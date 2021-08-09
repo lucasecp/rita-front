@@ -1,0 +1,60 @@
+@mixin btnStyle ($type){
+  @if($type == 'primary') {
+      padding: 10px 40px;
+      cursor: pointer;
+      border: none;
+      display: block;
+      font-weight: $fontBold;
+      color: #fff;
+      font-size: 14px;
+      position: relative;
+      transition: .3s;
+      &::before{
+        display: inline-block;
+        position: absolute;
+        top:0;
+        left: 0;
+        width:100%;
+        height:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: .3s;
+      }
+      &:hover::before{
+        opacity: 1;
+      }
+  }
+}
+@mixin inputStyle($type) {
+   @if($type == 'primary'){
+    border: solid #DCDFE6 1px;
+    color: $textColor;
+    border-radius: $borderRadiusSmall;
+    outline: none;
+   }
+}
+
+@mixin device($width) {
+  @if($width == 'sm'){
+    @media (max-width: 540px) {
+      @content
+    }
+  };
+  @if($width == 'md'){
+    @media (max-width: 767px) {
+      @content
+    }
+  };
+  @if($width == 'lg'){
+    @media (max-width: 991px) {
+      @content
+    }
+  };
+  @if($width == 'xl'){
+    @media (max-width: 1200px) {
+      @content
+    }
+  };
+}

@@ -1,0 +1,142 @@
+.section-define-password{
+    height: 100vh;
+    background-color: $background;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-define-password > form{
+    max-width: 324px;
+    border-radius: $borderRadiusSmall;
+    background-color: #fff;
+    box-shadow: 0 16px 48px #00000029 ;
+    padding: 32px;
+}
+.section-define-password > form > h2{
+   color: $textColor;
+   font-size: 26px;
+   text-align: center;
+   margin-bottom: 16px;
+   font-weight: $fontSemiBold;
+   line-height: 16px;
+}
+.section-define-password > form > button{
+   margin: 0 auto;
+   letter-spacing: .5px;
+   position: relative;
+   line-height: 16px;
+   background: linear-gradient(219deg, $primaryColor,$secondayColor);
+   border-radius: $borderRadiusLarge;
+   @include btnStyle(primary);
+}
+
+.section-define-password > form > button::before{
+   content: 'Confirmar';
+   background: linear-gradient(219deg, $secondayColor,$primaryColor);
+   border-radius: $borderRadiusLarge;
+}
+.section-define-password > form > h3{
+    max-width: 260px;
+   color: $textColor;
+   font-size: 14px;
+   margin-bottom: 18px;
+   font-weight: $fontRegular;
+   line-height: 24px;
+   
+}
+.section-define-password > form > .input-group{
+   display: grid;
+   flex-direction: column;
+   
+}
+.section-define-password > form > .input-group span{
+    grid-area: 2/1;
+    justify-self: end;
+    align-self: center;
+    background: url(../../../assets/icons/eye.png);
+    background-position: center center;
+    background-size:  contain;
+    width: 15px;
+    height: 100%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    margin-right: 8px;
+    
+}
+.section-define-password > form > .input-group + .input-group{
+    margin-top: 16px;
+    
+}
+
+.section-define-password > form > .input-group label{
+    color: $textColor;
+    grid-area: 1/1;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 4px;
+   font-weight: $fontRegular;
+}
+.section-define-password > form > .input-group input{
+    font-size: 14px;
+    grid-area: 2/1;
+    padding: 10px 30px 10px 15px;
+    @include inputStyle(primary)
+    
+}
+.section-define-password .mandatory-attr {
+  margin: 16px 0
+}
+.section-define-password .mandatory-attr li{
+  color:$errorColor;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  line-height: 16px;
+  margin-bottom: 2px;
+  font-weight: $fontRegular;
+}
+.section-define-password .mandatory-attr li.success{
+  color: $successColor;
+}
+.section-define-password .mandatory-attr li.error{
+  color:$errorColor;
+}
+.section-define-password .mandatory-attr li::before{
+  content: 'x';
+  display: inline-block;
+  font-size: 12px;
+  margin-right: 5px;
+
+}
+
+
+
+.section-define-password .modal-main ul{
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
+    justify-content: space-around;
+    gap: 5px
+}
+.section-define-password .modal-main ul li{
+   color: $errorColor;
+   font-size: 16px;
+   display: flex;
+  align-items: center;
+  margin: 6px
+}
+.section-define-password .modal-main ul li::before{
+    content: 'x';
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 5px;
+  
+  }
+.section-define-password .modal-main h3{
+    font-size: 18px;
+    line-height: 24px;
+    margin-top: 12px;
+  }

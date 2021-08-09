@@ -1,0 +1,127 @@
+.modal-container{
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-content{
+    padding: 40px 25px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: $borderRadiusSmall;
+    max-width: 512px;
+    min-width: 512px;
+}
+.modal-container[data-close-modal=false]{
+   display: none;
+}
+.modal-container .btn-close{
+    background-color: transparent;
+    border-radius: $borderRadiusCircle;
+    border: solid 2.3px;
+    cursor: pointer;
+    font-size: 16px;
+    height:40px;
+    width:40px;
+    border: solid 3px ;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.modal-container .btn-close::before{
+    position: absolute;
+    text-align: center;
+    display: inline-block;
+    font-weight: $fontBold;
+}
+.modal-container.success .btn-close::before{
+    content: 'v';
+    color: $successColor;
+}
+.modal-container.warning .btn-close::before{
+    content: '!';
+    color: $warningColor;
+}
+.modal-container.error .btn-close::before{
+    content: "x"; 
+    color: $errorColor;
+}
+.modal-container.error .btn-close{
+    color: $errorColor;
+    border-color: $errorColor;
+}
+.modal-container.warning .btn-close{
+    color:$warningColor;
+    border-color: $warningColor;
+}
+
+.modal-container.success .btn-close{
+    color: $successColor;
+    border-color: $successColor;
+}
+.modal-container .modal-title{
+    color: $textColor;
+    font-size: 30px;
+    line-height: 16px;
+    margin: 16px 0 12px 0;
+    font-weight: $fontBold
+}
+.modal-container .modal-main{
+    color: $textColor;
+    font-size: 18px;
+    line-height: 24px;
+    margin-top: 10px;
+    font-weight: $fontRegular;
+    text-align: center;
+}
+.modal-container .footer-modal > button, .modal-container .footer-modal > a{
+    background: linear-gradient(35deg, #0098F0,#ACFFC5);
+   margin: 20px auto 0 auto;
+   letter-spacing: .5px;
+   position: relative;
+   line-height: 16px;
+   border-radius: $borderRadiusSmall;
+   @include btnStyle(primary);
+   transition: .3s;
+}
+.modal-container .footer-modal{
+    display: flex;
+    align-items: center;
+}
+.modal-container .footer-modal a + a{
+   margin-left: 16px;
+}
+.modal-container .footer-modal > button::before, .modal-container .footer-modal > a::before{
+    background: linear-gradient(35deg,#ACFFC5, #0098F0);
+    border-radius: $borderRadiusSmall;
+    opacity: 0;
+    transition: .3s;
+ }
+ .modal-container .footer-modal > button:hover::before, .modal-container .footer-modal > a:hover::before{
+    opacity: 1 !important;
+ }
+ .modal-container .footer-modal > button[data-label-button="Entendi"]::before{
+    content: 'Entendi';
+ }
+ .modal-container .footer-modal > button[data-label-button="ok"]::before{
+    content: 'ok';
+ }
+ .modal-container .footer-modal > a[data-label-button="sim"]::before{
+    content: 'Sim';
+ }
+ .modal-container .footer-modal > a[data-label-button="não"]::before{
+    content: 'Não';
+ }
+ .modal-container .footer-modal > button[data-label-button="Faça seu cadastro"]::before{
+    content: 'Faça seu cadastro';
+ }
