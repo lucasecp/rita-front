@@ -94,3 +94,7 @@
     font-weight: $fontBolder;
     margin-right: 5px
 }
+
+.card-sabin .input-group[arial-expanded="false"] > input{
+    display: none
+}
