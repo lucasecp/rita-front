@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Modal from '../../../components/Modal';
 import InputMask from '../../../components/Form/InputMask';
-import InputRadio from '../../../components/Form/InputRadio';
 import validatorCpf from '../../../helpers/validatorCpf'
+import InputText from '../../../components/Form/InputText';
 
 
 const CardSabin = () => {
@@ -16,7 +16,8 @@ const CardSabin = () => {
     const [inputRadio, setInputRadio] = useState('')
     const [modalLabelBtn, setModalLabelBtn] = useState('Entendi');
     
-    const [valueDataInput, setValueData ] = useState('')
+    const [phone, setPhone ] = useState('')
+    const [email, setEmail ] = useState('')
 
 
     //Apenas para teste (VERSÃO FINAL VAI BUSCAR NO SERVIDOR)
@@ -60,12 +61,15 @@ const CardSabin = () => {
             setModalContent('Informe um CPF válido.');
         }
         else {
-            let fakeData = [{ label: 'E-mail: teste@email.com.br', value: 'teste@email.com.br',target: 'email' }, { label: 'Celular: 2199999999', value: '2199999999' , target:'celular' }];
+            let fakeData = [{ label: 'Email: xxxxx@email.com', value: 'xxxxx@email.com' , target:'email' },
+            { label: 'Celular: 2199999999', value: '2199999999' , target:'celular' },
+          ];
+
             setOptions(fakeData)
             fetchData(fakeData);
             setTimeout(() => {
                 fetchData([])
-            }, 5500)
+            }, 500)
         }
     }
 
@@ -101,14 +105,34 @@ const CardSabin = () => {
                 <div className='img'></div>
                 <h3>Para continuarmos, precisamos confirmar alguns dados.
                     Escolha uma das opções abaixo.</h3>
-                <InputRadio options={optionsConfirm} valueInputRadio={inputRadio} 
-                setInputRadio={setInputRadio} valueInputText={valueDataInput}
-                 placeHolderInputText={optionsConfirm.forEach(opt => opt.target === 'celular' ? '(00) 00000-0000': 'xxxxxxxxx@email.com')} />
+
+                   {optionsConfirm.length && <><label htmlFor={optionsConfirm[0].label} >
+                    <input type='radio' id={optionsConfirm[0].label} value={optionsConfirm[0].value} 
+                    onChange={(e) => setInputRadio(e.target.value)} checked={inputRadio === optionsConfirm[0].value} />
+                    {optionsConfirm[0].label}
+                    </label>
+               <InputText expanded={inputRadio === optionsConfirm[0].value}
+                     setValue={setEmail} value={email}
+                     placeHolder={optionsConfirm[0].target === 'celular' ? '(00) 00000-0000' : 'xxxxxxxx@email.com'}
+                     />
+                  </>      }
+
+                  {optionsConfirm.length > 1 && <>  <label htmlFor={optionsConfirm[1].label} >
+                    <input type='radio' id={optionsConfirm[1].label} value={optionsConfirm[1].value} 
+                    onChange={(e) => setInputRadio(e.target.value)} checked={inputRadio === optionsConfirm[1].value} />
+                    {optionsConfirm[1].label}
+                    </label>
+                    <InputText expanded={inputRadio === optionsConfirm[1].value}
+                     setValue={setPhone} value={phone}
+                     placeHolder={optionsConfirm[1].target === 'celular' ? '(00) 00000-0000' : 'xxxxxxxx@email.com'}
+                     />
+                     </>      }
 
                 <div className='btn-group'>
                 <a href="#">Não reconheço esses dados</a>
                 <button data-label-button='Confirmar'>Encaminhar</button>
                 </div>
+
             </form>
             }
 
