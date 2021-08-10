@@ -1,14 +1,14 @@
-import React from 'react';
-// import DefinePasswod from './views/Login/DefinePassword';
-import CardSabin from './views/Login/CardSabin'
-const App = () => {
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
 
+import Routes from "./routes";
+
+const App = () => {
   return (
-    <div className="App">
-      <CardSabin/>
-      {/* <DefinePasswod /> */}
-    </div>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
