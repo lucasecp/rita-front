@@ -3,7 +3,7 @@ import InputPass from '../../../components/Form/InputPassword';
 import Modal from '../../../components/Modal';
 
  const DefinePassword = () => {
-         
+
    const [inputPassword, setInputPassword] = useState('');
    const [inputConfirmPassword, setinputConfirmPassword] = useState('');
    const [errorsPass, setErrors] = useState([]);
@@ -41,7 +41,7 @@ import Modal from '../../../components/Modal';
       if (modalType === 'error' || errorsPass.length){
          setTitleModal('Preenchimento incorreto');
          return setActiveModal(true);
-      } 
+      }
       setActiveModal(true)
        setModalType('success')
        setTitleModal('Perfil criado com sucesso')
@@ -58,7 +58,7 @@ import Modal from '../../../components/Modal';
 
 
    const validatePassword = (password, confirmPass) => {
-      
+
       clearErrors();
 
       const anyLetter = /[a-zA-Z]/g;
@@ -68,7 +68,7 @@ import Modal from '../../../components/Modal';
          setModalType('error')
          setModalTitleContent('As senhas não conferem, favor revisar os campos.');
       }
-      
+
       if (!password.trim().length && !confirmPass.trim().length) {
          setModalType('error');
          setModalTitleContent('Por favor confira o preenchimento dos campos.');
@@ -93,7 +93,7 @@ import Modal from '../../../components/Modal';
          setModalType('error')
          setModalTitleContent('A senha não atende aos critérios de segurança:');
       }
-     
+
    }
 
 

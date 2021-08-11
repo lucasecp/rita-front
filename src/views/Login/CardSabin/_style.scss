@@ -13,7 +13,7 @@
     @include device(sm){
         width: 100%
     }
-   
+
 }
 .card-sabin form  button{
     @include btnStyle('primary');
@@ -27,37 +27,31 @@
     border-radius: $borderRadiusLarge;
 }
 .card-sabin form > .img {
-    width: 307px;
-    background-color: #9C1C1E;
-    height:197px;
-    border-radius: $borderRadiusLarge;
     position: relative;
     bottom: 130px;
     left: calc(50% - 152px);
-    
+    margin-bottom: -110px;
 }
 .card-sabin form label{
     color: $textColor;
     font-size: 14px;
     line-height: 16px;
-    
+
 }
 .card-sabin form .input-group input{
    @include inputStyle('primary');
    padding: 10px 15px;
    display: inline-block;
-   
+
 }
 
 .card-sabin .input-group{
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;
-  
-
 }
 .card-sabin form h3{
-    margin-top: -100px;
+
     color: $textColor;
     font-size: 14px;
     line-height: 18px;

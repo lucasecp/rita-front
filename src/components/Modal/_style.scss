@@ -53,7 +53,7 @@
     color: $warningColor;
 }
 .modal-container.error .btn-close::before{
-    content: "x"; 
+    content: "x";
     color: $errorColor;
 }
 .modal-container.error .btn-close{
@@ -114,6 +114,9 @@
     content: 'Entendi';
  }
  .modal-container .footer-modal > button[data-label-button="ok"]::before{
+    content: 'ok';
+ }
+ .modal-container .footer-modal > a[data-label-button="ok"]::before{
     content: 'ok';
  }
  .modal-container .footer-modal > a[data-label-button="sim"]::before{
