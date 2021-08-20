@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Container,Input} from './style'
 const InputMask = (props) => {
   const verifyTypeMask = () => {
     if (props.typeMask === 'cpf') {
@@ -35,18 +35,17 @@ const InputMask = (props) => {
   }
 
   return (
-    <div className="input-group" arial-expanded={`${props.expanded === undefined ? true : props.expanded}`}>
+    <Container >
       <label htmlFor={props.label}>{props.label}</label>
-      <input
+      <Input
         type="text"
         id={props.label}
         onChange={handleChange}
         value={props.value}
         maxLength={props.maxLength}
         onKeyPress={verifyTypeMask}
-        placeholder={props.placeHolder}
       />
-    </div>
+    </Container>
   )
 }
 

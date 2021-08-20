@@ -5,9 +5,12 @@ import colors from './colors'
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
     body,*{
-        font-family: "Poppins";
+        font-family: "Poppins" ;
         box-sizing: border-box;
-      
+    }
+    img{
+      max-width: 100%;
+      display: block;
     }
     .App{
         background-color: ${colors.background.primary};

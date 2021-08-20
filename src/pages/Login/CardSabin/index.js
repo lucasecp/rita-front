@@ -4,7 +4,8 @@ import InputMask from '../../../components/Form/InputMask'
 import validatorCpf from '../../../helpers/validatorCpf'
 import InputText from '../../../components/Form/InputText'
 import cardImg from '../../../assets/img/cardSabin.png'
-import { Container } from './style'
+import { Container, BtnGroup } from './style'
+
 const CardSabin = () => {
   const [activeModal, setActiveModal] = useState(false)
   const [modalTitle, setTitleModal] = useState('')
@@ -125,8 +126,10 @@ const CardSabin = () => {
   }
   const handleSubmitData = (e) => {
     e.preventDefault()
-    const anySpecialCaracter = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
-    const newPhone = [...phone].map(str => str.replace(anySpecialCaracter,'')).join('')
+    const anySpecialCaracter = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/
+    const newPhone = [...phone]
+      .map((str) => str.replace(anySpecialCaracter, ''))
+      .join('')
     const optConfirmString =
       optionsConfirm.length === 2
         ? 'Email ou Celular'
@@ -159,11 +162,7 @@ const CardSabin = () => {
   }
   const templateModalButton = () => {
     if (modalType === 'error')
-      return (
-        <button onClick={handleCloseModal}>
-          {modalLabelBtn}{' '}
-        </button>
-      )
+      return <button onClick={handleCloseModal}>{modalLabelBtn} </button>
     else if (modalType === 'success')
       return <a onClick={handleCloseModal}>{modalLabelBtn}</a>
     else if (modalType === 'warning')
@@ -182,8 +181,8 @@ const CardSabin = () => {
   return (
     <Container>
       {formContent === 'contentCpf' ? (
-        <form method="GET" onSubmit={handleSubmit}>
-          <img src={cardImg} alt='Cartão Sabin'/>
+        <form onSubmit={handleSubmit}>
+          <img src={cardImg} alt="Cartão Sabin" />
           <InputMask
             maxLength={14}
             typeMask={'cpf'}
@@ -192,11 +191,11 @@ const CardSabin = () => {
             label="Insira seu CPF: *"
             placeHolder="123.456.789-00"
           />
-          <button data-label-button="Confirmar">Encaminhar</button>
+          <button>Encaminhar</button>
         </form>
       ) : (
-        <form method="GET" onSubmit={handleSubmitData}>
-          <img src={cardImg} alt='Cartão Sabin' className='img'/>
+        <form onSubmit={handleSubmitData}>
+          <img src={cardImg} alt="Cartão Sabin" />
           <h3>
             Para continuarmos, precisamos confirmar alguns dados. Escolha uma
             das opções abaixo.{' '}
@@ -205,8 +204,7 @@ const CardSabin = () => {
               : ''}
           </h3>
 
-          {optionsConfirm.length && (
-            <>
+
               <label htmlFor={optionsConfirm[0].label}>
                 <input
                   type="radio"
@@ -220,22 +218,16 @@ const CardSabin = () => {
                 />
                 {optionsConfirm[0].label}
               </label>
-              <InputText
-                expanded={inputRadio.value === optionsConfirm[0].value}
-                setValue={setEmail}
-                value={email}
-                placeHolder={
-                  optionsConfirm[0].target === 'Celular'
-                    ? '(00) 00000-0000'
-                    : 'xxxxxxxx@email.com'
-                }
-              />
-            </>
-          )}
+              {inputRadio.value === optionsConfirm[0].value && (
+                <InputText
+                  setValue={setEmail}
+                  value={email}
+                  placeHolder={'xxxxxxxx@email.com'}
+                />
+              )}
 
           {optionsConfirm.length > 1 && (
             <>
-              {' '}
               <label htmlFor={optionsConfirm[1].label}>
                 <input
                   type="radio"
@@ -249,25 +241,21 @@ const CardSabin = () => {
                 />
                 {optionsConfirm[1].label}
               </label>
-              <InputMask
-                expanded={inputRadio.value === optionsConfirm[1].value}
-                setValue={setPhone}
-                value={phone}
-                placeHolder={
-                  optionsConfirm[1].target === 'Celular'
-                    ? '(00) 00000-0000'
-                    : 'xxxxxxxx@email.com'
-                }
-                maxLength={15}
-                typeMask='phone'
-              />
-            </>
+              {inputRadio.value === optionsConfirm[1].value && (
+                <InputMask
+                  setValue={setPhone}
+                  value={phone}
+                  placeHolder={'(00) 00000-0000'}
+                  maxLength={15}
+                  typeMask="phone"
+                />
+              )}
+  </>
           )}
-
-          <div className="btn-group">
+          <BtnGroup>
             <a href="#">Não reconheço esses dados</a>
-            <button data-label-button="Confirmar">Encaminhar</button>
-          </div>
+            <button>Encaminhar</button>
+          </BtnGroup>
         </form>
       )}
 

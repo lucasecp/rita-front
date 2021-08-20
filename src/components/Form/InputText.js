@@ -1,17 +1,18 @@
-import React from 'react';
-
+import React from 'react'
+import { Container, Input } from './style'
 const InputText = (props) => {
-    return (
-        <div className='input-group' arial-expanded={`${props.expanded === undefined ? true : props.expanded}`}>
-          { props.label && <label htmlFor={props.label}>{props.label}</label>}
-            <input type='text' value={props.value} id={props.label}
-            onChange={(e) => props.setValue(e.target.value)} 
-            placeholder={props.placeHolder}
-           /> 
-        </div>
-    );
-};
+  return (
+    <Container>
+      {props.label && <label htmlFor={props.label}>{props.label}</label>}
+      <Input
+        type="text"
+        value={props.value}
+        id={props.label}
+        placeholder={props.placeHolder}
+        onChange={(e) => props.setValue(e.target.value)}
+      />
+    </Container>
+  )
+}
 
-
-
-export default InputText;
+export default InputText
