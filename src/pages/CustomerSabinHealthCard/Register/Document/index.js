@@ -1,10 +1,13 @@
 import React from "react";
 
 import { Container } from "./styles";
+
 import tooltipIcon from "../../../../assets/icons/tooltip.png";
 import Button from "../../../../components/Button";
+import api from "../../../../services/api";
 
 function Document() {
+
   return (
     <Container>
       <h6>
