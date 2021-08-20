@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import colors from '../../../styles/colors'
 
 export const Container = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ export const Container = styled.div`
   > form {
     background: #fff;
     padding: 32px;
-    border-radius: $borderRadiusSmall;
+    border-radius: 4px;
     box-shadow: 0 16px 48px #00000029;
     max-width: 420px;
 
@@ -20,7 +21,7 @@ export const Container = styled.div`
       margin-bottom: -110px;
     }
     label {
-      color: $textColor;
+      color: ${colors.text.primary};
       font-size: 14px;
       line-height: 16px;
       margin-bottom: 16px;
@@ -30,10 +31,10 @@ export const Container = styled.div`
       }
     }
     > h3{
-    color: $textColor;
+    color: ${colors.text.primary};
     font-size: 14px;
     line-height: 18px;
-    font-weight: $fontRegular;
+    font-weight: 400;
     margin-bottom: 16px;
     }
 
