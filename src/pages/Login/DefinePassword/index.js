@@ -45,7 +45,7 @@ import Modal from '../../../components/Modal';
       setActiveModal(true)
        setModalType('success')
        setTitleModal('Perfil criado com sucesso')
-       setModalTitleContent('Seu ligin é seu CPF.')
+       setModalTitleContent('Seu login é seu CPF.')
    }
 
 

@@ -4,7 +4,7 @@ import InputMask from '../../../components/Form/InputMask'
 import validatorCpf from '../../../helpers/validatorCpf'
 import InputText from '../../../components/Form/InputText'
 import cardImg from '../../../assets/img/cardSabin.png'
-
+import { Container } from './style'
 const CardSabin = () => {
   const [activeModal, setActiveModal] = useState(false)
   const [modalTitle, setTitleModal] = useState('')
@@ -27,7 +27,7 @@ const CardSabin = () => {
       setModalType('error')
       setTitleModal('Desculpe')
       setModalContent(
-        'Os seus dados não formam encontrados na nossa base. Isso não significa que seu cadastro do cartão Sabin Saúde não exista.'
+        'Os seus dados não foram encontrados na nossa base. Isso não significa que seu cadastro do cartão Sabin Saúde não exista.'
       )
       setModalLabelBtn('Faça seu cadastro')
     } else {
@@ -151,7 +151,7 @@ const CardSabin = () => {
       setTitleModal('Encaminhado com sucesso')
       setModalContent(
         `Em breve você receberá um ${
-          inputRadio.label === 'celular' ? 'SMS' : 'E-mail'
+          inputRadio.label === 'Celular' ? 'SMS' : 'E-mail'
         } para a conclusão do seu cadastro.`
       )
       setModalLabelBtn('ok')
@@ -160,12 +160,12 @@ const CardSabin = () => {
   const templateModalButton = () => {
     if (modalType === 'error')
       return (
-        <button onClick={handleCloseModal} data-label-button={modalLabelBtn}>
+        <button onClick={handleCloseModal}>
           {modalLabelBtn}{' '}
         </button>
       )
     else if (modalType === 'success')
-      return <a data-label-button={modalLabelBtn} onClick={handleCloseModal}>{modalLabelBtn}</a>
+      return <a onClick={handleCloseModal}>{modalLabelBtn}</a>
     else if (modalType === 'warning')
       return (
         <>
@@ -180,10 +180,10 @@ const CardSabin = () => {
   }
 
   return (
-    <div className="card-sabin">
+    <Container>
       {formContent === 'contentCpf' ? (
         <form method="GET" onSubmit={handleSubmit}>
-          <img src={cardImg} alt='Cartão Sabin' className='img'/>
+          <img src={cardImg} alt='Cartão Sabin'/>
           <InputMask
             maxLength={14}
             typeMask={'cpf'}
@@ -279,7 +279,7 @@ const CardSabin = () => {
         onClickModal={handleCloseModal}
         footer={templateModalButton()}
       />
-    </div>
+    </Container>
   )
 }
 

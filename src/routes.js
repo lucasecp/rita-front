@@ -2,10 +2,10 @@ import React from "react";
 
 import { Switch, Route } from "react-router-dom";
 
-import CardSabin from "./views/Login/CardSabin";
+import CardSabin from "./pages/Login/CardSabin";
 import RegisterCustomerSabinHealthCard from "./pages/CustomerSabinHealthCard/Register";
 import Header from "./components/Header";
-import DefinePassword from './views/Login/DefinePassword'
+import DefinePassword from './pages/Login/DefinePassword'
 
 export default function Routes() {
   return (
