@@ -21,7 +21,7 @@ export const Container = styled.div`
       margin-left: auto;
       margin-right: auto;
     }
-    >label{
+    > label {
       margin-bottom: 16px;
     }
     label {
@@ -30,22 +30,21 @@ export const Container = styled.div`
       line-height: 16px;
       display: flex;
       align-items: center;
-      + a{
-    margin-top: 28px;
-       display: inline-block;
+      + a {
+        margin-top: 28px;
+        display: inline-block;
       }
     }
-    > h3{
-    color: ${colors.text.primary};
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 400;
-    margin-bottom: 16px;
+    > h3 {
+      color: ${colors.text.primary};
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 400;
+      margin-bottom: 16px;
     }
-    [arial-expanded="false"] > input{
+    [arial-expanded='false'] > input {
       display: none;
     }
-
   }
   @media (max-width: 767px) {
     > form {
@@ -54,14 +53,14 @@ export const Container = styled.div`
   }
 `
 export const BtnGroup = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    > :first-child{
-    color: #431B99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > :first-child {
+    color: #431b99;
     font-size: 12px;
     line-height: 16px;
     font-weight: $fontBolder;
-    margin-right: 5px
-    }
+    margin-right: 5px;
+  }
 `

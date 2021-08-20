@@ -21,6 +21,12 @@ const CardSabin = () => {
   const [email, setEmail] = useState('')
   const [originalValue, setOriginalValue] = useState([])
 
+  const personObj = {
+    name: 'Matheus',
+    email: 'matheus@csptecnologia.com',
+    phone: '22 99999999',
+  }
+
   // Apenas para teste (VERSÃO FINAL VAI BUSCAR NO SERVIDOR)
   const fetchData = (data) => {
     if (data.length) {
@@ -52,6 +58,7 @@ const CardSabin = () => {
     e.preventDefault()
     validateCpf()
   }
+
   const validateCpf = () => {
     const newCpf = [...cpf].toString().replace(/\D+/g, '')
     if (!newCpf.length) {
@@ -73,7 +80,6 @@ const CardSabin = () => {
           target: 'Celular',
         },
       ]
-
       setOriginalValue(fakeOriginalData)
       const fakeHashData = [
         {
@@ -87,7 +93,6 @@ const CardSabin = () => {
           target: 'Celular',
         },
       ]
-
       setOptions(fakeHashData)
       fetchData(fakeHashData)
       setTimeout(() => {
@@ -204,7 +209,8 @@ const CardSabin = () => {
               : ''}
           </h3>
 
-
+          {personObj.email && (
+            <>
               <label htmlFor={optionsConfirm[0].label}>
                 <input
                   type="radio"
@@ -218,6 +224,7 @@ const CardSabin = () => {
                 />
                 {optionsConfirm[0].label}
               </label>
+
               {inputRadio.value === optionsConfirm[0].value && (
                 <InputText
                   setValue={setEmail}
@@ -225,8 +232,10 @@ const CardSabin = () => {
                   placeHolder={'xxxxxxxx@email.com'}
                 />
               )}
+            </>
+          )}
 
-          {optionsConfirm.length > 1 && (
+          {personObj.phone && (
             <>
               <label htmlFor={optionsConfirm[1].label}>
                 <input
@@ -250,7 +259,7 @@ const CardSabin = () => {
                   typeMask="phone"
                 />
               )}
-  </>
+            </>
           )}
           <BtnGroup>
             <a href="#">Não reconheço esses dados</a>
