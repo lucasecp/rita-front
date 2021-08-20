@@ -1,13 +1,12 @@
-import React from "react";
+import React from 'react'
 
-import { Container } from "./styles";
+import { Container } from './styles'
 
-import tooltipIcon from "../../../../assets/icons/tooltip.png";
-import Button from "../../../../components/Button";
-import api from "../../../../services/api";
+import tooltipIcon from '../../../../assets/icons/tooltip.png'
+import ButtonOutline from '../../../../components/Button/Outline'
+import api from '../../../../services/api'
 
 function Document() {
-
   return (
     <Container>
       <h6>
@@ -19,13 +18,13 @@ function Document() {
         <button>Clique aqui</button> para ver as orientações sobre a foto
         segurando o documento de identificação.
       </h5>
-      <Button type="outline">Selecione o arquivo</Button>
+      <ButtonOutline type="outline">Selecione o arquivo</ButtonOutline>
       <h6>
         * Faça aqui o upload do seu documento de identificação que contenha o
         seu CPF
         <img src={tooltipIcon} alt="Icone que representa informação" />
       </h6>
-      <Button type="outline">Selecione o arquivo</Button>
+      <ButtonOutline type="outline">Selecione o arquivo</ButtonOutline>
       <h6>* Renda</h6>
       <select name="select">
         <option value="valor1" selected>
@@ -43,11 +42,11 @@ function Document() {
         ter acesso ao CADÚNICO. Lá você terá acesso ao seu comprovante para
         concluir o seu cadastro.
       </h5>
-      <Button type="outline">Selecione o arquivo</Button>
+      <ButtonOutline type="outline">Selecione o arquivo</ButtonOutline>
       <small>*Campos com preenchimento obrigatório</small>
       <div>
         <input type="checkbox" id="termsOfUse" name="termsOfUse" checked />
-        <label for="termsOfUse">Termos de Uso</label>
+        <label htmlFor="termsOfUse">Termos de Uso</label>
         <img src="" alt="Icone que representa baixar" />
       </div>
       <footer>
@@ -64,7 +63,7 @@ function Document() {
         Você somente poderá salvar os dados depois de aceitar os termos de uso
       </span>
     </Container>
-  );
+  )
 }
 
-export default Document;
+export default Document
