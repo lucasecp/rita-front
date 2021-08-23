@@ -4,7 +4,7 @@ import { Container } from './styles'
 
 import tooltipIcon from '../../../../assets/icons/tooltip.png'
 import ButtonOutline from '../../../../components/Button/Outline'
-import api from '../../../../services/api'
+
 
 function Document() {
   return (

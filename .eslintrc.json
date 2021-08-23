@@ -19,7 +19,7 @@
       "react/jsx-filename-extension": ["warn", { "extensions": [".jsx", ".js"] }],
       "react/prop-types": 0,
       "@TypeScript-eslint/no-explicit-any": "off",
-      "import/prefer-default-export": "off"
+      "import/prefer-default-export": "off",
+     "prefer-regex-literals": "off"
     }
   }
-   

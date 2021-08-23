@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container,Input} from './style'
+import { Container, Input } from './style'
 const InputMask = (props) => {
   const verifyTypeMask = () => {
     if (props.typeMask === 'cpf') {
@@ -19,8 +19,8 @@ const InputMask = (props) => {
 
   const maskPhone = () => {
     let value = props.value
-    if (value.length === 0)  value += '('
-    if (value.length === 3)  value += ')'
+    if (value.length === 0) value += '('
+    if (value.length === 3) value += ')'
     if (value.length === 4) value += ' '
     if (value.length === 10) value += '-'
     props.setValue(value)
@@ -30,12 +30,16 @@ const InputMask = (props) => {
 
   const handleChange = (e) => {
     // Forçando o usuário a digitar somente números
-    if (!containsNumbers(e.target.value.replace(/(\.|\/|-)/g, '')) && props.typeMask === 'cpf') return
+    if (
+      !containsNumbers(e.target.value.replace(/(\.|\/|-)/g, '')) &&
+      props.typeMask === 'cpf'
+    )
+      return
     props.setValue(e.target.value)
   }
 
   return (
-    <Container >
+    <Container>
       <label htmlFor={props.label}>{props.label}</label>
       <Input
         type="text"

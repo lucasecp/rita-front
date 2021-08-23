@@ -6,7 +6,7 @@ import validatorCpf from '../../../../helpers/validatorCpf'
 import { Container } from './styles'
 import Modal from '../../../../components/Modal'
 import hiddenPhoneAndEmail from '../helpers/hiddenPhoneAndEmail'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import ButtonPrimary from '../../../../components/Button/Primary'
 
 
