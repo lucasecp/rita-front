@@ -1,4 +1,6 @@
-import { useRef, useState } from 'react'
+import React ,{ useRef, useState } from 'react'
+import { BtnEye, Container,Input } from './style'
+import eye from '../../../assets/icons/eye.png'
 
 const InputPassword = (props) => {
   const [activeEyes, setActiveEyes] = useState(false)
@@ -14,9 +16,9 @@ const InputPassword = (props) => {
       : (inputPass.current.type = 'password')
 
   return (
-    <div className="input-password input-group">
+    <Container>
       <label htmlFor={props.label}>{props.label}</label>
-      <input
+      <Input
         type="password"
         value={props.value}
         id={props.label}
@@ -27,10 +29,12 @@ const InputPassword = (props) => {
           props.value ? setActiveEyes(true) : setActiveEyes(false)
         }
       />
-      {activeEyes && (
-        <span className="btn-see-password" onClick={handleSeePassword}></span>
+      {activeEyes &&(
+        <BtnEye type='button'  onClick={handleSeePassword}>
+          <img src={eye} />
+        </BtnEye>
       )}
-    </div>
+    </Container>
   )
 }
 export default InputPassword

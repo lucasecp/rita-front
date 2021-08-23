@@ -1,15 +1,15 @@
 import React from 'react';
-
+import { BtnClose, Container,Content, FooterModal, ModalMain, ModalTitle } from './style';
  const  Modal = (props) => {
     return(
-        <div className={`${props.type} modal-container`} data-close-modal={props.active} onClick={props.onClickModal}>
-           <div className='modal-content' >
-           <button onClick={props.onClickModal} className='btn-close'></button>
-           <h2 className='modal-title'>{props.title}</h2>
-           <div className='modal-main'>{props.content}</div>
-           <footer className='footer-modal'>{props.footer}</footer>
-           </div>
-        </div>
+        <Container onClick={props.onClickModal}>
+           <Content>
+           <BtnClose onClick={props.onClickModal} type={props.type}></BtnClose>
+           <ModalTitle>{props.title}</ModalTitle>
+           <ModalMain>{props.content}</ModalMain>
+           <FooterModal>{props.footer}</FooterModal>
+           </Content>
+        </Container>
     )
 }
 export default Modal

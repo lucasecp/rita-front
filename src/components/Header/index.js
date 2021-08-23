@@ -7,7 +7,7 @@ const Header = () => {
     <HeaderLayout>
       <nav>
         <Link to="/definir-senha">Definir senha</Link>
-        <Link to="/cartao-sabin">Cartão Sabin</Link>
+        <Link to="/cadastro-cartao-sabin">Cartão Sabin</Link>
         <Link to="/cadastro-cliente-cartao-sabin-saude">
           cadastro cliente cartao sabin saude
         </Link>

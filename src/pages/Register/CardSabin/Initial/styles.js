@@ -36,7 +36,4 @@ export const Container = styled.form`
     font-weight: 400;
     margin-bottom: 16px;
   }
-  [arial-expanded='false'] > input {
-    display: none;
-  }
 `

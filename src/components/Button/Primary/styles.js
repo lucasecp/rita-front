@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.button`
   position: relative;
   padding: 10px 40px;
   cursor: pointer;
@@ -29,8 +29,6 @@ export const Container = styled.div`
     ::after {
       opacity: 1;
     }
-
-    transform: scale(5.1);
   }
 
   > span {

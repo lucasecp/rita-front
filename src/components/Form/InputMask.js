@@ -44,6 +44,7 @@ const InputMask = (props) => {
         value={props.value}
         maxLength={props.maxLength}
         onKeyPress={verifyTypeMask}
+        placeholder={props.placeHolder}
       />
     </Container>
   )
