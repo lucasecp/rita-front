@@ -9,7 +9,6 @@ import hiddenPhoneAndEmail from '../helpers/hiddenPhoneAndEmail'
 import { useHistory } from 'react-router-dom'
 import ButtonPrimary from '../../../../components/Button/Primary'
 
-
 function Initial() {
   const [cpf, setCpf] = useState('')
   const [showModal, setShowModal] = useState(false)
@@ -19,7 +18,6 @@ function Initial() {
   const [optionsConfirm, setOptions] = useState([])
   const [originalValue, setOriginalValue] = useState([])
   const history = useHistory()
-
 
   const fetchData = (data) => {
     if (data.email || data.phone) {
@@ -39,10 +37,9 @@ function Initial() {
     }
   }
 
-
   const onSendCpf = (e) => {
     e.preventDefault()
-     validateCpf()
+    validateCpf()
   }
 
   const validateCpf = () => {
@@ -54,18 +51,15 @@ function Initial() {
       setModalErrors()
       setModalContent('Informe um CPF válido.')
     } else {
-      const fakeOriginalData =
-        {
-          email: `lucasecp@email.com`,
-          phone: `21993371281`,
-
-        }
+      const fakeOriginalData = {
+        email: `lucasecp@email.com`,
+        phone: `21993371281`,
+      }
       setOriginalValue(fakeOriginalData)
       const fakeHashData = {
-          email: `${hiddenPhoneAndEmail('email', 'lucasecp@email.com')}`,
-          phone: `${hiddenPhoneAndEmail('celular', '21993371281')}`,
-        }
-
+        email: `${hiddenPhoneAndEmail('email', 'lucasecp@email.com')}`,
+        phone: `${hiddenPhoneAndEmail('celular', '21993371281')}`,
+      }
 
       setOptions(fakeHashData)
       fetchData(fakeHashData)
@@ -82,25 +76,24 @@ function Initial() {
   const closeModal = () => {
     setShowModal(false)
   }
-  const pushToConfirmData = () =>{
+  const pushToConfirmData = () => {
     closeModal()
-    history.push({pathname: '/confirmar-dados',state: {hiddenData:optionsConfirm, originalData: originalValue}})
+    history.push({
+      pathname: '/confirmar-dados',
+      state: { hiddenData: optionsConfirm, originalData: originalValue },
+    })
   }
 
   const templateModalButton = () => {
     if (modalType === 'error')
       return <ButtonPrimary onClick={closeModal}>Entendi</ButtonPrimary>
-     if (modalType === 'success')
+    if (modalType === 'success')
       return <ButtonPrimary onClick={closeModal}>Ok</ButtonPrimary>
-     if (modalType === 'warning')
+    if (modalType === 'warning')
       return (
         <>
-          <ButtonPrimary onClick={pushToConfirmData}>
-            Sim
-          </ButtonPrimary>
-          <ButtonPrimary  onClick={closeModal}>
-            Não
-          </ButtonPrimary>
+          <ButtonPrimary onClick={pushToConfirmData}>Sim</ButtonPrimary>
+          <ButtonPrimary onClick={closeModal}>Não</ButtonPrimary>
         </>
       )
   }
@@ -110,23 +103,26 @@ function Initial() {
         <img src={cardImg} alt="Cartão Sabin" />
         <InputMask
           maxLength={14}
-          typeMask={'cpf'}
+          // typeMask={'cpf'}
           value={cpf}
           setValue={setCpf}
+          mask="###.###.###-##"
           label="Insira seu CPF: *"
           placeHolder="123.456.789-00"
         />
-        <ButtonPrimary >Encaminhar</ButtonPrimary>
+        <ButtonPrimary>Encaminhar</ButtonPrimary>
       </Container>
-    {showModal &&
-      <Modal
-        type={modalType}
-        title={modalTitle}
-        content={modalContent}
-        onClickModal={(e) => e.target === e.currentTarget && setShowModal(false)}
-        footer={templateModalButton()}
-      />
-    }
+      {showModal && (
+        <Modal
+          type={modalType}
+          title={modalTitle}
+          content={modalContent}
+          onClickModal={(e) =>
+            e.target === e.currentTarget && setShowModal(false)
+          }
+          footer={templateModalButton()}
+        />
+      )}
     </LayoutCenter>
   )
 }
