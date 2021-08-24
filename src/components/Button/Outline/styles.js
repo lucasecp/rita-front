@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import colors from "../../../styles/colors";
 
 export const Container = styled.button`
@@ -11,8 +11,19 @@ export const Container = styled.button`
   padding: 8px 16px;
 
   font-size: 14px;
-  font-size: 600;
+  font-weight: 600;
   line-height: 16px;
-
   width: fit-content;
+  @media (max-width:767px){
+
+  }
+  @media (max-width:991px){
+
+  }
+  @media (max-width:1200px){
+
+  }
 `;
+const styleMobile = css`
+
+`

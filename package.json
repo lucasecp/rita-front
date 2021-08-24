@@ -48,7 +48,6 @@
     "eslint-plugin-only-warn": "^1.0.3",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-promise": "^5.1.0",
-    "node-sass": "^6.0.1",
     "prettier": "^2.3.2"
   }
 }
