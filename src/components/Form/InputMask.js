@@ -30,17 +30,18 @@ const InputMask = (props) => {
   //   props.setValue(value)
   // }
 
-  // const containsNumbers = (value) => new RegExp('^[0-9]*$').test(value)
+  const containsNumbers = (value) => new RegExp('^[0-9]*$').test(value)
 
-  // const handleChange = (e) => {
-  //   // Forçando o usuário a digitar somente números
-  //   if (
-  //     !containsNumbers(e.target.value.replace(/(\.|\/|-)/g, '')) &&
-  //     props.typeMask === 'cpf'
-  //   )
-  //     return
-  //   props.setValue(e.target.value)
-  // }
+  const handleChange = (e) => {
+    // Forçando o usuário a digitar somente números
+    if (
+      !containsNumbers(e.target.value.replace(/(\.|\/|-)/g, '')) &&
+      props.mask === '###.###.###-##'
+    )
+      return
+
+    props.setValue(mask(e.target.value, props.mask))
+  }
 
   return (
     <Container>
@@ -48,14 +49,11 @@ const InputMask = (props) => {
       <Input
         type="text"
         id={props.label}
-        // onChange={handleChange}
+        onChange={handleChange}
         value={props.value}
         maxLength={props.maxLength}
         placeholder={props.placeHolder}
         // onKeyDown={verifyTypeMask}
-        onChange={(e) => {
-          props.setValue(mask(e.target.value, props.mask))
-        }}
       />
     </Container>
   )
