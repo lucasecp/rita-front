@@ -49,7 +49,7 @@ const InputMask = (props) => {
         maxLength={props.maxLength}
         onKeyPress={verifyTypeMask}
         placeholder={props.placeHolder}
-        onKeyUp={verifyTypeMask}
+        onInput={verifyTypeMask}
       />
     </Container>
   )
