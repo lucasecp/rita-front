@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Input } from './style'
 const InputMask = (props) => {
-  const verifyTypeMask = () => {
+  const verifyTypeMask = (e) => {
     if (props.typeMask === 'cpf') {
       maskCpf()
     }
@@ -48,7 +48,8 @@ const InputMask = (props) => {
         value={props.value}
         maxLength={props.maxLength}
         placeholder={props.placeHolder}
-        onInput={verifyTypeMask}
+        onKeyPress={verifyTypeMask}
+        onKeyUp={verifyTypeMask}
       />
     </Container>
   )
