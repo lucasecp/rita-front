@@ -3,14 +3,14 @@ import { Container, Input } from './style'
 const InputMask = (props) => {
   const verifyTypeMask = (e) => {
     if (props.typeMask === 'cpf') {
-      maskCpf()
+      maskCpf(e)
     }
     if (props.typeMask === 'phone') {
       maskPhone()
     }
   }
-  const maskCpf = () => {
-    let value = props.value
+  const maskCpf = (e) => {
+    let value = e.target.value
     if (value.length === 3) value += '.'
     if (value.length === 7) value += '.'
     if (value.length === 11) value += '-'
@@ -48,8 +48,8 @@ const InputMask = (props) => {
         value={props.value}
         maxLength={props.maxLength}
         placeholder={props.placeHolder}
-        onKeyPress={verifyTypeMask}
-        onKeyUp={verifyTypeMask}
+        onKeyDown={verifyTypeMask}
+        // onKeyPress={verifyTypeMask}
       />
     </Container>
   )
