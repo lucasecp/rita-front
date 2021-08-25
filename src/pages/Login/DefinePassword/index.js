@@ -12,6 +12,10 @@ const DefinePassword = () => {
   const [modalType, setModalType] = useState('')
 
   useEffect(() => {
+    document.title = 'Definir Senha'
+  }, [])
+
+  useEffect(() => {
     validatePassword(inputPassword, inputConfirmPassword)
     // eslint-disable-next-line
   }, [inputConfirmPassword, inputPassword])
@@ -117,16 +121,12 @@ const DefinePassword = () => {
         />
         <Mandatory>
           <MandatoryItem
-            type={
-              errorsPass.indexOf('Letras') !== -1 ? 'error' : 'success'
-            }
+            type={errorsPass.indexOf('Letras') !== -1 ? 'error' : 'success'}
           >
             Letras
           </MandatoryItem>
           <MandatoryItem
-            type={
-              errorsPass.indexOf('Números') !== -1 ? 'error' : 'success'
-            }
+            type={errorsPass.indexOf('Números') !== -1 ? 'error' : 'success'}
           >
             Números
           </MandatoryItem>
@@ -149,7 +149,7 @@ const DefinePassword = () => {
             Mínimo 6 dígitos{' '}
           </MandatoryItem>
         </Mandatory>
-        <button >Confirmar</button>
+        <button>Confirmar</button>
       </form>
       {activeModal && (
         <Modal
@@ -158,10 +158,7 @@ const DefinePassword = () => {
           content={templateModalContent()}
           onClickModal={handleCloseModal}
           footer={
-            <button
-              onClick={handleCloseModal}
-              data-label-button={modalType === 'success' ? 'ok' : 'Entendi'}
-            >
+            <button onClick={handleCloseModal}>
               {modalType === 'success' ? 'ok' : 'Entendi'}
             </button>
           }
