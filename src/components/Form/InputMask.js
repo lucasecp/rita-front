@@ -9,12 +9,7 @@ const InputMask = (props) => {
 
   const handleChange = (e) => {
     // Forçando o usuário a digitar somente números
-    if (
-      !(
-        !containsNumbers(e.target.value.replace(/(\.|\/|-)/g, '')) &&
-        props.mask === '###.###.###-##'
-      )
-    ) {
+    if (containsNumbers(e.target.value.replace(/(\.|\/|-)/g, ''))) {
       props.setValue(mask(e.target.value, props.mask))
     }
   }
@@ -23,7 +18,7 @@ const InputMask = (props) => {
     <Container>
       <label htmlFor={props.label}>{props.label}</label>
       <Input
-        type="tel"
+        type={props.type || 'tel'}
         id={props.label}
         onChange={handleChange}
         value={props.value}
