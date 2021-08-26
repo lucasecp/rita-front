@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import colors from './colors'
 
-
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
     body,*{
@@ -66,5 +65,9 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+input{
+  outline: none;
 }
 `

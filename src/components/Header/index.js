@@ -1,6 +1,7 @@
 import React from 'react'
 import { HeaderLayout } from './style'
 import { Link } from 'react-router-dom'
+import BootstrapButton from '../Button/Bootstrap'
 
 const Header = () => {
   return (
@@ -13,6 +14,10 @@ const Header = () => {
         </Link>
         <Link to="/teste">Teste de Componentes</Link>
       </nav>
+        <BootstrapButton controlId="floatingSelect" label="Works with selects">
+
+        </BootstrapButton>
+
     </HeaderLayout>
   )
 }

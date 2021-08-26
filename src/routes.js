@@ -13,7 +13,7 @@ function Routes() {
     <Switch>
       <Route exact path="/"  component={Header} />
 
-      <Route path="/cadastro" component={Register} />
+      <Route path="/cadastro" component={Register}/>
 
       <Route path="/cadastro-cartao-sabin" component={Initial} />
       <Route path="/definir-senha" component={DefinePassword} />
