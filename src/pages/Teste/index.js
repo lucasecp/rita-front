@@ -1,12 +1,13 @@
 import React from 'react'
-import ButtonPrimary from '../../components/Button/Primary'
+
+import {} from 'boots'
 
 import { Container } from './styles'
 
 function Teste() {
   return (
     <Container>
-      <ButtonPrimary>Botão Primário</ButtonPrimary>
+      <Button>Botão Primário</Button>
     </Container>
   )
 }

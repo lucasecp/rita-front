@@ -1,7 +1,5 @@
 import React from 'react'
-
 import { Switch, Route } from 'react-router-dom'
-
 import Header from './components/Header'
 import DefinePassword from './pages/Login/DefinePassword'
 import Teste from './pages/Teste'
