@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import InputPass from '../../../components/Form/InputPassword/InputPassword'
+import InputPass from '../../../components/Form/InputPassword'
 import Modal from '../../../components/Modal'
 import { Container, Mandatory, MandatoryItem, ContentModal } from './style'
 const DefinePassword = () => {
