@@ -1,11 +1,12 @@
 import React from 'react'
-import {  } from "react-bootstrap";
+import { Button } from 'react-bootstrap'
+
 import { Container } from './styles'
 
 function Teste() {
   return (
     <Container>
-      <ButtonPrimary>Botão Primário</ButtonPrimary>
+      <Button>Botão</Button>
     </Container>
   )
 }
