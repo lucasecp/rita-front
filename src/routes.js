@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Switch, Route } from 'react-router-dom'
 
 import Header from './components/Layout/DefaultLayout/Header'
@@ -13,11 +12,10 @@ import Profile from './pages/Profile'
 
 function Routes() {
   return (
-
     <Switch>
-      <Route exact path="/"  component={Header} />
+      <Route exact path="/" component={Header} />
 
-      <Route path="/cadastro" component={Register}/>
+      <Route path="/cadastro" component={Register} />
 
       <Route path="/cadastro-cartao-sabin" component={Initial} />
       <Route path="/definir-senha" component={DefinePassword} />
@@ -27,7 +25,6 @@ function Routes() {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/perfil" component={Profile} />
     </Switch>
-
   )
 }
 
