@@ -2,12 +2,14 @@ import React from 'react'
 
 import { Switch, Route } from 'react-router-dom'
 
-import Header from './components/Header'
+import Header from './components/Layout/DefaultLayout/Header'
 import DefinePassword from './pages/Login/DefinePassword'
 import Teste from './pages/Teste'
 import Register from './pages/Register/Default'
 import Initial from './pages/Register/CardSabin/Initial'
 import ConfirmData from './pages/Register/CardSabin/ConfirmData'
+import Dashboard from './pages/Dashboard'
+import Profile from './pages/Profile'
 
 function Routes() {
   return (
@@ -22,6 +24,8 @@ function Routes() {
 
       <Route path="/teste" component={Teste} />
       <Route path="/confirmar-dados" component={ConfirmData} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/perfil" component={Profile} />
     </Switch>
 
   )

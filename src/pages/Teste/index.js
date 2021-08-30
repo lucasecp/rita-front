@@ -1,6 +1,5 @@
 import React from 'react'
-import ButtonPrimary from '../../components/Button/Primary'
-
+import {  } from "react-bootstrap";
 import { Container } from './styles'
 
 function Teste() {
