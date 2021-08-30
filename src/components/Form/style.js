@@ -15,13 +15,14 @@ export const Container = styled.div`
   }
 `
 export const Input = styled.input`
-  border: solid #dcdfe6 1px;
   color: ${colors.text.primary};
   border-radius: 4px;
   padding: 10px 15px;
   display: inline-block;
   transition: all 0.3s;
   position: relative;
+  border: 1px solid #EEEEEE;
+  box-shadow: 0px 2px 4px 0px #E5E5E5;
 
   ::after {
     content: '';

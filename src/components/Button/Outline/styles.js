@@ -1,27 +1,45 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import colors from "../../../styles/colors";
 
 export const Container = styled.button`
-  border: 1px solid #ffffff;
-  border-radius: 20px;
-
+  border: 2px solid ${colors.secondary};
+  border-radius: 8px;
   cursor: pointer;
   background: transparent;
-  color: ${colors.text.secondary};
-  padding: 8px 16px;
-
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 16px;
-  width: fit-content;
-  @media (max-width:767px){
-
+  color: ${colors.secondary};
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  transition: .2s;
+  ${props=> props.variation === 'white' && css`
+   color: #fff;
+   border: solid 2px #fff;
+   :hover{
+     background: #fff !important;
+     color: #6A6A6A !important
+   }
+  `}
+  ${props=> props.variation === 'green' && css`
+  color: #ACFFC5;
+  border: solid 2px #ACFFC5;
+  :hover{
+     color: #084C4F !important;
+     background:  #ACFFC5 !important;
+   }
+  `}
+  ${props=> props.variation === 'blue' && css`
+   color: #326BF6;
+   :hover{
+     background: #326BF6 !important;
+     border-color:#326BF6 !important
+   }
+  `}
+  :hover {
+    background-color:  ${colors.secondary};
+    transition: .2s;
+    color: #fff
   }
-  @media (max-width:991px){
 
-  }
-  @media (max-width:1200px){
-
-  }
 `;
 

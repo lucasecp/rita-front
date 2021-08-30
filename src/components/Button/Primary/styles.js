@@ -1,38 +1,20 @@
 import styled from 'styled-components'
-
+import colors from '../../../styles/colors'
 export const Container = styled.button`
   position: relative;
-  padding: 10px 40px;
+  padding: 14px 32px;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 400;
   color: #fff;
-  font-size: 14px;
-  background: linear-gradient(35deg, #9198e5, #e66465);
+  font-size: 16px;
+  background: ${colors.secondary};
   transition: 0.2s;
-  border-radius: 14px;
-
-  ::after {
-    content: '';
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    background: linear-gradient(35deg, #e66465, #9198e5);
-    opacity: 0;
-    border-radius: 14px;
-
-    transition: all 0.2s ease-in-out;
-    z-index: 0;
-  }
+  border-radius: 8px;
+  line-height: 20px;
+  border: none;
   :hover {
-    ::after {
-      opacity: 1;
-    }
+    background-color: #7338CB;
+    transition: .2s;
   }
 
-  > span {
-    position: relative;
-    z-index: 1;
-  }
 `

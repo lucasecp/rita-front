@@ -2,12 +2,12 @@ import React from "react";
 
 import { Container } from "./styles";
 
-function Button({ children, type, ...rest }) {
+function OutlineButton({ children, type, variation, ...rest }) {
   return (
-    <Container type={type} {...rest}>
+    <Container type={type} variation={variation} {...rest}>
       {children}
     </Container>
   );
 }
 
-export default Button;
+export default OutlineButton;

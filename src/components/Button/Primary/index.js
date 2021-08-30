@@ -5,7 +5,7 @@ import { Container } from './styles'
 function ButtonPrimary({ children, ...rest }) {
   return (
     <Container {...rest}>
-      <span>{children}</span>
+     {children}
     </Container>
   )
 }
