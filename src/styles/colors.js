@@ -6,18 +6,23 @@ const colors = {
     primary: '#616367',
     secondary: '#fff',
     tertiary: '#1D253B',
-    link: '#870099',
+    link: '#6A6A6A',
   },
 
   background: {
     primary: '#F5F6FA',
-    register: '#C0A6FF',
+    hoverLink: '#C0A6FF',
+    activeLink: '#9146FF',
+    sideBar: '#fff',
   },
 
   feedback: {
     success: '#24EA60',
     error: '#FD5D93',
     warning: '#FFEF29',
+
+    hoverLinkSpan: '#DFD2FF',
+    activeLinkSpan: '#ACFFC5',
   },
 }
 
