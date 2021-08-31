@@ -1,7 +1,10 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import colors from '../../../../../styles/colors'
 
 export const Container = styled.ul`
+  display: flex;
+  flex-direction: column;
+
   > li {
     cursor: pointer;
     display: flex;
@@ -17,11 +20,21 @@ export const Container = styled.ul`
     > div {
       display: flex;
       align-items: center;
+      ${({ expanded }) =>
+        !expanded &&
+        css`
+          justify-content: center;
+          margin-right: 2px;
+        `}
+
+      flex: 1;
 
       padding: 18px 32px;
 
-      > img {
+      > svg {
+        transition: 0.3s;
       }
+
       > a {
         margin-left: 12px;
         color: ${colors.text.link};
@@ -53,8 +66,8 @@ export const Container = styled.ul`
       }
 
       > div {
-        > img {
-          color: ${colors.feedback.activeLinkSpan};
+        > svg {
+          fill: ${colors.feedback.activeLinkSpan};
         }
 
         > a {

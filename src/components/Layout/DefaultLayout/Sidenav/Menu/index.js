@@ -1,36 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import homeIcon from '../../../../../assets/icons/home.svg'
-import userIcon from '../../../../../assets/icons/user.svg'
-import groupUserIcon from '../../../../../assets/icons/people.svg'
-
 import { Container } from './styles'
+import menuItems from './MenuItems'
 
-function Menu() {
+function Menu({ expanded }) {
   return (
-    <Container>
-      <li>
-        <span />
-        <div>
-          <img src={homeIcon} />
-          <Link to="#">Inicio</Link>
-        </div>
-      </li>
-      <li>
-        <span />
-        <div>
-          <img src={userIcon} />
-          <Link to="#">Perfil</Link>
-        </div>
-      </li>
-      <li>
-        <span />
-        <div>
-          <img src={groupUserIcon} />
-          <Link to="#">Dependentes</Link>
-        </div>
-      </li>
+    <Container expanded={expanded}>
+      {menuItems.map((item) => (
+        <li key={item.name}>
+          <span />
+          <div>
+            {item.icon}
+            {expanded && <Link to={item.path}>{item.name}</Link>}
+          </div>
+        </li>
+      ))}
     </Container>
   )
 }
