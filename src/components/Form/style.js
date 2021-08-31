@@ -7,7 +7,7 @@ export const Container = styled.div`
   margin-bottom: 16px;
   label {
     margin-bottom: 6px;
-    color: ${colors.text.primary};
+    color: #909090;
     font-size: 14px;
     line-height: 16px;
     margin-bottom: 4px;
@@ -15,7 +15,7 @@ export const Container = styled.div`
   }
 `
 export const Input = styled.input`
-  color: ${colors.text.primary};
+  color: #6A6A6A;
   border-radius: 4px;
   padding: 10px 15px;
   display: inline-block;
@@ -23,6 +23,7 @@ export const Input = styled.input`
   position: relative;
   border: 1px solid #EEEEEE;
   box-shadow: 0px 2px 4px 0px #E5E5E5;
+  font-weight:500;
 
   ::after {
     content: '';
@@ -40,5 +41,8 @@ export const Input = styled.input`
     ::after {
       border: 1px solid #419eff;
     }
+  }
+  ::placeholder{
+    color: #6A6A6A
   }
 `

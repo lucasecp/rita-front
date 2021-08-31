@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import colors from '../../../styles/colors'
 export const Container = styled.button`
   position: relative;
-  padding: 14px 32px;
+  padding: 12px 32px;
   cursor: pointer;
   font-weight: 400;
   color: #fff;

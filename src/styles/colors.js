@@ -24,6 +24,12 @@ const colors = {
     hoverLinkSpan: '#DFD2FF',
     activeLinkSpan: '#ACFFC5',
   },
+  blue:{
+    light: '#326BF6'
+  },
+  green:{
+    light: '#084C4F'
+  }
 }
 
 export default colors

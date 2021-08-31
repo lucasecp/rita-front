@@ -1,14 +1,16 @@
 import React from 'react';
 import { Row } from 'react-bootstrap';
-import { ContainerBootstrap } from './style';
+import { ContainerBootstrap,BoxContainer } from './style';
 
 
-const ContainerBox = ({children}) => {
+const ContainerBox = ({children, wide}) => {
   return (
     <ContainerBootstrap >
+      <BoxContainer wide={wide}>
     <Row >
        {children}
     </Row>
+      </BoxContainer>
   </ContainerBootstrap>
   );
 };

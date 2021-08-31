@@ -1,21 +1,29 @@
 import React from 'react'
-import { HeaderLayout } from './style'
+import { Container, Profile } from './style'
 import { Link } from 'react-router-dom'
+import profileImg from '../../../../assets/img/profile.png'
+import logout from '../../../../assets/icons/logout.svg'
+import notification from '../../../../assets/icons/notification.svg'
+
+import ContainerBox from '../../Content/ContainerBox'
 
 const Header = () => {
   return (
-    <HeaderLayout>
-      <nav>
-        <Link to="/definir-senha">Definir senha</Link>
-        <Link to="/cadastro-cartao-sabin">Cartão Sabin</Link>
-        <Link to="/cadastro-cliente-cartao-sabin-saude">
-          cadastro cliente cartao sabin saude
-        </Link>
-        <Link to="/teste">Teste de Componentes</Link>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/perfil">Perfil</Link>
-      </nav>
-    </HeaderLayout>
+    <ContainerBox>
+      <Container>
+        <h1>Page Title</h1>
+        <nav>
+          <Link >
+            Olá, Fulano de Souza
+            <Profile >
+              <img src={profileImg} alt="perfil" />
+            </Profile>
+          </Link>
+          <img src={notification} />
+          <img src={logout} />
+        </nav>
+      </Container>
+    </ContainerBox>
   )
 }
 

@@ -83,7 +83,7 @@ export default createGlobalStyle`
 
 
     body,*{
-        font-family: "Athletics";
+        font-family: Athletics;
         box-sizing: border-box;
 
     }

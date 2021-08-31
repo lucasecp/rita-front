@@ -8,7 +8,6 @@ export const Container = styled.div`
     min-height: 100vh;
     background-color: #E5E5E5;
     >header{
-      background: ${colors.feedback.success};
       grid-area: header;
     }
     >aside{

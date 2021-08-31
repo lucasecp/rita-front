@@ -7,7 +7,7 @@ export const Container = styled.button`
   cursor: pointer;
   background: transparent;
   color: ${colors.secondary};
-  padding: 14px 32px;
+  padding: 12px 32px;
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
@@ -15,24 +15,27 @@ export const Container = styled.button`
   ${props=> props.variation === 'white' && css`
    color: #fff;
    border: solid 2px #fff;
+   padding: 10px 16px !important;
    :hover{
      background: #fff !important;
-     color: #6A6A6A !important
-   }
-  `}
-  ${props=> props.variation === 'green' && css`
-  color: #ACFFC5;
-  border: solid 2px #ACFFC5;
-  :hover{
-     color: #084C4F !important;
-     background:  #ACFFC5 !important;
-   }
-  `}
-  ${props=> props.variation === 'blue' && css`
-   color: #326BF6;
+     color: ${colors.text.link} !important
+    }
+    `}
+    ${props=> props.variation === 'green' && css`
+    color: ${colors.feedback.activeLinkSpan};
+    padding: 10px 16px !important;
+    border: solid 2px ${colors.feedback.activeLinkSpan};
+    :hover{
+      color: ${colors.green.light} !important;
+      background:  ${colors.feedback.activeLinkSpan} !important;
+    }
+    `}
+    ${props=> props.variation === 'blue' && css`
+    color: ${colors.blue.light};
+    padding: 10px 16px !important;
+    border-color:${colors.blue.light} !important;
    :hover{
-     background: #326BF6 !important;
-     border-color:#326BF6 !important
+     background: ${colors.blue.light} !important;
    }
   `}
   :hover {
