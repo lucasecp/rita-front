@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import ContainerBox from '../../Content/ContainerBox';
-import logoFooter from '../../../../assets/icons/logoFooter.png'
+import logoFooter from '../../../../assets/icons/logoSymbol.png'
 import { Container,Time,ColBootstrap } from './style';
 const Footer = () => {
     const formatDate = () =>`${new Date().toLocaleDateString('pt-br')} - ${new Date().getHours()}:${new Date().getMinutes()<10?`0${new Date().getMinutes()} `: new Date().getMinutes()}`

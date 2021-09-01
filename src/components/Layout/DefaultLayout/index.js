@@ -5,13 +5,14 @@ import Footer from './Footer'
 import Header from './Header'
 import Sidenav from './Sidenav'
 import { Container } from './style'
-
+import HeaderMobile from './mobile/Header'
+import SidenavMobile from './mobile/Sidenav'
 const DefaultLayout = ({ children }) => {
   const isMobile = useMediaPredicate('(max-width: 767px)')
 
   return (
     <Container>
-      {isMobile && 'Header do Mobile'}
+      {isMobile && <> <HeaderMobile/> <SidenavMobile/> </>}
 
       {!isMobile && (
         <>

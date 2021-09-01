@@ -32,13 +32,12 @@ export const Container = styled.header`
    @media(max-width:767px){
     padding:40px 40px 24px 40px;
    }
-
 `
 export const Profile = styled.div`
     border-radius: 50%;
     border: solid 2px #9146FF;
-    width: 50px;
-    height:50px;
+    width: 40px;
+    height:40px;
     display: flex;
     align-items: center;
     justify-content: center;
