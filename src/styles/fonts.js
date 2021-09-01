@@ -1,81 +1,105 @@
 import { css } from 'styled-components'
+import regular from '../assets/fonts/athletics/regular.otf'
+import light from '../assets/fonts/athletics/light.otf'
+import lightItalic from '../assets/fonts/athletics/lightItalic.otf'
+import regularItalic from '../assets/fonts/athletics/regularItalic.otf'
+import medium from '../assets/fonts/athletics/medium.otf'
+import mediumItalic from '../assets/fonts/athletics/mediumItalic.otf'
+import bold from '../assets/fonts/athletics/bold.otf'
+import boldItalic from '../assets/fonts/athletics/boldItalic.otf'
+import extraBold from '../assets/fonts/athletics/extraBold.otf'
+import extraBoldItalic from '../assets/fonts/athletics/extraBoldItalic.otf'
+import black from '../assets/fonts/athletics/black.otf'
+import blackItalic from '../assets/fonts/athletics/blackItalic.otf'
 
 const fonts = css`
   @font-face {
     font-family: Athletics;
     font-weight: 300;
-    src: url(../assets/fonts/athletics/light.otf);
+    src: url(${light})  format("opentype");
+
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 300;
     font-style: italic;
-    src: url(../assets/fonts/athletics/lightItalic.otf);
+    src: url(${lightItalic})  format("opentype");
+
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 400;
-    src: url(../assets/fonts/athletics/regular.otf);
+    src: url(${regular})  format("opentype");
+
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 400;
     font-style: italic;
-    src: url(../assets/fonts/athletics/regularItalic.otf);
+    src: url(${regularItalic})  format("opentype");
+
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 500;
-    src: url(../assets/fonts/athletics/medium.otf);
+    src: url(${medium})  format("opentype");
+
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 500;
     font-style: italic;
-    src: url(../assets/fonts/athletics/mediumItalic.otf);
+    src: url(${mediumItalic})  format("opentype");
+
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 700;
-    src: url(../assets/fonts/athletics/bold.otf);
+    src: url(${bold})  format("opentype");
+
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 700;
     font-style: italic;
-    src: url(../assets/fonts/athletics/boldItalic.otf);
+    src: url(${boldItalic})  format("opentype");
+
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 800;
-    src: url(../assets/fonts/athletics/extraBold.otf);
+    src: url(${extraBold})  format("opentype");
+
   }
   @font-face {
     font-family: Athletics;
     font-weight: 800;
     font-style: italic;
-    src: url(../assets/fonts/athletics/extraItalic.otf);
+    src: url(${extraBoldItalic})  format("opentype");
+
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 900;
-    src: url(../assets/fonts/athletics/black.otf);
+    src: url(${black})  format("opentype");
+
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 900;
     font-style: italic;
-    src: url(../assets/fonts/athletics/blackItalic.otf);
+    src: url(${blackItalic})  format("opentype");
+
   }
 `
 export default fonts

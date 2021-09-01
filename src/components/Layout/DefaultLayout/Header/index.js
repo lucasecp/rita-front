@@ -9,11 +9,11 @@ import ContainerBox from '../../Content/ContainerBox'
 
 const Header = () => {
   return (
-    <ContainerBox>
+    <ContainerBox >
       <Container>
         <h1>Page Title</h1>
         <nav>
-          <Link >
+          <Link to='/'>
             Olá, Fulano de Souza
             <Profile >
               <img src={profileImg} alt="perfil" />

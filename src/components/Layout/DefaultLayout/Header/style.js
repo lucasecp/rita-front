@@ -5,13 +5,13 @@ export const Container = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:32px 32px 32px 32px;
+  padding:40px 42px 24px 42px;
   margin: -15px 0;
   >h1{
     font-size: 32px;
     line-height: 39px;
     font-weight: 500;
-    color: ${colors.text.link}
+    color: ${colors.text.link};
   }
    > nav{
      display: flex;
@@ -26,7 +26,8 @@ export const Container = styled.header`
    }
    img{
     filter: invert(28%) sepia(63%) saturate(2375%) hue-rotate(248deg) brightness(105%) contrast(102%);
-    margin-left:20px
+    margin-left:20px;
+    cursor: pointer
    }
 
 `
