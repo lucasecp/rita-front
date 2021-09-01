@@ -20,4 +20,9 @@ export const Container = styled.div`
   > footer {
     grid-area: footer;
   }
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
