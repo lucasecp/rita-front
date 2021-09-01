@@ -8,13 +8,13 @@ export const Container = styled.button`
   color: #fff;
   font-size: 16px;
   background: ${colors.secondary};
-  transition: 0.2s;
+  transition: .3s;
   border-radius: 8px;
   line-height: 20px;
   border: none;
   :hover {
     background-color: #7338CB;
-    transition: .2s;
+    transition: .3s;
   }
 
 `

@@ -11,7 +11,7 @@ export const Container = styled.button`
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
-  transition: .2s;
+  transition: .3s;
   ${props=> props.variation === 'white' && css`
    color: #fff;
    border: solid 2px #fff;
@@ -40,7 +40,7 @@ export const Container = styled.button`
   `}
   :hover {
     background-color:  ${colors.secondary};
-    transition: .2s;
+    transition: .3s;
     color: #fff
   }
 

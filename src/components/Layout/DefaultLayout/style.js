@@ -16,11 +16,9 @@ export const Container = styled.div`
     grid-area: aside;
   }
   > main {
-    background: ${colors.text};
     grid-area: main;
   }
   > footer {
-    background: ${colors.primary};
     grid-area: footer;
   }
 

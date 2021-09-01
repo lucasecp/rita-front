@@ -15,8 +15,12 @@ export const Box = styled.div`
     height: 168px;
     background: #eeeeee;
     border-radius: 8px;
+    margin-right: 32px;
   }
   > div:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   h2,
   p {
@@ -74,14 +78,15 @@ export const Card = styled.div`
     top: 0;
     left: 0;
     z-index: 1 !important;
-    opacity: .3;
+    opacity: 0.3;
   }
   ${(props) =>
     props.variation === 'light-blue' &&
     css`
       background-color: #c5dbfe;
-      h3,p{
-        color:#1C23BD
+      h3,
+      p {
+        color: #1c23bd;
       }
       > img {
         filter: invert(87%) sepia(48%) saturate(1732%) hue-rotate(179deg)
@@ -92,8 +97,15 @@ export const Card = styled.div`
     props.variation === 'dark-blue' &&
     css`
       background-color: #706BFF;
+      h3{
+        color:#ACFFC5
+      }
+      p{
+        color: #C5DBFE;
+      }
       > img{
         filter: invert(17%) sepia(78%) saturate(5493%) hue-rotate(236deg) brightness(75%) contrast(95%);
+         right:350px;
         `}
         ${(props) =>
     props.variation === 'red' &&
