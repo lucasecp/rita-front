@@ -1,20 +1,28 @@
-import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import Sidenav from './Sidenav';
-import {Container} from './style'
+import React from 'react'
+import { useMediaPredicate } from 'react-media-hook'
 
-const DefaultLayout = ({children}) => {
+import Footer from './Footer'
+import Header from './Header'
+import Sidenav from './Sidenav'
+import { Container } from './style'
+
+const DefaultLayout = ({ children }) => {
+  const isMobile = useMediaPredicate('(max-width: 767px)')
+
   return (
     <Container>
-       <Header/>
-       <Sidenav/>
-       <main>
-         {children}
-       </main>
-       <Footer/>
-    </Container>
-  );
-};
+      {isMobile && 'Header do Mobile'}
 
-export default DefaultLayout;
+      {!isMobile && (
+        <>
+          <Header />
+          <Sidenav />
+        </>
+      )}
+      <main>{children}</main>
+      <Footer />
+    </Container>
+  )
+}
+
+export default DefaultLayout

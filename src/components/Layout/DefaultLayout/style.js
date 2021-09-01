@@ -23,4 +23,9 @@ export const Container = styled.div`
     background: ${colors.primary};
     grid-area: footer;
   }
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
