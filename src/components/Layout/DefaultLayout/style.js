@@ -8,11 +8,10 @@ export const Container = styled.div`
   min-height: 100vh;
   background-color: #e5e5e5;
   > header {
-    background: ${colors.feedback.success};
     grid-area: header;
   }
   > aside {
-    background: ${colors.background};
+
     grid-area: aside;
   }
   > main {

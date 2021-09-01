@@ -10,6 +10,7 @@ export const Box = styled.div`
   justify-content: space-between;
   margin: 15px 0;
 
+
   > div:first-child {
     width: 194px;
     height: 168px;
@@ -32,14 +33,13 @@ export const Box = styled.div`
   button {
     margin-top: auto;
   }
-`
-export const InputGroup = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 !important;
-  margin-top: 32px;
-  > * {
-    padding: 0 15px;
+  @media(max-width:767px){
+    flex-direction: column;
+    align-items: center;
+    > div:first-child {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
   }
 `
 export const Card = styled.div`
@@ -79,6 +79,7 @@ export const Card = styled.div`
     left: 0;
     z-index: 1 !important;
     opacity: 0.3;
+    width:100%
   }
   ${(props) =>
     props.variation === 'light-blue' &&

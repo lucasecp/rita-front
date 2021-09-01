@@ -5,7 +5,7 @@ export const Container = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:40px 42px 24px 42px;
+  padding:40px 47px 24px 47px;
   margin: -15px 0;
   >h1{
     font-size: 32px;
@@ -28,6 +28,9 @@ export const Container = styled.header`
     filter: invert(28%) sepia(63%) saturate(2375%) hue-rotate(248deg) brightness(105%) contrast(102%);
     margin-left:20px;
     cursor: pointer
+   }
+   @media(max-width:767px){
+    padding:40px 40px 24px 40px;
    }
 
 `

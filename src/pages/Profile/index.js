@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import DefaultLayout from '../../components/Layout/DefaultLayout'
-import { Card, Box, InputGroup } from './style'
+import { Card, Box } from './style'
 import OutlineButton from '../../components/Button/Outline'
 import ButtonPrimary from '../../components/Button/Primary'
 import InputText from '../../components/Form/InputText'
@@ -21,7 +21,7 @@ const Profile = () => {
   return (
     <DefaultLayout>
       <ContainerBox wide>
-        <Col>
+        <Col xl={4} lg={6}>
           <Card variation="light-blue">
           <img src={Background1} />
             <h3>Exames</h3>
@@ -29,7 +29,7 @@ const Profile = () => {
             <OutlineButton variation="blue">label</OutlineButton>
           </Card>
         </Col>
-        <Col>
+        <Col xl={4} lg={6} className='mt-3 mt-lg-0'>
           <Card variation="dark-blue">
           <img src={Background2} />
             <h3>Consultas</h3>
@@ -37,7 +37,7 @@ const Profile = () => {
             <OutlineButton variation="green">label</OutlineButton>
           </Card>
         </Col>
-        <Col>
+        <Col xl={4}  className='mt-3 mt-xl-0'>
           <Card variation="red">
           <img src={Background3} />
             <h3>Medicamentos</h3>
@@ -46,31 +46,32 @@ const Profile = () => {
           </Card>
         </Col>
 
-          <InputGroup>
-          <Col md={6}>
+
+          <Col lg={6} className='mt-5'>
             <InputText placeHolder="Text input" label="Label input" />
           </Col>
-          <Col md={6}>
+          <Col lg={6} className='mt-3 mt-lg-5'>
             <InputText placeHolder="Text input" label="Label input" />
           </Col>
-          <Col md={6}>
+          <Col lg={6} className='mt-3 mt-lg-0'>
             <InputText placeHolder="Text input" label="Label input" />
           </Col>
-          <Col md={6}>
+          <Col lg={6} className='mt-3 mt-lg-0'>
             <InputText placeHolder="Text input" label="Label input" />
           </Col>
-          <Col md={6} className="d-flex justify-content-end">
+          <Col lg={6} className="d-flex justify-content-lg-end justify-content-center mt-3 mt-lg-0" >
             <ButtonPrimary>Label main button</ButtonPrimary>
           </Col>
-          <Col md={6}>
+          <Col lg={6} className="d-flex justify-content-lg-start justify-content-center mt-3 mt-lg-0">
             <OutlineButton>Label secondary button</OutlineButton>
           </Col>
-          </InputGroup>
+
+
 
       </ContainerBox>
 
       <ContainerBox>
-        <Col md={6}>
+        <Col lg={6}>
           <Box>
             <div></div>
             <div>
@@ -80,7 +81,7 @@ const Profile = () => {
             </div>
           </Box>
         </Col>
-        <Col md={6}>
+        <Col lg={6}>
           <Box>
             <div></div>
             <div>
@@ -90,7 +91,7 @@ const Profile = () => {
             </div>
           </Box>
         </Col>
-        <Col md={6}>
+        <Col lg={6}>
           <Box>
             <div></div>
             <div>
@@ -100,7 +101,7 @@ const Profile = () => {
             </div>
           </Box>
         </Col>
-        <Col md={6}>
+        <Col lg={6}>
           <Box>
             <div></div>
             <div>

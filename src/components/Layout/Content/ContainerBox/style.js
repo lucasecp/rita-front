@@ -12,8 +12,14 @@ export const BoxContainer = styled.div`
     ${props => props.wide ? css`
     padding:40px 32px;
     background-color: #FFFFFF;
+    @media(max-width:767px){
+      padding:35px 25px;
+      margin: 0 10px;
+    }
     `: css`
     background-color: transparent;
+    @media(max-width:767px){
+      margin: 0 10px;
+    }
   `}
-
 `
