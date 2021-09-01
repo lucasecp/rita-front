@@ -10,7 +10,7 @@ const colors = {
   },
 
   background: {
-    primary: '#F5F6FA',
+    primary: '#F5F5F5',
     hoverLink: '#C0A6FF',
     activeLink: '#9146FF',
     sideBar: '#fff',
@@ -24,12 +24,12 @@ const colors = {
     hoverLinkSpan: '#DFD2FF',
     activeLinkSpan: '#ACFFC5',
   },
-  blue:{
-    light: '#326BF6'
+  blue: {
+    light: '#326BF6',
   },
-  green:{
-    light: '#084C4F'
-  }
+  green: {
+    light: '#084C4F',
+  },
 }
 
 export default colors

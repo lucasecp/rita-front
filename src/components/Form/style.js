@@ -4,7 +4,6 @@ import colors from '../../styles/colors'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
   label {
     margin-bottom: 6px;
     color: #909090;
@@ -15,15 +14,15 @@ export const Container = styled.div`
   }
 `
 export const Input = styled.input`
-  color: #6A6A6A;
+  color: #6a6a6a;
   border-radius: 4px;
   padding: 10px 15px;
   display: inline-block;
   transition: all 0.3s;
   position: relative;
-  border: 1px solid #EEEEEE;
-  box-shadow: 0px 2px 4px 0px #E5E5E5;
-  font-weight:500;
+  border: 1px solid #eeeeee;
+  box-shadow: 0px 2px 4px 0px #e5e5e5;
+  font-weight: 500;
 
   ::after {
     content: '';
@@ -42,7 +41,7 @@ export const Input = styled.input`
       border: 1px solid #419eff;
     }
   }
-  ::placeholder{
-    color: #6A6A6A
+  ::placeholder {
+    color: #6a6a6a;
   }
 `

@@ -8,13 +8,14 @@ export const Container = styled.button`
   color: #fff;
   font-size: 16px;
   background: ${colors.secondary};
-  transition: .3s;
+  transition: 0.3s;
   border-radius: 8px;
   line-height: 20px;
   border: none;
-  :hover {
-    background-color: #7338CB;
-    transition: .3s;
-  }
+  height: fit-content;
 
+  :hover {
+    background-color: #7338cb;
+    transition: 0.3s;
+  }
 `

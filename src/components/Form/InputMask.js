@@ -5,13 +5,11 @@ import mask from '../../helpers/mask'
 import { Container, Input } from './style'
 
 const InputMask = (props) => {
-
-  const handleChange = (e) =>  props.setValue(mask(e.target.value, props.mask))
-
+  const handleChange = (e) => props.setValue(mask(e.target.value, props.mask))
 
   return (
     <Container>
-      <label htmlFor={props.label}>{props.label}</label>
+      {props.label && <label htmlFor={props.label}>{props.label}</label>}
       <Input
         type={props.type || 'tel'}
         id={props.label}
