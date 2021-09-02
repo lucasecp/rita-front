@@ -17,109 +17,106 @@ const Profile = () => {
 
   return (
     <DefaultLayout>
-        <TemplateBox>
-          <Row>
-            <Col xl={4} lg={6}>
-              <Card variation="light-blue">
-                <img src={Background1} />
-                <h3>Exames</h3>
-                <p>Você tem X exames aguardando resultado.</p>
-                <OutlineButton variation="blue">label</OutlineButton>
-              </Card>
-            </Col>
-            <Col xl={4} lg={6} className="mt-3 mt-lg-0">
-              <Card variation="dark-blue">
-                <img src={Background2} />
-                <h3>Consultas</h3>
-                <p>Você não tem consultas agendadas neste momento.</p>
-                <OutlineButton variation="green">label</OutlineButton>
-              </Card>
-            </Col>
-            <Col xl={4} className="mt-3 mt-xl-0">
-              <Card variation="red">
-                <img src={Background3} />
-                <h3>Medicamentos</h3>
-                <p>
-                  Você tem 2 receitas prescritas neste mês. Gostaria de ver?
-                </p>
-                <OutlineButton variation="white">label</OutlineButton>
-              </Card>
-            </Col>
-          </Row>
+      <TemplateBox>
+        <Row>
+          <Col xl={4} lg={6}>
+            <Card variation="light-blue">
+              <img src={Background1} />
+              <h3>Exames</h3>
+              <p>Você tem X exames aguardando resultado.</p>
+              <OutlineButton variation="blue">label</OutlineButton>
+            </Card>
+          </Col>
+          <Col xl={4} lg={6} className="mt-3 mt-lg-0">
+            <Card variation="dark-blue">
+              <img src={Background2} />
+              <h3>Consultas</h3>
+              <p>Você não tem consultas agendadas neste momento.</p>
+              <OutlineButton variation="green">label</OutlineButton>
+            </Card>
+          </Col>
+          <Col xl={4} className="mt-3 mt-xl-0">
+            <Card variation="red">
+              <img src={Background3} />
+              <h3>Medicamentos</h3>
+              <p>Você tem 2 receitas prescritas neste mês. Gostaria de ver?</p>
+              <OutlineButton variation="white">label</OutlineButton>
+            </Card>
+          </Col>
+        </Row>
 
-          <Row>
-            <Col lg={6} className="mt-5 mb-4">
-              <InputText placeHolder="Text input" label="Label input" />
-            </Col>
-            <Col lg={6} className="mt-3 mt-lg-5 mb-4">
-              <InputText placeHolder="Text input" label="Label input" />
-            </Col>
-            <Col lg={6} className="mt-3 mt-lg-0 mb-4">
-              <InputText placeHolder="Text input" label="Label input" />
-            </Col>
-            <Col lg={6} className="mt-3 mt-lg-0">
-              <InputText placeHolder="Text input" label="Label input" />
-            </Col>
-            <Col
-              lg={6}
-              className="d-flex justify-content-lg-end justify-content-center align-items-center mt-4 mt-lg-0"
-            >
+        <Row>
+          <Col lg={6} className="mt-5 mb-4">
+            <InputText placeHolder="Text input" label="Label input" />
+          </Col>
+          <Col lg={6} className="mt-3 mt-lg-5 mb-4">
+            <InputText placeHolder="Text input" label="Label input" />
+          </Col>
+          <Col lg={6} className="mt-3 mt-lg-0 mb-4">
+            <InputText placeHolder="Text input" label="Label input" />
+          </Col>
+          <Col lg={6} className="mt-3 mt-lg-0">
+            <InputText placeHolder="Text input" label="Label input" />
+          </Col>
+          <Col
+            lg={6}
+            className="d-flex justify-content-lg-end justify-content-center align-items-center mt-4 mt-lg-0"
+          >
+            <ButtonPrimary>Label main button</ButtonPrimary>
+          </Col>
+          <Col
+            lg={6}
+            className="d-flex justify-content-lg-start justify-content-center mt-3 mt-lg-0"
+          >
+            <OutlineButton>Label secondary button</OutlineButton>
+          </Col>
+        </Row>
+      </TemplateBox>
+
+      <TemplateBox transparent>
+        <Row className='mt-3'>
+          <Col xl={6}>
+            <Box>
+              <div></div>
+              <div>
+                <h2>Título qualquer</h2>
+                <p>Alguma coisa importante aqui!</p>
+              </div>
               <ButtonPrimary>Label main button</ButtonPrimary>
-            </Col>
-            <Col
-              lg={6}
-              className="d-flex justify-content-lg-start justify-content-center mt-3 mt-lg-0"
-            >
-              <OutlineButton>Label secondary button</OutlineButton>
-            </Col>
-          </Row>
-        </TemplateBox>
-
-
-        <TemplateBox transparent>
-          <Row>
-            <Col lg={6}>
-              <Box>
-                <div></div>
-                <div>
-                  <h2>Título qualquer</h2>
-                  <p>Alguma coisa importante aqui!</p>
-                  <ButtonPrimary>Label main button</ButtonPrimary>
-                </div>
-              </Box>
-            </Col>
-            <Col lg={6}>
-              <Box>
-                <div></div>
-                <div>
-                  <h2>Título qualquer</h2>
-                  <p>Alguma coisa importante aqui!</p>
-                  <OutlineButton>Label secondary button</OutlineButton>
-                </div>
-              </Box>
-            </Col>
-            <Col lg={6}>
-              <Box>
-                <div></div>
-                <div>
-                  <h2>Título qualquer</h2>
-                  <p>Alguma coisa importante aqui!</p>
-                  <OutlineButton>Label secondary button</OutlineButton>
-                </div>
-              </Box>
-            </Col>
-            <Col lg={6}>
-              <Box>
-                <div></div>
-                <div>
-                  <h2>Título qualquer</h2>
-                  <p>Alguma coisa importante aqui!</p>
-                  <ButtonPrimary>Label main button</ButtonPrimary>
-                </div>
-              </Box>
-            </Col>
-          </Row>
-        </TemplateBox>
+            </Box>
+          </Col>
+          <Col xl={6}>
+            <Box>
+              <div></div>
+              <div>
+              <h2>Título qualquer</h2>
+              <p>Alguma coisa importante aqui!</p>
+              </div>
+              <OutlineButton>Label secondary </OutlineButton>
+            </Box>
+          </Col>
+          <Col xl={6}>
+            <Box>
+              <div></div>
+              <div>
+                <h2>Título qualquer</h2>
+                <p>Alguma coisa importante aqui!</p>
+              </div>
+              <OutlineButton>Label secondary </OutlineButton>
+            </Box>
+          </Col>
+          <Col xl={6}>
+            <Box>
+              <div></div>
+              <div>
+                <h2>Título qualquer</h2>
+                <p>Alguma coisa importante aqui!</p>
+              </div>
+              <ButtonPrimary>Label main button</ButtonPrimary>
+            </Box>
+          </Col>
+        </Row>
+      </TemplateBox>
     </DefaultLayout>
   )
 }

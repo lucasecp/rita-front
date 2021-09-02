@@ -2,24 +2,20 @@ import React, { useState } from 'react'
 
 import arrowImg from '../../../../assets/icons/arrow-left.svg'
 
-import expandedLogo from '../../../../assets/logo/expanded-logo.svg'
-import iconLogo from '../../../../assets/logo/icon-logo.svg'
 
 import Menu from './Menu'
 
-import { Container } from './style'
+import { Container, Logo } from './style'
 
 const MODE = {
   EXPANDED: 'expanded',
   SHORT: 'short',
-  HIDDEN: 'hidden',
 }
 
 const Sidenav = () => {
   const [mode, setMode] = useState(MODE.EXPANDED)
 
   const toogleShorten = () => {
-    console.log(mode)
 
     if (mode === MODE.EXPANDED) {
       setMode(MODE.SHORT)
@@ -37,7 +33,7 @@ const Sidenav = () => {
       </div>
       <nav>
         <header>
-          <img src={mode === MODE.EXPANDED ? expandedLogo : iconLogo} />
+          <Logo expanded={mode}></Logo>
         </header>
         <Menu expanded={mode === MODE.EXPANDED} />
       </nav>
