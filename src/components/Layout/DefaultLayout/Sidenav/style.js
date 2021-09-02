@@ -63,7 +63,8 @@ export const Logo = styled.div`
     background-position: left center;
     background-size: contain;
     background-repeat: no-repeat;
-transition: .3s;
+    transition: .3s;
+
     ${props => props.expanded === 'expanded'? css`
     background-image:url(${expandedLogo});
     height: 64px;
@@ -71,4 +72,7 @@ transition: .3s;
     background-image:url(${iconLogo});
     height: 52px;
     `}
+`
+export const Test = styled.div`
+  
 `
