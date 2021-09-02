@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-
 import logoRitaVertical from '../../assets/logo/vertical-named-logo.svg'
 import ButtonPrimary from '../../components/Button/Primary'
 import InputMask from '../../components/Form/InputMask'
@@ -14,7 +13,7 @@ function Register() {
 
   return (
     <Container>
-      <aside>
+      <aside collapseOnSelect expand="lg">
         <img src={logoRitaVertical} />
       </aside>
       <main>

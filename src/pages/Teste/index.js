@@ -1,54 +1,29 @@
-import { Dropdown } from 'bootstrap'
 import React from 'react'
-
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  FormControl,
-  InputGroup,
-  Nav,
-  Row,
-} from 'react-bootstrap'
+import ButtonPrimary from '../../components/Button/Primary'
+import InputMask from '../../components/Form/InputMask'
+import InputText from '../../components/Form/InputText'
+import Footer from '../../components/Layout/DefaultLayout/Footer'
+import { Container, Content } from './styles'
+import logoRitaVertical from '../../assets/logo/vertical-named-logo.svg'
 
 function Teste() {
   return (
     <Container>
-      <Nav variant="tabs" defaultActiveKey="/home">
-        <Nav.Item>
-          <Nav.Link href="/home">Sobre</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-1">Menu</Nav.Link>
-        </Nav.Item>
-        <Nav.Item></Nav.Item>
-      </Nav>
-      <Row className="justify-content-md-center m-4">
-        <Col xs lg="2">
-          <Card style={{ width: '18rem' }}>
-            <Card.Img
-              variant="top"
-              src="https://png.pngtree.com/png-clipart/20190629/original/pngtree-solar-elements-in-orange-character-expressions-illustration-png-image_4070185.jpg"
-            />
-            <Card.Body>
-              <Card.Title>Oi meninos</Card.Title>
-              <Button variant="warning">Warning</Button>{' '}
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-      <>
-        <InputGroup className="mb-3"></InputGroup>
-        <InputGroup
-          style={{
-            width: '15rem',
-            height: '3rem',
-          }}
-        >
-          <FormControl aria-label="" />
-        </InputGroup>
-      </>
+      <aside>
+        <img src={logoRitaVertical} />
+      </aside>
+      <main>
+        <Content>
+          <div>
+            <h6>Para iniciarmos o processo, por favor informe o seu CPF:</h6>
+            <div>
+              <InputMask mask="###.###.###-##" placeHolder="123.456.789-10" />
+              <ButtonPrimary>Confirmar</ButtonPrimary>
+            </div>
+          </div>
+          <Footer />
+        </Content>
+      </main>
     </Container>
   )
 }
