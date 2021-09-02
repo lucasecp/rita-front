@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import logoRitaVertical from '../../assets/logo/vertical-named-logo.svg'
-import ButtonPrimary from '../../components/Button/Primary'
-import InputMask from '../../components/Form/InputMask'
-import Footer from '../../components/Layout/DefaultLayout/Footer'
+import ButtonPrimary from '../../../../components/Button/Primary'
+import InputMask from '../../../../components/Form/InputMask'
+import Footer from '../../../../components/Layout/DefaultLayout/Footer'
 
 import { Container, Content } from './styles'
 
@@ -14,6 +14,7 @@ function Register() {
   return (
     <Container>
       <aside collapseOnSelect expand="lg">
+        <div />
         <img src={logoRitaVertical} />
       </aside>
       <main>
