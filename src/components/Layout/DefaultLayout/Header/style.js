@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import colors from "../../../../styles/colors";
-
-export const Container = styled.header`
+export const HeaderLayout = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:40px 42px 24px 42px;
-  margin: -15px 0;
   >h1{
     font-size: 32px;
     line-height: 39px;
@@ -29,13 +26,15 @@ export const Container = styled.header`
     margin-left:20px;
     cursor: pointer
    }
-
+   @media(max-width:767px){
+    padding:40px 40px 24px 40px;
+   }
 `
 export const Profile = styled.div`
     border-radius: 50%;
     border: solid 2px #9146FF;
-    width: 50px;
-    height:50px;
+    width: 40px;
+    height:40px;
     display: flex;
     align-items: center;
     justify-content: center;

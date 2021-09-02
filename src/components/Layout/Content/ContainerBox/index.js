@@ -1,17 +1,11 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
-import { ContainerBootstrap,BoxContainer } from './style';
-
+import { Container,Row } from 'react-bootstrap'
 
 const ContainerBox = ({children, wide}) => {
   return (
-    <ContainerBootstrap >
-      <BoxContainer wide={wide}>
-    <Row >
+    <Container fluid='md'>
        {children}
-    </Row>
-      </BoxContainer>
-  </ContainerBootstrap>
+  </Container>
   );
 };
 

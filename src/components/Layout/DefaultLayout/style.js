@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import colors from '../../../styles/colors'
-export const Container = styled.div`
+
+export const CustomContainer = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr auto;
@@ -8,11 +8,10 @@ export const Container = styled.div`
   min-height: 100vh;
   background-color: #e5e5e5;
   > header {
-    background: ${colors.feedback.success};
+    padding: 40px 64px 24px 64px;
     grid-area: header;
   }
   > aside {
-    background: ${colors.background};
     grid-area: aside;
   }
   > main {
@@ -20,6 +19,15 @@ export const Container = styled.div`
   }
   > footer {
     grid-area: footer;
+    padding-top: 22px;
+    padding-bottom: 105px;
+  }
+  > header, > footer,> main{
+    width: 100%;
+  }
+  >footer, > main{
+    padding-left: 32px;
+    padding-right: 32px;
   }
 
   @media (max-width: 767px) {
