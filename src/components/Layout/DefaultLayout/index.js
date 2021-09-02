@@ -22,6 +22,7 @@ const DefaultLayout = ({ children }) => {
         </>
       )}
       <main>
+      {isMobile && <h1>Page Title</h1>}
          {children}
         </main>
       <Footer />
