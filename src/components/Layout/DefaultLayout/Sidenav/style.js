@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import colors from '../../../../styles/colors'
-
+import expandedLogo from '../../../../assets/logo/expanded-logo.svg'
+import iconLogo from '../../../../assets/logo/icon-logo.svg'
 export const Container = styled.aside`
   position: sticky;
   /* left: 0;*/
@@ -53,11 +54,21 @@ export const Container = styled.aside`
     overflow: hidden;
 
     > header {
-      > img {
-        min-width: ${({ mode }) => (mode === 'expanded' ? '212px' : 'unset')};
-
         padding: 40px 32px 52px;
-      }
+
     }
   }
+`
+export const Logo = styled.div`
+    background-position: left center;
+    background-size: contain;
+    background-repeat: no-repeat;
+transition: .3s;
+    ${props => props.expanded === 'expanded'? css`
+    background-image:url(${expandedLogo});
+    height: 64px;
+    ` : css`
+    background-image:url(${iconLogo});
+    height: 52px;
+    `}
 `

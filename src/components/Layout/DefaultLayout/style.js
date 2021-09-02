@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import colors from '../../../styles/colors'
 
 export const CustomContainer = styled.div`
   display: grid;
@@ -16,6 +17,13 @@ export const CustomContainer = styled.div`
   }
   > main {
     grid-area: main;
+    >h1{
+      font-size: 32px;
+      line-height: 39px;
+      font-weight: 500;
+      color: ${colors.text.link};
+      margin-bottom: 16px;
+    }
   }
   > footer {
     grid-area: footer;
@@ -33,5 +41,13 @@ export const CustomContainer = styled.div`
   @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
+    > header,>footer, > main {
+    padding: 16px 24px 16px 24px;
+  }
+  >header{
+    margin-bottom: 24px;
+  }
+
+
   }
 `
