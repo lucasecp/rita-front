@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import colors from '../../styles/colors'
 
 export const Box = styled.div`
   padding: 40px 32px;
@@ -41,6 +40,18 @@ export const Box = styled.div`
     margin-bottom: 15px;
   }
   }
+`
+export const TemplateBox = styled.div`
+  padding: 32px;
+  background: #fff;
+  margin: 0 22px;
+  box-shadow: 0px 2px 8px 0px #DFD2FF26;
+  border-radius: 8px;
+  ${props => props.transparent && css`
+    background: transparent;
+    padding-left: 0;
+    padding-right: 0;
+  `};
 `
 export const Card = styled.div`
   padding: 18px 24px;

@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import colors from "../../../../styles/colors";
-
-export const Container = styled.header`
+export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:40px 47px 24px 47px;
-  margin: -15px 0;
   >h1{
     font-size: 32px;
     line-height: 39px;

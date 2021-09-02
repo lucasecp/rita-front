@@ -4,14 +4,15 @@ import { useMediaPredicate } from 'react-media-hook'
 import Footer from './Footer'
 import Header from './Header'
 import Sidenav from './Sidenav'
-import { Container } from './style'
+import { CustomContainer } from './style'
 import HeaderMobile from './mobile/Header'
 import SidenavMobile from './mobile/Sidenav'
+import { Container } from 'react-bootstrap'
 const DefaultLayout = ({ children }) => {
   const isMobile = useMediaPredicate('(max-width: 767px)')
 
   return (
-    <Container>
+    <CustomContainer>
       {isMobile && <> <HeaderMobile/> <SidenavMobile/> </>}
 
       {!isMobile && (
@@ -20,9 +21,13 @@ const DefaultLayout = ({ children }) => {
           <Sidenav />
         </>
       )}
-      <main>{children}</main>
+      <main>
+      <Container fluid='md'>
+         {children}
+        </Container>
+        </main>
       <Footer />
-    </Container>
+    </CustomContainer>
   )
 }
 

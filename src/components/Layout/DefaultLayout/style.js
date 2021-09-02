@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import colors from '../../../styles/colors'
-export const Container = styled.div`
+
+export const CustomContainer = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr auto;
@@ -11,7 +11,6 @@ export const Container = styled.div`
     grid-area: header;
   }
   > aside {
-
     grid-area: aside;
   }
   > main {
