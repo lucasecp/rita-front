@@ -1,11 +1,5 @@
 import React from 'react'
-import { Container } from "./styles"
 
-export default function BotaoEvelyn({children}) {
-   
-    return (
-        <Container>
-            {children}
-        </Container>
-    )
+export default function index() {
+  return <div></div>
 }

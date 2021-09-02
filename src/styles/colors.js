@@ -2,6 +2,9 @@ const colors = {
   primary: '#3F1B99',
   secondary: '#9146FF',
 
+  black: '#000000',
+  white: '#ffffff',
+
   text: {
     primary: '#616367',
     secondary: '#fff',
@@ -24,6 +27,11 @@ const colors = {
     hoverLinkSpan: '#DFD2FF',
     activeLinkSpan: '#ACFFC5',
   },
+
+  gray: {
+    light: '#EEEEEE',
+  },
+
   blue: {
     light: '#326BF6',
   },

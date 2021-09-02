@@ -5,7 +5,12 @@ import mask from '../../helpers/mask'
 import { Container, Input } from './style'
 
 const InputMask = (props) => {
-  const handleChange = (e) => props.setValue(mask(e.target.value, props.mask))
+  const containsNumbers = (value) => new RegExp('^[0-9]*$').test(value)
+
+  const handleChange = (e) => {
+    if (containsNumbers(e.target.value.replace(/(\.|\/|-)/g, '')))
+      props.setValue(mask(e.target.value, props.mask))
+  }
 
   return (
     <Container>

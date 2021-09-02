@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import InputMask from '../../../../components/Form/InputMask'
-import cardImg from '../../../../assets/img/cardSabin.png'
+// import cardImg from '../../../../assets/img/cardSabin.png'
 import LayoutCenter from '../../../../components/Layout/LayoutCenter'
 import validatorCpf from '../../../../helpers/validatorCpf'
 import { Container } from './styles'
@@ -100,7 +100,7 @@ function Initial() {
   return (
     <LayoutCenter>
       <Container onSubmit={onSendCpf}>
-        <img src={cardImg} alt="Cartão Sabin" />
+        {/* <img src={cardImg} alt="Cartão Sabin" /> */}
         <InputMask
           maxLength={14}
           // typeMask={'cpf'}

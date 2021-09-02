@@ -9,27 +9,37 @@ export const Container = styled.div`
 
   background-image: url(${shape});
   background-repeat: no-repeat;
-  background-size: 65%;
-  background-position: 0px -287px;
   background-color: ${colors.background.primary};
+  background-size: 80%;
+  background-position: left center;
 
   > aside {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    background: linear-gradient(
-      148.19deg,
-      #9146ff -15.68%,
-      #8f46fe -3.23%,
-      rgba(136, 70, 252, 0.992703) 43.97%,
-      #1c23bd 119.58%
-    );
-    opacity: 0.8;
+    position: relative;
+
+    > div {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(
+        148.19deg,
+        #9146ff -15.68%,
+        #8f46fe -3.23%,
+        rgba(136, 70, 252, 0.992703) 43.97%,
+        #1c23bd 119.58%
+      );
+      opacity: 0.9;
+      mix-blend-mode: multiply;
+      filter: contrast(0.8);
+    }
 
     > img {
+      position: absolute;
+
       margin-top: 104px;
-      width: 96px;
+      width: 120px;
     }
   }
 
