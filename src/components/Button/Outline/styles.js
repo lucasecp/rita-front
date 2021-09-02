@@ -7,7 +7,7 @@ export const Container = styled.button`
   cursor: pointer;
   background: transparent;
   color: ${colors.secondary};
-  padding: 12px 25px;
+  padding: 14px 32px;
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;

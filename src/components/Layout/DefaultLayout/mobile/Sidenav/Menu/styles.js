@@ -1,9 +1,10 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import colors from '../../../../../../styles/colors'
 
 export const Container = styled.ul`
   display: flex;
   flex-direction: column;
+   width: 250px;
 
   > li {
     cursor: pointer;

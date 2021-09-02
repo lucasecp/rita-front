@@ -48,13 +48,13 @@ const Profile = () => {
           </Row>
 
           <Row>
-            <Col lg={6} className="mt-5">
+            <Col lg={6} className="mt-5 mb-4">
               <InputText placeHolder="Text input" label="Label input" />
             </Col>
-            <Col lg={6} className="mt-3 mt-lg-5">
+            <Col lg={6} className="mt-3 mt-lg-5 mb-4">
               <InputText placeHolder="Text input" label="Label input" />
             </Col>
-            <Col lg={6} className="mt-3 mt-lg-0">
+            <Col lg={6} className="mt-3 mt-lg-0 mb-4">
               <InputText placeHolder="Text input" label="Label input" />
             </Col>
             <Col lg={6} className="mt-3 mt-lg-0">
@@ -62,7 +62,7 @@ const Profile = () => {
             </Col>
             <Col
               lg={6}
-              className="d-flex justify-content-lg-end justify-content-center mt-3 mt-lg-0"
+              className="d-flex justify-content-lg-end justify-content-center align-items-center mt-4 mt-lg-0"
             >
               <ButtonPrimary>Label main button</ButtonPrimary>
             </Col>

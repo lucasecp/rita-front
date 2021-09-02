@@ -1,14 +1,14 @@
 import React from 'react'
-import { Profile } from './style'
+import { Profile,HeaderLayout } from './style'
 import { Link } from 'react-router-dom'
 import profileImg from '../../../../assets/img/profile.png'
 import logout from '../../../../assets/icons/logout.svg'
 import notification from '../../../../assets/icons/notification.svg'
-   
+
 
 const Header = () => {
   return (
-      <Header>
+      <HeaderLayout>
         <h1>Page Title</h1>
         <nav>
           <Link to='/'>
@@ -20,7 +20,7 @@ const Header = () => {
           <img src={notification} />
           <img src={logout} />
         </nav>
-      </Header>
+      </HeaderLayout>
   )
 }
 

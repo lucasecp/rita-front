@@ -22,9 +22,7 @@ const DefaultLayout = ({ children }) => {
         </>
       )}
       <main>
-      <Container fluid='md'>
          {children}
-        </Container>
         </main>
       <Footer />
     </CustomContainer>

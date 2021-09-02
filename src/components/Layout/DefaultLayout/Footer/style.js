@@ -1,23 +1,18 @@
-import styled from 'styled-components';
-import {Col} from 'react-bootstrap'
+import styled from 'styled-components'
 export const Container = styled.footer`
-margin: 48px 0 83px 0;
-   h6{
-     font-size: 12px;
-     line-height: 18px;
-     font-weight: 500;
-     color: #909090;
-     text-align: center;
-     margin:auto
-   }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-`;
-export const Time = styled.div`
-    text-align: center;
+  h6 {
     font-size: 12px;
     line-height: 18px;
-    color:#909090;
-`;
-export const ColBootstrap = styled(Col)`
-   align-self: center
-`;
+    font-weight: 500;
+    color: #909090;
+  }
+`
+export const Time = styled.div`
+  font-size: 12px;
+  line-height: 18px;
+  color: #909090;
+`

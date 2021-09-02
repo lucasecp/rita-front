@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import colors from "../../../../styles/colors";
-export const Header = styled.header`
+export const HeaderLayout = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;

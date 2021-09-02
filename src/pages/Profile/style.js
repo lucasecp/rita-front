@@ -44,7 +44,6 @@ export const Box = styled.div`
 export const TemplateBox = styled.div`
   padding: 32px;
   background: #fff;
-  margin: 0 22px;
   box-shadow: 0px 2px 8px 0px #DFD2FF26;
   border-radius: 8px;
   ${props => props.transparent && css`
