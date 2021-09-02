@@ -33,7 +33,7 @@ export const HeaderLayout = styled.header`
 export const Profile = styled.div`
     border-radius: 50%;
     border: solid 2px #9146FF;
-    width: 40px;
+    min-width: 40px;
     height:40px;
     display: flex;
     align-items: center;
