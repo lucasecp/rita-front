@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 
 import arrowImg from '../../../../assets/icons/arrow-left.svg'
 
-import expandedLogo from '../../../../assets/logo/expanded-logo.svg'
-import iconLogo from '../../../../assets/logo/icon-logo.svg'
 
 import Menu from './Menu'
 
