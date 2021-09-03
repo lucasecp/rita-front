@@ -38,5 +38,6 @@ export const Content = styled.div`
       display: block;
       margin-left: auto;
     }
+  
   }
 `

@@ -39,7 +39,7 @@ export const Container = styled.button`
    }
   `}
   :hover {
-    background-color:  ${colors.secondary};
+    background-color:#7338cb;
     transition: .3s;
     color: #fff
   }

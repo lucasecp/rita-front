@@ -14,7 +14,7 @@ export const Container = styled.div`
 `
 export const Input = styled.input`
   color: #6a6a6a;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 14px ;
   display: inline-block;
   transition: all 0.3s;

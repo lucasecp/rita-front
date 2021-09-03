@@ -5,7 +5,7 @@ import WarningError from '@/assets/icons/alerts/warning.svg'
 import whatsApp from '@/assets/icons/whatsapp.svg'
 import { Container } from '../../styles'
 
-function ImportData({ onShowModal }) {
+function Denied({ onShowModal }) {
   const handleCloseModal = () => {
     onShowModal(false)
   }
@@ -26,4 +26,4 @@ function ImportData({ onShowModal }) {
   )
 }
 
-export default ImportData
+export default Denied

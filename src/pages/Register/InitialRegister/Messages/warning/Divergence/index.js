@@ -7,9 +7,9 @@ import { Container,ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 
-function ImportData({ onShowModal }) {
+function Divergence({ onShowModal }) {
   const history = useHistory()
-  const pushToHome = () =>{
+  const handleCloseModal = () => {
     onShowModal(false)
     history.push('/')
   }
@@ -18,11 +18,11 @@ function ImportData({ onShowModal }) {
       <img src={WarningError} />
       <p>Desculpe! Seu cadastro apresentou divergência entre os dados digitados e documentos apresentados, deseja atualizar suas informações?</p>
       <ButtonGroup>
-      <OutlineButton onClick={pushToHome}>Não</OutlineButton>
-      <ButtonPrimary onClick={pushToHome}>Sim</ButtonPrimary>
+      <OutlineButton onClick={handleCloseModal}>Não</OutlineButton>
+      <ButtonPrimary onClick={handleCloseModal}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>
   )
 }
 
-export default ImportData
+export default Divergence

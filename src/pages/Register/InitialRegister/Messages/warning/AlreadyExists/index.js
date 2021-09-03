@@ -7,7 +7,7 @@ import { Container,ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 
-function CpfFound({ onShowModal }) {
+function AlreadyExists({ onShowModal }) {
   const history = useHistory()
   const pushToHome = () =>{
     onShowModal(false)
@@ -26,4 +26,4 @@ function CpfFound({ onShowModal }) {
   )
 }
 
-export default CpfFound
+export default AlreadyExists

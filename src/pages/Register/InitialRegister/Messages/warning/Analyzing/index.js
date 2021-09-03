@@ -5,7 +5,7 @@ import WarningError from '@/assets/icons/alerts/warning.svg'
 
 import { Container } from '../../styles'
 
-function ImportData({ onShowModal }) {
+function Analyzing({ onShowModal }) {
   const handleCloseModal = () => {
     onShowModal(false)
   }
@@ -19,4 +19,4 @@ function ImportData({ onShowModal }) {
   )
 }
 
-export default ImportData
+export default Analyzing
