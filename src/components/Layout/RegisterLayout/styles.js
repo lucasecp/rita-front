@@ -77,6 +77,7 @@ export const Container = styled.div`
       }
 
       > img {
+        margin-left: -20px;
         margin-top: 48px;
         filter: brightness(6.5);
       }

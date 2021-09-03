@@ -8,5 +8,5 @@ export const status = {
 }
 
 export const response = {
-  status: 'have_data_to_import',
+  status: 'approved',
 }
