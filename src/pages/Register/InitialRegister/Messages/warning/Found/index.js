@@ -3,13 +3,13 @@ import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 import WarningError from '@/assets/icons/alerts/warning.svg'
 
-import { Container,ButtonGroup } from '../../styles'
+import { Container, ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 
-function CpfFound({ onShowModal }) {
+function Found({ onShowModal }) {
   const history = useHistory()
-  const pushToHome = () =>{
+  const pushToHome = () => {
     onShowModal(false)
     history.push('/')
   }
@@ -17,13 +17,16 @@ function CpfFound({ onShowModal }) {
   return (
     <Container>
       <img src={WarningError} />
-      <p>Seu CPF já está cadastrado na Rita Saúde. Deseja retornar para a tela principal?</p>
+      <p>
+        Foi localizado um cadastro no Cartão Sabin Saúde. Autoriza importar seus
+        dados?
+      </p>
       <ButtonGroup>
-      <OutlineButton onClick={pushToHome}>Não</OutlineButton>
-      <ButtonPrimary onClick={pushToHome}>Sim</ButtonPrimary>
+        <OutlineButton onClick={pushToHome}>Não</OutlineButton>
+        <ButtonPrimary onClick={pushToHome}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>
   )
 }
 
-export default CpfFound
+export default Found

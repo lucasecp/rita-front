@@ -9,7 +9,7 @@ import cardSabinImg from '@/assets/img/card-sabin.png'
 
 import { Content } from './styles'
 
-import CpfEmpty from '../Messages/CpfEmpty'
+import CpfEmpty from '../Messages/warning/Found'
 
 import validateCpf from '@/helpers/validateCpf'
 

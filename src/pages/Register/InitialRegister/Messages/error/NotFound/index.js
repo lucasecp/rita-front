@@ -4,10 +4,13 @@ import ButtonPrimary from '@/components/Button/Primary'
 import errorIcon from '@/assets/icons/alerts/error.svg'
 
 import { Container } from '../../styles'
+import { useHistory } from 'react-router-dom'
 
 function NotFound({ onShowModal }) {
+  const history = useHistory()
   const handleCloseModal = () => {
     onShowModal(false)
+    history.push('/')
   }
 
   return (
