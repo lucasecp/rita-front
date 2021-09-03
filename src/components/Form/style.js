@@ -40,7 +40,5 @@ export const Input = styled.input`
       border: 1px solid #419eff;
     }
   }
-  ::placeholder {
-    color: #888;
-  }
+
 `
