@@ -10,7 +10,7 @@ export const Content = styled.div`
   > h6 {
     font-weight: 700;
     font-size: 24px;
-    line-height: 140%;
+    line-height: 33px;
     color: ${colors.text.link};
   }
   > div {
@@ -23,6 +23,7 @@ export const Content = styled.div`
     }
   }
   @media(max-width:767px){
+    padding: 32px;
     >div{
       flex-direction: column;
       align-items: center;
