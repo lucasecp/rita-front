@@ -71,4 +71,14 @@ export const Content = styled.div`
       }
     }
   }
+
+  @media (max-width: 767px) {
+    overflow: unset;
+    margin-top: 88px;
+    padding-bottom: 32px;
+
+    > img {
+      margin-top: calc(-56px - 88px);
+    }
+  }
 `
