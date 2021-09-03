@@ -69,7 +69,7 @@ export const Container = styled.div`
   @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
-
+     background-size: cover;
     > aside {
       > div {
         height: 160px;

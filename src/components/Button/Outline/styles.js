@@ -41,7 +41,8 @@ export const Container = styled.button`
   :hover {
     background-color:#7338cb;
     transition: .3s;
-    color: #fff
+    color: #fff;
+    border-color:  #7338cb;
   }
 
 `;

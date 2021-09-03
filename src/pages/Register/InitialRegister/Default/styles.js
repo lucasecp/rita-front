@@ -30,6 +30,7 @@ export const Content = styled.div`
       margin-top: 24px;
       > div{
         margin: 0 0 24px 0;
+        width: 100%
       }
     }
   > h6 {

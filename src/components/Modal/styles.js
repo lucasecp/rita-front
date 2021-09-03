@@ -3,7 +3,7 @@ import colors from '@/styles/colors'
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 
@@ -32,6 +32,11 @@ export const Container = styled.div`
 
     min-width: 33%;
     opacity: 1;
-    z-index: 3;
+    z-index: 9999;
+  }
+  @media(max-width:767px){
+    >div{
+      margin: 0 24px;
+    }
   }
 `
