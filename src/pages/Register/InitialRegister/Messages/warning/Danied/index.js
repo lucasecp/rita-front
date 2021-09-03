@@ -5,7 +5,7 @@ import WarningError from '@/assets/icons/alerts/warning.svg'
 
 import { Container } from '../../styles'
 
-function ImportData({ onShowModal }) {
+function Denied({ onShowModal }) {
   const handleCloseModal = () => {
     onShowModal(false)
   }
@@ -20,4 +20,4 @@ Pedimos que entre em contato com a central de atendimento (61) 3181-0999</p>
   )
 }
 
-export default ImportData
+export default Denied

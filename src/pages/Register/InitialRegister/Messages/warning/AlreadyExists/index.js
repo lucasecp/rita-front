@@ -6,7 +6,7 @@ import WarningError from '@/assets/icons/alerts/warning.svg'
 import { Container,ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 
-function CpfFound({ onShowModal }) {
+function AlreadyExists({ onShowModal }) {
   const handleCloseModal = () => {
     onShowModal(false)
   }
@@ -23,4 +23,4 @@ function CpfFound({ onShowModal }) {
   )
 }
 
-export default CpfFound
+export default AlreadyExists

@@ -6,7 +6,7 @@ import WarningError from '@/assets/icons/alerts/warning.svg'
 import { Container,ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 
-function ImportData({ onShowModal }) {
+function Divergence({ onShowModal }) {
   const handleCloseModal = () => {
     onShowModal(false)
   }
@@ -23,4 +23,4 @@ function ImportData({ onShowModal }) {
   )
 }
 
-export default ImportData
+export default Divergence
