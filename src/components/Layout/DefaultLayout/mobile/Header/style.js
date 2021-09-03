@@ -20,8 +20,11 @@ export const Container = styled.header`
       color: #6a6a6a;
       font-size: 14px;
       font-weight: 500;
-
     }
+    > img+img{
+       transform: rotate(-180deg);
+     }
+
     img {
       filter: invert(28%) sepia(63%) saturate(2375%) hue-rotate(248deg)
         brightness(105%) contrast(102%);

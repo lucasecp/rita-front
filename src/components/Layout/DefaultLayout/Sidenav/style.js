@@ -64,15 +64,14 @@ export const Logo = styled.div`
     background-size: contain;
     background-repeat: no-repeat;
     transition: .3s;
-
-    ${props => props.expanded === 'expanded'? css`
+    ${({mode}) =>mode === 'expanded' && css`
     background-image:url(${expandedLogo});
     height: 64px;
-    ` : css`
+    `}
+    ${({mode}) =>mode === 'short' && css`
     background-image:url(${iconLogo});
     height: 52px;
     `}
+
 `
-export const Test = styled.div`
-  
-`
+

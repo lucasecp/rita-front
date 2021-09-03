@@ -5,7 +5,7 @@ import { Container } from './styles'
 import menuItems from './MenuItems'
 
 function Menu({ expanded }) {
-  return (
+  return ( 
     <Container expanded={expanded}>
       {menuItems.map((item) => (
         <li key={item.name}>

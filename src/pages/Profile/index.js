@@ -19,7 +19,7 @@ const Profile = () => {
     <DefaultLayout>
       <TemplateBox>
         <Row>
-          <Col xl={4} lg={6}>
+          <Col md={6} xl={4}>
             <Card variation="light-blue">
               <img src={Background1} />
               <h3>Exames</h3>
@@ -27,7 +27,7 @@ const Profile = () => {
               <OutlineButton variation="blue">label</OutlineButton>
             </Card>
           </Col>
-          <Col xl={4} lg={6} className="mt-3 mt-lg-0">
+          <Col md={6} xl={4} className="mt-3 mt-md-0">
             <Card variation="dark-blue">
               <img src={Background2} />
               <h3>Consultas</h3>
