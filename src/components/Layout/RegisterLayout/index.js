@@ -2,14 +2,19 @@ import React from 'react'
 import logoRitaVertical from '@/assets/logo/vertical-named-logo.svg'
 import Footer from '@/components/Layout/DefaultLayout/Footer'
 
+import expandedLogo from '@/assets/logo/expanded-logo.svg'
+
 import { Container } from './styles'
+import { useMediaPredicate } from 'react-media-hook'
 
 function RegisterLayout({ children }) {
+  const isMobile = useMediaPredicate('(max-width: 767px)')
+
   return (
     <Container>
       <aside>
         <div />
-        <img src={logoRitaVertical} />
+        <img src={isMobile ? expandedLogo : logoRitaVertical} />
       </aside>
       <main>
         <section>
