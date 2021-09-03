@@ -41,6 +41,6 @@ export const Input = styled.input`
     }
   }
   ::placeholder {
-    color: #6a6a6a;
+    color: #888;
   }
 `
