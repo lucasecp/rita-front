@@ -8,7 +8,7 @@ import cardSabinImg from '@/assets/img/card-sabin.png'
 
 import { Content } from './styles'
 import Modal from '@/components/Modal'
-import CpfEmpty from '../Messages/CpfEmpty'
+import AlreadyExists from '../Messages/warning/AlreadyExists'
 
 function CardSabin() {
   const [cpf, setCpf] = useState('')
@@ -18,7 +18,7 @@ function CardSabin() {
   const handleConfirm = () => {
     if (cpf.length === 0) {
       setShowModal(true)
-      setMessage(<CpfEmpty onShowModal={setShowModal} />)
+      setMessage(<AlreadyExists onShowModal={setShowModal} />)
     }
   }
 
