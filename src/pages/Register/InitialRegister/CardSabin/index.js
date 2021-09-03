@@ -75,7 +75,7 @@ function CardSabin() {
             <InputMask
               label="Digite Seu CPF:"
               mask="###.###.###-##"
-              placeHolder="123.456.789-10"
+              placeHolder="000.000.000-00"
               value={cpf}
               setValue={setCpf}
               name="cpf"

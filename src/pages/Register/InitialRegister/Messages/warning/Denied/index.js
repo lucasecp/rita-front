@@ -18,8 +18,10 @@ function Denied({ onShowModal }) {
         documentos apresentados.
       </p>
       <p>
-      Pedimos que entre em contato com a central de
-        atendimento <a href="tel:+556131810999">(61) 3181-0999 <img src={whatsApp}/></a>
+        Pedimos que entre em contato com a central de atendimento{' '}
+        <a href="https://api.whatsapp.com/send?phone=556131810999">
+          (61) 3181-0999 <img src={whatsApp} />
+        </a>
       </p>
       <ButtonPrimary onClick={handleCloseModal}>Ok</ButtonPrimary>
     </Container>

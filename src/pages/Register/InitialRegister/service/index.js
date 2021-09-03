@@ -8,5 +8,5 @@ export const status = {
 }
 
 export const response = {
-  status: 'approved',
+  status: 'denied_second_time',
 }
