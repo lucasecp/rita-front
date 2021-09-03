@@ -31,6 +31,7 @@ export const Content = styled.div`
   > section {
     margin-left: 24px;
     width: 100%;
+    min-width: 209px;
 
     > button {
       margin-top: 24px;
@@ -38,6 +39,36 @@ export const Content = styled.div`
       display: block;
       margin-left: auto;
     }
-  
+  }
+
+  @media (max-width: 935px) {
+    ::before {
+      width: 160px;
+    }
+    > img {
+      width: 270px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    flex-direction: column;
+
+    > img {
+      width: unset;
+      margin-bottom: 32px;
+    }
+
+    ::before {
+      content: unset;
+    }
+
+    > section {
+      margin-left: 0px;
+
+      > button {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
   }
 `

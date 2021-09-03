@@ -10,14 +10,16 @@ import CpfEmpty from '../Messages/error/CpfEmpty'
 
 import { Content } from './styles'
 
-import { status, response } from '../service'
 import InvalidCpf from '../Messages/error/InvalidCpf'
 import AlreadyExists from '../Messages/warning/AlreadyExists'
 import Analyzing from '../Messages/warning/Analyzing'
 import Divergence from '../Messages/warning/Divergence'
-import Denied from '../Messages/warning/Danied'
+import Denied from '../Messages/warning/Denied'
+import Found from '../Messages/warning/Found'
 
-function CardSabin() {
+import { status, response } from '../service'
+
+function DefaultRegister() {
   const [cpf, setCpf] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [message, setMessage] = useState(null)
@@ -41,7 +43,7 @@ function CardSabin() {
     // Substituir response.status por responseStatus
 
     if (response.status === status.HAVE_DATA_TO_IMPORT) {
-      // return showMessage(Found)
+      return showMessage(Found)
     }
 
     if (response.status === status.APPROVED) {
@@ -72,6 +74,7 @@ function CardSabin() {
               placeHolder="123.456.789-10"
               value={cpf}
               setValue={setCpf}
+              name="cpf"
             />
             <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
           </div>
@@ -82,4 +85,4 @@ function CardSabin() {
   )
 }
 
-export default CardSabin
+export default DefaultRegister

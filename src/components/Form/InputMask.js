@@ -4,24 +4,30 @@ import mask from '../../helpers/mask'
 
 import { Container, Input } from './style'
 
-const InputMask = (props) => {
+const InputMask = ({
+  label,
+  mask: maskFormat,
+  placeHolder,
+  type,
+  setValue,
+  ...rest
+}) => {
   const containsNumbers = (value) => new RegExp('^[0-9]*$').test(value)
 
   const handleChange = (e) => {
     if (containsNumbers(e.target.value.replace(/(\.|\/|-)/g, '')))
-      props.setValue(mask(e.target.value, props.mask))
+      setValue(mask(e.target.value, maskFormat))
   }
 
   return (
     <Container>
-      {props.label && <label htmlFor={props.label}>{props.label}</label>}
+      {label && <label htmlFor={label}>{label}</label>}
       <Input
-        type={props.type || 'tel'}
-        id={props.label}
+        type={type || 'tel'}
+        id={label}
         onChange={handleChange}
-        value={props.value}
-        maxLength={props.maxLength}
-        placeholder={props.placeHolder}
+        placeholder={placeHolder}
+        {...rest}
       />
     </Container>
   )

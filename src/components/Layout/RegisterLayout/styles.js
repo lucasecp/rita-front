@@ -54,4 +54,40 @@ export const Container = styled.div`
       height: 100%;
     }
   }
+
+  @media (max-width: 1180px) {
+    grid-template-columns: 3fr 9fr;
+  }
+
+  @media (max-width: 1065px) {
+    > main {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+
+    > aside {
+      > div {
+        height: 160px;
+        padding: 48px;
+      }
+
+      > img {
+        margin-top: 48px;
+        filter: brightness(6.5);
+      }
+    }
+  }
+
+  > main {
+    padding: 40px 24px 24px;
+    height: 100%;
+
+    > section {
+    }
+  }
 `

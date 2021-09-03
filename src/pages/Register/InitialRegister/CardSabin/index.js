@@ -6,9 +6,8 @@ import RegisterLayout from '@/components/Layout/RegisterLayout'
 import Modal from '@/components/Modal'
 import validateCpf from '@/helpers/validateCpf'
 import cardSabinImg from '@/assets/img/card-sabin.png'
-import {Content} from './styles'
+import { Content } from './styles'
 import CpfEmpty from '../Messages/error/CpfEmpty'
-
 
 import { status, response } from '../service'
 import InvalidCpf from '../Messages/error/InvalidCpf'
@@ -16,7 +15,7 @@ import NotFound from '../Messages/error/NotFound'
 import AlreadyExists from '../Messages/warning/AlreadyExists'
 import Analyzing from '../Messages/warning/Analyzing'
 import Divergence from '../Messages/warning/Divergence'
-import Denied from '../Messages/warning/Danied'
+import Denied from '../Messages/warning/Denied'
 import ImportData from '../Messages/warning/Authorization'
 
 function CardSabin() {
@@ -79,6 +78,7 @@ function CardSabin() {
               placeHolder="123.456.789-10"
               value={cpf}
               setValue={setCpf}
+              name="cpf"
             />
             <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
           </section>
