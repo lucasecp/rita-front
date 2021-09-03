@@ -3,22 +3,33 @@ import React, { useState } from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
+import Modal from '@/components/Modal'
 
 import cardSabinImg from '@/assets/img/card-sabin.png'
 
 import { Content } from './styles'
-import Modal from '@/components/Modal'
+
 import CpfEmpty from '../Messages/CpfEmpty'
+
+import validateCpf from '@/helpers/validateCpf'
 
 function CardSabin() {
   const [cpf, setCpf] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [message, setMessage] = useState(null)
 
+  const showMessage = (MessageComponent) => {
+    setShowModal(true)
+    setMessage(<MessageComponent onShowModal={setShowModal} />)
+  }
+
   const handleConfirm = () => {
     if (cpf.length === 0) {
-      setShowModal(true)
-      setMessage(<CpfEmpty onShowModal={setShowModal} />)
+      return showMessage(CpfEmpty)
+    }
+
+    if (validateCpf(cpf)) {
+      console.log('valido')
     }
   }
 
