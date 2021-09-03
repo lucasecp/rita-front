@@ -1,0 +1,38 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo Entered the install phase...
+    finally:
+  pre_build:
+    commands:
+      - echo Entered the pre_build phase...
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - aws ecr get-login-password | docker login --username AWS --password-stdin "$(aws sts get-caller-identity --query Account --output text).dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_CLUSTER_NAME --role-arn $EKS_KUBECTL_ROLE_ARN
+      - REPOSITORY_NAME=$(basename `git rev-parse --show-toplevel`)
+      - REPOSITORY_BRANCH=$(git name-rev --name-only $CODEBUILD_RESOLVED_SOURCE_VERSION)
+      - REPOSITORY_URI="335699900884.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPOSITORY_NAME"
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$COMMIT_HASH"
+      - echo ecr node base $ECR_NODE_BASE
+      - sed -i 's@ECR_NODE_BASE@'"$ECR_NODE_BASE"'@' ./Dockerfile
+      - sed -i 's@ECR_NGINX_BASE@'"$ECR_NGINX_BASE"'@' ./Dockerfile
+    finally:
+  build:
+    commands:
+      - echo Entered the build phase...
+      - echo building $REPOSITORY_URI:$REPOSITORY_BRANCH
+      - docker build --tag $REPOSITORY_URI:$REPOSITORY_BRANCH .
+      - docker tag $REPOSITORY_URI:$REPOSITORY_BRANCH $REPOSITORY_URI:$IMAGE_TAG
+    finally:
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
+      - echo pushing $REPOSITORY_URI:$REPOSITORY_BRANCH
+      - docker push $REPOSITORY_URI:$REPOSITORY_BRANCH
+      - echo pushing $REPOSITORY_URI:$IMAGE_TAG
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=$REPOSITORY_URI:$IMAGE_TAG -n $NAMESPACE
+    finally:
