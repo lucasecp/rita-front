@@ -18,7 +18,8 @@ export const Container = styled.button`
    padding: 10px 16px !important;
    :hover{
      background: #fff !important;
-     color: ${colors.text.link} !important
+     color: ${colors.text.link} !important;
+     border-color:  #fff;
     }
     `}
     ${props=> props.variation === 'green' && css`
@@ -28,6 +29,8 @@ export const Container = styled.button`
     :hover{
       color: ${colors.green.light} !important;
       background:  ${colors.feedback.activeLinkSpan} !important;
+      border-color:  ${colors.feedback.activeLinkSpan};
+
     }
     `}
     ${props=> props.variation === 'blue' && css`
@@ -36,13 +39,13 @@ export const Container = styled.button`
     border-color:${colors.blue.light} !important;
    :hover{
      background: ${colors.blue.light} !important;
+     border-color:  ${colors.blue.light};
    }
   `}
   :hover {
     background-color:#7338cb;
     transition: .3s;
     color: #fff;
-    border-color:  #7338cb;
   }
 
 `;
