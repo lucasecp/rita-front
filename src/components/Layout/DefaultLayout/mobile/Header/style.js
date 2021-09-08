@@ -5,7 +5,6 @@ export const Container = styled.header`
   justify-content: space-between;
   align-items: center;
   background: #fff;
-  margin-bottom: 80px;
   >a{
     img{
       min-width:30px
@@ -14,6 +13,7 @@ export const Container = styled.header`
   > nav {
     display: flex;
     align-items: center;
+    position: relative;
     > a {
       display: flex;
       align-items: center;
@@ -21,15 +21,16 @@ export const Container = styled.header`
       font-size: 14px;
       font-weight: 500;
     }
+    > img+img{
+       transform: rotate(-180deg);
+     }
+
     img {
       filter: invert(28%) sepia(63%) saturate(2375%) hue-rotate(248deg)
         brightness(105%) contrast(102%);
       margin-left: 20px;
       cursor: pointer;
     }
-  }
-  @media (max-width: 767px) {
-    padding: 40px 40px 24px 40px;
   }
 `
 export const Profile = styled.div`
@@ -51,6 +52,7 @@ export const Hamburger = styled.button`
  margin-left: 20px;
  border: none;
  background: transparent;
+ height: 40px;
   span {
     background-color: #9146ff;
     width: 24px;

@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import notification from '../../../../../assets/icons/notification.svg'
 import logo from '../../../../../assets/icons/logoSymbol.png'
 import { useMenu } from '../../../../../context/Menu'
+import logout from '../../../../../assets/icons/logout.svg'
+
 const HeaderMoble = () => {
   const {showMenu,setShowMenu} = useMenu();
   return (
@@ -19,6 +21,7 @@ const HeaderMoble = () => {
           </Profile>
         </Link>
         <img src={notification} />
+        <img src={logout} />
         <Hamburger onClick={()=> setShowMenu(!showMenu)}><span></span></Hamburger>
       </nav>
     </Container>

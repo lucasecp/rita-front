@@ -11,11 +11,11 @@ export const Container = styled.button`
   transition: 0.3s;
   border-radius: 8px;
   line-height: 20px;
-  border: none;
+  border: 2px solid ${colors.secondary};
   height: fit-content;
 
   :hover {
     background-color: #7338cb;
-    transition: 0.3s;
+    border-color: #7338cb;
   }
 `

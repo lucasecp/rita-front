@@ -6,14 +6,10 @@ const Header = () => {
   return (
     <HeaderLayout>
       <nav>
-        <Link to="/definir-senha">Definir senha</Link>
-        <Link to="/cadastro-cartao-sabin">Cartão Sabin</Link>
-        <Link to="/cadastro-cliente-cartao-sabin-saude">
-          cadastro cliente cartao sabin saude
-        </Link>
-        <Link to="/teste">Teste de Componentes</Link>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/perfil">Perfil</Link>
+        <Link to="/master-page">Master Page</Link>
+        <Link to="/cadastro-inicial">Cadastro Normal</Link>
+        <Link to="/cadastro-cartao-sabin">Cadastro Cartão Sabin</Link>
+        <Link to="/cadastro-pre">Pré Cadastro</Link>
       </nav>
     </HeaderLayout>
   )

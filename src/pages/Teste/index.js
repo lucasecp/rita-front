@@ -1,7 +1,6 @@
 import React from 'react'
 import ButtonPrimary from '../../components/Button/Primary'
 import InputMask from '../../components/Form/InputMask'
-import InputText from '../../components/Form/InputText'
 import Footer from '../../components/Layout/DefaultLayout/Footer'
 import { Container, Content } from './styles'
 import logoRitaVertical from '../../assets/logo/vertical-named-logo.svg'

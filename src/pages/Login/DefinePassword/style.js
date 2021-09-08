@@ -3,7 +3,7 @@ import colors from '../../../styles/colors'
 
 export const Container = styled.section`
   height: 100vh;
-  background-color: ${colors.background.primary};
+  background-color: ${colors.gray.extraLight};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,7 +88,7 @@ export const ContentModal = styled.div`
       font-size: 16px;
       display: flex;
       align-items: center;
-      
+
       ::before {
         content: 'x';
         display: inline-block;

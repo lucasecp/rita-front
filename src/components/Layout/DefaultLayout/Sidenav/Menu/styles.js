@@ -37,7 +37,7 @@ export const Container = styled.ul`
 
       > a {
         margin-left: 12px;
-        color: ${colors.text.link};
+        color: ${colors.gray.dark};
         font-weight: 700;
         line-height: 20px;
         transition: 0.3s;
@@ -45,10 +45,10 @@ export const Container = styled.ul`
     }
 
     :hover {
-      background: ${colors.background.hoverLink};
+      background: ${colors.purple.main.middle};
 
       > span {
-        background: ${colors.feedback.hoverLinkSpan};
+        background: ${colors.purple.main.light};
       }
 
       > div {
@@ -59,15 +59,15 @@ export const Container = styled.ul`
     }
 
     :active {
-      background: ${colors.background.activeLink};
+      background: ${colors.purple.main.dark};
 
       > span {
-        background: ${colors.feedback.activeLinkSpan};
+        background: ${colors.green.light};
       }
 
       > div {
         > svg {
-          fill: ${colors.feedback.activeLinkSpan};
+          fill: ${colors.green.light};
         }
 
         > a {

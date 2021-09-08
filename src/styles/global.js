@@ -17,10 +17,11 @@ export default createGlobalStyle`
     display: block;
   }
   .App{
-      background-color: ${colors.background.primary};
+      background-color: ${colors.gray.extraLight};
   }
   ::placeholder{
-      color: #C0C4CC;
+      color: ${colors.gray.middleLight};
+      font-weight: 500;
   }
 
   a{

@@ -7,7 +7,6 @@ import Sidenav from './Sidenav'
 import { CustomContainer } from './style'
 import HeaderMobile from './mobile/Header'
 import SidenavMobile from './mobile/Sidenav'
-import { Container } from 'react-bootstrap'
 const DefaultLayout = ({ children }) => {
   const isMobile = useMediaPredicate('(max-width: 767px)')
 
@@ -22,6 +21,7 @@ const DefaultLayout = ({ children }) => {
         </>
       )}
       <main>
+      {isMobile && <h1>Page Title</h1>}
          {children}
         </main>
       <Footer />
