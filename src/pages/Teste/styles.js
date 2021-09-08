@@ -10,7 +10,7 @@ export const Container = styled.div`
   background-repeat: no-repeat;
   background-size: 65%;
   background-position: 0px -287px;
-  background-color: ${colors.background.primary};
+  background-color: ${colors.gray.extraLight};
 
   > aside {
     display: flex;
@@ -51,7 +51,7 @@ export const Content = styled.section`
       font-weight: 700;
       font-size: 24px;
       line-height: 140%;
-      color: ${colors.text.link};
+      color: ${colors.gray.dark};
     }
 
     > div {

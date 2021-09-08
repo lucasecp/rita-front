@@ -7,14 +7,17 @@ import Profile from '@/pages/Profile'
 
 import RegisterCardSabin from '@/pages/Register/InitialRegister/CardSabin'
 import InitialRegister from '@/pages/Register/InitialRegister/Default'
+import PreRegister from '@/pages/Register/PreRegister'
 
 function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={Header} />
 
+      <Route path="/cadastro-pre" component={PreRegister} />
       <Route path="/cadastro-inicial" component={InitialRegister} />
       <Route path="/cadastro-cartao-sabin" component={RegisterCardSabin} />
+
       <Route path="/master-page" component={Profile} />
 
       <Route path="/teste" component={Teste} />

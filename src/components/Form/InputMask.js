@@ -20,7 +20,7 @@ const InputMask = ({
   }
 
   return (
-    <Container>
+    <Container name="container-mask">
       {label && <label htmlFor={label}>{label}</label>}
       <Input
         type={type || 'tel'}
