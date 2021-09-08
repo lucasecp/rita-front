@@ -6,8 +6,6 @@ import ButtonPrimary from '../../components/Button/Primary'
 import InputText from '../../components/Form/InputText'
 import Footer from '../../components/Layout/DefaultLayout/Footer'
 import { Container, Content } from './styles'
-import React from 'react'
-import { Button } from '@material-ui/core'
 
 function ConfDados() {
   return (
