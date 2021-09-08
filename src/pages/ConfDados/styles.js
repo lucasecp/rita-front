@@ -5,7 +5,7 @@ import shape from '../../assets/img/element3.png'
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  height: 100%;
+  height: 100vh;
   background-image: url(${shape});
   background-repeat: no-repeat;
   background-position: 0px -287px;
@@ -82,7 +82,5 @@ export const Content = styled.section`
   @media (max-width: 630px) {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    flex-wrap: wrap;
   }
 `
