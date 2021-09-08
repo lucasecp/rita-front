@@ -8,6 +8,7 @@ import Initial from './pages/RegisterOld/CardSabin/Initial'
 import ConfirmData from './pages/RegisterOld/CardSabin/ConfirmData'
 import Dashboard from './pages/Dashboard'
 import Profile from './pages/Profile'
+import ConfDados from './pages/ConfDados'
 
 import Register from './pages/Register'
 
@@ -15,6 +16,9 @@ function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={Header} />
+
+      {/* Rota Evelyn */}
+      <Route path="/confDados" component={ConfDados} />
 
       <Route path="/cadastro" component={Register} />
       {/* <Route path="/cadastro" component={Register} /> */}

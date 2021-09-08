@@ -5,10 +5,9 @@ import shape from '../../assets/img/element3.png'
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  height: 100vh;
+  height: 100%;
   background-image: url(${shape});
   background-repeat: no-repeat;
-  background-size: 65%;
   background-position: 0px -287px;
   background-color: ${colors.background.primary};
 
@@ -34,6 +33,13 @@ export const Container = styled.div`
   > main {
     padding: 104px 88px 24px;
   }
+
+  @media (max-width: 630px) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-wrap: wrap;
+  }
 `
 
 export const Content = styled.section`
@@ -41,13 +47,12 @@ export const Content = styled.section`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+
   > div {
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0px 2px 8px rgba(223, 210, 255, 0.15);
     border-radius: 8px;
     padding: 40px 32px 48px;
-    display: flex;
-    flex-direction: column;
 
     > h6 {
       font-weight: 700;
@@ -56,14 +61,28 @@ export const Content = styled.section`
       color: ${colors.text.link};
     }
 
+    > Form {
+      padding: 22px 0;
+      font-family: Athletics;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      color: ${colors.background.activeLink};
+      cursor: pointer;
+    }
+
     > div {
       display: flex;
-      align-items: center;
-      margin-top: 48px;
-
-      > div {
-        margin-right: 24px;
-      }
+      padding: 15px 0;
+      justify-content: flex-end;
+      margin-right: 24px;
     }
+  }
+
+  @media (max-width: 630px) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-wrap: wrap;
   }
 `
