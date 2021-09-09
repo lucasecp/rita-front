@@ -9,10 +9,14 @@ import { useHistory } from 'react-router-dom'
 
 function Found({ onShowModal,cpf }) {
   const history = useHistory()
-  console.log('cpf' + cpf);
-  const pushToHome = () => {
+
+  const pushToRegister = () => {
     onShowModal(false)
-    history.push('/')
+   return history.push('/')
+  }
+  const pushToPreRegister = () => {
+    onShowModal(false)
+   return history.push('/pre-cadastro',{cpf})
   }
 
   return (
@@ -23,8 +27,8 @@ function Found({ onShowModal,cpf }) {
         dados?
       </p>
       <ButtonGroup>
-        <OutlineButton onClick={pushToHome}>Não</OutlineButton>
-        <ButtonPrimary onClick={pushToHome}>Sim</ButtonPrimary>
+        <OutlineButton onClick={pushToRegister}>Não</OutlineButton>
+        <ButtonPrimary onClick={pushToPreRegister}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>
   )

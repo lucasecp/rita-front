@@ -48,7 +48,7 @@ function DefaultRegister() {
 
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
         return showMessage(Found, {cpf})
-      }
+      } 
       if (responseApi.status === status.APPROVED) {
         return showMessage(AlreadyExists)
       }
