@@ -7,21 +7,24 @@ import Modal from '@/components/Modal'
 import validateCpf from '@/helpers/validateCpf'
 import cardSabinImg from '@/assets/img/card-sabin.png'
 import { Content } from './styles'
-import CpfEmpty from '../messages/error/CpfEmpty'
 
-import { status, response } from '../service'
-import InvalidCpf from '../messages/error/InvalidCpf'
-import NotFound from '../messages/error/NotFound'
-import AlreadyExists from '../messages/warning/AlreadyExists'
-import Analyzing from '../messages/warning/Analyzing'
-import Divergence from '../messages/warning/Divergence'
-import Denied from '../messages/warning/Denied'
-import ImportData from '../messages/warning/Authorization'
+import axios from '@/services/api'
+import { status } from '../service'
+import InvalidCpf from '../Messages/error/InvalidCpf'
+import CpfEmpty from '../Messages/error/CpfEmpty'
+import NotFound from '../Messages/error/NotFound'
+import AlreadyExists from '../Messages/warning/AlreadyExists'
+import Analyzing from '../Messages/warning/Analyzing'
+import Divergence from '../Messages/warning/Divergence'
+import Denied from '../Messages/warning/Denied'
+import ImportData from '../Messages/warning/Authorization'
+import Loading from '@/components/Loading'
 
 function RegisterCardSabin() {
   const [cpf, setCpf] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [message, setMessage] = useState(null)
+  const [showLoading, setLoading] = useState(false)
 
   const showMessage = (MessageComponent) => {
     setShowModal(true)
@@ -36,34 +39,36 @@ function RegisterCardSabin() {
     if (!validateCpf(cpf)) {
       return showMessage(InvalidCpf)
     }
+    try{
+      setLoading(true)
+      const {data: responseApi} = await axios.get(`/paciente/status?cpf=${cpf}`);
 
-    // const response = await api.get('/rota');
-    // const responseStatus = response.data.status;
-    // Substituir response.status por responseStatus
-
-    if (response.status === status.NOT_COSTUMER_CARD_SABIN) {
-      return showMessage(NotFound)
+      if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
+        return showMessage(ImportData)
+      }
+      if (responseApi.status === status.APPROVED) {
+        return showMessage(AlreadyExists)
+      }
+      if (responseApi.status === status.PENDING) {
+        return showMessage(Analyzing)
+      }
+      if (responseApi.status === status.DENIED_FIRST_TIME) {
+        return showMessage(Divergence)
+      }
+      if (responseApi.status === status.DENIED_SECOND_TIME) {
+        return showMessage(Denied)
+      }
+    }
+    catch({response}){
+      const apiStatus = response.status
+      if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
+        return showMessage(NotFound)
+      }
+    }
+    finally{
+      setLoading(false)
     }
 
-    if (response.status === status.HAVE_DATA_TO_IMPORT) {
-      return showMessage(ImportData)
-    }
-
-    if (response.status === status.APPROVED) {
-      return showMessage(AlreadyExists)
-    }
-
-    if (response.status === status.PENDING) {
-      return showMessage(Analyzing)
-    }
-
-    if (response.status === status.DENIED_FIRST_TIME) {
-      return showMessage(Divergence)
-    }
-
-    if (response.status === status.DENIED_SECOND_TIME) {
-      return showMessage(Denied)
-    }
   }
 
   return (
@@ -85,6 +90,7 @@ function RegisterCardSabin() {
         </Content>
       </RegisterLayout>
       <Modal show={showModal}>{message}</Modal>
+      <Loading active={showLoading}/>
     </>
   )
 }

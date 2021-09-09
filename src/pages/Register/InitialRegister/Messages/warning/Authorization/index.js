@@ -7,8 +7,9 @@ import { Container,ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 
-function ImportData({ onShowModal }) {
+function ImportData({ onShowModal, cpf }) {
   const history = useHistory()
+ 
   const handleCloseModal = () => {
     onShowModal(false)
     history.push('/')
