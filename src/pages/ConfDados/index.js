@@ -1,35 +1,63 @@
-import React from 'react'
-import { Col, Form } from 'react-bootstrap'
-import logoRitaVertical from '../../assets/logo/vertical-named-logo.svg'
-import OutlineButton from '../../components/Button/Outline'
-import ButtonPrimary from '../../components/Button/Primary'
-import InputText from '../../components/Form/InputText'
-import Footer from '../../components/Layout/DefaultLayout/Footer'
-import { Container, Content } from './styles'
-import React from 'react'
-import { Button } from '@material-ui/core'
+import OutlineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
+import InputMask from '@/components/Form/InputMask'
+import RegisterLayout from '@/components/Layout/RegisterLayout'
+import RadioButton from '@/styles/components/RadioButton'
+import { RadioGroup } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
+import { Content } from './styles'
 
-function ConfDados() {
+function PreRegister() {
+  const [showModal] = useState(false)
+  const [message, setMessage] = useState(null)
+  const [choice, setChoice] = useState('')
+
+  const [phone, setPhone] = useState('')
+
+  const data = {
+    phone: '(**) *****-**23',
+  }
+
+  useEffect(() => {
+    if (data.phone) {
+      return setChoice('phone')
+    }
+  }, [])
+
+  function onChoiceChange(event) {
+    setChoice(event.target.value)
+  }
+
   return (
-    <Container>
-      <aside>
-        <img src={logoRitaVertical} />
-      </aside>
-      <main>
+    <>
+      <RegisterLayout>
         <Content>
-          <div xl={4} lg={6}>
-            <h6>
-              Para continuarmos, precisamos confirmar alguns dados. Reconhece
-              esse celular?
-            </h6>
-            <Form xl={4} lg={6}>
-              {['radio'].map((type) => (
-                <div key={`default-${type}`}>
-                  <Form.Check
-                    type={'radio'}
-                    id={`default-${type}`}
-                    label={`radio : ${type}`}
+          <h6>
+            Para continuarmos, precisamos confirmar alguns dados. <br />
+            Escolha uma das opções abaixo:
+          </h6>
+          <RadioGroup
+            aria-label="choice"
+            name="choice"
+            value={choice}
+            onChange={onChoiceChange}
+          >
+            {data.phone && (
+              <section>
+                <RadioButton
+                  value="phone"
+                  label={`Celular: ${data.phone}`}
+                  checked={choice === 'phone'}
+                />
+                {choice === 'phone' && (
+                  <InputMask
+                    mask="(##) #####-####"
+                    placeHolder="(00) 00000-0000"
+                    value={phone}
+                    setValue={setPhone}
+                    name="phone"
                   />
+<<<<<<< HEAD
                 </div>
               ))}
             </Form>
@@ -51,10 +79,20 @@ function ConfDados() {
             </Col>
           </div>
           <Footer />
+=======
+                )}
+              </section>
+            )}
+          </RadioGroup>
+          <footer>
+            {choice && <ButtonPrimary>Encaminhar</ButtonPrimary>}
+            <OutlineButton>Não reconheço esses dados</OutlineButton>
+          </footer>
+>>>>>>> 976d68dbb51ba0fc958f99e6af153f92a372ce9b
         </Content>
-      </main>
-    </Container>
+      </RegisterLayout>
+    </>
   )
 }
 
-export default ConfDados
+export default PreRegister

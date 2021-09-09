@@ -5,7 +5,7 @@ import colors from '@/styles/colors'
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  /* height: 100vh; */
+  height: 100vh;
 
   background-image: url(${shape});
   background-repeat: no-repeat;
