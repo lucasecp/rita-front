@@ -1,4 +1,4 @@
-export default function mask(text, mask, extra = [], ignore = []) {
+export default function toMask(text, mask, extra = [], ignore = []) {
   let newText = ''
   text = clearString(text + '', extra, ignore)
 

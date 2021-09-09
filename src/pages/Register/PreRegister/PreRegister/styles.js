@@ -21,7 +21,7 @@ export const Content = styled.div`
   > div {
     > section {
       > div + div {
-        margin-top: 16px;
+        margin-top: 8px;
       }
 
       + section {

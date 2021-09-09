@@ -1,22 +1,16 @@
 import React from 'react'
-
-import mask from '../../helpers/mask'
+import toMask from '@/helpers/toMask'
 
 import { Container, Input } from './style'
 
-const InputMask = ({
-  label,
-  mask: maskFormat,
-  placeHolder,
-  type,
-  setValue,
-  ...rest
-}) => {
+const InputMask = ({ label, mask, type, setValue, ...rest }) => {
   const containsNumbers = (value) => new RegExp('^[0-9]*$').test(value)
 
   const handleChange = (e) => {
-    if (containsNumbers(e.target.value.replace(/(\.|\/|-)/g, '')))
-      setValue(mask(e.target.value, maskFormat))
+    const value = e.target.value
+
+    if (containsNumbers(value.replace(/^[0-9*#+.() -]+$/g, '')))
+      setValue(toMask(value, mask))
   }
 
   return (
@@ -26,7 +20,6 @@ const InputMask = ({
         type={type || 'tel'}
         id={label}
         onChange={handleChange}
-        placeholder={placeHolder}
         {...rest}
       />
     </Container>

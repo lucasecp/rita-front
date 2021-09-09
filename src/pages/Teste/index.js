@@ -16,7 +16,7 @@ function Teste() {
           <div>
             <h6>Para iniciarmos o processo, por favor informe o seu CPF:</h6>
             <div className="input">
-              <InputMask mask="###.###.###-##" placeHolder="123.456.789-10" />
+              <InputMask mask="###.###.###-##" placeholder="123.456.789-10" />
               <ButtonPrimary>Confirmar</ButtonPrimary>
             </div>
           </div>

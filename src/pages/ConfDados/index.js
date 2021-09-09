@@ -34,7 +34,7 @@ function ConfDados() {
               ))}
             </Form>
 
-            <InputText mask="(##)#####-####" placeHolder="(00) 00000-0000" />
+            <InputText mask="(##)#####-####" placeholder="(00) 00000-0000" />
             <Col
               lg={6}
               className="d-flex justify-content-lg-end justify-content-center align-items-center mt-4 mt-lg-0"

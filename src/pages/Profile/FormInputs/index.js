@@ -5,20 +5,19 @@ import InputText from '@/components/Form/InputText'
 import { Col, Row } from 'react-bootstrap'
 
 const Profile = () => {
-
   return (
     <Row>
       <Col lg={6} className="mt-5 mb-4">
-        <InputText placeHolder="Text input" label="Label input" />
+        <InputText placeholder="Text input" label="Label input" />
       </Col>
       <Col lg={6} className="mt-3 mt-lg-5 mb-4">
-        <InputText placeHolder="Text input" label="Label input" />
+        <InputText placeholder="Text input" label="Label input" />
       </Col>
       <Col lg={6} className="mt-3 mt-lg-0 mb-4">
-        <InputText placeHolder="Text input" label="Label input" />
+        <InputText placeholder="Text input" label="Label input" />
       </Col>
       <Col lg={6} className="mt-3 mt-lg-0">
-        <InputText placeHolder="Text input" label="Label input" />
+        <InputText placeholder="Text input" label="Label input" />
       </Col>
       <Col
         lg={6}

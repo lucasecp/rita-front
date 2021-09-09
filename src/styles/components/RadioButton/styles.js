@@ -28,6 +28,6 @@ export const ContainerLabel = styled.div`
     line-height: 24px;
 
     color: ${({ checked }) => (checked ? colors.secondary : colors.gray.dark)};
-    margin-left: ${({ label }) => (label ? 16 : 0)}px;
+    margin-left: ${({ label }) => (label ? 8 : 0)}px;
   }
 `

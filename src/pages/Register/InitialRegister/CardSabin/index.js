@@ -18,7 +18,7 @@ import Divergence from '../messages/warning/Divergence'
 import Denied from '../messages/warning/Denied'
 import ImportData from '../messages/warning/Authorization'
 
-function CardSabin() {
+function RegisterCardSabin() {
   const [cpf, setCpf] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [message, setMessage] = useState(null)
@@ -75,7 +75,7 @@ function CardSabin() {
             <InputMask
               label="Digite Seu CPF:"
               mask="###.###.###-##"
-              placeHolder="000.000.000-00"
+              placeholder="000.000.000-00"
               value={cpf}
               setValue={setCpf}
               name="cpf"
@@ -89,4 +89,4 @@ function CardSabin() {
   )
 }
 
-export default CardSabin
+export default RegisterCardSabin

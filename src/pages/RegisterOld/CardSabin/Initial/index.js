@@ -108,7 +108,7 @@ function Initial() {
           setValue={setCpf}
           mask="###.###.###-##"
           label="Insira seu CPF: *"
-          placeHolder="123.456.789-00"
+          placeholder="123.456.789-00"
         />
         <ButtonPrimary>Encaminhar</ButtonPrimary>
       </Container>

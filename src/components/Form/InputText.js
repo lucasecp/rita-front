@@ -1,16 +1,15 @@
 import React from 'react'
 import { Container, Input } from './style'
 
-const InputText = (props) => {
+const InputText = ({ label, setValue, ...rest }) => {
   return (
     <Container>
-      {props.label && <label htmlFor={props.label}>{props.label}</label>}
+      {label && <label htmlFor={label}>{label}</label>}
       <Input
         type="text"
-        value={props.value}
-        id={props.label}
-        placeholder={props.placeHolder}
-        onChange={(e) => props.setValue(e.target.value)}
+        id={label}
+        onChange={(e) => setValue(e.target.value)}
+        {...rest}
       />
     </Container>
   )

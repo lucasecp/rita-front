@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from '../../../../components/Modal'
 import InputMask from '../../../../components/Form/InputMask'
 import InputText from '../../../../components/Form/InputText'
@@ -6,7 +6,6 @@ import InputText from '../../../../components/Form/InputText'
 import { Container, BtnGroup } from './style'
 import ButtonPrimary from '../../../../components/Button/Primary'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-
 
 const CardSabin = () => {
   const [showModal, setShowModal] = useState(false)
@@ -23,12 +22,11 @@ const CardSabin = () => {
   const history = useHistory()
   const location = useLocation()
 
-  useEffect(()=>{
-    if(!location.state) return history.push('cadastro-cartao-sabin')
+  useEffect(() => {
+    if (!location.state) return history.push('cadastro-cartao-sabin')
     setOriginalValue(location.state.originalData)
     setOptions(location.state.hiddenData)
   })
-
 
   const handleSubmitData = (e) => {
     e.preventDefault()
@@ -36,8 +34,6 @@ const CardSabin = () => {
     const newPhone = [...phone]
       .map((str) => str.replace(anySpecialCaracter, ''))
       .join('')
-
-
 
     const isEqual = Object.values(originalValue).filter(
       (el) => el === email || el === newPhone
@@ -50,7 +46,11 @@ const CardSabin = () => {
       setModalErrors()
     }
     if (inputRadio && !email && !newPhone) {
-      setModalContent(`Preencha o ${inputRadio === 'phone' ? 'celular' : 'E-mail'} corretamente.`)
+      setModalContent(
+        `Preencha o ${
+          inputRadio === 'phone' ? 'celular' : 'E-mail'
+        } corretamente.`
+      )
       setModalErrors()
     }
     if (isEqual.length) {
@@ -79,7 +79,6 @@ const CardSabin = () => {
     setTitleModal('Preenchimento incorreto')
   }
 
-
   return (
     <Container>
       <form onSubmit={handleSubmitData}>
@@ -88,17 +87,19 @@ const CardSabin = () => {
           Para continuarmos, precisamos confirmar alguns dados. Escolha uma das
           opções abaixo.{' '}
           {Object.keys(optionsConfirm).length === 1
-            ? `Reconhece este ${Object.keys(optionsConfirm)[0] === 'phone' ? 'celular' : 'email'}?`
+            ? `Reconhece este ${
+                Object.keys(optionsConfirm)[0] === 'phone' ? 'celular' : 'email'
+              }?`
             : null}
         </h3>
 
         {optionsConfirm.email && (
           <>
-            <label htmlFor='email'>
+            <label htmlFor="email">
               <input
                 type="radio"
-                id='email'
-                value='email'
+                id="email"
+                value="email"
                 onChange={() => {
                   setInputRadio('email')
                   setPhone('')
@@ -112,7 +113,7 @@ const CardSabin = () => {
               <InputText
                 setValue={setEmail}
                 value={email}
-                placeHolder={'xxxxxxxx@email.com'}
+                placeholder={'xxxxxxxx@email.com'}
               />
             )}
           </>
@@ -124,7 +125,7 @@ const CardSabin = () => {
               <input
                 type="radio"
                 id="celular"
-                value='phone'
+                value="phone"
                 onChange={() => {
                   setInputRadio('phone')
                   setEmail('')
@@ -137,7 +138,7 @@ const CardSabin = () => {
               <InputMask
                 setValue={setPhone}
                 value={phone}
-                placeHolder='(00) 00000-0000'
+                placeholder="(00) 00000-0000"
                 maxLength={15}
                 typeMask="phone"
               />
@@ -145,18 +146,21 @@ const CardSabin = () => {
           </>
         )}
         <BtnGroup>
-          <Link to='/'>Não reconheço esses dados</Link>
+          <Link to="/">Não reconheço esses dados</Link>
           <ButtonPrimary>Encaminhar</ButtonPrimary>
         </BtnGroup>
       </form>
-      {showModal &&
-      <Modal
-        type={modalType}
-        title={modalTitle}
-        content={modalContent}
-        onClickModal={(e) => e.target === e.currentTarget && setShowModal(false)}
-        footer={templateModalButton()} />
-      }
+      {showModal && (
+        <Modal
+          type={modalType}
+          title={modalTitle}
+          content={modalContent}
+          onClickModal={(e) =>
+            e.target === e.currentTarget && setShowModal(false)
+          }
+          footer={templateModalButton()}
+        />
+      )}
     </Container>
   )
 }

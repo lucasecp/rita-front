@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { RadioGroup } from '@material-ui/core'
 
 import RegisterLayout from '@/components/Layout/RegisterLayout'
@@ -11,6 +12,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import RadioButton from '@/styles/components/RadioButton'
 
 import { Content } from './styles'
+import DataDontMatch from '../messages/DataDontMatch'
 
 function PreRegister() {
   const [showModal, setShowModal] = useState(false)
@@ -20,10 +22,14 @@ function PreRegister() {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
 
+  const history = useHistory()
+
   const data = {
     phone: '(**) *****-**23',
     email: '*******uza23@gmail.com',
   }
+
+  const isDataMatch = false
 
   useEffect(() => {
     if (data.phone && data.email) {
@@ -39,8 +45,31 @@ function PreRegister() {
     }
   }, [])
 
-  function onChoiceChange(event) {
+  const showMessage = (MessageComponent) => {
+    setShowModal(true)
+    setMessage(<MessageComponent onShowModal={setShowModal} />)
+  }
+
+  const onChoiceChange = (event) => {
     setChoice(event.target.value)
+  }
+
+  const redirectToRegister = () => {
+    history.push('/cadastro')
+  }
+
+  const onForwardData = async () => {
+    if (choice === 'email') {
+      // isDataMatch = await api.get('email');
+    }
+
+    if (choice === 'phone') {
+      // isDataMatch = await api.get('phone');
+    }
+
+    if (!isDataMatch) {
+      return showMessage(DataDontMatch)
+    }
   }
 
   return (
@@ -66,11 +95,12 @@ function PreRegister() {
                 />
                 {choice === 'phone' && (
                   <InputMask
-                    mask="(##) #####-####"
-                    placeHolder="(00) 00000-0000"
+                    mask="(##)#####-####"
+                    placeholder="(00) 00000-0000"
                     value={phone}
                     setValue={setPhone}
                     name="phone"
+                    isPhone
                   />
                 )}
               </section>
@@ -84,7 +114,7 @@ function PreRegister() {
                 />
                 {choice === 'email' && (
                   <InputText
-                    placeHolder="nomesobrenome@email.com"
+                    placeholder="nomesobrenome@email.com"
                     value={email}
                     setValue={setEmail}
                   />
@@ -93,8 +123,20 @@ function PreRegister() {
             )}
           </RadioGroup>
           <footer>
-            {choice && <ButtonPrimary>Encaminhar</ButtonPrimary>}
-            <OutlineButton>Não reconheço esses dados</OutlineButton>
+            {choice && (
+              <ButtonPrimary
+                disabled={
+                  (choice === 'phone' && !phone) ||
+                  (choice === 'email' && !email)
+                }
+                onClick={onForwardData}
+              >
+                Encaminhar
+              </ButtonPrimary>
+            )}
+            <OutlineButton onClick={redirectToRegister}>
+              Não reconheço esses dados
+            </OutlineButton>
           </footer>
         </Content>
       </RegisterLayout>
