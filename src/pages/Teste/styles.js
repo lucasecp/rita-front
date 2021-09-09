@@ -25,10 +25,10 @@ export const Container = styled.div`
     );
     opacity: 0.8;
 
-    /* > img {
+    > img {
       margin-top: 104px;
       width: 96px;
-    } */
+    }
   }
 
   > main {
@@ -46,6 +46,8 @@ export const Content = styled.section`
     box-shadow: 0px 2px 8px rgba(223, 210, 255, 0.15);
     border-radius: 8px;
     padding: 40px 32px 48px;
+    display: flex;
+    flex-direction: column;
 
     > h6 {
       font-weight: 700;
