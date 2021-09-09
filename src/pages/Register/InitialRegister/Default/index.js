@@ -6,20 +6,20 @@ import RegisterLayout from '@/components/Layout/RegisterLayout'
 import Modal from '@/components/Modal'
 import validateCpf from '@/helpers/validateCpf'
 
-import CpfEmpty from '../Messages/error/CpfEmpty'
+import CpfEmpty from '../messages/error/CpfEmpty'
 
 import { Content } from './styles'
 
-import InvalidCpf from '../Messages/error/InvalidCpf'
-import Analyzing from '../Messages/warning/Analyzing'
-import Divergence from '../Messages/warning/Divergence'
-import Denied from '../Messages/warning/Denied'
-import Found from '../Messages/warning/Found'
+import InvalidCpf from '../messages/error/InvalidCpf'
+import Analyzing from '../messages/warning/Analyzing'
+import Divergence from '../messages/warning/Divergence'
+import Denied from '../messages/warning/Denied'
+import Found from '../messages/warning/Found'
 import { status } from '../service'
 import Loading from '@/components/Loading'
 import axios from '@/services/api'
 import { useHistory } from 'react-router-dom'
-import AlreadyExists from '../Messages/warning/AlreadyExists'
+import AlreadyExists from '../messages/warning/AlreadyExists'
 
 
 function DefaultRegister() {

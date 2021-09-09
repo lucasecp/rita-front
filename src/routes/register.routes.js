@@ -8,7 +8,7 @@ function RegisterRoutes() {
   return (
     <>
       <Switch>
-        <Route path="/cadastro-pre" component={PreRegister} />
+        <Route path="/pre-cadastro" component={PreRegister} />
         <Route path="/cadastro-inicial" component={DefaultRegister} />
         <Route path="/cadastro-cartao-sabin" component={RegisterCardSabin} />
       </Switch>
