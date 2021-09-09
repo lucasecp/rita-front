@@ -19,7 +19,7 @@ function AlreadyExists({ onShowModal }) {
       <img src={WarningError} />
       <p>Seu CPF já está cadastrado na Rita Saúde. Deseja retornar para a tela principal?</p>
       <ButtonGroup>
-      <OutlineButton onClick={pushToHome}>Não</OutlineButton>
+      <OutlineButton onClick={() => onShowModal(false)}>Não</OutlineButton>
       <ButtonPrimary onClick={pushToHome}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>
