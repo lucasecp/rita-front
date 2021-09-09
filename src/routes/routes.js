@@ -14,7 +14,7 @@ function Routes() {
       <RegisterRoutes />
 
       <Route path="/master-page" component={Profile} />
-      <Route path="/confDados" component={ConfDados} />
+      <Route path="/confdados" component={ConfDados} />
       <Route path="/teste" component={Teste} />
     </Switch>
   )
