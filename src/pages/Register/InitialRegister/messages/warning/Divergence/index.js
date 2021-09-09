@@ -7,19 +7,19 @@ import { Container,ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 
-function Divergence({ onShowModal }) {
+function Divergence({ onShowModal,cpf }) {
   const history = useHistory()
-  const handleCloseModal = () => {
+  const pushToPreRegister = () => {
     onShowModal(false)
-    history.push('/')
+    history.push('/pre-cadastro',{cpf})
   }
   return (
     <Container>
       <img src={WarningError} />
       <p>Desculpe! Seu cadastro apresentou divergência entre os dados digitados e documentos apresentados, deseja atualizar suas informações?</p>
       <ButtonGroup>
-      <OutlineButton onClick={handleCloseModal}>Não</OutlineButton>
-      <ButtonPrimary onClick={handleCloseModal}>Sim</ButtonPrimary>
+      <OutlineButton onClick={() => onShowModal(false)}>Não</OutlineButton>
+      <ButtonPrimary onClick={pushToPreRegister}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>
   )

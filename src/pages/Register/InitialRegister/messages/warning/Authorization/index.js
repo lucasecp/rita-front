@@ -9,10 +9,14 @@ import { useHistory } from 'react-router-dom'
 
 function ImportData({ onShowModal, cpf }) {
   const history = useHistory()
- 
-  const handleCloseModal = () => {
+
+  const pushToHome = () => {
     onShowModal(false)
     history.push('/')
+  }
+  const pushToPreRegister = () => {
+    onShowModal(false)
+    history.push('/pre-cadastro', { cpf })
   }
 
   return (
@@ -20,8 +24,8 @@ function ImportData({ onShowModal, cpf }) {
       <img src={WarningError} />
       <p>Autoriza importar seus dados cadastrais do Cartão Sabin Saúde?</p>
       <ButtonGroup>
-      <OutlineButton onClick={handleCloseModal}>Não</OutlineButton>
-      <ButtonPrimary onClick={handleCloseModal}>Sim</ButtonPrimary>
+      <OutlineButton onClick={pushToHome}>Não</OutlineButton>
+      <ButtonPrimary onClick={pushToPreRegister}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>
   )
