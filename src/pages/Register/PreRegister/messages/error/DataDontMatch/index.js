@@ -3,7 +3,7 @@ import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 import errorIcon from '@/assets/icons/alerts/error.svg'
 
-import { Container } from '../styles'
+import { Container } from '../../styles'
 
 function DataDontMatch({ onShowModal }) {
   const handleCloseModal = () => {

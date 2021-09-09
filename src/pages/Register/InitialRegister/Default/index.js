@@ -47,8 +47,8 @@ function DefaultRegister() {
       const {data: responseApi} = await axios.get(`/paciente/status?cpf=${cpf}`);
 
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
-        return showMessage(Found, {cpf})
-      } 
+        return showMessage(Found,responseApi)
+      }
       if (responseApi.status === status.APPROVED) {
         return showMessage(AlreadyExists)
       }

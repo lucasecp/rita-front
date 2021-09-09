@@ -12,7 +12,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import RadioButton from '@/styles/components/RadioButton'
 
 import { Content } from './styles'
-import DataDontMatch from '../messages/DataDontMatch'
+import DataDontMatch from '../messages/error/DataDontMatch'
 
 function PreRegister() {
   const [showModal, setShowModal] = useState(false)
