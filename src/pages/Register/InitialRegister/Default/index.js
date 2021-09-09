@@ -11,25 +11,30 @@ import CpfEmpty from '../Messages/error/CpfEmpty'
 import { Content } from './styles'
 
 import InvalidCpf from '../Messages/error/InvalidCpf'
-import AlreadyExists from '../Messages/warning/AlreadyExists'
 import Analyzing from '../Messages/warning/Analyzing'
 import Divergence from '../Messages/warning/Divergence'
 import Denied from '../Messages/warning/Denied'
 import Found from '../Messages/warning/Found'
+import { status } from '../service'
+import Loading from '@/components/Loading'
+import axios from '@/services/api'
+import { useHistory } from 'react-router-dom'
+import AlreadyExists from '../Messages/warning/AlreadyExists'
 
-import { status, response } from '../service'
 
 function DefaultRegister() {
   const [cpf, setCpf] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [message, setMessage] = useState(null)
+  const [showLoading, setLoading] = useState(false)
+  const history = useHistory()
 
-  const showMessage = (MessageComponent) => {
+  const showMessage = (MessageComponent,props) => {
     setShowModal(true)
-    setMessage(<MessageComponent onShowModal={setShowModal} />)
+    setMessage(<MessageComponent {...props} onShowModal={setShowModal} />)
   }
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (cpf.length === 0) {
       return showMessage(CpfEmpty)
     }
@@ -37,30 +42,36 @@ function DefaultRegister() {
     if (!validateCpf(cpf)) {
       return showMessage(InvalidCpf)
     }
+    try{
+      setLoading(true)
+      const {data: responseApi} = await axios.get(`/paciente/status?cpf=${cpf}`);
 
-    // const response = await api.get('/rota');
-    // const responseStatus = response.data.status;
-    // Substituir response.status por responseStatus
-
-    if (response.status === status.HAVE_DATA_TO_IMPORT) {
-      return showMessage(Found)
+      if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
+        return showMessage(Found, {cpf})
+      }
+      if (responseApi.status === status.APPROVED) {
+        return showMessage(AlreadyExists)
+      }
+      if (responseApi.status === status.PENDING) {
+        return showMessage(Analyzing)
+      }
+      if (responseApi.status === status.DENIED_FIRST_TIME) {
+        return showMessage(Divergence)
+      }
+      if (responseApi.status === status.DENIED_SECOND_TIME) {
+        return showMessage(Denied)
+      }
+    }
+    catch({response}){
+      const apiStatus = response.status
+      if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
+        return history.push('/')
+      }
+    }
+    finally{
+      setLoading(false)
     }
 
-    if (response.status === status.APPROVED) {
-      return showMessage(AlreadyExists)
-    }
-
-    if (response.status === status.PENDING) {
-      return showMessage(Analyzing)
-    }
-
-    if (response.status === status.DENIED_FIRST_TIME) {
-      return showMessage(Divergence)
-    }
-
-    if (response.status === status.DENIED_SECOND_TIME) {
-      return showMessage(Denied)
-    }
   }
 
   return (
@@ -71,7 +82,7 @@ function DefaultRegister() {
           <div>
             <InputMask
               mask="###.###.###-##"
-              placeHolder="123.456.789-10"
+              placeHolder="000.000.000-00"
               value={cpf}
               setValue={setCpf}
               name="cpf"
@@ -81,6 +92,7 @@ function DefaultRegister() {
         </Content>
       </RegisterLayout>
       <Modal show={showModal}>{message}</Modal>
+      <Loading active={showLoading}/>
     </>
   )
 }

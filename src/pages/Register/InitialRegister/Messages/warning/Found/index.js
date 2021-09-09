@@ -7,8 +7,9 @@ import { Container, ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 
-function Found({ onShowModal }) {
+function Found({ onShowModal,cpf }) {
   const history = useHistory()
+  console.log('cpf' + cpf);
   const pushToHome = () => {
     onShowModal(false)
     history.push('/')

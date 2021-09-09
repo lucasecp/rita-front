@@ -17,11 +17,11 @@ export const CustomContainer = styled.div`
   }
   > main {
     grid-area: main;
-    >h1{
+    > h1 {
       font-size: 32px;
       line-height: 39px;
       font-weight: 500;
-      color: ${colors.text.link};
+      color: ${colors.gray.dark};
       margin-bottom: 16px;
     }
   }
@@ -30,10 +30,13 @@ export const CustomContainer = styled.div`
     padding-top: 22px;
     padding-bottom: 105px;
   }
-  > header, > footer,> main{
+  > header,
+  > footer,
+  > main {
     width: 100%;
   }
-  >footer, > main{
+  > footer,
+  > main {
     padding-left: 32px;
     padding-right: 32px;
   }
@@ -41,13 +44,13 @@ export const CustomContainer = styled.div`
   @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
-    > header,>footer, > main {
-    padding: 16px 24px 16px 24px;
-  }
-  >header{
-    margin-bottom: 24px;
-  }
-
-
+    > header,
+    > footer,
+    > main {
+      padding: 16px 24px 16px 24px;
+    }
+    > header {
+      margin-bottom: 24px;
+    }
   }
 `

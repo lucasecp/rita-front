@@ -11,7 +11,7 @@ export const Content = styled.div`
     font-weight: 700;
     font-size: 24px;
     line-height: 33px;
-    color: ${colors.text.link};
+    color: ${colors.gray.dark};
   }
   > div {
     display: flex;

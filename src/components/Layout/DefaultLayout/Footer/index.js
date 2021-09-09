@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
 import logoFooter from '../../../../assets/icons/logoSymbol.png'
-import { Container, Time } from './style'
+import { Container, Time } from './styles'
+
 const Footer = () => {
   const formatDate = () =>
     `${new Date().toLocaleDateString('pt-br')} - ${new Date().getHours()}:${

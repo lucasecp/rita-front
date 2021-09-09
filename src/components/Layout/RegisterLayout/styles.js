@@ -5,11 +5,11 @@ import colors from '@/styles/colors'
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  height: 100vh;
+  min-height: 100vh;
 
   background-image: url(${shape});
   background-repeat: no-repeat;
-  background-color: ${colors.background.primary};
+  background-color: ${colors.gray.extraLight};
   background-size: 80%;
   background-position: left center;
 
@@ -69,7 +69,7 @@ export const Container = styled.div`
   @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
-     background-size: cover;
+    background-size: cover;
     > aside {
       > div {
         height: 160px;
@@ -82,13 +82,15 @@ export const Container = styled.div`
         filter: brightness(6.5);
       }
     }
-  }
+    > main {
+      padding: 40px 24px 24px;
+      height: 100%;
 
-  > main {
-    padding: 40px 24px 24px;
-    height: 100%;
-
-    > section {
+      > section {
+        > footer {
+          margin-top: 32px;
+        }
+      }
     }
   }
 `
