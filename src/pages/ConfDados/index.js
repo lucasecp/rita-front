@@ -57,29 +57,6 @@ function PreRegister() {
                     setValue={setPhone}
                     name="phone"
                   />
-<<<<<<< HEAD
-                </div>
-              ))}
-            </Form>
-
-            <InputText mask="(##)#####-####" placeholder="(00) 00000-0000" />
-            <Col
-              lg={6}
-              className="d-flex justify-content-lg-end justify-content-center align-items-center mt-4 mt-lg-0"
-            >
-              <ButtonPrimary xl={4} lg={6} className="mx-3">
-                Encaminhar
-              </ButtonPrimary>
-            </Col>
-            <Col
-              lg={6}
-              className="d-flex justify-content-lg-end justify-content-center align-items-center mt-2 mt-lg-0"
-            >
-              <OutlineButton>Não reconheço esses dados</OutlineButton>
-            </Col>
-          </div>
-          <Footer />
-=======
                 )}
               </section>
             )}
@@ -88,7 +65,6 @@ function PreRegister() {
             {choice && <ButtonPrimary>Encaminhar</ButtonPrimary>}
             <OutlineButton>Não reconheço esses dados</OutlineButton>
           </footer>
->>>>>>> 976d68dbb51ba0fc958f99e6af153f92a372ce9b
         </Content>
       </RegisterLayout>
     </>

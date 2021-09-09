@@ -9,10 +9,10 @@ import { useHistory } from 'react-router-dom'
 
 function Found({ onShowModal,cpf }) {
   const history = useHistory()
-  console.log('cpf' + cpf);
+
   const pushToHome = () => {
     onShowModal(false)
-    history.push('/')
+    history.push('/confDados',{cpf})
   }
 
   return (
