@@ -4,14 +4,14 @@ import Header from '@/components/HeaderTest'
 import Teste from '@/pages/Teste'
 import Profile from '@/pages/Profile'
 
-import RegisterRoutes from './register.routes'
+import registerRoutes from './register.routes'
 
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/" component={Header} />
+      {registerRoutes}
 
-      <RegisterRoutes />
+      <Route exact path="/" component={Header} />
 
       <Route path="/master-page" component={Profile} />
 
