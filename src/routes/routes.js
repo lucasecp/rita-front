@@ -1,11 +1,11 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Router } from 'react-router-dom'
 import Header from '@/components/HeaderTest'
 import Teste from '@/pages/Teste'
 import Profile from '@/pages/Profile'
-
 import RegisterRoutes from './register.routes'
 
+import ConfDados from '@/pages/ConfDados'
 function Routes() {
   return (
     <Switch>
@@ -14,7 +14,7 @@ function Routes() {
       <RegisterRoutes />
 
       <Route path="/master-page" component={Profile} />
-
+      <Route path="/confDados" component={ConfDados} />
       <Route path="/teste" component={Teste} />
     </Switch>
   )
