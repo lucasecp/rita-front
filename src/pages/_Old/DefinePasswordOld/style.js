@@ -53,12 +53,12 @@ export const MandatoryItem = styled.li`
     ${(props) =>
       props.type === 'error' &&
       css`
-        color: ${colors.feedback.error};
+        /* color: ${colors.feedback.error}; */
       `}
     ${(props) =>
       props.type === 'success' &&
       css`
-        color: ${colors.feedback.success};
+        /* color: ${colors.feedback.success}; */
       `}
     ::before {
       content: 'x';
@@ -84,7 +84,7 @@ export const ContentModal = styled.div`
     justify-content: space-around;
     gap: 5px;
     li {
-      color: ${colors.feedback.error};
+      /* color: ${colors.feedback.error}; */
       font-size: 16px;
       display: flex;
       align-items: center;

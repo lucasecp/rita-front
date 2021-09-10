@@ -56,12 +56,6 @@ const colors = {
     secondary: '#fff',
     tertiary: '#1D253B',
   },
-
-  feedback: {
-    success: '#24EA60',
-    error: '#FD5D93',
-    warning: '#FFEF29',
-  },
 }
 
 export default colors
