@@ -16,18 +16,20 @@ const colors = {
     },
   },
 
-  gray: {
-    extraLight: '#F5F5F5',
-    light: '#EEEEEE',
-    middleLight: '#AFAFAF',
-    middle: '#919191',
-    dark: '#6A6A6A',
-  },
-
   orange: {
     light: '#FFBDAB;',
     middle: '#FF815E',
     middleDark: '#DF644B',
+  },
+
+  pink: {
+    light: '#F8C0FF',
+  },
+
+  blueViola: {
+    light: '#9B97FF',
+    middle: '#706BFF',
+    dark: '#5944FF',
   },
 
   blue: {
@@ -36,10 +38,12 @@ const colors = {
     dark: '#1C23BD',
   },
 
-  blueViola: {
-    light: '#9B97FF',
-    middle: '#706BFF',
-    dark: '#5944FF',
+  gray: {
+    extraLight: '#F5F5F5',
+    light: '#EEEEEE',
+    middleLight: '#AFAFAF',
+    middle: '#919191',
+    dark: '#6A6A6A',
   },
 
   green: {
@@ -51,10 +55,6 @@ const colors = {
     primary: '#616367',
     secondary: '#fff',
     tertiary: '#1D253B',
-  },
-
-  background: {
-    sideBar: '#fff',
   },
 
   feedback: {

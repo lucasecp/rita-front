@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Modal from '../../../../components/Modal'
-import InputMask from '../../../../components/Form/InputMask'
-import InputText from '../../../../components/Form/InputText'
+import Modal from '../../../../../components/Modal'
+import InputMask from '../../../../../components/Form/InputMask'
+import InputText from '../../../../../components/Form/InputText'
 // import cardImg from '../../../../assets/img/cardSabin.png'
 import { Container, BtnGroup } from './style'
-import ButtonPrimary from '../../../../components/Button/Primary'
+import ButtonPrimary from '../../../../../components/Button/Primary'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 
 const CardSabin = () => {

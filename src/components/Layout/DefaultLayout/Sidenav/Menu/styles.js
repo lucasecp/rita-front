@@ -53,7 +53,7 @@ export const Container = styled.ul`
 
       > div {
         > a {
-          color: ${colors.text.secondary};
+          color: ${colors.white};
         }
       }
     }
@@ -71,7 +71,7 @@ export const Container = styled.ul`
         }
 
         > a {
-          color: ${colors.text.secondary};
+          color: ${colors.white};
         }
       }
     }
