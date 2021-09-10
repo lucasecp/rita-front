@@ -1,6 +1,4 @@
 const colors = {
-  primary: '#3F1B99',
-
   black: '#000000',
   white: '#ffffff',
 
@@ -49,12 +47,6 @@ const colors = {
   green: {
     light: '#ACFFC5',
     dark: '#084C4F',
-  },
-
-  text: {
-    primary: '#616367',
-    secondary: '#fff',
-    tertiary: '#1D253B',
   },
 }
 

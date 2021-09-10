@@ -18,7 +18,7 @@ export const Container = styled.aside`
     position: fixed;
     right: ${(props) => (props.show ? '0' : '-100%')};
     height: inherit;
-    background: ${colors.wihte};
+    background: ${colors.white};
     display: flex;
     flex-direction: column;
     overflow: hidden;

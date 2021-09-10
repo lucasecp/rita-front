@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import colors from '../../../../styles/colors'
-import expandedLogo from '../../../../assets/logo/expanded-logo.svg'
-import iconLogo from '../../../../assets/logo/icon-logo.svg'
+import colors from '@/styles/colors'
+import expandedLogo from '@/assets/logo/expanded-logo.svg'
+import iconLogo from '@/assets/logo/icon-logo.svg'
 export const Container = styled.aside`
   position: sticky;
   /* left: 0;*/
@@ -17,7 +17,7 @@ export const Container = styled.aside`
 
     padding: 14px 5px 14px 5px;
 
-    background: ${colors.wihte};
+    background: ${colors.white};
     border-radius: 0px 4px 4px 0px;
 
     cursor: pointer;
@@ -47,7 +47,7 @@ export const Container = styled.aside`
   > nav {
     position: relative;
     height: inherit;
-    background: ${colors.wihte};
+    background: ${colors.white};
     display: flex;
     flex-direction: column;
 

@@ -68,30 +68,13 @@ export const Container = styled.div`
     margin-top: 8px;
     margin-bottom: 16px;
   }
-  > h4 {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: center;
 
-    color: ${colors.blueViola.light};
-
-    margin-top: 8px;
-  }
   > footer {
     margin-top: 24px;
 
     > button + button {
       margin-left: 24px;
     }
-  }
-
-  /* > div + div {
-    margin-top: 24px;
-  } */
-
-  h4 + div {
-    margin-top: 8px;
   }
 
   > p {

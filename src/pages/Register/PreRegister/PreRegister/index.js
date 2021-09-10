@@ -36,7 +36,7 @@ function PreRegister() {
 
   const isDataMatch = true
   const isLastTry = false
-  const isBlocked = true
+  const isBlocked = false
 
   useEffect(() => {
     if (data.phone && data.email) {
@@ -75,9 +75,14 @@ function PreRegister() {
     }
 
     if (choice === 'phone') {
-      if (!isPhone(phone)) {
+      // if (!isPhone(phone)) {
+      //   return showMessage(DataDontMatch)
+      // }
+
+      if (!(phone.length === 14)) {
         return showMessage(DataDontMatch)
       }
+
       // isDataMatch = await api.get('phone');
     }
 

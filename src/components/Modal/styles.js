@@ -17,6 +17,14 @@ export const Container = styled.div`
   background: ${hexToRgba(colors.black, 0.8)};
   z-index: 2;
 
+  animation: fade 0.3s;
+
+  @keyframes fade {
+    from {
+      background: ${hexToRgba(colors.black, 0.0)};
+    }
+  }
+
   > div {
     background: #ffffff;
     box-shadow: 0px 2px 8px rgba(223, 210, 255, 0.15);
@@ -43,7 +51,16 @@ export const Container = styled.div`
       padding: 16px;
       cursor: pointer;
     }
+
+    animation: slideDown 0.3s;
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-24px);
+      }
+    }
   }
+
   @media (max-width: 767px) {
     > div {
       margin: 0 24px;
