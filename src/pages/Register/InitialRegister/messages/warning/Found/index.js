@@ -7,7 +7,7 @@ import { Container, ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 
-function Found({ onShowModal,cpf }) {
+function Found({ onShowModal,cpf,telefones,emails }) {
   const history = useHistory()
 
   const pushToRegister = () => {
@@ -15,8 +15,9 @@ function Found({ onShowModal,cpf }) {
    return history.push('/')
   }
   const pushToPreRegister = () => {
+    const dataToSend = {cpf, celular: telefones[0], email:emails[0]}
     onShowModal(false)
-   return history.push('/pre-cadastro',{cpf})
+    history.push('/pre-cadastro', dataToSend)
   }
 
   return (

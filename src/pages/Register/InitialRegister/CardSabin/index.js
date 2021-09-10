@@ -26,9 +26,9 @@ function RegisterCardSabin() {
   const [message, setMessage] = useState(null)
   const [showLoading, setLoading] = useState(false)
 
-  const showMessage = (MessageComponent) => {
+  const showMessage = (MessageComponent,props) => {
     setShowModal(true)
-    setMessage(<MessageComponent onShowModal={setShowModal} />)
+    setMessage(<MessageComponent {...props} onShowModal={setShowModal} />)
   }
 
   const handleConfirm = async () => {
@@ -44,7 +44,7 @@ function RegisterCardSabin() {
       const {data: responseApi} = await axios.get(`/paciente/status?cpf=${cpf}`);
 
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
-        return showMessage(ImportData)
+        return showMessage(ImportData, responseApi)
       }
       if (responseApi.status === status.APPROVED) {
         return showMessage(AlreadyExists)
