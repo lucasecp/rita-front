@@ -8,7 +8,7 @@ export const Container = styled.button`
   font-weight: 400;
   color: ${colors.white};
   font-size: 16px;
-  background: ${colors.secondary};
+  background: ${colors.purple.main.dark};
   transition: 0.3s;
   border-radius: 8px;
   line-height: 20px;
@@ -21,14 +21,10 @@ export const Container = styled.button`
       background: ${colors.purple.main.light};
       border-color: ${colors.purple.main.light};
       cursor: default;
-    `}
 
-  :hover {
-    ${({ disabled }) =>
-      !disabled &&
-      css`
-        background-color: #7338cb;
-        border-color: #7338cb;
-      `}
-  }
+      :hover {
+        background: ${colors.purple.main.light};
+        border-color: ${colors.purple.main.light};
+      }
+    `}
 `

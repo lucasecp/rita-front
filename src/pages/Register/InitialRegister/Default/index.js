@@ -5,6 +5,7 @@ import InputMask from '@/components/Form/InputMask'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
 import Modal from '@/components/Modal'
 import validateCpf from '@/helpers/validateCpf'
+import { useHistory } from 'react-router-dom'
 
 import CpfEmpty from '../messages/error/CpfEmpty'
 
@@ -16,20 +17,19 @@ import Divergence from '../messages/warning/Divergence'
 import Denied from '../messages/warning/Denied'
 import Found from '../messages/warning/Found'
 import { status } from '../service'
-import Loading from '@/components/Loading'
+import Loading from '@/components/Loading/RitaLoading'
 import axios from '@/services/api'
-import { useHistory } from 'react-router-dom'
 import AlreadyExists from '../messages/warning/AlreadyExists'
-
 
 function DefaultRegister() {
   const [cpf, setCpf] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [message, setMessage] = useState(null)
   const [showLoading, setLoading] = useState(false)
+
   const history = useHistory()
 
-  const showMessage = (MessageComponent,props) => {
+  const showMessage = (MessageComponent, props) => {
     setShowModal(true)
     setMessage(<MessageComponent {...props} onShowModal={setShowModal} />)
   }
@@ -42,13 +42,15 @@ function DefaultRegister() {
     if (!validateCpf(cpf)) {
       return showMessage(InvalidCpf)
     }
-    try{
+    try {
       setLoading(true)
-      const {data: responseApi} = await axios.get(`/paciente/status?cpf=${cpf}`);
+      const { data: responseApi } = await axios.get(
+        `/paciente/status?cpf=${cpf}`
+      )
 
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
-        return showMessage(Found, {cpf})
-      } 
+        return showMessage(Found, { cpf })
+      }
       if (responseApi.status === status.APPROVED) {
         return showMessage(AlreadyExists)
       }
@@ -61,17 +63,14 @@ function DefaultRegister() {
       if (responseApi.status === status.DENIED_SECOND_TIME) {
         return showMessage(Denied)
       }
-    }
-    catch({response}){
+    } catch ({ response }) {
       const apiStatus = response.status
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
         return history.push('/')
       }
-    }
-    finally{
+    } finally {
       setLoading(false)
     }
-
   }
 
   return (
@@ -92,7 +91,7 @@ function DefaultRegister() {
         </Content>
       </RegisterLayout>
       <Modal show={showModal}>{message}</Modal>
-      <Loading active={showLoading}/>
+      <Loading active={showLoading} />
     </>
   )
 }

@@ -18,7 +18,7 @@ import Analyzing from '../messages/warning/Analyzing'
 import Divergence from '../messages/warning/Divergence'
 import Denied from '../messages/warning/Denied'
 import ImportData from '../messages/warning/Authorization'
-import Loading from '@/components/Loading'
+import Loading from '@/components/Loading/RitaLoading'
 
 function RegisterCardSabin() {
   const [cpf, setCpf] = useState('')

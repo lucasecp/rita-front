@@ -1,12 +1,21 @@
 import React from 'react'
 
+import closeIcon from '@/assets/icons/close.svg'
+
 import { Container } from './styles'
 
-function Modal({ children, show }) {
+function Modal({ children, show, onCloseModal }) {
+  const toCloseModal = () => {
+    onCloseModal(false)
+  }
+
   return (
     show && (
       <Container>
-        <div>{children}</div>
+        <div>
+          {onCloseModal && <img src={closeIcon} onClick={toCloseModal} />}
+          {children}
+        </div>
       </Container>
     )
   )

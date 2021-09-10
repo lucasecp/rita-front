@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import colors from '@/styles/colors'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ export const Container = styled.div`
 export const Input = styled.input`
   color: #6a6a6a;
   border-radius: 8px;
-  padding: 14px ;
+  padding: 14px;
   display: inline-block;
   transition: all 0.3s;
   position: relative;
@@ -41,4 +42,9 @@ export const Input = styled.input`
     }
   }
 
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      border-color: ${colors.orange.light};
+    `}
 `
