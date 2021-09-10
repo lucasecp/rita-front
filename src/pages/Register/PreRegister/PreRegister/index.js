@@ -132,19 +132,18 @@ function PreRegister() {
           </RadioGroup>
           <footer>
             {choice && (
-              <ButtonPrimary
-                disabled={
-                  (choice === 'phone' && !phone) ||
-                  (choice === 'email' && !email)
-                }
-                onClick={onForwardData}
-              >
-                Encaminhar
-              </ButtonPrimary>
+              <OutlineButton onClick={redirectToRegister}>
+                Não reconheço esses dados
+              </OutlineButton>
             )}
-            <OutlineButton onClick={redirectToRegister}>
-              Não reconheço esses dados
-            </OutlineButton>
+            <ButtonPrimary
+              disabled={
+                (choice === 'phone' && !phone) || (choice === 'email' && !email)
+              }
+              onClick={onForwardData}
+            >
+              Encaminhar
+            </ButtonPrimary>
           </footer>
         </Content>
       </RegisterLayout>

@@ -2,8 +2,6 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
-
-import InputText from '@/components/Form/InputText'
 import RadioButton from '@/styles/components/RadioButton'
 import { RadioGroup } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
@@ -64,8 +62,8 @@ function ConfDados() {
             )}
           </RadioGroup>
           <footer>
-            {choice && <ButtonPrimary>Encaminhar</ButtonPrimary>}
-            <OutlineButton>Não reconheço esses dados</OutlineButton>
+            {choice && <OutlineButton>Não reconheço esses dados</OutlineButton>}
+            <ButtonPrimary>Encaminhar</ButtonPrimary>
           </footer>
         </Content>
       </RegisterLayout>

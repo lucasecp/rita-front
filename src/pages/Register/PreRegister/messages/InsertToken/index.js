@@ -57,12 +57,12 @@ function InsertToken({ onShowModal, email, phone }) {
         </>
       )}
       <footer>
-        <ButtonPrimary onClick={accessPlatform} disabled={token === ''}>
-          Acessar
-        </ButtonPrimary>
         <OutlineButton disabled={waitRequestNewToken}>
           Solicitar novo Token
         </OutlineButton>
+        <ButtonPrimary onClick={accessPlatform} disabled={token === ''}>
+          Acessar
+        </ButtonPrimary>
       </footer>
     </Container>
   )
