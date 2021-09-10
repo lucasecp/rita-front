@@ -5,8 +5,8 @@ import Teste from '@/pages/Teste'
 import Profile from '@/pages/Profile'
 
 import registerRoutes from './register.routes'
-
 import ConfDados from '@/pages/ConfDados'
+
 function Routes() {
   return (
     <Switch>
