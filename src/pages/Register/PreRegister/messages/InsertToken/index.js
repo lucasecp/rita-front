@@ -10,7 +10,7 @@ import SpinnerLoading from '@/styles/components/SpinnerLoading'
 function InsertToken({ onShowModal, email, phone }) {
   const [token, setToken] = useState('')
   const [hasError, setHasError] = useState(false)
-  const [waitRequestNewToken, setWaitRequestNewToken] = useState(true)
+  const [waitRequestNewToken, setWaitRequestNewToken] = useState(false)
 
   console.log('email ', email)
   console.log('phone ', phone)
@@ -38,6 +38,12 @@ function InsertToken({ onShowModal, email, phone }) {
       </h3>
       <h5>(Não saia desta tela enquanto não concluir esse processo)</h5>
       <h2>Informe o token abaixo:</h2>
+      {waitRequestNewToken && (
+        <>
+          <SpinnerLoading />
+          <h4>Você pode solicitar um novo token em 159 segundos...</h4>
+        </>
+      )}
       <InputText
         placeholder="0000000"
         value={token}
@@ -49,12 +55,6 @@ function InsertToken({ onShowModal, email, phone }) {
           *Por favor, verifique o número fornecido em seu dispositivo e tente
           novamente
         </small>
-      )}
-      {waitRequestNewToken && (
-        <>
-          <SpinnerLoading />
-          <h4>159 segundos restantes...</h4>
-        </>
       )}
       <footer>
         <ButtonPrimary onClick={accessPlatform} disabled={token === ''}>

@@ -14,6 +14,10 @@ import RadioButton from '@/styles/components/RadioButton'
 import { Content } from './styles'
 import InsertToken from '../messages/InsertToken'
 import DataDontMatch from '../messages/error/DataDontMatch'
+import LastTry from '../messages/warning/LastTry'
+import Denied from '../messages/error/Danied'
+import isEmail from '@/helpers/isEmail'
+import isPhone from '@/helpers/isPhone'
 
 function PreRegister() {
   const [showModal, setShowModal] = useState(false)
@@ -32,6 +36,7 @@ function PreRegister() {
 
   const isDataMatch = true
   const isLastTry = false
+  const isBlocked = true
 
   useEffect(() => {
     if (data.phone && data.email) {
@@ -62,10 +67,17 @@ function PreRegister() {
 
   const onForwardData = async () => {
     if (choice === 'email') {
+      if (!isEmail(email)) {
+        return showMessage(DataDontMatch)
+      }
+
       // isDataMatch = await api.get('email');
     }
 
     if (choice === 'phone') {
+      if (!isPhone(phone)) {
+        return showMessage(DataDontMatch)
+      }
       // isDataMatch = await api.get('phone');
     }
 
@@ -74,7 +86,11 @@ function PreRegister() {
     }
 
     if (isLastTry) {
-      // return showMessage(LastTry)
+      return showMessage(LastTry)
+    }
+
+    if (isBlocked) {
+      return showMessage(Denied)
     }
 
     return showMessage(InsertToken, choice === 'email' ? { email } : { phone })

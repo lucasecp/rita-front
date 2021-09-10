@@ -19,8 +19,10 @@ export const Container = styled.div`
 
     font-weight: 500;
     font-size: 20px;
-    line-height: 30px;
+    line-height: 25px;
     text-align: center;
+
+    color: ${colors.gray.dark};
   }
 
   // Insert Token
@@ -78,13 +80,30 @@ export const Container = styled.div`
   }
   > footer {
     margin-top: 24px;
-    
+
     > button + button {
       margin-left: 24px;
     }
   }
 
-  > div + div {
+  /* > div + div {
     margin-top: 24px;
+  } */
+
+  h4 + div {
+    margin-top: 8px;
+  }
+
+  > p {
+    > a {
+      display: inline-flex;
+      text-decoration: underline;
+
+      margin-left: 8px;
+
+      > img {
+        margin-left: 8px;
+      }
+    }
   }
 `
