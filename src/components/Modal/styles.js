@@ -33,9 +33,19 @@ export const Container = styled.div`
     min-width: 33%;
     opacity: 1;
     z-index: 9999;
+
+    position: relative;
+
+    > img {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      padding: 16px;
+      cursor: pointer;
+    }
   }
-  @media(max-width:767px){
-    >div{
+  @media (max-width: 767px) {
+    > div {
       margin: 0 24px;
     }
   }

@@ -12,6 +12,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import RadioButton from '@/styles/components/RadioButton'
 
 import { Content } from './styles'
+import InsertToken from '../messages/InsertToken'
 import DataDontMatch from '../messages/error/DataDontMatch'
 
 function PreRegister() {
@@ -29,7 +30,8 @@ function PreRegister() {
     email: '*******uza23@gmail.com',
   }
 
-  const isDataMatch = false
+  const isDataMatch = true
+  const isLastTry = false
 
   useEffect(() => {
     if (data.phone && data.email) {
@@ -45,9 +47,9 @@ function PreRegister() {
     }
   }, [])
 
-  const showMessage = (MessageComponent) => {
+  const showMessage = (MessageComponent, props) => {
     setShowModal(true)
-    setMessage(<MessageComponent onShowModal={setShowModal} />)
+    setMessage(<MessageComponent {...props} onShowModal={setShowModal} />)
   }
 
   const onChoiceChange = (event) => {
@@ -70,6 +72,12 @@ function PreRegister() {
     if (!isDataMatch) {
       return showMessage(DataDontMatch)
     }
+
+    if (isLastTry) {
+      // return showMessage(LastTry)
+    }
+
+    return showMessage(InsertToken, choice === 'email' ? { email } : { phone })
   }
 
   return (
@@ -140,7 +148,9 @@ function PreRegister() {
           </footer>
         </Content>
       </RegisterLayout>
-      <Modal show={showModal}>{message}</Modal>
+      <Modal show={showModal} onCloseModal={setShowModal}>
+        {message}
+      </Modal>
     </>
   )
 }

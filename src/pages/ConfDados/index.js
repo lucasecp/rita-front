@@ -8,7 +8,6 @@ import RadioButton from '@/styles/components/RadioButton'
 import { RadioGroup } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { Content } from './styles'
-// import { useHistory } from 'react-router-dom'
 
 function ConfDados() {
   const [showModal] = useState(false)
