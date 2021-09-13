@@ -5,7 +5,7 @@ import AccordionComponent from '@/components/Accordion'
 import selfie from '@/assets/img/selfie.png'
 import trash from '@/assets/img/trash.png'
 import { holdingDocumentTips } from '../tips'
-import InputFile from '@/components/Form/InputFile1/InputFile'
+import InputFile from '@/components/Form/InputFile/InputFile'
 import OutlineButton from '@/components/Button/Outline'
 import Modal from '@/components/Modal'
 import BigSize from '../../messages/BigSize'
@@ -46,7 +46,6 @@ const HoldingDocument = ({ setValue, value }) => {
             <ContentFile>
               <span>{value.name}</span>
               <button onClick={() => setValue('')}>
-                {' '}
                 <img src={trash} />
                 Remover o arquivo
               </button>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Content } from '../style';
 import AccordionComponent from '@/components/Accordion';
 import { AccordionDetails, AccordionSummary } from '@material-ui/core';
-import InputFile from '@/components/Form/InputFile1/InputFile';
+import InputFile from '@/components/Form/InputFile/InputFile';
 import OutlineButton from '@/components/Button/Outline';
 import {documentTip} from '../tips'
 import income from '@/assets/img/income.png'
