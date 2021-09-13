@@ -12,9 +12,13 @@ export const Container = styled.button`
   transition: 0.3s;
   border-radius: 8px;
   line-height: 20px;
-  border: 2px solid ${colors.secondary};
+  border: 2px solid ${colors.purple.main.dark};
   height: fit-content;
-
+   :hover{
+    background-color: #7338cb;
+    color: #fff;
+    border-color: #7338cb;
+   }
   ${({ disabled }) =>
     disabled &&
     css`

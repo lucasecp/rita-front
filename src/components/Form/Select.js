@@ -1,17 +1,16 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
-import { Container } from './style';
+import { Container,Select } from './style';
 
-const Select = ({options,label,setValue,labeDefaultOption, ...rest}) => {
+const SelectComponent = ({options,label,setValue,labeDefaultOption, ...rest}) => {
   return (
     <Container>
     <label>{label}</label>
-    <Form.Select {...rest} aria-label={label} onChange={({target}) => setValue(target.value)}>
-      <option selected="true" disabled="disabled" >{labeDefaultOption}</option>
+    <Select {...rest} value='default'  onChange={({target}) => setValue(target.value)}>
+      <option  value='default' >{labeDefaultOption}</option>
      {options.map((option,index) => (<option value={option} key={index} >{option}</option>) )}
-  </Form.Select>
+  </Select>
     </Container>
   );
 };
 
-export default Select;
+export default SelectComponent;

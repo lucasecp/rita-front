@@ -1,15 +1,22 @@
 import React from 'react';
 import { Container } from './style';
-
-const Checkbox = ({checked, setValue,label,...rest}) => {
+import {Checkbox, FormControlLabel} from '@material-ui/core'
+const CheckboxComponent = ({checked, setValue,label,id}) => {
   return (
     <Container>
-         <input {...rest} id={label} type='checkbox' checked={checked} onChange={() => setValue(!checked)}/>
-         <label htmlFor={label}>{label}</label>
+       <FormControlLabel
+        control={  <Checkbox
+        checked={checked}
+        onChange={() => setValue(!checked)}
+        inputProps={{ 'aria-label': 'primary checkbox' }}
+        color="primary"
+      />}
+        label={label}
+      />
+         {/* <input id={id} {...rest} type='checkbox' checked={checked} onChange={() => setValue(!checked)}/>
+         <label htmlFor={id}>{label}</label> */}
     </Container>
   );
 };
 
-Checkbox.propTypes = {};
-
-export default Checkbox;
+export default CheckboxComponent;

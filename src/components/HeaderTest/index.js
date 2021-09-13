@@ -9,7 +9,7 @@ const Header = () => {
         <Link to="/master-page">Master Page</Link>
         <Link to="/cadastro-inicial">Cadastro Normal</Link>
         <Link to="/cadastro-cartao-sabin">Cadastro Cartão Sabin</Link>
-        <Link to="/paciente/cadastro">Cadastro Paciente</Link>
+        <Link to="/cadastro/paciente">Cadastro Paciente</Link>
         <Link to="/pre-cadastro">Pré Cadastro</Link>
       </nav>
     </HeaderLayout>

@@ -8,9 +8,11 @@ const InputMask = ({ label, mask, type, setValue, ...rest }) => {
 
   const handleChange = (e) => {
     const value = e.target.value
+    if(!mask) return setValue(value)
+    
+    if (containsNumbers(value.replace(/^[0-9*#+.()\/ -]+$/g, '')))
+    setValue(toMask(value, mask))
 
-    if (containsNumbers(value.replace(/^[0-9*#+.() -]+$/g, '')))
-      setValue(toMask(value, mask))
   }
 
   return (
