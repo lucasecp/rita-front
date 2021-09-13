@@ -3,11 +3,11 @@ import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 import WarningError from '@/assets/icons/alerts/warning.svg'
 
-import { Container,ButtonGroup } from '../../styles'
+import { Container, ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 
-function ImportData({ onShowModal, cpf,emails, telefones }) {
+function ImportData({ onShowModal, ...data }) {
   const history = useHistory()
 
   const pushToHome = () => {
@@ -15,9 +15,8 @@ function ImportData({ onShowModal, cpf,emails, telefones }) {
     history.push('/')
   }
   const pushToPreRegister = () => {
-    const dataToSend = {cpf,celular: telefones[0], email:emails[0]}
     onShowModal(false)
-    history.push('/pre-cadastro', dataToSend)
+    history.push('/pre-cadastro', data)
   }
 
   return (
@@ -25,8 +24,8 @@ function ImportData({ onShowModal, cpf,emails, telefones }) {
       <img src={WarningError} />
       <p>Autoriza importar seus dados cadastrais do Cartão Sabin Saúde?</p>
       <ButtonGroup>
-      <OutlineButton onClick={pushToHome}>Não</OutlineButton>
-      <ButtonPrimary onClick={pushToPreRegister}>Sim</ButtonPrimary>
+        <OutlineButton onClick={pushToHome}>Não</OutlineButton>
+        <ButtonPrimary onClick={pushToPreRegister}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>
   )

@@ -83,7 +83,8 @@ export const Container = styled.div`
       }
     }
     > main {
-      padding: 40px 24px 24px;
+      /* padding: 40px 24px 24px; */
+      padding: 24px 16px 24px;
       height: 100%;
 
       > section {

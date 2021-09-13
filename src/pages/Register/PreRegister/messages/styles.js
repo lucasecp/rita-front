@@ -70,6 +70,7 @@ export const Container = styled.div`
   }
 
   > footer {
+    display: flex;
     margin-top: 24px;
 
     > button + button {
@@ -86,6 +87,23 @@ export const Container = styled.div`
 
       > img {
         margin-left: 8px;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+  }
+
+  @media (max-width: 478px) {
+    > footer {
+      flex-direction: column;
+      width: 100%;
+
+      margin-top: 24px;
+
+      > button + button {
+        margin-left: 0px;
+        margin-top: 8px;
       }
     }
   }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { RadioGroup } from '@material-ui/core'
 
 import RegisterLayout from '@/components/Layout/RegisterLayout'
@@ -14,12 +14,24 @@ import RadioButton from '@/styles/components/RadioButton'
 import { Content } from './styles'
 import InsertToken from '../messages/InsertToken'
 import DataDontMatch from '../messages/error/DataDontMatch'
-import LastTry from '../messages/warning/LastTry'
 import Denied from '../messages/error/Danied'
 import isEmail from '@/helpers/isEmail'
 import isPhone from '@/helpers/isPhone'
+import { isEmpty } from '@/helpers/isEmpty'
+import api from '@/services/api'
+import Loading from '@/components/Loading/RitaLoading'
 
 function PreRegister() {
+  const history = useHistory()
+  const location = useLocation()
+
+  const userData = location.state
+
+  if (!userData) {
+    history.push('/')
+    return null
+  }
+
   const [showModal, setShowModal] = useState(false)
   const [message, setMessage] = useState(null)
   const [choice, setChoice] = useState('')
@@ -27,27 +39,22 @@ function PreRegister() {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
 
-  const history = useHistory()
+  const [isLoading, setIsLoading] = useState(false)
 
-  const data = {
-    phone: '(**) *****-**23',
-    email: '*******uza23@gmail.com',
-  }
-
-  const isDataMatch = true
-  const isLastTry = false
-  const isBlocked = false
+  let isDataMatch
+  let isLastTry
+  let isBlocked
 
   useEffect(() => {
-    if (data.phone && data.email) {
+    if (userData.phone && userData.email) {
       return
     }
 
-    if (data.phone) {
+    if (userData.phone) {
       return setChoice('phone')
     }
 
-    if (data.email) {
+    if (userData.email) {
       return setChoice('email')
     }
   }, [])
@@ -66,12 +73,16 @@ function PreRegister() {
   }
 
   const onForwardData = async () => {
+    isDataMatch = true
+    isLastTry = false
+    isBlocked = false
+
+    setIsLoading(true)
+
     if (choice === 'email') {
       if (!isEmail(email)) {
         return showMessage(DataDontMatch)
       }
-
-      // isDataMatch = await api.get('email');
     }
 
     if (choice === 'phone') {
@@ -82,23 +93,58 @@ function PreRegister() {
       if (!(phone.length === 14)) {
         return showMessage(DataDontMatch)
       }
+    }
 
-      // isDataMatch = await api.get('phone');
+    try {
+      const response = await api.post(
+        '/paciente/token',
+        choice === 'email'
+          ? {
+              cpf: userData.cpf,
+              email,
+            }
+          : {
+              cpf: userData.cpf,
+              celular: phone,
+            }
+      )
+
+      if (response.data.ultimaTentativa) {
+        isLastTry = true
+      }
+    } catch ({ response }) {
+      console.log(response)
+      if (response.status === 400) {
+        if (response.data.message === 'Usuario Bloqueado') {
+          isBlocked = true
+        } else {
+          isDataMatch = false
+        }
+      }
+    } finally {
+      setIsLoading(false)
     }
 
     if (!isDataMatch) {
       return showMessage(DataDontMatch)
     }
 
-    if (isLastTry) {
-      return showMessage(LastTry)
-    }
-
     if (isBlocked) {
       return showMessage(Denied)
     }
 
-    return showMessage(InsertToken, choice === 'email' ? { email } : { phone })
+    const propsToInComumSend = {
+      isLastTry,
+      cpf: userData.cpf,
+      onLoading: setIsLoading,
+    }
+
+    return showMessage(
+      InsertToken,
+      choice === 'email'
+        ? { ...propsToInComumSend, email }
+        : { ...propsToInComumSend, phone }
+    )
   }
 
   return (
@@ -115,11 +161,11 @@ function PreRegister() {
             value={choice}
             onChange={onChoiceChange}
           >
-            {data.phone && (
+            {userData.phone && (
               <section>
                 <RadioButton
                   value="phone"
-                  label={`Celular: ${data.phone}`}
+                  label={`Celular: ${userData.phone}`}
                   checked={choice === 'phone'}
                 />
                 {choice === 'phone' && (
@@ -134,11 +180,11 @@ function PreRegister() {
                 )}
               </section>
             )}
-            {data.email && (
+            {userData.email && (
               <section>
                 <RadioButton
                   value="email"
-                  label={`E-mail: ${data.email}`}
+                  label={`E-mail: ${userData.email}`}
                   checked={choice === 'email'}
                 />
                 {choice === 'email' && (
@@ -152,25 +198,27 @@ function PreRegister() {
             )}
           </RadioGroup>
           <footer>
+            <OutlineButton onClick={redirectToRegister}>
+              Não reconheço esses dados
+            </OutlineButton>
             {choice && (
-              <OutlineButton onClick={redirectToRegister}>
-                Não reconheço esses dados
-              </OutlineButton>
+              <ButtonPrimary
+                disabled={
+                  (choice === 'phone' && !phone) ||
+                  (choice === 'email' && !email)
+                }
+                onClick={onForwardData}
+              >
+                Encaminhar
+              </ButtonPrimary>
             )}
-            <ButtonPrimary
-              disabled={
-                (choice === 'phone' && !phone) || (choice === 'email' && !email)
-              }
-              onClick={onForwardData}
-            >
-              Encaminhar
-            </ButtonPrimary>
           </footer>
         </Content>
       </RegisterLayout>
       <Modal show={showModal} onCloseModal={setShowModal}>
         {message}
       </Modal>
+      <Loading active={isLoading} />
     </>
   )
 }
