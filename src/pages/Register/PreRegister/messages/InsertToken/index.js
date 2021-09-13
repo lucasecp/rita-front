@@ -1,22 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import InputText from '@/components/Form/InputText'
 import ButtonPrimary from '@/components/Button/Primary'
 import OutlineButton from '@/components/Button/Outline'
 
 import { Container } from '../styles'
-import SpinnerLoading from '@/styles/components/SpinnerLoading'
+import RequestNewTokenTimer from './RequestNewTokenTimer'
 
 function InsertToken({ onShowModal, email, phone }) {
   const [token, setToken] = useState('')
   const [hasError, setHasError] = useState(false)
   const [waitRequestNewToken, setWaitRequestNewToken] = useState(true)
 
-  console.log('email ', email)
-  console.log('phone ', phone)
+  const INITIAL_TIME = 10
+  // const INITIAL_TIME = 120
+
+  const [time, setTime] = useState(INITIAL_TIME)
 
   const handleCloseModal = () => {
     onShowModal(false)
+  }
+
+  const onRequestNewToken = () => {
+    setWaitRequestNewToken(true)
   }
 
   const accessPlatform = () => {
@@ -38,6 +44,10 @@ function InsertToken({ onShowModal, email, phone }) {
       </h3>
       <h5>(Não saia desta tela enquanto não concluir esse processo)</h5>
       <h2>Informe o token abaixo:</h2>
+      <RequestNewTokenTimer
+        active={waitRequestNewToken}
+        onFinishTimer={setWaitRequestNewToken}
+      />
       <InputText
         placeholder="0000000"
         value={token}
@@ -50,19 +60,16 @@ function InsertToken({ onShowModal, email, phone }) {
           novamente
         </small>
       )}
-      {waitRequestNewToken && (
-        <>
-          <SpinnerLoading />
-          <h4>159 segundos restantes...</h4>
-        </>
-      )}
       <footer>
+        <OutlineButton
+          disabled={waitRequestNewToken}
+          onClick={onRequestNewToken}
+        >
+          Solicitar novo Token
+        </OutlineButton>
         <ButtonPrimary onClick={accessPlatform} disabled={token === ''}>
           Acessar
         </ButtonPrimary>
-        <OutlineButton disabled={waitRequestNewToken}>
-          Solicitar novo Token
-        </OutlineButton>
       </footer>
     </Container>
   )

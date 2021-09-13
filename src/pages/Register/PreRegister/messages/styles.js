@@ -19,8 +19,10 @@ export const Container = styled.div`
 
     font-weight: 500;
     font-size: 20px;
-    line-height: 30px;
+    line-height: 25px;
     text-align: center;
+
+    color: ${colors.gray.dark};
   }
 
   // Insert Token
@@ -66,25 +68,25 @@ export const Container = styled.div`
     margin-top: 8px;
     margin-bottom: 16px;
   }
-  > h4 {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: center;
 
-    color: ${colors.blueViola.light};
-
-    margin-top: 8px;
-  }
   > footer {
     margin-top: 24px;
-    
+
     > button + button {
       margin-left: 24px;
     }
   }
 
-  > div + div {
-    margin-top: 24px;
+  > p {
+    > a {
+      display: inline-flex;
+      text-decoration: underline;
+
+      margin-left: 8px;
+
+      > img {
+        margin-left: 8px;
+      }
+    }
   }
 `

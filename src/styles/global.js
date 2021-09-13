@@ -26,6 +26,7 @@ export default createGlobalStyle`
 
   a{
       text-decoration: none;
+      color: ${colors.blueViola.dark}
   }
   input[type="radio"]{
       margin: 0;

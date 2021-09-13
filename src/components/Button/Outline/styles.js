@@ -64,7 +64,7 @@ export const Container = styled.button`
       :hover {
         color: ${colors.purple.main.light};
         border-color: ${colors.purple.main.light};
-        background-color: transparentgit;
+        background-color: transparent;
       }
     `}
 `

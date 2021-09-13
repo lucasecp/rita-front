@@ -5,7 +5,7 @@ import FormInputs from './FormInputs'
 import Boxes from './Boxes'
 import Cards from './Cards'
 
-const Profile = () => {
+const MasterPage = () => {
   useEffect(() => {
     document.title = 'Perfil'
   }, [])
@@ -21,4 +21,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default MasterPage

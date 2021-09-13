@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import InputMask from '../../../../components/Form/InputMask'
+import InputMask from '../../../../../components/Form/InputMask'
 // import cardImg from '../../../../assets/img/cardSabin.png'
-import LayoutCenter from '../../../../components/Layout/LayoutCenter'
-import validatorCpf from '../../../../helpers/validateCpf'
+import LayoutCenter from '../../../../../components/Layout/LayoutCenter'
+import validatorCpf from '../../../../../helpers/validateCpf'
 import { Container } from './styles'
-import Modal from '../../../../components/Modal'
+import Modal from '../../../../../components/Modal'
 import hiddenPhoneAndEmail from '../helpers/hiddenPhoneAndEmail'
 import { useHistory } from 'react-router-dom'
-import ButtonPrimary from '../../../../components/Button/Primary'
+import ButtonPrimary from '../../../../../components/Button/Primary'
 
 function Initial() {
   const [cpf, setCpf] = useState('')

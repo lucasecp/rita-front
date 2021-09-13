@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import colors from '../../../../styles/colors'
-import expandedLogo from '../../../../assets/logo/expanded-logo.svg'
-import iconLogo from '../../../../assets/logo/icon-logo.svg'
+import colors from '@/styles/colors'
+import expandedLogo from '@/assets/logo/expanded-logo.svg'
+import iconLogo from '@/assets/logo/icon-logo.svg'
 export const Container = styled.aside`
   position: sticky;
   /* left: 0;*/
@@ -17,7 +17,7 @@ export const Container = styled.aside`
 
     padding: 14px 5px 14px 5px;
 
-    background: ${colors.background.sideBar};
+    background: ${colors.white};
     border-radius: 0px 4px 4px 0px;
 
     cursor: pointer;
@@ -47,31 +47,32 @@ export const Container = styled.aside`
   > nav {
     position: relative;
     height: inherit;
-    background: ${colors.background.sideBar};
+    background: ${colors.white};
     display: flex;
     flex-direction: column;
 
     overflow: hidden;
 
     > header {
-        padding: 40px 32px 52px;
-
+      padding: 40px 32px 52px;
     }
   }
 `
 export const Logo = styled.div`
-    background-position: left center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    transition: .3s;
-    ${({mode}) =>mode === 'expanded' && css`
-    background-image:url(${expandedLogo});
-    height: 64px;
+  background-position: left center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+  ${({ mode }) =>
+    mode === 'expanded' &&
+    css`
+      background-image: url(${expandedLogo});
+      height: 64px;
     `}
-    ${({mode}) =>mode === 'short' && css`
-    background-image:url(${iconLogo});
-    height: 52px;
+  ${({ mode }) =>
+    mode === 'short' &&
+    css`
+      background-image: url(${iconLogo});
+      height: 52px;
     `}
-
 `
-

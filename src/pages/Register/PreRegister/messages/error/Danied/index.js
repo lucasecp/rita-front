@@ -5,7 +5,7 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 import whatsApp from '@/assets/icons/whatsapp.svg'
 import { Container } from '../../styles'
 
-function DataDontMatch({ onShowModal }) {
+function Denied({ onShowModal }) {
   const handleCloseModal = () => {
     onShowModal(false)
   }
@@ -13,9 +13,9 @@ function DataDontMatch({ onShowModal }) {
   return (
     <Container>
       <img src={errorIcon} />
+      <p>Seu acesso foi bloqueado devido à excesso de tentativas.</p>
       <p>
-        Seu acesso foi bloqueado devido à excesso de tentativas. Pedimos que
-        entre em contato com a central de atendimento (61) 3181-0999
+        Pedimos que entre em contato com a central de atendimento
         <a href="https://api.whatsapp.com/send?phone=556131810999">
           (61) 3181-0999 <img src={whatsApp} />
         </a>
@@ -25,4 +25,4 @@ function DataDontMatch({ onShowModal }) {
   )
 }
 
-export default DataDontMatch
+export default Denied

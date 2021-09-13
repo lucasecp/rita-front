@@ -1,6 +1,4 @@
 const colors = {
-  primary: '#3F1B99',
-
   black: '#000000',
   white: '#ffffff',
 
@@ -16,24 +14,14 @@ const colors = {
     },
   },
 
-  gray: {
-    extraLight: '#F5F5F5',
-    light: '#EEEEEE',
-    middleLight: '#AFAFAF',
-    middle: '#919191',
-    dark: '#6A6A6A',
-  },
-
   orange: {
     light: '#FFBDAB;',
     middle: '#FF815E',
     middleDark: '#DF644B',
   },
 
-  blue: {
-    light: '#C5DBFE',
-    middle: '#326BF6',
-    dark: '#1C23BD',
+  pink: {
+    light: '#F8C0FF',
   },
 
   blueViola: {
@@ -42,25 +30,23 @@ const colors = {
     dark: '#5944FF',
   },
 
+  blue: {
+    light: '#C5DBFE',
+    middle: '#326BF6',
+    dark: '#1C23BD',
+  },
+
+  gray: {
+    extraLight: '#F5F5F5',
+    light: '#EEEEEE',
+    middleLight: '#AFAFAF',
+    middle: '#919191',
+    dark: '#6A6A6A',
+  },
+
   green: {
     light: '#ACFFC5',
     dark: '#084C4F',
-  },
-
-  text: {
-    primary: '#616367',
-    secondary: '#fff',
-    tertiary: '#1D253B',
-  },
-
-  background: {
-    sideBar: '#fff',
-  },
-
-  feedback: {
-    success: '#24EA60',
-    error: '#FD5D93',
-    warning: '#FFEF29',
   },
 }
 

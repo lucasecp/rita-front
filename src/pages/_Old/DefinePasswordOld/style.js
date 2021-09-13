@@ -16,7 +16,7 @@ export const Container = styled.section`
     box-shadow: 0 16px 48px #00000029;
     padding: 32px;
     > h2 {
-      color: ${colors.text.primary};
+      /* color: ${colors.text.primary}; */
       font-size: 26px;
       text-align: center;
       margin-bottom: 16px;
@@ -31,7 +31,7 @@ export const Container = styled.section`
     }
     > h3 {
       max-width: 260px;
-      color: ${colors.text.primary};
+      /* color: ${colors.text.primary}; */
       font-size: 14px;
       margin-bottom: 18px;
       font-weight: 400;
@@ -53,12 +53,12 @@ export const MandatoryItem = styled.li`
     ${(props) =>
       props.type === 'error' &&
       css`
-        color: ${colors.feedback.error};
+        /* color: ${colors.feedback.error}; */
       `}
     ${(props) =>
       props.type === 'success' &&
       css`
-        color: ${colors.feedback.success};
+        /* color: ${colors.feedback.success}; */
       `}
     ::before {
       content: 'x';
@@ -84,7 +84,7 @@ export const ContentModal = styled.div`
     justify-content: space-around;
     gap: 5px;
     li {
-      color: ${colors.feedback.error};
+      /* color: ${colors.feedback.error}; */
       font-size: 16px;
       display: flex;
       align-items: center;

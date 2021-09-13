@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import colors from '../../../../styles/colors'
+import colors from '../../../../../styles/colors'
 
 export const Container = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ export const Container = styled.div`
       margin-bottom: 16px;
     }
     label {
-      color: ${colors.text.primary};
+      /* color: ${colors.text.primary}; */
       font-size: 14px;
       line-height: 16px;
       display: flex;
@@ -36,7 +36,7 @@ export const Container = styled.div`
       }
     }
     > h3 {
-      color: ${colors.text.primary};
+      /* color: ${colors.text.primary}; */
       font-size: 14px;
       line-height: 18px;
       font-weight: 400;
