@@ -12,7 +12,7 @@ function ImportData({ onShowModal, ...data }) {
 
   const pushToHome = () => {
     onShowModal(false)
-    history.push('/')
+    history.push('/cadastro/paciente')
   }
   const pushToPreRegister = () => {
     onShowModal(false)

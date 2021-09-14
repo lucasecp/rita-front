@@ -16,8 +16,6 @@ import InsertToken from '../messages/InsertToken'
 import DataDontMatch from '../messages/error/DataDontMatch'
 import Denied from '../messages/error/Danied'
 import isEmail from '@/helpers/isEmail'
-import isPhone from '@/helpers/isPhone'
-import { isEmpty } from '@/helpers/isEmpty'
 import api from '@/services/api'
 import Loading from '@/components/Loading/RitaLoading'
 
@@ -69,7 +67,7 @@ function PreRegister() {
   }
 
   const redirectToRegister = () => {
-    history.push('/cadastro')
+    history.push('/cadastro/paciente')
   }
 
   const onForwardData = async () => {
@@ -81,7 +79,9 @@ function PreRegister() {
 
     if (choice === 'email') {
       if (!isEmail(email)) {
-        return showMessage(DataDontMatch)
+        isDataMatch = false
+
+        // return showMessage(DataDontMatch)
       }
     }
 
@@ -91,7 +91,8 @@ function PreRegister() {
       // }
 
       if (!(phone.length === 14)) {
-        return showMessage(DataDontMatch)
+        isDataMatch = false
+        // return showMessage(DataDontMatch)
       }
     }
 
@@ -113,7 +114,6 @@ function PreRegister() {
         isLastTry = true
       }
     } catch ({ response }) {
-      console.log(response)
       if (response.status === 400) {
         if (response.data.message === 'Usuario Bloqueado') {
           isBlocked = true

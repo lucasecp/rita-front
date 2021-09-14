@@ -38,8 +38,8 @@ export const Container = styled.div`
     margin-bottom: 16px;
   }
   > h5 {
-    font-weight: 900;
-    font-size: 20px;
+    font-weight: 700;
+    font-size: 18px;
     line-height: 150%;
     text-align: center;
 

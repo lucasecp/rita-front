@@ -9,6 +9,8 @@ import { Container } from '../styles'
 import RequestNewTokenTimer from './RequestNewTokenTimer'
 import api from '@/services/api'
 import Denied from '../error/Danied'
+import InputMask from '@/components/Form/InputMask'
+import { useHistory } from 'react-router-dom'
 
 const MODAL = {
   INSERT_TOKEN: 'insert_token',
@@ -17,6 +19,8 @@ const MODAL = {
 }
 
 function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
+  const history = useHistory()
+
   const [token, setToken] = useState('')
   const [hasError, setHasError] = useState(false)
   const [waitRequestNewToken, setWaitRequestNewToken] = useState(true)
@@ -50,7 +54,7 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
         switchModalTo(MODAL.LAST_TRY)
       }
 
-      if (messageFromApi === 'Usuario Bloqueado') {
+      if (response.data.message === 'Usuario Bloqueado') {
         switchModalTo(MODAL.BLOCKED)
       }
 
@@ -75,16 +79,18 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
         `/paciente/token?token=${token}&cpf=${cpf}`
       )
 
-      console.log(response)
-      // history.push('/cadastro/paciente/', dataFromApi);
+      if (response.status === 200) {
+        console.log(response.data)
+        history.push('/cadastro/paciente/', { userData: response.data })
+      }
     } catch ({ response }) {
-      const messageFromApi = response.data.message
-      console.log(response)
+      const messageFromApi = response?.data.message
+      const statusFromApi = response?.status
 
-      if (response.status === 400) {
-        if (messageFromApi === 'Token inválido') {
-          setHasError(true)
-        }
+      if (statusFromApi === 400) {
+        setHasError(true)
+        // if (messageFromApi === 'Token inválido') {
+        // }
 
         if (messageFromApi === 'Usuario Bloqueado') {
           switchModalTo(MODAL.BLOCKED)
@@ -123,12 +129,12 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
             active={waitRequestNewToken}
             onFinishTimer={setWaitRequestNewToken}
           />
-          <InputText
+          <InputMask
             placeholder="000000"
             value={token}
             setValue={setToken}
             hasError={hasError}
-            type="number"
+            mask="######"
             maxLength="6"
           />
           {hasError && (

@@ -12,7 +12,7 @@ function Found({ onShowModal, ...data }) {
 
   const pushToRegister = () => {
     onShowModal(false)
-    return history.push('/')
+    return history.push('/cadastro/paciente/')
   }
   const pushToPreRegister = () => {
     onShowModal(false)
