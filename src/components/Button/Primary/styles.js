@@ -14,11 +14,13 @@ export const Container = styled.button`
   line-height: 20px;
   border: 2px solid ${colors.purple.main.dark};
   height: fit-content;
-   :hover{
+
+  :hover {
     background-color: #7338cb;
     color: #fff;
     border-color: #7338cb;
-   }
+  }
+  
   ${({ disabled }) =>
     disabled &&
     css`

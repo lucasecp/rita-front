@@ -49,7 +49,11 @@ function DefaultRegister() {
       )
 
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
-        return showMessage(Found, { cpf })
+        return showMessage(Found, {
+          cpf,
+          email: responseApi.email,
+          phone: responseApi.telefone,
+        })
       }
       if (responseApi.status === status.APPROVED) {
         return showMessage(AlreadyExists)

@@ -20,6 +20,8 @@ export const Content = styled.div`
 
   > div {
     > section {
+      width: 100%;
+
       > div + div {
         margin-top: 8px;
       }

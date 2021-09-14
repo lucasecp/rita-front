@@ -22,21 +22,21 @@ export const Content = styled.div`
       margin-right: 24px;
     }
   }
-  @media(max-width:767px){
+  @media (max-width: 767px) {
     padding: 32px;
-    >div{
+    > div {
       flex-direction: column;
       align-items: center;
       margin-top: 24px;
-      > div{
+      > div {
         margin: 0 0 24px 0;
-        width: 100%
+        width: 100%;
       }
     }
-  > h6 {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 28px;
+    > h6 {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 28px;
+    }
   }
-  }
-  `
+`

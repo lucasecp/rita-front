@@ -17,7 +17,7 @@ import AlreadyExists from '../messages/warning/AlreadyExists'
 import Analyzing from '../messages/warning/Analyzing'
 import Divergence from '../messages/warning/Divergence'
 import Denied from '../messages/warning/Denied'
-import ImportData from '../messages/warning/Authorization'
+import ImportData from '../messages/warning/ImportData'
 import Loading from '@/components/Loading/RitaLoading'
 
 function RegisterCardSabin() {
@@ -26,7 +26,7 @@ function RegisterCardSabin() {
   const [message, setMessage] = useState(null)
   const [showLoading, setLoading] = useState(false)
 
-  const showMessage = (MessageComponent,props) => {
+  const showMessage = (MessageComponent, props) => {
     setShowModal(true)
     setMessage(<MessageComponent {...props} onShowModal={setShowModal} />)
   }
@@ -39,12 +39,18 @@ function RegisterCardSabin() {
     if (!validateCpf(cpf)) {
       return showMessage(InvalidCpf)
     }
-    try{
+    try {
       setLoading(true)
-      const {data: responseApi} = await axios.get(`/paciente/status?cpf=${cpf}`);
+      const { data: responseApi } = await axios.get(
+        `/paciente/status?cpf=${cpf}`
+      )
 
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
-        return showMessage(ImportData, responseApi)
+        return showMessage(ImportData, {
+          cpf,
+          email: responseApi.email,
+          phone: responseApi.telefone,
+        })
       }
       if (responseApi.status === status.APPROVED) {
         return showMessage(AlreadyExists)
@@ -58,17 +64,14 @@ function RegisterCardSabin() {
       if (responseApi.status === status.DENIED_SECOND_TIME) {
         return showMessage(Denied)
       }
-    }
-    catch({response}){
+    } catch ({ response }) {
       const apiStatus = response.status
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
         return showMessage(NotFound)
       }
-    }
-    finally{
+    } finally {
       setLoading(false)
     }
-
   }
 
   return (
@@ -90,7 +93,7 @@ function RegisterCardSabin() {
         </Content>
       </RegisterLayout>
       <Modal show={showModal}>{message}</Modal>
-      <Loading active={showLoading}/>
+      <Loading active={showLoading} />
     </>
   )
 }

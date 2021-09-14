@@ -5,7 +5,7 @@ export const Content = styled.div`
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0px 2px 8px rgba(223, 210, 255, 0.15);
   border-radius: 8px;
-  padding: 54px 32px 45px 28px;
+  padding: 54px 32px 45px;
 
   display: flex;
   align-items: center;
