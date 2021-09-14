@@ -11,7 +11,7 @@ const Header = () => {
         <Link to="/cadastro-cartao-sabin">Cadastro Cartão Sabin</Link>
         <Link to="/cadastro/paciente">Cadastro Paciente</Link>
         <Link to="/pre-cadastro">Pré Cadastro</Link>
-        <Link to="/confDados">Confirmar Dados</Link>
+        {/* <Link to="/confDados">Confirmar Dados</Link> */}
       </nav>
     </HeaderLayout>
   )
