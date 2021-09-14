@@ -80,19 +80,12 @@ function PreRegister() {
     if (choice === 'email') {
       if (!isEmail(email)) {
         isDataMatch = false
-
-        // return showMessage(DataDontMatch)
       }
     }
 
     if (choice === 'phone') {
-      // if (!isPhone(phone)) {
-      //   return showMessage(DataDontMatch)
-      // }
-
       if (!(phone.length === 14)) {
         isDataMatch = false
-        // return showMessage(DataDontMatch)
       }
     }
 
@@ -126,7 +119,7 @@ function PreRegister() {
     }
 
     if (!isDataMatch) {
-      return showMessage(DataDontMatch)
+      return showMessage(DataDontMatch, userData)
     }
 
     if (isBlocked) {
