@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container } from './style';
 import {Checkbox, FormControlLabel} from '@material-ui/core'
-const CheckboxComponent = ({checked, setValue,label,id}) => {
+const CheckboxComponent = ({checked, setValue,label, hasError}) => {
   return (
-    <Container>
+    <Container hasError={hasError}>
        <FormControlLabel
         control={  <Checkbox
         checked={checked}
@@ -13,8 +13,6 @@ const CheckboxComponent = ({checked, setValue,label,id}) => {
       />}
         label={label}
       />
-         {/* <input id={id} {...rest} type='checkbox' checked={checked} onChange={() => setValue(!checked)}/>
-         <label htmlFor={id}>{label}</label> */}
     </Container>
   );
 };

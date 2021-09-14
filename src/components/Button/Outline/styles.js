@@ -18,7 +18,6 @@ export const Container = styled.button`
     css`
       color: #fff;
       border: solid 2px #fff;
-      padding: 10px 16px !important;
       :hover {
         background: #fff !important;
         color: ${colors.gray.dark} !important;
@@ -29,7 +28,6 @@ export const Container = styled.button`
     props.variation === 'green' &&
     css`
       color: ${colors.green.light};
-      padding: 10px 16px !important;
       border: solid 2px ${colors.green.light};
       :hover {
         color: ${colors.green.dark} !important;
@@ -41,10 +39,18 @@ export const Container = styled.button`
     props.variation === 'blue' &&
     css`
       color: ${colors.blue.middle};
-      padding: 10px 16px !important;
       border-color: ${colors.blue.middle} !important;
       :hover {
         background: ${colors.blue.middle} !important;
+      }
+    `}
+    ${(props) =>
+    props.variation === 'red' &&
+    css`
+      color: ${colors.orange.middleDark};
+      border-color: ${colors.orange.middleDark} !important;
+      :hover {
+        background: ${colors.orange.middleDark} !important;
       }
     `}
 
@@ -57,14 +63,14 @@ export const Container = styled.button`
   ${({ disabled }) =>
     disabled &&
     css`
-      color: ${colors.purple.main.light};
-      border-color: ${colors.purple.main.light};
+      color: ${colors.purple.main.light} !important;
+      border-color: ${colors.purple.main.light} !important;
       cursor: default;
 
       :hover {
-        color: ${colors.purple.main.light};
-        border-color: ${colors.purple.main.light};
-        background-color: transparent;
+        color: ${colors.purple.main.light} !important;
+        border-color: ${colors.purple.main.light} !important;
+        background-color: transparent !important;
       }
     `}
 `

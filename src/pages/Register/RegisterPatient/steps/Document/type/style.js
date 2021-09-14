@@ -38,22 +38,6 @@ export const Container = styled.div`
     color: #9146ff;
     margin-bottom: 15px;
   }
-  .MuiAccordionDetails-root {
-    padding: 0;
-    display: block;
-  }
-  .MuiAccordionSummary-root {
-    padding: 0;
-  }
-  .MuiPaper-elevation1 {
-    box-shadow: none;
-  }
-  .MuiAccordionSummary-content {
-    flex-direction: column;
-  }
-  .MuiButtonBase-root {
-    cursor: default !important;
-  }
 `
 export const Content = styled.div`
   display: flex;

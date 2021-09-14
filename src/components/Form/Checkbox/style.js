@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import colors from '@/styles/colors'
 export const Container = styled.div`
     span + span{
@@ -12,4 +12,11 @@ export const Container = styled.div`
      .MuiTypography-body1{
        font-family: Athletics;
      }
+     ${({ hasError }) =>
+    hasError &&
+    css`
+         .MuiSvgIcon-root{
+          fill: #DF644B;
+     };
+    `}
 `;
