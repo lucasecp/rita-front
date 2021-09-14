@@ -15,7 +15,7 @@ function Routes() {
       <Route exact path="/" component={Header} />
 
       <Route path="/master-page" component={MasterPage} />
-      <Route path="/confdados" component={ConfDados} />
+      {/* <Route path="/confdados" component={ConfDados} /> */}
       <Route path="/teste" component={Teste} />
     </Switch>
   )
