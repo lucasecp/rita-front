@@ -60,10 +60,17 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
 
       setWaitRequestNewToken(true)
     } catch ({ response }) {
-      if (response.status === 400) {
-        if (response.data.message === 'Usuario Bloqueado') {
-          switchModalTo(MODAL.BLOCKED)
-        }
+      const messageFromApi = response?.data.message
+
+      if (
+        messageFromApi ===
+        'Ultima tentativa antes de ser bloqueado definitivamente'
+      ) {
+        switchModalTo(MODAL.LAST_TRY)
+      }
+
+      if (messageFromApi === 'Usuario Bloqueado') {
+        switchModalTo(MODAL.BLOCKED)
       }
     } finally {
       onLoading(false)
@@ -85,24 +92,21 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
       }
     } catch ({ response }) {
       const messageFromApi = response?.data.message
-      const statusFromApi = response?.status
 
-      if (statusFromApi === 400) {
-        if (messageFromApi === 'Dados inválido') {
-          setHasError(true)
-        }
+      if (messageFromApi === 'Dados inválido') {
+        setHasError(true)
+      }
 
-        if (
-          messageFromApi ===
-          'Ultima tentativa antes de ser bloqueado definitivamente'
-        ) {
-          setHasError(true)
-          switchModalTo(MODAL.LAST_TRY)
-        }
+      if (
+        messageFromApi ===
+        'Ultima tentativa antes de ser bloqueado definitivamente'
+      ) {
+        setHasError(true)
+        switchModalTo(MODAL.LAST_TRY)
+      }
 
-        if (messageFromApi === 'Usuario Bloqueado') {
-          switchModalTo(MODAL.BLOCKED)
-        }
+      if (messageFromApi === 'Usuario Bloqueado') {
+        switchModalTo(MODAL.BLOCKED)
       }
     } finally {
       onLoading(false)
