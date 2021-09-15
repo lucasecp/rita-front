@@ -1,6 +1,6 @@
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import InputMask from '@/components/Form/InputMask'
+import InputMask from '@/components/Form/InputMask2'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
 import RadioButton from '@/styles/components/RadioButton'
 import { RadioGroup } from '@material-ui/core'

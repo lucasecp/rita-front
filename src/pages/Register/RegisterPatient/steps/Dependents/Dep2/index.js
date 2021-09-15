@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import InputMask from '@/components/Form/InputMask'
+import InputMask from '@/components/Form/InputMask2'
 import { Col, Row } from 'react-bootstrap'
 import InputText from '@/components/Form/InputText'
 import SelectComponent from '@/components/Form/Select'

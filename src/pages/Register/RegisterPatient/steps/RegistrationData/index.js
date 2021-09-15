@@ -1,5 +1,5 @@
 import Checkbox from '@/components/Form/Checkbox'
-import InputMask from '@/components/Form/InputMask'
+import InputMask from '@/components/Form/InputMask2'
 import InputText from '@/components/Form/InputText'
 import Select from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'

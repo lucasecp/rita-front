@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import InputMask from '../../../../../components/Form/InputMask'
+import InputMask from '../../../../../components/Form/InputMask2'
 // import cardImg from '../../../../assets/img/cardSabin.png'
 import LayoutCenter from '../../../../../components/Layout/LayoutCenter'
 import validatorCpf from '../../../../../helpers/validateCpf'

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
-import InputMask from '@/components/Form/InputMask'
+import InputMask from '@/components/Form/InputMask2'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
 import Modal from '@/components/Modal'
 import validateCpf from '@/helpers/validateCpf'

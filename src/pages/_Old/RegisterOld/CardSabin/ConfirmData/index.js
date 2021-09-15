@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Modal from '../../../../../components/Modal'
-import InputMask from '../../../../../components/Form/InputMask'
+import InputMask from '../../../../../components/Form/InputMask2'
 import InputText from '../../../../../components/Form/InputText'
 // import cardImg from '../../../../assets/img/cardSabin.png'
 import { Container, BtnGroup } from './style'

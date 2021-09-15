@@ -9,7 +9,7 @@ import { Container } from '../styles'
 import RequestNewTokenTimer from './RequestNewTokenTimer'
 import api from '@/services/api'
 import Denied from '../error/Danied'
-import InputMask from '@/components/Form/InputMask'
+import InputMask from '@/components/Form/InputMask2'
 import { useHistory } from 'react-router-dom'
 
 const MODAL = {
@@ -88,19 +88,20 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
       const statusFromApi = response?.status
 
       if (statusFromApi === 400) {
-        setHasError(true)
-        // if (messageFromApi === 'Token inválido') {
-        // }
-
-        if (messageFromApi === 'Usuario Bloqueado') {
-          switchModalTo(MODAL.BLOCKED)
+        if (messageFromApi === 'Dados inválido') {
+          setHasError(true)
         }
 
         if (
           messageFromApi ===
-          'Token inválido, ultima tentativa antes de ser bloqueado definitivamente'
+          'Ultima tentativa antes de ser bloqueado definitivamente'
         ) {
+          setHasError(true)
           switchModalTo(MODAL.LAST_TRY)
+        }
+
+        if (messageFromApi === 'Usuario Bloqueado') {
+          switchModalTo(MODAL.BLOCKED)
         }
       }
     } finally {
