@@ -82,11 +82,10 @@ function RegisterCardSabin() {
           <section>
             <InputMask
               label="Digite Seu CPF:"
-              mask="###.###.###-##"
+              mask="999.999.999-99"
               placeholder="000.000.000-00"
               value={cpf}
               setValue={setCpf}
-              name="cpf"
             />
             <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
           </section>

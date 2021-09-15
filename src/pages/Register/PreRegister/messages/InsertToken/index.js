@@ -37,7 +37,7 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
     onLoading(true)
 
     try {
-      const response = await api.post(
+      await api.post(
         '/paciente/token',
         email
           ? {
@@ -50,20 +50,19 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
             }
       )
 
-      if (response.data.ultimaTentativa) {
+      setWaitRequestNewToken(true)
+    } catch ({ response }) {
+      const messageFromApi = response?.data.message
+
+      if (
+        messageFromApi ===
+        'Ultima tentativa antes de ser bloqueado definitivamente'
+      ) {
         switchModalTo(MODAL.LAST_TRY)
       }
 
-      if (response.data.message === 'Usuario Bloqueado') {
+      if (messageFromApi === 'Usuario Bloqueado') {
         switchModalTo(MODAL.BLOCKED)
-      }
-
-      setWaitRequestNewToken(true)
-    } catch ({ response }) {
-      if (response.status === 400) {
-        if (response.data.message === 'Usuario Bloqueado') {
-          switchModalTo(MODAL.BLOCKED)
-        }
       }
     } finally {
       onLoading(false)
@@ -85,23 +84,21 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
       }
     } catch ({ response }) {
       const messageFromApi = response?.data.message
-      const statusFromApi = response?.status
 
-      if (statusFromApi === 400) {
+      if (messageFromApi === 'Dados inválido') {
         setHasError(true)
-        // if (messageFromApi === 'Token inválido') {
-        // }
+      }
 
-        if (messageFromApi === 'Usuario Bloqueado') {
-          switchModalTo(MODAL.BLOCKED)
-        }
+      if (
+        messageFromApi ===
+        'Ultima tentativa antes de ser bloqueado definitivamente'
+      ) {
+        setHasError(true)
+        switchModalTo(MODAL.LAST_TRY)
+      }
 
-        if (
-          messageFromApi ===
-          'Token inválido, ultima tentativa antes de ser bloqueado definitivamente'
-        ) {
-          switchModalTo(MODAL.LAST_TRY)
-        }
+      if (messageFromApi === 'Usuario Bloqueado') {
+        switchModalTo(MODAL.BLOCKED)
       }
     } finally {
       onLoading(false)
@@ -134,8 +131,7 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
             value={token}
             setValue={setToken}
             hasError={hasError}
-            mask="######"
-            maxLength="6"
+            mask="999999"
           />
           {hasError && (
             <small>

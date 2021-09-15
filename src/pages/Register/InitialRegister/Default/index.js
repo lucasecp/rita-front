@@ -84,7 +84,7 @@ function DefaultRegister() {
           <h6>Para iniciarmos o processo, por favor informe o seu CPF:</h6>
           <div>
             <InputMask
-              mask="###.###.###-##"
+              mask="999.999.999-99"
               placeholder="000.000.000-00"
               value={cpf}
               setValue={setCpf}

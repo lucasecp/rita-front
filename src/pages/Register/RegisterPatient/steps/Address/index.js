@@ -15,40 +15,40 @@ const Address = ({ setBtn, setData }) => {
   const [complement, setComplement] = useState('')
   const [errors, setErrors] = useState({})
 
-    useEffect(() => {
-      const hasErrors = Object.values(errors).filter((err) => err).length
-      if (
-        district &&
-        uf &&
-        city &&
-        address &&
-        numberHome &&
-        cep &&
-        complement &&
-        !hasErrors) {
-        const dataObj = {
-          district,
-          uf,
-          city,
-          address,
-          numberHome,
-          cep,
-          complement,
-        }
-        setBtn(true)
-        setData({ cadastro: dataObj })
+  useEffect(() => {
+    const hasErrors = Object.values(errors).filter((err) => err).length
+    if (
+      district &&
+      uf &&
+      city &&
+      address &&
+      numberHome &&
+      cep &&
+      complement &&
+      !hasErrors
+    ) {
+      const dataObj = {
+        district,
+        uf,
+        city,
+        address,
+        numberHome,
+        cep,
+        complement,
       }
-      return () => {
-        setBtn(false)
-      }
-    }, [errors])
+      setBtn(true)
+      setData({ cadastro: dataObj })
+    }
+    return () => {
+      setBtn(false)
+    }
+  }, [errors])
 
   const validate = ({ target }) => {
     const value = target.value
     if (!value.trim()) {
       return setErrors({ ...errors, [target.name]: 'Campo Obrigatório.' })
-    }
-    else if(target.name === 'cep' && cep.length < 8){
+    } else if (target.name === 'cep' && cep.length < 8) {
       return setErrors({ ...errors, [target.name]: 'Cep Inválido.' })
     }
     return setErrors({ ...errors, [target.name]: '' })
@@ -60,7 +60,7 @@ const Address = ({ setBtn, setData }) => {
         <Col md="6">
           <InputMask
             label="CEP:"
-            mask="#####-###"
+            mask="99.999-999"
             value={cep}
             setValue={setCep}
             name="cep"

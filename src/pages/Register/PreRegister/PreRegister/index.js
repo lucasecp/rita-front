@@ -5,7 +5,6 @@ import { RadioGroup } from '@material-ui/core'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
 import Modal from '@/components/Modal'
 import InputText from '@/components/Form/InputText'
-import InputMask from '@/components/Form/InputMask'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
@@ -18,6 +17,7 @@ import Denied from '../messages/error/Danied'
 import isEmail from '@/helpers/isEmail'
 import api from '@/services/api'
 import Loading from '@/components/Loading/RitaLoading'
+import InputMask from '@/components/Form/InputMask'
 
 function PreRegister() {
   const history = useHistory()
@@ -90,7 +90,7 @@ function PreRegister() {
     }
 
     try {
-      const response = await api.post(
+      await api.post(
         '/paciente/token',
         choice === 'email'
           ? {
@@ -102,16 +102,24 @@ function PreRegister() {
               celular: phone,
             }
       )
-
-      if (response.data.ultimaTentativa) {
-        isLastTry = true
-      }
     } catch ({ response }) {
-      if (response.status === 400) {
-        if (response.data.message === 'Usuario Bloqueado') {
-          isBlocked = true
-        } else {
+      const messageFromApi = response?.data.message
+      const statusFromApi = response?.status
+
+      if (statusFromApi === 400) {
+        if (messageFromApi === 'Dados inválido') {
           isDataMatch = false
+        }
+
+        if (
+          messageFromApi ===
+          'Ultima tentativa antes de ser bloqueado definitivamente'
+        ) {
+          isLastTry = true
+        }
+
+        if (messageFromApi === 'Usuario Bloqueado') {
+          isBlocked = true
         }
       }
     } finally {
@@ -163,12 +171,10 @@ function PreRegister() {
                 />
                 {choice === 'phone' && (
                   <InputMask
-                    mask="(##)#####-####"
+                    mask="(99) 99999-9999"
                     placeholder="(00) 00000-0000"
                     value={phone}
                     setValue={setPhone}
-                    name="phone"
-                    isPhone
                   />
                 )}
               </section>

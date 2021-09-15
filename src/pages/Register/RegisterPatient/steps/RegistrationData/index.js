@@ -154,7 +154,7 @@ const RegistrationData = ({ setData, setBtn,dataApi }) => {
         <Col md="6" className="mt-4">
           <InputMask
             label="Data de Nascimento*:"
-            mask="##/##/####"
+            mask="99/99/9999"
             value={birthdate}
             setValue={setBirthdate}
             hasError={errors.birthdate}
@@ -170,7 +170,7 @@ const RegistrationData = ({ setData, setBtn,dataApi }) => {
         <Col md="6" className="mt-4">
           <InputMask
             label="Celular*:"
-            mask="(##) #####-####"
+            mask="(99) 99999-9999"
             value={phone}
             setValue={setPhone}
             hasError={errors.phone}
@@ -183,7 +183,7 @@ const RegistrationData = ({ setData, setBtn,dataApi }) => {
         <Col md="6" className="mt-4">
           <InputMask
             label="CPF*:"
-            mask="###.###.###-##"
+            mask="999.999.999-99"
             value={cpf}
             setValue={setCpf}
             hasError={errors.cpf}

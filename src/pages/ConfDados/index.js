@@ -51,7 +51,7 @@ function ConfDados() {
                 />
                 {choice === 'phone' && (
                   <InputMask
-                    mask="(##) #####-####"
+                    mask="(99) 99999-9999"
                     placeHolder="(00) 00000-0000"
                     value={phone}
                     setValue={setPhone}
