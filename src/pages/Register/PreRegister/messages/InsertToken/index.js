@@ -9,7 +9,7 @@ import { Container } from '../styles'
 import RequestNewTokenTimer from './RequestNewTokenTimer'
 import api from '@/services/api'
 import Denied from '../error/Danied'
-import InputMask from '@/components/Form/InputMask2'
+import InputMask from '@/components/Form/InputMask'
 import { useHistory } from 'react-router-dom'
 
 const MODAL = {
@@ -131,8 +131,7 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
             value={token}
             setValue={setToken}
             hasError={hasError}
-            mask="######"
-            maxLength="6"
+            mask="999999"
           />
           {hasError && (
             <small>

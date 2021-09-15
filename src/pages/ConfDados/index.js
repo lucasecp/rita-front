@@ -1,6 +1,6 @@
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import InputMask from '@/components/Form/InputMask2'
+import InputMask from '@/components/Form/InputMask'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
 import RadioButton from '@/styles/components/RadioButton'
 import { RadioGroup } from '@material-ui/core'
@@ -51,7 +51,7 @@ function ConfDados() {
                 />
                 {choice === 'phone' && (
                   <InputMask
-                    mask="(##) #####-####"
+                    mask="(99) 99999-9999"
                     placeHolder="(00) 00000-0000"
                     value={phone}
                     setValue={setPhone}

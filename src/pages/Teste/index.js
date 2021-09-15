@@ -1,6 +1,6 @@
 import React from 'react'
 import ButtonPrimary from '../../components/Button/Primary'
-import InputMask from '../../components/Form/InputMask2'
+import InputMask from '../../components/Form/InputMask'
 import Footer from '../../components/Layout/DefaultLayout/Footer'
 import { Container, Content } from './styles'
 import logoRitaVertical from '../../assets/logo/vertical-named-logo.svg'
@@ -16,7 +16,7 @@ function Teste() {
           <div>
             <h6>Para iniciarmos o processo, por favor informe o seu CPF:</h6>
             <div className="input">
-              <InputMask mask="###.###.###-##" placeholder="123.456.789-10" />
+              <InputMask mask="999.999.999-99" placeholder="123.456.789-10" />
               <ButtonPrimary>Confirmar</ButtonPrimary>
             </div>
           </div>

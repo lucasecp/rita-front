@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import InputMask from '@/components/Form/InputMask2'
+import InputMask from '@/components/Form/InputMask'
 import { Col, Row } from 'react-bootstrap'
 import InputText from '@/components/Form/InputText'
 import SelectComponent from '@/components/Form/Select'
@@ -16,10 +16,10 @@ const Dep2 = ({ setShowDep2 }) => {
   const [submitted, setSubmitted] = useState(false)
   const dataIsEmptyOrNot = () =>
     name && email && gender && birthdate && phone && cpf
-    const hanldeSubmit = (e) => {
-      e.preventDefault()
-      setSubmitted(true)
-    }
+  const hanldeSubmit = (e) => {
+    e.preventDefault()
+    setSubmitted(true)
+  }
   return (
     <Content>
       <h3>Dependente 2</h3>
@@ -31,7 +31,7 @@ const Dep2 = ({ setShowDep2 }) => {
           <Col md="6">
             <InputMask
               label="CPF:"
-              mask="###.###.###-##"
+              mask="999.999.999-99"
               value={cpf}
               setValue={setCpf}
             />
@@ -39,7 +39,7 @@ const Dep2 = ({ setShowDep2 }) => {
           <Col md="6" className="mt-4">
             <InputMask
               label="Data de Nascimento:"
-              mask="##/##/####"
+              mask="99/99/9999"
               value={birthdate}
               setValue={setBirthdate}
             />
@@ -55,7 +55,7 @@ const Dep2 = ({ setShowDep2 }) => {
           <Col md="6" className="mt-4">
             <InputMask
               label="Celular:"
-              mask="(##) #####-####"
+              mask="(99) 99999-9999"
               value={phone}
               setValue={setPhone}
             />
@@ -66,7 +66,11 @@ const Dep2 = ({ setShowDep2 }) => {
           </Col>
         </Row>
         <BtnGroup className="mt-5">
-          <OutlineButton variation="red" type='button' onClick={() => setShowDep2(false)}>
+          <OutlineButton
+            variation="red"
+            type="button"
+            onClick={() => setShowDep2(false)}
+          >
             Remover Dependente
           </OutlineButton>
           {!submitted && (

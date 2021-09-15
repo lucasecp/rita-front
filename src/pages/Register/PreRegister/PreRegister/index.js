@@ -176,14 +176,6 @@ function PreRegister() {
                     value={phone}
                     setValue={setPhone}
                   />
-                  // <InputMask
-                  //   mask="(##)#####-####"
-                  //   placeholder="(00) 00000-0000"
-                  //   value={phone}
-                  //   setValue={setPhone}
-                  //   name="phone"
-                  //   isPhone
-                  // />
                 )}
               </section>
             )}

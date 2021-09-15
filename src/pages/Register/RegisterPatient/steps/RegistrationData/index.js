@@ -1,5 +1,5 @@
 import Checkbox from '@/components/Form/Checkbox'
-import InputMask from '@/components/Form/InputMask2'
+import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import Select from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
@@ -151,7 +151,7 @@ const RegistrationData = ({ setData, setBtn }) => {
         <Col md="6" className="mt-4">
           <InputMask
             label="Data de Nascimento*:"
-            mask="##/##/####"
+            mask="99/99/9999"
             value={birthdate}
             setValue={setBirthdate}
             hasError={errors.birthdate}
@@ -167,7 +167,7 @@ const RegistrationData = ({ setData, setBtn }) => {
         <Col md="6" className="mt-4">
           <InputMask
             label="Celular*:"
-            mask="(##) #####-####"
+            mask="(99) 99999-9999"
             value={phone}
             setValue={setPhone}
             hasError={errors.phone}
@@ -180,7 +180,7 @@ const RegistrationData = ({ setData, setBtn }) => {
         <Col md="6" className="mt-4">
           <InputMask
             label="CPF*:"
-            mask="###.###.###-##"
+            mask="999.999.999-99"
             value={cpf}
             setValue={setCpf}
             hasError={errors.cpf}

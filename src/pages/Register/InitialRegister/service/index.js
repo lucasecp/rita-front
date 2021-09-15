@@ -6,7 +6,3 @@ export const status = {
   DENIED_FIRST_TIME: 'N',
   DENIED_SECOND_TIME: 'NE',
 }
-
-export const response = {
-  status: 'denied_second_time',
-}

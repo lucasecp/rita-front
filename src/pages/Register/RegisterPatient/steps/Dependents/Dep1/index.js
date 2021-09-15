@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import InputMask from '@/components/Form/InputMask2'
+import InputMask from '@/components/Form/InputMask'
 import { Col, Row } from 'react-bootstrap'
 import InputText from '@/components/Form/InputText'
 import SelectComponent from '@/components/Form/Select'
@@ -17,10 +17,10 @@ const Dep1 = ({ setShowDep2, setShowDep1, showDep2 }) => {
   const dataIsEmptyOrNot = () =>
     name && email && gender && birthdate && phone && cpf
 
-    const hanldeSubmit = (e) => {
-      e.preventDefault()
-      setSubmitted(true)
-    }
+  const hanldeSubmit = (e) => {
+    e.preventDefault()
+    setSubmitted(true)
+  }
   return (
     <Content>
       <h3>Dependente 1</h3>
@@ -32,7 +32,7 @@ const Dep1 = ({ setShowDep2, setShowDep1, showDep2 }) => {
           <Col md="6">
             <InputMask
               label="CPF:"
-              mask="###.###.###-##"
+              mask="999.999.999-99"
               value={cpf}
               setValue={setCpf}
             />
@@ -40,7 +40,7 @@ const Dep1 = ({ setShowDep2, setShowDep1, showDep2 }) => {
           <Col md="6" className="mt-4">
             <InputMask
               label="Data de Nascimento:"
-              mask="##/##/####"
+              mask="99/99/9999"
               value={birthdate}
               setValue={setBirthdate}
             />
@@ -51,13 +51,13 @@ const Dep1 = ({ setShowDep2, setShowDep1, showDep2 }) => {
               labeDefaultOption="selecione"
               options={['masculino', 'feminino']}
               setValue={setGender}
-              name='genderDep1'
+              name="genderDep1"
             />
           </Col>
           <Col md="6" className="mt-4">
             <InputMask
               label="Celular:"
-              mask="(##)#####-####"
+              mask="(99)99999-9999"
               value={phone}
               setValue={setPhone}
             />

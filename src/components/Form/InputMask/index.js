@@ -9,9 +9,9 @@ function InputMask({ setValue, label, ...rest }) {
     <Container>
       {label && <label htmlFor={label}>{label}</label>}
       <ReactInputMask
-        {...rest}
         id={label}
         onChange={(event) => setValue(event.target.value)}
+        {...rest}
       />
     </Container>
   )
