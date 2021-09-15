@@ -5,5 +5,6 @@ export const BtnTerms = styled.button`
     color: blue;
     text-decoration: underline;
     border: none;
-    padding:0
+    padding:0;
+    margin:0 3px
 `;

@@ -44,7 +44,7 @@ export const Container = styled.div`
   }
 
   > main {
-    padding: 104px 88px 24px;
+    padding: 32px 88px 24px;
 
     > section {
       display: flex;

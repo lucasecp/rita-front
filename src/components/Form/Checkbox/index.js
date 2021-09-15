@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from './style';
 import {Checkbox, FormControlLabel} from '@material-ui/core'
-const CheckboxComponent = ({checked, setValue,label, hasError}) => {
+const CheckboxComponent = ({checked, setValue,label, hasError,...rest}) => {
   return (
     <Container hasError={hasError}>
        <FormControlLabel
@@ -10,6 +10,7 @@ const CheckboxComponent = ({checked, setValue,label, hasError}) => {
         onChange={() => setValue(!checked)}
         inputProps={{ 'aria-label': 'primary checkbox' }}
         color="primary"
+        {...rest}
       />}
         label={label}
       />

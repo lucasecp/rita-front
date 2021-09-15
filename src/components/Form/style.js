@@ -38,9 +38,12 @@ export const Input = styled.input`
 
   :focus {
     border: 1px solid #419eff;
+    border-color: ${({hasError}) => hasError ? colors.orange.light: '#419eff' };
 
     ::after {
       border: 1px solid #419eff;
+      border-color: ${({hasError}) => hasError ? colors.orange.light: '#419eff' };
+
     }
   }
 
@@ -73,10 +76,12 @@ export const Select = styled.select`
   }
 
   :focus {
-    border: 1px solid #419eff;
-
+    border: 1px solid ;
+    border-color: ${({hasError}) => hasError ? colors.orange.light: '#419eff' };
     ::after {
       border: 1px solid #419eff;
+      border-color: ${({hasError}) => hasError ? colors.orange.light: '#419eff' };
+
     }
   }
 
