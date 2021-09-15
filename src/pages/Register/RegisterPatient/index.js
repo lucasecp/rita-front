@@ -8,7 +8,7 @@ import { Content, DotSteps, BtnGroup, BtnNext, BtnPrev } from './style'
 import ButtonPrimary from '@/components/Button/Primary'
 
 const RegisterPatient = () => {
-  const [step, setStep] = useState(2)
+  const [step, setStep] = useState(3)
   const [data, setData] = useState({})
   const [images, setImages] = useState('')
   const [disableBtn, setBtn] = useState(false)
@@ -20,16 +20,8 @@ const RegisterPatient = () => {
       <Content>
         <header>
           <DotSteps active={step === 1} finish={step >= 2} />
-          <DotSteps
-            active={step === 2}
-            finish={step >= 3}
-            waiting={step < 2}
-          />
-          <DotSteps
-            active={step === 3}
-            finish={step >= 4}
-            waiting={step < 3}
-          />
+          <DotSteps active={step === 2} finish={step >= 3} waiting={step < 2} />
+          <DotSteps active={step === 3} finish={step >= 4} waiting={step < 3} />
           <DotSteps active={step === 4} waiting={step < 4} />
         </header>
         {step === 1 && <RegistrationData setData={setData} setBtn={setBtn} />}

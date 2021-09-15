@@ -84,10 +84,12 @@ function PreRegister() {
     }
 
     if (choice === 'phone') {
-      if (!(phone.length === 14)) {
+      if (!(phone.length === 15)) {
         isDataMatch = false
       }
     }
+
+    console.log(phone.length)
 
     try {
       await api.post(

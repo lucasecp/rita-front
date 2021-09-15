@@ -37,7 +37,7 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
     onLoading(true)
 
     try {
-      await api.post(
+      const response = await api.post(
         '/paciente/token',
         email
           ? {
@@ -50,16 +50,13 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
             }
       )
 
+      if (response?.data.ultimaTentativa) {
+        switchModalTo(MODAL.LAST_TRY)
+      }
+
       setWaitRequestNewToken(true)
     } catch ({ response }) {
       const messageFromApi = response?.data.message
-
-      if (
-        messageFromApi ===
-        'Ultima tentativa antes de ser bloqueado definitivamente'
-      ) {
-        switchModalTo(MODAL.LAST_TRY)
-      }
 
       if (messageFromApi === 'Usuario Bloqueado') {
         switchModalTo(MODAL.BLOCKED)
@@ -163,9 +160,7 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
           </p>
           <footer>
             <OutlineButton onClick={handleCloseModal}>Não</OutlineButton>
-            <ButtonPrimary onClick={() => switchModalTo(MODAL.INSERT_TOKEN)}>
-              Sim
-            </ButtonPrimary>
+            <ButtonPrimary onClick={handleCloseModal}>Sim</ButtonPrimary>
           </footer>
         </Container>
       )}
