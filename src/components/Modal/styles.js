@@ -43,6 +43,8 @@ export const Container = styled.div`
     z-index: 9999;
 
     position: relative;
+    overflow-y: scroll;
+    max-height: 90%;
 
     > img {
       position: absolute;

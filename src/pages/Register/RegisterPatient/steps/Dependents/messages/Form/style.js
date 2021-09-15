@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  max-width:784px;
   h2 {
     font-weight: 500;
     font-size: 24px;

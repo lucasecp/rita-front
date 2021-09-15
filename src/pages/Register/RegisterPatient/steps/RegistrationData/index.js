@@ -16,15 +16,19 @@ import {
   validateName,
   validatePhone,
 } from '../../helpers/validator'
-
-const RegistrationData = ({ setData, setBtn }) => {
+import formatBirthdate from '../../helpers/formatBirthdate'
+const setDefaultValue = (obj,key,defaultVal) =>{
+    return obj[key] || defaultVal
+}
+const RegistrationData = ({ setData, setBtn,dataApi }) => {
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [confirmEmail, setConfirmEmail] = useState('')
-  const [gender, setGender] = useState('')
-  const [birthdate, setBirthdate] = useState('')
-  const [phone, setPhone] = useState('')
-  const [cpf, setCpf] = useState('')
+  const [email, setEmail] = useState(setDefaultValue(dataApi,'email',''))
+  const [confirmEmail, setConfirmEmail] = useState(setDefaultValue(dataApi,'email',''))
+  const [gender, setGender] = useState(setDefaultValue(dataApi,'sexo',''))
+  const [birthdate, setBirthdate] = useState(setDefaultValue(dataApi,'dataNascimento',''))
+  const [phone, setPhone] = useState(setDefaultValue(dataApi,'telefone',''))
+  const [cpf, setCpf] = useState(setDefaultValue(dataApi,'cpf',''))
+
   const [terms, setTerms] = useState(false)
   const [message, setMessage] = useState(null)
   const [showModal, setShowModal] = useState(false)
@@ -54,7 +58,7 @@ const RegistrationData = ({ setData, setBtn }) => {
         terms,
       }
       setBtn(true)
-      setData({ cadastro: dataObj })
+      setData(data => {return{ ...data, cadastro: dataObj }})
     }
     return () => {
       setBtn(false)
@@ -98,7 +102,7 @@ const RegistrationData = ({ setData, setBtn }) => {
         <Col md="12">
           <InputText
             label="Nome Completo*:"
-            value={name}
+            value={name || dataApi.nome}
             setValue={setName}
             hasError={errors.name || ''}
             name="name"
@@ -144,7 +148,6 @@ const RegistrationData = ({ setData, setBtn }) => {
             setValue={setGender}
             hasError={errors.gender}
             onBlur={() => setErrors({ ...errors, ...validateGender(gender) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateGender(gender) })}
           />
           {errors.gender && <MsgError>{errors.gender}</MsgError>}
         </Col>
@@ -186,6 +189,7 @@ const RegistrationData = ({ setData, setBtn }) => {
             hasError={errors.cpf}
             onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
             onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
+            disabled={dataApi.email}
           />
           {errors.cpf && <MsgError>{errors.cpf}</MsgError>}
         </Col>

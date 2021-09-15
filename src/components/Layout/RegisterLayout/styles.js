@@ -22,7 +22,7 @@ export const Container = styled.div`
 
     > div {
       width: 100%;
-      height: 100vh;
+      height: 100%;
       background: linear-gradient(
         148.19deg,
         #9146ff -15.68%,

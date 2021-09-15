@@ -4,13 +4,8 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  :first-child form::after{
-    content: '';
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: #EEEEEE;
-      margin:40px 0;
+  > button {
+    margin-top: 50px;
   }
   form {
     display: flex;
@@ -31,12 +26,58 @@ export const Content = styled.div`
   h2 {
     margin-bottom: 70px;
   }
-`
-export const BtnGroup = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  button + button{
-    margin-left: 56px;
+  > ul {
+    align-self: stretch;
+    > li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      > div {
+        display: flex;
+        align-items: center;
+      }
+      button {
+        display: flex;
+        align-items: center;
+        border: none;
+        background-color: transparent;
+        font-family: Athletics;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 21px;
+        color: #6a6a6a;
+        padding:0;
+        +button{
+          margin-left:25px
+        }
+        img {
+          margin-right: 10px;
+        }
+      }
+      ::after {
+        content: '';
+        height: 2px;
+        width: 100%;
+        display: block;
+        background: #eeeeee;
+        flex: 0 0 100%;
+        margin-top: 10px;
+      }
+      li {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
+        color: #909090;
+        span {
+          color: #6a6a6a;
+          font-family: Athletics;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 20px;
+          margin-left: 8px;
+        }
+      }
+    }
   }
 `

@@ -79,7 +79,6 @@ const Address = ({ setBtn, setData }) => {
             value={uf}
             name="uf"
             onBlur={validate}
-            onKeyUp={validate}
             hasError={errors.uf}
           />
           {errors.uf && <MsgError>{errors.uf}</MsgError>}

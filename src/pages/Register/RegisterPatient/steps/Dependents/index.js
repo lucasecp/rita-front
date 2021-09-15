@@ -1,34 +1,48 @@
-import AccordionComponent from '@/components/Accordion';
-import OutlineButton from '@/components/Button/Outline';
-import { AccordionSummary } from '@material-ui/core';
-import React, { useState } from 'react';
+import OutlineButton from '@/components/Button/Outline'
+import Modal from '@/components/Modal'
+import React, { useState } from 'react'
 import { Container } from '../style'
-import Dep1 from './Dep1';
-import Dep2 from './Dep2';
-import { Content } from './style';
+import Form from './messages/Form'
+import { Content } from './style'
+import trash from '@/assets/icons/trash.svg'
+import edit from '@/assets/icons/edit.svg'
 const Dependents = () => {
-  const [showDep1, setShowDep1] = useState(false);
-  const [showDep2, setShowDep2] = useState(false);
+  const [messages, setMessages] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+
+  const showModalMessages = (Messages) => {
+    setShowModal(true)
+    setMessages(<Messages onCloseModal={setShowModal} />)
+  }
   return (
     <Container>
-      {!showDep1 && !showDep2 &&
       <Content>
         <h2>Dependentes</h2>
-        <OutlineButton variation='blue' onClick={() => setShowDep1(true)}>Adicionar Dependentes</OutlineButton>
+        <ul>
+          <li>
+            <ul>
+              <li>Nome: <span>Fulano</span></li>
+              <li>CPF: <span>00000000000</span></li>
+            </ul>
+            <div>
+              <button>
+                <img src={edit} />
+                Editar
+              </button>
+              <button>
+                <img src={trash} />
+                Remover
+              </button>
+            </div>
+          </li>
+        </ul>
+        <OutlineButton variation="blue" onClick={() => showModalMessages(Form)}>
+          Adicionar Dependentes
+        </OutlineButton>
       </Content>
-      }
-
-      <AccordionComponent expanded={showDep1}>
-        <AccordionSummary style={{display:'none'}}></AccordionSummary>
-        <Dep1 showDep2={showDep2} setShowDep2={setShowDep2} setShowDep1={setShowDep1}/>
-        </AccordionComponent>
-
-      <AccordionComponent expanded={showDep2}>
-        <AccordionSummary style={{display:'none'}}></AccordionSummary>
-          <Dep2 setShowDep2={setShowDep2}/>
-        </AccordionComponent>
+      <Modal show={showModal}>{messages}</Modal>
     </Container>
-  );
-};
+  )
+}
 
-export default Dependents;
+export default Dependents
