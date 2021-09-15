@@ -90,7 +90,7 @@ function PreRegister() {
     }
 
     try {
-      const response = await api.post(
+      await api.post(
         '/paciente/token',
         choice === 'email'
           ? {
@@ -102,10 +102,6 @@ function PreRegister() {
               celular: phone,
             }
       )
-
-      if (response.data.ultimaTentativa) {
-        isLastTry = true
-      }
     } catch ({ response }) {
       const messageFromApi = response?.data.message
       const statusFromApi = response?.status

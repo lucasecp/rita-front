@@ -37,7 +37,7 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
     onLoading(true)
 
     try {
-      const response = await api.post(
+      await api.post(
         '/paciente/token',
         email
           ? {
@@ -49,14 +49,6 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
               celular: phone,
             }
       )
-
-      if (response.data.ultimaTentativa) {
-        switchModalTo(MODAL.LAST_TRY)
-      }
-
-      if (response.data.message === 'Usuario Bloqueado') {
-        switchModalTo(MODAL.BLOCKED)
-      }
 
       setWaitRequestNewToken(true)
     } catch ({ response }) {
