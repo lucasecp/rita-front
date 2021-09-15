@@ -5,8 +5,7 @@ import SpinnerLoading from '@/styles/components/SpinnerLoading'
 import { Container } from './styles'
 
 function RequestNewTokenTimer({ active, onFinishTimer }) {
-  const INITIAL_TIME = 10
-  // const INITIAL_TIME = 120
+  const INITIAL_TIME = 120
 
   const [time, setTime] = useState(INITIAL_TIME)
 

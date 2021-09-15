@@ -5,18 +5,29 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 
 import { Container } from '../../styles'
 
-function DataDontMatch({ onShowModal }) {
+function DataDontMatch({ onShowModal, email, phone }) {
   const handleCloseModal = () => {
     onShowModal(false)
+  }
+
+  const renderMessage = () => {
+    if (phone && email) {
+      return 'uma das opções: E-mail ou Celular'
+    }
+
+    if (phone) {
+      return 'a opção Celular'
+    }
+
+    if (email) {
+      return 'a opção E-mail'
+    }
   }
 
   return (
     <Container>
       <img src={errorIcon} />
-      <p>
-        Selecione uma das opções: E-mail ou Celular e preencha o dado
-        corretamente.
-      </p>
+      <p>Selecione {renderMessage()} e preencha o dado corretamente.</p>
       <ButtonPrimary onClick={handleCloseModal}>OK</ButtonPrimary>
     </Container>
   )
