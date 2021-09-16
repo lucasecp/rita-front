@@ -1,5 +1,6 @@
-import colors from '@/styles/colors'
 import styled from 'styled-components'
+
+import colors from '@/styles/colors'
 
 export const Content = styled.div`
   background: rgba(255, 255, 255, 0.8);

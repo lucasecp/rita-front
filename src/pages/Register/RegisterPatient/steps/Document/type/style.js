@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+import { Accordion } from '@material-ui/core'
+
+export const AccordionContainer = styled(Accordion)`
   margin-bottom: 30px;
   h2 {
     font-size: 20px;
@@ -11,16 +13,9 @@ export const Container = styled.div`
     text-align: left;
     color: #6a6a6a;
     width: 100%;
-    ::after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: #efeafa;
-      margin-top: 3px;
-    }
   }
   h3 {
+    margin-top: 16px;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -101,11 +96,10 @@ export const ContentFile = styled.div`
     line-height: 21px;
     letter-spacing: 0em;
     text-align: right;
-    color: #DF644B;
-    img{
+    color: #df644b;
+    img {
       margin-right: 5px;
     }
-;
   }
   span {
     font-size: 16px;
@@ -114,7 +108,6 @@ export const ContentFile = styled.div`
     line-height: 24px;
     letter-spacing: 0em;
     text-align: left;
-    color: #9146FF;
-;
+    color: #9146ff;
   }
 `

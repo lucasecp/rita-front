@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { AccordionDetails, AccordionSummary } from '@material-ui/core'
-import { Container, Content, ContentFile } from '../style'
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
+} from '@material-ui/core'
+import { AccordionContainer, Content, ContentFile } from '../style'
 import AccordionComponent from '@/components/Accordion'
 import selfie from '@/assets/img/selfie.png'
 import trash from '@/assets/img/trash.png'
@@ -11,13 +16,12 @@ import Modal from '@/components/Modal'
 import BigSize from '../../messages/BigSize'
 import InvalidFormat from '../../messages/InvalidFormat'
 
+import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons'
+
 const HoldingDocument = ({ setValue, value }) => {
   const [showModal, setShowModal] = useState(false)
   const [messages, setMessages] = useState(null)
-  const setModalMessages = (Message) => {
-    setShowModal(true)
-    setMessages(<Message onShowModal={setShowModal} />)
-  }
+
   useEffect(() => {
     if (!value) return
     const fileType = value.type.split('/')[1]
@@ -37,20 +41,31 @@ const HoldingDocument = ({ setValue, value }) => {
     }
   }, [value])
 
+  const setModalMessages = (Message) => {
+    setShowModal(true)
+    setMessages(<Message onShowModal={setShowModal} />)
+  }
+
   return (
-    <Container>
-      <AccordionComponent expanded={!value}>
-        <AccordionSummary>
-          <h2>Foto segurando o documento de identificação</h2>
-          {value && value.name && (
-            <ContentFile>
-              <span>{value.name}</span>
-              <button onClick={() => setValue('')}>
-                <img src={trash} />
-                Remover o arquivo
-              </button>
-            </ContentFile>
-          )}
+    <>
+      <AccordionContainer square={true} defaultExpanded={true} expand={!value}>
+        <AccordionSummary
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+          expandIcon={<ExpandMoreIcon />}
+        >
+          <div>
+            <h2>Foto segurando o documento de identificação</h2>
+            {value && value.name && (
+              <ContentFile>
+                <span>{value.name}</span>
+                <button onClick={() => setValue('')}>
+                  <img src={trash} />
+                  Remover
+                </button>
+              </ContentFile>
+            )}
+          </div>
         </AccordionSummary>
         <AccordionDetails>
           <h3>
@@ -78,9 +93,9 @@ const HoldingDocument = ({ setValue, value }) => {
             </div>
           </Content>
         </AccordionDetails>
-      </AccordionComponent>
+      </AccordionContainer>
       <Modal show={showModal}>{messages}</Modal>
-    </Container>
+    </>
   )
 }
 
