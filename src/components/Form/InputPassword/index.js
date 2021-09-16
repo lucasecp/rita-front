@@ -1,5 +1,5 @@
-import React ,{ useRef, useState } from 'react'
-import { BtnEye, Container,Input } from './style'
+import React, { useRef, useState } from 'react'
+import { BtnEye, Container, Input } from './style'
 import eye from '../../../assets/icons/eye.png'
 
 const InputPassword = (props) => {
@@ -29,8 +29,8 @@ const InputPassword = (props) => {
           props.value ? setActiveEyes(true) : setActiveEyes(false)
         }
       />
-      {activeEyes &&(
-        <BtnEye type='button'  onClick={handleSeePassword}>
+      {activeEyes && (
+        <BtnEye type="button" onClick={handleSeePassword}>
           <img src={eye} />
         </BtnEye>
       )}
