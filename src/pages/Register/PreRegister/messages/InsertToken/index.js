@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 
-import InputText from '@/components/Form/InputText'
 import ButtonPrimary from '@/components/Button/Primary'
 import OutlineButton from '@/components/Button/Outline'
 import warningIcon from '@/assets/icons/alerts/warning.svg'

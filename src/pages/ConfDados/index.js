@@ -8,8 +8,6 @@ import React, { useEffect, useState } from 'react'
 import { Content } from './styles'
 
 function ConfDados() {
-  const [showModal] = useState(false)
-  const [message, setMessage] = useState(null)
   const [choice, setChoice] = useState('')
 
   const [phone, setPhone] = useState('')
@@ -17,7 +15,7 @@ function ConfDados() {
   const data = {
     phone: '(**) *****-**23',
   }
-
+ 
   useEffect(() => {
     if (data.phone) {
       return setChoice('phone')

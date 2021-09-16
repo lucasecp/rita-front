@@ -139,7 +139,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
         </Col>
         <Col md="6" className="mt-4">
           <InputMask
-            label="Celular:"
+            label="Celular:" 
             mask="(99) 99999-9999"
             value={phone}
             setValue={setPhone}

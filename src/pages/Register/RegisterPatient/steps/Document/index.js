@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Typography,
-} from '@material-ui/core'
-
-import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons'
-
 import { Container } from './styles'
 
 import HoldingDocument from './type/HoldingDocument'
