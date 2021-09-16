@@ -8,7 +8,7 @@ export const Content = styled.div`
   padding: 26px 0;
   box-shadow: 0px 2px 8px 0px #dfd2ff26;
   background: #f8f5ff;
-  margin: 50px 0px 100px 0;
+  margin: 20px 0px 100px 0;
   border-radius: 8px;
   position: relative;
   > button {

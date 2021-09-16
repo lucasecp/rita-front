@@ -10,6 +10,7 @@ const Dependents = ({dataClientSabin,setData}) => {
   const [messages, setMessages] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const [allDeps, setAllDeps] = useState([]);
+
   useEffect(() => {
     const {dependentes} = dataClientSabin
     setAllDeps(dependentes || [])
@@ -27,10 +28,12 @@ const Dependents = ({dataClientSabin,setData}) => {
    showModalMessages(Form,infoDep)
   }
   const handleDelete = (cpf) =>{
-    const valueUpdated = allDeps.filter((dep)=> dep.cpf !== cpf)
+    const valueUpdated = allDeps.filter((dep)=> dep.cpf.replace(/[^a-zA-Z0-9]/g,'') !== cpf.replace(/[^a-zA-Z0-9]/g,''))
     setAllDeps(valueUpdated)
   }
-
+  const handleAddDep = () =>{
+    showModalMessages(Form,{})
+  }
   return (
     <Container>
       <Content>
@@ -55,7 +58,7 @@ const Dependents = ({dataClientSabin,setData}) => {
           </li>
           )}
         </ul>
-        <OutlineButton disabled={allDeps.length === 5} variation="blue" onClick={() => showModalMessages(Form)}>
+        <OutlineButton disabled={allDeps.length === 5} variation="blue" onClick={handleAddDep}>
           Adicionar Dependentes
         </OutlineButton>
       </Content>

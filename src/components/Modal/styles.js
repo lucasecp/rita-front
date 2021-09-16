@@ -6,7 +6,6 @@ export const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,6 +14,7 @@ export const Container = styled.div`
   height: 100vh;
 
   background: ${hexToRgba(colors.black, 0.8)};
+  opacity: 0;
   z-index: 0;
   visibility: hidden;
   transition: .3s;
@@ -44,6 +44,7 @@ export const Container = styled.div`
 
     position: relative;
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 90%;
     transition: .3s;
     transform: translate3d(0,-15px,0);

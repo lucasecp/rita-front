@@ -11,11 +11,12 @@ import api from '@/services/api'
 import Loading from '@/components/Loading/RitaLoading'
 import Modal from '@/components/Modal'
 import Success from './messages/Success'
+import Warning from './messages/Warning'
 import Server from './messages/Error/Server'
 import exitImg from '@/assets/icons/times.svg'
 
 const RegisterPatient = () => {
-  const [step, setStep] = useState(3)
+  const [step, setStep] = useState(1)
   const [data, setData] = useState({})
   const [dataClientSabin, setDataClientSabin] = useState({})
   const [images, setImages] = useState('')
@@ -57,7 +58,7 @@ const RegisterPatient = () => {
   return (
     <RegisterLayout>
       <Content>
-        <button onClick={() => history.push('/')}>Sair<img src={exitImg}/></button>
+        <button onClick={() => showMessage(Warning)}>Sair<img src={exitImg}/></button>
         <header>
           <DotSteps active={step === 1} finish={step >= 2} />
           <DotSteps active={step === 2} finish={step >= 3} waiting={step < 2} />
