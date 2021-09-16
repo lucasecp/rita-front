@@ -5,7 +5,7 @@ import Teste from '@/pages/Teste'
 import MasterPage from '@/pages/MasterPage'
 
 import registerRoutes from './register.routes'
-import ConfDados from '@/pages/ConfDados'
+import Password from '@/pages/Password'
 
 function Routes() {
   return (
@@ -15,7 +15,7 @@ function Routes() {
       <Route exact path="/" component={Header} />
 
       <Route path="/master-page" component={MasterPage} />
-      {/* <Route path="/confdados" component={ConfDados} /> */}
+      <Route path="/password" component={Password} />
       <Route path="/teste" component={Teste} />
     </Switch>
   )
