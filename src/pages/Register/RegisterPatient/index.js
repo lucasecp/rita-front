@@ -4,78 +4,108 @@ import Adress from './steps/Address'
 import RegistrationData from './steps/RegistrationData'
 import Document from './steps/Document'
 import Dependents from './steps/Dependents'
-import { Content, DotSteps, BtnGroup, BtnNext, BtnPrev } from './style'
-import ButtonPrimary from '@/components/Button/Primary'
+import { Content, DotSteps, BtnGroup, BtnPrev, CustomBtn } from './style'
 import { useHistory, useLocation } from 'react-router'
-const DATAFAKE = {
-idPaciente: 1,
-nome: "ubirajara soares",
-cpf: "31624278191",
-sexo: "M",
-dataNascimento: "1990-01-02T00:00:00.000Z",
-endereco: {
-  cep: "70.123-456",
-  logradouro: "Rua 18 Norte",
-  numero: "901",
-  complemento: "apartamento",
-  bairro: "Aguas Claras",
-  cidade: "Brasilia",
-  uf: "DF"
-  },
-telefone: "61981538247",
-email: "ubirajara.melo@gmail.com",
-dependentes: []
-}
+import { DATAFAKE } from './static'
+import api from '@/services/api'
+import Loading from '@/components/Loading/RitaLoading'
+import Modal from '@/components/Modal'
+import Success from './messages/Success'
+import Server from './messages/Error/Server'
+import exitImg from '@/assets/icons/times.svg'
 
 const RegisterPatient = () => {
   const [step, setStep] = useState(1)
   const [data, setData] = useState({})
-  const [dataApi, setDataApi] = useState({})
+  const [dataClientSabin, setDataClientSabin] = useState({})
   const [images, setImages] = useState('')
   const [disableBtn, setBtn] = useState(false)
-
+  const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [message, setMessage] = useState(null);
   const location = useLocation()
-  // useEffect(() => {
-  //   const data = location.state
-  //   if(!data) return setDataApi({})
-  //   setDataApi(data.userData)
-  // },[])
-  // TESTE
+  const history = useHistory()
   useEffect(() => {
-    setDataApi(DATAFAKE)
+    if(!location.state) return
+    setDataClientSabin(location.state.userData)
   },[])
-  const handleClick = () => {
-    setStep(step + 1)
+
+  // TESTE
+  // useEffect(() => {
+  //   setDataClientSabin(DATAFAKE)
+  // }, [])
+  const showMessage = (Message) =>{
+   setShowModal(true)
+   setMessage(<Message onShowModal={setShowModal}/>)
+  }
+
+  const handleSubmit = async () => {
+    console.log(data);
+    try{
+      setLoading(true)
+      const response = await api.post('/paciente',data)
+      if(response.status === 200){
+         showMessage(Success)
+      }
+    }catch({response}){
+     showMessage(Server)
+    }
+    finally{
+      setLoading(false)
+    }
   }
   return (
     <RegisterLayout>
       <Content>
+        <button onClick={() => history.push('/')}>Sair<img src={exitImg}/></button>
         <header>
           <DotSteps active={step === 1} finish={step >= 2} />
-          <DotSteps
-            active={step === 2}
-            finish={step >= 3}
-            waiting={step < 2}
-          />
-          <DotSteps
-            active={step === 3}
-            finish={step >= 4}
-            waiting={step < 3}
-          />
+          <DotSteps active={step === 2} finish={step >= 3} waiting={step < 2} />
+          <DotSteps active={step === 3} finish={step >= 4} waiting={step < 3} />
           <DotSteps active={step === 4} waiting={step < 4} />
         </header>
-        {step === 1 && <RegistrationData setData={setData} setBtn={setBtn} dataApi={dataApi} />}
-        {step === 2 && <Adress setData={setData} setBtn={setBtn} dataApi={dataApi} />}
-        {step === 3 && <Document setImages={setImages} setBtn={setBtn} dataApi={dataApi} />}
-        {step === 4 && <Dependents setData={setData} setBtn={setBtn} dataApi={dataApi} />}
+        {step === 1 && (
+          <RegistrationData
+            setData={setData}
+            setBtn={setBtn}
+            dataClientSabin={dataClientSabin}
+          />
+        )}
+        {step === 2 && (
+          <Adress
+            setData={setData}
+            setBtn={setBtn}
+            dataClientSabin={dataClientSabin}
+          />
+        )}
+        {step === 3 && (
+          <Document
+            setImages={setImages}
+            setBtn={setBtn}
+            dataClientSabin={dataClientSabin}
+          />
+        )}
+        {step === 4 && (
+          <Dependents
+            setData={setData}
+            setBtn={setBtn}
+            dataClientSabin={dataClientSabin}
+          />
+        )}
         <BtnGroup>
           {step > 1 && (
             <BtnPrev onClick={() => setStep(step - 1)}>Etapa Anterior</BtnPrev>
           )}
-          <BtnNext disabled={!disableBtn} onClick={handleClick}>
-            {step === 4 ? 'Concluir cadastro' : 'Próxima Etapa'}
-          </BtnNext>
+          {step === 4 ? (
+            <CustomBtn onClick={handleSubmit}>Concluir cadastro</CustomBtn>
+          ) : (
+            <CustomBtn disabled={!disableBtn} onClick={() => setStep(step + 1)}>
+              Próxima Etapa
+            </CustomBtn>
+          )}
         </BtnGroup>
+        <Loading active={loading}/>
+        <Modal show={showModal}>{message}</Modal>
       </Content>
     </RegisterLayout>
   )

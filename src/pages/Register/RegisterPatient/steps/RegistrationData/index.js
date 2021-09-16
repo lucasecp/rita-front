@@ -17,24 +17,32 @@ import {
   validatePhone,
 } from '../../helpers/validator'
 import formatBirthdate from '../../helpers/formatBirthdate'
-const setDefaultValue = (obj,key,defaultVal) =>{
-    return obj[key] || defaultVal
-}
-const RegistrationData = ({ setData, setBtn,dataApi }) => {
+
+const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
   const [name, setName] = useState('')
-  const [email, setEmail] = useState(setDefaultValue(dataApi,'email',''))
-  const [confirmEmail, setConfirmEmail] = useState(setDefaultValue(dataApi,'email',''))
-  const [gender, setGender] = useState(setDefaultValue(dataApi,'sexo',''))
-  const [birthdate, setBirthdate] = useState(setDefaultValue(dataApi,'dataNascimento',''))
-  const [phone, setPhone] = useState(setDefaultValue(dataApi,'telefone',''))
-  const [cpf, setCpf] = useState(setDefaultValue(dataApi,'cpf',''))
+  const [email, setEmail] = useState('')
+  const [confirmEmail, setConfirmEmail] = useState('')
+  const [gender, setGender] = useState('')
+  const [birthdate, setBirthdate] = useState('')
+  const [phone, setPhone] = useState('')
+  const [cpf, setCpf] = useState('')
 
   const [terms, setTerms] = useState(false)
   const [message, setMessage] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const [errors, setErrors] = useState({})
-
   useEffect(() => {
+    if(!dataClientSabin) return
+     setName(dataClientSabin.nome || '')
+     setEmail(dataClientSabin.email || '')
+     setConfirmEmail(dataClientSabin.email || '')
+     setGender(dataClientSabin.sexo || '')
+     setBirthdate(formatBirthdate(dataClientSabin.dataNascimento) || '')
+     setPhone(dataClientSabin.telefone || '')
+     setCpf(dataClientSabin.cpf || '')
+    }, [dataClientSabin]);
+
+    useEffect(() => {
     const hasErrors = Object.values(errors).filter((err) => err).length
     if (
       name &&
@@ -48,17 +56,15 @@ const RegistrationData = ({ setData, setBtn,dataApi }) => {
       !hasErrors
     ) {
       const dataObj = {
-        name,
+        nome: name,
         email,
-        gender,
-        birthdate,
-        phone,
+        sexo:gender,
+        dataNascimento: birthdate,
+       telefone: phone,
         cpf,
-        confirmEmail,
-        terms,
       }
       setBtn(true)
-      setData(data => {return{ ...data, cadastro: dataObj }})
+      setData(data => {return{ ...data,...dataObj }})
     }
     return () => {
       setBtn(false)
@@ -102,9 +108,9 @@ const RegistrationData = ({ setData, setBtn,dataApi }) => {
         <Col md="12">
           <InputText
             label="Nome Completo*:"
-            value={name || dataApi.nome}
+            value={name}
             setValue={setName}
-            hasError={errors.name || ''}
+            hasError={errors.name}
             name="name"
             onBlur={() => setErrors({ ...errors, ...validateName(name) })}
             onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
@@ -143,11 +149,12 @@ const RegistrationData = ({ setData, setBtn,dataApi }) => {
         <Col md="6" className="mt-4">
           <Select
             label="Gênero*:"
-            labeDefaultOption="selecione"
-            options={['masculino', 'feminino']}
+            labeDefaultOption="Selecione"
+            options={[{label:'Masculino',value: 'M'}, {label:'Feminino',value: 'F'},{label:'Outros',value: 'O'}]}
             setValue={setGender}
             hasError={errors.gender}
-            onBlur={() => setErrors({ ...errors, ...validateGender(gender) })}
+            onChange={(e) => {setGender(e.target.value);setErrors({ ...errors, ...validateGender(e.target.value) })}}
+            value={gender}
           />
           {errors.gender && <MsgError>{errors.gender}</MsgError>}
         </Col>
@@ -189,7 +196,7 @@ const RegistrationData = ({ setData, setBtn,dataApi }) => {
             hasError={errors.cpf}
             onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
             onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
-            disabled={dataApi.email}
+            disabled={dataClientSabin.email}
           />
           {errors.cpf && <MsgError>{errors.cpf}</MsgError>}
         </Col>

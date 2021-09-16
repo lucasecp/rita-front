@@ -33,7 +33,7 @@ export const Container = styled.div`
 `
 export const TextGroup = styled.div`
   overflow-y: auto;
-  max-height: 400px;
+  max-height: 300px;
   ::-webkit-scrollbar {
   width: 12px;
 }

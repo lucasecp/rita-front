@@ -5,7 +5,16 @@ import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { Container, MsgError } from '../style'
 import { UF } from './static'
-const Address = ({ setBtn, setData }) => {
+import {
+  validateAddress,
+  validateCep,
+  validateCity,
+  validateComplement,
+  validateDistrict,
+  validateNumberHome,
+  validateUf,
+} from '../../helpers/validator'
+const Address = ({ setBtn, setData, dataClientSabin }) => {
   const [cep, setCep] = useState('')
   const [uf, setUf] = useState('')
   const [city, setCity] = useState('')
@@ -14,7 +23,17 @@ const Address = ({ setBtn, setData }) => {
   const [district, setDistrict] = useState('')
   const [complement, setComplement] = useState('')
   const [errors, setErrors] = useState({})
-
+  useEffect(() => {
+    const { endereco } = dataClientSabin
+    if (!endereco) return
+    setCep(endereco.cep || '')
+    setUf(endereco.uf || '')
+    setCity(endereco.cidade || '')
+    setAdress(endereco.logradouro || '')
+    setNumberHome(endereco.numero || '')
+    setDistrict(endereco.bairro || '')
+    setComplement(endereco.complemento || '')
+  }, [dataClientSabin])
   useEffect(() => {
     const hasErrors = Object.values(errors).filter((err) => err).length
     if (
@@ -28,31 +47,21 @@ const Address = ({ setBtn, setData }) => {
       !hasErrors
     ) {
       const dataObj = {
-        district,
+        bairro: district,
         uf,
-        city,
-        address,
-        numberHome,
+        cidade: city,
+        logradouro: address,
+        numero: numberHome,
         cep,
-        complement,
+        complement0: complement,
       }
       setBtn(true)
-      setData({ cadastro: dataObj })
+      setData(data => {return {...data, endereco: dataObj }})
     }
     return () => {
       setBtn(false)
     }
-  }, [errors])
-
-  const validate = ({ target }) => {
-    const value = target.value
-    if (!value.trim()) {
-      return setErrors({ ...errors, [target.name]: 'Campo Obrigatório.' })
-    } else if (target.name === 'cep' && cep.length < 8) {
-      return setErrors({ ...errors, [target.name]: 'Cep Inválido.' })
-    }
-    return setErrors({ ...errors, [target.name]: '' })
-  }
+  }, [errors, district, uf, city, address, numberHome, cep, complement])
   return (
     <Container>
       <h1>Endereço</h1>
@@ -64,13 +73,13 @@ const Address = ({ setBtn, setData }) => {
             value={cep}
             setValue={setCep}
             name="cep"
-            onBlur={validate}
-            onKeyUp={validate}
+            onBlur={() => setErrors({ ...errors, ...validateCep(cep) })}
+            onKeyUp={() => setErrors({ ...errors, ...validateCep(cep) })}
             hasError={errors.cep}
           />
           {errors.cep && <MsgError>{errors.cep}</MsgError>}
         </Col>
-        <Col md="6">
+        <Col md="6" className="mt-4 mt-md-0">
           <Select
             label="UF:"
             labeDefaultOption="selecione:"
@@ -78,7 +87,10 @@ const Address = ({ setBtn, setData }) => {
             setValue={setUf}
             value={uf}
             name="uf"
-            onBlur={validate}
+            onChange={(e) => {
+              setUf(e.target.value)
+              setErrors({ ...errors, ...validateUf(e.target.value) })
+            }}
             hasError={errors.uf}
           />
           {errors.uf && <MsgError>{errors.uf}</MsgError>}
@@ -89,8 +101,8 @@ const Address = ({ setBtn, setData }) => {
             value={city}
             setValue={setCity}
             name="city"
-            onBlur={validate}
-            onKeyUp={validate}
+            onBlur={() => setErrors({ ...errors, ...validateCity(city) })}
+            onKeyUp={() => setErrors({ ...errors, ...validateCity(city) })}
             hasError={errors.city}
           />
           {errors.city && <MsgError>{errors.city}</MsgError>}
@@ -103,21 +115,29 @@ const Address = ({ setBtn, setData }) => {
                 value={address}
                 setValue={setAdress}
                 name="address"
-                onBlur={validate}
-                onKeyUp={validate}
+                onBlur={() =>
+                  setErrors({ ...errors, ...validateAddress(address) })
+                }
+                onKeyUp={() =>
+                  setErrors({ ...errors, ...validateAddress(address) })
+                }
                 hasError={errors.address}
               />
               {errors.address && <MsgError>{errors.address}</MsgError>}
             </Col>
-            <Col md="4">
+            <Col md="4" className="mt-4 mt-md-0">
               <InputText
                 label="Número:"
                 value={numberHome}
                 setValue={setNumberHome}
                 type="number"
                 name="numberHome"
-                onBlur={validate}
-                onKeyUp={validate}
+                onBlur={() =>
+                  setErrors({ ...errors, ...validateNumberHome(numberHome) })
+                }
+                onKeyUp={() =>
+                  setErrors({ ...errors, ...validateNumberHome(numberHome) })
+                }
                 hasError={errors.numberHome}
               />
               {errors.numberHome && <MsgError>{errors.numberHome}</MsgError>}
@@ -130,8 +150,12 @@ const Address = ({ setBtn, setData }) => {
             value={district}
             setValue={setDistrict}
             name="district"
-            onBlur={validate}
-            onKeyUp={validate}
+            onBlur={() =>
+              setErrors({ ...errors, ...validateDistrict(district) })
+            }
+            onKeyUp={() =>
+              setErrors({ ...errors, ...validateDistrict(district) })
+            }
             hasError={errors.district}
           />
           {errors.district && <MsgError>{errors.district}</MsgError>}
@@ -142,8 +166,12 @@ const Address = ({ setBtn, setData }) => {
             value={complement}
             setValue={setComplement}
             name="complement"
-            onBlur={validate}
-            onKeyUp={validate}
+            onBlur={() =>
+              setErrors({ ...errors, ...validateComplement(complement) })
+            }
+            onKeyUp={() =>
+              setErrors({ ...errors, ...validateComplement(complement) })
+            }
             hasError={errors.complement}
           />
           {errors.complement && <MsgError>{errors.complement}</MsgError>}

@@ -23,9 +23,6 @@ export const Content = styled.div`
     margin-bottom: 40px;
     align-self: flex-start;
   }
-  h2 {
-    margin-bottom: 70px;
-  }
   > ul {
     align-self: stretch;
     > li {
@@ -62,22 +59,43 @@ export const Content = styled.div`
         display: block;
         background: #eeeeee;
         flex: 0 0 100%;
-        margin-top: 10px;
+        margin: 15px 0;
       }
       li {
         font-size: 14px;
         font-weight: 400;
         line-height: 17px;
         color: #909090;
+       :first-child {margin-bottom: 10px;}
         span {
           color: #6a6a6a;
           font-family: Athletics;
           font-size: 16px;
           font-weight: 500;
           line-height: 20px;
-          margin-left: 8px;
+          margin-left: 3px;
         }
       }
+      @media(max-width: 539px){
+        flex-direction: column;
+        align-items: flex-start;
+        ::after{
+          flex:none
+        }
+        ul{
+          margin-bottom: 15px;
+        }
+      }
+    }
+    @media(max-width:539px){
+      div{
+            justify-content: space-between;
+            width:100%;
+            flex-wrap: wrap;
+            >button:last-child{
+              margin-left: 0;
+            }
+          }
     }
   }
 `

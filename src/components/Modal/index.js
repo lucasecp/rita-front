@@ -16,14 +16,13 @@ function Modal({ children, show, onCloseModal }) {
   }
 
   return (
-    show && (
-      <Container>
+      <Container show={show}>
         <div>
           {onCloseModal && <img src={closeIcon} onClick={toCloseModal} />}
           {children}
         </div>
       </Container>
-    )
+
   )
 }
 

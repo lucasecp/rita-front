@@ -1,12 +1,12 @@
 import hexToRgba from '@/helpers/hexToRgba'
 import colors from '@/styles/colors'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-
+  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,15 +15,15 @@ export const Container = styled.div`
   height: 100vh;
 
   background: ${hexToRgba(colors.black, 0.8)};
+  z-index: 0;
+  visibility: hidden;
+  transition: .3s;
+
+  ${({show}) => show && css`
   z-index: 2;
-
-  animation: fade 0.3s;
-
-  @keyframes fade {
-    from {
-      background: ${hexToRgba(colors.black, 0.0)};
-    }
-  }
+  opacity:1;
+  visibility: visible;
+  `}
 
   > div {
     background: #ffffff;
@@ -43,8 +43,13 @@ export const Container = styled.div`
     z-index: 9999;
 
     position: relative;
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 90%;
+    transition: .3s;
+    transform: translate3d(0,-15px,0);
+    ${({show}) => show && css`
+    transform: translate3d(0,0,0);
+  `}
 
     > img {
       position: absolute;
@@ -54,13 +59,9 @@ export const Container = styled.div`
       cursor: pointer;
     }
 
-    animation: slideDown 0.3s;
 
-    @keyframes slideDown {
-      from {
-        transform: translateY(-24px);
-      }
-    }
+
+
   }
 
   @media (max-width: 767px) {
