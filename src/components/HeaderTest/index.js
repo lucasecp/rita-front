@@ -11,7 +11,7 @@ const Header = () => {
         <Link to="/cadastro-cartao-sabin">Cadastro Cartão Sabin</Link>
         <Link to="/cadastro/paciente">Cadastro Paciente</Link>
         <Link to="/pre-cadastro">Pré Cadastro</Link>
-        <Link to="/password">Senha</Link>
+        <Link to="/password">Definição de Senha</Link>
       </nav>
     </HeaderLayout>
   )
