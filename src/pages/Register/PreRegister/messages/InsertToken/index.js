@@ -15,6 +15,7 @@ import { useHistory } from 'react-router-dom'
 const MODAL = {
   INSERT_TOKEN: 'insert_token',
   LAST_TRY: 'last_try',
+  LAST_TRY_REQUEST_NEW_TOKEN: 'last_try_request_new_token',
   BLOCKED: 'blocked',
 }
 
