@@ -16,6 +16,7 @@ import {
 } from '../../../../helpers/validator'
 import { MsgError } from '../../../style'
 import formatBirthdate from '@/pages/Register/RegisterPatient/helpers/formatBirthdate'
+
 const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -60,7 +61,6 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
     onCloseModal(false)
   }
   const handleUpdate = () =>{
-    if(depAlreadyExists()) return setErrors({...errors,submit: 'Dependente já existente com este CPF'})
     const valueUpdated = allDeps.map((dep,i)=> {
       if(dep.cpf !== cpf) return dep
       return{
@@ -68,8 +68,8 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
       'email': email,
       'sexo': gender,
       'dataNascimento': birthdate,
-      'telefone': phone,
-      'cpf': cpf,
+      'telefone': phone.replace(/[^a-zA-Z0-9]/g, ''),
+      'cpf': cpf.replace(/[^a-zA-Z0-9]/g, ''),
     }})
     setAllDeps(valueUpdated)
     onCloseModal(false)
@@ -80,7 +80,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
       <Row>
         <Col md="6">
           <InputText
-            label="Nome Completo:"
+            label="Nome Completo*:"
             value={name}
             setValue={setName}
             hasError={errors.name}
@@ -91,19 +91,20 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
         </Col>
         <Col md="6" className="mt-4 mt-md-0">
           <InputMask
-            label="CPF:"
+            label="CPF*:"
             mask="999.999.999-99"
             value={cpf}
             setValue={setCpf}
             hasError={errors.cpf}
             onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
             onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
+            disabled={Object.keys(editDep).length}
           />
           {errors.cpf && <MsgError>{errors.cpf}</MsgError>}
         </Col>
         <Col md="6" className="mt-4">
           <InputMask
-            label="Data de Nascimento:"
+            label="Data de Nascimento*:"
             mask="99/99/9999"
             value={birthdate}
             setValue={setBirthdate}
@@ -119,7 +120,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
         </Col>
         <Col md="6" className="mt-4">
           <SelectComponent
-            label="Gênero:"
+            label="Gênero*:"
             labeDefaultOption="selecione"
             options={[
               { label: 'Masculino', value: 'M' },
@@ -139,7 +140,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
         </Col>
         <Col md="6" className="mt-4">
           <InputMask
-            label="Celular:" 
+            label="Celular*:"
             mask="(99) 99999-9999"
             value={phone}
             setValue={setPhone}
@@ -152,7 +153,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
 
         <Col md="6" className="mt-4">
           <InputText
-            label="E-mail:"
+            label="E-mail*:"
             value={email}
             setValue={setEmail}
             hasError={errors.email}

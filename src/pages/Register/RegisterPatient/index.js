@@ -38,13 +38,14 @@ const RegisterPatient = () => {
    setShowModal(true)
    setMessage(<Message onShowModal={setShowModal}/>)
   }
+  console.log(data);
 
   const handleSubmit = async () => {
-    console.log(data);
+
     try{
       setLoading(true)
       const response = await api.post('/paciente',data)
-      if(response.status === 200){
+      if(response.status === 201){
          showMessage(Success)
       }
     }catch({response}){

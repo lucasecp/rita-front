@@ -4,10 +4,15 @@ export const validateName = (value) => {
   if (!value.trim()) return { name: 'Nome Obrigatório.' }
   return { name: '' }
 }
-export const validateEmail = (value) => {
-  if (!value) return { email: 'Email Obrigatório' }
-  else if (!/\S+@\S+\.\S+/.test(value)) return { email: 'Email inválido.' }
-  return { email: '' }
+export const validateEmail = (email, confirmEmail) => {
+  if (!email.trim()) return { email: 'Email Obrigatório' }
+  else if (!/\S+@\S+\.\S+/.test(email)) return { email: 'Email inválido.' }
+  else if (email !== confirmEmail && confirmEmail)
+    return {
+      confirmEmail:
+        'Os e-mails preenchidos estão diferentes, por favor verifique os campos E-mail e Confirme seu e-mail.',
+    }
+  return { email: '', confirmEmail: '' }
 }
 export const validateCpf = (value) => {
   const newValue = value.replace(anySpecialCaracter, '')
@@ -37,7 +42,7 @@ export const validateCep = (value) => {
   return { cep: '' }
 }
 export const validateCity = (value) => {
-  if (!value) return { city: 'Campo Obrigatório.' }
+  if (!value.trim()) return { city: 'Campo Obrigatório.' }
   return { city: '' }
 }
 export const validateUf = (value) => {
@@ -45,18 +50,18 @@ export const validateUf = (value) => {
   return { uf: '' }
 }
 export const validateDistrict = (value) => {
-  if (!value) return { district: 'Campo Obrigatório.' }
+  if (!value.trim()) return { district: 'Campo Obrigatório.' }
   return { district: '' }
 }
 export const validateAddress = (value) => {
-  if (!value) return { address: 'Campo Obrigatório.' }
+  if (!value.trim()) return { address: 'Campo Obrigatório.' }
   return { address: '' }
 }
 export const validateNumberHome = (value) => {
-  if (!value) return { address: 'Campo Obrigatório.' }
+  if (!value.trim()) return { numberHome: 'Campo Obrigatório.' }
   return { numberHome: '' }
 }
 export const validateComplement = (value) => {
-  if (!value) return { address: 'Campo Obrigatório.' }
+  if (!value.trim()) return { complement: 'Campo Obrigatório.' }
   return { complement: '' }
 }

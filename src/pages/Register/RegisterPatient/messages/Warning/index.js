@@ -13,7 +13,7 @@ const Success = ({onShowModal}) => {
   return (
     <Container>
       <img src={warning} />
-      <p>Tem certeza que deseja sair da tela?</p>
+      <p>Seu cadastro ainda não foi concluído e as informações preenchidas não serão salvas. Confirma a saída?</p>
       <ButtonGroup>
         <OutlineButton onClick={() => onShowModal(false)}>Não</OutlineButton>
       <ButtonPrimary onClick={handleCloseModal}>Sim</ButtonPrimary>
