@@ -31,7 +31,7 @@ const Dependents = ({dataClientSabin,setData}) => {
     const valueUpdated = allDeps.filter((dep)=> dep.cpf.replace(/[^a-zA-Z0-9]/g,'') !== cpf.replace(/[^a-zA-Z0-9]/g,''))
     setAllDeps(valueUpdated)
   }
-  const handleAddDep = () =>{
+  const handleAddDep = () =>{ 
     showModalMessages(Form,{})
   }
   return (

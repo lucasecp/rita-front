@@ -10,7 +10,7 @@ const Terms = ({ setTerms, setShowModal }) => {
     <Container>
       <h2>Termos de uso - PACIENTE</h2>
       <TextGroup>
-       <p>
+        <p>
           A Plataforma RITA (“Plataforma”) é disponibilizada, através de site e
           aplicativo e todo o seu conteúdo foi desenvolvida e é operada e de
           titularidade da RITA ATIVIDADES DE TECNOLOGIA E SAUDE LTDA, NÚMERO DE
@@ -27,9 +27,7 @@ const Terms = ({ setTerms, setShowModal }) => {
           começar, preciso que você leia tudo antes assinar, caso concorde é
           claro. Estas condições gerais do Termo de licença de uso dos
           Aplicativos da RITA devem ser lidas com atenção antes de sua
-          utilização.
-
-            1. O que é o aplicativo? Rita é um aplicativo de celular
+          utilização. 1. O que é o aplicativo? Rita é um aplicativo de celular
           que aproxima você de consultas a profissionais de saúde, farmácias e
           exames, com tudo isso em lugar só fica mais fácil para você chegar
           onde você quer com a sua saúde; isso é o que nós chamamos de uma
@@ -44,10 +42,8 @@ const Terms = ({ setTerms, setShowModal }) => {
           escolher entre navegar sozinho, ou seja, acompanhar suas consultas,
           medicamentos e exames pelo aplicativo apenas, ou então ter um apoio do
           nosso time de cuidado, um enfermeiro e um médico de família para te
-          ajudar e acompanhar no dia a dia da saúde.
-
-
-          2. POR ONDE EU POSSO ACESSAR MINHA CONTA NA PLATAFORMA? O acesso a plataforma pode ser
+          ajudar e acompanhar no dia a dia da saúde. 2. POR ONDE EU POSSO
+          ACESSAR MINHA CONTA NA PLATAFORMA? O acesso a plataforma pode ser
           feito através do computador, tablet ou telefone celular. Você vai
           precisar ter instalado na máquina um programa navegador e conexão de
           internet. É muito importante lembrar que você vai falar de dados sobre
@@ -56,10 +52,8 @@ const Terms = ({ setTerms, setShowModal }) => {
           sua privacidade, por isso é muito importante saber que a conexão, bem
           como a manutenção de ambiente dos equipamentos seguros, com uso de
           ferramentas disponíveis como antivírus atualizados, são extremamente
-          importantes e são de sua inteira responsabilidade.
-
-
-        3. INFORMAÇÕES GERAIS E LICENÇA DE USO O primeiro passo para entrar na plataforma é o
+          importantes e são de sua inteira responsabilidade. 3. INFORMAÇÕES
+          GERAIS E LICENÇA DE USO O primeiro passo para entrar na plataforma é o
           CADASTRO. Para fazer o seu cadastro e começar a utilizar os serviços
           você precisa ter mais de 18 (dezoito) anos de idade. Se você é mais
           jovem, vamos precisar que outra pessoa com essa idade, para te ajudar
@@ -97,11 +91,8 @@ const Terms = ({ setTerms, setShowModal }) => {
           ou incompletas, a Plataforma reserva-se o direito de suspender ou
           cancelar imediatamente, independente de notificação, a sua conta e
           recusar toda e qualquer utilização, presente ou futura dos Serviços,
-          ou parte deles.
-
-
-        4. PARA ACESSAR A PLATAFORMA VOCÊ PRECISA SABER DISSO:
-        Temos uma equipe trabalhando incansavelmente para que a Plataforma
+          ou parte deles. 4. PARA ACESSAR A PLATAFORMA VOCÊ PRECISA SABER DISSO:
+          Temos uma equipe trabalhando incansavelmente para que a Plataforma
           esteja sempre disponível, sem erros nem interrupções. Não podemos
           garantir, no entanto, a operação da Plataforma em tempo integral, pois
           ela depende de serviços prestados por terceiros e disponibilidade de
@@ -121,12 +112,7 @@ const Terms = ({ setTerms, setShowModal }) => {
           dos dados transmitidos pelo usuário a plataforma. A transmissão é de
           exclusiva responsabilidade dos usuários, que assim concordarem com
           esses termos e reconhecerem e assumirem expressamente tal
-          responsabilidade.
-
-
-
-
-          5. COMO É FEITO O ATENDIMENTO POR PROFISSIONAIS DE
+          responsabilidade. 5. COMO É FEITO O ATENDIMENTO POR PROFISSIONAIS DE
           SAÚDE NA PLATAFORMA? PARA ACESSO AO ATENDIMENTO POR PROFISSIONAL DE
           SAÚDE VIA TELEMEDICINA NA MODALIDADE DE TELECONSULTA VOCÊ DEVERÁ (i)
           SOLICITAR A CONSULTA A UM PROFISSIONAL DE SAÚDE NA PLATAFORMA; (ii)
@@ -182,7 +168,7 @@ const Terms = ({ setTerms, setShowModal }) => {
           ou de qualquer forma tornar disponível qualquer tipo de anúncio,
           propaganda ou material promocional não solicitado ou não autorizado
           pela Plataforma, tais como mensagens não solicitadas ou mensagens
-          enviadas em massa (conhecidos como "junk mail" ou "spam"); (g)
+          enviadas em massa (conhecidos como junk mail ou spam); (g)
           carregar, transmitir, divulgar, exibir, enviar, ou de qualquer forma
           tornar disponível qualquer conteúdo que contenha vírus ou qualquer
           outro código, arquivo ou programa de computador com o propósito de
@@ -369,7 +355,7 @@ const Terms = ({ setTerms, setShowModal }) => {
           e-mail ou através dos números disponíveis no site
           www.ritasaude.com.br, com horário de funcionamento: de segunda a sexta
           - 8h00 às 18h00 (funcionamos apenas em dias úteis).
-</p>
+        </p>
       </TextGroup>
       <ButtonPrimary onClick={hanldeAcceptTerms}>
         Li e Aceito os termos de uso

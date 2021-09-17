@@ -61,7 +61,7 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
         sexo:gender,
         dataNascimento: birthdate,
        telefone: phone,
-        cpf,
+        cpf
       }
       setBtn(true)
       setData(data => {return{ ...data,...dataObj }})
@@ -125,8 +125,8 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
             hasError={errors.email}
             value={email}
             setValue={setEmail}
-            onBlur={() => setErrors({ ...errors, ...validateEmail(email) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateEmail(email) })}
+            onBlur={() => setErrors({ ...errors, ...validateEmail(email,confirmEmail) })}
+            onKeyUp={() => setErrors({ ...errors, ...validateEmail(email,confirmEmail) })}
           />
           {errors.email && <MsgError>{errors.email}</MsgError>}
         </Col>
