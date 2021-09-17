@@ -39,7 +39,8 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
   }, [editDep])
 
   const dataIsEmptyOrNot = () =>
-    name && email && cpf && birthdate && gender && phone
+    name && email && cpf && birthdate && gender && phone && !Object.values(errors).filter((err) => err).length
+
   const depAlreadyExists = () => {
     const alreadyExist = allDeps.filter(dep=> dep.cpf.replace(/[^a-zA-Z0-9]/g,'') === cpf.replace(/[^a-zA-Z0-9]/g,''))
     return alreadyExist.length
