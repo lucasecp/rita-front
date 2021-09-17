@@ -37,7 +37,7 @@ export const Container = styled.div`
     height: fit-content;
 
     padding: 32px;
-
+    max-width: 90%;
     min-width: 33%;
     opacity: 1;
     z-index: 9999;

@@ -17,7 +17,7 @@ const Terms = ({ setTerms, setShowModal }) => {
           INSCRIÇÃO CNPJ 40.181.094/0001-67, Endereço TR SIA TRECHO 03,
           COMPLEMENTO LOTE 625 635 695 LOJA 16 PARTE TERREO, CEP 71.200-030,
           BAIRRO/DISTRITO ZONA INDUSTRIAL (GUARA), BRASILIA - DF. Todos os
-          direitos reservados. (“RITA SAÚDE”). A Plataforma é oferecida na
+          direitos reservados. (“RITA SAÚDE”).<br/> A Plataforma é oferecida na
           modalidade Software como um Serviço (SaaS) e é acessada por meio de
           conexão pela internet. Estes Termos de Uso (“Termos”) descrevem os
           termos e as condições aplicáveis ao acesso e ao uso da Plataforma por
