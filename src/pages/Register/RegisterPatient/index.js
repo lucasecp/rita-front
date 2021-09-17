@@ -24,7 +24,7 @@ const RegisterPatient = () => {
   const [disableBtn, setBtn] = useState(false)
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState(null); 
   const location = useLocation()
   useEffect(() => {
     if(!location.state) return
