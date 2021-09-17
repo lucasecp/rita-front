@@ -50,7 +50,17 @@ export const Container = styled.div`
       }
 
       > ul + div {
+        margin-bottom: 8px;
+      }
+
+      > p {
         margin-bottom: 16px;
+
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 150%;
+
+        color: ${colors.orange.middleDark};
       }
 
       > span {

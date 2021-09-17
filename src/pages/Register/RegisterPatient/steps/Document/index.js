@@ -6,13 +6,14 @@ import HoldingDocument from './type/HoldingDocument'
 import OwnDocument from './type/OwnDocument'
 import ProofOfIncome from './type/ProofOfIncome'
 
-const Document = ({setBtn}) => {
+const Document = ({ setBtn }) => {
   const [holdingDocument, setHoldingDocument] = useState('')
   const [ownDocument, setOwnDocument] = useState('')
   const [proofOfIncome, setProofOfIncome] = useState('')
   useEffect(() => {
-   setBtn(true)
-  }, []);
+    setBtn(true)
+  }, [])
+
   return (
     <Container>
       <h1>Documentos</h1>
