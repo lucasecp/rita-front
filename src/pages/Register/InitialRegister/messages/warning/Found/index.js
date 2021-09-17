@@ -12,7 +12,7 @@ function Found({ onShowModal, ...data }) {
 
   const pushToRegister = () => {
     onShowModal(false)
-    return history.push('/cadastro/paciente/')
+    return history.push('/cadastro/paciente/',{userData:{cpf: data.cpf}})
   }
   const pushToPreRegister = () => {
     onShowModal(false)

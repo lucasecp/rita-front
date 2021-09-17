@@ -195,7 +195,7 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
             hasError={errors.cpf}
             onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
             onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
-            disabled={dataClientSabin.email}
+            disabled={dataClientSabin.cpf}
           />
           {errors.cpf && <MsgError>{errors.cpf}</MsgError>}
         </Col>
