@@ -28,8 +28,14 @@ function InstructionsHoldingDocuments({ onGetFile }) {
             <li>Verifique se a imagem ficou nítida;</li>
           </ul>
           <InputFile setValue={onGetFile}>
-            <OutlineButton variation="blue">Selecionar Arquivo</OutlineButton>
+            <OutlineButton small variation="blue">
+              Selecionar Arquivo
+            </OutlineButton>
           </InputFile>
+          <p>
+            O envio da sua foto segurando o documento de identificação é
+            obrigatório.
+          </p>
           <span>
             Tamanho máximo do arquivo: 10MB
             <br />

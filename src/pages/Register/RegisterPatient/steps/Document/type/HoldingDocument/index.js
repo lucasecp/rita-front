@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-  AccordionDetails,
-  AccordionSummary,
-} from '@material-ui/core'
+import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 import { AccordionContainer, ContentFile } from '../style'
 import trash from '@/assets/img/trash.png'
 import Modal from '@/components/Modal'
@@ -17,7 +14,7 @@ const HoldingDocument = ({ setValue, value }) => {
   const [showModal, setShowModal] = useState(false)
   const [messages, setMessages] = useState(null)
 
-  const [holdingDocumentFile, setHoldingDocumentFile] = useState(null)
+  const [holdingDocumentFile, setHoldingDocumentFile] = useState('')
 
   useEffect(() => {
     if (!value) return
