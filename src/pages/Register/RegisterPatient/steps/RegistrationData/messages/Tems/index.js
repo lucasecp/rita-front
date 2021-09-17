@@ -168,10 +168,10 @@ const Terms = ({ setTerms, setShowModal }) => {
           ou de qualquer forma tornar disponível qualquer tipo de anúncio,
           propaganda ou material promocional não solicitado ou não autorizado
           pela Plataforma, tais como mensagens não solicitadas ou mensagens
-          enviadas em massa (conhecidos como junk mail ou spam); (g)
-          carregar, transmitir, divulgar, exibir, enviar, ou de qualquer forma
-          tornar disponível qualquer conteúdo que contenha vírus ou qualquer
-          outro código, arquivo ou programa de computador com o propósito de
+          enviadas em massa (conhecidos como junk mail ou spam); (g) carregar,
+          transmitir, divulgar, exibir, enviar, ou de qualquer forma tornar
+          disponível qualquer conteúdo que contenha vírus ou qualquer outro
+          código, arquivo ou programa de computador com o propósito de
           interromper, destruir ou limitar a funcionalidade de qualquer
           software, hardware ou equipamento; (i) violar direitos de sigilo e
           privacidade de terceiros; Praticar quaisquer atos que direta ou

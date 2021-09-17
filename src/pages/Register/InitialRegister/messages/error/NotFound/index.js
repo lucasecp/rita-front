@@ -10,7 +10,7 @@ function NotFound({ onShowModal }) {
   const history = useHistory()
   const handleCloseModal = () => {
     onShowModal(false)
-    history.push('/')
+    history.push('/cadastro/paciente')
   }
 
   return (

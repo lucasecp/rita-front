@@ -13,6 +13,7 @@ import Modal from '@/components/Modal'
 import Success from './messages/Success'
 import Warning from './messages/Warning'
 import Server from './messages/Error/Server'
+import alreadyExists from './messages/Error/AlreadyExists'
 import exitImg from '@/assets/icons/times.svg'
 
 const RegisterPatient = () => {
@@ -34,11 +35,10 @@ const RegisterPatient = () => {
   // useEffect(() => {
   //   setDataClientSabin(DATAFAKE)
   // }, [])
-  const showMessage = (Message) =>{
+  const showMessage = (Message,msg) =>{
    setShowModal(true)
-   setMessage(<Message onShowModal={setShowModal}/>)
+   setMessage(<Message onShowModal={setShowModal} msg={msg}/>)
   }
-  console.log(data);
 
   const handleSubmit = async () => {
 
@@ -49,7 +49,8 @@ const RegisterPatient = () => {
          showMessage(Success)
       }
     }catch({response}){
-     showMessage(Server)
+      if(response.status ===  500)  showMessage(Server)
+      if(response.status ===  400)  showMessage(alreadyExists,response.data.message)
     }
     finally{
       setLoading(false)

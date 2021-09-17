@@ -35,7 +35,6 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
     if(!dataClientSabin) return
      setName(dataClientSabin.nome || '')
      setEmail(dataClientSabin.email || '')
-     setConfirmEmail(dataClientSabin.email || '')
      setGender(dataClientSabin.sexo || '')
      setBirthdate(formatBirthdate(dataClientSabin.dataNascimento) || '')
      setPhone(dataClientSabin.telefone || '')

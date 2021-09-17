@@ -17,6 +17,7 @@ function Routes() {
       <Route path="/master-page" component={MasterPage} />
       <Route path="/password" component={Password} />
       <Route path="/teste" component={Teste} />
+      <Route path="/definir-senha" component={Password} />
     </Switch>
   )
 }
