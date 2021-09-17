@@ -159,8 +159,7 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
             acesso será bloqueado.
           </p>
           <footer>
-            <OutlineButton onClick={handleCloseModal}>Não</OutlineButton>
-            <ButtonPrimary onClick={handleCloseModal}>Sim</ButtonPrimary>
+            <ButtonPrimary onClick={handleCloseModal}>OK</ButtonPrimary>
           </footer>
         </Container>
       )}

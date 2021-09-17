@@ -1,36 +1,37 @@
 import styled from 'styled-components'
 
 import { Accordion } from '@material-ui/core'
+import colors from '@/styles/colors'
 
 export const AccordionContainer = styled(Accordion)`
   margin-bottom: 30px;
-  h2 {
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 25px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #6a6a6a;
-    width: 100%;
+
+  .MuiAccordionSummary-root {
+    h2 {
+      width: 100%;
+
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 25px;
+
+      color: ${colors.gray.dark};
+    }
   }
-  h3 {
+
+  > h3 {
     margin-top: 16px;
     font-size: 16px;
-    font-style: normal;
     font-weight: 700;
     line-height: 24px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #909090;
+    color: ${colors.gray.middle};
   }
-  h4 {
+  > h4 {
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
     line-height: 25px;
     letter-spacing: 0em;
-    color: #9146ff;
+    color: ${colors.purple.main.dark};
     margin-bottom: 15px;
   }
 `
@@ -40,12 +41,12 @@ export const Content = styled.div`
   > div:first-child {
     margin-right: 100px;
   }
-  ul {
+  > ul {
     margin-bottom: 45px;
-    li + li {
+    > li + li {
       margin-top: 15px;
     }
-    li {
+    > li {
       font-size: 16px;
       font-weight: 500;
       line-height: 19px;
