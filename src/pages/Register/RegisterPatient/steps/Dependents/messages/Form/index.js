@@ -169,7 +169,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
           sm={6}
           className="justify-content-sm-end justify-content-center d-flex"
         >
-          <OutlineButton variation="red" onClick={() => onCloseModal(false)}>
+          <OutlineButton variation="red" onClick={() => {setErrors({});onCloseModal(false)}}>
             Cancelar
           </OutlineButton>
         </Col>

@@ -17,7 +17,7 @@ import alreadyExists from './messages/Error/AlreadyExists'
 import exitImg from '@/assets/icons/times.svg'
 
 const RegisterPatient = () => {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(4)
   const [data, setData] = useState({})
   const [dataClientSabin, setDataClientSabin] = useState({})
   // const [images, setImages] = useState('')
@@ -26,7 +26,7 @@ const RegisterPatient = () => {
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState(null);
   const location = useLocation()
-  useEffect(() => { 
+  useEffect(() => {
     if(!location.state) return
     setDataClientSabin(location.state.userData)
   },[])
