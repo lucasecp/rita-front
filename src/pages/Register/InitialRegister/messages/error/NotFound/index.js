@@ -6,11 +6,11 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 import { Container } from '../../styles'
 import { useHistory } from 'react-router-dom'
 
-function NotFound({ onShowModal }) {
+function NotFound({ onShowModal,...data}) {
   const history = useHistory()
   const handleCloseModal = () => {
     onShowModal(false)
-    history.push('/cadastro/paciente')
+    history.push('/cadastro/paciente/',{userData:{cpf: data.cpf}})
   }
 
   return (

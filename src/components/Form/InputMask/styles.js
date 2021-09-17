@@ -24,6 +24,9 @@ export const Container = styled.div`
     box-shadow: 0px 2px 4px 0px #e5e5e5;
     font-weight: 500;
     width: 100%;
+    :disabled{
+    background: #EEEEEE;
+  }
 
   ${({ hasError }) =>
     hasError &&
