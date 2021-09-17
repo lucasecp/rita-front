@@ -40,7 +40,7 @@ const colors = {
     extraLight: '#F5F5F5',
     light: '#EEEEEE',
     middleLight: '#AFAFAF',
-    middle: '#919191',
+    middle: '#909090',
     dark: '#6A6A6A',
   },
 
