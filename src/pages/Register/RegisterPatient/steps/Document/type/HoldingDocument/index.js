@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import {
-  Accordion,
   AccordionDetails,
   AccordionSummary,
-  Typography,
 } from '@material-ui/core'
-import { AccordionContainer, Content, ContentFile } from '../style'
-import AccordionComponent from '@/components/Accordion'
+import { AccordionContainer, ContentFile } from '../style'
 import trash from '@/assets/img/trash.png'
-import { holdingDocumentTips } from '../tips'
-import InputFile from '@/components/Form/InputFile/InputFile'
-import OutlineButton from '@/components/Button/Outline'
 import Modal from '@/components/Modal'
 import BigSize from '../../messages/BigSize'
 import InvalidFormat from '../../messages/InvalidFormat'
