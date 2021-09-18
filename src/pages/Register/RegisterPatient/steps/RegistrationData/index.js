@@ -42,6 +42,7 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
     }, [dataClientSabin]);
 
     useEffect(() => {
+
     const hasErrors = Object.values(errors).filter((err) => err).length
     if (
       name &&
@@ -65,10 +66,10 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
       setBtn(true)
       setData(data => {return{ ...data,...dataObj }})
     }
-    return () => {
+    else{
       setBtn(false)
     }
-  }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone])
+  }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone,errors])
 
   const openModal = (Message, rest) => {
     setShowModal(true)
