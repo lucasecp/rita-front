@@ -1,6 +1,7 @@
 import Footer from '@/components/Layout/DefaultLayout/Footer'
 import React from 'react'
 import { useMediaPredicate } from 'react-media-hook'
+import ritaLogoImg from '@/assets/logo/expanded-logo.svg'
 import { Container } from './style'
 
 function LayoutExpanded({ children }) {
@@ -9,8 +10,7 @@ function LayoutExpanded({ children }) {
     <>
       <Container>
         <aside>
-          <div />
-          {/* <img src={isMobile ? expandedLogo : logoRitaVertical} /> COLOCAR A LOGO DA IMAGEM */}
+          <img src={ritaLogoImg} />
         </aside>
         <main>
           <section>

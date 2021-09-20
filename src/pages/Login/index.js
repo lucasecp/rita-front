@@ -4,7 +4,7 @@ import LayoutExpanded from '@/components/Layout/LoginLayout'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Content } from './style'
-// import ritaLogoImg from '@/assets/logo/vertical-named-logo.svg'
+import ritaLogoImg from '@/assets/logo/expanded-logo.svg'
 
 function Login() {
   return (
@@ -12,7 +12,7 @@ function Login() {
       <LayoutExpanded>
         <aside>{/* <img src={ritaLogoImg} /> */}</aside>
         <Content>
-          <InputMask className="mb-3" label="CPF*:" />
+          <InputMask className="mb-3" label="CPF*:" type="" />
           <InputMask
             className="mb-3"
             label="Senha*:"
@@ -23,10 +23,8 @@ function Login() {
             <p className="mt-3">Esqueci minha senha</p>
           </div>
           <div>
-            <span className="">
-              Não possui conta?
-              <Link> Cadastre-se aqui</Link>
-            </span>
+            <span> Não possui conta?</span>
+            <Link> Cadastre-se aqui</Link>
           </div>
         </Content>
       </LayoutExpanded>

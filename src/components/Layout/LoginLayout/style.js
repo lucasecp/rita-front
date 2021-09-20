@@ -11,6 +11,11 @@ export const Container = styled.div`
   background-size: 100%;
   background-position: left center;
 
+  > aside img {
+    margin: 0 auto;
+    padding-top: 45px;
+  }
+
   @media (max-width: 1180px) {
     grid-template-columns: 3fr;
   }

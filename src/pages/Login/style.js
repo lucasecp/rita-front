@@ -7,8 +7,7 @@ export const Content = styled.div`
   box-shadow: 0px 2px 8px rgba(223, 210, 255, 0.15);
   border-radius: 8px;
   padding: 38px 32px 24px;
-  margin: 250px auto;
-  /* colocar um espaçamento no footer */
+  margin: 0 auto;
   width: 60%;
 
   > div p {
@@ -26,7 +25,7 @@ export const Content = styled.div`
     width: 100%;
   }
 
-  > div p:first-child {
+  > div p {
     border-bottom: 1px solid #afafaf;
     padding-bottom: 20px;
     text-decoration: underline;
@@ -40,7 +39,7 @@ export const Content = styled.div`
     font-size: 16px;
     line-height: 20px;
     color: #afafaf;
-    padding-left: 90px;
+    padding-left: 70px;
   }
 
   @media (max-width: 900px) {
