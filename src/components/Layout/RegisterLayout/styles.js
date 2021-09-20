@@ -36,7 +36,7 @@ export const Container = styled.div`
     }
 
     > img {
-      position: absolute;
+      position: fixed;
 
       margin-top: 104px;
       width: 120px;
@@ -80,6 +80,7 @@ export const Container = styled.div`
         margin-left: -20px;
         margin-top: 48px;
         filter: brightness(6.5);
+        position: absolute
       }
     }
     > main {

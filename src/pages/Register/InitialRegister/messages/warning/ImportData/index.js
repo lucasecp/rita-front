@@ -9,10 +9,9 @@ import { useHistory } from 'react-router-dom'
 
 function ImportData({ onShowModal, ...data }) {
   const history = useHistory()
-
-  const pushToHome = () => {
+  const pushToRegister = () => {
     onShowModal(false)
-    history.push('/cadastro/paciente')
+    history.push('/cadastro/paciente',{userData:{cpf: data.cpf}})
   }
   const pushToPreRegister = () => {
     onShowModal(false)
@@ -24,7 +23,7 @@ function ImportData({ onShowModal, ...data }) {
       <img src={WarningError} />
       <p>Autoriza importar seus dados cadastrais do Cartão Sabin Saúde?</p>
       <ButtonGroup>
-        <OutlineButton onClick={pushToHome}>Não</OutlineButton>
+        <OutlineButton onClick={pushToRegister}>Não</OutlineButton>
         <ButtonPrimary onClick={pushToPreRegister}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>

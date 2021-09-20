@@ -16,6 +16,7 @@ import {
 } from '../../../../helpers/validator'
 import { MsgError } from '../../../style'
 import formatBirthdate from '@/pages/Register/RegisterPatient/helpers/formatBirthdate'
+
 const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -24,7 +25,9 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
   const [phone, setPhone] = useState('')
   const [cpf, setCpf] = useState('')
   const [errors, setErrors] = useState({})
-
+  useEffect(() => {
+    setErrors({})
+  }, []);
   useEffect(() => {
     if (!editDep) return
     setName(editDep.nome || '')
@@ -36,8 +39,12 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
   }, [editDep])
 
   const dataIsEmptyOrNot = () =>
-    name && email && cpf && birthdate && gender && phone
+    name && email && cpf && birthdate && gender && phone && !Object.values(errors).filter((err) => err).length
 
+  const depAlreadyExists = () => {
+    const alreadyExist = allDeps.filter(dep=> dep.cpf.replace(/[^a-zA-Z0-9]/g,'') === cpf.replace(/[^a-zA-Z0-9]/g,''))
+    return alreadyExist.length
+  }
   const hanldeSubmit = (e) => {
     e.preventDefault()
     const dataObj = [
@@ -50,6 +57,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
         cpf,
       },
     ]
+    if(depAlreadyExists()) return setErrors({...errors,submit: 'Dependente já existente com este CPF'})
     setAllDeps((data) => [...data, ...dataObj])
     onCloseModal(false)
   }
@@ -61,8 +69,8 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
       'email': email,
       'sexo': gender,
       'dataNascimento': birthdate,
-      'telefone': phone,
-      'cpf': cpf,
+      'telefone': phone.replace(/[^a-zA-Z0-9]/g, ''),
+      'cpf': cpf.replace(/[^a-zA-Z0-9]/g, ''),
     }})
     setAllDeps(valueUpdated)
     onCloseModal(false)
@@ -73,7 +81,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
       <Row>
         <Col md="6">
           <InputText
-            label="Nome Completo:"
+            label="Nome Completo*:"
             value={name}
             setValue={setName}
             hasError={errors.name}
@@ -84,19 +92,20 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
         </Col>
         <Col md="6" className="mt-4 mt-md-0">
           <InputMask
-            label="CPF:"
+            label="CPF*:"
             mask="999.999.999-99"
             value={cpf}
             setValue={setCpf}
             hasError={errors.cpf}
             onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
             onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
+            disabled={Object.keys(editDep).length}
           />
           {errors.cpf && <MsgError>{errors.cpf}</MsgError>}
         </Col>
         <Col md="6" className="mt-4">
           <InputMask
-            label="Data de Nascimento:"
+            label="Data de Nascimento*:"
             mask="99/99/9999"
             value={birthdate}
             setValue={setBirthdate}
@@ -112,7 +121,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
         </Col>
         <Col md="6" className="mt-4">
           <SelectComponent
-            label="Gênero:"
+            label="Gênero*:"
             labeDefaultOption="selecione"
             options={[
               { label: 'Masculino', value: 'M' },
@@ -132,7 +141,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
         </Col>
         <Col md="6" className="mt-4">
           <InputMask
-            label="Celular:"
+            label="Celular*:"
             mask="(99) 99999-9999"
             value={phone}
             setValue={setPhone}
@@ -145,7 +154,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
 
         <Col md="6" className="mt-4">
           <InputText
-            label="E-mail:"
+            label="E-mail*:"
             value={email}
             setValue={setEmail}
             hasError={errors.email}
@@ -160,28 +169,29 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
           sm={6}
           className="justify-content-sm-end justify-content-center d-flex"
         >
-          <OutlineButton variation="red" onClick={() => onCloseModal(false)}>
+          <OutlineButton variation="red" onClick={() => {setErrors({});onCloseModal(false)}}>
             Cancelar
           </OutlineButton>
         </Col>
         <Col
           sm={6}
           className="justify-content-center justify-content-sm-start d-flex mt-3 mt-sm-0"
-        >
-          {!editDep ? (
+          >
+          {!Object.keys(editDep).length ? (
             <ButtonPrimary
-              disabled={!dataIsEmptyOrNot()}
-              onClick={hanldeSubmit}
+            disabled={!dataIsEmptyOrNot()}
+            onClick={hanldeSubmit}
             >
               Salvar
             </ButtonPrimary>
           ) : (
             <ButtonPrimary
-              disabled={!dataIsEmptyOrNot()}
-              onClick={handleUpdate}
+            disabled={!dataIsEmptyOrNot()}
+            onClick={handleUpdate}
             >Salvar</ButtonPrimary>
-          )}
+            )}
         </Col>
+            {errors.submit && <MsgError className='text-center mt-3'>{errors.submit}</MsgError>}
       </Row>
     </Container>
   )

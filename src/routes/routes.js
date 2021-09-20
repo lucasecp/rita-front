@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, Router } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import Header from '@/components/HeaderTest'
 import Teste from '@/pages/Teste'
 import MasterPage from '@/pages/MasterPage'
@@ -19,6 +19,7 @@ function Routes() {
       <Route path="/password" component={Password} />
       <Route path="/login" component={Login} />
       <Route path="/teste" component={Teste} />
+      <Route path="/definir-senha" component={Password} />
     </Switch>
   )
 }

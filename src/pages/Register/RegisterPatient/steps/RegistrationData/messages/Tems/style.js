@@ -15,7 +15,7 @@ export const Container = styled.div`
     color: #6a6a6a;
     margin-right:35px;
     +p{
-      margin-top: 10px;
+      margin-top: 20px;
     }
   }
   h2 {

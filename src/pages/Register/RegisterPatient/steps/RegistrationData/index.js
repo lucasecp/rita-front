@@ -35,7 +35,6 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
     if(!dataClientSabin) return
      setName(dataClientSabin.nome || '')
      setEmail(dataClientSabin.email || '')
-     setConfirmEmail(dataClientSabin.email || '')
      setGender(dataClientSabin.sexo || '')
      setBirthdate(formatBirthdate(dataClientSabin.dataNascimento) || '')
      setPhone(dataClientSabin.telefone || '')
@@ -43,6 +42,7 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
     }, [dataClientSabin]);
 
     useEffect(() => {
+
     const hasErrors = Object.values(errors).filter((err) => err).length
     if (
       name &&
@@ -61,15 +61,15 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
         sexo:gender,
         dataNascimento: birthdate,
        telefone: phone,
-        cpf,
+        cpf
       }
       setBtn(true)
       setData(data => {return{ ...data,...dataObj }})
     }
-    return () => {
+    else{
       setBtn(false)
     }
-  }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone])
+  }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone,errors])
 
   const openModal = (Message, rest) => {
     setShowModal(true)
@@ -125,8 +125,8 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
             hasError={errors.email}
             value={email}
             setValue={setEmail}
-            onBlur={() => setErrors({ ...errors, ...validateEmail(email) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateEmail(email) })}
+            onBlur={() => setErrors({ ...errors, ...validateEmail(email,confirmEmail) })}
+            onKeyUp={() => setErrors({ ...errors, ...validateEmail(email,confirmEmail) })}
           />
           {errors.email && <MsgError>{errors.email}</MsgError>}
         </Col>
@@ -196,7 +196,7 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
             hasError={errors.cpf}
             onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
             onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
-            disabled={dataClientSabin.email}
+            disabled={dataClientSabin.cpf}
           />
           {errors.cpf && <MsgError>{errors.cpf}</MsgError>}
         </Col>

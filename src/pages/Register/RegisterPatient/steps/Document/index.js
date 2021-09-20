@@ -1,13 +1,4 @@
-import React, { useState } from 'react'
-
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Typography,
-} from '@material-ui/core'
-
-import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons'
+import React, { useEffect, useState } from 'react'
 
 import { Container } from './styles'
 
@@ -15,10 +6,13 @@ import HoldingDocument from './type/HoldingDocument'
 import OwnDocument from './type/OwnDocument'
 import ProofOfIncome from './type/ProofOfIncome'
 
-const Document = () => {
+const Document = ({ setBtn }) => {
   const [holdingDocument, setHoldingDocument] = useState('')
   const [ownDocument, setOwnDocument] = useState('')
   const [proofOfIncome, setProofOfIncome] = useState('')
+  useEffect(() => {
+    setBtn(true)
+  }, [])
 
   return (
     <Container>

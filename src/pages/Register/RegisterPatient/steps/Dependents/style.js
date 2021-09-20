@@ -5,7 +5,7 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   > button {
-    margin-top: 50px;
+    margin-bottom: 20px;
   }
   form {
     display: flex;

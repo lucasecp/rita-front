@@ -8,10 +8,10 @@ import MenuProvider from './context/Menu'
 const App = () => {
   return (
     <MenuProvider>
-    <BrowserRouter>
-      <GlobalStyle />
-      <Routes />
-    </BrowserRouter>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Routes />
+      </BrowserRouter>
     </MenuProvider>
   )
 }

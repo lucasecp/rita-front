@@ -6,7 +6,6 @@ export const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,15 +14,18 @@ export const Container = styled.div`
   height: 100vh;
 
   background: ${hexToRgba(colors.black, 0.8)};
+  opacity: 0;
   z-index: 0;
   visibility: hidden;
-  transition: .3s;
+  transition: 0.3s;
 
-  ${({show}) => show && css`
-  z-index: 2;
-  opacity:1;
-  visibility: visible;
-  `}
+  ${({ show }) =>
+    show &&
+    css`
+      z-index: 2;
+      opacity: 1;
+      visibility: visible;
+    `}
 
   > div {
     background: #ffffff;
@@ -37,31 +39,30 @@ export const Container = styled.div`
     height: fit-content;
 
     padding: 32px;
-
+    max-width: 90%;
     min-width: 33%;
     opacity: 1;
     z-index: 9999;
 
     position: relative;
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 90%;
-    transition: .3s;
-    transform: translate3d(0,-15px,0);
-    ${({show}) => show && css`
-    transform: translate3d(0,0,0);
-  `}
+    transition: 0.3s;
+    transform: translate3d(0, -15px, 0);
+    ${({ show }) =>
+      show &&
+      css`
+        transform: translate3d(0, 0, 0);
+      `}
 
-    > img {
-      position: absolute;
+    > span {
+      position: fixed;
       top: 0px;
       right: 0px;
       padding: 16px;
       cursor: pointer;
     }
-
-
-
-
   }
 
   @media (max-width: 767px) {

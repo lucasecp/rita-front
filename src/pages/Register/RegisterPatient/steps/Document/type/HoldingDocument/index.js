@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Typography,
-} from '@material-ui/core'
-import { AccordionContainer, Content, ContentFile } from '../style'
-import AccordionComponent from '@/components/Accordion'
-import selfie from '@/assets/img/selfie.png'
+import { AccordionDetails, AccordionSummary } from '@material-ui/core'
+import { AccordionContainer, ContentFile } from '../style'
 import trash from '@/assets/img/trash.png'
-import { holdingDocumentTips } from '../tips'
-import InputFile from '@/components/Form/InputFile/InputFile'
-import OutlineButton from '@/components/Button/Outline'
 import Modal from '@/components/Modal'
 import BigSize from '../../messages/BigSize'
 import InvalidFormat from '../../messages/InvalidFormat'
 
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons'
+import InstructionsHoldingDocuments from './Instructions'
+import SendedFile from '../../components/SendedFile'
 
 const HoldingDocument = ({ setValue, value }) => {
   const [showModal, setShowModal] = useState(false)
   const [messages, setMessages] = useState(null)
+
+  const [holdingDocumentFile, setHoldingDocumentFile] = useState('')
 
   useEffect(() => {
     if (!value) return
@@ -46,6 +40,8 @@ const HoldingDocument = ({ setValue, value }) => {
     setMessages(<Message onShowModal={setShowModal} />)
   }
 
+  console.log(holdingDocumentFile)
+
   return (
     <>
       <AccordionContainer square={true} defaultExpanded={true} expand={!value}>
@@ -68,30 +64,14 @@ const HoldingDocument = ({ setValue, value }) => {
           </div>
         </AccordionSummary>
         <AccordionDetails>
-          <h3>
-            Faça aqui o upload da sua foto segurando o documento de
-            identificação que contenha o seu CPF:
-          </h3>
-          <Content>
-            <div>
-              <img src={selfie} />
-            </div>
-            <div>
-              <h4>Como tirar a foto:</h4>
-              <ul>
-                {holdingDocumentTips.map((tip, index) => (
-                  <li key={index}>{tip}</li>
-                ))}
-              </ul>
-              <InputFile setValue={setValue}>
-                <OutlineButton>Selecionar Arquivo</OutlineButton>
-              </InputFile>
-              <span>
-                Tamanho máximo do arquivo: 10MB <br />
-                Tipos de arquivos aceitos: jpg, jpeg, png ou pdf.
-              </span>
-            </div>
-          </Content>
+          {holdingDocumentFile ? (
+            <SendedFile
+              file={holdingDocumentFile}
+              onGetFile={setHoldingDocumentFile}
+            />
+          ) : (
+            <InstructionsHoldingDocuments onGetFile={setHoldingDocumentFile} />
+          )}
         </AccordionDetails>
       </AccordionContainer>
       <Modal show={showModal}>{messages}</Modal>

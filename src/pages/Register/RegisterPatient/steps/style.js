@@ -42,4 +42,5 @@ export const MsgError = styled.p`
   text-align: left;
   color: #df644b;
   margin-top: 6px;
+  
 `
