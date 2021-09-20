@@ -6,6 +6,7 @@ import MasterPage from '@/pages/MasterPage'
 
 import registerRoutes from './register.routes'
 import Password from '@/pages/Password'
+import MenuProvider from '@/context/Menu'
 
 function Routes() {
   return (
@@ -14,7 +15,9 @@ function Routes() {
 
       <Route exact path="/" component={Header} />
 
-      <Route path="/master-page" component={MasterPage} />
+      <MenuProvider>
+        <Route path="/master-page" component={MasterPage} />
+      </MenuProvider>
       <Route path="/password" component={Password} />
       <Route path="/teste" component={Teste} />
       <Route path="/definir-senha" component={Password} />
