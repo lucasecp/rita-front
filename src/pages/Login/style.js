@@ -42,14 +42,7 @@ export const Content = styled.div`
     color: #afafaf;
     padding-left: 90px;
   }
-  > link {
-    font-family: Athletics;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 20px;
-    text-decoration: underline;
-  }
+
   @media (max-width: 900px) {
     > footer {
       align-self: center;
