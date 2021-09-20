@@ -19,7 +19,9 @@ export const Content = styled.div`
     line-height: 20px;
     color: #afafaf;
     text-align: center;
+    cursor: pointer;
   }
+
   > button {
     width: 100%;
   }
@@ -28,18 +30,26 @@ export const Content = styled.div`
     border-bottom: 1px solid #afafaf;
     padding-bottom: 20px;
     text-decoration: underline;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
 
-  > div + div span {
+  > div span {
     font-family: Athletics;
     font-style: normal;
     font-weight: 300;
     font-size: 16px;
     line-height: 20px;
     color: #afafaf;
+    padding-left: 90px;
   }
-
+  > link {
+    font-family: Athletics;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: underline;
+  }
   @media (max-width: 900px) {
     > footer {
       align-self: center;

@@ -23,8 +23,10 @@ function Login() {
             <p className="mt-3">Esqueci minha senha</p>
           </div>
           <div>
-            <span>Não possui conta?</span>
-            <Link> Cadastre-se aqui</Link>
+            <span className="">
+              Não possui conta?
+              <Link> Cadastre-se aqui</Link>
+            </span>
           </div>
         </Content>
       </LayoutExpanded>
