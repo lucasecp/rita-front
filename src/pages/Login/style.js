@@ -20,22 +20,24 @@ export const Content = styled.div`
     color: #afafaf;
     text-align: center;
   }
+  > button {
+    width: 100%;
+  }
 
   > div p:first-child {
     border-bottom: 1px solid #afafaf;
     padding-bottom: 20px;
     text-decoration: underline;
-    cursor: pointer;
     margin-bottom: 25px;
   }
 
-  > div span {
+  > div + div span {
     font-family: Athletics;
+    font-style: normal;
     font-weight: 300;
     font-size: 16px;
     line-height: 20px;
     color: #afafaf;
-    margin-left: auto;
   }
 
   @media (max-width: 900px) {
@@ -53,10 +55,6 @@ export const Content = styled.div`
       display: flex;
       flex-direction: column;
       width: 100%;
-
-      > button + button {
-        margin-left: 0px;
-      }
     }
   }
 `

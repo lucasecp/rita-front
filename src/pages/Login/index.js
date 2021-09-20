@@ -2,6 +2,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
 import LayoutExpanded from '@/components/Layout/LoginLayout'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Content } from './style'
 // import ritaLogoImg from '@/assets/logo/vertical-named-logo.svg'
 
@@ -22,10 +23,8 @@ function Login() {
             <p className="mt-3">Esqueci minha senha</p>
           </div>
           <div>
-            <span className="mt-3">
-              Não possui conta? {/* colocar em um p */}
-              <a className="mt-3"> Cadastre-se aqui</a>
-            </span>
+            <span>Não possui conta?</span>
+            <Link> Cadastre-se aqui</Link>
           </div>
         </Content>
       </LayoutExpanded>
