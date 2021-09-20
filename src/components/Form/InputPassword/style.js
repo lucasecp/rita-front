@@ -7,7 +7,7 @@ export const Container = styled.div`
 
   label {
     margin-bottom: 6px;
-    /* color: ${colors.text.primary}; */
+    color: red;
     grid-area: 1/1;
     font-size: 14px;
     line-height: 16px;
@@ -21,7 +21,7 @@ export const Container = styled.div`
 `
 export const Input = styled.input`
   border: solid #dcdfe6 1px;
-  /* color: ${colors.text.primary}; */
+  color: red;
   border-radius: 4px;
   outline-color: #419eff;
   padding: 14px;

@@ -6,6 +6,7 @@ import MasterPage from '@/pages/MasterPage'
 
 import registerRoutes from './register.routes'
 import Password from '@/pages/Password'
+import Login from '@/pages/Login'
 
 function Routes() {
   return (
@@ -16,6 +17,7 @@ function Routes() {
 
       <Route path="/master-page" component={MasterPage} />
       <Route path="/password" component={Password} />
+      <Route path="/login" component={Login} />
       <Route path="/teste" component={Teste} />
     </Switch>
   )

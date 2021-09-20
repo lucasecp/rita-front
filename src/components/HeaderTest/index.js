@@ -12,6 +12,7 @@ const Header = () => {
         <Link to="/cadastro/paciente">Cadastro Paciente</Link>
         <Link to="/pre-cadastro">Pré Cadastro</Link>
         <Link to="/password">Definição de Senha</Link>
+        <Link to="/login">Login</Link>
       </nav>
     </HeaderLayout>
   )
