@@ -4,13 +4,11 @@ import LayoutExpanded from '@/components/Layout/LoginLayout'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Content } from './style'
-import ritaLogoImg from '@/assets/logo/expanded-logo.svg'
 
 function Login() {
   return (
     <>
       <LayoutExpanded>
-        <aside>{/* <img src={ritaLogoImg} /> */}</aside>
         <Content>
           <InputMask className="mb-3" label="CPF*:" type="" />
           <InputMask
