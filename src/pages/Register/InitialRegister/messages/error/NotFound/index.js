@@ -7,13 +7,13 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 import { Container } from '../../styles'
 import { useModal } from '@/context/useModal'
 
-function NotFound() {
+function NotFound({ ...data }) {
   const history = useHistory()
   const { closeModal } = useModal()
 
   const handleCloseModal = () => {
     closeModal()
-    history.push('/cadastro/paciente')
+    history.push('/cadastro/paciente/', { userData: { cpf: data.cpf } })
   }
 
   return (

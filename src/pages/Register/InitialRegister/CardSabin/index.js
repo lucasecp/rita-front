@@ -40,6 +40,7 @@ function RegisterCardSabin() {
       const { data: responseApi } = await axios.get(
         `/paciente/status?cpf=${cpf}`
       )
+    
 
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
         return showMessage(ImportData, {
@@ -63,7 +64,7 @@ function RegisterCardSabin() {
     } catch ({ response }) {
       const apiStatus = response.status
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return showMessage(NotFound)
+        return showMessage(NotFound,{cpf})
       }
     } finally {
       setLoading(false)

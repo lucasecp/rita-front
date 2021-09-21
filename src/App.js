@@ -7,18 +7,25 @@ import Routes from './routes/routes'
 import GlobalStyle from './styles/global'
 
 import MenuProvider from './context/Menu'
+import AuthProvider from './context/login'
+import ModuleProvider from './context/Module'
+
 import { ModalProvider } from './context/useModal'
 
 const App = () => {
   return (
     <BrowserRouter>
-      <ModalProvider>
-        <MenuProvider>
-          <GlobalStyle />
-          <Routes />
-          <ModalWithHook />
-        </MenuProvider>
-      </ModalProvider>
+      <ModuleProvider>
+        <AuthProvider>
+          <ModalProvider>
+            <MenuProvider>
+              <GlobalStyle />
+              <Routes />
+              <ModalWithHook />
+            </MenuProvider>
+          </ModalProvider>
+        </AuthProvider>
+      </ModuleProvider>
     </BrowserRouter>
   )
 }

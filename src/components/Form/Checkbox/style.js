@@ -7,7 +7,7 @@ export const Container = styled.div`
      color: #919191;
      }
     .MuiCheckbox-colorPrimary.Mui-checked{
-       color: ${colors.primary}
+       color: ${colors.purple.main.dark}
      }
      .MuiTypography-body1{
        font-family: Athletics;

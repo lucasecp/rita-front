@@ -19,15 +19,15 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     line-height: 20px;
-    color: #AFAFAF;
+    color: #afafaf;
     position: absolute;
     top: -30px;
-    right:0;
+    right: 0;
     padding: 0;
-    img{
-      width:15px;
+    img {
+      width: 15px;
       height: 15px;
-      margin-left:8px;
+      margin-left: 8px;
     }
   }
   header {

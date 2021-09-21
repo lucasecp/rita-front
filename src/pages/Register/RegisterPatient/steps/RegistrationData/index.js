@@ -4,7 +4,8 @@ import InputText from '@/components/Form/InputText'
 import Select from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
-import { Container, MsgError } from '../style'
+import MsgError from '@/components/MsgError'
+import { Container } from '../style'
 import { BtnTerms } from './style'
 import Modal from '@/components/Modal'
 import Terms from './messages/Tems'
@@ -66,11 +67,10 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
       setData((data) => {
         return { ...data, ...dataObj }
       })
-    }
-    return () => {
+    } else {
       setBtn(false)
     }
-  }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone])
+  }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone, errors])
 
   const openModal = (Message, rest) => {
     setShowModal(true)

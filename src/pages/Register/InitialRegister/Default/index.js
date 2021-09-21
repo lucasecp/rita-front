@@ -66,7 +66,7 @@ function DefaultRegister() {
     } catch ({ response }) {
       const apiStatus = response.status
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return history.push('/')
+        return history.push('/cadastro/paciente/',{userData:{cpf}})
       }
     } finally {
       setLoading(false)

@@ -25,6 +25,9 @@ export const Input = styled.input`
   box-shadow: 0px 2px 4px 0px #e5e5e5;
   font-weight: 500;
   width: 100%;
+  :disabled{
+    background: #EEEEEE;
+  }
 
   ::after {
     content: '';
@@ -65,6 +68,9 @@ export const Select = styled.select`
   font-weight: 500;
   outline: none;
   width:100%;
+  :disabled{
+    background: #EEEEEE;
+  }
   ::after {
     content: '';
     position: absolute;
