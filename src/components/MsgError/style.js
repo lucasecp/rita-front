@@ -8,5 +8,4 @@ export const Container = styled.p`
   letter-spacing: 0em;
   text-align: left;
   color: #df644b;
-  margin-top: 6px;
 `;

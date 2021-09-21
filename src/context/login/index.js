@@ -22,12 +22,12 @@ export default function AuthProvider({ children }) {
         setErrors({ message: 'Erro na requisição' })
       }
     } finally {
-      loading(false)
+      setLoading(false)
     }
   }
-  const setDataLogin = ({ id, email, token }) => {
-    setUser({ id, email, token, })
-    setLocalStorage({ id, email, token })
+  const setDataLogin = ({ id, cpf, token }) => {
+    setUser({ id, cpf, token, })
+    setLocalStorage({ id, cpf, token })
   }
   const logout = () => {
     setUser(null)

@@ -14,18 +14,16 @@ export const Content = styled.form`
   max-width: 458px;
   margin: auto;
 
-  > a,> a + div {
+  > span,> span + div {
     /* font-family: Athletics;
     font-style: normal; */
     font-size: 16px;
     line-height: 20px;
     color: #afafaf;
-    cursor: pointer;
-    display: block;
     text-align: center;
 
   }
-  > a + div{
+  > span + div{
     position: relative;
     margin-top: 28px;
     ::before{
@@ -41,20 +39,30 @@ export const Content = styled.form`
   }
   .MuiTypography-body1{
     color: #afafaf;
-
-  }
-  a{
-    text-decoration: underline;
-    font-weight: 700;
-    transition: .3s;
-  }
-  > a{
-    margin-top: 25px;
-    margin-bottom: 70px;
     :hover{
       color: #0007;
     }
   }
+  a,> span{
+    text-decoration: underline;
+    font-weight: 700;
+    transition: .3s;
+    cursor:pointer
+  }
+  > span{
+    margin-top: 25px;
+    margin-bottom: 70px;
+    display: flex;
+    justify-content: center;
+    cursor: default;
+    a{
+      color: #afafaf;
+      :hover{
+        color: #0007;
+      }
+    }
+  }
+
 
 
   > button {
@@ -72,22 +80,13 @@ export const Content = styled.form`
   @media(max-width: 767px){
    padding: 51px 24px 24px;
   }
+  div + p{
+    margin-bottom: 24px;
+    margin-top: 6px
+  }
+  div+div{
+    margin-top: 24px;
 
-  /* @media (max-width: 900px) {
-    > footer {
-      align-self: center;
-    }
-  } */
+  }
 
-  /* @media (max-width: 800px) {
-    padding: 32px 16px 24px;
-  } */
-
-  /* @media (max-width: 550px) {
-    > footer {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-  } */
 `
