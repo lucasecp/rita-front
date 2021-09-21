@@ -1,24 +1,23 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
-
+import CustomRoutes from './CustomRoutes'
 import RegisterCardSabin from '@/pages/Register/InitialRegister/CardSabin'
 import DefaultRegister from '@/pages/Register/InitialRegister/Default'
 import PreRegister from '@/pages/Register/PreRegister/PreRegister'
 import RegisterPatient from '@/pages/Register/RegisterPatient'
 
 const registerRoutes = [
-  <Route path="/pre-cadastro" component={PreRegister} key="precadastro" />,
-  <Route
+  <CustomRoutes path="/pre-cadastro" component={PreRegister} key="precadastro" />,
+  <CustomRoutes
     path="/cadastro-inicial"
     component={DefaultRegister}
     key="cadastroinicial"
   />,
-  <Route
+  <CustomRoutes
     path="/cadastro/paciente"
     component={RegisterPatient}
     key="cadastropaciente"
   />,
-  <Route
+  <CustomRoutes
     path="/cadastro-cartao-sabin"
     component={RegisterCardSabin}
     key="cadastrocartaosabin"

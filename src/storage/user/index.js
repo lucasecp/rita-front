@@ -1,3 +1,4 @@
+
 export const getUser = () => JSON.parse(localStorage.getItem('user'));
 
 export const setLocalStorage = (payload) => {
@@ -5,3 +6,4 @@ export const setLocalStorage = (payload) => {
   localStorage.setItem('user', JSON.stringify(data));
 };
 export const deleteLocalStorage = () => localStorage.removeItem('user');
+

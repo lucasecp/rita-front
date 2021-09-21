@@ -4,17 +4,18 @@ import React, { createContext, useState, useContext, useEffect } from 'react'
 
 const UserContext = createContext()
 
-export default function AuthPatientProvider({ children }) {
+export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setErrors] = useState({ message: '' })
+
   useEffect(() => {
     setUser(getUser())
   }, [])
   const login = async (payload) => {
     try {
       setLoading(true)
-      const { data } = await api.post('/login/patient', payload)
+      const { data } = await api.post('/login', payload)
       setDataLogin(data)
     } catch ({ response }) {
       if (response.status === 400) {
@@ -25,8 +26,8 @@ export default function AuthPatientProvider({ children }) {
     }
   }
   const setDataLogin = ({ id, email, token }) => {
-    setUser({ id, email, token, module: 'patient' })
-      setLocalStorage({ id, email, token})
+    setUser({ id, email, token, })
+    setLocalStorage({ id, email, token })
   }
   const logout = () => {
     setUser(null)
@@ -34,10 +35,10 @@ export default function AuthPatientProvider({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ user, loading, error, login,logout }}>
+    <UserContext.Provider value={{ user, loading, error, login, logout }}>
       {children}
     </UserContext.Provider>
   )
 }
 
-export const useAuthPatient = () => useContext(UserContext)
+export const useAuth = () => useContext(UserContext)

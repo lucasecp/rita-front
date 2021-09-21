@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import logoFooter from '../../../../assets/icons/logoSymbol.png'
+import logoFooter from '@/assets/logo/symbol.svg'
 import { Container, Time } from './styles'
 
 const Footer = () => {
