@@ -14,7 +14,7 @@ import {
   validateName,
   validatePhone,
 } from '../../../../helpers/validator'
-import { MsgError } from '../../../style'
+import MsgError from '@/components/MsgError'
 import formatBirthdate from '@/pages/Register/RegisterPatient/helpers/formatBirthdate'
 
 const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {

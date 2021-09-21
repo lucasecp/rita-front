@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from './style'
-import logoGif from '@/assets/icons/logo-animate.gif'
+import logoGif from '@/assets/logo/logo-animate.gif'
 
 const Loading = ({active}) => {
   return (

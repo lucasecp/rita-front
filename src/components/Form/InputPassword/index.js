@@ -1,14 +1,12 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { BtnEye, Container, Input } from './style'
 import eye from '../../../assets/icons/eye.png'
 
-const InputPassword = (props) => {
-  const [activeEyes, setActiveEyes] = useState(false)
+const InputPassword = ({value,setValue,label,...rest}) => {
   const inputPass = useRef()
 
   const handleChange = (e) => {
-    props.setValue(e.target.value)
-    setActiveEyes(true)
+    setValue(e.target.value)
   }
   const handleSeePassword = () =>
     inputPass.current.type === 'password'
@@ -17,23 +15,18 @@ const InputPassword = (props) => {
 
   return (
     <Container>
-      <label htmlFor={props.label}>{props.label}</label>
+     {label && <label htmlFor={label}>{label}</label>}
       <Input
         type="password"
-        value={props.value}
-        id={props.label}
+        value={value}
+        id={label}
         onChange={handleChange}
         ref={inputPass}
-        disabled={props.disabled}
-        onFocus={() =>
-          props.value ? setActiveEyes(true) : setActiveEyes(false)
-        }
+        {...rest}
       />
-      {activeEyes && (
         <BtnEye type="button" onClick={handleSeePassword}>
           <img src={eye} />
         </BtnEye>
-      )}
     </Container>
   )
 }

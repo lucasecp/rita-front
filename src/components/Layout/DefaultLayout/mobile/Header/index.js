@@ -3,7 +3,7 @@ import { Container, Hamburger, Profile } from './style'
 import profileImg from '../../../../../assets/img/profile.png'
 import { Link } from 'react-router-dom'
 import notification from '../../../../../assets/icons/notification.svg'
-import logo from '../../../../../assets/icons/logoSymbol.png'
+import logo from '@/assets/logo/symbol.svg'
 import { useMenu } from '../../../../../context/Menu'
 import logout from '../../../../../assets/icons/logout.svg'
 
