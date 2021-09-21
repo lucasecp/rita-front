@@ -1,25 +1,45 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import zoomIcon from '@/assets/icons/zoom.svg'
 import trashIcon from '@/assets/icons/trash.svg'
 
+import { Container } from './styles'
+
+import BigSize from '../../messages/BigSize'
+import InvalidFormat from '../../messages/InvalidFormat'
+
 import OutlineButton from '@/components/Button/Outline'
 import InputFile from '@/components/Form/InputFile/InputFile'
-
-import { Container } from './styles'
 import Modal from '@/components/Modal'
 
-function SendedFile({ file, onGetFile }) {
-  const sourceFile = URL.createObjectURL(file)
+import { useModal } from '@/context/useModal'
 
-  const [showModal, setShowModal] = useState(false)
+import isValidSizeFile from '@/helpers/file/validateSizeFile'
+import isValidTypeFile from '@/helpers/file/validateTypeFile'
+import ImagePreview from '../../messages/ImagePreview'
+
+function SendedFile({ file, onGetFile }) {
+  // const { modalVisible, message, closeable, showMessage, closeModal } = useModal()
+  const { showMessage } = useModal()
+
+  useEffect(() => {
+    if (!isValidTypeFile(file)) {
+      showMessage(InvalidFormat)
+      return removeFile()
+    }
+
+    if (!isValidSizeFile(file)) {
+      showMessage(BigSize)
+      return removeFile()
+    }
+  }, [file])
 
   const removeFile = () => {
-    onGetFile('')
+    onGetFile(null)
   }
 
   const showPreview = () => {
-    setShowModal(true)
+    showMessage(ImagePreview, { file }, true)
   }
 
   return (
@@ -43,9 +63,6 @@ function SendedFile({ file, onGetFile }) {
             Remover
           </button>
         </aside>
-        <Modal show={showModal} onCloseModal={setShowModal}>
-          <img src={sourceFile} />
-        </Modal>
       </Container>
     </>
   )

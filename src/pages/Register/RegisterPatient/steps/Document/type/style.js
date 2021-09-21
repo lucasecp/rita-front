@@ -6,18 +6,6 @@ import colors from '@/styles/colors'
 export const AccordionContainer = styled(Accordion)`
   margin-bottom: 30px;
 
-  .MuiAccordionSummary-root {
-    h2 {
-      width: 100%;
-
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 25px;
-
-      color: ${colors.gray.dark};
-    }
-  }
-
   > h3 {
     margin-top: 16px;
     font-size: 16px;

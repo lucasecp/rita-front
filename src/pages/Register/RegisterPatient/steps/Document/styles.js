@@ -17,6 +17,24 @@ export const Container = styled.div`
   .MuiAccordionSummary-root {
     padding: 0;
     border-bottom: 2px solid ${colors.purple.background.middle};
+
+    h2 {
+      width: 100%;
+
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 25px;
+
+      color: ${colors.gray.dark};
+    }
+
+    &.Mui-disabled {
+      opacity: unset;
+
+      > div h2 {
+        color: ${colors.gray.middle};
+      }
+    }
   }
   .MuiAccordionDetails-root {
     padding: 0;
@@ -41,5 +59,16 @@ export const Container = styled.div`
 
   .MuiAccordion-rounded:last-child {
     border-radius: unset;
+  }
+
+  .MuiAccordionSummary-expandIcon {
+    width: 48px;
+    height: 48px;
+
+    &.Mui-expanded {
+      span svg {
+        fill: ${colors.purple.main.light};
+      }
+    }
   }
 `

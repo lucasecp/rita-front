@@ -25,21 +25,23 @@ const Address = ({ setBtn, setData, dataClientSabin }) => {
     setComplement(endereco.complemento || '')
   }, [dataClientSabin])
   useEffect(() => {
-      const dataObj = {
-        bairro: district,
-        uf,
-        cidade: city,
-        logradouro: address,
-        numero: numberHome,
-        cep: cep,
-        complemento: complement,
-      }
-      setBtn(true)
-      setData(data => {return {...data, endereco: dataObj }})
+    const dataObj = {
+      bairro: district,
+      uf,
+      cidade: city,
+      logradouro: address,
+      numero: numberHome,
+      cep: cep,
+      complemento: complement,
+    }
+    setBtn(true)
+    setData((data) => {
+      return { ...data, endereco: dataObj }
+    })
     return () => {
       setBtn(false)
     }
-  }, [address,cep,numberHome,city,complement,uf,district])
+  }, [address, cep, numberHome, city, complement, uf, district])
   return (
     <Container>
       <h1>Endereço</h1>
@@ -56,7 +58,7 @@ const Address = ({ setBtn, setData, dataClientSabin }) => {
         <Col md="6" className="mt-4 mt-md-0">
           <Select
             label="UF:"
-            labeDefaultOption="selecione:"
+            labelDefaultOption="selecione:"
             options={UF}
             setValue={setUf}
             value={uf}

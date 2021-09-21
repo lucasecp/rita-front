@@ -7,13 +7,13 @@ import logo from '../../../../../assets/icons/logoSymbol.png'
 import { useMenu } from '../../../../../context/Menu'
 import logout from '../../../../../assets/icons/logout.svg'
 
-const HeaderMoble = () => {
-  const {showMenu,setShowMenu} = useMenu();
+const HeaderMobile = () => {
+  const { showMenu, setShowMenu } = useMenu()
   return (
     <Container>
-    <Link>
-      <img src={logo}/>
-    </Link>
+      <Link>
+        <img src={logo} />
+      </Link>
       <nav>
         <Link to="/">
           <Profile>
@@ -22,10 +22,12 @@ const HeaderMoble = () => {
         </Link>
         <img src={notification} />
         <img src={logout} />
-        <Hamburger onClick={()=> setShowMenu(!showMenu)}><span></span></Hamburger>
+        <Hamburger onClick={() => setShowMenu(!showMenu)}>
+          <span></span>
+        </Hamburger>
       </nav>
     </Container>
   )
 }
 
-export default HeaderMoble
+export default HeaderMobile

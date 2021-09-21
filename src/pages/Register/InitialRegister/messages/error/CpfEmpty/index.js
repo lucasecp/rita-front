@@ -5,16 +5,16 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 
 import { Container } from '../../styles'
 
-function CpfEmpty({ onShowModal }) {
-  const handleCloseModal = () => {
-    onShowModal(false)
-  }
+import { useModal } from '@/context/useModal'
+
+function CpfEmpty() {
+  const { closeModal } = useModal()
 
   return (
     <Container>
       <img src={errorIcon} />
       <p>O campo CPF deve ser informado.</p>
-      <ButtonPrimary onClick={handleCloseModal}>OK</ButtonPrimary>
+      <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )
 }

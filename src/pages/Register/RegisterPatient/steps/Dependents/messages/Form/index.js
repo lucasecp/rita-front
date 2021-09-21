@@ -17,7 +17,7 @@ import {
 import { MsgError } from '../../../style'
 import formatBirthdate from '@/pages/Register/RegisterPatient/helpers/formatBirthdate'
 
-const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
+const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
@@ -27,7 +27,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
   const [errors, setErrors] = useState({})
   useEffect(() => {
     setErrors({})
-  }, []);
+  }, [])
   useEffect(() => {
     if (!editDep) return
     setName(editDep.nome || '')
@@ -39,10 +39,20 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
   }, [editDep])
 
   const dataIsEmptyOrNot = () =>
-    name && email && cpf && birthdate && gender && phone && !Object.values(errors).filter((err) => err).length
+    name &&
+    email &&
+    cpf &&
+    birthdate &&
+    gender &&
+    phone &&
+    !Object.values(errors).filter((err) => err).length
 
   const depAlreadyExists = () => {
-    const alreadyExist = allDeps.filter(dep=> dep.cpf.replace(/[^a-zA-Z0-9]/g,'') === cpf.replace(/[^a-zA-Z0-9]/g,''))
+    const alreadyExist = allDeps.filter(
+      (dep) =>
+        dep.cpf.replace(/[^a-zA-Z0-9]/g, '') ===
+        cpf.replace(/[^a-zA-Z0-9]/g, '')
+    )
     return alreadyExist.length
   }
   const hanldeSubmit = (e) => {
@@ -57,21 +67,26 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
         cpf,
       },
     ]
-    if(depAlreadyExists()) return setErrors({...errors,submit: 'Dependente já existente com este CPF'})
+    if (depAlreadyExists())
+      return setErrors({
+        ...errors,
+        submit: 'Dependente já existente com este CPF',
+      })
     setAllDeps((data) => [...data, ...dataObj])
     onCloseModal(false)
   }
-  const handleUpdate = () =>{
-    const valueUpdated = allDeps.map((dep,i)=> {
-      if(dep.cpf !== cpf) return dep
-      return{
-      'nome': name,
-      'email': email,
-      'sexo': gender,
-      'dataNascimento': birthdate,
-      'telefone': phone.replace(/[^a-zA-Z0-9]/g, ''),
-      'cpf': cpf.replace(/[^a-zA-Z0-9]/g, ''),
-    }})
+  const handleUpdate = () => {
+    const valueUpdated = allDeps.map((dep, i) => {
+      if (dep.cpf !== cpf) return dep
+      return {
+        nome: name,
+        email: email,
+        sexo: gender,
+        dataNascimento: birthdate,
+        telefone: phone.replace(/[^a-zA-Z0-9]/g, ''),
+        cpf: cpf.replace(/[^a-zA-Z0-9]/g, ''),
+      }
+    })
     setAllDeps(valueUpdated)
     onCloseModal(false)
   }
@@ -122,7 +137,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
         <Col md="6" className="mt-4">
           <SelectComponent
             label="Gênero*:"
-            labeDefaultOption="selecione"
+            labelDefaultOption="selecione"
             options={[
               { label: 'Masculino', value: 'M' },
               { label: 'Feminino', value: 'F' },
@@ -169,29 +184,39 @@ const Form = ({ onCloseModal, editDep, setAllDeps,allDeps }) => {
           sm={6}
           className="justify-content-sm-end justify-content-center d-flex"
         >
-          <OutlineButton variation="red" onClick={() => {setErrors({});onCloseModal(false)}}>
+          <OutlineButton
+            variation="red"
+            onClick={() => {
+              setErrors({})
+              onCloseModal(false)
+            }}
+          >
             Cancelar
           </OutlineButton>
         </Col>
         <Col
           sm={6}
           className="justify-content-center justify-content-sm-start d-flex mt-3 mt-sm-0"
-          >
+        >
           {!Object.keys(editDep).length ? (
             <ButtonPrimary
-            disabled={!dataIsEmptyOrNot()}
-            onClick={hanldeSubmit}
+              disabled={!dataIsEmptyOrNot()}
+              onClick={hanldeSubmit}
             >
               Salvar
             </ButtonPrimary>
           ) : (
             <ButtonPrimary
-            disabled={!dataIsEmptyOrNot()}
-            onClick={handleUpdate}
-            >Salvar</ButtonPrimary>
-            )}
+              disabled={!dataIsEmptyOrNot()}
+              onClick={handleUpdate}
+            >
+              Salvar
+            </ButtonPrimary>
+          )}
         </Col>
-            {errors.submit && <MsgError className='text-center mt-3'>{errors.submit}</MsgError>}
+        {errors.submit && (
+          <MsgError className="text-center mt-3">{errors.submit}</MsgError>
+        )}
       </Row>
     </Container>
   )

@@ -4,11 +4,10 @@ import ButtonPrimary from '@/components/Button/Primary'
 import WarningError from '@/assets/icons/alerts/warning.svg'
 import whatsApp from '@/assets/icons/whatsapp.svg'
 import { Container } from '../../styles'
+import { useModal } from '@/context/useModal'
 
-function Denied({ onShowModal }) {
-  const handleCloseModal = () => {
-    onShowModal(false)
-  }
+function Denied() {
+  const { closeModal } = useModal()
 
   return (
     <Container>
@@ -23,7 +22,7 @@ function Denied({ onShowModal }) {
           (61) 3181-0999 <img src={whatsApp} />
         </a>
       </p>
-      <ButtonPrimary onClick={handleCloseModal}>Ok</ButtonPrimary>
+      <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )
 }
