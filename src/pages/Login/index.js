@@ -5,13 +5,9 @@ import LoginLayout from '@/components/Layout/LoginLayout'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Content } from './style'
-<<<<<<< HEAD
-
-=======
 import MsgError from '@/components/MsgError'
 import CheckboxComponent from '@/components/Form/Checkbox'
 import validateCpf from '@/helpers/validateCpf'
->>>>>>> 6dd6b4e3938f29603ba17d7cf996eeadc80b02c5
 function Login() {
   const [cpf, setCpf] = useState('')
   const [password, setPassword] = useState('')
@@ -20,26 +16,14 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
   }
- const validateFields = () =>{
-  setErrors({})
-  if(!cpf) setErrors({...errors,cpf: 'CPF inválido.'})
-  else if(!validateCpf(cpf)) setErrors({...errors,cpf: 'CPF inválido.'})
-  if(!password.trim()) setErrors({...errors,password: 'Senha Obrigatória.'})
- }
+  const validateFields = () => {
+    setErrors({})
+    if (!cpf) setErrors({ ...errors, cpf: 'CPF inválido.' })
+    else if (!validateCpf(cpf)) setErrors({ ...errors, cpf: 'CPF inválido.' })
+    if (!password.trim())
+      setErrors({ ...errors, password: 'Senha Obrigatória.' })
+  }
   return (
-<<<<<<< HEAD
-    <>
-      <LayoutExpanded>
-        <Content>
-          <InputMask className="mb-3" label="CPF*:" type="" />
-          <InputMask
-            className="mb-3"
-            label="Senha*:"
-            type="password"
-          ></InputMask>
-          <ButtonPrimary>Entrar</ButtonPrimary>
-          <div>
-=======
     <LoginLayout>
       <Content onSubmit={handleSubmit}>
         <InputMask
@@ -48,23 +32,22 @@ function Login() {
           className="mb-4"
           value={cpf}
           setValue={setCpf}
-          mask='999.999.999-99'
+          mask="999.999.999-99"
         />
-     { errors.cpf && <MsgError>{errors.cpf}</MsgError>}
+        {errors.cpf && <MsgError>{errors.cpf}</MsgError>}
         <InputPassword
           label="Senha*:"
           value={password}
           setValue={setPassword}
-          />
-         { errors.password && <MsgError>{errors.password}</MsgError>}
+        />
+        {errors.password && <MsgError>{errors.password}</MsgError>}
         <CheckboxComponent
-         setValue={setStayConnected}
-         checked={stayConnected}
-         label='Permanecer Conectado'
+          setValue={setStayConnected}
+          checked={stayConnected}
+          label="Permanecer Conectado"
         />
         <ButtonPrimary type="submit">Entrar</ButtonPrimary>
         {/* <div>
->>>>>>> 6dd6b4e3938f29603ba17d7cf996eeadc80b02c5
             <p className="mt-3">Esqueci minha senha</p>
           </div> */}
         <Link>Esqueci minha senha</Link>
