@@ -3,7 +3,7 @@ const downloadFile = (file) => {
   link.href = window.URL.createObjectURL(file)
   link.target = '_blank'
   link.rel = 'noreferrer'
-  link.download = `${+new Date()}`
+  link.download = `${+new Date()}.pdf`
 
   link.click()
   link.remove()
