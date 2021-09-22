@@ -19,7 +19,7 @@ import {
 } from '../../helpers/validator'
 import formatBirthdate from '../../helpers/formatBirthdate'
 
-const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
+const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [confirmEmail, setConfirmEmail] = useState('')
@@ -33,17 +33,16 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
   const [showModal, setShowModal] = useState(false)
   const [errors, setErrors] = useState({})
   useEffect(() => {
-    if(!dataClientSabin) return
-     setName(dataClientSabin.nome || '')
-     setEmail(dataClientSabin.email || '')
-     setGender(dataClientSabin.sexo || '')
-     setBirthdate(formatBirthdate(dataClientSabin.dataNascimento) || '')
-     setPhone(dataClientSabin.telefone || '')
-     setCpf(dataClientSabin.cpf || '')
-    }, [dataClientSabin]);
+    if (!dataClientSabin) return
+    setName(dataClientSabin.nome || '')
+    setEmail(dataClientSabin.email || '')
+    setGender(dataClientSabin.sexo || '')
+    setBirthdate(formatBirthdate(dataClientSabin.dataNascimento) || '')
+    setPhone(dataClientSabin.telefone || '')
+    setCpf(dataClientSabin.cpf || '')
+  }, [dataClientSabin])
 
-    useEffect(() => {
-
+  useEffect(() => {
     const hasErrors = Object.values(errors).filter((err) => err).length
     if (
       name &&
@@ -59,18 +58,19 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
       const dataObj = {
         nome: name,
         email,
-        sexo:gender,
+        sexo: gender,
         dataNascimento: birthdate,
-       telefone: phone,
-        cpf
+        telefone: phone,
+        cpf,
       }
       setBtn(true)
-      setData(data => {return{ ...data,...dataObj }})
-    }
-    else{
+      setData((data) => {
+        return { ...data, ...dataObj }
+      })
+    } else {
       setBtn(false)
     }
-  }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone,errors])
+  }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone, errors])
 
   const openModal = (Message, rest) => {
     setShowModal(true)
@@ -126,8 +126,12 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
             hasError={errors.email}
             value={email}
             setValue={setEmail}
-            onBlur={() => setErrors({ ...errors, ...validateEmail(email,confirmEmail) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateEmail(email,confirmEmail) })}
+            onBlur={() =>
+              setErrors({ ...errors, ...validateEmail(email, confirmEmail) })
+            }
+            onKeyUp={() =>
+              setErrors({ ...errors, ...validateEmail(email, confirmEmail) })
+            }
           />
           {errors.email && <MsgError>{errors.email}</MsgError>}
         </Col>
@@ -150,11 +154,18 @@ const RegistrationData = ({ setData, setBtn,dataClientSabin }) => {
         <Col md="6" className="mt-4">
           <Select
             label="Gênero*:"
-            labeDefaultOption="Selecione"
-            options={[{label:'Masculino',value: 'M'}, {label:'Feminino',value: 'F'},{label:'Outros',value: 'O'}]}
+            labelDefaultOption="Selecione"
+            options={[
+              { label: 'Masculino', value: 'M' },
+              { label: 'Feminino', value: 'F' },
+              { label: 'Outros', value: 'O' },
+            ]}
             setValue={setGender}
             hasError={errors.gender}
-            onChange={(e) => {setGender(e.target.value);setErrors({ ...errors, ...validateGender(e.target.value) })}}
+            onChange={(e) => {
+              setGender(e.target.value)
+              setErrors({ ...errors, ...validateGender(e.target.value) })
+            }}
             value={gender}
           />
           {errors.gender && <MsgError>{errors.gender}</MsgError>}

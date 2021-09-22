@@ -20,19 +20,15 @@ import { status } from '../service'
 import Loading from '@/components/Loading/RitaLoading'
 import axios from '@/services/api'
 import AlreadyExists from '../messages/warning/AlreadyExists'
+import { useModal } from '@/context/useModal'
 
 function DefaultRegister() {
   const [cpf, setCpf] = useState('')
-  const [showModal, setShowModal] = useState(false)
-  const [message, setMessage] = useState(null)
   const [showLoading, setLoading] = useState(false)
 
   const history = useHistory()
 
-  const showMessage = (MessageComponent, props) => {
-    setShowModal(true)
-    setMessage(<MessageComponent {...props} onShowModal={setShowModal} />)
-  }
+  const { showMessage } = useModal()
 
   const handleConfirm = async () => {
     if (cpf.length === 0) {
@@ -94,7 +90,6 @@ function DefaultRegister() {
           </div>
         </Content>
       </RegisterLayout>
-      <Modal show={showModal}>{message}</Modal>
       <Loading active={showLoading} />
     </>
   )

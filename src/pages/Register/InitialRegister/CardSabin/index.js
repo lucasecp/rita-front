@@ -19,17 +19,13 @@ import Divergence from '../messages/warning/Divergence'
 import Denied from '../messages/warning/Denied'
 import ImportData from '../messages/warning/ImportData'
 import Loading from '@/components/Loading/RitaLoading'
+import { useModal } from '@/context/useModal'
 
 function RegisterCardSabin() {
   const [cpf, setCpf] = useState('')
-  const [showModal, setShowModal] = useState(false)
-  const [message, setMessage] = useState(null)
   const [showLoading, setLoading] = useState(false)
 
-  const showMessage = (MessageComponent, props) => {
-    setShowModal(true)
-    setMessage(<MessageComponent {...props} onShowModal={setShowModal} />)
-  }
+  const { showMessage } = useModal()
 
   const handleConfirm = async () => {
     if (cpf.length === 0) {
@@ -92,7 +88,6 @@ function RegisterCardSabin() {
           </section>
         </Content>
       </RegisterLayout>
-      <Modal show={showModal}>{message}</Modal>
       <Loading active={showLoading} />
     </>
   )

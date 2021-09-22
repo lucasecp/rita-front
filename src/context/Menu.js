@@ -1,17 +1,18 @@
 import React, { createContext, useState, useContext } from 'react'
 
-const ThemeContext = createContext()
+const MenuContext = createContext()
 
 export default function MenuProvider({ children }) {
   const [showMenu, setShowMenu] = useState(false)
   return (
-    <ThemeContext.Provider value={{ showMenu, setShowMenu }}>
+    <MenuContext.Provider value={{ showMenu, setShowMenu }}>
       {children}
-    </ThemeContext.Provider>
+    </MenuContext.Provider>
   )
 }
 
 export function useMenu() {
-  const context = useContext(ThemeContext)
+  const context = useContext(MenuContext)
+  
   return context
 }

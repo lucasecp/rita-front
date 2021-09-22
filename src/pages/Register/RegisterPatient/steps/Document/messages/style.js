@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ export const Container = styled.div`
 
   > p {
     max-width: 410px;
-    color: #6A6A6A;
+    color: #6a6a6a;
 
     font-weight: 500;
     font-size: 20px;

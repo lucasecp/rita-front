@@ -17,7 +17,7 @@ export const Container = styled.div`
     }
 
     > h6 {
-      width: 234px;
+      width: 187px;
 
       margin-left: 12px;
       margin-right: 12px;
@@ -58,11 +58,6 @@ export const Container = styled.div`
       } */
       img {
         margin-right: 8px;
-      }
-    }
-
-    > div {
-      > img {
       }
     }
   }

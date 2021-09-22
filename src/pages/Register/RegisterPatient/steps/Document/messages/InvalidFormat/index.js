@@ -1,21 +1,19 @@
 import React from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
-import errorIcon from '@/assets/icons/alerts/error.svg'
-import { Container } from '../style'
+import warningIcon from '@/assets/icons/alerts/warning.svg'
 
-function BigSize({ onShowModal }) {
-  const handleCloseModal = () => {
-    onShowModal(false)
-  }
+import { Container } from '../style'
+import { useModal } from '@/context/useModal'
+
+function BigSize() {
+  const { closeModal } = useModal()
 
   return (
     <Container>
-      <img src={errorIcon} />
-      <p>
-      Formato do Arquivo inválido. Por favor, selecione outro arquivo.
-      </p>
-      <ButtonPrimary onClick={handleCloseModal}>OK</ButtonPrimary>
+      <img src={warningIcon} />
+      <p>Formato do Arquivo inválido. Por favor, selecione outro arquivo.</p>
+      <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )
 }

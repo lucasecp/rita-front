@@ -6,16 +6,18 @@ import WarningError from '@/assets/icons/alerts/warning.svg'
 import { Container, ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
+import { useModal } from '@/context/useModal'
 
-function Found({ onShowModal, ...data }) {
+function Found(data) {
   const history = useHistory()
+  const { closeModal } = useModal()
 
   const pushToRegister = () => {
-    onShowModal(false)
-    return history.push('/cadastro/paciente/',{userData:{cpf: data.cpf}})
+    closeModal()
+    return history.push('/cadastro/paciente/', { userData: { cpf: data.cpf } })
   }
   const pushToPreRegister = () => {
-    onShowModal(false)
+    closeModal()
     history.push('/pre-cadastro', data)
   }
 

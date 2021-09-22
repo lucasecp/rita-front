@@ -20,7 +20,7 @@ export const Container = styled.div`
     min-height: 100%;
     height: 100vh;
     display: block;
-    position: absolute;
+    position: fixed;
     top: 0;
     opacity: 0.6;
  }

@@ -17,7 +17,7 @@ import alreadyExists from './messages/Error/AlreadyExists'
 import exitImg from '@/assets/icons/times.svg'
 
 const RegisterPatient = () => {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(3)
   const [data, setData] = useState({})
   const [dataClientSabin, setDataClientSabin] = useState({})
   // const [images, setImages] = useState('')
