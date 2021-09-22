@@ -6,10 +6,20 @@ export const Container = styled.div`
   padding-top: 16px;
 
   > header {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     > div {
     }
   }
+
+  > h6 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+
+    color: ${colors.orange.middleDark};
+    margin-bottom: 16px;
+  }
+
   > p {
     background: ${colors.gray.light};
     border-radius: 8px;

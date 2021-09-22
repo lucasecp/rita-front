@@ -7,7 +7,7 @@ const InputFile = ({ children, setValue, ...rest }) => {
     <Container onClick={() => inpFile.current.click()}>
       <input
         type="file"
-        accept="image/*,.pdf"
+        accept=".png, .jpg, .jpeg, .pdf"
         ref={inpFile}
         hidden
         onChange={({ target }) => setValue(target.files[0])}

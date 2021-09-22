@@ -39,7 +39,7 @@ function SendedFile({ file, onGetFile }) {
   }, [file])
 
   const removeFile = () => {
-    onGetFile(null)
+    onGetFile('')
   }
 
   const previewForPdf = () => {

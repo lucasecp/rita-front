@@ -6,23 +6,47 @@ import HoldingDocument from './type/HoldingDocument'
 import OwnDocument from './type/OwnDocument'
 import ProofOfIncome from './type/ProofOfIncome'
 
-const Document = ({ setBtn }) => {
-  const [holdingDocument, setHoldingDocument] = useState('')
-  const [ownDocument, setOwnDocument] = useState('')
-  const [proofOfIncome, setProofOfIncome] = useState('')
+const Document = ({ setButtonPass }) => {
+  const [holdingDocumentFile, setHoldingDocumentFile] = useState('')
+  const [ownDocumentFile, setOwnDocumentFile] = useState('')
+  const [proofOfIncomeFile, setProofOfIncomeFile] = useState('')
+  const [selectIncome, setSelectIncome] = useState('')
 
   useEffect(() => {
-    setBtn(true)
-  }, [])
+    if (holdingDocumentFile !== '' && ownDocumentFile !== '') {
+      return setButtonPass(true)
+      // terminar lógica
+    }
+
+    setButtonPass(false)
+  }, [holdingDocumentFile, ownDocumentFile])
+
+  console.log(
+    holdingDocumentFile,
+    ownDocumentFile,
+    proofOfIncomeFile,
+    selectIncome
+  )
 
   return (
     <Container>
       <h1>Documentos</h1>
-      <HoldingDocument setValue={setHoldingDocument} value={holdingDocument} />
+      <HoldingDocument
+        onGetFile={setHoldingDocumentFile}
+        holdingDocumentFile={holdingDocumentFile}
+      />
 
-      <OwnDocument setValue={setOwnDocument} value={ownDocument} />
+      <OwnDocument
+        onGetFile={setOwnDocumentFile}
+        ownDocumentFile={ownDocumentFile}
+      />
 
-      <ProofOfIncome setValue={setProofOfIncome} value={proofOfIncome} />
+      <ProofOfIncome
+        onGetFile={setProofOfIncomeFile}
+        proofOfIncomeFile={proofOfIncomeFile}
+        onSelectIncome={setSelectIncome}
+        selectIncome={selectIncome}
+      />
     </Container>
   )
 }

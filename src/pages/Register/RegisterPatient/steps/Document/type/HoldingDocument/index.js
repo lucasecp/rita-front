@@ -7,9 +7,7 @@ import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
 import InstructionsHoldingDocuments from './Instructions'
 import SendedFile from '../../components/SendedFile'
 
-const HoldingDocument = () => {
-  const [holdingDocumentFile, setHoldingDocumentFile] = useState('')
-
+const HoldingDocument = ({ holdingDocumentFile, onGetFile }) => {
   return (
     <>
       <AccordionContainer square={true} defaultExpanded={true}>
@@ -23,13 +21,10 @@ const HoldingDocument = () => {
         </AccordionSummary>
         <AccordionDetails>
           {holdingDocumentFile && (
-            <SendedFile
-              file={holdingDocumentFile}
-              onGetFile={setHoldingDocumentFile}
-            />
+            <SendedFile file={holdingDocumentFile} onGetFile={onGetFile} />
           )}
           {!holdingDocumentFile && (
-            <InstructionsHoldingDocuments onGetFile={setHoldingDocumentFile} />
+            <InstructionsHoldingDocuments onGetFile={onGetFile} />
           )}
         </AccordionDetails>
       </AccordionContainer>

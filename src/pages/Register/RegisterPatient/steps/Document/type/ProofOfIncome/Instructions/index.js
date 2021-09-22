@@ -33,6 +33,7 @@ function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
         />
         {/* {errors.gender && <MsgError>{errors.gender}</MsgError>} */}
       </header>
+      <h6>A seleção da sua faixa de renda é obrigatória.</h6>
       <p>
         <WarningIcon />
         <small>
@@ -48,7 +49,9 @@ function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
           para concluir o cadastro.
         </small>
       </p>
-      <BoxSendIncome onGetFile={onGetFile} />
+      {selectIncome !== '' && selectIncome !== 'more_one_half' && (
+        <BoxSendIncome onGetFile={onGetFile} />
+      )}
     </Container>
   )
 }

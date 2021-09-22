@@ -4,6 +4,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   background: #fff;
   padding: 40px 32px;
+  width: 100%;
 
   h1 {
     font-size: 32px;
