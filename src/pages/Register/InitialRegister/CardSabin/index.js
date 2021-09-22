@@ -8,7 +8,7 @@ import validateCpf from '@/helpers/validateCpf'
 import cardSabinImg from '@/assets/img/card-sabin.png'
 import { Content } from './styles'
 
-import axios from '@/services/api'
+import axios from '@/services/apiPatient'
 import { status } from '../service'
 import InvalidCpf from '../messages/error/InvalidCpf'
 import CpfEmpty from '../messages/error/CpfEmpty'
@@ -40,7 +40,7 @@ function RegisterCardSabin() {
       const { data: responseApi } = await axios.get(
         `/paciente/status?cpf=${cpf}`
       )
-    
+
 
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
         return showMessage(ImportData, {

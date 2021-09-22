@@ -18,7 +18,7 @@ import Denied from '../messages/warning/Denied'
 import Found from '../messages/warning/Found'
 import { status } from '../service'
 import Loading from '@/components/Loading/RitaLoading'
-import axios from '@/services/api'
+import axios from '@/services/apiPatient'
 import AlreadyExists from '../messages/warning/AlreadyExists'
 import { useModal } from '@/context/useModal'
 

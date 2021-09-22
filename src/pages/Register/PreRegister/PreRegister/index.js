@@ -15,7 +15,7 @@ import InsertToken from '../messages/InsertToken'
 import DataDontMatch from '../messages/error/DataDontMatch'
 import Denied from '../messages/error/Danied'
 import isEmail from '@/helpers/isEmail'
-import api from '@/services/api'
+import apiPatient from '@/services/apiPatient'
 import Loading from '@/components/Loading/RitaLoading'
 import InputMask from '@/components/Form/InputMask'
 
@@ -92,7 +92,7 @@ function PreRegister() {
     console.log(phone.length)
 
     try {
-      await api.post(
+      await apiPatient.post(
         '/paciente/token',
         choice === 'email'
           ? {

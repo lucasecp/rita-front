@@ -6,7 +6,7 @@ import warningIcon from '@/assets/icons/alerts/warning.svg'
 
 import { Container } from '../styles'
 import RequestNewTokenTimer from './RequestNewTokenTimer'
-import api from '@/services/api'
+import apiPatient from '@/services/apiPatient'
 import Denied from '../error/Danied'
 import InputMask from '@/components/Form/InputMask'
 import { useHistory } from 'react-router-dom'
@@ -37,7 +37,7 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
     onLoading(true)
 
     try {
-      const response = await api.post(
+      const response = await apiPatient.post(
         '/paciente/token',
         email
           ? {
@@ -71,7 +71,7 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
     setHasError(false)
 
     try {
-      const response = await api.get(
+      const response = await apiPatient.get(
         `/paciente/token?token=${token}&cpf=${cpf}`
       )
 

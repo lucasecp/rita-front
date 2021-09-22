@@ -7,7 +7,7 @@ import Dependents from './steps/Dependents'
 import { Content, DotSteps, BtnGroup, BtnPrev, CustomBtn } from './style'
 import { useLocation } from 'react-router'
 // import { DATAFAKE } from './static'
-import api from '@/services/api'
+import apiPatient from '@/services/apiPatient'
 import Loading from '@/components/Loading/RitaLoading'
 import Modal from '@/components/Modal'
 import Success from './messages/Success'
@@ -43,7 +43,7 @@ const RegisterPatient = () => {
   const handleSubmit = async () => {
     try {
       setLoading(true)
-      const response = await api.post('/paciente', data)
+      const response = await apiPatient.post('/paciente', data)
       if (response.status === 201) {
         showMessage(Success)
       }

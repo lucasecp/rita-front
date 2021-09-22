@@ -9,18 +9,23 @@ import MsgError from '@/components/MsgError'
 import CheckboxComponent from '@/components/Form/Checkbox'
 import validateCpf from '@/helpers/validateCpf'
 import { useAuth } from '@/context/login'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import LoadingWithHook from '@/components/LoadingWithHook/RitaLoading'
+import { useModal } from '@/context/useModal'
+import HasCardSabin from './messages/HasCardSabin'
+
 function Login() {
   const [cpf, setCpf] = useState('')
   const [password, setPassword] = useState('')
   const [stayConnected, setStayConnected] = useState(false)
   const [errors, setErrors] = useState({})
   const {login} = useAuth()
+  const {showMessage} = useModal()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if(validateErrors().cpf || validateErrors().password ) return
-
-    login({cpf,password})
+    login({cpf: clearSpecialCaracter(cpf),senha:password,permanecerConectado: stayConnected})
   }
 
  const validateErrors = () =>{
@@ -63,9 +68,10 @@ function Login() {
        <span> <Link >Esqueci minha senha</Link> </span>
         <div>
           Não possui conta?
-          <Link> Cadastre-se aqui</Link>
+          <Link to='#' onClick={() => showMessage(HasCardSabin)}>Cadastre-se aqui</Link>
         </div>
       </Content>
+      <LoadingWithHook/>
     </LoginLayout>
   )
 }
