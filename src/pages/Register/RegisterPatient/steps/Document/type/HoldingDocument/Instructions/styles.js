@@ -17,7 +17,7 @@ export const Container = styled.div`
     margin-top: 32px;
     justify-items: center;
 
-    gap: 16px;
+    gap: 64px;
 
     > section {
       > img {
@@ -67,6 +67,22 @@ export const Container = styled.div`
         font-size: 12px;
         line-height: 125%;
         color: ${colors.gray.middle};
+      }
+    }
+  }
+
+  @media (max-width: 880px) {
+    > div {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 500px) {
+    > div aside div {
+      width: 100%;
+
+      > button {
+        width: 100%;
       }
     }
   }

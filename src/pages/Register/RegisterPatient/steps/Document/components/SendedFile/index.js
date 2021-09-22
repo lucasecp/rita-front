@@ -10,17 +10,21 @@ import InvalidFormat from '../../messages/InvalidFormat'
 
 import OutlineButton from '@/components/Button/Outline'
 import InputFile from '@/components/Form/InputFile/InputFile'
-import Modal from '@/components/Modal'
 
 import { useModal } from '@/context/useModal'
 
 import isValidSizeFile from '@/helpers/file/validateSizeFile'
 import isValidTypeFile from '@/helpers/file/validateTypeFile'
 import ImagePreview from '../../messages/ImagePreview'
+import downloadFile from '@/helpers/downloadFile'
+import { useMediaPredicate } from 'react-media-hook'
+import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
 
 function SendedFile({ file, onGetFile }) {
   // const { modalVisible, message, closeable, showMessage, closeModal } = useModal()
   const { showMessage } = useModal()
+
+  const isMobile = useMediaPredicate('(max-width: 800px)')
 
   useEffect(() => {
     if (!isValidTypeFile(file)) {
@@ -38,7 +42,19 @@ function SendedFile({ file, onGetFile }) {
     onGetFile(null)
   }
 
+  const previewForPdf = () => {
+    if (isMobile) {
+      return downloadFile(file)
+    }
+
+    return previewFileInNewBlank(file)
+  }
+
   const showPreview = () => {
+    if (file.type === 'application/pdf') {
+      return previewForPdf()
+    }
+
     showMessage(ImagePreview, { file }, true)
   }
 

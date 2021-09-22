@@ -10,6 +10,7 @@ const Document = ({ setBtn }) => {
   const [holdingDocument, setHoldingDocument] = useState('')
   const [ownDocument, setOwnDocument] = useState('')
   const [proofOfIncome, setProofOfIncome] = useState('')
+
   useEffect(() => {
     setBtn(true)
   }, [])

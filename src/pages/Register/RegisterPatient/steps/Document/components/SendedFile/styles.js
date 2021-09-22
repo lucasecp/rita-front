@@ -17,7 +17,7 @@ export const Container = styled.div`
     }
 
     > h6 {
-      width: 187px;
+      max-width: 187px;
 
       margin-left: 12px;
       margin-right: 12px;
@@ -58,6 +58,44 @@ export const Container = styled.div`
       } */
       img {
         margin-right: 8px;
+      }
+    }
+  }
+
+  @media (max-width: 930px) {
+    display: flex;
+    flex-direction: column;
+
+    > section {
+      justify-content: space-between;
+      width: 100%;
+
+      > h6 {
+        max-width: 100%;
+      }
+    }
+
+    > aside {
+      justify-content: space-between;
+      width: 100%;
+      margin: 16px 0 0;
+    }
+  }
+
+  @media (max-width: 400px) {
+    > section {
+      flex-direction: column;
+
+      > div {
+        width: 100%;
+
+        > button {
+          width: 100%;
+        }
+      }
+
+      > h6 {
+        margin: 12px 0 0;
       }
     }
   }
