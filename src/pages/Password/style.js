@@ -8,7 +8,6 @@ export const Content = styled.div`
   border-radius: 8px;
   padding: 50px 30px;
   max-width: 768px;
-  margin-top: 104px;
 
   > h6 {
     font-size: 24px;
