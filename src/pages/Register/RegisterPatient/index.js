@@ -17,25 +17,98 @@ import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
 
 const RegisterPatient = () => {
-  const [step, setStep] = useState(1)
-  const [data, setData] = useState({})
-  const [dataClientSabin, setDataClientSabin] = useState({})
-  // const [images, setImages] = useState('')
-  const [buttonPass, setButtonPass] = useState(false)
   const location = useLocation()
   const { Loading } = useLoading()
-  const {showMessage} = useModal()
+  const { showMessage } = useModal()
 
+  const [step, setStep] = useState(3)
+  const [data, setData] = useState({})
+  const [dataClientSabin, setDataClientSabin] = useState({})
+  const [buttonPass, setButtonPass] = useState(false)
+  const [documentFiles, setdocumentFiles] = useState()
+  console.log(documentFiles)
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
 
-  // TESTE
-  // useEffect(() => {
-  //   setDataClientSabin(DATAFAKE)
-  // }, [])
+  const onUploadProgress = (ev) => {
+    const progressCalculate = parseInt(Math.round((ev.loaded * 100) / ev.total))
+    console.log(progressCalculate)
+    setProgress(progressCalculate)
+  }
+
+  const uploadDocuments = async () => {
+    Loading.turnOn()
+
+    try {
+      const formData = new FormData()
+
+      formData.append('file', documentFiles.holdingDocumentFile)
+
+      const response = await apiPatient.post(
+        `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=FotoSegurandoDoc`,
+        formData,
+        {
+          onUploadProgress,
+        }
+      )
+
+      console.log(response)
+    } catch ({ response }) {
+      console.log(response)
+    } finally {
+      Loading.turnOff()
+    }
+
+    Loading.turnOn()
+
+    try {
+      const formData = new FormData()
+
+      formData.append('file', documentFiles.ownDocumentFile)
+
+      const response = await apiPatient.post(
+        `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=Cpf`,
+        formData,
+        {
+          onUploadProgress,
+        }
+      )
+
+      console.log(response)
+    } catch ({ response }) {
+      console.log(response)
+    } finally {
+      Loading.turnOff()
+    }
+
+    if (documentFiles.proofOfIncomeFile !== '') {
+      Loading.turnOn()
+
+      try {
+        const formData = new FormData()
+
+        formData.append('file', documentFiles.proofOfIncomeFile)
+
+        const response = await apiPatient.post(
+          `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=Renda`,
+          formData,
+          {
+            onUploadProgress,
+          }
+        )
+
+        console.log(response)
+      } catch ({ response }) {
+        console.log(response)
+      } finally {
+        Loading.turnOff()
+      }
+    }
+  }
 
   const handleSubmit = async () => {
     try {
@@ -47,10 +120,12 @@ const RegisterPatient = () => {
     } catch ({ response }) {
       if (response.status === 500) showMessage(Server)
       if (response.status === 400)
-        showMessage(alreadyExists, {message: 'Usuário já existe.'})
+        showMessage(alreadyExists, { message: 'Usuário já existe.' })
     } finally {
       Loading.turnOff()
     }
+
+    uploadDocuments()
   }
   return (
     <RegisterLayout>
@@ -81,9 +156,8 @@ const RegisterPatient = () => {
         )}
         {step === 3 && (
           <Document
-            // setImages={setImages}
+            onGetDocumentFiles={setdocumentFiles}
             setButtonPass={setButtonPass}
-            dataClientSabin={dataClientSabin}
           />
         )}
         {step === 4 && (
