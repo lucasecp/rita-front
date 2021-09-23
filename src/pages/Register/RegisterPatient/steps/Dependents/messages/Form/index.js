@@ -16,8 +16,9 @@ import {
 } from '../../../../helpers/validator'
 import MsgError from '@/components/MsgError'
 import formatBirthdate from '@/pages/Register/RegisterPatient/helpers/formatBirthdate'
+import { useModal } from '@/context/useModal'
 
-const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
+const Form = ({ editDep, setAllDeps, allDeps }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
@@ -25,6 +26,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
   const [phone, setPhone] = useState('')
   const [cpf, setCpf] = useState('')
   const [errors, setErrors] = useState({})
+  const {closeModal} = useModal()
   useEffect(() => {
     setErrors({})
   }, [])
@@ -73,7 +75,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
         submit: 'Dependente já existente com este CPF',
       })
     setAllDeps((data) => [...data, ...dataObj])
-    onCloseModal(false)
+    closeModal()
   }
   const handleUpdate = () => {
     const valueUpdated = allDeps.map((dep, i) => {
@@ -88,7 +90,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
       }
     })
     setAllDeps(valueUpdated)
-    onCloseModal(false)
+    closeModal()
   }
   return (
     <Container>
@@ -102,8 +104,8 @@ const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
             hasError={errors.name}
             onBlur={() => setErrors({ ...errors, ...validateName(name) })}
             onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
+            msgError={errors.name}
           />
-          {errors.name && <MsgError>{errors.name}</MsgError>}
         </Col>
         <Col md="6" className="mt-4 mt-md-0">
           <InputMask
@@ -114,9 +116,9 @@ const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
             hasError={errors.cpf}
             onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
             onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
-            disabled={Object.keys(editDep).length}
+            disabled={editDep}
+            msgError={errors.cpf}
           />
-          {errors.cpf && <MsgError>{errors.cpf}</MsgError>}
         </Col>
         <Col md="6" className="mt-4">
           <InputMask
@@ -131,8 +133,8 @@ const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
             onKeyUp={() =>
               setErrors({ ...errors, ...validateBirthdate(birthdate) })
             }
+            msgError={errors.birthdate}
           />
-          {errors.birthdate && <MsgError>{errors.birthdate}</MsgError>}
         </Col>
         <Col md="6" className="mt-4">
           <SelectComponent
@@ -151,8 +153,8 @@ const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
               setGender(e.target.value)
               setErrors({ ...errors, ...validateGender(e.target.value) })
             }}
+            msgError={errors.gender}
           />
-          {errors.gender && <MsgError>{errors.gender}</MsgError>}
         </Col>
         <Col md="6" className="mt-4">
           <InputMask
@@ -163,8 +165,8 @@ const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
             hasError={errors.phone}
             onBlur={() => setErrors({ ...errors, ...validatePhone(phone) })}
             onKeyUp={() => setErrors({ ...errors, ...validatePhone(phone) })}
+            msgError={errors.phone}
           />
-          {errors.phone && <MsgError>{errors.phone}</MsgError>}
         </Col>
 
         <Col md="6" className="mt-4">
@@ -175,8 +177,8 @@ const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
             hasError={errors.email}
             onBlur={() => setErrors({ ...errors, ...validateEmail(email) })}
             onKeyUp={() => setErrors({ ...errors, ...validateEmail(email) })}
+            msgError={errors.email}
           />
-          {errors.email && <MsgError>{errors.email}</MsgError>}
         </Col>
       </Row>
       <Row className="mt-5 ">
@@ -188,7 +190,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
             variation="red"
             onClick={() => {
               setErrors({})
-              onCloseModal(false)
+              closeModal()
             }}
           >
             Cancelar
@@ -198,7 +200,7 @@ const Form = ({ onCloseModal, editDep, setAllDeps, allDeps }) => {
           sm={6}
           className="justify-content-center justify-content-sm-start d-flex mt-3 mt-sm-0"
         >
-          {!Object.keys(editDep).length ? (
+          {!editDep ? (
             <ButtonPrimary
               disabled={!dataIsEmptyOrNot()}
               onClick={hanldeSubmit}

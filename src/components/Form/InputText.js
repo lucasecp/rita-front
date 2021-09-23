@@ -1,4 +1,5 @@
 import React from 'react'
+import MsgError from '../MsgError'
 import { Container, Input } from './style'
 
 const InputText = ({ label, setValue, hasError,type,msgError, ...rest }) => {
@@ -11,8 +12,8 @@ const InputText = ({ label, setValue, hasError,type,msgError, ...rest }) => {
         onChange={(e) => setValue!== undefined && setValue(e.target.value)}
         hasError={hasError}
         {...rest}
-        
       />
+     {msgError && <MsgError>{msgError}</MsgError>}
 
     </Container>
   )

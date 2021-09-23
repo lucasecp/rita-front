@@ -76,9 +76,6 @@ export const Content = styled.form`
   }
 
   > div p {
-    border-bottom: 1px solid #afafaf;
-    padding-bottom: 20px;
-    text-decoration: underline;
     margin-bottom: 15px;
   }
 

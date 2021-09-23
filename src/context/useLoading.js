@@ -4,10 +4,17 @@ const LoadingContext = createContext({})
 
 const LoadingProvider = ({ children }) => {
   const [loading, setLoading] = useState(false)
-
+  const Loading = {
+      turnOff() {
+      setLoading(false)
+    },
+     turnOn() {
+      setLoading(true)
+    }
+  }
   return (
     <LoadingContext.Provider
-      value={{ loading,setLoading}}
+      value={{ loading, Loading}}
     >
       {children}
     </LoadingContext.Provider>

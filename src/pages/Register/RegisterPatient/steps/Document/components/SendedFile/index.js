@@ -10,7 +10,7 @@ import InvalidFormat from '../../messages/InvalidFormat'
 
 import OutlineButton from '@/components/Button/Outline'
 import InputFile from '@/components/Form/InputFile/InputFile'
-import Modal from '@/components/Modal'
+
 
 import { useModal } from '@/context/useModal'
 

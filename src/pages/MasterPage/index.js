@@ -4,8 +4,10 @@ import { TemplateBox } from './style'
 import FormInputs from './FormInputs'
 import Boxes from './Boxes'
 import Cards from './Cards'
+import { useAuth } from '@/context/login'
 
 const MasterPage = () => {
+  const {user} = useAuth()
   useEffect(() => {
     document.title = 'Perfil'
   }, [])

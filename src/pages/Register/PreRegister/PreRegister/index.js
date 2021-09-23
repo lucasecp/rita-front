@@ -3,7 +3,6 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { RadioGroup } from '@material-ui/core'
 
 import RegisterLayout from '@/components/Layout/RegisterLayout'
-import Modal from '@/components/Modal'
 import InputText from '@/components/Form/InputText'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
@@ -16,12 +15,15 @@ import DataDontMatch from '../messages/error/DataDontMatch'
 import Denied from '../messages/error/Danied'
 import isEmail from '@/helpers/isEmail'
 import apiPatient from '@/services/apiPatient'
-import Loading from '@/components/Loading/RitaLoading'
 import InputMask from '@/components/Form/InputMask'
+import { useLoading } from '@/context/useLoading'
+import { useModal } from '@/context/useModal'
 
 function PreRegister() {
   const history = useHistory()
   const location = useLocation()
+  const {showMessage} = useModal()
+
 
   const userData = location.state
 
@@ -30,14 +32,12 @@ function PreRegister() {
     return null
   }
 
-  const [showModal, setShowModal] = useState(false)
-  const [message, setMessage] = useState(null)
   const [choice, setChoice] = useState('')
 
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
 
-  const [isLoading, setIsLoading] = useState(false)
+  const {Loading} = useLoading()
 
   let isDataMatch
   let isLastTry
@@ -57,10 +57,6 @@ function PreRegister() {
     }
   }, [])
 
-  const showMessage = (MessageComponent, props) => {
-    setShowModal(true)
-    setMessage(<MessageComponent {...props} onShowModal={setShowModal} />)
-  }
 
   const onChoiceChange = (event) => {
     setChoice(event.target.value)
@@ -75,7 +71,7 @@ function PreRegister() {
     isLastTry = false
     isBlocked = false
 
-    setIsLoading(true)
+    Loading.turnOn()
 
     if (choice === 'email') {
       if (!isEmail(email)) {
@@ -125,7 +121,7 @@ function PreRegister() {
         }
       }
     } finally {
-      setIsLoading(false)
+      Loading.turnOff()
     }
 
     if (!isDataMatch) {
@@ -138,8 +134,7 @@ function PreRegister() {
 
     const propsToInComumSend = {
       isLastTry,
-      cpf: userData.cpf,
-      onLoading: setIsLoading,
+      cpf: userData.cpf
     }
 
     return showMessage(
@@ -216,10 +211,7 @@ function PreRegister() {
           </footer>
         </Content>
       </RegisterLayout>
-      <Modal show={showModal} onCloseModal={setShowModal}>
-        {message}
-      </Modal>
-      <Loading active={isLoading} />
+
     </>
   )
 }

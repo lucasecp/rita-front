@@ -4,11 +4,10 @@ import ButtonPrimary from '@/components/Button/Primary'
 import errorIcon from '@/assets/icons/alerts/error.svg'
 
 import { Container } from '../../styles'
+import { useModal } from '@/context/useModal'
 
-function TokenIncorrect({ onShowModal, origin }) {
-  const handleCloseModal = () => {
-    onShowModal(false)
-  }
+function TokenIncorrect({ origin }) {
+  const {closeModal} = useModal()
 
   return (
     <Container>
@@ -17,7 +16,7 @@ function TokenIncorrect({ onShowModal, origin }) {
         Por favor, verifique o número fornecido em seu{' '}
         {origin === 'email' ? 'E-mail' : 'Celular'} e tente novamente.
       </p>
-      <ButtonPrimary onClick={handleCloseModal}>OK</ButtonPrimary>
+      <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )
 }

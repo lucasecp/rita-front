@@ -10,6 +10,8 @@ import apiPatient from '@/services/apiPatient'
 import Denied from '../error/Danied'
 import InputMask from '@/components/Form/InputMask'
 import { useHistory } from 'react-router-dom'
+import { useLoading } from '@/context/useLoading'
+import { useModal } from '@/context/useModal'
 
 const MODAL = {
   INSERT_TOKEN: 'insert_token',
@@ -18,23 +20,22 @@ const MODAL = {
   BLOCKED: 'blocked',
 }
 
-function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
+function InsertToken({ isLastTry, cpf, email, phone }) {
   const history = useHistory()
+  const {closeModal} = useModal()
+
 
   const [token, setToken] = useState('')
   const [hasError, setHasError] = useState(false)
   const [waitRequestNewToken, setWaitRequestNewToken] = useState(true)
+  const {Loading} = useLoading()
 
   const [typeOfModal, setTypeOfModal] = useState(
     isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN
   )
 
-  const handleCloseModal = () => {
-    onShowModal(false)
-  }
-
   const onRequestNewToken = async () => {
-    onLoading(true)
+    Loading.turnOn()
 
     try {
       const response = await apiPatient.post(
@@ -62,12 +63,12 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
         switchModalTo(MODAL.BLOCKED)
       }
     } finally {
-      onLoading(false)
+      Loading.turnOff()
     }
   }
 
   const accessPlatform = async () => {
-    onLoading(true)
+    Loading.turnOn()
     setHasError(false)
 
     try {
@@ -98,7 +99,7 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
         switchModalTo(MODAL.BLOCKED)
       }
     } finally {
-      onLoading(false)
+      Loading.turnOff()
     }
   }
 
@@ -159,12 +160,12 @@ function InsertToken({ onShowModal, isLastTry, cpf, email, phone, onLoading }) {
             acesso será bloqueado.
           </p>
           <footer>
-            <ButtonPrimary onClick={handleCloseModal}>OK</ButtonPrimary>
+            <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
           </footer>
         </Container>
       )}
       {typeOfModal === MODAL.BLOCKED && (
-        <Denied onShowModal={handleCloseModal} />
+        <Denied />
       )}
     </>
   )

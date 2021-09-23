@@ -4,10 +4,8 @@ import InputText from '@/components/Form/InputText'
 import Select from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
-import MsgError from '@/components/MsgError'
 import { Container } from '../style'
 import { BtnTerms } from './style'
-import Modal from '@/components/Modal'
 import Terms from './messages/Tems'
 import {
   validateBirthdate,
@@ -18,6 +16,7 @@ import {
   validatePhone,
 } from '../../helpers/validator'
 import formatBirthdate from '../../helpers/formatBirthdate'
+import { useModal } from '@/context/useModal'
 
 const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
   const [name, setName] = useState('')
@@ -29,9 +28,8 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
   const [cpf, setCpf] = useState('')
 
   const [terms, setTerms] = useState(false)
-  const [message, setMessage] = useState(null)
-  const [showModal, setShowModal] = useState(false)
   const [errors, setErrors] = useState({})
+  const {showMessage} = useModal()
   useEffect(() => {
     if (!dataClientSabin) return
     setName(dataClientSabin.nome || '')
@@ -71,13 +69,6 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
       setBtn(false)
     }
   }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone, errors])
-
-  const openModal = (Message, rest) => {
-    setShowModal(true)
-    setMessage(
-      <Message setShowModal={setShowModal} setTerms={setTerms} {...rest} />
-    )
-  }
   const validateConfEmail = () => {
     if (email !== confirmEmail)
       return {
@@ -98,7 +89,7 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
   const labelTerms = (
     <>
       Li e aceito os
-      <BtnTerms onClick={() => openModal(Terms)}>Termos de uso </BtnTerms> da
+      <BtnTerms onClick={() => showMessage(Terms,{setTerms})}>Termos de uso </BtnTerms> da
       plataforma Rita.
     </>
   )
@@ -115,8 +106,8 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
             name="name"
             onBlur={() => setErrors({ ...errors, ...validateName(name) })}
             onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
+            msgError={errors.name}
           />
-          {errors.name && <MsgError>{errors.name}</MsgError>}
         </Col>
 
         <Col md="6" className="mt-4">
@@ -132,8 +123,8 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
             onKeyUp={() =>
               setErrors({ ...errors, ...validateEmail(email, confirmEmail) })
             }
+            msgError={errors.email}
           />
-          {errors.email && <MsgError>{errors.email}</MsgError>}
         </Col>
 
         <Col md="6" className="mt-4">
@@ -148,8 +139,8 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
             onKeyUp={() =>
               setErrors({ ...errors, ...validateConfEmail(confirmEmail) })
             }
+            msgError={errors.confirmEmail}
           />
-          {errors.confirmEmail && <MsgError>{errors.confirmEmail}</MsgError>}
         </Col>
         <Col md="6" className="mt-4">
           <Select
@@ -167,8 +158,8 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
               setErrors({ ...errors, ...validateGender(e.target.value) })
             }}
             value={gender}
+            msgError={errors.gender}
           />
-          {errors.gender && <MsgError>{errors.gender}</MsgError>}
         </Col>
         <Col md="6" className="mt-4">
           <InputMask
@@ -183,8 +174,8 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
             onKeyUp={() =>
               setErrors({ ...errors, ...validateBirthdate(birthdate) })
             }
+            msgError={errors.birthdate}
           />
-          {errors.birthdate && <MsgError>{errors.birthdate}</MsgError>}
         </Col>
         <Col md="6" className="mt-4">
           <InputMask
@@ -195,9 +186,9 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
             hasError={errors.phone}
             onBlur={() => setErrors({ ...errors, ...validatePhone(phone) })}
             onKeyUp={() => setErrors({ ...errors, ...validatePhone(phone) })}
+            msgError={errors.phone}
           />
 
-          {errors.phone && <MsgError>{errors.phone}</MsgError>}
         </Col>
         <Col md="6" className="mt-4">
           <InputMask
@@ -209,8 +200,8 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
             onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
             onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
             disabled={dataClientSabin.cpf}
+            msgError={errors.cpf}
           />
-          {errors.cpf && <MsgError>{errors.cpf}</MsgError>}
         </Col>
         <Col md="12" className="mt-4">
           <Checkbox
@@ -220,13 +211,10 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
             checked={terms}
             setValue={setTerms}
             onChange={() => validateTerms()}
+            msgError={errors.terms}
           />
-          {errors.terms && <MsgError>{errors.terms}</MsgError>}
         </Col>
       </Row>
-      <Modal show={showModal} onCloseModal={setShowModal}>
-        {message}
-      </Modal>
     </Container>
   )
 }

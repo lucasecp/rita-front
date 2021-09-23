@@ -4,10 +4,12 @@ import { Container,ButtonGroup } from '../style'
 import warning from '@/assets/icons/alerts/warning.svg'
 import { useHistory } from 'react-router'
 import OutlineButton from '@/components/Button/Outline'
-const Success = ({onShowModal}) => {
+import { useModal } from '@/context/useModal'
+const Success = () => {
+  const {closeModal} = useModal()
   const history = useHistory()
   const handleCloseModal = () =>{
-    onShowModal(false)
+    closeModal()
     history.push('/')
   }
   return (
@@ -15,7 +17,7 @@ const Success = ({onShowModal}) => {
       <img src={warning} />
       <p>Seu cadastro ainda não foi concluído e as informações preenchidas não serão salvas. Confirma a saída?</p>
       <ButtonGroup>
-        <OutlineButton onClick={() => onShowModal(false)}>Não</OutlineButton>
+        <OutlineButton onClick={closeModal}>Não</OutlineButton>
       <ButtonPrimary onClick={handleCloseModal}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>

@@ -1,47 +1,50 @@
 import jwt from 'jwt-decode'
 import apiUser from '@/services/apiUser'
-import { deleteLocalStorage, getUser, setLocalStorage } from '@/storage/user'
+import { deleteLocalStorage, setLocalStorage } from '@/storage/user'
 
-import React, { createContext, useState, useContext, useEffect } from 'react'
+import React, { createContext, useState, useContext } from 'react'
 import { useLoading } from '../useLoading'
 import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
+import { useHistory } from 'react-router'
 
 const UserContext = createContext()
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
-  const [module, setModule] = useState('DEFAULT')
-  const { setLoading, loading } = useLoading()
+  const { Loading } = useLoading()
   const { showMessage } = useModal()
+  const history = useHistory()
+  const [errorLogin,setErrorLogin] = useState('')
 
-  useEffect(() => {
-    setUser(getUser())
-  }, [])
-  const login = async (payload) => {
+  const login = async (payload,prevPath) => {
     try {
-      setLoading(true)
-      console.log(payload)
+      Loading.turnOn()
       const { data } = await apiUser.post('/login', payload)
       const dataUser = jwt(data.jwtToken)
-      console.log(dataUser)
+      setDataLogin({...dataUser,cpf:payload.cpf})
+      pushToUrl(prevPath)
     } catch ({ response }) {
       showMessage(InvalidCredences)
     } finally {
-      setLoading(false)
+      Loading.turnOff()
     }
   }
-  const setDataLogin = ({ id, cpf, token }) => {
-    setUser({ id, cpf, token })
-    setLocalStorage({ id, cpf, token })
+  const setDataLogin = (payload) => {
+    setUser(payload)
+    setLocalStorage(payload)
   }
   const logout = () => {
     setUser(null)
     deleteLocalStorage()
   }
+  const pushToUrl = (url) =>{
+    if(!url) return history.push('/master-page')
+    history.push(url.from)
+  }
 
   return (
-    <UserContext.Provider value={{ user, module, login, logout }}>
+    <UserContext.Provider value={{ user,setUser,errorLogin,setErrorLogin, module, login, logout }}>
       {children}
     </UserContext.Provider>
   )

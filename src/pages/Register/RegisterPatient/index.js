@@ -8,13 +8,13 @@ import { Content, DotSteps, BtnGroup, BtnPrev, CustomBtn } from './style'
 import { useLocation } from 'react-router'
 // import { DATAFAKE } from './static'
 import apiPatient from '@/services/apiPatient'
-import Loading from '@/components/Loading/RitaLoading'
-import Modal from '@/components/Modal'
 import Success from './messages/Success'
 import Warning from './messages/Warning'
 import Server from './messages/Error/Server'
 import alreadyExists from './messages/Error/AlreadyExists'
 import exitImg from '@/assets/icons/times.svg'
+import { useLoading } from '@/context/useLoading'
+import { useModal } from '@/context/useModal'
 
 const RegisterPatient = () => {
   const [step, setStep] = useState(3)
@@ -22,10 +22,11 @@ const RegisterPatient = () => {
   const [dataClientSabin, setDataClientSabin] = useState({})
   // const [images, setImages] = useState('')
   const [disableBtn, setBtn] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [showModal, setShowModal] = useState(false)
-  const [message, setMessage] = useState(null)
   const location = useLocation()
+  const { Loading } = useLoading()
+  const {showMessage} = useModal()
+
+
   useEffect(() => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
@@ -35,14 +36,10 @@ const RegisterPatient = () => {
   // useEffect(() => {
   //   setDataClientSabin(DATAFAKE)
   // }, [])
-  const showMessage = (Message, msg) => {
-    setShowModal(true)
-    setMessage(<Message onShowModal={setShowModal} msg={msg} />)
-  }
 
   const handleSubmit = async () => {
     try {
-      setLoading(true)
+      Loading.turnOn()
       const response = await apiPatient.post('/paciente', data)
       if (response.status === 201) {
         showMessage(Success)
@@ -50,9 +47,9 @@ const RegisterPatient = () => {
     } catch ({ response }) {
       if (response.status === 500) showMessage(Server)
       if (response.status === 400)
-        showMessage(alreadyExists, response.data.message)
+        showMessage(alreadyExists, {message: 'Usuário já existe.'})
     } finally {
-      setLoading(false)
+      Loading.turnOff()
     }
   }
   return (
@@ -108,8 +105,6 @@ const RegisterPatient = () => {
             </CustomBtn>
           )}
         </BtnGroup>
-        <Loading active={loading} />
-        <Modal show={showModal}>{message}</Modal>
       </Content>
     </RegisterLayout>
   )

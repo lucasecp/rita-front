@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
-import Modal from '@/components/Modal'
 import validateCpf from '@/helpers/validateCpf'
 import { useHistory } from 'react-router-dom'
 
@@ -17,15 +16,14 @@ import Divergence from '../messages/warning/Divergence'
 import Denied from '../messages/warning/Denied'
 import Found from '../messages/warning/Found'
 import { status } from '../service'
-import Loading from '@/components/Loading/RitaLoading'
 import axios from '@/services/apiPatient'
 import AlreadyExists from '../messages/warning/AlreadyExists'
 import { useModal } from '@/context/useModal'
+import { useLoading } from '@/context/useLoading'
 
 function DefaultRegister() {
   const [cpf, setCpf] = useState('')
-  const [showLoading, setLoading] = useState(false)
-
+const {Loading} = useLoading()
   const history = useHistory()
 
   const { showMessage } = useModal()
@@ -39,7 +37,7 @@ function DefaultRegister() {
       return showMessage(InvalidCpf)
     }
     try {
-      setLoading(true)
+      Loading.turnOn()
       const { data: responseApi } = await axios.get(
         `/paciente/status?cpf=${cpf}`
       )
@@ -69,7 +67,7 @@ function DefaultRegister() {
         return history.push('/cadastro/paciente/',{userData:{cpf}})
       }
     } finally {
-      setLoading(false)
+      Loading.turnOff()
     }
   }
 
@@ -90,7 +88,6 @@ function DefaultRegister() {
           </div>
         </Content>
       </RegisterLayout>
-      <Loading active={showLoading} />
     </>
   )
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import MsgError from '../MsgError'
 import { Container, Select } from './style'
 
 const SelectComponent = ({
@@ -6,6 +7,7 @@ const SelectComponent = ({
   label,
   setValue,
   labelDefaultOption,
+  msgError,
   ...rest
 }) => {
   return (
@@ -25,6 +27,7 @@ const SelectComponent = ({
           </option>
         ))}
       </Select>
+      {msgError && <MsgError>{msgError}</MsgError>}
     </Container>
   )
 }

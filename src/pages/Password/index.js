@@ -4,8 +4,8 @@ import InputMask from '@/components/Form/InputMask'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
-import { Button } from './button'
-import { Content } from './style'
+
+import { Content, Button } from './style'
 
 function Password() {
   return (
@@ -28,10 +28,8 @@ function Password() {
               <InputMask className="mt-2" label="Confirme sua nova senha*" />
             </Col>
           </Row>
-
           <Button>
             <OutlineButton className="">Voltar</OutlineButton>
-
             <ButtonPrimary>Confirmar</ButtonPrimary>
           </Button>
         </Content>

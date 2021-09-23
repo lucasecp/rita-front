@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
-import Modal from '@/components/Modal'
 import validateCpf from '@/helpers/validateCpf'
 import cardSabinImg from '@/assets/img/card-sabin.png'
 import { Content } from './styles'
@@ -18,15 +17,13 @@ import Analyzing from '../messages/warning/Analyzing'
 import Divergence from '../messages/warning/Divergence'
 import Denied from '../messages/warning/Denied'
 import ImportData from '../messages/warning/ImportData'
-import Loading from '@/components/Loading/RitaLoading'
 import { useModal } from '@/context/useModal'
+import { useLoading } from '@/context/useLoading'
 
 function RegisterCardSabin() {
   const [cpf, setCpf] = useState('')
-  const [showLoading, setLoading] = useState(false)
-
   const { showMessage } = useModal()
-
+  const {Loading} = useLoading()
   const handleConfirm = async () => {
     if (cpf.length === 0) {
       return showMessage(CpfEmpty)
@@ -36,8 +33,8 @@ function RegisterCardSabin() {
       return showMessage(InvalidCpf)
     }
     try {
-      setLoading(true)
-      const { data: responseApi } = await axios.get(
+Loading.turnOn()
+  const { data: responseApi } = await axios.get(
         `/paciente/status?cpf=${cpf}`
       )
 
@@ -67,7 +64,7 @@ function RegisterCardSabin() {
         return showMessage(NotFound,{cpf})
       }
     } finally {
-      setLoading(false)
+      Loading.turnOff()
     }
   }
 
@@ -88,7 +85,7 @@ function RegisterCardSabin() {
           </section>
         </Content>
       </RegisterLayout>
-      <Loading active={showLoading} />
+
     </>
   )
 }
