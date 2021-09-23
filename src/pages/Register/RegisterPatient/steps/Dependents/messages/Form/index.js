@@ -32,6 +32,7 @@ const Form = ({ editDep, setAllDeps, allDeps }) => {
   }, [])
   useEffect(() => {
     if (!editDep) return
+    console.log(editDep);
     setName(editDep.nome || '')
     setEmail(editDep.email || '')
     setGender(editDep.sexo || '')
@@ -116,7 +117,6 @@ const Form = ({ editDep, setAllDeps, allDeps }) => {
             hasError={errors.cpf}
             onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
             onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
-            disabled={editDep}
             msgError={errors.cpf}
           />
         </Col>
@@ -200,7 +200,7 @@ const Form = ({ editDep, setAllDeps, allDeps }) => {
           sm={6}
           className="justify-content-center justify-content-sm-start d-flex mt-3 mt-sm-0"
         >
-          {!editDep ? (
+          {!Object.values(editDep).length ? (
             <ButtonPrimary
               disabled={!dataIsEmptyOrNot()}
               onClick={hanldeSubmit}
@@ -212,7 +212,7 @@ const Form = ({ editDep, setAllDeps, allDeps }) => {
               disabled={!dataIsEmptyOrNot()}
               onClick={handleUpdate}
             >
-              Salvar
+              Atualizar
             </ButtonPrimary>
           )}
         </Col>

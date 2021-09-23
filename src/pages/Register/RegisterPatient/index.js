@@ -17,7 +17,7 @@ import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
 
 const RegisterPatient = () => {
-  const [step, setStep] = useState(3)
+  const [step, setStep] = useState(1)
   const [data, setData] = useState({})
   const [dataClientSabin, setDataClientSabin] = useState({})
   // const [images, setImages] = useState('')

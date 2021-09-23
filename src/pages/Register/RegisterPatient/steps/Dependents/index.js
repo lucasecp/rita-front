@@ -28,7 +28,7 @@ const Dependents = ({dataClientSabin,setData}) => {
     setAllDeps(valueUpdated)
   }
   const handleAddDep = () =>{
-    showMessage(Form,{allDeps,setAllDeps})
+    showMessage(Form,{editDep:{},allDeps,setAllDeps})
   }
   return (
     <Container>

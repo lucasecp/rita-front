@@ -12,9 +12,9 @@ import OutlineButton from '@/components/Button/Outline'
 function HasCardSabin() {
   const history = useHistory()
   const { closeModal } = useModal()
-  const pushToRegister = () =>{
+  const pushToPreRegister = () =>{
     closeModal(false)
-    history.push('/cadastro/paciente')
+    history.push('/cadastro-inicial')
   }
   const pushToCardSabin = () =>{
     closeModal(false)
@@ -25,7 +25,7 @@ function HasCardSabin() {
       <img src={warning} />
       <p>Possui cartão sabin?</p>
       <ButtonGroup>
-        <OutlineButton onClick={pushToRegister}>Não</OutlineButton>
+        <OutlineButton onClick={pushToPreRegister}>Não</OutlineButton>
         <ButtonPrimary onClick={pushToCardSabin}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>
