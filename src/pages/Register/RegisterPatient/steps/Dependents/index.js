@@ -1,38 +1,34 @@
 import OutlineButton from '@/components/Button/Outline'
-import Modal from '@/components/Modal'
 import React, { useEffect, useState } from 'react'
 import { Container } from '../style'
 import Form from './messages/Form'
 import { Content } from './style'
 import trash from '@/assets/icons/trash.svg'
 import edit from '@/assets/icons/edit.svg'
+import { useModal } from '@/context/useModal'
+
 const Dependents = ({dataClientSabin,setData}) => {
-  const [messages, setMessages] = useState(null)
-  const [showModal, setShowModal] = useState(false)
   const [allDeps, setAllDeps] = useState([]);
+  const {showMessage} = useModal()
+
 
   useEffect(() => {
     const {dependentes} = dataClientSabin
     setAllDeps(dependentes || [])
    }, [dataClientSabin])
+
   useEffect(() => {
     setData(data=> {return{...data, dependentes: [...allDeps]}})
    }, [allDeps])
-  const showModalMessages = (Messages,editDep) => {
-    setShowModal(true)
-    setMessages(<Messages onCloseModal={setShowModal}
-      editDep={editDep} allDeps={allDeps}
-      setAllDeps={setAllDeps} />)
-  }
   const handleUpdate = (infoDep) =>{
-   showModalMessages(Form,infoDep)
+    showMessage(Form,{editDep:infoDep,allDeps,setAllDeps})
   }
   const handleDelete = (cpf) =>{
     const valueUpdated = allDeps.filter((dep)=> dep.cpf.replace(/[^a-zA-Z0-9]/g,'') !== cpf.replace(/[^a-zA-Z0-9]/g,''))
     setAllDeps(valueUpdated)
   }
-  const handleAddDep = () =>{ 
-    showModalMessages(Form,{})
+  const handleAddDep = () =>{
+    showMessage(Form,{allDeps,setAllDeps})
   }
   return (
     <Container>
@@ -62,7 +58,6 @@ const Dependents = ({dataClientSabin,setData}) => {
           Adicionar Dependentes
         </OutlineButton>
       </Content>
-      <Modal show={showModal}>{messages}</Modal>
     </Container>
   )
 }

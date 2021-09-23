@@ -8,24 +8,26 @@ import GlobalStyle from './styles/global'
 
 import MenuProvider from './context/Menu'
 import AuthProvider from './context/login'
-import ModuleProvider from './context/Module'
 
 import { ModalProvider } from './context/useModal'
+import { LoadingProvider } from './context/useLoading'
+import LoadingWithHook from './components/LoadingWithHook/RitaLoading'
 
 const App = () => {
   return (
     <BrowserRouter>
-      <ModuleProvider>
-        <AuthProvider>
-          <ModalProvider>
+      <ModalProvider>
+        <LoadingProvider>
+          <AuthProvider>
             <MenuProvider>
               <GlobalStyle />
               <Routes />
               <ModalWithHook />
+              <LoadingWithHook />
             </MenuProvider>
-          </ModalProvider>
-        </AuthProvider>
-      </ModuleProvider>
+          </AuthProvider>
+        </LoadingProvider>
+      </ModalProvider>
     </BrowserRouter>
   )
 }

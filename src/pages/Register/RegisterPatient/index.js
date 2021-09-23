@@ -7,57 +7,74 @@ import Dependents from './steps/Dependents'
 import { Content, DotSteps, BtnGroup, BtnPrev, CustomBtn } from './style'
 import { useLocation } from 'react-router'
 // import { DATAFAKE } from './static'
-import api from '@/services/api'
-import Loading from '@/components/Loading/RitaLoading'
-import Modal from '@/components/Modal'
+import apiPatient from '@/services/apiPatient'
 import Success from './messages/Success'
 import Warning from './messages/Warning'
 import Server from './messages/Error/Server'
 import alreadyExists from './messages/Error/AlreadyExists'
 import exitImg from '@/assets/icons/times.svg'
+import { useLoading } from '@/context/useLoading'
+import { useModal } from '@/context/useModal'
 
 const RegisterPatient = () => {
+  const location = useLocation()
+  const { Loading } = useLoading()
+  const { showMessage } = useModal()
+
   const [step, setStep] = useState(3)
   const [data, setData] = useState({})
   const [dataClientSabin, setDataClientSabin] = useState({})
   const [buttonPass, setButtonPass] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [showModal, setShowModal] = useState(false)
-  const [message, setMessage] = useState(null)
-
   const [documentFiles, setdocumentFiles] = useState()
-
   console.log(documentFiles)
 
-  const location = useLocation()
   useEffect(() => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
 
-  // TESTE
-  // useEffect(() => {
-  //   setDataClientSabin(DATAFAKE)
-  // }, [])
-  const showMessage = (Message, msg) => {
-    setShowModal(true)
-    setMessage(<Message onShowModal={setShowModal} msg={msg} />)
+  const onUploadProgress = (ev) => {
+    const progress = parseInt(Math.round((ev.loaded * 100) / ev.total))
+    console.log(progress)
+  }
+
+  const uploadDocuments = () => {
+    Loading.turnOn()
+
+    try {
+      const formData = new FormData()
+
+      formData.append('file', file)
+
+      apiPatient.post(
+        `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=Cpf`,
+        formData,
+        {
+          onUploadProgress,
+        }
+      )
+    } catch ({ response }) {
+    } finally {
+      Loading.turnOff()
+    }
   }
 
   const handleSubmit = async () => {
     try {
-      setLoading(true)
-      const response = await api.post('/paciente', data)
+      Loading.turnOn()
+      const response = await apiPatient.post('/paciente', data)
       if (response.status === 201) {
         showMessage(Success)
       }
     } catch ({ response }) {
       if (response.status === 500) showMessage(Server)
       if (response.status === 400)
-        showMessage(alreadyExists, response.data.message)
+        showMessage(alreadyExists, { message: 'Usuário já existe.' })
     } finally {
-      setLoading(false)
+      Loading.turnOff()
     }
+
+    uploadDocuments()
   }
   return (
     <RegisterLayout>
@@ -111,8 +128,6 @@ const RegisterPatient = () => {
             </CustomBtn>
           )}
         </BtnGroup>
-        <Loading active={loading} />
-        <Modal show={showModal}>{message}</Modal>
       </Content>
     </RegisterLayout>
   )

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container } from './style';
 import {Checkbox, FormControlLabel} from '@material-ui/core'
-const CheckboxComponent = ({checked, setValue,label, hasError,...rest}) => {
+import MsgError from '@/components/MsgError';
+const CheckboxComponent = ({checked, setValue,label, hasError,msgError,...rest}) => {
   return (
     <Container hasError={hasError}>
        <FormControlLabel
@@ -14,6 +15,7 @@ const CheckboxComponent = ({checked, setValue,label, hasError,...rest}) => {
       />}
         label={label}
       />
+          {msgError && <MsgError>{msgError}</MsgError>}
     </Container>
   );
 };

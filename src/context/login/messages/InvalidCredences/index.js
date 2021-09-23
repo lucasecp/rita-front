@@ -3,22 +3,20 @@ import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 import errorIcon from '@/assets/icons/alerts/error.svg'
 
-import { Container } from '../../styles'
+import { Container } from '../style'
+
 import { useModal } from '@/context/useModal'
 
-function TokenIncorrect({ origin }) {
-  const {closeModal} = useModal()
+function InvalidCredences() {
+  const { closeModal } = useModal()
 
   return (
     <Container>
       <img src={errorIcon} />
-      <p>
-        Por favor, verifique o número fornecido em seu{' '}
-        {origin === 'email' ? 'E-mail' : 'Celular'} e tente novamente.
-      </p>
+      <p>Não foi possível realizar o login. Verifique os dados e tente novamente.</p>
       <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )
 }
 
-export default TokenIncorrect
+export default InvalidCredences

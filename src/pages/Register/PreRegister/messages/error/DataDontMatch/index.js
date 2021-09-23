@@ -4,11 +4,10 @@ import ButtonPrimary from '@/components/Button/Primary'
 import errorIcon from '@/assets/icons/alerts/error.svg'
 
 import { Container } from '../../styles'
+import { useModal } from '@/context/useModal'
 
-function DataDontMatch({ onShowModal, email, phone }) {
-  const handleCloseModal = () => {
-    onShowModal(false)
-  }
+function DataDontMatch({ email, phone }) {
+  const {closeModal} = useModal()
 
   const renderMessage = () => {
     if (phone && email) {
@@ -28,7 +27,7 @@ function DataDontMatch({ onShowModal, email, phone }) {
     <Container>
       <img src={errorIcon} />
       <p>Selecione {renderMessage()} e preencha o dado corretamente.</p>
-      <ButtonPrimary onClick={handleCloseModal}>OK</ButtonPrimary>
+      <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )
 }

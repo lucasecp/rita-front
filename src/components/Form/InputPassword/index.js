@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
 import { BtnEye, Container, Input } from './style'
 import eye from '../../../assets/icons/eye.png'
+import MsgError from '@/components/MsgError'
 
-const InputPassword = ({value,setValue,label,hasError,...rest}) => {
+const InputPassword = ({value,setValue,label,hasError,msgError,...rest}) => {
   const inputPass = useRef()
 
   const handleChange = (e) => {
@@ -28,6 +29,7 @@ const InputPassword = ({value,setValue,label,hasError,...rest}) => {
         <BtnEye type="button" onClick={handleSeePassword}>
           <img src={eye} />
         </BtnEye>
+        {msgError && <MsgError>{msgError}</MsgError>}
     </Container>
   )
 }

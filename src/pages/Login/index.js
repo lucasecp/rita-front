@@ -2,25 +2,33 @@ import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
 import InputPassword from '@/components/Form/InputPassword'
 import LoginLayout from '@/components/Layout/LoginLayout'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link,useLocation } from 'react-router-dom'
 import { Content } from './style'
-import MsgError from '@/components/MsgError'
 import CheckboxComponent from '@/components/Form/Checkbox'
 import validateCpf from '@/helpers/validateCpf'
 import { useAuth } from '@/context/login'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import { useModal } from '@/context/useModal'
+import HasCardSabin from './messages/HasCardSabin'
+import ExpiredSession from './messages/ExpiredSession'
+
 function Login() {
   const [cpf, setCpf] = useState('')
   const [password, setPassword] = useState('')
   const [stayConnected, setStayConnected] = useState(false)
   const [errors, setErrors] = useState({})
-  const { login } = useAuth()
+  const {login} = useAuth()
+  const {showMessage} = useModal()
+  const {state} = useLocation()
+  useEffect(() => {
+    state && state.message && showMessage(ExpiredSession)
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (validateErrors().cpf || validateErrors().password) return
-
-    login({ cpf, password })
+    if(validateErrors().cpf || validateErrors().password ) return
+    login({cpf: clearSpecialCaracter(cpf),senha:password,permanecerConectado: stayConnected},state)
   }
 
   const validateErrors = () => {
@@ -41,32 +49,29 @@ function Login() {
           setValue={setCpf}
           mask="999.999.999-99"
           hasError={errors.cpf}
+          msgError={errors.cpf}
         />
-        {errors.cpf && <MsgError>{errors.cpf}</MsgError>}
+
         <InputPassword
           name="password"
           label="Senha*:"
           value={password}
           setValue={setPassword}
           hasError={errors.password}
+          msgError={errors.password}
         />
-        {errors.password && <MsgError>{errors.password}</MsgError>}
         <CheckboxComponent
           setValue={setStayConnected}
           checked={stayConnected}
           label="Permanecer Conectado"
         />
         <ButtonPrimary type="submit">Entrar</ButtonPrimary>
-        {/* <div>
-            <p className="mt-3">Esqueci minha senha</p>
-          </div> */}
         <span>
-          {' '}
-          <Link>Esqueci minha senha</Link>{' '}
+          <Link to={'/definir-senha'}>Esqueci minha senha</Link>{' '}
         </span>
         <div>
           Não possui conta?
-          <Link> Cadastre-se aqui</Link>
+          <Link to='#' onClick={() => showMessage(HasCardSabin,{},true)}>Cadastre-se aqui</Link>
         </div>
       </Content>
     </LoginLayout>

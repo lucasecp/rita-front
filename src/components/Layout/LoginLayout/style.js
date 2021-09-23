@@ -32,9 +32,13 @@ export const Container = styled.div`
   }
 
   > aside img {
-    margin: 0 auto;
+    margin-left: -50px;
     padding-bottom: 46px;
     filter: invert(96%) sepia(95%) saturate(26%) hue-rotate(10deg) brightness(205%) contrast(100%);
+  }
+  >aside{
+    display: flex;
+    justify-content: center;
   }
 
 

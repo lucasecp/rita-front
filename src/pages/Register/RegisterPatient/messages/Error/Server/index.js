@@ -2,16 +2,15 @@ import ButtonPrimary from '@/components/Button/Primary'
 import React from 'react'
 import { Container } from '../../style'
 import error from '@/assets/icons/alerts/error.svg'
+import { useModal } from '@/context/useModal'
 // import { useHistory } from 'react-router'
-const Server = ({onShowModal}) => {
-  const handleCloseModal = () =>{
-    onShowModal(false)
-  }
+const Server = () => {
+  const {closeModal} = useModal()
   return (
     <Container>
       <img src={error} />
       <p>Verifique os dados informados e tente novamente.</p>
-      <ButtonPrimary onClick={handleCloseModal}>OK</ButtonPrimary>
+      <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )
 }

@@ -11,9 +11,11 @@ export const Container = styled.div`
     margin-bottom: 4px;
     font-weight: 400;
   }
-
   + div {
     margin-top: 16px;
+  }
+  >p{
+    grid-area: 3/1;
   }
 `
 export const Input = styled.input`

@@ -3,10 +3,12 @@ import React from 'react'
 import { Container } from '../style'
 import success from '@/assets/icons/alerts/success.svg'
 import { useHistory } from 'react-router'
-const Success = ({onShowModal}) => {
+import { useModal } from '@/context/useModal'
+const Success = () => {
   const history = useHistory()
+  const {closeModal} = useModal()
   const handleCloseModal = () =>{
-    onShowModal(false)
+    closeModal()
     history.push('/')
   }
   return (
