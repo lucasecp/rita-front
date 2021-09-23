@@ -27,6 +27,7 @@ const RegisterPatient = () => {
   const [buttonPass, setButtonPass] = useState(false)
   const [documentFiles, setdocumentFiles] = useState()
   console.log(documentFiles)
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     if (!location.state) return
@@ -34,28 +35,78 @@ const RegisterPatient = () => {
   }, [])
 
   const onUploadProgress = (ev) => {
-    const progress = parseInt(Math.round((ev.loaded * 100) / ev.total))
-    console.log(progress)
+    const progressCalculate = parseInt(Math.round((ev.loaded * 100) / ev.total))
+    console.log(progressCalculate)
+    setProgress(progressCalculate)
   }
 
-  const uploadDocuments = () => {
+  const uploadDocuments = async () => {
     Loading.turnOn()
 
     try {
       const formData = new FormData()
 
-      formData.append('file', file)
+      formData.append('file', documentFiles.holdingDocumentFile)
 
-      apiPatient.post(
+      const response = await apiPatient.post(
+        `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=FotoSegurandoDoc`,
+        formData,
+        {
+          onUploadProgress,
+        }
+      )
+
+      console.log(response)
+    } catch ({ response }) {
+      console.log(response)
+    } finally {
+      Loading.turnOff()
+    }
+
+    Loading.turnOn()
+
+    try {
+      const formData = new FormData()
+
+      formData.append('file', documentFiles.ownDocumentFile)
+
+      const response = await apiPatient.post(
         `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=Cpf`,
         formData,
         {
           onUploadProgress,
         }
       )
+
+      console.log(response)
     } catch ({ response }) {
+      console.log(response)
     } finally {
       Loading.turnOff()
+    }
+
+    if (documentFiles.proofOfIncomeFile !== '') {
+      Loading.turnOn()
+
+      try {
+        const formData = new FormData()
+
+        formData.append('file', documentFiles.proofOfIncomeFile)
+
+        const response = await apiPatient.post(
+          `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=Renda`,
+          formData,
+          {
+            onUploadProgress,
+          }
+        )
+
+        console.log(response)
+      } catch ({ response }) {
+        console.log(response)
+      } finally {
+        Loading.turnOff()
+      }
     }
   }
 
