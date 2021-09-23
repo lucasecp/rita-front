@@ -21,7 +21,7 @@ const RegisterPatient = () => {
   const [data, setData] = useState({})
   const [dataClientSabin, setDataClientSabin] = useState({})
   // const [images, setImages] = useState('')
-  const [disableBtn, setBtn] = useState(false)
+  const [buttonPass, setButtonPass] = useState(false)
   const location = useLocation()
   const { Loading } = useLoading()
   const {showMessage} = useModal()
@@ -68,28 +68,28 @@ const RegisterPatient = () => {
         {step === 1 && (
           <RegistrationData
             setData={setData}
-            setBtn={setBtn}
+            setBtn={setButtonPass}
             dataClientSabin={dataClientSabin}
           />
         )}
         {step === 2 && (
           <Adress
             setData={setData}
-            setBtn={setBtn}
+            setBtn={setButtonPass}
             dataClientSabin={dataClientSabin}
           />
         )}
         {step === 3 && (
           <Document
             // setImages={setImages}
-            setBtn={setBtn}
+            setButtonPass={setButtonPass}
             dataClientSabin={dataClientSabin}
           />
         )}
         {step === 4 && (
           <Dependents
             setData={setData}
-            setBtn={setBtn}
+            setBtn={setButtonPass}
             dataClientSabin={dataClientSabin}
           />
         )}
@@ -100,7 +100,7 @@ const RegisterPatient = () => {
           {step === 4 ? (
             <CustomBtn onClick={handleSubmit}>Concluir cadastro</CustomBtn>
           ) : (
-            <CustomBtn disabled={!disableBtn} onClick={() => setStep(step + 1)}>
+            <CustomBtn disabled={!buttonPass} onClick={() => setStep(step + 1)}>
               Próxima Etapa
             </CustomBtn>
           )}

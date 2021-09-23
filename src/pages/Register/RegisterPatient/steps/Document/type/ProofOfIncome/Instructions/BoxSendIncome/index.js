@@ -13,7 +13,7 @@ function BoxSendIncome({ onGetFile }) {
           Selecionar Arquivo
         </OutlineButton>
       </InputFile>
-      <span>O envio do seu comprovante de renda é obrigatório.</span>
+      <h5>O envio do seu comprovante de renda é obrigatório.</h5>
       <section>
         <span>Tamanho máximo do arquivo: 10MB</span>
         <span>Tipos de arquivos aceitos: jpg, jpeg, png ou pdf.</span>
