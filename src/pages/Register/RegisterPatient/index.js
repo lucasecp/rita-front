@@ -20,11 +20,15 @@ const RegisterPatient = () => {
   const [step, setStep] = useState(3)
   const [data, setData] = useState({})
   const [dataClientSabin, setDataClientSabin] = useState({})
-  // const [images, setImages] = useState('')
   const [buttonPass, setButtonPass] = useState(false)
   const [loading, setLoading] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [message, setMessage] = useState(null)
+
+  const [documentFiles, setdocumentFiles] = useState()
+
+  console.log(documentFiles)
+
   const location = useLocation()
   useEffect(() => {
     if (!location.state) return
@@ -84,9 +88,8 @@ const RegisterPatient = () => {
         )}
         {step === 3 && (
           <Document
-            // setImages={setImages}
+            onGetDocumentFiles={setdocumentFiles}
             setButtonPass={setButtonPass}
-            dataClientSabin={dataClientSabin}
           />
         )}
         {step === 4 && (
