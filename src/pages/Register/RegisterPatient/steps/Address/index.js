@@ -3,8 +3,10 @@ import InputText from '@/components/Form/InputText'
 import Select from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
+
 import { Container } from '../style'
 import { UF } from './static'
+
 const Address = ({ setBtn, setData, dataClientSabin, newData }) => {
   const [cep, setCep] = useState('')
   const [uf, setUf] = useState('')
