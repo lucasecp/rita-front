@@ -16,29 +16,30 @@ import exitImg from '@/assets/icons/times.svg'
 import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
 
+const status = {
+  SUCCESS: 'success',
+  SERVER_ERROR: 'server_error',
+  ALREADY_EXISTS: 'already_exists',
+}
+
 const RegisterPatient = () => {
+  let responseApiStatus
+
   const location = useLocation()
   const { Loading } = useLoading()
   const { showMessage } = useModal()
 
   const [step, setStep] = useState(3)
   const [data, setData] = useState({})
+
   const [dataClientSabin, setDataClientSabin] = useState({})
   const [buttonPass, setButtonPass] = useState(false)
   const [documentFiles, setdocumentFiles] = useState()
-  console.log(documentFiles)
-  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
-
-  const onUploadProgress = (ev) => {
-    const progressCalculate = parseInt(Math.round((ev.loaded * 100) / ev.total))
-    console.log(progressCalculate)
-    setProgress(progressCalculate)
-  }
 
   const uploadDocuments = async () => {
     Loading.turnOn()
@@ -48,15 +49,10 @@ const RegisterPatient = () => {
 
       formData.append('file', documentFiles.holdingDocumentFile)
 
-      const response = await apiPatient.post(
+      apiPatient.post(
         `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=FotoSegurandoDoc`,
-        formData,
-        {
-          onUploadProgress,
-        }
+        formData
       )
-
-      console.log(response)
     } catch ({ response }) {
       console.log(response)
     } finally {
@@ -70,15 +66,10 @@ const RegisterPatient = () => {
 
       formData.append('file', documentFiles.ownDocumentFile)
 
-      const response = await apiPatient.post(
+      apiPatient.post(
         `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=Cpf`,
-        formData,
-        {
-          onUploadProgress,
-        }
+        formData
       )
-
-      console.log(response)
     } catch ({ response }) {
       console.log(response)
     } finally {
@@ -93,15 +84,10 @@ const RegisterPatient = () => {
 
         formData.append('file', documentFiles.proofOfIncomeFile)
 
-        const response = await apiPatient.post(
+        apiPatient.post(
           `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=Renda`,
-          formData,
-          {
-            onUploadProgress,
-          }
+          formData
         )
-
-        console.log(response)
       } catch ({ response }) {
         console.log(response)
       } finally {
@@ -111,22 +97,36 @@ const RegisterPatient = () => {
   }
 
   const handleSubmit = async () => {
+    responseApiStatus = ''
+
     try {
       Loading.turnOn()
       const response = await apiPatient.post('/paciente', data)
       if (response.status === 201) {
-        showMessage(Success)
+        responseApiStatus = status.SUCCESS
       }
     } catch ({ response }) {
-      if (response.status === 500) showMessage(Server)
-      if (response.status === 400)
-        showMessage(alreadyExists, { message: 'Usuário já existe.' })
+      if (response.status === 500) responseApiStatus = status.SERVER_ERROR
+      if (response.status === 400) responseApiStatus = status.ALREADY_EXISTS
     } finally {
       Loading.turnOff()
     }
 
     uploadDocuments()
+
+    if (responseApiStatus === status.SUCCESS) {
+      showMessage(Success)
+    }
+
+    if (responseApiStatus === status.ALREADY_EXISTS) {
+      showMessage(alreadyExists, { message: 'Usuário já existe.' })
+    }
+
+    if (responseApiStatus === status.SERVER_ERROR) {
+      showMessage(Server)
+    }
   }
+
   return (
     <RegisterLayout>
       <Content>
@@ -145,6 +145,7 @@ const RegisterPatient = () => {
             setData={setData}
             setBtn={setButtonPass}
             dataClientSabin={dataClientSabin}
+            newData={data}
           />
         )}
         {step === 2 && (
@@ -152,6 +153,7 @@ const RegisterPatient = () => {
             setData={setData}
             setBtn={setButtonPass}
             dataClientSabin={dataClientSabin}
+            newData={data}
           />
         )}
         {step === 3 && (
