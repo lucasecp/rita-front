@@ -62,7 +62,7 @@ function SendedFile({ file, onGetFile }) {
     <>
       <Container>
         <section>
-          <InputFile setValue={onGetFile}>
+          <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
             <OutlineButton small variation="blue">
               Selecionar Arquivo
             </OutlineButton>
