@@ -23,6 +23,7 @@ const Address = ({ setBtn, setData, dataClientSabin, newData }) => {
       setNumberHome(newData.endereco.numero)
       setDistrict(newData.endereco.bairro)
       setComplement(newData.endereco.complemento)
+      return
     }
 
     const { endereco } = dataClientSabin
