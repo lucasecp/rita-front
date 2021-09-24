@@ -25,7 +25,7 @@ function InstructionsOwnDocuments({ onGetFile }) {
             <li>O documento deve aparecer por inteiro;</li>
             <li>Verifique se a imagem ficou nítida;</li>
           </ul>
-          <InputFile setValue={onGetFile}>
+          <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
             <OutlineButton small variation="blue">
               Selecionar Arquivo
             </OutlineButton>

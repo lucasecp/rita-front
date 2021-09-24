@@ -32,14 +32,14 @@ export const Container = styled.div`
 
   > aside {
     // aligned with the larger click area
-    margin-right: -10px;
+    margin-right: -18px;
 
     display: flex;
     align-items: center;
 
     > button {
       // click area in right
-      padding: 10px;
+      padding: 10px 20px;
 
       display: flex;
       align-items: center;

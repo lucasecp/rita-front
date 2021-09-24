@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { ReactComponent as WarningIcon } from '@/assets/icons/alerts/warning.svg'
 
@@ -24,14 +24,7 @@ function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
           ]}
           setValue={onGetSelectIncome}
           value={selectIncome}
-          // hasError={errors.gender}
-          // onBlur={() => setErrors({ ...errors, ...validateGender(gender) })}
-          // onChange={(e) => {
-          //   setGender(e.target.value)
-          //   setErrors({ ...errors, ...validateGender(e.target.value) })
-          // }}
         />
-        {/* {errors.gender && <MsgError>{errors.gender}</MsgError>} */}
       </header>
       <h6>A seleção da sua faixa de renda é obrigatória.</h6>
       <p>

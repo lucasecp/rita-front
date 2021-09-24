@@ -19,8 +19,11 @@ const ProofOfIncome = ({
         <AccordionSummary
           aria-controls="panel3a-content"
           id="panel3a-header"
-          expandIcon={!proofOfIncomeFile && <ArrowDownIcon />}
-          disabled={!!proofOfIncomeFile}
+          expandIcon={
+            !proofOfIncomeFile &&
+            selectIncome !== 'more_one_half' && <ArrowDownIcon />
+          }
+          disabled={!!proofOfIncomeFile || selectIncome === 'more_one_half'}
         >
           <h2>Comprovante de Renda</h2>
         </AccordionSummary>

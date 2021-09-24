@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import zoomIcon from '@/assets/icons/zoom.svg'
 import trashIcon from '@/assets/icons/trash.svg'
@@ -62,7 +62,7 @@ function SendedFile({ file, onGetFile }) {
     <>
       <Container>
         <section>
-          <InputFile setValue={onGetFile}>
+          <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
             <OutlineButton small variation="blue">
               Selecionar Arquivo
             </OutlineButton>

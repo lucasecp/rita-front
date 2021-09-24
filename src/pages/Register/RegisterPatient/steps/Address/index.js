@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { Container } from '../style'
 import { UF } from './static'
-const Address = ({ setBtn, setData, dataClientSabin }) => {
+const Address = ({ setBtn, setData, dataClientSabin, newData }) => {
   const [cep, setCep] = useState('')
   const [uf, setUf] = useState('')
   const [city, setCity] = useState('')
@@ -13,17 +13,30 @@ const Address = ({ setBtn, setData, dataClientSabin }) => {
   const [numberHome, setNumberHome] = useState('')
   const [district, setDistrict] = useState('')
   const [complement, setComplement] = useState('')
+
   useEffect(() => {
+    if (newData.endereco) {
+      setCep(newData.endereco.cep)
+      setUf(newData.endereco.uf)
+      setCity(newData.endereco.cidade)
+      setAdress(newData.endereco.logradouro)
+      setNumberHome(newData.endereco.numero)
+      setDistrict(newData.endereco.bairro)
+      setComplement(newData.endereco.complemento)
+      return
+    }
+
     const { endereco } = dataClientSabin
     if (!endereco) return
-    setCep(endereco.cep || '')
-    setUf(endereco.uf || '')
-    setCity(endereco.cidade || '')
-    setAdress(endereco.logradouro || '')
-    setNumberHome(endereco.numero || '')
-    setDistrict(endereco.bairro || '')
-    setComplement(endereco.complemento || '')
+    setCep(newData.endereco.cep || endereco.cep || '')
+    setUf(newData.endereco.uf || endereco.uf || '')
+    setCity(newData.endereco.cidade || endereco.cidade || '')
+    setAdress(newData.endereco.logradouro || endereco.logradouro || '')
+    setNumberHome(newData.endereco.numero || endereco.numero || '')
+    setDistrict(newData.endereco.bairro || endereco.bairro || '')
+    setComplement(newData.endereco.complemento || endereco.complemento || '')
   }, [dataClientSabin])
+
   useEffect(() => {
     const dataObj = {
       bairro: district,

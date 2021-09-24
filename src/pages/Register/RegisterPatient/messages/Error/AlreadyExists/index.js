@@ -4,12 +4,12 @@ import { Container } from '../../style'
 import error from '@/assets/icons/alerts/error.svg'
 import { useModal } from '@/context/useModal'
 // import { useHistory } from 'react-router'
-const alreadyExists = ({server}) => {
-  const {closeModal} = useModal()
+const alreadyExists = ({ message }) => {
+  const { closeModal } = useModal()
   return (
     <Container>
       <img src={error} />
-      <p>{server.message}</p>
+      <p>{message}</p>
       <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )

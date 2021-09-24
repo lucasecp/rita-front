@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 import { AccordionContainer } from '../style'
 

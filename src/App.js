@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 
-import ModalWithHook from './components/ModalWithHook'
+import Modal from './components/Modal'
 
 import Routes from './routes/routes'
 import GlobalStyle from './styles/global'
@@ -22,7 +22,7 @@ const App = () => {
             <MenuProvider>
               <GlobalStyle />
               <Routes />
-              <ModalWithHook />
+              <Modal />
               <LoadingWithHook />
             </MenuProvider>
           </AuthProvider>

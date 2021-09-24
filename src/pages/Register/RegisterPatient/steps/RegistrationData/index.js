@@ -18,7 +18,7 @@ import {
 import formatBirthdate from '../../helpers/formatBirthdate'
 import { useModal } from '@/context/useModal'
 
-const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
+const RegistrationData = ({ setData, setBtn, dataClientSabin, newData }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [confirmEmail, setConfirmEmail] = useState('')
@@ -29,15 +29,21 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
 
   const [terms, setTerms] = useState(false)
   const [errors, setErrors] = useState({})
-  const {showMessage} = useModal()
+  const { showMessage } = useModal()
+
   useEffect(() => {
     if (!dataClientSabin) return
-    setName(dataClientSabin.nome || '')
-    setEmail(dataClientSabin.email || '')
-    setGender(dataClientSabin.sexo || '')
-    setBirthdate(formatBirthdate(dataClientSabin.dataNascimento) || '')
-    setPhone(dataClientSabin.telefone || '')
-    setCpf(dataClientSabin.cpf || '')
+    setName(newData.nome || newData.nome || dataClientSabin.nome || '')
+    setEmail(newData.email || dataClientSabin.email || '')
+    setConfirmEmail(newData.email || '')
+    setGender(newData.sexo || dataClientSabin.sexo || '')
+    setBirthdate(
+      newData.dataNascimento ||
+        formatBirthdate(dataClientSabin.dataNascimento) ||
+        ''
+    )
+    setPhone(newData.telefone || dataClientSabin.telefone || '')
+    setCpf(newData.cpf || dataClientSabin.cpf || '')
   }, [dataClientSabin])
 
   useEffect(() => {
@@ -89,8 +95,10 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
   const labelTerms = (
     <>
       Li e aceito os
-      <BtnTerms onClick={() => showMessage(Terms,{setTerms})}>Termos de uso </BtnTerms> da
-      plataforma Rita.
+      <BtnTerms onClick={() => showMessage(Terms, { setTerms })}>
+        Termos de uso{' '}
+      </BtnTerms>{' '}
+      da plataforma Rita.
     </>
   )
   return (
@@ -188,7 +196,6 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin }) => {
             onKeyUp={() => setErrors({ ...errors, ...validatePhone(phone) })}
             msgError={errors.phone}
           />
-
         </Col>
         <Col md="6" className="mt-4">
           <InputMask

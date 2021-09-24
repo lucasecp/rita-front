@@ -8,7 +8,7 @@ function BoxSendIncome({ onGetFile }) {
   return (
     <Container>
       <h6>Faça agora o envio do seu comprovante de renda</h6>
-      <InputFile setValue={onGetFile}>
+      <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
         <OutlineButton small variation="blue">
           Selecionar Arquivo
         </OutlineButton>
