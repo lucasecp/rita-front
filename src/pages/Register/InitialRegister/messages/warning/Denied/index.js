@@ -18,7 +18,11 @@ function Denied() {
       </p>
       <p>
         Pedimos que entre em contato com a central de atendimento{' '}
-        <a href="https://api.whatsapp.com/send?phone=556131810999">
+        <a
+          href="https://api.whatsapp.com/send?phone=556131810999"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           (61) 3181-0999 <img src={whatsApp} />
         </a>
       </p>
