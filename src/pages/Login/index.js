@@ -68,7 +68,7 @@ function Login() {
         />
         <ButtonPrimary type="submit">Entrar</ButtonPrimary>
         <span>
-          <Link to={'/definir-senha'}>Esqueci minha senha</Link>{' '}
+          <Link to='/esqueci-senha/inicio'>Esqueci minha senha</Link>{' '}
         </span>
         <div>
           Não possui conta?
