@@ -8,13 +8,8 @@ export default function CustomRoutes ({
 }){
   const {  isAuthorization } = userHook()
   // message:'EXPIRED_TOKEN'
-  return (
-    <Route
-      {...rest}
-      render={(props) => {
-        if (isAuthorization() || !isPrivate) return <Component {...rest} />
-          return <Redirect to={{ pathname: `/login`, state: { from: props.location } }} />
-      }}
-    />
-  )
+
+  if (!isAuthorization() && isPrivate) return <Redirect to='login'  />
+
+  return <Route {...rest} component={Component} />;
 }

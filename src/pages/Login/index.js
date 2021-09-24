@@ -21,6 +21,7 @@ function Login() {
   const {login} = useAuth()
   const {showMessage} = useModal()
   const {state} = useLocation()
+
   useEffect(() => {
     state && state.message && showMessage(ExpiredSession)
   }, []);
@@ -33,9 +34,9 @@ function Login() {
 
   const validateErrors = () => {
     const newErrors = {}
-    if (!cpf.trim()) newErrors.cpf = 'Campo Obrigatório.'
+    if (!cpf.trim()) newErrors.cpf = 'Este campo é obrigatório.'
     else if (!validateCpf(cpf.trim())) newErrors.cpf = 'CPF inválido.'
-    if (!password.trim()) newErrors.password = 'Campo obrigatório.'
+    if (!password.trim()) newErrors.password = 'Este campo é obrigatório.'
     setErrors(newErrors)
     return newErrors
   }

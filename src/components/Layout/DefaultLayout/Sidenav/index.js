@@ -9,7 +9,7 @@ import { Container, Logo } from './style'
 
 const MODE = {
   EXPANDED: 'expanded',
-  SHORT: 'short',
+  SHORT: 'short', 
 }
 
 const Sidenav = () => {
