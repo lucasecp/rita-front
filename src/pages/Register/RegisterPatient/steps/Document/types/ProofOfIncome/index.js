@@ -3,9 +3,11 @@ import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
 
-import { AccordionContainer } from '../style'
+import { AccordionContainer } from '../styles'
 import InstructionsIncome from './Instructions'
 import SendedFile from '../../components/SendedFile'
+
+import { incomeType } from '../../constants/income'
 
 const ProofOfIncome = ({
   proofOfIncomeFile,
@@ -21,9 +23,11 @@ const ProofOfIncome = ({
           id="panel3a-header"
           expandIcon={
             !proofOfIncomeFile &&
-            selectIncome !== 'more_one_half' && <ArrowDownIcon />
+            selectIncome !== incomeType.MORE_ONE_HALF && <ArrowDownIcon />
           }
-          disabled={!!proofOfIncomeFile || selectIncome === 'more_one_half'}
+          disabled={
+            !!proofOfIncomeFile || selectIncome === incomeType.MORE_ONE_HALF
+          }
         >
           <h2>Comprovante de Renda</h2>
         </AccordionSummary>

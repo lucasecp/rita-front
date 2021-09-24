@@ -3,7 +3,6 @@ import colors from './colors'
 import fonts from './fonts'
 
 export default createGlobalStyle`
-  /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap'); */
 
   ${fonts}
 

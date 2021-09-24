@@ -8,12 +8,17 @@ export const Container = styled.div`
   > header {
     margin-bottom: 8px;
     > div {
+      width: 300px;
+
+      .form-select:focus {
+        box-shadow: unset;
+      }
     }
   }
 
   > h6 {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 150%;
 
     color: ${colors.orange.middleDark};

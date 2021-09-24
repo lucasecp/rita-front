@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 
 import { Container } from './styles'
 
-import HoldingDocument from './type/HoldingDocument'
-import OwnDocument from './type/OwnDocument'
-import ProofOfIncome from './type/ProofOfIncome'
+import HoldingDocument from './types/HoldingDocument'
+import OwnDocument from './types/OwnDocument'
+import ProofOfIncome from './types/ProofOfIncome'
+
+import { incomeType } from './constants/income'
 
 const Document = ({ setButtonPass, onGetDocumentFiles }) => {
   const [holdingDocumentFile, setHoldingDocumentFile] = useState('')
@@ -23,8 +25,9 @@ const Document = ({ setButtonPass, onGetDocumentFiles }) => {
     if (
       holdingDocumentFile !== '' &&
       ownDocumentFile !== '' &&
-      (selectIncome === 'more_one_half' ||
-        ((selectIncome === 'not_income' || selectIncome === 'one_half') &&
+      (selectIncome === incomeType.MORE_ONE_HALF ||
+        ((selectIncome === incomeType.NO_INCOME ||
+          selectIncome === incomeType.ONE_HALF) &&
           proofOfIncomeFile !== ''))
     ) {
       return setButtonPass(true)

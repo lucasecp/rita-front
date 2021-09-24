@@ -1,6 +1,6 @@
 import React from 'react'
 import { AccordionDetails, AccordionSummary } from '@material-ui/core'
-import { AccordionContainer } from '../style'
+import { AccordionContainer } from '../styles'
 
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
 

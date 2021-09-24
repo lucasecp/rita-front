@@ -1,4 +1,5 @@
 import colors from '@/styles/colors'
+import { Form } from 'react-bootstrap'
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
@@ -25,8 +26,8 @@ export const Input = styled.input`
   box-shadow: 0px 2px 4px 0px #e5e5e5;
   font-weight: 500;
   width: 100%;
-  :disabled{
-    background: #EEEEEE;
+  :disabled {
+    background: #eeeeee;
   }
 
   ::after {
@@ -41,12 +42,13 @@ export const Input = styled.input`
 
   :focus {
     border: 1px solid #419eff;
-    border-color: ${({hasError}) => hasError ? colors.orange.light: '#419eff' };
+    border-color: ${({ hasError }) =>
+      hasError ? colors.orange.light : '#419eff'};
 
     ::after {
       border: 1px solid #419eff;
-      border-color: ${({hasError}) => hasError ? colors.orange.light: '#419eff' };
-
+      border-color: ${({ hasError }) =>
+        hasError ? colors.orange.light : '#419eff'};
     }
   }
 
@@ -56,7 +58,7 @@ export const Input = styled.input`
       border-color: ${colors.orange.light};
     `}
 `
-export const Select = styled.select`
+export const Select = styled(Form.Select)`
   color: #6a6a6a;
   border-radius: 8px;
   padding: 14px;
@@ -67,9 +69,9 @@ export const Select = styled.select`
   box-shadow: 0px 2px 4px 0px #e5e5e5;
   font-weight: 500;
   outline: none;
-  width:100%;
-  :disabled{
-    background: #EEEEEE;
+  width: 100%;
+  :disabled {
+    background: #eeeeee;
   }
   ::after {
     content: '';
@@ -82,12 +84,13 @@ export const Select = styled.select`
   }
 
   :focus {
-    border: 1px solid ;
-    border-color: ${({hasError}) => hasError ? colors.orange.light: '#419eff' };
+    border: 1px solid;
+    border-color: ${({ hasError }) =>
+      hasError ? colors.orange.light : '#419eff'};
     ::after {
       border: 1px solid #419eff;
-      border-color: ${({hasError}) => hasError ? colors.orange.light: '#419eff' };
-
+      border-color: ${({ hasError }) =>
+        hasError ? colors.orange.light : '#419eff'};
     }
   }
 
