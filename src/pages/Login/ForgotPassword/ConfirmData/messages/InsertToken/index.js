@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import OutlineButton from '@/components/Button/Outline'
@@ -22,13 +22,12 @@ const MODAL = {
 
 function InsertToken({ isLastTry, cpf, email, phone }) {
   const history = useHistory()
-  const {closeModal} = useModal()
-
+  const { closeModal } = useModal()
 
   const [token, setToken] = useState('')
   const [hasError, setHasError] = useState(false)
   const [waitRequestNewToken, setWaitRequestNewToken] = useState(true)
-  const {Loading} = useLoading()
+  const { Loading } = useLoading()
 
   const [typeOfModal, setTypeOfModal] = useState(
     isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN
@@ -164,9 +163,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
           </footer>
         </Container>
       )}
-      {typeOfModal === MODAL.BLOCKED && (
-        <Denied />
-      )}
+      {typeOfModal === MODAL.BLOCKED && <Denied />}
     </>
   )
 }

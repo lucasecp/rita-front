@@ -6,11 +6,6 @@ const Header = () => {
   return (
     <HeaderLayout>
       <nav>
-        <Link to="/master-page">Master Page</Link>
-        <Link to="/cadastro-inicial">Cadastro Normal</Link>
-        <Link to="/cadastro-cartao-sabin">Cadastro Cartão Sabin</Link>
-        <Link to="/cadastro/paciente">Cadastro Paciente</Link>
-        <Link to="/pre-cadastro">Pré Cadastro</Link>
         <Link to="/definir-senha">Definição de Senha</Link>
         <Link to="/login">Login</Link>
       </nav>

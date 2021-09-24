@@ -14,6 +14,10 @@ export const Container = styled.div`
     margin-bottom: 4px;
     font-weight: 400;
   }
+
+  .form-select:focus {
+    box-shadow: unset;
+  }
 `
 export const Input = styled.input`
   color: #6a6a6a;
