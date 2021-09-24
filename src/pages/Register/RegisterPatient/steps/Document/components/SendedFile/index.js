@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import zoomIcon from '@/assets/icons/zoom.svg'
 import trashIcon from '@/assets/icons/trash.svg'
