@@ -69,7 +69,7 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
 
   const hanldeSubmit = (e) => {
     e.preventDefault()
-    const dataObj = [
+    const newDep = [
       {
         nome: name,
         email: email,
@@ -77,11 +77,11 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
         dataNascimento: birthdate,
         telefone: phone,
         cpf,
-      },
+      }
     ]
     if (cpfAlreadyExist()) return alreadyExistError()
-    setAllDeps((data) => [...data, ...dataObj])
-    clearFields()
+    setAllDeps((data) => [...data, ...newDep])
+    clearForm()
     closeModal()
   }
   const alreadyExistError = () => {
@@ -104,10 +104,11 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
       }
     })
     setAllDeps(valueUpdated)
-    clearFields()
+    clearForm()
     closeModal()
   }
-  const clearFields = () =>{
+  const clearForm = () =>{
+    setErrors({})
     setName('')
     setEmail('')
     setGender('')
@@ -211,7 +212,7 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
           <OutlineButton
             variation="red"
             onClick={() => {
-              setErrors({})
+              clearForm()
               closeModal()
             }}
           >
