@@ -159,6 +159,7 @@ const RegisterPatient = () => {
           <Document
             onGetDocumentFiles={setdocumentFiles}
             setButtonPass={setButtonPass}
+            documentFiles={documentFiles}
           />
         )}
         {step === 4 && (

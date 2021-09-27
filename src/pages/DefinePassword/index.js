@@ -14,17 +14,20 @@ import DefinePasswordSuccess from './messages/Success'
 import { Content, Button } from './style'
 
 function Password() {
+
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [errors, setErrors] = useState({});
   const history = useHistory()
   const {showMessage} = useModal()
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
    e.preventDefault()
    if(Object.values(validateErrors()).length) return
    showMessage(DefinePasswordSuccess)
 
   }
+
   const validateErrors = () =>{
      const newErrors = {}
      if(!hasSpecialCaracter(password)) newErrors.password = 'A senha deve ter um caracter especial.'
@@ -37,6 +40,7 @@ function Password() {
       setErrors(newErrors)
       return newErrors
     }
+
   return (
       <RegisterLayout>
         <Content onSubmit={handleSubmit}>

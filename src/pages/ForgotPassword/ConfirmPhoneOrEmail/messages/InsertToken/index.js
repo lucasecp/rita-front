@@ -5,12 +5,11 @@ import OutlineButton from '@/components/Button/Outline'
 
 import { Container } from '../styles'
 import RequestNewTokenTimer from './RequestNewTokenTimer'
-import apiPatient from '@/services/apiPatient'
+import apiUser from '@/services/apiUser'
 import Denied from '../error/Danied'
 import InputMask from '@/components/Form/InputMask'
 import { useHistory } from 'react-router-dom'
 import { useLoading } from '@/context/useLoading'
-import { useModal } from '@/context/useModal'
 import LastTry from '../error/LastTry'
 
 const MODAL = {
@@ -22,7 +21,6 @@ const MODAL = {
 
 function InsertToken({ isLastTry, cpf, email, phone }) {
   const history = useHistory()
-  const { closeModal } = useModal()
   const { Loading } = useLoading()
 
   const [token, setToken] = useState('')
@@ -37,7 +35,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
     Loading.turnOn()
 
     try {
-      const response = await apiPatient.post(
+      const response = await apiUser.post(
         '/paciente/token',
         email
           ? {
@@ -71,7 +69,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
     setHasError(false)
 
     try {
-      const response = await apiPatient.get(
+      const response = await apiUser.get(
         `/paciente/token?token=${token}&cpf=${cpf}`
       )
 
