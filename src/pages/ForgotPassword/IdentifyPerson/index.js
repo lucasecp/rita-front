@@ -8,18 +8,19 @@ import { useHistory } from 'react-router-dom'
 
 import CpfEmpty from './messages/error/CpfEmpty'
 
-import { Content } from './style'
+import { BtnGroup, Content } from './style'
 
 import InvalidCpf from './messages/error/InvalidCpf'
 import NotFound from './messages/error/NotFound'
 import apiUser from '@/services/apiUser'
 import { useModal } from '@/context/useModal'
 import { useLoading } from '@/context/useLoading'
+import OutlineButton from '@/components/Button/Outline'
 
 function Initial() {
   const [cpf, setCpf] = useState('')
-const {Loading} = useLoading()
-const history = useHistory()
+  const { Loading } = useLoading()
+  const history = useHistory()
 
   const { showMessage } = useModal()
 
@@ -33,18 +34,16 @@ const history = useHistory()
     }
     try {
       Loading.turnOn()
-      const {data} =  await apiUser.get(
-        `/status?cpf=${cpf}`
-      )
-        return history.push('/esqueci-senha/confirmar-dados',{
-          cpf,
-          email: data.email,
-          phone: data.telefone,
-        })
+      const { data } = await apiUser.get(`/status?cpf=${cpf}`)
+      return history.push('/esqueci-senha/confirmar-dados', {
+        cpf,
+        email: data.email,
+        phone: data.telefone,
+      })
     } catch ({ response }) {
       const apiStatus = response.status
       if (apiStatus === 404) {
-        return showMessage(NotFound,{cpf})
+        return showMessage(NotFound, { cpf })
       }
     } finally {
       Loading.turnOff()
@@ -55,17 +54,24 @@ const history = useHistory()
     <>
       <RegisterLayout>
         <Content>
-          <h6>Antes de definir sua senha, por favor informe o seu CPF:</h6>
-          <div>
-            <InputMask
-              mask="999.999.999-99"
-              placeholder="000.000.000-00"
-              value={cpf}
-              setValue={setCpf}
-              name="cpf"
-            />
+          <h6>
+            Para continuarmos, precisamos confirmar alguns dados. Informe seu
+            CPF.:
+          </h6>
+          <InputMask
+            mask="999.999.999-99"
+            placeholder="000.000.000-00"
+            value={cpf}
+            setValue={setCpf}
+            name="cpf"
+            label="CPF*:"
+          />
+          <BtnGroup>
+            <OutlineButton onClick={() => history.push('/login')}>
+              Voltar
+            </OutlineButton>
             <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
-          </div>
+          </BtnGroup>
         </Content>
       </RegisterLayout>
     </>

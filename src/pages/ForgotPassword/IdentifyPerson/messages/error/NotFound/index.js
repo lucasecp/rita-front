@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 
 import ButtonPrimary from '@/components/Button/Primary'
-import errorIcon from '@/assets/icons/alerts/error.svg'
+import warning from '@/assets/icons/alerts/warning.svg'
 
 import { ButtonGroup, Container } from '../../styles'
 import { useModal } from '@/context/useModal'
@@ -19,7 +19,7 @@ function NotFound(data) {
 
   return (
     <Container>
-      <img src={errorIcon} />
+      <img src={warning} />
       <p>
         Desculpe, os seus dados não foram encontrados. Deseja realizar o seu
         cadastro na Rita Saúde?

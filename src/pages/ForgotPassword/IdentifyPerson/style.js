@@ -12,31 +12,33 @@ export const Content = styled.div`
     font-size: 24px;
     line-height: 33px;
     color: ${colors.gray.dark};
-  }
-  > div {
-    display: flex;
-    align-items: center;
-    margin-top: 48px;
-
-    > div {
-      margin-right: 24px;
-    }
+    margin-bottom: 24px;
   }
   @media (max-width: 767px) {
     padding: 32px;
-    > div {
-      flex-direction: column;
-      align-items: center;
-      margin-top: 24px;
-      > div {
-        margin: 0 0 24px 0;
-        width: 100%;
-      }
-    }
     > h6 {
       font-weight: 700;
       font-size: 20px;
       line-height: 28px;
     }
+  }
+`
+export const BtnGroup = styled.div`
+   margin-left: auto;
+  justify-content: end;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 24px;
+
+  button + button {
+    margin-left: 15px;
+  }
+  @media (max-width: 539px) {
+    flex-direction: column;
+    > button:last-child {
+      margin-left: 0;
+      margin-top: 20px;
+    }
+    margin-top: 30px
   }
 `
