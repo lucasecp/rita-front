@@ -18,7 +18,12 @@ import {
 import formatBirthdate from '../../helpers/formatBirthdate'
 import { useModal } from '@/context/useModal'
 
-const RegistrationData = ({ setData, setBtn, dataClientSabin, newData }) => {
+const RegistrationData = ({
+  setData,
+  setButtonPass,
+  dataClientSabin,
+  newData,
+}) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [confirmEmail, setConfirmEmail] = useState('')
@@ -32,16 +37,11 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin, newData }) => {
   const { showMessage } = useModal()
 
   useEffect(() => {
-    if (!dataClientSabin) return
     setName(newData.nome || newData.nome || dataClientSabin.nome || '')
     setEmail(newData.email || dataClientSabin.email || '')
     setConfirmEmail(newData.email || '')
     setGender(newData.sexo || dataClientSabin.sexo || '')
-    setBirthdate(
-      newData.dataNascimento ||
-        formatBirthdate(dataClientSabin.dataNascimento) ||
-        ''
-    )
+    setBirthdate(newData.dataNascimento || dataClientSabin.dataNascimento || '')
     setPhone(newData.telefone || dataClientSabin.telefone || '')
     setCpf(newData.cpf || dataClientSabin.cpf || '')
   }, [dataClientSabin])
@@ -67,14 +67,15 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin, newData }) => {
         telefone: phone,
         cpf,
       }
-      setBtn(true)
+      setButtonPass(true)
       setData((data) => {
         return { ...data, ...dataObj }
       })
     } else {
-      setBtn(false)
+      setButtonPass(false)
     }
   }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone, errors])
+
   const validateConfEmail = () => {
     if (email !== confirmEmail)
       return {
@@ -83,6 +84,7 @@ const RegistrationData = ({ setData, setBtn, dataClientSabin, newData }) => {
       }
     return { confirmEmail: '' }
   }
+
   const validateTerms = () => {
     setTerms(!terms)
     if (terms)

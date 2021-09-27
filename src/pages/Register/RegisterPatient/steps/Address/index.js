@@ -7,7 +7,7 @@ import { Col, Row } from 'react-bootstrap'
 import { Container } from '../style'
 import { UF } from './static'
 
-const Address = ({ setBtn, setData, dataClientSabin, newData }) => {
+const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
   const [cep, setCep] = useState('')
   const [uf, setUf] = useState('')
   const [city, setCity] = useState('')
@@ -17,27 +17,32 @@ const Address = ({ setBtn, setData, dataClientSabin, newData }) => {
   const [complement, setComplement] = useState('')
 
   useEffect(() => {
-    if (newData.endereco) {
-      setCep(newData.endereco.cep)
-      setUf(newData.endereco.uf)
-      setCity(newData.endereco.cidade)
-      setAdress(newData.endereco.logradouro)
-      setNumberHome(newData.endereco.numero)
-      setDistrict(newData.endereco.bairro)
-      setComplement(newData.endereco.complemento)
-      return
-    }
+    // if (newDataAddress) {
+    //   setCep(newDataAddress.cep)
+    //   setUf(newDataAddress.uf)
+    //   setCity(newDataAddress.cidade)
+    //   setAdress(newDataAddress.logradouro)
+    //   setNumberHome(newDataAddress.numero)
+    //   setDistrict(newDataAddress.bairro)
+    //   setComplement(newDataAddress.complemento)
+    //   return
+    // }
 
-    const { endereco } = dataClientSabin
-    if (!endereco) return
-    setCep(newData.endereco.cep || endereco.cep || '')
-    setUf(newData.endereco.uf || endereco.uf || '')
-    setCity(newData.endereco.cidade || endereco.cidade || '')
-    setAdress(newData.endereco.logradouro || endereco.logradouro || '')
-    setNumberHome(newData.endereco.numero || endereco.numero || '')
-    setDistrict(newData.endereco.bairro || endereco.bairro || '')
-    setComplement(newData.endereco.complemento || endereco.complemento || '')
-  }, [dataClientSabin])
+    const addressFromSabinCard = dataClientSabin.endereco
+    const newDataAddress = newData.endereco
+
+    setCep(newDataAddress?.cep || addressFromSabinCard?.cep || '')
+    setUf(newDataAddress?.uf || addressFromSabinCard?.uf || '')
+    setCity(newDataAddress?.cidade || addressFromSabinCard?.cidade || '')
+    setAdress(
+      newDataAddress?.logradouro || addressFromSabinCard?.logradouro || ''
+    )
+    setNumberHome(newDataAddress?.numero || addressFromSabinCard?.numero || '')
+    setDistrict(newDataAddress?.bairro || addressFromSabinCard?.bairro || '')
+    setComplement(
+      newDataAddress?.complemento || addressFromSabinCard?.complemento || ''
+    )
+  }, [])
 
   useEffect(() => {
     const dataObj = {
@@ -46,15 +51,15 @@ const Address = ({ setBtn, setData, dataClientSabin, newData }) => {
       cidade: city,
       logradouro: address,
       numero: numberHome,
-      cep: cep,
+      cep,
       complemento: complement,
     }
-    setBtn(true)
+    setButtonPass(true)
     setData((data) => {
       return { ...data, endereco: dataObj }
     })
     return () => {
-      setBtn(false)
+      setButtonPass(false)
     }
   }, [address, cep, numberHome, city, complement, uf, district])
   return (

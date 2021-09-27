@@ -7,12 +7,9 @@ export const Container = styled.div`
 
   > header {
     margin-bottom: 8px;
+    
     > div {
       width: 300px;
-
-      .form-select:focus {
-        box-shadow: unset;
-      }
     }
   }
 

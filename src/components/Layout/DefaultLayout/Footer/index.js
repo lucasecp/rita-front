@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import logoFooter from '@/assets/logo/symbol.svg'
 import { Container, Time } from './styles'
@@ -13,7 +13,11 @@ const Footer = () => {
 
   const [dateNow, setDate] = useState(formatDate())
 
-  setInterval(() => {
+  useEffect(() => {
+    return () => clearInterval(interval)
+  })
+
+  const interval = setInterval(() => {
     setDate(formatDate())
   }, 6000)
 

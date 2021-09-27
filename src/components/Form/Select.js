@@ -20,7 +20,7 @@ const SelectComponent = ({
         }}
         {...rest}
       >
-        <option value="" disabled >
+        <option value="" disabled>
           {labelDefaultOption}
         </option>
         {options.map((option, index) => (
