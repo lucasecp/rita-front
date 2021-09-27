@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import OutlineButton from '@/components/Button/Outline'
-import warningIcon from '@/assets/icons/alerts/warning.svg'
 
 import { Container } from '../styles'
 import RequestNewTokenTimer from './RequestNewTokenTimer'
@@ -12,6 +11,7 @@ import InputMask from '@/components/Form/InputMask'
 import { useHistory } from 'react-router-dom'
 import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
+import LastTry from '../error/LastTry'
 
 const MODAL = {
   INSERT_TOKEN: 'insert_token',
@@ -23,11 +23,11 @@ const MODAL = {
 function InsertToken({ isLastTry, cpf, email, phone }) {
   const history = useHistory()
   const { closeModal } = useModal()
+  const { Loading } = useLoading()
 
   const [token, setToken] = useState('')
   const [hasError, setHasError] = useState(false)
   const [waitRequestNewToken, setWaitRequestNewToken] = useState(true)
-  const { Loading } = useLoading()
 
   const [typeOfModal, setTypeOfModal] = useState(
     isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN
@@ -151,18 +151,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
           </footer>
         </Container>
       )}
-      {typeOfModal === MODAL.LAST_TRY && (
-        <Container>
-          <img src={warningIcon} />
-          <p>
-            Esta é sua ultima tentativa, caso insira informações incorretas seu
-            acesso será bloqueado.
-          </p>
-          <footer>
-            <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
-          </footer>
-        </Container>
-      )}
+      {typeOfModal === MODAL.LAST_TRY && <LastTry />}
       {typeOfModal === MODAL.BLOCKED && <Denied />}
     </>
   )

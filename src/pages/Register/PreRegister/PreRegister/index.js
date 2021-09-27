@@ -22,8 +22,7 @@ import { useModal } from '@/context/useModal'
 function PreRegister() {
   const history = useHistory()
   const location = useLocation()
-  const {showMessage} = useModal()
-
+  const { showMessage } = useModal()
 
   const userData = location.state
 
@@ -37,7 +36,7 @@ function PreRegister() {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
 
-  const {Loading} = useLoading()
+  const { Loading } = useLoading()
 
   let isDataMatch
   let isLastTry
@@ -56,7 +55,6 @@ function PreRegister() {
       return setChoice('email')
     }
   }, [])
-
 
   const onChoiceChange = (event) => {
     setChoice(event.target.value)
@@ -84,8 +82,6 @@ function PreRegister() {
         isDataMatch = false
       }
     }
-
-    console.log(phone.length)
 
     try {
       await apiPatient.post(
@@ -134,14 +130,15 @@ function PreRegister() {
 
     const propsToInComumSend = {
       isLastTry,
-      cpf: userData.cpf
+      cpf: userData.cpf,
     }
 
     return showMessage(
       InsertToken,
       choice === 'email'
         ? { ...propsToInComumSend, email }
-        : { ...propsToInComumSend, phone }
+        : { ...propsToInComumSend, phone },
+      true
     )
   }
 
@@ -211,7 +208,6 @@ function PreRegister() {
           </footer>
         </Content>
       </RegisterLayout>
-
     </>
   )
 }

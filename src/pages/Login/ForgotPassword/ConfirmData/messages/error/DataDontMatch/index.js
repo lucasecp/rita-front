@@ -7,7 +7,7 @@ import { Container } from '../../styles'
 import { useModal } from '@/context/useModal'
 
 function DataDontMatch({ email, phone }) {
-  const {closeModal} = useModal()
+  const { closeModal } = useModal()
 
   const renderMessage = () => {
     if (phone && email) {

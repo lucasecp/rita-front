@@ -143,7 +143,7 @@ const RegisterPatient = () => {
         {step === 1 && (
           <RegistrationData
             setData={setData}
-            setBtn={setButtonPass}
+            setButtonPass={setButtonPass}
             dataClientSabin={dataClientSabin}
             newData={data}
           />
@@ -151,7 +151,7 @@ const RegisterPatient = () => {
         {step === 2 && (
           <Adress
             setData={setData}
-            setBtn={setButtonPass}
+            setButtonPass={setButtonPass}
             dataClientSabin={dataClientSabin}
             newData={data}
           />
@@ -163,11 +163,7 @@ const RegisterPatient = () => {
           />
         )}
         {step === 4 && (
-          <Dependents
-            setData={setData}
-            setBtn={setButtonPass}
-            dataClientSabin={dataClientSabin}
-          />
+          <Dependents setData={setData} dataClientSabin={dataClientSabin} />
         )}
         <BtnGroup>
           {step > 1 && (

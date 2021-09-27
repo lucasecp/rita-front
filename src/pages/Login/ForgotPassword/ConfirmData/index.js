@@ -16,14 +16,14 @@ import Denied from './messages/error/Danied'
 import isEmail from '@/helpers/isEmail'
 import apiPatient from '@/services/apiPatient'
 import InputMask from '@/components/Form/InputMask'
+
 import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
 
 function ConfirmData() {
   const history = useHistory()
   const location = useLocation()
-  const {showMessage} = useModal()
-
+  const { showMessage } = useModal()
 
   const userData = location.state
 
@@ -37,7 +37,7 @@ function ConfirmData() {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
 
-  const {Loading} = useLoading()
+  const { Loading } = useLoading()
 
   let isDataMatch
   let isLastTry
@@ -57,12 +57,9 @@ function ConfirmData() {
     }
   }, [])
 
-
   const onChoiceChange = (event) => {
     setChoice(event.target.value)
   }
-
-
 
   const onForwardData = async () => {
     isDataMatch = true
@@ -82,8 +79,6 @@ function ConfirmData() {
         isDataMatch = false
       }
     }
-
-    console.log(phone.length)
 
     try {
       await apiPatient.post(
@@ -132,14 +127,15 @@ function ConfirmData() {
 
     const propsToInComumSend = {
       isLastTry,
-      cpf: userData.cpf
+      cpf: userData.cpf,
     }
 
     return showMessage(
       InsertToken,
       choice === 'email'
         ? { ...propsToInComumSend, email }
-        : { ...propsToInComumSend, phone }
+        : { ...propsToInComumSend, phone },
+      true
     )
   }
 
@@ -209,7 +205,6 @@ function ConfirmData() {
           </footer>
         </Content>
       </RegisterLayout>
-
     </>
   )
 }
