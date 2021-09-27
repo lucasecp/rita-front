@@ -32,7 +32,6 @@ const Form = ({ editDep, setAllDeps, allDeps }) => {
   }, [])
   useEffect(() => {
     if (!editDep) return
-    console.log(editDep);
     setName(editDep.nome || '')
     setEmail(editDep.email || '')
     setGender(editDep.sexo || '')

@@ -10,7 +10,6 @@ const MasterPage = () => {
   const {user} = useAuth()
   useEffect(() => {
     document.title = 'Perfil'
-    console.log(user);
   }, [user])
 
   return (

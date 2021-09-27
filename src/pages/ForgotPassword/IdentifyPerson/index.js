@@ -56,7 +56,7 @@ function Initial() {
         <Content>
           <h6>
             Para continuarmos, precisamos confirmar alguns dados. Informe seu
-            CPF.:
+            CPF.
           </h6>
           <InputMask
             mask="999.999.999-99"
@@ -64,7 +64,6 @@ function Initial() {
             value={cpf}
             setValue={setCpf}
             name="cpf"
-            label="CPF*:"
           />
           <BtnGroup>
             <OutlineButton onClick={() => history.push('/login')}>

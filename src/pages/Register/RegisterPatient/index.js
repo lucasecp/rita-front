@@ -71,7 +71,6 @@ const RegisterPatient = () => {
         formData
       )
     } catch ({ response }) {
-      console.log(response)
     } finally {
       Loading.turnOff()
     }
