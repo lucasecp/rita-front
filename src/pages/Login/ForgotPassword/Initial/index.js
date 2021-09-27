@@ -12,7 +12,7 @@ import { Content } from './style'
 
 import InvalidCpf from './messages/error/InvalidCpf'
 import NotFound from './messages/error/NotFound'
-import axios from '@/services/apiPatient'
+import apiUser from '@/services/apiUser'
 import { useModal } from '@/context/useModal'
 import { useLoading } from '@/context/useLoading'
 
@@ -33,8 +33,8 @@ const history = useHistory()
     }
     try {
       Loading.turnOn()
-      const {data} =  await axios.get(
-        `/paciente/status?cpf=${cpf}`
+      const {data} =  await apiUser.get(
+        `/status?cpf=${cpf}`
       )
         return history.push('/esqueci-senha/confirmar-dados',{
           cpf,

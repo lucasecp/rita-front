@@ -71,6 +71,7 @@ export const BtnEye = styled.button`
   margin-right: 8px;
   background: transparent;
   border: none;
+  z-index: 1;
   > img {
     width: 17px;
   }

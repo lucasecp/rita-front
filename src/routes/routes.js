@@ -5,7 +5,7 @@ import Teste from '@/pages/Teste'
 import MasterPage from '@/pages/MasterPage'
 
 import registerRoutes from './register.routes'
-import Password from '@/pages/Password'
+import Password from '@/pages/DefinePassword'
 import Login from '@/pages/Login'
 import CustomRoutes from './CustomRoutes'
 import Initial from '@/pages/Login/ForgotPassword/Initial'

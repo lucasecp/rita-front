@@ -1,1 +1,1 @@
-const hasLetter = (value) =>  /[a-zA-Z]/g.test(value)
+export default (value) =>  /[a-zA-Z]/g.test(value)

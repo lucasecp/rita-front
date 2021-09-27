@@ -14,7 +14,7 @@ import InsertToken from './messages/InsertToken'
 import DataDontMatch from './messages/error/DataDontMatch'
 import Denied from './messages/error/Danied'
 import isEmail from '@/helpers/isEmail'
-import apiPatient from '@/services/apiPatient'
+import apiUser from '@/services/apiUser'
 import InputMask from '@/components/Form/InputMask'
 import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
@@ -86,8 +86,8 @@ function ConfirmData() {
     console.log(phone.length)
 
     try {
-      await apiPatient.post(
-        '/paciente/token',
+      await apiUser.post(
+        '/token',
         choice === 'email'
           ? {
               cpf: userData.cpf,

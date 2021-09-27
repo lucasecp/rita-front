@@ -1,1 +1,1 @@
-const hasNumber = (value) =>  /[a-zA-Z]/g.test(value)
+export default (value) =>  new RegExp('[0-9]+').test(value)
