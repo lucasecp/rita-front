@@ -8,9 +8,9 @@ import registerRoutes from './register.routes'
 import Password from '@/pages/DefinePassword'
 import Login from '@/pages/Login'
 import CustomRoutes from './CustomRoutes'
-import Initial from '@/pages/Login/ForgotPassword/Initial'
+import Initial from '@/pages/ForgotPassword/IdentifyPerson'
 import NotFound from '@/pages/404'
-import ConfirmData from '@/pages/Login/ForgotPassword/ConfirmData'
+import ConfirmData from '@/pages/ForgotPassword/ConfirmPhoneOrEmail'
 
 function Routes() {
   return (
