@@ -62,9 +62,7 @@ function ConfirmData() {
     setChoice(event.target.value)
   }
 
-  const redirectToRegister = () => {
-    history.push('/cadastro/paciente')
-  }
+
 
   const onForwardData = async () => {
     isDataMatch = true
@@ -194,7 +192,7 @@ function ConfirmData() {
             )}
           </RadioGroup>
           <footer>
-            <OutlineButton onClick={redirectToRegister}>
+            <OutlineButton onClick={() => showMessage(Denied)}>
               Não reconheço esses dados
             </OutlineButton>
             {choice && (

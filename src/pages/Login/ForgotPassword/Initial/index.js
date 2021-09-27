@@ -36,7 +36,6 @@ const history = useHistory()
       const {data} =  await axios.get(
         `/paciente/status?cpf=${cpf}`
       )
-      console.log(data);
         return history.push('/esqueci-senha/confirmar-dados',{
           cpf,
           email: data.email,

@@ -8,13 +8,13 @@ import { ButtonGroup, Container } from '../../styles'
 import { useModal } from '@/context/useModal'
 import OutlineButton from '@/components/Button/Outline'
 
-function NotFound() {
+function NotFound(data) {
   const history = useHistory()
   const { closeModal } = useModal()
 
   const pushToPreRegister = () => {
     closeModal()
-    history.push('/cadastro-inicial')
+    history.push('/cadastro/paciente',{ userData: { cpf: data.cpf } })
   }
 
   return (
