@@ -75,7 +75,6 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
         cpf,
       },
     ]
-    if (cpfAlreadyExist()) return alreadyExistError()
     setAllDeps((data) => [...data, ...newDep])
     clearForm()
     closeModal()
@@ -95,8 +94,8 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
         email: email,
         sexo: gender,
         dataNascimento: birthdate,
-        telefone: clearSpecialCaracter(phone),
-        cpf: clearSpecialCaracter(cpf),
+        telefone: phone,
+        cpf,
       }
       return dep
     })

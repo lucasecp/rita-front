@@ -17,7 +17,7 @@ const Dependents = ({ dataClientSabin, setData,newData }) => {
 
   useEffect(() => {
     setData((data) => {
-      return { ...data, dependentes: [...allDeps] }
+      return { ...data, dependentes: allDeps }
     })
   }, [allDeps])
 
