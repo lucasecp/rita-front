@@ -8,12 +8,13 @@ import { useModal } from '@/context/useModal'
 
 function Denied() {
   const { closeModal } = useModal()
- 
+
   return (
     <Container>
       <img src={errorIcon} />
+      <p>Seu acesso foi bloqueado devido à excesso de tentativas.</p>
       <p>
-      Seu acesso foi bloqueado devido à excesso de tentativas. Pedimos que entre em contato com a central de atendimento
+        Pedimos que entre em contato com a central de atendimento
         <a
           href="https://api.whatsapp.com/send?phone=556131810999"
           target="_blank"

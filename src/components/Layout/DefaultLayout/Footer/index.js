@@ -15,7 +15,7 @@ const Footer = () => {
 
   useEffect(() => {
     return () => clearInterval(interval)
-  })
+  }, [])
 
   const interval = setInterval(() => {
     setDate(formatDate())

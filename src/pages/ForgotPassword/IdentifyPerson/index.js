@@ -17,7 +17,7 @@ import { useModal } from '@/context/useModal'
 import { useLoading } from '@/context/useLoading'
 import OutlineButton from '@/components/Button/Outline'
 
-function Initial() {
+function IdentifyPerson() {
   const [cpf, setCpf] = useState('')
   const { Loading } = useLoading()
   const history = useHistory()
@@ -32,6 +32,7 @@ function Initial() {
     if (!validateCpf(cpf)) {
       return showMessage(InvalidCpf)
     }
+
     try {
       Loading.turnOn()
       const { data } = await apiUser.get(`/status?cpf=${cpf}`)
@@ -41,8 +42,7 @@ function Initial() {
         phone: data.telefone,
       })
     } catch ({ response }) {
-      const apiStatus = response.status
-      if (apiStatus === 404) {
+      if (response.status === 404) {
         return showMessage(NotFound, { cpf })
       }
     } finally {
@@ -51,13 +51,10 @@ function Initial() {
   }
 
   return (
-    <>
-      <RegisterLayout>
-        <Content>
-          <h6>
-            Para continuarmos, precisamos confirmar alguns dados. Informe seu
-            CPF.
-          </h6>
+    <RegisterLayout>
+      <Content>
+        <h6>Antes de definir sua senha, por favor informe o seu CPF:</h6>
+        <div>
           <InputMask
             mask="999.999.999-99"
             placeholder="000.000.000-00"
@@ -71,10 +68,10 @@ function Initial() {
             </OutlineButton>
             <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
           </BtnGroup>
+          </div>
         </Content>
       </RegisterLayout>
-    </>
   )
 }
 
-export default Initial
+export default IdentifyPerson

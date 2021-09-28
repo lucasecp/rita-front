@@ -1,27 +1,28 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useLoading } from '@/context/useLoading'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import OutlineButton from '@/components/Button/Outline'
 
 import { Container } from '../styles'
 import RequestNewTokenTimer from './RequestNewTokenTimer'
-import apiUser from '@/services/apiUser'
-import Denied from '../error/Danied'
+import Denied from '../error/Denied'
 import InputMask from '@/components/Form/InputMask'
-import { useHistory } from 'react-router-dom'
-import { useLoading } from '@/context/useLoading'
 import LastTry from '../error/LastTry'
+import apiUser from '@/services/apiUser'
+import { useModal } from '@/context/useModal'
 
 const MODAL = {
   INSERT_TOKEN: 'insert_token',
   LAST_TRY: 'last_try',
-  LAST_TRY_REQUEST_NEW_TOKEN: 'last_try_request_new_token',
   BLOCKED: 'blocked',
 }
 
 function InsertToken({ isLastTry, cpf, email, phone }) {
   const history = useHistory()
   const { Loading } = useLoading()
+  const { closeModal } = useModal()
 
   const [token, setToken] = useState('')
   const [hasError, setHasError] = useState(false)
@@ -36,7 +37,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
 
     try {
       const response = await apiUser.post(
-        '/paciente/token',
+        '/token',
         email
           ? {
               cpf,
@@ -64,18 +65,20 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
     }
   }
 
-  const accessPlatform = async () => {
-    Loading.turnOn()
+  const goToDefinePassword = async () => {
     setHasError(false)
 
     try {
-      const response = await apiUser.get(
-        `/paciente/token?token=${token}&cpf=${cpf}`
-      )
+      Loading.turnOn()
+      const response = await apiUser.get(`/token?token=${token}&cpf=${cpf}`)
 
       if (response.status === 200) {
-        console.log(response.data)
-        history.push('/cadastro/paciente/', { userData: response.data })
+        if (response?.data.ultimaTentativa) {
+          return switchModalTo(MODAL.LAST_TRY)
+        }
+
+        closeModal()
+        history.push('/definir-senha', { cpf, ...response.data })
       }
     } catch ({ response }) {
       const messageFromApi = response?.data.message
@@ -143,13 +146,15 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
             >
               Solicitar novo Token
             </OutlineButton>
-            <ButtonPrimary onClick={accessPlatform} disabled={token === ''}>
+            <ButtonPrimary onClick={goToDefinePassword} disabled={token === ''}>
               Acessar
             </ButtonPrimary>
           </footer>
         </Container>
       )}
-      {typeOfModal === MODAL.LAST_TRY && <LastTry />}
+      {typeOfModal === MODAL.LAST_TRY && (
+        <LastTry email={email} switchModalTo={switchModalTo} />
+      )}
       {typeOfModal === MODAL.BLOCKED && <Denied />}
     </>
   )

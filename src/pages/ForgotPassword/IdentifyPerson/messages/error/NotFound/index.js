@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import ButtonPrimary from '@/components/Button/Primary'
 import warning from '@/assets/icons/alerts/warning.svg'
 
-import { ButtonGroup, Container } from '../../styles'
+import { Container } from '../../styles'
 import { useModal } from '@/context/useModal'
 import OutlineButton from '@/components/Button/Outline'
 
@@ -14,7 +14,7 @@ function NotFound(data) {
 
   const pushToPreRegister = () => {
     closeModal()
-    history.push('/cadastro/paciente',{ userData: { cpf: data.cpf } })
+    history.push('/cadastro/paciente', { userData: { cpf: data.cpf } })
   }
 
   return (
@@ -24,10 +24,10 @@ function NotFound(data) {
         Desculpe, os seus dados não foram encontrados. Deseja realizar o seu
         cadastro na Rita Saúde?
       </p>
-      <ButtonGroup>
+      <footer>
         <OutlineButton onClick={closeModal}>Não</OutlineButton>
         <ButtonPrimary onClick={pushToPreRegister}>Sim</ButtonPrimary>
-      </ButtonGroup>
+      </footer>
     </Container>
   )
 }
