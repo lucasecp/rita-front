@@ -33,7 +33,7 @@ const Dependents = ({ dataClientSabin, setData,newData }) => {
     setAllDeps(valueUpdated)
   }
   const handleAddDep = () => {
-    showMessage(Form, {allDeps, setAllDeps,action: 'create', clientCpf : newData.cpf })
+    showMessage(Form, {editDep: {},allDeps, setAllDeps,action: 'create', clientCpf : '126.192.457-61' })
   }
   return (
     <Container>

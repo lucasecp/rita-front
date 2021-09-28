@@ -30,23 +30,18 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
   const { closeModal } = useModal()
 
   useEffect(() => {
-    if(action === 'edit' || !cpf && !clientCpf) return
-    if (!cpfAlreadyExist())
-      return setErrors({ ...errors, alreadyExist: '' })
+    if (!cpfAlreadyExist()) return setErrors({ ...errors, alreadyExist: '' })
     return alreadyExistError()
   }, [cpf])
 
   useEffect(() => {
-    setName(editDep && editDep.nome ? editDep.nome : '')
-    setEmail(editDep && editDep.email ? editDep.email : '')
-    setGender(editDep && editDep.sexo ? editDep.sexo : '')
-    setBirthdate(
-      editDep && formatBirthdate(editDep.dataNascimento)
-        ? formatBirthdate(editDep.dataNascimento)
-        : ''
-    )
-    setPhone(editDep && editDep.telefone ? editDep.telefone : '')
-    setCpf(editDep && editDep.cpf ? editDep.cpf : '')
+    console.log(editDep);
+    setName(editDep.nome || '')
+    setEmail(editDep.email || '')
+    setGender(editDep.sexo || '')
+    setBirthdate(formatBirthdate(editDep.dataNascimento) || '')
+    setPhone(editDep.telefone || '')
+    setCpf(editDep.cpf || '')
   }, [editDep])
 
   const isValidData = () =>
@@ -60,11 +55,12 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
 
   const cpfAlreadyExist = () => {
     const alreadyExist = allDeps.filter(
-      (dep) =>
-        clearSpecialCaracter(dep.cpf) === clearSpecialCaracter(cpf) ||
-        clearSpecialCaracter(cpf) === clearSpecialCaracter(clientCpf)
+      (dep) => clearSpecialCaracter(dep.cpf) === clearSpecialCaracter(cpf)
     )
-    return alreadyExist.length
+    return (
+      clearSpecialCaracter(cpf) === clearSpecialCaracter(clientCpf) ||
+      alreadyExist.length
+    )
   }
 
   const hanldeSubmit = (e) => {
@@ -77,7 +73,7 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
         dataNascimento: birthdate,
         telefone: phone,
         cpf,
-      }
+      },
     ]
     if (cpfAlreadyExist()) return alreadyExistError()
     setAllDeps((data) => [...data, ...newDep])
@@ -93,7 +89,7 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
 
   const handleUpdate = () => {
     const valueUpdated = allDeps.map((dep) => {
-      if (dep.cpf !== cpf) return dep
+      if (clearSpecialCaracter(dep.cpf) === clearSpecialCaracter(cpf))
       return {
         nome: name,
         email: email,
@@ -102,19 +98,21 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
         telefone: clearSpecialCaracter(phone),
         cpf: clearSpecialCaracter(cpf),
       }
+      return dep
     })
+    console.log(valueUpdated);
     setAllDeps(valueUpdated)
     clearForm()
     closeModal()
   }
-  const clearForm = () =>{
-    setErrors({})
+  const clearForm = () => {
     setName('')
     setEmail('')
     setGender('')
     setBirthdate('')
     setPhone('')
     setCpf('')
+    setErrors({})
   }
   return (
     <Container>
@@ -212,7 +210,7 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
           <OutlineButton
             variation="red"
             onClick={() => {
-              clearForm()
+              setErrors({})
               closeModal()
             }}
           >
