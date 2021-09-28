@@ -12,15 +12,16 @@ import RadioButton from '@/styles/components/RadioButton'
 import { Content } from './styles'
 import InsertToken from './messages/InsertToken'
 import DataDontMatch from './messages/error/DataDontMatch'
-import Denied from './messages/error/Danied'
+import Denied from './messages/error/Denied'
 import isEmail from '@/helpers/isEmail'
 import apiUser from '@/services/apiUser'
 import InputMask from '@/components/Form/InputMask'
 
 import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
+import ContactUs from './messages/error/ContactUs'
 
-function ConfirmData() {
+function ConfirmPhoneOrEmail() {
   const history = useHistory()
   const location = useLocation()
   const { showMessage } = useModal()
@@ -95,9 +96,8 @@ function ConfirmData() {
       )
     } catch ({ response }) {
       const messageFromApi = response?.data.message
-      const statusFromApi = response?.status
 
-      if (statusFromApi === 400) {
+      if (response?.status === 400) {
         if (messageFromApi === 'Dados inválido') {
           isDataMatch = false
         }
@@ -188,7 +188,7 @@ function ConfirmData() {
             )}
           </RadioGroup>
           <footer>
-            <OutlineButton onClick={() => showMessage(Denied)}>
+            <OutlineButton onClick={() => showMessage(ContactUs)}>
               Não reconheço esses dados
             </OutlineButton>
             {choice && (
@@ -209,4 +209,4 @@ function ConfirmData() {
   )
 }
 
-export default ConfirmData
+export default ConfirmPhoneOrEmail

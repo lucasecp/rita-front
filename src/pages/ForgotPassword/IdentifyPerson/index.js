@@ -16,10 +16,11 @@ import apiUser from '@/services/apiUser'
 import { useModal } from '@/context/useModal'
 import { useLoading } from '@/context/useLoading'
 
-function Initial() {
+function IdentifyPerson() {
   const [cpf, setCpf] = useState('')
-const {Loading} = useLoading()
-const history = useHistory()
+
+  const { Loading } = useLoading()
+  const history = useHistory()
 
   const { showMessage } = useModal()
 
@@ -31,20 +32,19 @@ const history = useHistory()
     if (!validateCpf(cpf)) {
       return showMessage(InvalidCpf)
     }
+
     try {
       Loading.turnOn()
-      const {data} =  await apiUser.get(
-        `/status?cpf=${cpf}`
-      )
-        return history.push('/esqueci-senha/confirmar-dados',{
-          cpf,
-          email: data.email,
-          phone: data.telefone,
-        })
+      const { data } = await apiUser.get(`/status?cpf=${cpf}`)
+
+      return history.push('/esqueci-senha/confirmar-dados', {
+        cpf,
+        email: data.email,
+        phone: data.telefone,
+      })
     } catch ({ response }) {
-      const apiStatus = response.status
-      if (apiStatus === 404) {
-        return showMessage(NotFound,{cpf})
+      if (response.status === 404) {
+        return showMessage(NotFound, { cpf })
       }
     } finally {
       Loading.turnOff()
@@ -52,24 +52,22 @@ const history = useHistory()
   }
 
   return (
-    <>
-      <RegisterLayout>
-        <Content>
-          <h6>Antes de definir sua senha, por favor informe o seu CPF:</h6>
-          <div>
-            <InputMask
-              mask="999.999.999-99"
-              placeholder="000.000.000-00"
-              value={cpf}
-              setValue={setCpf}
-              name="cpf"
-            />
-            <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
-          </div>
-        </Content>
-      </RegisterLayout>
-    </>
+    <RegisterLayout>
+      <Content>
+        <h6>Antes de definir sua senha, por favor informe o seu CPF:</h6>
+        <div>
+          <InputMask
+            mask="999.999.999-99"
+            placeholder="000.000.000-00"
+            value={cpf}
+            setValue={setCpf}
+            name="cpf"
+          />
+          <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
+        </div>
+      </Content>
+    </RegisterLayout>
   )
 }
 
-export default Initial
+export default IdentifyPerson

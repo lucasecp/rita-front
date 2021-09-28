@@ -6,7 +6,7 @@ import whatsApp from '@/assets/icons/whatsapp.svg'
 import { Container } from '../../styles'
 import { useModal } from '@/context/useModal'
 
-function Denied() {
+function ContactUs() {
   const { closeModal } = useModal()
 
   return (
@@ -27,4 +27,4 @@ function Denied() {
   )
 }
 
-export default Denied
+export default ContactUs
