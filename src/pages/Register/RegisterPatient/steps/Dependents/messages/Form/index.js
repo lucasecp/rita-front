@@ -14,10 +14,10 @@ import {
   validateName,
   validatePhone,
 } from '../../../../helpers/validator'
-import MsgError from '@/components/MsgError'
 import formatBirthdate from '@/helpers/formatBirthdate'
 import { useModal } from '@/context/useModal'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import { validateDepCpf } from './ValidateDepCpf'
 
 const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
   const [name, setName] = useState('')
@@ -28,11 +28,6 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
   const [cpf, setCpf] = useState('')
   const [errors, setErrors] = useState({})
   const { closeModal } = useModal()
-
-  useEffect(() => {
-    if (!cpfAlreadyExist()) return setErrors({ ...errors, alreadyExist: '' })
-    return alreadyExistError()
-  }, [cpf])
 
   useEffect(() => {
     console.log(editDep);
@@ -53,16 +48,6 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
     phone &&
     !Object.values(errors).filter((err) => err).length
 
-  const cpfAlreadyExist = () => {
-    const alreadyExist = allDeps.filter(
-      (dep) => clearSpecialCaracter(dep.cpf) === clearSpecialCaracter(cpf)
-    )
-    return (
-      clearSpecialCaracter(cpf) === clearSpecialCaracter(clientCpf) ||
-      alreadyExist.length
-    )
-  }
-
   const hanldeSubmit = (e) => {
     e.preventDefault()
     const newDep = [
@@ -79,12 +64,7 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
     clearForm()
     closeModal()
   }
-  const alreadyExistError = () => {
-    setErrors({
-      ...errors,
-      alreadyExist: 'Dependente já existente com este CPF',
-    })
-  }
+
 
   const handleUpdate = () => {
     const valueUpdated = allDeps.map((dep) => {
@@ -135,8 +115,8 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
             value={cpf}
             setValue={setCpf}
             hasError={errors.cpf}
-            onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
+            onBlur={() => setErrors({ ...errors, ...validateDepCpf(cpf,allDeps,clientCpf) })}
+            onKeyUp={() => setErrors({ ...errors, ...validateDepCpf(cpf,allDeps,clientCpf) })}
             msgError={errors.cpf}
           />
         </Col>
@@ -231,11 +211,7 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
             </ButtonPrimary>
           )}
         </Col>
-        {errors.alreadyExist && (
-          <MsgError className="text-center mt-3">
-            {errors.alreadyExist}
-          </MsgError>
-        )}
+
       </Row>
     </Container>
   )

@@ -22,7 +22,7 @@ const Dependents = ({ dataClientSabin, setData,newData }) => {
   }, [allDeps])
 
   const handleUpdate = (infoDep) => {
-    showMessage(Form, { editDep: infoDep, allDeps, setAllDeps,action: 'edit', clientCpf : newData.cpf })
+    showMessage(Form, { editDep: infoDep, allDeps, setAllDeps,action: 'edit', clientCpf : '12619245761' })
   }
   const handleDelete = (cpf) => {
     const valueUpdated = allDeps.filter(
@@ -33,7 +33,7 @@ const Dependents = ({ dataClientSabin, setData,newData }) => {
     setAllDeps(valueUpdated)
   }
   const handleAddDep = () => {
-    showMessage(Form, {editDep: {},allDeps, setAllDeps,action: 'create', clientCpf : '126.192.457-61' })
+    showMessage(Form, {editDep: {},allDeps, setAllDeps,action: 'create', clientCpf : '12619245761' })
   }
   return (
     <Container>
