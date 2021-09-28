@@ -8,10 +8,10 @@ import OutlineButton from '@/components/Button/Outline'
 import { Container } from '../styles'
 import RequestNewTokenTimer from './RequestNewTokenTimer'
 import Denied from '../error/Denied'
-import InputMask from '@/components/Form/InputMask'
 import LastTry from '../error/LastTry'
 import apiUser from '@/services/apiUser'
 import { useModal } from '@/context/useModal'
+import InputText from '@/components/Form/InputText'
 
 const MODAL = {
   INSERT_TOKEN: 'insert_token',
@@ -124,12 +124,12 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
             active={waitRequestNewToken}
             onFinishTimer={setWaitRequestNewToken}
           />
-          <InputMask
+          <InputText
             placeholder="000000"
             value={token}
             setValue={setToken}
             hasError={hasError}
-            mask="999999"
+            type="number"
           />
           {hasError && (
             <small>
