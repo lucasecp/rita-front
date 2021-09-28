@@ -81,22 +81,26 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
         history.push('/definir-senha', { cpf, ...response.data })
       }
     } catch ({ response }) {
-      const messageFromApi = response?.data.message
+      if (response.status === 400) {
+        const messageFromApi = response?.data.message
 
-      if (messageFromApi === 'Dados inválido') {
         setHasError(true)
-      }
 
-      if (
-        messageFromApi ===
-        'Ultima tentativa antes de ser bloqueado definitivamente'
-      ) {
-        setHasError(true)
-        switchModalTo(MODAL.LAST_TRY)
-      }
+        if (messageFromApi === 'Dados inválido') {
+          setHasError(true)
+        }
 
-      if (messageFromApi === 'Usuario Bloqueado') {
-        switchModalTo(MODAL.BLOCKED)
+        if (
+          messageFromApi ===
+          'Ultima tentativa antes de ser bloqueado definitivamente'
+        ) {
+          setHasError(true)
+          switchModalTo(MODAL.LAST_TRY)
+        }
+
+        if (messageFromApi === 'Usuario Bloqueado') {
+          switchModalTo(MODAL.BLOCKED)
+        }
       }
     } finally {
       Loading.turnOff()
