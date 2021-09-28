@@ -1,14 +1,11 @@
-<<<<<<< HEAD
-import colors from '@/styles/colors'
-=======
->>>>>>> 26167ff1da20b4d3a09b88b945734fc92cbe3e3d
 import styled from 'styled-components'
+
+import colors from '@/styles/colors'
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-<<<<<<< HEAD
 
   > img {
     margin-bottom: 24px;
@@ -18,14 +15,6 @@ export const Container = styled.div`
     margin-top: 24px;
   }
 
-=======
-  > img {
-    margin-bottom: 24px;
-  }
-  > button {
-    margin-top: 24px;
-  }
->>>>>>> 26167ff1da20b4d3a09b88b945734fc92cbe3e3d
   > p {
     max-width: 455px;
     word-wrap: break-word;
@@ -44,7 +33,7 @@ export const Container = styled.div`
       align-items: center;
       color: #1c23bd;
     }
-    
+
     img {
       margin-left: 6px;
     }

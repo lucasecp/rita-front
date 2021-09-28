@@ -68,9 +68,9 @@ function IdentifyPerson() {
             </OutlineButton>
             <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
           </BtnGroup>
+          </div>
         </Content>
       </RegisterLayout>
-    </>
   )
 }
 
