@@ -19,7 +19,6 @@ import InputMask from '@/components/Form/InputMask'
 
 import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
-import ContactUs from './messages/error/ContactUs'
 
 function ConfirmPhoneOrEmail() {
   const history = useHistory()
@@ -188,7 +187,7 @@ function ConfirmPhoneOrEmail() {
             )}
           </RadioGroup>
           <footer>
-            <OutlineButton onClick={() => showMessage(ContactUs)}>
+            <OutlineButton onClick={() => showMessage(Denied)}>
               Não reconheço esses dados
             </OutlineButton>
             {choice && (

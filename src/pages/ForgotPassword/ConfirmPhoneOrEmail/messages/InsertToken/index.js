@@ -11,6 +11,7 @@ import Denied from '../error/Denied'
 import InputMask from '@/components/Form/InputMask'
 import LastTry from '../error/LastTry'
 import apiUser from '@/services/apiUser'
+import { useModal } from '@/context/useModal'
 
 const MODAL = {
   INSERT_TOKEN: 'insert_token',
@@ -21,6 +22,7 @@ const MODAL = {
 function InsertToken({ isLastTry, cpf, email, phone }) {
   const history = useHistory()
   const { Loading } = useLoading()
+  const { closeModal } = useModal()
 
   const [token, setToken] = useState('')
   const [hasError, setHasError] = useState(false)
@@ -71,12 +73,12 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
       const response = await apiUser.get(`/token?token=${token}&cpf=${cpf}`)
 
       if (response.status === 200) {
-        console.log(response.data)
         if (response?.data.ultimaTentativa) {
           return switchModalTo(MODAL.LAST_TRY)
         }
 
-        history.push('/definir-senha', { cpf })
+        closeModal()
+        history.push('/definir-senha', { cpf, ...response.data })
       }
     } catch ({ response }) {
       const messageFromApi = response?.data.message
