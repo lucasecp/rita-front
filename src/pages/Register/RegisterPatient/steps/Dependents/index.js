@@ -7,7 +7,7 @@ import trash from '@/assets/icons/trash.svg'
 import edit from '@/assets/icons/edit.svg'
 import { useModal } from '@/context/useModal'
 
-const Dependents = ({ dataClientSabin, setData,newData }) => {
+const Dependents = ({ dataClientSabin, setData, newData }) => {
   const [allDeps, setAllDeps] = useState([])
   const { showMessage } = useModal()
 
@@ -21,19 +21,28 @@ const Dependents = ({ dataClientSabin, setData,newData }) => {
     })
   }, [allDeps])
 
-  const handleUpdate = (infoDep) => {
-    showMessage(Form, { editDep: infoDep, allDeps, setAllDeps,action: 'edit', clientCpf : '12619245761' })
+  const handleUpdate = (infoDep, id) => {
+    showMessage(Form, {
+      editDep: infoDep,
+      id,
+      allDeps,
+      setAllDeps,
+      action: 'edit',
+      clientCpf: '12619245761',
+    })
   }
-  const handleDelete = (cpf) => {
-    const valueUpdated = allDeps.filter(
-      (dep) =>
-        dep.cpf.replace(/[^a-zA-Z0-9]/g, '') !==
-        cpf.replace(/[^a-zA-Z0-9]/g, '')
-    )
+  const handleDelete = (id) => {
+    const valueUpdated = allDeps.filter((dep, index) => index !== id)
     setAllDeps(valueUpdated)
   }
   const handleAddDep = () => {
-    showMessage(Form, {editDep: {},allDeps, setAllDeps,action: 'create', clientCpf : '12619245761' })
+    showMessage(Form, {
+      editDep: {},
+      allDeps,
+      setAllDeps,
+      action: 'create',
+      clientCpf: '12619245761',
+    })
   }
   return (
     <Container>
@@ -51,11 +60,11 @@ const Dependents = ({ dataClientSabin, setData,newData }) => {
                 </li>
               </ul>
               <div>
-                <button onClick={() => handleUpdate(dep)}>
+                <button onClick={() => handleUpdate(dep, index)}>
                   <img src={edit} />
                   Editar
                 </button>
-                <button onClick={() => handleDelete(dep.cpf)}>
+                <button onClick={() => handleDelete(index)}>
                   <img src={trash} />
                   Remover
                 </button>

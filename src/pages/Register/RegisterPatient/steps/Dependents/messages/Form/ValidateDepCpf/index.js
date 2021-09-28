@@ -2,11 +2,11 @@ import clearCpf from '@/helpers/clear/SpecialCaracteres'
 import cpfValidate from '@/helpers/validateCpf'
 const anySpecialCaracter = /[^a-zA-Z0-9]/g
 
-export const validateDepCpf = (value, allDeps, clientCpf) => {
+export const validateDepCpf = (value, allDeps, clientCpf,action) => {
   const newValue = value.replace(anySpecialCaracter, '')
 
   const alreadyExist = allDeps.some(
-    (dep) => clearCpf(dep.cpf) === clearCpf(value)
+    (dep) => clearCpf(dep.cpf) === clearCpf(value) && action !== 'edit'
   )
 
   const isClientCpf =
@@ -15,10 +15,11 @@ export const validateDepCpf = (value, allDeps, clientCpf) => {
   if (!newValue.replace(anySpecialCaracter, ''))
     return { cpf: 'CPF Obrigatório.' }
 
-  else if (!cpfValidate(newValue.replace(anySpecialCaracter, '')))
+  if (!cpfValidate(newValue.replace(anySpecialCaracter, '')))
     return { cpf: 'CPF Inválido.' }
 
-  else if (alreadyExist || isClientCpf) return { cpf: 'CPF já existe.' }
+  if (alreadyExist) return { cpf: 'CPF já incluído na lista.' }
+  if(isClientCpf) return { cpf: 'Paciente não pode ser dependente.' }
 
   return { cpf: '' }
 }

@@ -8,7 +8,6 @@ import { Col, Row } from 'react-bootstrap'
 import { Container } from './style'
 import {
   validateBirthdate,
-  validateCpf,
   validateEmail,
   validateGender,
   validateName,
@@ -16,10 +15,9 @@ import {
 } from '../../../../helpers/validator'
 import formatBirthdate from '@/helpers/formatBirthdate'
 import { useModal } from '@/context/useModal'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import { validateDepCpf } from './ValidateDepCpf'
 
-const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
+const Form = ({ editDep,id, setAllDeps, allDeps, action, clientCpf }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
@@ -30,7 +28,6 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
   const { closeModal } = useModal()
 
   useEffect(() => {
-    console.log(editDep);
     setName(editDep.nome || '')
     setEmail(editDep.email || '')
     setGender(editDep.sexo || '')
@@ -61,14 +58,14 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
       },
     ]
     setAllDeps((data) => [...data, ...newDep])
-    clearForm()
+    setErrors({})
     closeModal()
   }
 
 
   const handleUpdate = () => {
-    const valueUpdated = allDeps.map((dep) => {
-      if (clearSpecialCaracter(dep.cpf) === clearSpecialCaracter(cpf))
+    const depsUpdated = allDeps.map((dep,index) => {
+      if (id === index)
       return {
         nome: name,
         email: email,
@@ -79,19 +76,10 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
       }
       return dep
     })
-    console.log(valueUpdated);
-    setAllDeps(valueUpdated)
-    clearForm()
-    closeModal()
-  }
-  const clearForm = () => {
-    setName('')
-    setEmail('')
-    setGender('')
-    setBirthdate('')
-    setPhone('')
-    setCpf('')
+    console.log(depsUpdated);
+    setAllDeps(depsUpdated)
     setErrors({})
+    closeModal()
   }
   return (
     <Container>
@@ -115,8 +103,8 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
             value={cpf}
             setValue={setCpf}
             hasError={errors.cpf}
-            onBlur={() => setErrors({ ...errors, ...validateDepCpf(cpf,allDeps,clientCpf) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateDepCpf(cpf,allDeps,clientCpf) })}
+            onBlur={() => setErrors({ ...errors, ...validateDepCpf(cpf,allDeps,clientCpf,action) })}
+            onKeyUp={() => setErrors({ ...errors, ...validateDepCpf(cpf,allDeps,clientCpf,action) })}
             msgError={errors.cpf}
           />
         </Col>
