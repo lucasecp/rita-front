@@ -17,12 +17,12 @@ const Dependents = ({ dataClientSabin, setData,newData }) => {
 
   useEffect(() => {
     setData((data) => {
-      return { ...data, dependentes: [...allDeps] }
+      return { ...data, dependentes: allDeps }
     })
   }, [allDeps])
 
   const handleUpdate = (infoDep) => {
-    showMessage(Form, { editDep: infoDep, allDeps, setAllDeps,action: 'edit', clientCpf : newData.cpf })
+    showMessage(Form, { editDep: infoDep, allDeps, setAllDeps,action: 'edit', clientCpf : '12619245761' })
   }
   const handleDelete = (cpf) => {
     const valueUpdated = allDeps.filter(
@@ -33,7 +33,7 @@ const Dependents = ({ dataClientSabin, setData,newData }) => {
     setAllDeps(valueUpdated)
   }
   const handleAddDep = () => {
-    showMessage(Form, {allDeps, setAllDeps,action: 'create', clientCpf : newData.cpf })
+    showMessage(Form, {editDep: {},allDeps, setAllDeps,action: 'create', clientCpf : '12619245761' })
   }
   return (
     <Container>

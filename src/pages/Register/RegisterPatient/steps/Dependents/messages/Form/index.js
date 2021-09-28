@@ -14,10 +14,10 @@ import {
   validateName,
   validatePhone,
 } from '../../../../helpers/validator'
-import MsgError from '@/components/MsgError'
 import formatBirthdate from '@/helpers/formatBirthdate'
 import { useModal } from '@/context/useModal'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import { validateDepCpf } from './ValidateDepCpf'
 
 const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
   const [name, setName] = useState('')
@@ -30,23 +30,13 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
   const { closeModal } = useModal()
 
   useEffect(() => {
-    if(action === 'edit' || !cpf && !clientCpf) return
-    if (!cpfAlreadyExist())
-      return setErrors({ ...errors, alreadyExist: '' })
-    return alreadyExistError()
-  }, [cpf])
-
-  useEffect(() => {
-    setName(editDep && editDep.nome ? editDep.nome : '')
-    setEmail(editDep && editDep.email ? editDep.email : '')
-    setGender(editDep && editDep.sexo ? editDep.sexo : '')
-    setBirthdate(
-      editDep && formatBirthdate(editDep.dataNascimento)
-        ? formatBirthdate(editDep.dataNascimento)
-        : ''
-    )
-    setPhone(editDep && editDep.telefone ? editDep.telefone : '')
-    setCpf(editDep && editDep.cpf ? editDep.cpf : '')
+    console.log(editDep);
+    setName(editDep.nome || '')
+    setEmail(editDep.email || '')
+    setGender(editDep.sexo || '')
+    setBirthdate(formatBirthdate(editDep.dataNascimento) || '')
+    setPhone(editDep.telefone || '')
+    setCpf(editDep.cpf || '')
   }, [editDep])
 
   const isValidData = () =>
@@ -58,15 +48,6 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
     phone &&
     !Object.values(errors).filter((err) => err).length
 
-  const cpfAlreadyExist = () => {
-    const alreadyExist = allDeps.filter(
-      (dep) =>
-        clearSpecialCaracter(dep.cpf) === clearSpecialCaracter(cpf) ||
-        clearSpecialCaracter(cpf) === clearSpecialCaracter(clientCpf)
-    )
-    return alreadyExist.length
-  }
-
   const hanldeSubmit = (e) => {
     e.preventDefault()
     const newDep = [
@@ -77,44 +58,40 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
         dataNascimento: birthdate,
         telefone: phone,
         cpf,
-      }
+      },
     ]
-    if (cpfAlreadyExist()) return alreadyExistError()
     setAllDeps((data) => [...data, ...newDep])
     clearForm()
     closeModal()
   }
-  const alreadyExistError = () => {
-    setErrors({
-      ...errors,
-      alreadyExist: 'Dependente já existente com este CPF',
-    })
-  }
+
 
   const handleUpdate = () => {
     const valueUpdated = allDeps.map((dep) => {
-      if (dep.cpf !== cpf) return dep
+      if (clearSpecialCaracter(dep.cpf) === clearSpecialCaracter(cpf))
       return {
         nome: name,
         email: email,
         sexo: gender,
         dataNascimento: birthdate,
-        telefone: clearSpecialCaracter(phone),
-        cpf: clearSpecialCaracter(cpf),
+        telefone: phone,
+        cpf,
       }
+      return dep
     })
+    console.log(valueUpdated);
     setAllDeps(valueUpdated)
     clearForm()
     closeModal()
   }
-  const clearForm = () =>{
-    setErrors({})
+  const clearForm = () => {
     setName('')
     setEmail('')
     setGender('')
     setBirthdate('')
     setPhone('')
     setCpf('')
+    setErrors({})
   }
   return (
     <Container>
@@ -138,8 +115,8 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
             value={cpf}
             setValue={setCpf}
             hasError={errors.cpf}
-            onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
+            onBlur={() => setErrors({ ...errors, ...validateDepCpf(cpf,allDeps,clientCpf) })}
+            onKeyUp={() => setErrors({ ...errors, ...validateDepCpf(cpf,allDeps,clientCpf) })}
             msgError={errors.cpf}
           />
         </Col>
@@ -212,7 +189,7 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
           <OutlineButton
             variation="red"
             onClick={() => {
-              clearForm()
+              setErrors({})
               closeModal()
             }}
           >
@@ -234,11 +211,7 @@ const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
             </ButtonPrimary>
           )}
         </Col>
-        {errors.alreadyExist && (
-          <MsgError className="text-center mt-3">
-            {errors.alreadyExist}
-          </MsgError>
-        )}
+
       </Row>
     </Container>
   )

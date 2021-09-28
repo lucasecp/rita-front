@@ -6,27 +6,24 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 import { Container } from '../../styles'
 import { useModal } from '@/context/useModal'
 
-function DataDontMatch({ email, phone }) {
+function DataDontMatch({choice}) {
   const { closeModal } = useModal()
+  console.log(choice);
 
   const renderMessage = () => {
-    if (phone && email) {
-      return 'uma das opções: E-mail ou Celular'
+    if (choice === 'phone') {
+      return 'Celular'
     }
 
-    if (phone) {
-      return 'a opção Celular'
-    }
-
-    if (email) {
-      return 'a opção E-mail'
+    if (choice === 'email') {
+      return 'E-mail'
     }
   }
 
   return (
     <Container>
       <img src={errorIcon} />
-      <p>Selecione {renderMessage()} e preencha o dado corretamente.</p>
+      <p>{renderMessage()} não confere com o cadastrado, preencha o dado corretamente.</p>
       <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )
