@@ -10,9 +10,11 @@ function RequestNewTokenTimer({ active, onFinishTimer }) {
   const [time, setTime] = useState(INITIAL_TIME)
 
   useEffect(() => {
+    let timeout
+
     if (active) {
       if (time > 0) {
-        setTimeout(() => {
+        timeout = setTimeout(() => {
           setTime(time - 1)
         }, 1000)
       } else {
@@ -20,6 +22,8 @@ function RequestNewTokenTimer({ active, onFinishTimer }) {
         onFinishTimer(false)
       }
     }
+
+    return () => clearTimeout(timeout)
   }, [active, time])
 
   return (
