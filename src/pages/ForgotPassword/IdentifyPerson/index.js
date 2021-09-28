@@ -53,7 +53,7 @@ function IdentifyPerson() {
   return (
     <RegisterLayout>
       <Content>
-        <h6>Antes de definir sua senha, por favor informe o seu CPF:</h6>
+        <h6>Para continuarmos, precisamos confirmar alguns dados. Informe seu CPF:</h6>
         <div>
           <InputMask
             mask="999.999.999-99"

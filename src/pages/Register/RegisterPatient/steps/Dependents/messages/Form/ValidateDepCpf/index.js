@@ -6,7 +6,7 @@ export const validateDepCpf = (value, allDeps, clientCpf,action) => {
   const newValue = value.replace(anySpecialCaracter, '')
 
   const alreadyExist = allDeps.some(
-    (dep) => clearCpf(dep.cpf) === clearCpf(value) && action !== 'edit'
+    (dep) => clearCpf(dep.cpf) === clearCpf(value) 
   )
 
   const isClientCpf =

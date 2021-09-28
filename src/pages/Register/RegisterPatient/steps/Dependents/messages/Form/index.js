@@ -28,13 +28,17 @@ const Form = ({ editDep,id, setAllDeps, allDeps, action, clientCpf }) => {
   const { closeModal } = useModal()
 
   useEffect(() => {
+    updateData()
+  }, [editDep])
+
+  const updateData = () => {
     setName(editDep.nome || '')
     setEmail(editDep.email || '')
     setGender(editDep.sexo || '')
     setBirthdate(formatBirthdate(editDep.dataNascimento) || '')
     setPhone(editDep.telefone || '')
     setCpf(editDep.cpf || '')
-  }, [editDep])
+  }
 
   const isValidData = () =>
     name &&
@@ -76,7 +80,6 @@ const Form = ({ editDep,id, setAllDeps, allDeps, action, clientCpf }) => {
       }
       return dep
     })
-    console.log(depsUpdated);
     setAllDeps(depsUpdated)
     setErrors({})
     closeModal()
@@ -178,6 +181,7 @@ const Form = ({ editDep,id, setAllDeps, allDeps, action, clientCpf }) => {
             variation="red"
             onClick={() => {
               setErrors({})
+              updateData()
               closeModal()
             }}
           >
