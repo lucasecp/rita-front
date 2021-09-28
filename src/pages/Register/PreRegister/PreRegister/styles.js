@@ -64,4 +64,10 @@ export const Content = styled.div`
       }
     }
   }
+  @media(max-width:539px) {
+    footer > button{
+      width:100%
+    }
+  }
+
 `

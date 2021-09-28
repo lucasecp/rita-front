@@ -13,5 +13,10 @@ export const Container = styled.div`
     color: #6a6a6a;
     align-self: flex-start;
   }
+  @media(max-width:539px) {
+    button{
+      width:100%
+    }
+  }
 `
 

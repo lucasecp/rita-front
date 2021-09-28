@@ -26,7 +26,7 @@ const InputPassword = ({value,setValue,label,hasError,msgError,...rest}) => {
         hasError={hasError}
         {...rest}
       />
-        <BtnEye type="button" onClick={handleSeePassword}>
+        <BtnEye type="button" onClick={handleSeePassword} >
           <img src={eye} />
         </BtnEye>
         {msgError && <MsgError>{msgError}</MsgError>}

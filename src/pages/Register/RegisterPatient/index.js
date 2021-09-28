@@ -29,13 +29,12 @@ const RegisterPatient = () => {
   const { Loading } = useLoading()
   const { showMessage } = useModal()
 
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(3)
   const [data, setData] = useState({})
 
   const [dataClientSabin, setDataClientSabin] = useState({})
   const [buttonPass, setButtonPass] = useState(false)
-  const [documentFiles, setdocumentFiles] = useState()
-
+  const [documentFiles, setdocumentFiles] = useState({})
   useEffect(() => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
@@ -71,7 +70,6 @@ const RegisterPatient = () => {
         formData
       )
     } catch ({ response }) {
-      console.log(response)
     } finally {
       Loading.turnOff()
     }
@@ -160,10 +158,11 @@ const RegisterPatient = () => {
           <Document
             onGetDocumentFiles={setdocumentFiles}
             setButtonPass={setButtonPass}
+            savedFiles={documentFiles}
           />
         )}
         {step === 4 && (
-          <Dependents setData={setData} dataClientSabin={dataClientSabin} />
+          <Dependents newData={data} setData={setData} dataClientSabin={dataClientSabin} />
         )}
         <BtnGroup>
           {step > 1 && (

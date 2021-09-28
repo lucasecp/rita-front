@@ -15,10 +15,11 @@ import {
   validatePhone,
 } from '../../../../helpers/validator'
 import MsgError from '@/components/MsgError'
-import formatBirthdate from '@/pages/Register/RegisterPatient/helpers/formatBirthdate'
+import formatBirthdate from '@/helpers/formatBirthdate'
 import { useModal } from '@/context/useModal'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 
-const Form = ({ editDep, setAllDeps, allDeps }) => {
+const Form = ({ editDep, setAllDeps, allDeps, action, clientCpf }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
@@ -26,22 +27,29 @@ const Form = ({ editDep, setAllDeps, allDeps }) => {
   const [phone, setPhone] = useState('')
   const [cpf, setCpf] = useState('')
   const [errors, setErrors] = useState({})
-  const {closeModal} = useModal()
+  const { closeModal } = useModal()
+
   useEffect(() => {
-    setErrors({})
-  }, [])
+    if(action === 'edit' || !cpf && !clientCpf) return
+    if (!cpfAlreadyExist())
+      return setErrors({ ...errors, alreadyExist: '' })
+    return alreadyExistError()
+  }, [cpf])
+
   useEffect(() => {
-    if (!editDep) return
-    console.log(editDep);
-    setName(editDep.nome || '')
-    setEmail(editDep.email || '')
-    setGender(editDep.sexo || '')
-    setBirthdate(formatBirthdate(editDep.dataNascimento) || '')
-    setPhone(editDep.telefone || '')
-    setCpf(editDep.cpf || '')
+    setName(editDep && editDep.nome ? editDep.nome : '')
+    setEmail(editDep && editDep.email ? editDep.email : '')
+    setGender(editDep && editDep.sexo ? editDep.sexo : '')
+    setBirthdate(
+      editDep && formatBirthdate(editDep.dataNascimento)
+        ? formatBirthdate(editDep.dataNascimento)
+        : ''
+    )
+    setPhone(editDep && editDep.telefone ? editDep.telefone : '')
+    setCpf(editDep && editDep.cpf ? editDep.cpf : '')
   }, [editDep])
 
-  const dataIsEmptyOrNot = () =>
+  const isValidData = () =>
     name &&
     email &&
     cpf &&
@@ -50,17 +58,18 @@ const Form = ({ editDep, setAllDeps, allDeps }) => {
     phone &&
     !Object.values(errors).filter((err) => err).length
 
-  const depAlreadyExists = () => {
+  const cpfAlreadyExist = () => {
     const alreadyExist = allDeps.filter(
       (dep) =>
-        dep.cpf.replace(/[^a-zA-Z0-9]/g, '') ===
-        cpf.replace(/[^a-zA-Z0-9]/g, '')
+        clearSpecialCaracter(dep.cpf) === clearSpecialCaracter(cpf) ||
+        clearSpecialCaracter(cpf) === clearSpecialCaracter(clientCpf)
     )
     return alreadyExist.length
   }
+
   const hanldeSubmit = (e) => {
     e.preventDefault()
-    const dataObj = [
+    const newDep = [
       {
         nome: name,
         email: email,
@@ -68,30 +77,44 @@ const Form = ({ editDep, setAllDeps, allDeps }) => {
         dataNascimento: birthdate,
         telefone: phone,
         cpf,
-      },
+      }
     ]
-    if (depAlreadyExists())
-      return setErrors({
-        ...errors,
-        submit: 'Dependente já existente com este CPF',
-      })
-    setAllDeps((data) => [...data, ...dataObj])
+    if (cpfAlreadyExist()) return alreadyExistError()
+    setAllDeps((data) => [...data, ...newDep])
+    clearForm()
     closeModal()
   }
+  const alreadyExistError = () => {
+    setErrors({
+      ...errors,
+      alreadyExist: 'Dependente já existente com este CPF',
+    })
+  }
+
   const handleUpdate = () => {
-    const valueUpdated = allDeps.map((dep, i) => {
+    const valueUpdated = allDeps.map((dep) => {
       if (dep.cpf !== cpf) return dep
       return {
         nome: name,
         email: email,
         sexo: gender,
         dataNascimento: birthdate,
-        telefone: phone.replace(/[^a-zA-Z0-9]/g, ''),
-        cpf: cpf.replace(/[^a-zA-Z0-9]/g, ''),
+        telefone: clearSpecialCaracter(phone),
+        cpf: clearSpecialCaracter(cpf),
       }
     })
     setAllDeps(valueUpdated)
+    clearForm()
     closeModal()
+  }
+  const clearForm = () =>{
+    setErrors({})
+    setName('')
+    setEmail('')
+    setGender('')
+    setBirthdate('')
+    setPhone('')
+    setCpf('')
   }
   return (
     <Container>
@@ -189,7 +212,7 @@ const Form = ({ editDep, setAllDeps, allDeps }) => {
           <OutlineButton
             variation="red"
             onClick={() => {
-              setErrors({})
+              clearForm()
               closeModal()
             }}
           >
@@ -200,24 +223,21 @@ const Form = ({ editDep, setAllDeps, allDeps }) => {
           sm={6}
           className="justify-content-center justify-content-sm-start d-flex mt-3 mt-sm-0"
         >
-          {!Object.values(editDep).length ? (
-            <ButtonPrimary
-              disabled={!dataIsEmptyOrNot()}
-              onClick={hanldeSubmit}
-            >
+          {action === 'create' && (
+            <ButtonPrimary disabled={!isValidData()} onClick={hanldeSubmit}>
               Salvar
             </ButtonPrimary>
-          ) : (
-            <ButtonPrimary
-              disabled={!dataIsEmptyOrNot()}
-              onClick={handleUpdate}
-            >
+          )}
+          {action === 'edit' && (
+            <ButtonPrimary disabled={!isValidData()} onClick={handleUpdate}>
               Atualizar
             </ButtonPrimary>
           )}
         </Col>
-        {errors.submit && (
-          <MsgError className="text-center mt-3">{errors.submit}</MsgError>
+        {errors.alreadyExist && (
+          <MsgError className="text-center mt-3">
+            {errors.alreadyExist}
+          </MsgError>
         )}
       </Row>
     </Container>

@@ -8,12 +8,12 @@ import { useModal } from '@/context/useModal'
 
 function ContactUs() {
   const { closeModal } = useModal()
-
+ 
   return (
     <Container>
       <img src={errorIcon} />
       <p>
-        Pedimos que entre em contato com a central de atendimento
+      Seu acesso foi bloqueado devido à excesso de tentativas. Pedimos que entre em contato com a central de atendimento
         <a
           href="https://api.whatsapp.com/send?phone=556131810999"
           target="_blank"

@@ -15,7 +15,6 @@ import {
   validateName,
   validatePhone,
 } from '../../helpers/validator'
-
 import { useModal } from '@/context/useModal'
 
 const RegistrationData = ({

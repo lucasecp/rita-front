@@ -7,22 +7,22 @@ import trash from '@/assets/icons/trash.svg'
 import edit from '@/assets/icons/edit.svg'
 import { useModal } from '@/context/useModal'
 
-const Dependents = ({ dataClientSabin, setData }) => {
+const Dependents = ({ dataClientSabin, setData,newData }) => {
   const [allDeps, setAllDeps] = useState([])
   const { showMessage } = useModal()
 
   useEffect(() => {
-    const { dependentes } = dataClientSabin
-    setAllDeps(dependentes || [])
-  }, [dataClientSabin])
+    setAllDeps(newData.dependentes || dataClientSabin.dependentes || [])
+  }, [])
 
   useEffect(() => {
     setData((data) => {
       return { ...data, dependentes: [...allDeps] }
     })
   }, [allDeps])
+
   const handleUpdate = (infoDep) => {
-    showMessage(Form, { editDep: infoDep, allDeps, setAllDeps })
+    showMessage(Form, { editDep: infoDep, allDeps, setAllDeps,action: 'edit', clientCpf : newData.cpf })
   }
   const handleDelete = (cpf) => {
     const valueUpdated = allDeps.filter(
@@ -33,7 +33,7 @@ const Dependents = ({ dataClientSabin, setData }) => {
     setAllDeps(valueUpdated)
   }
   const handleAddDep = () => {
-    showMessage(Form, { editDep: {}, allDeps, setAllDeps })
+    showMessage(Form, {allDeps, setAllDeps,action: 'create', clientCpf : newData.cpf })
   }
   return (
     <Container>

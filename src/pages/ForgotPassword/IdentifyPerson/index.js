@@ -8,17 +8,17 @@ import { useHistory } from 'react-router-dom'
 
 import CpfEmpty from './messages/error/CpfEmpty'
 
-import { Content } from './style'
+import { BtnGroup, Content } from './style'
 
 import InvalidCpf from './messages/error/InvalidCpf'
 import NotFound from './messages/error/NotFound'
 import apiUser from '@/services/apiUser'
 import { useModal } from '@/context/useModal'
 import { useLoading } from '@/context/useLoading'
+import OutlineButton from '@/components/Button/Outline'
 
 function IdentifyPerson() {
   const [cpf, setCpf] = useState('')
-
   const { Loading } = useLoading()
   const history = useHistory()
 
@@ -36,7 +36,6 @@ function IdentifyPerson() {
     try {
       Loading.turnOn()
       const { data } = await apiUser.get(`/status?cpf=${cpf}`)
-
       return history.push('/esqueci-senha/confirmar-dados', {
         cpf,
         email: data.email,
@@ -63,10 +62,15 @@ function IdentifyPerson() {
             setValue={setCpf}
             name="cpf"
           />
-          <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
-        </div>
-      </Content>
-    </RegisterLayout>
+          <BtnGroup>
+            <OutlineButton onClick={() => history.push('/login')}>
+              Voltar
+            </OutlineButton>
+            <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
+          </BtnGroup>
+        </Content>
+      </RegisterLayout>
+    </>
   )
 }
 

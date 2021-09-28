@@ -40,5 +40,16 @@ export const ButtonGroup = styled.div`
      > button + button{
        margin-left: 20px;
      }
+     @media(max-width:539px) {
+   flex-direction: column;
+   width: 100%;
+   button + button{
+     margin-top:20px;
+     margin-left: 0;
+   }
+   button{
+     width:100%
+   }
+  }
 
 `;
