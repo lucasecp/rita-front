@@ -28,7 +28,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
       allDeps,
       setAllDeps,
       action: 'edit',
-      clientCpf: '12619245761',
+      clientCpf: newData.cpf,
     })
   }
   const handleDelete = (id) => {
@@ -41,7 +41,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
       allDeps,
       setAllDeps,
       action: 'create',
-      clientCpf: '12619245761',
+      clientCpf: newData.cpf,
     })
   }
   return (

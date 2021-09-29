@@ -6,7 +6,7 @@ export const validateDepCpf = (value, allDeps, clientCpf,action) => {
   const newValue = value.replace(anySpecialCaracter, '')
 
   const alreadyExist = allDeps.some(
-    (dep) => clearCpf(dep.cpf) === clearCpf(value) 
+    (dep) => clearCpf(dep.cpf) === clearCpf(value)
   )
 
   const isClientCpf =
@@ -18,8 +18,8 @@ export const validateDepCpf = (value, allDeps, clientCpf,action) => {
   if (!cpfValidate(newValue.replace(anySpecialCaracter, '')))
     return { cpf: 'CPF Inválido.' }
 
-  if (alreadyExist) return { cpf: 'CPF já incluído na lista.' }
-  if(isClientCpf) return { cpf: 'Paciente não pode ser dependente.' }
+  if (alreadyExist) return { cpf: 'O CPF não pode ser igual ao de outro dependente, por favor verifique os dados e preencha novamente' }
+  if(isClientCpf) return { cpf: 'O CPF deve ser diferente do CPF do Titular, por favor verifique os dados e preencha novamente' }
 
   return { cpf: '' }
 }

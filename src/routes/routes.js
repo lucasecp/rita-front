@@ -20,8 +20,9 @@ function Routes() {
 
       <CustomRoutes path="/master-page" isPrivate component={MasterPage} />
       <Route path="/login" component={Login} />
-      <CustomRoutes path="/teste" component={Teste} />
+      <CustomRoutes path="/teste" isPrivate component={Teste} />
       <CustomRoutes path="/definir-senha" component={Password} />
+
       <CustomRoutes path="/esqueci-senha/inicio" component={Initial} />
       <CustomRoutes
         path="/esqueci-senha/confirmar-dados"

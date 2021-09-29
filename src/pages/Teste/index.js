@@ -14,11 +14,7 @@ function Teste() {
       <main>
         <Content>
           <div>
-            <h6>Para iniciarmos o processo, por favor informe o seu CPF:</h6>
-            <div className="input">
-              <InputMask mask="999.999.999-99" placeholder="123.456.789-10" />
-              <ButtonPrimary>Confirmar</ButtonPrimary>
-            </div>
+          <h1>TESTE ROTA PRIVADA</h1>
           </div>
           <Footer />
         </Content>

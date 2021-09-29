@@ -29,7 +29,7 @@ const RegisterPatient = () => {
   const { Loading } = useLoading()
   const { showMessage } = useModal()
 
-  const [step, setStep] = useState(3)
+  const [step, setStep] = useState(1)
   const [data, setData] = useState({})
 
   const [dataClientSabin, setDataClientSabin] = useState({})
@@ -39,7 +39,7 @@ const RegisterPatient = () => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
-
+console.log(data);
   const uploadDocuments = async () => {
     Loading.turnOn()
 

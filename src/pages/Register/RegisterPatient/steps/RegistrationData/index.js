@@ -15,6 +15,7 @@ import {
   validateName,
   validatePhone,
 } from '../../helpers/validator'
+import {validateConfEmail, validateTerms} from './validateFields'
 import { useModal } from '@/context/useModal'
 
 const RegistrationData = ({
@@ -75,28 +76,12 @@ const RegistrationData = ({
     }
   }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone, errors])
 
-  const validateConfEmail = () => {
-    if (email !== confirmEmail)
-      return {
-        confirmEmail:
-          'Os e-mails preenchidos estão diferentes, por favor verifique os campos E-mail e Confirme seu e-mail.',
-      }
-    return { confirmEmail: '' }
-  }
 
-  const validateTerms = () => {
-    setTerms(!terms)
-    if (terms)
-      return setErrors({
-        ...errors,
-        terms: 'Por favor, aceite os termos para continuar.',
-      })
-    return setErrors({ ...errors, terms: false })
-  }
+
   const labelTerms = (
     <>
       Li e aceito os
-      <BtnTerms onClick={() => showMessage(Terms, { setTerms })}>
+      <BtnTerms onClick={() => showMessage(Terms, { setTerms,setErrors },true)}>
         Termos de uso{' '}
       </BtnTerms>{' '}
       da plataforma Rita.
@@ -138,15 +123,16 @@ const RegistrationData = ({
 
         <Col md="6" className="mt-4">
           <InputText
+            autocomplete="off"
             label="Confirme seu e-mail*:"
             hasError={errors.confirmEmail}
             value={confirmEmail}
             setValue={setConfirmEmail}
             onBlur={() =>
-              setErrors({ ...errors, ...validateConfEmail(confirmEmail) })
+              setErrors({ ...errors, ...validateConfEmail(email,confirmEmail) })
             }
             onKeyUp={() =>
-              setErrors({ ...errors, ...validateConfEmail(confirmEmail) })
+              setErrors({ ...errors, ...validateConfEmail(email,confirmEmail) })
             }
             msgError={errors.confirmEmail}
           />
@@ -177,6 +163,7 @@ const RegistrationData = ({
             value={birthdate}
             setValue={setBirthdate}
             hasError={errors.birthdate}
+            autocomplete="off"
             onBlur={() =>
               setErrors({ ...errors, ...validateBirthdate(birthdate) })
             }
@@ -218,7 +205,7 @@ const RegistrationData = ({
             hasError={errors.terms}
             checked={terms}
             setValue={setTerms}
-            onChange={() => validateTerms()}
+            onChange={() => {setTerms(!terms); setErrors({...errors,...validateTerms(terms)})}}
             msgError={errors.terms}
           />
         </Col>

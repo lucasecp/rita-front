@@ -1,10 +1,13 @@
 import ButtonPrimary from '@/components/Button/Primary'
+import { useModal } from '@/context/useModal'
 import React from 'react'
 import { Container, TextGroup } from './style'
-const Terms = ({ setTerms, setShowModal }) => {
-  const hanldeAcceptTerms = () => {
+const Terms = ({ setTerms,setErrors }) => {
+  const {closeModal} = useModal()
+  const handleAcceptTerms = () => {
     setTerms(true)
-    setShowModal(false)
+    setErrors(errors => {return {...errors,terms: ''}})
+    closeModal()
   }
   return (
     <Container>
@@ -410,7 +413,7 @@ const Terms = ({ setTerms, setShowModal }) => {
           </p>
 
       </TextGroup>
-      <ButtonPrimary onClick={hanldeAcceptTerms}>
+      <ButtonPrimary onClick={handleAcceptTerms}>
         Li e Aceito os termos de uso
       </ButtonPrimary>
     </Container>

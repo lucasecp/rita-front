@@ -18,9 +18,8 @@ export const Container = styled.div`
   .form-select:focus {
     box-shadow: unset;
   }
-`
-export const Input = styled.input`
-  color: #6a6a6a;
+  >input{
+    color: #6a6a6a;
   border-radius: 8px;
   padding: 14px;
   display: inline-block;
@@ -61,6 +60,7 @@ export const Input = styled.input`
     css`
       border-color: ${colors.orange.light};
     `}
+  }
 `
 export const Select = styled(Form.Select)`
   color: #6a6a6a;

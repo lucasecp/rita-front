@@ -6,7 +6,7 @@ const InputText = ({ label, setValue, hasError,type,msgError, ...rest }) => {
   return (
     <Container>
       {label && <label htmlFor={label}>{label}</label>}
-      <Input
+      <input
         type={type || "text"}
         id={label}
         onChange={(e) => setValue!== undefined && setValue(e.target.value)}
