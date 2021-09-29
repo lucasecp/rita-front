@@ -1,6 +1,6 @@
 import jwt from 'jwt-decode'
 import apiUser from '@/services/apiUser'
-import { deleteLocalStorage, setLocalStorage } from '@/storage/user'
+import { deleteHeaderToken, deleteLocalStorage, setHeaderToken, setLocalStorage } from '@/storage/user'
 
 import React, { createContext, useState, useContext } from 'react'
 import { useLoading } from '../useLoading'
@@ -22,7 +22,7 @@ export default function AuthProvider({ children }) {
       Loading.turnOn()
       const { data } = await apiUser.post('/login', payload)
       const dataUser = jwt(data.jwtToken)
-      setDataLogin({...dataUser,cpf:payload.cpf})
+      setDataLogin({...dataUser,cpf:payload.cpf,token:data.jwtToken })
       pushToUrl(prevPath)
     } catch ({ response }) {
       showMessage(InvalidCredences)
@@ -33,10 +33,12 @@ export default function AuthProvider({ children }) {
   const setDataLogin = (payload) => {
     setUser(payload)
     setLocalStorage(payload)
+    setHeaderToken(payload.token)
   }
   const logout = () => {
     setUser(null)
     deleteLocalStorage()
+    deleteHeaderToken()
   }
   const pushToUrl = (url) =>{
     if(!url) return history.push('/master-page')

@@ -12,6 +12,7 @@ import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import { useModal } from '@/context/useModal'
 import HasCardSabin from './messages/HasCardSabin'
 import ExpiredSession from './messages/ExpiredSession'
+import { getHeaderToken } from '@/storage/user'
 
 function Login() {
   const [cpf, setCpf] = useState('')
