@@ -12,9 +12,9 @@ function NotFound(data) {
   const history = useHistory()
   const { closeModal } = useModal()
 
-  const pushToPreRegister = () => {
+  const pushToInitialRegister = () => {
     closeModal()
-    history.push('/cadastro/paciente', { userData: { cpf: data.cpf } })
+    history.push('/cadastro-inicial')
   }
 
   return (
@@ -26,7 +26,7 @@ function NotFound(data) {
       </p>
       <footer>
         <OutlineButton onClick={closeModal}>Não</OutlineButton>
-        <ButtonPrimary onClick={pushToPreRegister}>Sim</ButtonPrimary>
+        <ButtonPrimary onClick={pushToInitialRegister}>Sim</ButtonPrimary>
       </footer>
     </Container>
   )

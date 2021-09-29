@@ -43,7 +43,7 @@ function IdentifyPerson() {
       })
     } catch ({ response }) {
       if (response.status === 404) {
-        return showMessage(NotFound, { cpf })
+        return showMessage(NotFound)
       }
     } finally {
       Loading.turnOff()
