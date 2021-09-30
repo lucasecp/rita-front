@@ -1,6 +1,6 @@
 import React from 'react'
 import MsgError from '../MsgError'
-import { Container, Input } from './style'
+import { Container } from './style'
 
 const InputText = ({ label, setValue, hasError,type,msgError, ...rest }) => {
   return (

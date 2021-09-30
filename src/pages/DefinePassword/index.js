@@ -18,6 +18,8 @@ import DefinePasswordSuccess from './messages/Success'
 
 import { Content, Button } from './style'
 
+const msgErrorPass = 'A senha informada não atende aos critérios de segurança, por favor verifique e tente novamente.'
+
 function Password() {
   const [password, setPassword] = useState('')
   const [confirmPass, setConfirmPass] = useState('')
@@ -66,13 +68,13 @@ function Password() {
   const validateErrors = () => {
     const newErrors = {}
     if (!hasSpecialCaracter(password))
-      newErrors.password = 'A senha deve ter um caracter especial.'
-    if (!hasLetter(password)) newErrors.password = 'A senha deve ter uma letra.'
-    if (!hasNumber(password)) newErrors.password = 'A senha deve ter um número.'
+      newErrors.password = msgErrorPass
+    if (!hasLetter(password)) newErrors.password = msgErrorPass
+    if (!hasNumber(password)) newErrors.password = msgErrorPass
     if (password.trim().length < 6)
-      newErrors.password = 'A senha deve ter no mínimo 6 digitos.'
+      newErrors.password = msgErrorPass
     if (password.trim() !== confirmPass.trim())
-      newErrors.confirmPass = 'As senhas não conferem, favor revisar os campos'
+      newErrors.confirmPass = msgErrorPass
     if (!password.trim()) newErrors.password = 'Campo Obrigatório'
     if (!confirmPass.trim()) newErrors.confirmPass = 'Campo Obrigatório'
     setErrors(newErrors)
