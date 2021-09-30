@@ -4,7 +4,7 @@ import Select from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 
-import { Container } from '../style'
+import { Container } from './styles'
 import { UF } from './static'
 
 const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
@@ -17,17 +17,6 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
   const [complement, setComplement] = useState('')
 
   useEffect(() => {
-    // if (newDataAddress) {
-    //   setCep(newDataAddress.cep)
-    //   setUf(newDataAddress.uf)
-    //   setCity(newDataAddress.cidade)
-    //   setAdress(newDataAddress.logradouro)
-    //   setNumberHome(newDataAddress.numero)
-    //   setDistrict(newDataAddress.bairro)
-    //   setComplement(newDataAddress.complemento)
-    //   return
-    // }
-
     const addressFromSabinCard = dataClientSabin.endereco
     const newDataAddress = newData.endereco
 
@@ -62,6 +51,7 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
       setButtonPass(false)
     }
   }, [address, cep, numberHome, city, complement, uf, district])
+
   return (
     <Container>
       <h1>Endereço</h1>
@@ -78,7 +68,7 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
         <Col md="6" className="mt-4 mt-md-0">
           <Select
             label="UF:"
-            labelDefaultOption="selecione:"
+            labelDefaultOption="Selecione:"
             options={UF}
             setValue={setUf}
             value={uf}

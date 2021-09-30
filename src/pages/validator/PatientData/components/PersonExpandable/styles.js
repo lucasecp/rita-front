@@ -3,6 +3,13 @@ import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 
 export const Container = styled.div`
+  padding-bottom: 22px;
+  border-bottom: 2px solid ${colors.gray.light};
+
+  & + & {
+    padding-top: 24px;
+  }
+
   > header {
     display: flex;
     align-items: center;
@@ -35,22 +42,35 @@ export const Container = styled.div`
 
     + section {
       transition: 0.3s;
-      margin-top: 24px;
 
       opacity: 0;
       visibility: hidden;
-      max-height: 0px;
-
-      /* margin-top: -165px; */
+      min-height: 0px;
+      height: 0px;
 
       ${({ expanded }) =>
         expanded &&
         css`
           opacity: 1;
           visibility: visible;
-          max-height: unset;
-          /* margin-top: 24px; */
+
+          margin-top: 24px;
+          height: 176px;
         `}
+    }
+  }
+
+  @media (max-width: 767px) {
+    > section {
+      grid-template-columns: 1fr;
+
+      + section {
+        ${({ expanded }) =>
+          expanded &&
+          css`
+            height: 356px;
+          `}
+      }
     }
   }
 `

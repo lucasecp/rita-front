@@ -7,14 +7,15 @@ import { Container } from '../style'
 
 import { useModal } from '@/context/useModal'
 import { useHistory } from 'react-router'
+import { deleteHeaderToken } from '@/storage/user'
 
 function DefinePasswordSuccess() {
   const { closeModal } = useModal()
   const history = useHistory()
   const pushToLogin = () =>{
+    deleteHeaderToken()
     closeModal()
     history.push('/login')
-
   }
   return (
     <Container>

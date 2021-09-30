@@ -3,7 +3,7 @@ import InputMask from '@/components/Form/InputMask'
 import InputPassword from '@/components/Form/InputPassword'
 import LoginLayout from '@/components/Layout/LoginLayout'
 import React, { useEffect, useState } from 'react'
-import { Link,useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Content } from './style'
 import CheckboxComponent from '@/components/Form/Checkbox'
 import validateCpf from '@/helpers/validateCpf'
@@ -12,24 +12,32 @@ import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import { useModal } from '@/context/useModal'
 import HasCardSabin from './messages/HasCardSabin'
 import ExpiredSession from './messages/ExpiredSession'
+import { getHeaderToken } from '@/storage/user'
 
 function Login() {
   const [cpf, setCpf] = useState('')
   const [password, setPassword] = useState('')
   const [stayConnected, setStayConnected] = useState(false)
   const [errors, setErrors] = useState({})
-  const {login} = useAuth()
-  const {showMessage} = useModal()
-  const {state} = useLocation()
+  const { login } = useAuth()
+  const { showMessage } = useModal()
+  const { state } = useLocation()
 
   useEffect(() => {
     state && state.message && showMessage(ExpiredSession)
-  }, []);
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(validateErrors().cpf || validateErrors().password ) return
-    login({cpf: clearSpecialCaracter(cpf),senha:password,permanecerConectado: stayConnected},state)
+    if (validateErrors().cpf || validateErrors().password) return
+    login(
+      {
+        cpf: clearSpecialCaracter(cpf),
+        senha: password,
+        permanecerConectado: stayConnected,
+      },
+      state
+    )
   }
 
   const validateErrors = () => {
@@ -68,11 +76,13 @@ function Login() {
         />
         <ButtonPrimary type="submit">Entrar</ButtonPrimary>
         <span>
-          <Link to='/esqueci-senha/inicio'>Esqueci minha senha</Link>{' '}
+          <Link to="/esqueci-senha/inicio">Esqueci minha senha</Link>{' '}
         </span>
         <div>
           Não possui conta?
-          <Link to='#' onClick={() => showMessage(HasCardSabin,{},true)}>Cadastre-se aqui</Link>
+          <Link to="#" onClick={() => showMessage(HasCardSabin, {}, true)}>
+            Cadastre-se aqui
+          </Link>
         </div>
       </Content>
     </LoginLayout>
