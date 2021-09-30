@@ -6,22 +6,29 @@ import PreRegister from '@/pages/Register/PreRegister/PreRegister'
 import RegisterPatient from '@/pages/Register/RegisterPatient'
 
 const registerRoutes = [
-  <CustomRoutes path="/pre-cadastro" component={PreRegister} key="precadastro" />,
-  <CustomRoutes
-    path="/cadastro-inicial"
-    component={DefaultRegister}
-    key="cadastroinicial"
-  />,
-  <CustomRoutes
-    path="/cadastro/paciente"
-    component={RegisterPatient}
-    key="cadastropaciente"
-  />,
-  <CustomRoutes
-    path="/cadastro-cartao-sabin"
-    component={RegisterCardSabin}
-    key="cadastrocartaosabin"
-  />,
+  {
+    path: '/pre-cadastro',
+    component: PreRegister,
+  },
+  {
+    path: '/cadastro-inicial',
+    component: DefaultRegister,
+  },
+
+  {
+    path: '/cadastro-cartao-sabin',
+    component: RegisterCardSabin,
+  },
+  {
+    path: '/cadastro/paciente',
+    component: RegisterPatient,
+  },
 ]
 
-export default registerRoutes
+const registerRoutesComponent = registerRoutes.map(
+  ({ path, component }, key) => (
+    <CustomRoutes path={path} component={component} key={key} />
+  )
+)
+
+export default registerRoutesComponent

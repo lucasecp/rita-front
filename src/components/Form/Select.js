@@ -14,7 +14,6 @@ const SelectComponent = ({
     <Container>
       <label>{label}</label>
       <Select
-        {...rest}
         onChange={({ target }) => {
           setValue(target.value)
         }}

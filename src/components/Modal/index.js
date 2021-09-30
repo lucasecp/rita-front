@@ -6,7 +6,7 @@ import { Container } from './styles'
 
 import { useModal } from '@/context/useModal'
 
-function ModalWithHook() {
+function Modal() {
   const body = document.querySelector('body')
 
   const { message, modalVisible, closeable, closeModal } = useModal()
@@ -29,4 +29,4 @@ function ModalWithHook() {
   )
 }
 
-export default ModalWithHook
+export default Modal

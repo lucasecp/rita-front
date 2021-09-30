@@ -15,7 +15,7 @@ import {
   validateName,
   validatePhone,
 } from '../../helpers/validator'
-import {validateConfEmail, validateTerms} from './validateFields'
+import { validateConfEmail, validateTerms } from './validateFields'
 import { useModal } from '@/context/useModal'
 
 const RegistrationData = ({
@@ -76,12 +76,12 @@ const RegistrationData = ({
     }
   }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone, errors])
 
-
-
   const labelTerms = (
     <>
       Li e aceito os
-      <BtnTerms onClick={() => showMessage(Terms, { setTerms,setErrors },true)}>
+      <BtnTerms
+        onClick={() => showMessage(Terms, { setTerms, setErrors }, true)}
+      >
         Termos de uso{' '}
       </BtnTerms>{' '}
       da plataforma Rita.
@@ -123,16 +123,22 @@ const RegistrationData = ({
 
         <Col md="6" className="mt-4">
           <InputText
-            autocomplete="off"
+            autoComplete="off"
             label="Confirme seu e-mail*:"
             hasError={errors.confirmEmail}
             value={confirmEmail}
             setValue={setConfirmEmail}
             onBlur={() =>
-              setErrors({ ...errors, ...validateConfEmail(email,confirmEmail) })
+              setErrors({
+                ...errors,
+                ...validateConfEmail(email, confirmEmail),
+              })
             }
             onKeyUp={() =>
-              setErrors({ ...errors, ...validateConfEmail(email,confirmEmail) })
+              setErrors({
+                ...errors,
+                ...validateConfEmail(email, confirmEmail),
+              })
             }
             msgError={errors.confirmEmail}
           />
@@ -163,7 +169,7 @@ const RegistrationData = ({
             value={birthdate}
             setValue={setBirthdate}
             hasError={errors.birthdate}
-            autocomplete="off"
+            autoComplete="off"
             onBlur={() =>
               setErrors({ ...errors, ...validateBirthdate(birthdate) })
             }
@@ -205,7 +211,10 @@ const RegistrationData = ({
             hasError={errors.terms}
             checked={terms}
             setValue={setTerms}
-            onChange={() => {setTerms(!terms); setErrors({...errors,...validateTerms(terms)})}}
+            onChange={() => {
+              setTerms(!terms)
+              setErrors({ ...errors, ...validateTerms(terms) })
+            }}
             msgError={errors.terms}
           />
         </Col>

@@ -5,10 +5,10 @@ import profileImg from '../../../../assets/img/profile.png'
 import logout from '../../../../assets/icons/logout.svg'
 import notification from '../../../../assets/icons/notification.svg'
 
-const Header = () => {
+const Header = ({ title }) => {
   return (
     <HeaderLayout>
-      <h1>Page Title</h1>
+      <h1>{title || 'Page Title'}</h1>
       <nav>
         <Link to="/">
           Olá, Fulano de Souza
