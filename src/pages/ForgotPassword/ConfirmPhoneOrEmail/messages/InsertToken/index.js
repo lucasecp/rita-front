@@ -76,7 +76,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
         if (response?.data.ultimaTentativa) {
           return switchModalTo(MODAL.LAST_TRY)
         }
-
+        setToken('')
         closeModal()
         history.push('/definir-senha', { cpf, ...response.data })
       }

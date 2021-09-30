@@ -55,7 +55,7 @@ function Password() {
     } catch ({ response }) {
       if (response && response.status === 401) {
         logout()
-        return history.push('/esqueci-senha/inicio')
+        return history.push('/esqueci-senha/inicio',{error:'EXPIRED_TOKEN'})
       }
       if (response && response.status === 400) {
         showMessage(AlreadyExists, { message: response.data.message })
