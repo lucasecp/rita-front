@@ -1,5 +1,7 @@
+import clear from '@/helpers/clear/SpecialCaracteres'
 import cpfValidate from '@/helpers/validateCpf'
-const anySpecialCaracter = /[^a-zA-Z0-9]/g
+import moment from 'moment'
+
 export const validateName = (value) => {
   if (!value.trim()) return { name: 'Nome Obrigatório.' }
   return { name: '' }
@@ -15,15 +17,15 @@ export const validateEmail = (email, confirmEmail) => {
   return { email: '', confirmEmail: '' }
 }
 export const validateCpf = (value) => {
-  const newValue = value.replace(anySpecialCaracter, '')
-  if (!newValue.replace(anySpecialCaracter, ''))
+  const newValue = clear(value)
+  if (!newValue)
     return { cpf: 'CPF Obrigatório.' }
-  else if (!cpfValidate(newValue.replace(anySpecialCaracter, '')))
+  else if (!cpfValidate(newValue))
     return { cpf: 'CPF Inválido.' }
   return { cpf: '' }
 }
 export const validatePhone = (value) => {
-  if (value.replace(anySpecialCaracter, '').length < 11)
+  if (clear(value).length < 11)
     return { phone: 'Celular inválido.' }
   return { phone: '' }
 }
@@ -32,12 +34,17 @@ export const validateGender = (value) => {
   return { gender: '' }
 }
 export const validateBirthdate = (value) => {
-  if (value.replace(anySpecialCaracter, '').length < 8)
+  const dateFormate = moment(value,'DD/MM/YYYY',true)
+
+  // console.log(dateFormate.isAfter(moment()));
+  console.log(moment().diff(dateFormate,'years'));
+  // console.log(dateFormate.isValid());
+  if (clear(value).length < 8)
     return { birthdate: 'Data de Nascimento Obrigatória.' }
   return { birthdate: '' }
 }
 export const validateCep = (value) => {
-  if (value.replace(anySpecialCaracter, '').length < 8)
+  if (clear(value).length < 8)
     return { cep: 'Cep Inválido.' }
   return { cep: '' }
 }

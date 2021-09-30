@@ -5,7 +5,7 @@ import Teste from '@/pages/Teste'
 import MasterPage from '@/pages/MasterPage'
 
 import registerRoutes from './register.routes'
-import Password from '@/pages/DefinePassword'
+import DefinePassoword from '@/pages/DefinePassword'
 import Login from '@/pages/Login'
 import CustomRoutes from './custom.routes'
 import Initial from '@/pages/ForgotPassword/IdentifyPerson'
@@ -21,7 +21,7 @@ function Routes() {
       <CustomRoutes path="/master-page" isPrivate component={MasterPage} />
       <Route path="/login" component={Login} />
       <CustomRoutes path="/teste" isPrivate component={Teste} />
-      <CustomRoutes path="/definir-senha" component={Password} />
+      <CustomRoutes path="/definir-senha" component={DefinePassoword} />
 
       <CustomRoutes path="/esqueci-senha/inicio" component={Initial} />
       <CustomRoutes

@@ -8,7 +8,7 @@ export const setLocalStorage = (payload) => {
 export const deleteLocalStorage = () => localStorage.removeItem('user');
 
 
-export const getHeaderToken = () => apiUser.defaults.headers.Authorization;
-export const deleteHeaderToken = () => delete apiUser.defaults.headers.Authorization;
+export const getHeaderToken = () => apiUser.defaults.headers.token;
+export const deleteHeaderToken = () => delete apiUser.defaults.headers.token;
 
-export const setHeaderToken = (token) => {apiUser.defaults.headers.Authorization = `Bearer ${token}`; };
+export const setHeaderToken = (token) => {apiUser.defaults.headers.token = token; };

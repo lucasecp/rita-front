@@ -16,8 +16,13 @@ import {
 import formatBirthdate from '@/helpers/formatBirthdate'
 import { useModal } from '@/context/useModal'
 import { validateDepCpf } from './ValidateDepCpf'
+import { useLoading } from '@/context/useLoading'
+import clearCpf from '@/helpers/clear/SpecialCaracteres'
+import apiPatient from '@/services/apiPatient'
 
-const Form = ({ editDep,id, setAllDeps, allDeps, action, clientCpf }) => {
+const CpfAlreadyExistsError = 'Este CPF já está cadastrado na plataforma Rita, por favor verifique os dados e preencha novamente.'
+
+const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
@@ -26,6 +31,7 @@ const Form = ({ editDep,id, setAllDeps, allDeps, action, clientCpf }) => {
   const [cpf, setCpf] = useState('')
   const [errors, setErrors] = useState({})
   const { closeModal } = useModal()
+  const { Loading } = useLoading()
 
   useEffect(() => {
     updateData()
@@ -49,8 +55,14 @@ const Form = ({ editDep,id, setAllDeps, allDeps, action, clientCpf }) => {
     phone &&
     !Object.values(errors).filter((err) => err).length
 
-  const hanldeSubmit = (e) => {
-    e.preventDefault()
+  const hanldeSubmit = async () => {
+    setErrors({})
+    if (await cpfAlreadyExistsApi()) {
+      return setErrors({
+        ...errors,
+        cpf: CpfAlreadyExistsError,
+      })
+    }
     const newDep = [
       {
         nome: name,
@@ -62,27 +74,46 @@ const Form = ({ editDep,id, setAllDeps, allDeps, action, clientCpf }) => {
       },
     ]
     setAllDeps((data) => [...data, ...newDep])
-    setErrors({})
     closeModal()
   }
 
+  const handleUpdate = async () => {
+    setErrors({})
+    if (await cpfAlreadyExistsApi()) {
+      return setErrors({
+        ...errors,
+        cpf: CpfAlreadyExistsError,
+      })
+    }
 
-  const handleUpdate = () => {
-    const depsUpdated = allDeps.map((dep,index) => {
+    const depsUpdated = allDeps.map((dep, index) => {
       if (id === index)
-      return {
-        nome: name,
-        email: email,
-        sexo: gender,
-        dataNascimento: birthdate,
-        telefone: phone,
-        cpf,
-      }
+        return {
+          nome: name,
+          email: email,
+          sexo: gender,
+          dataNascimento: birthdate,
+          telefone: phone,
+          cpf,
+        }
       return dep
     })
     setAllDeps(depsUpdated)
-    setErrors({})
     closeModal()
+  }
+
+  const cpfAlreadyExistsApi = async () => {
+    try {
+      Loading.turnOn()
+
+      const { data } = await apiPatient.get(
+        `/paciente?limit=1&skip=0&cpf=${clearCpf(cpf)}`
+      )
+      return data.length
+    } catch ({ response }) {
+    } finally {
+      Loading.turnOff()
+    }
   }
   return (
     <Container>
@@ -106,8 +137,18 @@ const Form = ({ editDep,id, setAllDeps, allDeps, action, clientCpf }) => {
             value={cpf}
             setValue={setCpf}
             hasError={errors.cpf}
-            onBlur={() => setErrors({ ...errors, ...validateDepCpf(cpf,allDeps,clientCpf,action) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateDepCpf(cpf,allDeps,clientCpf,action) })}
+            onBlur={() =>
+              setErrors({
+                ...errors,
+                ...validateDepCpf(cpf, allDeps, clientCpf, action),
+              })
+            }
+            onKeyUp={() =>
+              setErrors({
+                ...errors,
+                ...validateDepCpf(cpf, allDeps, clientCpf, action),
+              })
+            }
             msgError={errors.cpf}
           />
         </Col>
@@ -203,7 +244,6 @@ const Form = ({ editDep,id, setAllDeps, allDeps, action, clientCpf }) => {
             </ButtonPrimary>
           )}
         </Col>
-
       </Row>
     </Container>
   )
