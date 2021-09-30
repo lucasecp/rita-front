@@ -18,15 +18,12 @@ export const validateEmail = (email, confirmEmail) => {
 }
 export const validateCpf = (value) => {
   const newValue = clear(value)
-  if (!newValue)
-    return { cpf: 'CPF Obrigatório.' }
-  else if (!cpfValidate(newValue))
-    return { cpf: 'CPF Inválido.' }
+  if (!newValue) return { cpf: 'CPF Obrigatório.' }
+  else if (!cpfValidate(newValue)) return { cpf: 'CPF Inválido.' }
   return { cpf: '' }
 }
 export const validatePhone = (value) => {
-  if (clear(value).length < 11)
-    return { phone: 'Celular inválido.' }
+  if (clear(value).length < 11) return { phone: 'Celular inválido.' }
   return { phone: '' }
 }
 export const validateGender = (value) => {
@@ -34,18 +31,19 @@ export const validateGender = (value) => {
   return { gender: '' }
 }
 export const validateBirthdate = (value) => {
-  const dateFormate = moment(value,'DD/MM/YYYY',true)
-
-  // console.log(dateFormate.isAfter(moment()));
-  console.log(moment().diff(dateFormate,'years'));
-  // console.log(dateFormate.isValid());
-  if (clear(value).length < 8)
-    return { birthdate: 'Data de Nascimento Obrigatória.' }
+  const dateFormate = moment(value, 'DD/MM/YYYY', true)
+  if (
+    !dateFormate.isValid() ||
+    moment().diff(dateFormate, 'years') >= 200 ||
+    dateFormate.isAfter(moment())
+  ) {
+    return { birthdate: 'Data de Nascimento Inválida.' }
+  }
   return { birthdate: '' }
 }
+
 export const validateCep = (value) => {
-  if (clear(value).length < 8)
-    return { cep: 'Cep Inválido.' }
+  if (clear(value).length < 8) return { cep: 'Cep Inválido.' }
   return { cep: '' }
 }
 export const validateCity = (value) => {

@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
 import validateCpf from '@/helpers/validateCpf'
-import { useHistory } from 'react-router-dom'
+import { useHistory,useLocation } from 'react-router-dom'
 
 import CpfEmpty from './messages/error/CpfEmpty'
 
@@ -16,13 +16,19 @@ import apiUser from '@/services/apiUser'
 import { useModal } from '@/context/useModal'
 import { useLoading } from '@/context/useLoading'
 import OutlineButton from '@/components/Button/Outline'
+import ExpiredSessionDefinePassword from './messages/error/ExpiredToken'
 
 function IdentifyPerson() {
   const [cpf, setCpf] = useState('')
   const { Loading } = useLoading()
   const history = useHistory()
-
+  const {state} = useLocation()
   const { showMessage } = useModal()
+
+  useEffect(() => {
+    if(!state && !state?.error) return
+    if(state.error === 'EXPIRED_TOKEN') showMessage(ExpiredSessionDefinePassword)
+  }, []);
 
   const handleConfirm = async () => {
     if (cpf.length === 0) {
