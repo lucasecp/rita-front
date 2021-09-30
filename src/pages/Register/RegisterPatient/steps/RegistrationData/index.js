@@ -15,8 +15,9 @@ import {
   validateName,
   validatePhone,
 } from '../../helpers/validator'
-import {validateConfEmail, validateTerms} from './validateFields'
+import { validateConfEmail, validateTerms } from './validateFields'
 import { useModal } from '@/context/useModal'
+import MsgError from '@/components/MsgError'
 
 const RegistrationData = ({
   setData,
@@ -46,42 +47,54 @@ const RegistrationData = ({
     setCpf(newData.cpf || dataClientSabin.cpf || '')
   }, [dataClientSabin])
 
-  useEffect(() => {
-    const hasErrors = Object.values(errors).filter((err) => err).length
-    if (
-      name &&
-      email &&
-      cpf &&
-      terms &&
-      confirmEmail &&
-      birthdate &&
-      gender &&
-      phone &&
-      !hasErrors
-    ) {
-      const dataObj = {
-        nome: name,
-        email,
-        sexo: gender,
-        dataNascimento: birthdate,
-        telefone: phone,
-        cpf,
+
+    useEffect(() => {
+      if (
+        hasPermitionToNext()
+      ) {
+        const dataObj = {
+          nome: name,
+          email,
+          sexo: gender,
+          dataNascimento: birthdate,
+          telefone: phone,
+          cpf,
+        }
+        setButtonPass(true)
+        setData((data) => {
+          return { ...data, ...dataObj }
+        })
+      } else {
+        setButtonPass(false)
       }
-      setButtonPass(true)
-      setData((data) => {
-        return { ...data, ...dataObj }
-      })
-    } else {
-      setButtonPass(false)
-    }
-  }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone, errors])
-
-
+    }, [
+      name,
+      email,
+      cpf,
+      terms,
+      confirmEmail,
+      birthdate,
+      gender,
+      phone,
+      errors,
+    ])
+    const hasPermitionToNext = () =>
+    !Object.values(errors).filter((err) => err).length &&
+    name &&
+    email &&
+    cpf &&
+    terms &&
+    confirmEmail &&
+    birthdate &&
+    gender &&
+    phone
 
   const labelTerms = (
     <>
       Li e aceito os
-      <BtnTerms onClick={() => showMessage(Terms, { setTerms,setErrors },true)}>
+      <BtnTerms
+        onClick={() => showMessage(Terms, { setTerms, setErrors }, true)}
+      >
         Termos de uso{' '}
       </BtnTerms>{' '}
       da plataforma Rita.
@@ -129,10 +142,16 @@ const RegistrationData = ({
             value={confirmEmail}
             setValue={setConfirmEmail}
             onBlur={() =>
-              setErrors({ ...errors, ...validateConfEmail(email,confirmEmail) })
+              setErrors({
+                ...errors,
+                ...validateConfEmail(email, confirmEmail),
+              })
             }
             onKeyUp={() =>
-              setErrors({ ...errors, ...validateConfEmail(email,confirmEmail) })
+              setErrors({
+                ...errors,
+                ...validateConfEmail(email, confirmEmail),
+              })
             }
             msgError={errors.confirmEmail}
           />
@@ -205,11 +224,15 @@ const RegistrationData = ({
             hasError={errors.terms}
             checked={terms}
             setValue={setTerms}
-            onChange={() => {setTerms(!terms); setErrors({...errors,...validateTerms(terms)})}}
+            onChange={() => {
+              setTerms(!terms)
+              setErrors({ ...errors, ...validateTerms(terms) })
+            }}
             msgError={errors.terms}
           />
         </Col>
       </Row>
+     {!hasPermitionToNext() && <MsgError className='mt-3'>Todos os campos são obrigatórios.</MsgError>}
     </Container>
   )
 }
