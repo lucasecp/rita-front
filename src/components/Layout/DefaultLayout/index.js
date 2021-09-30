@@ -7,23 +7,29 @@ import Sidenav from './Sidenav'
 import { CustomContainer } from './style'
 import HeaderMobile from './mobile/Header'
 import SidenavMobile from './mobile/Sidenav'
-const DefaultLayout = ({ children }) => {
+
+const DefaultLayout = ({ children, title }) => {
   const isMobile = useMediaPredicate('(max-width: 767px)')
 
   return (
     <CustomContainer>
-      {isMobile && <> <HeaderMobile/> <SidenavMobile/> </>}
+      {isMobile && (
+        <>
+          {' '}
+          <HeaderMobile /> <SidenavMobile />{' '}
+        </>
+      )}
 
       {!isMobile && (
         <>
-          <Header />
+          <Header title={title} />
           <Sidenav />
         </>
       )}
       <main>
-      {isMobile && <h1>Page Title</h1>}
-         {children}
-        </main>
+        {isMobile && <h1>{title || 'Page Title'}</h1>}
+        {children}
+      </main>
       <Footer />
     </CustomContainer>
   )

@@ -14,7 +14,6 @@ const SelectComponent = ({
     <Container>
       <label>{label}</label>
       <Select
-        {...rest}
         onChange={({ target }) => {
           setValue(target.value)
         }}
@@ -23,7 +22,7 @@ const SelectComponent = ({
         <option value="" disabled>
           {labelDefaultOption}
         </option>
-        {options.map((option, index) => (
+        {options?.map((option, index) => (
           <option value={option.value} key={index}>
             {option.label}
           </option>

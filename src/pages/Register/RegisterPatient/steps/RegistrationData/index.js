@@ -136,7 +136,7 @@ const RegistrationData = ({
 
         <Col md="6" className="mt-4">
           <InputText
-            autocomplete="off"
+            autoComplete="off"
             label="Confirme seu e-mail*:"
             hasError={errors.confirmEmail}
             value={confirmEmail}
@@ -182,7 +182,7 @@ const RegistrationData = ({
             value={birthdate}
             setValue={setBirthdate}
             hasError={errors.birthdate}
-            autocomplete="off"
+            autoComplete="off"
             onBlur={() =>
               setErrors({ ...errors, ...validateBirthdate(birthdate) })
             }

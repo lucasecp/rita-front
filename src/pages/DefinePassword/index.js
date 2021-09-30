@@ -24,11 +24,13 @@ function Password() {
   const [password, setPassword] = useState('')
   const [confirmPass, setConfirmPass] = useState('')
   const [errors, setErrors] = useState({})
+
   const history = useHistory()
   const { state } = useLocation()
   const { showMessage } = useModal()
   const { logout } = useAuth()
   const { Loading } = useLoading()
+  
   let cpf = ''
 
   useEffect(() => {

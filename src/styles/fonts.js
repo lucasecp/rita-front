@@ -16,90 +16,78 @@ const fonts = css`
   @font-face {
     font-family: Athletics;
     font-weight: 300;
-    src: url(${light})  format("opentype");
-
+    src: url(${light}) format('opentype');
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 300;
     font-style: italic;
-    src: url(${lightItalic})  format("opentype");
-
+    src: url(${lightItalic}) format('opentype');
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 400;
-    src: url(${regular})  format("opentype");
-
+    src: url(${regular}) format('opentype');
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 400;
     font-style: italic;
-    src: url(${regularItalic})  format("opentype");
-
+    src: url(${regularItalic}) format('opentype');
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 500;
-    src: url(${medium})  format("opentype");
-
+    src: url(${medium}) format('opentype');
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 500;
     font-style: italic;
-    src: url(${mediumItalic})  format("opentype");
-
+    src: url(${mediumItalic}) format('opentype');
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 700;
-    src: url(${bold})  format("opentype");
-
+    src: url(${bold}) format('opentype');
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 700;
     font-style: italic;
-    src: url(${boldItalic})  format("opentype");
-
+    src: url(${boldItalic}) format('opentype');
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 800;
-    src: url(${extraBold})  format("opentype");
-
+    src: url(${extraBold}) format('opentype');
   }
   @font-face {
     font-family: Athletics;
     font-weight: 800;
     font-style: italic;
-    src: url(${extraBoldItalic})  format("opentype");
-
+    src: url(${extraBoldItalic}) format('opentype');
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 900;
-    src: url(${black})  format("opentype");
-
+    src: url(${black}) format('opentype');
   }
 
   @font-face {
     font-family: Athletics;
     font-weight: 900;
     font-style: italic;
-    src: url(${blackItalic})  format("opentype");
-
+    src: url(${blackItalic}) format('opentype');
   }
 `
 export default fonts
