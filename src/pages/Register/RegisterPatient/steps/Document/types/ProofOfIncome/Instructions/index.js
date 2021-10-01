@@ -9,7 +9,6 @@ import { Container } from './styles'
 import { incomeType, incomeOptions } from '../../../constants/income'
 
 function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
-
   return (
     <Container>
       <header>
@@ -21,7 +20,7 @@ function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
           value={selectIncome}
         />
       </header>
-      <h6>A seleção da sua faixa de renda é obrigatória.</h6>
+      {!selectIncome && <h6>A seleção da sua faixa de renda é obrigatória.</h6>}
       {selectIncome !== incomeType.MORE_ONE_HALF && (
         <p>
           <WarningIcon />
