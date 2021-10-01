@@ -8,6 +8,7 @@ const Header = () => {
       <nav>
         <Link to="/definir-senha">Definição de Senha</Link>
         <Link to="/login">Login</Link>
+        <Link to="/autorizacoes/analisar-pacientes">Analisar Pacientes</Link>
         <Link to="/autorizacoes/ver-paciente">
           Acessar Cadastro de um Paciente
         </Link>
