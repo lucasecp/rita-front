@@ -1,15 +1,34 @@
 import React from 'react'
+import { useHistory, useLocation } from 'react-router'
 
 import DefaultLayout from '@/components/Layout/DefaultLayout'
 
 import { Container } from './styles'
 
-function PatientData() {
+function AnalyzePatients() {
+  const patients = [
+    { cpf: '00864506112' },
+    { cpf: '71674624115' },
+    { cpf: '01515208109' },
+  ]
+
+  const history = useHistory()
+
+  const seeOnePatient = (cpf) => {
+    history.push('/autorizacoes/ver-paciente', { cpf })
+  }
+
   return (
-    <DefaultLayout>
-      <Container>Hello Page</Container>
-    </DefaultLayout>
+    // <DefaultLayout>
+    <Container>
+      {patients.map((patient, index) => (
+        <button key={index} onClick={() => seeOnePatient(patient.cpf)}>
+          {patient.cpf}
+        </button>
+      ))}
+    </Container>
+    // </DefaultLayout>
   )
 }
 
-export default PatientData
+export default AnalyzePatients

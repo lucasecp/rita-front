@@ -25,8 +25,9 @@ function Routes() {
     <Switch>
       {registerRoutesComponent}
 
-      {user?.userPermission === permissions.VALIDATOR &&
-        validatorRoutesComponent}
+      {/* {user?.userPermission === permissions.VALIDATOR &&
+        validatorRoutesComponent} */}
+      {validatorRoutesComponent}
 
       <Route exact path="/" component={Header} />
 
