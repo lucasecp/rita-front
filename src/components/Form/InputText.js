@@ -4,13 +4,12 @@ import { Container } from './style'
 
 const InputText = ({ label, setValue, hasError,type,msgError, ...rest }) => {
   return (
-    <Container>
+    <Container hasError={hasError}>
       {label && <label htmlFor={label}>{label}</label>}
       <input
         type={type || "text"}
         id={label}
         onChange={(e) => setValue!== undefined && setValue(e.target.value)}
-        hasError={hasError}
         {...rest}
       />
      {msgError && <MsgError>{msgError}</MsgError>}
