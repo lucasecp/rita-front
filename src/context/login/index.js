@@ -13,37 +13,37 @@ import { useLoading } from '../useLoading'
 import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
 import { useHistory } from 'react-router'
+import permissions from '@/routes/permissions'
 
 const UserContext = createContext()
 
 export default function AuthProvider({ children }) {
-  let userPermission
+  let currentUserPermission = null
+  const [userPermission, setUserPermission] = useState(getUserStorage()?.userPermission || null)
 
   const { Loading } = useLoading()
   const { showMessage } = useModal()
   const history = useHistory()
 
   const [user, setUser] = useState(getUserStorage() || null)
-  const [errorLogin, setErrorLogin] = useState('')
+
 
   const login = async (payload, prevPath) => {
     try {
       Loading.turnOn()
       const { data } = await apiUser.post('/login', payload)
       const dataUser = jwt(data.jwtToken)
-      // setDataLogin({ ...dataUser, cpf: payload.cpf, token: data.jwtToken })
-      // pushToUrl(prevPath)
 
-      if (dataUser.perfis.length === 1) {
-        userPermission = dataUser.perfis[0].nome
-      }
+      setUserPermission(isValidatorUser(dataUser.perfis))
+      currentUserPermission= isValidatorUser(dataUser.perfis)
 
       setDataLogin({
         ...dataUser,
         cpf: payload.cpf,
         token: data.jwtToken,
-        userPermission,
+        userPermission:currentUserPermission,
       })
+
 
       pushToUrl(prevPath)
     } catch ({ response }) {
@@ -70,16 +70,28 @@ export default function AuthProvider({ children }) {
     history.push(url.from)
   }
 
+  const isAuthorization = () => {
+    if (!user) return false
+    return new Date() < new Date(user.exp * 1000)
+  }
+
+  const isValidatorUser = (users) => {
+    const isValidator = users.some(
+      (user) => user.nome === permissions.VALIDATOR
+    )
+    if (isValidator) return permissions.VALIDATOR
+    return ''
+  }
+
   return (
     <UserContext.Provider
       value={{
         user,
-        setUser,
-        errorLogin,
-        setErrorLogin,
-        module,
+        userPermission,
+        setUserPermission,
         login,
         logout,
+        isAuthorization
       }}
     >
       {children}

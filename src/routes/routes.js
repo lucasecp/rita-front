@@ -19,15 +19,14 @@ import permissions from './permissions'
 import { useAuth } from '@/context/login'
 
 function Routes() {
-  const { user } = useAuth()
+  const { userPermission } = useAuth()
 
   return (
     <Switch>
       {registerRoutesComponent}
 
-      {/* {user?.userPermission === permissions.VALIDATOR &&
-        validatorRoutesComponent} */}
-      {validatorRoutesComponent}
+      {userPermission === permissions.VALIDATOR &&
+        validatorRoutesComponent}
 
       <Route exact path="/" component={Header} />
 

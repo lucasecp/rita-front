@@ -154,6 +154,7 @@ const RegistrationData = ({
               })
             }
             msgError={errors.confirmEmail}
+            onPaste={(e)=> e.preventDefault() }
           />
         </Col>
         <Col md="6" className="mt-4">
