@@ -1,6 +1,6 @@
+import { useAuth } from '@/context/login'
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import userHook from './hooks/Login/Authorization'
 
 export default function CustomRoute({
   component: Component,
@@ -8,7 +8,7 @@ export default function CustomRoute({
   path,
   ...rest
 }) {
-  const { isAuthorization } = userHook()
+  const { isAuthorization } = useAuth()
   // message:'EXPIRED_TOKEN'
 
   if (!isAuthorization() && isPrivate)

@@ -7,10 +7,12 @@ import Cards from './Cards'
 import { useAuth } from '@/context/login'
 
 const MasterPage = () => {
-  const {user} = useAuth()
+  const {setUserPermission,userPermission} = useAuth()
   useEffect(() => {
     document.title = 'Perfil'
-  }, [user])
+    setUserPermission('aaa')
+    console.log(userPermission);
+  }, [userPermission])
 
   return (
     <DefaultLayout>
