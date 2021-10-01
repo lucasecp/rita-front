@@ -18,7 +18,8 @@ import DefinePasswordSuccess from './messages/Success'
 
 import { Content, Button } from './style'
 
-const msgErrorPass = 'A senha informada não atende aos critérios de segurança, por favor verifique e tente novamente.'
+const msgErrorPass =
+  'A senha informada não atende aos critérios de segurança, por favor verifique e tente novamente.'
 
 function Password() {
   const [password, setPassword] = useState('')
@@ -30,7 +31,7 @@ function Password() {
   const { showMessage } = useModal()
   const { logout } = useAuth()
   const { Loading } = useLoading()
-  
+
   let cpf = ''
 
   useEffect(() => {
@@ -57,7 +58,7 @@ function Password() {
     } catch ({ response }) {
       if (response && response.status === 401) {
         logout()
-        return history.push('/esqueci-senha/inicio',{error:'EXPIRED_TOKEN'})
+        return history.push('/esqueci-senha/inicio', { error: 'EXPIRED_TOKEN' })
       }
       if (response && response.status === 400) {
         showMessage(AlreadyExists, { message: response.data.message })
@@ -69,12 +70,10 @@ function Password() {
 
   const validateErrors = () => {
     const newErrors = {}
-    if (!hasSpecialCaracter(password))
-      newErrors.password = msgErrorPass
+    if (!hasSpecialCaracter(password)) newErrors.password = msgErrorPass
     if (!hasLetter(password)) newErrors.password = msgErrorPass
     if (!hasNumber(password)) newErrors.password = msgErrorPass
-    if (password.trim().length < 6)
-      newErrors.password = msgErrorPass
+    if (password.trim().length < 6) newErrors.password = msgErrorPass
     if (password.trim() !== confirmPass.trim())
       newErrors.confirmPass = msgErrorPass
     if (!password.trim()) newErrors.password = 'Campo Obrigatório'
@@ -88,8 +87,8 @@ function Password() {
       <Content onSubmit={handleSubmit}>
         <h6>Preencha os campos abaixo para redefinir sua senha.</h6>
         <p>
-          A senha deve conter letras, números e caracteres <br />
-          especiais. Mínimo 6 dígitos.
+          A senha deve conter letras, números e caracteres especiais. <br />
+          Mínimo 6 dígitos.
         </p>
         <Row>
           <Col md={6}>

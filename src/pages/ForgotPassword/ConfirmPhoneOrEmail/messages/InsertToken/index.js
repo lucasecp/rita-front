@@ -74,6 +74,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
 
       if (response.status === 200) {
         if (response?.data.ultimaTentativa) {
+          setHasError(true)
           return switchModalTo(MODAL.LAST_TRY)
         }
         setToken('')
