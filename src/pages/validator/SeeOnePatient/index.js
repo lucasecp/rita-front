@@ -49,7 +49,7 @@ function seeOnePatient() {
           title="Dados cadastrais do titular"
           personData={patientData}
         />
-        {patientDependents.map((dependent, index) => (
+        {patientDependents?.map((dependent, index) => (
           <PersonExpandable
             title={`Dados cadastrais do dependente ${index + 1}`}
             personData={dependent}
