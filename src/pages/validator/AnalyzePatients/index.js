@@ -1,6 +1,10 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 
+<<<<<<< HEAD
+=======
+// import DefaultLayout from '@/components/Layout/DefaultLayout'
+>>>>>>> 10e661997d58028623f4032ebbe948ccf9f56070
 
 import { Container } from './styles'
 

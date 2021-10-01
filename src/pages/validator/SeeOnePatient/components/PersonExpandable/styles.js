@@ -43,8 +43,9 @@ export const Container = styled.div`
     + section {
       transition: 0.3s;
 
-      opacity: 0;
+      /* opacity: 0; */
       visibility: hidden;
+      overflow: hidden;
       min-height: 0px;
       height: 0px;
 

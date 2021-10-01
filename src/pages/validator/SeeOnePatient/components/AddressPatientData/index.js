@@ -13,21 +13,20 @@ const AddressPatientData = ({ address }) => {
       <div>
         <InputText
           label="Endereço:"
-          value={address?.address || ''}
+          value={address?.logradouro || ''}
           name="address"
           disabled
         />
         <section>
           <InputText
             label="Número:"
-            value={address?.number || ''}
-            type="number"
+            value={address?.numero || ''}
             name="number"
             disabled
           />
           <InputText
             label="Complemento:"
-            value={address?.complement || ''}
+            value={address?.complemento || ''}
             name="complement"
             disabled
           />
@@ -41,17 +40,22 @@ const AddressPatientData = ({ address }) => {
         />
         <InputMask
           label="Bairro:"
-          value={address?.district || ''}
+          value={address?.bairro || ''}
           name="district"
           disabled
         />
         <InputText
           label="Cidade:"
-          value={address?.city || ''}
+          value={address?.cidade || ''}
           name="city"
           disabled
         />
-        <Select label="UF:" value={address?.uf || ''} name="uf" disabled />
+        <Select
+          label="UF:"
+          labelDefaultOption={address?.uf}
+          name="uf"
+          disabled
+        />
       </div>
     </Container>
   )

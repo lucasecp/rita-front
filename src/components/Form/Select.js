@@ -6,6 +6,7 @@ const SelectComponent = ({
   options,
   label,
   setValue,
+  value,
   labelDefaultOption,
   msgError,
   ...rest
@@ -17,6 +18,7 @@ const SelectComponent = ({
         onChange={({ target }) => {
           setValue(target.value)
         }}
+        value={value || ''}
         {...rest}
       >
         <option value="" disabled>

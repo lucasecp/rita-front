@@ -22,11 +22,11 @@ const menuItemsValidator = [
     icon: <GroupUserIcon />,
     name: 'Dependentes',
   },
-  // {
-  //   path: '#',
-  //   icon: <PadLock />,
-  //   name: 'Trocar senha',
-  // },
+  {
+    path: '#',
+    icon: <PadLock />,
+    name: 'Trocar senha',
+  },
 ]
 
 export default menuItemsValidator

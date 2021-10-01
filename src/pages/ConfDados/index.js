@@ -15,7 +15,7 @@ function ConfDados() {
   const data = {
     phone: '(**) *****-**23',
   }
- 
+
   useEffect(() => {
     if (data.phone) {
       return setChoice('phone')

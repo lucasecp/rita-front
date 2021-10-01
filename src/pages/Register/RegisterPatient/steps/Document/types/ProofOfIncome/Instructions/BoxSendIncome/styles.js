@@ -17,6 +17,8 @@ export const Container = styled.div`
     margin-top: 8px;
     margin-bottom: 16px;
     color: ${colors.orange.middleDark};
+
+    font-size: 12px;
   }
   > section {
     display: flex;

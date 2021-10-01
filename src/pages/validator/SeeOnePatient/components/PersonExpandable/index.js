@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { format, parseISO } from 'date-fns'
 
 import arrowDownOutlineIcon from '@/assets/icons/arrow-down-outline.svg'
 
@@ -9,9 +10,15 @@ import SelectComponent from '@/components/Form/Select'
 import { Container } from './styles'
 
 function PersonExpandable({ title, personData }) {
+  const birthDate =
+    personData?.dataNascimento &&
+    format(parseISO(personData?.dataNascimento), 'dd/MM/yyyy')
+
   const [expanded, setExpanded] = useState(false)
 
   const toogleExpanded = () => setExpanded(!expanded)
+
+  const isOldDigit = () => personData?.telefone?.length === 10
 
   return (
     <Container expanded={expanded}>
@@ -22,13 +29,13 @@ function PersonExpandable({ title, personData }) {
       <section>
         <InputText
           label="Nome Completo:"
-          value={personData?.prop || ''}
+          value={personData?.nome || ''}
           disabled
         />
         <InputMask
           label="CPF:"
           mask="999.999.999-99"
-          value={personData?.prop || ''}
+          value={personData?.cpf || ''}
           disabled
         />
       </section>
@@ -36,7 +43,7 @@ function PersonExpandable({ title, personData }) {
         <InputMask
           label="Data de Nascimento:"
           mask="99/99/9999"
-          value={personData?.prop || ''}
+          value={birthDate || ''}
           disabled
         />
         <SelectComponent
@@ -47,16 +54,16 @@ function PersonExpandable({ title, personData }) {
             { label: 'Feminino', value: 'F' },
             { label: 'Outros', value: 'O' },
           ]}
-          value={personData?.prop || ''}
+          value={personData?.sexo || ''}
           disabled
         />
         <InputMask
           label="Celular:"
-          mask="(99) 99999-9999"
-          value={personData?.prop || ''}
+          mask={isOldDigit() ? '(99) 9999-9999' : '(99) 99999-9999'}
+          value={personData?.telefone || ''}
           disabled
         />
-        <InputText label="E-mail:" value={personData?.prop || ''} disabled />
+        <InputText label="E-mail:" value={personData?.email || ''} disabled />
       </section>
     </Container>
   )
