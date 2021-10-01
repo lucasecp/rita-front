@@ -8,10 +8,12 @@ import PersonExpandable from './components/PersonExpandable'
 import AddressPatientData from './components/AddressPatientData'
 import { useHistory, useLocation } from 'react-router'
 import apiPatient from '@/services/apiPatient'
+import { useLoading } from '@/context/useLoading'
 
 function seeOnePatient() {
   const history = useHistory()
   const location = useLocation()
+  const { Loading } = useLoading()
 
   if (!location.state) {
     history.push('/autorizacoes/analisar-pacientes')
@@ -25,6 +27,8 @@ function seeOnePatient() {
   useEffect(async () => {
     const userCpf = location.state.cpf
 
+    Loading.turnOn()
+
     try {
       const response = await apiPatient.get(`/paciente/cpf?cpf=${userCpf}`)
 
@@ -33,6 +37,8 @@ function seeOnePatient() {
       setPatientAddress(response.data.endereco)
     } catch ({ response }) {
       console.log(response)
+    } finally {
+      Loading.turnOff()
     }
   }, [])
 
@@ -43,14 +49,13 @@ function seeOnePatient() {
           title="Dados cadastrais do titular"
           personData={patientData}
         />
-        <PersonExpandable
-          title="Dados cadastrais do dependente 1"
-          personData={{}}
-        />
-        <PersonExpandable
-          title="Dados cadastrais do dependente 2"
-          personData={{}}
-        />
+        {patientDependents.map((dependent, index) => (
+          <PersonExpandable
+            title={`Dados cadastrais do dependente ${index + 1}`}
+            personData={dependent}
+            key={index}
+          />
+        ))}
         <AddressPatientData address={patientAddress} />
       </Container>
     </DefaultLayout>

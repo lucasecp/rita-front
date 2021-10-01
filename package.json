@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
     "customize-cra": "^1.0.0",
+    "date-fns": "^2.24.0",
     "history": "^5.0.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
