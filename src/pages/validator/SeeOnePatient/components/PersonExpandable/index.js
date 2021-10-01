@@ -18,6 +18,8 @@ function PersonExpandable({ title, personData }) {
 
   const toogleExpanded = () => setExpanded(!expanded)
 
+  const isOldDigit = () => personData?.telefone?.length === 10
+
   return (
     <Container expanded={expanded}>
       <header>
@@ -57,7 +59,7 @@ function PersonExpandable({ title, personData }) {
         />
         <InputMask
           label="Celular:"
-          mask="(99) 99999-9999"
+          mask={isOldDigit() ? '(99) 9999-9999' : '(99) 99999-9999'}
           value={personData?.telefone || ''}
           disabled
         />

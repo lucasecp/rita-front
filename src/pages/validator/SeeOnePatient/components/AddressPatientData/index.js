@@ -7,8 +7,6 @@ import Select from '@/components/Form/Select'
 import { Container } from './styles'
 
 const AddressPatientData = ({ address }) => {
-  console.log(address)
-
   return (
     <Container>
       <h2>Endereço</h2>
