@@ -20,7 +20,13 @@ import InputMask from '@/components/Form/InputMask'
 import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
 import LastTry from './messages/error/LastTry'
+import ContactUs from './messages/error/ContactUs'
 
+const MESSAGEAPI = {
+  LAST_TRY: 'Ultima tentativa antes de ser bloqueado definitivamente',
+  DENIED: 'Usuario Bloqueado',
+  INVALID_DATA: 'Dados inválido',
+}
 function ConfirmPhoneOrEmail() {
   const history = useHistory()
   const location = useLocation()
@@ -82,7 +88,7 @@ function ConfirmPhoneOrEmail() {
     }
 
     try {
-      await apiUser.post(
+     const {data} = await apiUser.post(
         '/token',
         choice === 'email'
           ? {
@@ -94,40 +100,42 @@ function ConfirmPhoneOrEmail() {
               celular: phone,
             }
       )
+      const ultimaTentativa = data?.ultimaTentativa
+      isLastTry = ultimaTentativa
     } catch ({ response }) {
       const messageFromApi = response?.data.message
-      console.log(messageFromApi);
+      console.log(messageFromApi)
 
       if (response?.status === 400) {
-        if (messageFromApi === 'Dados inválido') {
+        if (
+          messageFromApi === MESSAGEAPI.INVALID_DATA ||
+          (messageFromApi !== MESSAGEAPI.DENIED &&
+            messageFromApi !== MESSAGEAPI.LAST_TRY)
+        ) {
           isDataMatch = false
         }
-
-        if (
-          messageFromApi ===
-          'Ultima tentativa antes de ser bloqueado definitivamente'
-        ) {
+        if (messageFromApi === MESSAGEAPI.LAST_TRY) {
           isLastTry = true
         }
 
-        if (messageFromApi === 'Usuario Bloqueado') {
+        if (messageFromApi === MESSAGEAPI.DENIED) {
           isBlocked = true
         }
       }
     } finally {
       Loading.turnOff()
     }
-    if(isLastTry) {
+    if (isLastTry) {
       return showMessage(LastTry)
     }
-
-    if (!isDataMatch) {
-      return showMessage(DataDontMatch, {choice})
-    }
-
     if (isBlocked) {
       return showMessage(Denied)
     }
+
+    if (!isDataMatch) {
+      return showMessage(DataDontMatch, { choice })
+    }
+
 
     const propsToInComumSend = {
       isLastTry,
@@ -192,7 +200,7 @@ function ConfirmPhoneOrEmail() {
             )}
           </RadioGroup>
           <footer>
-            <OutlineButton onClick={() => showMessage(Denied)}>
+            <OutlineButton onClick={() => showMessage(ContactUs)}>
               Não reconheço esses dados
             </OutlineButton>
             {choice && (
