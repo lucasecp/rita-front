@@ -22,9 +22,12 @@ function AnalyzePatients() {
     // <DefaultLayout>
     <Container>
       {patients.map((patient, index) => (
-        <button key={index} onClick={() => seeOnePatient(patient.cpf)}>
-          {patient.cpf}
-        </button>
+        <>
+          <button key={index} onClick={() => seeOnePatient(patient.cpf)}>
+            {patient.cpf}
+          </button>
+          <br />
+        </>
       ))}
     </Container>
     // </DefaultLayout>

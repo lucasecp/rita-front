@@ -5,10 +5,12 @@ import DefaultLayout from '@/components/Layout/DefaultLayout'
 import { Container } from './styles'
 
 import PersonExpandable from './components/PersonExpandable'
-import AddressPatientData from './components/AddressPatientData'
+import AddressSeeOnePatient from './components/AddressSeeOnePatient'
 import { useHistory, useLocation } from 'react-router'
 import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/context/useLoading'
+import DocumentsSeeOnePatient from './components/DocumentsSeeOnePatient'
+import ValidationSeeOnePatient from './components/ValidationSeeOnePatient'
 
 function seeOnePatient() {
   const history = useHistory()
@@ -48,6 +50,7 @@ function seeOnePatient() {
         <PersonExpandable
           title="Dados cadastrais do titular"
           personData={patientData}
+          holder
         />
         {patientDependents?.map((dependent, index) => (
           <PersonExpandable
@@ -56,7 +59,9 @@ function seeOnePatient() {
             key={index}
           />
         ))}
-        <AddressPatientData address={patientAddress} />
+        <AddressSeeOnePatient address={patientAddress} />
+        <DocumentsSeeOnePatient documents={{}} />
+        <ValidationSeeOnePatient />
       </Container>
     </DefaultLayout>
   )

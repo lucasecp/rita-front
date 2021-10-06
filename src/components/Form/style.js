@@ -67,7 +67,7 @@ export const Container = styled.div`
 export const Select = styled(Form.Select)`
   color: #6a6a6a;
   border-radius: 8px;
-  padding: 14px 22px;
+  padding: 14px 16px;
   display: inline-block;
   transition: all 0.3s;
   position: relative;
@@ -80,6 +80,7 @@ export const Select = styled(Form.Select)`
 
   :disabled {
     background: #eeeeee;
+    box-shadow: unset;
   }
   ::after {
     content: '';

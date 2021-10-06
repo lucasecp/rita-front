@@ -7,7 +7,8 @@ export const CustomContainer = styled.div`
   grid-template-rows: auto 1fr auto;
   grid-template-areas: 'aside header' 'aside main' 'aside footer';
   min-height: 100vh;
-  background-color: #e5e5e5;
+  background-color: ${colors.gray.extraLight};
+
   > header {
     padding: 40px 64px 24px 64px;
     grid-area: header;
@@ -17,6 +18,7 @@ export const CustomContainer = styled.div`
   }
   > main {
     grid-area: main;
+
     > h1 {
       font-size: 32px;
       line-height: 39px;
@@ -25,16 +27,19 @@ export const CustomContainer = styled.div`
       margin-bottom: 16px;
     }
   }
+
   > footer {
     grid-area: footer;
     padding-top: 22px;
     padding-bottom: 105px;
   }
+
   > header,
   > footer,
   > main {
     width: 100%;
   }
+
   > footer,
   > main {
     padding-left: 32px;
@@ -44,13 +49,15 @@ export const CustomContainer = styled.div`
   @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
+
     > header,
     > footer,
     > main {
-      padding: 16px 24px 16px 24px;
+      padding: 16px;
     }
+
     > header {
-      margin-bottom: 24px;
+      margin-bottom: 8px;
     }
   }
 `

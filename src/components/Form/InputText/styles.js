@@ -23,7 +23,7 @@ export const Container = styled.div`
   > input {
     color: #6a6a6a;
     border-radius: 8px;
-    padding: 14px 22px;
+    padding: 14px 16px;
     display: inline-block;
     transition: all 0.3s;
     position: relative;
@@ -31,8 +31,10 @@ export const Container = styled.div`
     box-shadow: 0px 2px 4px 0px #e5e5e5;
     font-weight: 500;
     width: 100%;
+
     :disabled {
       background: #eeeeee;
+      box-shadow: unset;
     }
 
     ::after {

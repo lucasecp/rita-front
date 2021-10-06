@@ -27,6 +27,8 @@ export const Container = styled.div`
 
     > img {
       padding: 12px 24px;
+      margin-right: -22px;
+
       cursor: pointer;
 
       transform: rotateX(${({ expanded }) => (expanded ? '180deg' : '0')});
@@ -62,6 +64,13 @@ export const Container = styled.div`
   }
 
   @media (max-width: 767px) {
+    > header {
+      > h2 {
+        font-size: 20px;
+        line-height: 1.3;
+      }
+    }
+
     > section {
       grid-template-columns: 1fr;
 

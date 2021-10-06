@@ -12,7 +12,11 @@ export const ContainerRadio = styled.div`
   }
 
   .MuiRadio-root {
-    color: ${colors.purple.main.dark};
+    color: #979797;
+
+    .Mui-checked {
+      color: ${colors.purple.main.dark};
+    }
 
     :hover {
       background: ${colors.purple.main.light};
@@ -29,6 +33,6 @@ export const ContainerLabel = styled.div`
 
     color: ${({ checked }) =>
       checked ? colors.purple.main.dark : colors.gray.dark};
-    margin-left: ${({ label }) => (label ? 8 : 0)}px;
+    margin-left: ${({ label }) => (label ? 2 : 0)}px;
   }
 `

@@ -4,15 +4,18 @@ export const HeaderLayout = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   > h1 {
     font-size: 32px;
     line-height: 39px;
     font-weight: 500;
     color: ${colors.gray.dark};
   }
+
   > nav {
     display: flex;
     align-items: center;
+
     > a {
       display: flex;
       align-items: center;
@@ -20,13 +23,15 @@ export const HeaderLayout = styled.header`
       font-size: 14px;
       font-weight: 500;
     }
+
     > img:last-child {
       transform: rotate(-180deg);
     }
   }
+
   img {
-    filter: invert(28%) sepia(63%) saturate(2375%) hue-rotate(248deg)
-      brightness(105%) contrast(102%);
+    /* filter: invert(28%) sepia(63%) saturate(2375%) hue-rotate(248deg)
+      brightness(105%) contrast(102%); */
     margin-left: 20px;
     cursor: pointer;
   }
@@ -44,6 +49,7 @@ export const Profile = styled.div`
   justify-content: center;
   overflow: hidden;
   margin-left: 20px;
+
   > img {
     filter: none;
     margin-left: 0;
