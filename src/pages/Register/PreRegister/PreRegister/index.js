@@ -68,7 +68,7 @@ function PreRegister() {
 
   const redirectToRegister = () => {
     if (userData?.status === 'N') return showMessage(ContactUs)
-    history.push('/cadastro/paciente')
+    history.push('/cadastro/paciente',{ userData: { cpf: userData.cpf } })
   }
 
   const onForwardData = async () => {
@@ -91,7 +91,7 @@ function PreRegister() {
     }
 
     try {
-     const {data} = await apiPatient.post(
+      const { data } = await apiPatient.post(
         '/paciente/token',
         choice === 'email'
           ? {
@@ -106,8 +106,10 @@ function PreRegister() {
       const ultimaTentativa = data?.ultimaTentativa
       isLastTry = ultimaTentativa
     } catch ({ response }) {
+
       const messageFromApi = response?.data.message
       const statusFromApi = response?.status
+
       if (statusFromApi === 400) {
         if (
           messageFromApi === MESSAGEAPI.INVALID_DATA ||
