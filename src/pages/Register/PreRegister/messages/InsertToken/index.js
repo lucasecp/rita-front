@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import OutlineButton from '@/components/Button/Outline'
@@ -27,15 +27,20 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
   const [token, setToken] = useState('')
   const [hasError, setHasError] = useState(false)
   const [waitRequestNewToken, setWaitRequestNewToken] = useState(true)
+  const [acessOrRequestToken, setAcessOrRequestToken] = useState(false)
   const { Loading } = useLoading()
 
   const [typeOfModal, setTypeOfModal] = useState(
     isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN
   )
+  useEffect(() => {
+     setTypeOfModal(isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN)
+  }, [isLastTry]);
+  console.log(isLastTry);
 
   const onRequestNewToken = async () => {
     Loading.turnOn()
-
+    setAcessOrRequestToken(true)
     try {
       const response = await apiPatient.post(
         '/paciente/token',
@@ -69,6 +74,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
   const accessPlatform = async () => {
     Loading.turnOn()
     setHasError(false)
+    setAcessOrRequestToken(true)
 
     try {
       const response = await apiPatient.get(
@@ -81,10 +87,8 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
       }
     } catch ({ response }) {
       const messageFromApi = response?.data.message
-
-      if (messageFromApi === 'Dados inválido') {
-        setHasError(true)
-      }
+      console.log(messageFromApi);
+      setHasError(true)
 
       if (
         messageFromApi ===
@@ -133,7 +137,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
           {hasError && (
             <small>
               {phone &&
-                '*Por favor, verifique o número fornecido em seu dispositivo e tente novamente'}
+                '*Por favor, verifique o número fornecido em seu celular e tente novamente'}
               {email &&
                 '*Por favor, verifique o número enviado para seu e-mail e tente novamente'}
             </small>
@@ -155,11 +159,25 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
         <Container>
           <img src={warningIcon} />
           <p>
-            Esta é sua ultima tentativa, caso insira informações incorretas seu
-            acesso será bloqueado.
+            {acessOrRequestToken
+              ? `Por favor, verifique o número fornecido em seu ${
+                  email ? 'email' : 'celular'
+                }. Esta é sua última tentativa, caso realize nova solicitação, seu acesso será bloqueado! Deseja continuar?`
+              : 'Esta é sua última tentativa, caso insira informações incorretas seu acesso será bloqueado.'}
           </p>
           <footer>
-            <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
+            {acessOrRequestToken ? (
+              <>
+                <OutlineButton onClick={()=> {closeModal();setAcessOrRequestToken(false)}}>Não</OutlineButton>
+                <ButtonPrimary
+                  onClick={() => switchModalTo(MODAL.INSERT_TOKEN)}
+                >
+                  Sim
+                </ButtonPrimary>
+              </>
+            ) : (
+              <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
+            )}
           </footer>
         </Container>
       )}

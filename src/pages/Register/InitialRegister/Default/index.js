@@ -23,7 +23,7 @@ import { useLoading } from '@/context/useLoading'
 
 function DefaultRegister() {
   const [cpf, setCpf] = useState('')
-const {Loading} = useLoading()
+  const { Loading } = useLoading()
   const history = useHistory()
 
   const { showMessage } = useModal()
@@ -56,7 +56,12 @@ const {Loading} = useLoading()
         return showMessage(Analyzing)
       }
       if (responseApi.status === status.DENIED_FIRST_TIME) {
-        return showMessage(Divergence)
+        return showMessage(Divergence, {
+          cpf,
+          email: responseApi.email,
+          phone: responseApi.telefone,
+          status: responseApi.status
+        })
       }
       if (responseApi.status === status.DENIED_SECOND_TIME) {
         return showMessage(Denied)
@@ -64,7 +69,7 @@ const {Loading} = useLoading()
     } catch ({ response }) {
       const apiStatus = response.status
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return history.push('/cadastro/paciente/',{userData:{cpf}})
+        return history.push('/cadastro/paciente/', { userData: { cpf } })
       }
     } finally {
       Loading.turnOff()

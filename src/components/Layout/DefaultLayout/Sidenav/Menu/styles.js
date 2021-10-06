@@ -32,7 +32,8 @@ export const Container = styled.ul`
       padding: 18px 32px;
 
       > svg {
-        transition: 0.3s;
+        transition: none;
+        min-width: 30px;
       }
 
       > a {
@@ -63,11 +64,13 @@ export const Container = styled.ul`
 
       > span {
         background: ${colors.green.light};
+
       }
 
       > div {
         > svg {
-          fill: ${colors.green.light};
+          transition: none;
+          filter:invert(94%) sepia(18%) saturate(609%) hue-rotate(67deg) brightness(100%) contrast(104%);
         }
 
         > a {
@@ -76,4 +79,5 @@ export const Container = styled.ul`
       }
     }
   }
+
 `

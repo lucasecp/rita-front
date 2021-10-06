@@ -49,7 +49,7 @@ const RegisterPatient = () => {
       formData.append('file', documentFiles.holdingDocumentFile)
 
       apiPatient.post(
-        `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=FotoSegurandoDoc`,
+        `/paciente/documento?cpf=${data.cpf}&tipoDocumento=FotoSegurandoDoc`,
         formData
       )
     } catch ({ response }) {
@@ -66,7 +66,7 @@ const RegisterPatient = () => {
       formData.append('file', documentFiles.ownDocumentFile)
 
       apiPatient.post(
-        `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=Cpf`,
+        `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Cpf`,
         formData
       )
     } catch ({ response }) {
@@ -83,7 +83,7 @@ const RegisterPatient = () => {
         formData.append('file', documentFiles.proofOfIncomeFile)
 
         apiPatient.post(
-          `/paciente/documento?cpf=${data.cpf}&tipoDocumeto=Renda`,
+          `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
           formData
         )
       } catch ({ response }) {

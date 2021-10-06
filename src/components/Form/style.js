@@ -19,6 +19,7 @@ export const Container = styled.div`
   .form-select:focus {
     box-shadow: unset;
   }
+  
 
   > input {
     color: #6a6a6a;

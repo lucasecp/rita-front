@@ -8,13 +8,13 @@ import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 import { useModal } from '@/context/useModal'
 
-function Divergence({cpf }) {
+function Divergence(data) {
   const history = useHistory()
   const { closeModal } = useModal()
 
   const pushToPreRegister = () => {
     closeModal()
-    history.push('/pre-cadastro',{cpf})
+    history.push('/pre-cadastro',data)
   }
   return (
     <Container>

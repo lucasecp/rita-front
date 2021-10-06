@@ -18,7 +18,13 @@ import apiPatient from '@/services/apiPatient'
 import InputMask from '@/components/Form/InputMask'
 import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
+import ContactUs from '../messages/error/ContactUs'
 
+const MESSAGEAPI = {
+  LAST_TRY: 'Ultima tentativa antes de ser bloqueado definitivamente',
+  DENIED: 'Usuario Bloqueado',
+  INVALID_DATA: 'Dados inválido',
+}
 function PreRegister() {
   const history = useHistory()
   const location = useLocation()
@@ -61,7 +67,8 @@ function PreRegister() {
   }
 
   const redirectToRegister = () => {
-    history.push('/cadastro/paciente')
+    if (userData?.status === 'N') return showMessage(ContactUs)
+    history.push('/cadastro/paciente',{ userData: { cpf: userData.cpf } })
   }
 
   const onForwardData = async () => {
@@ -84,7 +91,7 @@ function PreRegister() {
     }
 
     try {
-      await apiPatient.post(
+      const { data } = await apiPatient.post(
         '/paciente/token',
         choice === 'email'
           ? {
@@ -96,23 +103,26 @@ function PreRegister() {
               celular: phone,
             }
       )
+      const ultimaTentativa = data?.ultimaTentativa
+      isLastTry = ultimaTentativa
     } catch ({ response }) {
+
       const messageFromApi = response?.data.message
       const statusFromApi = response?.status
 
       if (statusFromApi === 400) {
-        if (messageFromApi === 'Dados inválido') {
+        if (
+          messageFromApi === MESSAGEAPI.INVALID_DATA ||
+          (messageFromApi !== MESSAGEAPI.DENIED &&
+            messageFromApi !== MESSAGEAPI.LAST_TRY)
+        ) {
           isDataMatch = false
         }
-
-        if (
-          messageFromApi ===
-          'Ultima tentativa antes de ser bloqueado definitivamente'
-        ) {
+        if (messageFromApi === MESSAGEAPI.LAST_TRY) {
           isLastTry = true
         }
 
-        if (messageFromApi === 'Usuario Bloqueado') {
+        if (messageFromApi === MESSAGEAPI.DENIED) {
           isBlocked = true
         }
       }
@@ -120,12 +130,11 @@ function PreRegister() {
       Loading.turnOff()
     }
 
-    if (!isDataMatch) {
-      return showMessage(DataDontMatch, userData)
-    }
-
     if (isBlocked) {
       return showMessage(Denied)
+    }
+    if (!isDataMatch) {
+      return showMessage(DataDontMatch, userData)
     }
 
     const propsToInComumSend = {

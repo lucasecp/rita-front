@@ -15,7 +15,6 @@ const DefaultLayout = ({ children, title }) => {
     <CustomContainer>
       {isMobile && (
         <>
-          {' '}
           <HeaderMobile /> <SidenavMobile />{' '}
         </>
       )}

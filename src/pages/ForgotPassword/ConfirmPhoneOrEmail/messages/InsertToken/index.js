@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useLoading } from '@/context/useLoading'
 
@@ -31,11 +31,16 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
   const [typeOfModal, setTypeOfModal] = useState(
     isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN
   )
+  useEffect(() => {
+    setTypeOfModal(isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN)
+ }, [isLastTry]);
+ console.log(isLastTry);
 
   const onRequestNewToken = async () => {
     Loading.turnOn()
 
     try {
+      setWaitRequestNewToken(true)
       const response = await apiUser.post(
         '/token',
         email
@@ -53,7 +58,6 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
         switchModalTo(MODAL.LAST_TRY)
       }
 
-      setWaitRequestNewToken(true)
     } catch ({ response }) {
       const messageFromApi = response?.data.message
 
@@ -71,7 +75,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
     try {
       Loading.turnOn()
       const response = await apiUser.get(`/token?token=${token}&cpf=${cpf}`)
-
+        console.log(response?.data);
       if (response.status === 200) {
         if (response?.data.ultimaTentativa) {
           setHasError(true)
@@ -84,12 +88,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
     } catch ({ response }) {
       if (response.status === 400) {
         const messageFromApi = response?.data.message
-
         setHasError(true)
-
-        if (messageFromApi === 'Dados inválido') {
-          setHasError(true)
-        }
 
         if (
           messageFromApi ===
@@ -158,7 +157,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
         </Container>
       )}
       {typeOfModal === MODAL.LAST_TRY && (
-        <LastTry email={email} switchModalTo={switchModalTo} />
+        <LastTry email={email} switchModalTo={switchModalTo} requestNewToken={true} />
       )}
       {typeOfModal === MODAL.BLOCKED && <Denied />}
     </>

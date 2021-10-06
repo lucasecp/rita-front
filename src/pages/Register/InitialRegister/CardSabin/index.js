@@ -23,7 +23,7 @@ import { useLoading } from '@/context/useLoading'
 function RegisterCardSabin() {
   const [cpf, setCpf] = useState('')
   const { showMessage } = useModal()
-  const {Loading} = useLoading()
+  const { Loading } = useLoading()
   const handleConfirm = async () => {
     if (cpf.length === 0) {
       return showMessage(CpfEmpty)
@@ -33,11 +33,10 @@ function RegisterCardSabin() {
       return showMessage(InvalidCpf)
     }
     try {
-Loading.turnOn()
-  const { data: responseApi } = await axios.get(
+      Loading.turnOn()
+      const { data: responseApi } = await axios.get(
         `/paciente/status?cpf=${cpf}`
       )
-
 
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
         return showMessage(ImportData, {
@@ -53,7 +52,12 @@ Loading.turnOn()
         return showMessage(Analyzing)
       }
       if (responseApi.status === status.DENIED_FIRST_TIME) {
-        return showMessage(Divergence)
+        return showMessage(Divergence, {
+          cpf,
+          email: responseApi.email,
+          phone: responseApi.telefone,
+          status: responseApi.status
+        })
       }
       if (responseApi.status === status.DENIED_SECOND_TIME) {
         return showMessage(Denied)
@@ -61,7 +65,7 @@ Loading.turnOn()
     } catch ({ response }) {
       const apiStatus = response.status
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return showMessage(NotFound,{cpf})
+        return showMessage(NotFound, { cpf })
       }
     } finally {
       Loading.turnOff()
@@ -85,7 +89,6 @@ Loading.turnOn()
           </section>
         </Content>
       </RegisterLayout>
-
     </>
   )
 }

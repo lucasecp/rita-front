@@ -42,11 +42,13 @@ function IdentifyPerson() {
     try {
       Loading.turnOn()
       const { data } = await apiUser.get(`/status?cpf=${cpf}`)
+      console.log(data);
       return history.push('/esqueci-senha/confirmar-dados', {
         cpf,
         email: data.email,
         phone: data.telefone,
       })
+      
     } catch ({ response }) {
       if (response.status === 404) {
         return showMessage(NotFound)
