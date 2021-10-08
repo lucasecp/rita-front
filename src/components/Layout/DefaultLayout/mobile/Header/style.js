@@ -5,9 +5,10 @@ export const Container = styled.header`
   justify-content: space-between;
   align-items: center;
   background: #fff;
-  >a{
-    img{
-      min-width:30px
+  
+  > a {
+    img {
+      min-width: 30px;
     }
   }
   > nav {
@@ -21,13 +22,13 @@ export const Container = styled.header`
       font-size: 14px;
       font-weight: 500;
     }
-    > img+img{
-       transform: rotate(-180deg);
-     }
+    > img + img {
+      transform: rotate(-180deg);
+    }
 
-    img {
-      filter: invert(28%) sepia(63%) saturate(2375%) hue-rotate(248deg)
-        brightness(105%) contrast(102%);
+    > img {
+      /* filter: invert(28%) sepia(63%) saturate(2375%) hue-rotate(248deg)
+        brightness(105%) contrast(102%); */
       margin-left: 20px;
       cursor: pointer;
     }
@@ -49,10 +50,10 @@ export const Profile = styled.div`
   }
 `
 export const Hamburger = styled.button`
- margin-left: 20px;
- border: none;
- background: transparent;
- height: 40px;
+  margin-left: 20px;
+  border: none;
+  background: transparent;
+  height: 40px;
   span {
     background-color: #9146ff;
     width: 24px;
@@ -71,10 +72,10 @@ export const Hamburger = styled.button`
     height: 2px;
     border-radius: 8px;
   }
-  ::after{
-    margin-top:4px;
+  ::after {
+    margin-top: 4px;
   }
-  ::before{
-    margin-bottom:4px;
+  ::before {
+    margin-bottom: 4px;
   }
 `

@@ -8,11 +8,19 @@ export default createGlobalStyle`
   ${fonts}
   ${calendar}
 
-  body,*{
-      font-family: "Athletics";
-      box-sizing: border-box;
-
+  body, *{
+    font-family: "Athletics";
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline:0;
   }
+
+  button{
+    background: transparent;
+  }
+
   img{
     max-width: 100%;
     display: block;

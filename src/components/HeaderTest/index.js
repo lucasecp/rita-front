@@ -8,7 +8,9 @@ const Header = () => {
       <nav>
         <Link to="/definir-senha">Definição de Senha</Link>
         <Link to="/login">Login</Link>
-        <Link to="/autorizacoes/analisar-pacientes">Analisar Pacientes</Link>
+        <Link to="/autorizacoes/analisar-pacientes2">
+          Analisar Pacientes Temporário
+        </Link>
       </nav>
     </HeaderLayout>
   )

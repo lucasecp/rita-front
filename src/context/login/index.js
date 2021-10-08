@@ -20,7 +20,9 @@ const UserContext = createContext()
 
 export default function AuthProvider({ children }) {
   let currentUserPermission = null
-  const [userPermission, setUserPermission] = useState(getUserStorage()?.userPermission || null)
+  const [userPermission, setUserPermission] = useState(
+    getUserStorage()?.userPermission || null
+  )
 
   const { Loading } = useLoading()
   const { showMessage } = useModal()
@@ -38,18 +40,18 @@ export default function AuthProvider({ children }) {
     try {
       Loading.turnOn()
       const { data } = await apiUser.post('/login', payload)
+
       const dataUser = jwt(data.jwtToken)
 
       setUserPermission(isValidatorUser(dataUser.perfis))
-      currentUserPermission= isValidatorUser(dataUser.perfis)
+      currentUserPermission = isValidatorUser(dataUser.perfis)
 
       setDataLogin({
         ...dataUser,
         cpf: payload.cpf,
         token: data.jwtToken,
-        userPermission:currentUserPermission,
+        userPermission: currentUserPermission,
       })
-
 
       pushToUrl(prevPath)
     } catch ({ response }) {
@@ -97,7 +99,7 @@ export default function AuthProvider({ children }) {
         setUserPermission,
         login,
         logout,
-        isAuthorization
+        isAuthorization,
       }}
     >
       {children}

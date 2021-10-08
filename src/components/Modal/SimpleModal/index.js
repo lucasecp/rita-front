@@ -1,0 +1,40 @@
+import React from 'react'
+
+import errorIcon from '@/assets/icons/alerts/error.svg'
+import warningIcon from '@/assets/icons/alerts/warning.svg'
+import successIcon from '@/assets/icons/alerts/success.svg'
+
+import { useModal } from '@/context/useModal'
+import ButtonPrimary from '@/components/Button/Primary'
+
+import { Container } from './styles'
+
+export const MODAL_TYPES = {
+  ERROR: 'error',
+  WARNING: 'warning',
+  SUCCESS: 'success',
+}
+
+const icons = {
+  [MODAL_TYPES.ERROR]: errorIcon,
+  [MODAL_TYPES.WARNING]: warningIcon,
+  [MODAL_TYPES.SUCCESS]: successIcon,
+}
+
+function SimpleModal({ type, message }) {
+  const { closeModal } = useModal()
+
+  const onOk = () => {
+    closeModal()
+  }
+
+  return (
+    <Container>
+      <img src={icons[type]} />
+      <p>{message}</p>
+      <ButtonPrimary onClick={onOk}>OK</ButtonPrimary>
+    </Container>
+  )
+}
+
+export default SimpleModal

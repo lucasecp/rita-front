@@ -1,14 +1,24 @@
-import apiUser from "@/services/apiUser";
+import apiPatient from '@/services/apiPatient'
+import apiUser from '@/services/apiUser'
 
-export const getUserStorage = () => JSON.parse(localStorage.getItem('user'));
+export const getUserStorage = () => JSON.parse(localStorage.getItem('user'))
 
 export const setLocalStorage = (payload) => {
-  localStorage.setItem('user', JSON.stringify(payload));
-};
-export const deleteLocalStorage = () => localStorage.removeItem('user');
+  localStorage.setItem('user', JSON.stringify(payload))
+}
+export const deleteLocalStorage = () => localStorage.removeItem('user')
 
+export const deleteHeaderToken = () => {
+  delete apiUser.defaults.headers.common.token
+  delete apiPatient.defaults.headers.common.token
+}
 
-export const getHeaderToken = () => apiUser.defaults.headers.token;
-export const deleteHeaderToken = () => delete apiUser.defaults.headers.token;
+export const setHeaderToken = (token) => {
+  console.log(token)
 
-export const setHeaderToken = (token) => {apiUser.defaults.headers.token = token; };
+  apiUser.defaults.headers.token = `Bearer ${token}`
+  apiPatient.defaults.headers.token = `Bearer ${token}`
+
+  console.log(apiUser.defaults.headers.token)
+  console.log(apiPatient.defaults.headers.token)
+}

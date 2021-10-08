@@ -5,7 +5,7 @@ import AnalyzePatients from '@/pages/validator/AnalyzePatients'
 
 const validatorRoutes = [
   {
-    path: '/autorizacoes/analisar-pacientes',
+    path: '/autorizacoes/analisar-pacientes2',
     component: AnalyzePatients,
   },
   {

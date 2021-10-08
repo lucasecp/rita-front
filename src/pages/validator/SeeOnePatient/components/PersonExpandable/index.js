@@ -9,12 +9,12 @@ import SelectComponent from '@/components/Form/Select'
 
 import { Container } from './styles'
 
-function PersonExpandable({ title, personData }) {
+function PersonExpandable({ title, personData, holder }) {
   const birthDate =
     personData?.dataNascimento &&
     format(parseISO(personData?.dataNascimento), 'dd/MM/yyyy')
 
-  const [expanded, setExpanded] = useState(false)
+  const [expanded, setExpanded] = useState(!!holder)
 
   const toogleExpanded = () => setExpanded(!expanded)
 
