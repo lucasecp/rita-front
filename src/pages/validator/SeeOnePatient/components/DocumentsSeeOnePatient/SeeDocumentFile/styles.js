@@ -2,7 +2,19 @@ import styled, { css } from 'styled-components'
 
 import colors from '@/styles/colors'
 
-export const Container = styled.div`
+export const Container = styled.div.attrs()`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-left: 16px;
+
+  border: 2px solid ${colors.gray.light};
+  box-sizing: border-box;
+  border-radius: 8px;
+
+  cursor:pointer;
+
   & + & {
     margin-top: 24px;
   }
@@ -17,58 +29,50 @@ export const Container = styled.div`
     color: ${colors.gray.middle};
   }
 
-  > div {
+  > h4 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+
+    color: ${colors.purple.main.dark};
+    /* word-break: break-all; */
+    padding: 14px 0;
+  }
+
+  > button {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
-    padding-left: 16px;
+    padding: 14px 16px;
 
-    border: 2px solid ${colors.gray.light};
-    box-sizing: border-box;
-    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
 
-    > h4 {
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 150%;
+    color: ${colors.gray.middle};
 
-      color: ${colors.purple.main.dark};
-      word-break: break-all;
-      padding: 14px 0;
+    > svg {
+      margin-right: 8px;
     }
+  }
 
-    > button {
-      display: flex;
-      align-items: center;
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: default;
+      pointer-events: none;
 
-      padding: 14px 16px;
+      background: ${colors.gray.light};
 
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 150%;
-
-      color: ${colors.gray.middle};
-
-      > svg {
-        margin-right: 8px;
+      > h4 {
+        color: ${colors.gray.middle};
       }
-    }
-
-    ${({ disabled }) =>
-      disabled &&
-      css`
-        background: ${colors.gray.light};
-
-        > h4 {
-          color: ${colors.gray.middle};
+      > button {
+        > svg {
+          fill: ${colors.gray.middle};
         }
-        > button {
-          > svg {
-            fill: ${colors.gray.middle};
-          }
-        }
-      `}
+      }
+    `}
   }
 
   @media (max-width: 767px) {

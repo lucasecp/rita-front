@@ -7,6 +7,8 @@ import { Container } from './styles'
 
 function AnalyzePatients() {
   const patients = [
+    { cpf: '86829994047' },
+    { cpf: '72262650012' },
     { cpf: '00864506112' },
     { cpf: '71674624115' },
     { cpf: '01515208109' },

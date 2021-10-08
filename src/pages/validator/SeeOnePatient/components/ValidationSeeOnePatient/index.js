@@ -1,19 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RadioGroup } from '@material-ui/core'
 
-import ButtonLink from '@/components/Button/Link'
-import OutlineButton from '@/components/Button/Outline'
-import ButtonPrimary from '@/components/Button/Primary'
 import CheckboxComponent from '@/components/Form/Checkbox'
 import Textarea from '@/components/Form/Textarea'
 import RadioButton from '@/styles/components/RadioButton'
 
 import { Container } from './styles'
 
-function ValidationSeeOnePatient() {
-  const [documentOk, setDocumentOk] = useState('')
-  const [incomeOk, setIncomeOk] = useState('no')
-  const [checkAllData, setCheckAllData] = useState(false)
+function ValidationSeeOnePatient({ validations, onChangeValidations }) {
+  const [documentOk, setDocumentOk] = useState(validations.documentOk || '')
+
+  const [resonDocumentNotOk, setResonDocumentNotOk] = useState(
+    validations.resonDocumentNotOk || ''
+  )
+
+  const [incomeOk, setIncomeOk] = useState(validations.incomeOk || 'no')
+
+  const [allDataVerified, setCheckAllData] = useState(
+    validations.allDataVerified || false
+  )
+
+  // setTimeout(() => {
+  //   setDocumentOk(validations.documentOk)
+  //   setResonDocumentNotOk(validations.resonDocumentNotOk)
+  //   setIncomeOk(validations.incomeOk)
+  //   setCheckAllData(validations.allDataVerified)
+  // }, [1000])
+
+  useEffect(() => {
+    onChangeValidations({
+      documentOk,
+      resonDocumentNotOk,
+      incomeOk,
+      allDataVerified,
+    })
+  }, [documentOk, resonDocumentNotOk, incomeOk, allDataVerified])
 
   const onDocumentOkChange = (_, value) => {
     setDocumentOk(value)
@@ -39,7 +60,15 @@ function ValidationSeeOnePatient() {
         <RadioButton value="no" label="Não" checked={documentOk === 'no'} />
       </RadioGroup>
       {!documentOk && <small>A seleção do campo é obrigatória</small>}
-      {documentOk === 'no' && <Textarea label="Descreva o motivo*:" rows="3" />}
+      {documentOk === 'no' && (
+        <Textarea
+          label="Descreva o motivo*:"
+          rows="3"
+          limit="2000"
+          value={resonDocumentNotOk}
+          setValue={setResonDocumentNotOk}
+        />
+      )}
       <h2>
         Paciente apresentou comprovante de renda válido com valor de até 1
         salário mínimo e meio?
@@ -58,19 +87,14 @@ function ValidationSeeOnePatient() {
           <CheckboxComponent
             id="terms"
             label="Atesto que verifiquei todos os dados preenchidos pelo usuário como dados reais."
-            checked={checkAllData}
+            checked={allDataVerified}
             setValue={setCheckAllData}
             colorLight
-            hasError={!checkAllData}
-            msgError={!checkAllData && 'A seleção do campo é obrigatória'}
+            hasError={!allDataVerified}
+            msgError={!allDataVerified && 'A seleção do campo é obrigatória'}
           />
         </section>
       )}
-      <footer>
-        <ButtonLink>Voltar</ButtonLink>
-        <OutlineButton>Salvar</OutlineButton>
-        <ButtonPrimary disabled>Concluir</ButtonPrimary>
-      </footer>
     </Container>
   )
 }

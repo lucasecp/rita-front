@@ -10,4 +10,25 @@ export const Container = styled.div`
 
   background: ${colors.white};
   transition: 0.3s;
+
+  > footer {
+    margin-top: 24px;
+
+    display: flex;
+    justify-content: center;
+
+    button + button {
+      margin-left: 32px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    > footer {
+      flex-direction: column;
+
+      > button + button {
+        margin: 8px 0 0;
+      }
+    }
+  }
 `

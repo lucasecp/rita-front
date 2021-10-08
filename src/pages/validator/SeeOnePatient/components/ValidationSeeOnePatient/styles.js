@@ -57,17 +57,6 @@ export const Container = styled.div`
     margin-top: 16px;
   }
 
-  > footer {
-    margin-top: 24px;
-
-    display: flex;
-    justify-content: center;
-
-    button + button {
-      margin-left: 32px;
-    }
-  }
-
   > div + div {
     margin-top: 16px;
   }
