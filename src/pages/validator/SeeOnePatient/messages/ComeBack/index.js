@@ -1,14 +1,16 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
-import { Container } from './styles'
 import { useModal } from '@/context/useModal'
-import { useHistory } from 'react-router'
 import apiPatient from '@/services/apiPatient'
+import apiUser from '@/services/apiUser'
+
+import { Container } from './styles'
 
 function ComeBack({ idPatient }) {
   const { closeModal } = useModal()
@@ -19,6 +21,9 @@ function ComeBack({ idPatient }) {
   }
 
   const onConfirmExit = async () => {
+    // console.log(apiPatient.defaults.headers.token)
+    // console.log(apiUser.defaults.headers.token)
+
     try {
       const response = await apiPatient.patch(
         `/paciente/${idPatient}/liberar-validacao`

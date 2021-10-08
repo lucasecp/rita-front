@@ -33,6 +33,7 @@ export default function AuthProvider({ children }) {
     try {
       Loading.turnOn()
       const { data } = await apiUser.post('/login', payload)
+
       const dataUser = jwt(data.jwtToken)
 
       setUserPermission(isValidatorUser(dataUser.perfis))

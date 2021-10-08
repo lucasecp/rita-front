@@ -6,8 +6,15 @@ import Textarea from '@/components/Form/Textarea'
 import RadioButton from '@/styles/components/RadioButton'
 
 import { Container } from './styles'
+import getValidationsFromLocalStorage from '../../helpers/getValidationsFromLocalStorage'
 
-function ValidationSeeOnePatient({ validations, onChangeValidations }) {
+import isObjectEmpty from '@/helpers/isEmpty'
+
+function ValidationSeeOnePatient({
+  patientId,
+  validations,
+  onChangeValidations,
+}) {
   const [documentOk, setDocumentOk] = useState(validations.documentOk || '')
 
   const [resonDocumentNotOk, setResonDocumentNotOk] = useState(
@@ -20,12 +27,16 @@ function ValidationSeeOnePatient({ validations, onChangeValidations }) {
     validations.allDataVerified || false
   )
 
-  // setTimeout(() => {
-  //   setDocumentOk(validations.documentOk)
-  //   setResonDocumentNotOk(validations.resonDocumentNotOk)
-  //   setIncomeOk(validations.incomeOk)
-  //   setCheckAllData(validations.allDataVerified)
-  // }, [1000])
+  useEffect(() => {
+    const validationsStored = getValidationsFromLocalStorage(patientId)
+
+    if (!isObjectEmpty(validationsStored)) {
+      setDocumentOk(validationsStored.documentOk)
+      setResonDocumentNotOk(validationsStored.resonDocumentNotOk)
+      setIncomeOk(validationsStored.incomeOk)
+      setCheckAllData(validationsStored.allDataVerified)
+    }
+  }, [patientId])
 
   useEffect(() => {
     onChangeValidations({

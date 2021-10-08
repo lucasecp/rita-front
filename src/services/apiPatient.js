@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiPatient = axios.create({
-  baseURL: 'https://patient-qa.cloudsabin.com',
+  baseURL: process.env.REACT_APP_PATIENT_API_HOST,
 })
 
 export default apiPatient

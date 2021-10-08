@@ -54,8 +54,6 @@ function seeOnePatient() {
         setPatientData(response.data)
         setPatientDependents(response.data.dependentes)
         setPatientAddress(response.data.endereco)
-
-        setValidations(getValidationsFromLocalStorage(response.data.idPaciente))
       } catch ({ response }) {
         console.log(response)
       } finally {
@@ -137,9 +135,20 @@ function seeOnePatient() {
         `/paciente/${patientData.idPaciente}/assumir-validacao?forcar=false`
       )
 
+      showMessage(SimpleModal, {
+        type: MODAL_TYPES.SUCCESS,
+        message: 'Validação salva!',
+      })
+
       console.log(response)
     } catch ({ response }) {
       console.log(response)
+
+      showMessage(SimpleModal, {
+        type: MODAL_TYPES.WARNING,
+        message: 'Fulano assumiu a validação desse paciente às 11:00 horas',
+      })
+      // history.push('/autorizacoes/analisar-pacientes')
     }
   }
 
@@ -192,6 +201,7 @@ function seeOnePatient() {
         <AddressSeeOnePatient address={patientAddress} />
         <DocumentsSeeOnePatient documents={patientDocuments} />
         <ValidationSeeOnePatient
+          patientId={patientData.idPaciente}
           validations={validations}
           onChangeValidations={setValidations}
         />
@@ -211,11 +221,3 @@ function seeOnePatient() {
 }
 
 export default seeOnePatient
-
-// {
-//   documentoOk: {
-//     resposta: false,
-//     motivo:'Sei la'
-//   },
-//   rendaBaixa: true,
-// }
