@@ -2,15 +2,14 @@ import React from 'react'
 import MsgError from '../../MsgError'
 import { Container } from './styles'
 
-const InputText = ({ label, setValue, hasError, type, msgError, ...rest }) => {
+const InputText = ({ label, setValue, hasError, type, msgError,variation, ...rest }) => {
   return (
-    <Container>
+    <Container variation={variation}  hasError={hasError}>
       {label && <label htmlFor={label}>{label}</label>}
       <input
         type={type || 'text'}
         id={label}
         onChange={(e) => setValue !== undefined && setValue(e.target.value)}
-        hasError={hasError}
         {...rest}
       />
       {msgError && <MsgError>{msgError}</MsgError>}

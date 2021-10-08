@@ -62,5 +62,25 @@ export const Container = styled.div`
       css`
         border-color: ${colors.orange.light};
       `}
+
+      ${({ variation }) =>
+      variation === 'secondary' &&
+      css`
+        border: none;
+        border-bottom: 2px solid
+          ${({ hasError }) =>
+            hasError ? colors.orange.light : colors.purple.main.middle};
+        border-radius: 0;
+        box-shadow: none;
+        background-color: transparent;
+        :focus,
+        ::after {
+          border: none;
+          border-bottom: 2px solid #419eff;
+          border-color: ${({ hasError }) =>
+            hasError ? colors.orange.light : colors.purple.main.dark};
+        }
+        padding: 5px;
+      `}
   }
 `

@@ -1,10 +1,12 @@
 import { createGlobalStyle } from 'styled-components'
 import colors from './colors'
 import fonts from './fonts'
+import calendar from './components/calendar'
 
 export default createGlobalStyle`
 
   ${fonts}
+  ${calendar}
 
   body,*{
       font-family: "Athletics";

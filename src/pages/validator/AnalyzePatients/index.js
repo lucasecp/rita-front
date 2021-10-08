@@ -1,16 +1,13 @@
+import DefaultLayout from '@/components/Layout/DefaultLayout'
 import React from 'react'
 import { useHistory } from 'react-router'
+import Filter from './Filter'
 
 // import DefaultLayout from '@/components/Layout/DefaultLayout'
 
 import { Container } from './styles'
 
 function AnalyzePatients() {
-  const patients = [
-    { cpf: '00864506112' },
-    { cpf: '71674624115' },
-    { cpf: '01515208109' },
-  ]
 
   const history = useHistory()
 
@@ -19,15 +16,11 @@ function AnalyzePatients() {
   }
 
   return (
-    // <DefaultLayout>
+    <DefaultLayout>
     <Container>
-      {patients.map((patient, index) => (
-        <button key={index} onClick={() => seeOnePatient(patient.cpf)}>
-          {patient.cpf}
-        </button>
-      ))}
+     <Filter/>
     </Container>
-    // </DefaultLayout>
+   </DefaultLayout>
   )
 }
 

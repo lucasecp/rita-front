@@ -5,9 +5,9 @@ import ReactInputMask from 'react-input-mask'
 
 import { Container } from './styles'
 
-function InputMask({ setValue, label,hasError,msgError, ...rest }) {
+function InputMask({ setValue, label,hasError,msgError,variation, ...rest }) {
   return (
-    <Container hasError={hasError}>
+    <Container hasError={hasError} variation={variation}>
       {label && <label htmlFor={label}>{label}</label>}
       <ReactInputMask
         id={label}

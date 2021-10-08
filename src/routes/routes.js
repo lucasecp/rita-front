@@ -14,7 +14,6 @@ import Route from './custom.routes'
 
 import validatorRoutesComponent from './validator/validator.routes'
 import registerRoutesComponent from './register.routes'
-import CustomRangePicker from '@/components/CustomRangePicker'
 
 // import permissions from './permissions'
 // import { useAuth } from '@/context/login'
@@ -32,7 +31,6 @@ function Routes() {
       {validatorRoutesComponent}
 
       <Route exact path="/" component={Header} />
-      <Route path='/teste/calendario' component={CustomRangePicker}/>
 
       <Route path="/master-page" isPrivate component={MasterPage} />
       <Route path="/login" component={Login} />

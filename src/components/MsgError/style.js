@@ -9,4 +9,5 @@ export const Container = styled.p`
   text-align: left;
   color: #df644b;
   margin-top: 6px;
+  margin-bottom: 0
 `;

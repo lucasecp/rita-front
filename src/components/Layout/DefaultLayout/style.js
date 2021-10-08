@@ -17,6 +17,7 @@ export const CustomContainer = styled.div`
   }
   > main {
     grid-area: main;
+    overflow: hidden;
     > h1 {
       font-size: 32px;
       line-height: 39px;

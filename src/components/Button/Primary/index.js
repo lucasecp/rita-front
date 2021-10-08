@@ -2,8 +2,8 @@ import React from 'react'
 
 import { Container } from './styles'
 
-function ButtonPrimary({ children, ...rest }) {
-  return <Container {...rest}>{children}</Container>
+function ButtonPrimary({ children,small, ...rest }) {
+  return <Container {...rest} small>{children}</Container>
 }
 
 export default ButtonPrimary

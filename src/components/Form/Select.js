@@ -9,12 +9,14 @@ const SelectComponent = ({
   value,
   labelDefaultOption,
   msgError,
+  variation,
   ...rest
 }) => {
   return (
-    <Container>
+    <Container >
       <label>{label}</label>
       <Select
+        variation={variation}
         onChange={({ target }) => {
           setValue(target.value)
         }}

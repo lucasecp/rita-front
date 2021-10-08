@@ -3,7 +3,7 @@ import colors from '@/styles/colors'
 
 export const Container = styled.button`
   position: relative;
-  padding: 14px 32px;
+  padding: ${({ small }) => (small ? '10px 16px' : '14px 32px')};
   cursor: pointer;
   font-weight: 400;
   color: ${colors.white};
@@ -20,7 +20,7 @@ export const Container = styled.button`
     color: #fff;
     border-color: #7338cb;
   }
-  
+
   ${({ disabled }) =>
     disabled &&
     css`

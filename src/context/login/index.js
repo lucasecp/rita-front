@@ -3,12 +3,13 @@ import apiUser from '@/services/apiUser'
 import {
   deleteHeaderToken,
   deleteLocalStorage,
+  getHeaderToken,
   getUserStorage,
   setHeaderToken,
   setLocalStorage,
 } from '@/storage/user'
 
-import React, { createContext, useState, useContext } from 'react'
+import React, { createContext, useState, useContext, useEffect } from 'react'
 import { useLoading } from '../useLoading'
 import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
@@ -27,6 +28,11 @@ export default function AuthProvider({ children }) {
 
   const [user, setUser] = useState(getUserStorage() || null)
 
+  useEffect(() => {
+    if(!isAuthorization()) return logout()
+    setDataLogin(getUserStorage())
+    console.log(apiUser.defaults.headers.token);
+  }, []);
 
   const login = async (payload, prevPath) => {
     try {

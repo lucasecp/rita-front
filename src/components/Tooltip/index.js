@@ -1,22 +1,20 @@
-// import React from 'react';
-// import { OverlayTrigger } from 'react-bootstrap';
+import React from 'react';
+import { OverlayTrigger,Tooltip } from 'react-bootstrap';
 
-// const Tooltip = ({children}) => {
-//   return (
-//     <div>
-//     <OverlayTrigger
-//       placement={placement}
-//       overlay={
-//         <Tooltip id={}>
-//           Tooltip on <strong>{placement}</strong>.
-//         </Tooltip>
-//       }
-//     >
-//       {children}
-//     </OverlayTrigger>
-//     </div>
-//   );
-// };
+const CustomTooltip = ({label,children}) => {
+  return (
+    <OverlayTrigger
+      placement='right'
+      overlay={
+        <Tooltip >
+         {label}
+        </Tooltip>
+      }
+    >
+      {children}
+    </OverlayTrigger>
+  );
+};
 
 
-// export default Tooltip;
+export default CustomTooltip;

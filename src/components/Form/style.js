@@ -19,7 +19,6 @@ export const Container = styled.div`
   .form-select:focus {
     box-shadow: unset;
   }
-  
 
   > input {
     color: #6a6a6a;
@@ -63,6 +62,21 @@ export const Container = styled.div`
       css`
         border-color: ${colors.orange.light};
       `}
+
+      ${({variation}) => variation === 'secondary' && css`
+     border: none;
+     border-bottom: 2px solid ${({hasError})=> hasError ?colors.orange.light : colors.purple.main.middle};
+     border-radius: 0;
+     box-shadow: none;
+     background-color: transparent;
+     :focus,::after{
+       border: none;
+       border-bottom: 2px solid #419eff;
+       border-color: ${({hasError}) => hasError ? colors.orange.light: colors.purple.main.dark };
+     }
+     padding: 5px
+  `}
+  
   }
 `
 export const Select = styled(Form.Select)`
@@ -106,6 +120,24 @@ export const Select = styled(Form.Select)`
   ${({ hasError }) =>
     hasError &&
     css`
-      border-color: ${colors.orange.light};
+      border-color: ${colors.orange.light} ;
+    `}
+
+  ${({ variation }) =>
+    variation === 'secondary' &&
+    css`
+      border: none;
+      border-bottom: 2px solid ${({hasError})=> hasError ?colors.orange.light : colors.purple.main.middle};
+      border-radius: 0;
+      box-shadow: none;
+      background-color: transparent;
+      :focus,
+      ::after {
+        border: none;
+        border-bottom: 2px solid #419eff;
+        border-color: ${({ hasError }) =>
+          hasError ? colors.orange.light : colors.purple.main.dark};
+      }
+      padding: 5px;
     `}
 `
