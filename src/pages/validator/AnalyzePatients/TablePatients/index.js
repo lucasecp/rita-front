@@ -7,17 +7,17 @@ import Thead from './Thead'
 
 const TablePatients = ({orders,setOrders}) => {
   const [patients, setPatients] = useState(null);
-  useEffect(() => {
-   const OrderRquest = async () =>{
-     try{
-       const {data} = await apiPatient.get(`/paciente?limit=10&`)
-        setPatients(data)
-     }
-     catch({response}){
-      alert(response)
-     }
-   }
-  }, [orders])
+  // useEffect(() => {
+  //  const OrderRquest = async () =>{
+  //    try{
+  //      const {data} = await apiPatient.get(`/paciente?limit=10&`)
+  //       setPatients(data)
+  //    }
+  //    catch({response}){
+  //     alert(response)
+  //    }
+  //  }
+  // }, [orders])
 
   return (
     <Container>

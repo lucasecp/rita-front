@@ -35,12 +35,12 @@ const Thead = ({ setOrders, orders }) => {
     <thead>
     <tr>
       {_static.map((field) => (
-        <th key={field}>
+        <th key={field.label}>
             <Content>
-            {field}
-            <div onClick={() => handleClick(field)}>
-              <ArrowUp order={hasDescOrder(field)} />
-              <ArrowDown order={hasAscOrder(field)} />
+            {field.label}
+            <div onClick={() => handleClick(field.name)}>
+              <ArrowUp order={hasDescOrder(field.name)} />
+              <ArrowDown order={hasAscOrder(field.name)} />
             </div>
             </Content>
         </th>
