@@ -14,11 +14,6 @@ export const deleteHeaderToken = () => {
 }
 
 export const setHeaderToken = (token) => {
-  console.log(token)
-
-  apiUser.defaults.headers.token = `Bearer ${token}`
-  apiPatient.defaults.headers.token = `Bearer ${token}`
-
-  console.log(apiUser.defaults.headers.token)
-  console.log(apiPatient.defaults.headers.token)
+  apiUser.defaults.headers.token = token
+  apiPatient.defaults.headers.token = token
 }

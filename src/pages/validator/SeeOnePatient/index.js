@@ -125,14 +125,14 @@ function seeOnePatient() {
   }
 
   const onSaveValidations = async () => {
-    localStorage.setItem(
-      `@Rita/Validate/OnePatient/${patientData.idPaciente}`,
-      JSON.stringify(validations)
-    )
-
     try {
       const response = await apiPatient.patch(
         `/paciente/${patientData.idPaciente}/assumir-validacao?forcar=false`
+      )
+
+      localStorage.setItem(
+        `@Rita/Validate/OnePatient/${patientData.idPaciente}`,
+        JSON.stringify(validations)
       )
 
       showMessage(SimpleModal, {
@@ -143,12 +143,14 @@ function seeOnePatient() {
       console.log(response)
     } catch ({ response }) {
       console.log(response)
+      const { message } = response.data
 
       showMessage(SimpleModal, {
         type: MODAL_TYPES.WARNING,
-        message: 'Fulano assumiu a validação desse paciente às 11:00 horas',
+        message,
       })
-      // history.push('/autorizacoes/analisar-pacientes')
+
+      history.push('/autorizacoes/analisar-pacientes')
     }
   }
 

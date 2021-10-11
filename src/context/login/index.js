@@ -14,7 +14,7 @@ import { useLoading } from '../useLoading'
 import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
 import { useHistory } from 'react-router'
-import permissions from '@/routes/permissions'
+import permissions from '@/routes/constants/permissions'
 
 const UserContext = createContext()
 

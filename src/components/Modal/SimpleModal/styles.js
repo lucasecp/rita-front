@@ -17,6 +17,8 @@ export const Container = styled.div`
 
     color: ${colors.gray.dark};
     text-align: center;
+
+    max-width: 522px;
   }
 
   > * + * {
