@@ -7,13 +7,15 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { useModal } from '@/context/useModal'
+import { useLoading } from '@/context/useLoading'
 import apiPatient from '@/services/apiPatient'
-import apiUser from '@/services/apiUser'
 
 import { Container } from './styles'
+import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 
 function ComeBack({ idPatient }) {
-  const { closeModal } = useModal()
+  const { closeModal, showMessage } = useModal()
+  const { Loading } = useLoading()
   const history = useHistory()
 
   const onDoNotConfirmExit = () => {
@@ -21,21 +23,34 @@ function ComeBack({ idPatient }) {
   }
 
   const onConfirmExit = async () => {
-    // console.log(apiPatient.defaults.headers.token)
-    // console.log(apiUser.defaults.headers.token)
-
     try {
+      Loading.turnOn()
+
       const response = await apiPatient.patch(
         `/paciente/${idPatient}/liberar-validacao`
       )
 
-      console.log(response)
+      if (response.status === 200) {
+        if (
+          response.data.mensagem ===
+          'Avaliacão de paciente liberada com sucesso!'
+        ) {
+          history.push('/autorizacoes/analisar-pacientes')
+          closeModal()
+        }
+      }
     } catch ({ response }) {
       console.log(response)
-    }
 
-    history.push('/autorizacoes/analisar-pacientes')
-    closeModal()
+      if (response.status[0] === 5) {
+        showMessage(SimpleModal, {
+          type: MODAL_TYPES.ERROR,
+          message: 'Erro no Servidor!',
+        })
+      }
+    } finally {
+      Loading.turnOff()
+    }
   }
 
   return (

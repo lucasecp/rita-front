@@ -5,7 +5,7 @@ import { Container } from './styles'
 import menuPatient from '../../menuItems/patient'
 import menuValidator from '../../menuItems/validator'
 import { useAuth } from '@/context/login'
-import permission from '@/routes/permissions'
+import permission from '@/routes/constants/permissions'
 function Menu({ expanded }) {
   const {userPermission} = useAuth()
 

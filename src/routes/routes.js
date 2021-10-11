@@ -1,34 +1,33 @@
 import React from 'react'
 import { Switch } from 'react-router-dom'
+
 import Header from '@/components/HeaderTest'
 import Teste from '@/pages/Teste'
 import MasterPage from '@/pages/MasterPage'
 
-import DefinePassoword from '@/pages/DefinePassword'
-import Login from '@/pages/Login'
 import Initial from '@/pages/ForgotPassword/IdentifyPerson'
-import NotFound from '@/pages/404'
 import ConfirmData from '@/pages/ForgotPassword/ConfirmPhoneOrEmail'
+import DefinePassoword from '@/pages/DefinePassword'
+
+import Login from '@/pages/Login'
+import NotFound from '@/pages/404'
 
 import Route from './custom.routes'
 
 import validatorRoutesComponent from './validator/validator.routes'
 import registerRoutesComponent from './register.routes'
 
-// import permissions from './permissions'
-// import { useAuth } from '@/context/login'
+import permissions from './constants/permissions'
+import { useAuth } from '@/context/login'
 
 function Routes() {
-  // const { userPermission } = useAuth()
+  const { userPermission } = useAuth()
 
   return (
     <Switch>
       {registerRoutesComponent}
 
-      {/* {userPermission === permissions.VALIDATOR &&
-        validatorRoutesComponent} */}
-
-      {validatorRoutesComponent}
+      {userPermission === permissions.VALIDATOR && validatorRoutesComponent}
 
       <Route exact path="/" component={Header} />
 
@@ -39,6 +38,7 @@ function Routes() {
       <Route path="/definir-senha" component={DefinePassoword} />
       <Route path="/esqueci-senha/inicio" component={Initial} />
       <Route path="/esqueci-senha/confirmar-dados" component={ConfirmData} />
+      
       <Route path="*" component={NotFound} />
     </Switch>
   )
