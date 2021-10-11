@@ -5,8 +5,10 @@ import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import SelectComponent from '@/components/Form/Select'
 import clearFormat from '@/helpers/clear/SpecialCaracteres'
+import convertDate from '@/helpers/convertDateToIso'
 import React, { useState } from 'react'
 import TablePatients from '../TablePatients'
+import SelectValidator from './SelectValidator'
 import { Container, BtnGroup } from './styles'
 
 const Filter = () => {
@@ -17,6 +19,7 @@ const Filter = () => {
   const [status, setStatus] = useState('')
   const [errors, setErrors] = useState({})
   const [orders, setOrders] = useState([])
+  const [filters, setFilters] = useState([]);
 
   const typedData = () => {
     return dates.length || clearFormat(cpf) || name || validator || status
@@ -24,7 +27,7 @@ const Filter = () => {
   const validateFields = () =>{
     const newErrors = {}
     const newCpf = String(clearFormat(cpf)).trim()
-    const newName = String(clearFormat(cpf)).trim()
+    const newName = String(name).trim()
 
     if(newCpf.length < 3 && newCpf){
       newErrors.cpf = 'Informe 3 dígitos ou mais'
@@ -43,17 +46,32 @@ const Filter = () => {
    setDates([])
    setErrors({})
    setOrders([])
+   setFilters([])
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
      if(Object.keys(validateFields()).length) return
 
+     const dataValues = [
+       {name: 'nome',value: name},
+       {name: 'cpf',value: clearFormat(cpf)},
+       {name: 'status',value: status},
+       {name: 'dataCadastroInicio',value: convertDate(dates[0])},
+       {name: 'dataCadastroFim',value: convertDate(dates[1])},
+       {name: 'idValidador',value: validator},
+
+    ]
+     setFilters(verifyTypedFields(dataValues))
+  }
+
+  const verifyTypedFields = (fields) =>{
+    return fields.filter(field=> field.value)
   }
 
   return (
     <>
     <Container>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <div>
           <CustomRangePicker
             label="Período do Cadastro: "
@@ -78,12 +96,9 @@ const Filter = () => {
             hasError={errors.name}
             msgError={errors.name}
           />
-          <SelectComponent
-            variation="secondary"
-            labelDefaultOption="Todos"
-            label="Validador:"
-            setValue={setValidator}
-            value={validator}
+          <SelectValidator
+            setValidator={setValidator}
+            validator={validator}
           />
           <SelectComponent
             variation="secondary"
@@ -91,6 +106,7 @@ const Filter = () => {
             label="Status:"
             value={status}
             setValue={setStatus}
+            options={[{label: 'Pendente',value: 'P'},{label: 'Em análise',value: 'AN'},{label: 'Aprovado',value: 'A'},{label: 'Negado',value: 'N'}]}
           />
         </div>
       { typedData() &&  <BtnGroup>
@@ -103,7 +119,7 @@ const Filter = () => {
         </BtnGroup>}
       </form>
     </Container>
-    <TablePatients orders={orders} setOrders={setOrders}/>
+    <TablePatients orders={orders} setOrders={setOrders} filters={filters}/>
     </>
   )
 }

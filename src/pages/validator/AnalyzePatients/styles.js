@@ -5,4 +5,7 @@ export const Container = styled.div`
   padding: 32px;
   border-radius: 8px;
   position: relative;
+  @media(max-width: 767px){
+    padding: 25px 24px
+  }
 `
