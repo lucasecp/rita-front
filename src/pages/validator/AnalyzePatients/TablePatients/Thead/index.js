@@ -36,7 +36,7 @@ const Thead = ({ setOrders, orders }) => {
             </div>
             </Content>
         </th>
-      ))}
+      ))} 
     </tr>
     </thead>
   )

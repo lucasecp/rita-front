@@ -1,38 +1,42 @@
+import useQuery from '@/hooks/useQuery';
 import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 import SelectComponent from '../Form/Select';
-import _static from './static';
+import options from './static';
 import {Container,Prev,Next} from './style'
 
 
-const Pagination = ({api,total}) => {
-  const [limit, setLimit] = useState(10)
-  const [currentPage, setCurrentPage] = useState(1)
-  const location = useLocation()
+const Pagination = ({total,restQuery,range,setQuery}) => {
   const history = useHistory()
+  const query = useQuery()
+  const [limit, setLimit] = useState(Number(query.get('limit')) || 10)
+  const [currentPage, setCurrentPage] = useState(Number(query.get('page')) || 1)
 
   const totalPages = Math.ceil(total / limit)
+  const queryString = `?page=${currentPage}&limit=${limit}${restQuery || ''}`
+  const queryApiString = `?limit=${limit}&skip=${(currentPage - 1) * limit}`
 
   useEffect(() => {
-   console.log(currentPage);
-  }, [limit]);
+    history.push(queryString)
+    setQuery(queryApiString)
+  }, [limit,currentPage,restQuery]);
 
 
   const hadleChange = ({target}) =>{
   setLimit(target.value)
-
+  setQuery(queryApiString)
   }
 
   const prevPage = () =>{
     if(currentPage === 1) return
     setCurrentPage(currentPage - 1)
-    history.push(`?page=${currentPage - 1}&limit=${limit}`)
+    setQuery(queryApiString)
   }
 
   const nextPage = () =>{
     if(currentPage === totalPages) return
     setCurrentPage(currentPage + 1)
-    history.push(`?page=${currentPage + 1}&limit=${limit}`)
+    setQuery(queryApiString)
   }
 
   return (
@@ -40,7 +44,7 @@ const Pagination = ({api,total}) => {
       <div>
       <span>Linhas por página:</span>
       <SelectComponent
-      options={_static}
+      options={options(range || 10)}
       value={limit}
       onChange={hadleChange}
       variation='secondary'
@@ -48,8 +52,7 @@ const Pagination = ({api,total}) => {
       </div>
 
       <div>
-       {currentPage} - {totalPages}
-        de {total}
+       {currentPage} - {totalPages} de {total}
       </div>
 
       <div>

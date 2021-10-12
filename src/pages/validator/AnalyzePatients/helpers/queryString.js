@@ -1,3 +1,5 @@
+
+
 export const queryOrderString = (array) => {
   let valueString = ''
 
@@ -12,7 +14,7 @@ export const queryOrderString = (array) => {
 export const queryFilterString = (array) => {
   let valueString = ''
 
-  if (!array.length) return ''
+  if (!array.length) return '&status=P'
 
   for (let i = 0; i < array.length; i++) {
     valueString += `&${array[i].name}=${array[i].value}`

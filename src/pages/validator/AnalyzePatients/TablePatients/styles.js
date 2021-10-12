@@ -25,6 +25,16 @@ export const Container = styled.div`
     margin-right: -32px;
     padding-right: 32px;
   }
+  + div{
+    padding: 37px 32px;
+    background-color: #fff;
+    margin: 0 -32px;
+    border-radius: 0 0 8px 8px;
+    @media(max-width: 767px){
+    margin: 0 -24px;
+    padding: 32px 24px
+  }
+  }
   @media(max-width: 767px){
     margin: 0 -24px;
     padding: 0px 24px

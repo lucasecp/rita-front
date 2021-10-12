@@ -18,6 +18,16 @@ export const Container = styled.div`
       min-width: 55px;
       margin-left: 16px;
     }
+    @media(max-width: 767px){
+     :first-child{
+       flex-direction: column;
+       align-items: stretch;
+       select {
+      margin-left: 0px;
+      min-width: 100%;
+    }
+     }
+  }
   }
 `
 export const Next = styled.button`
