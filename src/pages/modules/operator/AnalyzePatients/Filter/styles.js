@@ -10,7 +10,7 @@ export const Container = styled.header`
     gap: 24px;
 
     @media (max-width: 1200px) {
-      grid-template-columns: repeat(3, auto);
+      grid-template-columns: repeat(4, auto);
     }
     @media (max-width: 991px) {
       grid-template-columns: repeat(2, auto);
@@ -26,5 +26,12 @@ export const BtnGroup = styled.div`
   justify-content:flex-end ;
   button:first-child{
     margin-right: 24px;
+  }
+  @media(max-width: 540px){
+    flex-direction: column;
+    button:first-child{
+      margin-right: 0;
+      margin-bottom: 24px;
+    }
   }
 `

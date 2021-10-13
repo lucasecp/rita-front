@@ -8,18 +8,19 @@ import Filter from './Filter'
 import { Container } from './styles'
 
 function AnalyzePatients() {
+
   const history = useHistory()
 
   const seeOnePatient = (cpf) => {
-    history.push('/pacientes/ver-paciente', { cpf })
+    history.push('/autorizacoes/ver-paciente', { cpf })
   }
 
   return (
     <DefaultLayout>
-      <Container>
-        <Filter />
-      </Container>
-    </DefaultLayout>
+    <Container>
+     <Filter/>
+    </Container>
+   </DefaultLayout>
   )
 }
 

@@ -130,8 +130,6 @@ const Filter = () => {
               options={[
                 { label: 'Pendente', value: 'P' },
                 { label: 'Em análise', value: 'EA' },
-                { label: 'Aprovado', value: 'A' },
-                { label: 'Negado', value: 'N' },
               ]}
             />
           </div>

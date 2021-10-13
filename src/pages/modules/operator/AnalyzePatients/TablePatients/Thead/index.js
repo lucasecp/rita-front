@@ -5,30 +5,22 @@ import { ArrowDown, ArrowUp,Content } from './styles'
 const Thead = ({ setOrders, orders }) => {
 
   const hasDescOrder = (name) =>
-    orders.some((obj) => obj.name === name && obj.order === 'DESC')
+    orders.some((obj) => obj.name === name && obj.value === 'DESC')
 
   const hasAscOrder = (name) =>
-    orders.some((obj) => obj.name === name && obj.order === 'ASC')
-
-  const updateOrder = (value) => {
-   const valueUpdated = orders.reduce((ac,obj,i)=>{
-     if(obj.name === value.name && value.order !== obj.order) {
-      ac.splice(i,1)
-      return ac
-      }
-     ac.push(obj)
-     return ac
-    },[]
-    )
-    setOrders([...valueUpdated,value])
-  }
-
+    orders.some((obj) => obj.name === name && obj.value === 'ASC')
   const handleClick = (name) => {
+
+    if(hasDescOrder(name)) {
+     return setOrders([])
+    }
+
     if (hasDescOrder(name) || !hasAscOrder(name) || !orders.length) {
-      updateOrder({ name, order: 'ASC' })
+      setOrders([{ name, value: 'ASC' }])
       return
     }
-    updateOrder({ name, order: 'DESC' })
+
+    setOrders([{ name, value: 'DESC' }])
   }
 
   return (
@@ -39,8 +31,8 @@ const Thead = ({ setOrders, orders }) => {
             <Content>
             {field.label}
             <div onClick={() => handleClick(field.name)}>
-              <ArrowUp order={hasDescOrder(field.name)} />
-              <ArrowDown order={hasAscOrder(field.name)} />
+              <ArrowUp order={hasAscOrder(field.name)} />
+              <ArrowDown order={hasDescOrder(field.name)} />
             </div>
             </Content>
         </th>

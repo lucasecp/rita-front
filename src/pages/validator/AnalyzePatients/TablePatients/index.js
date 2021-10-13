@@ -14,6 +14,7 @@ import { queryOrderString, queryFilterString } from '../helpers/queryString'
 import RecordAlreadyAnalized from './messages/error/RecordAlreadyAnalyzed'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
+import Generic from './messages/error/Generic'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
   const query = useQuery()
@@ -63,19 +64,29 @@ const TablePatients = ({ orders, setOrders, filters }) => {
       Loading.turnOn()
 
       const response = await apiPatient.patch(
-        `/paciente/${id}/assumir-validacao`,{forcar: false}
+        `/paciente/${id}/assumir-validacao?forcar=false`
       )
       if (response.status === 200) {
         history.push('/autorizacoes/ver-paciente', { cpf })
       }
-    } catch ({response}) {
-      if (response.status === 400) {
-        showMessage(RecordAlreadyAnalized, { message: response.data.message, cpf })
+    } catch ({ response }) {
+      const responseApi = response.data
+      if (
+        response.status === 400 &&
+        responseApi.message ===
+          'Atenção Este registro está sendo analisado por outro validador.'
+      ) {
+     return showMessage(RecordAlreadyAnalized, {
+          validator: responseApi.validador,
+          date: responseApi.data,
+          id,
+          cpf,
+        })
       }
+      return showMessage(Generic, responseApi.message)
     } finally {
       Loading.turnOff()
     }
-
   }
 
   return (
@@ -84,34 +95,35 @@ const TablePatients = ({ orders, setOrders, filters }) => {
         <table cellSpacing="0">
           <Thead setOrders={setOrders} orders={orders} />
           <tbody>
-            {patients?.dados?.length !== 0 && patients?.dados?.map((patient) => (
-              <tr
-                key={patient.idPaciente}
-                onClick={() => handleClick(patient.idPaciente, patient.cpf)}
-              >
-                <Td soft>{formatBirthdate(patient.dataFiliacao) || '-'}</Td>
-                <Td strong id="patient-name">
-                  <CustomTooltip
-                    label={convertToCaptalize(patient.nome) || '-'}
-                  >
-                    <div>
-                      {convertToCaptalize(formatName(patient.nome)) || '-'}
-                    </div>
-                  </CustomTooltip>
-                </Td>
-                <Td strong>{patient.cpf || '-'}</Td>
-                <Td soft>{patient.validador?.nome || '-'}</Td>
-                <Td soft>{formatBirthdate(patient.dataValidacao) || '-'}</Td>
-                <Td status={showStatus(patient.status)}>
-                  <span>{showStatus(patient.status) || '-'}</span>
-                </Td>
-              </tr>
-            ))}
+            {patients?.dados?.length !== 0 &&
+              patients?.dados?.map((patient) => (
+                <tr
+                  key={patient.idPaciente}
+                  onClick={() => handleClick(patient.idPaciente, patient.cpf)}
+                >
+                  <Td soft>{formatBirthdate(patient.dataFiliacao) || '-'}</Td>
+                  <Td strong id="patient-name">
+                    <CustomTooltip
+                      label={convertToCaptalize(patient.nome) || '-'}
+                    >
+                      <div>
+                        {convertToCaptalize(formatName(patient.nome)) || '-'}
+                      </div>
+                    </CustomTooltip>
+                  </Td>
+                  <Td strong>{patient.cpf || '-'}</Td>
+                  <Td soft>{patient.validador?.nome || '-'}</Td>
+                  <Td soft>{formatBirthdate(patient.dataValidacao) || '-'}</Td>
+                  <Td status={showStatus(patient.status)}>
+                    <span>{showStatus(patient.status) || '-'}</span>
+                  </Td>
+                </tr>
+              ))}
             {!patients?.total && (
               <tr>
-              <td colSpan="6">
-                <NotFound>Nenhum resultado encontrado.</NotFound>
-              </td>
+                <td colSpan="6">
+                  <NotFound>Nenhum resultado encontrado.</NotFound>
+                </td>
               </tr>
             )}
           </tbody>
