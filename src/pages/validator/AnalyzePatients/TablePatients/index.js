@@ -6,32 +6,44 @@ import formatBirthdate from '@/helpers/formatBirthdate'
 import formatName from '@/helpers/formatName'
 import useQuery from '@/hooks/useQuery'
 import apiPatient from '@/services/apiPatient'
+import { getUserStorage, setHeaderToken } from '@/storage/user'
+import { useModal } from '@/context/useModal'
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router'
 import { queryOrderString, queryFilterString } from '../helpers/queryString'
+import RecordAlreadyAnalized from './messages/error/RecordAlreadyAnalyzed'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
   const query = useQuery()
+  const history = useHistory()
   const initialQuery = `?limit=${Number(query.get('limit')) || '10'}&skip=${
     (Number(query.get('page')) - 1) * Number(query.get('limit')) || '0'
   }`
 
-  const [patients, setPatients] = useState([])
+  const [patients, setPatients] = useState({})
   const { Loading } = useLoading()
   const [queryPagination, setQueryPagination] = useState(initialQuery)
+  const { showMessage } = useModal()
 
   useEffect(() => {
+    setHeaderToken(getUserStorage().token)
     const requestFilters = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get(
+        const response = await apiPatient.get(
           `/paciente${queryPagination}${queryOrderString(
             orders
           )}${queryFilterString(filters)}`
         )
-        setPatients(data)
+        if (response.status === 200) {
+          setPatients(response.data)
+        }
       } catch ({ response }) {
+        if (response.status === 401) {
+          return history.push('/login')
+        }
       } finally {
         Loading.turnOff()
       }
@@ -46,35 +58,25 @@ const TablePatients = ({ orders, setOrders, filters }) => {
     if (status === 'EA') return 'Em analise'
   }
 
-  const handleClick = async (id) => {
+  const handleClick = async (id, cpf) => {
     try {
       Loading.turnOn()
 
-      const response = await apiPatient.patch(`/paciente/${id}/assumir-validacao`)
-
-      // remove when finished configuring API responses
-      console.log(response)
-
+      const response = await apiPatient.patch(
+        `/paciente/${id}/assumir-validacao`,{forcar: false}
+      )
       if (response.status === 200) {
-        if (response.data.mensagem === 'Message From Api') {
-          // Actions
-        }
+        history.push('/autorizacoes/ver-paciente', { cpf })
       }
-    } catch ({ response }) {
-      // remove when finished configuring API responses
-      console.log(response)
-        if (response.status === 401) {
-          // Actions to 401 Error
-        }
-
-      if (response.status[0] === 5) {
-
+    } catch ({response}) {
+      if (response.status === 400) {
+        showMessage(RecordAlreadyAnalized, { message: response.data.message, cpf })
       }
     } finally {
       Loading.turnOff()
     }
-  }
 
+  }
 
   return (
     <>
@@ -82,8 +84,11 @@ const TablePatients = ({ orders, setOrders, filters }) => {
         <table cellSpacing="0">
           <Thead setOrders={setOrders} orders={orders} />
           <tbody>
-            {patients.dados?.map((patient, index) => (
-              <tr key={index} onClick={()=> handleClick(patient.id)}>
+            {patients?.dados?.length !== 0 && patients?.dados?.map((patient) => (
+              <tr
+                key={patient.idPaciente}
+                onClick={() => handleClick(patient.idPaciente, patient.cpf)}
+              >
                 <Td soft>{formatBirthdate(patient.dataFiliacao) || '-'}</Td>
                 <Td strong id="patient-name">
                   <CustomTooltip
@@ -95,26 +100,27 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                   </CustomTooltip>
                 </Td>
                 <Td strong>{patient.cpf || '-'}</Td>
-                <Td soft>{patient.validador || '-'}</Td>
+                <Td soft>{patient.validador?.nome || '-'}</Td>
                 <Td soft>{formatBirthdate(patient.dataValidacao) || '-'}</Td>
-                <Td status={showStatus(patient.status) || '-'}>
+                <Td status={showStatus(patient.status)}>
                   <span>{showStatus(patient.status) || '-'}</span>
                 </Td>
               </tr>
             ))}
-            {patients.total === 0 && (
+            {!patients?.total && (
+              <tr>
               <td colSpan="6">
                 <NotFound>Nenhum resultado encontrado.</NotFound>
               </td>
+              </tr>
             )}
           </tbody>
         </table>
       </Container>
       <Pagination
-        total={patients.total}
+        total={patients?.total}
         setQuery={setQueryPagination}
-        restQuery={queryFilterString(filters) + queryOrderString(orders)
-        }
+        restQuery={queryFilterString(filters) + queryOrderString(orders)}
       />
     </>
   )

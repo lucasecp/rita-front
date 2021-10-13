@@ -9,12 +9,14 @@ import convertDate from '@/helpers/convertDateToIso'
 import useQuery from '@/hooks/useQuery'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router'
 import TablePatients from '../TablePatients'
 import SelectValidator from './SelectValidator'
 import { Container, BtnGroup } from './styles'
 
 const Filter = () => {
   const query = useQuery()
+  const history = useHistory()
   const DATES =
   !query.get('dataCadastroInicio') ||
   !query.get('dataCadastroFim')
@@ -73,11 +75,13 @@ const Filter = () => {
     setErrors({})
     setOrders([])
     setFilters([])
+    history.push('?page=1&limit=10&status=P')
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (Object.keys(validateFields()).length) return
 
+    history.push('?page=1&limit=10&status=P')
     setFilters(verifyTypedFields(objQuery))
   }
 
