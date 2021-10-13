@@ -23,9 +23,9 @@ const SelectComponent = ({
         value={value || ''}
         {...rest}
       >
-        <option value="" disabled>
+       {labelDefaultOption && <option value="" disabled>
           {labelDefaultOption}
-        </option>
+        </option>}
         {options?.map((option, index) => (
           <option value={option.value} key={index}>
             {option.label}

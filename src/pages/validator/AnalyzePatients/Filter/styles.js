@@ -27,4 +27,11 @@ export const BtnGroup = styled.div`
   button:first-child{
     margin-right: 24px;
   }
+  @media(max-width: 540px){
+    flex-direction: column;
+    button:first-child{
+      margin-right: 0;
+      margin-bottom: 24px;
+    }
+  }
 `
