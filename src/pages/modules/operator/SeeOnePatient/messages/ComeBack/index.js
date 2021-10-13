@@ -35,7 +35,7 @@ function ComeBack({ idPatient }) {
           response.data.mensagem ===
           'Avaliacão de paciente liberada com sucesso!'
         ) {
-          history.push('/autorizacoes/analisar-pacientes')
+          history.push('/pacientes/analisar-pacientes')
           closeModal()
         }
       }

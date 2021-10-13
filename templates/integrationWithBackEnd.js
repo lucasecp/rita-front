@@ -15,13 +15,13 @@
     // remove when finished configuring API responses
     console.log(response)
 
-    if (response.status[0] === 4) {
+    if (response.status.toString()[0] === '4') {
       if (response.status === 401) {
         // Actions to 401 Error
       }
     }
 
-    if (response.status[0] === 5) {
+    if (response.status.toString()[0] === '5') {
       showMessage(SimpleModal, {
         type: MODAL_TYPES.ERROR,
         message: 'Erro no Servidor!',

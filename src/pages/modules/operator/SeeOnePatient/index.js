@@ -26,7 +26,7 @@ function seeOnePatient() {
   const { showMessage } = useModal()
 
   if (!location.state) {
-    history.push('/autorizacoes/analisar-pacientes')
+    history.push('/pacientes/analisar-pacientes')
     return null
   }
 
@@ -142,33 +142,17 @@ function seeOnePatient() {
 
       console.log(response)
     } catch ({ response }) {
-      if (response.status.toString()[0] === '4') {
-        if (
-          response.data.message ===
-          'Atenção Este registro está sendo analisado por outro validador.'
-        ) {
-          showMessage(SimpleModal, {
-            type: MODAL_TYPES.SUCCESS,
-            message: (
-              <>
-                Este registro está sendo analisado pelo validador{' '}
-                {response.data.validador} desde {response.data.data}.<br />
-                Suas alterações não foram salvas
-              </>
-            ),
-          })
-        }
-      }
+      console.log(response)
+      const { message } = response.data
 
-      if (response.status.toString()[0] === '5') {
-        showMessage(SimpleModal, {
-          type: MODAL_TYPES.ERROR,
-          message: 'Erro no Servidor!',
-        })
-      }
+      showMessage(SimpleModal, {
+        type: MODAL_TYPES.WARNING,
+        message,
+      })
+
+      history.push('/pacientes/analisar-pacientes')
     } finally {
       Loading.turnOff()
-      history.push('/autorizacoes/analisar-pacientes')
     }
   }
 
@@ -188,49 +172,23 @@ function seeOnePatient() {
       )
 
       if (response.status === 201) {
-        // if (response.data.mensagem === '"Validação concluída!"') {
         if (response.data.mensagem === 'Validacao efetuada com sucesso.') {
           showMessage(SimpleModal, {
             type: MODAL_TYPES.SUCCESS,
             message: 'Validação concluída!',
           })
+
+          history.push('/pacientes/analisar-pacientes')
         }
       }
       console.log(response)
     } catch ({ response }) {
       console.log(response)
-      if (response.status.toString()[0] === '4') {
-        if (
-          response.data.message ===
-          'Atenção Este registro está sendo analisado por outro validador.'
-        ) {
-          showMessage(SimpleModal, {
-            type: MODAL_TYPES.SUCCESS,
-            message: (
-              <>
-                Este registro está sendo analisado pelo validador{' '}
-                {response.data.validador} desde {response.data.data}.<br />
-                Suas alterações não foram salvas
-              </>
-            ),
-          })
-        }
-      }
-
-      if (response.status.toString()[0] === '5') {
-        showMessage(SimpleModal, {
-          type: MODAL_TYPES.ERROR,
-          message: 'Erro no Servidor!',
-        })
-      }
-    } finally {
-      history.push('/autorizacoes/analisar-pacientes')
-      Loading.turnOff()
     }
   }
 
   return (
-    <DefaultLayout title="Autorizações">
+    <DefaultLayout title="Pacientes">
       <Container>
         <PersonExpandable
           title="Dados cadastrais do titular"
@@ -252,14 +210,8 @@ function seeOnePatient() {
           onChangeValidations={setValidations}
         />
         <footer>
-          <ButtonLink onClick={onComeBack}>Voltar</ButtonLink>
-          <OutlineButton onClick={onSaveValidations}>Salvar</OutlineButton>
-          <ButtonPrimary
-            onClick={onFinishValidations}
-            disabled={disableFinishButton}
-          >
-            Concluir
-          </ButtonPrimary>
+          <ButtonLink onClick={null}>Voltar</ButtonLink>
+          <OutlineButton onClick={null}>Salvar</OutlineButton>
         </footer>
       </Container>
     </DefaultLayout>
