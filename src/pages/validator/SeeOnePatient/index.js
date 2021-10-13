@@ -149,7 +149,13 @@ function seeOnePatient() {
         ) {
           showMessage(SimpleModal, {
             type: MODAL_TYPES.SUCCESS,
-            message: `Este registro está sendo analisado pelo validador ${response.data.validador} desde ${response.data.data}. Suas alterações não foram salvas`,
+            message: (
+              <>
+                Este registro está sendo analisado pelo validador{' '}
+                {response.data.validador} desde {response.data.data}.<br />
+                Suas alterações não foram salvas
+              </>
+            ),
           })
         }
       }
@@ -200,7 +206,13 @@ function seeOnePatient() {
         ) {
           showMessage(SimpleModal, {
             type: MODAL_TYPES.SUCCESS,
-            message: `Este registro está sendo analisado pelo validador ${response.data.validador} desde ${response.data.data}. Suas alterações não foram salvas`,
+            message: (
+              <>
+                Este registro está sendo analisado pelo validador{' '}
+                {response.data.validador} desde {response.data.data}.<br />
+                Suas alterações não foram salvas
+              </>
+            ),
           })
         }
       }

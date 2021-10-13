@@ -27,6 +27,7 @@ export const Container = styled.div`
       line-height: 150%;
 
       color: ${colors.purple.main.dark};
+      word-break: break-all;
     }
   }
 

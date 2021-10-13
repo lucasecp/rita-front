@@ -1,5 +1,4 @@
-import isObjectEmpty from '@/helpers/isEmpty'
-import React, { useEffect } from 'react'
+import React from 'react'
 import SeeDocumentFile from './SeeDocumentFile'
 
 import { Container } from './styles'
