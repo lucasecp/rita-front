@@ -15,6 +15,8 @@ import NotFound from '@/pages/404'
 import Route from './custom.routes'
 
 import validatorRoutesComponent from './validator/validator.routes'
+import operatorRoutesComponent from './operator/operator.routes'
+
 import registerRoutesComponent from './register.routes'
 
 import permissions from './constants/permissions'
@@ -29,6 +31,10 @@ function Routes() {
 
       {userPermission === permissions.VALIDATOR && validatorRoutesComponent}
 
+      {/* {userPermission === permissions.OPERATOR && operatorRoutesComponent} */}
+
+      {operatorRoutesComponent}
+
       <Route exact path="/" component={Header} />
 
       <Route path="/master-page" isPrivate component={MasterPage} />
@@ -38,7 +44,7 @@ function Routes() {
       <Route path="/definir-senha" component={DefinePassoword} />
       <Route path="/esqueci-senha/inicio" component={Initial} />
       <Route path="/esqueci-senha/confirmar-dados" component={ConfirmData} />
-      
+
       <Route path="*" component={NotFound} />
     </Switch>
   )

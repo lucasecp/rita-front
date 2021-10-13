@@ -11,6 +11,9 @@ const Header = () => {
         <Link to="/autorizacoes/analisar-pacientes2">
           Analisar Pacientes Temporário
         </Link>
+        <Link to="/pacientes/analisar-pacientes2">
+          Operador Visualiza Pacientes Que Já Foram Validados
+        </Link>
       </nav>
     </HeaderLayout>
   )
