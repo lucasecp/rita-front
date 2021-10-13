@@ -42,7 +42,7 @@ function ComeBack({ idPatient }) {
     } catch ({ response }) {
       console.log(response)
 
-      if (response.status[0] === 5) {
+      if (response.status.toString()[0] === '5') {
         showMessage(SimpleModal, {
           type: MODAL_TYPES.ERROR,
           message: 'Erro no Servidor!',

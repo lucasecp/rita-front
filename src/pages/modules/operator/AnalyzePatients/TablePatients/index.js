@@ -1,12 +1,12 @@
 import CustomTooltip from '@/components/Tooltip'
-import formateName from '@/helpers/formateName'
+import formateName from '@/helpers/formatName'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
 import { Container, Td } from './styles'
 import Thead from './Thead'
 
-const TablePatients = ({orders,setOrders}) => {
-  const [patients, setPatients] = useState(null);
+const TablePatients = ({ orders, setOrders }) => {
+  const [patients, setPatients] = useState(null)
   // useEffect(() => {
   //  const OrderRquest = async () =>{
   //    try{
@@ -28,13 +28,17 @@ const TablePatients = ({orders,setOrders}) => {
             <Td soft>22/09/2021 - 18:07</Td>
             <Td strong id="patient-name">
               <CustomTooltip label="Alice Nogueira da Silva Pereiraaaaaaaaaaaaaaaaa">
-                <div>{formateName('Alice Nogueira da Silva PereiraaaaaaaEFGHJKLPaaaaaaaaaa')}</div>
+                <div>
+                  {formateName(
+                    'Alice Nogueira da Silva PereiraaaaaaaEFGHJKLPaaaaaaaaaa'
+                  )}
+                </div>
               </CustomTooltip>
             </Td>
             <Td strong>218.537.546-68</Td>
             <Td soft>Rogério Cerqueira</Td>
             <Td soft>22/09/2021 - 18:56</Td>
-            <Td status='Negado'>
+            <Td status="Negado">
               <span>Negado</span>
             </Td>
           </tr>

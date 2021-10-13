@@ -142,13 +142,24 @@ function seeOnePatient() {
 
       console.log(response)
     } catch ({ response }) {
-      console.log(response)
-      const { message } = response.data
+      if (response.status.toString()[0] === '4') {
+        if (
+          response.data.message ===
+          'Atenção Este registro está sendo analisado por outro validador.'
+        ) {
+          showMessage(SimpleModal, {
+            type: MODAL_TYPES.SUCCESS,
+            message: `Este registro está sendo analisado pelo validador ${response.data.validador} desde ${response.data.data}. Suas alterações não foram salvas`,
+          })
+        }
+      }
 
-      showMessage(SimpleModal, {
-        type: MODAL_TYPES.WARNING,
-        message,
-      })
+      if (response.status.toString()[0] === '5') {
+        showMessage(SimpleModal, {
+          type: MODAL_TYPES.ERROR,
+          message: 'Erro no Servidor!',
+        })
+      }
     } finally {
       Loading.turnOff()
       history.push('/autorizacoes/analisar-pacientes')
@@ -182,10 +193,24 @@ function seeOnePatient() {
       console.log(response)
     } catch ({ response }) {
       console.log(response)
-      showMessage(SimpleModal, {
-        type: MODAL_TYPES.SUCCESS,
-        message: response.data.mensagem,
-      })
+      if (response.status.toString()[0] === '4') {
+        if (
+          response.data.message ===
+          'Atenção Este registro está sendo analisado por outro validador.'
+        ) {
+          showMessage(SimpleModal, {
+            type: MODAL_TYPES.SUCCESS,
+            message: `Este registro está sendo analisado pelo validador ${response.data.validador} desde ${response.data.data}. Suas alterações não foram salvas`,
+          })
+        }
+      }
+
+      if (response.status.toString()[0] === '5') {
+        showMessage(SimpleModal, {
+          type: MODAL_TYPES.ERROR,
+          message: 'Erro no Servidor!',
+        })
+      }
     } finally {
       history.push('/autorizacoes/analisar-pacientes')
       Loading.turnOff()

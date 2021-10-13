@@ -50,7 +50,9 @@ const TablePatients = ({ orders, setOrders, filters }) => {
     try {
       Loading.turnOn()
 
-      const response = await apiPatient.patch(`/paciente/${id}/assumir-validacao`)
+      const response = await apiPatient.patch(
+        `/paciente/${id}/assumir-validacao`
+      )
 
       // remove when finished configuring API responses
       console.log(response)
@@ -63,18 +65,16 @@ const TablePatients = ({ orders, setOrders, filters }) => {
     } catch ({ response }) {
       // remove when finished configuring API responses
       console.log(response)
-        if (response.status === 401) {
-          // Actions to 401 Error
-        }
+      if (response.status === 401) {
+        // Actions to 401 Error
+      }
 
-      if (response.status[0] === 5) {
-
+      if (response.status.toString()[0] === '5') {
       }
     } finally {
       Loading.turnOff()
     }
   }
-
 
   return (
     <>
@@ -83,7 +83,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
           <Thead setOrders={setOrders} orders={orders} />
           <tbody>
             {patients.dados?.map((patient, index) => (
-              <tr key={index} onClick={()=> handleClick(patient.id)}>
+              <tr key={index} onClick={() => handleClick(patient.id)}>
                 <Td soft>{formatBirthdate(patient.dataFiliacao) || '-'}</Td>
                 <Td strong id="patient-name">
                   <CustomTooltip
@@ -113,8 +113,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
       <Pagination
         total={patients.total}
         setQuery={setQueryPagination}
-        restQuery={queryFilterString(filters) + queryOrderString(orders)
-        }
+        restQuery={queryFilterString(filters) + queryOrderString(orders)}
       />
     </>
   )
