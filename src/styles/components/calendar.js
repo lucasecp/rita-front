@@ -96,4 +96,10 @@ export default css`
   .ant-picker-cell-inner::before,.ant-picker-cell-inner::after{
    display: none;
   }
+  @media(max-width:768px){
+    .ant-picker-panels{
+      flex-direction: column;
+    }
+
+  }
 `

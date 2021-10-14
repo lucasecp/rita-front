@@ -17,6 +17,7 @@ import Generic from './messages/error/Generic'
 import { LOGIN, VALIDATOR_SEE_ONE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import formatCpf from '@/helpers/formatCpf'
+import formatFistLastName from '@/helpers/formatFistLastName'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
   const query = useQuery()
@@ -114,7 +115,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                     </CustomTooltip>
                   </Td>
                   <Td strong>{ formatCpf(patient.cpf) || '-'}</Td>
-                  <Td soft>{patient.validador?.nome || '-'}</Td>
+                  <Td soft>{formatFistLastName(patient.validador?.nome) || '-'}</Td>
                   <Td soft>{formateDateAndHour(patient.dataValidacao) || '-'}</Td>
                   <Td status={showStatus(patient.status)}>
                     <span>{showStatus(patient.status) || '-'}</span>
