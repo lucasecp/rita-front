@@ -3,7 +3,6 @@ import apiUser from '@/services/apiUser'
 import {
   deleteHeaderToken,
   deleteLocalStorage,
-  getHeaderToken,
   getUserStorage,
   setHeaderToken,
   setLocalStorage,
@@ -33,7 +32,6 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     if(!isAuthorization()) return logout()
     setDataLogin(getUserStorage())
-    console.log(apiUser.defaults.headers.token);
   }, []);
 
   const login = async (payload, prevPath) => {

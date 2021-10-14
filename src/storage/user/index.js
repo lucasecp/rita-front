@@ -9,8 +9,8 @@ export const setLocalStorage = (payload) => {
 export const deleteLocalStorage = () => localStorage.removeItem('user')
 
 export const deleteHeaderToken = () => {
-  delete apiUser.defaults.headers.common.token
-  delete apiPatient.defaults.headers.common.token
+  delete apiUser.defaults.headers.token
+  delete apiPatient.defaults.headers.token
 }
 
 export const setHeaderToken = (token) => {

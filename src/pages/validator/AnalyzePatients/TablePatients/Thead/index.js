@@ -31,12 +31,12 @@ const Thead = ({ setOrders, orders }) => {
             <Content>
             {field.label}
             <div onClick={() => handleClick(field.name)}>
-              <ArrowUp order={hasDescOrder(field.name)} />
-              <ArrowDown order={hasAscOrder(field.name)} />
+              <ArrowUp order={hasAscOrder(field.name)} />
+              <ArrowDown order={hasDescOrder(field.name)} />
             </div>
             </Content>
         </th>
-      ))} 
+      ))}
     </tr>
     </thead>
   )
