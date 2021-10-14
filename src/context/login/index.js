@@ -14,6 +14,7 @@ import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
 import { useHistory } from 'react-router'
 import permissions from '@/routes/constants/permissions'
+import { MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
 
 const UserContext = createContext()
 
@@ -72,7 +73,7 @@ export default function AuthProvider({ children }) {
   }
 
   const pushToUrl = (url) => {
-    if (!url) return history.push('/master-page')
+    if (!url) return history.push(MASTERPAGE)
     history.push(url.from)
   }
 

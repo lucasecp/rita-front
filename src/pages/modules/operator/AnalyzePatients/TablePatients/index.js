@@ -13,7 +13,7 @@ import { useHistory } from 'react-router'
 import { queryOrderString, queryFilterString } from '../helpers/queryString'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
-import { LOGIN } from '@/routes/constants/namedRoutes/routes'
+import { LOGIN, VALIDATOR_SEE_ONE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
   const query = useQuery()
@@ -59,7 +59,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
   }
 
   const handleClick = async (cpf) => {
-    history.push('/autorizacoes/ver-paciente', { cpf })
+    history.push(VALIDATOR_SEE_ONE_PATIENT, { cpf })
   }
 
   return (

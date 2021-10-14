@@ -10,6 +10,7 @@ import OutlineButton from '@/components/Button/Outline'
 import { useLoading } from '@/context/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { useHistory } from 'react-router'
+import { VALIDATOR_SEE_ONE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 function RecordAlreadyAnalized(data) {
   const { closeModal } = useModal()
@@ -25,7 +26,7 @@ function RecordAlreadyAnalized(data) {
       )
       if (response.status === 200) {
         closeModal()
-        history.push('/autorizacoes/ver-paciente', { cpf:data.cpf })
+        history.push(VALIDATOR_SEE_ONE_PATIENT, { cpf:data.cpf })
       }
     } catch ({ response }) {
       const responseApi = response.data

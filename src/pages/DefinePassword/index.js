@@ -8,7 +8,7 @@ import { useModal } from '@/context/useModal'
 import hasLetter from '@/helpers/hasLetter'
 import hasNumber from '@/helpers/hasNumber'
 import hasSpecialCaracter from '@/helpers/hasSpecialCaracter'
-import { LOGIN } from '@/routes/constants/namedRoutes/routes'
+import { FORGOT_PASSWORD_INIT, LOGIN } from '@/routes/constants/namedRoutes/routes'
 import apiUser from '@/services/apiUser'
 import { setHeaderToken } from '@/storage/user'
 import React, { useEffect, useState } from 'react'
@@ -59,7 +59,7 @@ function Password() {
     } catch ({ response }) {
       if (response && response.status === 401) {
         logout()
-        return history.push('/esqueci-senha/inicio', { error: 'EXPIRED_TOKEN' })
+        return history.push(FORGOT_PASSWORD_INIT, { error: 'EXPIRED_TOKEN' })
       }
       if (response && response.status === 400) {
         showMessage(AlreadyExists, { message: response.data.message })

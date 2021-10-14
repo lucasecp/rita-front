@@ -4,23 +4,24 @@ import RegisterCardSabin from '@/pages/Register/InitialRegister/CardSabin'
 import DefaultRegister from '@/pages/Register/InitialRegister/Default'
 import PreRegister from '@/pages/Register/PreRegister/PreRegister'
 import RegisterPatient from '@/pages/Register/RegisterPatient'
+import { DEFAULT_REGISTER, PRE_REGISTER, REGISTER_CARD_SABIN, RESGISTE_PATIENT } from './constants/namedRoutes/routes'
 
 const registerRoutes = [
   {
-    path: '/pre-cadastro',
+    path: PRE_REGISTER,
     component: PreRegister,
   },
   {
-    path: '/cadastro-inicial',
+    path: DEFAULT_REGISTER,
     component: DefaultRegister,
   },
 
   {
-    path: '/cadastro-cartao-sabin',
+    path: REGISTER_CARD_SABIN,
     component: RegisterCardSabin,
   },
   {
-    path: '/cadastro/paciente',
+    path: RESGISTE_PATIENT,
     component: RegisterPatient,
   },
 ]

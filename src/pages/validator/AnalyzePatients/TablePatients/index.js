@@ -15,7 +15,7 @@ import RecordAlreadyAnalized from './messages/error/RecordAlreadyAnalyzed'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
 import Generic from './messages/error/Generic'
-import { LOGIN } from '@/routes/constants/namedRoutes/routes'
+import { LOGIN, VALIDATOR_SEE_ONE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
   const query = useQuery()
@@ -68,7 +68,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
         `/paciente/${id}/assumir-validacao?forcar=false`
       )
       if (response.status === 200) {
-        history.push('/autorizacoes/ver-paciente', { cpf })
+        history.push(VALIDATOR_SEE_ONE_PATIENT, { cpf })
       }
     } catch ({ response }) {
       const responseApi = response.data
@@ -84,7 +84,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
           cpf,
         })
       }
-      return showMessage(Generic, responseApi.message)
+      return showMessage(Generic, {message: responseApi.message})
     } finally {
       Loading.turnOff()
     }

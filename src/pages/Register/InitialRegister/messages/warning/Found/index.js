@@ -7,6 +7,7 @@ import { Container, ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 import { useModal } from '@/context/useModal'
+import { PRE_REGISTER, RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 function Found(data) {
   const history = useHistory()
@@ -14,11 +15,11 @@ function Found(data) {
 
   const pushToRegister = () => {
     closeModal()
-    return history.push('/cadastro/paciente/', { userData: { cpf: data.cpf } })
+    return history.push(RESGISTE_PATIENT, { userData: { cpf: data.cpf } })
   }
   const pushToPreRegister = () => {
     closeModal()
-    history.push('/pre-cadastro', data)
+    history.push(PRE_REGISTER, data)
   }
 
   return (

@@ -17,7 +17,7 @@ import { useModal } from '@/context/useModal'
 import { useLoading } from '@/context/useLoading'
 import OutlineButton from '@/components/Button/Outline'
 import ExpiredSessionDefinePassword from './messages/error/ExpiredToken'
-import { LOGIN } from '@/routes/constants/namedRoutes/routes'
+import { FORGOT_PASSWORD_CONFIRM_DATA, LOGIN } from '@/routes/constants/namedRoutes/routes'
 
 function IdentifyPerson() {
   const [cpf, setCpf] = useState('')
@@ -44,7 +44,7 @@ function IdentifyPerson() {
       Loading.turnOn()
       const { data } = await apiUser.get(`/status?cpf=${cpf}`)
       console.log(data);
-      return history.push('/esqueci-senha/confirmar-dados', {
+      return history.push(FORGOT_PASSWORD_CONFIRM_DATA, {
         cpf,
         email: data.email,
         phone: data.telefone,

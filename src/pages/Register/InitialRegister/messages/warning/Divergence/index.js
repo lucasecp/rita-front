@@ -7,6 +7,7 @@ import { Container,ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 import { useModal } from '@/context/useModal'
+import { PRE_REGISTER } from '@/routes/constants/namedRoutes/routes'
 
 function Divergence(data) {
   const history = useHistory()
@@ -14,7 +15,7 @@ function Divergence(data) {
 
   const pushToPreRegister = () => {
     closeModal()
-    history.push('/pre-cadastro',data)
+    history.push(PRE_REGISTER,data)
   }
   return (
     <Container>

@@ -18,6 +18,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/context/useModal'
 import ComeBack from './messages/ComeBack'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
+import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 function seeOnePatient() {
   const history = useHistory()
@@ -26,7 +27,7 @@ function seeOnePatient() {
   const { showMessage } = useModal()
 
   if (!location.state) {
-    history.push('/pacientes/analisar-pacientes')
+    history.push(OPERATOR_ANALYZE_PATIENT)
     return null
   }
 
@@ -134,7 +135,7 @@ function seeOnePatient() {
             title={`Dados cadastrais do dependente ${index + 1}`}
             personData={dependent}
             setPersonData={()=>{
-              
+
             }}
             key={index}
           />
