@@ -174,6 +174,7 @@ function seeOnePatient() {
 
   const onFinishValidations = async () => {
     try {
+      Loading.turnOn()
       const response = await apiPatient.post(
         `/paciente/${patientData.idPaciente}/validar`,
         {
