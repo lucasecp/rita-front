@@ -9,6 +9,7 @@ const validatorRoutes = [
   {
     path: VALIDATOR_ANALYZE_PATIENTS,
     component: AnalyzePatients,
+    isPrivate: true
   },
   {
     path: VALIDATOR_ANALYZE_PATIENTS2,
@@ -17,6 +18,7 @@ const validatorRoutes = [
   {
     path: VALIDATOR_SEE_ONE_PATIENT,
     component: SeeOnePatient,
+    isPrivate: true
   },
 ]
 

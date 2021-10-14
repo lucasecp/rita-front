@@ -39,7 +39,7 @@ function Routes() {
       {/* <Route exact path="/" component={Header} /> */}
 
       <Route path={MASTERPAGE} isPrivate component={MasterPage} />
-      <Route path={LOGIN} component={Login} />
+      <Route path={LOGIN} exact component={Login} />
       <Route path={TESTE} isPrivate component={Teste} />
 
       <Route path={DEFINE_PASSWORD} component={DefinePassoword} />

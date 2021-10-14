@@ -10,6 +10,7 @@ const operatorRoutes = [
   {
     path: OPERATOR_ANALYZE_PATIENT,
     component: AnalyzePatients,
+    isPrivate: true
   },
   {
     path: OPERATOR_ANALYZE_PATIENT2,
@@ -18,6 +19,7 @@ const operatorRoutes = [
   {
     path: OPERATOR_SEE_ONE_PATIENT,
     component: SeeOnePatient,
+    isPrivate: true
   },
 ]
 

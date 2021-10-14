@@ -53,7 +53,7 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
       <div>
         <span>Linhas por página:</span>
         <SelectComponent
-          options={options(range || 10)}
+          options={options(range || 100)}
           value={limit}
           onChange={hadleChange}
           variation="secondary"
