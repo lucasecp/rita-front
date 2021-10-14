@@ -16,7 +16,7 @@ function AnalyzePatients() {
   }
 
   return (
-    <DefaultLayout>
+    <DefaultLayout title="Pacientes">
     <Container>
      <Filter/>
     </Container>

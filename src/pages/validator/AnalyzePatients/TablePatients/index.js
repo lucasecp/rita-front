@@ -15,6 +15,7 @@ import RecordAlreadyAnalized from './messages/error/RecordAlreadyAnalyzed'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
 import Generic from './messages/error/Generic'
+import { LOGIN } from '@/routes/constants/namedRoutes/routes'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
   const query = useQuery()
@@ -43,7 +44,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
         }
       } catch ({ response }) {
         if (response.status === 401) {
-          return history.push('/login')
+          return history.push(LOGIN)
         }
       } finally {
         Loading.turnOff()

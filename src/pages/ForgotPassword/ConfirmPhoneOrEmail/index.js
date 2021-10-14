@@ -21,6 +21,7 @@ import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
 import LastTry from './messages/error/LastTry'
 import ContactUs from './messages/error/ContactUs'
+import { LOGIN } from '@/routes/constants/namedRoutes/routes'
 
 const MESSAGEAPI = {
   LAST_TRY: 'Ultima tentativa antes de ser bloqueado definitivamente',
@@ -35,7 +36,7 @@ function ConfirmPhoneOrEmail() {
   const userData = location.state
 
   if (!userData) {
-    history.push('/login')
+    history.push(LOGIN)
     return null
   }
 

@@ -9,14 +9,8 @@ import { Container } from './styles'
 
 function AnalyzePatients() {
 
-  const history = useHistory()
-
-  const seeOnePatient = (cpf) => {
-    history.push('/autorizacoes/ver-paciente', { cpf })
-  }
-
   return (
-    <DefaultLayout>
+    <DefaultLayout title="Autorizações">
     <Container>
      <Filter/>
     </Container>

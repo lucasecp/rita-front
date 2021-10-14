@@ -17,6 +17,7 @@ import { useModal } from '@/context/useModal'
 import { useLoading } from '@/context/useLoading'
 import OutlineButton from '@/components/Button/Outline'
 import ExpiredSessionDefinePassword from './messages/error/ExpiredToken'
+import { LOGIN } from '@/routes/constants/namedRoutes/routes'
 
 function IdentifyPerson() {
   const [cpf, setCpf] = useState('')
@@ -48,7 +49,7 @@ function IdentifyPerson() {
         email: data.email,
         phone: data.telefone,
       })
-      
+
     } catch ({ response }) {
       if (response.status === 404) {
         return showMessage(NotFound)
@@ -71,7 +72,7 @@ function IdentifyPerson() {
             name="cpf"
           />
           <BtnGroup>
-            <OutlineButton onClick={() => history.push('/login')}>
+            <OutlineButton onClick={() => history.push(LOGIN)}>
               Voltar
             </OutlineButton>
             <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>

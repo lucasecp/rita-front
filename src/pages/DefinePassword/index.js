@@ -8,6 +8,7 @@ import { useModal } from '@/context/useModal'
 import hasLetter from '@/helpers/hasLetter'
 import hasNumber from '@/helpers/hasNumber'
 import hasSpecialCaracter from '@/helpers/hasSpecialCaracter'
+import { LOGIN } from '@/routes/constants/namedRoutes/routes'
 import apiUser from '@/services/apiUser'
 import { setHeaderToken } from '@/storage/user'
 import React, { useEffect, useState } from 'react'
@@ -35,7 +36,7 @@ function Password() {
   let cpf = ''
 
   useEffect(() => {
-    if (!state) return history.push('/login')
+    if (!state) return history.push(LOGIN)
   }, [])
 
   const handleSubmit = async (e) => {
@@ -111,7 +112,7 @@ function Password() {
           </Col>
         </Row>
         <Button>
-          <OutlineButton type="button" onClick={() => history.push('/login')}>
+          <OutlineButton type="button" onClick={() => history.push(LOGIN)}>
             Voltar
           </OutlineButton>
           <ButtonPrimary type="submit">Confirmar</ButtonPrimary>

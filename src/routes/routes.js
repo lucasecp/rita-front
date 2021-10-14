@@ -20,6 +20,7 @@ import operatorRoutesComponent from './operator/operator.routes'
 import registerRoutesComponent from './register.routes'
 
 import permissions from './constants/permissions'
+import {LOGIN} from './constants/namedRoutes/routes'
 import { useAuth } from '@/context/login'
 
 function Routes() {
@@ -38,7 +39,7 @@ function Routes() {
       <Route exact path="/" component={Header} />
 
       <Route path="/master-page" isPrivate component={MasterPage} />
-      <Route path="/login" component={Login} />
+      <Route path={LOGIN} component={Login} />
       <Route path="/teste" isPrivate component={Teste} />
 
       <Route path="/definir-senha" component={DefinePassoword} />

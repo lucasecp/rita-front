@@ -149,7 +149,6 @@ const Filter = () => {
                 { label: 'Negado', value: 'N' },
               ]}
             />
-          </div>
           {typedData() && (
             <BtnGroup>
               <OutlineButton
@@ -165,6 +164,7 @@ const Filter = () => {
               </ButtonPrimary>
             </BtnGroup>
           )}
+          </div>
         </form>
       </Container>
       <TablePatients orders={orders} setOrders={setOrders} filters={filters} />

@@ -11,10 +11,9 @@ import { useModal } from '@/context/useModal'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { queryOrderString, queryFilterString } from '../helpers/queryString'
-import RecordAlreadyAnalized from './messages/error/RecordAlreadyAnalyzed'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
-import Generic from './messages/error/Generic'
+import { LOGIN } from '@/routes/constants/namedRoutes/routes'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
   const query = useQuery()
@@ -26,7 +25,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
   const [patients, setPatients] = useState({})
   const { Loading } = useLoading()
   const [queryPagination, setQueryPagination] = useState(initialQuery)
-  const { showMessage } = useModal()
+
 
   useEffect(() => {
     setHeaderToken(getUserStorage().token)
@@ -43,7 +42,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
         }
       } catch ({ response }) {
         if (response.status === 401) {
-          return history.push('/login')
+          return history.push(LOGIN)
         }
       } finally {
         Loading.turnOff()
@@ -59,34 +58,8 @@ const TablePatients = ({ orders, setOrders, filters }) => {
     if (status === 'EA') return 'Em analise'
   }
 
-  const handleClick = async (id, cpf) => {
-    try {
-      Loading.turnOn()
-
-      const response = await apiPatient.patch(
-        `/paciente/${id}/assumir-validacao?forcar=false`
-      )
-      if (response.status === 200) {
-        history.push('/autorizacoes/ver-paciente', { cpf })
-      }
-    } catch ({ response }) {
-      const responseApi = response.data
-      if (
-        response.status === 400 &&
-        responseApi.message ===
-          'Atenção Este registro está sendo analisado por outro validador.'
-      ) {
-     return showMessage(RecordAlreadyAnalized, {
-          validator: responseApi.validador,
-          date: responseApi.data,
-          id,
-          cpf,
-        })
-      }
-      return showMessage(Generic, responseApi.message)
-    } finally {
-      Loading.turnOff()
-    }
+  const handleClick = async (cpf) => {
+    history.push('/autorizacoes/ver-paciente', { cpf })
   }
 
   return (
@@ -129,6 +102,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
           </tbody>
         </table>
       </Container>
+
       <Pagination
         total={patients?.total}
         setQuery={setQueryPagination}
