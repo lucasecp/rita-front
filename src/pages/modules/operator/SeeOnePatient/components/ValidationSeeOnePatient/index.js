@@ -6,17 +6,10 @@ import Textarea from '@/components/Form/Textarea'
 import RadioButton from '@/styles/components/RadioButton'
 
 import { Container } from './styles'
-import getValidationsFromLocalStorage from '../../helpers/getValidationsFromLocalStorage'
 
 import isObjectEmpty from '@/helpers/isEmpty'
 
-function ValidationSeeOnePatient({
-  patientId,
-  validations,
-  onChangeValidations,
-}) {
-  const [documentOk, setDocumentOk] = useState(validations.documentOk || '')
-
+function ValidationSeeOnePatient({ validations }) {
   const [resonDocumentNotOk, setResonDocumentNotOk] = useState(
     validations.resonDocumentNotOk || ''
   )
@@ -34,11 +27,23 @@ function ValidationSeeOnePatient({
         Os dados informados pelo usuário correspondem aos documentos
         apresentados?
       </h2>
-      <RadioGroup aria-label="documentOk" name="documentOk" value={documentOk}>
-        <RadioButton value="yes" label="Sim" checked={documentOk === 'yes'} />
-        <RadioButton value="no" label="Não" checked={documentOk === 'no'} />
+      <RadioGroup
+        aria-label="documentOk"
+        name="documentOk"
+        value={validations.documentOk}
+      >
+        <RadioButton
+          value="yes"
+          label="Sim"
+          checked={validations.documentOk === 'yes'}
+        />
+        <RadioButton
+          value="no"
+          label="Não"
+          checked={validations.documentOk === 'no'}
+        />
       </RadioGroup>
-      {documentOk === 'no' && (
+      {validations.documentOk === 'no' && (
         <Textarea
           label="Descreva o motivo*:"
           rows="3"
@@ -55,7 +60,7 @@ function ValidationSeeOnePatient({
         <RadioButton value="yes" label="Sim" checked={incomeOk === 'yes'} />
         <RadioButton value="no" label="Não" checked={incomeOk === 'no'} />
       </RadioGroup>
-      {documentOk === 'yes' && (
+      {validations.documentOk === 'yes' && (
         <section>
           <CheckboxComponent
             id="terms"

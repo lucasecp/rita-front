@@ -30,11 +30,13 @@ function seeOnePatient() {
     return null
   }
 
-  const [disableFinishButton, setDisableFinishButton] = useState(true)
+  const [disableSaveButton, setDisableSaveButton] = useState(true)
 
-  const [patientData, setPatientData] = useState({})
+  const [patientData, setPatientData] = useState()
+  const [patientDataFromApi, setPatientDataFromApi] = useState({})
+
   const [patientDependents, setPatientDependents] = useState([])
-  const [patientAddress, setPatientAddress] = useState({})
+  const [patientAddress, setPatientAddress] = useState()
   const [patientDocuments, setPatientDocuments] = useState({})
 
   const [validations, setValidations] = useState({})
@@ -49,6 +51,8 @@ function seeOnePatient() {
       try {
         Loading.turnOn()
         const response = await apiPatient.get(`/paciente/cpf?cpf=${userCpf}`)
+
+        console.log(response.data)
 
         setPatientData(response.data)
         setPatientDependents(response.data.dependentes)
@@ -67,7 +71,7 @@ function seeOnePatient() {
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
-        console.log('falha segurando doc', response)
+        // console.log('falha segurando doc', response)
       } finally {
         Loading.turnOff()
       }
@@ -80,7 +84,7 @@ function seeOnePatient() {
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
-        console.log('falha identificacao', response)
+        // console.log('falha identificacao', response)
       } finally {
         Loading.turnOff()
       }
@@ -93,7 +97,7 @@ function seeOnePatient() {
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
-        console.log('falha renda', response)
+        // console.log('falha renda', response)
       } finally {
         Loading.turnOff()
       }
@@ -108,107 +112,41 @@ function seeOnePatient() {
     loadPatientInformations()
   }, [])
 
-  useEffect(() => {
-    const { documentOk, allDataVerified, resonDocumentNotOk } = validations
-
-    setDisableFinishButton(
-      !(
-        (documentOk === 'yes' && allDataVerified) ||
-        (documentOk === 'no' && resonDocumentNotOk)
-      )
-    )
-  }, [validations])
-
   const onComeBack = () => {
     showMessage(ComeBack, { idPatient: patientData.idPaciente })
   }
 
-  const onSaveValidations = async () => {
-    try {
-      Loading.turnOn()
-      const response = await apiPatient.patch(
-        `/paciente/${patientData.idPaciente}/assumir-validacao?forcar=false`
-      )
-
-      localStorage.setItem(
-        `@Rita/Validate/OnePatient/${patientData.idPaciente}`,
-        JSON.stringify(validations)
-      )
-
-      showMessage(SimpleModal, {
-        type: MODAL_TYPES.SUCCESS,
-        message: 'Validação salva!',
-      })
-
-      console.log(response)
-    } catch ({ response }) {
-      console.log(response)
-      const { message } = response.data
-
-      showMessage(SimpleModal, {
-        type: MODAL_TYPES.WARNING,
-        message,
-      })
-
-      history.push('/pacientes/analisar-pacientes')
-    } finally {
-      Loading.turnOff()
-    }
-  }
-
-  const onFinishValidations = async () => {
-    try {
-      const response = await apiPatient.post(
-        `/paciente/${patientData.idPaciente}/validar`,
-        {
-          dadosOk: {
-            resposta: validations.documentOk === 'yes',
-            motivo: validations.resonDocumentNotOk,
-          },
-          rendaBaixa: {
-            resposta: validations.incomeOk === 'yes',
-          },
-        }
-      )
-
-      if (response.status === 201) {
-        if (response.data.mensagem === 'Validacao efetuada com sucesso.') {
-          showMessage(SimpleModal, {
-            type: MODAL_TYPES.SUCCESS,
-            message: 'Validação concluída!',
-          })
-
-          history.push('/pacientes/analisar-pacientes')
-        }
-      }
-      console.log(response)
-    } catch ({ response }) {
-      console.log(response)
-    }
-  }
+  const onSavePatientData = async () => {}
 
   return (
     <DefaultLayout title="Pacientes">
       <Container>
-        <PersonExpandable
-          title="Dados cadastrais do titular"
-          personData={patientData}
-          holder
-        />
+        {patientData && (
+          <PersonExpandable
+            title="Dados cadastrais do titular"
+            personData={patientData}
+            setPersonData={setPatientData}
+            holder
+          />
+        )}
         {patientDependents?.map((dependent, index) => (
           <PersonExpandable
             title={`Dados cadastrais do dependente ${index + 1}`}
             personData={dependent}
+            setPersonData={()=>{
+              
+            }}
             key={index}
           />
         ))}
-        <AddressSeeOnePatient address={patientAddress} />
+        {patientAddress && (
+          <AddressSeeOnePatient
+            address={patientAddress}
+            setAddress={setPatientAddress}
+          />
+        )}
         <DocumentsSeeOnePatient documents={patientDocuments} />
-        <ValidationSeeOnePatient
-          patientId={patientData.idPaciente}
-          validations={validations}
-          onChangeValidations={setValidations}
-        />
+        <ValidationSeeOnePatient validations={validations} />
         <footer>
           <ButtonLink onClick={null}>Voltar</ButtonLink>
           <OutlineButton onClick={null}>Salvar</OutlineButton>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { format, parseISO } from 'date-fns'
 
 import arrowDownOutlineIcon from '@/assets/icons/arrow-down-outline.svg'
@@ -9,16 +9,32 @@ import SelectComponent from '@/components/Form/Select'
 
 import { Container } from './styles'
 
-function PersonExpandable({ title, personData, holder }) {
-  const birthDate =
+function PersonExpandable({ title, personData, setPersonData, holder }) {
+  const birthDateFormated =
     personData?.dataNascimento &&
     format(parseISO(personData?.dataNascimento), 'dd/MM/yyyy')
 
   const [expanded, setExpanded] = useState(!!holder)
 
-  const toogleExpanded = () => setExpanded(!expanded)
+  const [name, setName] = useState(personData.nome || '')
+  const [cpf, setCpf] = useState(personData.cpf || '')
+  const [birthDate, setBirthDate] = useState(birthDateFormated || '')
+  const [gender, setGender] = useState(personData.sexo || '')
+  const [phone, setPhone] = useState(personData.telefone || '')
+  const [email, setEmail] = useState(personData.email || '')
 
-  const isOldDigit = personData?.telefone?.length === 10
+  useEffect(() => {
+    setPersonData({
+      name,
+      cpf,
+      birthDate,
+      gender,
+      phone,
+      email,
+    })
+  }, [name, cpf, birthDate, gender, phone, email])
+
+  const toogleExpanded = () => setExpanded(!expanded)
 
   return (
     <Container expanded={expanded}>
@@ -27,18 +43,20 @@ function PersonExpandable({ title, personData, holder }) {
         <img src={arrowDownOutlineIcon} onClick={toogleExpanded} />
       </header>
       <section>
-        <InputText label="Nome Completo:" value={personData?.nome || ''} />
+        <InputText label="Nome Completo:" value={name} setValue={setName} />
         <InputMask
           label="CPF:"
           mask="999.999.999-99"
-          value={personData?.cpf || ''}
+          value={cpf}
+          setValue={setCpf}
         />
       </section>
       <section>
         <InputMask
           label="Data de Nascimento:"
           mask="99/99/9999"
-          value={birthDate || ''}
+          value={birthDate}
+          setValue={setBirthDate}
         />
         <SelectComponent
           label="Gênero:"
@@ -48,14 +66,16 @@ function PersonExpandable({ title, personData, holder }) {
             { label: 'Feminino', value: 'F' },
             { label: 'Outros', value: 'O' },
           ]}
-          value={personData?.sexo || ''}
+          value={gender}
+          setValue={setGender}
         />
         <InputMask
           label="Celular:"
-          mask={isOldDigit ? '(99) 9999-9999' : '(99) 99999-9999'}
-          value={personData?.telefone || ''}
+          mask="(99) 99999-9999"
+          value={phone}
+          setValue={setPhone}
         />
-        <InputText label="E-mail:" value={personData?.email || ''} />
+        <InputText label="E-mail:" value={email} setValue={setEmail} />
       </section>
     </Container>
   )

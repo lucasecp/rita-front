@@ -188,8 +188,8 @@ function seeOnePatient() {
       )
 
       if (response.status === 201) {
-        // if (response.data.mensagem === '"Validação concluída!"') {
-        if (response.data.mensagem === 'Validacao efetuada com sucesso.') {
+        if (response.data.mensagem === 'Validação concluída!') {
+          // if (response.data.mensagem === 'Validacao efetuada com sucesso.') {
           showMessage(SimpleModal, {
             type: MODAL_TYPES.SUCCESS,
             message: 'Validação concluída!',

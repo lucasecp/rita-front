@@ -1,64 +1,79 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import Select from '@/components/Form/Select'
 
 import { Container } from './styles'
+import { UF } from '../../constants/UFs'
 
-const AddressPatientData = ({ address }) => {
+const AddressSeeOnePatient = ({ address, setAddress }) => {
+  const [cep, setCep] = useState(address.cep || '')
+  const [uf, setUf] = useState(address.uf || '')
+  const [city, setCity] = useState(address.cidade || '')
+  const [addressPatient, setAddressPatient] = useState(address.logradouro || '')
+  const [number, setNumber] = useState(address.numero || '')
+  const [district, setDistrict] = useState(address.bairro || '')
+  const [complement, setComplement] = useState(address.complemento || '')
+
+  useEffect(() => {
+    setAddress({ cep, uf, city, addressPatient, number, district, complement })
+  }, [cep, uf, city, addressPatient, number, district, complement])
+
   return (
     <Container>
       <h2>Endereço</h2>
       <div>
         <InputText
           label="Endereço:"
-          value={address?.logradouro || ''}
+          value={addressPatient}
+          setValue={setAddressPatient}
           name="address"
-          disabled
         />
         <section>
           <InputText
             label="Número:"
-            value={address?.numero || ''}
+            value={number}
+            setValue={setNumber}
             name="number"
-            disabled
           />
           <InputText
             label="Complemento:"
-            value={address?.complemento || ''}
+            value={complement}
+            setValue={setComplement}
             name="complement"
-            disabled
           />
         </section>
         <InputMask
           label="CEP:"
           mask="99.999-999"
-          value={address?.cep || ''}
+          value={cep}
+          setValue={setCep}
           name="cep"
-          disabled
         />
         <InputMask
           label="Bairro:"
-          value={address?.bairro || ''}
+          value={district}
+          setValue={setDistrict}
           name="district"
-          disabled
         />
         <InputText
           label="Cidade:"
-          value={address?.cidade || ''}
+          value={city}
+          setValue={setCity}
           name="city"
-          disabled
         />
         <Select
           label="UF:"
-          labelDefaultOption={address?.uf}
+          labelDefaultOption="Selecione:"
+          options={UF}
+          setValue={setUf}
+          value={uf}
           name="uf"
-          disabled
         />
       </div>
     </Container>
   )
 }
 
-export default AddressPatientData
+export default AddressSeeOnePatient
