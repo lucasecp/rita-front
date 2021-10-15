@@ -27,7 +27,7 @@ function ComeBack({ idPatient }) {
     try {
       Loading.turnOn()
 
-      history.push('/pacientes/analisar-pacientes')
+      history.push(OPERATOR_ANALYZE_PATIENT)
       closeModal()
     } catch ({ response }) {
 

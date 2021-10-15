@@ -8,6 +8,7 @@ import { Container } from './styles'
 
 function AnalyzePatientsTemporary() {
   const patients = [
+    { cpf: '02574416112' },
     { cpf: '02326029135' },
     { cpf: '19397356100' },
     { cpf: '86829994047' },

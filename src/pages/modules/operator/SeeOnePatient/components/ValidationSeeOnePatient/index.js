@@ -8,15 +8,15 @@ import RadioButton from '@/styles/components/RadioButton'
 import { Container } from './styles'
 
 // function ValidationSeeOnePatient({validations}) {
-function ValidationSeeOnePatient() {
-  const validations = {
-    documentOk: 'yes',
-    resonDocumentNotOk: 'without reson',
-    incomeOk: 'no',
-    validatorName: 'Nome do Validador',
-    date: '28/09/2021',
-    time: '13:20',
-  }
+function ValidationSeeOnePatient({ validations }) {
+  // const validations = {
+  //   documentOk: 'yes',
+  //   resonDocumentNotOk: 'without reson',
+  //   incomeOk: 'no',
+  //   validatorName: 'Nome do Validador',
+  //   date: '28/09/2021',
+  //   time: '13:20',
+  // }
 
   return (
     <Container>

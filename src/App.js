@@ -13,6 +13,9 @@ import { ModalProvider } from './context/useModal'
 import { LoadingProvider } from './context/useLoading'
 import LoadingWithHook from './components/LoadingWithHook/RitaLoading'
 
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,6 +27,7 @@ const App = () => {
               <Routes />
               <Modal />
               <LoadingWithHook />
+              <ToastContainer />
             </MenuProvider>
           </AuthProvider>
         </LoadingProvider>
