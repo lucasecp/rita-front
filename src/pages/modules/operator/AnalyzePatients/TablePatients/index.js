@@ -73,7 +73,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
               patients?.dados?.map((patient) => (
                 <tr
                   key={patient.idPaciente}
-                  onClick={() => handleClick(patient.idPaciente, patient.cpf)}
+                  onClick={() => handleClick(patient.cpf)}
                 >
                   <Td soft>{formateDateAndHour(patient.dataFiliacao) || '-'}</Td>
                   <Td strong id="patient-name">
