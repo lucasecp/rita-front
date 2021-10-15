@@ -3,13 +3,24 @@ import React from 'react'
 import MsgError from '../../MsgError'
 import { Container } from './styles'
 
-const InputText = ({ label, setValue, hasError, type, msgError,variation, ...rest }) => {
+const InputText = ({
+  label,
+  setValue,
+  hasError,
+  type,
+  msgError,
+  variation,
+  onlyLetter,
+  ...rest
+}) => {
+  
+  const handleChange = ({ target }) => {
+    if (!setValue) return
 
-  const handleChange = ({target}) =>{
-    if(!setValue) return
-    if(target.type === 'text'){
-      if(hasNumber(target.value)) return
+    if (onlyLetter && hasNumber(target.value)) {
+      return
     }
+
     setValue(target.value)
   }
 

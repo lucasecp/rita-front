@@ -142,6 +142,7 @@ const Filter = () => {
               setValue={setName}
               hasError={errors.name}
               msgError={errors.name}
+              onlyLetter
             />
             <SelectValidator
               setValidator={setValidator}
