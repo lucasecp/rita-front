@@ -10,7 +10,7 @@ const TemporaryMenu = [
   {
     path: MASTERPAGE,
     icon: <HomeIcon />,
-    name: 'Inicio',
+    name: 'Início',
   },
   {
     path: VALIDATOR_ANALYZE_PATIENTS,
