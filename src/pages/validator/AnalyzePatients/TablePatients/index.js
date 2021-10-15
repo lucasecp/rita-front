@@ -80,7 +80,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
           'Atenção Este registro está sendo analisado por outro validador.'
       ) {
      return showMessage(RecordAlreadyAnalized, {
-          validator: responseApi.validador,
+          validator: formatFistLastName(responseApi.validador),
           date: responseApi.data,
           id,
           cpf,
