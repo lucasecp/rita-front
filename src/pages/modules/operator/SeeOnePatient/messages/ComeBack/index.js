@@ -22,7 +22,7 @@ function ComeBack({ idPatient }) {
   const onDoNotConfirmExit = () => {
     closeModal()
   }
-git 
+
   const onConfirmExit = async () => {
     try {
       Loading.turnOn()
