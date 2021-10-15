@@ -31,9 +31,9 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState(getUserStorage() || null)
 
   useEffect(() => {
-    if(!isAuthorization()) return logout()
+    if (!isAuthorization()) return logout()
     setDataLogin(getUserStorage())
-  }, []);
+  }, [])
 
   const login = async (payload, prevPath) => {
     try {

@@ -11,7 +11,7 @@ import { useHistory } from 'react-router'
 import { queryOrderString, queryFilterString } from '../helpers/queryString'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
-import { LOGIN, VALIDATOR_SEE_ONE_PATIENT } from '@/routes/constants/namedRoutes/routes'
+import { LOGIN, OPERATOR_SEE_ONE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import formatCpf from '@/helpers/formatCpf'
 import formatFistLastName from '@/helpers/formatFistLastName'
@@ -60,7 +60,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
   }
 
   const handleClick = async (cpf) => {
-    history.push(VALIDATOR_SEE_ONE_PATIENT, { cpf })
+    history.push(OPERATOR_SEE_ONE_PATIENT, { cpf })
   }
 
   return (
