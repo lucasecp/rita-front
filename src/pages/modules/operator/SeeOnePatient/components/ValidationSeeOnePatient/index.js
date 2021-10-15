@@ -9,14 +9,9 @@ import { Container } from './styles'
 
 // function ValidationSeeOnePatient({validations}) {
 function ValidationSeeOnePatient({ validations }) {
-  // const validations = {
-  //   documentOk: 'yes',
-  //   resonDocumentNotOk: 'without reson',
-  //   incomeOk: 'no',
-  //   validatorName: 'Nome do Validador',
-  //   date: '28/09/2021',
-  //   time: '13:20',
-  // }
+  const extendedStatus = (status) => {
+    return status === 'N' ? 'Negado' : 'Aprovado'
+  }
 
   return (
     <Container>
@@ -87,7 +82,8 @@ function ValidationSeeOnePatient({ validations }) {
       )}
       <h6>
         Registro validado por <b>{validations.validatorName}</b> em{' '}
-        {validations.date} {validations.time} com status <b>Aprovado</b>
+        {validations.date} {validations.time} com status{' '}
+        <b>{validations.status === 'N' ? 'Negado' : 'Aprovado'}</b>
       </h6>
     </Container>
   )
