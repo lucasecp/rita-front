@@ -35,6 +35,7 @@ const RegisterPatient = () => {
   const [dataClientSabin, setDataClientSabin] = useState({})
   const [buttonPass, setButtonPass] = useState(false)
   const [documentFiles, setdocumentFiles] = useState({})
+  console.log(documentFiles);
 
   useEffect(() => {
     if (!location.state) return
@@ -91,13 +92,18 @@ const RegisterPatient = () => {
       }
     }
   }
+  const formatDocumentFiles = () => {
+    if(documentFiles.selectIncome === 'no_income') return 'NaopossuoRenda'
+    if(documentFiles.selectIncome === 'one_half') return 'AteUmSalarioMinimoEMeio'
+    if(documentFiles.selectIncome === 'more_one_half') return 'AcimaDeUmSalarioMinimoEMeio'
+  }
 
   const handleSubmit = async () => {
     responseApiStatus = ''
-
+    console.log({...data, renda: formatDocumentFiles()});
     try {
       Loading.turnOn()
-      const response = await apiPatient.post('/paciente', data)
+      const response = await apiPatient.post('/paciente', {...data, renda: formatDocumentFiles()})
       if (response.status === 201) {
         responseApiStatus = status.SUCCESS
       }
