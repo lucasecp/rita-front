@@ -6,6 +6,7 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 
 import { Container } from '../../styles'
 import { useModal } from '@/context/useModal'
+import { RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 function NotFound({ ...data }) {
   const history = useHistory()
@@ -13,7 +14,7 @@ function NotFound({ ...data }) {
 
   const handleCloseModal = () => {
     closeModal()
-    history.push('/cadastro/paciente/', { userData: { cpf: data.cpf } })
+    history.push(RESGISTE_PATIENT, { userData: { cpf: data.cpf } })
   }
 
   return (

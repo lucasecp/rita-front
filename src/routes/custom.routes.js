@@ -10,7 +10,6 @@ export default function CustomRoute({
   ...rest
 }) {
   const { isAuthorization } = useAuth()
-  // message:'EXPIRED_TOKEN'
 
   if (!isAuthorization() && isPrivate)
     return <Redirect to={{ pathname: LOGIN, state: { from: path } }} />

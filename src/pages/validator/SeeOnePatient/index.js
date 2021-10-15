@@ -18,6 +18,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/context/useModal'
 import ComeBack from './messages/ComeBack'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
+import { VALIDATOR_ANALYZE_PATIENTS } from '@/routes/constants/namedRoutes/routes'
 
 function seeOnePatient() {
   const history = useHistory()
@@ -26,7 +27,7 @@ function seeOnePatient() {
   const { showMessage } = useModal()
 
   if (!location.state) {
-    history.push('/autorizacoes/analisar-pacientes')
+    history.push(VALIDATOR_ANALYZE_PATIENTS)
     return null
   }
 
@@ -168,7 +169,7 @@ function seeOnePatient() {
       }
     } finally {
       Loading.turnOff()
-      history.push('/autorizacoes/analisar-pacientes')
+      history.push(VALIDATOR_ANALYZE_PATIENTS)
     }
   }
 
@@ -225,7 +226,7 @@ function seeOnePatient() {
         })
       }
     } finally {
-      history.push('/autorizacoes/analisar-pacientes')
+      history.push(VALIDATOR_ANALYZE_PATIENTS)
       Loading.turnOff()
     }
   }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SelectComponent from '@/components/Form/Select'
 import { useLoading } from '@/context/useLoading'
 import apiUser from '@/services/apiUser'
+import formatFistLastName from '@/helpers/formatFistLastName'
 
 const SelectValidator = ({setValidator,validator}) => {
   const [validators, setValidators] = useState([])
@@ -23,14 +24,10 @@ const SelectValidator = ({setValidator,validator}) => {
 
   const formatObjectApi = () => {
    return validators.map((validator) => {
-      return { label: formatName(validator.nome), value: validator.idUsuario }
+      return { label: formatFistLastName(validator.nome), value: validator.idUsuario }
     })
   }
-  const formatName = (value) => {
-    const names = String(value).split(' ')
-    const newName = names[0] + ' ' + names[names.length - 1]
-    return newName.toLowerCase().replace(/\b(\w)/g, x => x.toUpperCase())
-  }
+
 
   return (
     <SelectComponent

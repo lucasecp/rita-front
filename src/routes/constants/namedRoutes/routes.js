@@ -1,5 +1,5 @@
 export const LOGIN = '/'
-export const MASTERPAGE = '/master-page'
+export const MASTERPAGE = '/inicio'
 
 export const TESTE = '/teste'
 
@@ -14,9 +14,9 @@ export const OPERATOR_ANALYZE_PATIENT2 = '/pacientes/analisar-pacientes2'
 
 export const OPERATOR_SEE_ONE_PATIENT = '/pacientes/ver-paciente'
 
-export const VALIDATOR_ANALYZE_PATIENT = '/autorizacoes/analisar-pacientes'
+export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 
-export const VALIDATOR_ANALYZE_PATIENT2 = '/autorizacoes/analisar-pacientes2'
+export const VALIDATOR_ANALYZE_PATIENTS2 = '/autorizacoes/analisar-pacientes2'
 
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
 

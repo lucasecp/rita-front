@@ -18,22 +18,26 @@ const Filter = () => {
   const query = useQuery()
   const history = useHistory()
   const REGISTERDATES =
-  !query.get('dataCadastroInicio') ||
-  !query.get('dataCadastroFim')
-    ? []
-    : [moment(String(query.get('dataCadastroInicio'))),moment(String(query.get('dataCadastroFim')))]
+    !query.get('dataCadastroInicio') || !query.get('dataCadastroFim')
+      ? []
+      : [
+          moment(String(query.get('dataCadastroInicio'))),
+          moment(String(query.get('dataCadastroFim'))),
+        ]
   const VALIDATIONDATES =
-  !query.get('dataCadastroInicio') ||
-  !query.get('dataCadastroFim')
-    ? []
-    : [moment(String(query.get('dataCadastroInicio'))),moment(String(query.get('dataCadastroFim')))]
-    const CPF = query.get('cpf') || ''
-    const NAME = query.get('nome') || ''
-    const VALIDATOR = query.get('idValidador') || ''
-    const STATUS = query.get('status') || ''
+    !query.get('dataCadastroInicio') || !query.get('dataCadastroFim')
+      ? []
+      : [
+          moment(String(query.get('dataCadastroInicio'))),
+          moment(String(query.get('dataCadastroFim'))),
+        ]
+  const CPF = query.get('cpf') || ''
+  const NAME = query.get('nome') || ''
+  const VALIDATOR = query.get('idValidador') || ''
+  const STATUS = query.get('status') || ''
 
   const [registerDates, setRegisterDates] = useState(REGISTERDATES)
-  const [validationDates, setvalidationDates] = useState(VALIDATIONDATES);
+  const [validationDates, setvalidationDates] = useState(VALIDATIONDATES)
   const [cpf, setCpf] = useState(CPF)
   const [name, setName] = useState(NAME)
   const [validator, setValidator] = useState(VALIDATOR)
@@ -44,10 +48,17 @@ const Filter = () => {
 
   useEffect(() => {
     setFilters(verifyTypedFields(objQuery))
-  }, []);
+  }, [])
 
   const typedData = () => {
-    return registerDates.length || validationDates.length || clearFormat(cpf) || name || validator || status
+    return (
+      registerDates.length ||
+      validationDates.length ||
+      clearFormat(cpf) ||
+      name ||
+      validator ||
+      status
+    )
   }
   const objQuery = [
     { name: 'nome', value: name },
@@ -84,13 +95,13 @@ const Filter = () => {
     setErrors({})
     setOrders([])
     setFilters([])
-    history.push('?page=1&limit=10&status=P')
+    history.push('?page=1&limit=10&orderBy=dataValidacao&order=DESC')
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (Object.keys(validateFields()).length) return
 
-    history.push('?page=1&limit=10&status=P')
+    history.push('?page=1&limit=10&orderBy=dataValidacao&order=DESC')
     setFilters(verifyTypedFields(objQuery))
   }
 
@@ -149,21 +160,21 @@ const Filter = () => {
                 { label: 'Negado', value: 'N' },
               ]}
             />
-          {typedData() && (
-            <BtnGroup>
-              <OutlineButton
-                type="button"
-                variation="red"
-                small
-                onClick={clearFields}
-              >
-                Limpar Filtro
-              </OutlineButton>
-              <ButtonPrimary type="submit" small>
-                Filtrar Resultados
-              </ButtonPrimary>
-            </BtnGroup>
-          )}
+            {typedData() && (
+              <BtnGroup>
+                <OutlineButton
+                  type="button"
+                  variation="red"
+                  small
+                  onClick={clearFields}
+                >
+                  Limpar Filtro
+                </OutlineButton>
+                <ButtonPrimary type="submit" small>
+                  Filtrar Resultados
+                </ButtonPrimary>
+              </BtnGroup>
+            )}
           </div>
         </form>
       </Container>

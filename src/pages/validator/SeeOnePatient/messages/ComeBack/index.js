@@ -12,6 +12,7 @@ import apiPatient from '@/services/apiPatient'
 
 import { Container } from './styles'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
+import { VALIDATOR_ANALYZE_PATIENTS } from '@/routes/constants/namedRoutes/routes'
 
 function ComeBack({ idPatient }) {
   const { closeModal, showMessage } = useModal()
@@ -35,7 +36,7 @@ function ComeBack({ idPatient }) {
           response.data.mensagem ===
           'Avaliacão de paciente liberada com sucesso!'
         ) {
-          history.push('/autorizacoes/analisar-pacientes')
+          history.push(VALIDATOR_ANALYZE_PATIENTS)
           closeModal()
         }
       }

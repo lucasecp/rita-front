@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch } from 'react-router-dom'
 
-import Header from '@/components/HeaderTest'
+// import Header from '@/components/HeaderTest'
 import Teste from '@/pages/Teste'
 import MasterPage from '@/pages/MasterPage'
 
@@ -20,7 +20,7 @@ import operatorRoutesComponent from './operator/operator.routes'
 import registerRoutesComponent from './register.routes'
 
 import permissions from './constants/permissions'
-import {LOGIN} from './constants/namedRoutes/routes'
+import {DEFINE_PASSWORD, FORGOT_PASSWORD_CONFIRM_DATA, FORGOT_PASSWORD_INIT, LOGIN, MASTERPAGE, NOT_FOUND, TESTE} from './constants/namedRoutes/routes'
 import { useAuth } from '@/context/login'
 
 function Routes() {
@@ -36,17 +36,17 @@ function Routes() {
 
       {operatorRoutesComponent}
 
-      <Route exact path="/" component={Header} />
+      {/* <Route exact path="/" component={Header} /> */}
 
-      <Route path="/master-page" isPrivate component={MasterPage} />
-      <Route path={LOGIN} component={Login} />
-      <Route path="/teste" isPrivate component={Teste} />
+      <Route path={MASTERPAGE} isPrivate component={MasterPage} />
+      <Route path={LOGIN} exact component={Login} />
+      <Route path={TESTE} isPrivate component={Teste} />
 
-      <Route path="/definir-senha" component={DefinePassoword} />
-      <Route path="/esqueci-senha/inicio" component={Initial} />
-      <Route path="/esqueci-senha/confirmar-dados" component={ConfirmData} />
+      <Route path={DEFINE_PASSWORD} component={DefinePassoword} />
+      <Route path={FORGOT_PASSWORD_INIT} component={Initial} />
+      <Route path={FORGOT_PASSWORD_CONFIRM_DATA} component={ConfirmData} />
 
-      <Route path="*" component={NotFound} />
+      <Route path={NOT_FOUND} component={NotFound} />
     </Switch>
   )
 }

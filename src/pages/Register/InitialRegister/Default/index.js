@@ -20,6 +20,7 @@ import axios from '@/services/apiPatient'
 import AlreadyExists from '../messages/warning/AlreadyExists'
 import { useModal } from '@/context/useModal'
 import { useLoading } from '@/context/useLoading'
+import { RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 function DefaultRegister() {
   const [cpf, setCpf] = useState('')
@@ -69,7 +70,7 @@ function DefaultRegister() {
     } catch ({ response }) {
       const apiStatus = response.status
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return history.push('/cadastro/paciente/', { userData: { cpf } })
+        return history.push(RESGISTE_PATIENT, { userData: { cpf } })
       }
     } finally {
       Loading.turnOff()

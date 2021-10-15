@@ -12,6 +12,7 @@ import apiPatient from '@/services/apiPatient'
 
 import { Container } from './styles'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
+import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 function ComeBack({ idPatient }) {
   const { closeModal, showMessage } = useModal()
@@ -21,7 +22,7 @@ function ComeBack({ idPatient }) {
   const onDoNotConfirmExit = () => {
     closeModal()
   }
-
+git 
   const onConfirmExit = async () => {
     try {
       Loading.turnOn()

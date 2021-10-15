@@ -12,6 +12,7 @@ import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import { useModal } from '@/context/useModal'
 import HasCardSabin from './messages/HasCardSabin'
 import ExpiredSession from './messages/ExpiredSession'
+import { FORGOT_PASSWORD_INIT } from '@/routes/constants/namedRoutes/routes'
 
 function Login() {
   const [cpf, setCpf] = useState('')
@@ -75,7 +76,7 @@ function Login() {
         />
         <ButtonPrimary type="submit">Entrar</ButtonPrimary>
         <span>
-          <Link to="/esqueci-senha/inicio">Esqueci minha senha</Link>{' '}
+          <Link to={FORGOT_PASSWORD_INIT}>Esqueci minha senha</Link>{' '}
         </span>
         <div>
           Não possui conta?

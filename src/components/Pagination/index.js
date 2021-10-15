@@ -2,7 +2,6 @@ import useQuery from '@/hooks/useQuery'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import SelectComponent from '../Form/Select'
-import options from './static'
 import { Container, Prev, Next } from './style'
 
 const Pagination = ({ total, restQuery, range, setQuery }) => {
@@ -21,18 +20,10 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
   }, [limit, currentPage, restQuery])
 
   useEffect(() => {
-    if(currentPage>totalPages){
+    if (currentPage > totalPages) {
       setCurrentPage(1)
     }
   }, [total])
-
-  // useEffect(() => {
-  //   if(currentPage > totalPages){
-  //     setCurrentPage(1)
-  //     setLimit(10)
-  //     history.push(`?page=${1}&limit=${limit}${restQuery || ''}`)
-  //   }
-  // }, [restQuery]);
 
   const hadleChange = ({ target }) => {
     setLimit(target.value)
@@ -53,7 +44,14 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
       <div>
         <span>Linhas por página:</span>
         <SelectComponent
-          options={options(range || 10)}
+          options={
+            range || [
+              { label: 10, value: 10 },
+              { label: 25, value: 25 },
+              { label: 50, value: 50 },
+              { label: 100, value: 100 },
+            ]
+          }
           value={limit}
           onChange={hadleChange}
           variation="secondary"

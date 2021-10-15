@@ -32,7 +32,7 @@ function Menu({ expanded }) {
         </li>
       ))} */}
       {TemporaryMenu.map((item) => (
-        <NavLink activeClassName='active' key={item.name} to={item.path}>
+        <NavLink key={item.name} to={item.path}>
           <span />
           <div>
             {item.icon}

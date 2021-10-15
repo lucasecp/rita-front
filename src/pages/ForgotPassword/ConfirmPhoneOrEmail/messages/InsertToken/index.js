@@ -12,6 +12,7 @@ import LastTry from '../error/LastTry'
 import apiUser from '@/services/apiUser'
 import { useModal } from '@/context/useModal'
 import InputText from '@/components/Form/InputText'
+import { DEFINE_PASSWORD } from '@/routes/constants/namedRoutes/routes'
 
 const MODAL = {
   INSERT_TOKEN: 'insert_token',
@@ -83,7 +84,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
         }
         setToken('')
         closeModal()
-        history.push('/definir-senha', { cpf, ...response.data })
+        history.push(DEFINE_PASSWORD, { cpf, ...response.data })
       }
     } catch ({ response }) {
       if (response.status === 400) {
