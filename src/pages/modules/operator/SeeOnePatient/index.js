@@ -136,6 +136,7 @@ function seeOnePatient() {
             'dd/MM/yyyy'
           ),
           time: format(parseISO(validationsFromApi.dataValidacao), 'HH:MM'),
+          status: validationsFromApi.status,
         }
 
         console.log(validationsMapped)
