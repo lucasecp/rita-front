@@ -14,7 +14,7 @@ const InputText = ({ label, setValue, hasError, type, msgError,variation, ...res
   }
 
   return (
-    <Container variation={variation}  hasError={hasError}>
+    <Container variation={variation} hasError={msgError || hasError}>
       {label && <label htmlFor={label}>{label}</label>}
       <input
         type={type || 'text'}

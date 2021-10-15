@@ -35,11 +35,11 @@ const RegisterPatient = () => {
   const [dataClientSabin, setDataClientSabin] = useState({})
   const [buttonPass, setButtonPass] = useState(false)
   const [documentFiles, setdocumentFiles] = useState({})
+
   useEffect(() => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
-  
   const uploadDocuments = async () => {
     Loading.turnOn()
 
@@ -160,7 +160,11 @@ const RegisterPatient = () => {
           />
         )}
         {step === 4 && (
-          <Dependents newData={data} setData={setData} dataClientSabin={dataClientSabin} />
+          <Dependents
+            newData={data}
+            setData={setData}
+            dataClientSabin={dataClientSabin}
+          />
         )}
         <BtnGroup>
           {step > 1 && (

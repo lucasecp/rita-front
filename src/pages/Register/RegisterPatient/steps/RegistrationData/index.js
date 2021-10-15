@@ -47,38 +47,26 @@ const RegistrationData = ({
     setCpf(newData.cpf || dataClientSabin.cpf || '')
   }, [dataClientSabin])
 
-
-    useEffect(() => {
-      if (
-        hasPermitionToNext()
-      ) {
-        const dataObj = {
-          nome: name,
-          email,
-          sexo: gender,
-          dataNascimento: birthdate,
-          telefone: phone,
-          cpf,
-        }
-        setButtonPass(true)
-        setData((data) => {
-          return { ...data, ...dataObj }
-        })
-      } else {
-        setButtonPass(false)
+  useEffect(() => {
+    if (hasPermitionToNext()) {
+      const dataObj = {
+        nome: name,
+        email,
+        sexo: gender,
+        dataNascimento: birthdate,
+        telefone: phone,
+        cpf,
       }
-    }, [
-      name,
-      email,
-      cpf,
-      terms,
-      confirmEmail,
-      birthdate,
-      gender,
-      phone,
-      errors,
-    ])
-    const hasPermitionToNext = () =>
+      setButtonPass(true)
+      setData((data) => {
+        return { ...data, ...dataObj }
+      })
+    } else {
+      setButtonPass(false)
+    }
+  }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone, errors])
+
+  const hasPermitionToNext = () =>
     !Object.values(errors).filter((err) => err).length &&
     name &&
     email &&
@@ -155,7 +143,7 @@ const RegistrationData = ({
               })
             }
             msgError={errors.confirmEmail}
-            onPaste={(e)=> e.preventDefault() }
+            onPaste={(e) => e.preventDefault()}
           />
         </Col>
         <Col md="6" className="mt-4">
@@ -234,7 +222,9 @@ const RegistrationData = ({
           />
         </Col>
       </Row>
-     {!hasPermitionToNext() && <MsgError className='mt-3'>Todos os campos são obrigatórios.</MsgError>}
+      {!hasPermitionToNext() && (
+        <MsgError className="mt-3">Todos os campos são obrigatórios.</MsgError>
+      )}
     </Container>
   )
 }

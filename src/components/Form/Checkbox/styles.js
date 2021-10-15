@@ -30,8 +30,15 @@ export const Container = styled.div`
     color: ${colors.purple.main.dark};
   }
 
+  .MuiCheckbox-colorPrimary.Mui-disabled {
+    color: ${colors.gray.middle};
+  }
+
   .MuiTypography-body1 {
     font-family: Athletics;
+  }
+  .MuiTypography-body1.Mui-disabled {
+    color: ${colors.gray.middle};
   }
 
   ${({ hasError }) =>

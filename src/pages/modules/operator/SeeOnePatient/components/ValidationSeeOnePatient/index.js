@@ -7,18 +7,16 @@ import RadioButton from '@/styles/components/RadioButton'
 
 import { Container } from './styles'
 
-import isObjectEmpty from '@/helpers/isEmpty'
-
-function ValidationSeeOnePatient({ validations }) {
-  const [resonDocumentNotOk, setResonDocumentNotOk] = useState(
-    validations.resonDocumentNotOk || ''
-  )
-
-  const [incomeOk, setIncomeOk] = useState(validations.incomeOk || 'no')
-
-  const [allDataVerified, setCheckAllData] = useState(
-    validations.allDataVerified || false
-  )
+// function ValidationSeeOnePatient({validations}) {
+function ValidationSeeOnePatient() {
+  const validations = {
+    documentOk: 'yes',
+    resonDocumentNotOk: 'without reson',
+    incomeOk: 'no',
+    validatorName: 'Nome do Validador',
+    date: '28/09/2021',
+    time: '13:20',
+  }
 
   return (
     <Container>
@@ -36,11 +34,13 @@ function ValidationSeeOnePatient({ validations }) {
           value="yes"
           label="Sim"
           checked={validations.documentOk === 'yes'}
+          disabled
         />
         <RadioButton
           value="no"
           label="Não"
           checked={validations.documentOk === 'no'}
+          disabled
         />
       </RadioGroup>
       {validations.documentOk === 'no' && (
@@ -48,29 +48,47 @@ function ValidationSeeOnePatient({ validations }) {
           label="Descreva o motivo*:"
           rows="3"
           limit="2000"
-          value={resonDocumentNotOk}
-          setValue={setResonDocumentNotOk}
+          value={validations.resonDocumentNotOk}
+          disabled
         />
       )}
       <h2>
         Paciente apresentou comprovante de renda válido com valor de até 1
         salário mínimo e meio?
       </h2>
-      <RadioGroup aria-label="incomeOk" name="incomeOk" value={incomeOk}>
-        <RadioButton value="yes" label="Sim" checked={incomeOk === 'yes'} />
-        <RadioButton value="no" label="Não" checked={incomeOk === 'no'} />
+      <RadioGroup
+        aria-label="incomeOk"
+        name="incomeOk"
+        value={validations.incomeOk}
+      >
+        <RadioButton
+          value="yes"
+          label="Sim"
+          checked={validations.incomeOk === 'yes'}
+          disabled
+        />
+        <RadioButton
+          value="no"
+          label="Não"
+          checked={validations.incomeOk === 'no'}
+          disabled
+        />
       </RadioGroup>
       {validations.documentOk === 'yes' && (
         <section>
           <CheckboxComponent
             id="terms"
             label="Atesto que verifiquei todos os dados preenchidos pelo usuário como dados reais."
-            checked={allDataVerified}
-            setValue={setCheckAllData}
+            checked={validations.documentOk === 'yes'}
             colorLight
+            disabled
           />
         </section>
       )}
+      <h6>
+        Registro validado por <b>{validations.validatorName}</b> em{' '}
+        {validations.date} {validations.time} com status <b>Aprovado</b>
+      </h6>
     </Container>
   )
 }

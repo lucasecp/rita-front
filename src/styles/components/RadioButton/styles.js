@@ -11,6 +11,10 @@ export const ContainerRadio = styled.div`
     }
   }
 
+  .MuiRadio-colorSecondary.Mui-disabled {
+    color: ${colors.gray.middle};
+  }
+
   .MuiRadio-root {
     color: #979797;
 
@@ -34,5 +38,8 @@ export const ContainerLabel = styled.div`
     color: ${({ checked }) =>
       checked ? colors.purple.main.dark : colors.gray.dark};
     margin-left: ${({ label }) => (label ? 2 : 0)}px;
+  }
+  .MuiTypography-body1.Mui-disabled {
+    color: ${colors.gray.dark};
   }
 `

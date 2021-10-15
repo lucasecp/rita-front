@@ -27,19 +27,8 @@ function ComeBack({ idPatient }) {
     try {
       Loading.turnOn()
 
-      const response = await apiPatient.patch(
-        `/paciente/${idPatient}/liberar-validacao`
-      )
-
-      if (response.status === 200) {
-        if (
-          response.data.mensagem ===
-          'Avaliacão de paciente liberada com sucesso!'
-        ) {
-          history.push(OPERATOR_ANALYZE_PATIENT)
-          closeModal()
-        }
-      }
+      history.push('/pacientes/analisar-pacientes')
+      closeModal()
     } catch ({ response }) {
 
       if (response.status.toString()[0] === '5') {
@@ -57,7 +46,7 @@ function ComeBack({ idPatient }) {
     <Container>
       <img src={warningIcon} />
       <p>
-        Suas últimas alterações não foram salvas.
+        Suas últimas alterações não serão salvas.
         <br />
         Confirma a saída?
       </p>

@@ -63,7 +63,7 @@ function seeOnePatient() {
         Loading.turnOn()
 
         holdingDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumeto=FotoSegurandoDoc`,
+          `/paciente/documento?cpf=${userCpf}&tipoDocumento=FotoSegurandoDoc`,
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
@@ -75,7 +75,7 @@ function seeOnePatient() {
         Loading.turnOn()
 
         identifyDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumeto=Cpf`,
+          `/paciente/documento?cpf=${userCpf}&tipoDocumento=Cpf`,
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
@@ -87,7 +87,7 @@ function seeOnePatient() {
         Loading.turnOn()
 
         incomeDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumeto=Renda`,
+          `/paciente/documento?cpf=${userCpf}&tipoDocumento=Renda`,
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
@@ -144,7 +144,7 @@ function seeOnePatient() {
           'Atenção Este registro está sendo analisado por outro validador.'
         ) {
           showMessage(SimpleModal, {
-            type: MODAL_TYPES.SUCCESS,
+            type: MODAL_TYPES.WARNING,
             message: (
               <>
                 Este registro está sendo analisado pelo validador{' '}
@@ -200,7 +200,7 @@ function seeOnePatient() {
           'Atenção Este registro está sendo analisado por outro validador.'
         ) {
           showMessage(SimpleModal, {
-            type: MODAL_TYPES.SUCCESS,
+            type: MODAL_TYPES.WARNING,
             message: (
               <>
                 Este registro está sendo analisado pelo validador{' '}

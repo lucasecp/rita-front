@@ -1,4 +1,6 @@
 import React from 'react'
+import SelectComponent from '@/components/Form/Select'
+import { incomeOptions } from '../../constants/income'
 import SeeDocumentFile from './SeeDocumentFile'
 
 import { Container } from './styles'
@@ -17,11 +19,22 @@ function DocumentsSeeOnePatient({ documents }) {
         document={documents.identifyDocument}
         disabled={!documents.identifyDocument}
       />
-      <SeeDocumentFile
-        title="Comprovante de renda"
-        document={documents.incomeDocument}
-        disabled={!documents.incomeDocument}
-      />
+      <section>
+        <SelectComponent
+          label="Renda:"
+          labelDefaultOption="Selecione"
+          options={incomeOptions}
+          value={''}
+          disabled
+        />
+        <aside>
+          <SeeDocumentFile
+            title="Comprovante de renda"
+            document={documents.incomeDocument}
+            disabled={!documents.incomeDocument}
+          />
+        </aside>
+      </section>
     </Container>
   )
 }
