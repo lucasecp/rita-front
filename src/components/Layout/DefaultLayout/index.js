@@ -8,7 +8,7 @@ import { CustomContainer } from './style'
 import HeaderMobile from './mobile/Header'
 import SidenavMobile from './mobile/Sidenav'
 import Mobile from './mobile'
-import Desktop from './desktop'
+import Desktop from './Desktop'
 
 const DefaultLayout = ({ children, title }) => {
   const isMobile = useMediaPredicate('(max-width: 767px)')
