@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 
 export const Container = styled.div`
-  padding-bottom: 22px;
+  padding-bottom: 20px;
   border-bottom: 2px solid ${colors.gray.light};
 
   & + & {
@@ -45,11 +45,11 @@ export const Container = styled.div`
     + section {
       transition: 0.3s;
 
-      /* opacity: 0; */
       visibility: hidden;
       overflow: hidden;
       min-height: 0px;
       height: 0px;
+      /* padding-bottom: 4px; */
 
       ${({ expanded }) =>
         expanded &&
@@ -58,7 +58,9 @@ export const Container = styled.div`
           visibility: visible;
 
           margin-top: 24px;
-          height: 176px;
+          /* height: 176px; */
+          height: auto;
+          padding-bottom: 4px;
         `}
     }
   }

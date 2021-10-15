@@ -9,7 +9,22 @@ import SelectComponent from '@/components/Form/Select'
 
 import { Container } from './styles'
 
-function PersonExpandable({ title, personData, setPersonData, holder }) {
+import {
+  validateBirthdate,
+  validateCpf,
+  validateEmail,
+  validateGender,
+  validateName,
+  validatePhone,
+} from '../../helpers/validatorFields'
+
+function PersonExpandable({
+  title,
+  allPersonData,
+  personData,
+  setPersonData,
+  holder,
+}) {
   const birthDateFormated =
     personData?.dataNascimento &&
     format(parseISO(personData?.dataNascimento), 'dd/MM/yyyy')
@@ -23,6 +38,10 @@ function PersonExpandable({ title, personData, setPersonData, holder }) {
   const [phone, setPhone] = useState(personData.telefone || '')
   const [email, setEmail] = useState(personData.email || '')
 
+  const [errors, setErrors] = useState({})
+
+  // console.log(allPersonData)
+
   useEffect(() => {
     setPersonData({
       name,
@@ -31,8 +50,9 @@ function PersonExpandable({ title, personData, setPersonData, holder }) {
       gender,
       phone,
       email,
+      error: Object.values(errors).some((value) => value !== ''),
     })
-  }, [name, cpf, birthDate, gender, phone, email])
+  }, [name, cpf, birthDate, gender, phone, email, errors])
 
   const toogleExpanded = () => setExpanded(!expanded)
 
@@ -43,12 +63,22 @@ function PersonExpandable({ title, personData, setPersonData, holder }) {
         <img src={arrowDownOutlineIcon} onClick={toogleExpanded} />
       </header>
       <section>
-        <InputText label="Nome Completo:" value={name} setValue={setName} />
+        <InputText
+          label="Nome Completo:"
+          value={name}
+          setValue={setName}
+          onBlur={() => setErrors({ ...errors, ...validateName(name) })}
+          onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
+          msgError={errors.name}
+        />
         <InputMask
           label="CPF:"
           mask="999.999.999-99"
           value={cpf}
           setValue={setCpf}
+          onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
+          onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
+          msgError={errors.cpf}
         />
       </section>
       <section>
@@ -57,6 +87,13 @@ function PersonExpandable({ title, personData, setPersonData, holder }) {
           mask="99/99/9999"
           value={birthDate}
           setValue={setBirthDate}
+          onBlur={() =>
+            setErrors({ ...errors, ...validateBirthdate(birthDate) })
+          }
+          onKeyUp={() =>
+            setErrors({ ...errors, ...validateBirthdate(birthDate) })
+          }
+          msgError={errors.birthDate}
         />
         <SelectComponent
           label="Gênero:"
@@ -68,14 +105,29 @@ function PersonExpandable({ title, personData, setPersonData, holder }) {
           ]}
           value={gender}
           setValue={setGender}
+          onKeyUp={(e) => {
+            // setGender(e.target.value)
+            setErrors({ ...errors, ...validateGender(e.target.value) })
+          }}
+          msgError={errors.gender}
         />
         <InputMask
           label="Celular:"
           mask="(99) 99999-9999"
           value={phone}
           setValue={setPhone}
+          onBlur={() => setErrors({ ...errors, ...validatePhone(phone) })}
+          onKeyUp={() => setErrors({ ...errors, ...validatePhone(phone) })}
+          msgError={errors.phone}
         />
-        <InputText label="E-mail:" value={email} setValue={setEmail} />
+        <InputText
+          label="E-mail:"
+          value={email}
+          setValue={setEmail}
+          onBlur={() => setErrors({ ...errors, ...validateEmail(email) })}
+          onKeyUp={() => setErrors({ ...errors, ...validateEmail(email) })}
+          msgError={errors.email}
+        />
       </section>
     </Container>
   )

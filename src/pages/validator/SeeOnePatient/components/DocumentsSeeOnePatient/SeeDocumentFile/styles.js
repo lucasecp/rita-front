@@ -19,16 +19,6 @@ export const Container = styled.div.attrs()`
     margin-top: 24px;
   }
 
-  > h3 {
-    margin-bottom: 4px;
-
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 25px;
-
-    color: ${colors.gray.middle};
-  }
-
   > h4 {
     font-weight: 700;
     font-size: 16px;

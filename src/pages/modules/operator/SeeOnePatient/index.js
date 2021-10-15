@@ -33,7 +33,6 @@ function seeOnePatient() {
   const [disableSaveButton, setDisableSaveButton] = useState(true)
 
   const [patientData, setPatientData] = useState()
-  const [patientDataFromApi, setPatientDataFromApi] = useState({})
 
   const [patientDependents, setPatientDependents] = useState([])
   const [patientAddress, setPatientAddress] = useState()
@@ -67,7 +66,7 @@ function seeOnePatient() {
         Loading.turnOn()
 
         holdingDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumeto=FotoSegurandoDoc`,
+          `/paciente/documento?cpf=${userCpf}&tipoDocumento=FotoSegurandoDoc`,
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
@@ -80,7 +79,7 @@ function seeOnePatient() {
         Loading.turnOn()
 
         identifyDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumeto=Cpf`,
+          `/paciente/documento?cpf=${userCpf}&tipoDocumento=Cpf`,
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
@@ -93,7 +92,7 @@ function seeOnePatient() {
         Loading.turnOn()
 
         incomeDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumeto=Renda`,
+          `/paciente/documento?cpf=${userCpf}&tipoDocumento=Renda`,
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
@@ -111,6 +110,22 @@ function seeOnePatient() {
 
     loadPatientInformations()
   }, [])
+
+  useEffect(() => {
+    const dependentErrorExists = patientDependents.some(
+      (dependent) => dependent?.error
+    )
+
+    setDisableSaveButton(dependentErrorExists || patientData?.error)
+  }, [patientData, patientDependents])
+
+  const onDependentsChange = (personDataReceived, index) => {
+    const patientDependentsTemporary = patientDependents
+
+    patientDependentsTemporary[index] = personDataReceived
+
+    setPatientDependents([...patientDependentsTemporary])
+  }
 
   const onComeBack = () => {
     showMessage(ComeBack, { idPatient: patientData.idPaciente })
@@ -132,10 +147,11 @@ function seeOnePatient() {
         {patientDependents?.map((dependent, index) => (
           <PersonExpandable
             title={`Dados cadastrais do dependente ${index + 1}`}
+            allPersonData={[patientData, ...patientDependents]}
             personData={dependent}
-            setPersonData={()=>{
-              
-            }}
+            setPersonData={(personDataReceived) =>
+              onDependentsChange(personDataReceived, index)
+            }
             key={index}
           />
         ))}
@@ -148,8 +164,13 @@ function seeOnePatient() {
         <DocumentsSeeOnePatient documents={patientDocuments} />
         <ValidationSeeOnePatient validations={validations} />
         <footer>
-          <ButtonLink onClick={null}>Voltar</ButtonLink>
-          <OutlineButton onClick={null}>Salvar</OutlineButton>
+          <ButtonLink onClick={onComeBack}>Voltar</ButtonLink>
+          <OutlineButton
+            disabled={disableSaveButton}
+            onClick={onSavePatientData}
+          >
+            Salvar
+          </OutlineButton>
         </footer>
       </Container>
     </DefaultLayout>

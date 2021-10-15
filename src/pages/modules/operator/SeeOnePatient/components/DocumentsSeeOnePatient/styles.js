@@ -14,4 +14,23 @@ export const Container = styled.div`
 
     color: ${colors.gray.dark};
   }
+
+  > section {
+    margin-top: 24px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: flex-end;
+
+    select {
+      height: 56px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    > section {
+      grid-template-columns: 1fr;
+    }
+  }
 `

@@ -61,6 +61,20 @@ export const Container = styled.div`
     margin-top: 16px;
   }
 
+  > h6 {
+    margin-top: 24px;
+
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+
+    color: ${colors.gray.dark};
+
+    > b {
+      font-weight: 700;
+    }
+  }
+
   @media (max-width: 767px) {
     > h2 {
       font-size: 16px;

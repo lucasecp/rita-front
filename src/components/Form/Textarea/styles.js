@@ -19,6 +19,10 @@ export const Container = styled.div`
     border-radius: 4px;
     color: ${colors.gray.dark};
     padding: 14px 16px;
+
+    :disabled {
+      background: ${colors.gray.light};
+    }
   }
 
   > label + textarea {
