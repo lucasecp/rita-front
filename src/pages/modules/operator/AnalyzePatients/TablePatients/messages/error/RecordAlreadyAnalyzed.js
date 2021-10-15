@@ -29,8 +29,6 @@ function RecordAlreadyAnalized(data) {
         history.push(VALIDATOR_SEE_ONE_PATIENT, { cpf:data.cpf })
       }
     } catch ({ response }) {
-      const responseApi = response.data
-      console.log(responseApi);
     } finally {
       Loading.turnOff()
     }

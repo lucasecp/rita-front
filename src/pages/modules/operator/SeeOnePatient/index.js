@@ -53,13 +53,11 @@ function seeOnePatient() {
         Loading.turnOn()
         const response = await apiPatient.get(`/paciente/cpf?cpf=${userCpf}`)
 
-        console.log(response.data)
 
         setPatientData(response.data)
         setPatientDependents(response.data.dependentes)
         setPatientAddress(response.data.endereco)
       } catch ({ response }) {
-        console.log(response)
       } finally {
         Loading.turnOff()
       }

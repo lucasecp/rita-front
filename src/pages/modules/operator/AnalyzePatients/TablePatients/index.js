@@ -2,12 +2,10 @@ import Pagination from '@/components/Pagination'
 import CustomTooltip from '@/components/Tooltip'
 import { useLoading } from '@/context/useLoading'
 import convertToCaptalize from '@/helpers/convertToCaptalize'
-import formatBirthdate from '@/helpers/formatDate'
 import formatName from '@/helpers/formatName'
 import useQuery from '@/hooks/useQuery'
 import apiPatient from '@/services/apiPatient'
 import { getUserStorage, setHeaderToken } from '@/storage/user'
-import { useModal } from '@/context/useModal'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { queryOrderString, queryFilterString } from '../helpers/queryString'
@@ -58,7 +56,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
     if (status === 'N') return 'Negado'
     if (status === 'P') return 'Pendente'
     if (status === 'A') return 'Aprovado'
-    if (status === 'EA') return 'Em analise'
+    if (status === 'EA') return 'Em análise'
   }
 
   const handleClick = async (cpf) => {

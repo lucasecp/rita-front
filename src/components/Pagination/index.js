@@ -20,10 +20,10 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
   }, [limit, currentPage, restQuery])
 
   useEffect(() => {
-    if (currentPage > totalPages) {
+    if (currentPage > totalPages && total > 0) {
       setCurrentPage(1)
     }
-  }, [total])
+  }, [total,currentPage,limit])
 
   const hadleChange = ({ target }) => {
     setLimit(target.value)
@@ -59,7 +59,7 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
       </div>
 
       <div>
-        {currentPage} - {totalPages} de {total}
+        {currentPage} - {totalPages} de {total || 0}
       </div>
 
       <div>

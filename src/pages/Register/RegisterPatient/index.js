@@ -39,7 +39,7 @@ const RegisterPatient = () => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
-  console.log(data);
+  
   const uploadDocuments = async () => {
     Loading.turnOn()
 
@@ -53,7 +53,6 @@ const RegisterPatient = () => {
         formData
       )
     } catch ({ response }) {
-      console.log(response)
     } finally {
       Loading.turnOff()
     }
@@ -87,7 +86,6 @@ const RegisterPatient = () => {
           formData
         )
       } catch ({ response }) {
-        console.log(response)
       } finally {
         Loading.turnOff()
       }

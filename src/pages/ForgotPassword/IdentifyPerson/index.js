@@ -43,7 +43,6 @@ function IdentifyPerson() {
     try {
       Loading.turnOn()
       const { data } = await apiUser.get(`/status?cpf=${cpf}`)
-      console.log(data);
       return history.push(FORGOT_PASSWORD_CONFIRM_DATA, {
         cpf,
         email: data.email,

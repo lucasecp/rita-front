@@ -37,7 +37,6 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
   useEffect(() => {
      setTypeOfModal(isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN)
   }, [isLastTry]);
-  console.log(isLastTry);
 
   const onRequestNewToken = async () => {
     Loading.turnOn()
@@ -88,7 +87,6 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
       }
     } catch ({ response }) {
       const messageFromApi = response?.data.message
-      console.log(messageFromApi);
       setHasError(true)
 
       if (

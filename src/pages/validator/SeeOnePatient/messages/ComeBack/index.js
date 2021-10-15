@@ -41,7 +41,6 @@ function ComeBack({ idPatient }) {
         }
       }
     } catch ({ response }) {
-      console.log(response)
 
       if (response.status.toString()[0] === '5') {
         showMessage(SimpleModal, {

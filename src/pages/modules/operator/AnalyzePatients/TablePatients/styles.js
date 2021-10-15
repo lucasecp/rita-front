@@ -101,7 +101,7 @@ export const Td = styled.td`
       }
     `}
   ${({ status }) =>
-    status === 'Em analise' &&
+    status === 'Em análise' &&
     css`
       span {
         background: #706bff;

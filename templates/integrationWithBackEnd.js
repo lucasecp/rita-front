@@ -4,7 +4,6 @@
     const response = await api.method('/route')
 
     // remove when finished configuring API responses
-    console.log(response)
 
     if (response.status === 200) {
       if (response.data.mensagem === 'Message From Api') {
@@ -13,7 +12,6 @@
     }
   } catch ({ response }) {
     // remove when finished configuring API responses
-    console.log(response)
 
     if (response.status.toString()[0] === '4') {
       if (response.status === 401) {

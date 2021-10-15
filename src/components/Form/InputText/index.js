@@ -12,7 +12,7 @@ const InputText = ({ label, setValue, hasError, type, msgError,variation, ...res
     }
     setValue(target.value)
   }
-  
+
   return (
     <Container variation={variation}  hasError={hasError}>
       {label && <label htmlFor={label}>{label}</label>}

@@ -105,7 +105,6 @@ function ConfirmPhoneOrEmail() {
       isLastTry = ultimaTentativa
     } catch ({ response }) {
       const messageFromApi = response?.data.message
-      console.log(messageFromApi)
 
       if (response?.status === 400) {
         if (

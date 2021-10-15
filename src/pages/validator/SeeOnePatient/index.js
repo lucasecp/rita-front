@@ -55,7 +55,6 @@ function seeOnePatient() {
         setPatientDependents(response.data.dependentes)
         setPatientAddress(response.data.endereco)
       } catch ({ response }) {
-        console.log(response)
       } finally {
         Loading.turnOff()
       }
@@ -68,7 +67,6 @@ function seeOnePatient() {
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
-        console.log('falha segurando doc', response)
       } finally {
         Loading.turnOff()
       }
@@ -81,7 +79,6 @@ function seeOnePatient() {
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
-        console.log('falha identificacao', response)
       } finally {
         Loading.turnOff()
       }
@@ -94,7 +91,6 @@ function seeOnePatient() {
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
-        console.log('falha renda', response)
       } finally {
         Loading.turnOff()
       }
@@ -141,7 +137,6 @@ function seeOnePatient() {
         message: 'Validação salva!',
       })
 
-      console.log(response)
     } catch ({ response }) {
       if (response.status.toString()[0] === '4') {
         if (
@@ -198,9 +193,7 @@ function seeOnePatient() {
           })
         }
       }
-      console.log(response)
     } catch ({ response }) {
-      console.log(response)
       if (response.status.toString()[0] === '4') {
         if (
           response.data.message ===
