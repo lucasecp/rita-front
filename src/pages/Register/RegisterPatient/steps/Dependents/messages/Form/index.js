@@ -128,6 +128,7 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf }) => {
             onBlur={() => setErrors({ ...errors, ...validateName(name) })}
             onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
             msgError={errors.name}
+            maxLength={100}
           />
         </Col>
         <Col md="6" className="mt-4 mt-md-0">

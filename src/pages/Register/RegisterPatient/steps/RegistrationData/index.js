@@ -102,6 +102,7 @@ const RegistrationData = ({
             onBlur={() => setErrors({ ...errors, ...validateName(name) })}
             onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
             msgError={errors.name}
+            maxLength={100}
           />
         </Col>
 

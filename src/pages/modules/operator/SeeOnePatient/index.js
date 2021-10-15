@@ -14,7 +14,6 @@ import ValidationSeeOnePatient from './components/ValidationSeeOnePatient'
 
 import ButtonLink from '@/components/Button/Link'
 import OutlineButton from '@/components/Button/Outline'
-import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/context/useModal'
 import ComeBack from './messages/ComeBack'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
@@ -61,7 +60,6 @@ function seeOnePatient() {
 
         // console.log(response)
       } catch ({ response }) {
-        console.log(response)
       } finally {
         Loading.turnOff()
       }

@@ -8,7 +8,6 @@ import { useModal } from '@/context/useModal'
 
 function DataDontMatch({choice}) {
   const { closeModal } = useModal()
-  console.log(choice);
 
   const renderMessage = () => {
     if (choice === 'phone') {
