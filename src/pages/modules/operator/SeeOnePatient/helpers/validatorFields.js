@@ -20,17 +20,17 @@ export const validateEmail = (email, confirmEmail) => {
   return { email: '' }
 }
 
-export const validateCpf = (value) => {
-  const newValue = clear(value)
+// export const validateCpf = (value) => {
+//   const newValue = clear(value)
 
-  if (!newValue) {
-    return { cpf: 'CPF Obrigatório.' }
-  } else if (!cpfValidate(newValue)) {
-    return { cpf: 'CPF Inválido.' }
-  }
+//   if (!newValue) {
+//     return { cpf: 'CPF Obrigatório.' }
+//   } else if (!cpfValidate(newValue)) {
+//     return { cpf: 'CPF Inválido.' }
+//   }
 
-  return { cpf: '' }
-}
+//   return { cpf: '' }
+// }
 
 export const validatePhone = (value) => {
   if (clear(value).length < 11) {
@@ -114,4 +114,28 @@ export const validateComplement = (value) => {
   }
 
   return { complement: '' }
+}
+
+export const validateCpf = (value, allPersons) => {
+  let message = ''
+  const cpfCleared = clear(value)
+
+  const alreadyExist =
+    allPersons?.filter((person) => clear(person.cpf) === cpfCleared).length !==
+    1
+
+  if (!cpfCleared) {
+    message = 'CPF Obrigatório.'
+  }
+
+  if (!cpfValidate(cpfCleared)) {
+    message = 'CPF Inválido.'
+  }
+
+  if (alreadyExist) {
+    message =
+      'O CPF não pode ser igual ao de outra pessoa, por favor verifique os dados e preencha novamente'
+  }
+
+  return { cpf: message }
 }

@@ -19,6 +19,9 @@ import { useModal } from '@/context/useModal'
 import ComeBack from './messages/ComeBack'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
+import { getDataMapped } from './helpers/getDataMapped'
+import { toast } from 'react-toastify'
+import { format, parseISO } from 'date-fns'
 
 function seeOnePatient() {
   const history = useHistory()
@@ -39,7 +42,7 @@ function seeOnePatient() {
   const [patientAddress, setPatientAddress] = useState()
   const [patientDocuments, setPatientDocuments] = useState({})
 
-  const [validations, setValidations] = useState({})
+  const [validations, setValidations] = useState()
 
   useEffect(() => {
     const loadPatientInformations = async () => {
@@ -52,11 +55,11 @@ function seeOnePatient() {
         Loading.turnOn()
         const response = await apiPatient.get(`/paciente/cpf?cpf=${userCpf}`)
 
-        console.log(response.data)
-
         setPatientData(response.data)
         setPatientDependents(response.data.dependentes)
         setPatientAddress(response.data.endereco)
+
+        // console.log(response)
       } catch ({ response }) {
         console.log(response)
       } finally {
@@ -113,6 +116,58 @@ function seeOnePatient() {
   }, [])
 
   useEffect(() => {
+    const loadValidationInformations = async () => {
+      try {
+        Loading.turnOn()
+
+        const response = await apiPatient.get(
+          `/paciente/${patientData.idPaciente}/validar`
+        )
+
+        const validationsFromApi = response.data[0]
+
+        console.log(validationsFromApi)
+
+        const validationsMapped = {
+          documentOk: validationsFromApi.documentoOk ? 'yes' : 'no',
+          resonDocumentNotOk: validationsFromApi.motivoDocumento || '',
+          incomeOk: validationsFromApi.rendaBaixa ? 'yes' : 'no',
+          validatorName: validationsFromApi.nomeValidador,
+          date: format(
+            parseISO(validationsFromApi.dataValidacao),
+            'dd/MM/yyyy'
+          ),
+          time: format(parseISO(validationsFromApi.dataValidacao), 'HH:MM'),
+        }
+
+        console.log(validationsMapped)
+        setValidations(validationsMapped)
+      } catch ({ response }) {
+        console.log(response)
+
+        // if (response.status.toString()[0] === '4') {
+        //   if (response.status === 404) {
+        //     // Actions to 404 Error
+        //   }
+        // }
+
+        if (response?.status.toString()[0] === '5') {
+          showMessage(SimpleModal, {
+            type: MODAL_TYPES.ERROR,
+            message: 'Erro no Servidor!',
+          })
+        }
+      } finally {
+        Loading.turnOff()
+      }
+    }
+
+    if (patientData?.idPaciente) {
+      loadValidationInformations()
+    }
+  }, [patientData])
+
+  useEffect(() => {
     const dependentErrorExists = patientDependents.some(
       (dependent) => dependent?.error
     )
@@ -132,7 +187,49 @@ function seeOnePatient() {
     showMessage(ComeBack, { idPatient: patientData.idPaciente })
   }
 
-  const onSavePatientData = async () => {}
+  const onSavePatientData = async () => {
+    const dataToSend = getDataMapped(
+      patientData,
+      patientDependents,
+      patientAddress
+    )
+
+    console.log(dataToSend)
+
+    try {
+      Loading.turnOn()
+
+      const response = await apiPatient.put('/paciente/operador', dataToSend)
+
+      // remove when finished configuring API responses
+      console.log(response)
+
+      if (response.status === 200) {
+        if (response.data.mensagem === 'Sucesso') {
+          toast.success('Dados atualizados com sucesso.')
+          history.push(OPERATOR_ANALYZE_PATIENT)
+        }
+      }
+    } catch ({ response }) {
+      // remove when finished configuring API responses
+      console.log(response)
+
+      if (response.status.toString()[0] === '4') {
+        if (response.status === 404) {
+          // Actions to 404 Error
+        }
+      }
+
+      if (response.status.toString()[0] === '5') {
+        showMessage(SimpleModal, {
+          type: MODAL_TYPES.ERROR,
+          message: 'Erro no Servidor!',
+        })
+      }
+    } finally {
+      Loading.turnOff()
+    }
+  }
 
   return (
     <DefaultLayout title="Pacientes">
@@ -140,6 +237,7 @@ function seeOnePatient() {
         {patientData && (
           <PersonExpandable
             title="Dados cadastrais do titular"
+            allPersonData={[patientData, ...patientDependents]}
             personData={patientData}
             setPersonData={setPatientData}
             holder
@@ -163,7 +261,7 @@ function seeOnePatient() {
           />
         )}
         <DocumentsSeeOnePatient documents={patientDocuments} />
-        <ValidationSeeOnePatient validations={validations} />
+        {validations && <ValidationSeeOnePatient validations={validations} />}
         <footer>
           <ButtonLink onClick={onComeBack}>Voltar</ButtonLink>
           <OutlineButton

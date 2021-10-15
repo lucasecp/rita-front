@@ -40,10 +40,9 @@ function PersonExpandable({
 
   const [errors, setErrors] = useState({})
 
-  // console.log(allPersonData)
-
   useEffect(() => {
     setPersonData({
+      id: personData.idPaciente,
       name,
       cpf,
       birthDate,
@@ -76,8 +75,12 @@ function PersonExpandable({
           mask="999.999.999-99"
           value={cpf}
           setValue={setCpf}
-          onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
-          onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
+          onBlur={() =>
+            setErrors({ ...errors, ...validateCpf(cpf, allPersonData) })
+          }
+          onKeyUp={() =>
+            setErrors({ ...errors, ...validateCpf(cpf, allPersonData) })
+          }
           msgError={errors.cpf}
         />
       </section>
@@ -106,7 +109,6 @@ function PersonExpandable({
           value={gender}
           setValue={setGender}
           onKeyUp={(e) => {
-            // setGender(e.target.value)
             setErrors({ ...errors, ...validateGender(e.target.value) })
           }}
           msgError={errors.gender}
