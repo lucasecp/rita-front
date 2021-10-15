@@ -75,13 +75,13 @@ const Filter = () => {
     setErrors({})
     setOrders([])
     setFilters([])
-    history.push('?page=1&limit=10&status=P')
+    history.push('?page=1&limit=10')
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (Object.keys(validateFields()).length) return
 
-    history.push('?page=1&limit=10&status=P')
+    history.push('?page=1&limit=10')
     setFilters(verifyTypedFields(objQuery))
   }
 
