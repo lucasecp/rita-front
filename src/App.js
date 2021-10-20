@@ -16,6 +16,8 @@ import LoadingWithHook from './components/LoadingWithHook/RitaLoading'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 
+import '@/services/axios.config'
+
 const App = () => {
   return (
     <BrowserRouter>

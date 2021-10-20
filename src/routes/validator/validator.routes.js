@@ -8,6 +8,7 @@ import {
   VALIDATOR_ANALYZE_PATIENTS2,
   VALIDATOR_SEE_ONE_PATIENT,
 } from '../constants/namedRoutes/routes'
+import { permissionList } from '../../components/Layout/DefaultLayout/Menu/_menuItems/permissionList'
 
 const validatorRoutes = [
   {

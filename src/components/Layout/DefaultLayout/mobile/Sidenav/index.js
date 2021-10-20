@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 
-import Menu from './Menu'
+import Menu from '../../Menu'
+
 import { useMenu } from '@/context/Menu'
 import { Container } from './style'
 
@@ -8,9 +9,9 @@ const Sidenav = () => {
   const { setShowMenu, showMenu } = useMenu()
 
   useEffect(() => {
-    if(showMenu) document.body.style.overflow = 'hidden'
+    if (showMenu) document.body.style.overflow = 'hidden'
     else document.body.style.overflow = 'auto'
-  }, [showMenu]);
+  }, [showMenu])
 
   return (
     <Container
@@ -20,7 +21,7 @@ const Sidenav = () => {
       }
     >
       <nav>
-        <Menu />
+        <Menu expanded />
       </nav>
     </Container>
   )

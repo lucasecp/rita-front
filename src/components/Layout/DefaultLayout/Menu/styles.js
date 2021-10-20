@@ -1,12 +1,11 @@
-import styled from 'styled-components'
-import colors from '../../../../../../styles/colors'
+import styled, { css } from 'styled-components'
+import colors from '@/styles/colors'
 
 export const Container = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 250px;
 
-  > li {
+  > a {
     cursor: pointer;
     display: flex;
 
@@ -21,16 +20,24 @@ export const Container = styled.ul`
     > div {
       display: flex;
       align-items: center;
+      
+      ${({ expanded }) =>
+        !expanded &&
+        css`
+          justify-content: center;
+          margin-right: 2px;
+        `}
 
       flex: 1;
 
       padding: 18px 32px;
 
       > svg {
-        transition: 0.3s;
+        transition: none;
+        min-width: 30px;
       }
 
-      > a {
+      > span {
         margin-left: 12px;
         color: ${colors.gray.dark};
         font-weight: 700;
@@ -47,7 +54,7 @@ export const Container = styled.ul`
       }
 
       > div {
-        > a {
+        > span {
           color: ${colors.white};
         }
       }
@@ -58,11 +65,13 @@ export const Container = styled.ul`
 
       > span {
         background: ${colors.green.light};
+
       }
 
       > div {
         > svg {
-          fill: ${colors.green.light};
+          transition: none;
+          filter:invert(94%) sepia(18%) saturate(609%) hue-rotate(67deg) brightness(100%) contrast(104%);
         }
 
         > a {
@@ -71,4 +80,22 @@ export const Container = styled.ul`
       }
     }
   }
-`
+  [aria-current="page"]{
+    background: ${colors.purple.main.dark};
+    div span{
+      color: #fff
+    }
+    svg {
+      transition: none;
+      filter:invert(94%) sepia(18%) saturate(609%) hue-rotate(67deg) brightness(100%) contrast(104%);
+    }
+    > span {
+      background: ${colors.green.light};
+
+    }
+    :hover{
+      background: ${colors.purple.main.dark};
+    }
+  }
+
+  `

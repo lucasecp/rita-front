@@ -1,6 +1,6 @@
 import React from 'react'
 import logoRitaVertical from '@/assets/logo/vertical-named-logo.svg'
-import Footer from '@/components/Layout/DefaultLayout/Footer'
+import Footer from '@/components/Layout/DefaultLayout/desktop/Footer'
 
 import expandedLogo from '@/assets/logo/expanded-logo.svg'
 

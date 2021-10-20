@@ -1,18 +1,21 @@
 import React from 'react'
-import Sidenav from './Sidenav'
-import HeaderMobile from './Header'
 
-const Mobile = ({ title, html }) => {
+import Sidenav from './Sidenav'
+import Header from './Header'
+import Footer from './Footer'
+
+import { Container } from './styles'
+
+export const MobileLayout = ({ title, children }) => {
   return (
-    <>
-      <HeaderMobile />
+    <Container>
+      <Header />
       <Sidenav />
       <main>
         <h1>{title || 'Page Title'}</h1>
-        {html}
+        {children}
       </main>
-    </>
+      <Footer />
+    </Container>
   )
 }
-
-export default Mobile

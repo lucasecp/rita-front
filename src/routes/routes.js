@@ -19,7 +19,6 @@ import operatorRoutesComponent from './operator/operator.routes'
 
 import registerRoutesComponent from './register.routes'
 
-import permissions from './constants/permissions'
 import {
   DEFINE_PASSWORD,
   FORGOT_PASSWORD_CONFIRM_DATA,
@@ -29,20 +28,17 @@ import {
   NOT_FOUND,
   TESTE,
 } from './constants/namedRoutes/routes'
-import { useAuth } from '@/context/login'
 
 function Routes() {
-  const { userPermission } = useAuth()
-
   return (
     <Switch>
       {registerRoutesComponent}
 
-      {userPermission === permissions.VALIDATOR && validatorRoutesComponent}
-
-      {/* {userPermission === permissions.OPERATOR && operatorRoutesComponent} */}
+      {validatorRoutesComponent}
 
       {operatorRoutesComponent}
+
+      {/* {userPermission === permissions.OPERATOR && operatorRoutesComponent} */}
 
       {/* <Route exact path="/" component={Header} /> */}
 

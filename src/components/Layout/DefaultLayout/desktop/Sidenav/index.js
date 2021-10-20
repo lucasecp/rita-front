@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useMediaPredicate } from 'react-media-hook'
 
-import arrowImg from '../../../../assets/icons/arrow-left.svg'
+import arrowImg from '@/assets/icons/arrow-left.svg'
 
-import Menu from './Menu'
+import Menu from '../../Menu'
 
 import { Container, Logo } from './style'
 
 const MODE = {
   EXPANDED: 'expanded',
-  SHORT: 'short', 
+  SHORT: 'short',
 }
 
 const Sidenav = () => {
@@ -19,7 +19,9 @@ const Sidenav = () => {
   const isTablet = useMediaPredicate('(max-width: 1200px)')
 
   useEffect(() => {
-    if (isTablet) setMode(MODE.SHORT)
+    if (isTablet) {
+      setMode(MODE.SHORT)
+    }
   }, [])
 
   const toogleShorten = () => {
@@ -41,7 +43,7 @@ const Sidenav = () => {
       )}
       <nav>
         <header>
-          <Logo mode={mode}></Logo>
+          <Logo mode={mode} />
         </header>
         <Menu expanded={isExpanded} />
       </nav>
