@@ -2,12 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { Container } from './styles'
-// import menuPatient from '../../menuItems/patient'
-// import menuValidator from '../../menuItems/validator'
-// import { useAuth } from '@/context/login'
-// import permission from '@/routes/constants/permissions'
-import { menuItens } from './_menuItems'
 import { useAuth } from '@/context/login'
+
+import { menuItens } from './_menuItems'
 
 function Menu({ expanded }) {
   const { user } = useAuth()
@@ -25,6 +22,7 @@ function Menu({ expanded }) {
     )
 
     setMenuToShow(menuToShowTemporary)
+    setMenuToShow([])
   }, [])
 
   return (
