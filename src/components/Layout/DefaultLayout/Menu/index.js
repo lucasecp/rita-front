@@ -22,7 +22,6 @@ function Menu({ expanded }) {
     )
 
     setMenuToShow(menuToShowTemporary)
-    setMenuToShow([])
   }, [])
 
   return (
