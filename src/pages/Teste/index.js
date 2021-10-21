@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from '../../components/Layout/DefaultLayout/Footer'
+import Footer from '../../components/Layout/DefaultLayout/desktop/Footer'
 import { Container, Content } from './styles'
 import logoRitaVertical from '../../assets/logo/vertical-named-logo.svg'
 

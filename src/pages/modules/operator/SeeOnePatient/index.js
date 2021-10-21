@@ -218,13 +218,6 @@ function seeOnePatient() {
           // Actions to 404 Error
         }
       }
-
-      if (response.status.toString()[0] === '5') {
-        showMessage(SimpleModal, {
-          type: MODAL_TYPES.ERROR,
-          message: 'Erro no Servidor!',
-        })
-      }
     } finally {
       Loading.turnOff()
     }

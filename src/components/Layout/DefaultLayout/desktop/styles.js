@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import colors from '../../../styles/colors'
+import colors from '@/styles/colors'
 
-export const CustomContainer = styled.div`
+export const Container = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr auto;

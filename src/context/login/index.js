@@ -19,10 +19,10 @@ import { MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
 const UserContext = createContext()
 
 export default function AuthProvider({ children }) {
-  let currentUserPermission = null
-  const [userPermission, setUserPermission] = useState(
-    getUserStorage()?.userPermission || null
-  )
+  // let currentUserPermission = null
+  // const [userPermission, setUserPermission] = useState(
+  //   getUserStorage()?.userPermission || null
+  // )
 
   const { Loading } = useLoading()
   const { showMessage } = useModal()
@@ -42,14 +42,14 @@ export default function AuthProvider({ children }) {
 
       const dataUser = jwt(data.jwtToken)
 
-      setUserPermission(isValidatorUser(dataUser.perfis))
-      currentUserPermission = isValidatorUser(dataUser.perfis)
+      // setUserPermission(isValidatorUser(dataUser.perfis))
+      // currentUserPermission = isValidatorUser(dataUser.perfis)
 
       setDataLogin({
         ...dataUser,
         cpf: payload.cpf,
         token: data.jwtToken,
-        userPermission: currentUserPermission,
+        // userPermission: currentUserPermission,
       })
 
       pushToUrl(prevPath)
@@ -78,24 +78,27 @@ export default function AuthProvider({ children }) {
   }
 
   const isAuthorization = () => {
-    if (!user) return false
+    if (!user) {
+      return false
+    }
+
     return new Date() < new Date(user.exp * 1000)
   }
 
-  const isValidatorUser = (users) => {
-    const isValidator = users.some(
-      (user) => user.nome === permissions.VALIDATOR
-    )
-    if (isValidator) return permissions.VALIDATOR
-    return ''
-  }
+  // const isValidatorUser = (users) => {
+  //   const isValidator = users.some(
+  //     (user) => user.nome === permissions.VALIDATOR
+  //   )
+  //   if (isValidator) return permissions.VALIDATOR
+  //   return ''
+  // }
 
   return (
     <UserContext.Provider
       value={{
         user,
-        userPermission,
-        setUserPermission,
+        // userPermission,
+        // setUserPermission,
         login,
         logout,
         isAuthorization,

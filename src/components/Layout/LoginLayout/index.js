@@ -1,4 +1,4 @@
-import Footer from '@/components/Layout/DefaultLayout/Footer'
+import Footer from '@/components/Layout/DefaultLayout/desktop/Footer'
 import React from 'react'
 import ritaLogoImg from '@/assets/logo/expanded-logo.svg'
 import { Container } from './style'

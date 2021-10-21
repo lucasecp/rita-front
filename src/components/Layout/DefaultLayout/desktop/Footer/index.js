@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import logoFooter from '@/assets/logo/symbol.svg'
+
 import { Container, Time } from './styles'
 
 const Footer = () => {
@@ -19,7 +20,7 @@ const Footer = () => {
 
   const interval = setInterval(() => {
     setDate(formatDate())
-  }, 6000)
+  }, 30 * 1000)
 
   return (
     <Container>

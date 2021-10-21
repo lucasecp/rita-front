@@ -1,28 +1,15 @@
 import React from 'react'
 import { useMediaPredicate } from 'react-media-hook'
 
-import Footer from './Footer'
-import Header from './Header'
-import Sidenav from './Sidenav'
-import { CustomContainer } from './style'
-import HeaderMobile from './mobile/Header'
-import SidenavMobile from './mobile/Sidenav'
-import Mobile from './mobile'
-import Desktop from './Desktop'
+import { MobileLayout } from './mobile'
+import { DesktopLayout } from './desktop'
 
-const DefaultLayout = ({ children, title }) => {
+const DefaultLayout = ({ children, ...rest }) => {
   const isMobile = useMediaPredicate('(max-width: 767px)')
 
-  return (
-    <CustomContainer>
-      {isMobile ? (
-        <Mobile html={children} title={title} />
-      ) : (
-        <Desktop html={children} title={title} />
-      )}
-      <Footer />
-    </CustomContainer>
-  )
+  const Component = isMobile ? MobileLayout : DesktopLayout
+
+  return <Component {...rest}>{children}</Component>
 }
 
 export default DefaultLayout

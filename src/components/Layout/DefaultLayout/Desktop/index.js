@@ -1,16 +1,17 @@
 import React from 'react'
-import Sidenav from '../Sidenav'
-import Header from '../Header'
+import Sidenav from './Sidenav'
+import Header from './Header'
+import Footer from './Footer'
 
-const Desktop = ({ title, html }) => {
+import { Container } from './styles'
+
+export const DesktopLayout = ({ title, children }) => {
   return (
-    <>
+    <Container>
       <Header title={title} />
       <Sidenav />
-
-      <main>{html}</main>
-    </>
+      <main>{children}</main>
+      <Footer />
+    </Container>
   )
 }
-
-export default Desktop
