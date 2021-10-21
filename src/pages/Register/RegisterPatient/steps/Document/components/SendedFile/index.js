@@ -28,7 +28,7 @@ function SendedFile({ file, onGetFile }) {
 
   useEffect(() => {
     if (!isValidTypeFile(file)) {
-      showMessage(InvalidFormat)
+      showMessage(InvalidFormat) 
       return removeFile()
     }
 
