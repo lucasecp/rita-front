@@ -63,6 +63,7 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
             value={cep}
             setValue={setCep}
             name="cep"
+
           />
         </Col>
         <Col md="6" className="mt-4 mt-md-0">
@@ -81,6 +82,7 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
             value={city}
             setValue={setCity}
             name="city"
+            maxLength={100}
           />
         </Col>
         <Col md="6" className="mt-4">
@@ -91,6 +93,7 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
                 value={address}
                 setValue={setAdress}
                 name="address"
+                maxLength={100}
               />
             </Col>
             <Col md="4" className="mt-4 mt-md-0">
@@ -98,8 +101,9 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
                 label="Número:"
                 value={numberHome}
                 setValue={setNumberHome}
-                type="number"
                 name="numberHome"
+                onlyNumber
+                maxLength='20'
               />
             </Col>
           </Row>
@@ -110,6 +114,7 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
             value={district}
             setValue={setDistrict}
             name="district"
+            maxLength={100}
           />
         </Col>
         <Col md="6" className="mt-4">
@@ -118,6 +123,7 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
             value={complement}
             setValue={setComplement}
             name="complement"
+            maxLength={100}
           />
         </Col>
       </Row>
