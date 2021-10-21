@@ -5,4 +5,6 @@ export const status = {
   PENDING: 'P',
   DENIED_FIRST_TIME: 'N',
   DENIED_SECOND_TIME: 'NE',
+  INACTIVE: 'I',
+  DEPENDENT: 'D'
 }
