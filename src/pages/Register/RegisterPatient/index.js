@@ -15,6 +15,8 @@ import alreadyExists from './messages/Error/AlreadyExists'
 import exitImg from '@/assets/icons/times.svg'
 import { useLoading } from '@/context/useLoading'
 import { useModal } from '@/context/useModal'
+import axios from 'axios'
+import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 
 const status = {
   SUCCESS: 'success',
@@ -35,98 +37,132 @@ const RegisterPatient = () => {
   const [dataClientSabin, setDataClientSabin] = useState({})
   const [buttonPass, setButtonPass] = useState(false)
   const [documentFiles, setdocumentFiles] = useState({})
-  console.log(documentFiles);
 
   useEffect(() => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
-  const uploadDocuments = async () => {
-    Loading.turnOn()
+  // const uploadDocuments = async () => {
+  //   Loading.turnOn()
 
-    try {
-      const formData = new FormData()
+  //   try {
+  //     const formData = new FormData()
 
-      formData.append('file', documentFiles.holdingDocumentFile)
+  //     formData.append('file', documentFiles.holdingDocumentFile)
 
-      apiPatient.post(
-        `/paciente/documento?cpf=${data.cpf}&tipoDocumento=FotoSegurandoDoc`,
-        formData
-      )
-    } catch ({ response }) {
-    } finally {
-      Loading.turnOff()
-    }
+  //     apiPatient.post(
+  //       `/paciente/documento?cpf=${data.cpf}&tipoDocumento=FotoSegurandoDoc`,
+  //       formData
+  //     )
+  //   } catch ({ response }) {
+  //   } finally {
+  //     Loading.turnOff()
+  //   }
 
-    Loading.turnOn()
+  //   Loading.turnOn()
 
-    try {
-      const formData = new FormData()
+  //   try {
+  //     const formData = new FormData()
 
-      formData.append('file', documentFiles.ownDocumentFile)
+  //     formData.append('file', documentFiles.ownDocumentFile)
 
-      apiPatient.post(
-        `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Cpf`,
-        formData
-      )
-    } catch ({ response }) {
-    } finally {
-      Loading.turnOff()
-    }
+  //     apiPatient.post(
+  //       `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Cpf`,
+  //       formData
+  //     )
+  //   } catch ({ response }) {
+  //   } finally {
+  //     Loading.turnOff()
+  //   }
 
-    if (documentFiles.proofOfIncomeFile !== '') {
-      Loading.turnOn()
+  //   if (documentFiles.proofOfIncomeFile !== '') {
+  //     Loading.turnOn()
 
-      try {
-        const formData = new FormData()
+  //     try {
+  //       const formData = new FormData()
 
-        formData.append('file', documentFiles.proofOfIncomeFile)
+  //       formData.append('file', documentFiles.proofOfIncomeFile)
 
-        apiPatient.post(
-          `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
-          formData
-        )
-      } catch ({ response }) {
-      } finally {
-        Loading.turnOff()
-      }
-    }
-  }
+  //       apiPatient.post(
+  //         `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
+  //         formData
+  //       )
+  //     } catch ({ response }) {
+  //     } finally {
+  //       Loading.turnOff()
+  //     }
+  //   }
+  // }
   const formatDocumentFiles = () => {
-    if(documentFiles.selectIncome === 'no_income') return 'NaopossuoRenda'
-    if(documentFiles.selectIncome === 'one_half') return 'AteUmSalarioMinimoEMeio'
-    if(documentFiles.selectIncome === 'more_one_half') return 'AcimaDeUmSalarioMinimoEMeio'
+    if (documentFiles.selectIncome === 'no_income') return 'NaopossuoRenda'
+    if (documentFiles.selectIncome === 'one_half')
+      return 'AteUmSalarioMinimoEMeio'
+    if (documentFiles.selectIncome === 'more_one_half')
+      return 'AcimaDeUmSalarioMinimoEMeio'
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     responseApiStatus = ''
-    console.log({...data, renda: formatDocumentFiles()});
-    try {
-      Loading.turnOn()
-      const response = await apiPatient.post('/paciente', {...data, renda: formatDocumentFiles()})
-      if (response.status === 201) {
-        responseApiStatus = status.SUCCESS
-      }
-    } catch ({ response }) {
-      if (response.status === 500) responseApiStatus = status.SERVER_ERROR
-      if (response.status === 400) responseApiStatus = status.ALREADY_EXISTS
-    } finally {
-      Loading.turnOff()
-    }
+    const formFile1 = new FormData()
+    formFile1.append('file', documentFiles.holdingDocumentFile)
 
-    uploadDocuments()
+    const formFile2 = new FormData()
+    formFile2.append('file', documentFiles.ownDocumentFile)
 
-    if (responseApiStatus === status.SUCCESS) {
-      showMessage(Success)
-    }
+    const formFile3 = new FormData()
+    formFile3.append('file', documentFiles.proofOfIncomeFile)
 
-    if (responseApiStatus === status.ALREADY_EXISTS) {
-      showMessage(alreadyExists, { message: 'Usuário já existe.' })
-    }
+    Loading.turnOn()
+    axios
+      .all([
+        apiPatient.post('/paciente', { ...data, renda: formatDocumentFiles() }),
+        apiPatient.post(
+          `/paciente/documento?cpf=${data.cpf}&tipoDocumento=FotoSegurandoDoc`,
+          formFile1
+        ),
+        apiPatient.post(
+          `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Cpf`,
+          formFile2
+        ),
+        !documentFiles.proofOfIncomeFile
+          ? ''
+          : apiPatient.post(
+              `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
+              formFile3
+            ),
+      ])
+      .then(
+        axios.spread((response1, response2, response3, response4) => {
+          if (
+            response1.status === 201 &&
+            response2.status === 201 &&
+            response3.status === 201 &&
+            (response4.status === 201 || !documentFiles.proofOfIncomeFile)
+          ) {
+            responseApiStatus = status.SUCCESS
+          }
+        })
+      )
+      .catch(({ response }) => {
+        if (response.status === 500) responseApiStatus = status.SERVER_ERROR
+        if (response.status === 400) responseApiStatus = status.ALREADY_EXISTS
+      })
+      .finally(() => {
+        Loading.turnOff()
 
-    if (responseApiStatus === status.SERVER_ERROR) {
-      showMessage(Server)
-    }
+        if (responseApiStatus === status.ALREADY_EXISTS) {
+          showMessage(SimpleModal, {
+            type: MODAL_TYPES.ERROR,
+            message: 'Usuário já existe.',
+          })
+        }
+        if (responseApiStatus === status.SERVER_ERROR) {
+          showMessage(Server)
+        }
+        if (responseApiStatus === status.SUCCESS) {
+          showMessage(Success)
+        }
+      })
   }
 
   return (

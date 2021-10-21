@@ -1,6 +1,4 @@
-import moment from "moment"
-
-export default (value) =>{
-  if(!value) return ''
-  return moment(value).toISOString()
+export default (value) => {
+  if (!value) return ''
+  return value.toISOString()
 }

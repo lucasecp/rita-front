@@ -47,7 +47,7 @@ const Filter = () => {
     { name: 'nome', value: name },
     { name: 'cpf', value: clearFormat(cpf) },
     { name: 'status', value: status },
-    { name: 'dataCadastroInicio', value: convertDate(dates[0]) },
+    { name: 'dataCadastroInicio', value:  convertDate(dates[0]) },
     { name: 'dataCadastroFim', value: convertDate(dates[1]) },
     { name: 'idValidador', value: validator },
   ]
@@ -81,7 +81,6 @@ const Filter = () => {
     e.preventDefault()
     if (Object.keys(validateFields()).length) return
 
-    history.push('?page=1&limit=10')
     setFilters(verifyTypedFields(objQuery))
   }
 
