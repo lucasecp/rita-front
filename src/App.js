@@ -6,11 +6,11 @@ import Modal from './components/Modal'
 import Routes from './routes/routes'
 import GlobalStyle from './styles/global'
 
-import MenuProvider from './context/Menu'
-import AuthProvider from './context/login'
+import MenuProvider from './hooks/useMenu'
+import AuthProvider from './hooks/login'
 
-import { ModalProvider } from './context/useModal'
-import { LoadingProvider } from './context/useLoading'
+import { ModalProvider } from './hooks/useModal'
+import { LoadingProvider } from './hooks/useLoading'
 import LoadingWithHook from './components/LoadingWithHook/RitaLoading'
 
 import 'react-toastify/dist/ReactToastify.css'

@@ -6,7 +6,7 @@ import WarningError from '@/assets/icons/alerts/warning.svg'
 import { Container, ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 
 function AlreadyExists() {
   const history = useHistory()

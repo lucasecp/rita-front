@@ -1,24 +1,21 @@
 import React, { useEffect } from 'react'
 
-import Menu from '../../Menu'
+import Menu from '../../shared/Menu'
 
-import { useMenu } from '@/context/Menu'
+import { useMenu } from '@/hooks/useMenu'
 import { Container } from './style'
 
 const Sidenav = () => {
   const { setShowMenu, showMenu } = useMenu()
 
   useEffect(() => {
-    if (showMenu) document.body.style.overflow = 'hidden'
-    else document.body.style.overflow = 'auto'
+    document.body.style.overflow = showMenu ? 'hidden' : 'auto'
   }, [showMenu])
 
   return (
     <Container
       show={showMenu}
-      onClick={(e) =>
-        e.target === e.currentTarget ? setShowMenu(false) : null
-      }
+      onClick={(e) => e.target === e.currentTarget && setShowMenu(false)}
     >
       <nav>
         <Menu expanded />

@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidenav from './Sidenav'
 import Header from './Header'
-import Footer from './Footer'
+import Footer from '../../shared/Footer'
 
 import { Container } from './styles'
 

@@ -1,8 +1,6 @@
 import React from 'react'
 import { Switch } from 'react-router-dom'
 
-import HeaderTest from '@/components/HeaderTest'
-import Teste from '@/pages/Teste'
 import MasterPage from '@/pages/MasterPage'
 
 import Initial from '@/pages/ForgotPassword/IdentifyPerson'
@@ -26,7 +24,6 @@ import {
   LOGIN,
   MASTERPAGE,
   NOT_FOUND,
-  TESTE,
 } from './constants/namedRoutes/routes'
 
 function Routes() {
@@ -38,13 +35,8 @@ function Routes() {
 
       {operatorRoutesComponent}
 
-      {/* {userPermission === permissions.OPERATOR && operatorRoutesComponent} */}
-
-      {/* <Route exact path="/" component={Header} /> */}
-
       <Route path={MASTERPAGE} isPrivate component={MasterPage} />
       <Route path={LOGIN} exact component={Login} />
-      <Route path={TESTE} component={HeaderTest} />
 
       <Route path={DEFINE_PASSWORD} component={DefinePassoword} />
       <Route path={FORGOT_PASSWORD_INIT} component={Initial} />

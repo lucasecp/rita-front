@@ -4,7 +4,7 @@ import { Container, ButtonGroup } from '../style'
 import warning from '@/assets/icons/alerts/warning.svg'
 import { useHistory } from 'react-router'
 import OutlineButton from '@/components/Button/Outline'
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 const Success = () => {
   const { closeModal } = useModal()
   const history = useHistory()

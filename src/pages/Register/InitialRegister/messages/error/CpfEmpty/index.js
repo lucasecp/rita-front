@@ -5,7 +5,7 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 
 import { Container } from '../../styles'
 
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 
 function CpfEmpty() {
   const { closeModal } = useModal()

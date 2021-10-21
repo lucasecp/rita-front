@@ -10,8 +10,8 @@ import apiPatient from '@/services/apiPatient'
 import Denied from '../error/Danied'
 import InputMask from '@/components/Form/InputMask'
 import { useHistory } from 'react-router-dom'
-import { useLoading } from '@/context/useLoading'
-import { useModal } from '@/context/useModal'
+import { useLoading } from '@/hooks/useLoading'
+import { useModal } from '@/hooks/useModal'
 import { RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 const MODAL = {

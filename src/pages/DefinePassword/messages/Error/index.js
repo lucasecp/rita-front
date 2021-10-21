@@ -5,7 +5,7 @@ import error from '@/assets/icons/alerts/error.svg'
 
 import { Container } from '../style'
 
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 
 function AlreadyExists({message}) {
   const { closeModal } = useModal()

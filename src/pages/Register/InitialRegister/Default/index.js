@@ -18,8 +18,8 @@ import Found from '../messages/warning/Found'
 import { status } from '../service'
 import axios from '@/services/apiPatient'
 import AlreadyExists from '../messages/warning/AlreadyExists'
-import { useModal } from '@/context/useModal'
-import { useLoading } from '@/context/useLoading'
+import { useModal } from '@/hooks/useModal'
+import { useLoading } from '@/hooks/useLoading'
 import { RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 function DefaultRegister() {

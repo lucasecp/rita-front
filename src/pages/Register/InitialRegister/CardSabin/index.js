@@ -17,8 +17,8 @@ import Analyzing from '../messages/warning/Analyzing'
 import Divergence from '../messages/warning/Divergence'
 import Denied from '../messages/warning/Denied'
 import ImportData from '../messages/warning/ImportData'
-import { useModal } from '@/context/useModal'
-import { useLoading } from '@/context/useLoading'
+import { useModal } from '@/hooks/useModal'
+import { useLoading } from '@/hooks/useLoading'
 
 function RegisterCardSabin() {
   const [cpf, setCpf] = useState('')

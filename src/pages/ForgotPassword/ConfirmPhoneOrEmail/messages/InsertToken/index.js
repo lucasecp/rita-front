@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useLoading } from '@/context/useLoading'
+import { useLoading } from '@/hooks/useLoading'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import OutlineButton from '@/components/Button/Outline'
@@ -10,7 +10,7 @@ import RequestNewTokenTimer from './RequestNewTokenTimer'
 import Denied from '../error/Denied'
 import LastTry from '../error/LastTry'
 import apiUser from '@/services/apiUser'
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 import InputText from '@/components/Form/InputText'
 import { DEFINE_PASSWORD } from '@/routes/constants/namedRoutes/routes'
 

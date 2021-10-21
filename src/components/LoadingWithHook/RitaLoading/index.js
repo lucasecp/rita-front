@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container } from './style'
 import logoGif from '@/assets/logo/logo-animate.gif'
-import { useLoading } from '@/context/useLoading'
+import { useLoading } from '@/hooks/useLoading'
 
 const LoadingWithHook = () => {
   const {loading} = useLoading()

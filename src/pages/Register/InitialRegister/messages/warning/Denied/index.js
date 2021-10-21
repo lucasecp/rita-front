@@ -4,7 +4,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import WarningError from '@/assets/icons/alerts/warning.svg'
 import whatsApp from '@/assets/icons/whatsapp.svg'
 import { Container } from '../../styles'
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 
 function Denied() {
   const { closeModal } = useModal()

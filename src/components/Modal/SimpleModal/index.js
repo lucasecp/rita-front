@@ -4,7 +4,7 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 import successIcon from '@/assets/icons/alerts/success.svg'
 
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { Container } from './styles'

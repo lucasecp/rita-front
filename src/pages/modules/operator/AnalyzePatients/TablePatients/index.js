@@ -1,6 +1,6 @@
 import Pagination from '@/components/Pagination'
 import CustomTooltip from '@/components/Tooltip'
-import { useLoading } from '@/context/useLoading'
+import { useLoading } from '@/hooks/useLoading'
 import convertToCaptalize from '@/helpers/convertToCaptalize'
 import formatName from '@/helpers/formatName'
 import useQuery from '@/hooks/useQuery'
@@ -11,7 +11,10 @@ import { useHistory } from 'react-router'
 import { queryOrderString, queryFilterString } from '../helpers/queryString'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
-import { LOGIN, OPERATOR_SEE_ONE_PATIENT } from '@/routes/constants/namedRoutes/routes'
+import {
+  LOGIN,
+  OPERATOR_SEE_ONE_PATIENT,
+} from '@/routes/constants/namedRoutes/routes'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import formatCpf from '@/helpers/formatCpf'
 import formatFistLastName from '@/helpers/formatFistLastName'
@@ -27,9 +30,8 @@ const TablePatients = ({ orders, setOrders, filters }) => {
   const { Loading } = useLoading()
   const [queryPagination, setQueryPagination] = useState(initialQuery)
 
-
   useEffect(() => {
-    setHeaderToken(getUserStorage().token)
+    // setHeaderToken(getUserStorage().token)
     const requestFilters = async () => {
       try {
         Loading.turnOn()
@@ -75,7 +77,9 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                   key={patient.idPaciente}
                   onClick={() => handleClick(patient.cpf)}
                 >
-                  <Td soft>{formateDateAndHour(patient.dataFiliacao) || '-'}</Td>
+                  <Td soft>
+                    {formateDateAndHour(patient.dataFiliacao) || '-'}
+                  </Td>
                   <Td strong id="patient-name">
                     <CustomTooltip
                       label={convertToCaptalize(patient.nome) || '-'}
@@ -86,8 +90,12 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                     </CustomTooltip>
                   </Td>
                   <Td strong>{formatCpf(patient.cpf) || '-'}</Td>
-                  <Td soft>{formatFistLastName(patient.validador?.nome) || '-'}</Td>
-                  <Td soft>{formateDateAndHour(patient.dataValidacao) || '-'}</Td>
+                  <Td soft>
+                    {formatFistLastName(patient.validador?.nome) || '-'}
+                  </Td>
+                  <Td soft>
+                    {formateDateAndHour(patient.dataValidacao) || '-'}
+                  </Td>
                   <Td status={showStatus(patient.status)}>
                     <span>{showStatus(patient.status) || '-'}</span>
                   </Td>

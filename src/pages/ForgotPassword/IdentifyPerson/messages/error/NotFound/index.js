@@ -5,7 +5,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import warning from '@/assets/icons/alerts/warning.svg'
 
 import { Container } from '../../styles'
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 import { DEFAULT_REGISTER } from '@/routes/constants/namedRoutes/routes'
 

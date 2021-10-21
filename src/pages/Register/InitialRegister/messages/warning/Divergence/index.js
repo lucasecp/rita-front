@@ -6,7 +6,7 @@ import WarningError from '@/assets/icons/alerts/warning.svg'
 import { Container,ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 import { PRE_REGISTER } from '@/routes/constants/namedRoutes/routes'
 
 function Divergence(data) {

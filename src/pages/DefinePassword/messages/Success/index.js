@@ -5,7 +5,7 @@ import success from '@/assets/icons/alerts/success.svg'
 
 import { Container } from '../style'
 
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 import { useHistory } from 'react-router'
 import { deleteHeaderToken } from '@/storage/user'
 import { LOGIN } from '@/routes/constants/namedRoutes/routes'

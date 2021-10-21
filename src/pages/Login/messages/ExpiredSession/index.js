@@ -5,7 +5,7 @@ import warning from '@/assets/icons/alerts/warning.svg'
 
 import { Container } from '../style'
 
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 
 function ExpiredSession() {
   const { closeModal } = useModal()

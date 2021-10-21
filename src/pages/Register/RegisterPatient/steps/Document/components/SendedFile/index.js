@@ -11,7 +11,7 @@ import InvalidFormat from '../../messages/InvalidFormat'
 import OutlineButton from '@/components/Button/Outline'
 import InputFile from '@/components/Form/InputFile/InputFile'
 
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 
 import isValidSizeFile from '@/helpers/file/validateSizeFile'
 import isValidTypeFile from '@/helpers/file/validateTypeFile'

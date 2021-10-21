@@ -14,9 +14,9 @@ import {
   validatePhone,
 } from '../../../../helpers/validator'
 import formatBirthdate from '@/helpers/formatDate'
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 import { validateDepCpf } from './ValidateDepCpf'
-import { useLoading } from '@/context/useLoading'
+import { useLoading } from '@/hooks/useLoading'
 import clearCpf from '@/helpers/clear/SpecialCaracteres'
 import apiPatient from '@/services/apiPatient'
 

@@ -4,7 +4,7 @@ import closeIcon from '@/assets/icons/close.svg'
 
 import { Container } from './styles'
 
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 
 function Modal() {
   const body = document.querySelector('body')

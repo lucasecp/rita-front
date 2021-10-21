@@ -6,8 +6,8 @@ import warningIcon from '@/assets/icons/alerts/warning.svg'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
-import { useModal } from '@/context/useModal'
-import { useLoading } from '@/context/useLoading'
+import { useModal } from '@/hooks/useModal'
+import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 
 import { Container } from './styles'

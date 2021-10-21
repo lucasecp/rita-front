@@ -1,5 +1,5 @@
 import ButtonPrimary from '@/components/Button/Primary'
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 import React from 'react'
 import { Container, TextGroup } from './style'
 const Terms = ({ setTerms,setErrors }) => {

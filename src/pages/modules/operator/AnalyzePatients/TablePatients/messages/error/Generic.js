@@ -5,7 +5,7 @@ import warning from '@/assets/icons/alerts/warning.svg'
 
 import { Container,ButtonGroup } from '../style'
 
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 
 function Generic(data) {
   const { closeModal } = useModal()

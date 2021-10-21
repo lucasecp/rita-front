@@ -5,9 +5,9 @@ import error from '@/assets/icons/alerts/error.svg'
 
 import { Container, ButtonGroup } from '../style'
 
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
-import { useLoading } from '@/context/useLoading'
+import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { useHistory } from 'react-router'
 import {

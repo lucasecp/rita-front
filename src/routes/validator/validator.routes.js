@@ -1,34 +1,26 @@
 import React from 'react'
 import Route from '../custom.routes'
-import SeeOnePatient from '@/pages/validator/SeeOnePatient'
-import AnalyzePatients from '@/pages/validator/AnalyzePatients'
-import AnalyzePatientsTemporary from '@/pages/validator/AnalyzePatientsTemporary'
+import SeeOnePatient from '@/pages/modules/validator/SeeOnePatient'
+import AnalyzePatients from '@/pages/modules/validator/AnalyzePatients'
+
 import {
   VALIDATOR_ANALYZE_PATIENTS,
-  VALIDATOR_ANALYZE_PATIENTS2,
   VALIDATOR_SEE_ONE_PATIENT,
 } from '../constants/namedRoutes/routes'
-import { permissionList } from '../../components/Layout/DefaultLayout/Menu/_menuItems/permissionList'
 
 const validatorRoutes = [
   {
     path: VALIDATOR_ANALYZE_PATIENTS,
     component: AnalyzePatients,
-    isPrivate: true,
-  },
-  {
-    path: VALIDATOR_ANALYZE_PATIENTS2,
-    component: AnalyzePatientsTemporary,
   },
   {
     path: VALIDATOR_SEE_ONE_PATIENT,
     component: SeeOnePatient,
-    isPrivate: true,
   },
 ]
 
 const validatorRoutesComponent = validatorRoutes.map((props, index) => (
-  <Route {...props} key={index} />
+  <Route {...props} isPrivate key={index} />
 ))
 
 export default validatorRoutesComponent

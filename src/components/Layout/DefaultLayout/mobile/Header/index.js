@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import profileImg from '@/assets/img/profile.png'
 import notification from '@/assets/icons/notification.svg'
 import logo from '@/assets/logo/symbol.svg'
-import { useMenu } from '@/context/Menu'
+import { useMenu } from '@/hooks/useMenu'
 import logoutIcon from '@/assets/icons/logout.svg'
 
 import { Container, Hamburger, Profile } from './style'
 
-import { useAuth } from '@/context/login'
+import { useAuth } from '@/hooks/login'
 
 const HeaderMobile = () => {
   const { showMenu, setShowMenu } = useMenu()

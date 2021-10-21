@@ -3,7 +3,7 @@ import { useMediaPredicate } from 'react-media-hook'
 
 import arrowImg from '@/assets/icons/arrow-left.svg'
 
-import Menu from '../../Menu'
+import Menu from '../../shared/Menu'
 
 import { Container, Logo } from './style'
 

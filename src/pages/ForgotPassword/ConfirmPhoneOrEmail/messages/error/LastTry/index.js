@@ -4,7 +4,7 @@ import React from 'react'
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 
 import { Container } from '../../styles'
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 
 function LastTry({ email, switchModalTo, requestNewToken }) {

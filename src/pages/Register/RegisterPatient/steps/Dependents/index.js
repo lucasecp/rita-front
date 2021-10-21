@@ -5,7 +5,7 @@ import Form from './messages/Form'
 import { Content } from './style'
 import trash from '@/assets/icons/trash.svg'
 import edit from '@/assets/icons/edit.svg'
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 
 const Dependents = ({ dataClientSabin, setData, newData }) => {
   const [allDeps, setAllDeps] = useState([])

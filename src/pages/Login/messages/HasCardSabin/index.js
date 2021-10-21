@@ -5,7 +5,7 @@ import warning from '@/assets/icons/alerts/warning.svg'
 
 import { ButtonGroup, Container } from '../style'
 
-import { useModal } from '@/context/useModal'
+import { useModal } from '@/hooks/useModal'
 import { useHistory } from 'react-router'
 import OutlineButton from '@/components/Button/Outline'
 import { DEFAULT_REGISTER, REGISTER_CARD_SABIN } from '@/routes/constants/namedRoutes/routes'
