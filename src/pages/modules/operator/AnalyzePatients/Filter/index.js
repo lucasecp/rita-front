@@ -50,16 +50,7 @@ const Filter = () => {
     setFilters(verifyTypedFields(objQuery))
   }, [])
 
-  const typedData = () => {
-    return (
-      registerDates.length ||
-      validationDates.length ||
-      clearFormat(cpf) ||
-      name ||
-      validator ||
-      status
-    )
-  }
+
   const objQuery = [
     { name: 'nome', value: name },
     { name: 'cpf', value: clearFormat(cpf) },
@@ -162,7 +153,7 @@ const Filter = () => {
                 { label: 'Negado', value: 'N' },
               ]}
             />
-            {typedData() && (
+
               <BtnGroup>
                 <OutlineButton
                   type="button"
@@ -176,7 +167,7 @@ const Filter = () => {
                   Filtrar Resultados
                 </ButtonPrimary>
               </BtnGroup>
-            )}
+            
           </div>
         </form>
       </Container>
