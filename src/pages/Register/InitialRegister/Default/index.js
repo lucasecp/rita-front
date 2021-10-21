@@ -14,6 +14,7 @@ import InvalidCpf from '../messages/error/InvalidCpf'
 import Analyzing from '../messages/warning/Analyzing'
 import Divergence from '../messages/warning/Divergence'
 import Denied from '../messages/warning/Denied'
+import Inactive from '../messages/warning/Inactive'
 import Found from '../messages/warning/Found'
 import { status } from '../service'
 import axios from '@/services/apiPatient'
@@ -21,6 +22,7 @@ import AlreadyExists from '../messages/warning/AlreadyExists'
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
 import { RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
+import StatusD from '../messages/warning/StatusD'
 
 function DefaultRegister() {
   const [cpf, setCpf] = useState('')
@@ -43,6 +45,12 @@ function DefaultRegister() {
         `/paciente/status?cpf=${cpf}`
       )
 
+      if (responseApi.status === status.INACTIVE) {
+        return showMessage(Inactive)
+      }
+      if (responseApi.status === status.DEPENDENT) {
+        return showMessage(StatusD)
+      }
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
         return showMessage(Found, {
           cpf,

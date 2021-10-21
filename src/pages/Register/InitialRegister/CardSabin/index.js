@@ -19,6 +19,8 @@ import Denied from '../messages/warning/Denied'
 import ImportData from '../messages/warning/ImportData'
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
+import Inactive from '../messages/warning/Inactive'
+import StatusD from '../messages/warning/StatusD'
 
 function RegisterCardSabin() {
   const [cpf, setCpf] = useState('')
@@ -37,6 +39,12 @@ function RegisterCardSabin() {
       const { data: responseApi } = await axios.get(
         `/paciente/status?cpf=${cpf}`
       )
+      if (responseApi.status === status.INACTIVE) {
+        return showMessage(Inactive)
+      }
+      if (responseApi.status === status.DEPENDENT) {
+        return showMessage(StatusD)
+      }
 
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
         return showMessage(ImportData, {
