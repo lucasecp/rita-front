@@ -15,6 +15,8 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
   const queryString = `?page=${currentPage}&limit=${limit}${restQuery || ''}`
   const queryApiString = `?limit=${limit}&skip=${skipedPages}`
 
+  const currentTotal = currentPage === totalPages ? total : skipedPages + Number(limit)
+
   useEffect(() => {
     history.push(queryString)
     setQuery(queryApiString)
@@ -60,7 +62,7 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
       </div>
 
       <div>
-        {skipedPages + 1} a {skipedPages + Number(limit)} de {total || 0}
+        {skipedPages + 1} a {currentTotal} de {total || 0}
       </div>
 
       <div>
