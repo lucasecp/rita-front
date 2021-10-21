@@ -32,11 +32,11 @@ const SelectValidator = ({setValidator,validator}) => {
   return (
     <SelectComponent
       variation="secondary"
-      labelDefaultOption="Todos"
+      labelDefaultOption="Selecione"
       label="Validador:"
       setValue={setValidator}
       value={validator}
-      options={formatObjectApi()}
+      options={[{label:'Todos',value: 'ALL'},...formatObjectApi()]}
     />
   )
 }
