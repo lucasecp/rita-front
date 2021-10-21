@@ -7,12 +7,10 @@ import logoutIcon from '@/assets/icons/logout.svg'
 import notification from '@/assets/icons/notification.svg'
 
 import { useAuth } from '@/hooks/login'
-import apiPatient from '@/services/apiPatient'
 const Header = ({ title }) => {
   const { logout, user } = useAuth()
 
   console.log(user)
-  console.log(apiPatient.defaults.headers.token)
 
   return (
     <HeaderLayout>

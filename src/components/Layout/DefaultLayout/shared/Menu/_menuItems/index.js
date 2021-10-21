@@ -26,12 +26,12 @@ export const menuItens = [
     name: 'Início',
     // permission: permissionList.
   },
-  {
-    path: PATIENT_START,
-    icon: <HomeIcon />,
-    name: 'Início',
-    // permission: permissionList.
-  },
+  // {
+  //   path: PATIENT_START,
+  //   icon: <HomeIcon />,
+  //   name: 'Início',
+  //   // permission: permissionList.
+  // },
   {
     path: PROFILE,
     icon: <UserIcon />,

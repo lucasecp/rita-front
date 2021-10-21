@@ -10,9 +10,9 @@ import SelectComponent from '@/components/Form/Select'
 import { Container } from './styles'
 
 function PersonExpandable({ title, personData, holder }) {
-  const birthDate =
-    personData?.dataNascimento &&
-    format(parseISO(personData?.dataNascimento), 'dd/MM/yyyy')
+  // const birthDate =
+  //   personData?.dataNascimento &&
+  //   format(parseISO(personData?.dataNascimento), 'dd/MM/yyyy')
 
   const [expanded, setExpanded] = useState(!!holder)
 
@@ -43,7 +43,7 @@ function PersonExpandable({ title, personData, holder }) {
         <InputMask
           label="Data de Nascimento:"
           mask="99/99/9999"
-          value={birthDate || ''}
+          value={personData?.dataNascimento || ''}
           disabled
         />
         <SelectComponent
