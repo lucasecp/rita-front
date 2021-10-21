@@ -120,6 +120,7 @@ const RegistrationData = ({
               setErrors({ ...errors, ...validateEmail(email, confirmEmail) })
             }
             msgError={errors.email}
+            maxLength={100}
           />
         </Col>
 

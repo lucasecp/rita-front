@@ -46,10 +46,10 @@ const Filter = () => {
   const objQuery = [
     { name: 'nome', value: name },
     { name: 'cpf', value: clearFormat(cpf) },
-    { name: 'status', value: status },
+    { name: 'status', value: status === 'ALL' ? '' : status },
     { name: 'dataCadastroInicio', value:  convertDate(dates[0]) },
     { name: 'dataCadastroFim', value: convertDate(dates[1]) },
-    { name: 'idValidador', value: validator },
+    { name: 'idValidador', value: validator === 'ALL' ? '' : validator },
   ]
 
   const validateFields = () => {
@@ -123,11 +123,12 @@ const Filter = () => {
             />
             <SelectComponent
               variation="secondary"
-              labelDefaultOption="Todos"
+              labelDefaultOption="Selecione"
               label="Status:"
               value={status}
               setValue={setStatus}
               options={[
+                { label: 'Todos', value: 'ALL' },
                 { label: 'Pendente', value: 'P' },
                 { label: 'Em análise', value: 'EA' },
               ]}

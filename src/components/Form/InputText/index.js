@@ -1,4 +1,6 @@
+import hasLetter from '@/helpers/hasLetter'
 import hasNumber from '@/helpers/hasNumber'
+import hasSpecialCaracter from '@/helpers/hasSpecialCaracter'
 import React from 'react'
 import MsgError from '../../MsgError'
 import { Container } from './styles'
@@ -11,13 +13,17 @@ const InputText = ({
   msgError,
   variation,
   onlyLetter,
+  onlyNumber,
   ...rest
 }) => {
-  
+
   const handleChange = ({ target }) => {
     if (!setValue) return
 
     if (onlyLetter && hasNumber(target.value)) {
+      return
+    }
+    if(onlyNumber && hasSpecialCaracter(target.value) && hasLetter(target.value)){
       return
     }
 

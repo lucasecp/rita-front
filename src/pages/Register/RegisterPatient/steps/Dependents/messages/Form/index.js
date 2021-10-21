@@ -211,6 +211,7 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf }) => {
             onBlur={() => setErrors({ ...errors, ...validateEmail(email) })}
             onKeyUp={() => setErrors({ ...errors, ...validateEmail(email) })}
             msgError={errors.email}
+            maxLength={100}
           />
         </Col>
       </Row>
