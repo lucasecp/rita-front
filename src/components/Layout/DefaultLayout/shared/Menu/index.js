@@ -13,13 +13,11 @@ function Menu({ expanded }) {
   const [menuToShow, setMenuToShow] = useState([])
 
   useEffect(() => {
-    menuItens.forEach((item) =>
-      user.permissoes.forEach((permission) => {
-        if (item.permission === permission) {
-          menuToShowTemporary.push(item)
-        }
-      })
-    )
+    menuItens.forEach((item) => {
+      if (!item.permission || user.permissoes.indexOf(item.permission) >= 0) {
+        menuToShowTemporary.push(item)
+      }
+    })
 
     setMenuToShow(menuToShowTemporary)
   }, [])
