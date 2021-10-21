@@ -17,15 +17,17 @@ import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 import axios from 'axios'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
+import DocumentNoSent from './messages/Success/DocumentNotSent'
 
 const status = {
   SUCCESS: 'success',
   SERVER_ERROR: 'server_error',
   ALREADY_EXISTS: 'already_exists',
+  BAD_REQUEST_DOCUMENTS: 'bad_request_documents',
 }
 
 const RegisterPatient = () => {
-  let responseApiStatus
+  let responseApiStatus = ''
 
   const location = useLocation()
   const { Loading } = useLoading()
@@ -42,57 +44,7 @@ const RegisterPatient = () => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
-  // const uploadDocuments = async () => {
-  //   Loading.turnOn()
 
-  //   try {
-  //     const formData = new FormData()
-
-  //     formData.append('file', documentFiles.holdingDocumentFile)
-
-  //     apiPatient.post(
-  //       `/paciente/documento?cpf=${data.cpf}&tipoDocumento=FotoSegurandoDoc`,
-  //       formData
-  //     )
-  //   } catch ({ response }) {
-  //   } finally {
-  //     Loading.turnOff()
-  //   }
-
-  //   Loading.turnOn()
-
-  //   try {
-  //     const formData = new FormData()
-
-  //     formData.append('file', documentFiles.ownDocumentFile)
-
-  //     apiPatient.post(
-  //       `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Cpf`,
-  //       formData
-  //     )
-  //   } catch ({ response }) {
-  //   } finally {
-  //     Loading.turnOff()
-  //   }
-
-  //   if (documentFiles.proofOfIncomeFile !== '') {
-  //     Loading.turnOn()
-
-  //     try {
-  //       const formData = new FormData()
-
-  //       formData.append('file', documentFiles.proofOfIncomeFile)
-
-  //       apiPatient.post(
-  //         `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
-  //         formData
-  //       )
-  //     } catch ({ response }) {
-  //     } finally {
-  //       Loading.turnOff()
-  //     }
-  //   }
-  // }
   const formatDocumentFiles = () => {
     if (documentFiles.selectIncome === 'no_income') return 'NaopossuoRenda'
     if (documentFiles.selectIncome === 'one_half')
@@ -101,8 +53,7 @@ const RegisterPatient = () => {
       return 'AcimaDeUmSalarioMinimoEMeio'
   }
 
-  const handleSubmit = () => {
-    responseApiStatus = ''
+  const handleSubmit = async () => {
     const formFile1 = new FormData()
     formFile1.append('file', documentFiles.holdingDocumentFile)
 
@@ -113,9 +64,25 @@ const RegisterPatient = () => {
     formFile3.append('file', documentFiles.proofOfIncomeFile)
 
     Loading.turnOn()
-    axios
-      .all([
-        apiPatient.post('/paciente', { ...data, renda: formatDocumentFiles() }),
+    try {
+      const response = await apiPatient.post('/paciente', {
+        ...data,
+        renda: formatDocumentFiles(),
+      })
+      if (response.status === 201) {
+        responseApiStatus = status.SUCCESS
+      }
+    } catch ({ response }) {
+      if (response.status === 400) {
+        responseApiStatus = status.ALREADY_EXISTS
+      }
+      if (response.status === 500) {
+        responseApiStatus = status.SERVER_ERROR
+      }
+    }
+
+    try {
+      await axios.all([
         apiPatient.post(
           `/paciente/documento?cpf=${data.cpf}&tipoDocumento=FotoSegurandoDoc`,
           formFile1
@@ -126,43 +93,38 @@ const RegisterPatient = () => {
         ),
         !documentFiles.proofOfIncomeFile
           ? ''
-          : apiPatient.post(
-              `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
-              formFile3
-            ),
+          :
+        apiPatient.post(
+          `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
+          formFile3
+        ),
       ])
-      .then(
-        axios.spread((response1, response2, response3, response4) => {
-          if (
-            response1.status === 201 &&
-            response2.status === 201 &&
-            response3.status === 201 &&
-            (response4.status === 201 || !documentFiles.proofOfIncomeFile)
-          ) {
-            responseApiStatus = status.SUCCESS
-          }
-        })
-      )
-      .catch(({ response }) => {
-        if (response.status === 500) responseApiStatus = status.SERVER_ERROR
-        if (response.status === 400) responseApiStatus = status.ALREADY_EXISTS
-      })
-      .finally(() => {
-        Loading.turnOff()
+    } catch ({ response }) {
+      if (
+        (response.status === 500 || response.status === 400) &&
+        responseApiStatus === status.SUCCESS
+      ) {
+        responseApiStatus = status.BAD_REQUEST_DOCUMENTS
+      }
+    } finally {
+      Loading.turnOff()
 
-        if (responseApiStatus === status.ALREADY_EXISTS) {
-          showMessage(SimpleModal, {
-            type: MODAL_TYPES.ERROR,
-            message: 'Usuário já existe.',
-          })
-        }
-        if (responseApiStatus === status.SERVER_ERROR) {
-          showMessage(Server)
-        }
-        if (responseApiStatus === status.SUCCESS) {
-          showMessage(Success)
-        }
-      })
+      if (responseApiStatus === status.ALREADY_EXISTS) {
+        showMessage(SimpleModal, {
+          type: MODAL_TYPES.ERROR,
+          message: 'Paciente já cadastrado.',
+        })
+      }
+      if (responseApiStatus === status.SERVER_ERROR) {
+        showMessage(Server)
+      }
+      if (responseApiStatus === status.BAD_REQUEST_DOCUMENTS) {
+        showMessage(DocumentNoSent)
+      }
+      if (responseApiStatus === status.SUCCESS) {
+        showMessage(Success)
+      }
+    }
   }
 
   return (
