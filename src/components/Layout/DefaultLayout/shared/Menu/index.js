@@ -8,18 +8,15 @@ import { menuItens } from './_menuItems'
 
 function Menu({ expanded }) {
   const { user } = useAuth()
-  const menuToShowTemporary = []
 
   const [menuToShow, setMenuToShow] = useState([])
 
   useEffect(() => {
     menuItens.forEach((item) => {
       if (!item.permission || user.permissoes.indexOf(item.permission) >= 0) {
-        menuToShowTemporary.push(item)
+        setMenuToShow((before) => [...before, item])
       }
     })
-
-    setMenuToShow(menuToShowTemporary)
   }, [])
 
   return (

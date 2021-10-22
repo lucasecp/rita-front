@@ -46,6 +46,7 @@ function seeOnePatient() {
       let holdingDocument
       let identifyDocument
       let incomeDocument
+      let incomeDocumentType
 
       try {
         Loading.turnOn()
@@ -54,6 +55,8 @@ function seeOnePatient() {
         setPatientData(response.data)
         setPatientDependents(response.data.dependentes)
         setPatientAddress(response.data.endereco)
+        incomeDocumentType = response.data.renda
+
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
@@ -99,6 +102,7 @@ function seeOnePatient() {
         holdingDocument,
         identifyDocument,
         incomeDocument,
+        incomeDocumentType
       })
     }
 

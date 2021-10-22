@@ -4,6 +4,7 @@ import { incomeOptions } from '../../constants/income'
 import SeeDocumentFile from './SeeDocumentFile'
 
 import { Container } from './styles'
+import formatIncome from '../../helpers/formatIncome'
 
 function DocumentsSeeOnePatient({ documents }) {
   return (
@@ -22,9 +23,7 @@ function DocumentsSeeOnePatient({ documents }) {
       <section>
         <SelectComponent
           label="Renda:"
-          labelDefaultOption="Selecione"
-          options={incomeOptions}
-          value={''}
+          labelDefaultOption={formatIncome(documents?.incomeDocumentType)}
           disabled
         />
         <aside>

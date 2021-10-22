@@ -25,15 +25,12 @@ function PersonExpandable({
   setPersonData,
   holder,
 }) {
-  const birthDateFormated =
-    personData?.dataNascimento &&
-    formatDate(personData.dataNascimento)
 
   const [expanded, setExpanded] = useState(!!holder)
 
   const [name, setName] = useState(personData.nome || '')
   const [cpf, setCpf] = useState(personData.cpf || '')
-  const [birthDate, setBirthDate] = useState(birthDateFormated || '')
+  const [birthDate, setBirthDate] = useState(personData?.dataNascimento || '')
   const [gender, setGender] = useState(personData.sexo || '')
   const [phone, setPhone] = useState(personData.telefone || '')
   const [email, setEmail] = useState(personData.email || '')

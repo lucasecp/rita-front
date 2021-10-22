@@ -12,8 +12,7 @@ import NotFound from '@/pages/404'
 
 import Route from './custom.routes'
 
-import validatorRoutesComponent from './validator/validator.routes'
-import operatorRoutesComponent from './operator/operator.routes'
+import { operatorRoutes, validatorRoutes } from './modules'
 
 import registerRoutesComponent from './register.routes'
 
@@ -31,9 +30,9 @@ function Routes() {
     <Switch>
       {registerRoutesComponent}
 
-      {validatorRoutesComponent}
+      {validatorRoutes}
 
-      {operatorRoutesComponent}
+      {operatorRoutes}
 
       <Route path={MASTERPAGE} isPrivate component={MasterPage} />
       <Route path={LOGIN} exact component={Login} />
