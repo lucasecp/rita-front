@@ -8,9 +8,7 @@ import notification from '@/assets/icons/notification.svg'
 
 import { useAuth } from '@/hooks/login'
 const Header = ({ title }) => {
-  const { logout, user } = useAuth()
-
-  console.log(user)
+  const { logout } = useAuth()
 
   return (
     <HeaderLayout>

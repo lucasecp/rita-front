@@ -14,12 +14,12 @@ const Footer = () => {
   const [dateNow, setDate] = useState(formatDate())
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setDate(formatDate())
+    }, 30 * 1000)
+
     return () => clearInterval(interval)
   }, [])
-
-  const interval = setInterval(() => {
-    setDate(formatDate())
-  }, 30 * 1000)
 
   return (
     <Container>
