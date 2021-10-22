@@ -12,8 +12,8 @@ import NotFound from '@/pages/404'
 
 import Route from './custom.routes'
 
-import validatorRoutesComponent from './validator/validator.routes'
-import operatorRoutesComponent from './operator/operator.routes'
+import validatorRoutesComponent from './modules/validator/validator.routes'
+import operatorRoutesComponent from './modules/operator/operator.routes'
 
 import registerRoutesComponent from './register.routes'
 
