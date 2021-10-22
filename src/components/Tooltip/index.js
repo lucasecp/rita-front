@@ -4,7 +4,7 @@ import { OverlayTrigger,Tooltip } from 'react-bootstrap';
 const CustomTooltip = ({label,children}) => {
   return (
     <OverlayTrigger
-      placement='right'
+      placement='top'
       overlay={
         <Tooltip >
          {label}

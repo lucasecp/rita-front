@@ -1,14 +1,20 @@
 import React from 'react'
 import { Profile, HeaderLayout } from './style'
-import { Link } from 'react-router-dom'
+import { Link,useHistory } from 'react-router-dom'
 
 import profileImg from '@/assets/img/profile.png'
 import logoutIcon from '@/assets/icons/logout.svg'
 import notification from '@/assets/icons/notification.svg'
-
+import {LOGIN} from '@/routes/constants/namedRoutes/routes'
 import { useAuth } from '@/hooks/login'
 const Header = ({ title }) => {
   const { logout } = useAuth()
+  const history = useHistory()
+
+  const handleLogout = () => {
+    logout()
+    history.push(LOGIN)
+  }
 
   return (
     <HeaderLayout>
@@ -21,7 +27,7 @@ const Header = ({ title }) => {
           </Profile>
         </Link>
         <img src={notification} />
-        <img src={logoutIcon} onClick={logout} />
+        <img src={logoutIcon} onClick={handleLogout} />
       </nav>
     </HeaderLayout>
   )

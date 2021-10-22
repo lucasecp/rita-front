@@ -15,7 +15,7 @@ const HeaderMobile = () => {
   const {logout} = useAuth()
   return (
     <Container>
-      <Link>
+      <Link to="/">
         <img src={logo} />
       </Link>
       <nav>

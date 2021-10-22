@@ -31,8 +31,8 @@ const Thead = ({ setOrders, orders }) => {
             <Content>
             {field.label}
             <div onClick={() => handleClick(field.name)}>
-              <ArrowUp order={hasAscOrder(field.name)} />
-              <ArrowDown order={hasDescOrder(field.name)} />
+              <ArrowUp order={hasAscOrder(field.name) ? 1 : 0} />
+              <ArrowDown order={hasDescOrder(field.name) ? 1 : 0} />
             </div>
             </Content>
         </th>

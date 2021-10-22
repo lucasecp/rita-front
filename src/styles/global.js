@@ -2,11 +2,13 @@ import { createGlobalStyle } from 'styled-components'
 import colors from './colors'
 import fonts from './fonts'
 import calendar from './components/calendar'
+import tooltip from './components/tooltip'
 
 export default createGlobalStyle`
 
   ${fonts}
   ${calendar}
+  ${tooltip}
 
   body, *{
     font-family: "Athletics";

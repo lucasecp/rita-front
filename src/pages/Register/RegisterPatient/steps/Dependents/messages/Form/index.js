@@ -94,8 +94,7 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf,dataClientSa
 
   const handleUpdate = async () => {
     setErrors({})
-    console.log(await cpfAlreadyExistsApi())
-    if (await cpfAlreadyExistsApi()) {
+    if (await cpfAlreadyExistsApi() && !dataClientSabin?.idPaciente) {
       return setErrors({
         ...errors,
         cpf: CpfAlreadyExistsError,
@@ -139,6 +138,7 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf,dataClientSa
             onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
             msgError={errors.name}
             maxLength={100}
+
           />
         </Col>
         <Col md="6" className="mt-4 mt-md-0">
@@ -161,6 +161,7 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf,dataClientSa
               })
             }
             msgError={errors.cpf}
+            disabled={dataClientSabin?.idPaciente && action === 'edit'}
           />
         </Col>
         <Col md="6" className="mt-4">

@@ -6,6 +6,7 @@ import { Content } from './style'
 import trash from '@/assets/icons/trash.svg'
 import edit from '@/assets/icons/edit.svg'
 import { useModal } from '@/hooks/useModal'
+import formatCpf from '@/helpers/formatCpf'
 
 const Dependents = ({ dataClientSabin, setData, newData }) => {
   const [allDeps, setAllDeps] = useState([])
@@ -58,7 +59,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
                   Nome: <span>{dep.nome}</span>
                 </li>
                 <li>
-                  CPF: <span>{dep.cpf}</span>
+                  CPF: <span>{formatCpf(dep.cpf)}</span>
                 </li>
               </ul>
               <div>

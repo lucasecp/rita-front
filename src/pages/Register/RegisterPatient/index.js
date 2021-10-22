@@ -11,7 +11,6 @@ import apiPatient from '@/services/apiPatient'
 import Success from './messages/Success'
 import Warning from './messages/Warning'
 import Server from './messages/Error/Server'
-import alreadyExists from './messages/Error/AlreadyExists'
 import exitImg from '@/assets/icons/times.svg'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
@@ -44,7 +43,7 @@ const RegisterPatient = () => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
-  console.log(data,location.state.userData);
+  console.log(data,location?.state?.userData);
 
   const formatDocumentFiles = () => {
     if (documentFiles.selectIncome === 'no_income') return 'NaopossuoRenda'

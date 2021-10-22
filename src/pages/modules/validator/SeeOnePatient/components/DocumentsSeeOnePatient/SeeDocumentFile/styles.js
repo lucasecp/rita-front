@@ -13,7 +13,7 @@ export const Container = styled.div.attrs()`
   box-sizing: border-box;
   border-radius: 8px;
 
-  cursor:pointer;
+  cursor: pointer;
 
   & + & {
     margin-top: 24px;
@@ -63,7 +63,6 @@ export const Container = styled.div.attrs()`
         }
       }
     `}
-  }
 
   @media (max-width: 767px) {
     > h3 {

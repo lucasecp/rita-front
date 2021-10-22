@@ -63,7 +63,6 @@ export const Container = styled.div.attrs()`
         }
       }
     `}
-  }
 
   @media (max-width: 767px) {
     > h3 {

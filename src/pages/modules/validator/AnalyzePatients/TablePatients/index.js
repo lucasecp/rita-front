@@ -5,7 +5,6 @@ import convertToCaptalize from '@/helpers/convertToCaptalize'
 import formatName from '@/helpers/formatName'
 import useQuery from '@/hooks/useQuery'
 import apiPatient from '@/services/apiPatient'
-import { getUserStorage, setHeaderToken } from '@/storage/user'
 import { useModal } from '@/hooks/useModal'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
@@ -35,7 +34,6 @@ const TablePatients = ({ orders, setOrders, filters }) => {
   const { showMessage } = useModal()
 
   useEffect(() => {
-    // setHeaderToken(getUserStorage().token)
     const requestFilters = async () => {
       try {
         Loading.turnOn()
