@@ -6,6 +6,7 @@ const validateTypeFile = (file) => {
     fileType === 'jpeg' ||
     fileType === 'png' ||
     fileType === 'pdf'
-  )
+  ) && file.name.split('.')[1] !== 'jfif'
 }
+
 export default validateTypeFile

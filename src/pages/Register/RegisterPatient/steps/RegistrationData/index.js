@@ -103,6 +103,7 @@ const RegistrationData = ({
             onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
             msgError={errors.name}
             maxLength={100}
+            onlyLetter
           />
         </Col>
 
