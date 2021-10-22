@@ -29,6 +29,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
       setAllDeps,
       action: 'edit',
       clientCpf: newData.cpf,
+      dataClientSabin
     })
   }
   const handleDelete = (id) => {
@@ -42,6 +43,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
       setAllDeps,
       action: 'create',
       clientCpf: newData.cpf,
+      dataClientSabin
     })
   }
   return (

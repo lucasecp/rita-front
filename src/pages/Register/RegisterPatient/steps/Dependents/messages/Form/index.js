@@ -22,7 +22,7 @@ import apiPatient from '@/services/apiPatient'
 
 const CpfAlreadyExistsError = 'Este CPF já está cadastrado na plataforma Rita, por favor verifique os dados e preencha novamente.'
 
-const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf }) => {
+const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf,dataClientSabin }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
@@ -36,6 +36,28 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf }) => {
   useEffect(() => {
     updateData()
   }, [editDep])
+
+  const verifyNewPatinet = () => {
+    if(dataClientSabin?.idPaciente) {
+      return {
+        idPaciente: dataClientSabin.idPaciente,
+        nome: name,
+        email: email,
+        sexo: gender,
+        dataNascimento: birthdate,
+        telefone: phone,
+        cpf,
+      }
+    }
+    return {
+      nome: name,
+      email: email,
+      sexo: gender,
+      dataNascimento: birthdate,
+      telefone: phone,
+      cpf,
+    }
+  }
 
   const updateData = () => {
     setName(editDep.nome || '')
@@ -64,14 +86,7 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf }) => {
       })
     }
     const newDep = [
-      {
-        nome: name,
-        email: email,
-        sexo: gender,
-        dataNascimento: birthdate,
-        telefone: phone,
-        cpf,
-      },
+      {...verifyNewPatinet()}
     ]
     setAllDeps((data) => [...data, ...newDep])
     closeModal()
@@ -79,6 +94,7 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf }) => {
 
   const handleUpdate = async () => {
     setErrors({})
+    console.log(await cpfAlreadyExistsApi())
     if (await cpfAlreadyExistsApi()) {
       return setErrors({
         ...errors,
@@ -88,14 +104,7 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf }) => {
 
     const depsUpdated = allDeps.map((dep, index) => {
       if (id === index)
-        return {
-          nome: name,
-          email: email,
-          sexo: gender,
-          dataNascimento: birthdate,
-          telefone: phone,
-          cpf,
-        }
+        return {...verifyNewPatinet()}
       return dep
     })
     setAllDeps(depsUpdated)
@@ -106,11 +115,12 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf }) => {
     try {
       Loading.turnOn()
 
-      const { data } = await apiPatient.get(
-        `/paciente?limit=1&skip=0&cpf=${clearCpf(cpf)}`
+      await apiPatient.get(
+        `/paciente/status?cpf=${clearCpf(cpf)}`
       )
-      return data.length
+      return true
     } catch ({ response }) {
+      if(response.status === 404) return false
     } finally {
       Loading.turnOff()
     }

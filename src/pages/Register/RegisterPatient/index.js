@@ -44,6 +44,7 @@ const RegisterPatient = () => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
+  console.log(data,location.state.userData);
 
   const formatDocumentFiles = () => {
     if (documentFiles.selectIncome === 'no_income') return 'NaopossuoRenda'
