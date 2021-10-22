@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { format, parseISO } from 'date-fns'
 
 import arrowDownOutlineIcon from '@/assets/icons/arrow-down-outline.svg'
 
@@ -17,6 +16,7 @@ import {
   validateName,
   validatePhone,
 } from '../../helpers/validatorFields'
+import formatDate from '@/helpers/formatDate'
 
 function PersonExpandable({
   title,
@@ -27,7 +27,7 @@ function PersonExpandable({
 }) {
   const birthDateFormated =
     personData?.dataNascimento &&
-    format(parseISO(personData?.dataNascimento), 'dd/MM/yyyy')
+    formatDate(personData.dataNascimento)
 
   const [expanded, setExpanded] = useState(!!holder)
 

@@ -8,13 +8,12 @@ import {
   setLocalStorage,
 } from '@/storage/user'
 
-import React, { createContext, useState, useContext, useEffect } from 'react'
+import React, { createContext, useState, useContext } from 'react'
 import { useLoading } from '../useLoading'
 import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
 import { useHistory } from 'react-router'
 import { MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
-import apiPatient from '@/services/apiPatient'
 
 const UserContext = createContext()
 
@@ -25,10 +24,10 @@ export default function AuthProvider({ children }) {
 
   const [user, setUser] = useState(getUserStorage() || null)
 
-  useEffect(() => {
-    apiUser.defaults.headers.token = user?.token
-    apiPatient.defaults.headers.token = user?.token
-  }, [user])
+  // useEffect(() => {
+  //   apiUser.defaults.headers.token = user?.token
+  //   apiPatient.defaults.headers.token = user?.token
+  // }, [user])
 
   const login = async (payload, prevPath) => {
     try {

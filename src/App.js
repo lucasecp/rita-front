@@ -15,6 +15,15 @@ import LoadingWithHook from './components/LoadingWithHook/RitaLoading'
 
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
+import {getUserStorage} from '@/storage/user'
+import apiPatient from '@/services/apiPatient'
+import apiUser from '@/services/apiUser'
+
+
+const user = getUserStorage()
+
+apiUser.defaults.headers.token = user?.token
+apiPatient.defaults.headers.token = user?.token
 
 const App = () => {
   return (

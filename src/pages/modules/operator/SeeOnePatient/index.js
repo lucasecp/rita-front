@@ -21,6 +21,7 @@ import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import { getDataMapped } from './helpers/getDataMapped'
 import { toast } from 'react-toastify'
 import { format, parseISO } from 'date-fns'
+import apiUser from '@/services/apiUser'
 
 function seeOnePatient() {
   const history = useHistory()
@@ -49,6 +50,7 @@ function seeOnePatient() {
       let holdingDocument
       let identifyDocument
       let incomeDocument
+      let incomeDocumentType
 
       try {
         Loading.turnOn()
@@ -57,8 +59,8 @@ function seeOnePatient() {
         setPatientData(response.data)
         setPatientDependents(response.data.dependentes)
         setPatientAddress(response.data.endereco)
+        incomeDocumentType = response.data.renda
 
-        // console.log(response)
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
@@ -98,7 +100,6 @@ function seeOnePatient() {
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
-        // console.log('falha renda', response)
       } finally {
         Loading.turnOff()
       }
@@ -107,6 +108,7 @@ function seeOnePatient() {
         holdingDocument,
         identifyDocument,
         incomeDocument,
+        incomeDocumentType
       })
     }
 
@@ -124,7 +126,6 @@ function seeOnePatient() {
 
         const validationsFromApi = response.data[0]
 
-        console.log(validationsFromApi)
 
         const validationsMapped = {
           documentOk: validationsFromApi.documentoOk ? 'yes' : 'no',
@@ -139,10 +140,8 @@ function seeOnePatient() {
           status: validationsFromApi.status,
         }
 
-        console.log(validationsMapped)
         setValidations(validationsMapped)
       } catch ({ response }) {
-        console.log(response)
 
         // if (response.status.toString()[0] === '4') {
         //   if (response.status === 404) {
@@ -193,7 +192,6 @@ function seeOnePatient() {
       patientAddress
     )
 
-    console.log(dataToSend)
 
     try {
       Loading.turnOn()
@@ -201,7 +199,6 @@ function seeOnePatient() {
       const response = await apiPatient.put('/paciente/operador', dataToSend)
 
       // remove when finished configuring API responses
-      console.log(response)
 
       if (response.status === 200) {
         if (response.data.mensagem === 'Sucesso') {
@@ -211,7 +208,6 @@ function seeOnePatient() {
       }
     } catch ({ response }) {
       // remove when finished configuring API responses
-      console.log(response)
 
       if (response.status.toString()[0] === '4') {
         if (response.status === 404) {
