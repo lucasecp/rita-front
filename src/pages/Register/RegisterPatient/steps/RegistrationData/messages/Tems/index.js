@@ -20,7 +20,7 @@ const Terms = ({ setTerms,setErrors }) => {
           INSCRIÇÃO CNPJ 40.181.094/0001-67, Endereço TR SIA TRECHO 03,
           COMPLEMENTO LOTE 625 635 695 LOJA 16 PARTE TERREO, CEP 71.200-030,
           BAIRRO/DISTRITO ZONA INDUSTRIAL (GUARA), BRASILIA - DF. Todos os
-          direitos reservados. (“RITA SAÚDE”).<br/> A Plataforma é oferecida na
+          direitos reservados. (“RITA SAÚDE”).<br/> <br/> A Plataforma é oferecida na
           modalidade Software como um Serviço (SaaS) e é acessada por meio de
           conexão pela internet. Estes Termos de Uso (“Termos”) descrevem os
           termos e as condições aplicáveis ao acesso e ao uso da Plataforma por
@@ -33,7 +33,7 @@ const Terms = ({ setTerms,setErrors }) => {
           utilização.
           </p>
           <p>
-            1. O que é o aplicativo?<br/> Rita é um aplicativo de celular que
+           <strong>1. O que é o aplicativo?</strong> <br/> Rita é um aplicativo de celular que
             aproxima você de consultas a profissionais de saúde, farmácias e
             exames, com tudo isso em lugar só fica mais fácil para você chegar
             onde você quer com a sua saúde; isso é o que nós chamamos de uma
@@ -51,7 +51,7 @@ const Terms = ({ setTerms,setErrors }) => {
             família para te ajudar e acompanhar no dia a dia da saúde.
           </p>
           <p>
-            2. POR ONDE EU POSSO ACESSAR MINHA CONTA NA PLATAFORMA?<br/> O acesso a
+            <strong>2. POR ONDE EU POSSO ACESSAR MINHA CONTA NA PLATAFORMA?</strong><br/> O acesso a
             plataforma pode ser feito através do computador, tablet ou telefone
             celular. Você vai precisar ter instalado na máquina um programa
             navegador e conexão de internet. É muito importante lembrar que você
@@ -64,7 +64,7 @@ const Terms = ({ setTerms,setErrors }) => {
             inteira responsabilidade.
           </p>
           <p>
-            3. INFORMAÇÕES GERAIS E LICENÇA DE USO O primeiro passo para entrar
+            <strong>3. INFORMAÇÕES GERAIS E LICENÇA DE USO </strong><br/> primeiro passo para entrar
             na plataforma é o CADASTRO. Para fazer o seu cadastro e começar a
             utilizar os serviços você precisa ter mais de 18 (dezoito) anos de
             idade. Se você é mais jovem, vamos precisar que outra pessoa com
@@ -106,7 +106,7 @@ const Terms = ({ setTerms,setErrors }) => {
             presente ou futura dos Serviços, ou parte deles.
           </p>
           <p>
-            4. PARA ACESSAR A PLATAFORMA VOCÊ PRECISA SABER DISSO: Temos uma
+           <strong> 4. PARA ACESSAR A PLATAFORMA VOCÊ PRECISA SABER DISSO:</strong> <br/> Temos uma
             equipe trabalhando incansavelmente para que a Plataforma esteja
             sempre disponível, sem erros nem interrupções. Não podemos garantir,
             no entanto, a operação da Plataforma em tempo integral, pois ela
@@ -130,8 +130,8 @@ const Terms = ({ setTerms,setErrors }) => {
             expressamente tal responsabilidade.
           </p>
           <p>
-            5. COMO É FEITO O ATENDIMENTO POR PROFISSIONAIS DE SAÚDE NA
-            PLATAFORMA?<br/> PARA ACESSO AO ATENDIMENTO POR PROFISSIONAL DE SAÚDE VIA
+           <strong> 5. COMO É FEITO O ATENDIMENTO POR PROFISSIONAIS DE SAÚDE NA
+            PLATAFORMA?</strong><br/> PARA ACESSO AO ATENDIMENTO POR PROFISSIONAL DE SAÚDE VIA
             TELEMEDICINA NA MODALIDADE DE TELECONSULTA VOCÊ DEVERÁ (i) SOLICITAR
             A CONSULTA A UM PROFISSIONAL DE SAÚDE NA PLATAFORMA; (ii)
             VERIFICAÇÃO DO TERMO DE CONSENTIMENTO; (iii) VERIFICAR SE SEUS DADOS
@@ -160,7 +160,7 @@ const Terms = ({ setTerms,setErrors }) => {
             usuário 24 horas após o evento agendado que deu origem ao bloqueio.
           </p>
           <p>
-            6. COMO FUNCIONA A CONCESSÃO DE CRÉDITOS APÓS OS ATENDIMENTOS?<br/> Assim
+           <strong> 6. COMO FUNCIONA A CONCESSÃO DE CRÉDITOS APÓS OS ATENDIMENTOS?</strong><br/> Assim
             que implantado o serviço de banco como serviço na plataforma (Baas),
             para cada atendimento realizado em uma das unidades participantes da
             plataforma será realizada a disponibilização de créditos em caráter
@@ -171,7 +171,7 @@ const Terms = ({ setTerms,setErrors }) => {
             expiram automaticamente.
           </p>
           <p>
-            7. SANÇÕES e PROIBIÇÕES Para que tenhamos uma parceria duradoura e
+           <strong> 7. SANÇÕES e PROIBIÇÕES </strong><br/> Para que tenhamos uma parceria duradoura e
             produtiva é importante você saber o que consideramos proibido no
             ambiente da plataforma. (a) violar qualquer legislação ou regulação
             municipal, estadual, nacional ou internacional aplicável ao Brasil,
@@ -218,7 +218,7 @@ const Terms = ({ setTerms,setErrors }) => {
             legislação aplicável.
           </p>
           <p>
-            8. PROPRIEDADE INTELECTUAL O Direito de Propriedade Intelectual no
+           <strong> 8. PROPRIEDADE INTELECTUAL </strong> <br/>O direito de propriedade intelectual no
             Brasil prevê que todo o conteúdo disponível na plataforma como,
             gráficos, imagens, fotos, ilustrações, nome empresarial, marcas,
             logotipos, informações, código-fonte, layouts, look and feel, nomes
@@ -266,7 +266,7 @@ const Terms = ({ setTerms,setErrors }) => {
             SOCIAIS OU ENVIADAS À PLATAFORMA.
           </p>
           <p>
-            9. PRAZO Estes Termos terão efeito por todo o tempo em que: (i) os
+           <strong> 9. PRAZO</strong> <br/> Estes termos terão efeito por todo o tempo em que: (i) os
             Serviços forem disponibilizados na Plataforma e não forem cancelados
             pela RITA SAÚDE e/ou substituídos por outros termos de uso; (ii)
             enquanto você estiver acessando a Plataforma; e (iii) enquanto você
@@ -285,7 +285,7 @@ const Terms = ({ setTerms,setErrors }) => {
             tratamento dados)
           </p>
           <p>
-            10. RESPONSABILIDADE Você concorda que possui como solução para
+           <strong> 10. RESPONSABILIDADE </strong> <br/> Você concorda que possui como solução para
             quaisquer problemas ou insatisfação com os Serviços a possibilidade
             de desinstalar o aplicativo e parar de usar A Plataforma, seus
             responsáveis, sócios, funcionário, agentes, diretores, subsidiárias,
@@ -319,7 +319,7 @@ const Terms = ({ setTerms,setErrors }) => {
             informações do site e/ou uso da Plataforma.
           </p>
           <p>
-            11. GARANTIA A Plataforma, seus licenciantes ou fornecedores não
+           <strong> 11. GARANTIA A Plataforma </strong> <br/> Seus licenciantes ou fornecedores não
             prestam qualquer declaração ou garantia relacionada a qualquer
             conteúdo incluído ou acessado por meio da Plataforma. A RITA SAUDE
             não terá nenhuma obrigação, tampouco será responsável pela exatidão,
@@ -337,7 +337,7 @@ const Terms = ({ setTerms,setErrors }) => {
             ININTERRUPTAMENTE OU ESTARÃO LIVRES DE ERROS.
           </p>
           <p>
-            12. INDENIZAÇÃO Você concorda em isentar e indenizar, defender e
+           <strong> 12. INDENIZAÇÃO </strong> <br/> Você concorda em isentar e indenizar, defender e
             manter a RITA SAÚDE e seus respectivos diretores, agentes, sócios e
             funcionários indenes de qualquer prejuízo, responsabilidade, ação
             judicial ou demanda, incluindo honorários advocatícios, devidos ou
@@ -346,7 +346,7 @@ const Terms = ({ setTerms,setErrors }) => {
             e da utilização indevida das informações ou materiais da Plataforma.
           </p>
           <p>
-            13. DECLARAÇÕES ADICIONAIS DO USUÁRIO Você declara e garante que:
+           <strong> 13. DECLARAÇÕES ADICIONAIS DO USUÁRIO </strong> <br/> Você declara e garante que:
             (i) você é o legítimo proprietário das informações fornecidas na
             Plataforma; (ii) as informações prestadas não violam a privacidade,
             publicidade, os Direitos de Propriedade Intelectual ou outros
@@ -356,14 +356,14 @@ const Terms = ({ setTerms,setErrors }) => {
             prestadas são verdadeiras, atualizadas e completas.
           </p>
           <p>
-            14. COMUNICAÇÕES Você, ao aceitar estes Termos, autoriza a
+           <strong> 14. COMUNICAÇÕES </strong> <br/> Você, ao aceitar estes Termos, autoriza a
             Plataforma a comunicar-se com ele através de quaisquer meios
             eletrônicos, tais como celular, mensagem, e-mail, e, ainda,
             correspondência física. Fica ressaltado que a principal via de
             informação para você é via Plataforma.
           </p>
           <p>
-            15. COMO ATUALIZAMOS ESTES TERMOS DE USO?<br/> Você será comunicado de
+           <strong> 15. COMO ATUALIZAMOS ESTES TERMOS DE USO? </strong><br/> Você será comunicado de
             quaisquer alterações mediante a publicação dos Termos atualizados na
             Plataforma. Falamos isso, porque os nossos Serviços estão em
             constante aprimoramento e melhoramento; o que faz com que a qualquer
@@ -383,7 +383,7 @@ const Terms = ({ setTerms,setErrors }) => {
             ALTERADOS, NÃO PODERÁ CONTINUAR A UTILIZAR OU ACESSAR A PLATAFORMA.
           </p>
           <p>
-            16. LEI APLICÁVEL E JURISDIÇÃO Os presentes Termos de Uso serão
+           <strong> 16. LEI APLICÁVEL E JURISDIÇÃO </strong> <br/> Os presentes Termos de Uso serão
             interpretados de acordo com as leis da República Federativa do
             Brasil. Fica eleito o Foro da Comarca de Brasília, Distrito Federal,
             para dirimir qualquer divergência oriunda dos presentes Termos de
@@ -391,7 +391,7 @@ const Terms = ({ setTerms,setErrors }) => {
             outro, por mais privilegiado que seja.
           </p>
           <p>
-            17. DISPOSIÇÕES GERAIS Se qualquer disposição destes Termos de Uso
+          <strong>  17. DISPOSIÇÕES GERAIS </strong> <br/> Se qualquer disposição destes Termos de Uso
             tornar-se inválida ou inexequível, tal disposição será anulada e as
             demais disposições serão mantidas. Os títulos são apenas para
             efeitos de referência e de forma alguma definem, limitam, determinam
@@ -405,7 +405,7 @@ const Terms = ({ setTerms,setErrors }) => {
             de Uso.
           </p>
           <p>
-          18. DÚVIDAS Caso tenha qualquer dúvida em relação aos presentes Termos
+         <strong> 18. DÚVIDAS </strong> <br/> Caso tenha qualquer dúvida em relação aos presentes Termos
           de Uso, favor entrar em contato com a Plataforma, por meio do e-mail
           ou através dos números disponíveis no site www.ritasaude.com.br, com
           horário de funcionamento: de segunda a sexta - 8h00 às 18h00

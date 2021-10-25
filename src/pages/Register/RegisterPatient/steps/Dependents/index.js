@@ -13,7 +13,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
   const { showMessage } = useModal()
 
   useEffect(() => {
-    setAllDeps(newData.dependentes || dataClientSabin.dependentes || [])
+    setAllDeps(newData.dependentes  || dataClientSabin.dependentes || [])
   }, [])
 
   useEffect(() => {
@@ -35,6 +35,9 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
   }
   const handleDelete = (id) => {
     const valueUpdated = allDeps.filter((dep, index) => index !== id)
+    if(dataClientSabin?.dependentes) {
+     dataClientSabin.dependentes.splice(id,1)
+    }
     setAllDeps(valueUpdated)
   }
   const handleAddDep = () => {

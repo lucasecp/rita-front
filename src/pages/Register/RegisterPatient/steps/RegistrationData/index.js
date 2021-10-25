@@ -59,6 +59,9 @@ const RegistrationData = ({
       }
       setButtonPass(true)
       setData((data) => {
+        if(dataClientSabin?.idPaciente){
+          return {...data, ...dataObj, idPaciente: dataClientSabin.idPaciente }
+        }
         return { ...data, ...dataObj }
       })
     } else {

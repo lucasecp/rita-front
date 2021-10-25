@@ -12,7 +12,7 @@ import { useAuth } from '@/hooks/login'
 
 const HeaderMobile = () => {
   const { showMenu, setShowMenu } = useMenu()
-  const {logout} = useAuth()
+  const { clearDataLogout} = useAuth()
   return (
     <Container>
       <Link to="/">
@@ -25,7 +25,7 @@ const HeaderMobile = () => {
           </Profile>
         </Link>
         <img src={notification} />
-        <img src={logoutIcon} onClick={logout}/>
+        <img src={logoutIcon} onClick={clearDataLogout}/>
         <Hamburger onClick={() => setShowMenu(!showMenu)}>
           <span></span>
         </Hamburger>

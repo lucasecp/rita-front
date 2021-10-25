@@ -20,9 +20,18 @@ import { useLoading } from '@/hooks/useLoading'
 import clearCpf from '@/helpers/clear/SpecialCaracteres'
 import apiPatient from '@/services/apiPatient'
 
-const CpfAlreadyExistsError = 'Este CPF já está cadastrado na plataforma Rita, por favor verifique os dados e preencha novamente.'
+const CpfAlreadyExistsError =
+  'Este CPF já está cadastrado na plataforma Rita, por favor verifique os dados e preencha novamente.'
 
-const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf,dataClientSabin }) => {
+const Form = ({
+  editDep,
+  id,
+  setAllDeps,
+  allDeps,
+  action,
+  clientCpf,
+  dataClientSabin,
+}) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
@@ -37,26 +46,23 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf,dataClientSa
     updateData()
   }, [editDep])
 
+  const dataBaseForm = {
+    nome: name,
+    email: email,
+    sexo: gender,
+    dataNascimento: birthdate,
+    telefone: phone,
+    cpf,
+  }
+
   const verifyNewPatinet = () => {
-    if(dataClientSabin?.idPaciente) {
+    if (dataClientSabin?.idPaciente && action === 'edit') {
       return {
-        idPaciente: dataClientSabin.idPaciente,
-        nome: name,
-        email: email,
-        sexo: gender,
-        dataNascimento: birthdate,
-        telefone: phone,
-        cpf,
+        ...dataClientSabin?.dependentes[id],
+        ...dataBaseForm,
       }
     }
-    return {
-      nome: name,
-      email: email,
-      sexo: gender,
-      dataNascimento: birthdate,
-      telefone: phone,
-      cpf,
-    }
+    return dataBaseForm
   }
 
   const updateData = () => {
@@ -85,16 +91,14 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf,dataClientSa
         cpf: CpfAlreadyExistsError,
       })
     }
-    const newDep = [
-      {...verifyNewPatinet()}
-    ]
+    const newDep = [{ ...verifyNewPatinet() }]
     setAllDeps((data) => [...data, ...newDep])
     closeModal()
   }
 
   const handleUpdate = async () => {
     setErrors({})
-    if (await cpfAlreadyExistsApi() && !dataClientSabin?.idPaciente) {
+    if ((await cpfAlreadyExistsApi()) && !dataClientSabin?.idPaciente) {
       return setErrors({
         ...errors,
         cpf: CpfAlreadyExistsError,
@@ -102,8 +106,7 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf,dataClientSa
     }
 
     const depsUpdated = allDeps.map((dep, index) => {
-      if (id === index)
-        return {...verifyNewPatinet()}
+      if (id === index) return { ...verifyNewPatinet() }
       return dep
     })
     setAllDeps(depsUpdated)
@@ -114,12 +117,10 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf,dataClientSa
     try {
       Loading.turnOn()
 
-      await apiPatient.get(
-        `/paciente/status?cpf=${clearCpf(cpf)}`
-      )
+      await apiPatient.get(`/paciente/status?cpf=${clearCpf(cpf)}`)
       return true
     } catch ({ response }) {
-      if(response.status === 404) return false
+      if (response.status === 404) return false
     } finally {
       Loading.turnOff()
     }
@@ -138,7 +139,6 @@ const Form = ({ editDep, id, setAllDeps, allDeps, action, clientCpf,dataClientSa
             onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
             msgError={errors.name}
             maxLength={100}
-
           />
         </Col>
         <Col md="6" className="mt-4 mt-md-0">

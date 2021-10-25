@@ -13,7 +13,7 @@ import { useLoading } from '../useLoading'
 import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
 import { useHistory } from 'react-router'
-import { MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
+import { LOGIN, MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
 
 const UserContext = createContext()
 
@@ -66,6 +66,10 @@ export default function AuthProvider({ children }) {
     if (!url) return history.push(MASTERPAGE)
     history.push(url.from)
   }
+  const clearDataLogout = () => {
+    logout()
+    history.push(LOGIN)
+  }
 
   const isAuthorization = () => {
     if (!user) {
@@ -81,6 +85,7 @@ export default function AuthProvider({ children }) {
         user,
         login,
         logout,
+        clearDataLogout,
         isAuthorization,
       }}
     >
