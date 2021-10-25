@@ -56,14 +56,9 @@ const Form = ({
   }
 
   const verifyNewPatinet = () => {
-
     if (dataClientSabin?.idPaciente && action === 'edit') {
-      const newDep = !dataClientSabin?.dependentes[id]
-        ? { idPaciente: dataClientSabin?.idPaciente }
-        : dataClientSabin?.dependentes[id]
-
       return {
-        ...newDep,
+        ...dataClientSabin?.dependentes[id],
         ...dataBaseForm,
       }
     }
