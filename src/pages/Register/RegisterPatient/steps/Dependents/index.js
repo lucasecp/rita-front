@@ -13,7 +13,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
   const { showMessage } = useModal()
 
   useEffect(() => {
-    setAllDeps(newData.dependentes || dataClientSabin.dependentes || [])
+    setAllDeps(newData.dependentes  || dataClientSabin.dependentes || [])
   }, [])
 
   useEffect(() => {
