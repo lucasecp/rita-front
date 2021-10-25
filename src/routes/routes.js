@@ -17,6 +17,7 @@ import { operatorRoutes, validatorRoutes } from './modules'
 import registerRoutesComponent from './register.routes'
 
 import {
+  CHANGE_PASSWORD,
   DEFINE_PASSWORD,
   FORGOT_PASSWORD_CONFIRM_DATA,
   FORGOT_PASSWORD_INIT,
@@ -24,6 +25,7 @@ import {
   MASTERPAGE,
   NOT_FOUND,
 } from './constants/namedRoutes/routes'
+import ChangePassword from '@/pages/ChangePassword'
 
 function Routes() {
   return (
@@ -40,6 +42,7 @@ function Routes() {
       <Route path={DEFINE_PASSWORD} component={DefinePassoword} />
       <Route path={FORGOT_PASSWORD_INIT} component={Initial} />
       <Route path={FORGOT_PASSWORD_CONFIRM_DATA} component={ConfirmData} />
+      <Route path={CHANGE_PASSWORD} component={ChangePassword} />
 
       <Route path={NOT_FOUND} component={NotFound} />
     </Switch>
