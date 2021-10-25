@@ -13,14 +13,15 @@ export const Container = styled.ul`
 
     > span {
       width: 4px;
-      color: red;
 
       transition: 0.3s;
     }
     > div {
       display: flex;
       align-items: center;
-      
+      flex: 1;
+      padding: 18px 32px;
+
       ${({ expanded }) =>
         !expanded &&
         css`
@@ -28,13 +29,16 @@ export const Container = styled.ul`
           margin-right: 2px;
         `}
 
-      flex: 1;
-
-      padding: 18px 32px;
-
       > svg {
-        transition: none;
+        /* transition: none; */
         min-width: 30px;
+
+        stroke: ${colors.purple.main.dark};
+        fill: transparent;
+
+        /* > path {
+          fill: red;
+        } */
       }
 
       > span {
@@ -54,6 +58,12 @@ export const Container = styled.ul`
       }
 
       > div {
+        > svg {
+          /* filter: invert(0%) sepia(100%) saturate(12%) hue-rotate(200deg)
+            brightness(153%) contrast(104%); */
+          stroke: ${colors.purple.main.light};
+        }
+
         > span {
           color: ${colors.white};
         }
@@ -65,37 +75,62 @@ export const Container = styled.ul`
 
       > span {
         background: ${colors.green.light};
-
       }
 
       > div {
         > svg {
-          transition: none;
-          filter:invert(94%) sepia(18%) saturate(609%) hue-rotate(67deg) brightness(100%) contrast(104%);
-        }
-
-        > a {
-          color: ${colors.white};
+          stroke: ${colors.green.light};
+          /* filter: invert(90%) sepia(7%) saturate(1721%) hue-rotate(74deg)
+            brightness(105%) contrast(105%); */
         }
       }
     }
   }
-  [aria-current="page"]{
+
+  [aria-current='page'] {
     background: ${colors.purple.main.dark};
-    div span{
-      color: #fff
-    }
-    svg {
-      transition: none;
-      filter:invert(94%) sepia(18%) saturate(609%) hue-rotate(67deg) brightness(100%) contrast(104%);
-    }
+
     > span {
       background: ${colors.green.light};
-
     }
-    :hover{
+
+    > div {
+      > svg {
+        /* transition: none; */
+        /* filter: invert(94%) sepia(18%) saturate(609%) hue-rotate(67deg)
+        brightness(100%) contrast(104%); */
+
+        stroke: ${colors.green.light};
+
+        /* fill: #acffc5; */
+
+        > path {
+          /* stroke: #acffc5; */
+          /* fill: #acffc5; */
+        }
+      }
+
+      > span {
+        color: #fff;
+      }
+    }
+
+    :hover {
       background: ${colors.purple.main.dark};
+
+      > span {
+        background: ${colors.green.light};
+      }
+
+      > div {
+        > svg {
+          stroke: ${colors.green.light};
+          /* transition: none; */
+          /* filter: invert(90%) sepia(7%) saturate(1721%) hue-rotate(74deg)
+            brightness(105%) contrast(105%); */
+          /* fill: #acffc5; */
+        }
+      }
     }
   }
-
-  `
+`
