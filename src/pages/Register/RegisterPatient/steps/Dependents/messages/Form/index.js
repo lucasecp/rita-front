@@ -45,8 +45,8 @@ const Form = ({
   useEffect(() => {
     updateData()
   }, [editDep])
-  
-  const dataBase = {
+
+  const dataBaseForm = {
     nome: name,
     email: email,
     sexo: gender,
@@ -56,23 +56,18 @@ const Form = ({
   }
 
   const verifyNewPatinet = () => {
-    const newDep = !dataClientSabin.dependentes[id]
-      ? { idPaciente: dataClientSabin.idPaciente }
-      : dataClientSabin.dependentes[id]
 
-    if (dataClientSabin?.idPaciente && action === 'create') {
-      return {
-        idPaciente: dataClientSabin.idPaciente,
-        ...dataBase,
-      }
-    }
     if (dataClientSabin?.idPaciente && action === 'edit') {
+      const newDep = !dataClientSabin?.dependentes[id]
+        ? { idPaciente: dataClientSabin?.idPaciente }
+        : dataClientSabin?.dependentes[id]
+
       return {
         ...newDep,
-        ...dataBase,
+        ...dataBaseForm,
       }
     }
-    return dataBase
+    return dataBaseForm
   }
 
   const updateData = () => {
