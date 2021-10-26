@@ -6,16 +6,14 @@ export const Container = styled.ul`
   flex-direction: column;
 
   > a {
-    cursor: pointer;
     display: flex;
 
     transition: 0.3s;
 
     > span {
       width: 4px;
-
-      transition: 0.3s;
     }
+
     > div {
       display: flex;
       align-items: center;
@@ -30,15 +28,14 @@ export const Container = styled.ul`
         `}
 
       > svg {
-        /* transition: none; */
         min-width: 30px;
 
-        stroke: ${colors.purple.main.dark};
-        fill: transparent;
+        color: ${colors.purple.main.dark};
 
-        /* > path {
-          fill: red;
-        } */
+        stroke: currentColor;
+        > path {
+          fill: currentColor;
+        }
       }
 
       > span {
@@ -59,9 +56,7 @@ export const Container = styled.ul`
 
       > div {
         > svg {
-          /* filter: invert(0%) sepia(100%) saturate(12%) hue-rotate(200deg)
-            brightness(153%) contrast(104%); */
-          stroke: ${colors.purple.main.light};
+          color: ${colors.purple.main.light};
         }
 
         > span {
@@ -79,15 +74,14 @@ export const Container = styled.ul`
 
       > div {
         > svg {
-          stroke: ${colors.green.light};
-          /* filter: invert(90%) sepia(7%) saturate(1721%) hue-rotate(74deg)
-            brightness(105%) contrast(105%); */
+          color: ${colors.green.light};
         }
       }
     }
   }
 
   [aria-current='page'] {
+    pointer-events: none;
     background: ${colors.purple.main.dark};
 
     > span {
@@ -96,40 +90,11 @@ export const Container = styled.ul`
 
     > div {
       > svg {
-        /* transition: none; */
-        /* filter: invert(94%) sepia(18%) saturate(609%) hue-rotate(67deg)
-        brightness(100%) contrast(104%); */
-
-        stroke: ${colors.green.light};
-
-        /* fill: #acffc5; */
-
-        > path {
-          /* stroke: #acffc5; */
-          /* fill: #acffc5; */
-        }
+        color: ${colors.green.light};
       }
 
       > span {
         color: #fff;
-      }
-    }
-
-    :hover {
-      background: ${colors.purple.main.dark};
-
-      > span {
-        background: ${colors.green.light};
-      }
-
-      > div {
-        > svg {
-          stroke: ${colors.green.light};
-          /* transition: none; */
-          /* filter: invert(90%) sepia(7%) saturate(1721%) hue-rotate(74deg)
-            brightness(105%) contrast(105%); */
-          /* fill: #acffc5; */
-        }
       }
     }
   }
