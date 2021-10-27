@@ -12,7 +12,7 @@ import {
   DEPENDENTS,
   MASTERPAGE,
   OPERATOR_ANALYZE_PATIENT,
-  PATIENT_START,
+  // PATIENT_START,
   PROFILE,
   VALIDATOR_ANALYZE_PATIENTS,
 } from '@/routes/constants/namedRoutes/routes'

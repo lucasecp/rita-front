@@ -1,6 +1,6 @@
 import React from 'react'
 import SelectComponent from '@/components/Form/Select'
-import { incomeOptions } from '../../constants/income'
+// import { incomeOptions } from '../../constants/income'
 import SeeDocumentFile from './SeeDocumentFile'
 
 import { Container } from './styles'

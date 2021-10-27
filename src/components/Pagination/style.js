@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import arrowLeft from '@/assets/icons/arrow-left.svg'
 import arrowRight from '@/assets/icons/arrow-right.svg'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   display: flex;

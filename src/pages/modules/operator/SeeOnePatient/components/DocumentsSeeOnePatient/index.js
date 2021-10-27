@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import SelectComponent from '@/components/Form/Select'
 import SeeDocumentFile from './SeeDocumentFile'
 
-import { incomeOptions } from '../../constants/income'
+// import { incomeOptions } from '../../constants/income'
 
 import { Container } from './styles'
 import formatIncome from '../../helpers/formatIncome'

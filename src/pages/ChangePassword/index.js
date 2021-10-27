@@ -4,7 +4,11 @@ import React from 'react'
 import { Container } from './styles'
 
 function ChangePassword() {
-  return <DefaultLayout title="Mudar Senha">Mudar Senha</DefaultLayout>
+  return (
+    <DefaultLayout title="Mudar Senha">
+      <Container>Mudar Senha</Container>
+    </DefaultLayout>
+  )
 }
 
 export default ChangePassword

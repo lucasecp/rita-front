@@ -8,7 +8,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
+// import apiPatient from '@/services/apiPatient'
 
 import { Container } from './styles'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'

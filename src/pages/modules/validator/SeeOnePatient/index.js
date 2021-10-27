@@ -127,7 +127,7 @@ function seeOnePatient() {
   const onSaveValidations = async () => {
     try {
       Loading.turnOn()
-      const response = await apiPatient.patch(
+      await apiPatient.patch(
         `/paciente/${patientData.idPaciente}/assumir-validacao?forcar=false`
       )
 

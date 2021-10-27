@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { RadioGroup } from '@material-ui/core'
 
 import CheckboxComponent from '@/components/Form/Checkbox'
@@ -9,9 +9,9 @@ import { Container } from './styles'
 
 // function ValidationSeeOnePatient({validations}) {
 function ValidationSeeOnePatient({ validations }) {
-  const extendedStatus = (status) => {
-    return status === 'N' ? 'Negado' : 'Aprovado'
-  }
+  // const extendedStatus = (status) => {
+  //   return status === 'N' ? 'Negado' : 'Aprovado'
+  // }
 
   return (
     <Container>
