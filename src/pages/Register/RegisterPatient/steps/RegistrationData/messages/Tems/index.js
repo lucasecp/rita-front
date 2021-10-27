@@ -4,6 +4,7 @@ import React from 'react'
 import { Container, TextGroup } from './style'
 const Terms = ({ setTerms,setErrors }) => {
   const {closeModal} = useModal()
+  
   const handleAcceptTerms = () => {
     setTerms(true)
     setErrors(errors => {return {...errors,terms: ''}})

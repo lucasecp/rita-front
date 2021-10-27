@@ -161,7 +161,7 @@ const Form = ({
               })
             }
             msgError={errors.cpf}
-            disabled={dataClientSabin?.idPaciente && action === 'edit'}
+            disabled={action === 'edit'}
           />
         </Col>
         <Col md="6" className="mt-4">

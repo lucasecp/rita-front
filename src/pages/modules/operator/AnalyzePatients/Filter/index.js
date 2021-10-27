@@ -134,6 +134,7 @@ const Filter = () => {
               hasError={errors.name}
               msgError={errors.name}
               onlyLetter
+              maxLength='100'
             />
             <SelectValidator
               setValidator={setValidator}
@@ -167,7 +168,7 @@ const Filter = () => {
                   Filtrar Resultados
                 </ButtonPrimary>
               </BtnGroup>
-            
+
           </div>
         </form>
       </Container>
