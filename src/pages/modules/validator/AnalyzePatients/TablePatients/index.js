@@ -23,7 +23,6 @@ import formatFistLastName from '@/helpers/formatFistLastName'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
   const query = useQuery()
-  const history = useHistory()
   const initialQuery = `?limit=${Number(query.get('limit')) || '10'}&skip=${
     (Number(query.get('page')) - 1) * Number(query.get('limit')) || '0'
   }`
@@ -31,7 +30,9 @@ const TablePatients = ({ orders, setOrders, filters }) => {
   const [patients, setPatients] = useState({})
   const { Loading } = useLoading()
   const [queryPagination, setQueryPagination] = useState(initialQuery)
+  const history = useHistory()
   const { showMessage } = useModal()
+
 
   useEffect(() => {
     const requestFilters = async () => {
@@ -69,15 +70,15 @@ const TablePatients = ({ orders, setOrders, filters }) => {
 
       const response = await apiPatient.patch(
         `/paciente/${id}/assumir-validacao?forcar=false`
-      )
-      if (response.status === 200) {
-        history.push(VALIDATOR_SEE_ONE_PATIENT, { cpf })
-      }
-    } catch ({ response }) {
-      const responseApi = response.data
-      if (
-        response.status === 400 &&
-        responseApi.message ===
+        )
+        if (response.status === 200) {
+          history.push(VALIDATOR_SEE_ONE_PATIENT, { cpf })
+        }
+      } catch ({ response }) {
+        const responseApi = response.data
+        if (
+          response.status === 400 &&
+          responseApi.message ===
           'Atenção Este registro está sendo analisado por outro validador.'
       ) {
         return showMessage(RecordAlreadyAnalized, {

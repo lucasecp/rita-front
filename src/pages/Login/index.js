@@ -26,7 +26,6 @@ function Login() {
   useEffect(() => {
     state && state.message && showMessage(ExpiredSession)
   }, [])
-  console.log(state)
 
   const handleSubmit = (e) => {
     e.preventDefault()

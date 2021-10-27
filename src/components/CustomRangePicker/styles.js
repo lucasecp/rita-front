@@ -75,7 +75,6 @@ export const Container = styled.div`
   }
   .ant-picker-range-separator {
     padding-left: 0;
-    margin-left: -10px;
     color:#6A6A6A;
     font-weight: 500;
   }
@@ -85,6 +84,7 @@ export const Container = styled.div`
     line-height: 17px;
     color: #6A6A6A;
     cursor: pointer;
+    width:85px;
     ::placeholder{
       color: #6A6A6A;
     }

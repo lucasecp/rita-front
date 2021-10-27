@@ -22,8 +22,10 @@ import apiUser from '@/services/apiUser'
 
 const user = getUserStorage()
 
+
 apiUser.defaults.headers.token = user?.token
 apiPatient.defaults.headers.token = user?.token
+
 
 const App = () => {
   return (

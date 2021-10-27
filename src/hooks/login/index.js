@@ -79,6 +79,7 @@ export default function AuthProvider({ children }) {
     return new Date() < new Date(user.exp * 1000)
   }
 
+
   return (
     <UserContext.Provider
       value={{
