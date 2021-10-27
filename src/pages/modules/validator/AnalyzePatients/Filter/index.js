@@ -22,6 +22,7 @@ const Filter = () => {
   !query.get('dataCadastroFim')
     ? []
     : [moment(String(query.get('dataCadastroInicio'))),moment(String(query.get('dataCadastroFim')))]
+
     const CPF = query.get('cpf') || ''
     const NAME = query.get('nome') || ''
     const VALIDATOR = query.get('idValidador') || ''
@@ -35,10 +36,15 @@ const Filter = () => {
   const [errors, setErrors] = useState({})
   const [orders, setOrders] = useState([])
   const [filters, setFilters] = useState([])
+  const [submited, setSubmited] = useState(false)
 
   useEffect(() => {
     setFilters(verifyTypedFields(objQuery))
   }, []);
+
+  useEffect(() => {
+   if(!dates[0] && !dates[1] && submited) setFilters(verifyTypedFields(objQuery))
+  }, [dates]);
 
   const typedData = () => {
     return dates.length || clearFormat(cpf) || name || validator || status
@@ -66,7 +72,7 @@ const Filter = () => {
     setErrors(newErrors)
     return newErrors
   }
-  const clearFields = () => {
+  const setInitialStates = () => {
     setName('')
     setCpf('')
     setValidator('')
@@ -76,9 +82,14 @@ const Filter = () => {
     setOrders([])
     setFilters([])
     history.push('?page=1&limit=10')
+    setSubmited(false)
   }
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    setSubmited(true)
+
     if (Object.keys(validateFields()).length) return
 
     setFilters(verifyTypedFields(objQuery))
@@ -141,7 +152,7 @@ const Filter = () => {
                 type="button"
                 variation="red"
                 small
-                onClick={clearFields}
+                onClick={setInitialStates}
               >
                 Limpar Filtro
               </OutlineButton>

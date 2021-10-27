@@ -17,10 +17,10 @@ export const Container = styled.div`
     font-weight: 400;
     grid-area: 1/1
   }
-  >span,> div{
+  >button,> div{
     grid-area: 2/1
    }
-   >span{
+   >button{
      align-self: center;
      justify-self: end;
      position: relative;
@@ -28,6 +28,8 @@ export const Container = styled.div`
      top: calc(75% - 21px);
      padding:5px;
      cursor:pointer;
+     background: transparent;
+     border: none;
      ::after{
        height:10px;
        width: 10px;

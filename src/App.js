@@ -11,7 +11,7 @@ import AuthProvider from './hooks/login'
 
 import { ModalProvider } from './hooks/useModal'
 import { LoadingProvider } from './hooks/useLoading'
-import LoadingWithHook from './components/LoadingWithHook/RitaLoading'
+import LoadingWithHook from './components/Loading/RitaLoading'
 
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'

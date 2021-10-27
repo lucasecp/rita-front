@@ -45,10 +45,20 @@ const Filter = () => {
   const [errors, setErrors] = useState({})
   const [orders, setOrders] = useState([])
   const [filters, setFilters] = useState([])
+  const [submited, setSubmited] = useState(false)
+
 
   useEffect(() => {
     setFilters(verifyTypedFields(objQuery))
   }, [])
+
+  useEffect(() => {
+    if(!registerDates[0] && !registerDates[1] && submited) setFilters(verifyTypedFields(objQuery))
+   }, [registerDates]);
+
+  useEffect(() => {
+    if(!validationDates[0] && !validationDates[1] ) setFilters(verifyTypedFields(objQuery))
+   }, [validationDates]);
 
 
   const objQuery = [
@@ -76,7 +86,8 @@ const Filter = () => {
     setErrors(newErrors)
     return newErrors
   }
-  const clearFields = () => {
+
+  const setInitialStates = () => {
     setName('')
     setCpf('')
     setValidator('')
@@ -87,9 +98,14 @@ const Filter = () => {
     setOrders([])
     setFilters([])
     history.push('?page=1&limit=10&orderBy=dataValidacao&order=DESC')
+    setSubmited(false)
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    setSubmited(true)
+
     if (Object.keys(validateFields()).length) return
 
     history.push('?page=1&limit=10&orderBy=dataValidacao&order=DESC')
@@ -160,7 +176,8 @@ const Filter = () => {
                   type="button"
                   variation="red"
                   small
-                  onClick={clearFields}
+                  onClick={setInitialStates}
+
                 >
                   Limpar Filtro
                 </OutlineButton>
