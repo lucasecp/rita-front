@@ -9,7 +9,7 @@ import { useMenu } from '@/hooks/useMenu'
 
 function Menu({ expanded }) {
   const { user } = useAuth()
-  const { setShowMenu } = useMenu()
+  const { closeMenu } = useMenu()
 
   const [menuToShow, setMenuToShow] = useState([])
 
@@ -22,7 +22,7 @@ function Menu({ expanded }) {
   }, [])
 
   const onClickInMenuItem = () => {
-    setShowMenu(false)
+    closeMenu()
   }
 
   return (
