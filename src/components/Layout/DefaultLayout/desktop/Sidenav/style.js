@@ -2,12 +2,13 @@ import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 import expandedLogo from '@/assets/logo/expanded-logo.svg'
 import iconLogo from '@/assets/logo/icon-logo.svg'
+
 export const Container = styled.aside`
   position: sticky;
   /* left: 0;*/
   top: 0;
   height: 100vh;
-  width: ${({ mode }) => (mode === 'expanded' ? 300 : 118)}px;
+  width: ${({ isExpanded }) => (isExpanded ? 220 : 118)}px;
   transition: 0.3s;
 
   > div {
@@ -25,8 +26,8 @@ export const Container = styled.aside`
     > img {
       transition: 0.3s;
 
-      ${({ mode }) =>
-        mode === 'short' &&
+      ${({ isExpanded }) =>
+        !isExpanded &&
         css`
           transform: rotateY(180deg);
         `}
@@ -55,24 +56,26 @@ export const Container = styled.aside`
 
     > header {
       padding: 40px 32px 52px;
+
+      > div {
+        background-position: left center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        transition: 0.3s;
+
+        ${({ isExpanded }) =>
+          isExpanded &&
+          css`
+            background-image: url(${expandedLogo});
+            height: 64px;
+          `}
+        ${({ isExpanded }) =>
+          !isExpanded &&
+          css`
+            background-image: url(${iconLogo});
+            height: 52px;
+          `}
+      }
     }
   }
-`
-export const Logo = styled.div`
-  background-position: left center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  transition: 0.3s;
-  ${({ mode }) =>
-    mode === 'expanded' &&
-    css`
-      background-image: url(${expandedLogo});
-      height: 64px;
-    `}
-  ${({ mode }) =>
-    mode === 'short' &&
-    css`
-      background-image: url(${iconLogo});
-      height: 52px;
-    `}
 `

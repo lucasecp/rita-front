@@ -5,37 +5,23 @@ import arrowImg from '@/assets/icons/arrow-left.svg'
 
 import Menu from '../../shared/Menu'
 
-import { Container, Logo } from './style'
-
-const MODE = {
-  EXPANDED: 'expanded',
-  SHORT: 'short',
-}
+import { Container } from './style'
 
 const Sidenav = () => {
-  const [mode, setMode] = useState(MODE.EXPANDED)
-
-  const isExpanded = mode === MODE.EXPANDED
   const isTablet = useMediaPredicate('(max-width: 1200px)')
 
+  const [isExpanded, setIsExpanded] = useState(!isTablet)
+
   useEffect(() => {
-    if (isTablet) {
-      setMode(MODE.SHORT)
-    }
+    // Colocar no local storage
   }, [])
 
   const toogleShorten = () => {
-    if (isExpanded) {
-      setMode(MODE.SHORT)
-    }
-
-    if (mode === MODE.SHORT && !isTablet) {
-      setMode(MODE.EXPANDED)
-    }
+    setIsExpanded(!isExpanded)
   }
 
   return (
-    <Container mode={mode}>
+    <Container isExpanded={isExpanded}>
       {!isTablet && (
         <div onClick={toogleShorten}>
           <img src={arrowImg} />
@@ -43,7 +29,7 @@ const Sidenav = () => {
       )}
       <nav>
         <header>
-          <Logo mode={mode} />
+          <div />
         </header>
         <Menu expanded={isExpanded} />
       </nav>

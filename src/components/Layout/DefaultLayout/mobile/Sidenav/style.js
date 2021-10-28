@@ -13,6 +13,7 @@ export const Container = styled.aside`
   visibility: ${(props) => (props.show ? 'visible' : 'hidden')};
   opacity: ${(props) => (props.show ? '1' : '0')};
   transition: 0.4s;
+
   > nav {
     padding-top: 32px;
     position: fixed;

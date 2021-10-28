@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ReactComponent as HomeIcon } from '@/assets/icons/home.svg'
-import { ReactComponent as AuthorizationIcon } from '@/assets/icons/authorization-menu.svg'
+import { ReactComponent as AuthorizationIcon } from '@/assets/icons/to-do.svg'
 import { ReactComponent as PatientIcon } from '@/assets/icons/patients.svg'
 import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
 import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
