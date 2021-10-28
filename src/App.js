@@ -11,7 +11,7 @@ import AuthProvider from './hooks/login'
 
 import { ModalProvider } from './hooks/useModal'
 import { LoadingProvider } from './hooks/useLoading'
-import LoadingWithHook from './components/LoadingWithHook/RitaLoading'
+import LoadingWithHook from './components/Loading/RitaLoading'
 
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
@@ -22,8 +22,10 @@ import apiUser from '@/services/apiUser'
 
 const user = getUserStorage()
 
+
 apiUser.defaults.headers.token = user?.token
 apiPatient.defaults.headers.token = user?.token
+
 
 const App = () => {
   return (

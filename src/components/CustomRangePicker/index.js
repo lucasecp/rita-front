@@ -1,13 +1,13 @@
 import React from 'react'
 import { DatePicker } from 'antd'
-import "antd/es/date-picker/style/css";
-import {Container} from './styles'
-import locale from 'antd/es/date-picker/locale/pt_BR';
-import {ReactComponent as Calendar} from '@/assets/icons/calendar.svg'
-import moment from 'moment';
-const { RangePicker } = DatePicker
+import 'antd/es/date-picker/style/css'
+import { Container } from './styles'
+import locale from 'antd/es/date-picker/locale/pt_BR'
+import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
+import moment from 'moment'
 
-const CustomRangePicker = ({label,value,setValue,...rest}) => {
+const CustomRangePicker = ({ label, value, setValue, ...rest }) => {
+  const { RangePicker } = DatePicker
 
   const handleChange = (value) => {
     const start = moment(value[0]).utcOffset(0)
@@ -19,23 +19,23 @@ const CustomRangePicker = ({label,value,setValue,...rest}) => {
     start.toISOString()
     end.toISOString()
 
-    setValue([start,end])
+    setValue([start, end])
   }
-  return(
+  return (
     <Container>
       {label && <label>{label}</label>}
       <RangePicker
-      placeholder={['00/00/0000','00/00/0000']}
-      allowClear={false}
-      locale={locale}
+        placeholder={['00/00/0000', '00/00/0000']}
+        allowClear={false}
+        locale={locale}
         format="DD/MM/YYYY"
         value={value}
         onChange={handleChange}
         separator={'-'}
-        suffixIcon={<Calendar/>}
+        suffixIcon={<Calendar />}
         {...rest}
       />
-      <span onClick={()=> setValue([])}/>
+      <button disabled={!value[0] && !value[1]} onClick={() => setValue([])} />
     </Container>
   )
 }

@@ -18,6 +18,9 @@ export const Container = styled.div`
       margin-top: 20px;
     }
   }
+  strong{
+    text-transform: uppercase;
+  }
   h2 {
     font-weight: 500;
     font-size: 24px;

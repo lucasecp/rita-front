@@ -16,5 +16,5 @@ export default function CustomRoute({
     return <Redirect to={{ pathname: LOGIN, state: { from: path } }} />
   }
 
-  return <Route {...rest} component={Component} />
+  return <Route {...rest} component={Component}/>
 }

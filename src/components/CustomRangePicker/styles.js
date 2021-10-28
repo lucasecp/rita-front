@@ -17,10 +17,10 @@ export const Container = styled.div`
     font-weight: 400;
     grid-area: 1/1
   }
-  >span,> div{
+  >button,> div{
     grid-area: 2/1
    }
-   >span{
+   >button{
      align-self: center;
      justify-self: end;
      position: relative;
@@ -28,6 +28,8 @@ export const Container = styled.div`
      top: calc(75% - 21px);
      padding:5px;
      cursor:pointer;
+     background: transparent;
+     border: none;
      ::after{
        height:10px;
        width: 10px;
@@ -51,7 +53,7 @@ export const Container = styled.div`
 
     }
     .ant-picker-range-separator + div{
-      margin-right: 15px;
+      margin-right: 25px;
     }
 
   .ant-picker {
@@ -73,7 +75,6 @@ export const Container = styled.div`
   }
   .ant-picker-range-separator {
     padding-left: 0;
-    margin-left: -10px;
     color:#6A6A6A;
     font-weight: 500;
   }
@@ -83,6 +84,7 @@ export const Container = styled.div`
     line-height: 17px;
     color: #6A6A6A;
     cursor: pointer;
+    width:85px;
     ::placeholder{
       color: #6A6A6A;
     }
