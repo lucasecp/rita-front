@@ -4,7 +4,7 @@ import React from 'react'
 import { Container, TextGroup } from './style'
 const Terms = ({ setTerms,setErrors }) => {
   const {closeModal} = useModal()
-  
+
   const handleAcceptTerms = () => {
     setTerms(true)
     setErrors(errors => {return {...errors,terms: ''}})
@@ -65,7 +65,7 @@ const Terms = ({ setTerms,setErrors }) => {
             inteira responsabilidade.
           </p>
           <p>
-            <strong>3. INFORMAÇÕES GERAIS E LICENÇA DE USO </strong><br/> primeiro passo para entrar
+            <strong>3. INFORMAÇÕES GERAIS E LICENÇA DE USO </strong><br/> Primeiro passo para entrar
             na plataforma é o CADASTRO. Para fazer o seu cadastro e começar a
             utilizar os serviços você precisa ter mais de 18 (dezoito) anos de
             idade. Se você é mais jovem, vamos precisar que outra pessoa com
