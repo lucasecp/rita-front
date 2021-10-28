@@ -53,7 +53,7 @@ export const Container = styled.div`
 
     }
     .ant-picker-range-separator + div{
-      margin-right: 15px;
+      margin-right: 25px;
     }
 
   .ant-picker {
