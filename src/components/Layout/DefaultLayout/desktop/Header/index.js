@@ -1,30 +1,31 @@
 import React from 'react'
-import { Profile, HeaderLayout } from './style'
 import { Link } from 'react-router-dom'
 
 import profileImg from '@/assets/img/profile.png'
-import logoutIcon from '@/assets/icons/logout.svg'
-import notification from '@/assets/icons/notification.svg'
+
+import { ReactComponent as LetterIcon } from '@/assets/icons/letter.svg'
+import { ReactComponent as ExitIcon } from '@/assets/icons/exit.svg'
+
 import { useAuth } from '@/hooks/login'
-const Header = ({ title }) => {
+
+import { Container } from './styles'
+
+export const Header = ({ title }) => {
   const { clearDataLogout } = useAuth()
 
-
   return (
-    <HeaderLayout>
+    <Container>
       <h1>{title || 'Page Title'}</h1>
       <nav>
-        <Link to="/">
+        <Link to="/perfil">
           Olá, Fulano de Souza
-          <Profile>
+          <div>
             <img src={profileImg} alt="perfil" />
-          </Profile>
+          </div>
         </Link>
-        <img src={notification} />
-        <img src={logoutIcon} onClick={clearDataLogout} />
+        <LetterIcon />
+        <ExitIcon onClick={clearDataLogout} />
       </nav>
-    </HeaderLayout>
+    </Container>
   )
 }
-
-export default Header

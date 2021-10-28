@@ -1,3 +1,4 @@
+import colors from '@/styles/colors'
 import styled from 'styled-components'
 
 export const Container = styled.header`
@@ -5,55 +6,57 @@ export const Container = styled.header`
   justify-content: space-between;
   align-items: center;
   background: #fff;
-  
+
   > a {
-    img {
-      min-width: 30px;
+    > img {
+      width: 30px;
     }
   }
+
   > nav {
     display: flex;
     align-items: center;
     position: relative;
+
     > a {
       display: flex;
       align-items: center;
-      color: #6a6a6a;
+      color: ${colors.gray.dark};
       font-size: 14px;
       font-weight: 500;
-    }
-    > img + img {
-      transform: rotate(-180deg);
+
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+
+        border: solid 2px ${colors.purple.main.dark};
+
+        overflow: hidden;
+        margin-left: 24px;
+      }
     }
 
-    > img {
-      /* filter: invert(28%) sepia(63%) saturate(2375%) hue-rotate(248deg)
-        brightness(105%) contrast(102%); */
-      margin-left: 20px;
+    > svg {
+      margin-left: 16px;
       cursor: pointer;
+      width: 32px;
+
+      fill: ${colors.purple.main.dark};
     }
   }
 `
-export const Profile = styled.div`
-  border-radius: 50%;
-  border: solid 2px #9146ff;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  margin-left: 20px;
-  > img {
-    filter: none !important;
-    margin-left: 0 !important;
-  }
-`
-export const Hamburger = styled.button`
+
+export const HamburgerButton = styled.button`
   margin-left: 20px;
   border: none;
   background: transparent;
   height: 40px;
+
   span {
     background-color: #9146ff;
     width: 24px;

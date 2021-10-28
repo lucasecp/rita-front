@@ -7,7 +7,7 @@ import Menu from '../../shared/Menu'
 
 import { Container } from './style'
 
-const Sidenav = () => {
+export const Sidenav = () => {
   const isTablet = useMediaPredicate('(max-width: 1200px)')
 
   const [isExpanded, setIsExpanded] = useState(!isTablet)
@@ -36,5 +36,3 @@ const Sidenav = () => {
     </Container>
   )
 }
-
-export default Sidenav
