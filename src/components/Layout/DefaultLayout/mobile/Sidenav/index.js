@@ -6,7 +6,7 @@ import { useMenu } from '@/hooks/useMenu'
 import { Container } from './style'
 
 const Sidenav = () => {
-  const { setShowMenu, showMenu } = useMenu()
+  const { showMenu, closeMenu } = useMenu()
 
   useEffect(() => {
     document.body.style.overflow = showMenu ? 'hidden' : 'auto'
@@ -15,7 +15,7 @@ const Sidenav = () => {
   return (
     <Container
       show={showMenu}
-      onClick={(e) => e.target === e.currentTarget && setShowMenu(false)}
+      onClick={(e) => e.target === e.currentTarget && closeMenu()}
     >
       <nav>
         <Menu expanded />

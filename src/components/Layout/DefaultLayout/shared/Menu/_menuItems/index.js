@@ -1,19 +1,19 @@
 import React from 'react'
 
 import { ReactComponent as HomeIcon } from '@/assets/icons/home.svg'
-import { ReactComponent as AuthorizationIcon } from '@/assets/icons/authorization-menu.svg'
+import { ReactComponent as AuthorizationIcon } from '@/assets/icons/to-do.svg'
 import { ReactComponent as PatientIcon } from '@/assets/icons/patients.svg'
-import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
-import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
-import { ReactComponent as PadLock } from '@/assets/icons/pad-lock.svg'
+// import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
+// import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
+// import { ReactComponent as PadLock } from '@/assets/icons/pad-lock.svg'
 
 import {
-  CHANGE_PASSWORD,
-  DEPENDENTS,
   MASTERPAGE,
   OPERATOR_ANALYZE_PATIENT,
+  // CHANGE_PASSWORD,
+  // DEPENDENTS,
   // PATIENT_START,
-  PROFILE,
+  // PROFILE,
   VALIDATOR_ANALYZE_PATIENTS,
 } from '@/routes/constants/namedRoutes/routes'
 
@@ -32,12 +32,12 @@ export const menuItens = [
   //   name: 'Início',
   //   // permission: permissionList.
   // },
-  {
-    path: PROFILE,
-    icon: <UserIcon />,
-    name: 'Perfil',
-    permission: permissionList.VER_MEUS_DADOS_PACIENTE,
-  },
+  // {
+  //   path: PROFILE,
+  //   icon: <UserIcon />,
+  //   name: 'Perfil',
+  //   permission: permissionList.VER_MEUS_DADOS_PACIENTE,
+  // },
   {
     path: VALIDATOR_ANALYZE_PATIENTS,
     icon: <AuthorizationIcon />,
@@ -50,16 +50,16 @@ export const menuItens = [
     name: 'Pacientes',
     permission: permissionList.PERMITIR_TODOS_STATUS_PACIENTE,
   },
-  {
-    path: DEPENDENTS,
-    icon: <GroupUserIcon />,
-    name: 'Dependentes',
-    permission: permissionList.VER_MEUS_DEPENDENTES,
-  },
-  {
-    path: CHANGE_PASSWORD,
-    icon: <PadLock />,
-    name: 'Trocar senha',
-    permission: permissionList.TROCAR_MINHA_SENHA,
-  },
+  // {
+  //   path: DEPENDENTS,
+  //   icon: <GroupUserIcon />,
+  //   name: 'Dependentes',
+  //   permission: permissionList.VER_MEUS_DEPENDENTES,
+  // },
+  // {
+  //   path: CHANGE_PASSWORD,
+  //   icon: <PadLock />,
+  //   name: 'Trocar senha',
+  //   permission: permissionList.TROCAR_MINHA_SENHA,
+  // },
 ]

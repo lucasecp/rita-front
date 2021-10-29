@@ -1,37 +1,38 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import profileImg from '@/assets/img/profile.png'
-import notification from '@/assets/icons/notification.svg'
 import logo from '@/assets/logo/symbol.svg'
+
+import { ReactComponent as LetterIcon } from '@/assets/icons/letter.svg'
+import { ReactComponent as ExitIcon } from '@/assets/icons/exit.svg'
+
 import { useMenu } from '@/hooks/useMenu'
-import logoutIcon from '@/assets/icons/logout.svg'
-
-import { Container, Hamburger, Profile } from './style'
-
 import { useAuth } from '@/hooks/login'
 
-const HeaderMobile = () => {
-  const { showMenu, setShowMenu } = useMenu()
-  const { clearDataLogout} = useAuth()
+import { Container, HamburgerButton } from './styles'
+
+export const Header = () => {
+  const { openMenu } = useMenu()
+  const { clearDataLogout } = useAuth()
+
   return (
     <Container>
-      <Link to="/">
+      <Link to="/inicio">
         <img src={logo} />
       </Link>
       <nav>
-        <Link to="#">
-          <Profile>
+        <Link to="/perfil">
+          <div>
             <img src={profileImg} alt="perfil" />
-          </Profile>
+          </div>
         </Link>
-        <img src={notification} />
-        <img src={logoutIcon} onClick={clearDataLogout}/>
-        <Hamburger onClick={() => setShowMenu(!showMenu)}>
+        <LetterIcon />
+        <ExitIcon onClick={clearDataLogout} />
+        <HamburgerButton onClick={openMenu}>
           <span></span>
-        </Hamburger>
+        </HamburgerButton>
       </nav>
     </Container>
   )
 }
-
-export default HeaderMobile

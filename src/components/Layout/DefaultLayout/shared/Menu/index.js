@@ -9,20 +9,20 @@ import { useMenu } from '@/hooks/useMenu'
 
 function Menu({ expanded }) {
   const { user } = useAuth()
-  const { setShowMenu } = useMenu()
+  const { closeMenu } = useMenu()
 
   const [menuToShow, setMenuToShow] = useState([])
 
   useEffect(() => {
     menuItens.forEach((item) => {
-      if (!item.permission || user.permissoes.indexOf(item.permission) >= 0) {
+      if (!item.permission || user?.permissoes.indexOf(item.permission) >= 0) {
         setMenuToShow((before) => [...before, item])
       }
     })
   }, [])
 
   const onClickInMenuItem = () => {
-    setShowMenu(false)
+    closeMenu()
   }
 
   return (

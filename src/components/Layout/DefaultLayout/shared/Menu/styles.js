@@ -28,14 +28,11 @@ export const Container = styled.ul`
         `}
 
       > svg {
-        min-width: 30px;
+        width: 30px;
 
         color: ${colors.purple.main.dark};
 
-        stroke: currentColor;
-        > path {
-          fill: currentColor;
-        }
+        fill: currentColor;
       }
 
       > span {
