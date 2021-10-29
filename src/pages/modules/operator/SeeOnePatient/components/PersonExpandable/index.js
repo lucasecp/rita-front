@@ -39,7 +39,7 @@ function PersonExpandable({
 
   useEffect(() => {
     setPersonData({
-      id: personData.idPaciente,
+      idPaciente: personData.idPaciente,
       name,
       cpf,
       birthDate,
@@ -79,6 +79,7 @@ function PersonExpandable({
             setErrors({ ...errors, ...validateCpf(cpf, allPersonData) })
           }
           msgError={errors.cpf}
+          disabled={holder}
         />
       </section>
       <section>

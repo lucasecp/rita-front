@@ -1,6 +1,6 @@
 export function getDataMapped(patientData, patientDependents, patientAddress) {
   const patientMapped = {
-    idPaciente: patientData.id,
+    idPaciente: patientData.idPaciente,
     nome: patientData.name,
     cpf: patientData.cpf,
     sexo: patientData.gender,
@@ -10,7 +10,7 @@ export function getDataMapped(patientData, patientDependents, patientAddress) {
   }
 
   const dependentsMapped = patientDependents.map((dependent) => ({
-    idPaciente: dependent.id,
+    idPaciente: dependent.idPaciente,
     nome: dependent.name,
     cpf: dependent.cpf,
     sexo: dependent.gender,

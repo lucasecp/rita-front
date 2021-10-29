@@ -43,7 +43,6 @@ function seeOnePatient() {
   const [patientDocuments, setPatientDocuments] = useState({})
 
   const [validations, setValidations] = useState()
-
   useEffect(() => {
     const loadPatientInformations = async () => {
       const userCpf = location.state.cpf
@@ -144,8 +143,8 @@ function seeOnePatient() {
       } catch ({ response }) {
 
         // if (response.status.toString()[0] === '4') {
-        //   if (response.status === 404) {
-        //     // Actions to 404 Error
+          //   if (response.status === 404) {
+            //     // Actions to 404 Error
         //   }
         // }
 
@@ -163,7 +162,7 @@ function seeOnePatient() {
     if (patientData?.idPaciente) {
       loadValidationInformations()
     }
-  }, [patientData])
+  }, [])
 
   useEffect(() => {
     const dependentErrorExists = patientDependents.some(
@@ -191,7 +190,6 @@ function seeOnePatient() {
       patientDependents,
       patientAddress
     )
-
 
     try {
       Loading.turnOn()

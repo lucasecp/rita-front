@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MsgError from '../MsgError'
 import { Container, Select } from './style'
 
@@ -10,10 +10,11 @@ const SelectComponent = ({
   labelDefaultOption,
   msgError,
   variation,
+  hasError,
   ...rest
 }) => {
   return (
-    <Container >
+    <Container>
       <label>{label}</label>
       <Select
         variation={variation}
@@ -33,6 +34,7 @@ const SelectComponent = ({
         ))}
       </Select>
       {msgError && <MsgError>{msgError}</MsgError>}
+
     </Container>
   )
 }

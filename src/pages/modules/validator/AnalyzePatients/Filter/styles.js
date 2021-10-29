@@ -5,7 +5,7 @@ export const Container = styled.header`
   margin-bottom: 32px;
   form > div:first-child {
     display: grid;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(3, auto) repeat(2,120px);
     align-items: start;
     gap: 24px;
 

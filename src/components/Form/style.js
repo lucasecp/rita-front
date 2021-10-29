@@ -76,10 +76,10 @@ export const Container = styled.div`
      }
      padding: 5px
   `}
-  
+
   }
 `
-export const Select = styled(Form.Select)`
+export const Select = styled.select`
   color: #6a6a6a;
   border-radius: 8px;
   padding: 14px 16px;
@@ -104,7 +104,7 @@ export const Select = styled(Form.Select)`
     left: 0;
     bottom: 0;
     right: 0;
-    /* border: 1px solid #dcdfe6; */
+     border: 1px solid #dcdfe6;
   }
 
   :focus {
