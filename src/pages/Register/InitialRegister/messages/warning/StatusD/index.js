@@ -13,9 +13,10 @@ function StatusD() {
     <Container>
       <img src={WarningError} />
       <p>
-      O seu cadastro e o do titular estão sendo analisados, pedimos que aguarde a aprovação pela nossa equipe.
+        O seu cadastro e o do titular estão sendo analisados.
+        <br /> Pedimos que aguarde a aprovação pela nossa equipe.
       </p>
-      <ButtonPrimary onClick={closeModal}>Ok</ButtonPrimary>
+      <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )
 }

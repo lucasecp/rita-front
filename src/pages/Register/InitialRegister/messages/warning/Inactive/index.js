@@ -12,8 +12,9 @@ function Inactive() {
     <Container>
       <img src={WarningError} />
       <p>
-        Desculpe! Seu cadastro está inativo, Pedimos que entre em contato com a
-        central de atendimento
+        Desculpe! Seu cadastro está inativo.
+        <br />
+        Pedimos que entre em contato com a central de atendimento
         <a
           href="https://api.whatsapp.com/send?phone=556131810999"
           target="_blank"
