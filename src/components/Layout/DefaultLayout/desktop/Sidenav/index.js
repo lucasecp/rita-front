@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useMediaPredicate } from 'react-media-hook'
 
 import arrowImg from '@/assets/icons/arrow-left.svg'
@@ -9,15 +9,21 @@ import { Container } from './style'
 
 export const Sidenav = () => {
   const isTablet = useMediaPredicate('(max-width: 1200px)')
+  let initialIsExpanded = false
 
-  const [isExpanded, setIsExpanded] = useState(!isTablet)
+  if (!isTablet) {
+    const isExpandedBefore = JSON.parse(
+      localStorage.getItem('@Rita/Menu/Expanded')
+    )
 
-  useEffect(() => {
-    // Colocar no local storage
-  }, [])
+    initialIsExpanded = isExpandedBefore === null || isExpandedBefore
+  }
+
+  const [isExpanded, setIsExpanded] = useState(initialIsExpanded)
 
   const toogleShorten = () => {
     setIsExpanded(!isExpanded)
+    localStorage.setItem('@Rita/Menu/Expanded', JSON.stringify(!isExpanded))
   }
 
   return (
