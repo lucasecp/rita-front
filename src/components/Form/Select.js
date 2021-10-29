@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import MsgError from '../MsgError'
 import { Container, Select } from './style'
 
@@ -24,9 +24,11 @@ const SelectComponent = ({
         value={value || ''}
         {...rest}
       >
-       {labelDefaultOption && <option value="" disabled>
-          {labelDefaultOption}
-        </option>}
+        {labelDefaultOption && (
+          <option value="" disabled>
+            {labelDefaultOption}
+          </option>
+        )}
         {options?.map((option, index) => (
           <option value={option.value} key={index}>
             {option.label}
@@ -34,7 +36,6 @@ const SelectComponent = ({
         ))}
       </Select>
       {msgError && <MsgError>{msgError}</MsgError>}
-
     </Container>
   )
 }
