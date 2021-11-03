@@ -1,5 +1,5 @@
-import colors from '@/styles/colors'
 import styled from 'styled-components'
+import colors from '@/styles/colors'
 
 export const Container = styled.div`
   display: grid;
@@ -7,7 +7,7 @@ export const Container = styled.div`
   grid-gap: 24px;
 
   width: 100%;
-  align-items: flex-end;
+  align-items: ${({ hasMessage }) => (hasMessage ? 'center' : 'flex-end')};
 
   padding: 40px 32px;
 
