@@ -14,11 +14,10 @@ export const FORGOT_PASSWORD_INIT = '/esqueci-senha/inicio'
 export const FORGOT_PASSWORD_CONFIRM_DATA = '/esqueci-senha/confirmar-dados'
 
 export const OPERATOR_ANALYZE_PATIENT = '/pacientes/analisar-pacientes'
-export const OPERATOR_ANALYZE_PATIENT2 = '/pacientes/analisar-pacientes2'
 export const OPERATOR_SEE_ONE_PATIENT = '/pacientes/ver-paciente'
+export const OPERATOR_CONSULT_ELIGIBILITY = '/elegibilidade/consultar'
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
-export const VALIDATOR_ANALYZE_PATIENTS2 = '/autorizacoes/analisar-pacientes2'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
 
 export const PRE_REGISTER = '/pre-cadastro'

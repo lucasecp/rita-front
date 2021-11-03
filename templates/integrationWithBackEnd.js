@@ -16,8 +16,18 @@ try {
   console.log(response)
 
   if (response.status.toString()[0] === '4') {
-    if (response.status === 404) {
-      // Actions to 404 Error
+    switch (response.status) {
+      case 404:
+        // Actions to 404 Error
+
+        break;
+
+      default:
+        showMessage(SimpleModal, {
+          type: MODAL_TYPES.ERROR,
+          message: 'Erro não tratado no Front!',
+        })
+        break;
     }
   }
 

@@ -1,10 +1,10 @@
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 // import { OPERATOR_SEE_ONE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import React from 'react'
 // import { useHistory } from 'react-router'
 import Filter from './Filter'
 
-// import DefaultLayout from '@/components/Layout/DefaultLayout'
+// import { DefaultLayout }from '@/components/Layout/DefaultLayout'
 
 import { Container } from './styles'
 

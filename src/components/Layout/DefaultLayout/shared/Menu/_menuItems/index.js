@@ -3,6 +3,7 @@ import React from 'react'
 import { ReactComponent as HomeIcon } from '@/assets/icons/home.svg'
 import { ReactComponent as AuthorizationIcon } from '@/assets/icons/to-do.svg'
 import { ReactComponent as PatientIcon } from '@/assets/icons/patients.svg'
+import { ReactComponent as EligibilityIcon } from '@/assets/icons/choose-person.svg'
 // import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
 // import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 // import { ReactComponent as PadLock } from '@/assets/icons/pad-lock.svg'
@@ -10,6 +11,7 @@ import { ReactComponent as PatientIcon } from '@/assets/icons/patients.svg'
 import {
   MASTERPAGE,
   OPERATOR_ANALYZE_PATIENT,
+  OPERATOR_CONSULT_ELIGIBILITY,
   // CHANGE_PASSWORD,
   // DEPENDENTS,
   // PATIENT_START,
@@ -48,6 +50,12 @@ export const menuItens = [
     path: OPERATOR_ANALYZE_PATIENT,
     icon: <PatientIcon />,
     name: 'Pacientes',
+    permission: permissionList.PERMITIR_TODOS_STATUS_PACIENTE,
+  },
+  {
+    path: OPERATOR_CONSULT_ELIGIBILITY,
+    icon: <EligibilityIcon />,
+    name: 'Elegibilidade',
     permission: permissionList.PERMITIR_TODOS_STATUS_PACIENTE,
   },
   // {

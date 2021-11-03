@@ -14,8 +14,10 @@ function Menu({ expanded }) {
   const [menuToShow, setMenuToShow] = useState([])
 
   useEffect(() => {
+    setMenuToShow([])
+
     menuItens.forEach((item) => {
-      if (!item.permission || user?.permissoes.indexOf(item.permission) >= 0) {
+      if (!item.permission || user?.permissoes.includes(item.permission)) {
         setMenuToShow((before) => [...before, item])
       }
     })

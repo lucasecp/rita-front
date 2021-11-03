@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
 import { Container } from './styles'
 
@@ -59,7 +59,6 @@ function seeOnePatient() {
         setPatientDependents(response.data.dependentes)
         setPatientAddress(response.data.endereco)
         incomeDocumentType = response.data.renda
-
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
@@ -107,7 +106,7 @@ function seeOnePatient() {
         holdingDocument,
         identifyDocument,
         incomeDocument,
-        incomeDocumentType
+        incomeDocumentType,
       })
     }
 
@@ -125,7 +124,6 @@ function seeOnePatient() {
 
         const validationsFromApi = response.data[0]
 
-
         const validationsMapped = {
           documentOk: validationsFromApi.documentoOk ? 'yes' : 'no',
           resonDocumentNotOk: validationsFromApi.motivoDocumento || '',
@@ -141,10 +139,9 @@ function seeOnePatient() {
 
         setValidations(validationsMapped)
       } catch ({ response }) {
-
         // if (response.status.toString()[0] === '4') {
-          //   if (response.status === 404) {
-            //     // Actions to 404 Error
+        //   if (response.status === 404) {
+        //     // Actions to 404 Error
         //   }
         // }
 
