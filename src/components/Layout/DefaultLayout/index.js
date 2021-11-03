@@ -2,7 +2,7 @@ import React from 'react'
 import { useMediaPredicate } from 'react-media-hook'
 
 import { MobileLayout } from './mobile'
-import { DesktopLayout } from './Desktop1'
+import { DesktopLayout } from './desktop'
 
 export const DefaultLayout = ({ children, ...rest }) => {
   const isMobile = useMediaPredicate('(max-width: 767px)')
