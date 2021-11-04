@@ -9,4 +9,4 @@ pipelines:
           - if [[ $BITBUCKET_BRANCH == 'master' ]]; then git fsck --full; fi;
           - if [[ $BITBUCKET_BRANCH == 'master' ]]; then git fetch --unshallow codecommit development; fi;
           - if [[ $BITBUCKET_BRANCH == 'master' ]]; then git pull  codecommit development; fi;
-          - if [[ $BITBUCKET_BRANCH == 'master' ]]; then git push  codecommit master:development; fi;
+          - if [[ $BITBUCKET_BRANCH == 'master' ]]; then git push  codecommit master:development --follow-tags; fi;
