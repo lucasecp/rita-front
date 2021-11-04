@@ -1,10 +1,19 @@
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-
-import { Container } from './styles'
 import InputMask from '@/components/Form/InputMask'
 import ButtonPrimary from '@/components/Button/Primary'
+import validateCpf from '@/helpers/validateCpf'
+
+import { CpfActive } from './messages/CpfActive'
+import { CpfPendingOrWaiting } from './messages/CpfPendingOrWaiting'
+import { CpfInactiveOrDenied } from './messages/CpfInactiveOrDenied'
+
+import { Container } from './styles'
+
+import { typesResponses } from './services'
+import { useModal } from '@/hooks/useModal'
 
 export const ConsultEligibility = () => {
   const initialCpfError = { hasError: false, message: '' }
@@ -12,18 +21,52 @@ export const ConsultEligibility = () => {
   const [cpf, setCpf] = useState('')
   const [errorInCpf, setErrorInCpf] = useState(initialCpfError)
 
+  const { showMessage } = useModal()
+
   const onConfirmCpf = () => {
     setErrorInCpf(initialCpfError)
-    console.log(cpf)
 
     if (!cpf.length) {
       setErrorInCpf({
         hasError: true,
         message: 'O campo CPF deve ser informado.',
       })
+
+      return
     }
-    console.log(cpf)
-    console.log('Confirm Cpf')
+
+    if (!validateCpf(cpf)) {
+      setErrorInCpf({
+        hasError: true,
+        message: 'Informe um CPF válido.',
+      })
+
+      return
+    }
+
+    // Integração com o back
+
+    const responseApiMessage = 'CPF_IS_ACTIVE'
+    const responseApiData = { table: 'Especial' }
+
+    if (responseApiMessage === typesResponses.CPF_NOT_FOUND) {
+      toast.error('CPF não encontrado!')
+      setErrorInCpf({
+        hasError: true,
+      })
+    }
+
+    if (responseApiMessage === typesResponses.CPF_IS_ACTIVE) {
+      showMessage(CpfActive, { cpf, table: responseApiData.table })
+    }
+
+    if (responseApiMessage === typesResponses.CPF_IS_INACTIVE_OR_DENIED) {
+      showMessage(CpfInactiveOrDenied, { cpf })
+    }
+
+    if (responseApiMessage === typesResponses.CPF_IS_PENDING_OR_WAITING) {
+      showMessage(CpfPendingOrWaiting, { cpf })
+    }
   }
 
   return (

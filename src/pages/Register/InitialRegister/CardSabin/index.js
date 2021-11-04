@@ -8,7 +8,7 @@ import cardSabinImg from '@/assets/img/card-sabin.png'
 import { Content } from './styles'
 
 import axios from '@/services/apiPatient'
-import { status } from '../service'
+import { status } from '../services'
 import InvalidCpf from '../messages/error/InvalidCpf'
 import CpfEmpty from '../messages/error/CpfEmpty'
 import NotFound from '../messages/error/NotFound'

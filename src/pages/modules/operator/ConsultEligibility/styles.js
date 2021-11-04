@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 
 export const Container = styled.div`
@@ -18,6 +18,12 @@ export const Container = styled.div`
 
   > button {
     width: fit-content;
+
+    ${({ hasMessage }) =>
+      hasMessage &&
+      css`
+        margin-bottom: 2px;
+      `};
   }
 
   @media (max-width: 768px) {
@@ -25,6 +31,7 @@ export const Container = styled.div`
 
     > button {
       width: unset;
+      margin-bottom: unset;
     }
   }
 `
