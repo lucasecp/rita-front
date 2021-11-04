@@ -19,6 +19,7 @@ import { useModal } from '@/hooks/useModal'
 import ComeBack from './messages/ComeBack'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import { VALIDATOR_ANALYZE_PATIENTS } from '@/routes/constants/namedRoutes/routes'
+import formatFistLastName from '@/helpers/formatFistLastName'
 
 function seeOnePatient() {
   const history = useHistory()
@@ -150,7 +151,8 @@ function seeOnePatient() {
             message: (
               <>
                 Este registro está sendo analisado pelo validador{' '}
-                {response.data.validador} desde {response.data.data}.<br />
+                {formatFistLastName(response.data.validador)} desde{' '}
+                {Array.from(response.data.data).splice(0, 5)}.<br />
                 Suas alterações não foram salvas
               </>
             ),

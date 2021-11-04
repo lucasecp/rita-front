@@ -12,7 +12,7 @@ import { queryOrderString, queryFilterString } from '../helpers/queryString'
 import RecordAlreadyAnalized from './messages/error/RecordAlreadyAnalyzed'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
-import Generic from './messages/error/Generic'
+// import Generic from './messages/error/Generic'
 import {
   LOGIN,
   VALIDATOR_SEE_ONE_PATIENT,
@@ -20,6 +20,7 @@ import {
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import formatCpf from '@/helpers/formatCpf'
 import formatFistLastName from '@/helpers/formatFistLastName'
+import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
   const query = useQuery()
@@ -32,7 +33,6 @@ const TablePatients = ({ orders, setOrders, filters }) => {
   const [queryPagination, setQueryPagination] = useState(initialQuery)
   const history = useHistory()
   const { showMessage } = useModal()
-
 
   useEffect(() => {
     const requestFilters = async () => {
@@ -70,25 +70,30 @@ const TablePatients = ({ orders, setOrders, filters }) => {
 
       const response = await apiPatient.patch(
         `/paciente/${id}/assumir-validacao?forcar=false`
-        )
-        if (response.status === 200) {
-          history.push(VALIDATOR_SEE_ONE_PATIENT, { cpf })
-        }
-      } catch ({ response }) {
-        const responseApi = response.data
-        if (
-          response.status === 400 &&
-          responseApi.message ===
+      )
+      if (response.status === 200) {
+        history.push(VALIDATOR_SEE_ONE_PATIENT, { cpf })
+      }
+    } catch ({ response }) {
+      const responseApi = response.data
+      if (
+        response.status === 400 &&
+        responseApi.message ===
           'Atenção Este registro está sendo analisado por outro validador.'
       ) {
         return showMessage(RecordAlreadyAnalized, {
           validator: formatFistLastName(responseApi.validador),
-          date: responseApi.data,
+          date: Array.from(responseApi.data).splice(0, 5),
           id,
           cpf,
         })
       }
-      return showMessage(Generic, { message: responseApi.message })
+      console.log('entrou')
+
+      return showMessage(SimpleModal, {
+        type: MODAL_TYPES.WARNING,
+        message: responseApi.message,
+      })
     } finally {
       Loading.turnOff()
     }

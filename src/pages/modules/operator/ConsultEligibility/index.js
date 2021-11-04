@@ -26,27 +26,27 @@ export const ConsultEligibility = () => {
   const onConfirmCpf = () => {
     setErrorInCpf(initialCpfError)
 
-    if (!cpf.length) {
-      setErrorInCpf({
-        hasError: true,
-        message: 'O campo CPF deve ser informado.',
-      })
+    // if (!cpf.length) {
+    //   setErrorInCpf({
+    //     hasError: true,
+    //     message: 'O campo CPF deve ser informado.',
+    //   })
 
-      return
-    }
+    //   return
+    // }
 
-    if (!validateCpf(cpf)) {
-      setErrorInCpf({
-        hasError: true,
-        message: 'Informe um CPF válido.',
-      })
+    // if (!validateCpf(cpf)) {
+    //   setErrorInCpf({
+    //     hasError: true,
+    //     message: 'Informe um CPF válido.',
+    //   })
 
-      return
-    }
+    //   return
+    // }
 
     // Integração com o back
 
-    const responseApiMessage = 'CPF_IS_ACTIVE'
+    const responseApiMessage = typesResponses.CPF_NOT_FOUND
     const responseApiData = { table: 'Especial' }
 
     if (responseApiMessage === typesResponses.CPF_NOT_FOUND) {

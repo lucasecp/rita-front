@@ -13,19 +13,16 @@ import { ModalProvider } from './hooks/useModal'
 import { LoadingProvider } from './hooks/useLoading'
 import LoadingWithHook from './components/Loading/RitaLoading'
 
-import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
-import {getUserStorage} from '@/storage/user'
+
+import { getUserStorage } from '@/storage/user'
 import apiPatient from '@/services/apiPatient'
 import apiUser from '@/services/apiUser'
 
-
 const user = getUserStorage()
-
 
 apiUser.defaults.headers.token = user?.token
 apiPatient.defaults.headers.token = user?.token
-
 
 const App = () => {
   return (

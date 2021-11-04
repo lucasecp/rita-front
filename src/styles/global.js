@@ -3,12 +3,15 @@ import colors from './colors'
 import fonts from './fonts'
 import calendar from './components/calendar'
 import tooltip from './components/tooltip'
+import { toastifyStyles } from './components/toastify'
 
 export default createGlobalStyle`
 
   ${fonts}
   ${calendar}
   ${tooltip}
+  ${toastifyStyles}
+
 
   body, *{
     font-family: "Athletics";
@@ -27,9 +30,8 @@ export default createGlobalStyle`
     max-width: 100%;
     display: block;
   }
-  .App{
-      background-color: ${colors.gray.extraLight};
-  }
+
+
   ::placeholder{
       color: ${colors.gray.middleLight};
       font-weight: 500;
