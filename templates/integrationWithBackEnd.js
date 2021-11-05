@@ -20,22 +20,17 @@ try {
       case 404:
         // Actions to 404 Error
 
-        break;
+        break
 
       default:
-        showMessage(SimpleModal, {
-          type: MODAL_TYPES.ERROR,
-          message: 'Erro não tratado no Front!',
-        })
-        break;
+        showSimple.error('Erro não tratado no Front!')
+
+        break
     }
   }
 
   if (response.status.toString()[0] === '5') {
-    showMessage(SimpleModal, {
-      type: MODAL_TYPES.ERROR,
-      message: 'Erro no Servidor!',
-    })
+    showSimple.error('Erro no Servidor!')
   }
 } finally {
   Loading.turnOff()

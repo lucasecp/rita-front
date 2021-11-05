@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { toast } from 'react-toastify'
+// import { toast } from 'react-toastify'
+import { toast } from '@/styles/components/toastify'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import InputMask from '@/components/Form/InputMask'
@@ -13,7 +14,10 @@ import { CpfInactiveOrDenied } from './messages/CpfInactiveOrDenied'
 import { Container } from './styles'
 
 import { typesResponses } from './services'
+
 import { useModal } from '@/hooks/useModal'
+import { useLoading } from '@/hooks/useLoading'
+import apiPatient from '@/services/apiPatient'
 
 export const ConsultEligibility = () => {
   const initialCpfError = { hasError: false, message: '' }
@@ -21,36 +25,99 @@ export const ConsultEligibility = () => {
   const [cpf, setCpf] = useState('')
   const [errorInCpf, setErrorInCpf] = useState(initialCpfError)
 
-  const { showMessage } = useModal()
+  const { Loading } = useLoading()
+  const { showMessage, showSimple } = useModal()
 
-  const onConfirmCpf = () => {
+  const hasErrorInInputCpf = () => {
+    if (!cpf.length) {
+      setErrorInCpf({
+        hasError: true,
+        message: 'O campo CPF deve ser informado.',
+      })
+
+      return true
+    }
+
+    if (!validateCpf(cpf)) {
+      setErrorInCpf({
+        hasError: true,
+        message: 'Informe um CPF válido.',
+      })
+
+      return true
+    }
+
+    return false
+  }
+
+  const mapResponseFromApi = async () => {
+    try {
+      Loading.turnOn()
+
+      const response = await apiPatient.get('/paciente/elegibilidade', {
+        params: { cpf },
+      })
+
+      // remove when finished configuring API responses
+      console.log(response)
+
+      if (response.status === 200) {
+        switch (response.data.status) {
+          case 'A':
+            if (!response.data.tabela) {
+              return [typesResponses.CPF_IS_INACTIVE_OR_DENIED]
+            }
+
+            return [
+              typesResponses.CPF_IS_ACTIVE,
+              { table: response.data.tabela },
+            ]
+
+          default:
+            return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
+        }
+      }
+    } catch ({ response }) {
+      // remove when finished configuring API responses
+      console.log(response)
+
+      if (response.status.toString()[0] === '4') {
+        switch (response.status) {
+          case 404:
+            if (
+              response.data.message ===
+              'Nenhum usuário encontrado na base de dados'
+            ) {
+              return [typesResponses.CPF_NOT_FOUND]
+            }
+            break
+
+          default:
+            return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
+        }
+      }
+
+      if (response.status.toString()[0] === '5') {
+        return [typesResponses.INTERNAL_SERVER_ERROR]
+      }
+    } finally {
+      Loading.turnOff()
+    }
+  }
+
+  const onConfirmCpf = async () => {
     setErrorInCpf(initialCpfError)
 
-    // if (!cpf.length) {
-    //   setErrorInCpf({
-    //     hasError: true,
-    //     message: 'O campo CPF deve ser informado.',
-    //   })
-
-    //   return
-    // }
-
-    // if (!validateCpf(cpf)) {
-    //   setErrorInCpf({
-    //     hasError: true,
-    //     message: 'Informe um CPF válido.',
-    //   })
-
-    //   return
-    // }
+    if (hasErrorInInputCpf()) {
+      return
+    }
 
     // Integração com o back
-
-    const responseApiMessage = typesResponses.CPF_NOT_FOUND
-    const responseApiData = { table: 'Especial' }
+    const [responseApiMessage, responseApiData] = await mapResponseFromApi()
 
     if (responseApiMessage === typesResponses.CPF_NOT_FOUND) {
       toast.error('CPF não encontrado!')
+
       setErrorInCpf({
         hasError: true,
       })
@@ -66,6 +133,14 @@ export const ConsultEligibility = () => {
 
     if (responseApiMessage === typesResponses.CPF_IS_PENDING_OR_WAITING) {
       showMessage(CpfPendingOrWaiting, { cpf })
+    }
+
+    if (responseApiMessage === typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR) {
+      showSimple.error('Erro não tratado no Front!')
+    }
+
+    if (responseApiMessage === typesResponses.INTERNAL_SERVER_ERROR) {
+      showSimple.error('Erro no Servidor!')
     }
   }
 

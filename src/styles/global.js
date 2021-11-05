@@ -3,7 +3,7 @@ import colors from './colors'
 import fonts from './fonts'
 import calendar from './components/calendar'
 import tooltip from './components/tooltip'
-import { toastifyStyles } from './components/toastify'
+import { toastifyStyles } from './components/toastify/styles'
 
 export default createGlobalStyle`
 

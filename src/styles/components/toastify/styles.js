@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
 import 'react-toastify/dist/ReactToastify.css'
 
-import colors from '../colors'
+import colors from '../../colors'
 
 export const toastifyStyles = css`
   :root {
@@ -83,13 +83,13 @@ export const toastifyStyles = css`
 
   /** Used to position the icon **/
   .Toastify__toast-icon {
-    /* width: 24px;
+    width: 24px;
     height: 24px;
 
     > svg {
       width: 24px;
       height: 24px;
-    } */
+    }
   }
 
   /** handle the notificaiton color and the text color based on the theme **/

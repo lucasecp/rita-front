@@ -12,7 +12,7 @@ import { queryOrderString, queryFilterString } from '../helpers/queryString'
 import RecordAlreadyAnalized from './messages/error/RecordAlreadyAnalyzed'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
-// import Generic from './messages/error/Generic'
+
 import {
   LOGIN,
   VALIDATOR_SEE_ONE_PATIENT,

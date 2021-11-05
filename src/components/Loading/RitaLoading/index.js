@@ -4,9 +4,10 @@ import logoGif from '@/assets/logo/logo-animate.gif'
 import { useLoading } from '@/hooks/useLoading'
 
 const RitaLoading = () => {
-  const { loading } = useLoading()
+  const { isLoading } = useLoading()
+  
   return (
-    loading && (
+    isLoading && (
       <Container>
         <img src={logoGif} alt="Carregando..." />
       </Container>
