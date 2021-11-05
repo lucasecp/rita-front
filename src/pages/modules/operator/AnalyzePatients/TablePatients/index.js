@@ -7,7 +7,7 @@ import useQuery from '@/hooks/useQuery'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
-import { queryOrderString, queryFilterString } from '../helpers/queryString'
+import { queryOrderString, queryFilterString } from '../../Reports/Authorization/helpers/queryString'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
 import {

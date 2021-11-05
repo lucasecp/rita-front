@@ -7,13 +7,14 @@ import trash from '@/assets/icons/trash.svg'
 import edit from '@/assets/icons/edit.svg'
 import { useModal } from '@/hooks/useModal'
 import formatCpf from '@/helpers/formatCpf'
+import mapDeps from '../../helpers/formatDateCardSabin'
 
 const Dependents = ({ dataClientSabin, setData, newData }) => {
   const [allDeps, setAllDeps] = useState([])
   const { showMessage } = useModal()
 
   useEffect(() => {
-    setAllDeps(newData.dependentes  || dataClientSabin.dependentes || [])
+    setAllDeps(newData.dependentes  || mapDeps(dataClientSabin.dependentes) || [])
   }, [])
 
   useEffect(() => {

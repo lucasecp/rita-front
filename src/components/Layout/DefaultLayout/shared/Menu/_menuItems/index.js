@@ -3,6 +3,7 @@ import React from 'react'
 import { ReactComponent as HomeIcon } from '@/assets/icons/home.svg'
 import { ReactComponent as AuthorizationIcon } from '@/assets/icons/to-do.svg'
 import { ReactComponent as PatientIcon } from '@/assets/icons/patients.svg'
+import { ReactComponent as ReportsIcon } from '@/assets/icons/report.svg'
 // import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
 // import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 // import { ReactComponent as PadLock } from '@/assets/icons/pad-lock.svg'
@@ -10,6 +11,7 @@ import { ReactComponent as PatientIcon } from '@/assets/icons/patients.svg'
 import {
   MASTERPAGE,
   OPERATOR_ANALYZE_PATIENT,
+  OPERATOR_REPORTS,
   // CHANGE_PASSWORD,
   // DEPENDENTS,
   // PATIENT_START,
@@ -17,7 +19,7 @@ import {
   VALIDATOR_ANALYZE_PATIENTS,
 } from '@/routes/constants/namedRoutes/routes'
 
-import { permissionList } from '@/components/Layout/DefaultLayout/shared/Menu/_menuItems/permissionList'
+import { permissionList } from './permissionList'
 
 export const menuItens = [
   {
@@ -49,6 +51,12 @@ export const menuItens = [
     icon: <PatientIcon />,
     name: 'Pacientes',
     permission: permissionList.PERMITIR_TODOS_STATUS_PACIENTE,
+  },
+  {
+    path: OPERATOR_REPORTS,
+    icon: <ReportsIcon />,
+    name: 'Relatórios',
+    permission: permissionList.LISTAR_LOG_VALIDACOES,
   },
   // {
   //   path: DEPENDENTS,

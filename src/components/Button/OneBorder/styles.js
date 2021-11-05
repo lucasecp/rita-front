@@ -2,8 +2,7 @@ import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 
 export const Container = styled.button`
-  border: 2px solid ${colors.purple.main.dark};
-  border-radius: 8px;
+  border-bottom: 2px solid ${colors.purple.main.dark};
   cursor: pointer;
   background: transparent;
   color: ${colors.purple.main.dark};
@@ -13,7 +12,8 @@ export const Container = styled.button`
   line-height: 20px;
   transition: 0.3s;
 
-  ${(props) =>
+
+  /* ${(props) =>
     props.variation === 'white' &&
     css`
       color: #fff;
@@ -43,36 +43,35 @@ export const Container = styled.button`
       :hover {
         background: ${colors.blue.middle} !important;
       }
-    `}
+    `} */
     ${(props) =>
     props.variation === 'red' &&
     css`
       color: ${colors.orange.middleDark};
       border-color: ${colors.orange.middleDark} !important;
-      :hover {
+
+      /* :hover {
         background: ${colors.orange.middleDark} !important;
-      }
+      } */
     `}
 
-  :hover {
+  /* :hover {
     background-color: #7338cb;
     color: #fff;
     border-color: #7338cb;
-  }
+  } */
 
-  ${({ disabled,disabledCss }) =>
-    disabled || disabledCss ?
+  /* ${({ disabled }) =>
+    disabled &&
     css`
-      background: #AFAFAF;
-      border-color: #AFAFAF;
-      cursor: default;
       color: ${colors.purple.main.light} !important;
+      border-color: ${colors.purple.main.light} !important;
+      cursor: default;
 
       :hover {
-        background: #AFAFAF ;
-        border-color: #AFAFAF;
+        color: ${colors.purple.main.light} !important;
+        border-color: ${colors.purple.main.light} !important;
+        background-color: transparent !important;
       }
-    `: ''}
-
-
+    `} */
 `

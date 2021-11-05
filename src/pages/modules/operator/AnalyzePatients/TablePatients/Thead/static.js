@@ -5,10 +5,4 @@ export default [
   {name: 'validador', label: 'Validador'},
   {name: 'dataValidacao', label: 'Validação'},
   {name: 'status', label: 'Status'},
-  // 'Cadastro',
-  // 'Nome',
-  // 'CPF',
-  // 'Validador',
-  // 'Validação',
-  // 'Status'
 ]
