@@ -79,7 +79,7 @@ function PersonExpandable({
             setErrors({ ...errors, ...validateCpf(cpf, allPersonData) })
           }
           msgError={errors.cpf}
-          disabled
+          disabled={holder}
         />
       </section>
       <section>

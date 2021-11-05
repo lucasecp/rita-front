@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
 import { Container } from './styles'
 
@@ -19,6 +19,7 @@ import { useModal } from '@/hooks/useModal'
 import ComeBack from './messages/ComeBack'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import { VALIDATOR_ANALYZE_PATIENTS } from '@/routes/constants/namedRoutes/routes'
+import formatFistLastName from '@/helpers/formatFistLastName'
 
 function seeOnePatient() {
   const history = useHistory()
@@ -56,7 +57,6 @@ function seeOnePatient() {
         setPatientDependents(response.data.dependentes)
         setPatientAddress(response.data.endereco)
         incomeDocumentType = response.data.renda
-
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
@@ -102,7 +102,7 @@ function seeOnePatient() {
         holdingDocument,
         identifyDocument,
         incomeDocument,
-        incomeDocumentType
+        incomeDocumentType,
       })
     }
 
@@ -140,7 +140,6 @@ function seeOnePatient() {
         type: MODAL_TYPES.SUCCESS,
         message: 'Validação salva!',
       })
-
     } catch ({ response }) {
       if (response.status.toString()[0] === '4') {
         if (
@@ -152,7 +151,8 @@ function seeOnePatient() {
             message: (
               <>
                 Este registro está sendo analisado pelo validador{' '}
-                {response.data.validador} desde {response.data.data}.<br />
+                {formatFistLastName(response.data.validador)} desde{' '}
+                {Array.from(response.data.data).splice(0, 5)}.<br />
                 Suas alterações não foram salvas
               </>
             ),

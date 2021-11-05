@@ -4,6 +4,7 @@ import { ReactComponent as HomeIcon } from '@/assets/icons/home.svg'
 import { ReactComponent as AuthorizationIcon } from '@/assets/icons/to-do.svg'
 import { ReactComponent as PatientIcon } from '@/assets/icons/patients.svg'
 import { ReactComponent as ReportsIcon } from '@/assets/icons/report.svg'
+import { ReactComponent as EligibilityIcon } from '@/assets/icons/choose-person.svg'
 // import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
 // import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 // import { ReactComponent as PadLock } from '@/assets/icons/pad-lock.svg'
@@ -11,6 +12,7 @@ import { ReactComponent as ReportsIcon } from '@/assets/icons/report.svg'
 import {
   MASTERPAGE,
   OPERATOR_ANALYZE_PATIENT,
+  OPERATOR_CONSULT_ELIGIBILITY,
   OPERATOR_REPORTS,
   // CHANGE_PASSWORD,
   // DEPENDENTS,
@@ -57,6 +59,12 @@ export const menuItens = [
     icon: <ReportsIcon />,
     name: 'Relatórios',
     permission: permissionList.LISTAR_LOG_VALIDACOES,
+  },
+  {
+    path: OPERATOR_CONSULT_ELIGIBILITY,
+    icon: <EligibilityIcon />,
+    name: 'Elegibilidade',
+    permission: permissionList.PERMITIR_TODOS_STATUS_PACIENTE,
   },
   // {
   //   path: DEPENDENTS,

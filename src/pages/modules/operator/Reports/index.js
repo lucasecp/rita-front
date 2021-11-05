@@ -1,4 +1,4 @@
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import {DefaultLayout} from '@/components/Layout/DefaultLayout'
 import Select from '@/components/Form/Select'
 import React, { useState } from 'react'
 

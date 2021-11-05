@@ -1,7 +1,8 @@
 image: 'atlassian/default-image:2'
-pipelines:
-  default:
-    - step:
+definitions: 
+  steps:
+    - step: &codecommit_mirror
+        name: Default mirror
         script:
           - echo "Host git-codecommit.*.amazonaws.com" >> ~/.ssh/config
           - echo "User $SSHKEY" >> ~/.ssh/config
@@ -9,4 +10,13 @@ pipelines:
           - if [[ $BITBUCKET_BRANCH == 'master' ]]; then git fsck --full; fi;
           - if [[ $BITBUCKET_BRANCH == 'master' ]]; then git fetch --unshallow codecommit development; fi;
           - if [[ $BITBUCKET_BRANCH == 'master' ]]; then git pull  codecommit development; fi;
-          - if [[ $BITBUCKET_BRANCH == 'master' ]]; then git push  codecommit master:development; fi;
+          - if [[ $BITBUCKET_BRANCH == 'master' ]]; then git push  codecommit master:development --follow-tags; fi;
+
+pipelines:
+  default:
+    - step: *codecommit_mirror
+  tags:
+    '*':
+      - step: 
+          <<: *codecommit_mirror
+          name: Tag mirror

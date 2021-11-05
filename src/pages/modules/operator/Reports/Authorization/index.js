@@ -1,4 +1,4 @@
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import {DefaultLayout} from '@/components/Layout/DefaultLayout'
 import React from 'react'
 import Filter from './Filter'
 
