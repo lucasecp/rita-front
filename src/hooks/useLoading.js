@@ -3,21 +3,23 @@ import React, { createContext, useContext, useState } from 'react'
 const LoadingContext = createContext({})
 
 const LoadingProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const turnOff = () => {
+    setIsLoading(false)
+  }
+
+  const turnOn = () => {
+    setIsLoading(true)
+  }
 
   const Loading = {
-      turnOff() {
-      setLoading(false)
-    },
-     turnOn() {
-      setLoading(true)
-    }
+    turnOff,
+    turnOn,
   }
-  
+
   return (
-    <LoadingContext.Provider
-      value={{ loading, Loading}}
-    >
+    <LoadingContext.Provider value={{ isLoading, Loading }}>
       {children}
     </LoadingContext.Provider>
   )
