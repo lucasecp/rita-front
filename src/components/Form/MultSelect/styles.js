@@ -1,12 +1,13 @@
 import colors from '@/styles/colors'
 import styled from 'styled-components'
 import checkedIcon from '@/assets/icons/checked.svg'
+import closeIcon from '@/assets/icons/close.svg'
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
+  align-items: start;
   label {
+    grid-area: 1/1;
     margin-bottom: 9px;
     color: #909090;
     font-size: 14px;
@@ -17,18 +18,42 @@ export const Container = styled.div`
     border: none;
     border-bottom: 2px solid ${colors.purple.main.middle};
     border-radius: 0;
+    display: flex;
+    min-width: fit-content;
+    span {
+      cursor: pointer;
+    }
   }
   .multiSelectContainer {
-    /* position: static; */
+    position: static;
+    grid-area: 2/1;
+    overflow-x: hidden;
   }
   .optionListContainer {
     ::-webkit-scrollbar-track {
-    border-radius: 8px;
-    background: red;
-  }
+      border-radius: 8px;
+      background: red;
+    }
     /* width: auto; */
   }
-  .multiSelectContainer ul{
+  .multiSelectContainer ul {
+    /* Track */
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background: #EEEEEE;
+;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #AFAFAF;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
   }
   .chip {
     border-radius: 16px;
@@ -39,6 +64,12 @@ export const Container = styled.div`
     padding-left: 6px;
     padding-bottom: 1px;
     cursor: pointer;
+  }
+  .notFound {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #6a6a6a;
   }
   .optionContainer {
     border-radius: 0px 0px 4px 4px;
@@ -89,5 +120,49 @@ export const Container = styled.div`
       background-repeat: no-repeat;
     }
   }
+  > button {
+    align-self: center;
+    justify-self: end;
+    grid-area: 2/1;
+    padding: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    ::after {
+      height: 10px;
+      width: 10px;
+      box-sizing: content-box;
+      display: block;
+      content: '';
+      background: url(${closeIcon});
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin-bottom: 2px;
+      filter: invert(80%) sepia(0%) saturate(2969%) hue-rotate(192deg)
+        brightness(1006%) contrast(30%);
+      opacity: 0.6;
+      transition: 0.3s;
+    }
+    :hover::after {
+      opacity: 1;
+      transition: 0.3s;
+    }
+  }
+  ::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background: #EEEEEE;
+;
+}
 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #AFAFAF;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 `

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Container = styled.div`
   margin: 0 -32px;
@@ -39,6 +39,9 @@ export const Container = styled.div`
       font-weight: 500;
       line-height: 17px;
       color: #6a6a6a;
+      max-width: 150px;
+      margin-right: 20px;
+      word-break: break-all;
     }
   }
 
@@ -65,76 +68,6 @@ export const ResultsFounds = styled.div`
   color: #909090;
 
 `
-export const Td = styled.td`
-  padding: 25.5px 0;
-  cursor: pointer;
-  text-transform: capitalize;
-
-  div {
-    margin: -25.5px 0;
-    margin-right: 60px;
-    padding: 25.5px 0;
-  }
-  span {
-    padding: 3px 10px;
-    border-radius: 16px;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-  }
-
-  ${({ status }) =>
-    status === 'Negado' &&
-    css`
-      span {
-        background: #df644b;
-        color: #f8f5ff;
-      }
-    `}
-  ${({ status }) =>
-    status === 'Aprovado' &&
-    css`
-      span {
-        background: #acffc5;
-        color: #084c4f;
-      }
-    `}
-  ${({ status }) =>
-    status === 'Em análise' &&
-    css`
-      span {
-        background: #706bff;
-        color: #c5dbfe;
-      }
-    `}
-  ${({ status }) =>
-    status === 'Pendente' &&
-    css`
-      span {
-        background: #f89bff;
-        color: #ffffff;
-      }
-    `}
-
-
-
-  ${({ soft }) =>
-    soft &&
-    css`
-      color: #909090;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 17px;
-    `}
-  ${({ strong }) =>
-    strong &&
-    css`
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 20px;
-      color: #6a6a6a;
-    `}
-`
 
 export const NotFound = styled.p`
   text-align: center;
@@ -142,5 +75,5 @@ export const NotFound = styled.p`
   font-weight: 500;
   line-height: 25px;
   color: #6a6a6a;
-  margin: 32px 0;
+  margin: 32px auto;
 `

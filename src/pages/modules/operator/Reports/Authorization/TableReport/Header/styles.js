@@ -15,9 +15,8 @@ export const Content = styled.div`
   :first-child{
     margin-left:  32px;
   }
-  :last-child{
-    margin-right: 0px;
-  }
+
+  margin-right: 20px;
 
   > div {
     display: flex;

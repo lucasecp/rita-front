@@ -30,9 +30,9 @@ const Header = ({ setOrders, orders }) => {
       {columns.map((field) => (
         <Content key={field.id}>
            <h5> {field.name} </h5>
-            <div onClick={() => handleClick(field.name)}>
-              <ArrowUp order={hasAscOrder(field.name) ? 1 : 0} />
-              <ArrowDown order={hasDescOrder(field.name) ? 1 : 0} />
+            <div onClick={() => handleClick(field.id)}>
+              <ArrowUp order={hasAscOrder(field.id) ? 1 : 0} />
+              <ArrowDown order={hasDescOrder(field.id) ? 1 : 0} />
             </div>
 
         </Content>

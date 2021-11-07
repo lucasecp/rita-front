@@ -65,7 +65,7 @@ export const Container = styled.button`
     css`
       background: #AFAFAF;
       border-color: #AFAFAF;
-      cursor: default;
+      cursor: default !important;
       color: ${colors.purple.main.light} !important;
 
       :hover {

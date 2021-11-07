@@ -37,15 +37,7 @@ export const BtnGroup = styled.div`
   button:first-child {
     margin-right: 24px;
   }
-  /* @media (max-width: 1200px) {
-    grid-column: span 3;
-  }
-  @media (max-width: 768px) {
-    grid-column: 1;
-  } */
-
-  /* @media (max-width: 991px) {
-  } */
+  
   @media (max-width: 540px) {
     flex-direction: column;
     button:first-child {
@@ -84,18 +76,24 @@ export const Controls = styled.div`
   }
   @media(max-width: 991px){
     flex-direction: column;
+    align-items: center;
     >span{
-      margin-top: 32px
+      margin-top: 32px;
+      margin-left: 0;
     }
   }
+
   @media(max-width: 540px){
+    align-items: stretch;
     >span{
       flex-direction: column;
-      align-items: stretch;
        button{
         margin-top: 16px;
         width: 100%
       }
+     > div:first-child{
+       margin-right: 0;
+     }
     }
 
   }

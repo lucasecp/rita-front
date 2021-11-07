@@ -10,7 +10,7 @@ export const Container = styled.button`
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
-  transition: 0.3s;
+
 
 
   /* ${(props) =>
@@ -55,11 +55,9 @@ export const Container = styled.button`
       } */
     `}
 
-  /* :hover {
-    background-color: #7338cb;
-    color: #fff;
-    border-color: #7338cb;
-  } */
+  :hover {
+    border-bottom: solid 2px transparent !important;
+  }
 
   /* ${({ disabled }) =>
     disabled &&

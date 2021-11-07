@@ -1,6 +1,6 @@
 export default () => {
-  const optionsContainer = document.querySelector('.optionListContainer')
-  const multiSelectWidth = document.querySelector('.multiselect-container').clientWidth
+  const optionsContainer = document.querySelectorAll('.optionListContainer')
+  const multiSelectWidth = document.querySelectorAll('.multiselect-container')
   console.log(multiSelectWidth);
-  optionsContainer.style.width = `${multiSelectWidth}px`
+  Array.from(optionsContainer).forEach((el,i) => {el.style.width = `${multiSelectWidth[i].clientWidth}px`})
 }

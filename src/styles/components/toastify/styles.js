@@ -9,8 +9,9 @@ export const toastifyStyles = css`
     --toastify-color-dark: #121212;
     --toastify-color-info: #3498db;
     --toastify-color-success: ${colors.green.light} !important;
-    --toastify-color-warning: #f1c40f;
+    --toastify-color-warning: ${colors.blueViola.light} !important;
     --toastify-color-error: ${colors.orange.middle} !important;
+    --toastify-color-loading: ${colors.purple.main.dark} !important;
     --toastify-color-transparent: rgba(255, 255, 255, 0.7);
 
     --toastify-icon-color-info: var(--toastify-color-info);

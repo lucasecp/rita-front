@@ -11,16 +11,20 @@ import RadioButton from '@/styles/components/RadioButton'
 import { RadioGroup } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
-import { toast } from 'react-toastify'
+import { toast } from '@/styles/components/toastify'
 import { columns as staticColumns, status as staticStatus } from '../static'
 import TableReport from '../TableReport'
 import formatArray from '../helpers/formatMultSelectArray'
 
 import MultSelectValidator from './MultSelectValidator'
 import { BtnGroup, Container, Controls } from './styles'
+import { OPERATOR_REPORTS } from '@/routes/constants/namedRoutes/routes'
+import differenceDays from '../helpers/differenceDays'
+import apiPatient from '@/services/apiPatient'
+import { useLoading } from '@/hooks/useLoading'
+import { queryFilterString, queryOrderString } from '../helpers/queryString'
 
 const Filter = () => {
-
   const [registerDates, setRegisterDates] = useState([])
   const [validationDates, setvalidationDates] = useState([])
   const [cpf, setCpf] = useState('')
@@ -30,13 +34,32 @@ const Filter = () => {
   const [errors, setErrors] = useState({})
   const [orders, setOrders] = useState([])
   const [filters, setFilters] = useState([])
-  const [submited, setSubmited] = useState(false)
+  const [submitGenPreview, setSubmitGenPreview] = useState(false)
   const [fileType, setFileType] = useState('')
   const [columns, setColumns] = useState([])
+  const [patients, setPatients] = useState({})
 
-  useEffect(() => {
-    setFilters(verifyTypedFields(objQuery))
-  }, [])
+  const history = useHistory()
+  const { Loading } = useLoading()
+
+  // // Evitar requisição desnecessária
+  // useEffect(() => {
+
+  //   if (!registerDates[0] && !registerDates[1] && submitGenPreview) {
+  //     setErrors({ ...errors, registerDate: '' })
+  //     setFilters(verifyTypedFields(objQuery))
+  //   }
+
+  // }, [registerDates])
+
+  // useEffect(() => {
+
+  //   if (!validationDates[0] && !validationDates[1] && submitGenPreview) {
+  //     setErrors({ ...errors, validationDate: '' })
+  //     setFilters(verifyTypedFields(objQuery))
+  //   }
+
+  // }, [validationDates])
 
   const allFieldIsEmpty = () =>
     registerDates.length ||
@@ -44,17 +67,8 @@ const Filter = () => {
     validators.length ||
     name ||
     clearFormat(cpf) ||
-    status.length
-
-  useEffect(() => {
-    if (!registerDates[0] && !registerDates[1] && submited)
-      setFilters(verifyTypedFields(objQuery))
-  }, [registerDates])
-
-  useEffect(() => {
-    if (!validationDates[0] && !validationDates[1] && submited)
-      setFilters(verifyTypedFields(objQuery))
-  }, [validationDates])
+    status.length ||
+    columns.length
 
   const objQuery = [
     { name: 'nome', value: name },
@@ -65,56 +79,97 @@ const Filter = () => {
     { name: 'dataValidacaoInicio', value: convertDate(validationDates[0]) },
     { name: 'dataValidacaoFim', value: convertDate(validationDates[1]) },
     { name: 'idValidador', value: formatArray(validators) },
-    { name: 'colunas', value: formatArray(columns) }
+    { name: 'campos', value: formatArray(columns) },
   ]
 
   const hasFieldErrors = () => {
-    const newCpf = String(clearFormat(cpf)).trim()
-    const newName = String(name).trim()
+    console.log(name)
+    const cpfClear = String(clearFormat(cpf)).trim()
+    const nameClear = String(name).trim()
     let hasError = false
     setErrors({})
+    // toast.loading('Informe pelo menos um filtro', {autoClose: false})
 
-    if(!allFieldIsEmpty()){
-      toast.warn('Informe pelo menos um filtro')
+    if (!allFieldIsEmpty()) {
+      toast.warning('Informe pelo menos um filtro')
       return true
     }
 
-    if (newCpf.length < 3 && newCpf) {
-      setErrors({...errors, cpf: 'Informe 3 dígitos ou mais'})
+    if (cpfClear.length < 3 && cpfClear) {
+      setErrors({ ...errors, cpf: 'Informe 3 dígitos ou mais' })
+      hasError = true
+    }
+    if (differenceDays(registerDates[0], registerDates[1]) > 60) {
+      setErrors({
+        ...errors,
+        registerDate: 'Período de cadastro não pode ultrapassar 60 dias.',
+      })
+      hasError = true
+    }
+    if (differenceDays(validationDates[0], validationDates[1]) > 60) {
+      setErrors({
+        ...errors,
+        validationDate: 'Período de validação não pode ultrapassar 60 dias.',
+      })
       hasError = true
     }
 
-    if (newName.length < 3 && newName) {
-      setErrors({...errors, name:'Informe 3 letras ou mais'})
+    if (nameClear.length < 3 && nameClear) {
+      setErrors({ ...errors, name: 'Informe 3 letras ou mais' })
       hasError = true
     }
     return hasError
   }
 
-  // const setInitialStates = () => {
-  //   setName('')
-  //   setCpf('')
-  //   setvalidators('')
-  //   setStatus('')
-  //   setvalidationDates([])
-  //   setRegisterDates([])
-  //   setErrors({})
-  //   setOrders([])
-  //   setFilters([])
-  //   setSubmited(false)
-  // }
-
   const onPreview = async () => {
-
-    setSubmited(true)
-
     if (hasFieldErrors()) return
 
-
     setFilters(verifyTypedFields(objQuery))
+
+    try {
+      Loading.turnOn()
+      const response = await apiPatient.get(
+        `/validacao-paciente?limit=10&skip=0${queryFilterString(
+          verifyTypedFields(objQuery)
+        )}`
+      )
+
+      if (response.status === 200) {
+        setSubmitGenPreview(true)
+        setPatients(response.data)
+      }
+    } catch ({ response }) {
+    } finally {
+      Loading.turnOff()
+    }
   }
 
-  console.log(filters);
+  const onGenerateReport = async () => {
+    if (hasFieldErrors()) return
+
+    try {
+      Loading.turnOn()
+      const response = await apiPatient.get(
+        `/validacao-paciente-relatorio/documento?limit=10&skip=0${queryOrderString(
+          orders
+        )}${queryFilterString(
+          verifyTypedFields(objQuery)
+        )}&tipoRelatorio=${fileType}`
+      )
+
+      if (response.status === 200) {
+        // const blobDocument = new Blob([response.data], {
+        //   type: 'application/pdf',
+        // })
+        // const urlDocument = URL.createObjectURL(blobDocument)
+        // window.open(urlDocument)
+      }
+    } catch ({ response }) {
+    } finally {
+      Loading.turnOff()
+    }
+  }
+
   const verifyTypedFields = (fields) => {
     return fields.filter((field) => field.value)
   }
@@ -128,12 +183,16 @@ const Filter = () => {
             value={registerDates}
             setValue={setRegisterDates}
             inputReadOnly={true}
+            hasError={errors.registerDate}
+            msgError={errors.registerDate}
           />
           <CustomRangePicker
             label="Período de Validação: "
             value={validationDates}
             setValue={setvalidationDates}
             inputReadOnly={true}
+            hasError={errors.validationDate}
+            msgError={errors.validationDate}
           />
           <InputMask
             variation="secondary"
@@ -159,27 +218,35 @@ const Filter = () => {
             validators={validators}
           />
           <CustomMultSelect
-           value={status}
-           setValue={setStatus}
-           options={staticStatus}
-           label="Status" />
+            value={status}
+            setValue={setStatus}
+            options={staticStatus}
+            label="Status"
+          />
 
           <CustomMultSelect
-          value={columns}
-          setValue={setColumns}
-          options={staticColumns}
-           label="Colunas" span="2" />
+            value={columns}
+            setValue={setColumns}
+            options={staticColumns}
+            label="Colunas"
+            span="2"
+          />
         </div>
 
         <Controls>
           <BtnGroup>
-            <ButtonOneBorder variation="red" >
+            <ButtonOneBorder
+              variation="red"
+              onClick={() => history.push(OPERATOR_REPORTS)}
+            >
               Cancelar
             </ButtonOneBorder>
-            <OutlineButton onClick={onPreview} disabledCss={!allFieldIsEmpty()}>Gerar prévia</OutlineButton>
+            <OutlineButton onClick={onPreview} disabledCss={!allFieldIsEmpty()}>
+              Gerar prévia
+            </OutlineButton>
           </BtnGroup>
 
-          { !!allFieldIsEmpty() && (
+          {!!allFieldIsEmpty() && (
             <span>
               <div>
                 <h6>Escolha o tipo de arquivo:</h6>
@@ -189,21 +256,31 @@ const Filter = () => {
                   <RadioButton
                     label="PDF"
                     value="pdf"
-                    checked={fileType === 'PDF'}
+                    checked={fileType === 'pdf'}
                   />
                   <RadioButton
                     label="XLS"
-                    value="xls"
-                    checked={fileType === 'XLS'}
+                    value="xlsx"
+                    checked={fileType === 'xlsx'}
                   />
                 </RadioGroup>
               </div>
-              <ButtonPrimary disabled={!fileType}>Gerar relatório</ButtonPrimary>
+              <ButtonPrimary disabled={!fileType} onClick={onGenerateReport}>
+                Gerar relatório
+              </ButtonPrimary>
             </span>
           )}
         </Controls>
       </Container>
-      <TableReport orders={orders} setOrders={setOrders} filters={filters} />
+      {submitGenPreview && (
+        <TableReport
+          patients={patients}
+          setPatients={setPatients}
+          orders={orders}
+          setOrders={setOrders}
+          filters={filters}
+        />
+      )}
     </>
   )
 }
