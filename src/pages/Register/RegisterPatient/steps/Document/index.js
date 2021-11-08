@@ -13,7 +13,7 @@ const Document = ({ setButtonPass, onGetDocumentFiles,savedFiles }) => {
   const [ownDocumentFile, setOwnDocumentFile] = useState('')
   const [proofOfIncomeFile, setProofOfIncomeFile] = useState('')
   const [selectIncome, setSelectIncome] = useState('')
-  
+
   useEffect(() => {
     verifySavedFiles()
   }, [])
