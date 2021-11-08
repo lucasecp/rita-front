@@ -13,7 +13,7 @@ export const CpfActive = ({ cpf, table }) => {
     <Container>
       <img src={successIcon} />
       <p>O CPF {cpf} está habilitado para atendimento e associado à</p>
-      <h6>Tabela {table}</h6>
+      <h6>{table}</h6>
       <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )

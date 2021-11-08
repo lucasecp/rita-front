@@ -65,6 +65,7 @@ export const menuItens = [
     icon: <EligibilityIcon />,
     name: 'Elegibilidade',
     permission: permissionList.PERMITIR_TODOS_STATUS_PACIENTE,
+    // permission: permissionList.VER_ELEGIBILIDADE_PACIENTE,
   },
   // {
   //   path: DEPENDENTS,

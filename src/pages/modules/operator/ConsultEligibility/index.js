@@ -58,46 +58,41 @@ export const ConsultEligibility = () => {
         params: { cpf },
       })
 
-      // remove when finished configuring API responses
-      console.log(response)
+      switch (response.data.status) {
+        case 'A':
+          if (!response.data.tabela) {
+            return [typesResponses.CPF_IS_INACTIVE_OR_DENIED]
+          }
 
-      if (response.status === 200) {
-        switch (response.data.status) {
-          case 'A':
-            if (!response.data.tabela) {
-              return [typesResponses.CPF_IS_INACTIVE_OR_DENIED]
-            }
+          return [typesResponses.CPF_IS_ACTIVE, { table: response.data.tabela }]
 
-            return [
-              typesResponses.CPF_IS_ACTIVE,
-              { table: response.data.tabela },
-            ]
+        case 'P':
+        case 'D':
+          return [typesResponses.CPF_IS_PENDING_OR_WAITING]
 
-          default:
-            return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
-        }
+        case 'I':
+        case 'N':
+        case 'NE':
+          return [typesResponses.CPF_IS_INACTIVE_OR_DENIED]
+
+        default:
+          console.log(response)
+          return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
       }
     } catch ({ response }) {
-      // remove when finished configuring API responses
-      console.log(response)
-
       if (response.status.toString()[0] === '4') {
-        switch (response.status) {
-          case 404:
-            if (
-              response.data.message ===
-              'Nenhum usuário encontrado na base de dados'
-            ) {
-              return [typesResponses.CPF_NOT_FOUND]
-            }
-            break
+        switch (response.data.message) {
+          case 'Nenhum usuário encontrado na base de dados':
+            return [typesResponses.CPF_NOT_FOUND]
 
           default:
+            console.log(response)
             return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
         }
       }
 
       if (response.status.toString()[0] === '5') {
+        console.log(response)
         return [typesResponses.INTERNAL_SERVER_ERROR]
       }
     } finally {
@@ -105,16 +100,7 @@ export const ConsultEligibility = () => {
     }
   }
 
-  const onConfirmCpf = async () => {
-    setErrorInCpf(initialCpfError)
-
-    if (hasErrorInInputCpf()) {
-      return
-    }
-
-    // Integração com o back
-    const [responseApiMessage, responseApiData] = await mapResponseFromApi()
-
+  const showEligiblility = (responseApiMessage, responseApiData) => {
     if (responseApiMessage === typesResponses.CPF_NOT_FOUND) {
       toast.error('CPF não encontrado!')
 
@@ -136,12 +122,24 @@ export const ConsultEligibility = () => {
     }
 
     if (responseApiMessage === typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR) {
-      showSimple.error('Erro não tratado no Front!')
+      showSimple.error('Erro não tratado na aplicação Frontend!')
     }
 
     if (responseApiMessage === typesResponses.INTERNAL_SERVER_ERROR) {
       showSimple.error('Erro no Servidor!')
     }
+  }
+
+  const onConfirmCpf = async () => {
+    setErrorInCpf(initialCpfError)
+
+    if (hasErrorInInputCpf()) {
+      return
+    }
+
+    const [responseApiMessage, responseApiData] = await mapResponseFromApi()
+
+    showEligiblility(responseApiMessage, responseApiData)
   }
 
   return (
