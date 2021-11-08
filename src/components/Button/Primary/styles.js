@@ -21,8 +21,8 @@ export const Container = styled.button`
     border-color: #7338cb;
   }
 
-  ${({ disabled,disabledCss }) =>
-    disabled || disabledCss ?
+  ${({ disabled,disabledWithEvents }) =>
+    disabled || disabledWithEvents ?
     css`
       background: #AFAFAF;
       border-color: #AFAFAF;

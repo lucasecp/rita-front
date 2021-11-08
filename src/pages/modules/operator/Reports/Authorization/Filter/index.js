@@ -61,7 +61,7 @@ const Filter = () => {
 
   // }, [validationDates])
 
-  const allFieldIsEmpty = () =>
+  const someFieldIsTyped = () =>
     registerDates.length ||
     validationDates.length ||
     validators.length ||
@@ -90,7 +90,7 @@ const Filter = () => {
     setErrors({})
     // toast.loading('Informe pelo menos um filtro', {autoClose: false})
 
-    if (!allFieldIsEmpty()) {
+    if (!someFieldIsTyped()) {
       toast.warning('Informe pelo menos um filtro')
       return true
     }
@@ -241,12 +241,12 @@ const Filter = () => {
             >
               Cancelar
             </ButtonOneBorder>
-            <OutlineButton onClick={onPreview} disabledCss={!allFieldIsEmpty()}>
+            <OutlineButton onClick={onPreview} disabledWithEvents={!someFieldIsTyped()}>
               Gerar prévia
             </OutlineButton>
           </BtnGroup>
 
-          {!!allFieldIsEmpty() && (
+          {!!someFieldIsTyped() && (
             <span>
               <div>
                 <h6>Escolha o tipo de arquivo:</h6>

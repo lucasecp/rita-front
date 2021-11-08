@@ -7,13 +7,13 @@ function OutlineButton({
   type,
   variation,
   small,
-  disabledCss,
+  disabledWithEvents,
   ...rest
 }) {
   // Change the variation to color
 
   return (
-    <Container type={type} variation={variation} small={small} disabledCss={disabledCss} {...rest}>
+    <Container type={type} variation={variation} small={small} disabledWithEvents={disabledWithEvents} {...rest}>
       {children}
     </Container>
   )

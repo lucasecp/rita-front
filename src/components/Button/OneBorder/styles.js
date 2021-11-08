@@ -53,10 +53,10 @@ export const Container = styled.button`
       /* :hover {
         background: ${colors.orange.middleDark} !important;
       } */
-    `}
+      `}
 
-  :hover {
-    border-bottom: solid 2px transparent !important;
+      :hover {
+    background: #fff;
   }
 
   /* ${({ disabled }) =>
