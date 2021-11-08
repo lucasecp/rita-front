@@ -16,14 +16,19 @@ const InputText = ({
   onlyNumber,
   ...rest
 }) => {
-
   const handleChange = ({ target }) => {
     if (!setValue) return
 
-    if (onlyLetter && hasNumber(target.value)) {
+    if (
+      (onlyLetter && hasNumber(target.value)) ||
+      (onlyLetter && hasSpecialCaracter(target.value))
+    ) {
       return
     }
-    if(onlyNumber && hasSpecialCaracter(target.value) && hasLetter(target.value)){
+    if (
+      (onlyNumber && hasSpecialCaracter(target.value)) ||
+      (onlyNumber && hasLetter(target.value))
+    ) {
       return
     }
 

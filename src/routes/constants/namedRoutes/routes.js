@@ -17,6 +17,9 @@ export const OPERATOR_ANALYZE_PATIENT = '/pacientes/analisar-pacientes'
 export const OPERATOR_SEE_ONE_PATIENT = '/pacientes/ver-paciente'
 export const OPERATOR_CONSULT_ELIGIBILITY = '/elegibilidade/consultar'
 
+export const OPERATOR_REPORTS = '/relatorios'
+export const OPERATOR_REPORTS_AUTHORIZATION = '/relatorios/autorizacoes'
+
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
 

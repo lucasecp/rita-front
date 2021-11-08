@@ -30,6 +30,7 @@ export const validateGender = (value) => {
   if (!value) return { gender: 'Campo Obrigatório.' }
   return { gender: '' }
 }
+
 export const validateBirthdate = (value) => {
   const dateFormate = moment(value, 'DD/MM/YYYY', true)
   if (

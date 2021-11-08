@@ -5,8 +5,9 @@ import { Container } from './styles'
 import locale from 'antd/es/date-picker/locale/pt_BR'
 import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
 import moment from 'moment'
+import MsgError from '@/components/MsgError'
 
-const CustomRangePicker = ({ label, value, setValue, ...rest }) => {
+const CustomRangePicker = ({ label, value, setValue,msgError,hasError, ...rest }) => {
   const { RangePicker } = DatePicker
 
   const handleChange = (value) => {
@@ -22,7 +23,7 @@ const CustomRangePicker = ({ label, value, setValue, ...rest }) => {
     setValue([start, end])
   }
   return (
-    <Container>
+    <Container hasError={hasError}>
       {label && <label>{label}</label>}
       <RangePicker
         placeholder={['00/00/0000', '00/00/0000']}
@@ -36,6 +37,8 @@ const CustomRangePicker = ({ label, value, setValue, ...rest }) => {
         {...rest}
       />
       <button disabled={!value[0] && !value[1]} onClick={() => setValue([])} />
+      {msgError && <MsgError>{msgError}</MsgError>}
+
     </Container>
   )
 }

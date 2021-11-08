@@ -41,10 +41,8 @@ export const Container = styled.div`
        background-size: cover;
        margin-bottom: 2px;
        filter: invert(80%) sepia(0%) saturate(2969%) hue-rotate(192deg) brightness(1006%) contrast(30%);
-
        opacity: .6;
        transition: .3s;
-
       }
       :hover::after{
         opacity: 1;
@@ -58,7 +56,7 @@ export const Container = styled.div`
 
   .ant-picker {
     border: none;
-    border-bottom: 2px solid #c0a6ff !important;
+    border-bottom: 2px solid ${({hasError}) => hasError ? colors.orange.light : '#c0a6ff' } !important;
     border-radius: 0;
     padding: 0px 5px 0 5px;
     cursor:pointer;

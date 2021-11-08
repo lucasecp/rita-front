@@ -94,11 +94,11 @@ function ConfirmPhoneOrEmail() {
         choice === 'email'
           ? {
               cpf: userData.cpf,
-              email,
+              email: email.trim(),
             }
           : {
               cpf: userData.cpf,
-              celular: phone,
+              celular: phone.trim(),
             }
       )
       const ultimaTentativa = data?.ultimaTentativa

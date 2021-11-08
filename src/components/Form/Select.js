@@ -13,6 +13,7 @@ const SelectComponent = ({
   hasError,
   ...rest
 }) => {
+  console.log(options);
   return (
     <Container>
       <label>{label}</label>
@@ -29,7 +30,7 @@ const SelectComponent = ({
             {labelDefaultOption}
           </option>
         )}
-        {options?.map((option, index) => (
+        {!!options?.length && options?.map((option, index) => (
           <option value={option.value} key={index}>
             {option.label}
           </option>

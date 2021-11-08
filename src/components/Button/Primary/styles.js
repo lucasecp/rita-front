@@ -21,16 +21,18 @@ export const Container = styled.button`
     border-color: #7338cb;
   }
 
-  ${({ disabled }) =>
-    disabled &&
+  ${({ disabled,disabledCss }) =>
+    disabled || disabledCss ?
     css`
-      background: ${colors.purple.main.light};
-      border-color: ${colors.purple.main.light};
-      cursor: default;
+      background: #AFAFAF;
+      border-color: #AFAFAF;
+      cursor: default !important;
+      color: ${colors.purple.main.light} !important;
 
       :hover {
-        background: ${colors.purple.main.light};
-        border-color: ${colors.purple.main.light};
+        background: #AFAFAF ;
+        border-color: #AFAFAF;
       }
-    `}
+    `: ''}
+
 `

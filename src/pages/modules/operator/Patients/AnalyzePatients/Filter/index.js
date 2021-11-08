@@ -1,6 +1,6 @@
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import CustomRangePicker from '@/components/CustomRangePicker'
+import CustomRangePicker from '@/components/Form/CustomRangePicker'
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import SelectComponent from '@/components/Form/Select'
@@ -103,7 +103,7 @@ const Filter = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     setSubmited(true)
 
     if (Object.keys(validateFields()).length) return

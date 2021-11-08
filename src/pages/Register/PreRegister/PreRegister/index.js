@@ -77,31 +77,32 @@ function PreRegister() {
     isLastTry = false
     isBlocked = false
 
-    Loading.turnOn()
 
     if (choice === 'email') {
       if (!isEmail(email)) {
         isDataMatch = false
+
       }
     }
 
     if (choice === 'phone') {
-      if (!(phone.length === 15)) {
+      if (!(phone.trim().length === 15)) {
         isDataMatch = false
       }
     }
 
     try {
-      const { data } = await apiPatient.post(
+     Loading.turnOn()
+        const { data } = await apiPatient.post(
         '/paciente/token',
         choice === 'email'
           ? {
               cpf: userData.cpf,
-              email,
+              email: email.trim(),
             }
           : {
               cpf: userData.cpf,
-              celular: phone,
+              celular: phone.trim(),
             }
       )
       const ultimaTentativa = data?.ultimaTentativa
