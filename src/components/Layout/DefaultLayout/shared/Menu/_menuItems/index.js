@@ -5,16 +5,16 @@ import { ReactComponent as AuthorizationIcon } from '@/assets/icons/to-do.svg'
 import { ReactComponent as PatientIcon } from '@/assets/icons/patients.svg'
 import { ReactComponent as ReportsIcon } from '@/assets/icons/report.svg'
 import { ReactComponent as EligibilityIcon } from '@/assets/icons/choose-person.svg'
+import { ReactComponent as PadLock } from '@/assets/icons/pad-lock.svg'
 // import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
 // import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
-// import { ReactComponent as PadLock } from '@/assets/icons/pad-lock.svg'
 
 import {
   MASTERPAGE,
   OPERATOR_ANALYZE_PATIENT,
   OPERATOR_CONSULT_ELIGIBILITY,
   OPERATOR_REPORTS,
-  // CHANGE_PASSWORD,
+  CHANGE_PASSWORD,
   // DEPENDENTS,
   // PATIENT_START,
   // PROFILE,
@@ -64,8 +64,7 @@ export const menuItens = [
     path: OPERATOR_CONSULT_ELIGIBILITY,
     icon: <EligibilityIcon />,
     name: 'Elegibilidade',
-    permission: permissionList.PERMITIR_TODOS_STATUS_PACIENTE,
-    // permission: permissionList.VER_ELEGIBILIDADE_PACIENTE,
+    permission: permissionList.VER_ELEGIBILIDADE_PACIENTE,
   },
   // {
   //   path: DEPENDENTS,
@@ -73,10 +72,10 @@ export const menuItens = [
   //   name: 'Dependentes',
   //   permission: permissionList.VER_MEUS_DEPENDENTES,
   // },
-  // {
-  //   path: CHANGE_PASSWORD,
-  //   icon: <PadLock />,
-  //   name: 'Trocar senha',
-  //   permission: permissionList.TROCAR_MINHA_SENHA,
-  // },
+  {
+    path: CHANGE_PASSWORD,
+    icon: <PadLock />,
+    name: 'Trocar senha',
+    permission: permissionList.TROCAR_MINHA_SENHA,
+  },
 ]

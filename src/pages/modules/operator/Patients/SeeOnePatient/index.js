@@ -20,7 +20,7 @@ import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import { getDataMapped } from './helpers/getDataMapped'
 import { toast } from 'react-toastify'
-import { format, parseISO,  } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 // import apiUser from '@/services/apiUser'
 
 function seeOnePatient() {
