@@ -36,7 +36,7 @@ const CustomRangePicker = ({ label, value, setValue,msgError,hasError, ...rest }
         suffixIcon={<Calendar />}
         {...rest}
       />
-      <button disabled={!value[0] && !value[1]} onClick={() => setValue([])} />
+      {!!(value[0] || value[1]) && <button onClick={() => setValue([])} />}
       {msgError && <MsgError>{msgError}</MsgError>}
 
     </Container>

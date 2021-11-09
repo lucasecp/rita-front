@@ -60,19 +60,32 @@ export const Container = styled.button`
     border-color: #7338cb;
   }
 
-  ${({ disabled,disabledWithEvents }) =>
-    disabled || disabledWithEvents ?
+  ${({ disabledWithEvents }) =>
+    disabledWithEvents &&
     css`
-      background: #AFAFAF;
-      border-color: #AFAFAF;
+      background: #afafaf;
+      border-color: #afafaf;
       cursor: default !important;
       color: ${colors.purple.main.light} !important;
 
       :hover {
-        background: #AFAFAF ;
-        border-color: #AFAFAF;
+        background: #afafaf;
+        border-color: #afafaf;
       }
-    `: ''}
+    `}
 
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      background: ${colors.purple.main.light};
+      border-color: ${colors.purple.main.light};
+      cursor: default !important;
+      color: ${colors.purple.background.middle} !important;
 
+      :hover {
+        background: ${colors.purple.main.light};
+        border-color: ${colors.purple.main.light};
+        color: ${colors.purple.background.middle} !important;
+      }
+    `}
 `

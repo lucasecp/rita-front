@@ -11,8 +11,6 @@ export const Container = styled.button`
   font-weight: 400;
   line-height: 20px;
 
-
-
   /* ${(props) =>
     props.variation === 'white' &&
     css`
@@ -56,7 +54,8 @@ export const Container = styled.button`
       `}
 
       :hover {
-    background: #fff;
+    opacity: .7;
+    transition: .3s;
   }
 
   /* ${({ disabled }) =>

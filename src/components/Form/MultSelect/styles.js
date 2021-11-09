@@ -6,9 +6,9 @@ import closeIcon from '@/assets/icons/close.svg'
 export const Container = styled.div`
   display: grid;
   align-items: start;
-  label {
+ > label {
     grid-area: 1/1;
-    margin-bottom: 9px;
+    margin-bottom: 6px;
     color: #909090;
     font-size: 14px;
     line-height: 16px;
@@ -20,6 +20,7 @@ export const Container = styled.div`
     border-radius: 0;
     display: flex;
     min-width: fit-content;
+    max-height: 35px;
     span {
       cursor: pointer;
     }
@@ -129,6 +130,7 @@ export const Container = styled.div`
     cursor: pointer;
     background: transparent;
     border: none;
+    z-index: 999999;
     ::after {
       height: 10px;
       width: 10px;

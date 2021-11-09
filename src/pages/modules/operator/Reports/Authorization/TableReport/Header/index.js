@@ -26,7 +26,7 @@ const Header = ({ setOrders, orders }) => {
 
   return (
     <Container>
-
+      <div>
       {columns.map((field) => (
         <Content key={field.id}>
            <h5> {field.name} </h5>
@@ -37,6 +37,7 @@ const Header = ({ setOrders, orders }) => {
 
         </Content>
       ))}
+      </div>
       </Container>
   )
 }

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import SelectComponent from '@/components/Form/Select'
 import { useLoading } from '@/hooks/useLoading'
 import apiUser from '@/services/apiUser'
-import formatFistLastName from '@/helpers/formatFistLastName'
+import formatFirstLastName from '@/helpers/formatFirstLastName'
 
-const SelectValidator = ({setValidator,validator}) => {
+const SelectValidator = ({ setValidator, validator }) => {
   const [validators, setValidators] = useState([])
   const { Loading } = useLoading()
 
@@ -23,11 +23,13 @@ const SelectValidator = ({setValidator,validator}) => {
   }, [])
 
   const formatObjectApi = () => {
-   return validators.map((validator) => {
-      return { label: formatFistLastName(validator.nome), value: validator.idUsuario }
+    return validators.map((validator) => {
+      return {
+        label: formatFirstLastName(validator.nome),
+        value: validator.idUsuario,
+      }
     })
   }
-
 
   return (
     <SelectComponent
@@ -36,7 +38,7 @@ const SelectValidator = ({setValidator,validator}) => {
       label="Validador:"
       setValue={setValidator}
       value={validator}
-      options={[{label:'Todos',value: 'ALL'},...formatObjectApi()]}
+      options={[{ label: 'Todos', value: 'ALL' }, ...formatObjectApi()]}
     />
   )
 }

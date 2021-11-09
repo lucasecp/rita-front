@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useLoading } from '@/hooks/useLoading'
 import apiUser from '@/services/apiUser'
-import formatFistLastName from '@/helpers/formatFistLastName'
+import formatFirstLastName from '@/helpers/formatFirstLastName'
 import CustomMultSelect from '@/components/Form/MultSelect'
 
-const MultSelectValidator = ({setValidators,validators}) => {
+const MultSelectValidator = ({ setValidators, validators }) => {
   const { Loading } = useLoading()
-  const [valueApi, setValueApi] = useState([]);
+  const [valueApi, setValueApi] = useState([])
 
   useEffect(() => {
     const getValidators = async () => {
@@ -23,21 +23,22 @@ const MultSelectValidator = ({setValidators,validators}) => {
   }, [])
 
   const formatValidators = () => {
-   return valueApi.map((validator) => {
-      return { name: formatFistLastName(validator.nome), id: validator.idUsuario }
+    return valueApi.map((validator) => {
+      return {
+        name: formatFirstLastName(validator.nome),
+        id: validator.idUsuario,
+      }
     })
   }
-
 
   return (
     <CustomMultSelect
       label="Validador:"
-      options={[{ name: 'Todos', id: 'All'},...formatValidators()]}
+      options={[{ name: 'Todos', id: 'All' }, ...formatValidators()]}
       setValue={setValidators}
       value={validators}
     />
   )
 }
-
 
 export default MultSelectValidator

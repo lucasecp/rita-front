@@ -4,7 +4,7 @@ import { toast as toastify } from 'react-toastify'
 import { ReactComponent as ErrorIcon } from '@/assets/icons/alerts/error.svg'
 import { ReactComponent as SuccessIcon } from '@/assets/icons/alerts/success.svg'
 import { ReactComponent as WarningIcon } from '@/assets/icons/alerts/warning.svg'
-import SpinnerLoading from '../SpinnerLoading'
+import Spinner from '@/components/Loading/Spinner'
 
 const error = (message) => {
   return toastify.error(message, { icon: <ErrorIcon /> })
@@ -18,15 +18,38 @@ const warning = (message) => {
   return toastify.warning(message, { icon: <WarningIcon /> })
 }
 
-const loading = (message, options) => {
-  return toastify.loading(message, { icon: <SpinnerLoading />, closeButton: true, ...options })
+const promise = (promisseReturn, message) => {
+  return toastify.promise(
+    promisseReturn,
+    {
+      pending: message.pending,
+
+      error: {
+        render() {
+          return message.error
+        },
+        icon: <ErrorIcon />,
+      },
+
+      success: {
+        render() {
+          return message.success
+        },
+
+        icon: <SuccessIcon />,
+      },
+
+    },
+
+    { icon: <Spinner /> }
+  )
 }
 
 const toast = {
   error,
   success,
   warning,
-  loading,
+  promise,
 }
 
 export { toast }

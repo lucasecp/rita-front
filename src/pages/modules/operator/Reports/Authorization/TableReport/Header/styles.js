@@ -15,6 +15,9 @@ export const Content = styled.div`
   :first-child{
     margin-left:  32px;
   }
+  :last-child{
+    justify-content: space-between;
+  }
 
   margin-right: 20px;
 
@@ -27,6 +30,9 @@ export const Content = styled.div`
     height: 100%;
     margin-left: 4px;
     margin-right: 4px;
+    :last-child{
+     
+    }
   }
   h5 {
     color: #fff;
@@ -38,12 +44,16 @@ export const Content = styled.div`
   }
 `
 export const Container = styled.header`
-  display: flex;
-  align-items: center;
+
   margin:  0 -32px;
-  justify-content: space-between;
   background: #afafaf;
   min-width: fit-content;
+  > div{
+    justify-content: space-between;
+    display: flex;
+  align-items: center;
+  width: 100%
+  }
 `
 
 export const ArrowUp = styled.button`

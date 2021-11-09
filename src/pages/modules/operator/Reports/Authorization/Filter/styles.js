@@ -6,6 +6,10 @@ export const Container = styled.header`
     grid-template-columns: repeat(4, auto);
     align-items: start;
     gap: 24px;
+    [span='2'] {
+      grid-column: span 2;
+
+    }
 
     @media (max-width: 1200px) {
       grid-template-columns: repeat(3, auto);
@@ -25,9 +29,6 @@ export const Container = styled.header`
       grid-column: 1 !important;
     }
     }
-    [span='2'] {
-      grid-column: span 2;
-    }
   }
 `
 
@@ -37,7 +38,7 @@ export const BtnGroup = styled.div`
   button:first-child {
     margin-right: 24px;
   }
-  
+
   @media (max-width: 540px) {
     flex-direction: column;
     button:first-child {

@@ -34,6 +34,7 @@ export const toastifyStyles = css`
     --toastify-text-color-success: #fff;
     --toastify-text-color-warning: #fff;
     --toastify-text-color-error: #fff;
+    --toastify-text-color-loading: ${colors.purple.main.dark} !important;
 
     --toastify-spinner-color: #616161;
     --toastify-spinner-color-empty-area: #e0e0e0;
@@ -80,12 +81,18 @@ export const toastifyStyles = css`
   .Toastify__toast--rtl {
   }
   .Toastify__toast-body {
+    > * {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 17px;
+    }
   }
 
   /** Used to position the icon **/
-  .Toastify__toast-icon {
-    width: 24px;
-    height: 24px;
+  .Toastify__toast-icon ,
+    .MuiCircularProgress-root{
+    width: 24px !important;
+    height: 24px !important;
 
     > svg {
       width: 24px;

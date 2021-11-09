@@ -18,11 +18,19 @@ export const Container = styled.div`
   @media (max-width: 767px) {
     padding: 25px 24px ;
   }
-`
+  `
 export const Content = styled.div`
   display: flex;
   align-items: center;
   button {
     margin-left: 24px;
+  }
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: stretch;
+    button {
+      margin-left: 0px;
+      margin-top: 24px;
+    }
   }
 `

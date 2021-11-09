@@ -13,7 +13,7 @@ const Reports = () => {
   const history = useHistory()
   const [reportChoosen, setReportChoosen] = useState('')
 
-  const handleClick = () => {
+  const onUserConfirmReportChoice = () => {
     const path = getPath(reportChoosen)
     if (path) {
       history.push(path)
@@ -31,7 +31,7 @@ const Reports = () => {
             options={getOptionsPermission(user?.permissoes)}
             labelDefaultOption="Selecione"
           />
-          <ButtonPrimary onClick={handleClick}>Selecionar</ButtonPrimary>
+          <ButtonPrimary onClick={onUserConfirmReportChoice}>Selecionar</ButtonPrimary>
         </Content>
       </Container>
     </DefaultLayout>

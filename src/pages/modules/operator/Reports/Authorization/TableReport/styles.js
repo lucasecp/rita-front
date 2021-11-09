@@ -7,7 +7,7 @@ export const Container = styled.div`
   overflow-x: auto;
   border: solid 1px #afafaf;
 
-  header > div,
+  header > div > div,
   ul li {
     min-width: 150px;
     max-width: 150px;
@@ -18,6 +18,7 @@ export const Container = styled.div`
     align-items: flex-start;
     position: relative;
     min-width: fit-content;
+   margin: 0 -32px 0 0;
     :after {
       content: '';
       height: 1px;
@@ -42,6 +43,9 @@ export const Container = styled.div`
       max-width: 150px;
       margin-right: 20px;
       word-break: break-all;
+      :last-child{
+       padding: 16px 32px 16px 0
+      }
     }
   }
 

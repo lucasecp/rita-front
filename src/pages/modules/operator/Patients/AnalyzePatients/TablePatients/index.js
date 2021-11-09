@@ -16,7 +16,7 @@ import {
 } from '@/routes/constants/namedRoutes/routes'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import formatCpf from '@/helpers/formatCpf'
-import formatFistLastName from '@/helpers/formatFistLastName'
+import formatFirstLastName from '@/helpers/formatFirstLastName'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
   const query = useQuery()
@@ -90,7 +90,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                   </Td>
                   <Td strong>{formatCpf(patient.cpf) || '-'}</Td>
                   <Td soft>
-                    {formatFistLastName(patient.validador?.nome) || '-'}
+                    {formatFirstLastName(patient.validador?.nome) || '-'}
                   </Td>
                   <Td soft>
                     {formateDateAndHour(patient.dataValidacao) || '-'}

@@ -19,7 +19,7 @@ import {
 } from '@/routes/constants/namedRoutes/routes'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import formatCpf from '@/helpers/formatCpf'
-import formatFistLastName from '@/helpers/formatFistLastName'
+import formatFirstLastName from '@/helpers/formatFirstLastName'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
@@ -82,7 +82,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
           'Atenção Este registro está sendo analisado por outro validador.'
       ) {
         return showMessage(RecordAlreadyAnalized, {
-          validator: formatFistLastName(responseApi.validador),
+          validator: formatFirstLastName(responseApi.validador),
           date: Array.from(responseApi.data).splice(0, 5),
           id,
           cpf,
@@ -125,7 +125,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                   </Td>
                   <Td strong>{formatCpf(patient.cpf) || '-'}</Td>
                   <Td soft>
-                    {formatFistLastName(patient.validador?.nome) || '-'}
+                    {formatFirstLastName(patient.validador?.nome) || '-'}
                   </Td>
                   <Td soft>
                     {formateDateAndHour(patient.dataValidacao) || '-'}

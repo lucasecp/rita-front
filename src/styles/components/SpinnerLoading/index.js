@@ -1,11 +1,12 @@
 import React from 'react'
 
 import { Container } from './styles'
+import { CircularProgress } from '@material-ui/core'
 
-function SpinnerLoading() {
+function SpinnerLoading({variation,...rest}) {
   return (
-    <Container animation="border" role="status">
-      <span className="visually-hidden">Loading...</span>
+    <Container variation={true} {...rest}  >
+    <CircularProgress {...rest} animation="border" role="status"/>
     </Container>
   )
 }

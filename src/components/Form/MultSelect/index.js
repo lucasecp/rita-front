@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
 import { Container } from './styles'
 import Multiselect from 'multiselect-react-dropdown'
-import adjustSelectOptions from './adjustSelectOptions'
+import { adjustSelectOptions } from './adjustSelectOptions'
 import { ReactComponent as CloseMultSelectIcon } from '@/assets/icons/close-multselct.svg'
 
 const CustomMultSelect = ({ label, value, setValue, options, ...rest }) => {
-
   useEffect(() => {
     adjustSelectOptions()
-  }, []);
+  }, [])
   window.onresize = adjustSelectOptions
 
   return (

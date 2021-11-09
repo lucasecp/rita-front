@@ -15,6 +15,7 @@ import { toast } from '@/styles/components/toastify'
 import { columns as staticColumns, status as staticStatus } from '../static'
 import TableReport from '../TableReport'
 import formatArray from '../helpers/formatMultSelectArray'
+import { ReactComponent as ErrorIcon } from '@/assets/icons/alerts/error.svg'
 
 import MultSelectValidator from './MultSelectValidator'
 import { BtnGroup, Container, Controls } from './styles'
@@ -23,6 +24,8 @@ import differenceDays from '../helpers/differenceDays'
 import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
 import { queryFilterString, queryOrderString } from '../helpers/queryString'
+import downloadFile from '@/helpers/downloadFile'
+import downloadXls from '../helpers/downloadXls'
 
 const Filter = () => {
   const [registerDates, setRegisterDates] = useState([])
@@ -38,6 +41,7 @@ const Filter = () => {
   const [fileType, setFileType] = useState('')
   const [columns, setColumns] = useState([])
   const [patients, setPatients] = useState({})
+  const [submitGenReport, setSubmitGenReport] = useState(false)
 
   const history = useHistory()
   const { Loading } = useLoading()
@@ -83,7 +87,6 @@ const Filter = () => {
   ]
 
   const hasFieldErrors = () => {
-    console.log(name)
     const cpfClear = String(clearFormat(cpf)).trim()
     const nameClear = String(name).trim()
     let hasError = false
@@ -145,28 +148,42 @@ const Filter = () => {
   }
 
   const onGenerateReport = async () => {
-    if (hasFieldErrors()) return
+    if (hasFieldErrors()) {
+      return
+    }
+
+    setSubmitGenReport(true)
 
     try {
-      Loading.turnOn()
-      const response = await apiPatient.get(
-        `/validacao-paciente-relatorio/documento?limit=10&skip=0${queryOrderString(
-          orders
-        )}${queryFilterString(
-          verifyTypedFields(objQuery)
-        )}&tipoRelatorio=${fileType}`
+      const response = await toast.promise(
+        apiPatient.get(
+          `/validacao-paciente-relatorio/documento?${queryOrderString(
+            orders
+          )}${queryFilterString(
+            verifyTypedFields(objQuery)
+          )}&tipoRelatorio=${fileType}`,
+          {
+            responseType: 'arraybuffer',
+          }
+        ),
+        {
+          pending: 'Gerando arquivo ...',
+          success: 'Arquivo gerado',
+          error: 'Erro ao gerar relatório',
+        }
       )
-
       if (response.status === 200) {
-        // const blobDocument = new Blob([response.data], {
-        //   type: 'application/pdf',
-        // })
-        // const urlDocument = URL.createObjectURL(blobDocument)
-        // window.open(urlDocument)
+        if (fileType === 'xlsx') {
+          downloadXls(response.data)
+        }
+
+        if (fileType === 'pdf') {
+          downloadFile(response.data)
+        }
       }
     } catch ({ response }) {
     } finally {
-      Loading.turnOff()
+      setSubmitGenReport(false)
     }
   }
 
@@ -241,35 +258,37 @@ const Filter = () => {
             >
               Cancelar
             </ButtonOneBorder>
-            <OutlineButton onClick={onPreview} disabledWithEvents={!someFieldIsTyped()}>
+            <OutlineButton
+              onClick={onPreview}
+              disabledWithEvents={!someFieldIsTyped()}
+            >
               Gerar prévia
             </OutlineButton>
           </BtnGroup>
 
-          {!!someFieldIsTyped() && (
-            <span>
-              <div>
-                <h6>Escolha o tipo de arquivo:</h6>
-                <RadioGroup
-                  onChange={({ target }) => setFileType(target.value)}
-                >
-                  <RadioButton
-                    label="PDF"
-                    value="pdf"
-                    checked={fileType === 'pdf'}
-                  />
-                  <RadioButton
-                    label="XLS"
-                    value="xlsx"
-                    checked={fileType === 'xlsx'}
-                  />
-                </RadioGroup>
-              </div>
-              <ButtonPrimary disabled={!fileType} onClick={onGenerateReport}>
-                Gerar relatório
-              </ButtonPrimary>
-            </span>
-          )}
+          <span hidden={!someFieldIsTyped()}>
+            <div>
+              <h6>Escolha o tipo de arquivo:</h6>
+              <RadioGroup onChange={({ target }) => setFileType(target.value)}>
+                <RadioButton
+                  label="PDF"
+                  value="pdf"
+                  checked={fileType === 'pdf'}
+                />
+                <RadioButton
+                  label="XLS"
+                  value="xlsx"
+                  checked={fileType === 'xlsx'}
+                />
+              </RadioGroup>
+            </div>
+            <ButtonPrimary
+              disabled={!fileType || submitGenReport}
+              onClick={onGenerateReport}
+            >
+              Gerar relatório
+            </ButtonPrimary>
+          </span>
         </Controls>
       </Container>
       {submitGenPreview && (

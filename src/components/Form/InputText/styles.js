@@ -12,7 +12,6 @@ export const Container = styled.div`
     color: #909090;
     font-size: 14px;
     line-height: 16px;
-    margin-bottom: 4px;
     font-weight: 400;
   }
 

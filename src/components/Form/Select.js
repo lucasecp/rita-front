@@ -13,7 +13,6 @@ const SelectComponent = ({
   hasError,
   ...rest
 }) => {
-  console.log(options);
   return (
     <Container>
       <label>{label}</label>

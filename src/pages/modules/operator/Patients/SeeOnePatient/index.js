@@ -43,6 +43,7 @@ function seeOnePatient() {
   const [patientDocuments, setPatientDocuments] = useState({})
 
   const [validations, setValidations] = useState()
+
   useEffect(() => {
     const loadPatientInformations = async () => {
       const userCpf = location.state.cpf
@@ -120,9 +121,9 @@ function seeOnePatient() {
 
         const response = await apiPatient.get(
           `/paciente/${patientData.idPaciente}/validar`
-        )
+          )
 
-        const validationsFromApi = response.data[0]
+          const validationsFromApi = response.data[0]
 
         const validationsMapped = {
           documentOk: validationsFromApi.documentoOk ? 'yes' : 'no',
@@ -132,15 +133,16 @@ function seeOnePatient() {
           date: format(
             parseISO(validationsFromApi.dataValidacao),
             'dd/MM/yyyy'
-          ),
-          time: format(parseISO(validationsFromApi.dataValidacao), 'HH:MM'),
-          status: validationsFromApi.status,
-        }
+            ),
+            time: format(parseISO(validationsFromApi.dataValidacao), 'HH:MM'),
+            status: validationsFromApi.status,
+          }
 
-        setValidations(validationsMapped)
-      } catch ({ response }) {
-        // if (response.status.toString()[0] === '4') {
-        //   if (response.status === 404) {
+          setValidations(validationsMapped)
+          console.log(validations);
+        } catch ({ response }) {
+          // if (response.status.toString()[0] === '4') {
+            //   if (response.status === 404) {
         //     // Actions to 404 Error
         //   }
         // }
@@ -159,7 +161,7 @@ function seeOnePatient() {
     if (patientData?.idPaciente) {
       loadValidationInformations()
     }
-  }, [])
+  }, [patientData?.idPaciente])
 
   useEffect(() => {
     const dependentErrorExists = patientDependents.some(

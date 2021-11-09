@@ -8,7 +8,7 @@ import Header from './Header'
 
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import formatCpf from '@/helpers/formatCpf'
-import formatFistLastName from '@/helpers/formatFistLastName'
+import formatFirstLastName from '@/helpers/formatFirstLastName'
 
 const TableReport = ({ orders, setOrders, filters, setPatients, patients }) => {
   const { Loading } = useLoading()
@@ -58,7 +58,7 @@ const TableReport = ({ orders, setOrders, filters, setPatients, patients }) => {
             <li>{formateDateAndHour(patient.dataFiliacao) || '-'}</li>
             <li>{formatName(patient.nome) || '-'}</li>
             <li>{formatCpf(patient.cpf) || '-'}</li>
-            <li> {formatFistLastName(patient.validador?.nome) || '-'}</li>
+            <li> {formatFirstLastName(patient.validador?.nome) || '-'}</li>
             <li>{formateDateAndHour(patient.dataValidacao) || '-'}</li>
             <li>{showStatus(patient.status) || '-'}</li>
             <li>{patient.documentoOk ? 'Sim' : '-'}</li>

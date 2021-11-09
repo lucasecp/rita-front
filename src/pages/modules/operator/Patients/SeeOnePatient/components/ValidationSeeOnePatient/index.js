@@ -6,6 +6,7 @@ import Textarea from '@/components/Form/Textarea'
 import RadioButton from '@/styles/components/RadioButton'
 
 import { Container } from './styles'
+import formatFirstLastName from '@/helpers/formatFirstLastName'
 
 // function ValidationSeeOnePatient({validations}) {
 function ValidationSeeOnePatient({ validations }) {
@@ -81,7 +82,8 @@ function ValidationSeeOnePatient({ validations }) {
         </section>
       )}
       <h6>
-        Registro validado por <b>{validations.validatorName}</b> em{' '}
+        Registro validado por{' '}
+        <b>{formatFirstLastName(validations.validatorName)}</b> em{' '}
         {validations.date} {validations.time} com status{' '}
         <b>{validations.status === 'N' ? 'Negado' : 'Aprovado'}</b>
       </h6>

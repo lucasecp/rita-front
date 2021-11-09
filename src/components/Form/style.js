@@ -7,12 +7,11 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  label {
+  > label {
     margin-bottom: 6px;
     color: #909090;
     font-size: 14px;
     line-height: 16px;
-    margin-bottom: 4px;
     font-weight: 400;
   }
 
