@@ -11,7 +11,7 @@ import {
   OPERATOR_CONSULT_ELIGIBILITY,
   OPERATOR_SEE_ONE_PATIENT,
   OPERATOR_REPORTS,
-  OPERATOR_REPORTS_AUTHORIZATION
+  OPERATOR_REPORTS_AUTHORIZATION,
 } from '../../constants/namedRoutes/routes'
 import Authorization from '@/pages/modules/operator/Reports/Authorization'
 
@@ -27,12 +27,10 @@ const operatorRoutes = [
   {
     path: OPERATOR_REPORTS,
     component: Reports,
-    exact: true
   },
   {
     path: OPERATOR_REPORTS_AUTHORIZATION,
     component: Authorization,
-    exact: true
   },
   {
     path: OPERATOR_CONSULT_ELIGIBILITY,
@@ -41,7 +39,7 @@ const operatorRoutes = [
 ]
 
 const operatorRoutesComponent = operatorRoutes.map((props, index) => (
-  <Route {...props} isPrivate key={index} />
+  <Route {...props} exact isPrivate key={index} />
 ))
 
 export default operatorRoutesComponent

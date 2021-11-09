@@ -1,6 +1,6 @@
 import RegisterLayout from '@/components/Layout/RegisterLayout'
 import React, { useEffect, useState } from 'react'
-import Adress from './steps/Address'
+import { Address } from './steps/Address'
 import RegistrationData from './steps/RegistrationData'
 import Document from './steps/Document'
 import Dependents from './steps/Dependents'
@@ -92,11 +92,10 @@ const RegisterPatient = () => {
         ),
         !documentFiles.proofOfIncomeFile
           ? ''
-          :
-        apiPatient.post(
-          `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
-          formFile3
-        ),
+          : apiPatient.post(
+              `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
+              formFile3
+            ),
       ])
     } catch ({ response }) {
       if (
@@ -148,7 +147,7 @@ const RegisterPatient = () => {
           />
         )}
         {step === 2 && (
-          <Adress
+          <Address
             setData={setData}
             setButtonPass={setButtonPass}
             dataClientSabin={dataClientSabin}

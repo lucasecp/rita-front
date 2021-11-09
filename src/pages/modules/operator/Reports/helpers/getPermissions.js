@@ -1,4 +1,4 @@
-import { OptionsPermission } from '../constants/OptionsPermission'
+// import { OptionsPermission } from '../constants/OptionsPermission'
 
 export const getOptionsPermission = (permissions) => {
 

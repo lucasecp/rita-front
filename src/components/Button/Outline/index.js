@@ -2,21 +2,10 @@ import React from 'react'
 
 import { Container } from './styles'
 
-function OutlineButton({
-  children,
-  type,
-  variation,
-  small,
-  disabledWithEvents,
-  ...rest
-}) {
+function OutlineButton({ children, ...rest }) {
   // Change the variation to color
 
-  return (
-    <Container type={type} variation={variation} small={small} disabledWithEvents={disabledWithEvents} {...rest}>
-      {children}
-    </Container>
-  )
+  return <Container {...rest}>{children}</Container>
 }
 
 export default OutlineButton

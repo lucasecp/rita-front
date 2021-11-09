@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Container = styled.header`
   > div:first-child {
@@ -8,26 +8,25 @@ export const Container = styled.header`
     gap: 24px;
     [span='2'] {
       grid-column: span 2;
-
     }
 
     @media (max-width: 1200px) {
       grid-template-columns: repeat(3, minmax(auto,33%));
       [span='2'] {
-      grid-column: span 3 !important;
-    }
+        grid-column: span 3 !important;
+      }
     }
     @media (max-width: 991px) {
       grid-template-columns: repeat(2, minmax(auto,50%));
       [span='2'] {
-      grid-column: span 2 !important;
-    }
+        grid-column: span 2 !important;
+      }
     }
     @media (max-width: 767px) {
       grid-template-columns: 100%;
       [span='2'] {
-      grid-column: 1 !important;
-    }
+        grid-column: 1 !important;
+      }
     }
   }
 `
@@ -46,7 +45,6 @@ export const BtnGroup = styled.div`
       margin-bottom: 24px;
     }
   }
-
 `
 export const Controls = styled.div`
   margin-top: 32px;
@@ -54,10 +52,9 @@ export const Controls = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  >span{
+  > span {
     display: flex;
     margin-left: auto;
-
   }
   > span > div:first-child {
     display: flex;
@@ -73,29 +70,28 @@ export const Controls = styled.div`
     font-size: 14px;
     font-weight: 500;
     line-height: 17px;
-    color: #6A6A6A;
+    color: #6a6a6a;
   }
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     flex-direction: column;
     align-items: center;
-    >span{
+    > span {
       margin-top: 32px;
       margin-left: 0;
     }
   }
 
-  @media(max-width: 540px){
+  @media (max-width: 540px) {
     align-items: stretch;
-    >span{
+    > span {
       flex-direction: column;
-       button{
+      button {
         margin-top: 16px;
-        width: 100%
+        width: 100%;
       }
-     > div:first-child{
-       margin-right: 0;
-     }
+      > div:first-child {
+        margin-right: 0;
+      }
     }
-
   }
 `
