@@ -6,7 +6,6 @@ export const getOptionsPermission = (permissions) => {
     if (permissions.includes(option.value)) {
       acumulator.push(option)
     }
-
     return acumulator
   }, [])
 
