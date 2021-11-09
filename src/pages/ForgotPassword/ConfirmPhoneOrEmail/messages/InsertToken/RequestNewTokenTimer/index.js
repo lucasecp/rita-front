@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import SpinnerLoading from '@/styles/components/SpinnerLoading'
+import { SpinnerLoading } from '@/styles/components/SpinnerLoading'
 
 import { Container } from './styles'
 

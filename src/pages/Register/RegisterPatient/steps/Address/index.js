@@ -7,7 +7,12 @@ import { Col, Row } from 'react-bootstrap'
 import { Container } from './styles'
 import { UF } from './static'
 
-const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
+export const Address = ({
+  setButtonPass,
+  setData,
+  dataClientSabin,
+  newData,
+}) => {
   const [cep, setCep] = useState('')
   const [uf, setUf] = useState('')
   const [city, setCity] = useState('')
@@ -63,7 +68,6 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
             value={cep}
             setValue={setCep}
             name="cep"
-
           />
         </Col>
         <Col md="6" className="mt-4 mt-md-0">
@@ -103,7 +107,7 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
                 setValue={setNumberHome}
                 name="numberHome"
                 onlyNumber
-                maxLength='20'
+                maxLength="20"
               />
             </Col>
           </Row>
@@ -130,5 +134,3 @@ const Address = ({ setButtonPass, setData, dataClientSabin, newData }) => {
     </Container>
   )
 }
-
-export default Address

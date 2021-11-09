@@ -20,7 +20,7 @@ const validatorRoutes = [
 ]
 
 const validatorRoutesComponent = validatorRoutes.map((props, index) => (
-  <Route {...props} isPrivate key={index} />
+  <Route {...props} exact isPrivate key={index} />
 ))
 
 export default validatorRoutesComponent

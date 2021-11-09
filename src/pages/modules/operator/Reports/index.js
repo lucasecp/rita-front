@@ -1,12 +1,13 @@
-import {DefaultLayout} from '@/components/Layout/DefaultLayout'
-import Select from '@/components/Form/Select'
 import React, { useState } from 'react'
+import { useHistory } from 'react-router'
+import { DefaultLayout } from '@/components/Layout/DefaultLayout'
+import Select from '@/components/Form/Select'
 
 import { Container, Content } from './styles'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useAuth } from '@/hooks/login'
 import { getOptionsPermission, getPath } from './helpers/getPermissions'
-import { useHistory } from 'react-router'
+import { reportOptions } from './constants/OptionsPermission'
 
 const Reports = () => {
   const { user } = useAuth()
@@ -14,10 +15,13 @@ const Reports = () => {
   const [reportChoosen, setReportChoosen] = useState('')
 
   const onUserConfirmReportChoice = () => {
-    const path = getPath(reportChoosen)
-    if (path) {
-      history.push(path)
-    }
+    // const path = getPath(reportChoosen)
+    // if (path) {
+    const { path: reportPath } = reportOptions.find(
+      (report) => report.value === reportChoosen
+    )
+    history.push(reportPath)
+    // }
   }
 
   return (
@@ -28,10 +32,13 @@ const Reports = () => {
           <Select
             value={reportChoosen}
             setValue={setReportChoosen}
-            options={getOptionsPermission(user?.permissoes)}
+            // options={getOptionsPermission(user?.permissoes)}
+            options={reportOptions}
             labelDefaultOption="Selecione"
           />
-          <ButtonPrimary onClick={onUserConfirmReportChoice}>Selecionar</ButtonPrimary>
+          <ButtonPrimary onClick={onUserConfirmReportChoice}>
+            Selecionar
+          </ButtonPrimary>
         </Content>
       </Container>
     </DefaultLayout>
