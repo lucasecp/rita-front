@@ -258,10 +258,16 @@ const Filter = () => {
             >
               Cancelar
             </ButtonOneBorder>
-            <OutlineButton
+
+            <ButtonPrimary
               onClick={onPreview}
-              disabledWithEvents={!someFieldIsTyped()}
+              hidden={someFieldIsTyped()}
+              disabledWithEvents
             >
+              Gerar prévia
+            </ButtonPrimary>
+
+            <OutlineButton onClick={onPreview} hidden={!someFieldIsTyped()}>
               Gerar prévia
             </OutlineButton>
           </BtnGroup>

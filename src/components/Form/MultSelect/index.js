@@ -1,17 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Container } from './styles'
 import Multiselect from 'multiselect-react-dropdown'
 import { adjustSelectOptions } from './adjustSelectOptions'
 import { ReactComponent as CloseMultSelectIcon } from '@/assets/icons/close-multselct.svg'
+import generateRandomString from '@/helpers/generateRandomString'
 
 const CustomMultSelect = ({ label, value, setValue, options, ...rest }) => {
+  const containerDiv = useRef(null)
+
   useEffect(() => {
-    adjustSelectOptions()
+    adjustSelectOptions(containerDiv?.current)
   }, [])
-  window.onresize = adjustSelectOptions
+
+  window.onresize = () => adjustSelectOptions(containerDiv?.current)
 
   return (
-    <Container {...rest} onClick={adjustSelectOptions}>
+    <Container
+      {...rest}
+      ref={containerDiv}
+      id={generateRandomString(7)}
+      onClick={() => adjustSelectOptions(containerDiv?.current)}
+    >
       {label && <label>{label}</label>}
       <Multiselect
         options={options}

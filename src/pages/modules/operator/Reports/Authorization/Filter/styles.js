@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const Container = styled.header`
   > div:first-child {
     display: grid;
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(4, minmax(auto,25%));
     align-items: start;
     gap: 24px;
     [span='2'] {
@@ -12,13 +12,13 @@ export const Container = styled.header`
     }
 
     @media (max-width: 1200px) {
-      grid-template-columns: repeat(3, auto);
+      grid-template-columns: repeat(3, minmax(auto,33%));
       [span='2'] {
       grid-column: span 3 !important;
     }
     }
     @media (max-width: 991px) {
-      grid-template-columns: repeat(2, auto);
+      grid-template-columns: repeat(2, minmax(auto,50%));
       [span='2'] {
       grid-column: span 2 !important;
     }

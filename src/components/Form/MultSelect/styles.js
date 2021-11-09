@@ -4,8 +4,10 @@ import checkedIcon from '@/assets/icons/checked.svg'
 import closeIcon from '@/assets/icons/close.svg'
 
 export const Container = styled.div`
-  display: grid;
-  align-items: start;
+display: grid;
+align-items: start;
+border-bottom: 2px solid ${colors.purple.main.middle};
+max-height: 54px;
  > label {
     grid-area: 1/1;
     margin-bottom: 6px;
@@ -14,13 +16,15 @@ export const Container = styled.div`
     line-height: 16px;
     font-weight: 400;
   }
+  .optionListContainer{
+    margin-top: 2px;
+  }
   .searchWrapper {
     border: none;
-    border-bottom: 2px solid ${colors.purple.main.middle};
     border-radius: 0;
     display: flex;
     min-width: fit-content;
-    max-height: 35px;
+    max-height: 32px;
     span {
       cursor: pointer;
     }
@@ -28,7 +32,9 @@ export const Container = styled.div`
   .multiSelectContainer {
     position: static;
     grid-area: 2/1;
-    overflow-x: hidden;
+    overflow: hidden;
+    max-height: 32px;
+    max-width: calc(100% - 25px)
   }
   .optionListContainer {
     ::-webkit-scrollbar-track {
@@ -95,6 +101,10 @@ export const Container = styled.div`
     .highlightOption {
       background: transparent;
     }
+  }
+  .multiSelectContainer input{
+    margin-top: 0;
+    width:30px
   }
 
   input[type='checkbox'] {
