@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 // import { toast } from 'react-toastify'
 import { toast } from '@/styles/components/toastify'
 
@@ -27,6 +27,8 @@ export const ConsultEligibility = () => {
 
   const { Loading } = useLoading()
   const { showMessage, showSimple } = useModal()
+
+  const cpfInputRef = useRef(null)
 
   const hasErrorInInputCpf = () => {
     if (!cpf.length) {
@@ -130,15 +132,18 @@ export const ConsultEligibility = () => {
     }
   }
 
-  const onConfirmCpf = async () => {
+  const onConfirmCpf = async (event) => {
+    event.preventDefault()
+
     setErrorInCpf(initialCpfError)
 
     if (hasErrorInInputCpf()) {
+      cpfInputRef.current.focus()
       return
     }
 
     const [responseApiMessage, responseApiData] = await mapResponseFromApi()
-
+    
     showEligiblility(responseApiMessage, responseApiData)
   }
 
@@ -153,8 +158,11 @@ export const ConsultEligibility = () => {
           setValue={setCpf}
           hasError={errorInCpf.hasError}
           msgError={errorInCpf.message}
+          inputRef={(ref) => (cpfInputRef.current = ref)}
         />
-        <ButtonPrimary onClick={onConfirmCpf}>Confirmar</ButtonPrimary>
+        <ButtonPrimary type="submit" onClick={onConfirmCpf}>
+          Confirmar
+        </ButtonPrimary>
       </Container>
     </DefaultLayout>
   )
