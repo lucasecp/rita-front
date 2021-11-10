@@ -30,7 +30,7 @@ import orderColumnsToApi from '../helpers/orderColumnsToApi'
 
 const Filter = () => {
   const [registerDates, setRegisterDates] = useState([])
-  const [validationDates, setvalidationDates] = useState([])
+  const [validationDates, setValidationDates] = useState([])
   const [cpf, setCpf] = useState('')
   const [name, setName] = useState('')
   const [validators, setvalidators] = useState([])
@@ -48,25 +48,19 @@ const Filter = () => {
   const history = useHistory()
   const { Loading } = useLoading()
 
-  // // Evitar requisição desnecessária
-  // useEffect(() => {
+  useEffect(() => {
+    if (!registerDates[0] && !registerDates[1]) {
+      setErrors({ ...errors, registerDate: '' })
+    }
+  }, [registerDates])
 
-  //   if (!registerDates[0] && !registerDates[1] && submitGenPreview) {
-  //     setErrors({ ...errors, registerDate: '' })
-  //     setFilters(verifyTypedFields(objQuery))
-  //   }
+  useEffect(() => {
+    if (!validationDates[0] && !validationDates[1] ) {
+      setErrors({ ...errors, validationDate: '' })
+    }
+  }, [validationDates])
 
-  // }, [registerDates])
-
-  // useEffect(() => {
-
-  //   if (!validationDates[0] && !validationDates[1] && submitGenPreview) {
-  //     setErrors({ ...errors, validationDate: '' })
-  //     setFilters(verifyTypedFields(objQuery))
-  //   }
-
-  // }, [validationDates])
-
+  console.log(errors);
   useEffect(() => {
     if (
       registerDates.length ||
@@ -202,7 +196,6 @@ const Filter = () => {
   const verifyTypedFields = (fields) => {
     return fields.filter((field) => field.value)
   }
-
   return (
     <>
       <Container>
@@ -218,7 +211,7 @@ const Filter = () => {
           <CustomRangePicker
             label="Período de Validação: "
             value={validationDates}
-            setValue={setvalidationDates}
+            setValue={setValidationDates}
             inputReadOnly={true}
             hasError={errors.validationDate}
             msgError={errors.validationDate}

@@ -18,6 +18,7 @@ export const Header = ({ title }) => {
   useEffect(() => {
     getProfilePhoto()
   }, []);
+  console.log(photoApi);
 
   return (
     <Container>
