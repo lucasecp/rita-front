@@ -26,6 +26,7 @@ import { useLoading } from '@/hooks/useLoading'
 import { queryFilterString, queryOrderString } from '../helpers/queryString'
 import downloadFile from '@/helpers/downloadFile'
 import downloadXls from '../helpers/downloadXls'
+import orderColumnsToApi from '../helpers/orderColumnsToApi'
 
 const Filter = () => {
   const [registerDates, setRegisterDates] = useState([])
@@ -83,7 +84,7 @@ const Filter = () => {
     { name: 'dataValidacaoInicio', value: convertDate(validationDates[0]) },
     { name: 'dataValidacaoFim', value: convertDate(validationDates[1]) },
     { name: 'idValidador', value: formatArray(validators) },
-    { name: 'campos', value: formatArray(columns) },
+    { name: 'campos', value: orderColumnsToApi(columns) },
   ]
 
   const hasFieldErrors = () => {
@@ -178,7 +179,8 @@ const Filter = () => {
         }
 
         if (fileType === 'pdf') {
-          downloadFile(response.data)
+          const blob =  new Blob([response.data], { type: 'application/pdf' })
+          downloadFile(blob)
         }
       }
     } catch ({ response }) {
@@ -260,7 +262,7 @@ const Filter = () => {
             </ButtonOneBorder>
 
             <ButtonPrimary
-              onClick={onPreview}
+              onClick={() => toast.warning('Informe pelo menos um filtro')}
               hidden={someFieldIsTyped()}
               disabledWithEvents
             >

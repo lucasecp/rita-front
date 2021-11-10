@@ -58,9 +58,9 @@ const TableReport = ({ orders, setOrders, filters, setPatients, patients }) => {
             <li>{formateDateAndHour(patient.dataFiliacao) || '-'}</li>
             <li>{formatName(patient.nome) || '-'}</li>
             <li>{formatCpf(patient.cpf) || '-'}</li>
+            <li>{showStatus(patient.status) || '-'}</li>
             <li> {formatFirstLastName(patient.validador?.nome) || '-'}</li>
             <li>{formateDateAndHour(patient.dataValidacao) || '-'}</li>
-            <li>{showStatus(patient.status) || '-'}</li>
             <li>{patient.documentoOk ? 'Sim' : '-'}</li>
             <li>{patient.rendaBaixa ? 'Sim' : '-'}</li>
             <li>{patient.motivoDocumento || '-'}</li>

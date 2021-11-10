@@ -4,11 +4,11 @@ import checkedIcon from '@/assets/icons/checked.svg'
 import closeIcon from '@/assets/icons/close.svg'
 
 export const Container = styled.div`
-display: grid;
-align-items: start;
-border-bottom: 2px solid ${colors.purple.main.middle};
-max-height: 54px;
- > label {
+  display: grid;
+  align-items: start;
+  border-bottom: 2px solid ${colors.purple.main.middle};
+  max-height: 54px;
+  > label {
     grid-area: 1/1;
     margin-bottom: 6px;
     color: #909090;
@@ -16,7 +16,7 @@ max-height: 54px;
     line-height: 16px;
     font-weight: 400;
   }
-  .optionListContainer{
+  .optionListContainer {
     margin-top: 2px;
   }
   .searchWrapper {
@@ -34,7 +34,7 @@ max-height: 54px;
     grid-area: 2/1;
     overflow: hidden;
     max-height: 32px;
-    max-width: calc(100% - 25px)
+    max-width: calc(100% - 25px);
   }
   .optionListContainer {
     ::-webkit-scrollbar-track {
@@ -45,22 +45,21 @@ max-height: 54px;
   }
   .multiSelectContainer ul {
     /* Track */
-::-webkit-scrollbar-track {
-  border-radius: 8px;
-  background: #EEEEEE;
-;
-}
+    ::-webkit-scrollbar-track {
+      border-radius: 8px;
+      background: #eeeeee;
+    }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #AFAFAF;
-  border-radius: 8px;
-}
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #afafaf;
+      border-radius: 8px;
+    }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
   }
   .chip {
     border-radius: 16px;
@@ -102,9 +101,9 @@ max-height: 54px;
       background: transparent;
     }
   }
-  .multiSelectContainer input{
+  .multiSelectContainer input {
     margin-top: 0;
-    width:30px
+    width: 30px;
   }
 
   input[type='checkbox'] {
@@ -140,7 +139,6 @@ max-height: 54px;
     cursor: pointer;
     background: transparent;
     border: none;
-    z-index: 999999;
     ::after {
       height: 10px;
       width: 10px;
@@ -162,19 +160,18 @@ max-height: 54px;
     }
   }
   ::-webkit-scrollbar-track {
-  border-radius: 8px;
-  background: #EEEEEE;
-;
-}
+    border-radius: 8px;
+    background: #eeeeee;
+  }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #AFAFAF;
-  border-radius: 8px;
-}
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #afafaf;
+    border-radius: 8px;
+  }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `
