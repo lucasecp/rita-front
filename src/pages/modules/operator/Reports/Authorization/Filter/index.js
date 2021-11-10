@@ -9,7 +9,7 @@ import clearFormat from '@/helpers/clear/SpecialCaracteres'
 import convertDate from '@/helpers/convertDateToIso'
 import RadioButton from '@/styles/components/RadioButton'
 import { RadioGroup } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { toast } from '@/styles/components/toastify'
 import { columns as staticColumns, status as staticStatus } from '../static'
@@ -43,6 +43,7 @@ const Filter = () => {
   const [columns, setColumns] = useState([])
   const [patients, setPatients] = useState({})
   const [submitGenReport, setSubmitGenReport] = useState(false)
+  const [someFieldWasTyped, setSomeFieldWasTyped] = useState(false)
 
   const history = useHistory()
   const { Loading } = useLoading()
@@ -66,14 +67,22 @@ const Filter = () => {
 
   // }, [validationDates])
 
-  const someFieldIsTyped = () =>
-    registerDates.length ||
-    validationDates.length ||
-    validators.length ||
-    name ||
-    clearFormat(cpf) ||
-    status.length ||
-    columns.length
+  useEffect(() => {
+    if (
+      registerDates.length ||
+      validationDates.length ||
+      validators.length ||
+      name ||
+      clearFormat(cpf) ||
+      status.length ||
+      columns.length
+    ) {
+      setSomeFieldWasTyped(true)
+    } else {
+      setSubmitGenPreview(false)
+      setSomeFieldWasTyped(false)
+    }
+  }, [registerDates, validationDates, validators, name, cpf, status, columns])
 
   const objQuery = [
     { name: 'nome', value: name },
@@ -92,9 +101,8 @@ const Filter = () => {
     const nameClear = String(name).trim()
     let hasError = false
     setErrors({})
-    // toast.loading('Informe pelo menos um filtro', {autoClose: false})
 
-    if (!someFieldIsTyped()) {
+    if (!someFieldWasTyped) {
       toast.warning('Informe pelo menos um filtro')
       return true
     }
@@ -179,8 +187,10 @@ const Filter = () => {
         }
 
         if (fileType === 'pdf') {
-          const blob =  new Blob([response.data], { type: 'application/pdf' })
-          downloadFile(blob)
+          const blobReportPdf = new Blob([response.data], {
+            type: 'application/pdf',
+          })
+          downloadFile(blobReportPdf)
         }
       }
     } catch ({ response }) {
@@ -263,18 +273,18 @@ const Filter = () => {
 
             <ButtonPrimary
               onClick={() => toast.warning('Informe pelo menos um filtro')}
-              hidden={someFieldIsTyped()}
+              hidden={someFieldWasTyped}
               disabledWithEvents
             >
               Gerar prévia
             </ButtonPrimary>
 
-            <OutlineButton onClick={onPreview} hidden={!someFieldIsTyped()}>
+            <OutlineButton onClick={onPreview} hidden={!someFieldWasTyped}>
               Gerar prévia
             </OutlineButton>
           </BtnGroup>
 
-          <span hidden={!someFieldIsTyped()}>
+          <span hidden={!someFieldWasTyped}>
             <div>
               <h6>Escolha o tipo de arquivo:</h6>
               <RadioGroup onChange={({ target }) => setFileType(target.value)}>
