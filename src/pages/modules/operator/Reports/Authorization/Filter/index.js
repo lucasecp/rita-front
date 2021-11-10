@@ -50,17 +50,17 @@ const Filter = () => {
 
   useEffect(() => {
     if (!registerDates[0] && !registerDates[1]) {
-      setErrors({ ...errors, registerDate: '' })
+      setErrors(errors => {return{ ...errors, registerDate: '' }})
     }
   }, [registerDates])
 
   useEffect(() => {
     if (!validationDates[0] && !validationDates[1] ) {
-      setErrors({ ...errors, validationDate: '' })
+      setErrors(errors => {return{ ...errors, validationDate: '' }})
     }
   }, [validationDates])
 
-  console.log(errors);
+  console.log(errors)
   useEffect(() => {
     if (
       registerDates.length ||
@@ -102,26 +102,36 @@ const Filter = () => {
     }
 
     if (cpfClear.length < 3 && cpfClear) {
-      setErrors({ ...errors, cpf: 'Informe 3 dígitos ou mais' })
-      hasError = true
-    }
-    if (differenceDays(registerDates[0], registerDates[1]) > 60) {
-      setErrors({
-        ...errors,
-        registerDate: 'Período de cadastro não pode ultrapassar 60 dias.',
+      setErrors((errors) => {
+        return { ...errors, cpf: 'Informe 3 dígitos ou mais' }
       })
       hasError = true
     }
+
+    if (differenceDays(registerDates[0], registerDates[1]) > 60) {
+      setErrors((errors) => {
+        return {
+          ...errors,
+          registerDate: 'Período de cadastro não pode ultrapassar 60 dias.',
+        }
+      })
+      hasError = true
+    }
+
     if (differenceDays(validationDates[0], validationDates[1]) > 60) {
-      setErrors({
-        ...errors,
-        validationDate: 'Período de validação não pode ultrapassar 60 dias.',
+      setErrors((errors) => {
+        return {
+          ...errors,
+          validationDate: 'Período de validação não pode ultrapassar 60 dias.',
+        }
       })
       hasError = true
     }
 
     if (nameClear.length < 3 && nameClear) {
-      setErrors({ ...errors, name: 'Informe 3 letras ou mais' })
+      setErrors((errors) => {
+        return { ...errors, name: 'Informe 3 letras ou mais' }
+      })
       hasError = true
     }
     return hasError
