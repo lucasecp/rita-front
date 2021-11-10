@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import profileImg from '@/assets/img/profile.png'
@@ -9,9 +9,15 @@ import { ReactComponent as ExitIcon } from '@/assets/icons/exit.svg'
 import { useAuth } from '@/hooks/login'
 
 import { Container } from './styles'
+import useProfilePhoto from '../../hooks/useProfilePhoto'
 
 export const Header = ({ title }) => {
   const { clearDataLogout } = useAuth()
+  const [photoApi,getProfilePhoto] = useProfilePhoto()
+
+  useEffect(() => {
+    getProfilePhoto()
+  }, []);
 
   return (
     <Container>

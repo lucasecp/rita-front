@@ -107,8 +107,6 @@ export const Container = styled.div`
   }
 
   input[type='checkbox'] {
-    /* change "blue" browser chrome to yellow */
-    /* filter: invert(100%) hue-rotate(18deg) brightness(1.7); */
     appearance: none;
     margin-right: 8px;
     margin-bottom: 4px;
