@@ -31,7 +31,7 @@ export const Header = () => {
         <img src={logo} />
       </Link>
       <nav>
-        <Link to="/perfil">
+        <Link to="#">
           <div>
             {photo ? (
               <img src={photo} alt="perfil" />

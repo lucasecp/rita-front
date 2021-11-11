@@ -27,7 +27,7 @@ export const Header = ({ title }) => {
     <Container>
       <h1>{title || 'Page Title'}</h1>
       <nav>
-        <Link to='/perfil'>
+        <Link to='#'>
           Olá, {nameFormated}
           <div>
             {photo ? (
