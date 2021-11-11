@@ -10,14 +10,10 @@ import formateDateAndHour from '@/helpers/formateDateAndHour'
 import formatCpf from '@/helpers/formatCpf'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
 
-const TableReport = ({ orders, setOrders, filters, setPatients, patients }) => {
+const TableReport = ({ orders, setOrders, filters, setPatients, patients,columns }) => {
   const { Loading } = useLoading()
 
   useEffect(() => {
-    if (!orders.length) {
-      return
-    }
-
     const requestOrders = async () => {
       try {
         Loading.turnOn()
@@ -51,7 +47,7 @@ const TableReport = ({ orders, setOrders, filters, setPatients, patients }) => {
         Foram encontrados: {patients?.total} registros
       </ResultsFounds>
       <Container>
-        <Header setOrders={setOrders} orders={orders} />
+        <Header setOrders={setOrders} orders={orders} columns={columns} />
 
         {patients.dados?.map((patient) => (
           <ul key={patient.id}>

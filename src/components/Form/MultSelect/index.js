@@ -4,8 +4,9 @@ import Multiselect from 'multiselect-react-dropdown'
 import { adjustSelectOptions } from './adjustSelectOptions'
 import { ReactComponent as CloseMultSelectIcon } from '@/assets/icons/close-multselct.svg'
 import generateRandomString from '@/helpers/generateRandomString'
+import MsgError from '@/components/MsgError'
 
-const CustomMultSelect = ({ label, value, setValue, options, ...rest }) => {
+const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, ...rest }) => {
   const containerDiv = useRef(null)
 
   useEffect(() => {
@@ -17,6 +18,7 @@ const CustomMultSelect = ({ label, value, setValue, options, ...rest }) => {
   return (
     <Container
       {...rest}
+      hasError={hasError}
       ref={containerDiv}
       id={generateRandomString(7)}
       onClick={() => adjustSelectOptions(containerDiv?.current)}
@@ -38,6 +40,7 @@ const CustomMultSelect = ({ label, value, setValue, options, ...rest }) => {
       {!!value.length && (
         <button disabled={!value} onClick={() => setValue([])} />
       )}
+      {msgError && <MsgError>{msgError}</MsgError>}
     </Container>
   )
 }

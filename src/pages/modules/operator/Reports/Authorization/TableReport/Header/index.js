@@ -1,5 +1,5 @@
 import React from 'react'
-import {columns} from '../../static'
+import {columnsTable} from '../../static'
 import { ArrowDown, ArrowUp,Content,Container } from './styles'
 
 const Header = ({ setOrders, orders }) => {
@@ -27,7 +27,7 @@ const Header = ({ setOrders, orders }) => {
   return (
     <Container>
       <div>
-      {columns.map((field) => (
+      {columnsTable.map((field) => (
         <Content key={field.id}>
            <h5> {field.name} </h5>
             <div onClick={() => handleClick(field.id)}>

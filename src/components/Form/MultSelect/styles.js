@@ -1,5 +1,5 @@
 import colors from '@/styles/colors'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import checkedIcon from '@/assets/icons/checked.svg'
 import closeIcon from '@/assets/icons/close.svg'
 
@@ -172,4 +172,9 @@ export const Container = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+  ${({ hasError }) =>
+      hasError &&
+      css`
+        border-color: ${colors.orange.light};
+      `}
 `

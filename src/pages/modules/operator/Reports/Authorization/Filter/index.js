@@ -40,7 +40,7 @@ const Filter = () => {
   const [filters, setFilters] = useState([])
   const [submitGenPreview, setSubmitGenPreview] = useState(false)
   const [fileType, setFileType] = useState('')
-  const [columns, setColumns] = useState([])
+  const [columns, setColumns] = useState(staticColumns)
   const [patients, setPatients] = useState({})
   const [submitGenReport, setSubmitGenReport] = useState(false)
   const [someFieldWasTyped, setSomeFieldWasTyped] = useState(false)
@@ -50,17 +50,20 @@ const Filter = () => {
 
   useEffect(() => {
     if (!registerDates[0] && !registerDates[1]) {
-      setErrors(errors => {return{ ...errors, registerDate: '' }})
+      setErrors((errors) => {
+        return { ...errors, registerDate: '' }
+      })
     }
   }, [registerDates])
 
   useEffect(() => {
-    if (!validationDates[0] && !validationDates[1] ) {
-      setErrors(errors => {return{ ...errors, validationDate: '' }})
+    if (!validationDates[0] && !validationDates[1]) {
+      setErrors((errors) => {
+        return { ...errors, validationDate: '' }
+      })
     }
   }, [validationDates])
 
-  console.log(errors)
   useEffect(() => {
     if (
       registerDates.length ||
@@ -107,6 +110,12 @@ const Filter = () => {
       })
       hasError = true
     }
+    if (!columns.length) {
+      setErrors((errors) => {
+        return { ...errors, columns: 'Informe pelo menos 1 coluna' }
+      })
+      hasError = true
+    }
 
     if (differenceDays(registerDates[0], registerDates[1]) > 60) {
       setErrors((errors) => {
@@ -145,9 +154,9 @@ const Filter = () => {
     try {
       Loading.turnOn()
       const response = await apiPatient.get(
-        `/validacao-paciente?limit=10&skip=0${queryFilterString(
-          verifyTypedFields(objQuery)
-        )}`
+        `/validacao-paciente?limit=10&skip=0${queryOrderString(
+          orders
+        )}${queryFilterString(verifyTypedFields(objQuery))}`
       )
 
       if (response.status === 200) {
@@ -262,6 +271,8 @@ const Filter = () => {
             options={staticColumns}
             label="Colunas"
             span="2"
+            hasError={errors.columns}
+            msgError={errors.columns}
           />
         </div>
 
@@ -282,7 +293,9 @@ const Filter = () => {
               Gerar prévia
             </ButtonPrimary>
 
-            <OutlineButton onClick={onPreview} hidden={!someFieldWasTyped}>
+            <OutlineButton
+            onClick={onPreview}
+             hidden={!someFieldWasTyped}>
               Gerar prévia
             </OutlineButton>
           </BtnGroup>
@@ -319,6 +332,7 @@ const Filter = () => {
           orders={orders}
           setOrders={setOrders}
           filters={filters}
+          columns={columns}
         />
       )}
     </>

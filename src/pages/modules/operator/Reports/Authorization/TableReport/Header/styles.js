@@ -19,7 +19,7 @@ export const Content = styled.div`
     justify-content: space-between;
   }
 
-  margin-right: 20px;
+  margin-right: 24px;
 
   > div {
     display: flex;
@@ -31,7 +31,7 @@ export const Content = styled.div`
     margin-left: 4px;
     margin-right: 4px;
     :last-child{
-     
+
     }
   }
   h5 {

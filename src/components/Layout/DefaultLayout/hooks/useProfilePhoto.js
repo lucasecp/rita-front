@@ -1,18 +1,25 @@
+import convertImageFromApiToBase64 from '@/helpers/convertImageFromApiToBase64'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { useState } from 'react'
 
 export default () => {
-  const [photoApi, setPhotoApi] = useState('')
+  const [photo, setPhotoApi] = useState(window.localStorage.getItem('profilePhoto'))
   const { Loading } = useLoading()
 
   const getProfilePhoto = async () => {
+    if(photo) return
+
     try {
       Loading.turnOn()
 
-      const response = await apiPatient.get('/paciente/foto-perfil')
+      const response = await apiPatient.get('/paciente/foto-perfil',{
+        responseType: 'arraybuffer'
+      })
+      const photo = convertImageFromApiToBase64(response)
 
-      setPhotoApi(response)
+      setPhotoApi(photo)
+      window.localStorage.setItem('profilePhoto',photo)
     }
     catch ({ response }) {
       if (response.status === 404) {
@@ -23,5 +30,5 @@ export default () => {
       Loading.turnOff()
     }
   }
-  return [photoApi,getProfilePhoto]
+  return [photo,getProfilePhoto]
 }
