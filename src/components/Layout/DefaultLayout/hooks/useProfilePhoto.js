@@ -8,7 +8,9 @@ export default () => {
   const { Loading } = useLoading()
 
   const getProfilePhoto = async () => {
-    if(photo) return
+    if(photo) {
+      return
+    }
 
     try {
       Loading.turnOn()

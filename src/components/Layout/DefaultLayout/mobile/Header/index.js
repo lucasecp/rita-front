@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 import logo from '@/assets/logo/symbol.svg'
@@ -21,6 +21,8 @@ export const Header = () => {
   useEffect(() => {
     getProfilePhoto()
   }, [])
+  
+  const initialName = useMemo(() => getInitialLetterName(user?.nome), user?.nome);
 
 
   return (
@@ -34,7 +36,7 @@ export const Header = () => {
             {photo ? (
               <img src={photo} alt="perfil" />
             ) : (
-              <span>{getInitialLetterName(user?.nome)}</span>
+              <span>{initialName}</span>
             )}
           </div>
         </Link>

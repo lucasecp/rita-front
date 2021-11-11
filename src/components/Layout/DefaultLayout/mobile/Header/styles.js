@@ -38,11 +38,11 @@ export const Container = styled.header`
         overflow: hidden;
         margin-left: 16px;
 
-        img {
+       > img {
           border: solid 2px ${colors.purple.main.dark};
           border-radius: 50px;
         }
-        span {
+        > span {
           background-color: ${colors.purple.main.dark};
           border-radius: 50%;
           color: #fff;
@@ -53,7 +53,6 @@ export const Container = styled.header`
           align-items: center;
           justify-content: center;
           text-align: center;
-          padding-right: 2px;
           border: none;
         }
       }

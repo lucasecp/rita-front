@@ -17,7 +17,6 @@ export const Container = styled.header`
     display: flex;
     align-items: center;
 
-
     > a {
       display: flex;
       align-items: center;
@@ -32,18 +31,18 @@ export const Container = styled.header`
 
         min-width: 40px;
         min-height: 40px;
-        max-width:40px;
+        max-width: 40px;
         max-height: 40px;
         border-radius: 50%;
         overflow: hidden;
         margin-left: 16px;
 
-        img {
+        > img {
           border: solid 2px ${colors.purple.main.dark};
           border-radius: 50px;
         }
 
-        span {
+        > span {
           background-color: ${colors.purple.main.dark};
           border-radius: 50%;
           color: #fff;
@@ -54,7 +53,6 @@ export const Container = styled.header`
           align-items: center;
           justify-content: center;
           text-align: center;
-          padding-right: 2px;
           border: none;
         }
       }

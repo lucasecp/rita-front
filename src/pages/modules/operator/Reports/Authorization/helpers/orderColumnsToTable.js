@@ -1,5 +1,4 @@
 import { columnsTable } from "../static"
-
 export default (value) => {
 
   return columnsTable.reduce((acumulator,el) => {

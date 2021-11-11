@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 
@@ -20,17 +20,20 @@ export const Header = ({ title }) => {
     getProfilePhoto()
   }, [])
 
+  const nameFormated = useMemo(() => formatFirstLastName(user?.nome), user?.nome);
+  const initialName = useMemo(() => getInitialLetterName(user?.nome), user?.nome);
+
   return (
     <Container>
       <h1>{title || 'Page Title'}</h1>
       <nav>
         <Link to='/perfil'>
-          Olá, {formatFirstLastName(user?.nome)}
+          Olá, {nameFormated}
           <div>
             {photo ? (
               <img src={photo} alt="perfil" />
             ) : (
-              <span>{getInitialLetterName(user?.nome)}</span>
+              <span>{initialName}</span>
             )}
           </div>
         </Link>
