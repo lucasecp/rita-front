@@ -40,7 +40,7 @@ export const Header = () => {
             )}
           </div>
         </Link>
-        <LetterIcon />
+        {/* <LetterIcon /> */}
         <ExitIcon onClick={clearDataLogout} />
         <HamburgerButton onClick={openMenu}>
           <span></span>

@@ -37,7 +37,7 @@ export const Header = ({ title }) => {
             )}
           </div>
         </Link>
-        <LetterIcon />
+        {/* <LetterIcon /> */}
         <ExitIcon onClick={clearDataLogout} />
       </nav>
     </Container>
