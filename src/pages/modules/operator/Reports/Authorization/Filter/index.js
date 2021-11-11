@@ -15,7 +15,6 @@ import { toast } from '@/styles/components/toastify'
 import { columns as staticColumns, status as staticStatus } from '../static/columns'
 import TableReport from '../TableReport'
 import formatArray from '../helpers/formatMultSelectArray'
-// import { ReactComponent as ErrorIcon } from '@/assets/icons/alerts/error.svg'
 
 import MultSelectValidator from './MultSelectValidator'
 import { BtnGroup, Container, Controls } from './styles'

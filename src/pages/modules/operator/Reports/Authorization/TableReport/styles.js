@@ -14,7 +14,6 @@ export const Container = styled.div`
   }
   ul {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
     position: relative;
     min-width: fit-content;

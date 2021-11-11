@@ -49,7 +49,6 @@ export const Container = styled.header`
   background: #afafaf;
   min-width: fit-content;
   > div{
-    justify-content: space-between;
     display: flex;
   align-items: center;
   width: 100%
