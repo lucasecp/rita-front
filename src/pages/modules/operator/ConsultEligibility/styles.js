@@ -4,7 +4,7 @@ import colors from '@/styles/colors'
 export const Container = styled.form`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 24px;
+  gap: 24px;
 
   width: 100%;
   align-items: ${({ hasMessage }) => (hasMessage ? 'center' : 'flex-end')};
@@ -28,6 +28,7 @@ export const Container = styled.form`
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    padding: 32px 24px;
 
     > button {
       width: unset;

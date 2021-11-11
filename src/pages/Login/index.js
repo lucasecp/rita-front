@@ -1,6 +1,6 @@
 import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
-import InputPassword from '@/components/Form/InputPassword'
+import { InputPassword } from '@/components/Form/InputPassword'
 import LoginLayout from '@/components/Layout/LoginLayout'
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
@@ -48,7 +48,7 @@ function Login() {
     setErrors(newErrors)
     return newErrors
   }
-  
+
   return (
     <LoginLayout>
       <Content onSubmit={handleSubmit}>
@@ -68,7 +68,7 @@ function Login() {
           value={password}
           setValue={setPassword}
           hasError={errors.password}
-          msgError={errors.password}
+          messageError={errors.password}
         />
         <CheckboxComponent
           setValue={setStayConnected}

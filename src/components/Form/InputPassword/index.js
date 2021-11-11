@@ -1,36 +1,43 @@
-import React, { useRef } from 'react'
-import { BtnEye, Container, Input } from './style'
-import eye from '../../../assets/icons/eye.png'
-import MsgError from '@/components/MsgError'
+import React, { useState } from 'react'
 
-const InputPassword = ({value,setValue,label,hasError,msgError,...rest}) => {
-  const inputPass = useRef()
+import eyeOpenedIcon from '@/assets/icons/eye-opened.svg'
+import eyeClosedIcon from '@/assets/icons/eye-closed.svg'
 
-  const handleChange = (e) => {
+import { Container } from './styles'
+
+export const InputPassword = ({
+  value = '',
+  setValue = () => {},
+  label = '',
+  hasError = false,
+  messageError = '',
+  ...rest
+}) => {
+  const [showPassword, setShowPassword] = useState(false)
+
+  const onInputChange = (e) => {
     setValue(e.target.value)
   }
-  const handleSeePassword = () =>
-    inputPass.current.type === 'password'
-      ? (inputPass.current.type = 'text')
-      : (inputPass.current.type = 'password')
+
+  const onToggleShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
 
   return (
-    <Container>
-     {label && <label htmlFor={label}>{label}</label>}
-      <Input
-        type="password"
-        value={value}
-        id={label}
-        onChange={handleChange}
-        ref={inputPass}
-        hasError={hasError}
-        {...rest}
-      />
-        <BtnEye type="button" onClick={handleSeePassword} >
-          <img src={eye} />
-        </BtnEye>
-        {msgError && <MsgError>{msgError}</MsgError>}
+    <Container hasError={hasError}>
+      {label && <label htmlFor={label}>{label}</label>}
+      <div>
+        <input
+          type={showPassword ? 'text' : 'password'}
+          id={label}
+          onChange={onInputChange}
+          {...rest}
+        />
+        <button type="button" onClick={onToggleShowPassword}>
+          <img src={showPassword ? eyeClosedIcon : eyeOpenedIcon} />
+        </button>
+      </div>
+      {messageError && <small>{messageError}</small>}
     </Container>
   )
 }
-export default InputPassword

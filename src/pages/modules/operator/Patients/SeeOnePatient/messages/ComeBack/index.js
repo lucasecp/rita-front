@@ -11,11 +11,10 @@ import { useLoading } from '@/hooks/useLoading'
 // import apiPatient from '@/services/apiPatient'
 
 import { Container } from './styles'
-import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 function ComeBack({ idPatient }) {
-  const { closeModal, showMessage } = useModal()
+  const { closeModal, showSimple } = useModal()
   const { Loading } = useLoading()
   const history = useHistory()
 
@@ -30,12 +29,8 @@ function ComeBack({ idPatient }) {
       history.push(OPERATOR_ANALYZE_PATIENT)
       closeModal()
     } catch ({ response }) {
-
       if (response.status.toString()[0] === '5') {
-        showMessage(SimpleModal, {
-          type: MODAL_TYPES.ERROR,
-          message: 'Erro no Servidor!',
-        })
+        showSimple.error('Erro no Servidor!')
       }
     } finally {
       Loading.turnOff()

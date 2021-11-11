@@ -8,7 +8,7 @@ import RadioButton from '@/styles/components/RadioButton'
 import { Container } from './styles'
 import getValidationsFromLocalStorage from '../../helpers/getValidationsFromLocalStorage'
 
-import isObjectEmpty from '@/helpers/isEmpty'
+import { isObjectEmpty } from '@/helpers/isObjectEmpty'
 
 function ValidationSeeOnePatient({
   patientId,

@@ -62,20 +62,25 @@ export const Container = styled.div`
         border-color: ${colors.orange.light};
       `}
 
-      ${({variation}) => variation === 'secondary' && css`
-     border: none;
-     border-bottom: 2px solid ${({hasError})=> hasError ?colors.orange.light : colors.purple.main.middle};
-     border-radius: 0;
-     box-shadow: none;
-     background-color: transparent;
-     :focus,::after{
-       border: none;
-       border-bottom: 2px solid #419eff;
-       border-color: ${({hasError}) => hasError ? colors.orange.light: colors.purple.main.dark };
-     }
-     padding: 5px
-  `}
-
+    ${({ variation }) =>
+      variation === 'secondary' &&
+      css`
+        border: none;
+        border-bottom: 2px solid
+          ${({ hasError }) =>
+            hasError ? colors.orange.light : colors.purple.main.middle};
+        border-radius: 0;
+        box-shadow: none;
+        background-color: transparent;
+        :focus,
+        ::after {
+          border: none;
+          border-bottom: 2px solid #419eff;
+          border-color: ${({ hasError }) =>
+            hasError ? colors.orange.light : colors.purple.main.dark};
+        }
+        padding: 5px;
+      `}
   }
 `
 export const Select = styled.select`
@@ -103,7 +108,7 @@ export const Select = styled.select`
     left: 0;
     bottom: 0;
     right: 0;
-     border: 1px solid #dcdfe6;
+    border: 1px solid #dcdfe6;
   }
 
   :focus {
@@ -120,14 +125,16 @@ export const Select = styled.select`
   ${({ hasError }) =>
     hasError &&
     css`
-      border-color: ${colors.orange.light} ;
+      border-color: ${colors.orange.light};
     `}
 
   ${({ variation }) =>
     variation === 'secondary' &&
     css`
       border: none;
-      border-bottom: 2px solid ${({hasError})=> hasError ?colors.orange.light : colors.purple.main.middle};
+      border-bottom: 2px solid
+        ${({ hasError }) =>
+          hasError ? colors.orange.light : colors.purple.main.middle};
       border-radius: 0;
       box-shadow: none;
       background-color: transparent;

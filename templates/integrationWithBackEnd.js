@@ -27,7 +27,7 @@ const mapResponseFromApi = async () => {
 
       default:
         // Move out to this function
-        showSimple.error('Erro não tratado no Front!')
+        showSimple.error('Erro não tratado!')
         // enable console.log when finished configuring API responses
         // console.log(response)
         return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
@@ -44,9 +44,12 @@ const mapResponseFromApi = async () => {
         case 'Message Error 2 From Api':
           return [typesResponses.ERROR_2]
 
+        case 'Unauthorized':
+          return
+
         default:
           // Move out to this function
-          showSimple.error('Erro não tratado no Front!')
+          showSimple.error('Erro não tratado!')
           // enable console.log when finished configuring API responses
           // console.log(response)
           return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]

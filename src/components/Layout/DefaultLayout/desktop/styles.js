@@ -19,6 +19,7 @@ export const Container = styled.div`
   > main {
     grid-area: main;
     overflow: hidden;
+
     > h1 {
       font-size: 32px;
       line-height: 39px;
@@ -44,6 +45,7 @@ export const Container = styled.div`
   > main {
     padding-left: 32px;
     padding-right: 32px;
+    padding-bottom: 16px;
   }
 
   @media (max-width: 767px) {

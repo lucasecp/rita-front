@@ -25,7 +25,7 @@ import {
   MASTERPAGE,
   NOT_FOUND,
 } from './constants/namedRoutes/routes'
-import ChangePassword from '@/pages/ChangePassword'
+import { ChangePassword } from '@/pages/ChangePassword'
 
 function Routes() {
   return (

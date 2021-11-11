@@ -9,7 +9,11 @@ const ModalProvider = ({ children }) => {
 
   const [message, setMessage] = useState(null)
 
-  const showMessage = (MessageComponent, props, isCloseable = false) => {
+  const showMessage = (
+    MessageComponent = <>Uso incorreto do showMessage</>,
+    props = {},
+    isCloseable = false
+  ) => {
     setCloseable(isCloseable)
     setMessage(<MessageComponent {...props} />)
     setModalVisible(true)
