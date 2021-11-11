@@ -27,11 +27,12 @@ export const Container = styled.button`
       background: #afafaf;
       border-color: #afafaf;
       cursor: default !important;
-      color: ${colors.purple.main.light} !important;
+      color: ${colors.purple.background.middle};
 
       :hover {
         background: #afafaf;
         border-color: #afafaf;
+        color: ${colors.purple.background.middle};
       }
     `}
 
@@ -46,7 +47,7 @@ export const Container = styled.button`
       :hover {
         border-color: ${colors.purple.main.light};
         background: ${colors.purple.main.light};
-        color: ${colors.purple.background.middle} ;
+        color: ${colors.purple.background.middle};
       }
     `}
 `

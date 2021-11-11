@@ -29,21 +29,40 @@ export const Container = styled.header`
         align-items: center;
         justify-content: center;
 
-        width: 40px;
-        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        max-width: 40px;
+        max-height: 40px;
         border-radius: 50%;
-
-        border: solid 2px ${colors.purple.main.dark};
-
         overflow: hidden;
-        margin-left: 24px;
+        margin-left: 16px;
+
+        > img {
+          border: solid 2px ${colors.purple.main.dark};
+          border-radius: 50px;
+        }
+
+        > span {
+          background-color: ${colors.purple.main.dark};
+          border-radius: 50%;
+          color: #fff;
+          width: 100%;
+          height: 40px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          border: none;
+        }
       }
     }
 
     > svg {
       margin-left: 16px;
       cursor: pointer;
-      width: 32px;
+      min-width: 32px;
+      max-width: 32px;
 
       fill: ${colors.purple.main.dark};
     }

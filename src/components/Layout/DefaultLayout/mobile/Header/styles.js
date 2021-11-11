@@ -34,10 +34,27 @@ export const Container = styled.header`
         height: 40px;
         border-radius: 50%;
 
-        border: solid 2px ${colors.purple.main.dark};
 
         overflow: hidden;
-        margin-left: 24px;
+        margin-left: 16px;
+
+       > img {
+          border: solid 2px ${colors.purple.main.dark};
+          border-radius: 50px;
+        }
+        > span {
+          background-color: ${colors.purple.main.dark};
+          border-radius: 50%;
+          color: #fff;
+          width: 100%;
+          height: 40px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          border: none;
+        }
       }
     }
 

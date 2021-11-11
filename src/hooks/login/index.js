@@ -60,6 +60,7 @@ export default function AuthProvider({ children }) {
     setUser(null)
     deleteLocalStorage()
     deleteHeaderToken()
+    window.localStorage.removeItem('profilePhoto')
   }
 
   const pushToUrl = (url) => {

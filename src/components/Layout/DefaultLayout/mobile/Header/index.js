@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
-import profileImg from '@/assets/img/profile.png'
 import logo from '@/assets/logo/symbol.svg'
 
 import { ReactComponent as LetterIcon } from '@/assets/icons/letter.svg'
@@ -11,10 +10,20 @@ import { useMenu } from '@/hooks/useMenu'
 import { useAuth } from '@/hooks/login'
 
 import { Container, HamburgerButton } from './styles'
+import useProfilePhoto from '../../hooks/useProfilePhoto'
+import { getInitialLetterName } from '../../helpers/getInitialLetterName'
 
 export const Header = () => {
   const { openMenu } = useMenu()
-  const { clearDataLogout } = useAuth()
+  const { clearDataLogout, user } = useAuth()
+  const [photo, getProfilePhoto] = useProfilePhoto()
+
+  useEffect(() => {
+    getProfilePhoto()
+  }, [])
+
+  const initialName = useMemo(() => getInitialLetterName(user?.nome), [user?.nome]);
+
 
   return (
     <Container>
@@ -22,12 +31,16 @@ export const Header = () => {
         <img src={logo} />
       </Link>
       <nav>
-        <Link to="/perfil">
+        <Link to="#">
           <div>
-            <img src={profileImg} alt="perfil" />
+            {photo ? (
+              <img src={photo} alt="perfil" />
+            ) : (
+              <span>{initialName}</span>
+            )}
           </div>
         </Link>
-        <LetterIcon />
+        {/* <LetterIcon /> */}
         <ExitIcon onClick={clearDataLogout} />
         <HamburgerButton onClick={openMenu}>
           <span></span>

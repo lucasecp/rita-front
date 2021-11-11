@@ -1,5 +1,5 @@
 import colors from '@/styles/colors'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import checkedIcon from '@/assets/icons/checked.svg'
 import closeIcon from '@/assets/icons/close.svg'
 
@@ -107,8 +107,6 @@ export const Container = styled.div`
   }
 
   input[type='checkbox'] {
-    /* change "blue" browser chrome to yellow */
-    /* filter: invert(100%) hue-rotate(18deg) brightness(1.7); */
     appearance: none;
     margin-right: 8px;
     margin-bottom: 4px;
@@ -174,4 +172,9 @@ export const Container = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+  ${({ hasError }) =>
+      hasError &&
+      css`
+        border-color: ${colors.orange.light};
+      `}
 `

@@ -14,7 +14,6 @@ export const Container = styled.div`
   }
   ul {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
     position: relative;
     min-width: fit-content;
@@ -41,8 +40,8 @@ export const Container = styled.div`
       line-height: 17px;
       color: #6a6a6a;
       max-width: 150px;
-      margin-right: 20px;
-      word-break: break-all;
+      margin-right: 24px;
+      word-break: normal;
       :last-child{
        padding: 16px 32px 16px 0
       }

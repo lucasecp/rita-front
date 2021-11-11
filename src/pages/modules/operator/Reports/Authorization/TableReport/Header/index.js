@@ -1,9 +1,8 @@
 import React from 'react'
-import {columns} from '../../static'
-import { ArrowDown, ArrowUp,Content,Container } from './styles'
+import orderColumnsToTable from '../../helpers/orderColumnsToHeaderTable'
+import { ArrowDown, ArrowUp, Content, Container } from './styles'
 
-const Header = ({ setOrders, orders }) => {
-
+const Header = ({ setOrders, orders, columns }) => {
   const hasDescOrder = (name) =>
     orders.some((obj) => obj.name === name && obj.value === 'DESC')
 
@@ -11,9 +10,9 @@ const Header = ({ setOrders, orders }) => {
     orders.some((obj) => obj.name === name && obj.value === 'ASC')
 
   const handleClick = (name) => {
-
-    if(hasDescOrder(name)) {
-     return setOrders([])
+    
+    if (hasDescOrder(name)) {
+      return setOrders([])
     }
 
     if (hasDescOrder(name) || !hasAscOrder(name) || !orders.length) {
@@ -27,18 +26,17 @@ const Header = ({ setOrders, orders }) => {
   return (
     <Container>
       <div>
-      {columns.map((field) => (
-        <Content key={field.id}>
-           <h5> {field.name} </h5>
+        {orderColumnsToTable(columns).map((field) => (
+          <Content key={field.id}>
+            <h5> {field.name} </h5>
             <div onClick={() => handleClick(field.id)}>
               <ArrowUp order={hasAscOrder(field.id) ? 1 : 0} />
               <ArrowDown order={hasDescOrder(field.id) ? 1 : 0} />
             </div>
-
-        </Content>
-      ))}
+          </Content>
+        ))}
       </div>
-      </Container>
+    </Container>
   )
 }
 

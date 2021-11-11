@@ -16,10 +16,10 @@ export const Content = styled.div`
     margin-left:  32px;
   }
   :last-child{
-    justify-content: space-between;
+    /* justify-content: space-between; */
   }
 
-  margin-right: 20px;
+  margin-right: 24px;
 
   > div {
     display: flex;
@@ -31,7 +31,7 @@ export const Content = styled.div`
     margin-left: 4px;
     margin-right: 4px;
     :last-child{
-     
+
     }
   }
   h5 {
@@ -49,7 +49,6 @@ export const Container = styled.header`
   background: #afafaf;
   min-width: fit-content;
   > div{
-    justify-content: space-between;
     display: flex;
   align-items: center;
   width: 100%

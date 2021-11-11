@@ -5,24 +5,18 @@ import Select from '@/components/Form/Select'
 
 import { Container, Content } from './styles'
 import ButtonPrimary from '@/components/Button/Primary'
-import { useAuth } from '@/hooks/login'
-import { getOptionsPermission, getPath } from './helpers/getPermissions'
 import { reportOptions } from './constants/OptionsPermission'
 
 const Reports = () => {
-  const { user } = useAuth()
   const history = useHistory()
   const [reportChoosen, setReportChoosen] = useState('')
 
   const onUserConfirmReportChoice = () => {
-    // const path = getPath(reportChoosen)
-    // if (path) {
     const { path: reportPath } = reportOptions.find(
       (report) => report.value === reportChoosen
     )
     history.push(reportPath)
-    // }
-  }
+  } 
 
   return (
     <DefaultLayout title="Relatórios">
@@ -32,7 +26,6 @@ const Reports = () => {
           <Select
             value={reportChoosen}
             setValue={setReportChoosen}
-            // options={getOptionsPermission(user?.permissoes)}
             options={reportOptions}
             labelDefaultOption="Selecione"
           />
