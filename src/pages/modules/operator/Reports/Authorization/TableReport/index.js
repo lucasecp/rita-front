@@ -1,16 +1,22 @@
 import { useLoading } from '@/hooks/useLoading'
-import formatName from '@/helpers/formatName'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect } from 'react'
 import { queryOrderString, queryFilterString } from '../helpers/queryString'
 import { Container, NotFound, ResultsFounds } from './styles'
 import Header from './Header'
 
-import formateDateAndHour from '@/helpers/formateDateAndHour'
-import formatCpf from '@/helpers/formatCpf'
-import formatFirstLastName from '@/helpers/formatFirstLastName'
+import { COLUMNS_NAME } from '../static/columns'
+import formatObjectFromApi from '../helpers/formatObjectFromApi'
+import ColumnIsActive from '../helpers/ColumnIsActive'
 
-const TableReport = ({ orders, setOrders, filters, setPatients, patients,columns }) => {
+const TableReport = ({
+  orders,
+  setOrders,
+  filters,
+  setPatients,
+  patients,
+  columns,
+}) => {
   const { Loading } = useLoading()
 
   useEffect(() => {
@@ -24,7 +30,7 @@ const TableReport = ({ orders, setOrders, filters, setPatients, patients,columns
         )
 
         if (response.status === 200) {
-          setPatients(response.data)
+          setPatients(formatObjectFromApi(response.data))
         }
       } catch ({ response }) {
       } finally {
@@ -34,13 +40,6 @@ const TableReport = ({ orders, setOrders, filters, setPatients, patients,columns
     requestOrders()
   }, [orders])
 
-  const showStatus = (status) => {
-    if (status === 'N') return 'Negado'
-    if (status === 'P') return 'Pendente'
-    if (status === 'A') return 'Aprovado'
-    if (status === 'EA') return 'Em análise'
-  }
-
   return (
     <>
       <ResultsFounds>
@@ -49,17 +48,47 @@ const TableReport = ({ orders, setOrders, filters, setPatients, patients,columns
       <Container>
         <Header setOrders={setOrders} orders={orders} columns={columns} />
 
-        {patients.dados?.map((patient) => (
+        {patients.dataPatients?.map((patient) => (
           <ul key={patient.id}>
-            <li>{formateDateAndHour(patient.dataFiliacao) || '-'}</li>
-            <li>{formatName(patient.nome) || '-'}</li>
-            <li>{formatCpf(patient.cpf) || '-'}</li>
-            <li>{showStatus(patient.status) || '-'}</li>
-            <li> {formatFirstLastName(patient.validador?.nome) || '-'}</li>
-            <li>{formateDateAndHour(patient.dataValidacao) || '-'}</li>
-            <li>{patient.documentoOk ? 'Sim' : '-'}</li>
-            <li>{patient.rendaBaixa ? 'Sim' : '-'}</li>
-            <li>{patient.motivoDocumento || '-'}</li>
+            <li hidden={!ColumnIsActive(COLUMNS_NAME.REGISTER, columns)}>
+              {patient.registerDate || '-'}
+            </li>
+
+            <li hidden={!ColumnIsActive(COLUMNS_NAME.NAME, columns)}>
+              {patient.name || '-'}
+            </li>
+
+            <li hidden={!ColumnIsActive(COLUMNS_NAME.CPF, columns)}>
+              {patient.cpf || '-'}
+            </li>
+
+            <li hidden={!ColumnIsActive(COLUMNS_NAME.STATUS, columns)}>
+              {patient.status || '-'}
+            </li>
+
+            <li hidden={!ColumnIsActive(COLUMNS_NAME.VALIDATOR, columns)}>
+              {patient.validatorName || '-'}
+            </li>
+
+            <li hidden={!ColumnIsActive(COLUMNS_NAME.VALIDATION, columns)}>
+              {patient.validationDate || '-'}
+            </li>
+
+            <li hidden={!ColumnIsActive(COLUMNS_NAME.DATAISVALID, columns)}>
+              {patient.documentOk ? 'Sim' : '-'}
+            </li>
+
+            <li hidden={!ColumnIsActive(COLUMNS_NAME.INCOME, columns)}>
+              {patient.income ? 'Sim' : '-'}
+            </li>
+
+            <li
+              hidden={
+                !ColumnIsActive(COLUMNS_NAME.REASON_FOR_NEGATIVE, columns)
+              }
+            >
+              {patient.reasonForNegative || '-'}
+            </li>
           </ul>
         ))}
 

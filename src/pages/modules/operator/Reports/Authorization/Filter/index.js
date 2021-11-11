@@ -12,7 +12,7 @@ import { RadioGroup } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { toast } from '@/styles/components/toastify'
-import { columns as staticColumns, status as staticStatus } from '../static'
+import { columns as staticColumns, status as staticStatus } from '../static/columns'
 import TableReport from '../TableReport'
 import formatArray from '../helpers/formatMultSelectArray'
 // import { ReactComponent as ErrorIcon } from '@/assets/icons/alerts/error.svg'
@@ -27,6 +27,7 @@ import { queryFilterString, queryOrderString } from '../helpers/queryString'
 import downloadFile from '@/helpers/downloadFile'
 import downloadXls from '../helpers/downloadXls'
 import orderColumnsToApi from '../helpers/orderColumnsToApi'
+import formatObjectFromApi from '../helpers/formatObjectFromApi'
 
 const Filter = () => {
   const [registerDates, setRegisterDates] = useState([])
@@ -38,11 +39,11 @@ const Filter = () => {
   const [errors, setErrors] = useState({})
   const [orders, setOrders] = useState([])
   const [filters, setFilters] = useState([])
-  const [submitGenPreview, setSubmitGenPreview] = useState(false)
+  const [submitGeneratePreview, setSubmitGeneratePreview] = useState(false)
   const [fileType, setFileType] = useState('')
   const [columns, setColumns] = useState(staticColumns)
   const [patients, setPatients] = useState({})
-  const [submitGenReport, setSubmitGenReport] = useState(false)
+  const [submitGenerateReport, setSubmitGenerateReport] = useState(false)
   const [someFieldWasTyped, setSomeFieldWasTyped] = useState(false)
 
   const history = useHistory()
@@ -65,6 +66,10 @@ const Filter = () => {
   }, [validationDates])
 
   useEffect(() => {
+    setSubmitGeneratePreview(false)
+  }, [columns])
+
+  useEffect(() => {
     if (
       registerDates.length ||
       validationDates.length ||
@@ -76,7 +81,7 @@ const Filter = () => {
     ) {
       setSomeFieldWasTyped(true)
     } else {
-      setSubmitGenPreview(false)
+      setSubmitGeneratePreview(false)
       setSomeFieldWasTyped(false)
     }
   }, [registerDates, validationDates, validators, name, cpf, status, columns])
@@ -160,8 +165,8 @@ const Filter = () => {
       )
 
       if (response.status === 200) {
-        setSubmitGenPreview(true)
-        setPatients(response.data)
+        setSubmitGeneratePreview(true)
+        setPatients(formatObjectFromApi(response.data))
       }
     } catch ({ response }) {
     } finally {
@@ -174,7 +179,7 @@ const Filter = () => {
       return
     }
 
-    setSubmitGenReport(true)
+    setSubmitGenerateReport(true)
 
     try {
       const response = await toast.promise(
@@ -208,7 +213,7 @@ const Filter = () => {
       }
     } catch ({ response }) {
     } finally {
-      setSubmitGenReport(false)
+      setSubmitGenerateReport(false)
     }
   }
 
@@ -317,7 +322,7 @@ const Filter = () => {
               </RadioGroup>
             </div>
             <ButtonPrimary
-              disabled={!fileType || submitGenReport}
+              disabled={!fileType || submitGenerateReport}
               onClick={onGenerateReport}
             >
               Gerar relatório
@@ -325,7 +330,7 @@ const Filter = () => {
           </span>
         </Controls>
       </Container>
-      {submitGenPreview && (
+      {submitGeneratePreview && (
         <TableReport
           patients={patients}
           setPatients={setPatients}

@@ -20,8 +20,8 @@ export const Header = ({ title }) => {
     getProfilePhoto()
   }, [])
 
-  const nameFormated = useMemo(() => formatFirstLastName(user?.nome), user?.nome);
-  const initialName = useMemo(() => getInitialLetterName(user?.nome), user?.nome);
+  const nameFormated = useMemo(() => formatFirstLastName(user?.nome), [user?.nome]);
+  const initialName = useMemo(() => getInitialLetterName(user?.nome), [user?.nome]);
 
   return (
     <Container>

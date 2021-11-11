@@ -21,8 +21,8 @@ export const Header = () => {
   useEffect(() => {
     getProfilePhoto()
   }, [])
-  
-  const initialName = useMemo(() => getInitialLetterName(user?.nome), user?.nome);
+
+  const initialName = useMemo(() => getInitialLetterName(user?.nome), [user?.nome]);
 
 
   return (
