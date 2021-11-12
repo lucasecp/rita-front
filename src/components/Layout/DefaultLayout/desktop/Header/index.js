@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 
-import { ReactComponent as LetterIcon } from '@/assets/icons/letter.svg'
+// import { ReactComponent as LetterIcon } from '@/assets/icons/letter.svg'
 import { ReactComponent as ExitIcon } from '@/assets/icons/exit.svg'
 
 import { useAuth } from '@/hooks/login'

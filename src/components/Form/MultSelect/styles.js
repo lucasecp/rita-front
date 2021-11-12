@@ -103,7 +103,6 @@ export const Container = styled.div`
   }
   .multiSelectContainer input {
     margin-top: 0;
-    width: 30px;
   }
 
   input[type='checkbox'] {

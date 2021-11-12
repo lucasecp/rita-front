@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import logo from '@/assets/logo/symbol.svg'
 
-import { ReactComponent as LetterIcon } from '@/assets/icons/letter.svg'
+// import { ReactComponent as LetterIcon } from '@/assets/icons/letter.svg'
 import { ReactComponent as ExitIcon } from '@/assets/icons/exit.svg'
 
 import { useMenu } from '@/hooks/useMenu'
