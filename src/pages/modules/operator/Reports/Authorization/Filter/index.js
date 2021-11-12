@@ -207,7 +207,7 @@ const Filter = () => {
           const blobReportPdf = new Blob([response.data], {
             type: 'application/pdf',
           })
-          downloadFile(blobReportPdf)
+          downloadFile(blobReportPdf,'_Autorizacoes')
         }
       }
     } catch ({ response }) {
