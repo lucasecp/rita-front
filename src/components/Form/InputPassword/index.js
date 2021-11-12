@@ -30,7 +30,7 @@ export const InputPassword = ({
           type={showPassword ? 'text' : 'password'}
           id={label}
           onChange={onInputChange}
-          maxLength={100}
+          maxLength={20}
           {...rest}
         />
         <button type="button" onClick={onToggleShowPassword}>
