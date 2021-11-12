@@ -87,6 +87,7 @@ export const ConsultEligibility = () => {
             return [typesResponses.CPF_NOT_FOUND]
 
           case 'Unauthorized':
+            history.push('/login')
             return
 
           default:

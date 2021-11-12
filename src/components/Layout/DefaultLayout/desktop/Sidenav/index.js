@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useMediaPredicate } from 'react-media-hook'
 
 import arrowImg from '@/assets/icons/arrow-left.svg'
@@ -20,21 +20,13 @@ export const Sidenav = () => {
     initialIsExpanded = isExpandedBefore === null || isExpandedBefore
   }
 
-  // const [isExpanded, setIsExpanded] = useState(initialIsExpanded)
   const [isExpanded, toogleExpanded] = useExpanded(initialIsExpanded)
-
-  // const toogleShorten = () => {
-  //   setIsExpanded(!isExpanded)
-  //   localStorage.setItem('@Rita/Menu/Expanded', JSON.stringify(!isExpanded))
-  // }
 
   return (
     <Container isExpanded={isExpanded}>
-      {!isTablet && (
-        <div onClick={toogleExpanded}>
-          <img src={arrowImg} />
-        </div>
-      )}
+      <div onClick={toogleExpanded}>
+        <img src={arrowImg} />
+      </div>
       <nav>
         <header>
           <div />

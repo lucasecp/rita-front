@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
-
-import { ReactComponent as LetterIcon } from '@/assets/icons/letter.svg'
+// import { ReactComponent as LetterIcon } from '@/assets/icons/letter.svg'
 import { ReactComponent as ExitIcon } from '@/assets/icons/exit.svg'
 
 import { useAuth } from '@/hooks/login'
@@ -20,14 +19,21 @@ export const Header = ({ title }) => {
     getProfilePhoto()
   }, [])
 
-  const nameFormated = useMemo(() => formatFirstLastName(user?.nome), [user?.nome]);
-  const initialName = useMemo(() => getInitialLetterName(user?.nome), [user?.nome]);
+  const nameFormated = useMemo(
+    () => formatFirstLastName(user?.nome),
+    [user?.nome]
+  )
+  
+  const initialName = useMemo(
+    () => getInitialLetterName(user?.nome),
+    [user?.nome]
+  )
 
   return (
     <Container>
       <h1>{title || 'Page Title'}</h1>
       <nav>
-        <Link to='#'>
+        <Link to="#">
           Olá, {nameFormated}
           <div>
             {photo ? (

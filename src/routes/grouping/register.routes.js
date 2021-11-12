@@ -1,10 +1,16 @@
 import React from 'react'
-import CustomRoutes from './custom.routes'
+import CustomRoutes from '../custom.routes'
 import RegisterCardSabin from '@/pages/Register/InitialRegister/CardSabin'
 import DefaultRegister from '@/pages/Register/InitialRegister/Default'
 import PreRegister from '@/pages/Register/PreRegister/PreRegister'
 import RegisterPatient from '@/pages/Register/RegisterPatient'
-import { DEFAULT_REGISTER, PRE_REGISTER, REGISTER_CARD_SABIN, RESGISTE_PATIENT } from './constants/namedRoutes/routes'
+
+import {
+  DEFAULT_REGISTER,
+  PRE_REGISTER,
+  REGISTER_CARD_SABIN,
+  RESGISTE_PATIENT,
+} from '../constants/namedRoutes/routes'
 
 const registerRoutes = [
   {

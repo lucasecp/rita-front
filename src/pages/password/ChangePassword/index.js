@@ -1,4 +1,4 @@
-import { DefaultLayout } from '../../components/Layout/DefaultLayout'
+import { DefaultLayout } from '../../../components/Layout/DefaultLayout'
 import React, { useState } from 'react'
 
 import { Container } from './styles'
@@ -91,8 +91,6 @@ export const ChangePassword = () => {
     try {
       Loading.turnOn()
 
-      console.log(cpf)
-
       const response = await apiUser.post('/senha', {
         cpf,
         senhaAntiga: oldPassword,
@@ -100,48 +98,30 @@ export const ChangePassword = () => {
         confirmacaoSenha: confirmNewPassword,
       })
 
-      // remove when finished configuring API responses
-      console.log(response)
-
       switch (response.data.mensagem) {
-        // case 'Message From Api 1':
-        //   return [
-        //     typesResponses.ACTION_1,
-        //     { exempleWithObjectData: response.data.objectData },
-        //   ]
-
-        case 'Message From Api 2':
-          return [typesResponses.ACTION_2]
+        case 'Sucesso':
+          return [typesResponses.PASSWORD_CHANGED_SUCCESSFULLY]
 
         default:
           console.log(response)
           return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
       }
     } catch ({ response }) {
-      // remove when finished configuring API responses
-      console.log(response)
-
       if (response.status.toString()[0] === '4') {
         switch (response.data.message) {
           case 'Senha antiga incorreta':
             return [typesResponses.INCORRECT_PASSWORD]
 
-          case 'Message Error 2 From Api':
-            return [typesResponses.ERROR_2]
+          case 'Nova senha não pode ser igual a antiga':
+            return [typesResponses.SAME_PASSWORD_AS_OLD]
 
           case 'Unauthorized':
+            history.push('/login')
             return
-        }
 
-        if (
-          response.data.message[0] ===
-          ' senhaAntiga must be a valid conforming to the specified constraints'
-        ) {
-          console.log('asdas')
-          return [typesResponses.SAME_PASSWORD_AS_OLD]
-        } else {
-          console.log(response)
-          return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
+          default:
+            console.log(response)
+            return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
         }
       }
 
@@ -154,20 +134,15 @@ export const ChangePassword = () => {
     }
   }
 
-  const onConfirmChangePassword = async (event) => {
-    event.preventDefault()
+  const showPasswordChanged = (responseApiMessage) => {
     const newErrors = {}
-
-    const hasErrors = findErrorsInFields()
-
-    if (hasErrors) {
-      return
-    }
-
-    const [responseApiMessage] = await mapResponseFromApi()
 
     if (responseApiMessage === typesResponses.PASSWORD_CHANGED_SUCCESSFULLY) {
       showSimple.success('Senha alterada com sucesso!')
+
+      setOldPassword('')
+      setNewPassword('')
+      setConfirmNewPassword('')
     }
 
     if (responseApiMessage === typesResponses.SAME_PASSWORD_AS_OLD) {
@@ -201,6 +176,20 @@ export const ChangePassword = () => {
     }
   }
 
+  const onConfirmChangePassword = async (event) => {
+    event.preventDefault()
+
+    const hasErrors = findErrorsInFields()
+
+    if (hasErrors) {
+      return
+    }
+
+    const [responseApiMessage] = await mapResponseFromApi()
+
+    showPasswordChanged(responseApiMessage)
+  }
+
   return (
     <DefaultLayout title="Trocar senha">
       <Container>
@@ -210,30 +199,29 @@ export const ChangePassword = () => {
           dígitos. Sem espaços.
         </p>
         <form onSubmit={onConfirmChangePassword}>
-          <div>
-            <InputPassword
-              label="Digite sua senha atual*:"
-              value={oldPassword}
-              setValue={setOldPassword}
-              hasError={errors.oldPassword?.hasError}
-              messageError={errors.oldPassword?.message}
-            />
-            <div />
-            <InputPassword
-              label="Digite sua nova senha*:"
-              value={newPassword}
-              setValue={setNewPassword}
-              hasError={errors.newPassword?.hasError}
-              messageError={errors.newPassword?.message}
-            />
-            <InputPassword
-              label="Confirme sua nova senha*:"
-              value={confirmNewPassword}
-              setValue={setConfirmNewPassword}
-              hasError={errors.confirmNewPassword?.hasError}
-              messageError={errors.confirmNewPassword?.message}
-            />
-          </div>
+          <InputPassword
+            label="Digite sua senha atual*:"
+            value={oldPassword}
+            setValue={setOldPassword}
+            hasError={errors.oldPassword?.hasError}
+            messageError={errors.oldPassword?.message}
+          />
+          <small />
+          <small />
+          <InputPassword
+            label="Digite sua nova senha*:"
+            value={newPassword}
+            setValue={setNewPassword}
+            hasError={errors.newPassword?.hasError}
+            messageError={errors.newPassword?.message}
+          />
+          <InputPassword
+            label="Confirme sua nova senha*:"
+            value={confirmNewPassword}
+            setValue={setConfirmNewPassword}
+            hasError={errors.confirmNewPassword?.hasError}
+            messageError={errors.confirmNewPassword?.message}
+          />
           <ButtonPrimary type="submit">Confirmar</ButtonPrimary>
         </form>
       </Container>

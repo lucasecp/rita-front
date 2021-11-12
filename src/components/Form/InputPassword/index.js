@@ -6,7 +6,6 @@ import eyeClosedIcon from '@/assets/icons/eye-closed.svg'
 import { Container } from './styles'
 
 export const InputPassword = ({
-  value = '',
   setValue = () => {},
   label = '',
   hasError = false,
@@ -31,6 +30,7 @@ export const InputPassword = ({
           type={showPassword ? 'text' : 'password'}
           id={label}
           onChange={onInputChange}
+          maxLength={100}
           {...rest}
         />
         <button type="button" onClick={onToggleShowPassword}>

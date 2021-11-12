@@ -28,8 +28,9 @@ export const Container = styled.div`
       position: relative;
       border: 1px solid #eeeeee;
       box-shadow: 0px 2px 4px 0px #e5e5e5;
-      font-weight: 500;
       width: 100%;
+      font-weight: 500;
+      line-height: 22px;
 
       :disabled {
         background: #eeeeee;

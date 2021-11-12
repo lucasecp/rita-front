@@ -45,6 +45,7 @@ const mapResponseFromApi = async () => {
           return [typesResponses.ERROR_2]
 
         case 'Unauthorized':
+          history.push('/login')
           return
 
         default:

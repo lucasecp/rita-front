@@ -28,16 +28,15 @@ export const Container = styled.div`
 
   > form {
     margin-top: 24px;
-    display: flex;
-    align-items: end;
 
-    > div {
-      margin-right: 24px;
-      flex: 1;
+    flex: 1;
 
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 24px;
+
+    > button {
+      margin-top: 24px;
     }
   }
 
@@ -45,13 +44,16 @@ export const Container = styled.div`
     padding: 32px 24px;
 
     > form {
-      flex-direction: column;
-      align-items: unset;
+      grid-template-columns: 1fr;
+      margin-right: 0;
+      gap: 16px;
 
-      > div {
-        grid-template-columns: 1fr;
-        margin-right: 0;
-        margin-bottom: 32px;
+      > div + div {
+        margin-top: 8px;
+      }
+
+      > button {
+        margin-top: 32px;
       }
     }
   }
