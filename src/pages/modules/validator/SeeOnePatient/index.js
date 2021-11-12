@@ -25,7 +25,7 @@ function seeOnePatient() {
   const history = useHistory()
   const location = useLocation()
   const { Loading } = useLoading()
-  const { showMessage } = useModal()
+  const { showMessage, showSimple } = useModal()
 
   if (!location.state) {
     history.push(VALIDATOR_ANALYZE_PATIENTS)
@@ -161,10 +161,7 @@ function seeOnePatient() {
       }
 
       if (response.status.toString()[0] === '5') {
-        showMessage(SimpleModal, {
-          type: MODAL_TYPES.ERROR,
-          message: 'Erro no Servidor!',
-        })
+        showSimple.error('Erro no Servidor!')
       }
     } finally {
       Loading.turnOff()
@@ -217,10 +214,7 @@ function seeOnePatient() {
       }
 
       if (response.status.toString()[0] === '5') {
-        showMessage(SimpleModal, {
-          type: MODAL_TYPES.ERROR,
-          message: 'Erro no Servidor!',
-        })
+        showSimple.error('Erro no Servidor!')
       }
     } finally {
       history.push(VALIDATOR_ANALYZE_PATIENTS)

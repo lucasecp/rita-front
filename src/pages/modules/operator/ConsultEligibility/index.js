@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-// import { toast } from 'react-toastify'
 import { toast } from '@/styles/components/toastify'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
@@ -87,6 +86,10 @@ export const ConsultEligibility = () => {
           case 'Nenhum usuário encontrado na base de dados':
             return [typesResponses.CPF_NOT_FOUND]
 
+          case 'Unauthorized':
+            history.push('/login')
+            return
+
           default:
             console.log(response)
             return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
@@ -124,7 +127,7 @@ export const ConsultEligibility = () => {
     }
 
     if (responseApiMessage === typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR) {
-      showSimple.error('Erro não tratado na aplicação Frontend!')
+      showSimple.error('Erro não tratado!')
     }
 
     if (responseApiMessage === typesResponses.INTERNAL_SERVER_ERROR) {
@@ -143,7 +146,7 @@ export const ConsultEligibility = () => {
     }
 
     const [responseApiMessage, responseApiData] = await mapResponseFromApi()
-    
+
     showEligiblility(responseApiMessage, responseApiData)
   }
 

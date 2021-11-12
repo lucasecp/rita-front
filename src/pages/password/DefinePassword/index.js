@@ -1,6 +1,6 @@
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import InputPassword from '@/components/Form/InputPassword'
+import { InputPassword } from '@/components/Form/InputPassword'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
 import { useAuth } from '@/hooks/login'
 import { useLoading } from '@/hooks/useLoading'
@@ -8,7 +8,10 @@ import { useModal } from '@/hooks/useModal'
 import hasLetter from '@/helpers/hasLetter'
 import hasNumber from '@/helpers/hasNumber'
 import hasSpecialCaracter from '@/helpers/hasSpecialCaracter'
-import { FORGOT_PASSWORD_INIT, LOGIN } from '@/routes/constants/namedRoutes/routes'
+import {
+  FORGOT_PASSWORD_INIT,
+  LOGIN,
+} from '@/routes/constants/namedRoutes/routes'
 import apiUser from '@/services/apiUser'
 import { setHeaderToken } from '@/storage/user'
 import React, { useEffect, useState } from 'react'
@@ -74,6 +77,7 @@ function Password() {
     if (!hasSpecialCaracter(password)) newErrors.password = msgErrorPass
     if (!hasLetter(password)) newErrors.password = msgErrorPass
     if (!hasNumber(password)) newErrors.password = msgErrorPass
+    if (password.includes(' ')) newErrors.password = msgErrorPass
     if (password.trim().length < 6) newErrors.password = msgErrorPass
     if (password.trim() !== confirmPass.trim())
       newErrors.confirmPass = msgErrorPass
@@ -89,7 +93,7 @@ function Password() {
         <h6>Preencha os campos abaixo para redefinir sua senha.</h6>
         <p>
           A senha deve conter letras, números e caracteres especiais. <br />
-          Mínimo 6 dígitos.
+          Mínimo 6 dígitos e sem espaços.
         </p>
         <Row>
           <Col md={6}>
@@ -98,7 +102,7 @@ function Password() {
               value={password}
               setValue={setPassword}
               hasError={errors.password}
-              msgError={errors.password}
+              messageError={errors.password}
             />
           </Col>
           <Col className="mt-4 mt-md-0" md={6}>
@@ -107,7 +111,7 @@ function Password() {
               value={confirmPass}
               setValue={setConfirmPass}
               hasError={errors.confirmPass}
-              msgError={errors.confirmPass}
+              messageError={errors.confirmPass}
             />
           </Col>
         </Row>

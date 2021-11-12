@@ -11,4 +11,3 @@ export const DefaultLayout = ({ children, ...rest }) => {
 
   return <Component {...rest}>{children}</Component>
 }
-
