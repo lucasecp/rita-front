@@ -75,11 +75,11 @@ const TableReport = ({
             </li>
 
             <li hidden={!ColumnIsActive(COLUMNS_NAME.DATAISVALID, columns)}>
-              {patient.documentOk ? 'Sim' : '-'}
+              {patient.documentOk ? 'Sim' : 'Não'}
             </li>
 
             <li hidden={!ColumnIsActive(COLUMNS_NAME.INCOME, columns)}>
-              {patient.income ? 'Sim' : '-'}
+              {patient.income ? 'Sim' : 'Não'}
             </li>
 
             <li
