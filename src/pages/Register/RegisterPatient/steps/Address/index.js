@@ -106,8 +106,7 @@ export const Address = ({
                 value={numberHome}
                 setValue={setNumberHome}
                 name="numberHome"
-                onlyNumber
-                maxLength="20"
+                maxLength="50"
               />
             </Col>
           </Row>
