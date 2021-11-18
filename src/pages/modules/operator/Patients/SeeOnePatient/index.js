@@ -16,11 +16,9 @@ import ButtonLink from '@/components/Button/Link'
 import OutlineButton from '@/components/Button/Outline'
 import { useModal } from '@/hooks/useModal'
 import ComeBack from './messages/ComeBack'
-import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import { getDataMapped } from './helpers/getDataMapped'
 import { toast } from 'react-toastify'
-import { format, parseISO } from 'date-fns'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 // import apiUser from '@/services/apiUser'
 
@@ -28,7 +26,7 @@ function seeOnePatient() {
   const history = useHistory()
   const location = useLocation()
   const { Loading } = useLoading()
-  const { showMessage } = useModal()
+  const { showMessage, showSimple } = useModal()
 
   if (!location.state) {
     history.push(OPERATOR_ANALYZE_PATIENT)
@@ -42,9 +40,9 @@ function seeOnePatient() {
   const [patientDependents, setPatientDependents] = useState([])
   const [patientAddress, setPatientAddress] = useState()
   const [patientDocuments, setPatientDocuments] = useState({})
- const [table, setTable] = useState('');
 
   const [validations, setValidations] = useState()
+  const [table, setTable] = useState('');
 
   useEffect(() => {
     const loadPatientInformations = async () => {
@@ -56,13 +54,14 @@ function seeOnePatient() {
 
       try {
         Loading.turnOn()
-        const response = await apiPatient.get(`/paciente/cpf?cpf=${userCpf}`)
+        const { data } = await apiPatient.get(`/paciente/cpf?cpf=${userCpf}`)
 
-        setPatientData(response.data)
-        setPatientDependents(response.data.dependentes)
-        setPatientAddress(response.data.endereco)
-        incomeDocumentType = response.data.renda
-        setTable(response.data.tabela.nome)
+        setPatientData(data)
+        setPatientDependents(data.dependentes)
+        setPatientAddress(data.endereco)
+        incomeDocumentType = data.renda
+        setTable(data.status !== "N" && data.tabela.nome)
+
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
@@ -76,7 +75,6 @@ function seeOnePatient() {
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
-        // console.log('falha segurando doc', response)
       } finally {
         Loading.turnOff()
       }
@@ -89,7 +87,6 @@ function seeOnePatient() {
           { responseType: 'arraybuffer' }
         )
       } catch ({ response }) {
-        // console.log('falha identificacao', response)
       } finally {
         Loading.turnOff()
       }
@@ -113,9 +110,9 @@ function seeOnePatient() {
         incomeDocumentType,
       })
     }
-
     loadPatientInformations()
   }, [])
+
 
   useEffect(() => {
     const loadValidationInformations = async () => {
@@ -124,38 +121,24 @@ function seeOnePatient() {
 
         const response = await apiPatient.get(
           `/paciente/${patientData.idPaciente}/validar`
-          )
+        )
 
-          const validationsFromApi = response.data[0]
-
+        const validationsFromApi = response.data[0]
         const validationsMapped = {
           documentOk: validationsFromApi.documentoOk ? 'yes' : 'no',
           resonDocumentNotOk: validationsFromApi.motivoDocumento || '',
           incomeOk: validationsFromApi.rendaBaixa ? 'yes' : 'no',
           validatorName: validationsFromApi.nomeValidador,
-          date: format(
-            parseISO(validationsFromApi.dataValidacao),
-            'dd/MM/yyyy'
-            ),
-            time: format(parseISO(validationsFromApi.dataValidacao), 'HH:MM'),
-            status: validationsFromApi.status,
-            table,
-          }
-          console.log(formateDateAndHour(validationsFromApi.dataValidacao))
+          dateAndHour: formateDateAndHour(validationsFromApi.dataValidacao),
+          status: validationsFromApi.status,
+          table,
+        }
 
-          setValidations(validationsMapped)
-        } catch ({ response }) {
-          // if (response.status.toString()[0] === '4') {
-            //   if (response.status === 404) {
-        //     // Actions to 404 Error
-        //   }
-        // }
+        setValidations(validationsMapped)
+      } catch ({ response }) {
 
         if (response?.status.toString()[0] === '5') {
-          showMessage(SimpleModal, {
-            type: MODAL_TYPES.ERROR,
-            message: 'Erro no Servidor!',
-          })
+          showSimple.error('Erro no Servidor!')
         }
       } finally {
         Loading.turnOff()
@@ -165,7 +148,7 @@ function seeOnePatient() {
     if (patientData?.idPaciente) {
       loadValidationInformations()
     }
-  }, [patientData?.idPaciente])
+  }, [patientData?.idPaciente,table])
 
   useEffect(() => {
     const dependentErrorExists = patientDependents.some(
@@ -199,8 +182,6 @@ function seeOnePatient() {
 
       const response = await apiPatient.put('/paciente/operador', dataToSend)
 
-      // remove when finished configuring API responses
-
       if (response.status === 200) {
         if (response.data.mensagem === 'Sucesso') {
           toast.success('Dados atualizados com sucesso.')
@@ -208,13 +189,6 @@ function seeOnePatient() {
         }
       }
     } catch ({ response }) {
-      // remove when finished configuring API responses
-
-      if (response.status.toString()[0] === '4') {
-        if (response.status === 404) {
-          // Actions to 404 Error
-        }
-      }
     } finally {
       Loading.turnOff()
     }

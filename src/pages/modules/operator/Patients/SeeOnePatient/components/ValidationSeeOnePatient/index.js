@@ -83,9 +83,16 @@ function ValidationSeeOnePatient({ validations }) {
       )}
       <h6>
         Registro validado por{' '}
-        <b>{formatFirstLastName(validations.validatorName)}</b> em{' '}
-        {validations.date} {validations.time} com status{' '}
-        <b>{validations.status === 'N' ? 'Negado' : 'Aprovado'}</b>
+        <strong>{formatFirstLastName(validations.validatorName)}</strong> em{' '}
+        {validations.dateAndHour} com status{' '}
+        <strong>{validations.status === 'N' ? 'Negado.' : 'Aprovado.'}</strong>
+        {validations.table && (
+          <>
+            <br />
+            <br />
+            Paciente associado á <strong>{validations.table}.</strong>
+          </>
+        )}
       </h6>
     </Container>
   )
