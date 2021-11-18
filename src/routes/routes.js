@@ -7,7 +7,7 @@ import MasterPage from '@/pages/MasterPage'
 import Login from '@/pages/Login'
 import NotFound from '@/pages/404'
 
-import { operatorRoutes, validatorRoutes } from './modules'
+import { directorRoutes, operatorRoutes, validatorRoutes } from './modules'
 
 import registerRoutesComponent from './grouping/register.routes'
 import passwordRoutesComponent from './grouping/password.routes'
@@ -24,6 +24,8 @@ function Routes() {
       {validatorRoutes}
 
       {operatorRoutes}
+      
+      {directorRoutes}
 
       <Route path={MASTERPAGE} isPrivate component={MasterPage} />
 

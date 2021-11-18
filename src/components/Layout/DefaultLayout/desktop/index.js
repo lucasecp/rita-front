@@ -5,10 +5,10 @@ import Footer from '../../shared/Footer'
 
 import { Container } from './styles'
 
-export const DesktopLayout = ({ title, children }) => {
+export const DesktopLayout = ({ title, children,headerChildren }) => {
   return (
     <Container>
-      <Header title={title} />
+      <Header title={title}>{headerChildren}</Header>
       <Sidenav />
       <main>{children}</main>
       <Footer />
