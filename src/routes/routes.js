@@ -26,6 +26,7 @@ function Routes() {
       {operatorRoutes}
 
       <Route path={MASTERPAGE} isPrivate component={MasterPage} />
+
       <Route path={LOGIN} exact component={Login} />
 
       <Route path={NOT_FOUND} component={NotFound} />

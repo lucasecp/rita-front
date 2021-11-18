@@ -1,4 +1,4 @@
-export default function (value){
+export default function (value,separator){
   if(!value && typeof value !== 'string') return
-  return value.split('T')[0].split('-').reverse().join('/') + ' - ' + new Date(value).toLocaleTimeString('pt-br').slice(0,5)
+  return value.split('T')[0].split('-').reverse().join('/') + separator || '' + value.split('T')[1].slice(0,5)
 }

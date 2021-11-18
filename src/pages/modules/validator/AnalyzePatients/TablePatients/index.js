@@ -112,7 +112,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                   onClick={() => handleClick(patient.idPaciente, patient.cpf)}
                 >
                   <Td soft>
-                    {formateDateAndHour(patient.dataFiliacao) || '-'}
+                    {formateDateAndHour(patient.dataFiliacao, ' - ') || '-'}
                   </Td>
                   <Td strong id="patient-name">
                     <CustomTooltip
@@ -128,7 +128,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                     {formatFirstLastName(patient.validador?.nome) || '-'}
                   </Td>
                   <Td soft>
-                    {formateDateAndHour(patient.dataValidacao) || '-'}
+                    {formateDateAndHour(patient.dataValidacao, ' - ') || '-'}
                   </Td>
                   <Td status={showStatus(patient.status)}>
                     <span>{showStatus(patient.status) || '-'}</span>

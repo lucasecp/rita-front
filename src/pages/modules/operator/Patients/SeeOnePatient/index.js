@@ -21,6 +21,7 @@ import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import { getDataMapped } from './helpers/getDataMapped'
 import { toast } from 'react-toastify'
 import { format, parseISO } from 'date-fns'
+import formateDateAndHour from '@/helpers/formateDateAndHour'
 // import apiUser from '@/services/apiUser'
 
 function seeOnePatient() {
@@ -41,6 +42,7 @@ function seeOnePatient() {
   const [patientDependents, setPatientDependents] = useState([])
   const [patientAddress, setPatientAddress] = useState()
   const [patientDocuments, setPatientDocuments] = useState({})
+ const [table, setTable] = useState('');
 
   const [validations, setValidations] = useState()
 
@@ -60,6 +62,7 @@ function seeOnePatient() {
         setPatientDependents(response.data.dependentes)
         setPatientAddress(response.data.endereco)
         incomeDocumentType = response.data.renda
+        setTable(response.data.tabela.nome)
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
@@ -136,10 +139,11 @@ function seeOnePatient() {
             ),
             time: format(parseISO(validationsFromApi.dataValidacao), 'HH:MM'),
             status: validationsFromApi.status,
+            table,
           }
+          console.log(formateDateAndHour(validationsFromApi.dataValidacao))
 
           setValidations(validationsMapped)
-          console.log(validations);
         } catch ({ response }) {
           // if (response.status.toString()[0] === '4') {
             //   if (response.status === 404) {

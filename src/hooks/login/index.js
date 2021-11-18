@@ -33,7 +33,7 @@ export default function AuthProvider({ children }) {
 
       const { data: responsePatient } = await apiPatient.get(`paciente/status?cpf=${payload.cpf}`)
 
-      if (responsePatient.status === 'P') {
+      if (responsePatient.status === 'P' || responsePatient.status === 'D') {
         throw new Error('PATIENT_STATUS_P')
       }
 
