@@ -9,12 +9,12 @@ export default (dataReport) => {
     total: dataReport.total,
     dataPatients: dataReport?.dados?.map((patient) => {
       return {
-        registerDate: formateDateAndHour(patient?.dataFiliacao),
+        registerDate: formateDateAndHour(patient?.dataFiliacao, ' - '),
         name: formatName(patient?.nome),
         cpf: formatCpf(patient?.cpf),
         status: showStatus(patient?.status),
         validatorName: formatFirstLastName(patient?.validador?.nome),
-        validationDate: formateDateAndHour(patient?.dataValidacao),
+        validationDate: formateDateAndHour(patient?.dataValidacao, ' - '),
         documentOk: patient?.documentoOk,
         income: patient?.rendaBaixa,
         reasonForNegative: patient?.motivoDocumento,

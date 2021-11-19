@@ -6,6 +6,7 @@ import { Col, Row } from 'react-bootstrap'
 
 import { Container } from './styles'
 import { UF } from './static'
+import { validateCep } from '../../helpers/validator'
 
 export const Address = ({
   setButtonPass,
@@ -20,6 +21,7 @@ export const Address = ({
   const [numberHome, setNumberHome] = useState('')
   const [district, setDistrict] = useState('')
   const [complement, setComplement] = useState('')
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const addressFromSabinCard = dataClientSabin.endereco
@@ -68,6 +70,10 @@ export const Address = ({
             value={cep}
             setValue={setCep}
             name="cep"
+            onBlur={() => setErrors({ ...errors, ...validateCep(cep) })}
+            onKeyUp={() => setErrors({ ...errors, ...validateCep(cep) })}
+            msgError={errors.cep}
+            hasError={errors.cep}
           />
         </Col>
         <Col md="6" className="mt-4 mt-md-0">
@@ -106,8 +112,7 @@ export const Address = ({
                 value={numberHome}
                 setValue={setNumberHome}
                 name="numberHome"
-                onlyNumber
-                maxLength="20"
+                maxLength="50"
               />
             </Col>
           </Row>

@@ -23,6 +23,8 @@ export const OPERATOR_REPORTS_AUTHORIZATION = '/relatorios/autorizacoes'
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
 
+export const DIRECTOR_PLAN_MANAGMENT = '/gestão-planos'
+
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'
 export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'

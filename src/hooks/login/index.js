@@ -14,6 +14,9 @@ import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
 import { useHistory } from 'react-router'
 import { LOGIN, MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
+import apiPatient from '@/services/apiPatient'
+import AnalyzingData from './messages/AnalzingData'
+import axios from 'axios'
 
 const UserContext = createContext()
 
@@ -24,14 +27,22 @@ export default function AuthProvider({ children }) {
 
   const [user, setUser] = useState(getUserStorage() || null)
 
-  // useEffect(() => {
-  //   apiUser.defaults.headers.token = user?.token
-  //   apiPatient.defaults.headers.token = user?.token
-  // }, [user])
-
   const login = async (payload, prevPath) => {
     try {
       Loading.turnOn()
+
+      const { data: responsePatient } = await apiPatient.get(`paciente/status?cpf=${payload.cpf}`)
+
+      if (responsePatient.status === 'P' || responsePatient.status === 'D') {
+        throw new Error('PATIENT_STATUS_P')
+      }
+
+      // const [reponseStatus, responseLogin] = await axios.all([
+      //   apiPatient.get(`paciente/status?cpf=${payload.cpf}`),
+      //   apiUser.post('/login', payload),
+      // ])
+      // console.log(reponseStatus, responseLogin)
+
       const { data } = await apiUser.post('/login', payload)
 
       const dataUser = jwt(data.jwtToken)
@@ -43,7 +54,11 @@ export default function AuthProvider({ children }) {
       })
 
       pushToUrl(prevPath)
-    } catch ({ response }) {
+    } catch (e) {
+      if (e.message === 'PATIENT_STATUS_P') {
+        showMessage(AnalyzingData)
+        return
+      }
       showMessage(InvalidCredences)
     } finally {
       Loading.turnOff()
@@ -79,7 +94,6 @@ export default function AuthProvider({ children }) {
 
     return new Date() < new Date(user.exp * 1000)
   }
-
 
   return (
     <UserContext.Provider

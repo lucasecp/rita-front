@@ -22,6 +22,7 @@ const colors = {
 
   pink: {
     light: '#F8C0FF',
+    middle: '#F89BFF'
   },
 
   blueViola: {
