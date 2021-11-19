@@ -176,4 +176,12 @@ export const Container = styled.div`
       css`
         border-color: ${colors.orange.light};
       `}
+  ${({ disabled }) =>
+      disabled &&
+      css`
+        opacity: .5;
+        .optionListContainer, .multiSelectContainer input{
+          visibility: hidden;
+        }
+      `}
 `

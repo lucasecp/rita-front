@@ -16,16 +16,19 @@ export const Container = styled.button`
   height: fit-content;
 
   :hover {
-    background-color: #7338cb;
+    background-color: ${colors.purple.main.darkness};
     color: #fff;
-    border-color: #7338cb;
+    border-color: ${colors.purple.main.darkness};
   }
   ${({small}) => small && css`
-     padding: 10px 16px
+     padding: 10px 16px;
   `}
+
   ${({medium}) => medium && css`
-     padding: 10px 32px
+     padding: 10px 32px;
   `}
+
+ 
 
   ${({ disabledWithEvents }) =>
     disabledWithEvents &&

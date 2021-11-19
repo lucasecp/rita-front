@@ -4,14 +4,14 @@ import React, { useState } from 'react'
 import Filter from './Filter'
 import Table from './Table'
 import { Container, Content } from './styles'
-import Pagination from '@/components/Pagination'
+import ButtonHeader from './Components/ButtonHeader'
 
 const PlanManagment = () => {
   return (
     <Container>
       <DefaultLayout
         title="Gestão de Planos"
-        headerChildren={<ButtonPrimary>Incluir</ButtonPrimary>}
+        headerChildren={<ButtonHeader/>}
       >
         <Content>
           <Filter />
