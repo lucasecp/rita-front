@@ -6,7 +6,7 @@ import { ReactComponent as CloseMultSelectIcon } from '@/assets/icons/close-mult
 import generateRandomString from '@/helpers/generateRandomString'
 import MsgError from '@/components/MsgError'
 
-const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, ...rest }) => {
+const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, disabled, ...rest }) => {
   const containerDiv = useRef(null)
 
   useEffect(() => {
@@ -17,11 +17,12 @@ const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, .
 
   return (
     <Container
-      {...rest}
-      hasError={hasError}
-      ref={containerDiv}
-      id={generateRandomString(7)}
-      onClick={() => adjustSelectOptions(containerDiv?.current)}
+    disabled={disabled}
+    hasError={hasError}
+    ref={containerDiv}
+    id={generateRandomString(7)}
+    onClick={() => adjustSelectOptions(containerDiv?.current)}
+    {...rest}
     >
       {label && <label>{label}</label>}
       <Multiselect

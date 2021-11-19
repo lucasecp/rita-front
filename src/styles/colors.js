@@ -7,6 +7,7 @@ const colors = {
       light: '#DFD2FF',
       middle: '#C0A6FF',
       dark: '#9146FF',
+      darkness: '#7338CB'
     },
     background: {
       light: '#F8F5FF',
@@ -25,6 +26,7 @@ const colors = {
     middle: '#F89BFF'
   },
 
+
   blueViola: {
     light: '#9B97FF',
     middle: '#706BFF',
@@ -35,6 +37,7 @@ const colors = {
     light: '#C5DBFE',
     middle: '#326BF6',
     dark: '#1C23BD',
+
   },
 
   gray: {
