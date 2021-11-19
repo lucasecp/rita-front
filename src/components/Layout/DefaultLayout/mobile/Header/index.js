@@ -22,8 +22,10 @@ export const Header = () => {
     getProfilePhoto()
   }, [])
 
-  const initialName = useMemo(() => getInitialLetterName(user?.nome), [user?.nome]);
-
+  const initialName = useMemo(
+    () => getInitialLetterName(user?.nome),
+    [user?.nome]
+  )
 
   return (
     <Container>
@@ -31,7 +33,7 @@ export const Header = () => {
         <img src={logo} />
       </Link>
       <nav>
-        <Link to="#">
+        <Link to="/perfil">
           <div>
             {photo ? (
               <img src={photo} alt="perfil" />

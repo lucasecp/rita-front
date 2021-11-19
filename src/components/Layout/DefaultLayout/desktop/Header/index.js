@@ -33,7 +33,7 @@ export const Header = ({ title }) => {
     <Container>
       <h1>{title || 'Page Title'}</h1>
       <nav>
-        <Link to="#">
+        <Link to="/perfil">
           Olá, {nameFormated}
           <div>
             {photo ? (

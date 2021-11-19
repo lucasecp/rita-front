@@ -9,26 +9,25 @@ import BigSize from '../../messages/BigSize'
 import InvalidFormat from '../../messages/InvalidFormat'
 
 import OutlineButton from '@/components/Button/Outline'
-import InputFile from '@/components/Form/InputFile/InputFile'
+import { InputFile } from '@/components/Form/InputFile'
 
 import { useModal } from '@/hooks/useModal'
 
-import isValidSizeFile from '@/helpers/file/validateSizeFile'
-import isValidTypeFile from '@/helpers/file/validateTypeFile'
+import { isValidSizeFile } from '@/helpers/file/isValidSizeFile'
+import { isValidTypeFile } from '@/helpers/file/isValidTypeFile'
 import ImagePreview from '../../messages/ImagePreview'
 import downloadFile from '@/helpers/downloadFile'
 import { useMediaPredicate } from 'react-media-hook'
 import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
 
 function SendedFile({ file, onGetFile }) {
-  // const { modalVisible, message, closeable, showMessage, closeModal } = useModal()
   const { showMessage } = useModal()
 
   const isMobile = useMediaPredicate('(max-width: 800px)')
 
   useEffect(() => {
     if (!isValidTypeFile(file)) {
-      showMessage(InvalidFormat) 
+      showMessage(InvalidFormat)
       return removeFile()
     }
 

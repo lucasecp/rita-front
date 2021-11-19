@@ -86,7 +86,7 @@ export const Container = styled.div`
 export const Select = styled.select`
   color: #6a6a6a;
   border-radius: 8px;
-  padding: 14px 16px;
+  padding: 13px 16px;
   display: inline-block;
   transition: all 0.3s;
   position: relative;

@@ -5,6 +5,7 @@ import Route from './custom.routes'
 
 import MasterPage from '@/pages/MasterPage'
 import Login from '@/pages/Login'
+import { Profile } from '@/pages/Profile'
 import NotFound from '@/pages/404'
 
 import { operatorRoutes, validatorRoutes } from './modules'
@@ -12,7 +13,12 @@ import { operatorRoutes, validatorRoutes } from './modules'
 import registerRoutesComponent from './grouping/register.routes'
 import passwordRoutesComponent from './grouping/password.routes'
 
-import { LOGIN, MASTERPAGE, NOT_FOUND } from './constants/namedRoutes/routes'
+import {
+  LOGIN,
+  MASTERPAGE,
+  NOT_FOUND,
+  PROFILE,
+} from './constants/namedRoutes/routes'
 
 function Routes() {
   return (
@@ -24,6 +30,8 @@ function Routes() {
       {validatorRoutes}
 
       {operatorRoutes}
+
+      <Route path={PROFILE} isPrivate component={Profile} />
 
       <Route path={MASTERPAGE} isPrivate component={MasterPage} />
       <Route path={LOGIN} exact component={Login} />

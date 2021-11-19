@@ -5,7 +5,7 @@ import selfieImage from '@/assets/img/selfie.png'
 import { Container } from './styles'
 
 import OutlineButton from '@/components/Button/Outline'
-import InputFile from '@/components/Form/InputFile/InputFile'
+import { InputFile } from '@/components/Form/InputFile'
 
 function InstructionsHoldingDocuments({ onGetFile }) {
   return (
