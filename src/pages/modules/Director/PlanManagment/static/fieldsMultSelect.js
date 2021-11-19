@@ -6,6 +6,7 @@ export const staticStatus = [
   {name: 'Suspenso', id: 'S'}
 ]
 export const staticUf = [
+  {name: 'Todos', id: 'All'},
   { name: 'AC', id: 'AC' },
   { name: 'AL', id: 'AL' },
   { name: 'AP', id: 'AP' },
