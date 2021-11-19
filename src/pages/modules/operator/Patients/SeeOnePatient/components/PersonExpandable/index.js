@@ -16,6 +16,7 @@ import {
   validateName,
   validatePhone,
 } from '../../helpers/validatorFields'
+import { useToggle } from '@/hooks/useToggle'
 // import formatDate from '@/helpers/formatDate'
 
 function PersonExpandable({
@@ -25,8 +26,7 @@ function PersonExpandable({
   setPersonData,
   holder,
 }) {
-
-  const [expanded, setExpanded] = useState(!!holder)
+  const [expanded, toggleExpanded] = useToggle(!!holder)
 
   const [name, setName] = useState(personData.nome || '')
   const [cpf, setCpf] = useState(personData.cpf || '')
@@ -50,13 +50,11 @@ function PersonExpandable({
     })
   }, [name, cpf, birthDate, gender, phone, email, errors])
 
-  const toogleExpanded = () => setExpanded(!expanded)
-
   return (
     <Container expanded={expanded}>
       <header>
         <h2>{title}</h2>
-        <img src={arrowDownOutlineIcon} onClick={toogleExpanded} />
+        <img src={arrowDownOutlineIcon} onClick={toggleExpanded} />
       </header>
       <section>
         <InputText

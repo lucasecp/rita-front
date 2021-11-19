@@ -5,10 +5,10 @@ import { ReactComponent as AuthorizationIcon } from '@/assets/icons/to-do.svg'
 import { ReactComponent as PatientIcon } from '@/assets/icons/patients.svg'
 import { ReactComponent as ReportsIcon } from '@/assets/icons/report.svg'
 import { ReactComponent as EligibilityIcon } from '@/assets/icons/choose-person.svg'
-import { ReactComponent as PadLock } from '@/assets/icons/pad-lock.svg'
+import { ReactComponent as PadLockIcon } from '@/assets/icons/pad-lock.svg'
+import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 import { ReactComponent as ManagmentIcon } from '@/assets/icons/managment.svg'
 // import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
-// import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 
 import {
   MASTERPAGE,
@@ -18,7 +18,7 @@ import {
   CHANGE_PASSWORD,
   // DEPENDENTS,
   // PATIENT_START,
-  // PROFILE,
+  PROFILE,
   VALIDATOR_ANALYZE_PATIENTS,
   DIRECTOR_PLAN_MANAGMENT,
 } from '@/routes/constants/namedRoutes/routes'
@@ -38,12 +38,18 @@ export const menuItens = [
   //   name: 'Início',
   //   // permission: permissionList.
   // },
-  // {
-  //   path: PROFILE,
-  //   icon: <UserIcon />,
-  //   name: 'Perfil',
-  //   permission: permissionList.VER_MEUS_DADOS_PACIENTE,
-  // },
+  {
+    path: PROFILE,
+    icon: <UserIcon />,
+    name: 'Perfil',
+    permission: permissionList.VER_MEUS_DADOS_PACIENTE,
+  },
+  {
+    path: CHANGE_PASSWORD,
+    icon: <PadLockIcon />,
+    name: 'Trocar Senha',
+    permission: permissionList.TROCAR_MINHA_SENHA,
+  },
   {
     path: VALIDATOR_ANALYZE_PATIENTS,
     icon: <AuthorizationIcon />,

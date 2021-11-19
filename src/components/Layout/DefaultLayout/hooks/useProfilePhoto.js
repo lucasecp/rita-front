@@ -4,33 +4,33 @@ import apiPatient from '@/services/apiPatient'
 import { useState } from 'react'
 
 export default () => {
-  const [photo, setPhotoApi] = useState(window.localStorage.getItem('profilePhoto'))
+  const [photo, setPhotoApi] = useState(
+    window.localStorage.getItem('@Rita/Photo/Profile')
+  )
   const { Loading } = useLoading()
 
   const getProfilePhoto = async () => {
-    if(photo) {
+    if (photo) {
       return
     }
 
     try {
       Loading.turnOn()
 
-      const response = await apiPatient.get('/paciente/foto-perfil',{
-        responseType: 'arraybuffer'
+      const response = await apiPatient.get('/paciente/foto-perfil', {
+        responseType: 'arraybuffer',
       })
       const photo = convertImageFromApiToBase64(response)
 
       setPhotoApi(photo)
-      window.localStorage.setItem('profilePhoto',photo)
-    }
-    catch ({ response }) {
+      window.localStorage.setItem('@Rita/Photo/Profile', photo)
+    } catch ({ response }) {
       if (response.status === 404) {
         setPhotoApi('')
       }
-    }
-    finally {
+    } finally {
       Loading.turnOff()
     }
   }
-  return [photo,getProfilePhoto]
+  return [photo, getProfilePhoto]
 }

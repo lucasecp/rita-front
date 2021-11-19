@@ -31,7 +31,9 @@ export default function AuthProvider({ children }) {
     try {
       Loading.turnOn()
 
-      const { data: responsePatient } = await apiPatient.get(`paciente/status?cpf=${payload.cpf}`)
+      const { data: responsePatient } = await apiPatient.get(
+        `paciente/status?cpf=${payload.cpf}`
+      )
 
       if (responsePatient.status === 'P' || responsePatient.status === 'D') {
         throw new Error('PATIENT_STATUS_P')
@@ -75,7 +77,7 @@ export default function AuthProvider({ children }) {
     setUser(null)
     deleteLocalStorage()
     deleteHeaderToken()
-    window.localStorage.removeItem('profilePhoto')
+    window.localStorage.removeItem('@Rita/Photo/Profile')
   }
 
   const pushToUrl = (url) => {

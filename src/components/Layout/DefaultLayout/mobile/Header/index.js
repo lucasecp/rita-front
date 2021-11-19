@@ -13,7 +13,7 @@ import { Container, HamburgerButton } from './styles'
 import useProfilePhoto from '../../hooks/useProfilePhoto'
 import { getInitialLetterName } from '../../helpers/getInitialLetterName'
 
-export const Header = ({children}) => {
+export const Header = ({ children }) => {
   const { openMenu } = useMenu()
   const { clearDataLogout, user } = useAuth()
   const [photo, getProfilePhoto] = useProfilePhoto()
@@ -22,17 +22,19 @@ export const Header = ({children}) => {
     getProfilePhoto()
   }, [])
 
-  const initialName = useMemo(() => getInitialLetterName(user?.nome), [user?.nome]);
-
+  const initialName = useMemo(
+    () => getInitialLetterName(user?.nome),
+    [user?.nome]
+  )
 
   return (
     <Container>
       <Link to="/inicio">
         <img src={logo} />
       </Link>
-  
+
       <nav>
-        <Link to="#">
+        <Link to="/perfil">
           <div>
             {photo ? (
               <img src={photo} alt="perfil" />

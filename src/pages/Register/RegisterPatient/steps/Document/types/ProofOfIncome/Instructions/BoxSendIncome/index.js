@@ -1,6 +1,7 @@
-import OutlineButton from '@/components/Button/Outline'
-import InputFile from '@/components/Form/InputFile/InputFile'
 import React from 'react'
+
+import OutlineButton from '@/components/Button/Outline'
+import { InputFile } from '@/components/Form/InputFile'
 
 import { Container } from './styles'
 
