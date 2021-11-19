@@ -1,5 +1,6 @@
-import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import React from 'react'
+
+import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { DisplayUserInformations } from './containers/DisplayUserInformations'
 import { EditPersonalData } from './containers/EditPersonalData'
 

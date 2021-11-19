@@ -8,15 +8,14 @@ import InputMask from '@/components/Form/InputMask'
 import SelectComponent from '@/components/Form/Select'
 
 import { Container } from './styles'
+import { useToggle } from '@/hooks/useToggle'
 
 function PersonExpandable({ title, personData, holder }) {
   // const birthDate =
   //   personData?.dataNascimento &&
   //   format(parseISO(personData?.dataNascimento), 'dd/MM/yyyy')
 
-  const [expanded, setExpanded] = useState(!!holder)
-
-  const toogleExpanded = () => setExpanded(!expanded)
+  const [expanded, toggleExpanded] = useToggle(!!holder)
 
   const isOldDigit = () => personData?.telefone?.length === 10
 
@@ -24,7 +23,7 @@ function PersonExpandable({ title, personData, holder }) {
     <Container expanded={expanded}>
       <header>
         <h2>{title}</h2>
-        <img src={arrowDownOutlineIcon} onClick={toogleExpanded} />
+        <img src={arrowDownOutlineIcon} onClick={toggleExpanded} />
       </header>
       <section>
         <InputText

@@ -13,7 +13,7 @@ import { Container, HamburgerButton } from './styles'
 import useProfilePhoto from '../../hooks/useProfilePhoto'
 import { getInitialLetterName } from '../../helpers/getInitialLetterName'
 
-export const Header = ({children}) => {
+export const Header = ({ children }) => {
   const { openMenu } = useMenu()
   const { clearDataLogout, user } = useAuth()
   const [photo, getProfilePhoto] = useProfilePhoto()
@@ -32,7 +32,7 @@ export const Header = ({children}) => {
       <Link to="/inicio">
         <img src={logo} />
       </Link>
-  
+
       <nav>
         <Link to="/perfil">
           <div>
