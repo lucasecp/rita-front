@@ -1,3 +1,4 @@
+import colors from '@/styles/colors';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -11,4 +12,9 @@ export const Container = styled.div`
      }
 
    }
+`;
+export const Content = styled.div`
+overflow-x: hidden;
+   padding: 32px;
+   background: ${colors.purple.background.light};
 `;

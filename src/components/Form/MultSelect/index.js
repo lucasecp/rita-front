@@ -32,13 +32,13 @@ const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, .
         customCloseIcon={<CloseMultSelectIcon />}
         emptyRecordMsg="Nenhum resultado."
         closeOnSelect={false}
-        onSelect={(values) => setValue(values)}
-        onRemove={(values) => setValue(values)}
+        onSelect={(values) => setValue !== undefined && setValue(values)}
+        onRemove={(values) => setValue !== undefined && setValue(values)}
         selectedValues={value}
         {...rest}
       />
       {!!value.length && (
-        <button disabled={!value} onClick={() => setValue([])} />
+        <button disabled={!value} onClick={() => setValue !== undefined && setValue([])} />
       )}
       {msgError && <MsgError>{msgError}</MsgError>}
     </Container>

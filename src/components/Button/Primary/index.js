@@ -2,9 +2,9 @@ import React from 'react'
 
 import { Container } from './styles'
 
-function ButtonPrimary({ children, small,disabledWithEvents, ...rest }) {
+function ButtonPrimary({ children, small,disabledWithEvents,medium, ...rest }) {
   return (
-    <Container {...rest} small={small} disabledWithEvents={disabledWithEvents}>
+    <Container {...rest} small={small} medium={medium} disabledWithEvents={disabledWithEvents}>
       {children}
     </Container>
   )
