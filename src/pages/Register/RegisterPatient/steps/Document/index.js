@@ -8,7 +8,7 @@ import ProofOfIncome from './types/ProofOfIncome'
 
 import { incomeType } from './constants/income'
 
-const Document = ({ setButtonPass, onGetDocumentFiles,savedFiles }) => {
+const Document = ({ setButtonPass, onGetDocumentFiles, savedFiles }) => {
   const [holdingDocumentFile, setHoldingDocumentFile] = useState('')
   const [ownDocumentFile, setOwnDocumentFile] = useState('')
   const [proofOfIncomeFile, setProofOfIncomeFile] = useState('')
@@ -21,10 +21,10 @@ const Document = ({ setButtonPass, onGetDocumentFiles,savedFiles }) => {
   useEffect(() => {
     onGetDocumentFiles({
       holdingDocumentFile,
-     ownDocumentFile,
-     proofOfIncomeFile,
-     selectIncome,
-   })
+      ownDocumentFile,
+      proofOfIncomeFile,
+      selectIncome,
+    })
 
     if (
       holdingDocumentFile !== '' &&
@@ -41,7 +41,7 @@ const Document = ({ setButtonPass, onGetDocumentFiles,savedFiles }) => {
   }, [holdingDocumentFile, ownDocumentFile, proofOfIncomeFile, selectIncome])
 
   const verifySavedFiles = () => {
-    if(!Object.keys(savedFiles).length) return
+    if (!Object.keys(savedFiles).length) return
     setHoldingDocumentFile(savedFiles.holdingDocumentFile || '')
     setOwnDocumentFile(savedFiles.ownDocumentFile || '')
     setProofOfIncomeFile(savedFiles.proofOfIncomeFile || '')

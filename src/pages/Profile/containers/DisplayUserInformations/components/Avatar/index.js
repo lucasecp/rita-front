@@ -9,18 +9,21 @@ import { Container } from './styles'
 import { useModal } from '@/hooks/useModal'
 import { isValidTypeFile } from '@/helpers/file/isValidTypeFile'
 import { isValidSizeFile } from '@/helpers/file/isValidSizeFile'
+import apiPatient from '@/services/apiPatient'
+import { useLoading } from '@/hooks/useLoading'
 
 export const Avatar = () => {
   const { showSimple } = useModal()
+  const { Loading } = useLoading()
 
-  const [photoSource, setPhotoSource] = useState(
-    localStorage.getItem('@Rita/Photo/Profile')
-  )
+  const photoProfileStoraged = localStorage.getItem('@Rita/Photo/Profile')
+
+  const [photoSource, setPhotoSource] = useState(photoProfileStoraged)
 
   const [photoFile, setPhotoFile] = useState('')
 
   useEffect(() => {
-    if (photoFile) {
+    const updateProfilePhoto = async () => {
       if (
         !isValidTypeFile(photoFile, { onlyImage: true }) ||
         !isValidSizeFile(photoFile)
@@ -28,9 +31,36 @@ export const Avatar = () => {
         showSimple.error('Arquivo não suportado, por favor, envie outra foto!')
         return
       }
+
+      const photoSourceTemporary = URL.createObjectURL(photoFile)
+
+      setPhotoSource(photoSourceTemporary)
+
+      const formPhotoFile = new FormData()
+      formPhotoFile.append('file', photoFile)
+
+      try {
+        Loading.turnOn()
+
+        await apiPatient.post('/paciente/foto-perfil', formPhotoFile)
+
+        window.localStorage.setItem('@Rita/Photo/Profile', photoSourceTemporary)
+      } catch ({ response }) {
+        showSimple.error(
+          <>
+            Não foi possível atualizar sua foto de perfil. <br /> Por favor,
+            tente novamente!
+          </>
+        )
+        setPhotoSource(photoProfileStoraged)
+      } finally {
+        Loading.turnOff()
+      }
     }
 
-    console.log(photoFile)
+    if (photoFile) {
+      updateProfilePhoto()
+    }
   }, [photoFile])
 
   return (

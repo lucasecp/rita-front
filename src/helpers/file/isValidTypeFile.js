@@ -9,7 +9,6 @@ export const isValidTypeFile = (file, { onlyImage = false }) => {
 
   const isValid =
     typesFile.includes(fileType) && file.name.split('.')[1] !== 'jfif'
-  console.log(isValid)
 
   return isValid
 }
