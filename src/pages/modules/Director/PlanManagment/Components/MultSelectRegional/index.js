@@ -15,7 +15,7 @@ const MultSelectRegional = ({setRegional, regional}) => {
            Loading.turnOn()
           const {data} = await  apiPatient.get('/regional')
           const dataMapped = mapDataFromApiToMultSelect(data?.dados)
-          setRegionalOptions(dataMapped)
+          setRegionalOptions([{name: 'Todas', id: 'All'},...dataMapped])
          }
          catch({response}){
 

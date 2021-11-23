@@ -17,8 +17,8 @@ export const Content = styled.div`
   margin-right: 24px;
   :last-child {
     margin-right: 0px;
-    justify-content: space-between;
   }
+  justify-content: space-between;
 
 
   > div {

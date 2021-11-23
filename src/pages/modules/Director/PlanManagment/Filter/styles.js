@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const BtnGroup = styled.div`
    display: flex;
    justify-content: flex-end;
-   margin: 24px 0;
+   margin: 24px 0 -16px 0 ;
    >button:first-child{
      margin-right: 24px;
    }

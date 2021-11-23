@@ -4,7 +4,7 @@ import { queryFilterString } from '@/helpers/queryString/filter'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
-import mapDataFromApiToMultSelect, { mapUf } from '../../helpers/mapDataFromApiToMultSelect'
+import { mapUf } from '../../helpers/mapDataFromApiToMultSelect'
 import { staticUf } from '../../static/fieldsMultSelect'
 
 const MultSelectUf = ({ setUf, uf, regional }) => {
@@ -20,16 +20,16 @@ const MultSelectUf = ({ setUf, uf, regional }) => {
     const getUf = async () => {
       try {
         Loading.turnOn()
-        const queryRegional = [{name: 'idRegional', value: formatMultSelectValue(regional)}]
+        const queryRegional = [
+          { name: 'idRegional', value: formatMultSelectValue(regional) },
+        ]
 
         const { data } = await apiPatient.get(
           `/uf?${queryFilterString(queryRegional)}`
         )
         const dataMapped = mapUf(data?.dados)
 
-
-        setUfOptions(dataMapped)
-
+        setUfOptions([{ name: 'Todos', id: 'All' }, ...dataMapped])
       } catch ({ response }) {
       } finally {
         Loading.turnOff()

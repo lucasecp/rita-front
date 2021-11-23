@@ -4,37 +4,33 @@ import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
 import mapDataFromApiToMultSelect from '../../helpers/mapDataFromApiToMultSelect'
 
-const MultSelectServices = ({setServices, services}) => {
-  const [serviceOptions, setServicesOptions] = useState([]);
-  const {Loading} = useLoading()
+const MultSelectServices = ({ setServices, services }) => {
+  const [serviceOptions, setServicesOptions] = useState([])
+  const { Loading } = useLoading()
 
   useEffect(() => {
-
-      const getServices = async () => {
-         try{
-           Loading.turnOn()
-          const {data} = await  apiPatient.get('/servico')
-          const dataMapped = mapDataFromApiToMultSelect(data?.dados)
-          setServicesOptions(dataMapped)
-         }
-         catch({response}){
-
-         }
-         finally{
-          Loading.turnOff()
-         }
+    const getServices = async () => {
+      try {
+        Loading.turnOn()
+        const { data } = await apiPatient.get('/servico')
+        const dataMapped = mapDataFromApiToMultSelect(data?.dados)
+        setServicesOptions([{ name: 'Todos', id: 'All' }, ...dataMapped])
+      } catch ({ response }) {
+      } finally {
+        Loading.turnOff()
       }
+    }
 
-     getServices()
-  }, []);
+    getServices()
+  }, [])
 
   return (
     <CustomMultSelect
-    options={serviceOptions}
-    label="Serviços:"
-    value={services}
-    setValue={setServices}
-  />
+      options={serviceOptions}
+      label="Serviços:"
+      value={services}
+      setValue={setServices}
+    />
   )
 }
 

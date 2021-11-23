@@ -18,7 +18,7 @@ const MultSelectCity = ({setCity, city, uf}) => {
            Loading.turnOn()
           const {data} = await  apiPatient.get('/cidades')
           const dataMapped = mapDataFromApiToMultSelect(data?.dados)
-          setCityOptions(dataMapped)
+          setCityOptions([{name: 'Todas', id: 'All'},...dataMapped])
          }
          catch({response}){
 
