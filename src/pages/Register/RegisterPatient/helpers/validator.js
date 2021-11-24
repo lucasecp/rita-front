@@ -21,7 +21,6 @@ export const validateEmail = (email, confirmEmail) => {
 export const validateCpf = (value) => {
   const newValue = clear(value)
   if (!newValue) return { cpf: 'CPF Obrigatório.' }
-  
   else if (!cpfValidate(newValue)) return { cpf: 'CPF Inválido.' }
 
   return { cpf: '' }
@@ -53,7 +52,10 @@ export const validateBirthdate = (value) => {
 }
 
 export const validateCep = (value) => {
-  if (clear(value).length < 8) return { cep: 'Cep Inválido.' }
+  if (clear(value).length > 0 && clear(value).length < 8) {
+    return { cep: 'Cep Inválido.' }
+  }
+
   return { cep: '' }
 }
 

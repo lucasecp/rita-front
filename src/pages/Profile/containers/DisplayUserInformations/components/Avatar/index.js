@@ -32,10 +32,6 @@ export const Avatar = () => {
         return
       }
 
-      const photoSourceTemporary = URL.createObjectURL(photoFile)
-
-      setPhotoSource(photoSourceTemporary)
-
       const formPhotoFile = new FormData()
       formPhotoFile.append('file', photoFile)
 
@@ -43,6 +39,10 @@ export const Avatar = () => {
         Loading.turnOn()
 
         await apiPatient.post('/paciente/foto-perfil', formPhotoFile)
+
+        const photoSourceTemporary = URL.createObjectURL(photoFile)
+
+        setPhotoSource(photoSourceTemporary)
 
         window.localStorage.setItem('@Rita/Photo/Profile', photoSourceTemporary)
       } catch ({ response }) {

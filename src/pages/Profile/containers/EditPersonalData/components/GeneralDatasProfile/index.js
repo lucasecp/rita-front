@@ -36,6 +36,14 @@ export const GeneralDatas = ({
     })
   }, [name, birthDate, gender, phone, email, errors])
 
+  useEffect(() => {
+    setName(personalDatas?.name || '')
+    setBirthDate(personalDatas?.birthDate || '')
+    setGender(personalDatas?.gender || '')
+    setEmail(personalDatas?.email || '')
+    setPhone(personalDatas?.phone || '')
+  }, [isEditing])
+
   return (
     <Container>
       <h1>Dados Gerais</h1>

@@ -1,5 +1,4 @@
 import clear from '@/helpers/clear/SpecialCaracteres'
-import cpfValidate from '@/helpers/validateCpf'
 import moment from 'moment'
 
 export const validateName = (value) => {
@@ -21,10 +20,10 @@ export const validateEmail = (email, confirmEmail) => {
 }
 
 export const validatePhone = (value) => {
-  if (clear(value).length < 11) {
-    return { phone: 'Celular inválido.' }
-  }
+  const phone = clear(value)
+  const phoneIsValid = phone[0] !== '0' && phone[2] === '9'
 
+  if (phone.length < 11 || !phoneIsValid) return { phone: 'Celular inválido.' }
   return { phone: '' }
 }
 
@@ -46,4 +45,12 @@ export const validateBirthdate = (value) => {
     return { birthdate: 'Data de Nascimento Inválida.' }
   }
   return { birthdate: '' }
+}
+
+export const validateCep = (value) => {
+  if (clear(value).length > 0 && clear(value).length < 8) {
+    return { cep: 'Cep Inválido.' }
+  }
+
+  return { cep: '' }
 }

@@ -26,13 +26,10 @@ export const EditPersonalData = ({ personalDatas }) => {
   const [address, setAddress] = useState(personalDatas?.address)
 
   useEffect(() => {
-    setIsSaveButtonDisabled(personalDatas?.hasError)
-  }, [mainPersonalDatas])
+    setIsSaveButtonDisabled(mainPersonalDatas?.hasError || address?.hasError)
+  }, [mainPersonalDatas, address])
 
   const onSaveChanges = async () => {
-    console.log('personalDatas: ', mainPersonalDatas)
-    console.log('address: ', address)
-
     try {
       Loading.turnOn()
 
@@ -69,6 +66,14 @@ export const EditPersonalData = ({ personalDatas }) => {
     }
   }
 
+  const onCancelEditing = () => {
+    console.log(personalDatas?.personalDatas)
+
+    setMainPersonalDatas(personalDatas?.personalDatas)
+    setAddress(personalDatas?.address)
+    toogleEditing()
+  }
+
   return (
     <Container>
       {!isEditing && (
@@ -76,7 +81,6 @@ export const EditPersonalData = ({ personalDatas }) => {
           Editar Informações
         </OutlineButton>
       )}
-
       <GeneralDatas
         isEditing={isEditing}
         personalDatas={mainPersonalDatas}
@@ -89,7 +93,7 @@ export const EditPersonalData = ({ personalDatas }) => {
       />
       {isEditing && (
         <footer>
-          <OutlineButton onClick={toogleEditing}>Cancelar</OutlineButton>
+          <OutlineButton onClick={onCancelEditing}>Cancelar</OutlineButton>
           <ButtonPrimary
             onClick={onSaveChanges}
             disabled={isSaveButtonDisabled}
