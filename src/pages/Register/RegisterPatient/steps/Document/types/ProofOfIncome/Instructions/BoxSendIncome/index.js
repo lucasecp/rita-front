@@ -8,17 +8,41 @@ import { Container } from './styles'
 function BoxSendIncome({ onGetFile }) {
   return (
     <Container>
-      <h6>Faça agora o envio do seu comprovante de renda</h6>
+      <h6>Para obter melhores descontos no laboratório Sabin, você precisa:</h6>
+      <ul>
+        <li>
+          <h5>Enviar comprovação de renda</h5>
+          <span>Comprovante de renda deve ter menos de 90 dias </span>
+        </li>
+
+        <div>OU</div>
+
+        <li>
+          <h5>Enviar comprovação que não tem renda</h5>
+          <span>
+          <a
+            href="https://meucadunico.cidadania.gov.br/meu_cadunico/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            clique aqui
+          </a>&nbsp;
+            para ter acesso ao CADÚNICO. Lá no site do governo você consegue
+            gerar o seu comprovante para incluir aqui no seu cadastro.
+          </span>
+        </li>
+      </ul>
+
       <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
         <OutlineButton small variation="blue">
           Selecionar Arquivo
         </OutlineButton>
       </InputFile>
-      <h5>O envio do seu comprovante de renda é obrigatório.</h5>
+      <p>Este campo não é obrigatório</p>
       <section>
+        <span>Permitido apenas o upload de 1 arquivo</span>
         <span>Tamanho máximo do arquivo: 10MB</span>
         <span>Tipos de arquivos aceitos: jpg, jpeg, png ou pdf.</span>
-        <span>Permitido apenas o upload de 1 arquivo</span>
       </section>
     </Container>
   )

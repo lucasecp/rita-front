@@ -32,7 +32,7 @@ const RegisterPatient = () => {
   const { Loading } = useLoading()
   const { showMessage } = useModal()
 
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(3)
   const [data, setData] = useState({})
 
   const [dataClientSabin, setDataClientSabin] = useState({})

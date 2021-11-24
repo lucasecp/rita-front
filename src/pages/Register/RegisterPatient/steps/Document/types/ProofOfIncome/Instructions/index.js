@@ -13,7 +13,7 @@ function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
     <Container>
       <header>
         <SelectComponent
-          label="Renda:"
+          label="Escolha uma opção:"
           labelDefaultOption="Selecione"
           options={incomeOptions}
           setValue={onGetSelectIncome}
@@ -21,7 +21,7 @@ function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
         />
       </header>
       {!selectIncome && <h6>A seleção da sua faixa de renda é obrigatória.</h6>}
-      {selectIncome !== incomeType.MORE_ONE_HALF && (
+      {!selectIncome  && (
         <p>
           <WarningIcon />
           <small>

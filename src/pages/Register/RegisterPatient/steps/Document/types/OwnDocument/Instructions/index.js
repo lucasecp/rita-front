@@ -11,8 +11,7 @@ function InstructionsOwnDocuments({ onGetFile }) {
   return (
     <Container>
       <h3>
-        Faça agora o upload da foto do seu documento de identificação que
-        contenha o seu CPF
+      Faça o envio de uma foto do seu documento de identificação que contenha o seu CPF
       </h3>
       <div>
         <section>
