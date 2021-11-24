@@ -12,14 +12,16 @@ export default function TableActive({ table }) {
         <p>
           Você tem acesso a <span>Tabela Padrão.</span>
         </p>
-      ) : (
+      ) : table === 'special' ? (
         <div>
-         Tabela Especial
+          Tabela Especial
           <p>
             Você tem acesso a <span>Tabela Especial.</span> <br />
             Válido até 04/08/2023
           </p>
         </div>
+      ) : (
+        <p>Tabela não encontrada.</p>
       )}
     </Container>
   )
