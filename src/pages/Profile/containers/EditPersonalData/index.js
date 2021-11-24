@@ -67,8 +67,6 @@ export const EditPersonalData = ({ personalDatas }) => {
   }
 
   const onCancelEditing = () => {
-    console.log(personalDatas?.personalDatas)
-
     setMainPersonalDatas(personalDatas?.personalDatas)
     setAddress(personalDatas?.address)
     toogleEditing()

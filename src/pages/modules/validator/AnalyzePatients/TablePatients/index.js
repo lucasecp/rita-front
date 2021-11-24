@@ -88,7 +88,6 @@ const TablePatients = ({ orders, setOrders, filters }) => {
           cpf,
         })
       }
-      console.log('entrou')
 
       return showMessage(SimpleModal, {
         type: MODAL_TYPES.WARNING,
