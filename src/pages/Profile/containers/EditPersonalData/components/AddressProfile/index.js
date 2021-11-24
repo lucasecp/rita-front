@@ -6,21 +6,41 @@ import Select from '@/components/Form/Select'
 
 import { Container } from './styles'
 import { UF } from '../../constants/uf'
+import { validateCep } from '../../helpers/validatorFields'
 
 export const AddressProfile = ({ address, setAddress, isEditing }) => {
   const [cep, setCep] = useState(address?.cep || '')
   const [uf, setUf] = useState(address?.uf || '')
   const [city, setCity] = useState(address?.city || '')
-  const [addressPatient, setAddressPatient] = useState(
-    address?.addressPatient || ''
-  )
+  const [addressUser, setAddressUser] = useState(address?.addressUser || '')
   const [number, setNumber] = useState(address?.number || '')
   const [district, setDistrict] = useState(address?.district || '')
   const [complement, setComplement] = useState(address?.complement || '')
 
+  const [errors, setErrors] = useState({})
+
   useEffect(() => {
-    setAddress({ cep, uf, city, addressPatient, number, district, complement })
-  }, [cep, uf, city, addressPatient, number, district, complement])
+    setAddress({
+      cep,
+      uf,
+      city,
+      addressUser,
+      number,
+      district,
+      complement,
+      hasError: Object.values(errors).some((value) => value !== ''),
+    })
+  }, [cep, uf, city, addressUser, number, district, complement, errors])
+
+  useEffect(() => {
+    setCep(address?.cep || '')
+    setUf(address?.uf || '')
+    setCity(address?.city || '')
+    setAddressUser(address?.addressUser || '')
+    setNumber(address?.number || '')
+    setDistrict(address?.district || '')
+    setComplement(address?.complement || '')
+  }, [isEditing])
 
   return (
     <Container>
@@ -28,8 +48,8 @@ export const AddressProfile = ({ address, setAddress, isEditing }) => {
       <section>
         <InputText
           label="Endereço:"
-          value={addressPatient}
-          setValue={setAddressPatient}
+          value={addressUser}
+          setValue={setAddressUser}
           name="address"
           disabled={!isEditing}
         />
@@ -79,6 +99,10 @@ export const AddressProfile = ({ address, setAddress, isEditing }) => {
           setValue={setCep}
           name="cep"
           disabled={!isEditing}
+          onBlur={() => setErrors({ ...errors, cep: validateCep(cep) })}
+          onKeyUp={() => setErrors({ ...errors, cep: validateCep(cep) })}
+          msgError={errors.cep}
+          hasError={errors.cep}
         />
       </section>
     </Container>

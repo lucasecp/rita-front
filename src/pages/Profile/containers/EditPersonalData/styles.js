@@ -30,7 +30,7 @@ export const Container = styled.section`
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 820px) {
     padding: 24px 16px;
 
     > button {
