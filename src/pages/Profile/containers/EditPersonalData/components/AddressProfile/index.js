@@ -99,8 +99,8 @@ export const AddressProfile = ({ address, setAddress, isEditing }) => {
           setValue={setCep}
           name="cep"
           disabled={!isEditing}
-          onBlur={() => setErrors({ ...errors, ...validateCep(cep) })}
-          onKeyUp={() => setErrors({ ...errors, ...validateCep(cep) })}
+          onBlur={() => setErrors({ ...errors, cep: validateCep(cep) })}
+          onKeyUp={() => setErrors({ ...errors, cep: validateCep(cep) })}
           msgError={errors.cep}
           hasError={errors.cep}
         />

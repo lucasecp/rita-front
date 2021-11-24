@@ -3,54 +3,63 @@ import moment from 'moment'
 
 export const validateName = (value) => {
   if (!value.trim()) {
-    return { name: 'Nome Obrigatório.' }
+    return 'Nome Obrigatório.'
   }
 
-  return { name: '' }
+  return ''
 }
 
 export const validateEmail = (email, confirmEmail) => {
   if (!email.trim()) {
-    return { email: 'Email Obrigatório' }
+    return 'Email Obrigatório'
   } else if (!/\S+@\S+\.\S+/.test(email)) {
-    return { email: 'Email inválido.' }
+    return 'Email inválido.'
   }
 
-  return { email: '' }
+  return ''
 }
 
 export const validatePhone = (value) => {
   const phone = clear(value)
   const phoneIsValid = phone[0] !== '0' && phone[2] === '9'
 
-  if (phone.length < 11 || !phoneIsValid) return { phone: 'Celular inválido.' }
-  return { phone: '' }
+  if (phone.length < 11 || !phoneIsValid) {
+    return 'Celular inválido.'
+  }
+
+  return ''
 }
 
 export const validateGender = (value) => {
   if (!value) {
-    return { gender: 'Campo Obrigatório.' }
+    return 'Campo Obrigatório.'
   }
-  return { gender: '' }
+
+  return ''
 }
 
 export const validateBirthdate = (value) => {
   const dateFormate = moment(value, 'DD/MM/YYYY', true)
+
+  if (!clear(value)) {
+    return 'Data de Nascimento Obrigatório.'
+  }
 
   if (
     !dateFormate.isValid() ||
     moment().diff(dateFormate, 'years') >= 200 ||
     dateFormate.isAfter(moment())
   ) {
-    return { birthdate: 'Data de Nascimento Inválida.' }
+    return 'Data de Nascimento Inválida.'
   }
-  return { birthdate: '' }
+
+  return ''
 }
 
 export const validateCep = (value) => {
   if (clear(value).length > 0 && clear(value).length < 8) {
-    return { cep: 'Cep Inválido.' }
+    return 'Cep Inválido.'
   }
 
-  return { cep: '' }
+  return ''
 }

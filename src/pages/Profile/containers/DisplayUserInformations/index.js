@@ -10,6 +10,7 @@ export const DisplayUserInformations = () => {
   return (
     <Container>
       <Avatar />
+      <h1>José Silva Silva dos santos</h1>
       <div>
         CPF:<span>123.456.789-10</span>
       </div>
@@ -18,9 +19,11 @@ export const DisplayUserInformations = () => {
       </div>
       <section>
         <img src={logoGif} alt="logo animada que representa plano contratado" />
-        Plano contratado:<span>Econômico</span>
+        <div>
+          Status:<span>Paciente Ativo</span>
+        </div>
       </section>
-      <TableActive table="default" />
+      <TableActive table="special" />
     </Container>
   )
 }

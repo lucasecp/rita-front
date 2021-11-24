@@ -55,8 +55,8 @@ export const GeneralDatas = ({
         hasError={errors?.name}
         msgError={errors?.name}
         maxLength={100}
-        onBlur={() => setErrors({ ...errors, ...validateName(name) })}
-        onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
+        onBlur={() => setErrors({ ...errors, name: validateName(name) })}
+        onKeyUp={() => setErrors({ ...errors, name: validateName(name) })}
         onlyLetter
         disabled={!isEditing}
       />
@@ -66,13 +66,13 @@ export const GeneralDatas = ({
           mask="99/99/9999"
           value={birthDate}
           setValue={setBirthDate}
-          hasError={errors?.birthdate}
-          msgError={errors?.birthdate}
+          hasError={errors?.birthDate}
+          msgError={errors?.birthDate}
           onBlur={() =>
-            setErrors({ ...errors, ...validateBirthdate(birthDate) })
+            setErrors({ ...errors, birthDate: validateBirthdate(birthDate) })
           }
           onKeyUp={() =>
-            setErrors({ ...errors, ...validateBirthdate(birthDate) })
+            setErrors({ ...errors, birthDate: validateBirthdate(birthDate) })
           }
           autoComplete="off"
           disabled={!isEditing}
@@ -90,7 +90,7 @@ export const GeneralDatas = ({
           hasError={errors?.gender}
           msgError={errors?.gender}
           onKeyUp={(e) => {
-            setErrors({ ...errors, ...validateGender(e.target.value) })
+            setErrors({ ...errors, gender: validateGender(e.target.value) })
           }}
           disabled={!isEditing}
         />
@@ -101,8 +101,8 @@ export const GeneralDatas = ({
           setValue={setEmail}
           hasError={errors?.email}
           msgError={errors?.email}
-          onBlur={() => setErrors({ ...errors, ...validateEmail(email) })}
-          onKeyUp={() => setErrors({ ...errors, ...validateEmail(email) })}
+          onBlur={() => setErrors({ ...errors, email: validateEmail(email) })}
+          onKeyUp={() => setErrors({ ...errors, email: validateEmail(email) })}
           maxLength={100}
           disabled={!isEditing}
         />
@@ -113,8 +113,8 @@ export const GeneralDatas = ({
           setValue={setPhone}
           hasError={errors?.phone}
           msgError={errors?.phone}
-          onBlur={() => setErrors({ ...errors, ...validatePhone(phone) })}
-          onKeyUp={() => setErrors({ ...errors, ...validatePhone(phone) })}
+          onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
+          onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           disabled={!isEditing}
         />
       </section>

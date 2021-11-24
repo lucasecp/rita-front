@@ -14,9 +14,9 @@ export default function TableActive({ table }) {
         </p>
       ) : (
         <div>
-          <h6>Tabela Especial</h6>
+         Tabela Especial
           <p>
-            Você tem acesso a Tabela Especial. <br />
+            Você tem acesso a <span>Tabela Especial.</span> <br />
             Válido até 04/08/2023
           </p>
         </div>

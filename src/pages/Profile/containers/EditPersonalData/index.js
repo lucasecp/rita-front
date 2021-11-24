@@ -12,6 +12,7 @@ import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 import { SuccessUpdateProfile } from './messages/SuccessUpdateProfile'
+import { SupplementaryData } from './components/SupplementaryData'
 
 export const EditPersonalData = ({ personalDatas }) => {
   const { Loading } = useLoading()
@@ -89,6 +90,7 @@ export const EditPersonalData = ({ personalDatas }) => {
         address={address}
         setAddress={setAddress}
       />
+      <SupplementaryData />
       {isEditing && (
         <footer>
           <OutlineButton onClick={onCancelEditing}>Cancelar</OutlineButton>
