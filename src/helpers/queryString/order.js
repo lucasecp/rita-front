@@ -1,11 +1,5 @@
-export const queryOrderString = (array = []) => {
-  let valueString = ''
+export const queryOrderString = (obj = []) => {
+  if (!Object.keys(obj).length) return ''
 
-  if (!array.length) return ''
-
-  for (let i = 0; i < array.length; i++) {
-    valueString += `&orderBy=${array[i].name}&order=${array[i].value}`
-  }
-
-  return valueString
+  return `&orderBy=${obj.name}&order=${obj.value}`
 }

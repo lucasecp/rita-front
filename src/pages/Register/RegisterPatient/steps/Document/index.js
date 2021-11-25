@@ -29,11 +29,7 @@ const Document = ({ setButtonPass, onGetDocumentFiles, savedFiles }) => {
     if (
       holdingDocumentFile !== '' &&
       ownDocumentFile !== '' &&
-      (selectIncome === incomeType.MORE_ONE_HALF ||
-        ((selectIncome === incomeType.NO_INCOME ||
-          selectIncome === incomeType.ONE_HALF) &&
-          proofOfIncomeFile !== ''))
-    ) {
+      selectIncome) {
       return setButtonPass(true)
     }
 

@@ -4,4 +4,8 @@ export const Container = styled.li`
   >svg + svg{
    margin-left: 24px;
   }
+  svg{
+    cursor: pointer;
+  }
+
 `;

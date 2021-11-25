@@ -19,25 +19,24 @@ import formatCpf from '@/helpers/formatCpf'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
-  const query = useQuery()
   const history = useHistory()
-  const initialQuery = `?limit=${Number(query.get('limit')) || '10'}&skip=${
-    (Number(query.get('page')) - 1) * Number(query.get('limit')) || '0'
-  }`
 
   const [patients, setPatients] = useState({})
   const { Loading } = useLoading()
-  const [queryPagination, setQueryPagination] = useState(initialQuery)
+  const [queryPagination, setQueryPagination] = useState('')
 
   useEffect(() => {
-    // setHeaderToken(getUserStorage().token)
+    if (!queryPagination) {
+      return
+    }
+
     const requestFilters = async () => {
       try {
         Loading.turnOn()
         const response = await apiPatient.get(
-          `/paciente${queryPagination}${queryOrderString(
-            orders
-          )}${queryFilterString(filters)}`
+          `/paciente${queryPagination}${
+            queryFilterString(filters) + queryOrderString(orders)
+          }`
         )
         if (response.status === 200) {
           setPatients(response.data)
@@ -77,7 +76,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                   onClick={() => handleClick(patient.cpf)}
                 >
                   <Td soft>
-                    {formateDateAndHour(patient.dataFiliacao , ' - ') || '-'}
+                    {formateDateAndHour(patient.dataFiliacao, ' - ') || '-'}
                   </Td>
                   <Td strong id="patient-name">
                     <CustomTooltip

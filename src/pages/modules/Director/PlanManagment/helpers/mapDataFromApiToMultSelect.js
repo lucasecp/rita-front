@@ -5,5 +5,5 @@ export default (array = []) => {
 
 export const mapUf = (array = []) => {
   if(!array) return []
-  return array.map((obj) => ({ id: obj.idUf, name: obj.sigla }))
+  return array.map((obj) => ({ id: obj.idUF, name: obj.sigla }))
 }
