@@ -29,13 +29,11 @@ const MultSelectUf = ({ setUf, uf, regional }) => {
         }
 
         setUfOptions(() => {
-
           if (dataMapped.length === 1) {
             return dataMapped
           }
           return [{ name: 'Todos', id: 'All' }, ...dataMapped]
         })
-
       } catch ({ response }) {
       } finally {
         Loading.turnOff()

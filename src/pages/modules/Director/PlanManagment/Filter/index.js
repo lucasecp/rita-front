@@ -61,6 +61,7 @@ const Filter = ({ setFilters }) => {
     setUf('')
     setCity('')
     setValidityDate([])
+    setFilters([])
   }
 
   const allFieldsIsEmpty =

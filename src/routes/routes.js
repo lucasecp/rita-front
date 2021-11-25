@@ -19,6 +19,7 @@ import {
   NOT_FOUND,
   PROFILE,
 } from './constants/namedRoutes/routes'
+import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
 function Routes() {
   return (
@@ -30,7 +31,7 @@ function Routes() {
       {validatorRoutes}
 
       {operatorRoutes}
-      
+
       {directorRoutes}
 
       <Route path={PROFILE} isPrivate component={Profile} />
@@ -38,6 +39,12 @@ function Routes() {
       <Route path={MASTERPAGE} isPrivate component={MasterPage} />
 
       <Route path={LOGIN} exact component={Login} />
+
+      {/* <Route
+        path="/gestao/planos/editar"
+        exact
+        component={() => (<DefaultLayout title="teste">teste</DefaultLayout>)}
+      /> */}
 
       <Route path={NOT_FOUND} component={NotFound} />
     </Switch>
