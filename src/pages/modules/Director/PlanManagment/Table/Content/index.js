@@ -16,7 +16,7 @@ const Content = ({ plans }) => {
           <Status type={showStatus(plan.status)}>
             <span>{showStatus(plan.status) || '-'}</span>
           </Status>
-          <Actions status={showStatus('A')} />
+          <Actions status={showStatus(plan.status)} />
         </ul>
       ))}
       {!plans.total && <h2>Nenhum resultado encontrado</h2>}

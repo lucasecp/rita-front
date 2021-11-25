@@ -15,13 +15,14 @@ const Actions = ({status}) => {
       <EyePurpleIcon />
       </CustomTooltip>
 
-      <CustomTooltip label="Inativar">
-      <InactiveIcon hidden={status !== 'Ativo' && status !== 'Suspenso'}/>
-      </CustomTooltip>
-
       <CustomTooltip label="Ativar">
       <ActiveIcon hidden={status !== 'Inativo' && status !== 'Suspenso' && status !== 'Pendente'}/>
       </CustomTooltip>
+
+      <CustomTooltip label="Inativar">
+      <InactiveIcon hidden={status !== 'Ativo' && status !== 'Suspenso' && status !== 'Pendente'}/>
+      </CustomTooltip>
+
 
       <CustomTooltip label="Suspender">
       <SuspenseIcon hidden={status !== 'Inativo' && status !== 'Ativo'}/>

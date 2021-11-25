@@ -11,6 +11,7 @@ const MultSelectUf = ({ setUf, uf, regional }) => {
   const { Loading } = useLoading()
 
   useEffect(() => {
+    setUf([])
     const getUf = async () => {
       try {
         Loading.turnOn()
@@ -19,11 +20,22 @@ const MultSelectUf = ({ setUf, uf, regional }) => {
         ]
 
         const { data } = await apiPatient.get(
-          `/uf?${queryFilterString(queryRegional).slice(1, -1)}`
+          `/uf?${queryFilterString(queryRegional)}`
         )
         const dataMapped = mapUf(data?.dados)
 
-        setUfOptions([{ name: 'Todos', id: 'All' }, ...dataMapped])
+        if (!dataMapped.length) {
+          return setUfOptions([])
+        }
+
+        setUfOptions(() => {
+
+          if (dataMapped.length === 1) {
+            return dataMapped
+          }
+          return [{ name: 'Todos', id: 'All' }, ...dataMapped]
+        })
+
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
