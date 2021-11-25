@@ -21,13 +21,12 @@ import formatFirstLastName from '@/helpers/formatFirstLastName'
 const TablePatients = ({ orders, setOrders, filters }) => {
   const history = useHistory()
 
-
   const [patients, setPatients] = useState({})
   const { Loading } = useLoading()
   const [queryPagination, setQueryPagination] = useState('')
 
   useEffect(() => {
-    if(!queryPagination){
+    if (!queryPagination) {
       return
     }
 
@@ -35,7 +34,9 @@ const TablePatients = ({ orders, setOrders, filters }) => {
       try {
         Loading.turnOn()
         const response = await apiPatient.get(
-          `/paciente${queryPagination}`
+          `/paciente${queryPagination}${
+            queryFilterString(filters) + queryOrderString(orders)
+          }`
         )
         if (response.status === 200) {
           setPatients(response.data)
@@ -75,7 +76,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                   onClick={() => handleClick(patient.cpf)}
                 >
                   <Td soft>
-                    {formateDateAndHour(patient.dataFiliacao , ' - ') || '-'}
+                    {formateDateAndHour(patient.dataFiliacao, ' - ') || '-'}
                   </Td>
                   <Td strong id="patient-name">
                     <CustomTooltip

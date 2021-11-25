@@ -1,4 +1,3 @@
-import ButtonPrimary from '@/components/Button/Primary'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import React, { useEffect, useState } from 'react'
 import Filter from './Filter'
@@ -19,7 +18,6 @@ const PlanManagment = () => {
   const { Loading } = useLoading()
 
   useEffect(() => {
-    
     if (!queryApi) {
       return
     }
@@ -27,7 +25,11 @@ const PlanManagment = () => {
     const getPlans = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient(`/plano${queryApi}`)
+        const { data } = await apiPatient(
+          `/plano${queryApi}${
+            queryFilterString(filters) + queryOrderString(order)
+          }`
+        )
         setPlans(data)
       } catch ({ response }) {
       } finally {

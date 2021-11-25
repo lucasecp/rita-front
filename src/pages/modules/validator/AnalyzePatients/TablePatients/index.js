@@ -23,8 +23,6 @@ import formatFirstLastName from '@/helpers/formatFirstLastName'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
-
-
   const [patients, setPatients] = useState({})
   const { Loading } = useLoading()
   const [queryPagination, setQueryPagination] = useState('')
@@ -32,14 +30,16 @@ const TablePatients = ({ orders, setOrders, filters }) => {
   const { showMessage } = useModal()
 
   useEffect(() => {
-    if(!queryPagination){
+    if (!queryPagination) {
       return
     }
     const requestFilters = async () => {
       try {
         Loading.turnOn()
         const response = await apiPatient.get(
-          `/paciente${queryPagination}`
+          `/paciente${queryPagination}${
+            queryFilterString(filters) + queryOrderString(orders)
+          }`
         )
         if (response.status === 200) {
           setPatients(response.data)
