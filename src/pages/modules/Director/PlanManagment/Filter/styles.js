@@ -3,9 +3,9 @@ import styled from 'styled-components'
 export const Container = styled.div`
   > div:first-child {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(4, minmax(auto, 1fr));
     gap: 24px;
-    /* @media (max-width: 1200px) {
+    @media (max-width: 1200px) {
       grid-template-columns: repeat(3, minmax(auto, 1fr));
     }
     @media (max-width: 991px) {
@@ -13,7 +13,7 @@ export const Container = styled.div`
     }
     @media (max-width: 767px) {
       grid-template-columns: 100%;
-    } */
+    }
   }
 `
 

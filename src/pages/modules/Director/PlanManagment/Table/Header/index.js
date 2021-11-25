@@ -8,16 +8,19 @@ const Header = ({ order, setOrder }) => {
   const hasAscOrder = (name) => name === order?.name && order?.value === 'ASC'
 
   const toggleOrder = (name) => {
-    setOrder((lastOrder) => {
-      if (!Object.keys(lastOrder).length) {
-        return { name, value: 'ASC' }
-      }
+    if (hasDescOrder(name)) {
+      return setOrder({})
+    }
 
-      if (lastOrder.value === 'ASC') {
-        return { name, value: 'DESC' }
-      }
-      return {}
-    })
+    if (
+      hasDescOrder(name) ||
+      !hasAscOrder(name) ||
+      !Object.keys(order).length
+    ) {
+      return setOrder({ name, value: 'ASC' })
+    }
+
+    setOrder({ name, value: 'DESC' })
   }
 
   return (
