@@ -13,7 +13,7 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
   const skipedPages = (currentPage - 1) * limit
   const totalPages = Math.ceil(total / limit) || 0
   const queryString = `?page=${currentPage}&limit=${limit}${restQuery || ''}`
-  const queryApiString = `?limit=${limit}&skip=${skipedPages}`
+  const queryApiString = `?limit=${limit}&skip=${skipedPages}${restQuery || ''}`
 
   const currentTotal = currentPage === totalPages ? total : skipedPages + Number(limit)
 

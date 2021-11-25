@@ -6,6 +6,15 @@ export const Container = styled.div`
      display: grid;
      grid-template-columns: repeat(4,minmax(auto,25%));
      gap: 24px;
+     @media (max-width: 1200px){
+       grid-template-columns: repeat(3,minmax(auto,33.3%));
+     }
+     @media (max-width: 991px){
+       grid-template-columns: repeat(2,minmax(auto, 50%));
+     }
+     @media (max-width: 767px){
+       grid-template-columns: 100%
+     }
   }
 `;
 export const BtnGroup = styled.div`

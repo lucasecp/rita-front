@@ -5,18 +5,12 @@ import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
 import { mapUf } from '../../helpers/mapDataFromApiToMultSelect'
-import { staticUf } from '../../static/fieldsMultSelect'
 
 const MultSelectUf = ({ setUf, uf, regional }) => {
   const [ufOptions, setUfOptions] = useState([])
   const { Loading } = useLoading()
 
   useEffect(() => {
-    if (!regional.length) {
-      setUfOptions(staticUf)
-      return
-    }
-
     const getUf = async () => {
       try {
         Loading.turnOn()
@@ -25,7 +19,7 @@ const MultSelectUf = ({ setUf, uf, regional }) => {
         ]
 
         const { data } = await apiPatient.get(
-          `/uf?${queryFilterString(queryRegional)}`
+          `/uf?${queryFilterString(queryRegional).slice(1, -1)}`
         )
         const dataMapped = mapUf(data?.dados)
 

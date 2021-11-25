@@ -5,8 +5,5 @@ export const Container = styled.div`
   overflow-x: auto;
   background-color: #fff;
   margin-top: 40px;
-  >*:last-child{
-    margin: 35px 32px;
-  }
 
 `;

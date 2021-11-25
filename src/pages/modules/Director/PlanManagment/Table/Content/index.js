@@ -1,48 +1,27 @@
-import React from 'react';
-import { Container, Status } from './styles';
-import Actions from './Actions';
-import { showStatus } from '../../helpers/showStatus';
+import React from 'react'
+import { Container, Status } from './styles'
+import Actions from './Actions'
+import { showStatus } from '../../helpers/showStatus'
+import formatDate from '@/helpers/formatDate'
 
-const Content = () => {
-
-
+const Content = ({ plans }) => {
   return (
     <Container>
-        <ul>
-          <li>22/10/2019</li>
-          <li>-</li>
-          <li>PPA</li>
-          <li>Plano Padrão</li>
-          <Status type={showStatus('A')}> <span>{showStatus('A')}</span></Status>
-          <Actions/>
+      {plans?.dados?.map((plan, index) => (
+        <ul key={index}>
+          <li>{formatDate(plan.periodoAtivacaoInicio) || '-'}</li>
+          <li>{formatDate(plan.periodoAtivacaoFim) || '-'}</li>
+          <li>{plan.codigo || '-'}</li>
+          <li>{plan.nome || '-'}</li>
+          <Status type={showStatus(plan.status)}>
+            <span>{showStatus(plan.status) || '-'}</span>
+          </Status>
+          <Actions status={showStatus('A')} />
         </ul>
-        <ul>
-          <li>22/10/2019</li>
-          <li>-</li>
-          <li>PPA</li>
-          <li>Plano Padrão</li>
-          <Status type={showStatus('I')}> <span>{showStatus('I')}</span></Status>
-          <Actions/>
-        </ul>
-        <ul>
-          <li>22/10/2019</li>
-          <li>-</li>
-          <li>PPA</li>
-          <li>Plano Padrão</li>
-          <Status type={showStatus('P')}> <span>{showStatus('P')}</span></Status>
-          <Actions/>
-        </ul>
-        <ul>
-          <li>22/10/2019</li>
-          <li>-</li>
-          <li>PPA</li>
-          <li>Plano Padrão</li>
-          <Status type={showStatus('S')}> <span>{showStatus('S')}</span></Status>
-          <Actions/>
-        </ul>
+      ))}
+      {!plans.total && <h2>Nenhum resultado encontrado</h2>}
     </Container>
-  );
-};
+  )
+}
 
-
-export default Content;
+export default Content
