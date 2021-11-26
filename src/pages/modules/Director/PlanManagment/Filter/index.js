@@ -64,16 +64,6 @@ const Filter = ({ setFilters }) => {
     setFilters([])
   }
 
-  const allFieldsIsEmpty =
-    !name &&
-    !code &&
-    !status.length &&
-    !services.length &&
-    !regional.length &&
-    !uf.length &&
-    !city.length &&
-    !validityDate.length
-
   const onFilter = () => {
     setFilters(verifyTypedFields(arrayQuery))
   }
@@ -119,7 +109,7 @@ const Filter = ({ setFilters }) => {
         <MultSelectCity city={city} setCity={setCity} uf={uf} />
       </div>
 
-      <BtnGroup hidden={allFieldsIsEmpty}>
+      <BtnGroup>
         <OutlineButton small variation="red" onClick={() => clearFields()}>
           Limpar Filtro
         </OutlineButton>

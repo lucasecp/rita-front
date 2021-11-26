@@ -9,8 +9,8 @@ const Content = ({ plans }) => {
     <Container>
       {plans?.dados?.map((plan, index) => (
         <ul key={index}>
-          <li>{formatDate(plan.periodoAtivacaoInicio) || '-'}</li>
-          <li>{formatDate(plan.periodoAtivacaoFim) || '-'}</li>
+          <li>{formatDate(plan.dataAtivacao) || '-'}</li>
+          <li>{formatDate(plan.dataTermino) || '-'}</li>
           <li>{plan.codigo || '-'}</li>
           <li>{plan.nome || '-'}</li>
           <Status type={showStatus(plan.status)}>
