@@ -92,6 +92,7 @@ const Filter = ({ setFilters }) => {
           label="Período de Vigência:"
           value={validityDate}
           setValue={setValidityDate}
+          inputReadOnly={true}
         />
 
         <CustomMultSelect
