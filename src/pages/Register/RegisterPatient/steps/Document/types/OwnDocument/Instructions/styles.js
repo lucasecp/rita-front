@@ -1,7 +1,7 @@
 import colors from '@/styles/colors'
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.div `
   padding-top: 16px;
 
   > h3 {
@@ -68,6 +68,27 @@ export const Container = styled.div`
         line-height: 125%;
         color: ${colors.gray.middle};
       }
+
+      > div {
+    display: flex;
+    flex-direction: column;
+
+    > span {
+      font-size: 12px;
+      line-height: 125%;
+      color: ${colors.gray.middle};
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 15px;
+    }
+    > span:first-child {
+      color: ${colors.orange.middleDark};
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 15px;
+    }
+  }
+
     }
   }
 

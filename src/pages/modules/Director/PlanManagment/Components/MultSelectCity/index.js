@@ -4,7 +4,7 @@ import { queryFilterString } from '@/helpers/queryString/filter'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
-import mapDataFromApiToMultSelect from '../../helpers/mapDataFromApiToMultSelect'
+import { mapCity } from '../../helpers/mapDataFromApiToMultSelect'
 import { verifyTypedFields } from '../../helpers/verifyTypedFields'
 
 const MultSelectCity = ({ setCity, city, uf }) => {
@@ -12,13 +12,15 @@ const MultSelectCity = ({ setCity, city, uf }) => {
   const { Loading } = useLoading()
 
   useEffect(() => {
+    setCity([])
     if (!uf.length) {
       return
     }
 
+
     const ufValue = verifyTypedFields([
       {
-        name: 'idUf',
+        name: 'idUF',
         value: formatMultSelectValue(uf),
       },
     ])
@@ -27,10 +29,22 @@ const MultSelectCity = ({ setCity, city, uf }) => {
       try {
         Loading.turnOn()
         const { data } = await apiPatient.get(
-          `/municipio?${queryFilterString(ufValue).slice(1, -1)}`
+          `/municipio?${queryFilterString(ufValue)}`
         )
-        const dataMapped = mapDataFromApiToMultSelect(data?.dados)
-        setCityOptions([{ name: 'Todas', id: 'All' }, ...dataMapped])
+        const dataMapped = mapCity(data?.dados)
+
+        if (!dataMapped.length) {
+          return setCityOptions([])
+        }
+
+        setCityOptions(() => {
+
+          if (dataMapped.length === 1) {
+            return dataMapped
+          }
+          return [{ name: 'Todas', id: 'All' }, ...dataMapped]
+        })
+
       } catch ({ response }) {
       } finally {
         Loading.turnOff()

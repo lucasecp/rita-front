@@ -14,7 +14,19 @@ const MultSelectServices = ({ setServices, services }) => {
         Loading.turnOn()
         const { data } = await apiPatient.get('/servico')
         const dataMapped = mapDataFromApiToMultSelect(data?.dados)
-        setServicesOptions([{ name: 'Todos', id: 'All' }, ...dataMapped])
+        
+        if (!dataMapped.length) {
+          return setServicesOptions([])
+        }
+
+        setServicesOptions(() => {
+
+          if (dataMapped.length === 1) {
+            return dataMapped
+          }
+          return [{ name: 'Todos', id: 'All' }, ...dataMapped]
+        })
+
       } catch ({ response }) {
       } finally {
         Loading.turnOff()

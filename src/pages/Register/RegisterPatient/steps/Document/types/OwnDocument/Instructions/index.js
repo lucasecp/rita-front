@@ -32,13 +32,11 @@ function InstructionsOwnDocuments({ onGetFile }) {
           <p>
             O envio da foto do seu documento de identificação é obrigatório.
           </p>
-          <span>
-            Tamanho máximo do arquivo: 10MB
-            <br />
-            Tipos de arquivos aceitos: jpg, jpeg, png ou pdf.
-            <br />
-            Permitido apenas o upload de 1 arquivo.
-          </span>
+          <div>
+        <span>Permitido apenas o upload de 1 arquivo</span>
+        <span>Tamanho máximo do arquivo: 10MB</span>
+        <span>Tipos de arquivos aceitos: jpg, jpeg, png ou pdf.</span>
+        </div>
         </aside>
       </div>
     </Container>
