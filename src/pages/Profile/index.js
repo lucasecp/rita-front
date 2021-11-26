@@ -74,7 +74,7 @@ export const Profile = () => {
         })
 
         if (data.status === 'I') {
-          showMessage(ProfileInactive)
+          showMessage(ProfileInactive, {}, true)
         }
       } catch (err) {
         console.log(err)
