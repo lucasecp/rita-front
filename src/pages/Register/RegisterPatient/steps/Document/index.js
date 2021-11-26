@@ -26,10 +26,7 @@ const Document = ({ setButtonPass, onGetDocumentFiles, savedFiles }) => {
       selectIncome,
     })
 
-    if (
-      holdingDocumentFile !== '' &&
-      ownDocumentFile !== '' &&
-      selectIncome) {
+    if (holdingDocumentFile !== '' && ownDocumentFile !== '' && selectIncome) {
       return setButtonPass(true)
     }
 
@@ -52,13 +49,13 @@ const Document = ({ setButtonPass, onGetDocumentFiles, savedFiles }) => {
       />
 
       <OwnDocument
-        holdingDocumentFile={holdingDocumentFile}
+        hasPreviousDocument={!!holdingDocumentFile}
         onGetFile={setOwnDocumentFile}
         ownDocumentFile={ownDocumentFile}
       />
 
       <ProofOfIncome
-      ownDocumentFile={ownDocumentFile}
+        hasPreviousDocument={!!ownDocumentFile}
         onGetFile={setProofOfIncomeFile}
         proofOfIncomeFile={proofOfIncomeFile}
         onSelectIncome={setSelectIncome}

@@ -7,11 +7,10 @@ import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
 import InstructionsOwnDocuments from './Instructions'
 import SendedFile from '../../components/SendedFile'
 
-const OwnDocument = ({ ownDocumentFile, onGetFile,holdingDocumentFile }) => {
-  console.log(holdingDocumentFile)
+const OwnDocument = ({ ownDocumentFile, onGetFile,hasPreviousDocument }) => {
   return (
     <>
-      <AccordionContainer square={true} defaultExpanded={false} expanded={holdingDocumentFile}>
+      <AccordionContainer square={true} defaultExpanded={false} expanded={hasPreviousDocument || !!ownDocumentFile}>
         <AccordionSummary
           aria-controls="panel2a-content"
           id="panel2a-header"
