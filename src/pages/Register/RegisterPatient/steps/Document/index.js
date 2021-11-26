@@ -52,11 +52,13 @@ const Document = ({ setButtonPass, onGetDocumentFiles, savedFiles }) => {
       />
 
       <OwnDocument
+        holdingDocumentFile={holdingDocumentFile}
         onGetFile={setOwnDocumentFile}
         ownDocumentFile={ownDocumentFile}
       />
 
       <ProofOfIncome
+      ownDocumentFile={ownDocumentFile}
         onGetFile={setProofOfIncomeFile}
         proofOfIncomeFile={proofOfIncomeFile}
         onSelectIncome={setSelectIncome}
