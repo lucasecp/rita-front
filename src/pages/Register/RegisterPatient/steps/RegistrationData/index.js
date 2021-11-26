@@ -229,9 +229,9 @@ const RegistrationData = ({
           />
         </Col>
       </Row>
-      {!hasPermitionToNext() && (
+      {/* {!hasPermitionToNext() && (
         <MsgError className="mt-3">Todos os campos são obrigatórios.</MsgError>
-      )}
+      )} */}
     </Container>
   )
 }
