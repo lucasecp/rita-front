@@ -3,7 +3,7 @@ export const isValidTypeFile = (file, options) => {
 
   const typesFile = ['jpg', 'jpeg', 'png']
 
-  if (options?.onlyImage  && !options?.onlyImage ) {
+  if (!options?.onlyImage) {
     typesFile.push('pdf')
   }
 

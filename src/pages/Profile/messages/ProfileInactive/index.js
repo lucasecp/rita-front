@@ -6,16 +6,13 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 import { Container } from './styles'
 
 import { useModal } from '@/hooks/useModal'
-import { useHistory } from 'react-router'
-import { MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
 
 export const ProfileInactive = () => {
   const { closeModal } = useModal()
-  const history = useHistory()
 
   const onChoosePlan = () => {
     closeModal()
-    history.push(MASTERPAGE)
+    window.open('https://ritasaude.com.br/rita-e-para-todos/', '_blank')
   }
 
   return (
