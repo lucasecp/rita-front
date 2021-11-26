@@ -15,7 +15,7 @@ import {
   OPERATOR_SEE_ONE_PATIENT,
 } from '@/routes/constants/namedRoutes/routes'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
-import formatCpf from '@/helpers/formatCpf'
+import { formatCpf } from '@/helpers/formatCpf'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
 
 const TablePatients = ({ orders, setOrders, filters }) => {

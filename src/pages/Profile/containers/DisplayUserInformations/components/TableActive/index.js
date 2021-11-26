@@ -8,16 +8,16 @@ export default function TableActive({ table }) {
   return (
     <Container>
       <img src={sabinLogo} />
-      {table === 'default' ? (
+      {table?.type === 'default' ? (
         <p>
           Você tem acesso a <span>Tabela Padrão.</span>
         </p>
-      ) : table === 'special' ? (
+      ) : table?.type === 'special' ? (
         <div>
           Tabela Especial
           <p>
             Você tem acesso a <span>Tabela Especial.</span> <br />
-            Válido até 04/08/2023
+            Válido até {table?.validity}
           </p>
         </div>
       ) : (

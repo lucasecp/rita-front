@@ -68,8 +68,8 @@ export const EditPersonalData = ({ personalDatas }) => {
   }
 
   const onCancelEditing = () => {
-    setMainPersonalDatas(personalDatas?.personalDatas)
-    setAddress(personalDatas?.address)
+    // setMainPersonalDatas(personalDatas?.personalDatas)
+    // setAddress(personalDatas?.address)
     toogleEditing()
   }
 
@@ -90,7 +90,11 @@ export const EditPersonalData = ({ personalDatas }) => {
         address={address}
         setAddress={setAddress}
       />
-      <SupplementaryData />
+      {personalDatas?.supplementaryData?.contractedPlan && (
+        <SupplementaryData
+          supplementaryData={personalDatas?.supplementaryData}
+        />
+      )}
       {isEditing && (
         <footer>
           <OutlineButton onClick={onCancelEditing}>Cancelar</OutlineButton>

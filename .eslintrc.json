@@ -15,7 +15,7 @@
     },
     "plugins": ["react", "prettier", "only-warn"],
     "rules": {
-      "prettier/prettier": "warn",
+      "prettier/prettier": "off",
       "react/jsx-filename-extension": ["warn", { "extensions": [".jsx", ".js"] }],
       "react/prop-types": 0,
       "@TypeScript-eslint/no-explicit-any": "off",

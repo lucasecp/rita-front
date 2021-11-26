@@ -50,6 +50,13 @@ export const Container = styled.div`
         width: 108px;
         height: 108px;
       }
+
+      :last-child {
+        right: -8px;
+        bottom: 4px;
+
+       
+      }
     }
   }
 `

@@ -18,6 +18,7 @@ export const Container = styled.div`
 
     color: ${colors.gray.dark};
     margin-top: 24px;
+    text-align: center;
   }
 
   > div {
@@ -47,7 +48,9 @@ export const Container = styled.div`
     align-items: center;
 
     > img {
-      margin-right: 24px;
+      margin-right: 16px;
+
+      height: 56px;
     }
 
     > div {
@@ -60,12 +63,19 @@ export const Container = styled.div`
       > span {
         display: block;
         font-weight: 700;
-        color: ${colors.purple.main.dark};
+        color: ${({ isPatientActive }) =>
+          isPatientActive ? colors.purple.main.dark : colors.gray.dark};
       }
     }
   }
 
   @media (max-width: 767px) {
     padding: 24px 16px;
+
+    > section {
+      > div {
+        text-align: left;
+      }
+    }
   }
 `
