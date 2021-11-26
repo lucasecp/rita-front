@@ -38,6 +38,7 @@ export const Container = styled.header`
         margin-left: 16px;
 
         > img {
+          min-height: 100%;
           border: solid 2px ${colors.purple.main.dark};
           border-radius: 50px;
         }
