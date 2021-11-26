@@ -43,7 +43,7 @@ const Filter = ({ setFilters }) => {
   const arrayQuery = [
     { name: 'nome', value: name },
     { name: 'codigo', value: code },
-    { name: 'idStatus', value: formatMultSelectValue(status) },
+    { name: 'status', value: formatMultSelectValue(status) },
     { name: 'idServico', value: formatMultSelectValue(services) },
     { name: 'idRegional', value: formatMultSelectValue(regional) },
     { name: 'idUf', value: formatMultSelectValue(uf) },
