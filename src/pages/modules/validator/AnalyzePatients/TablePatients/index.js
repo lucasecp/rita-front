@@ -18,7 +18,7 @@ import {
   VALIDATOR_SEE_ONE_PATIENT,
 } from '@/routes/constants/namedRoutes/routes'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
-import formatCpf from '@/helpers/formatCpf'
+import { formatCpf } from '@/helpers/formatCpf'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
 import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
 

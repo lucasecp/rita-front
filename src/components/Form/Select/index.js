@@ -1,12 +1,13 @@
 import React from 'react'
-import MsgError from '../MsgError'
-import { Container, Select } from './style'
+// import MsgError from '../../MsgError'
+
+import { Container } from './styles'
 
 const SelectComponent = ({
   options,
   label,
   setValue,
-  value,
+  value = '',
   labelDefaultOption,
   msgError,
   variation,
@@ -14,14 +15,14 @@ const SelectComponent = ({
   ...rest
 }) => {
   return (
-    <Container>
-      {label && <label>{label}</label>}
-      <Select
-        variation={variation}
+    <Container hasError={hasError} variation={variation}>
+      {label && <label htmlFor={label}>{label}</label>}
+      <select
         onChange={({ target }) => {
           setValue(target.value)
         }}
-        value={value || ''}
+        value={value}
+        id={label}
         {...rest}
       >
         {labelDefaultOption && (
@@ -35,8 +36,8 @@ const SelectComponent = ({
               {option.label}
             </option>
           ))}
-      </Select>
-      {msgError && <MsgError>{msgError}</MsgError>}
+      </select>
+      {msgError && <small>{msgError}</small>}
     </Container>
   )
 }

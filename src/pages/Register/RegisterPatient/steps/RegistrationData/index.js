@@ -59,8 +59,8 @@ const RegistrationData = ({
       }
       setButtonPass(true)
       setData((data) => {
-        if(dataClientSabin?.idPaciente){
-          return {...data, ...dataObj, idPaciente: dataClientSabin.idPaciente }
+        if (dataClientSabin?.idPaciente) {
+          return { ...data, ...dataObj, idPaciente: dataClientSabin.idPaciente }
         }
         return { ...data, ...dataObj }
       })
@@ -164,8 +164,10 @@ const RegistrationData = ({
             hasError={errors.gender}
             onChange={(e) => {
               setGender(e.target.value)
-              setErrors({ ...errors, ...validateGender(e.target.value) })
+              setErrors({ ...errors, ...validateGender(gender) })
             }}
+            onBlur={() => setErrors({ ...errors, ...validateGender(gender) })}
+            onKeyUp={() => setErrors({ ...errors, ...validateGender(gender) })}
             value={gender}
             msgError={errors.gender}
           />

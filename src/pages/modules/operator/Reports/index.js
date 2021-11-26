@@ -16,7 +16,7 @@ const Reports = () => {
       (report) => report.value === reportChoosen
     )
     history.push(reportPath)
-  } 
+  }
 
   return (
     <DefaultLayout title="Relatórios">

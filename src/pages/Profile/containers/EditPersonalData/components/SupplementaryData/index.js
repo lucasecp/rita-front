@@ -2,24 +2,29 @@ import React from 'react'
 
 import { Container } from './styles'
 
-export const SupplementaryData = () => {
+export const SupplementaryData = ({ supplementaryData }) => {
   return (
     <Container>
       <h1>Dados Complementares</h1>
-      <h5>Você está no Plano Econômico desde 05/08/2021</h5>
+      <h5>
+        Você está no Plano {supplementaryData?.contractedPlan} desde{' '}
+        {supplementaryData?.contractedPlanSince}
+      </h5>
       <div>
         <div>
           Valor:
-          <p>R$ 00,00</p>
+          <p>{supplementaryData?.price}</p>
         </div>
         <div>
           Canal:
-          <p>Exemplo</p>
+          <p>{supplementaryData?.channel}</p>
         </div>
-        <div>
-          Empresa:
-          <p>Empresa Exemplo</p>
-        </div>
+        {supplementaryData?.channel !== 'Pessoa Física' && (
+          <div>
+            Empresa:
+            <p>{supplementaryData?.company}</p>
+          </div>
+        )}
       </div>
     </Container>
   )

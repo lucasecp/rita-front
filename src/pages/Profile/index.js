@@ -7,10 +7,17 @@ import { EditPersonalData } from './containers/EditPersonalData'
 import { Container } from './styles'
 import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
+import { formatCpf } from '@/helpers/formatCpf'
+import { formatPrice } from '@/helpers/formatPrice'
+import { useModal } from '@/hooks/useModal'
+import { ProfileInactive } from './messages/ProfileInactive'
 
 export const Profile = () => {
   const { Loading } = useLoading()
+  const { showMessage } = useModal()
+
   const [personalDatas, setPersonalDatas] = useState()
+  const [dataToDisplay, setDataToDisplay] = useState()
 
   useEffect(() => {
     const loadProfileInformations = async () => {
@@ -21,6 +28,22 @@ export const Profile = () => {
           data,
           data: { endereco },
         } = await apiPatient.get('/paciente/meu-perfil')
+
+        setDataToDisplay({
+          name: data.nome,
+          cpf: formatCpf(data.cpf),
+          contractedPlan: data.plano?.nome,
+          status: data.status === 'A' ? 'active' : 'inactive',
+          table: {
+            type:
+              data.tabela?.nome === 'Tabela Padrão'
+                ? 'default'
+                : data.tabela?.nome === 'Tabela Especial'
+                ? 'special'
+                : 'none',
+            validity: data.tabela?.validade,
+          },
+        })
 
         setPersonalDatas({
           personalDatas: {
@@ -39,9 +62,22 @@ export const Profile = () => {
             district: endereco.bairro,
             complement: endereco.complemento,
           },
+          supplementaryData: {
+            contractedPlan: data.plano?.nome,
+            contractedPlanSince: data.plano?.data,
+            price: data.plano?.valor
+              ? formatPrice(data.plano?.valor)
+              : 'Isento',
+            channel: data.plano?.canal,
+            company: data.plano?.empresa,
+          },
         })
-      } catch ({ response }) {
-        console.log(response)
+
+        if (data.status === 'I') {
+          showMessage(ProfileInactive)
+        }
+      } catch (err) {
+        console.log(err)
       } finally {
         Loading.turnOff()
       }
@@ -53,7 +89,7 @@ export const Profile = () => {
   return (
     <DefaultLayout title="Perfil">
       <Container>
-        <DisplayUserInformations />
+        <DisplayUserInformations dataToDisplay={dataToDisplay} />
         {personalDatas && <EditPersonalData personalDatas={personalDatas} />}
       </Container>
     </DefaultLayout>

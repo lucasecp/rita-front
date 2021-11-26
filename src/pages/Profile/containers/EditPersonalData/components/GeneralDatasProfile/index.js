@@ -89,9 +89,16 @@ export const GeneralDatas = ({
           value={gender}
           hasError={errors?.gender}
           msgError={errors?.gender}
-          onKeyUp={(e) => {
-            setErrors({ ...errors, gender: validateGender(e.target.value) })
+          onChange={(e) => {
+            setGender(e.target.value)
+            setErrors({ ...errors, gender: validateGender(gender) })
           }}
+          onBlur={() =>
+            setErrors({ ...errors, gender: validateGender(gender) })
+          }
+          onKeyUp={() =>
+            setErrors({ ...errors, gender: validateGender(gender) })
+          }
           disabled={!isEditing}
         />
         <InputText

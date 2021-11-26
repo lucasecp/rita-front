@@ -1,29 +1,40 @@
 import React from 'react'
 import { Avatar } from './components/Avatar'
 
-import logoGif from '@/assets/logo/logo-animate.gif'
+import logoRitaGif from '@/assets/logo/logo-animated-without-background.gif'
+import logoRitaInactive from '@/assets/logo/rita-inactive.svg'
 
 import { Container } from './styles'
 import TableActive from './components/TableActive'
 
-export const DisplayUserInformations = () => {
+export const DisplayUserInformations = ({ dataToDisplay }) => {
+  const isPatientActive = dataToDisplay?.status === 'active'
+
   return (
-    <Container>
+    <Container isPatientActive={isPatientActive}>
       <Avatar />
-      <h1>José Silva Silva dos santos</h1>
+      <h1>{dataToDisplay?.name}</h1>
       <div>
-        CPF:<span>123.456.789-10</span>
+        CPF:<span>{dataToDisplay?.cpf}</span>
       </div>
-      <div>
-        Plano contratado:<span>Econômico</span>
-      </div>
-      <section>
-        <img src={logoGif} alt="logo animada que representa plano contratado" />
+      {dataToDisplay?.contractedPlan && (
         <div>
-          Status:<span>Paciente Ativo</span>
+          Plano contratado:<span>{dataToDisplay?.contractedPlan}</span>
+        </div>
+      )}
+      <section>
+        <img
+          src={isPatientActive ? logoRitaGif : logoRitaInactive}
+          alt={`logo animada que representa usuário ${
+            isPatientActive ? 'ativo' : 'inativo'
+          }`}
+        />
+        <div>
+          Status:
+          <span>Paciente {isPatientActive ? 'Ativo' : 'Inativo'}</span>
         </div>
       </section>
-      <TableActive table="special" />
+      <TableActive table={dataToDisplay?.table} />
     </Container>
   )
 }

@@ -1,4 +1,4 @@
-import formatCpf from '@/helpers/formatCpf'
+import { formatCpf } from '@/helpers/formatCpf'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
 import formatName from '@/helpers/formatName'

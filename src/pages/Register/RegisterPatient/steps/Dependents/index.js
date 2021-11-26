@@ -6,7 +6,7 @@ import { Content } from './style'
 import trash from '@/assets/icons/trash.svg'
 import edit from '@/assets/icons/edit.svg'
 import { useModal } from '@/hooks/useModal'
-import formatCpf from '@/helpers/formatCpf'
+import { formatCpf } from '@/helpers/formatCpf'
 import mapDeps from '../../helpers/formatDateCardSabin'
 
 const Dependents = ({ dataClientSabin, setData, newData }) => {
@@ -14,7 +14,9 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
   const { showMessage } = useModal()
 
   useEffect(() => {
-    setAllDeps(newData.dependentes  || mapDeps(dataClientSabin.dependentes) || [])
+    setAllDeps(
+      newData.dependentes || mapDeps(dataClientSabin.dependentes) || []
+    )
   }, [])
 
   useEffect(() => {
@@ -31,13 +33,13 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
       setAllDeps,
       action: 'edit',
       clientCpf: newData.cpf,
-      dataClientSabin
+      dataClientSabin,
     })
   }
   const handleDelete = (id) => {
     const valueUpdated = allDeps.filter((dep, index) => index !== id)
-    if(dataClientSabin?.dependentes) {
-     dataClientSabin.dependentes.splice(id,1)
+    if (dataClientSabin?.dependentes) {
+      dataClientSabin.dependentes.splice(id, 1)
     }
     setAllDeps(valueUpdated)
   }
@@ -48,7 +50,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
       setAllDeps,
       action: 'create',
       clientCpf: newData.cpf,
-      dataClientSabin
+      dataClientSabin,
     })
   }
   return (
