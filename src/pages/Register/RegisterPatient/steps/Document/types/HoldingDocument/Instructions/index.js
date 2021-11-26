@@ -11,7 +11,8 @@ function InstructionsHoldingDocuments({ onGetFile }) {
   return (
     <Container>
       <h3>
-      Faça o envio de uma foto segurando o documento de identificação que contenha o seu CPF
+        Faça o envio de uma foto segurando o documento de identificação que
+        contenha o seu CPF
       </h3>
       <div>
         <section>
@@ -36,10 +37,10 @@ function InstructionsHoldingDocuments({ onGetFile }) {
             obrigatório.
           </p>
           <div>
-        <span>Permitido apenas o upload de 1 arquivo</span>
-        <span>Tamanho máximo do arquivo: 10MB</span>
-        <span>Tipos de arquivos aceitos: jpg, jpeg, png ou pdf.</span>
-        </div>
+            <span>Permitido apenas o envio de 1 arquivo</span>
+            <span>Tamanho máximo do arquivo: 10MB</span>
+            <span>Tipos de arquivos aceitos: jpg, jpeg, png ou pdf.</span>
+          </div>
         </aside>
       </div>
     </Container>

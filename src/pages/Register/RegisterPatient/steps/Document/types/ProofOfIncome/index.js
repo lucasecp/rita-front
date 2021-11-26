@@ -14,10 +14,11 @@ const ProofOfIncome = ({
   onGetFile,
   selectIncome,
   onSelectIncome,
+  hasPreviousDocument
 }) => {
   return (
     <>
-      <AccordionContainer square={true} defaultExpanded={true}>
+      <AccordionContainer square={true} defaultExpanded={false} expanded={hasPreviousDocument || !!proofOfIncomeFile}>
         <AccordionSummary
           aria-controls="panel3a-content"
           id="panel3a-header"

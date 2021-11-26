@@ -84,6 +84,6 @@ export const menuItens = [
     path: DIRECTOR_PLAN_MANAGMENT,
     icon: <ManagmentIcon />,
     name: 'Gestão de Planos',
-    // permission: permissionList.TROCAR_MINHA_SENHA,
+    permission: permissionList.LISTAR_PLANO_DIRETOR,
   },
 ]

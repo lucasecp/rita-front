@@ -20,15 +20,15 @@ function BoxSendIncome({ onGetFile }) {
         <li>
           <h5>Enviar comprovação que não tem renda</h5>
           <span>
-          <a
-            href="https://meucadunico.cidadania.gov.br/meu_cadunico/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            clique aqui
-          </a>&nbsp;
-            para ter acesso ao CADÚNICO. Lá no site do governo você consegue
-            gerar o seu comprovante para incluir aqui no seu cadastro.
+            <a
+              href="https://meucadunico.cidadania.gov.br/meu_cadunico/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              clique aqui
+            </a>
+            &nbsp; para ter acesso ao CADÚNICO. Lá no site do governo você
+            consegue gerar o seu comprovante para incluir aqui no seu cadastro.
           </span>
         </li>
       </ul>
@@ -40,7 +40,7 @@ function BoxSendIncome({ onGetFile }) {
       </InputFile>
       <p>Este campo não é obrigatório</p>
       <section>
-        <span>Permitido apenas o upload de 1 arquivo</span>
+        <span>Permitido apenas o envio de 1 arquivo</span>
         <span>Tamanho máximo do arquivo: 10MB</span>
         <span>Tipos de arquivos aceitos: jpg, jpeg, png ou pdf.</span>
       </section>
