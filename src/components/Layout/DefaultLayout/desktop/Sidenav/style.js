@@ -8,7 +8,7 @@ export const Container = styled.aside`
   /* left: 0;*/
   top: 0;
   height: 100vh;
-  width: ${({ isExpanded }) => (isExpanded ? 220 : 118)}px;
+  width: ${({ isExpanded }) => (isExpanded ? 240 : 118)}px;
   transition: 0.3s;
 
   > div {

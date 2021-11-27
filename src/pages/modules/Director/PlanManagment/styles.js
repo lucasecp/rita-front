@@ -14,6 +14,7 @@ export const Container = styled.div`
   > * > main > h1 {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 `
 
