@@ -12,10 +12,15 @@ const Reports = () => {
   const [reportChoosen, setReportChoosen] = useState('')
 
   const onUserConfirmReportChoice = () => {
-    const { path: reportPath } = reportOptions.find(
+    const report = reportOptions.find(
       (report) => report.value === reportChoosen
     )
-    history.push(reportPath)
+
+    if (!report?.path) {
+      return
+    }
+
+    history.push(report.path)
   }
 
   return (
