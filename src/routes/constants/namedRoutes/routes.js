@@ -24,6 +24,7 @@ export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
 
 export const DIRECTOR_PLAN_MANAGMENT = '/gestao/planos'
+export const DIRECTOR_EDIT_PLAN = '/gestao/planos/editar'
 
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'
