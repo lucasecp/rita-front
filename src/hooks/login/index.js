@@ -16,7 +16,6 @@ import { useHistory } from 'react-router'
 import { LOGIN, MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
 import apiPatient from '@/services/apiPatient'
 import AnalyzingData from './messages/AnalzingData'
-import axios from 'axios'
 
 const UserContext = createContext()
 

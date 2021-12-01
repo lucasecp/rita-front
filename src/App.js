@@ -11,6 +11,7 @@ import AuthProvider from './hooks/login'
 
 import { ModalProvider } from './hooks/useModal'
 import { LoadingProvider } from './hooks/useLoading'
+import { ThemeProvider } from './hooks/useTheme'
 import LoadingWithHook from './components/Loading/RitaLoading'
 
 import { ToastContainer } from 'react-toastify'
@@ -31,11 +32,13 @@ const App = () => {
         <LoadingProvider>
           <AuthProvider>
             <MenuProvider>
-              <GlobalStyle />
-              <Routes />
-              <Modal />
-              <LoadingWithHook />
-              <ToastContainer />
+              <ThemeProvider>
+                <GlobalStyle />
+                <Routes />
+                <Modal />
+                <LoadingWithHook />
+                <ToastContainer />
+              </ThemeProvider>
             </MenuProvider>
           </AuthProvider>
         </LoadingProvider>

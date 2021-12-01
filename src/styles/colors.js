@@ -7,7 +7,7 @@ const colors = {
       light: '#DFD2FF',
       middle: '#C0A6FF',
       dark: '#9146FF',
-      darkness: '#7338CB'
+      darkness: '#7338CB',
     },
     background: {
       light: '#F8F5FF',
@@ -16,16 +16,15 @@ const colors = {
   },
 
   orange: {
-    light: '#FFBDAB;',
+    light: '#FFBDAB',
     middle: '#FF815E',
     middleDark: '#DF644B',
   },
 
   pink: {
     light: '#F8C0FF',
-    middle: '#F89BFF'
+    middle: '#F89BFF',
   },
-
 
   blueViola: {
     light: '#9B97FF',
@@ -37,7 +36,6 @@ const colors = {
     light: '#C5DBFE',
     middle: '#326BF6',
     dark: '#1C23BD',
-
   },
 
   gray: {
@@ -51,6 +49,44 @@ const colors = {
   green: {
     light: '#ACFFC5',
     dark: '#084C4F',
+  },
+
+
+
+  themePurple: {
+    light: '#DFD2FF',
+    middle: '#C0A6FF',
+    dark: '#9146FF',
+    darkness: '#7338CB',
+    bgLight: '#F8F5FF',
+    bgMiddle: '#EFEAFA',
+  },
+
+  themeBlue: {
+    light: '#EAF1FC',
+    middle: '#326BF6',
+    dark: '#1C23BD' ,
+    darkness: '#9146FF',
+    bgLight: '#F8F5FF',
+    bgMiddle: '#EFEAFA',
+  },
+
+  themeOrange: {
+    darkness: '#c33124',
+    dark: '#fe793d',
+    middle: '#e9723d',
+    light: '#fd9a7e',
+    bgLight: '#edc596',
+    bgMiddle: '#e2d4c4',
+  },
+
+  themeGray: {
+    bgLight: '#F5F5F5',
+    bgMiddle: '#AFAFAF',
+    light: '#EEEEEE',
+    middle: '#AFAF99',
+    darkness: '#909090',
+    dark: '#6A6A6A',
   },
 }
 
