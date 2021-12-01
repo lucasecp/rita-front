@@ -1,5 +1,7 @@
 import React from 'react'
 import { useMediaPredicate } from 'react-media-hook'
+import { ReactComponent as ExpandedLogo } from '@/assets/logo/expanded-logo.svg'
+import { ReactComponent as IconLogo } from '@/assets/logo/icon-logo.svg'
 
 import arrowImg from '@/assets/icons/arrow-left.svg'
 
@@ -29,7 +31,8 @@ export const Sidenav = () => {
       </div>
       <nav>
         <header>
-          <div />
+          {/* <div /> */}
+          {isExpanded ? <ExpandedLogo /> : <IconLogo />}
         </header>
         <Menu expanded={isExpanded} />
       </nav>
