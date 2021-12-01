@@ -10,8 +10,6 @@ export const Content = styled.div`
   line-height: 20px;
   color: #9146ff;
   align-items: center;
-  min-height: 83px;
-  max-height: 83px;
   justify-content: flex-start;
   min-width: 150px;
   margin-right: 24px;

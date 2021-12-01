@@ -1,7 +1,7 @@
 import { formatCpf } from '@/helpers/formatCpf'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
-import formatName from '@/helpers/formatName'
+import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import showStatus from './showStatus'
 
 export default (dataReport) => {
@@ -10,7 +10,7 @@ export default (dataReport) => {
     dataPatients: dataReport?.dados?.map((patient) => {
       return {
         registerDate: formateDateAndHour(patient?.dataFiliacao, ' - '),
-        name: formatName(patient?.nome),
+        name: formatTextWithLimit(patient?.nome, 38),
         cpf: formatCpf(patient?.cpf),
         status: showStatus(patient?.status),
         validatorName: formatFirstLastName(patient?.validador?.nome),

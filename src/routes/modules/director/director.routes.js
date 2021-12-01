@@ -2,7 +2,7 @@ import React from 'react'
 import Route from '../../custom.routes'
 
 import { DIRECTOR_PLAN_MANAGMENT } from '../../constants/namedRoutes/routes'
-import Director from '@/pages/modules/Director/PlanManagment'
+import Director from '@/pages/modules/Director/PlanManagment/GetPlan'
 
 const directorRoutes = [
   {
