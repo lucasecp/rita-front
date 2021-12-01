@@ -46,6 +46,7 @@ export const Container = styled.ul`
 
     :hover {
       background: ${colors.purple.main.middle};
+      /* background: ${({theme}) => theme.primary}; */
 
       > span {
         background: ${colors.purple.main.light};

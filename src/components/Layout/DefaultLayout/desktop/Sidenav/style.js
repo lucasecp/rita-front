@@ -57,7 +57,11 @@ export const Container = styled.aside`
     > header {
       padding: 40px 32px 52px;
 
-      > div {
+      /* > svg {
+        fill: red;
+      } */
+
+      /* > div {
         background-position: left center;
         background-size: contain;
         background-repeat: no-repeat;
@@ -75,7 +79,7 @@ export const Container = styled.aside`
             background-image: url(${iconLogo});
             height: 52px;
           `}
-      }
+      } */
     }
   }
 `
