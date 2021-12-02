@@ -5,7 +5,7 @@ import arrowDownOutlineIcon from '@/assets/icons/arrow-down-outline.svg'
 
 import InputText from '@/components/Form/InputText'
 import InputMask from '@/components/Form/InputMask'
-import SelectComponent from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 
 import { Container } from './styles'
 import { useToggle } from '@/hooks/useToggle'
@@ -45,7 +45,7 @@ function PersonExpandable({ title, personData, holder }) {
           value={personData?.dataNascimento || ''}
           disabled
         />
-        <SelectComponent
+        <Select
           label="Gênero:"
           labelDefaultOption="Selecione"
           options={[

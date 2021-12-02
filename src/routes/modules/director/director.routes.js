@@ -2,8 +2,8 @@ import React from 'react'
 import Route from '../../custom.routes'
 
 import { DIRECTOR_EDIT_PLAN, DIRECTOR_PLAN_MANAGMENT } from '../../constants/namedRoutes/routes'
-import Director from '@/pages/modules/Director/PlanManagment'
-import { EditPlan } from '@/pages/modules/Director/EditPlan'
+import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
+import Director from '@/pages/modules/Director/PlanManagment/GetPlan'
 
 const directorRoutes = [
   {

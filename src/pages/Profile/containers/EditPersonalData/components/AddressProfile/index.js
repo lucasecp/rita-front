@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import Select from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 
 import { Container } from './styles'
 import { UF } from '../../constants/uf'

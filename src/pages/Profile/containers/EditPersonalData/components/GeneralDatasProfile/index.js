@@ -1,6 +1,6 @@
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import SelectComponent from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import {
   validateBirthdate,
@@ -77,7 +77,7 @@ export const GeneralDatas = ({
           autoComplete="off"
           disabled={!isEditing}
         />
-        <SelectComponent
+        <Select
           label="Gênero:"
           labelDefaultOption="Selecione"
           options={[

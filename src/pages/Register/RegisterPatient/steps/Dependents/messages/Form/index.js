@@ -2,7 +2,7 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import SelectComponent from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { Container } from './style'
@@ -182,7 +182,7 @@ const Form = ({
           />
         </Col>
         <Col md="6" className="mt-4">
-          <SelectComponent
+          <Select
             label="Gênero*:"
             labelDefaultOption="selecione"
             options={[

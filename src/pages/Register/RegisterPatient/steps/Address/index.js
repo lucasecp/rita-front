@@ -1,6 +1,6 @@
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import Select from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 
@@ -21,7 +21,7 @@ export const Address = ({
   const [numberHome, setNumberHome] = useState('')
   const [district, setDistrict] = useState('')
   const [complement, setComplement] = useState('')
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({})
 
   useEffect(() => {
     const addressFromSabinCard = dataClientSabin.endereco

@@ -1,7 +1,7 @@
 import Checkbox from '@/components/Form/Checkbox'
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import Select from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { Container } from '../style'

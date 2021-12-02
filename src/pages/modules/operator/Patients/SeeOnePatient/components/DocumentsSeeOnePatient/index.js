@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SelectComponent from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 import SeeDocumentFile from './SeeDocumentFile'
 
 // import { incomeOptions } from '../../constants/income'
@@ -9,7 +9,6 @@ import { Container } from './styles'
 import formatIncome from '../../helpers/formatIncome'
 
 function DocumentsSeeOnePatient({ documents }) {
-
   return (
     <Container>
       <h2>Documentos</h2>
@@ -24,7 +23,7 @@ function DocumentsSeeOnePatient({ documents }) {
         disabled={!documents.identifyDocument}
       />
       <section>
-        <SelectComponent
+        <Select
           label="Renda:"
           labelDefaultOption={formatIncome(documents?.incomeDocumentType)}
           value={''}

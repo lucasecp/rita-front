@@ -3,7 +3,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import CustomRangePicker from '@/components/Form/CustomRangePicker'
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import SelectComponent from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 import clearFormat from '@/helpers/clear/SpecialCaracteres'
 import convertDate from '@/helpers/convertDateToIso'
 import useQuery from '@/hooks/useQuery'
@@ -47,24 +47,24 @@ const Filter = () => {
   const [filters, setFilters] = useState([])
   const [submited, setSubmited] = useState(false)
 
-
   useEffect(() => {
     setFilters(verifyTypedFields(objQuery))
   }, [])
 
   useEffect(() => {
-    if(!registerDates[0] && !registerDates[1] && submited) setFilters(verifyTypedFields(objQuery))
-   }, [registerDates]);
+    if (!registerDates[0] && !registerDates[1] && submited)
+      setFilters(verifyTypedFields(objQuery))
+  }, [registerDates])
 
   useEffect(() => {
-    if(!validationDates[0] && !validationDates[1] ) setFilters(verifyTypedFields(objQuery))
-   }, [validationDates]);
-
+    if (!validationDates[0] && !validationDates[1])
+      setFilters(verifyTypedFields(objQuery))
+  }, [validationDates])
 
   const objQuery = [
     { name: 'nome', value: name },
     { name: 'cpf', value: clearFormat(cpf) },
-    { name: 'status', value: status === 'ALL' ? '' : status  },
+    { name: 'status', value: status === 'ALL' ? '' : status },
     { name: 'dataCadastroInicio', value: convertDate(registerDates[0]) },
     { name: 'dataCadastroFim', value: convertDate(registerDates[1]) },
     { name: 'dataValidacaoInicio', value: convertDate(validationDates[0]) },
@@ -150,20 +150,20 @@ const Filter = () => {
               hasError={errors.name}
               msgError={errors.name}
               onlyLetter
-              maxLength='100'
+              maxLength="100"
             />
             <SelectValidator
               setValidator={setValidator}
               validator={validator}
             />
-            <SelectComponent
+            <Select
               variation="secondary"
               labelDefaultOption="Selecione"
               label="Status:"
               value={status}
               setValue={setStatus}
               options={[
-                {label:'Todos',value: 'ALL'},
+                { label: 'Todos', value: 'ALL' },
                 { label: 'Pendente', value: 'P' },
                 { label: 'Em análise', value: 'EA' },
                 { label: 'Aprovado', value: 'A' },
@@ -171,21 +171,19 @@ const Filter = () => {
               ]}
             />
 
-              <BtnGroup>
-                <OutlineButton
-                  type="button"
-                  variation="red"
-                  small
-                  onClick={setInitialStates}
-
-                >
-                  Limpar Filtro
-                </OutlineButton>
-                <ButtonPrimary type="submit" small>
-                  Filtrar Resultados
-                </ButtonPrimary>
-              </BtnGroup>
-
+            <BtnGroup>
+              <OutlineButton
+                type="button"
+                variation="red"
+                small
+                onClick={setInitialStates}
+              >
+                Limpar Filtro
+              </OutlineButton>
+              <ButtonPrimary type="submit" small>
+                Filtrar Resultados
+              </ButtonPrimary>
+            </BtnGroup>
           </div>
         </form>
       </Container>
