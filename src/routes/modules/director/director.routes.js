@@ -1,13 +1,18 @@
 import React from 'react'
 import Route from '../../custom.routes'
 
-import { DIRECTOR_PLAN_MANAGMENT } from '../../constants/namedRoutes/routes'
-import Director from '@/pages/modules/Director/PlanManagment/GetPlan'
+import { DIRECTOR_PLAN_MANAGMENT, DIRECTOR_SEE_PLAN_MANAGMENT } from '../../constants/namedRoutes/routes'
+import DirectorGetPlan from '@/pages/modules/Director/PlanManagment/GetPlan'
+import SeePlan from '@/pages/modules/Director/PlanManagment/SeePlan'
 
 const directorRoutes = [
   {
     path: DIRECTOR_PLAN_MANAGMENT,
-    component: Director,
+    component: DirectorGetPlan,
+  },
+  {
+    path: DIRECTOR_SEE_PLAN_MANAGMENT,
+    component: SeePlan,
   },
 ]
 
