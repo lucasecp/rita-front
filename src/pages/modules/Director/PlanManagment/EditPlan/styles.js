@@ -1,7 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+import colors from '@/styles/colors'
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
-`;
+  flex-direction: column;
 
+  border-radius: 8px;
+  background: ${colors.white};
+
+  > div {
+    padding: 40px 32px;
+  }
+`

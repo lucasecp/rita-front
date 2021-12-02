@@ -8,7 +8,10 @@ export const EditPlan = () => {
   return (
     <DefaultLayout title="Gestão de Planos - Editar Plano">
       <Container>
-        <RangeOfUse />
+        <div>
+          <RangeOfUse />
+        </div>
+        <footer></footer>
       </Container>
     </DefaultLayout>
   )

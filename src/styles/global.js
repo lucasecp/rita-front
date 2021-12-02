@@ -20,6 +20,8 @@ export default createGlobalStyle`
     padding: 0;
     border: 0;
     outline:0;
+    cursor: normal;
+
   }
 
   button{
@@ -63,6 +65,7 @@ export default createGlobalStyle`
     border: 0;
     font-size: 100%;
     vertical-align: baseline;
+
   }
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure,
