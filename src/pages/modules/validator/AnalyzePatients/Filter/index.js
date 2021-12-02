@@ -149,21 +149,19 @@ const Filter = () => {
               ]}
             />
           </div>
-          {typedData() && (
-            <BtnGroup>
-              <OutlineButton
-                type="button"
-                variation="red"
-                small
-                onClick={setInitialStates}
-              >
-                Limpar Filtro
-              </OutlineButton>
-              <ButtonPrimary type="submit" small>
-                Filtrar Resultados
-              </ButtonPrimary>
-            </BtnGroup>
-          )}
+          <BtnGroup>
+            <OutlineButton
+              type="button"
+              variation="red"
+              small
+              onClick={setInitialStates}
+            >
+              Limpar Filtro
+            </OutlineButton>
+            <ButtonPrimary type="submit" small>
+              Filtrar Resultados
+            </ButtonPrimary>
+          </BtnGroup>
         </form>
       </Container>
       <TablePatients orders={orders} setOrders={setOrders} filters={filters} />
