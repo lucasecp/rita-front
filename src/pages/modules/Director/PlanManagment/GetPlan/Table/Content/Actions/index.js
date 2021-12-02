@@ -14,8 +14,6 @@ const Actions = ({ status }) => {
         <EyePurpleIcon />
       </CustomTooltip>
 
-
-
       <CustomTooltip label="Ativar">   
         <ActiveIcon
           hidden={
