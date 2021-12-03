@@ -1,11 +1,21 @@
 import React from 'react'
 import Route from '../../custom.routes'
 
-import { DIRECTOR_PLAN_MANAGMENT, DIRECTOR_SEE_PLAN_MANAGMENT } from '../../constants/namedRoutes/routes'
+import {
+  DIRECTOR_EDIT_PLAN,
+  DIRECTOR_PLAN_MANAGMENT,
+  DIRECTOR_SEE_PLAN_MANAGMENT
+} from '../../constants/namedRoutes/routes'
+
+import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
 import DirectorGetPlan from '@/pages/modules/Director/PlanManagment/GetPlan'
 import SeePlan from '@/pages/modules/Director/PlanManagment/SeePlan'
 
 const directorRoutes = [
+  {
+    path: DIRECTOR_EDIT_PLAN,
+    component: EditPlan,
+  },
   {
     path: DIRECTOR_PLAN_MANAGMENT,
     component: DirectorGetPlan,
@@ -17,7 +27,8 @@ const directorRoutes = [
 ]
 
 const directorRoutesComponents = directorRoutes.map((props, index) => (
-  <Route {...props} exact isPrivate key={index} />
+  <Route {...props} exact key={index} />
+  // <Route {...props} exact isPrivate key={index} />
 ))
 
 export default directorRoutesComponents

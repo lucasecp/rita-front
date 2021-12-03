@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import SelectComponent from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 import { useLoading } from '@/hooks/useLoading'
 import apiUser from '@/services/apiUser'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
@@ -32,7 +32,7 @@ const SelectValidator = ({ setValidator, validator }) => {
   }
 
   return (
-    <SelectComponent
+    <Select
       variation="secondary"
       // labelDefaultOption="Selecione" //
       label="Validador:"

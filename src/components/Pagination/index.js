@@ -1,7 +1,7 @@
 import useQuery from '@/hooks/useQuery'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
-import SelectComponent from '../Form/Select'
+import { Select } from '../Form/Select'
 import { Container, Prev, Next } from './style'
 
 const Pagination = ({ total, restQuery, range, setQuery }) => {
@@ -15,7 +15,8 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
   const queryString = `?page=${currentPage}&limit=${limit}${restQuery || ''}`
   const queryApiString = `?limit=${limit}&skip=${skipedPages}`
 
-  const currentTotal = currentPage === totalPages ? total : skipedPages + Number(limit)
+  const currentTotal =
+    currentPage === totalPages ? total : skipedPages + Number(limit)
 
   useEffect(() => {
     history.push(queryString)
@@ -26,7 +27,7 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
     if (currentPage > totalPages && total > 0) {
       setCurrentPage(1)
     }
-  }, [total,currentPage,limit])
+  }, [total, currentPage, limit])
 
   const hadleChange = ({ target }) => {
     setLimit(target.value)
@@ -46,7 +47,7 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
     <Container>
       <div>
         <span>Linhas por página:</span>
-        <SelectComponent
+        <Select
           options={
             range || [
               { label: 10, value: 10 },

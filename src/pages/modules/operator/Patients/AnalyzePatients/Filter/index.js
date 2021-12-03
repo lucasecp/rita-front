@@ -3,7 +3,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import CustomRangePicker from '@/components/Form/CustomRangePicker'
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import SelectComponent from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 import clearFormat from '@/helpers/clear/SpecialCaracteres'
 import convertDate from '@/helpers/convertDateToIso'
 import useQuery from '@/hooks/useQuery'
@@ -156,7 +156,7 @@ const Filter = () => {
               setValidator={setValidator}
               validator={validator}
             />
-            <SelectComponent
+            <Select
               variation="secondary"
               // labelDefaultOption="Selecione" //
               label="Status:"

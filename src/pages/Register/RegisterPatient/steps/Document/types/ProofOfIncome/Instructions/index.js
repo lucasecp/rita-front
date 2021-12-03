@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ReactComponent as WarningIcon } from '@/assets/icons/alerts/warning.svg'
 
-import SelectComponent from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 import BoxSendIncome from './BoxSendIncome'
 
 import { Container } from './styles'
@@ -12,7 +12,7 @@ function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
   return (
     <Container>
       <header>
-        <SelectComponent
+        <Select
           label="Escolha uma opção:"
           labelDefaultOption="Selecione"
           options={incomeOptions}
@@ -21,7 +21,7 @@ function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
         />
       </header>
       {!selectIncome && <h6>A seleção da sua faixa de renda é obrigatória.</h6>}
-      {!selectIncome  && (
+      {!selectIncome && (
         <p>
           <WarningIcon />
           <small>

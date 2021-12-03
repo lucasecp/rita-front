@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import Select from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 
 import { Container, Content } from './styles'
 import ButtonPrimary from '@/components/Button/Primary'

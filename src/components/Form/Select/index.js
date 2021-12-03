@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Container } from './styles'
 
-const SelectComponent = ({
+export const Select = ({
   options,
   label,
   setValue,
@@ -42,4 +42,4 @@ const SelectComponent = ({
   )
 }
 
-export default SelectComponent
+

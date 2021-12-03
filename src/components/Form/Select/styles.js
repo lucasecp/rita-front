@@ -35,11 +35,11 @@ export const Container = styled.div`
     line-height: 1.25;
 
     appearance: none;
-    background: transparent;
+    background: ${colors.white};
     background-image: url(${arrowDownIcon});
-    background-size: 16px;
+    background-size: 10px;
     background-repeat: no-repeat;
-    background-position-x: calc(100% - 8px);
+    background-position-x: calc(100% - 16px);
     background-position-y: 50%;
 
     :disabled {
