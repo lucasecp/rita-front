@@ -16,7 +16,7 @@ const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, d
   window.onresize = () => adjustSelectOptions(containerDiv?.current)
 
   return (
-    <Container>
+    <Container {...rest}>
     {label && <label>{label}</label>}
     <Content
     disabled={disabled}
@@ -29,7 +29,7 @@ const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, d
     {...rest}
     >
       <Multiselect
-        options={options}
+        options={options || []}
         displayValue="name"
         showCheckbox
         placeholder=""
@@ -41,7 +41,7 @@ const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, d
         selectedValues={value}
         {...rest}
       />
-      {!!value.length && (
+      {!!value?.length && (
         <button disabled={!value} onClick={() => setValue !== undefined && setValue([])} />
       )}
       {msgError && <MsgError>{msgError}</MsgError>}
