@@ -7,13 +7,11 @@ import {
 } from '../../constants/namedRoutes/routes'
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
 import Director from '@/pages/modules/Director/PlanManagment/GetPlan'
-import { RangeOfUse } from '@/components/RangeOfUse'
 
 const directorRoutes = [
   {
     path: DIRECTOR_EDIT_PLAN,
-    component: RangeOfUse,
-    // component: EditPlan,
+    component: EditPlan,
   },
   {
     path: DIRECTOR_PLAN_MANAGMENT,

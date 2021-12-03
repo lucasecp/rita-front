@@ -1,5 +1,5 @@
 import colors from '@/styles/colors'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -86,9 +86,20 @@ export const Container = styled.div`
 
           > div {
             width: fit-content;
-            padding: 0 6px 0 8px;
+            padding: 0px 0px 0px 12px;
             display: flex;
             align-items: center;
+
+            border-radius: 16px;
+            border: 1px solid ${colors.purple.main.darkness};
+
+            ${({ viewMode }) =>
+              viewMode &&
+              css`
+                padding: 0px 12px;
+                border: 1px solid ${colors.gray.dark};
+                ?: ;
+              `};
 
             + div {
               margin-top: 8px;
@@ -98,18 +109,32 @@ export const Container = styled.div`
               font-weight: 500;
               font-size: 16px;
               line-height: 20px;
-              color: ${colors.purple.background.light};
+              color: ${colors.purple.main.darkness};
+              padding: 4px 0px;
 
-              margin-right: 8px;
+              ${({ viewMode }) =>
+                viewMode &&
+                css`
+                  color: ${colors.gray.dark};
+                `};
             }
-
-            background: ${colors.blueViola.light};
-            border-radius: 16px;
 
             > svg {
-              /* padding-left: 8px; */
               cursor: pointer;
+              fill: ${colors.purple.main.darkness};
+              padding: 10px 12px 10px 8px;
+              box-sizing: content-box;
             }
+          }
+
+          > button {
+            color: ${colors.purple.main.darkness};
+
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 20px;
+
+            text-align: end;
           }
         }
       }
