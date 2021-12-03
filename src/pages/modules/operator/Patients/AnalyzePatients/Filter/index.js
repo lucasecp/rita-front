@@ -158,7 +158,7 @@ const Filter = () => {
             />
             <Select
               variation="secondary"
-              labelDefaultOption="Selecione"
+              // labelDefaultOption="Selecione" //
               label="Status:"
               value={status}
               setValue={setStatus}

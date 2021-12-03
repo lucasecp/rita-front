@@ -34,7 +34,7 @@ const SelectValidator = ({ setValidator, validator }) => {
   return (
     <Select
       variation="secondary"
-      labelDefaultOption="Selecione"
+      // labelDefaultOption="Selecione" //
       label="Validador:"
       setValue={setValidator}
       value={validator}

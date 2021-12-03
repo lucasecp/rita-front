@@ -4,9 +4,12 @@ import Route from '../../custom.routes'
 import {
   DIRECTOR_EDIT_PLAN,
   DIRECTOR_PLAN_MANAGMENT,
+  DIRECTOR_SEE_PLAN_MANAGMENT
 } from '../../constants/namedRoutes/routes'
+
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
-import Director from '@/pages/modules/Director/PlanManagment/GetPlan'
+import DirectorGetPlan from '@/pages/modules/Director/PlanManagment/GetPlan'
+import SeePlan from '@/pages/modules/Director/PlanManagment/SeePlan'
 
 const directorRoutes = [
   {
@@ -15,7 +18,11 @@ const directorRoutes = [
   },
   {
     path: DIRECTOR_PLAN_MANAGMENT,
-    component: Director,
+    component: DirectorGetPlan,
+  },
+  {
+    path: DIRECTOR_SEE_PLAN_MANAGMENT,
+    component: SeePlan,
   },
 ]
 

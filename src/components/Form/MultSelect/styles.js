@@ -3,21 +3,16 @@ import styled, { css } from 'styled-components'
 import checkedIcon from '@/assets/icons/checked.svg'
 import closeIcon from '@/assets/icons/close.svg'
 
-export const Container = styled.div`
+export const Content = styled.div`
   display: grid;
   align-items: start;
   border-bottom: 2px solid ${colors.purple.main.middle};
   max-height: 54px;
-  > label {
-    grid-area: 1/1;
-    margin-bottom: 6px;
-    color: #909090;
-    font-size: 14px;
-    line-height: 16px;
-    font-weight: 400;
-  }
+
+
   .optionListContainer {
     margin-top: 2px;
+    box-shadow: 0px 1px 2px 0px #e5e5e5;
   }
   .searchWrapper {
     border: none;
@@ -64,7 +59,16 @@ export const Container = styled.div`
   .chip {
     border-radius: 16px;
     padding: 2px 8px 2px 8px;
-    background: #9b97ff;
+    background: transparent;
+    border: 1px solid #7338cb;
+    color: #7338cb;
+    font-family: Athletics;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    path{
+      fill: #7338cb;
+    }
   }
   .custom-close {
     padding-left: 6px;
@@ -172,16 +176,81 @@ export const Container = styled.div`
     background: #555;
   }
   ${({ hasError }) =>
-      hasError &&
-      css`
-        border-color: ${colors.orange.light};
-      `}
-  ${({ disabled }) =>
-      disabled &&
-      css`
-        opacity: .5;
-        .optionListContainer, .multiSelectContainer input{
-          visibility: hidden;
+    hasError &&
+    css`
+      border-color: ${colors.orange.light};
+    `}
+
+
+  ${({ variation }) =>
+    variation === 'secondary' &&
+    css`
+      border: 1px solid #eeeeee;
+      box-shadow: 0px 2px 4px 0px #e5e5e5;
+      border-radius: 8px;
+      background: #fff;
+      max-height: 100%;
+
+      .optionListContainer{
+        margin-top: 3px;
+      }
+      .search-wrapper{
+        padding: 0;
+        display: block;
+        max-height: 100%;
+      }
+      .chip{
+        margin-bottom: 0;
+        & + .chip{
+          margin-top: 5px
         }
-      `}
+      }
+      .multiSelectContainer{
+        max-height: 100%;
+
+      }
+      .searchWrapper{
+        padding: 14px 16px;
+        padding-left: 16px;
+        max-height: 100%;
+      }
+    `}
+    ${({ disabled ,variation}) =>
+    disabled && variation === 'secondary' &&
+    css`
+      opacity: 1;
+      background: ${colors.gray.light};
+      .optionListContainer,
+      .multiSelectContainer input {
+        visibility: hidden;
+      }
+      .chip {
+        color: #6A6A6A;
+        border-color: #6A6A6A
+      }
+      .custom-close, > button{
+        display: none
+      }
+
+    `}
+`
+export const Container = styled.div`
+   > label {
+    grid-area: 1/1;
+    margin-bottom: 6px;
+    color: #909090;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+  }
+  
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+      .optionListContainer,
+      .multiSelectContainer input {
+        visibility: hidden;
+      }
+    `}
 `
