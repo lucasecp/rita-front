@@ -43,7 +43,7 @@ function SendedFile({ file, onGetFile }) {
 
   const previewForPdf = () => {
     if (isMobile) {
-      return downloadFile(file)
+      return downloadFile(file, '', 'pdf')
     }
 
     return previewFileInNewBlank(file)

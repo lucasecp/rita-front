@@ -14,8 +14,8 @@ function Textarea({ label, setValue, limit, showCaractersInformation,value, ...r
   return (
     <Container {...rest}>
       {label && <label htmlFor={label}>{label}</label>}
-      <textarea id={label} onChange={onChangeText} {...rest} />
-      {showCaractersInformation && <p>({value.length} de {limit} caracteres)</p>}
+      <textarea id={label} onChange={onChangeText} value={value} {...rest} />
+      {showCaractersInformation && <p>({value?.length || 0} de {limit} caracteres)</p>}
     </Container>
   )
 }
