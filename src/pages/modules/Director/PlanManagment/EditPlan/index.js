@@ -9,7 +9,7 @@ export const EditPlan = () => {
     <DefaultLayout title="Gestão de Planos - Editar Plano">
       <Container>
         <div>
-          <RangeOfUse />
+          <RangeOfUse rangesOfUse={[]} />
         </div>
         <footer></footer>
       </Container>

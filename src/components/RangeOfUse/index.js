@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { ReactComponent as CloseIcon } from '@/assets/icons/close-multselct.svg'
 
@@ -10,25 +10,27 @@ import { UF } from './constants/uf'
 import { Container } from './styles'
 import ButtonPrimary from '../Button/Primary'
 
-export const RangeOfUse = () => {
-  const viewMode = false
-
+export const RangeOfUse = ({
+  rangesOfUse,
+  setRangesOfUse = () => {},
+  viewMode,
+}) => {
   const [regional, setRegional] = useState('')
   const [uf, setUf] = useState('')
   const [cities, setCities] = useState([])
 
   // const [hasEmptyFields, setHasEmptyFields] = useState(false)
-  // const [rangesOfUse, setRangeOfUse] = useState([
+  // const [listRangeOfUse, setListRangeOfUse] = useState([
   //   {
   //     regional: { label: 'Centro Oeste', value: 5 },
   //     uf: { label: 'Distrito Federal', value: 9 },
   //     cities: [
-  //       { label: 'Brasília', value: 2 },
-  //       { label: 'Gama', value: 3 },
-  //       { label: 'Taguatinga', value: 4 },
-  //       { label: 'Brazlândia', value: 5 },
-  //       { label: 'Planaltina', value: 9 },
-  //       { label: 'Paranoá', value: 7 },
+  //       { name: 'Brasília', id: 2 },
+  //       { name: 'Gama', id: 3 },
+  //       { name: 'Taguatinga', id: 4 },
+  //       { name: 'Brazlândia', id: 5 },
+  //       { name: 'Planaltina', id: 9 },
+  //       { name: 'Paranoá', id: 7 },
   //     ],
   //     showCities: false,
   //   },
@@ -36,13 +38,19 @@ export const RangeOfUse = () => {
   //     regional: { label: 'Centro Oeste', value: 5 },
   //     uf: { label: 'Goiás', value: 9 },
   //     cities: [
-  //       { label: 'Goiânia', value: 2 },
-  //       { label: 'Avelinópolis', value: 3 },
+  //       { name: 'Goiânia', id: 2 },
+  //       { name: 'Avelinópolis', id: 3 },
   //     ],
   //     showCities: false,
   //   },
   // ])
-  const [rangesOfUse, setRangeOfUse] = useState([])
+  const [listRangeOfUse, setListRangeOfUse] = useState(
+    rangesOfUse.map((range) => ({ ...range, showCities: false }))
+  )
+
+  useEffect(() => {
+    setRangesOfUse(listRangeOfUse)
+  }, [listRangeOfUse])
 
   return (
     <Container viewMode={viewMode}>
@@ -74,11 +82,12 @@ export const RangeOfUse = () => {
                 label="Cidade(s):"
                 value={cities}
                 setValue={setCities}
+                variation="secondary"
               />
             </section>
             <ButtonPrimary>Adicionar</ButtonPrimary>
           </div>
-          {!rangesOfUse.length && (
+          {!listRangeOfUse.length && (
             <small>
               Ao menos a seleção de um item da Abrangência de Utilização é
               obrigatório.
@@ -86,7 +95,7 @@ export const RangeOfUse = () => {
           )}
         </>
       )}
-      {!!rangesOfUse.length && (
+      {!!listRangeOfUse.length && (
         <table>
           <thead>
             <th>Regional</th>
@@ -94,7 +103,7 @@ export const RangeOfUse = () => {
             <th>Cidade</th>
           </thead>
           <tbody>
-            {rangesOfUse.map((range, index) => (
+            {listRangeOfUse.map((range, index) => (
               <tr key={index}>
                 <td>
                   <div>
@@ -111,14 +120,14 @@ export const RangeOfUse = () => {
                 <td>
                   {range.cities.map((city, index) =>
                     range.showCities ? (
-                      <div key={city.value}>
-                        <p>{city.label}</p>
+                      <div key={city.id}>
+                        <p>{city.name}</p>
                         {!viewMode && <CloseIcon />}
                       </div>
                     ) : (
                       index < 2 && (
-                        <div key={city.value}>
-                          <p>{city.label}</p>
+                        <div key={city.id}>
+                          <p>{city.name}</p>
                           {!viewMode && <CloseIcon />}
                         </div>
                       )
@@ -127,10 +136,10 @@ export const RangeOfUse = () => {
                   {range.cities.length > 2 && (
                     <button
                       onClick={() => {
-                        const rangeOfUseTemporary = rangesOfUse
+                        const rangeOfUseTemporary = listRangeOfUse
                         rangeOfUseTemporary[index].showCities =
                           !rangeOfUseTemporary[index].showCities
-                        setRangeOfUse([...rangeOfUseTemporary])
+                        setListRangeOfUse([...rangeOfUseTemporary])
                       }}
                     >
                       {range.showCities

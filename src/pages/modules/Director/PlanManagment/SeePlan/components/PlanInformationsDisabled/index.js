@@ -3,7 +3,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import OutilineButton from '@/components/Button/Outline'
 import InputText from '@/components/Form/InputText'
 import CustomMultSelect from '@/components/Form/MultSelect'
-import SelectComponent from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 import Textarea from '@/components/Form/Textarea'
 import { ButtonGroup, Container } from './styles'
 import mapDataToMultSelect from '../../helpers/mapDataToMultSelect'
@@ -29,9 +29,8 @@ const PlanInformationsDisabled = ({ data }) => {
           label="Serviços*:"
           variation="secondary"
           value={mapDataToMultSelect(data?.servico)}
-
         />
-        <SelectComponent
+        <Select
           label="Status*:"
           disabled
           value={data?.status || ''}
