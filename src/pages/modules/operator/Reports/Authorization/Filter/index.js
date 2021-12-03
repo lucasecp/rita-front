@@ -12,7 +12,10 @@ import { RadioGroup } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { toast } from '@/styles/components/toastify'
-import { columns as staticColumns, status as staticStatus } from '../static/columns'
+import {
+  columns as staticColumns,
+  status as staticStatus,
+} from '../static/columns'
 import TableReport from '../TableReport'
 import formatArray from '../helpers/formatMultSelectArray'
 
@@ -200,14 +203,17 @@ const Filter = () => {
       )
       if (response.status === 200) {
         if (fileType === 'xlsx') {
-          downloadXls(response.data)
+          const blobReportPdf = new Blob([response.data], {
+            type: 'application/vnd.ms-excel;charset=utf-8',
+          })
+          downloadFile(blobReportPdf, '_Autorizacoes', 'xls')
         }
 
         if (fileType === 'pdf') {
           const blobReportPdf = new Blob([response.data], {
             type: 'application/pdf',
           })
-          downloadFile(blobReportPdf,'_Autorizacoes')
+          downloadFile(blobReportPdf, '_Autorizacoes', 'pdf')
         }
       }
     } catch ({ response }) {
@@ -297,9 +303,7 @@ const Filter = () => {
               Gerar prévia
             </ButtonPrimary>
 
-            <OutlineButton
-            onClick={onPreview}
-             hidden={!someFieldWasTyped}>
+            <OutlineButton onClick={onPreview} hidden={!someFieldWasTyped}>
               Gerar prévia
             </OutlineButton>
           </BtnGroup>

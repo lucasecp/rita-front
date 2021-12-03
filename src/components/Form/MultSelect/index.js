@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react'
-import { Container } from './styles'
+import { Content,Container } from './styles'
 import Multiselect from 'multiselect-react-dropdown'
 import { adjustSelectOptions } from './adjustSelectOptions'
 import { ReactComponent as CloseMultSelectIcon } from '@/assets/icons/close-multselct.svg'
 import generateRandomString from '@/helpers/generateRandomString'
 import MsgError from '@/components/MsgError'
 
-const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, disabled, ...rest }) => {
+const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, disabled, variation, ...rest }) => {
   const containerDiv = useRef(null)
 
   useEffect(() => {
@@ -16,17 +16,20 @@ const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, d
   window.onresize = () => adjustSelectOptions(containerDiv?.current)
 
   return (
-    <Container
+    <Container {...rest}>
+    {label && <label>{label}</label>}
+    <Content
     disabled={disabled}
     hasError={hasError}
     ref={containerDiv}
     id={generateRandomString(7)}
     onClick={() => adjustSelectOptions(containerDiv?.current)}
+    variation={variation}
+
     {...rest}
     >
-      {label && <label>{label}</label>}
       <Multiselect
-        options={options}
+        options={options || []}
         displayValue="name"
         showCheckbox
         placeholder=""
@@ -38,10 +41,11 @@ const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, d
         selectedValues={value}
         {...rest}
       />
-      {!!value.length && (
+      {!!value?.length && (
         <button disabled={!value} onClick={() => setValue !== undefined && setValue([])} />
       )}
       {msgError && <MsgError>{msgError}</MsgError>}
+    </Content>
     </Container>
   )
 }
