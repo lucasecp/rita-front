@@ -21,7 +21,9 @@ const Actions = ({ status, planInformations }) => {
         />
       </CustomTooltip>
 
-      <CustomTooltip label="Ativar">
+
+
+      <CustomTooltip label="Ativar">   
         <ActiveIcon
           hidden={
             status !== 'Inativo' &&

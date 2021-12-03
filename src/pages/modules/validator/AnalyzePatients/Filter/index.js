@@ -18,15 +18,17 @@ const Filter = () => {
   const query = useQuery()
   const history = useHistory()
   const DATES =
-  !query.get('dataCadastroInicio') ||
-  !query.get('dataCadastroFim')
-    ? []
-    : [moment(String(query.get('dataCadastroInicio'))),moment(String(query.get('dataCadastroFim')))]
+    !query.get('dataCadastroInicio') || !query.get('dataCadastroFim')
+      ? []
+      : [
+          moment(String(query.get('dataCadastroInicio'))),
+          moment(String(query.get('dataCadastroFim'))),
+        ]
 
-    const CPF = query.get('cpf') || ''
-    const NAME = query.get('nome') || ''
-    const VALIDATOR = query.get('idValidador') || ''
-    const STATUS = query.get('status') || ''
+  const CPF = query.get('cpf') || ''
+  const NAME = query.get('nome') || ''
+  const VALIDATOR = query.get('idValidador') || ''
+  const STATUS = query.get('status') || ''
 
   const [dates, setDates] = useState(DATES)
   const [cpf, setCpf] = useState(CPF)
@@ -40,11 +42,12 @@ const Filter = () => {
 
   useEffect(() => {
     setFilters(verifyTypedFields(objQuery))
-  }, []);
+  }, [])
 
   useEffect(() => {
-   if(!dates[0] && !dates[1] && submited) setFilters(verifyTypedFields(objQuery))
-  }, [dates]);
+    if (!dates[0] && !dates[1] && submited)
+      setFilters(verifyTypedFields(objQuery))
+  }, [dates])
 
   const typedData = () => {
     return dates.length || clearFormat(cpf) || name || validator || status
@@ -53,7 +56,7 @@ const Filter = () => {
     { name: 'nome', value: name },
     { name: 'cpf', value: clearFormat(cpf) },
     { name: 'status', value: status === 'ALL' ? '' : status },
-    { name: 'dataCadastroInicio', value:  convertDate(dates[0]) },
+    { name: 'dataCadastroInicio', value: convertDate(dates[0]) },
     { name: 'dataCadastroFim', value: convertDate(dates[1]) },
     { name: 'idValidador', value: validator === 'ALL' ? '' : validator },
   ]
@@ -127,7 +130,7 @@ const Filter = () => {
               hasError={errors.name}
               msgError={errors.name}
               onlyLetter
-              maxLength='100'
+              maxLength="100"
             />
             <SelectValidator
               setValidator={setValidator}
@@ -135,7 +138,7 @@ const Filter = () => {
             />
             <SelectComponent
               variation="secondary"
-              labelDefaultOption="Selecione"
+              // labelDefaultOption="Selecione" //
               label="Status:"
               value={status}
               setValue={setStatus}
@@ -146,21 +149,19 @@ const Filter = () => {
               ]}
             />
           </div>
-          {typedData() && (
-            <BtnGroup>
-              <OutlineButton
-                type="button"
-                variation="red"
-                small
-                onClick={setInitialStates}
-              >
-                Limpar Filtro
-              </OutlineButton>
-              <ButtonPrimary type="submit" small>
-                Filtrar Resultados
-              </ButtonPrimary>
-            </BtnGroup>
-          )}
+          <BtnGroup>
+            <OutlineButton
+              type="button"
+              variation="red"
+              small
+              onClick={setInitialStates}
+            >
+              Limpar Filtro
+            </OutlineButton>
+            <ButtonPrimary type="submit" small>
+              Filtrar Resultados
+            </ButtonPrimary>
+          </BtnGroup>
         </form>
       </Container>
       <TablePatients orders={orders} setOrders={setOrders} filters={filters} />
