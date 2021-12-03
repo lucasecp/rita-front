@@ -16,10 +16,9 @@ const CustomMultSelect = ({ label, value, setValue, options,msgError,hasError, d
   window.onresize = () => adjustSelectOptions(containerDiv?.current)
 
   return (
-    <Container {...rest}>
+    <Container disabled={disabled} {...rest}>
     {label && <label>{label}</label>}
     <Content
-    disabled={disabled}
     hasError={hasError}
     ref={containerDiv}
     id={generateRandomString(7)}

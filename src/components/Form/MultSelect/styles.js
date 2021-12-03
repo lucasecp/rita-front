@@ -8,7 +8,7 @@ export const Content = styled.div`
   align-items: start;
   border-bottom: 2px solid ${colors.purple.main.middle};
   max-height: 54px;
- 
+
 
   .optionListContainer {
     margin-top: 2px;
@@ -180,15 +180,7 @@ export const Content = styled.div`
     css`
       border-color: ${colors.orange.light};
     `}
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      .optionListContainer,
-      .multiSelectContainer input {
-        visibility: hidden;
-      }
-    `}
+
 
   ${({ variation }) =>
     variation === 'secondary' &&
@@ -215,7 +207,7 @@ export const Content = styled.div`
       }
       .multiSelectContainer{
         max-height: 100%;
-        
+
       }
       .searchWrapper{
         padding: 14px 16px;
@@ -239,7 +231,7 @@ export const Content = styled.div`
       .custom-close, > button{
         display: none
       }
-     
+
     `}
 `
 export const Container = styled.div`
@@ -251,4 +243,14 @@ export const Container = styled.div`
     line-height: 16px;
     font-weight: 400;
   }
+  
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+      .optionListContainer,
+      .multiSelectContainer input {
+        visibility: hidden;
+      }
+    `}
 `
