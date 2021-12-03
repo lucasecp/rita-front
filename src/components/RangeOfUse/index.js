@@ -95,7 +95,7 @@ export const RangeOfUse = ({
           )}
         </>
       )}
-      {!!listRangeOfUse.length && (
+      {listRangeOfUse.length ? (
         <table>
           <thead>
             <th>Regional</th>
@@ -152,6 +152,8 @@ export const RangeOfUse = ({
             ))}
           </tbody>
         </table>
+      ) : (
+        <h1>Sem dados de abrangência de utilização para mostrar</h1>
       )}
     </Container>
   )

@@ -35,7 +35,7 @@ export const Container = styled.div`
 
     > button {
       margin-left: 40px;
-      align-self: end;
+      margin-top: 22px;
     }
   }
 
