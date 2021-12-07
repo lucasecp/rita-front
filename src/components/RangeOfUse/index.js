@@ -2,25 +2,16 @@ import React, { useState, useEffect } from 'react'
 
 import { ReactComponent as CloseIcon } from '@/assets/icons/close-multselct.svg'
 
-import CustomMultSelect from '../Form/MultSelect'
-import { Select } from '../Form/Select'
-import { REGIONAL } from './constants/regional'
-import { UF } from './constants/uf'
-
 import { Container } from './styles'
-import ButtonPrimary from '../Button/Primary'
+import { AddArea } from './components/AddArea'
 
 export const RangeOfUse = ({
   rangesOfUse,
   setRangesOfUse = () => {},
   viewMode,
 }) => {
-  const [regional, setRegional] = useState('')
-  const [uf, setUf] = useState('')
-  const [cities, setCities] = useState([])
-
   // const [hasEmptyFields, setHasEmptyFields] = useState(false)
-  // const [listRangeOfUse, setListRangeOfUse] = useState([
+  // const [rangesOfUse, setRangesOfUse] = useState([
   //   {
   //     regional: { label: 'Centro Oeste', value: 5 },
   //     uf: { label: 'Distrito Federal', value: 9 },
@@ -48,9 +39,48 @@ export const RangeOfUse = ({
     rangesOfUse.map((range) => ({ ...range, showCities: false }))
   )
 
-  useEffect(() => {
-    setRangesOfUse(listRangeOfUse)
-  }, [listRangeOfUse])
+  // useEffect(() => {
+  //   setRangesOfUse(listRangeOfUse)
+  // }, [listRangeOfUse])
+
+  const onGetArea = (area) => {
+    setListRangeOfUse([...listRangeOfUse, { ...area, showCities: false }])
+  }
+
+  const removeRegionalAndUf = (position) => {
+    const rangesOfUseRemoved = listRangeOfUse.filter(
+      (range, index) => index !== position
+    )
+
+    setListRangeOfUse(rangesOfUseRemoved)
+  }
+
+  // const removeUf = (position) => {
+  //   const rangesOfUseTemporary = listRangeOfUse
+
+  //   rangesOfUseTemporary[position] = {
+  //     ...rangesOfUseTemporary[position],
+  //     uf: '',
+  //     cities: [],
+  //   }
+
+  //   setListRangeOfUse([...rangesOfUseTemporary])
+  // }
+
+  const removeCity = (position, id) => {
+    const rangesOfUseTemporary = listRangeOfUse
+
+    const newCities = rangesOfUseTemporary[position].cities?.filter(
+      (city) => city.id !== id
+    )
+
+    rangesOfUseTemporary[position] = {
+      ...rangesOfUseTemporary[position],
+      cities: newCities,
+    }
+
+    setListRangeOfUse([...rangesOfUseTemporary])
+  }
 
   return (
     <Container viewMode={viewMode}>
@@ -59,34 +89,7 @@ export const RangeOfUse = ({
       </header>
       {!viewMode && (
         <>
-          <div>
-            <section>
-              <Select
-                label="Regional:"
-                labelDefaultOption="Selecione..."
-                options={REGIONAL}
-                name="regional"
-                setValue={setRegional}
-                value={regional}
-              />
-              <Select
-                label="UF:"
-                labelDefaultOption="Selecione..."
-                options={UF}
-                name="uf"
-                setValue={setUf}
-                value={uf}
-              />
-              <CustomMultSelect
-                options={[{ name: 'Cidade', id: 1 }]}
-                label="Cidade(s):"
-                value={cities}
-                setValue={setCities}
-                variation="secondary"
-              />
-            </section>
-            <ButtonPrimary>Adicionar</ButtonPrimary>
-          </div>
+          <AddArea onGetArea={onGetArea} />
           {!listRangeOfUse.length && (
             <small>
               Ao menos a seleção de um item da Abrangência de Utilização é
@@ -95,66 +98,87 @@ export const RangeOfUse = ({
           )}
         </>
       )}
-      {listRangeOfUse.length ? (
-        <table>
-          <thead>
-            <th>Regional</th>
-            <th>UF</th>
-            <th>Cidade</th>
-          </thead>
-          <tbody>
-            {listRangeOfUse.map((range, index) => (
-              <tr key={index}>
-                <td>
-                  <div>
-                    <p>{range.regional.label}</p>
-                    {!viewMode && <CloseIcon />}
-                  </div>
-                </td>
-                <td>
-                  <div>
-                    <p>{range.uf.label}</p>
-                    {!viewMode && <CloseIcon />}
-                  </div>
-                </td>
-                <td>
-                  {range.cities.map((city, index) =>
-                    range.showCities ? (
-                      <div key={city.id}>
-                        <p>{city.name}</p>
-                        {!viewMode && <CloseIcon />}
+      {
+        !!listRangeOfUse.length && (
+          <table>
+            <thead>
+              <tr>
+                <th>Regional</th>
+                <th>UF</th>
+                <th>Cidade</th>
+              </tr>
+            </thead>
+            <tbody>
+              {listRangeOfUse.map((range, index) => (
+                <tr key={index}>
+                  <td>
+                    <div>
+                      <p>{range.regional.label}</p>
+                      {!viewMode && (
+                        <CloseIcon onClick={() => removeRegionalAndUf(index)} />
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    {range.uf && (
+                      <div>
+                        <p>{range.uf.label}</p>
+                        {!viewMode && (
+                          <CloseIcon
+                            onClick={() => removeRegionalAndUf(index)}
+                          />
+                        )}
                       </div>
-                    ) : (
-                      index < 2 && (
+                    )}
+                  </td>
+                  <td>
+                    {range.cities.map((city, indexCity) =>
+                      range.showCities ? (
                         <div key={city.id}>
                           <p>{city.name}</p>
-                          {!viewMode && <CloseIcon />}
+                          {!viewMode && (
+                            <CloseIcon
+                              onClick={() => removeCity(index, city.id)}
+                            />
+                          )}
                         </div>
+                      ) : (
+                        indexCity < 2 && (
+                          <div key={city.id}>
+                            <p>{city.name}</p>
+                            {!viewMode && (
+                              <CloseIcon
+                                onClick={() => removeCity(index, city.id)}
+                              />
+                            )}
+                          </div>
+                        )
                       )
-                    )
-                  )}
-                  {range.cities.length > 2 && (
-                    <button
-                      onClick={() => {
-                        const rangeOfUseTemporary = listRangeOfUse
-                        rangeOfUseTemporary[index].showCities =
-                          !rangeOfUseTemporary[index].showCities
-                        setListRangeOfUse([...rangeOfUseTemporary])
-                      }}
-                    >
-                      {range.showCities
-                        ? 'Ver Menos'
-                        : `Ver + (${range.cities.length - 2})`}
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <h1>Sem dados de abrangência de utilização para mostrar</h1>
-      )}
+                    )}
+                    {range.cities.length > 2 && (
+                      <button
+                        onClick={() => {
+                          const rangeOfUseTemporary = listRangeOfUse
+                          rangeOfUseTemporary[index].showCities =
+                            !rangeOfUseTemporary[index].showCities
+                          setListRangeOfUse([...rangeOfUseTemporary])
+                        }}
+                      >
+                        {range.showCities
+                          ? 'Ver Menos'
+                          : `Ver + (${range.cities.length - 2})`}
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )
+        // : (
+        //   <h1>Sem dados de abrangência de utilização para mostrar</h1>
+        // )
+      }
     </Container>
   )
 }

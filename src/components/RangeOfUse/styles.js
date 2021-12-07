@@ -22,7 +22,7 @@ export const Container = styled.div`
     }
   }
 
-  > div {
+  /* > div {
     margin-top: 16px;
     display: flex;
 
@@ -37,7 +37,7 @@ export const Container = styled.div`
       margin-left: 40px;
       margin-top: 22px;
     }
-  }
+  } */
 
   > small {
     margin-top: 8px;
@@ -52,8 +52,9 @@ export const Container = styled.div`
     margin-top: 32px;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 
-    > thead {
+    > thead tr {
       border-radius: 8px 8px 0 0;
       overflow: hidden;
       display: grid;
@@ -135,6 +136,8 @@ export const Container = styled.div`
             line-height: 20px;
 
             text-align: end;
+
+            margin-top: 8px;
           }
         }
       }
@@ -142,7 +145,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 767px) {
-    > div {
+    /* > div {
       flex-direction: column;
 
       > section {
@@ -155,6 +158,6 @@ export const Container = styled.div`
         margin-top: 40px;
         width: 100%;
       }
-    }
+    } */
   }
 `
