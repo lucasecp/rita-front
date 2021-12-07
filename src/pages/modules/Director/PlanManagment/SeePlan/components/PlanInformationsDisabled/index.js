@@ -3,11 +3,12 @@ import ButtonPrimary from '@/components/Button/Primary'
 import OutilineButton from '@/components/Button/Outline'
 import InputText from '@/components/Form/InputText'
 import CustomMultSelect from '@/components/Form/MultSelect'
-import { Select } from '@/components/Form/Select'
+import {Select} from '@/components/Form/Select'
 import Textarea from '@/components/Form/Textarea'
 import { ButtonGroup, Container } from './styles'
 import mapDataToMultSelect from '../../helpers/mapDataToMultSelect'
 import { showStatus } from '../../helpers/showStatus'
+import { RangeOfUse } from '@/components/RangeOfUse'
 
 const PlanInformationsDisabled = ({ data }) => {
   return (
@@ -30,6 +31,7 @@ const PlanInformationsDisabled = ({ data }) => {
           variation="secondary"
           value={mapDataToMultSelect(data?.servico)}
         />
+        <RangeOfUse rangesOfUse={[]} viewMode={true}/>
         <Select
           label="Status*:"
           disabled

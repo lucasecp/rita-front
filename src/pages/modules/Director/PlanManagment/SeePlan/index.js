@@ -24,7 +24,8 @@ const SeePlan = () => {
           `/plano/${location.state.idPlan}`
         )
         setPlanInfo(response.data)
-      } catch ({ response }) {
+      } catch (error) {
+       
       } finally {
         Loading.turnOff()
       }

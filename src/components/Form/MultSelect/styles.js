@@ -9,7 +9,6 @@ export const Content = styled.div`
   border-bottom: 2px solid ${colors.purple.main.middle};
   max-height: 54px;
 
-
   .optionListContainer {
     margin-top: 2px;
     box-shadow: 0px 1px 2px 0px #e5e5e5;
@@ -66,7 +65,7 @@ export const Content = styled.div`
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
-    path{
+    path {
       fill: #7338cb;
     }
   }
@@ -181,7 +180,6 @@ export const Content = styled.div`
       border-color: ${colors.orange.light};
     `}
 
-
   ${({ variation }) =>
     variation === 'secondary' &&
     css`
@@ -191,32 +189,46 @@ export const Content = styled.div`
       background: #fff;
       max-height: 100%;
 
-      .optionListContainer{
+      .optionListContainer {
         margin-top: 3px;
       }
-      .search-wrapper{
+      .search-wrapper {
         padding: 0;
         display: block;
         max-height: 100%;
       }
-      .chip{
+      .chip {
         margin-bottom: 0;
-        & + .chip{
-          margin-top: 5px
+        & + .chip {
+          margin-top: 5px;
         }
       }
-      .multiSelectContainer{
+      .multiSelectContainer {
         max-height: 100%;
-
       }
-      .searchWrapper{
+      .searchWrapper {
         padding: 14px 16px;
         padding-left: 16px;
         max-height: 100%;
       }
     `}
-    ${({ disabled ,variation}) =>
-    disabled && variation === 'secondary' &&
+
+        ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+      .optionListContainer,
+      .multiSelectContainer input {
+        visibility: hidden;
+      }
+      .chip{
+        cursor: default !important;
+      }
+    `}
+
+    ${({ disabled, variation }) =>
+    disabled &&
+    variation === 'secondary' &&
     css`
       opacity: 1;
       background: ${colors.gray.light};
@@ -225,17 +237,17 @@ export const Content = styled.div`
         visibility: hidden;
       }
       .chip {
-        color: #6A6A6A;
-        border-color: #6A6A6A
+        color: #6a6a6a;
+        border-color: #6a6a6a;
       }
-      .custom-close, > button{
-        display: none
+      .custom-close,
+      > button {
+        display: none;
       }
-
     `}
 `
 export const Container = styled.div`
-   > label {
+  > label {
     grid-area: 1/1;
     margin-bottom: 6px;
     color: #909090;
@@ -243,14 +255,13 @@ export const Container = styled.div`
     line-height: 16px;
     font-weight: 400;
   }
-  
-  ${({ disabled }) =>
+
+  ${({ disabled, variation }) =>
     disabled &&
+    variation !== 'secondary' &&
     css`
-      opacity: 0.5;
-      .optionListContainer,
-      .multiSelectContainer input {
-        visibility: hidden;
+      > label {
+        opacity: 0.5;
       }
     `}
 `

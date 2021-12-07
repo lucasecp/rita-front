@@ -24,8 +24,8 @@ export default () => {
 
       setPhotoApi(photo)
       window.localStorage.setItem('@Rita/Photo/Profile', photo)
-    } catch (e) {
-      if (e.response?.status === 404) {
+    } catch (error) {
+      if (error.response?.status === 404) {
         setPhotoApi('')
       }
     } finally {
