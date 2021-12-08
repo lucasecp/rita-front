@@ -4,7 +4,7 @@ import React from 'react'
 import { Container } from './styles'
 
 export const Select = ({
-  options,
+  options = [],
   label,
   setValue,
   value = '',
@@ -32,8 +32,8 @@ export const Select = ({
         )}
         {!!options?.length &&
           options?.map((option, index) => (
-            <option value={option.value} key={index}>
-              {option.label}
+            <option value={option?.value} key={index}>
+              {option?.label}
             </option>
           ))}
       </select>
@@ -41,5 +41,3 @@ export const Select = ({
     </Container>
   )
 }
-
-
