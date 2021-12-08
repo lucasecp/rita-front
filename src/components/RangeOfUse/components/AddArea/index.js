@@ -21,7 +21,7 @@ export const AddArea = ({ onGetArea }) => {
   const [ufSelected, setUfSelected] = useState('')
   const [citiesSelected, setCitiesSelected] = useState([])
 
-  const [disabledCity, setDisabledCity] = useState(true)
+  // const [disabled, setDisabled] = useState({ city: true, button: true })
 
   useEffect(() => {
     const findRegional = regionals.find(
@@ -60,10 +60,6 @@ export const AddArea = ({ onGetArea }) => {
     }
 
     loadCities()
-
-    if (ufSelected) {
-      setDisabledCity(false)
-    }
   }, [ufSelected])
 
   const addArea = () => {
@@ -74,7 +70,9 @@ export const AddArea = ({ onGetArea }) => {
     const findUf = ufs.find((uf) => uf.value === +ufSelected)
 
     onGetArea({
-      regional: { label: findRegional.label, value: +regionalSelected },
+      regional: findRegional
+        ? { label: findRegional.label, value: +regionalSelected }
+        : '',
       uf: findUf ? { label: findUf.label, value: +ufSelected } : '',
       cities: citiesSelected,
     })
@@ -109,10 +107,15 @@ export const AddArea = ({ onGetArea }) => {
           value={citiesSelected}
           setValue={setCitiesSelected}
           variation="secondary"
-          disabled={disabledCity}
+          disabled={!ufSelected}
         />
       </section>
-      <ButtonPrimary onClick={addArea}>Adicionar</ButtonPrimary>
+      <ButtonPrimary
+        disabled={!regionalSelected && !ufSelected}
+        onClick={addArea}
+      >
+        Adicionar
+      </ButtonPrimary>
     </Container>
   )
 }

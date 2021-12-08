@@ -5,46 +5,37 @@ import { ReactComponent as CloseIcon } from '@/assets/icons/close-multselct.svg'
 import { Container } from './styles'
 import { AddArea } from './components/AddArea'
 
+import { useLoading } from '@/hooks/useLoading'
+import { mapDataToSendApi } from './helpers/mapDataToSendApi'
+import apiPatient from '@/services/apiPatient'
+
 export const RangeOfUse = ({
   rangesOfUse,
   setRangesOfUse = () => {},
   viewMode,
 }) => {
-  // const [hasEmptyFields, setHasEmptyFields] = useState(false)
-  // const [rangesOfUse, setRangesOfUse] = useState([
-  //   {
-  //     regional: { label: 'Centro Oeste', value: 5 },
-  //     uf: { label: 'Distrito Federal', value: 9 },
-  //     cities: [
-  //       { name: 'Brasília', id: 2 },
-  //       { name: 'Gama', id: 3 },
-  //       { name: 'Taguatinga', id: 4 },
-  //       { name: 'Brazlândia', id: 5 },
-  //       { name: 'Planaltina', id: 9 },
-  //       { name: 'Paranoá', id: 7 },
-  //     ],
-  //     showCities: false,
-  //   },
-  //   {
-  //     regional: { label: 'Centro Oeste', value: 5 },
-  //     uf: { label: 'Goiás', value: 9 },
-  //     cities: [
-  //       { name: 'Goiânia', id: 2 },
-  //       { name: 'Avelinópolis', id: 3 },
-  //     ],
-  //     showCities: false,
-  //   },
-  // ])
+  const { Loading } = useLoading()
   const [listRangeOfUse, setListRangeOfUse] = useState(
     rangesOfUse.map((range) => ({ ...range, showCities: false }))
   )
 
-  // useEffect(() => {
-  //   setRangesOfUse(listRangeOfUse)
-  // }, [listRangeOfUse])
+  const onGetArea = async (area) => {
+    // setListRangeOfUse([...listRangeOfUse, { ...area, showCities: false }])
+    const dataToSend = mapDataToSendApi(area, listRangeOfUse)
 
-  const onGetArea = (area) => {
-    setListRangeOfUse([...listRangeOfUse, { ...area, showCities: false }])
+    console.log(dataToSend)
+
+    try {
+      Loading.turnOn()
+
+      const response = await apiPatient.post('/plano/abrangencia', dataToSend)
+
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      Loading.turnOff()
+    }
   }
 
   const removeRegionalAndUf = (position) => {
