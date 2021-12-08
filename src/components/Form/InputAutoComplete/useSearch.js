@@ -27,6 +27,6 @@ export default (endPoint, urlApi, inputValue, setOptions, setLoading) => {
 
   const mapData = (data) => {
     if (!data) return []
-    return data.map((el) => ({ label: el.nome, value: el.nome }))
+    return data.map((el) => ({ label: el.nome, value: el.id }))
   }
 }

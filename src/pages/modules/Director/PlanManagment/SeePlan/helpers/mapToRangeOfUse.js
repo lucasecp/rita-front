@@ -26,19 +26,3 @@ export default (ranges) => {
   return dataMaped
 }
 
-// municipios: [{id: 4, nome: "Abaete"}]
-// regional: {id: 1, nome: "Sudeste"}
-// uf: {id: 13, sigla: "MG", nome: "MINAS GERAIS"}
-// {
-//     regional: { label: 'Centro Oeste', value: 5 },
-//     uf: { label: 'Distrito Federal', value: 9 },
-//     cities: [
-//       { name: 'Brasília', id: 2 },
-//       { name: 'Gama', id: 3 },
-//       { name: 'Taguatinga', id: 4 },
-//       { name: 'Brazlândia', id: 5 },
-//       { name: 'Planaltina', id: 9 },
-//       { name: 'Paranoá', id: 7 },
-//     ],
-//     showCities: false,
-//   },
