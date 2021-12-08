@@ -10,6 +10,7 @@ export const RangeOfUse = ({
   setRangesOfUse = () => {},
   viewMode,
 }) => {
+  console.log(rangesOfUse);
   // const [hasEmptyFields, setHasEmptyFields] = useState(false)
   // const [rangesOfUse, setRangesOfUse] = useState([
   //   {
@@ -38,10 +39,13 @@ export const RangeOfUse = ({
   const [listRangeOfUse, setListRangeOfUse] = useState(
     rangesOfUse.map((range) => ({ ...range, showCities: false }))
   )
+  console.log(listRangeOfUse);
 
-  // useEffect(() => {
-  //   setRangesOfUse(listRangeOfUse)
-  // }, [listRangeOfUse])
+  useEffect(() => {
+    setListRangeOfUse(rangesOfUse.map((range) => ({ ...range, showCities: false })))
+  }, [rangesOfUse])
+
+
 
   const onGetArea = (area) => {
     setListRangeOfUse([...listRangeOfUse, { ...area, showCities: false }])

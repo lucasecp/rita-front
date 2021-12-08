@@ -32,7 +32,7 @@ const PlanInformationsDisabled = ({ data }) => {
           variation="secondary"
           value={mapDataToMultSelect(data?.servico)}
         />
-        <RangeOfUse rangesOfUse={mapToRangeOfUse(data?.abrangencia)}  />
+        <RangeOfUse rangesOfUse={mapToRangeOfUse(data?.abrangencia)} viewMode />
         <Select
           label="Status*:"
           disabled
