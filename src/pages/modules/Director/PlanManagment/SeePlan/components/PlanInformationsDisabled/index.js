@@ -9,6 +9,7 @@ import { ButtonGroup, Container } from './styles'
 import mapDataToMultSelect from '../../helpers/mapDataToMultSelect'
 import { showStatus } from '../../helpers/showStatus'
 import { RangeOfUse } from '@/components/RangeOfUse'
+import mapToRangeOfUse from '../../helpers/mapToRangeOfUse'
 
 const PlanInformationsDisabled = ({ data }) => {
   return (
@@ -31,7 +32,7 @@ const PlanInformationsDisabled = ({ data }) => {
           variation="secondary"
           value={mapDataToMultSelect(data?.servico)}
         />
-        <RangeOfUse rangesOfUse={[]} viewMode={true}/>
+        <RangeOfUse rangesOfUse={mapToRangeOfUse(data?.abrangencia)}  />
         <Select
           label="Status*:"
           disabled

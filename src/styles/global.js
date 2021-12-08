@@ -3,6 +3,7 @@ import colors from './colors'
 import fonts from './fonts'
 import calendar from './components/calendar'
 import tooltip from './components/tooltip'
+import listInputAutoComplete from './components/listInputAutoComplete'
 import { toastifyStyles } from './components/toastify/styles'
 
 export default createGlobalStyle`
@@ -11,6 +12,7 @@ export default createGlobalStyle`
   ${calendar}
   ${tooltip}
   ${toastifyStyles}
+  ${listInputAutoComplete}
 
 
   body, *{
@@ -35,9 +37,10 @@ export default createGlobalStyle`
 
 
   ::placeholder{
-      color: ${colors.gray.middleLight};
+      color: ${colors.gray.dark};
       font-weight: 500;
   }
+  
 
   a{
       text-decoration: none;

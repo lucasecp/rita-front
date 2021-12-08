@@ -16,7 +16,6 @@ export const FORGOT_PASSWORD_CONFIRM_DATA = '/esqueci-senha/confirmar-dados'
 export const OPERATOR_ANALYZE_PATIENT = '/pacientes/analisar-pacientes'
 export const OPERATOR_SEE_ONE_PATIENT = '/pacientes/ver-paciente'
 export const OPERATOR_CONSULT_ELIGIBILITY = '/elegibilidade/consultar'
-
 export const OPERATOR_REPORTS = '/relatorios'
 export const OPERATOR_REPORTS_AUTHORIZATION = '/relatorios/autorizacoes'
 
@@ -26,6 +25,8 @@ export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
 export const DIRECTOR_PLAN_MANAGMENT = '/gestao/planos'
 export const DIRECTOR_EDIT_PLAN = '/gestao/planos/editar'
 export const DIRECTOR_SEE_PLAN_MANAGMENT = '/gestao/planos/visualizar'
+
+export const PATIENT_SCHEDULE_APPOINTMENT = '/agendar-consulta'
 
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'
