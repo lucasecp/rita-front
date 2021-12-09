@@ -20,7 +20,7 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
 
   useEffect(() => {
     history.push(queryString)
-    setQuery(queryApiString)
+   return setQuery && setQuery(queryApiString)
   }, [limit, currentPage, restQuery])
 
   useEffect(() => {

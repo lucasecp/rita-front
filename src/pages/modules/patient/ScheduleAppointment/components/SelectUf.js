@@ -6,7 +6,7 @@ const SelectUf = ({ setUf, uf }) => {
   const [ufOptions, setUfOptions] = useState([])
 
   useEffect(() => {
-    setUf([])
+    setUf('')
     const getUf = async () => {
       try {
         const { data } = await apiPatient.get(`/uf?`)

@@ -6,7 +6,7 @@ const SelectCity = ({ setCity, city, uf }) => {
   const [cityOptions, setCityOptions] = useState([])
 
   useEffect(() => {
-    setCity([])
+    setCity('')
     if (!uf.length) {
       return
     }
@@ -31,7 +31,7 @@ const SelectCity = ({ setCity, city, uf }) => {
 
   return (
     <Select
-      
+
       options={cityOptions}
       label="Cidade:"
       labelDefaultOption="Necessário selecionar a UF:"
