@@ -3,14 +3,17 @@ import ButtonPrimary from '@/components/Button/Primary'
 import OutilineButton from '@/components/Button/Outline'
 import InputText from '@/components/Form/InputText'
 import CustomMultSelect from '@/components/Form/MultSelect'
-import {Select} from '@/components/Form/Select'
+import { Select } from '@/components/Form/Select'
 import Textarea from '@/components/Form/Textarea'
 import { ButtonGroup, Container } from './styles'
 import mapDataToMultSelect from '../../helpers/mapDataToMultSelect'
 import { showStatus } from '../../helpers/showStatus'
 import { RangeOfUse } from '@/components/RangeOfUse'
 import mapToRangeOfUse from '../../helpers/mapToRangeOfUse'
-import { DIRECTOR_EDIT_PLAN, DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
+import {
+  DIRECTOR_EDIT_PLAN,
+  DIRECTOR_PLAN_MANAGMENT,
+} from '@/routes/constants/namedRoutes/routes'
 import { useHistory } from 'react-router'
 
 const PlanInformationsDisabled = ({ data }) => {
@@ -19,9 +22,7 @@ const PlanInformationsDisabled = ({ data }) => {
     <>
       <Container>
         <InputText label="Código*:" disabled value={data?.codigo || ''} />
-
         <InputText label="Nome*:" disabled value={data?.nome || ''} />
-
         <Textarea
           label="Descrição*:"
           disabled
@@ -35,8 +36,7 @@ const PlanInformationsDisabled = ({ data }) => {
           variation="secondary"
           value={mapDataToMultSelect(data?.servicos)}
         />
-        <RangeOfUse rangesOfUse={mapToRangeOfUse(data?.abrangencia)} viewMode />
-        
+        {data?.abrangencia && <RangeOfUse rangesOfUse={mapToRangeOfUse(data?.abrangencia)} viewMode />}
         <Select
           label="Status*:"
           disabled
@@ -45,8 +45,14 @@ const PlanInformationsDisabled = ({ data }) => {
         />
       </Container>
       <ButtonGroup>
-        <OutilineButton onClick={() => history.push(DIRECTOR_PLAN_MANAGMENT)}>Voltar</OutilineButton>
-        <ButtonPrimary onClick={() => history.push(DIRECTOR_EDIT_PLAN, {plan: data})}>Editar</ButtonPrimary>
+        <OutilineButton onClick={() => history.push(DIRECTOR_PLAN_MANAGMENT)}>
+          Voltar
+        </OutilineButton>
+        <ButtonPrimary
+          onClick={() => history.push(DIRECTOR_EDIT_PLAN, { plan: data })}
+        >
+          Editar
+        </ButtonPrimary>
       </ButtonGroup>
     </>
   )
