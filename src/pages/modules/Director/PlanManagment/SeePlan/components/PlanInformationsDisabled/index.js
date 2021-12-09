@@ -9,8 +9,12 @@ import { ButtonGroup, Container } from './styles'
 import mapDataToMultSelect from '../../helpers/mapDataToMultSelect'
 import { showStatus } from '../../helpers/showStatus'
 import { RangeOfUse } from '@/components/RangeOfUse'
+import mapToRangeOfUse from '../../helpers/mapToRangeOfUse'
+import { DIRECTOR_EDIT_PLAN, DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
+import { useHistory } from 'react-router'
 
 const PlanInformationsDisabled = ({ data }) => {
+  const history = useHistory()
   return (
     <>
       <Container>
@@ -29,9 +33,10 @@ const PlanInformationsDisabled = ({ data }) => {
           disabled
           label="Serviços*:"
           variation="secondary"
-          value={mapDataToMultSelect(data?.servico)}
+          value={mapDataToMultSelect(data?.servicos)}
         />
-        <RangeOfUse rangesOfUse={[]} viewMode={true}/>
+        <RangeOfUse rangesOfUse={mapToRangeOfUse(data?.abrangencia)} viewMode />
+        
         <Select
           label="Status*:"
           disabled
@@ -40,8 +45,8 @@ const PlanInformationsDisabled = ({ data }) => {
         />
       </Container>
       <ButtonGroup>
-        <OutilineButton>Cancelar</OutilineButton>
-        <ButtonPrimary>Editar</ButtonPrimary>
+        <OutilineButton onClick={() => history.push(DIRECTOR_PLAN_MANAGMENT)}>Voltar</OutilineButton>
+        <ButtonPrimary onClick={() => history.push(DIRECTOR_EDIT_PLAN, {plan: data})}>Editar</ButtonPrimary>
       </ButtonGroup>
     </>
   )

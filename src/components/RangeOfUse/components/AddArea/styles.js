@@ -16,7 +16,7 @@ export const Container = styled.div`
     margin-top: 22px;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 991px) {
     flex-direction: column;
 
     > section {

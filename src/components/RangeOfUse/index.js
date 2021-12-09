@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { ReactComponent as CloseIcon } from '@/assets/icons/close-multselct.svg'
 
@@ -6,8 +6,12 @@ import { Container } from './styles'
 import { AddArea } from './components/AddArea'
 
 import { useLoading } from '@/hooks/useLoading'
-import { mapDataToSendApi } from './helpers/mapDataToSendApi'
+import {
+  mapDataToSendApi,
+  mapRangesToSendApi,
+} from './helpers/mapDataToSendApi'
 import apiPatient from '@/services/apiPatient'
+import { mapDataComingFromApi } from './helpers/mapDataComingFromApi'
 
 export const RangeOfUse = ({
   rangesOfUse,
@@ -15,62 +19,72 @@ export const RangeOfUse = ({
   viewMode,
 }) => {
   const { Loading } = useLoading()
-  const [listRangeOfUse, setListRangeOfUse] = useState(
-    rangesOfUse.map((range) => ({ ...range, showCities: false }))
-  )
+  const [listRangeOfUse, setListRangeOfUse] = useState([])
 
   const onGetArea = async (area) => {
     // setListRangeOfUse([...listRangeOfUse, { ...area, showCities: false }])
     const dataToSend = mapDataToSendApi(area, listRangeOfUse)
 
-    console.log(dataToSend)
-
     try {
       Loading.turnOn()
 
-      const response = await apiPatient.post('/plano/abrangencia', dataToSend)
+      const { data } = await apiPatient.post('/plano/abrangencia', dataToSend)
 
-      console.log(response)
+      const rangesOfUseMapped = mapDataComingFromApi(data)
+
+      setListRangeOfUse(rangesOfUseMapped)
     } catch (error) {
       console.log(error)
     } finally {
       Loading.turnOff()
     }
+
+    // console.log(regional)
   }
 
-  const removeRegionalAndUf = (position) => {
-    const rangesOfUseRemoved = listRangeOfUse.filter(
-      (range, index) => index !== position
-    )
+  const removeRegional = async (id) => {
+    try {
+      const { data } = await apiPatient.delete(`/plano/abrangencia/${id}`, {
+        params: { tipo: 'regional' },
+        data: mapRangesToSendApi(listRangeOfUse),
+      })
 
-    setListRangeOfUse(rangesOfUseRemoved)
-  }
+      const rangesOfUseMapped = mapDataComingFromApi(data)
 
-  // const removeUf = (position) => {
-  //   const rangesOfUseTemporary = listRangeOfUse
-
-  //   rangesOfUseTemporary[position] = {
-  //     ...rangesOfUseTemporary[position],
-  //     uf: '',
-  //     cities: [],
-  //   }
-
-  //   setListRangeOfUse([...rangesOfUseTemporary])
-  // }
-
-  const removeCity = (position, id) => {
-    const rangesOfUseTemporary = listRangeOfUse
-
-    const newCities = rangesOfUseTemporary[position].cities?.filter(
-      (city) => city.id !== id
-    )
-
-    rangesOfUseTemporary[position] = {
-      ...rangesOfUseTemporary[position],
-      cities: newCities,
+      setListRangeOfUse(rangesOfUseMapped)
+    } catch (error) {
+      console.log(error)
     }
+  }
 
-    setListRangeOfUse([...rangesOfUseTemporary])
+  const removeUf = async (id) => {
+    try {
+      const { data } = await apiPatient.delete(`/plano/abrangencia/${id}`, {
+        params: { tipo: 'uf' },
+        data: mapRangesToSendApi(listRangeOfUse),
+      })
+
+      const rangesOfUseMapped = mapDataComingFromApi(data)
+
+      setListRangeOfUse(rangesOfUseMapped)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const removeCity = async (id) => {
+    try {
+      const { data } = await apiPatient.delete(`/plano/abrangencia/${id}`, {
+        params: { tipo: 'municipio' },
+        data: mapRangesToSendApi(listRangeOfUse),
+      })
+
+      const rangesOfUseMapped = mapDataComingFromApi(data)
+
+      setListRangeOfUse(rangesOfUseMapped)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -80,7 +94,7 @@ export const RangeOfUse = ({
       </header>
       {!viewMode && (
         <>
-          <AddArea onGetArea={onGetArea} />
+          <AddArea onGetArea={onGetArea} rangesOfUse={listRangeOfUse} />
           {!listRangeOfUse.length && (
             <small>
               Ao menos a seleção de um item da Abrangência de Utilização é
@@ -89,87 +103,78 @@ export const RangeOfUse = ({
           )}
         </>
       )}
-      {
-        !!listRangeOfUse.length && (
-          <table>
-            <thead>
-              <tr>
-                <th>Regional</th>
-                <th>UF</th>
-                <th>Cidade</th>
-              </tr>
-            </thead>
-            <tbody>
-              {listRangeOfUse.map((range, index) => (
-                <tr key={index}>
-                  <td>
+      {!!listRangeOfUse.length && (
+        <table>
+          <thead>
+            <tr>
+              <th>Regional</th>
+              <th>UF</th>
+              <th>Cidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listRangeOfUse.map((range, index) => (
+              <tr key={index}>
+                <td>
+                  <div>
+                    <p>{range.regional.label}</p>
+                    {!viewMode && (
+                      <CloseIcon
+                        onClick={() => removeRegional(range.regional.value)}
+                      />
+                    )}
+                  </div>
+                </td>
+                <td>
+                  {range.uf && (
                     <div>
-                      <p>{range.regional.label}</p>
+                      <p>{range.uf.label}</p>
                       {!viewMode && (
-                        <CloseIcon onClick={() => removeRegionalAndUf(index)} />
+                        <CloseIcon onClick={() => removeUf(range.uf.value)} />
                       )}
                     </div>
-                  </td>
-                  <td>
-                    {range.uf && (
-                      <div>
-                        <p>{range.uf.label}</p>
+                  )}
+                </td>
+                <td>
+                  {range.cities.map((city, indexCity) =>
+                    range.showCities ? (
+                      <div key={city.id}>
+                        <p>{city.name}</p>
                         {!viewMode && (
-                          <CloseIcon
-                            onClick={() => removeRegionalAndUf(index)}
-                          />
+                          <CloseIcon onClick={() => removeCity(city.id)} />
                         )}
                       </div>
-                    )}
-                  </td>
-                  <td>
-                    {range.cities.map((city, indexCity) =>
-                      range.showCities ? (
+                    ) : (
+                      indexCity < 2 && (
                         <div key={city.id}>
                           <p>{city.name}</p>
                           {!viewMode && (
-                            <CloseIcon
-                              onClick={() => removeCity(index, city.id)}
-                            />
+                            <CloseIcon onClick={() => removeCity(city.id)} />
                           )}
                         </div>
-                      ) : (
-                        indexCity < 2 && (
-                          <div key={city.id}>
-                            <p>{city.name}</p>
-                            {!viewMode && (
-                              <CloseIcon
-                                onClick={() => removeCity(index, city.id)}
-                              />
-                            )}
-                          </div>
-                        )
                       )
-                    )}
-                    {range.cities.length > 2 && (
-                      <button
-                        onClick={() => {
-                          const rangeOfUseTemporary = listRangeOfUse
-                          rangeOfUseTemporary[index].showCities =
-                            !rangeOfUseTemporary[index].showCities
-                          setListRangeOfUse([...rangeOfUseTemporary])
-                        }}
-                      >
-                        {range.showCities
-                          ? 'Ver Menos'
-                          : `Ver + (${range.cities.length - 2})`}
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )
-        // : (
-        //   <h1>Sem dados de abrangência de utilização para mostrar</h1>
-        // )
-      }
+                    )
+                  )}
+                  {range.cities.length > 2 && (
+                    <button
+                      onClick={() => {
+                        const rangeOfUseTemporary = listRangeOfUse
+                        rangeOfUseTemporary[index].showCities =
+                          !rangeOfUseTemporary[index].showCities
+                        setListRangeOfUse([...rangeOfUseTemporary])
+                      }}
+                    >
+                      {range.showCities
+                        ? 'Ver Menos'
+                        : `Ver + (${range.cities.length - 2})`}
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </Container>
   )
 }

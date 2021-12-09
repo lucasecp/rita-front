@@ -3,13 +3,21 @@ export const mapDataToSendApi = (area, ranges) => {
     regional: area.regional.value,
     uf: area.uf.value,
     municipios: area.cities.map((city) => city.id),
-    abrangencia: ranges?.map((range) => ({
-      regional: { id: range.value, nome: range.name },
-      uf: { id: range.value, nome: range.name },
-      municipios: range?.cities?.map((city) => ({
-        id: city.id,
-        nome: city.name,
-      })),
-    })),
+    abrangencia: mapRangesToSendApi(ranges),
   }
+}
+
+export const mapRangesToSendApi = (ranges) => {
+  const rangesMapped = ranges?.map((range) => ({
+    regional: range.regional
+      ? { id: range.regional.value, nome: range.regional.label }
+      : '',
+    uf: range.uf ? { id: range.uf.value, nome: range.uf.label } : '',
+    municipios: range?.cities?.map((city) => ({
+      id: city.id,
+      nome: city.name,
+    })),
+  }))
+
+  return rangesMapped
 }
