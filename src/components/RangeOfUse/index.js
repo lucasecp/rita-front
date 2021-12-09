@@ -19,7 +19,7 @@ export const RangeOfUse = ({
   viewMode,
 }) => {
   const { Loading } = useLoading()
-  const [listRangeOfUse, setListRangeOfUse] = useState([])
+  const [listRangeOfUse, setListRangeOfUse] = useState(rangesOfUse)
 
   const onGetArea = async (area) => {
     // setListRangeOfUse([...listRangeOfUse, { ...area, showCities: false }])
@@ -33,6 +33,7 @@ export const RangeOfUse = ({
       const rangesOfUseMapped = mapDataComingFromApi(data)
 
       setListRangeOfUse(rangesOfUseMapped)
+      setRangesOfUse(rangesOfUseMapped)
     } catch (error) {
       console.log(error)
     } finally {
@@ -52,6 +53,7 @@ export const RangeOfUse = ({
       const rangesOfUseMapped = mapDataComingFromApi(data)
 
       setListRangeOfUse(rangesOfUseMapped)
+      setRangesOfUse(rangesOfUseMapped)
     } catch (error) {
       console.log(error)
     }
@@ -67,6 +69,7 @@ export const RangeOfUse = ({
       const rangesOfUseMapped = mapDataComingFromApi(data)
 
       setListRangeOfUse(rangesOfUseMapped)
+      setRangesOfUse(rangesOfUseMapped)
     } catch (error) {
       console.log(error)
     }
@@ -82,6 +85,7 @@ export const RangeOfUse = ({
       const rangesOfUseMapped = mapDataComingFromApi(data)
 
       setListRangeOfUse(rangesOfUseMapped)
+      setRangesOfUse(rangesOfUseMapped)
     } catch (error) {
       console.log(error)
     }
