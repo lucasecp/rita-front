@@ -4,6 +4,7 @@ import Actions from './Actions'
 import { showStatus } from '../../helpers/showStatus'
 import formatDate from '@/helpers/formatDate'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
+import CustomTooltip from '@/components/Tooltip'
 
 const Content = ({ plans }) => {
   return (
@@ -13,7 +14,11 @@ const Content = ({ plans }) => {
           <li>{formatDate(plan.dataAtivacao) || '-'}</li>
           <li>{formatDate(plan.dataTermino) || '-'}</li>
           <li>{plan.codigo || '-'}</li>
-          <li>{formatTextWithLimit(plan.nome, 38) || '-'}</li>
+          <li>
+            <CustomTooltip label={plan.nome}>
+              <div>{formatTextWithLimit(plan.nome, 38) || '-'}</div>
+            </CustomTooltip>
+          </li>
           <Status type={showStatus(plan.status)}>
             <span>{showStatus(plan.status) || '-'}</span>
           </Status>
