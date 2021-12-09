@@ -9,8 +9,10 @@ import { Container } from './styles'
 
 import apiPatient from '@/services/apiPatient'
 import { useModal } from '@/hooks/useModal'
+import { mapRangesToSendApi } from '../../helpers/mapDataToSendApi'
+import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 
-export const AddArea = ({ onGetArea }) => {
+export const AddArea = ({ onGetArea, rangesOfUse = [] }) => {
   const { showSimple } = useModal()
 
   const [regionals, setRegionals] = useState(REGIONAL_AND_UF)
@@ -21,21 +23,24 @@ export const AddArea = ({ onGetArea }) => {
   const [ufSelected, setUfSelected] = useState('')
   const [citiesSelected, setCitiesSelected] = useState([])
 
-  const [disabledCity, setDisabledCity] = useState(true)
-
   useEffect(() => {
-    const findRegional = regionals.find(
-      (regional) => regional.value === +regionalSelected
-    )
+    const updateUfs = async () => {
+      const ufsApi = await apiPatient.post(
+        '/plano/uf',
+        mapRangesToSendApi(rangesOfUse),
+        {
+          params: { regional: regionalSelected },
+        }
+      )
+      const ufsMapped = ufsApi.data.map((uf) => ({
+        value: uf.idUF,
+        label: firstLetterCapitalize(uf.descricao),
+      }))
 
-    const allUfs = []
-    regionals.forEach((regional) =>
-      regional.ufs?.forEach((uf) => allUfs.push(uf))
-    )
+      setUfs(ufsMapped)
+    }
 
-    const ufFromSelectedRegionalOrAll = findRegional?.ufs || allUfs
-    setUfs(ufFromSelectedRegionalOrAll)
-
+    updateUfs()
     setUfSelected('')
   }, [regionals, regionalSelected])
 
@@ -44,26 +49,24 @@ export const AddArea = ({ onGetArea }) => {
 
     const loadCities = async () => {
       try {
-        const response = await apiPatient.get('/municipio', {
-          params: { idUF: ufSelected },
-        })
+        const citiesApi = await apiPatient.post(
+          '/plano/municipio',
+          mapRangesToSendApi(rangesOfUse),
+          { params: { uf: ufSelected } }
+        )
 
-        const citiesMapped = response.data.dados.map((city) => ({
+        const citiesMapped = citiesApi.data.map((city) => ({
           id: city.idMunicipio,
-          name: city.descricao,
+          name: firstLetterCapitalize(city.descricao),
         }))
 
         setCities(citiesMapped)
       } catch (error) {
-        showSimple('Erro ao carregar as cidades')
+        showSimple.error('Erro ao carregar as cidades')
       }
     }
 
     loadCities()
-
-    if (ufSelected) {
-      setDisabledCity(false)
-    }
   }, [ufSelected])
 
   const addArea = () => {
@@ -74,7 +77,9 @@ export const AddArea = ({ onGetArea }) => {
     const findUf = ufs.find((uf) => uf.value === +ufSelected)
 
     onGetArea({
-      regional: { label: findRegional.label, value: +regionalSelected },
+      regional: findRegional
+        ? { label: findRegional.label, value: +regionalSelected }
+        : '',
       uf: findUf ? { label: findUf.label, value: +ufSelected } : '',
       cities: citiesSelected,
     })
@@ -83,6 +88,46 @@ export const AddArea = ({ onGetArea }) => {
     setUfSelected('')
     setCitiesSelected([])
   }
+
+  useEffect(() => {
+    const updateAreas = async () => {
+      const regionalsApi = await apiPatient.post(
+        '/plano/regional',
+        mapRangesToSendApi(rangesOfUse)
+      )
+
+      const ufsApi = await apiPatient.post(
+        '/plano/uf',
+        mapRangesToSendApi(rangesOfUse)
+      )
+
+      const citiesApi = await apiPatient.post(
+        '/plano/municipio',
+        mapRangesToSendApi(rangesOfUse)
+      )
+
+      const regionalsMapped = regionalsApi.data.map((regional) => ({
+        value: regional.id,
+        label: regional.nome,
+      }))
+
+      const ufsMapped = ufsApi.data.map((uf) => ({
+        value: uf.idUF,
+        label: firstLetterCapitalize(uf.descricao),
+      }))
+
+      const citiesMapped = citiesApi.data.map((city) => ({
+        value: city.idUF,
+        label: firstLetterCapitalize(city.descricao),
+      }))
+
+      setRegionals(regionalsMapped)
+      setUfs(ufsMapped)
+      setCities(citiesMapped)
+    }
+
+    updateAreas()
+  }, [rangesOfUse])
 
   return (
     <Container>
@@ -109,10 +154,15 @@ export const AddArea = ({ onGetArea }) => {
           value={citiesSelected}
           setValue={setCitiesSelected}
           variation="secondary"
-          disabled={disabledCity}
+          disabled={!ufSelected}
         />
       </section>
-      <ButtonPrimary onClick={addArea}>Adicionar</ButtonPrimary>
+      <ButtonPrimary
+        disabled={!regionalSelected && !ufSelected}
+        onClick={addArea}
+      >
+        Adicionar
+      </ButtonPrimary>
     </Container>
   )
 }

@@ -10,7 +10,7 @@ import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/rout
 
 const Actions = ({ status, planInformations }) => {
   const history = useHistory()
-  
+
   return (
     <Container>
       <CustomTooltip label="Visualizar">
@@ -21,7 +21,7 @@ const Actions = ({ status, planInformations }) => {
         />
       </CustomTooltip>
 
-      <CustomTooltip label="Ativar">   
+      <CustomTooltip label="Ativar">
         <ActiveIcon
           hidden={
             status !== 'Inativo' &&
