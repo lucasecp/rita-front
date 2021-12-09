@@ -29,6 +29,7 @@ export const Container = styled.div`
     line-height: 20px;
     margin-right: 24px;
     min-width: 150px;
+    max-width:150px;
     &:last-child {
       margin-right: 0;
     }
