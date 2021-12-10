@@ -4,7 +4,7 @@ import { Content } from './styles'
 import { Link } from 'react-router-dom'
 import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/routes'
 import { ReactComponent as ArrowLeftIcon } from '@/assets/icons/arrow-left2.svg'
-
+import ServiceSchedule from '../components/ServiceSchedule'
 const ClinicInformation = () => {
   return (
     <DefaultLayout title="Informações da Clínica">
@@ -14,7 +14,8 @@ const ClinicInformation = () => {
             <ArrowLeftIcon /> Voltar aos resultados
           </Link>
         </div>
-        <h3>Especialidades que atende</h3>
+        <h3>Especialidades que atende</h3> 
+        <ServiceSchedule/>
       </Content>
     </DefaultLayout>
   )
