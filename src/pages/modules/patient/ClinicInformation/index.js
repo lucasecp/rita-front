@@ -12,6 +12,7 @@ const ClinicInformation = () => {
         <div>
           <Link to={PATIENT_SCHEDULE_APPOINTMENT}><ArrowLeftIcon/> Voltar aos resultados</Link>
         </div>
+        <h3>Especialidades que atende</h3>
       </Content>
     </DefaultLayout>
   )
