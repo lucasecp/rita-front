@@ -33,7 +33,7 @@ const Cards = () => {
         Loading.turnOff()
       }
     }
-    // getPlans()
+    getPlans()
   }, [])
 
   const onConsult = () => {
