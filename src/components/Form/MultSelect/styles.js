@@ -221,7 +221,7 @@ export const Content = styled.div`
       .multiSelectContainer input {
         visibility: hidden;
       }
-      .chip{
+      .chip {
         cursor: default !important;
       }
     `}
