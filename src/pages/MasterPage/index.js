@@ -1,22 +1,18 @@
 import React, { useEffect } from 'react'
 import { DefaultLayout } from '../../components/Layout/DefaultLayout'
 import { TemplateBox } from './style'
-import FormInputs from './FormInputs'
-import Boxes from './Boxes'
 import Cards from './Cards'
 
 const MasterPage = () => {
   useEffect(() => {
-    document.title = 'Perfil'
+    document.title = 'Como você precisa cuidar sua saúde hoje?'
   }, [])
 
   return (
     <DefaultLayout>
       <TemplateBox>
         <Cards />
-        <FormInputs />
       </TemplateBox>
-      <Boxes />
     </DefaultLayout>
   )
 }
