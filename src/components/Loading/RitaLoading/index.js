@@ -3,9 +3,9 @@ import { Container } from './style'
 import logoGif from '@/assets/logo/logo-animate.gif'
 import { useLoading } from '@/hooks/useLoading'
 
-const RitaLoading = () => {
+export const RitaLoading = () => {
   const { isLoading } = useLoading()
-  
+
   return (
     isLoading && (
       <Container>
@@ -14,5 +14,3 @@ const RitaLoading = () => {
     )
   )
 }
-
-export default RitaLoading

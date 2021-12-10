@@ -122,7 +122,7 @@ export const RangeOfUse = ({
                 <td>
                   <div>
                     <p>{range.regional.label}</p>
-                    {!viewMode && (
+                    {!viewMode && !range.uf && (
                       <CloseIcon
                         onClick={() => removeRegional(range.regional.value)}
                       />

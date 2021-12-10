@@ -87,7 +87,7 @@ export const Container = styled.div`
 
           > div {
             width: fit-content;
-            padding: 0px 0px 0px 12px;
+            padding: 0px 12px 0px 12px;
             display: flex;
             align-items: center;
 
@@ -123,7 +123,7 @@ export const Container = styled.div`
             > svg {
               cursor: pointer;
               fill: ${colors.purple.main.darkness};
-              padding: 10px 12px 10px 8px;
+              padding: 10px 0px 10px 8px;
               box-sizing: content-box;
             }
           }
