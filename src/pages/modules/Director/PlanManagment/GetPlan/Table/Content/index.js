@@ -16,7 +16,7 @@ const Content = ({ plans }) => {
           <li>{plan.codigo || '-'}</li>
           <li>
             <CustomTooltip label={plan.nome}>
-              <div>{formatTextWithLimit(plan.nome, 38) || '-'}</div>
+              <div>{formatTextWithLimit(plan.nome, 33) || '-'}</div>
             </CustomTooltip>
           </li>
           <Status type={showStatus(plan.status)}>
