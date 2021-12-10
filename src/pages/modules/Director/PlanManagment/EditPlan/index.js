@@ -131,13 +131,13 @@ export const EditPlan = () => {
   }
 
   const onEditAndSavePlan = () => {
-    const hasErrorsOnFields = verifyErrorsOnFields()
+    // const hasErrorsOnFields = verifyErrorsOnFields()
 
-    if (hasErrorsOnFields) {
-      return
-    }
+    // if (hasErrorsOnFields) {
+    //   return
+    // }
 
-    console.log('save plan')
+    // console.log('save plan')
   }
 
   return (
