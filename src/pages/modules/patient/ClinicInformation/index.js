@@ -14,6 +14,7 @@ const ClinicInformation = () => {
             <ArrowLeftIcon /> Voltar aos resultados
           </Link>
         </div>
+        <h3>Especialidades que atende</h3>
       </Content>
     </DefaultLayout>
   )
