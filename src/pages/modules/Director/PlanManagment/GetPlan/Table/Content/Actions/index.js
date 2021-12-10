@@ -26,7 +26,7 @@ const Actions = ({ status, planInformations }) => {
           hidden={
             status !== 'Inativo' &&
             status !== 'Suspenso' &&
-            status !== 'Pendente'
+            status !== 'Em digitação'
           }
         />
       </CustomTooltip>
@@ -34,7 +34,7 @@ const Actions = ({ status, planInformations }) => {
       <CustomTooltip label="Inativar">
         <InactiveIcon
           hidden={
-            status !== 'Ativo' && status !== 'Suspenso' && status !== 'Pendente'
+            status !== 'Ativo' && status !== 'Suspenso' && status !== 'Em digitação'
           }
         />
       </CustomTooltip>
