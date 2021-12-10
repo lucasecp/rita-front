@@ -18,6 +18,9 @@ export const Container = styled.div`
       min-width: 55px;
       margin-left: 16px;
     }
+    &:last-child {
+      margin-right:-6px
+    }
     @media (max-width: 767px) {
       :first-child {
         flex-direction: column;

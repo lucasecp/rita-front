@@ -18,8 +18,10 @@ const DoctorInfo = ({ name, isVerify }) => {
           {isVerify && <VerifiedIcon />}
         </li>
         <li>
+          <div>
           <h6>Especialidade:</h6>
           <p>Ortopedista - RQE Nº: 1234</p>
+          </div>
         </li>
       </ul>
       <Link to="">

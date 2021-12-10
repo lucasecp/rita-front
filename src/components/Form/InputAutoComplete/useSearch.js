@@ -1,8 +1,15 @@
 import axios from 'axios'
 import { useEffect } from 'react'
 
-export default (endPoint, urlApi, inputValue, setOptions, setLoading) => {
-
+export default (
+  endPoint,
+  urlApi,
+  keyLabelFromApi,
+  keyValueFromApi,
+  inputValue,
+  setOptions,
+  setLoading
+) => {
   useEffect(() => {
     let cancel
     const getOptions = async () => {
@@ -16,7 +23,6 @@ export default (endPoint, urlApi, inputValue, setOptions, setLoading) => {
         const dataMapped = mapData(data?.dados)
         setOptions(dataMapped)
       } catch (error) {
-        if (axios.isCancel(error)) return
       } finally {
         setLoading(false)
       }
@@ -27,6 +33,6 @@ export default (endPoint, urlApi, inputValue, setOptions, setLoading) => {
 
   const mapData = (data) => {
     if (!data) return []
-    return data.map((el) => ({ label: el.nome, value: el.id }))
+    return data.map((el) => ({ label: el[keyLabelFromApi], value: el[keyValueFromApi] }))
   }
 }

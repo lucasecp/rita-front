@@ -11,7 +11,7 @@ import useProfilePhoto from '../../hooks/useProfilePhoto'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
 import { getInitialLetterName } from '../../helpers/getInitialLetterName'
 
-export const Header = ({ title,children }) => {
+export const Header = ({ title, children }) => {
   const { clearDataLogout, user } = useAuth()
   const [photo, getProfilePhoto] = useProfilePhoto()
 
@@ -31,8 +31,8 @@ export const Header = ({ title,children }) => {
 
   return (
     <Container>
-      <h1>{title || 'Page Title'}</h1>
-      {children }
+      <h1>{title || 'Como você precisa cuidar sua saúde hoje?'}</h1>
+      {children}
       <nav>
         <Link to="/perfil">
           Olá, {nameFormated}

@@ -12,6 +12,7 @@ export const Container = styled.div`
   th,
   td {
     min-width: 150px;
+    max-width: 150px;
   }
 
   th:last-child > div > div {

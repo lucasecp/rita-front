@@ -29,6 +29,7 @@ export const Container = styled.div`
     line-height: 20px;
     margin-right: 24px;
     min-width: 150px;
+    max-width: 150px;
     &:last-child {
       margin-right: 0;
     }
@@ -39,7 +40,7 @@ export const Container = styled.div`
     line-height: 25px;
     color: ${colors.gray.middle};
     text-align: center;
-    padding: 32px 0
+    padding: 32px 0;
   }
 `
 export const Status = styled.li`
@@ -68,7 +69,7 @@ export const Status = styled.li`
       }
     `}
   ${({ type }) =>
-    type === 'Pendente' &&
+    type === 'Em digitação' &&
     css`
       > span {
         background: ${colors.pink.middle};
