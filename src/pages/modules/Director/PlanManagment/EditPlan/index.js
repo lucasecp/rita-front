@@ -54,8 +54,6 @@ export const EditPlan = () => {
           name: service.nome,
         }))
 
-        servicesOptionsMapped.unshift({ id: 0, name: 'Todos' })
-
         setServicesOptions(servicesOptionsMapped)
       } catch (error) {
         console.log(error)
@@ -65,44 +63,44 @@ export const EditPlan = () => {
     loadServices()
   }, [])
 
-  const onSelectService = (_, selectedItem) => {
-    if (!selectedItem) {
-      return
-    }
+  // const onSelectService = (_, selectedItem) => {
+  //   if (!selectedItem) {
+  //     return
+  //   }
 
-    if (selectedItem.id === 0) {
-      return setServices(servicesOptions)
-    }
+  //   if (selectedItem.id === 0) {
+  //     return setServices(servicesOptions)
+  //   }
 
-    // console.log('services: ', services)
-    // console.log('servicesOptions: ', servicesOptions)
+  // console.log('services: ', services)
+  // console.log('servicesOptions: ', servicesOptions)
 
-    // if (services.length === servicesOptions.length - 1) {
-    //   return setServices([...services, { id: 0, name: 'Todos' }])
-    // }
+  // if (services.length === servicesOptions.length - 1) {
+  //   return setServices([...services, { id: 0, name: 'Todos' }])
+  // }
 
-    // const findAll = services.find((service) => service.id)
+  // const findAll = services.find((service) => service.id)
 
-    // if (findAll && services.length <= servicesOptions.length - 1) {
-    //   const cleanedServices = services.filter((service) => service.id !== 0)
+  // if (findAll && services.length <= servicesOptions.length - 1) {
+  //   const cleanedServices = services.filter((service) => service.id !== 0)
 
-    //   setServices(cleanedServices)
-    // }
+  //   setServices(cleanedServices)
+  // }
 
-    // console.log('servicesOp', servicesOptions)
-  }
+  // console.log('servicesOp', servicesOptions)
+  // }
 
-  const onRemoveService = (_, removedItem) => {
-    const findAll = services.find((service) => service.id === 0)
+  // const onRemoveService = (_, removedItem) => {
+  //   const findAll = services.find((service) => service.id === 0)
 
-    if (findAll && services.length >= servicesOptions.length) {
-      const cleanedServices = services.filter(
-        (service) => service.id !== 0 && service.id !== removedItem.id
-      )
+  //   if (findAll && services.length >= servicesOptions.length) {
+  //     const cleanedServices = services.filter(
+  //       (service) => service.id !== 0 && service.id !== removedItem.id
+  //     )
 
-      setServices(cleanedServices)
-    }
-  }
+  //     setServices(cleanedServices)
+  //   }
+  // }
 
   const verifyErrorsOnFields = () => {
     let hasError = false
@@ -132,11 +130,9 @@ export const EditPlan = () => {
 
   const onEditAndSavePlan = () => {
     // const hasErrorsOnFields = verifyErrorsOnFields()
-
     // if (hasErrorsOnFields) {
     //   return
     // }
-
     // console.log('save plan')
   }
 
@@ -177,8 +173,8 @@ export const EditPlan = () => {
             setValue={setServices}
             value={services}
             options={servicesOptions}
-            onSelect={onSelectService}
-            onRemove={onRemoveService}
+            // onSelect={onSelectService}
+            // onRemove={onRemoveService}
             hasError={!!errors.services}
             msgError={errors.services}
           />
