@@ -130,7 +130,7 @@ export const Card = styled.div`
   ${(props) =>
     props.variation === 'middle-blue' &&
     css`
-      background-color: #706bff;
+      background-color: #9b97ff;
       > img {
         filter: invert(87%) sepia(48%) saturate(1732%) hue-rotate(179deg)
           brightness(105%) contrast(98%);

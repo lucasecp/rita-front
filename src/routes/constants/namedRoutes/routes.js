@@ -27,6 +27,7 @@ export const DIRECTOR_EDIT_PLAN = '/gestao/planos/editar'
 export const DIRECTOR_SEE_PLAN_MANAGMENT = '/gestao/planos/visualizar'
 
 export const PATIENT_SCHEDULE_APPOINTMENT = '/agendar-consulta'
+export const PATIENT_CLINIC_INFORMATION = '/agendar-consulta/informacoes-clinica'
 
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'
