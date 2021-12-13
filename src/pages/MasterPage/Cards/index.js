@@ -33,7 +33,7 @@ const Cards = () => {
         Loading.turnOff()
       }
     }
-    // getPlans()
+    getPlans()
   }, [])
 
   const onConsult = () => {
@@ -41,6 +41,12 @@ const Cards = () => {
       return showMessage(Socialplan)
     }
     history.push(PATIENT_SCHEDULE_APPOINTMENT)
+  }
+
+  const onMedicament = () => {
+    if (plan === 'Social') {
+      return showMessage(Socialplan)
+    }
   }
 
   const onCsd = () => {
@@ -87,7 +93,9 @@ const Cards = () => {
           <img src={Background4} />
           <h3>Medicamentos</h3>
           <p>Descontos especiais em redes de farmácias.</p>
-          <OutlineButton variation="white">Encontre uma farmácia</OutlineButton>
+          <OutlineButton variation="white" onClick={onMedicament}>
+            Encontre uma farmácia
+          </OutlineButton>
         </Card>
       </CustomCol>
       <CustomCol md={6} order={plan === 'Vida' ? 1 : 4}>
