@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from './styles'
-import OutlineButton from '@/components/Button/outline'
+import OutlineButton from '@/components/Button/Outline'
 
 const SpecialtyItem = () => {
   return (

@@ -3,7 +3,7 @@ import { Container } from './Styles'
 import { ReactComponent as VerifiedIcon } from '@/assets/icon/verified.svg'
 
 const Header = () => {
-  return (
+  return ( 
     <Container>
       <div></div>
       <div>
