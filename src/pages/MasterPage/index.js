@@ -5,7 +5,7 @@ import Cards from './Cards'
 
 const MasterPage = () => {
   useEffect(() => {
-    document.title = 'Como você precisa cuidar sua saúde hoje?'
+    document.title = 'Rita Saúde | Início'
   }, [])
 
   return (

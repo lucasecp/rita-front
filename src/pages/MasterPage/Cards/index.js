@@ -43,7 +43,7 @@ const Cards = () => {
     history.push(PATIENT_SCHEDULE_APPOINTMENT)
   }
 
-  const onMedicamento = () => {
+  const onMedicament = () => {
     if (plan === 'Social') {
       return showMessage(Socialplan)
     }
@@ -93,7 +93,7 @@ const Cards = () => {
           <img src={Background4} />
           <h3>Medicamentos</h3>
           <p>Descontos especiais em redes de farmácias.</p>
-          <OutlineButton variation="white" onClick={onMedicamento}>
+          <OutlineButton variation="white" onClick={onMedicament}>
             Encontre uma farmácia
           </OutlineButton>
         </Card>
