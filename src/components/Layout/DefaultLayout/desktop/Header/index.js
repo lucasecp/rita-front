@@ -31,7 +31,7 @@ export const Header = ({ title, children }) => {
 
   return (
     <Container>
-      <h1>{title || 'Como você precisa cuidar sua saúde hoje?'}</h1>
+      <h1>{title || 'Como você precisa cuidar da sua saúde hoje?'}</h1>
       {children}
       <nav>
         <Link to="/perfil">
