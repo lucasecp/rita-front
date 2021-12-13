@@ -43,6 +43,12 @@ const Cards = () => {
     history.push(PATIENT_SCHEDULE_APPOINTMENT)
   }
 
+  const onMedicamento = () => {
+    if (plan === 'Social') {
+      return showMessage(Socialplan)
+    }
+  }
+
   const onCsd = () => {
     if (plan !== 'Vida') {
       return showMessage(DifferentPlanLife)
@@ -87,7 +93,7 @@ const Cards = () => {
           <img src={Background4} />
           <h3>Medicamentos</h3>
           <p>Descontos especiais em redes de farmácias.</p>
-          <OutlineButton variation="white" onClick={onConsult}>
+          <OutlineButton variation="white" onClick={onMedicamento}>
             Encontre uma farmácia
           </OutlineButton>
         </Card>
