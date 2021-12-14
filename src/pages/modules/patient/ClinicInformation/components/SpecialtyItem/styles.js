@@ -15,8 +15,14 @@ export const Container = styled.div`
       line-height: 30px;
       color: #303030;
     }
+    > svg {
+      cursor: pointer;
+    }
   }
-  > * + *{
-     margin-top: 27px
+  > *:last-child > * + * {
+    margin-top: 27px
+  }
+  > *:last-child{
+    margin-top: 27px
   }
 `
