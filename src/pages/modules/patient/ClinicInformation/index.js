@@ -26,6 +26,8 @@ const ClinicInformation = () => {
         <SpecialtySubDetails />
         <h3>Especialidades que atende</h3>
         <ServiceSchedule />
+        <SpecialtyItem/>
+      
       </Content>
     </DefaultLayout>
   )
