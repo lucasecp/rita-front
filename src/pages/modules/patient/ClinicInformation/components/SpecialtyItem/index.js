@@ -18,7 +18,7 @@ const SpecialtyItem = () => {
           <OutlineButton onClick={toggle}>Ver Especialistas</OutlineButton>
         )}
       </div>
-      <Accordion data-expanded={state ? 'show' : 'hidden' } >
+      <Accordion data-expanded={state ? 1 : 0 } >
         <SpecialtyDetails parentWasClosed={state} />
         <SpecialtyDetails parentWasClosed={state} />
       </Accordion>

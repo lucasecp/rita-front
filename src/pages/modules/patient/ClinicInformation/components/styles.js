@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components'
 
 export const Accordion = styled.div`
   max-height: 0;
-  transition: 0.4s;
+  transition: 0.3s max-height;
   visibility: hidden;
-  transition-delay: .1s;
+  opacity: 0;
   /* ${({ order }) => {
     order === 'show' &&
     css`
@@ -12,9 +12,10 @@ export const Accordion = styled.div`
         visibility: visible;
         `
   }} */
-  &[data-expanded='show'] {
-    transition: 0.4s max-height;
+  &[data-expanded='1'] {
+    transition: 0.3s max-height;
     max-height: 2000px;
     visibility: visible;
+    opacity: 1
   }
 `
