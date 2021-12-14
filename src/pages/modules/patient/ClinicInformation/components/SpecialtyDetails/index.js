@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Container } from './styles'
 import { ReactComponent as DropdownIcon } from '@/assets/icons/dropdown.svg'
 import SpecialtySubDetails from '../SpecialtySubDetails'
@@ -7,6 +7,12 @@ import { useToggle } from '@/hooks/useToggle'
 
 const SpecialtyDetails = ({ parentWasClosed }) => {
   const [state, toggle] = useToggle()  
+
+  useEffect(() => {
+   if(!parentWasClosed && state) {
+     toggle()
+   }
+  },[parentWasClosed])
 
   return (
     <Container>
@@ -18,7 +24,7 @@ const SpecialtyDetails = ({ parentWasClosed }) => {
         </div>
         <DropdownIcon onClick={toggle}/>
       </div>
-      <Accordion data-expanded={state  ? 'show' : 'hidden' || !parentWasClosed ? 'hidden' : 'show'}>
+      <Accordion data-expanded={state ? 1 : 0 }>
         <SpecialtySubDetails />
       </Accordion>
     </Container>
