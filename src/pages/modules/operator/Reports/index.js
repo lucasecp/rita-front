@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Select } from '@/components/Form/Select'
@@ -22,6 +22,10 @@ const Reports = () => {
 
     history.push(report.path)
   }
+
+  useEffect(() => {
+    document.title = 'Rita Saúde | Relátorios'
+  },[])
 
   return (
     <DefaultLayout title="Relatórios">

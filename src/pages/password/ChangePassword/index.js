@@ -1,5 +1,5 @@
 import { DefaultLayout } from '../../../components/Layout/DefaultLayout'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Container } from './styles'
 import { InputPassword } from '@/components/Form/InputPassword'
@@ -29,6 +29,10 @@ export const ChangePassword = () => {
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
 
   const [errors, setErrors] = useState({})
+
+  useEffect(() => {
+    document.title = 'Rita Saúde | Trocar Senha'
+  }, [])
 
   const findErrorsInFields = () => {
     const newErrors = {}
