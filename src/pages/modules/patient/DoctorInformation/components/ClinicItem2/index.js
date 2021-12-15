@@ -1,7 +1,7 @@
 import OutlineButton from '@/components/Button/Outline'
 import React from 'react'
 import { Container } from './styles'
-import ClinicItemDetails from '../ClinicItemDetails'
+import ClinicItemDetails from '../ClinicItemDetails2'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg'
 import { Accordion } from '../../../ClinicInformation/components/styles'
