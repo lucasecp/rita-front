@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   > div:first-child {
     width: 147px;
     height: 147px;
@@ -16,6 +18,7 @@ export const Container = styled.div`
     text-align: left;
     color: #303030;
     line-height: 30px;
+    margin: 8px 0 0 0;
   }
   h4 {
     font-size: 20px;
@@ -42,5 +45,8 @@ export const Container = styled.div`
         padding: 0 8px 0 0;
       }
     }
+  }
+  @media (max-width: 767px) {
+    justify-content: center;
   }
 `
