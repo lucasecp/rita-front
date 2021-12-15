@@ -5,10 +5,11 @@ export const Container = styled.div`
   border: solid 1px #efeafa;
   border-radius: 8px;
   max-width: 1000px;
+
   header {
     display: flex;
     flex-direction: column;
-    margin: 0 -24px;
+    margin: 0 -24px 16px -24px;
     > h5 {
       background: #efeafa;
       color: #7338cb;
@@ -18,43 +19,38 @@ export const Container = styled.div`
       text-align: center;
       padding: 8px;
     }
-    > ul {
-      margin-top: 16px;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 16px;
-      > li {
-        color: #6a6a6a;
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 20px;
-        min-width: 155px;
-        max-width: 155px;
-        text-align: center;
-        & +li{
-          margin-left: 15px;
-        }
-      }
+   
     }
   }
-  > ul {
+  > div  {
     display: flex;
-    justify-content: center;
-    & + ul{
-      margin-top: 11px
+    justify-content:center;
+    flex-wrap: wrap;
+    margin: -24px;
+    
+    >ul {
+      margin: 24px;
+      > h6{
+       text-align: center;
+      font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 20px;
+color: #6A6A6A;
+margin-bottom: 12px
+
+
     }
+   
     > li {
+      display: block;
       font-size: 16px;
       font-weight: 400;
       line-height: 20px;
       color: #6a6a6a;
-      min-width: 155px;
-      max-width: 155px;
       text-align: center;
-      & +li{
-        margin-left: 15px;
-
-      }
+     
     }
   }
+}
 `

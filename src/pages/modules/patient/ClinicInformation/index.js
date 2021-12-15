@@ -11,7 +11,7 @@ import SpecialtySubDetails from './components/SpecialtySubDetails'
 import ServiceSchedule from '../components/ServiceSchedule'
 
 const ClinicInformation = () => {
-  useEffect(() =>{
+  useEffect(() => {
     document.title = 'Rita Saúde | Informações da Clínica'
   }, [])
   return (
@@ -25,12 +25,6 @@ const ClinicInformation = () => {
         <Header />
         <h3>Especialidades que atende</h3>
         <SpecialtyItem />
-        <SpecialtyDetails />
-        <SpecialtySubDetails />
-        <h3>Especialidades que atende</h3>
-        <ServiceSchedule />
-        <SpecialtyItem/>
-
       </Content>
     </DefaultLayout>
   )

@@ -6,15 +6,10 @@ const ServiceSchedule = () => {
     <Container>
       <header>
         <h5>Agenda de atendimento</h5>
-        <ul>
-          <li>Segunda</li>
-          <li>Terça</li>
-          <li>Quarta</li>
-          <li>Quinta</li>
-          <li>Sexta</li>
-        </ul>
       </header>
-      <ul>
+      <div>
+        <ul>
+      <h6>Segunda</h6>
         <li>09:00 às 11:00</li>
         <li>09:00 às 11:00</li>
         <li>09:00 às 11:00</li>
@@ -22,12 +17,40 @@ const ServiceSchedule = () => {
         <li>09:00 às 11:00</li>
       </ul>
       <ul>
+      <h6>Terça</h6>
         <li>13:00 às 17:00</li>
         <li>13:00 às 17:00</li>
         <li>13:00 às 17:00</li>
         <li>13:00 às 17:00</li>
         <li>13:00 às 17:00</li>
       </ul>
+      <ul>
+      <h6>Quarta</h6>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+      </ul>
+      <ul>
+      <h6>Quinta</h6>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+      </ul>
+      <ul>
+      <h6>Sexta</h6>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+        <li>13:00 às 17:00</li>
+      </ul>
+  
+
+      </div>
     </Container>
   )
 }

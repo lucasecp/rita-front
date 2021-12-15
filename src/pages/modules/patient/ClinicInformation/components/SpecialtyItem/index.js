@@ -13,12 +13,14 @@ const SpecialtyItem = () => {
       <div>
         <h2>Alergia</h2>
         {state ? (
-          <CloseIcon onClick={toggle} />
+          <span onClick={toggle}>
+            <CloseIcon  />
+          </span>
         ) : (
           <OutlineButton onClick={toggle}>Ver Especialistas</OutlineButton>
         )}
       </div>
-      <Accordion data-expanded={state ? 1 : 0 } >
+      <Accordion data-expanded={state ? 1 : 0}>
         <SpecialtyDetails parentWasClosed={state} />
         <SpecialtyDetails parentWasClosed={state} />
       </Accordion>
