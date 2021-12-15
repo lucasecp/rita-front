@@ -11,7 +11,7 @@ export const Container = styled.div`
       font-weight: 400;
       line-height: 20px;
       margin-top: 8px;
-      margin-bottom:8px;
+      margin-bottom: 8px;
     }
     > h6 {
       color: #6a6a6a;
@@ -19,7 +19,7 @@ export const Container = styled.div`
     }
     display: flex;
     align-items: center;
-    
+
     & > * {
       /* margin: 8px 0 */
     }
@@ -28,38 +28,37 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    
+
     li:first-child {
       margin-right: 32px;
     }
     span {
       color: #303030;
-      
     }
   }
   > ul > li > * + * {
+    margin: 0 8px;
   }
   > ul > li > svg {
     margin-right: 8px;
   }
 
-  > ul > div + li > svg + h6 +  span {
+  > ul > div + li > svg + h6 + span {
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
     margin-right: 8px;
-    & + span +  span {
+    & + span + span {
       padding: 8px;
       background: #9146ff;
       color: #fff;
-      font-family: Athletics;
       font-size: 16px;
       font-weight: 700;
       line-height: 20px;
       border-radius: 16px;
     }
     & + span {
-     margin-right: 8px;
+      margin-right: 8px;
     }
   }
   > ul > li:last-child span {
@@ -79,10 +78,10 @@ export const Container = styled.div`
     > ul li {
       justify-content: center;
       margin-right: 0 !important;
-      flex-direction: column
+      flex-direction: column;
     }
-    > ul > div{
-      flex-direction: column
+    > ul > div {
+      flex-direction: column;
     }
   }
 `

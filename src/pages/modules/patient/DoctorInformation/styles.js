@@ -21,7 +21,7 @@ export const Content = styled.div`
       }
     }
   }
-  h3 {
+  > h3 {
     font-size: 20px;
     font-weight: 400;
     line-height: 25px;

@@ -1,19 +1,44 @@
 import OutlineButton from '@/components/Button/Outline'
 import React from 'react'
 import { Container } from './styles'
+import ClinicItemDetails from '../ClinicItemDetails'
+import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
+import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg'
+import { Accordion } from '../../../ClinicInformation/components/styles'
+import { useToggle } from '@/hooks/useToggle'
 
-const ClinicItemDetails = () => {
+const ClinicItem = () => {
+  const [state, toggle] = useToggle()
   return (
     <Container>
       <div>
-        <h2>Clinica Cardiológica + Vida</h2>
-        <ul>
-          <li>Saúde - Rio de janeiro - RJ</li>
-        </ul>
+        <div>
+          <h2>Clinica Cardiológica + Vida</h2>
+          <ul>
+            {state ? (
+              <li>
+                <span>
+                  Av. Médicos do Brasil, 800 - Saúde - Rio de Janeiro/RJ
+                </span>
+                <VerifiedIcon />
+                <a href="">Como chegar</a>
+              </li>
+            ) : (
+              <li>Saúde - Rio de janeiro - RJ</li>
+            )}
+          </ul>
+        </div>
+        {state ? (
+          <CloseIcon onClick={toggle} />
+        ) : (
+          <OutlineButton onClick={toggle}>Ver detalhes</OutlineButton>
+        )}
       </div>
-      <OutlineButton>Ver detalhes</OutlineButton>
+      <Accordion data-expanded={state ? 1 : 0}>
+        <ClinicItemDetails />
+      </Accordion>
     </Container>
   )
 }
 
-export default ClinicItemDetails
+export default ClinicItem
