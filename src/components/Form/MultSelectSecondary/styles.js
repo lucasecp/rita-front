@@ -130,7 +130,6 @@ export const Content = styled.div`
       background-repeat: no-repeat;
     }
   }
-
   > button {
     align-self: center;
     justify-self: end;
@@ -212,10 +211,6 @@ export const Content = styled.div`
         padding-left: 16px;
         max-height: 100%;
       }
-
-      border: 1px solid
-        ${({ hasError }) =>
-          hasError ? colors.orange.light : colors.gray.light};
     `}
 
         ${({ disabled }) =>
@@ -252,8 +247,6 @@ export const Content = styled.div`
     `}
 `
 export const Container = styled.div`
-  display: grid;
-
   > label {
     grid-area: 1/1;
     margin-bottom: 6px;
@@ -261,16 +254,6 @@ export const Container = styled.div`
     font-size: 14px;
     line-height: 16px;
     font-weight: 400;
-  }
-
-  > small {
-    margin-top: 4px;
-
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 15px;
-
-    color: ${colors.orange.middleDark};
   }
 
   ${({ disabled, variation }) =>

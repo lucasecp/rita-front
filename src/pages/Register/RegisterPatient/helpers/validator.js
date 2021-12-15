@@ -1,6 +1,7 @@
 import clear from '@/helpers/clear/SpecialCaracteres'
 import cpfValidate from '@/helpers/validateCpf'
 import moment from 'moment'
+import { parse, intervalToDuration, isValid } from 'date-fns';
 
 export const validateName = (value) => {
   if (!value.trim()) return { name: 'Nome Obrigatório.' }
@@ -41,12 +42,24 @@ export const validateGender = (value) => {
 
 export const validateBirthdate = (value) => {
   const dateFormate = moment(value, 'DD/MM/YYYY', true)
+  const birthDate = parse(value, 'dd/MM/yyyy', new Date())
+
+  console.log(isValid(birthDate));
+
   if (
     !dateFormate.isValid() ||
     moment().diff(dateFormate, 'years') >= 200 ||
     dateFormate.isAfter(moment())
   ) {
     return { birthdate: 'Data de Nascimento Inválida.' }
+  } else if (isValid(birthDate)) {
+    const { years } = intervalToDuration({ start: birthDate, end: new Date()});
+
+    if (years < 18) {
+      return { birthdate: 'O titular deve ser maior de 18 anos'}
+    }
+
+    return { birthdate: '' }
   }
   return { birthdate: '' }
 }

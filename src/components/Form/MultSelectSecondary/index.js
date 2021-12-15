@@ -11,10 +11,9 @@ const CustomMultSelect = ({
   value,
   setValue,
   options,
-  messageError,
+  msgError,
   hasError,
   disabled,
-  variation,
   ...rest
 }) => {
   const containerDiv = useRef(null)
@@ -26,7 +25,7 @@ const CustomMultSelect = ({
   window.onresize = () => adjustSelectOptions(containerDiv?.current)
 
   return (
-    <Container disabled={disabled} variation={variation} {...rest}>
+    <Container disabled={disabled}  {...rest}>
       {label && <label>{label}</label>}
       <Content
         disabled={disabled}
@@ -34,7 +33,7 @@ const CustomMultSelect = ({
         ref={containerDiv}
         id={generateRandomString(7)}
         onClick={() => adjustSelectOptions(containerDiv?.current)}
-        variation={variation}
+       
         {...rest}
       >
         <Multiselect
@@ -56,8 +55,8 @@ const CustomMultSelect = ({
             onClick={() => setValue !== undefined && setValue([])}
           />
         )}
+        {msgError && <MsgError>{msgError}</MsgError>}
       </Content>
-      {messageError && <small>{messageError}</small>}
     </Container>
   )
 }

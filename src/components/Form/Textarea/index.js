@@ -8,6 +8,8 @@ function Textarea({
   limit,
   showCaractersInformation,
   value,
+  hasError,
+  messageError,
   ...rest
 }) {
   const onChangeText = (event) => {
@@ -19,14 +21,17 @@ function Textarea({
   }
 
   return (
-    <Container {...rest}>
+    <Container hasError={hasError} >
       {label && <label htmlFor={label}>{label}</label>}
       <textarea id={label} onChange={onChangeText} value={value} {...rest} />
-      {showCaractersInformation && (
-        <p>
-          ({value?.length || 0} de {limit} caracteres)
-        </p>
-      )}
+      <div>
+        <small>{messageError}</small>
+        {showCaractersInformation && (
+          <p>
+            ({value?.length || 0} de {limit} caracteres)
+          </p>
+        )}
+      </div>
     </Container>
   )
 }

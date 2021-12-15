@@ -36,4 +36,7 @@ export const Container = styled.div`
       cursor: pointer;
     }
   }
+  > *:last-child > *  {
+   
+  }
 `

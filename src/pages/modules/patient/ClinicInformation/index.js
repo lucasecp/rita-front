@@ -6,6 +6,9 @@ import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/rou
 import { ReactComponent as ArrowLeftIcon } from '@/assets/icons/arrow-left2.svg'
 import Header from './components/Header'
 import SpecialtyItem from './components/SpecialtyItem'
+import SpecialtyDetails from './components/SpecialtyDetails'
+import SpecialtySubDetails from './components/SpecialtySubDetails'
+import ServiceSchedule from '../components/ServiceSchedule'
 
 const ClinicInformation = () => {
   useEffect(() =>{
@@ -21,6 +24,11 @@ const ClinicInformation = () => {
         </div>
         <Header />
         <h3>Especialidades que atende</h3>
+        <SpecialtyItem />
+        <SpecialtyDetails />
+        <SpecialtySubDetails />
+        <h3>Especialidades que atende</h3>
+        <ServiceSchedule />
         <SpecialtyItem/>
 
       </Content>
