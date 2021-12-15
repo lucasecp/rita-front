@@ -86,7 +86,7 @@ function DefaultRegister() {
   }
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Cadastro Padrão'
+    document.title = 'Rita Saúde | Cadastro'
 }, [])
 
   return (

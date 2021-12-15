@@ -11,7 +11,7 @@ import { Container } from './styles'
 function AnalyzePatients() {
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Analizar Paciente'
+    document.title = 'Rita Saúde | Pacientes'
   }, [])
   // const history = useHistory()
 

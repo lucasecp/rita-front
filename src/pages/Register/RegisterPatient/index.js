@@ -40,7 +40,7 @@ const RegisterPatient = () => {
   const [documentFiles, setdocumentFiles] = useState({})
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Registro Paciente'
+    document.title = 'Rita Saúde | Cadastro'
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])

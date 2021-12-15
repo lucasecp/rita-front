@@ -18,7 +18,7 @@ const PlanManagment = () => {
   const { Loading } = useLoading()
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Planos de Diretores'
+    document.title = 'Rita Saúde | Gestão de Planos'
     if (!queryApi) {
       return
     }
