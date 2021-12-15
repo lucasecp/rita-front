@@ -5,7 +5,7 @@ import Header from './components/Header'
 import { Link } from 'react-router-dom'
 import { Content } from './styles'
 import { ReactComponent as ArrowLeftIcon } from '@/assets/icons/arrow-left2.svg'
-import ClinicItem from './components/ClinicItem2'
+import ClinicItem from './components/ClinicItem'
 
 const DoctorInformation = () => {
   useEffect(() => {
