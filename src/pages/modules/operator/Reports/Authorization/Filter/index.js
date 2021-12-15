@@ -282,7 +282,7 @@ const Filter = () => {
             label="Colunas"
             span="2"
             hasError={errors.columns}
-            msgError={errors.columns}
+            messageError={errors.columns}
           />
         </div>
 

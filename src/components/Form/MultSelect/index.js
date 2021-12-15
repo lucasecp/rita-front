@@ -11,7 +11,7 @@ const CustomMultSelect = ({
   value,
   setValue,
   options,
-  msgError,
+  messageError,
   hasError,
   disabled,
   variation,
@@ -56,8 +56,8 @@ const CustomMultSelect = ({
             onClick={() => setValue !== undefined && setValue([])}
           />
         )}
-        {msgError && <MsgError>{msgError}</MsgError>}
       </Content>
+      {messageError && <small>{messageError}</small>}
     </Container>
   )
 }
