@@ -24,7 +24,7 @@ import { useModal } from '@/hooks/useModal'
 export const EditPlan = () => {
   const { plan } = useLocation().state
   const { Loading } = useLoading()
-  const { showMessage } = useModal()
+  const { showMessage, showSimple } = useModal()
   const history = useHistory()
 
   const [code, setCode] = useState(plan?.codigo || '')
@@ -147,6 +147,7 @@ export const EditPlan = () => {
 
   const onEditAndSavePlan = () => {
     const hasErrorsOnFields = verifyErrorsOnFields()
+
     if (hasErrorsOnFields) {
       return
     }

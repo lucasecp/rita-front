@@ -30,6 +30,10 @@ export default function AuthProvider({ children }) {
     try {
       Loading.turnOn()
 
+      const { data } = await apiUser.post('/login', payload)
+
+      const dataUser = jwt(data.jwtToken)
+
       const { data: responsePatient } = await apiPatient.get(
         `paciente/status?cpf=${payload.cpf}`
       )
@@ -37,16 +41,6 @@ export default function AuthProvider({ children }) {
       if (responsePatient.status === 'P' || responsePatient.status === 'D') {
         throw new Error('PATIENT_STATUS_P')
       }
-
-      // const [reponseStatus, responseLogin] = await axios.all([
-      //   apiPatient.get(`paciente/status?cpf=${payload.cpf}`),
-      //   apiUser.post('/login', payload),
-      // ])
-      // console.log(reponseStatus, responseLogin)
-
-      const { data } = await apiUser.post('/login', payload)
-
-      const dataUser = jwt(data.jwtToken)
 
       setDataLogin({
         ...dataUser,
