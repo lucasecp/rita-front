@@ -22,12 +22,7 @@ const ClinicInformation = () => {
         <Header />
         <h3>Especialidades que atende</h3>
         <SpecialtyItem />
-        <SpecialtyDetails />
-        <SpecialtySubDetails />
-        <h3>Especialidades que atende</h3>
-        <ServiceSchedule />
-        <SpecialtyItem/>
-      
+        <SpecialtyItem />
       </Content>
     </DefaultLayout>
   )

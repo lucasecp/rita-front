@@ -5,11 +5,11 @@ import Header from './components/Header'
 import { Link } from 'react-router-dom'
 import { Content } from './styles'
 import { ReactComponent as ArrowLeftIcon } from '@/assets/icons/arrow-left2.svg'
-import ClinicItem from './components/ClinicItem/index'
-import ClinicItemDetails from './components/ClinicItemDetails/index'
+import ClinicItem from './components/clinicItem'
+import ClinicItemDetails from './components/clinicItemDetails'
 
 const DoctorInformation = () => {
-  return (
+  return ( 
     <DefaultLayout title="Informações do Especialista">
       <Content>
         <div>

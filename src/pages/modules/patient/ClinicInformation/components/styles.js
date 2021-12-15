@@ -2,20 +2,15 @@ import styled, { css } from 'styled-components'
 
 export const Accordion = styled.div`
   max-height: 0;
-  transition: 0.3s max-height;
+  transition: 0.4s ;
   visibility: hidden;
-  opacity: 0;
-  /* ${({ order }) => {
-    order === 'show' &&
-    css`
-        max-height: 1000px;
-        visibility: visible;
-        `
-  }} */
+  overflow: hidden;
+  
+  
   &[data-expanded='1'] {
-    transition: 0.3s max-height;
+    overflow: visible;
     max-height: 2000px;
     visibility: visible;
-    opacity: 1
   }
+  
 `
