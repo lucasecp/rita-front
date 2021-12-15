@@ -13,6 +13,7 @@ const SeePlan = () => {
   const history = useHistory()
 
   useEffect(() => {
+    document.title = 'Rita Saúde | Planos'
     if (!location.state) {
       return history.push(DIRECTOR_PLAN_MANAGMENT)
     }
@@ -25,7 +26,7 @@ const SeePlan = () => {
         )
         setPlanInfo(response.data)
       } catch (error) {
-       
+
       } finally {
         Loading.turnOff()
       }

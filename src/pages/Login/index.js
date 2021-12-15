@@ -24,6 +24,7 @@ function Login() {
   const { state } = useLocation()
 
   useEffect(() => {
+    document.title = 'Rita Saúde | Entrar'
     state && state.message && showMessage(ExpiredSession)
   }, [])
 

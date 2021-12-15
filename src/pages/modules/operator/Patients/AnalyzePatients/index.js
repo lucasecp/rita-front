@@ -1,6 +1,6 @@
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 // import { OPERATOR_SEE_ONE_PATIENT } from '@/routes/constants/namedRoutes/routes'
-import React from 'react'
+import React, { useEffect } from 'react'
 // import { useHistory } from 'react-router'
 import Filter from './Filter'
 
@@ -9,6 +9,10 @@ import Filter from './Filter'
 import { Container } from './styles'
 
 function AnalyzePatients() {
+
+  useEffect(() => {
+    document.title = 'Rita Saúde | Analizar Paciente'
+  }, [])
   // const history = useHistory()
 
   // const seeOnePatient = (cpf) => {

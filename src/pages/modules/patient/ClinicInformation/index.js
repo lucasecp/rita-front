@@ -1,5 +1,5 @@
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Content } from './styles'
 import { Link } from 'react-router-dom'
 import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/routes'
@@ -8,6 +8,9 @@ import Header from './components/Header'
 import SpecialtyItem from './components/SpecialtyItem'
 
 const ClinicInformation = () => {
+  useEffect(() =>{
+    document.title = 'Rita Saúde | Informações da Clínica'
+  }, [])
   return (
     <DefaultLayout title="Informações da Clínica">
       <Content>
@@ -19,7 +22,7 @@ const ClinicInformation = () => {
         <Header />
         <h3>Especialidades que atende</h3>
         <SpecialtyItem/>
-      
+
       </Content>
     </DefaultLayout>
   )

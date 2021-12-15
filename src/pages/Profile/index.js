@@ -20,6 +20,7 @@ export const Profile = () => {
   const [dataToDisplay, setDataToDisplay] = useState()
 
   useEffect(() => {
+    document.title = 'Rita Saúde | Perfil'
     const loadProfileInformations = async () => {
       try {
         Loading.turnOn()

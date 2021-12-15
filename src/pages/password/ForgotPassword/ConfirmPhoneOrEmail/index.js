@@ -52,6 +52,7 @@ function ConfirmPhoneOrEmail() {
   let isBlocked
 
   useEffect(() => {
+    document.title = 'Rita Saúde | Confirmar Telefone ou Email'
     if (userData.phone && userData.email) {
       return
     }

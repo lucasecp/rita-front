@@ -45,6 +45,7 @@ export const EditPlan = () => {
   })
 
   useEffect(() => {
+    document.title = 'Rita Saúde | Editar Plano'
     const loadServices = async () => {
       try {
         const { data } = await apiPatient.get('/servico')

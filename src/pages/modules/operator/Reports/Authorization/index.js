@@ -5,6 +5,9 @@ import Filter from './Filter'
 import { Container } from './styles'
 
 const Authorization = () => {
+  useEffect(() => {
+    document.title = 'Rita Saúde | Autorização'
+  }, [])
 
   return (
     <DefaultLayout title="Relatórios / Autorizações">

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Content } from './styles';
 import Filters from './Filters';
 
 const ScheduleAppointment = () => {
+  useEffect(() => {
+    document.title = 'Rita Saúde | Agendar Consulta'
+  }, [])
+
   return (
     <DefaultLayout title='Agende sua Consulta'>
       <Content>

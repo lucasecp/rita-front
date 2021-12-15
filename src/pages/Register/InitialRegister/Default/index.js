@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
@@ -84,6 +84,10 @@ function DefaultRegister() {
       Loading.turnOff()
     }
   }
+
+  useEffect(() => {
+    document.title = 'Rita Saúde | Cadastro Padrão'
+}, [])
 
   return (
     <>

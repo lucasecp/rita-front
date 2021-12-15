@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { toast } from '@/styles/components/toastify'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
@@ -149,6 +149,10 @@ export const ConsultEligibility = () => {
 
     showEligiblility(responseApiMessage, responseApiData)
   }
+
+  useEffect(() => {
+    document.title = 'Rita Saúde | Consultar Eligibilidade'
+  },[])
 
   return (
     <DefaultLayout title="Consulta de Elegibilidade">
