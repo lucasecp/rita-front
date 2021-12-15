@@ -8,6 +8,7 @@ import Header from './components/Header'
 import SpecialtyItem from './components/SpecialtyItem'
 import SpecialtyDetails from './components/SpecialtyDetails'
 import SpecialtySubDetails from './components/SpecialtySubDetails'
+import ServiceSchedule from '../components/ServiceSchedule'
 
 const ClinicInformation = () => {
   return (
@@ -20,9 +21,13 @@ const ClinicInformation = () => {
         </div>
         <Header />
         <h3>Especialidades que atende</h3>
+        <SpecialtyItem />
+        <SpecialtyDetails />
+        <SpecialtySubDetails />
+        <h3>Especialidades que atende</h3>
+        <ServiceSchedule />
         <SpecialtyItem/>
-        <SpecialtyDetails/>
-        <SpecialtySubDetails/>
+      
       </Content>
     </DefaultLayout>
   )
