@@ -1,12 +1,12 @@
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/routes'
 import React from 'react'
-import Header from './components/Header'
+import Header from './components/Header/index2'
 import { Link } from 'react-router-dom'
 import { Content } from './styles'
 import { ReactComponent as ArrowLeftIcon } from '@/assets/icons/arrow-left2.svg'
-import ClinicItem from './components/ClinicItem/index'
-import ClinicItemDetails from './components/ClinicItemDetails/index'
+import ClinicItem from './components/clinicItem/index2'
+import ClinicItemDetails from './components/clinicItemDetails/index2'
 
 const DoctorInformation = () => {
   return (

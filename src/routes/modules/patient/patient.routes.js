@@ -7,7 +7,7 @@ import {
 } from '../../constants/namedRoutes/routes'
 import ScheduleAppointment from '@/pages/modules/patient/ScheduleAppointment'
 import ClinicInformation from '@/pages/modules/patient/ClinicInformation'
-import DoctorInformation from '@/pages/modules/patient/DoctorInformation'
+import DoctorInformation from '@/pages/modules/patient/DoctorInformation/index2'
 
 const patientRoutes = [
   {
