@@ -39,6 +39,7 @@ function Password() {
   let cpf = ''
 
   useEffect(() => {
+    document.title = 'Rita Saúde | Definir Senha'
     if (!state) return history.push(LOGIN)
   }, [])
 

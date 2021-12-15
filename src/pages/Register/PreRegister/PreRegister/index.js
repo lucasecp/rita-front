@@ -50,6 +50,7 @@ function PreRegister() {
   let isBlocked
 
   useEffect(() => {
+      document.title = 'Rita Saúde | Registrar'
     if (userData.phone && userData.email) {
       return
     }

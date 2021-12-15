@@ -40,7 +40,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 815px) {
     padding: 32px 24px;
 
     > form {

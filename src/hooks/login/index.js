@@ -27,42 +27,62 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState(getUserStorage() || null)
 
   const login = async (payload, prevPath) => {
+    let searchPatientStatus = false
+    let canDoLogin = false
+
     try {
       Loading.turnOn()
 
-      const { data: responsePatient } = await apiPatient.get(
-        `paciente/status?cpf=${payload.cpf}`
-      )
-
-      if (responsePatient.status === 'P' || responsePatient.status === 'D') {
-        throw new Error('PATIENT_STATUS_P')
-      }
-
-      // const [reponseStatus, responseLogin] = await axios.all([
-      //   apiPatient.get(`paciente/status?cpf=${payload.cpf}`),
-      //   apiUser.post('/login', payload),
-      // ])
-      // console.log(reponseStatus, responseLogin)
-
-      const { data } = await apiUser.post('/login', payload)
-
-      const dataUser = jwt(data.jwtToken)
-
-      setDataLogin({
-        ...dataUser,
-        cpf: payload.cpf,
-        token: data.jwtToken,
+      await apiUser.get(`/status`, {
+        params: { cpf: payload.cpf },
       })
 
-      pushToUrl(prevPath)
-    } catch (e) {
-      if (e.message === 'PATIENT_STATUS_P') {
-        showMessage(AnalyzingData)
-        return
-      }
-      showMessage(InvalidCredences)
+      canDoLogin = true
+    } catch (error) {
+      searchPatientStatus = true
     } finally {
       Loading.turnOff()
+    }
+
+    if (searchPatientStatus) {
+      try {
+        Loading.turnOn()
+
+        const { data } = await apiPatient.get(
+          `paciente/status?cpf=${payload.cpf}`
+        )
+
+        if (data.status === 'P' || data.status === 'D') {
+          showMessage(AnalyzingData)
+        }
+      } catch (error) {
+        // Futuro tratamento caso exista um usuário sem paciente
+        showMessage(InvalidCredences)
+      } finally {
+        Loading.turnOff()
+      }
+    }
+
+    if (canDoLogin) {
+      try {
+        Loading.turnOn()
+
+        const { data } = await apiUser.post('/login', payload)
+
+        const dataUser = jwt(data.jwtToken)
+
+        setDataLogin({
+          ...dataUser,
+          cpf: payload.cpf,
+          token: data.jwtToken,
+        })
+
+        pushToUrl(prevPath)
+      } catch (error) {
+        showMessage(InvalidCredences)
+      } finally {
+        Loading.turnOff()
+      }
     }
   }
 

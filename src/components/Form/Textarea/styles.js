@@ -15,7 +15,8 @@ export const Container = styled.div`
 
   > textarea {
     resize: none;
-    border: 1px solid ${colors.gray.light};
+    border: 1px solid
+      ${({ hasError }) => (hasError ? colors.orange.light : colors.gray.light)};
     border-radius: 8px;
     color: ${colors.gray.dark};
     padding: 14px 16px;
@@ -53,14 +54,27 @@ export const Container = styled.div`
   > label + textarea {
     margin-top: 4px;
   }
-  > p {
-    margin-left: auto;
-    font-family: Athletics;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 15px;
-    color: #AFAFAF;
-    margin-top: 4px
 
+  > div {
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+
+    > small {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 15px;
+
+      color: ${colors.orange.middleDark};
+    }
+
+    > p {
+      margin-left: auto;
+      font-family: Athletics;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 15px;
+      color: #afafaf;
+    }
   }
 `
