@@ -27,7 +27,7 @@ function IdentifyPerson() {
   const { showMessage } = useModal()
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Esqueci Minha Senha'
+    document.title = 'Rita Saúde | Recuperar Senha'
     if(!state && !state?.error) return
     if(state.error === 'EXPIRED_TOKEN') showMessage(ExpiredSessionDefinePassword)
   }, []);

@@ -5,7 +5,7 @@ import Filters from './Filters';
 
 const ScheduleAppointment = () => {
   useEffect(() => {
-    document.title = 'Rita Saúde | Agendar Consulta'
+    document.title = 'Rita Saúde | Agende sua Consulta'
   }, [])
 
   return (

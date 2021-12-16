@@ -24,7 +24,7 @@ const Reports = () => {
   }
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Relátorios'
+    document.title = 'Rita Saúde | Relatórios'
   },[])
 
   return (

@@ -81,7 +81,7 @@ function RegisterCardSabin() {
   }
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Registrar Cartão Sabin'
+    document.title = 'Rita Saúde | Cadastro com Cartão Sabin'
 }, [])
 
   return (
