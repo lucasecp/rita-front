@@ -39,6 +39,6 @@ export const Container = styled.div`
     margin-top: 27px
   }
   > *:last-child[data-expanded='1']{
-    margin-top: 7px
+    margin-top: 27px
   }
 `
