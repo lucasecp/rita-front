@@ -8,7 +8,7 @@ export const Content = styled.div`
     background: #eeeeee;
     padding: 16px 32px;
     border-radius: 8px 8px 0 0;
-    margin: 0 -24px 40px -24px;
+    margin: 0 -32px 40px -32px;
     > a {
       font-size: 14px;
       font-weight: 500;
@@ -41,5 +41,14 @@ export const Content = styled.div`
   }
   @media (max-width:767px){
     padding: 0 24px 40px 24px;
+    > div:first-child {
+      margin: 0 -24px 40px -24px;
+    }
   }
+`
+export const ListItems = styled.div`
+> * + *{
+  margin-top: 32px
+}
+ 
 `

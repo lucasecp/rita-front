@@ -128,21 +128,25 @@ export const EditPlan = () => {
   }
 
   const checkIfCodeAlreadyExists = async () => {
-    setTimeout(() => {
-      try {
-        Loading.turnOn()
+    try {
+      // Loading.turnOn()
 
+      const {
+        data: { mensagem: codeExists },
+      } = await apiPatient.get(`/plano/codigo/${code}/existe`)
+
+      if (codeExists === 'true' && code !== plan?.codigo) {
         setErrors({ ...errors, code: 'O código informado já existe!' })
         setDisabledSaveButton(true)
-
+      } else {
         setErrors({ ...errors, code: '' })
         setDisabledSaveButton(false)
-      } catch (error) {
-        console.log(error)
-      } finally {
-        Loading.turnOff()
       }
-    }, 1000)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      // Loading.turnOff()
+    }
   }
 
   const onCancelEditPlan = () => {
@@ -158,6 +162,7 @@ export const EditPlan = () => {
     const hasErrorsOnFields = verifyErrorsOnFields()
 
     if (hasErrorsOnFields) {
+      scrollTo(0, 0)
       return
     }
 
