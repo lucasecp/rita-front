@@ -35,13 +35,14 @@ export const fromApi = (dataClinic) => {
 
   return {
     photo: dataClinic.foto,
-    description: dataClinic.descricao,
+    name: dataClinic.descricao,
     address: dataClinic.endereco,
     linkGoogleMap: dataClinic.comoChegar,
     district: dataClinic.bairro,
     city: dataClinic.cidade,
     uf: dataClinic.uf,
     number: dataClinic.numero,
+    complement: dataClinic.complemento,
     specialtys,
   }
 }

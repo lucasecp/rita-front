@@ -8,9 +8,12 @@ import Header from './components/Header'
 import SpecialtyItem from './components/SpecialtyItem'
 import apiPatient from '@/services/apiPatient'
 import {fromApi} from './adapters/mapClinicInfo'
+import { useLoading } from '@/hooks/useLoading'
 
 const ClinicInformation = () => {
   const [clinicInfo, setClinicInfo] = useState({});
+
+  const {Loading} = useLoading()
 
   useEffect(() => {
     document.title = 'Rita Saúde | Informações da Clínica'
@@ -19,14 +22,15 @@ const ClinicInformation = () => {
   useEffect(() => {
     const getClinic = async () => {
       try{
+        Loading.turnOn()
         const {data} = await apiPatient.get(`clinica/1/especialidades/medicos`)
-        // setClinicInfo(data)
-        console.log(fromApi(data))
-
+        setClinicInfo(fromApi(data))
       }
       catch(error){
         console.log(error)
-       
+      }
+      finally{
+        Loading.turnOff()
       }
     }
     getClinic()
@@ -41,7 +45,7 @@ const ClinicInformation = () => {
             <ArrowLeftIcon /> Voltar aos resultados
           </Link>
         </div>
-        <Header />
+        <Header clinicInfo={clinicInfo}/>
         <h3>Especialidades que atende</h3>
         <ListItems>
         <SpecialtyItem />

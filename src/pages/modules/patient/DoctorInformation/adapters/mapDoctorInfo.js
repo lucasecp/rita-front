@@ -1,5 +1,5 @@
 export const fromApi = (dataClinic) => {
-  const doctorSpecialty = dataClinic?.medicoEspecialidade?.map((dSpecialty) => ({
+  const doctorSpecialty = dataClinic?.medicoEspecialidade?.find((dSpecialty) => ({
     rqe: dSpecialty.RQE,
     specialty: dSpecialty.especialidade.descricao
   }))
@@ -61,6 +61,6 @@ export const fromApi = (dataClinic) => {
     crmuf: dataClinic.crmuf,
     crm: dataClinic.CRM,
     clinicdoctor,
-    doctorSpecialty
+    doctorSpecialty : {...doctorSpecialty}
   }
 }
