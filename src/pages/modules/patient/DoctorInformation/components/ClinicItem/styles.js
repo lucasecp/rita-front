@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   box-shadow: 0px 2px 8px #0000001a;
   border-radius: 8px;
+  margin: 0 0 32px 0;
   > *:first-child {
     padding: 24px;
     display: flex;

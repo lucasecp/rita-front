@@ -7,10 +7,9 @@ import { EditPersonalData } from './containers/EditPersonalData'
 import { Container } from './styles'
 import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
-import { formatCpf } from '@/helpers/formatCpf'
-import { formatPrice } from '@/helpers/formatPrice'
 import { useModal } from '@/hooks/useModal'
 import { ProfileInactive } from './messages/ProfileInactive'
+import { fromApiDataToDisplay, fromApiPersonalDatas } from './adapters/fromApi'
 
 export const Profile = () => {
   const { Loading } = useLoading()
@@ -21,6 +20,7 @@ export const Profile = () => {
 
   useEffect(() => {
     document.title = 'Rita Saúde | Perfil'
+
     const loadProfileInformations = async () => {
       try {
         Loading.turnOn()
@@ -30,49 +30,9 @@ export const Profile = () => {
           data: { endereco },
         } = await apiPatient.get('/paciente/meu-perfil')
 
-        setDataToDisplay({
-          name: data.nome,
-          cpf: formatCpf(data.cpf),
-          contractedPlan: data.plano?.nome,
-          status: data.status === 'A' ? 'active' : 'inactive',
-          table: {
-            type:
-              data.tabela?.nome === 'Tabela Padrão'
-                ? 'default'
-                : data.tabela?.nome === 'Tabela Especial'
-                ? 'special'
-                : 'none',
-            validity: data.tabela?.validade,
-          },
-        })
+        setDataToDisplay(fromApiDataToDisplay(data))
 
-        setPersonalDatas({
-          personalDatas: {
-            name: data.nome,
-            birthDate: data.dataNascimento,
-            gender: data.sexo,
-            phone: data.telefone,
-            email: data.email,
-          },
-          address: {
-            cep: endereco.cep,
-            uf: endereco.uf,
-            city: endereco.cidade,
-            addressUser: endereco.logradouro,
-            number: endereco.numero,
-            district: endereco.bairro,
-            complement: endereco.complemento,
-          },
-          supplementaryData: {
-            contractedPlan: data.plano?.nome,
-            contractedPlanSince: data.plano?.data,
-            price: data.plano?.valor
-              ? formatPrice(data.plano?.valor)
-              : 'Isento',
-            channel: data.plano?.canal,
-            company: data.plano?.empresa,
-          },
-        })
+        setPersonalDatas(fromApiPersonalDatas(data, endereco))
 
         if (data.status === 'I') {
           showMessage(ProfileInactive, {}, true)
