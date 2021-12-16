@@ -18,7 +18,7 @@ const PlanManagment = () => {
   const { Loading } = useLoading()
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Gestão de Planos'
+    document.title = 'Rita Saúde | Visualizar Plano'
     if (!queryApi) {
       return
     }
@@ -42,7 +42,7 @@ const PlanManagment = () => {
 
   return (
     <Container>
-      <DefaultLayout title="Gestão de Planos" headerChildren={<ButtonHeader />}>
+      <DefaultLayout title="Visualizar Plano" headerChildren={<ButtonHeader />}>
         <Content>
           <Filter setFilters={setFilters} />
           <Table

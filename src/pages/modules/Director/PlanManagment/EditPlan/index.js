@@ -193,7 +193,7 @@ export const EditPlan = () => {
   }
 
   return (
-    <DefaultLayout title="Gestão de Planos - Editar Plano">
+    <DefaultLayout title="Editar Plano">
       <Container>
         <div>
           <section>
