@@ -40,5 +40,10 @@ export const Content = styled.div`
       margin-top: 3px;
     }
   }
-  
+  @media (max-width: 767px) {
+    padding: 0 24px 40px 24px;
+    > div:first-child {
+      margin: 0 -24px 40px -24px;
+    }
+  }
 `
