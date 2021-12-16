@@ -1,9 +1,13 @@
 export const fromApi = (dataClinic) => {
+  const doctorSpecialty = dataClinic?.medicoEspecialidade?.map((dSpecialty) => ({
+    rqe: dSpecialty.RQE,
+    specialty: dSpecialty.especialidade.descricao
+  }))
+
   const clinicdoctor = dataClinic?.clinicaMedico?.map((specialty) => ({
     linkGoogleMap: specialty.clinica.comoChegar,
 
     scheduleAppointment: dataClinic.agenda.reduce((ac, schedule) => {
-      console.log(schedule.idMedico, specialty.idMedico)
       if (schedule.idMedico === specialty.idMedico) {
         ac = schedule.agenda
         return ac
@@ -54,6 +58,9 @@ export const fromApi = (dataClinic) => {
     uf: dataClinic.uf,
     number: dataClinic.numero,
     verified: dataClinic.validadoClinica,
+    crmuf: dataClinic.crmuf,
+    crm: dataClinic.CRM,
     clinicdoctor,
+    doctorSpecialty
   }
 }
