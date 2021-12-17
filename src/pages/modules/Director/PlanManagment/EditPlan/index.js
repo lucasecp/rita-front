@@ -17,34 +17,41 @@ import mapDataToMultSelect from './helpers/mapDataToMultSelect'
 import mapToRangeOfUse from './helpers/mapToRangeOfUse'
 import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
-import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
+import {
+  DIRECTOR_PLAN_MANAGMENT,
+  DIRECTOR_SEE_PLAN_MANAGMENT,
+} from '@/routes/constants/namedRoutes/routes'
 import { CancelAndExit } from './messages/CancelAndExit'
 import { useModal } from '@/hooks/useModal'
-import { CompareSharp } from '@material-ui/icons'
+import { toast } from '@/styles/components/toastify'
+import { twoObjectsAreTheSame } from '@/helpers/twoObjectsAreTheSame'
+import { planToApi } from './adapters/toApi'
 
 export const EditPlan = () => {
   const { plan } = useLocation().state
+  const initialPlan = plan
+
   const { Loading } = useLoading()
   const { showMessage, showSimple } = useModal()
   const history = useHistory()
 
-  const [code, setCode] = useState(plan?.codigo || '')
-  const [name, setName] = useState(plan?.nome || '')
-  const [description, setDescription] = useState(plan?.descricao || '')
+  const [code, setCode] = useState(initialPlan?.codigo || '')
+  const [name, setName] = useState(initialPlan?.nome || '')
+  const [description, setDescription] = useState(initialPlan?.descricao || '')
   const [servicesOptions, setServicesOptions] = useState([])
   const [services, setServices] = useState(
-    mapDataToMultSelect(plan?.servicos) || []
+    mapDataToMultSelect(initialPlan?.servicos) || []
   )
   const [rangesOfUse, setRangesOfUse] = useState(
-    mapToRangeOfUse(plan?.abrangencia) || []
+    mapToRangeOfUse(initialPlan?.abrangencia) || []
   )
-  const [status, setStatus] = useState(plan?.status || '')
+  const [status, setStatus] = useState(initialPlan?.status || '')
   const [disabledSaveButton, setDisabledSaveButton] = useState(false)
+
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(0)
+  const [anyFieldImpactingChanged, setAnyFieldImpactingChanged] = useState(0)
 
-  const initialInputValues = plan
-
-  console.log(initialInputValues)
+  // console.log(initialPlan)
 
   const initialErrors = {
     code: '',
@@ -78,6 +85,10 @@ export const EditPlan = () => {
   useEffect(() => {
     setAnyFieldsHasChanged(anyFieldsHasChanged + 1)
   }, [code, name, description, services, rangesOfUse])
+
+  useEffect(() => {
+    setAnyFieldImpactingChanged(anyFieldImpactingChanged + 1)
+  }, [code, name, status, services])
 
   const verifyErrorsOnFields = () => {
     let errorsTemporary = initialErrors
@@ -150,7 +161,7 @@ export const EditPlan = () => {
     showMessage(CancelAndExit)
   }
 
-  const onEditAndSavePlan = () => {
+  const onEditAndSavePlan = async () => {
     const hasErrorsOnFields = verifyErrorsOnFields()
 
     if (hasErrorsOnFields) {
@@ -158,16 +169,43 @@ export const EditPlan = () => {
       return
     }
 
-    const modalValues = {
+    // const rangesOfUseHasChanged = rangesOfUse.some((range, index) =>
+    //   twoObjectsAreTheSame(range, initialPlan.abrangencia[index])
+    // )
 
+    // console.log(rangesOfUseHasChanged)
+
+    if (
+      anyFieldImpactingChanged > 1 ||
+      initialPlan.abrangencia.length > rangesOfUse.length
+    ) {
+      console.log('Causou impacto')
+      return
     }
 
-    console.log(initialInputValues.nome, name)
-
-    switch(true) {
-      case initialInputValues.nome !== name: console.log(initialInputValues.nome)
+    const planObject = {
+      id: initialPlan.idPlano,
+      code,
+      name,
+      status,
+      description,
+      services,
+      rangesOfUse,
     }
 
+    const planMapped = planToApi(planObject)
+
+    try {
+      await apiPatient.put(`/plano/${initialPlan.idPlano}`, planMapped)
+
+      toast.success('Dados atualizados com sucesso.')
+
+      history.push(DIRECTOR_SEE_PLAN_MANAGMENT, { idPlan: initialPlan.idPlano })
+    } catch (error) {
+      console.log(error)
+    }
+
+    // enviar os dados para atualizar (back)
   }
 
   return (
