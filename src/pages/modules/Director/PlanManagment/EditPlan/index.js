@@ -42,23 +42,15 @@ export const EditPlan = () => {
   const [disabledSaveButton, setDisabledSaveButton] = useState(false)
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(0)
 
+  const initialInputValues = plan
+
+  console.log(initialInputValues)
+
   const initialErrors = {
     code: '',
     name: '',
     description: '',
     services: '',
-  }
-
-  const [codeError, setCodeError] = useState(false)
-  const [nameError, setNameError] = useState(false)
-  const [descriptionError, setDescriptionError] = useState(false)
-  const [servicesError, setServicesError] = useState(false)
-
-  const errorMessage = {
-    code: 'Código é obrigatório.',
-    name: 'Nome é obrigatório',
-    description: 'Descrição deve conter no mínimo 20 caracteres',
-    services: 'Serviços são obrigatórios',
   }
 
   const [errors, setErrors] = useState(initialErrors)
@@ -166,30 +158,16 @@ export const EditPlan = () => {
       return
     }
 
-    console.log('save plan')
-  }
+    const modalValues = {
 
-  const validateValueFormat = (props) => {
-    const field = props.target.id
-    const value = props.target.value
-
-    switch (true) {
-      case field === 'code':
-        value.length === 0 ? setCodeError(true) : setCodeError(false)
-        break
-      case field === 'name':
-        value.length === 0 ? setNameError(true) : setNameError(false)
-        break
-      case field === 'description':
-        value.length < 20 ? setDescriptionError(true) : setDescriptionError(false)
-        break
-      // case field === 'services':
-      //   value.length === 0 ? setServicesError(true) : setServicesError(false)
-      //   break
-      // case field === 'rangeOfUse':
-      //   //logic
-      //   break
     }
+
+    console.log(initialInputValues.nome, name)
+
+    switch(true) {
+      case initialInputValues.nome !== name: console.log(initialInputValues.nome)
+    }
+
   }
 
   return (
@@ -204,8 +182,8 @@ export const EditPlan = () => {
               setValue={setCode}
               value={code}
               hasError={!!errors.code}
-              msgError={codeError ? errorMessage.code : ''}
-              onKeyUp={checkIfCodeAlreadyExists && validateValueFormat}
+              msgError={errors.code}
+              onKeyUp={checkIfCodeAlreadyExists}
             />
             <InputText
               id="name"
@@ -214,8 +192,7 @@ export const EditPlan = () => {
               setValue={setName}
               value={name}
               hasError={!!errors.name}
-              msgError={nameError ? errorMessage.name : ''}
-              onKeyUp={validateValueFormat}
+              msgError={errors.name}
             />
           </section>
           <Textarea
@@ -225,9 +202,8 @@ export const EditPlan = () => {
             showCaractersInformation
             setValue={setDescription}
             value={description}
-            hasError={descriptionError}
-            messageError={descriptionError ? errorMessage.description : ''}
-            onKeyUp={validateValueFormat}
+            hasError={!!errors.description}
+            messageError={errors.description}
           />
           <CustomMultSelect
             id="services"
@@ -238,13 +214,11 @@ export const EditPlan = () => {
             options={servicesOptions}
             hasError={!!errors.services}
             messageError={errors.services}
-            onKeyUp={validateValueFormat}
           />
           <RangeOfUse
             id="rangeOfUse"
             rangesOfUse={rangesOfUse}
             setRangesOfUse={setRangesOfUse}
-            onKeyUp={validateValueFormat}
           />
           <Select
             id="status"
@@ -256,7 +230,6 @@ export const EditPlan = () => {
                 ? statusOptions
                 : statusOptionsWithoutInTyping
             }
-            onChange={validateValueFormat}
           />
         </div>
         <footer>
