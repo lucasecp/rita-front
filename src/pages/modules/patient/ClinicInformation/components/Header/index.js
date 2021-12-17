@@ -4,27 +4,41 @@ import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as WhatsAppIcon } from '@/assets/icons/whatsapp.svg'
 import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg'
 
-const Header = () => {
+const Header = ({ clinicInfo }) => {
   return (
     <Container>
-      <div></div>
+      <div> <img src={clinicInfo?.photo}/></div>
       <div>
-        <h2>Clínica +Vida</h2>
+        <h2>{clinicInfo?.name}</h2>
         <ul>
           <li>
-            Av. Médicos do Brasil, 800 - Saúde - Rio de Janeiro/RJ
+            <span>
+              {clinicInfo?.address}, {clinicInfo?.number},{' '}
+              {clinicInfo?.complement} - {clinicInfo?.district} -{' '}
+              {clinicInfo?.city} / {clinicInfo?.uf}
+            </span>
             <VerifiedIcon />
-            <a href="">Como chegar</a>
+            <a
+              href={clinicInfo?.linkGoogleMap}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Como chegar
+            </a>
           </li>
           <li>
-            <span>
-              <PhoneIcon />
-              (11) 3445-8765
-            </span>
-            <span>
-              <WhatsAppIcon />
-              (11) 98888.9900
-            </span>
+            {clinicInfo?.phone?.length > 10 ? (
+              <a href={`https://api.whatsapp.com/send?phone=${clinicInfo?.phone}`}  target="_blank"
+              rel="noreferrer">
+                <WhatsAppIcon />
+                {clinicInfo?.phone}
+              </a>
+            ) : (
+              <span>
+                <PhoneIcon />
+                {clinicInfo?.phone}
+              </span>
+            )}
           </li>
         </ul>
       </div>

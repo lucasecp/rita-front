@@ -6,23 +6,25 @@ import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg'
 import { Accordion } from '../styles'
 import { useToggle } from '@/hooks/useToggle'
 
-const SpecialtyItem = () => {
+const SpecialtyItem = ({ specialtyInfo }) => {
   const [state, toggle] = useToggle()
+
   return (
     <Container>
       <div>
-        <h2>Alergia</h2>
+        <h2>{specialtyInfo.name}</h2>
         {state ? (
           <span onClick={toggle}>
-            <CloseIcon  />
+            <CloseIcon />
           </span>
         ) : (
           <OutlineButton onClick={toggle}>Ver Especialistas</OutlineButton>
         )}
       </div>
       <Accordion data-expanded={state ? 1 : 0}>
-        <SpecialtyDetails parentWasClosed={state} />
-        <SpecialtyDetails parentWasClosed={state} />
+        {specialtyInfo?.doctorSpecialty?.map((dataSpecialtyDetails,index) => (
+          <SpecialtyDetails key={index} dataSpecialtyDetails={{...dataSpecialtyDetails, specialtyName: specialtyInfo.name}} parentWasClosed={state} />
+        ))}
       </Accordion>
     </Container>
   )

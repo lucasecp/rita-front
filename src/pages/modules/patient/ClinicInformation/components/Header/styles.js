@@ -30,11 +30,19 @@ export const Container = styled.div`
       flex-wrap: wrap;
       &:first-child {
         margin: 0px 0 24px 0;
-        > *{
-          margin-top: 8px
+        > span {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 20px;
+          color: #6a6a6a;
+          margin-right: 0 !important;
+          margin-bottom: 0 !important;
+        }
+        > * {
+          margin-top: 8px;
         }
       }
-    
+
       > svg {
         margin: 0px 16px 0 8px;
       }
@@ -54,12 +62,27 @@ export const Container = styled.div`
         align-items: center;
         margin-top: 8px;
         margin-bottom: 8px;
+        text-decoration: none;
         &:first-child {
           margin-right: 24px;
         }
         svg {
           margin-right: 8px;
         }
+      }
+      &:last-child > a {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 20px;
+        color: #303030;
+        display: flex;
+        align-items: center;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        > svg {
+          margin-right: 8px;
+        }
+        text-decoration: none;
       }
     }
   }

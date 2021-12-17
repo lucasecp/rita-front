@@ -1,25 +1,30 @@
+import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
+import { formatPhone } from '@/helpers/formatPhone'
+import { scheduleFromApi } from './mapSchedule'
+
 export const fromApi = (dataClinic) => {
-  const doctorSpecialty = dataClinic?.medicoEspecialidade?.map((dSpecialty) => ({
-    rqe: dSpecialty.RQE,
-    specialty: dSpecialty.especialidade.descricao
-  }))
+  const doctorSpecialty = dataClinic?.medicoEspecialidade?.find(
+    (dSpecialty) => dSpecialty
+  )
 
   const clinicdoctor = dataClinic?.clinicaMedico?.map((specialty) => ({
     linkGoogleMap: specialty.clinica.comoChegar,
 
-    scheduleAppointment: dataClinic.agenda.reduce((ac, schedule) => {
-      if (schedule.idMedico === specialty.idMedico) {
-        ac = schedule.agenda
+    scheduleAppointment: scheduleFromApi(
+      dataClinic.agenda.reduce((ac, schedule) => {
+        if (schedule.idMedico === specialty.idMedico) {
+          ac = schedule.agenda
+          return ac
+        }
         return ac
-      }
-      return ac
-    }, null),
+      }, null)
+    ),
 
     status: specialty.statusMedicoClinica,
     clinic: {
       photo: specialty.clinica.foto,
-      description: specialty.clinica.descricao,
-      phone: specialty.clinica.telefone,
+      description: firstLetterCapitalize(specialty.clinica.descricao),
+      phone: formatPhone(specialty.clinica.telefone),
       status: specialty.clinica.status,
       address: specialty.clinica.endereco,
       district: specialty.clinica.bairro,
@@ -28,7 +33,7 @@ export const fromApi = (dataClinic) => {
       number: specialty.clinica.numero,
     },
     specialtys: specialty.clinica.especialidade.map((spe) => ({
-      description: spe.descricao,
+      description: firstLetterCapitalize(spe.descricao),
 
       defaultPrice: spe.precos.reduce((ac, price) => {
         if (price.idEspecialidade === spe.idEspecialidade) {
@@ -50,8 +55,8 @@ export const fromApi = (dataClinic) => {
 
   return {
     photo: dataClinic.foto,
-    title: dataClinic.titulo,
-    description: dataClinic.nome,
+    title: firstLetterCapitalize(dataClinic.titulo),
+    name: firstLetterCapitalize(dataClinic.nome),
     address: dataClinic.endereco,
     district: dataClinic.bairro,
     city: dataClinic.cidade,
@@ -61,6 +66,6 @@ export const fromApi = (dataClinic) => {
     crmuf: dataClinic.crmuf,
     crm: dataClinic.CRM,
     clinicdoctor,
-    doctorSpecialty
+    doctorSpecialty: { ...doctorSpecialty },
   }
 }

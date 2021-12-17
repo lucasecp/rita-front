@@ -6,7 +6,7 @@ import { Container } from './styles'
 
 const Authorization = () => {
   useEffect(() => {
-    document.title = 'Rita Saúde | Autorização'
+    document.title = 'Rita Saúde | Autorizações'
   }, [])
 
   return (
