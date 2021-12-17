@@ -42,7 +42,7 @@ function seeOnePatient() {
   const [validations, setValidations] = useState({})
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Ver Paciente'
+    document.title = 'Rita Saúde | Autorizações'
     const loadPatientInformations = async () => {
       const userCpf = location.state.cpf
       let holdingDocument
