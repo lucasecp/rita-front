@@ -20,8 +20,8 @@ const DoctorInformation = () => {
     const getDoctor = async () => {
       try {
         const { data } = await apiPatient.get(`/medico/25`)
-        // setDoctorInfo(data)
-        console.log(fromApi(data))
+        setDoctorInfo(fromApi(data))
+        console.log(fromApi(data));
       } catch (error) {
         console.log(error)
       }

@@ -1,6 +1,10 @@
+import { firstLetterCapitalize } from "@/helpers/firstLetterCapitalize"
+import { formatPhone } from "@/helpers/formatPhone"
+import { scheduleFromApi } from "./mapSchedule"
+
 export const fromApi = (dataClinic) => {
   const specialtys = dataClinic?.especialidade?.map((specialty) => ({
-    name: specialty.descricao,
+    name: firstLetterCapitalize(specialty.descricao),
     doctorSpecialty: specialty.medicoEspecialidade.map((spe) => ({
       rqe: spe.RQE,
 
@@ -19,29 +23,32 @@ export const fromApi = (dataClinic) => {
         }
         return ac
       }, null),
-      name: spe.medico.nome,
+
+      name: firstLetterCapitalize(spe.medico.nome),
       photo: spe.medico.foto,
       status: spe.medico.status,
       crm: spe.medico.CRM,
       crmUf: spe.medico.crmuf,
-      title: spe.medico.titulo,
+      title: firstLetterCapitalize(spe.medico.titulo),
       formation: spe.medico.formacao,
       verified: spe.medico.validadoClinica,
       hasSchedule: spe.medico.receberAgendamentos,
-      phone: spe.medico.numero,
-      schedule: spe.medico.agenda,
+      // phone: spe.medico.numero,
+      schedule: scheduleFromApi(spe.medico.agenda),
     })),
   }))
 
   return {
     photo: dataClinic.foto,
-    description: dataClinic.descricao,
+    name: firstLetterCapitalize(dataClinic.descricao),
     address: dataClinic.endereco,
     linkGoogleMap: dataClinic.comoChegar,
     district: dataClinic.bairro,
     city: dataClinic.cidade,
     uf: dataClinic.uf,
     number: dataClinic.numero,
+    complement: dataClinic.complemento,
+    phone: formatPhone(dataClinic.telefone),
     specialtys,
   }
 }

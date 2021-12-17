@@ -37,7 +37,7 @@ export const Container = styled.div`
     }
   }
   > ul > li > * + * {
-    margin: 0 8px;
+    margin: 0 0px 0 8px ;
   }
   > ul > li > svg {
     margin-right: 8px;
