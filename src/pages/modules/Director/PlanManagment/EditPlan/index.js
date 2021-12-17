@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
@@ -41,6 +41,10 @@ export const EditPlan = () => {
   const [status, setStatus] = useState(plan?.status || '')
   const [disabledSaveButton, setDisabledSaveButton] = useState(false)
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(0)
+
+  const initialInputValues = plan
+
+  console.log(initialInputValues)
 
   const initialErrors = {
     code: '',
@@ -154,7 +158,16 @@ export const EditPlan = () => {
       return
     }
 
-    console.log('save plan')
+    const modalValues = {
+
+    }
+
+    console.log(initialInputValues.nome, name)
+
+    switch(true) {
+      case initialInputValues.nome !== name: console.log(initialInputValues.nome)
+    }
+
   }
 
   return (
