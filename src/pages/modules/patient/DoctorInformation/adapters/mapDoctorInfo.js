@@ -1,8 +1,5 @@
 export const fromApi = (dataClinic) => {
-  const doctorSpecialty = dataClinic?.medicoEspecialidade?.find((dSpecialty) => ({
-    rqe: dSpecialty.RQE,
-    specialty: dSpecialty.especialidade.descricao
-  }))
+  const doctorSpecialty = dataClinic?.medicoEspecialidade?.find((dSpecialty) => dSpecialty )
 
   const clinicdoctor = dataClinic?.clinicaMedico?.map((specialty) => ({
     linkGoogleMap: specialty.clinica.comoChegar,

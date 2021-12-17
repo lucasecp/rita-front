@@ -4,7 +4,7 @@ import SpecialtySubDetails from '../SpecialtySubDetails'
 import { Accordion } from '../styles'
 import { useToggle } from '@/hooks/useToggle'
 
-const SpecialtyDetails = ({ parentWasClosed }) => {
+const SpecialtyDetails = ({ parentWasClosed,dataSpecialtyDetails }) => {
   const [state, toggle] = useToggle()  
 
   useEffect(() => {
@@ -19,14 +19,14 @@ const SpecialtyDetails = ({ parentWasClosed }) => {
         <div>
         <div></div>
         <div>
-          <h2>Dra. Maria Eduarda Sampaio Correia</h2>
-          <h3>Alergista</h3>
+          <h2>{dataSpecialtyDetails.title} {dataSpecialtyDetails?.name}</h2>
+          <h3>{dataSpecialtyDetails.specialtyName}</h3>
         </div>
         </div>
         <DropdownIconStyled data-expanded={state ? 1 : 0 }/>
       </div>
       <Accordion data-expanded={state ? 1 : 0 }>
-        <SpecialtySubDetails />
+        <SpecialtySubDetails dataSpecialtyDetails={dataSpecialtyDetails}/>
       </Accordion>
     </Container>
   )

@@ -7,13 +7,13 @@ import { ReactComponent as ArrowLeftIcon } from '@/assets/icons/arrow-left2.svg'
 import Header from './components/Header'
 import SpecialtyItem from './components/SpecialtyItem'
 import apiPatient from '@/services/apiPatient'
-import {fromApi} from './adapters/mapClinicInfo'
+import { fromApi } from './Adapters'
 import { useLoading } from '@/hooks/useLoading'
 
 const ClinicInformation = () => {
-  const [clinicInfo, setClinicInfo] = useState({});
+  const [clinicInfo, setClinicInfo] = useState({})
 
-  const {Loading} = useLoading()
+  const { Loading } = useLoading()
 
   useEffect(() => {
     document.title = 'Rita Saúde | Informações da Clínica'
@@ -21,21 +21,21 @@ const ClinicInformation = () => {
 
   useEffect(() => {
     const getClinic = async () => {
-      try{
+      try {
         Loading.turnOn()
-        const {data} = await apiPatient.get(`clinica/1/especialidades/medicos`)
+        const { data } = await apiPatient.get(
+          `clinica/1/especialidades/medicos`
+        )
         setClinicInfo(fromApi(data))
-      }
-      catch(error){
+        console.log(fromApi(data))
+      } catch (error) {
         console.log(error)
-      }
-      finally{
+      } finally {
         Loading.turnOff()
       }
     }
     getClinic()
   }, [])
-
 
   return (
     <DefaultLayout title="Informações da Clínica">
@@ -45,12 +45,12 @@ const ClinicInformation = () => {
             <ArrowLeftIcon /> Voltar aos resultados
           </Link>
         </div>
-        <Header clinicInfo={clinicInfo}/>
+        <Header clinicInfo={clinicInfo} />
         <h3>Especialidades que atende</h3>
         <ListItems>
-        <SpecialtyItem />
-        <SpecialtyItem />
-        <SpecialtyItem />
+          {clinicInfo?.specialtys?.map((specialty, index) => (
+            <SpecialtyItem key={index} specialtyInfo={specialty} />
+          ))}
         </ListItems>
       </Content>
     </DefaultLayout>

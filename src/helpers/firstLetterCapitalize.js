@@ -1,4 +1,7 @@
 export const firstLetterCapitalize = (stringOriginal) => {
+  if (typeof stringOriginal !== 'string') {
+    return ''
+  }
   let strings = stringOriginal.split(' ')
   strings = strings.filter((string) => string !== '')
   strings = strings.map((str) =>
