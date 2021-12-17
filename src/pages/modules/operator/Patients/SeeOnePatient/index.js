@@ -45,7 +45,7 @@ function seeOnePatient() {
   const [table, setTable] = useState('');
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Paciente'
+    document.title = 'Rita Saúde | Pacientes'
     const loadPatientInformations = async () => {
       const userCpf = location.state.cpf
       let holdingDocument

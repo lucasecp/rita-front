@@ -151,7 +151,7 @@ export const ConsultEligibility = () => {
   }
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Consulta de Eligibilidade'
+    document.title = 'Rita Saúde | Consulta de Elegibilidade'
   },[])
 
   return (
