@@ -1,13 +1,18 @@
-import React from 'react'
-import { Container } from './styles'
-import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
-import { ReactComponent as WhatsAppIcon } from '@/assets/icons/whatsapp.svg'
-import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg'
+import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg';
+import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg';
+import { ReactComponent as WhatsAppIcon } from '@/assets/icons/whatsapp.svg';
+import React from 'react';
+
+import { Container } from './styles';
 
 const Header = ({ clinicInfo }) => {
   return (
     <Container>
-      <div> <img src={clinicInfo?.photo}/></div>
+      <div>
+        <img
+          src={`data:image/png;base64,${clinicInfo?.photo}`}
+          alt="Imagem da clínica"/>
+      </div>
       <div>
         <h2>{clinicInfo?.name}</h2>
         <ul>
@@ -17,11 +22,12 @@ const Header = ({ clinicInfo }) => {
               {clinicInfo?.complement} - {clinicInfo?.district} -{' '}
               {clinicInfo?.city} / {clinicInfo?.uf}
             </span>
-            <VerifiedIcon />
+            { clinicInfo?.validAddress && <VerifiedIcon /> }
             <a
               href={clinicInfo?.linkGoogleMap}
               target="_blank"
               rel="noreferrer"
+              className="link-address"
             >
               Como chegar
             </a>
