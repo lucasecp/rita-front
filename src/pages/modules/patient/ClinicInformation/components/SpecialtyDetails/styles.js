@@ -19,14 +19,17 @@ export const Container = styled.div`
           margin-top: 10px;
         }
       }
-      
+
     }
     > div:first-child > div:first-child{
-      width: 98px;
-      height: 98px;
       margin-right: 24px;
-      border-radius: 50%;
-      background: #6a6a6a;
+
+      > img {
+        border-radius: 50%;
+        width: 98px;
+        height: 98px;
+        object-fit: fill;
+      }
     }
     > div {
       h2 {

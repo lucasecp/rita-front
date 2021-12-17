@@ -12,46 +12,27 @@ import ButtonPrimary from '@/components/Button/Primary'
 import OutilineButton from '@/components/Button/Outline'
 
 import { Container } from './styles'
-import { statusOptions, statusOptionsWithoutInTyping } from './helpers/status'
-import mapDataToMultSelect from './helpers/mapDataToMultSelect'
-import mapToRangeOfUse from './helpers/mapToRangeOfUse'
 import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
-import {
-  DIRECTOR_PLAN_MANAGMENT,
-  DIRECTOR_SEE_PLAN_MANAGMENT,
-} from '@/routes/constants/namedRoutes/routes'
+import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 import { CancelAndExit } from './messages/CancelAndExit'
+import { toApi } from './adapters/toApi'
 import { useModal } from '@/hooks/useModal'
 import { toast } from '@/styles/components/toastify'
-import { twoObjectsAreTheSame } from '@/helpers/twoObjectsAreTheSame'
-import { planToApi } from './adapters/toApi'
 
-export const EditPlan = () => {
-  const { plan } = useLocation().state
-  const initialPlan = plan
-
+export const CreatePlan = () => {
   const { Loading } = useLoading()
-  const { showMessage, showSimple } = useModal()
+  const { showMessage } = useModal()
   const history = useHistory()
-
-  const [code, setCode] = useState(initialPlan?.codigo || '')
-  const [name, setName] = useState(initialPlan?.nome || '')
-  const [description, setDescription] = useState(initialPlan?.descricao || '')
   const [servicesOptions, setServicesOptions] = useState([])
-  const [services, setServices] = useState(
-    mapDataToMultSelect(initialPlan?.servicos) || []
-  )
-  const [rangesOfUse, setRangesOfUse] = useState(
-    mapToRangeOfUse(initialPlan?.abrangencia) || []
-  )
-  const [status, setStatus] = useState(initialPlan?.status || '')
+
+  const [code, setCode] = useState('')
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [services, setServices] = useState([])
+  const [rangesOfUse, setRangesOfUse] = useState([])
+
   const [disabledSaveButton, setDisabledSaveButton] = useState(false)
-
-  const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(0)
-  const [anyFieldImpactingChanged, setAnyFieldImpactingChanged] = useState(0)
-
-  // console.log(initialPlan)
 
   const initialErrors = {
     code: '',
@@ -63,7 +44,6 @@ export const EditPlan = () => {
   const [errors, setErrors] = useState(initialErrors)
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Editar Plano'
     const loadServices = async () => {
       try {
         const { data } = await apiPatient.get('/servico')
@@ -82,13 +62,27 @@ export const EditPlan = () => {
     loadServices()
   }, [])
 
-  useEffect(() => {
-    setAnyFieldsHasChanged(anyFieldsHasChanged + 1)
-  }, [code, name, description, services, rangesOfUse])
+  const checkIfCodeAlreadyExists = async () => {
+    try {
+      // Loading.turnOn()
 
-  useEffect(() => {
-    setAnyFieldImpactingChanged(anyFieldImpactingChanged + 1)
-  }, [code, name, status, services])
+      const {
+        data: { mensagem: codeExists },
+      } = await apiPatient.get(`/plano/codigo/${code}/existe`)
+
+      if (codeExists === 'true') {
+        setErrors({ ...errors, code: 'O código informado já existe!' })
+        setDisabledSaveButton(true)
+      } else {
+        setErrors({ ...errors, code: '' })
+        setDisabledSaveButton(false)
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      // Loading.turnOff()
+    }
+  }
 
   const verifyErrorsOnFields = () => {
     let errorsTemporary = initialErrors
@@ -130,38 +124,7 @@ export const EditPlan = () => {
     return hasErrors
   }
 
-  const checkIfCodeAlreadyExists = async () => {
-    try {
-      // Loading.turnOn()
-
-      const {
-        data: { mensagem: codeExists },
-      } = await apiPatient.get(`/plano/codigo/${code}/existe`)
-
-      if (codeExists === 'true' && code !== plan?.codigo) {
-        setErrors({ ...errors, code: 'O código informado já existe!' })
-        setDisabledSaveButton(true)
-      } else {
-        setErrors({ ...errors, code: '' })
-        setDisabledSaveButton(false)
-      }
-    } catch (error) {
-      console.log(error)
-    } finally {
-      // Loading.turnOff()
-    }
-  }
-
-  const onCancelEditPlan = () => {
-    if (anyFieldsHasChanged <= 1) {
-      history.push(DIRECTOR_PLAN_MANAGMENT)
-      return
-    }
-
-    showMessage(CancelAndExit)
-  }
-
-  const onEditAndSavePlan = async () => {
+  const onCreatePlan = async () => {
     const hasErrorsOnFields = verifyErrorsOnFields()
 
     if (hasErrorsOnFields) {
@@ -169,52 +132,52 @@ export const EditPlan = () => {
       return
     }
 
-    // const rangesOfUseHasChanged = rangesOfUse.some((range, index) =>
-    //   twoObjectsAreTheSame(range, initialPlan.abrangencia[index])
-    // )
+    try {
+      const planMapped = toApi({
+        code,
+        name,
+        description,
+        services,
+        rangesOfUse,
+      })
 
-    // console.log(rangesOfUseHasChanged)
+      await apiPatient.post('/plano', planMapped)
 
-    if (
-      anyFieldImpactingChanged > 1 ||
-      initialPlan.abrangencia.length > rangesOfUse.length
-    ) {
-      console.log('Causou impacto')
-      return
+      toast.success('Cadastro realizado com sucesso')
+      history.push(DIRECTOR_PLAN_MANAGMENT)
+    } catch {
+      toast.error('Erro na criação do plano')
     }
+  }
 
-    const planObject = {
-      id: initialPlan.idPlano,
+  const onCancelCreatePlan = () => {
+    console.log({
       code,
       name,
-      status,
       description,
       services,
       rangesOfUse,
+    })
+
+    if (
+      code !== '' ||
+      name !== '' ||
+      description !== '' ||
+      services.length > 0 ||
+      rangesOfUse.length > 0
+    ) {
+      showMessage(CancelAndExit)
+    } else {
+      history.push(DIRECTOR_PLAN_MANAGMENT)
     }
-
-    const planMapped = planToApi(planObject)
-
-    try {
-      await apiPatient.put(`/plano/${initialPlan.idPlano}`, planMapped)
-
-      toast.success('Dados atualizados com sucesso.')
-
-      history.push(DIRECTOR_SEE_PLAN_MANAGMENT, { idPlan: initialPlan.idPlano })
-    } catch (error) {
-      console.log(error)
-    }
-
-    // enviar os dados para atualizar (back)
   }
 
   return (
-    <DefaultLayout title="Editar Plano">
+    <DefaultLayout title="Gestão de Planos - Incluir Plano">
       <Container>
         <div>
           <section>
             <InputText
-              id="code"
               label="Código*:"
               maxLength={10}
               setValue={setCode}
@@ -224,7 +187,6 @@ export const EditPlan = () => {
               onKeyUp={checkIfCodeAlreadyExists}
             />
             <InputText
-              id="name"
               label="Nome*:"
               maxLength={50}
               setValue={setName}
@@ -234,7 +196,6 @@ export const EditPlan = () => {
             />
           </section>
           <Textarea
-            id="description"
             label="Descrição*:"
             limit="150"
             showCaractersInformation
@@ -244,7 +205,6 @@ export const EditPlan = () => {
             messageError={errors.description}
           />
           <CustomMultSelect
-            id="services"
             label="Serviços*:"
             variation="secondary"
             setValue={setServices}
@@ -254,28 +214,13 @@ export const EditPlan = () => {
             messageError={errors.services}
           />
           <RangeOfUse
-            id="rangeOfUse"
             rangesOfUse={rangesOfUse}
             setRangesOfUse={setRangesOfUse}
           />
-          <Select
-            id="status"
-            label="Status*:"
-            setValue={setStatus}
-            value={status}
-            options={
-              plan?.status === 'P'
-                ? statusOptions
-                : statusOptionsWithoutInTyping
-            }
-          />
         </div>
         <footer>
-          <OutilineButton onClick={onCancelEditPlan}>Cancelar</OutilineButton>
-          <ButtonPrimary
-            disabled={disabledSaveButton}
-            onClick={onEditAndSavePlan}
-          >
+          <OutilineButton onClick={onCancelCreatePlan}>Cancelar</OutilineButton>
+          <ButtonPrimary disable={disabledSaveButton} onClick={onCreatePlan}>
             Salvar
           </ButtonPrimary>
         </footer>

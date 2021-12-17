@@ -38,18 +38,15 @@ const promise = (promisseReturn, message) => {
 
         icon: <SuccessIcon />,
       },
-
     },
 
     { icon: <Spinner /> }
   )
 }
 
-const toast = {
+export const toast = {
   error,
   success,
   warning,
   promise,
 }
-
-export { toast }

@@ -24,7 +24,7 @@ export const fromApi = (dataClinic) => {
       }, null),
 
       name: firstLetterCapitalize(spe.medico.nome),
-      photo: spe.medico.foto,
+      photo: spe.medico.avatar,
       status: spe.medico.status,
       crm: spe.medico.CRM,
       crmUf: spe.medico.crmuf,
@@ -38,9 +38,10 @@ export const fromApi = (dataClinic) => {
   }))
 
   return {
-    photo: dataClinic.foto,
+    photo: dataClinic.avatar,
     name: firstLetterCapitalize(dataClinic.descricao),
     address: dataClinic.endereco,
+    validAddress: dataClinic.enderecoValidado,
     linkGoogleMap: dataClinic.comoChegar,
     district: dataClinic.bairro,
     city: dataClinic.cidade,

@@ -29,7 +29,7 @@ const ClinicInformation = () => {
       try {
         Loading.turnOn()
         const { data } = await apiPatient.get(
-          `clinica/${location.state.idClinic}/especialidades/medicos`
+         `clinica/${location.state.idClinic}/especialidades/medicos`
         )
         setClinicInfo(fromApi(data))
         console.log(fromApi(data))
