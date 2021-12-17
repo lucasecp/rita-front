@@ -4,26 +4,33 @@ import { Container } from './styles'
 import { ReactComponent as HeartIcon } from '@/assets/icons/heart.svg'
 import { ReactComponent as MoneyIcon } from '@/assets/icons/money.svg'
 import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg'
+
 import ServiceSchedule from '../../../components/ServiceSchedule'
 
-const ClinicItemDetails = () => {
+const ClinicItemDetails = ({ clinicDetails }) => {
+  console.log(clinicDetails)
   return (
     <Container>
       <ul>
         <li>
-          <HeartIcon /> Atendimento: <span>Cardiologia</span>
+          <HeartIcon /> Atendimento:
+          <span>{clinicDetails?.clinic?.description}</span>
         </li>
         <li>
-          <MoneyIcon /> Valor: <span>Balcão R$ 400,00</span> <span>-</span>
-          <span>Rita: R$ 150,00</span>
+          <MoneyIcon /> Valor:
+          <span>Balcão {clinicDetails?.defaultPrice}</span> <span>-</span>
+          <span>Rita: {clinicDetails?.ritaPrice}</span>
         </li>
         <li>
           <PhoneIcon />
           <div> Faça seu agendamento: </div>
-          <span>(11) 3333-3333</span>
+          <span>{clinicDetails?.clinic.phone}</span>
         </li>
       </ul>
-      <ServiceSchedule />
+
+      {!!clinicDetails?.scheduleAppointment.length && (
+        <ServiceSchedule dataSchedule={clinicDetails?.scheduleAppointment} />
+      )}
     </Container>
   )
 }

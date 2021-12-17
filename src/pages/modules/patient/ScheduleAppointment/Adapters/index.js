@@ -1,5 +1,5 @@
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-import { formatPhone } from '@/helpers/formatPhone'
+import { formatMobilePhone } from '@/helpers/formatMobilePhone'
 
 export const fromApi = (dataClinic) => {
   const clinics = dataClinic?.map((clinic) => ({
@@ -12,7 +12,7 @@ export const fromApi = (dataClinic) => {
     uf: clinic.uf,
     number: clinic.numero,
     complement: clinic.complemento,
-    phone: formatPhone(clinic.telefone),
+    phone: formatMobilePhone(clinic.telefone),
     specialtys: clinic?.especialidade?.map((specialty) => ({
       name: firstLetterCapitalize(specialty.descricao),
       doctorSpecialty: specialty.medicoEspecialidade.map((spe) => ({
