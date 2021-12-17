@@ -13,7 +13,7 @@ const SeePlan = () => {
   const history = useHistory()
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Planos'
+    document.title = 'Rita Saúde | Visualizar Plano'
     if (!location.state) {
       return history.push(DIRECTOR_PLAN_MANAGMENT)
     }
@@ -35,7 +35,7 @@ const SeePlan = () => {
   }, [])
 
   return (
-    <DefaultLayout title="Gestão de Planos - Visualizar Plano">
+    <DefaultLayout title="Visualizar Plano">
       <PlanInformationsDisabled data={planInfo} />
     </DefaultLayout>
   )

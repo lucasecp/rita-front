@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useHistory, useLocation } from 'react-router'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
@@ -47,18 +47,6 @@ export const EditPlan = () => {
     name: '',
     description: '',
     services: '',
-  }
-
-  const [codeError, setCodeError] = useState(false)
-  const [nameError, setNameError] = useState(false)
-  const [descriptionError, setDescriptionError] = useState(false)
-  const [servicesError, setServicesError] = useState(false)
-
-  const errorMessage = {
-    code: 'Código é obrigatório.',
-    name: 'Nome é obrigatório',
-    description: 'Descrição deve conter no mínimo 20 caracteres',
-    services: 'Serviços são obrigatórios',
   }
 
   const [errors, setErrors] = useState(initialErrors)
@@ -169,29 +157,6 @@ export const EditPlan = () => {
     console.log('save plan')
   }
 
-  const validateValueFormat = (props) => {
-    const field = props.target.id
-    const value = props.target.value
-
-    switch (true) {
-      case field === 'code':
-        value.length === 0 ? setCodeError(true) : setCodeError(false)
-        break
-      case field === 'name':
-        value.length === 0 ? setNameError(true) : setNameError(false)
-        break
-      case field === 'description':
-        value.length < 20 ? setDescriptionError(true) : setDescriptionError(false)
-        break
-      // case field === 'services':
-      //   value.length === 0 ? setServicesError(true) : setServicesError(false)
-      //   break
-      // case field === 'rangeOfUse':
-      //   //logic
-      //   break
-    }
-  }
-
   return (
     <DefaultLayout title="Editar Plano">
       <Container>
@@ -204,8 +169,8 @@ export const EditPlan = () => {
               setValue={setCode}
               value={code}
               hasError={!!errors.code}
-              msgError={codeError ? errorMessage.code : ''}
-              onKeyUp={checkIfCodeAlreadyExists && validateValueFormat}
+              msgError={errors.code}
+              onKeyUp={checkIfCodeAlreadyExists}
             />
             <InputText
               id="name"
@@ -214,8 +179,7 @@ export const EditPlan = () => {
               setValue={setName}
               value={name}
               hasError={!!errors.name}
-              msgError={nameError ? errorMessage.name : ''}
-              onKeyUp={validateValueFormat}
+              msgError={errors.name}
             />
           </section>
           <Textarea
@@ -225,9 +189,8 @@ export const EditPlan = () => {
             showCaractersInformation
             setValue={setDescription}
             value={description}
-            hasError={descriptionError}
-            messageError={descriptionError ? errorMessage.description : ''}
-            onKeyUp={validateValueFormat}
+            hasError={!!errors.description}
+            messageError={errors.description}
           />
           <CustomMultSelect
             id="services"
@@ -238,13 +201,11 @@ export const EditPlan = () => {
             options={servicesOptions}
             hasError={!!errors.services}
             messageError={errors.services}
-            onKeyUp={validateValueFormat}
           />
           <RangeOfUse
             id="rangeOfUse"
             rangesOfUse={rangesOfUse}
             setRangesOfUse={setRangesOfUse}
-            onKeyUp={validateValueFormat}
           />
           <Select
             id="status"
@@ -256,7 +217,6 @@ export const EditPlan = () => {
                 ? statusOptions
                 : statusOptionsWithoutInTyping
             }
-            onChange={validateValueFormat}
           />
         </div>
         <footer>
