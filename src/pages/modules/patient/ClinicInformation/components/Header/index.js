@@ -3,6 +3,8 @@ import { Container } from './styles'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as WhatsAppIcon } from '@/assets/icons/whatsapp.svg'
 import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg'
+import { formatMobilePhone } from '@/helpers/formatMobilePhone'
+import { formatPhone } from '@/helpers/formatPhone'
 
 const Header = ({ clinicInfo }) => {
   return (
@@ -31,12 +33,12 @@ const Header = ({ clinicInfo }) => {
               <a href={`https://api.whatsapp.com/send?phone=${clinicInfo?.phone}`}  target="_blank"
               rel="noreferrer">
                 <WhatsAppIcon />
-                {clinicInfo?.phone}
+                {formatMobilePhone(clinicInfo?.phone)}
               </a>
             ) : (
               <span>
                 <PhoneIcon />
-                {clinicInfo?.phone}
+                {formatPhone(clinicInfo?.phone)}
               </span>
             )}
           </li>

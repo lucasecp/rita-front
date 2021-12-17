@@ -1,18 +1,29 @@
 import styled from 'styled-components'
 
+export const DefaultImg = styled.div`
+   width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #f8f5ff;
+    margin-bottom: 21px;
+`
+export const Profile = styled.div`
+   max-width: 130px;
+    max-height: 130px;
+   min-width: 130px;
+   min-height: 130px;
+    border-radius: 50%;
+    margin-bottom: 21px;
+    >img{
+      max-height: 100%
+    }
+`
 export const Container = styled.div`
   padding: 27px 30px;
   background: #fff;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  > div:first-child {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: #f8f5ff;
-    margin-bottom: 21px;
-  }
   > h4 {
     font-size: 20px;
     font-weight: 700;
@@ -51,7 +62,7 @@ export const Container = styled.div`
       }
     }
   }
-  > a {
+  > button {
     text-align: right;
     font-family: Athletics;
     font-size: 14px;
@@ -60,6 +71,7 @@ export const Container = styled.div`
     color: #9146ff;
     margin-top: auto;
     align-self: flex-end;
+    background: transparent;
 
     svg {
       margin-left: 4px;

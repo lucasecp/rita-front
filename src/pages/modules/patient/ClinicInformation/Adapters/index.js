@@ -1,5 +1,4 @@
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-import { formatMobilePhone } from '@/helpers/formatMobilePhone'
 import { scheduleFromApi } from './mapSchedule'
 
 export const fromApi = (dataClinic) => {
@@ -48,7 +47,7 @@ export const fromApi = (dataClinic) => {
     uf: dataClinic.uf,
     number: dataClinic.numero,
     complement: dataClinic.complemento,
-    phone: formatMobilePhone(dataClinic.telefone),
+    phone: dataClinic.telefone,
     specialtys,
   }
 }
