@@ -7,24 +7,33 @@ import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg'
 import { Accordion } from '../../../ClinicInformation/components/styles'
 import { useToggle } from '@/hooks/useToggle'
 
-const ClinicItem = () => {
+const ClinicItem = ({ clinic }) => {
   const [state, toggle] = useToggle()
   return (
     <Container>
       <div>
         <div>
-          <h2>Clinica Cardiológica + Vida</h2>
+          <h2>{clinic?.clinic.description}</h2>
           <ul>
             {state ? (
               <li>
                 <span>
-                  Av. Médicos do Brasil, 800 - Saúde - Rio de Janeiro/RJ
+                  {clinic?.clinic.address} - {clinic?.clinic.district} -{' '}
+                  {clinic?.clinic.city}
                 </span>
                 <VerifiedIcon />
-                <a href="">Como chegar</a>
+                <a
+                  href={clinic?.linkGoogleMap}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Como chegar
+                </a>
               </li>
             ) : (
-              <li>Saúde - Rio de janeiro - RJ</li>
+              <li>
+                {clinic?.clinic.district} - {clinic?.clinic.city}
+              </li>
             )}
           </ul>
         </div>
@@ -35,7 +44,7 @@ const ClinicItem = () => {
         )}
       </div>
       <Accordion data-expanded={state ? 1 : 0}>
-        <ClinicItemDetails />
+        <ClinicItemDetails clinicDetails={clinic} />
       </Accordion>
     </Container>
   )
