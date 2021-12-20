@@ -5,7 +5,7 @@ import { Accordion } from '../styles'
 import { useToggle } from '@/hooks/useToggle'
 
 const SpecialtyDetails = ({ parentWasClosed,dataSpecialtyDetails }) => {
-  const [state, toggle] = useToggle()  
+  const [state, toggle] = useToggle()
 
   useEffect(() => {
    if(!parentWasClosed && state) {
@@ -17,7 +17,9 @@ const SpecialtyDetails = ({ parentWasClosed,dataSpecialtyDetails }) => {
     <Container>
       <div onClick={toggle}>
         <div>
-        <div></div>
+        <div>
+          <img src={`data:image/png;base64,${dataSpecialtyDetails.photo}`} alt="Imagem do médico" />
+        </div>
         <div>
           <h2>{dataSpecialtyDetails.title} {dataSpecialtyDetails?.name}</h2>
           <h3>{dataSpecialtyDetails.specialtyName}</h3>

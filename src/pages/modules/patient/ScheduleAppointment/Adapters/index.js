@@ -1,51 +1,28 @@
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 import { formatMobilePhone } from '@/helpers/formatMobilePhone'
 
-export const fromApi = (dataClinic) => {
-  const clinics = dataClinic?.map((clinic) => ({
-    photo: clinic.foto,
-    name: firstLetterCapitalize(clinic.descricao),
+export const fromApi = (dataDoctor) => {
+  const doctor = dataDoctor?.map((clinic) => ({
+    photo: clinic.avatar,
+    name: firstLetterCapitalize(clinic.nome),
+    id: clinic.idMedico,
     address: clinic.endereco,
-    linkGoogleMap: clinic.comoChegar,
     district: clinic.bairro,
     city: clinic.cidade,
     uf: clinic.uf,
     number: clinic.numero,
     complement: clinic.complemento,
     phone: formatMobilePhone(clinic.telefone),
-    specialtys: clinic?.especialidade?.map((specialty) => ({
-      name: firstLetterCapitalize(specialty.descricao),
-      doctorSpecialty: specialty.medicoEspecialidade.map((spe) => ({
-        rqe: spe.RQE,
+    crm: clinic.CRM,
+    crmUf: clinic.crmuf,
+    title: firstLetterCapitalize(clinic.titulo),
+    verified: clinic.validadoClinica,
 
-        defaultPrice: specialty.precos?.reduce((ac, price) => {
-          if (price.idEspecialidade === spe.idEspecialidade) {
-            ac = price.precoNormal
-            return ac
-          }
-          return ac
-        }, null),
+    doctorSpecialty: clinic?.medicoEspecialidade?.map((spe) => ({
+      rqe: spe.RQE,
 
-        ritaPrice: specialty.precos?.reduce((ac, price) => {
-          if (price.idEspecialidade === spe.idEspecialidade) {
-            ac = price.precoRita
-            return ac
-          }
-          return ac
-        }, null),
-
-        name: firstLetterCapitalize(spe.medico.nome),
-        photo: spe.medico.foto,
-        status: spe.medico.status,
-        crm: spe.medico.CRM,
-        crmUf: spe.medico.crmuf,
-        title: firstLetterCapitalize(spe.medico.titulo),
-        formation: spe.medico.formacao,
-        verified: spe.medico.validadoClinica,
-        hasSchedule: spe.medico.receberAgendamentos,
-        // phone: spe.medico.numero,
-      })),
+      name: firstLetterCapitalize(spe.especialidade.descricao),
     })),
   }))
-  return clinics
+  return doctor
 }

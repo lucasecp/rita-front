@@ -6,10 +6,11 @@ const SelectCity = ({ setCity, city, uf }) => {
   const [cityOptions, setCityOptions] = useState([])
 
   useEffect(() => {
-    setCity('')
-    if (!uf.length) {
+    console.log(uf);
+    if (!uf) {
       return
     }
+    
 
     const getCity = async () => {
       try {

@@ -21,7 +21,7 @@ const Filters = () => {
   const [city, setCity] = useState('')
   const [results, setResults] = useState(false)
   const [filter, setFilter] = useState([])
-  const [queryApiPagination, setQueryApiPagination] = useState('limit=10&skip=0')
+  const [queryApiPagination, setQueryApiPagination] = useState('?limit=10&skip=0')
   const { showSimple } = useModal()
   const history = useHistory()
   const { Loading } = useLoading()
@@ -56,7 +56,7 @@ const Filters = () => {
         if (data.total === 0) {
           return showSimple.error('Nenhum resultado encontrado.')
         }
-      setResults({total: data.total, clinics: fromApi(data.clinicas) })
+      setResults({total: data.total, doctor: fromApi(data.clinicas) })
 
     } catch (error) {
       console.log(error);
@@ -85,7 +85,7 @@ const Filters = () => {
           keyValueFromApi="idPaciente"
         /> */}
         <InputText
-          label="Especialista, Especialidade ou Clínica:"
+          label="Especialista ou Especialidade:"
           setValue={setResearchDoctor}
           value={researchDoctor}
           placeholder="O que você procura?"
@@ -100,7 +100,7 @@ const Filters = () => {
         </BtnGroup>
       </Container>
 
-       <Results data={results} setQueryPagination={setQueryApiPagination}/>
+      { results.total && <Results data={results} setQueryPagination={setQueryApiPagination}/>}
     </>
   )
 }

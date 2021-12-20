@@ -9,7 +9,7 @@ const SelectUf = ({ setUf, uf }) => {
     setUf('')
     const getUf = async () => {
       try {
-        const { data } = await apiPatient.get(`/uf`)
+        const { data } = await apiPatient.get(`/uf/todas`)
         const dataMapped = mapUf(data?.dados)
 
         setUfOptions(dataMapped)
@@ -21,7 +21,7 @@ const SelectUf = ({ setUf, uf }) => {
 
   const mapUf = (array = []) => {
     if (!array) return []
-    return array.map((obj) => ({ value: obj.sigla, label: obj.sigla }))
+    return array.map((obj) => ({ value: obj.idUF, label: obj.sigla }))
   }
 
   return (

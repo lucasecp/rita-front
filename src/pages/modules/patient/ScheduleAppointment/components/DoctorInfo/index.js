@@ -1,32 +1,58 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Container } from './styles'
+import { Container, DefaultImg, Profile } from './styles'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.svg'
+import { useHistory } from 'react-router'
+import { PATIENT_DOCTOR_INFORMATION } from '@/routes/constants/namedRoutes/routes'
+const DoctorInfo = ({ dataDoctor }) => {
+  const history = useHistory()
+  const specialty = dataDoctor.doctorSpecialty.reduce((ac, spe, index) => {
+    if (index === 0) {
+      ac = spe
+    }
+    return ac
+  }, {})
 
-const DoctorInfo = ({ name, isVerify }) => {
   return (
     <Container>
-      <div></div>
-      <h4>Dr. Fábio Mendes</h4>
+      {dataDoctor.photo ? (
+        <Profile>
+          <img src={'data:image/png;base64,' + dataDoctor.photo} />
+        </Profile>
+      ) : (
+        <DefaultImg />
+      )}
+
+      <h4>
+        {dataDoctor.title} {dataDoctor.name}
+      </h4>
       <ul>
         <li>
           <div>
             <h6>Conselho Regional:</h6>
-            <p>CRM - 11123 - RJ</p>
+            <p>
+              CRM - {dataDoctor.crm} - {dataDoctor.crmuf}
+            </p>
           </div>
-          {isVerify && <VerifiedIcon />}
+          {dataDoctor.verified && <VerifiedIcon />}
         </li>
         <li>
           <div>
-          <h6>Especialidade:</h6>
-          <p>Ortopedista - RQE Nº: 1234</p>
+            <h6>Especialidade:</h6>
+            <p>
+              {specialty.name} - RQE Nº: {specialty.rqe}
+            </p>
           </div>
         </li>
       </ul>
-      <Link to="">
+      <button
+        onClick={() =>
+          history.push(PATIENT_DOCTOR_INFORMATION, { idDoctor: dataDoctor.id })
+        }
+      >
         Ver mais <ArrowRightIcon />{' '}
-      </Link>
+      </button>
     </Container>
   )
 }

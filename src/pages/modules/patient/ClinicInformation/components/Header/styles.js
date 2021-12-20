@@ -4,12 +4,20 @@ export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+
+  .link-address {
+    margin-left: 8px
+  }
+
   > div:first-child {
-    width: 320px;
-    height: 188px;
-    background: #eeeeee;
-    border-radius: 8px;
     margin-right: 24px;
+
+    > img {
+      max-width: 320px;
+      max-height: 188px;
+      border-radius: 8px;
+      object-fit: fill;
+    }
   }
   > div:last-child {
     > h2 {
