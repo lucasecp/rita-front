@@ -3,9 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { DefaultLayout } from 'src/components/Layout/DefaultLayout'
 import { DisplayUserInformations } from './containers/DisplayUserInformations'
 import { EditPersonalData } from './containers/EditPersonalData'
-
-// import ""
-
 import { Container } from './styles'
 import apiPatient from 'src/services/apiPatient'
 import { useLoading } from 'src/hooks/useLoading'
