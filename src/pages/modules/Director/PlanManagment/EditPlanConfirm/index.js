@@ -8,8 +8,9 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { useToggle } from '@/hooks/useToggle'
 
 export const EditPlanConfirm = () => {
+  const history = useHistory()
 
-  //Objeto hipotetico - popular a lista com os dados da api
+  // Objeto hipotetico - popular a lista com os dados da api
   const sellableItems = [
     { id: 1, nome: 'Centro Oeste - Goiás (Estadual)', preco: 'R$ 39,90' },
     { id: 2, nome: 'Centro Oeste - Brasília (Distrital)', preco: 'R$ 69,90' },
@@ -29,6 +30,10 @@ export const EditPlanConfirm = () => {
   ]
 
   const [isSellableItemsExpanded, toggleIsSellableItemsExpanded] = useToggle()
+
+  const onDoNotProceed = () => {
+    history.back()
+  }
 
   return (
     <DefaultLayout title="Editar Plano">
@@ -54,17 +59,15 @@ export const EditPlanConfirm = () => {
           )}
           {sellableItems.length > 3 && (
             <span onClick={toggleIsSellableItemsExpanded}>
-              Ver {isSellableItemsExpanded ? '-' : `+  (${sellableItems.length - 4})`}
+              Ver{' '}
+              {isSellableItemsExpanded
+                ? '-'
+                : `+  (${sellableItems.length - 4})`}
             </span>
           )}
         </div>
         <footer>
-          <ButtonPrimary
-          // disabled={disabledSaveButton}
-          // onClick={onEditAndSavePlan}
-          >
-            Não
-          </ButtonPrimary>
+          <ButtonPrimary onClick={onDoNotProceed}>Não</ButtonPrimary>
           <OutilineButton>Sim</OutilineButton>
         </footer>
       </Container>

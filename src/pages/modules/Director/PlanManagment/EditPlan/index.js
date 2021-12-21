@@ -59,7 +59,7 @@ export const EditPlan = () => {
     code: '',
     name: '',
     description: '',
-    services: ''
+    services: '',
   }
 
   const [errors, setErrors] = useState(initialErrors)
@@ -218,12 +218,15 @@ export const EditPlan = () => {
     const planMapped = planToApi(planObject)
 
     try {
+      Loading.turnOn()
+
       const response = await apiPatient.put(
         `/plano/${initialPlan.idPlano}`,
         planMapped,
         { params: { confirmado: false } }
       )
-      // console.log(response)
+
+      console.log(response)
 
       // sellableItems = [
       //   { id: 1, nome: 'Centro Oeste - Goiás (Estadual)', preco: 'R$ 39,90' },
@@ -233,13 +236,15 @@ export const EditPlan = () => {
       // hasImpactOnSavePlan = false
     } catch (error) {
       console.log(error)
+    } finally {
+      Loading.turnOff()
     }
 
     if (hasImpactOnSavePlan) {
       if (sellableItems.length) {
         history.push(DIRECTOR_EDIT_PLAN_CONFIRM, { sellableItems })
       } else {
-        showMessage(NotSellableItems)
+        showMessage(NotSellableItems, { plan: planObject })
       }
     } else {
       toast.success('Dados atualizados com sucesso.')

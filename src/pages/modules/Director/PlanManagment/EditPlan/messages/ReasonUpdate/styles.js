@@ -4,12 +4,14 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   text-align: center;
-  max-width: 450px;
+
+  width: 480px;
 
   > img {
     width: 56px;
+    margin: 0 auto;
   }
 
   > h6 {
@@ -19,7 +21,7 @@ export const Container = styled.div`
     color: ${colors.gray.dark};
   }
 
-   Textarea {
+  /* Textarea {
     width: 466px;
     height: 83px;
     margin-top: 24px;
@@ -35,7 +37,7 @@ export const Container = styled.div`
     font-size: 16px;
     line-height: 20px;
     color: ${colors.gray.dark};
-  }
+  } */
 
   > p {
     margin: 0;
@@ -60,6 +62,8 @@ export const Container = styled.div`
   }
 
   @media (max-width: 500px) {
+    width: unset;
+
     > p {
       min-width: unset;
     }

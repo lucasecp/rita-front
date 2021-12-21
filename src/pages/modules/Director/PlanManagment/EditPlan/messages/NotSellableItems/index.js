@@ -11,7 +11,7 @@ import { ReasonUpdate } from '@/pages/modules/Director/PlanManagment/EditPlan/me
 
 import { Container } from './styles'
 
-export const NotSellableItems = () => {
+export const NotSellableItems = ({ plan }) => {
   const { showMessage } = useModal()
   const { closeModal } = useModal()
 
@@ -20,7 +20,7 @@ export const NotSellableItems = () => {
   }
 
   const onProceed = async () => {
-    showMessage(ReasonUpdate)
+    showMessage(ReasonUpdate, { plan })
   }
 
   return (
