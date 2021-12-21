@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory } from 'react-router'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { RangeOfUse } from '@/components/RangeOfUse'
 import InputText from '@/components/Form/InputText'
 import Textarea from '@/components/Form/Textarea'
 import CustomMultSelect from '@/components/Form/MultSelect'
-import { Select } from '@/components/Form/Select'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import OutilineButton from '@/components/Button/Outline'
@@ -52,6 +51,13 @@ export const CreatePlan = () => {
           id: service.id,
           name: service.nome,
         }))
+
+        const optionAll = {
+          id: 'all',
+          name: 'Todos',
+        }
+
+        servicesOptionsMapped.unshift(optionAll)
 
         setServicesOptions(servicesOptionsMapped)
       } catch (error) {
@@ -133,11 +139,21 @@ export const CreatePlan = () => {
     }
 
     try {
+      let servicesSelected = services
+
+      services.forEach((service) => {
+        if (service.id === 'all') {
+          servicesSelected = servicesOptions.filter(
+            (service) => service.id !== 'all'
+          )
+        }
+      })
+
       const planMapped = toApi({
         code,
         name,
         description,
-        services,
+        services: servicesSelected,
         rangesOfUse,
       })
 
@@ -151,14 +167,6 @@ export const CreatePlan = () => {
   }
 
   const onCancelCreatePlan = () => {
-    console.log({
-      code,
-      name,
-      description,
-      services,
-      rangesOfUse,
-    })
-
     if (
       code !== '' ||
       name !== '' ||

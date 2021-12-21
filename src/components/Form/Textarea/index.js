@@ -5,7 +5,7 @@ import { Container } from './styles'
 function Textarea({
   label,
   setValue,
-  limit,
+  limit = 255,
   showCaractersInformation,
   value,
   hasError,

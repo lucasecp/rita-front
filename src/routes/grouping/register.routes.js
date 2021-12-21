@@ -21,7 +21,6 @@ const registerRoutes = [
     path: DEFAULT_REGISTER,
     component: DefaultRegister,
   },
-
   {
     path: REGISTER_CARD_SABIN,
     component: RegisterCardSabin,

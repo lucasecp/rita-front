@@ -20,12 +20,14 @@ import { useLoading } from '@/hooks/useLoading'
 import {
   DIRECTOR_PLAN_MANAGMENT,
   DIRECTOR_SEE_PLAN_MANAGMENT,
+  DIRECTOR_EDIT_PLAN_CONFIRM,
 } from '@/routes/constants/namedRoutes/routes'
 import { CancelAndExit } from './messages/CancelAndExit'
 import { useModal } from '@/hooks/useModal'
 import { toast } from '@/styles/components/toastify'
 import { twoObjectsAreTheSame } from '@/helpers/twoObjectsAreTheSame'
 import { planToApi } from './adapters/toApi'
+import { NotSellableItems } from './messages/NotSellableItems'
 
 export const EditPlan = () => {
   const { plan } = useLocation().state
@@ -57,7 +59,7 @@ export const EditPlan = () => {
     code: '',
     name: '',
     description: '',
-    services: '',
+    services: ''
   }
 
   const [errors, setErrors] = useState(initialErrors)
@@ -72,6 +74,13 @@ export const EditPlan = () => {
           id: service.id,
           name: service.nome,
         }))
+
+        const optionAll = {
+          id: 'all',
+          name: 'Todos',
+        }
+
+        servicesOptionsMapped.unshift(optionAll)
 
         setServicesOptions(servicesOptionsMapped)
       } catch (error) {
@@ -164,6 +173,9 @@ export const EditPlan = () => {
   const onEditAndSavePlan = async () => {
     const hasErrorsOnFields = verifyErrorsOnFields()
 
+    let hasImpactOnSavePlan = false
+    let sellableItems = []
+
     if (hasErrorsOnFields) {
       scrollTo(0, 0)
       return
@@ -175,13 +187,23 @@ export const EditPlan = () => {
 
     // console.log(rangesOfUseHasChanged)
 
-    if (
-      anyFieldImpactingChanged > 1 ||
-      initialPlan.abrangencia.length > rangesOfUse.length
-    ) {
-      console.log('Causou impacto')
-      return
-    }
+    // if (
+    //   anyFieldImpactingChanged > 1 ||
+    //   initialPlan.abrangencia.length > rangesOfUse.length
+    // ) {
+    // console.log('Causou impacto')
+    // return
+    // }
+
+    let servicesSelected = services
+
+    services.forEach((service) => {
+      if (service.id === 'all') {
+        servicesSelected = servicesOptions.filter(
+          (service) => service.id !== 'all'
+        )
+      }
+    })
 
     const planObject = {
       id: initialPlan.idPlano,
@@ -189,23 +211,41 @@ export const EditPlan = () => {
       name,
       status,
       description,
-      services,
+      services: servicesSelected,
       rangesOfUse,
     }
 
     const planMapped = planToApi(planObject)
 
     try {
-      await apiPatient.put(`/plano/${initialPlan.idPlano}`, planMapped)
+      const response = await apiPatient.put(
+        `/plano/${initialPlan.idPlano}`,
+        planMapped,
+        { params: { confirmado: false } }
+      )
+      // console.log(response)
 
-      toast.success('Dados atualizados com sucesso.')
-
-      history.push(DIRECTOR_SEE_PLAN_MANAGMENT, { idPlan: initialPlan.idPlano })
+      // sellableItems = [
+      //   { id: 1, nome: 'Centro Oeste - Goiás (Estadual)', preco: 'R$ 39,90' },
+      // ]
+      sellableItems = []
+      hasImpactOnSavePlan = true
+      // hasImpactOnSavePlan = false
     } catch (error) {
       console.log(error)
     }
 
-    // enviar os dados para atualizar (back)
+    if (hasImpactOnSavePlan) {
+      if (sellableItems.length) {
+        history.push(DIRECTOR_EDIT_PLAN_CONFIRM, { sellableItems })
+      } else {
+        showMessage(NotSellableItems)
+      }
+    } else {
+      toast.success('Dados atualizados com sucesso.')
+
+      history.push(DIRECTOR_SEE_PLAN_MANAGMENT, { idPlan: initialPlan.idPlano })
+    }
   }
 
   return (

@@ -1,0 +1,60 @@
+import colors from '@/styles/colors'
+import styled from 'styled-components'
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: ${colors.gray.dark};
+  text-align: center;
+  max-width: 450px;
+
+  > img {
+    width: 56px;
+  }
+
+  > h6 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+
+    color: inherit;
+  }
+
+  > p {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  > * + * {
+    margin-top: 24px;
+  }
+
+  > footer {
+    button + button {
+      margin-left: 24px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    > p {
+      min-width: unset;
+    }
+
+    > footer {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      > button {
+      }
+
+      > button + button {
+        margin-left: 0px;
+        margin-top: 24px;
+      }
+    }
+  }
+`

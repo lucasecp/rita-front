@@ -24,6 +24,7 @@ export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
 
 export const DIRECTOR_PLAN_MANAGMENT = '/gestao/planos'
 export const DIRECTOR_EDIT_PLAN = '/gestao/planos/editar'
+export const DIRECTOR_EDIT_PLAN_CONFIRM = '/gestao/planos/editar/confirmar'
 export const DIRECTOR_SEE_PLAN_MANAGMENT = '/gestao/planos/visualizar'
 export const DIRECTOR_CREATE_PLAN_MANAGMENT = '/gestao/planos/criar'
 

@@ -1,8 +1,6 @@
 import { mapRangesToSendApi } from '../helpers/mapRangesToSendApi'
 
 export const planToApi = (plan) => {
-  console.log(plan.rangesOfUse)
-
   return {
     idPlano: plan.id,
     codigo: plan.code,
