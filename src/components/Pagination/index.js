@@ -29,9 +29,6 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
     }
   }, [total, currentPage, limit])
 
-  const hadleChange = ({ target }) => {
-    setLimit(target.value)
-  }
 
   const prevPage = () => {
     if (currentPage === 1) return
@@ -40,6 +37,8 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
 
   const nextPage = () => {
     if (currentPage === totalPages || !totalPages) return
+    console.log((currentTotal + currentTotal));
+
     setCurrentPage(currentPage + 1)
   }
 
@@ -57,7 +56,7 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
             ]
           }
           value={limit}
-          onChange={hadleChange}
+          onChange={({ target }) => setLimit(target.value)}
           variation="secondary"
         />
       </div>

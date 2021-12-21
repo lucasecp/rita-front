@@ -10,14 +10,14 @@ const SelectCity = ({ setCity, city, uf }) => {
     if (!uf) {
       return
     }
-    
+
 
     const getCity = async () => {
       try {
         const { data } = await apiPatient.get(`/municipio?idUF=${uf}`)
         const dataMapped = mapCity(data?.dados)
 
-        setCityOptions(dataMapped)
+        setCityOptions([{label: 'Todos', value: 'ALL'},...dataMapped])
       } catch ({ response }) {
     }
   }
@@ -35,8 +35,7 @@ const SelectCity = ({ setCity, city, uf }) => {
 
       options={cityOptions}
       label="Cidade:"
-      labelDefaultOption="Necessário selecionar a UF:"
-
+      labelDefaultOption="Necessário selecionar a UF"
       value={city}
       setValue={setCity}
     />
