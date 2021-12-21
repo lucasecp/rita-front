@@ -59,7 +59,7 @@ export const EditPlan = () => {
     code: '',
     name: '',
     description: '',
-    services: '',
+    services: ''
   }
 
   const [errors, setErrors] = useState(initialErrors)

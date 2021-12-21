@@ -7,10 +7,12 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { useModal } from '@/hooks/useModal'
+import { ReasonUpdate } from '@/pages/modules/Director/PlanManagment/EditPlan/messages/ReasonUpdate'
 
 import { Container } from './styles'
 
 export const NotSellableItems = () => {
+  const { showMessage } = useModal()
   const { closeModal } = useModal()
 
   const onDoNotProceed = () => {
@@ -18,7 +20,7 @@ export const NotSellableItems = () => {
   }
 
   const onProceed = async () => {
-    // showMessage()
+    showMessage(ReasonUpdate)
   }
 
   return (
