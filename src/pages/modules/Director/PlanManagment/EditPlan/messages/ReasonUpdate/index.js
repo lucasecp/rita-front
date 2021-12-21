@@ -13,7 +13,7 @@ import { Container } from './styles'
 
 export const ReasonUpdate = () => {
   const [reason, setReason] = useState('')
-  const [reasonError, setReasonError] = ('')
+  const [reasonError, setReasonError] = useState('')
   const { closeModal } = useModal()
 
   const onDoNotProceed = () => {
