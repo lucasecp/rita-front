@@ -73,6 +73,13 @@ export const EditPlan = () => {
           name: service.nome,
         }))
 
+        const optionAll = {
+          id: 'all',
+          name: 'Todos',
+        }
+
+        servicesOptionsMapped.unshift(optionAll)
+
         setServicesOptions(servicesOptionsMapped)
       } catch (error) {
         console.log(error)
@@ -180,8 +187,18 @@ export const EditPlan = () => {
       initialPlan.abrangencia.length > rangesOfUse.length
     ) {
       console.log('Causou impacto')
-      return
+      // return
     }
+
+    let servicesSelected = services
+
+    services.forEach((service) => {
+      if (service.id === 'all') {
+        servicesSelected = servicesOptions.filter(
+          (service) => service.id !== 'all'
+        )
+      }
+    })
 
     const planObject = {
       id: initialPlan.idPlano,
@@ -189,7 +206,7 @@ export const EditPlan = () => {
       name,
       status,
       description,
-      services,
+      services: servicesSelected,
       rangesOfUse,
     }
 
