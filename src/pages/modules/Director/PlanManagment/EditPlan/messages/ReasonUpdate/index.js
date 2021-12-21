@@ -13,7 +13,7 @@ import { Container } from './styles'
 
 export const ReasonUpdate = () => {
   const [reason, setReason] = useState('')
-  const [reasonError, setReasonError] = ''
+  const [reasonError, setReasonError] = ('')
   const { closeModal } = useModal()
 
   const onDoNotProceed = () => {
@@ -22,7 +22,7 @@ export const ReasonUpdate = () => {
 
   const onProceed = async () => {
     if (reason.length < 20) {
-      setReasonError('Informe 20 caracteres ou mais')
+      return setReasonError('Informe 20 caracteres ou mais')
     }
     // Proceed on saving
   }
@@ -36,8 +36,8 @@ export const ReasonUpdate = () => {
         value={reason}
         limit={150}
         showCaractersInformation
-        hasError={'d'}
-        messageError={'Informe 20 caracteres ou mais'}
+        hasError={reasonError}
+        messageError={reasonError}
       />
       <p>
         <span>Mínimo 20 caracteres</span>

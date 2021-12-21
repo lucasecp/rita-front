@@ -10,7 +10,7 @@ const Authorization = () => {
   }, [])
 
   return (
-    <DefaultLayout title="Relatórios / Autorizações">
+    <DefaultLayout title="Relatórios">
       <Container>
         <Filter />
       </Container>
