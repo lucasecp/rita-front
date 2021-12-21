@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory } from 'react-router'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { RangeOfUse } from '@/components/RangeOfUse'
 import InputText from '@/components/Form/InputText'
 import Textarea from '@/components/Form/Textarea'
 import CustomMultSelect from '@/components/Form/MultSelect'
-import { Select } from '@/components/Form/Select'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import OutilineButton from '@/components/Button/Outline'
