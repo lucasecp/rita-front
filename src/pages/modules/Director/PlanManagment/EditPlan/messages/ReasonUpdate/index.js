@@ -35,8 +35,7 @@ export const ReasonUpdate = () => {
         setValue={setReason}
         value={reason}
         limit={150}
-        showCaractersInformation
-        hasError={reasonError}
+        hasError={!!reasonError}
         messageError={reasonError}
       />
       <p>
