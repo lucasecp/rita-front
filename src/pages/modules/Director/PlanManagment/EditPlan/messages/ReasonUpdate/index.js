@@ -21,10 +21,10 @@ export const ReasonUpdate = () => {
   }
 
   const onProceed = async () => {
+    setReasonError('')
     if (reason.length < 20) {
       return setReasonError('Informe 20 caracteres ou mais')
     }
-    // Proceed on saving
   }
 
   return (
