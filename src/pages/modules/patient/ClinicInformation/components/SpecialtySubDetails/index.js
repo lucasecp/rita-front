@@ -40,7 +40,7 @@ const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
           <span>{dataSpecialtyDetails?.phone}</span>
         </li>
       </ul>
-      {!!dataSpecialtyDetails?.schedule.length && <ServiceSchedule dataSchedule={dataSpecialtyDetails?.schedule}/>}
+       <ServiceSchedule dataSchedule={dataSpecialtyDetails?.schedule}/>
     </Container>
   )
 }

@@ -64,4 +64,20 @@ export const Container = styled.div`
       }
     }
   }
+  .MuiAutocomplete-popper {
+    box-shadow: 0px 1px 2px 0px #e5e5e5;
+    border: none !important;
+    * {
+      font-size: 16px !important;
+      font-weight: 500 !important;
+      line-height: 20px;
+    }
+    h3{
+      background: blue
+    }
+    >* {
+      font-size: 50px
+    }
+
+  }
 `
