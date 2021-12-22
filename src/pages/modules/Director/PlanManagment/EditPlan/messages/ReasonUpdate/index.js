@@ -26,6 +26,8 @@ export const ReasonUpdate = ({ plan, hasSellableItems }) => {
     closeModal()
   }
 
+  console.log(plan)
+
   const onProceed = async () => {
     setReasonError('')
 
@@ -34,7 +36,7 @@ export const ReasonUpdate = ({ plan, hasSellableItems }) => {
     }
 
     // alterou o status para ativo e não tem itens vendáveis associados?
-    // if( && ){
+    // if(!hasSellableItemss){
     //   closeModal()
     //   toast.warning(
     //     'Para ativar um plano, é necessário que ele possua pelo menos um item vendável associado'

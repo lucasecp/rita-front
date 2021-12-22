@@ -208,8 +208,6 @@ export const EditPlan = () => {
         { params: { confirmado: false } }
       )
 
-      console.log(data)
-
       if (data.mensagem) {
         hasImpactOnSavePlan = false
       }

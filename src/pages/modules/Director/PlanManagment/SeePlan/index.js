@@ -23,6 +23,7 @@ const SeePlan = () => {
       try {
         Loading.turnOn()
         const response = await apiPatient.get(`/plano/${location.state.idPlan}`)
+        console.log(response)
         setPlanInfo(response.data)
       } catch (error) {
       } finally {

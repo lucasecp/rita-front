@@ -26,8 +26,9 @@ export const NotSellableItems = ({ plan }) => {
   return (
     <Container>
       <img src={warningIcon} />
-      <h6>Suas alterações afetarão os itens abaixo, deseja prosseguir?</h6>
-      <p>Não há itens vendáveis associados a esse plano.</p>
+      <h6>
+      Não há itens vendáveis associados a esse plano, deseja prosseguir?
+      </h6>
       <footer>
         <OutlineButton onClick={onDoNotProceed}>Não</OutlineButton>
         <ButtonPrimary onClick={onProceed}>Sim</ButtonPrimary>
