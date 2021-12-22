@@ -6,17 +6,23 @@ import { Container } from './styles'
 import OutilineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useToggle } from '@/hooks/useToggle'
+import { useModal } from '@/hooks/useModal'
 
 export const EditPlanConfirm = () => {
   const history = useHistory()
   const { sellableItems } = useLocation().state
+  const { showMessage, showSimple } = useModal()
 
-  console.log(sellableItems)
+  const { plan } = useLocation().state
 
   const [isSellableItemsExpanded, toggleIsSellableItemsExpanded] = useToggle()
 
   const onDoNotProceed = () => {
     history.goBack()
+  }
+
+  const onProceed = () => {
+            // showMessage(ReasonUpdate, { plan, hasSellableItems: true})
   }
 
   return (
@@ -52,7 +58,7 @@ export const EditPlanConfirm = () => {
         </div>
         <footer>
           <ButtonPrimary onClick={onDoNotProceed}>Não</ButtonPrimary>
-          <OutilineButton>Sim</OutilineButton>
+          <OutilineButton onClick={onProceed}>Sim</OutilineButton>
         </footer>
       </Container>
     </DefaultLayout>

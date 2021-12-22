@@ -95,6 +95,7 @@ export const EditPlan = () => {
 
   const verifyErrorsOnFields = () => {
     let errorsTemporary = initialErrors
+    let hasErrors = false
 
     if (!code) {
       errorsTemporary = {
@@ -126,10 +127,11 @@ export const EditPlan = () => {
 
     setErrors(errorsTemporary)
 
-    const hasErrors = Object.values(errorsTemporary).some(
-      (value) => value !== ''
-    )
+    hasErrors = Object.values(errorsTemporary).some((value) => value !== '')
 
+    if (!rangesOfUse.length) {
+      hasErrors = true
+    }
     return hasErrors
   }
 

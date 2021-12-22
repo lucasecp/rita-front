@@ -16,7 +16,7 @@ import { toast } from '@/styles/components/toastify'
 import apiPatient from '@/services/apiPatient'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
-export const ReasonUpdate = ({ plan }) => {
+export const ReasonUpdate = ({ plan, hasSellableItems }) => {
   const [reason, setReason] = useState('')
   const [reasonError, setReasonError] = useState('')
   const { closeModal, showSimple } = useModal()
