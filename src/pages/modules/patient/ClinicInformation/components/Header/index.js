@@ -5,6 +5,7 @@ import { ReactComponent as WhatsAppIcon } from '@/assets/icons/whatsapp.svg'
 import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg'
 import { formatMobilePhone } from '@/helpers/formatMobilePhone'
 import { formatPhone } from '@/helpers/formatPhone'
+import CustomTooltip from '@/components/Tooltip'
 
 const Header = ({ clinicInfo }) => {
   return (
@@ -12,7 +13,8 @@ const Header = ({ clinicInfo }) => {
       <div>
         <img
           src={`data:image/png;base64,${clinicInfo?.photo}`}
-          alt="Imagem da clínica"/>
+          alt="Imagem da clínica"
+        />
       </div>
       <div>
         <h2>{clinicInfo?.name}</h2>
@@ -23,7 +25,11 @@ const Header = ({ clinicInfo }) => {
               {clinicInfo?.complement} - {clinicInfo?.district} -{' '}
               {clinicInfo?.city} / {clinicInfo?.uf}
             </span>
-            { clinicInfo?.validAddress && <VerifiedIcon /> }
+            {clinicInfo?.validAddress && (
+              <CustomTooltip label="Verificado">
+                <VerifiedIcon />
+              </CustomTooltip>
+            )}
             <a
               href={clinicInfo?.linkGoogleMap}
               target="_blank"
@@ -35,8 +41,11 @@ const Header = ({ clinicInfo }) => {
           </li>
           <li>
             {clinicInfo?.phone?.length > 10 ? (
-              <a href={`https://api.whatsapp.com/send?phone=${clinicInfo?.phone}`}  target="_blank"
-              rel="noreferrer">
+              <a
+                href={`https://api.whatsapp.com/send?phone=${clinicInfo?.phone}`}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <WhatsAppIcon />
                 {formatMobilePhone(clinicInfo?.phone)}
               </a>

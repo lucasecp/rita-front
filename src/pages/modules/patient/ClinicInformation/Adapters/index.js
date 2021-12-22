@@ -1,5 +1,6 @@
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 import { scheduleFromApi } from './mapSchedule'
+import { formatPrice } from '@/helpers/formatPrice'
 
 export const fromApi = (dataClinic) => {
   const specialtys = dataClinic?.especialidade?.map((specialty) => ({
@@ -9,7 +10,7 @@ export const fromApi = (dataClinic) => {
 
       defaultPrice: specialty.precos.reduce((ac, price) => {
         if (price.idEspecialidade === spe.idEspecialidade) {
-          ac = price.precoNormal
+          ac = formatPrice(price.precoNormal)
           return ac
         }
         return ac
@@ -17,7 +18,7 @@ export const fromApi = (dataClinic) => {
 
       ritaPrice: specialty.precos.reduce((ac, price) => {
         if (price.idEspecialidade === spe.idEspecialidade) {
-          ac = price.precoRita
+          ac = formatPrice(price.precoRita)
           return ac
         }
         return ac
