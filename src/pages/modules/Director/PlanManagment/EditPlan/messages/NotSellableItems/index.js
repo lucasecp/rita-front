@@ -21,6 +21,7 @@ export const NotSellableItems = ({ plan }) => {
 
   const onProceed = async () => {
     showMessage(ReasonUpdate, { plan, hasSellableItems: false })
+
   }
 
   return (

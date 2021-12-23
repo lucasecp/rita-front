@@ -208,10 +208,6 @@ export const EditPlan = () => {
         { params: { confirmado: false } }
       )
 
-      if (data.mensagem) {
-        hasImpactOnSavePlan = false
-      }
-
       if (Array.isArray(data)) {
         const sellableItemsMapped = data.map((sellableItem) => ({
           name: sellableItem.nome,
@@ -229,7 +225,7 @@ export const EditPlan = () => {
 
     if (hasImpactOnSavePlan) {
       if (sellableItems.length) {
-        history.push(DIRECTOR_EDIT_PLAN_CONFIRM, { sellableItems })
+        history.push(DIRECTOR_EDIT_PLAN_CONFIRM, {plan: planObject, sellableItems })
       } else {
         showMessage(NotSellableItems, { plan: planObject })
       }
