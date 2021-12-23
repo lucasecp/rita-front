@@ -83,11 +83,13 @@ export const EditPersonalData = ({ personalDatas }) => {
       <GeneralDatas
         isEditing={isEditing}
         personalDatas={mainPersonalDatas}
+        prevData={personalDatas.personalDatas}
         setPersonalDatas={setMainPersonalDatas}
       />
       <AddressProfile
         isEditing={isEditing}
         address={address}
+        prevData={personalDatas.address}
         setAddress={setAddress}
       />
       {personalDatas?.supplementaryData?.contractedPlan && (

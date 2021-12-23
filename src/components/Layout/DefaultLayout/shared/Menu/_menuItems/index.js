@@ -8,7 +8,7 @@ import { ReactComponent as EligibilityIcon } from '@/assets/icons/choose-person.
 import { ReactComponent as PadLockIcon } from '@/assets/icons/pad-lock.svg'
 import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 import { ReactComponent as ManagmentIcon } from '@/assets/icons/managment.svg'
-// import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
+import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
 
 import {
   MASTERPAGE,
@@ -16,7 +16,7 @@ import {
   OPERATOR_CONSULT_ELIGIBILITY,
   OPERATOR_REPORTS,
   CHANGE_PASSWORD,
-  // DEPENDENTS,
+  PATIENT_SEE_DEPENDENT,
   // PATIENT_START,
   PROFILE,
   VALIDATOR_ANALYZE_PATIENTS,
@@ -74,12 +74,12 @@ export const menuItens = [
     name: 'Elegibilidade',
     permission: permissionList.VER_ELEGIBILIDADE_PACIENTE,
   },
-  // {
-  //   path: DEPENDENTS,
-  //   icon: <GroupUserIcon />,
-  //   name: 'Dependentes',
-  //   permission: permissionList.VER_MEUS_DEPENDENTES,
-  // },
+  {
+    path: PATIENT_SEE_DEPENDENT,
+    icon: <GroupUserIcon />,
+    name: 'Dependentes',
+    permission: permissionList.VER_MEUS_DEPENDENTES,
+  },
   {
     path: DIRECTOR_PLAN_MANAGMENT,
     icon: <ManagmentIcon />,

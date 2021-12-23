@@ -2,7 +2,6 @@ export const LOGIN = '/'
 export const MASTERPAGE = '/inicio'
 
 export const PROFILE = '/perfil'
-export const DEPENDENTS = '/paciente/dependentes'
 export const CHANGE_PASSWORD = '/trocar-senha'
 
 export const PATIENT_START = '/paciente/inicio'
@@ -29,10 +28,14 @@ export const DIRECTOR_SEE_PLAN_MANAGMENT = '/gestao/planos/visualizar'
 export const DIRECTOR_CREATE_PLAN_MANAGMENT = '/gestao/planos/criar'
 
 export const PATIENT_SCHEDULE_APPOINTMENT = '/agendar-consulta'
+
 export const PATIENT_CLINIC_INFORMATION =
   '/agendar-consulta/informacoes-clinica'
+
 export const PATIENT_DOCTOR_INFORMATION =
   '/agendar-consulta/informacoes-especialista'
+
+export const PATIENT_SEE_DEPENDENT = '/paciente/dependentes/ver-dependente'
 
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'

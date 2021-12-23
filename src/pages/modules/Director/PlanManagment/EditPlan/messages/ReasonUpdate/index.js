@@ -15,18 +15,18 @@ import { toast } from '@/styles/components/toastify'
 
 import apiPatient from '@/services/apiPatient'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
+import { planToApi } from '../../adapters/toApi'
 
 export const ReasonUpdate = ({ plan, hasSellableItems }) => {
   const [reason, setReason] = useState('')
   const [reasonError, setReasonError] = useState('')
   const { closeModal, showSimple } = useModal()
   const { Loading } = useLoading()
+  const history = useHistory()
 
   const onDoNotProceed = () => {
     closeModal()
   }
-
-  console.log(plan)
 
   const onProceed = async () => {
     setReasonError('')
@@ -35,19 +35,18 @@ export const ReasonUpdate = ({ plan, hasSellableItems }) => {
       return setReasonError('Informe 20 caracteres ou mais')
     }
 
-    // alterou o status para ativo e não tem itens vendáveis associados?
-    // if(!hasSellableItemss){
-    //   closeModal()
-    //   toast.warning(
-    //     'Para ativar um plano, é necessário que ele possua pelo menos um item vendável associado'
-    //   )
-    // }
+    if (plan.status === 'A' && !hasSellableItems) {
+      closeModal()
+      toast.warning(
+        'Para ativar um plano, é necessário que ele possua pelo menos um item vendável associado'
+      )
+      return
+    }
 
     try {
       Loading.turnOn()
 
-      // fazer o mapeamento das propriedades para mandar para o back
-      const planMapped = plan
+      const planMapped = planToApi(plan)
 
       const response = await apiPatient.put(`/plano/${plan.id}`, planMapped, {
         params: { confirmado: true, motivo: reason },
@@ -56,8 +55,10 @@ export const ReasonUpdate = ({ plan, hasSellableItems }) => {
       console.log(response)
       toast.success('Dados atualizados com sucesso.')
 
+      closeModal()
       history.push(DIRECTOR_SEE_PLAN_MANAGMENT, { idPlan: plan.id })
     } catch (error) {
+      console.log(error)
       showSimple.error('Erro ao editar um plano!')
     } finally {
       Loading.turnOff()
