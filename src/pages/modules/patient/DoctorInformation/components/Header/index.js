@@ -1,11 +1,17 @@
 import React from 'react'
 import { Container } from './styles'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
+import CustomTooltip from '@/components/Tooltip'
 
 const Header = ({ doctorInfo }) => {
   return (
     <Container>
-      <div></div>
+      <div>
+        <img
+          src={`data:image/png;base64,${doctorInfo?.photo}`}
+          alt="Imagem do Médico"
+        />
+      </div>
       <div>
         <h2>
           {doctorInfo?.title}&nbsp;{doctorInfo?.name}
@@ -28,7 +34,11 @@ const Header = ({ doctorInfo }) => {
                 {doctorInfo?.doctorSpecialty.especialidade.descricao} -
                 {doctorInfo?.doctorSpecialty.RQE}
               </span>
-              <VerifiedIcon />
+              {doctorInfo?.verified && (
+                <CustomTooltip label="Verificado">
+                  <VerifiedIcon />
+                </CustomTooltip>
+              )}
             </h6>
           </li>
         </ul>

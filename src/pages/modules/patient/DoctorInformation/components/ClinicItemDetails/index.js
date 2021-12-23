@@ -16,14 +16,32 @@ const ClinicItemDetails = ({ clinicDetails }) => {
           <HeartIcon /> Atendimento:
           <span>{clinicDetails?.clinic?.description}</span>
         </li>
-        <li>
-          <MoneyIcon /> Valor:
-          <span>Balcão {clinicDetails?.defaultPrice}</span> <span>-</span>
-          <span>Rita: {clinicDetails?.ritaPrice}</span>
-        </li>
+        {clinicDetails?.clinic?.defaultPrice &&
+          clinicDetails?.clinic?.ritaPrice && (
+            <li>
+              <MoneyIcon /> <h6>Valor:</h6>
+              {clinicDetails?.clinic?.defaultPrice && (
+                <span>Balcão {clinicDetails?.clinic?.defaultPrice}</span>
+              )}
+              {clinicDetails?.clinic?.defaultPrice && (
+                <>
+                  <span>-</span>{' '}
+                  <span>Rita {clinicDetails?.clinic?.ritaPrice}</span>
+                </>
+              )}
+            </li>
+          )}
+        {
+          <li>
+            <MoneyIcon /> Valor:
+            <span>Balcão {clinicDetails?.specialtys[0].defaultPrice}</span>{' '}
+            <span>-</span>
+            <span>Rita: {clinicDetails?.specialtys[0].ritaPrice}</span>
+          </li>
+        }
         <li>
           <PhoneIcon />
-          <div> Faça seu agendamento: </div>
+          <div> Telefone de Agendamento: </div>
           <span>{clinicDetails?.clinic.phone}</span>
         </li>
       </ul>
