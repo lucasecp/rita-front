@@ -7,11 +7,12 @@ import OutilineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useToggle } from '@/hooks/useToggle'
 import { useModal } from '@/hooks/useModal'
+import { ReasonUpdate } from '../EditPlan/messages/ReasonUpdate'
 
 export const EditPlanConfirm = () => {
   const history = useHistory()
   const { sellableItems } = useLocation().state
-  const { showMessage, showSimple } = useModal()
+  const { showMessage } = useModal()
 
   const { plan } = useLocation().state
 
@@ -22,7 +23,7 @@ export const EditPlanConfirm = () => {
   }
 
   const onProceed = () => {
-            // showMessage(ReasonUpdate, { plan, hasSellableItems: true})
+    showMessage(ReasonUpdate, { plan, hasSellableItems: true })
   }
 
   return (
