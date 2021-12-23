@@ -1,6 +1,23 @@
 import styled from 'styled-components'
 import { ReactComponent as DropdownIcon } from '@/assets/icons/dropdown.svg'
 
+export const DefaultPhoto = styled.div`
+  border-radius: 50%;
+  width: 98px;
+  height: 98px;
+  background: #6a6a6a;
+  margin-right: 24px;
+`
+export const Photo = styled.div`
+  margin-right: 24px;
+  > img {
+    border-radius: 50%;
+    width: 98px;
+    height: 98px;
+    object-fit: fill;
+  }
+`
+
 export const Container = styled.div`
   border-radius: 8px;
   border: solid 1px #f5f5f5;
@@ -11,24 +28,16 @@ export const Container = styled.div`
     padding: 24px;
     cursor: pointer;
     display: flex;
-    > div:first-child{
+    @media (max-width: 767px) {
+      padding: 16px;
+    }
+    > div:first-child {
       display: flex;
-      @media(max-width: 767px){
+      @media (max-width: 767px) {
         flex-direction: column;
-        > div h2{
+        > div h2 {
           margin-top: 10px;
         }
-      }
-
-    }
-    > div:first-child > div:first-child{
-      margin-right: 24px;
-
-      > img {
-        border-radius: 50%;
-        width: 98px;
-        height: 98px;
-        object-fit: fill;
       }
     }
     > div {
@@ -50,14 +59,14 @@ export const Container = styled.div`
     > svg {
       margin-left: auto;
       cursor: pointer;
-      min-width: 40px
+      min-width: 40px;
     }
   }
 `
 export const DropdownIconStyled = styled(DropdownIcon)`
-    transition: .3s;
+  transition: 0.3s;
   &[data-expanded='1'] {
-   transform: rotate(-180deg);
-   transition: .3s;
+    transform: rotate(-180deg);
+    transition: 0.3s;
   }
 `

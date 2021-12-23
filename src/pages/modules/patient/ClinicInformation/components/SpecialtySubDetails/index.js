@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from './styles'
+import { Container, MainInfo, Price ,RitaPrice, DefaultPrice,Phone,ContainerMainInfo} from './styles'
 import { ReactComponent as MoneyIcon } from '@/assets/icons/money.svg'
 import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
@@ -11,8 +11,8 @@ const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
   return (
     <Container>
       <ul>
-        <div>
-          <li>
+        <ContainerMainInfo>
+          <MainInfo>
             <h6>Conselho Regional:</h6>{' '}
             <span>
               CRM - {dataSpecialtyDetails?.crm} - {dataSpecialtyDetails?.crmUf}{' '}
@@ -22,37 +22,40 @@ const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
                 <VerifiedIcon />
               </CustomTooltip>
             )}
-          </li>
-          <li>
+          </MainInfo>
+
+          <MainInfo>
             <h6>Especialidades: </h6>
             <span>
               {dataSpecialtyDetails?.specialtyName} - RQE Nº :{' '}
               {dataSpecialtyDetails?.rqe}
             </span>
-          </li>
-        </div>
+          </MainInfo>
+        </ContainerMainInfo>
+
         {dataSpecialtyDetails?.defaultPrice && dataSpecialtyDetails?.ritaPrice && (
-          <li>
+          <Price>
             <MoneyIcon /> <h6>Valor:</h6>
             {dataSpecialtyDetails?.defaultPrice && (
-              <span>Balcão {dataSpecialtyDetails?.defaultPrice}</span>
+              <DefaultPrice>Balcão {dataSpecialtyDetails?.defaultPrice}</DefaultPrice>
             )}
             {dataSpecialtyDetails?.defaultPrice && (
               <>
-                <span>-</span>{' '}
-                <span>Rita {dataSpecialtyDetails?.ritaPrice}</span>
+                <span>-</span>
+                <RitaPrice>Rita {dataSpecialtyDetails?.ritaPrice}</RitaPrice>
               </>
             )}
-          </li>
+          </Price>
         )}
-        <li>
-          <PhoneIcon /> <h6>Telefone de Agendamento:</h6>
-          <span>{dataSpecialtyDetails?.phone}</span>
-        </li>
+        {dataSpecialtyDetails?.phone && (
+          <Phone>
+            <PhoneIcon /> <h6>Telefone de Agendamento:</h6>
+            <span>{dataSpecialtyDetails?.phone}</span>
+          </Phone>
+        )}
       </ul>
-      {!!dataSpecialtyDetails?.schedule.length && (
-        <ServiceSchedule dataSchedule={dataSpecialtyDetails?.schedule} />
-      )}
+
+      <ServiceSchedule dataSchedule={dataSpecialtyDetails?.schedule} />
     </Container>
   )
 }

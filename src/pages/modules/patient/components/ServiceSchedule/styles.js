@@ -19,7 +19,7 @@ export const Container = styled.div`
       text-align: center;
       padding: 8px;
     }
-   
+
     }
   }
   > div  {
@@ -27,7 +27,7 @@ export const Container = styled.div`
     justify-content:center;
     flex-wrap: wrap;
     margin: -24px;
-    
+
     >ul {
       margin: 24px;
       > h6{
@@ -41,7 +41,7 @@ margin-bottom: 12px
 
 
     }
-   
+
     > li {
       display: block;
       font-size: 16px;
@@ -49,7 +49,7 @@ margin-bottom: 12px
       line-height: 20px;
       color: #6a6a6a;
       text-align: center;
-     
+
     }
   }
 }

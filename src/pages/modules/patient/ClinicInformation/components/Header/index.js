@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from './styles'
+import { Container, DefaultPhoto } from './styles'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as WhatsAppIcon } from '@/assets/icons/whatsapp.svg'
 import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg'
@@ -10,12 +10,17 @@ import CustomTooltip from '@/components/Tooltip'
 const Header = ({ clinicInfo }) => {
   return (
     <Container>
-      <div>
-        <img
-          src={`data:image/png;base64,${clinicInfo?.photo}`}
-          alt="Imagem da clínica"
-        />
-      </div>
+      {clinicInfo?.photo ? (
+        <div>
+          <img
+            src={`data:image/png;base64,${clinicInfo?.photo}`}
+            alt="Imagem da clínica"
+          />
+        </div>
+      ) : (
+        <DefaultPhoto />
+      )}
+
       <div>
         <h2>{clinicInfo?.name}</h2>
         <ul>

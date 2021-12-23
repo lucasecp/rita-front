@@ -1,5 +1,6 @@
 export const scheduleFromApi = (schedules) => {
-  console.log(schedules)
+  if(!schedules) return []
+  
   return [schedules]?.map((schedule) => ({
     monday: schedule?.segunda?.map((day) => ({
       start: day.inicio,

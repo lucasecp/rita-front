@@ -28,7 +28,7 @@ const DoctorInformation = () => {
     const getDoctor = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get(`/medico/34`)
+        const { data } = await apiPatient.get(`/medico/13`)
         setDoctorInfo(fromApi(data))
       } catch (error) {
         console.log(error)

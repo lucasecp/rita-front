@@ -22,8 +22,15 @@ const SpecialtyItem = ({ specialtyInfo }) => {
         )}
       </div>
       <Accordion data-expanded={state ? 1 : 0}>
-        {specialtyInfo?.doctorSpecialty?.map((dataSpecialtyDetails,index) => (
-          <SpecialtyDetails key={index} dataSpecialtyDetails={{...dataSpecialtyDetails, specialtyName: specialtyInfo.name}} parentWasClosed={state} />
+        {specialtyInfo?.doctorSpecialty?.map((dataSpecialtyDetails, index) => (
+          <SpecialtyDetails
+            key={index}
+            dataSpecialtyDetails={{
+              ...dataSpecialtyDetails,
+              specialtyName: specialtyInfo.name,
+            }}
+            parentWasClosed={state}
+          />
         ))}
       </Accordion>
     </Container>

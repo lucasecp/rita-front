@@ -15,6 +15,7 @@ export const Container = styled.div`
       font-weight: 500;
       line-height: 30px;
       color: #303030;
+      margin-right: 60px;
 
     }
     > span {
@@ -40,5 +41,8 @@ export const Container = styled.div`
   }
   > *:last-child[data-expanded='1']{
     margin-top: 27px
+  }
+  @media (max-width: 767px) {
+    padding: 33px 16px;
   }
 `

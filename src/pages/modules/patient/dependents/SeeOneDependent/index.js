@@ -10,7 +10,7 @@ const SeeDependents = () => {
     dataNascimento: '01/02/1985',
     telefone: '(61) 98498-4848',
     email: 'teste@teste.com',
-    status: '',
+    status: 'I',
     cep: '21992292',
     uf: 'RJ',
     municipio: 'Rio de Janeiro',
@@ -20,10 +20,10 @@ const SeeDependents = () => {
     complemento: 'Apartamento',
   }
   const [dependentData, setDependentData] = useState(fromApi(dataFromApi));
-  
+
   return (
     <DefaultLayout title="Visualizar informações de dependente">
-      <EditDependent dependentData={dependentData}  setDependentData={setDependentData}/>
+      <EditDependent dependentData={dependentData}  />
     </DefaultLayout>
   )
 }
