@@ -1,7 +1,46 @@
 import { formatPrice } from '@/helpers/formatPrice'
 import { formatCpf } from '@/helpers/formatCpf'
 
-export const fromApiDataToDisplay = (data) => {
+interface IDataToDisplayFromApi{
+  nome:string;
+  cpf:string;
+  status:string;
+  plano:{
+    nome:string;
+  };
+  tabela:{
+    nome:string;
+    validade:string;
+  }
+}
+
+interface IPersonalDataFromApi{
+  nome:string;
+  dataNascimento:string;
+  sexo:string;
+  telefone:string;
+  email:string;
+  plano:{
+    nome: string;
+    data: string;
+    valor: string;
+    canal: string;
+    empresa: string;
+  }
+
+}
+
+interface IPersonalDataAddressFromApi{
+  cep:string;
+  uf:string;
+  cidade:string;
+  logradouro:string;
+  numero:string;
+  bairro:string;
+  complemento:string;
+}
+
+export const fromApiDataToDisplay = (data: IDataToDisplayFromApi) => {
   return {
     name: data.nome,
     cpf: formatCpf(data.cpf),
@@ -19,7 +58,7 @@ export const fromApiDataToDisplay = (data) => {
   }
 }
 
-export const fromApiPersonalDatas = (data, endereco) => {
+export const fromApiPersonalDatas = (data:IPersonalDataFromApi, endereco:IPersonalDataAddressFromApi) => {
   return {
     personalDatas: {
       name: data.nome,

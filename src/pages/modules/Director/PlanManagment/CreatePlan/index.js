@@ -52,6 +52,13 @@ export const CreatePlan = () => {
           name: service.nome,
         }))
 
+        const optionAll = {
+          id: 'all',
+          name: 'Todos',
+        }
+
+        servicesOptionsMapped.unshift(optionAll)
+
         setServicesOptions(servicesOptionsMapped)
       } catch (error) {
         console.log(error)
@@ -132,11 +139,21 @@ export const CreatePlan = () => {
     }
 
     try {
+      let servicesSelected = services
+
+      services.forEach((service) => {
+        if (service.id === 'all') {
+          servicesSelected = servicesOptions.filter(
+            (service) => service.id !== 'all'
+          )
+        }
+      })
+
       const planMapped = toApi({
         code,
         name,
         description,
-        services,
+        services: servicesSelected,
         rangesOfUse,
       })
 
@@ -150,14 +167,6 @@ export const CreatePlan = () => {
   }
 
   const onCancelCreatePlan = () => {
-    console.log({
-      code,
-      name,
-      description,
-      services,
-      rangesOfUse,
-    })
-
     if (
       code !== '' ||
       name !== '' ||

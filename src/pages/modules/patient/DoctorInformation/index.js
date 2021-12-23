@@ -21,16 +21,14 @@ const DoctorInformation = () => {
   }, [])
 
   useEffect(() => {
-    if (!location.state) {
-      return history.push(PATIENT_SCHEDULE_APPOINTMENT)
-    }
+    // if (!location.state) {
+    //   return history.push(PATIENT_SCHEDULE_APPOINTMENT)
+    // }
 
     const getDoctor = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get(
-          `/medico/${location.state.idDoctor}`
-        )
+        const { data } = await apiPatient.get(`/medico/34`)
         setDoctorInfo(fromApi(data))
       } catch (error) {
         console.log(error)
@@ -50,7 +48,7 @@ const DoctorInformation = () => {
           </Link>
         </div>
         <Header doctorInfo={doctorInfo} />
-        <h3>Clinicas que atende</h3>
+        <h3>Clínicas que atende</h3>
         {doctorInfo?.clinicdoctor?.map((clinic, index) => (
           <ClinicItem key={index} clinic={clinic} />
         ))}

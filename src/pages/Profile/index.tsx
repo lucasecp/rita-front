@@ -10,12 +10,14 @@ import { useModal } from 'src/hooks/useModal'
 import { ProfileInactive } from './messages/ProfileInactive'
 import { fromApiDataToDisplay, fromApiPersonalDatas } from './adapters/fromApi'
 
+import { IPersonalDatasState,IDataToDisplayState} from './types/IPersonal'
+
 export const Profile = () => {
   const { Loading } = useLoading()
   const { showMessage } = useModal()
 
-  const [personalDatas, setPersonalDatas] = useState()
-  const [dataToDisplay, setDataToDisplay] = useState()
+  const [personalDatas, setPersonalDatas] = useState<IPersonalDatasState>()
+  const [dataToDisplay, setDataToDisplay] = useState<IDataToDisplayState>()
 
   useEffect(() => {
     document.title = 'Rita Saúde | Perfil'
@@ -28,6 +30,7 @@ export const Profile = () => {
           data,
           data: { endereco },
         } = await apiPatient.get('/paciente/meu-perfil')
+
 
         setDataToDisplay(fromApiDataToDisplay(data))
 

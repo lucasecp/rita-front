@@ -1,6 +1,7 @@
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 import { formatPhone } from '@/helpers/formatPhone'
 import { scheduleFromApi } from './mapSchedule'
+import { formatPrice } from '@/helpers/formatPrice'
 
 export const fromApi = (dataClinic) => {
   const doctorSpecialty = dataClinic?.medicoEspecialidade?.find(
@@ -37,7 +38,7 @@ export const fromApi = (dataClinic) => {
 
       defaultPrice: spe.precos.reduce((ac, price) => {
         if (price.idEspecialidade === spe.idEspecialidade) {
-          ac = price.precoNormal
+          ac = formatPrice(price.precoNormal)
           return ac
         }
         return ac
@@ -45,7 +46,7 @@ export const fromApi = (dataClinic) => {
 
       ritaPrice: spe.precos.reduce((ac, price) => {
         if (price.idEspecialidade === spe.idEspecialidade) {
-          ac = price.precoRita
+          ac = formatPrice(price.precoRita)
           return ac
         }
         return ac
@@ -54,7 +55,7 @@ export const fromApi = (dataClinic) => {
   }))
 
   return {
-    photo: dataClinic.foto,
+    photo: dataClinic.avatar,
     title: firstLetterCapitalize(dataClinic.titulo),
     name: firstLetterCapitalize(dataClinic.nome),
     address: dataClinic.endereco,

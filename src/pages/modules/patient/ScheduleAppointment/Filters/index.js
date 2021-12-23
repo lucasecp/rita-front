@@ -1,6 +1,7 @@
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import InputAutoComplete from '@/components/Form/InputAutoComplete'
+import InputAutoCompleteAntd from '@/components/Form/InputAutoCompleteAntd'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
 import SelectCity from '../components/SelectCity'
@@ -14,6 +15,7 @@ import InputText from '@/components/Form/InputText'
 import { useLoading } from '@/hooks/useLoading'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { fromApi } from '../Adapters'
+import { toast } from '@/styles/components/toastify'
 
 const Filters = () => {
   const [researchDoctor, setResearchDoctor] = useState('')
@@ -37,12 +39,12 @@ const Filters = () => {
   const arrayQuery = [
     { name: 'palavraChave', value: researchDoctor },
     { name: 'municipio', value: city },
-    { name: 'uf', value: uf },
+    { name: 'uf', value: uf === 'All' ? '' : uf },
   ]
 
   const onFilter = () => {
     if (!someFieldWasTyped) {
-      return showSimple.warning('Informe pelo menos um filtro.')
+      return toast.warning('Informe pelo menos um filtro.')
     }
     setFilter(verifyTypedFields(arrayQuery))
   }
@@ -54,7 +56,8 @@ const Filters = () => {
         `/paciente/agenda-consulta${queryApiPagination}${queryFilterString(filter)}`
         )
         if (data.total === 0) {
-          return showSimple.error('Nenhum resultado encontrado.')
+         return toast.warning('Nenhum resultado encontrado.')
+
         }
       setResults({total: data.total, doctor: fromApi(data.clinicas) })
 
@@ -68,6 +71,7 @@ const Filters = () => {
   const verifyTypedFields = (fields) => {
     return fields.filter((field) => field.value)
   }
+  
 
   return (
     <>
@@ -84,12 +88,13 @@ const Filters = () => {
           keyLabelFromApi="nome"
           keyValueFromApi="idPaciente"
         /> */}
-        <InputText
+        <InputAutoCompleteAntd setValue={setResearchDoctor} value={researchDoctor} />
+        {/* <InputText
           label="Especialista ou Especialidade:"
           setValue={setResearchDoctor}
           value={researchDoctor}
           placeholder="O que você procura?"
-        />
+        /> */}
         <SelectUf setUf={setUf} uf={uf} />
         <SelectCity setCity={setCity} uf={uf} city={city} />
         <BtnGroup>

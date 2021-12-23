@@ -8,7 +8,12 @@ import { Container } from './styles'
 import { UF } from '../../constants/uf'
 import { validateCep } from '../../helpers/validatorFields'
 
-export const AddressProfile = ({ address, setAddress, isEditing }) => {
+export const AddressProfile = ({
+  address,
+  setAddress,
+  isEditing,
+  prevData,
+}) => {
   const [cep, setCep] = useState(address?.cep || '')
   const [uf, setUf] = useState(address?.uf || '')
   const [city, setCity] = useState(address?.city || '')
@@ -33,13 +38,16 @@ export const AddressProfile = ({ address, setAddress, isEditing }) => {
   }, [cep, uf, city, addressUser, number, district, complement, errors])
 
   useEffect(() => {
-    setCep(address?.cep || '')
-    setUf(address?.uf || '')
-    setCity(address?.city || '')
-    setAddressUser(address?.addressUser || '')
-    setNumber(address?.number || '')
-    setDistrict(address?.district || '')
-    setComplement(address?.complement || '')
+    if (!isEditing) {
+      setCep(prevData?.cep || '')
+      setUf(prevData?.uf || '')
+      setCity(prevData?.city || '')
+      setAddressUser(prevData?.addressUser || '')
+      setNumber(prevData?.number || '')
+      setDistrict(prevData?.district || '')
+      setComplement(prevData?.complement || '')
+      setErrors({})
+    }
   }, [isEditing])
 
   return (

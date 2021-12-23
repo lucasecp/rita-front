@@ -3,9 +3,11 @@ export const formatPrice = (price) => {
     return ''
   }
 
-  const priceFormatted = `R$ ${price?.toLocaleString('pt-br', {
+  const priceFormatted = price.toLocaleString('pt-br', {
     minimumFractionDigits: 2,
-  })}`
+    style: 'currency',
+    currency: 'BRL',
+  })
 
   return priceFormatted
 }

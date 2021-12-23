@@ -6,6 +6,7 @@ import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg'
 import { Accordion } from '../../../ClinicInformation/components/styles'
 import { useToggle } from '@/hooks/useToggle'
+import CustomTooltip from '@/components/Tooltip'
 
 const ClinicItem = ({ clinic }) => {
   const [state, toggle] = useToggle()
@@ -21,7 +22,11 @@ const ClinicItem = ({ clinic }) => {
                   {clinic?.clinic.address} - {clinic?.clinic.district} -{' '}
                   {clinic?.clinic.city}
                 </span>
-                <VerifiedIcon />
+                {clinic?.verified && (
+                  <CustomTooltip label="Verificado">
+                    <VerifiedIcon />
+                  </CustomTooltip>
+                )}
                 <a
                   href={clinic?.linkGoogleMap}
                   target="_blank"

@@ -16,6 +16,7 @@ export const GeneralDatas = ({
   personalDatas,
   setPersonalDatas,
   isEditing,
+  prevData,
 }) => {
   const [name, setName] = useState(personalDatas?.name || '')
   const [birthDate, setBirthDate] = useState(personalDatas?.birthDate || '')
@@ -37,11 +38,14 @@ export const GeneralDatas = ({
   }, [name, birthDate, gender, phone, email, errors])
 
   useEffect(() => {
-    setName(personalDatas?.name || '')
-    setBirthDate(personalDatas?.birthDate || '')
-    setGender(personalDatas?.gender || '')
-    setEmail(personalDatas?.email || '')
-    setPhone(personalDatas?.phone || '')
+    if (!isEditing) {
+      setName(prevData?.name || '')
+      setBirthDate(prevData?.birthDate || '')
+      setGender(prevData?.gender || '')
+      setEmail(prevData?.email || '')
+      setPhone(prevData?.phone || '')
+      setErrors(false)
+    }
   }, [isEditing])
 
   return (
