@@ -8,63 +8,90 @@ import {
   validateGender,
   validateName,
   validatePhone,
+  validateCPF,
 } from '../../helpers/validatorFields'
 
 import { Container } from './styles'
 
-export const GeneralDatas = ({
+export const DependentData = ({
   personalDatas,
   setPersonalDatas,
   isEditing,
-  prevData,
+  initialData,
+  cancelEdit
 }) => {
   const [name, setName] = useState(personalDatas?.name || '')
-  const [birthDate, setBirthDate] = useState(personalDatas?.birthDate || '')
+  const [cpf, setCpf] = useState(personalDatas?.cpf || '')
+  const [birthDate, setBirthDate] = useState(personalDatas?.birthdate || '')
   const [gender, setGender] = useState(personalDatas?.gender || '')
   const [email, setEmail] = useState(personalDatas?.email || '')
   const [phone, setPhone] = useState(personalDatas?.phone || '')
 
   const [errors, setErrors] = useState({})
 
+  // useEffect(() => {
+  //   setName(personalDatas?.name || '')
+  //   setBirthDate(personalDatas?.birthdate || '')
+  //   setGender(personalDatas?.gender || '')
+  //   setEmail(personalDatas?.email || '')
+  //   setPhone(personalDatas?.phone || '')
+  // }, [personalDatas])
+
   useEffect(() => {
     setPersonalDatas({
       name,
-      birthDate,
+      birthdate: birthDate,
       gender,
       phone,
       email,
+      cpf,
       hasError: Object.values(errors).some((value) => value !== ''),
     })
-  }, [name, birthDate, gender, phone, email, errors])
+  }, [name, birthDate,cpf, gender, phone, email, errors])
+
+
 
   useEffect(() => {
-    if (!isEditing) {
-      setName(prevData?.name || '')
-      setBirthDate(prevData?.birthDate || '')
-      setGender(prevData?.gender || '')
-      setEmail(prevData?.email || '')
-      setPhone(prevData?.phone || '')
-      setErrors(false)
+    if (cancelEdit) {
+      setName(initialData?.name || '')
+      setCpf(initialData?.cpf || '')
+      setBirthDate(initialData?.birthdate || '')
+      setGender(initialData?.gender || '')
+      setEmail(initialData?.email || '')
+      setPhone(initialData?.phone || '')
+      setErrors({})
     }
-  }, [isEditing])
+  }, [cancelEdit,initialData])
 
   return (
     <Container>
       <h1>Dados Gerais</h1>
-      <InputText
-        label="Nome:"
-        value={name}
-        setValue={setName}
-        name="name"
-        hasError={errors?.name}
-        msgError={errors?.name}
-        maxLength={100}
-        onBlur={() => setErrors({ ...errors, name: validateName(name) })}
-        onKeyUp={() => setErrors({ ...errors, name: validateName(name) })}
-        onlyLetter
-        disabled={!isEditing}
-      />
       <section>
+        <InputText
+          label="Nome:"
+          value={name}
+          setValue={setName}
+          name="name"
+          hasError={errors?.name}
+          msgError={errors?.name}
+          maxLength={100}
+          onBlur={() => setErrors({ ...errors, name: validateName(name) })}
+          onKeyUp={() => setErrors({ ...errors, name: validateName(name) })}
+          onlyLetter
+          disabled={!isEditing}
+        />
+        <InputMask
+          mask="999.999.999-99"
+          label="CPF:"
+          value={cpf}
+          setValue={setCpf}
+          name="cpf"
+          hasError={errors?.cpf}
+          msgError={errors?.cpf}
+          onBlur={() => setErrors({ ...errors, cpf: validateCPF(cpf) })}
+          onKeyUp={() => setErrors({ ...errors, cpf: validateCPF(cpf) })}
+          disabled={!isEditing}
+        />
         <InputMask
           label="Data de Nascimento:"
           mask="99/99/9999"
@@ -105,6 +132,17 @@ export const GeneralDatas = ({
           }
           disabled={!isEditing}
         />
+        <InputMask
+          label="Celular:"
+          mask="(99) 99999-9999"
+          value={phone}
+          setValue={setPhone}
+          hasError={errors?.phone}
+          msgError={errors?.phone}
+          onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
+          onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
+          disabled={!isEditing}
+        />
         <InputText
           label="E-mail:"
           name="email"
@@ -115,17 +153,6 @@ export const GeneralDatas = ({
           onBlur={() => setErrors({ ...errors, email: validateEmail(email) })}
           onKeyUp={() => setErrors({ ...errors, email: validateEmail(email) })}
           maxLength={100}
-          disabled={!isEditing}
-        />
-        <InputMask
-          label="Celular:"
-          mask="(99) 99999-9999"
-          value={phone}
-          setValue={setPhone}
-          hasError={errors?.phone}
-          msgError={errors?.phone}
-          onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
-          onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           disabled={!isEditing}
         />
       </section>
