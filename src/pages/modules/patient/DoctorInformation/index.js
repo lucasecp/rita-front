@@ -15,7 +15,7 @@ const DoctorInformation = () => {
   // const location = useLocation()
   // const history = useHistory()
   const { Loading } = useLoading()
- 
+
   useEffect(() => {
     document.title = 'Rita Saúde | Informações do Médico'
   }, [])
@@ -28,7 +28,7 @@ const DoctorInformation = () => {
     const getDoctor = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get(`/medico/13`)
+        const { data } = await apiPatient.get(`/medico/22`)
         setDoctorInfo(fromApi(data))
       } catch (error) {
         console.log(error)

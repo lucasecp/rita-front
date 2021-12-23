@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Container, DropdownIconStyled, DefaultPhoto, Photo } from './styles'
 import SpecialtySubDetails from '../SpecialtySubDetails'
-import { Accordion } from '../styles'
+import { Accordion } from '../../../styles/accordion'
 import { useToggle } from '@/hooks/useToggle'
 
 const SpecialtyDetails = ({ parentWasClosed, dataSpecialtyDetails }) => {
@@ -29,7 +29,7 @@ const SpecialtyDetails = ({ parentWasClosed, dataSpecialtyDetails }) => {
             </h2>
             <h3>{dataSpecialtyDetails.specialtyName}</h3>
           </div>
-          
+
         </div>
         <DropdownIconStyled data-expanded={state ? 1 : 0} />
       </div>

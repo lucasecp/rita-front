@@ -50,7 +50,7 @@ export const DefaultPrice = styled.span`
   }
   `
 export const Container = styled.div`
-  padding: 32px 0;
+  padding: 32px 32px 32px 0;
   margin: 0 0px 0 140px;
   > ul {
     margin: -8px;
@@ -97,6 +97,6 @@ export const Container = styled.div`
     }
   }
   @media (max-width: 767px) {
-    padding: 24px 0;
+    padding: 16px ;
   }
 `

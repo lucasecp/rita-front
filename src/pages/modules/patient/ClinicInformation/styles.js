@@ -43,9 +43,10 @@ export const Content = styled.div`
     padding: 0 24px 40px 24px;
     > div:first-child {
       margin: 0 -24px 40px -24px;
+      padding: 16px 24px;
     }
   }
-`
+  `
 export const ListItems = styled.div`
 > * + *{
   margin-top: 32px
