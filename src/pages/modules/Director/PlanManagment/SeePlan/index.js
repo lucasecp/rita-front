@@ -14,6 +14,7 @@ const SeePlan = () => {
 
   useEffect(() => {
     document.title = 'Rita Saúde | Visualizar Plano'
+
     if (!location.state) {
       return history.push(DIRECTOR_PLAN_MANAGMENT)
     }
@@ -21,12 +22,10 @@ const SeePlan = () => {
     const getPlanInfo = async () => {
       try {
         Loading.turnOn()
-        const response = await apiPatient.get(
-          `/plano/${location.state.idPlan}`
-        )
+        const response = await apiPatient.get(`/plano/${location.state.idPlan}`)
+        console.log(response)
         setPlanInfo(response.data)
       } catch (error) {
-
       } finally {
         Loading.turnOff()
       }

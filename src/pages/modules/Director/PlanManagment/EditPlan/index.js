@@ -28,6 +28,7 @@ import { toast } from '@/styles/components/toastify'
 import { twoObjectsAreTheSame } from '@/helpers/twoObjectsAreTheSame'
 import { planToApi } from './adapters/toApi'
 import { NotSellableItems } from './messages/NotSellableItems'
+import { formatPrice } from '@/helpers/formatPrice'
 
 export const EditPlan = () => {
   const { plan } = useLocation().state
@@ -51,15 +52,12 @@ export const EditPlan = () => {
   const [disabledSaveButton, setDisabledSaveButton] = useState(false)
 
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(0)
-  const [anyFieldImpactingChanged, setAnyFieldImpactingChanged] = useState(0)
-
-  // console.log(initialPlan)
 
   const initialErrors = {
     code: '',
     name: '',
     description: '',
-    services: ''
+    services: '',
   }
 
   const [errors, setErrors] = useState(initialErrors)
@@ -95,12 +93,9 @@ export const EditPlan = () => {
     setAnyFieldsHasChanged(anyFieldsHasChanged + 1)
   }, [code, name, description, services, rangesOfUse])
 
-  useEffect(() => {
-    setAnyFieldImpactingChanged(anyFieldImpactingChanged + 1)
-  }, [code, name, status, services])
-
   const verifyErrorsOnFields = () => {
     let errorsTemporary = initialErrors
+    let hasErrors = false
 
     if (!code) {
       errorsTemporary = {
@@ -132,10 +127,11 @@ export const EditPlan = () => {
 
     setErrors(errorsTemporary)
 
-    const hasErrors = Object.values(errorsTemporary).some(
-      (value) => value !== ''
-    )
+    hasErrors = Object.values(errorsTemporary).some((value) => value !== '')
 
+    if (!rangesOfUse.length) {
+      hasErrors = true
+    }
     return hasErrors
   }
 
@@ -181,20 +177,6 @@ export const EditPlan = () => {
       return
     }
 
-    // const rangesOfUseHasChanged = rangesOfUse.some((range, index) =>
-    //   twoObjectsAreTheSame(range, initialPlan.abrangencia[index])
-    // )
-
-    // console.log(rangesOfUseHasChanged)
-
-    // if (
-    //   anyFieldImpactingChanged > 1 ||
-    //   initialPlan.abrangencia.length > rangesOfUse.length
-    // ) {
-    // console.log('Causou impacto')
-    // return
-    // }
-
     let servicesSelected = services
 
     services.forEach((service) => {
@@ -218,28 +200,38 @@ export const EditPlan = () => {
     const planMapped = planToApi(planObject)
 
     try {
-      const response = await apiPatient.put(
+      Loading.turnOn()
+
+      const { data } = await apiPatient.put(
         `/plano/${initialPlan.idPlano}`,
         planMapped,
         { params: { confirmado: false } }
       )
-      // console.log(response)
 
-      // sellableItems = [
-      //   { id: 1, nome: 'Centro Oeste - Goiás (Estadual)', preco: 'R$ 39,90' },
-      // ]
-      sellableItems = []
-      hasImpactOnSavePlan = true
-      // hasImpactOnSavePlan = false
+      if (data.mensagem) {
+        hasImpactOnSavePlan = false
+      }
+
+      if (Array.isArray(data)) {
+        const sellableItemsMapped = data.map((sellableItem) => ({
+          name: sellableItem.nome,
+          price: formatPrice(Number(sellableItem.preco)),
+        }))
+
+        sellableItems = sellableItemsMapped
+        hasImpactOnSavePlan = true
+      }
     } catch (error) {
       console.log(error)
+    } finally {
+      Loading.turnOff()
     }
 
     if (hasImpactOnSavePlan) {
       if (sellableItems.length) {
         history.push(DIRECTOR_EDIT_PLAN_CONFIRM, { sellableItems })
       } else {
-        showMessage(NotSellableItems)
+        showMessage(NotSellableItems, { plan: planObject })
       }
     } else {
       toast.success('Dados atualizados com sucesso.')

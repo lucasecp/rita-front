@@ -11,7 +11,7 @@ import { ReasonUpdate } from '@/pages/modules/Director/PlanManagment/EditPlan/me
 
 import { Container } from './styles'
 
-export const NotSellableItems = () => {
+export const NotSellableItems = ({ plan }) => {
   const { showMessage } = useModal()
   const { closeModal } = useModal()
 
@@ -20,14 +20,15 @@ export const NotSellableItems = () => {
   }
 
   const onProceed = async () => {
-    showMessage(ReasonUpdate)
+    showMessage(ReasonUpdate, { plan, hasSellableItems: false })
   }
 
   return (
     <Container>
       <img src={warningIcon} />
-      <h6>Suas alterações afetarão os itens abaixo, deseja prosseguir?</h6>
-      <p>Não há itens vendáveis associados a esse plano.</p>
+      <h6>
+      Não há itens vendáveis associados a esse plano, deseja prosseguir?
+      </h6>
       <footer>
         <OutlineButton onClick={onDoNotProceed}>Não</OutlineButton>
         <ButtonPrimary onClick={onProceed}>Sim</ButtonPrimary>

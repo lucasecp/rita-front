@@ -22,12 +22,6 @@ export const Container = styled.div`
     color: inherit;
   }
 
-  > p {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 30px;
-  }
-
   > * + * {
     margin-top: 24px;
   }
@@ -39,10 +33,6 @@ export const Container = styled.div`
   }
 
   @media (max-width: 500px) {
-    > p {
-      min-width: unset;
-    }
-
     > footer {
       display: flex;
       flex-direction: column;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useHistory, useLocation } from 'react-router'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
@@ -6,29 +6,24 @@ import { Container } from './styles'
 import OutilineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useToggle } from '@/hooks/useToggle'
+import { useModal } from '@/hooks/useModal'
 
 export const EditPlanConfirm = () => {
+  const history = useHistory()
+  const { sellableItems } = useLocation().state
+  const { showMessage, showSimple } = useModal()
 
-  //Objeto hipotetico - popular a lista com os dados da api
-  const sellableItems = [
-    { id: 1, nome: 'Centro Oeste - Goiás (Estadual)', preco: 'R$ 39,90' },
-    { id: 2, nome: 'Centro Oeste - Brasília (Distrital)', preco: 'R$ 69,90' },
-    { id: 3, nome: 'Centro Oeste - Brasília (Distrital)', preco: 'R$ 69,90' },
-    { id: 4, nome: 'Centro Oeste - Goiás (Estadual)', preco: 'R$ 39,90' },
-    { id: 5, nome: 'Centro Oeste - Brasília (Distrital)', preco: 'R$ 69,90' },
-    { id: 6, nome: 'Centro Oeste - Brasília (Distrital)', preco: 'R$ 69,90' },
-    { id: 7, nome: 'Centro Oeste - Goiás (Estadual)', preco: 'R$ 39,90' },
-    { id: 8, nome: 'Centro Oeste - Brasília (Distrital)', preco: 'R$ 69,90' },
-    { id: 9, nome: 'Centro Oeste - Brasília (Distrital)', preco: 'R$ 69,90' },
-    { id: 10, nome: 'Centro Oeste - Goiás (Estadual)', preco: 'R$ 39,90' },
-    { id: 11, nome: 'Centro Oeste - Brasília (Distrital)', preco: 'R$ 69,90' },
-    { id: 12, nome: 'Centro Oeste - Brasília (Distrital)', preco: 'R$ 69,90' },
-    { id: 13, nome: 'Centro Oeste - Goiás (Estadual)', preco: 'R$ 39,90' },
-    { id: 14, nome: 'Centro Oeste - Brasília (Distrital)', preco: 'R$ 69,90' },
-    { id: 15, nome: 'Centro Oeste - Brasília (Distrital)', preco: 'R$ 69,90' },
-  ]
+  const { plan } = useLocation().state
 
   const [isSellableItemsExpanded, toggleIsSellableItemsExpanded] = useToggle()
+
+  const onDoNotProceed = () => {
+    history.goBack()
+  }
+
+  const onProceed = () => {
+            // showMessage(ReasonUpdate, { plan, hasSellableItems: true})
+  }
 
   return (
     <DefaultLayout title="Editar Plano">
@@ -42,30 +37,28 @@ export const EditPlanConfirm = () => {
           {sellableItems.map((sellableItem, index) =>
             isSellableItemsExpanded ? (
               <p key={sellableItem.id}>
-                {sellableItem.nome} - {sellableItem.preco}
+                {sellableItem.name} - {sellableItem.price}
               </p>
             ) : (
               index < 4 && (
                 <p key={sellableItem.id}>
-                  {sellableItem.nome} - {sellableItem.preco}
+                  {sellableItem.name} - {sellableItem.price}
                 </p>
               )
             )
           )}
           {sellableItems.length > 3 && (
             <span onClick={toggleIsSellableItemsExpanded}>
-              Ver {isSellableItemsExpanded ? '-' : `+  (${sellableItems.length - 4})`}
+              Ver{' '}
+              {isSellableItemsExpanded
+                ? '-'
+                : `+  (${sellableItems.length - 4})`}
             </span>
           )}
         </div>
         <footer>
-          <ButtonPrimary
-          // disabled={disabledSaveButton}
-          // onClick={onEditAndSavePlan}
-          >
-            Não
-          </ButtonPrimary>
-          <OutilineButton>Sim</OutilineButton>
+          <ButtonPrimary onClick={onDoNotProceed}>Não</ButtonPrimary>
+          <OutilineButton onClick={onProceed}>Sim</OutilineButton>
         </footer>
       </Container>
     </DefaultLayout>
