@@ -49,9 +49,6 @@ const Filter = () => {
       setFilters(verifyTypedFields(objQuery))
   }, [dates])
 
-  const typedData = () => {
-    return dates.length || clearFormat(cpf) || name || validator || status
-  }
   const objQuery = [
     { name: 'nome', value: name },
     { name: 'cpf', value: clearFormat(cpf) },

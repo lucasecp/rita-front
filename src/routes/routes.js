@@ -19,7 +19,6 @@ import {
   NOT_FOUND,
   PROFILE,
 } from './constants/namedRoutes/routes'
-import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
 function Routes() {
   return (

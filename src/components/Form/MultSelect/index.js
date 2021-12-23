@@ -4,7 +4,6 @@ import Multiselect from 'multiselect-react-dropdown'
 import { adjustSelectOptions } from './adjustSelectOptions'
 import { ReactComponent as CloseMultSelectIcon } from '@/assets/icons/close-multselct.svg'
 import generateRandomString from '@/helpers/generateRandomString'
-import MsgError from '@/components/MsgError'
 
 const CustomMultSelect = ({
   label,

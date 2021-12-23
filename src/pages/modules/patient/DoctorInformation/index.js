@@ -2,7 +2,7 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/routes'
 import React, { useEffect, useState } from 'react'
 import Header from './components/Header'
-import { Link, useLocation, useHistory } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import { Content } from './styles'
 import { ReactComponent as ArrowLeftIcon } from '@/assets/icons/arrow-left2.svg'
 import ClinicItem from './components/ClinicItem'
@@ -12,10 +12,10 @@ import { useLoading } from '@/hooks/useLoading'
 
 const DoctorInformation = () => {
   const [doctorInfo, setDoctorInfo] = useState()
-  const location = useLocation()
-  const history = useHistory()
+  // const location = useLocation()
+  // const history = useHistory()
   const { Loading } = useLoading()
-
+ 
   useEffect(() => {
     document.title = 'Rita Saúde | Informações do Médico'
   }, [])

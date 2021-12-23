@@ -1,6 +1,6 @@
 import { Container, ButtonGroup } from './styles'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router'
+// import { useHistory } from 'react-router'
 import ButtonLink from '@/components/Button/Link'
 import OutilineButton from '@/components/Button/Outline'
 import { DependentAddress } from '../components/DependentAddress'
@@ -9,7 +9,7 @@ import { Documents } from '../components/Documents'
 import { Situation } from '../components/Situation'
 import Danied from '../messages/Denied'
 import { useModal } from '@/hooks/useModal'
-import { toApi, fromApi } from '../adapters'
+// import { toApi, fromApi } from '../adapters'
 
 const EditDependent = ({ dependentData }) => {
   const [isEditing, setIsEditing] = useState(false)
@@ -23,7 +23,7 @@ const EditDependent = ({ dependentData }) => {
   const [cancelEdit, setCancelEdit] = useState(false)
   const [prevData, setPrevData] = useState(dependentData)
   const { showSimple, showMessage } = useModal()
-  const history = useHistory()
+  // const history = useHistory()
 
   useEffect(() => {
     setButtonIsDisabled(personalDatas?.hasError || address?.hasError)

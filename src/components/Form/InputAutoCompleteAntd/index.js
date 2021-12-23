@@ -19,7 +19,7 @@ const Complete = ({ setValue }) => {
         options={options}
         onSearch={(value) => setInputValue(value)}
         filterOption
-        notFoundContent="Nenhum resultado."
+        notFoundContent="Nenhum resultado." 
         onSelect={(value,option) => setValue(option.value)}
         allowClear
       >

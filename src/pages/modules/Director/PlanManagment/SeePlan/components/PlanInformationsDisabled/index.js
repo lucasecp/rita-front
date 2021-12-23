@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 import OutilineButton from '@/components/Button/Outline'
 import InputText from '@/components/Form/InputText'

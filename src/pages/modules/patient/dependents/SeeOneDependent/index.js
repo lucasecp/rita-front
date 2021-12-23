@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import EditDependent from './EditDependent'
 import { fromApi } from './adapters'
@@ -19,11 +19,11 @@ const SeeDependents = () => {
     bairro: 'Tijuca',
     complemento: 'Apartamento',
   }
-  const [dependentData, setDependentData] = useState(fromApi(dataFromApi));
+  const dependentData = fromApi(dataFromApi)
 
   return (
     <DefaultLayout title="Visualizar informações de dependente">
-      <EditDependent dependentData={dependentData}  />
+      <EditDependent dependentData={dependentData} />
     </DefaultLayout>
   )
 }

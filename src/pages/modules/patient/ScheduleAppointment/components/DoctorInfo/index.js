@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Container, DefaultImg, Profile } from './styles'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.svg'

@@ -4,7 +4,7 @@ import OutlineButton from '@/components/Button/Outline'
 
 import { useModal } from '@/hooks/useModal'
 
-import { Col, Row } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 
 import Background1 from '@/assets/img/element1.svg'
 import Background2 from '@/assets/img/element2.svg'

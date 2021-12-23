@@ -27,7 +27,6 @@ import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
 import { queryFilterString, queryOrderString } from '../helpers/queryString'
 import downloadFile from '@/helpers/downloadFile'
-import downloadXls from '../helpers/downloadXls'
 import orderColumnsToApi from '../helpers/orderColumnsToApi'
 import formatObjectFromApi from '../helpers/formatObjectFromApi'
 
