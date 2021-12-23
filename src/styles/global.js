@@ -40,7 +40,7 @@ export default createGlobalStyle`
       color: ${colors.gray.dark};
       font-weight: 500;
   }
-  
+
 
   a{
       text-decoration: none;

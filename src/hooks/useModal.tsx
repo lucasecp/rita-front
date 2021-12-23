@@ -1,27 +1,31 @@
 import React, { createContext, useContext, useState } from 'react'
-import { SimpleModal,  MODAL_TYPES } from '@/components/Modal/SimpleModal'
+import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 
-interface IShowMessage{
-  MessageComponent: typeof React.Component;
+interface IShowMessage {
+  MessageComponent: typeof React.Component
   props: {
-    [x: string]: string;
-  };
-  isCloseable: boolean;
+    [x: string]: string
+  }
+  isCloseable: boolean
 }
 
 interface IShowSimple {
-  error: (message: string) => void;
-  warning: (message: string) => void;
-  success: (message: string) => void;
+  error: (message: string) => void
+  warning: (message: string) => void
+  success: (message: string) => void
 }
 
 interface ModalContextData {
-  modalVisible:boolean;
-  message: JSX.Element | null;
-  closeable:boolean;
-  showMessage: (MessageComponent: React.FC<any>, props: { [x: string]: any }, isCloseable: boolean) => void;
-  closeModal: () => void;
-  showSimple: IShowSimple;
+  modalVisible: boolean
+  message: JSX.Element | null
+  closeable: boolean
+  showMessage: (
+    MessageComponent: React.FC<any>,
+    props: { [x: string]: any },
+    isCloseable: boolean,
+  ) => void
+  closeModal: () => void
+  showSimple: IShowSimple
 }
 
 const ModalContext = createContext<ModalContextData>({} as ModalContextData)
@@ -35,7 +39,7 @@ const ModalProvider: React.FC = ({ children }) => {
   const showMessage = (
     MessageComponent: React.FC<any>,
     props: { [x: string]: any },
-    isCloseable = false
+    isCloseable = false,
   ) => {
     setCloseable(isCloseable)
     setMessage(<MessageComponent {...props} />)

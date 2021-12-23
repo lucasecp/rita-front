@@ -30,11 +30,15 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
   const [waitRequestNewToken, setWaitRequestNewToken] = useState(true)
 
   const [typeOfModal, setTypeOfModal] = useState(
-    isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN
+    isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN,
   )
   useEffect(() => {
     setTypeOfModal(isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN)
- }, [isLastTry]);
+  }, [isLastTry])
+
+  const switchModalTo = modalName => {
+    setTypeOfModal(modalName)
+  }
 
   const onRequestNewToken = async () => {
     Loading.turnOn()
@@ -51,13 +55,12 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
           : {
               cpf,
               celular: phone,
-            }
+            },
       )
 
       if (response?.data.ultimaTentativa) {
         switchModalTo(MODAL.LAST_TRY)
       }
-
     } catch ({ response }) {
       const messageFromApi = response?.data.message
 
@@ -106,10 +109,6 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
     }
   }
 
-  const switchModalTo = (modalName) => {
-    setTypeOfModal(modalName)
-  }
-
   return (
     <>
       {typeOfModal === MODAL.INSERT_TOKEN && (
@@ -156,7 +155,11 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
         </Container>
       )}
       {typeOfModal === MODAL.LAST_TRY && (
-        <LastTry email={email} switchModalTo={switchModalTo} requestNewToken={true} />
+        <LastTry
+          email={email}
+          switchModalTo={switchModalTo}
+          requestNewToken={true}
+        />
       )}
       {typeOfModal === MODAL.BLOCKED && <Denied />}
     </>

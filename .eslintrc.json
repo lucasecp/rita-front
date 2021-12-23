@@ -1,25 +1,69 @@
 {
-    "env": {
-      "browser": true,
-      "es2021": true,
-      "jest": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "standard",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": ["plugin:react/recommended", "standard", "prettier"],
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 12,
-      "sourceType": "module"
-    },
-    "plugins": ["react", "prettier", "only-warn"],
-    "rules": {
-      "prettier/prettier": "off",
-      "react/jsx-filename-extension": ["warn", { "extensions": [".jsx", ".js", ".tsx", ".ts"] }],
-      "react/prop-types": 0,
-      "@TypeScript-eslint/no-explicit-any": "off",
-      "import/prefer-default-export": "off",
-     "prefer-regex-literals": "off"
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "react-hooks",
+    "prettier",
+    "only-warn"
+  ],
+  "rules": {
+    "react/prop-types": 0,
+    "react-hooks/rules-of-hooks": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".tsx", ".ts"]
+      }
+    ],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["warn"],
+    "react/react-in-jsx-scope": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "prettier/prettier": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
     }
+  },
+  "globals": {
+    "React": true,
+    "google": true,
+    "mount": true,
+    "mountWithRouter": true,
+    "shallow": true,
+    "shallowWithRouter": true,
+    "context": true,
+    "expect": true,
+    "jsdom": true,
+    "JSX": true
   }
+}

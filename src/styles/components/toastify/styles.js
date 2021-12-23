@@ -89,8 +89,8 @@ export const toastifyStyles = css`
   }
 
   /** Used to position the icon **/
-  .Toastify__toast-icon ,
-    .MuiCircularProgress-root{
+  .Toastify__toast-icon,
+  .MuiCircularProgress-root {
     width: 24px !important;
     height: 24px !important;
 
