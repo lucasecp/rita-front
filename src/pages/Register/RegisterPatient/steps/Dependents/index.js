@@ -15,7 +15,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
 
   useEffect(() => {
     setAllDeps(
-      newData.dependentes || mapDeps(dataClientSabin.dependentes) || []
+      newData.dependentes || mapDeps(dataClientSabin.dependentes) || [],
     )
   }, [])
 
