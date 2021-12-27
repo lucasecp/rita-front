@@ -7,7 +7,14 @@ import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
 import moment from 'moment'
 import MsgError from '@/components/MsgError'
 
-const CustomRangePicker = ({ label, value, setValue,msgError,hasError, ...rest }) => {
+const CustomRangePicker = ({
+  label,
+  value,
+  setValue,
+  msgError,
+  hasError,
+  ...rest
+}) => {
   const { RangePicker } = DatePicker
 
   const handleChange = (value) => {
@@ -38,7 +45,6 @@ const CustomRangePicker = ({ label, value, setValue,msgError,hasError, ...rest }
       />
       {!!(value[0] || value[1]) && <button onClick={() => setValue([])} />}
       {msgError && <MsgError>{msgError}</MsgError>}
-
     </Container>
   )
 }

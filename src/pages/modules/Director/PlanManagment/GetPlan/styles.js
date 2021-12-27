@@ -27,7 +27,7 @@ export const Content = styled.div`
     padding: 35px 32px;
     background: #fff;
   }
-  @media(max-width: 767px){
-    padding: 25px 24px 0
+  @media (max-width: 767px) {
+    padding: 25px 24px 0;
   }
 `

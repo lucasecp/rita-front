@@ -161,8 +161,8 @@ const Filter = () => {
       Loading.turnOn()
       const response = await apiPatient.get(
         `/validacao-paciente?limit=10&skip=0${queryOrderString(
-          orders
-        )}${queryFilterString(verifyTypedFields(objQuery))}`
+          orders,
+        )}${queryFilterString(verifyTypedFields(objQuery))}`,
       )
 
       if (response.status === 200) {
@@ -186,19 +186,19 @@ const Filter = () => {
       const response = await toast.promise(
         apiPatient.get(
           `/validacao-paciente-relatorio/documento?${queryOrderString(
-            orders
+            orders,
           )}${queryFilterString(
-            verifyTypedFields(objQuery)
+            verifyTypedFields(objQuery),
           )}&tipoRelatorio=${fileType}`,
           {
             responseType: 'arraybuffer',
-          }
+          },
         ),
         {
           pending: 'Gerando arquivo ...',
           success: 'Arquivo gerado',
           error: 'Erro ao gerar relatório',
-        }
+        },
       )
       if (response.status === 200) {
         if (fileType === 'xlsx') {

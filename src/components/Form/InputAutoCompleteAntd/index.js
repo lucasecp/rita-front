@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import 'antd/dist/antd.css'
 import { Input, AutoComplete } from 'antd'
 import useSearch from './useSearch'
@@ -19,11 +19,15 @@ const Complete = ({ setValue }) => {
         options={options}
         onSearch={(value) => setInputValue(value)}
         filterOption
-        notFoundContent="Nenhum resultado." 
-        onSelect={(value,option) => setValue(option.value)}
+        notFoundContent="Nenhum resultado."
+        onSelect={(value, option) => setValue(option.value)}
         allowClear
       >
-        <Input.Search size="large" placeholder='O que você procura?' ref={input} />
+        <Input.Search
+          size="large"
+          placeholder="O que você procura?"
+          ref={input}
+        />
       </AutoComplete>
     </Container>
   )

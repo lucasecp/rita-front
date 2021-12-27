@@ -68,7 +68,7 @@ export const ArrowDown = styled.button`
   ${({ order }) =>
     order &&
     css`
-        filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
+      filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
         brightness(100%) contrast(103%);
     `}
 `

@@ -1,43 +1,42 @@
 import { formatPrice } from '@/helpers/formatPrice'
 import { formatCpf } from '@/helpers/formatCpf'
 
-interface IDataToDisplayFromApi{
-  nome:string;
-  cpf:string;
-  status:string;
-  plano:{
-    nome:string;
-  };
-  tabela:{
-    nome:string;
-    validade:string;
+interface IDataToDisplayFromApi {
+  nome: string
+  cpf: string
+  status: string
+  plano: {
+    nome: string
+  }
+  tabela: {
+    nome: string
+    validade: string
   }
 }
 
-interface IPersonalDataFromApi{
-  nome:string;
-  dataNascimento:string;
-  sexo:string;
-  telefone:string;
-  email:string;
-  plano:{
-    nome: string;
-    data: string;
-    valor: string;
-    canal: string;
-    empresa: string;
+interface IPersonalDataFromApi {
+  nome: string
+  dataNascimento: string
+  sexo: string
+  telefone: string
+  email: string
+  plano: {
+    nome: string
+    data: string
+    valor: string
+    canal: string
+    empresa: string
   }
-
 }
 
-interface IPersonalDataAddressFromApi{
-  cep:string;
-  uf:string;
-  cidade:string;
-  logradouro:string;
-  numero:string;
-  bairro:string;
-  complemento:string;
+interface IPersonalDataAddressFromApi {
+  cep: string
+  uf: string
+  cidade: string
+  logradouro: string
+  numero: string
+  bairro: string
+  complemento: string
 }
 
 export const fromApiDataToDisplay = (data: IDataToDisplayFromApi) => {
@@ -58,7 +57,10 @@ export const fromApiDataToDisplay = (data: IDataToDisplayFromApi) => {
   }
 }
 
-export const fromApiPersonalDatas = (data:IPersonalDataFromApi, endereco:IPersonalDataAddressFromApi) => {
+export const fromApiPersonalDatas = (
+  data: IPersonalDataFromApi,
+  endereco: IPersonalDataAddressFromApi,
+) => {
   return {
     personalDatas: {
       name: data.nome,
@@ -85,5 +87,3 @@ export const fromApiPersonalDatas = (data:IPersonalDataFromApi, endereco:IPerson
     },
   }
 }
-
-

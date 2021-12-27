@@ -85,7 +85,7 @@ const Filter = () => {
     setSubmited(false)
   }
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     setSubmited(true)
@@ -95,8 +95,8 @@ const Filter = () => {
     setFilters(verifyTypedFields(objQuery))
   }
 
-  const verifyTypedFields = fields => {
-    return fields.filter(field => field.value)
+  const verifyTypedFields = (fields) => {
+    return fields.filter((field) => field.value)
   }
 
   return (

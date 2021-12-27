@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 export default () => {
   const [photo, setPhotoApi] = useState(
-    window.localStorage.getItem('@Rita/Photo/Profile')
+    window.localStorage.getItem('@Rita/Photo/Profile'),
   )
 
   const getProfilePhoto = async () => {
@@ -13,7 +13,6 @@ export default () => {
     }
 
     try {
-
       const response = await apiPatient.get('/paciente/foto-perfil', {
         responseType: 'arraybuffer',
       })
@@ -25,7 +24,7 @@ export default () => {
       if (error.response?.status === 404) {
         setPhotoApi('')
       }
-    } 
+    }
   }
   return [photo, getProfilePhoto]
 }

@@ -82,9 +82,9 @@ export const Content = styled.div`
       margin-top: calc(-56px - 88px);
     }
   }
-  @media(max-width:539px) {
-    section > button{
-      width:100%
+  @media (max-width: 539px) {
+    section > button {
+      width: 100%;
     }
   }
 `

@@ -17,7 +17,7 @@ export const Container = styled.div`
     height: fit-content !important;
     width: fit-content !important;
     position: absolute !important;
-    .anticon.anticon-close-circle{
+    .anticon.anticon-close-circle {
       display: none !important;
     }
     ::after {
@@ -44,7 +44,7 @@ export const Container = styled.div`
       transition: 0.3s;
     }
   }
- > label {
+  > label {
     margin-bottom: 6px;
     color: #909090;
     font-size: 14px;
@@ -62,10 +62,10 @@ export const Container = styled.div`
     box-shadow: 0px 2px 4px 0px #e5e5e5;
     font-weight: 500;
     width: 100%;
-    line-height:0;
-    &::placeholder{
+    line-height: 0;
+    &::placeholder {
       color: #6a6a6a;
-  }
+    }
 
     :disabled {
       background: #eeeeee;
@@ -100,30 +100,27 @@ export const Container = styled.div`
 `
 export const Item = styled.div`
   display: grid;
-  grid-template-columns:  5fr 1fr;
+  grid-template-columns: 5fr 1fr;
   align-items: center;
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
-  >span{
+  > span {
     text-align: end;
-    margin-left: 10px
+    margin-left: 10px;
   }
   > div {
     display: flex;
     align-items: center;
     overflow: hidden;
-    >span{
+    > span {
       overflow: hidden;
       text-overflow: ellipsis;
-
     }
     > div {
       margin-right: 10px;
       min-width: 30px;
       max-width: 30px;
-
-
     }
   }
 `

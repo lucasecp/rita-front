@@ -17,7 +17,7 @@ export const Container = styled.div`
     align-items: flex-start;
     position: relative;
     min-width: fit-content;
-   margin: 0 -32px 0 0;
+    margin: 0 -32px 0 0;
     :after {
       content: '';
       height: 1px;
@@ -27,7 +27,6 @@ export const Container = styled.div`
       left: 0;
       bottom: 0;
       margin: 0 -32px;
-
     }
     :last-child:after {
       display: none;
@@ -42,8 +41,8 @@ export const Container = styled.div`
       max-width: 150px;
       margin-right: 24px;
       word-break: normal;
-      :last-child{
-       padding: 16px 32px 16px 0
+      :last-child {
+        padding: 16px 32px 16px 0;
       }
     }
   }
@@ -69,7 +68,6 @@ export const ResultsFounds = styled.div`
   font-weight: 700;
   line-height: 17px;
   color: #909090;
-
 `
 
 export const NotFound = styled.p`

@@ -64,7 +64,7 @@ export const Container = styled.div`
         border-color: ${colors.orange.light};
       `}
 
-      ${({ variation }) =>
+    ${({ variation }) =>
       variation === 'secondary' &&
       css`
         border: none;

@@ -7,7 +7,7 @@ import { Container } from '../style'
 
 import { useModal } from '@/hooks/useModal'
 
-function AlreadyExists({message}) {
+function AlreadyExists({ message }) {
   const { closeModal } = useModal()
   return (
     <Container>

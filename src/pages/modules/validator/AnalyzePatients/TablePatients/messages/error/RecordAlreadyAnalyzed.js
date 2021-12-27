@@ -22,7 +22,7 @@ function RecordAlreadyAnalized(data) {
       Loading.turnOn()
 
       const response = await apiPatient.patch(
-        `/paciente/${data.id}/assumir-validacao?forcar=true`
+        `/paciente/${data.id}/assumir-validacao?forcar=true`,
       )
       if (response.status === 200) {
         closeModal()

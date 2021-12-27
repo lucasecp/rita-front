@@ -16,7 +16,7 @@ export const Sidenav = () => {
 
   if (!isTablet) {
     const isExpandedBefore = JSON.parse(
-      localStorage.getItem('@Rita/Menu/Expanded')
+      localStorage.getItem('@Rita/Menu/Expanded'),
     )
 
     initialIsExpanded = isExpandedBefore === null || isExpandedBefore
