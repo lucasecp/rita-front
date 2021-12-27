@@ -42,10 +42,10 @@ export const EditPlan = () => {
   const [description, setDescription] = useState(initialPlan?.descricao || '')
   const [servicesOptions, setServicesOptions] = useState([])
   const [services, setServices] = useState(
-    mapDataToMultSelect(initialPlan?.servicos) || []
+    mapDataToMultSelect(initialPlan?.servicos) || [],
   )
   const [rangesOfUse, setRangesOfUse] = useState(
-    mapToRangeOfUse(initialPlan?.abrangencia) || []
+    mapToRangeOfUse(initialPlan?.abrangencia) || [],
   )
   const [status, setStatus] = useState(initialPlan?.status || '')
   const [disabledSaveButton, setDisabledSaveButton] = useState(false)
@@ -181,7 +181,7 @@ export const EditPlan = () => {
     services.forEach((service) => {
       if (service.id === 'all') {
         servicesSelected = servicesOptions.filter(
-          (service) => service.id !== 'all'
+          (service) => service.id !== 'all',
         )
       }
     })
@@ -204,7 +204,7 @@ export const EditPlan = () => {
       const { data } = await apiPatient.put(
         `/plano/${initialPlan.idPlano}`,
         planMapped,
-        { params: { confirmado: false } }
+        { params: { confirmado: false } },
       )
 
       if (Array.isArray(data)) {
@@ -224,7 +224,10 @@ export const EditPlan = () => {
 
     if (hasImpactOnSavePlan) {
       if (sellableItems.length) {
-        history.push(DIRECTOR_EDIT_PLAN_CONFIRM, {plan: planObject, sellableItems })
+        history.push(DIRECTOR_EDIT_PLAN_CONFIRM, {
+          plan: planObject,
+          sellableItems,
+        })
       } else {
         showMessage(NotSellableItems, { plan: planObject })
       }

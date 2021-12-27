@@ -46,7 +46,7 @@ export const EditPlanConfirm = () => {
                   {sellableItem.name} - {sellableItem.price}
                 </p>
               )
-            )
+            ),
           )}
           {sellableItems.length > 3 && (
             <span onClick={toggleIsSellableItemsExpanded}>

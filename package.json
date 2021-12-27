@@ -39,12 +39,6 @@
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -59,16 +53,27 @@
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.7",
+    "@types/customize-cra": "^1.0.2",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^17.0.1",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.24.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-only-warn": "^1.0.3",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "prettier": "^2.3.2",
-    "react-test-renderer": "^17.0.2"
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-react": "^7.28.0",
+    "prettier": "^2.5.1",
+    "react-app-rewire-alias": "^1.1.7",
+    "react-test-renderer": "^17.0.2",
+    "typescript": "^4.5.4"
   },
   "jest": {
     "modulePaths": [

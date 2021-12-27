@@ -15,7 +15,7 @@ import exitImg from '@/assets/icons/times.svg'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 import axios from 'axios'
-import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
+import { SimpleModal,  MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import DocumentNoSent from './messages/Success/DocumentNotSent'
 
 const status = {

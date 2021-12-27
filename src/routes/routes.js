@@ -8,7 +8,12 @@ import Login from '@/pages/Login'
 import { Profile } from '@/pages/Profile'
 import NotFound from '@/pages/404'
 
-import { directorRoutes, operatorRoutes, validatorRoutes, patientRoutes } from './modules'
+import {
+  directorRoutes,
+  operatorRoutes,
+  validatorRoutes,
+  patientRoutes,
+} from './modules'
 
 import registerRoutesComponent from './grouping/register.routes'
 import passwordRoutesComponent from './grouping/password.routes'

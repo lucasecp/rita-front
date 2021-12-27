@@ -1,18 +1,45 @@
 import React, { createContext, useContext, useState } from 'react'
-import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
+import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 
-const ModalContext = createContext({})
+interface IShowMessage {
+  MessageComponent: typeof React.Component
+  props: {
+    [x: string]: string
+  }
+  isCloseable: boolean
+}
 
-const ModalProvider = ({ children }) => {
+interface IShowSimple {
+  error: (message: string) => void
+  warning: (message: string) => void
+  success: (message: string) => void
+}
+
+interface ModalContextData {
+  modalVisible: boolean
+  message: JSX.Element | null
+  closeable: boolean
+  showMessage: (
+    MessageComponent: React.FC<any>,
+    props: { [x: string]: any },
+    isCloseable: boolean,
+  ) => void
+  closeModal: () => void
+  showSimple: IShowSimple
+}
+
+const ModalContext = createContext<ModalContextData>({} as ModalContextData)
+
+const ModalProvider: React.FC = ({ children }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [closeable, setCloseable] = useState(false)
 
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState<JSX.Element | null>(null)
 
   const showMessage = (
-    MessageComponent = <>Uso incorreto do showMessage</>,
-    props = {},
-    isCloseable = false
+    MessageComponent: React.FC<any>,
+    props: { [x: string]: any },
+    isCloseable = false,
   ) => {
     setCloseable(isCloseable)
     setMessage(<MessageComponent {...props} />)
@@ -23,21 +50,21 @@ const ModalProvider = ({ children }) => {
     setModalVisible(false)
   }
 
-  const error = (message) => {
+  const error = (message: string) => {
     showMessage(SimpleModal, {
       type: MODAL_TYPES.ERROR,
       message,
     })
   }
 
-  const warning = (message) => {
+  const warning = (message: string) => {
     showMessage(SimpleModal, {
       type: MODAL_TYPES.WARNING,
       message,
     })
   }
 
-  const success = (message) => {
+  const success = (message: string) => {
     showMessage(SimpleModal, {
       type: MODAL_TYPES.SUCCESS,
       message,

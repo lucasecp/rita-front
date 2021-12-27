@@ -6,15 +6,15 @@ import { ReactComponent as SuccessIcon } from '@/assets/icons/alerts/success.svg
 import { ReactComponent as WarningIcon } from '@/assets/icons/alerts/warning.svg'
 import Spinner from '@/components/Loading/Spinner'
 
-const error = (message) => {
+const error = message => {
   return toastify.error(message, { icon: <ErrorIcon /> })
 }
 
-const success = (message) => {
+const success = message => {
   return toastify.success(message, { icon: <SuccessIcon /> })
 }
 
-const warning = (message) => {
+const warning = message => {
   return toastify.warning(message, { icon: <WarningIcon /> })
 }
 
@@ -40,7 +40,7 @@ const promise = (promisseReturn, message) => {
       },
     },
 
-    { icon: <Spinner /> }
+    { icon: <Spinner /> },
   )
 }
 

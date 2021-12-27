@@ -17,11 +17,11 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/hooks/useModal'
 import ComeBack from './messages/ComeBack'
-import SimpleModal, { MODAL_TYPES } from '@/components/Modal/SimpleModal'
+import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import { VALIDATOR_ANALYZE_PATIENTS } from '@/routes/constants/namedRoutes/routes'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
 
-function seeOnePatient() {
+function SeeOnePatient() {
   const history = useHistory()
   const location = useLocation()
   const { Loading } = useLoading()
@@ -29,7 +29,6 @@ function seeOnePatient() {
 
   if (!location.state) {
     history.push(VALIDATOR_ANALYZE_PATIENTS)
-    return null
   }
 
   const [disableFinishButton, setDisableFinishButton] = useState(true)
@@ -68,7 +67,7 @@ function seeOnePatient() {
 
         holdingDocument = await apiPatient.get(
           `/paciente/documento?cpf=${userCpf}&tipoDocumento=FotoSegurandoDoc`,
-          { responseType: 'arraybuffer' }
+          { responseType: 'arraybuffer' },
         )
       } catch ({ response }) {
       } finally {
@@ -80,7 +79,7 @@ function seeOnePatient() {
 
         identifyDocument = await apiPatient.get(
           `/paciente/documento?cpf=${userCpf}&tipoDocumento=Cpf`,
-          { responseType: 'arraybuffer' }
+          { responseType: 'arraybuffer' },
         )
       } catch ({ response }) {
       } finally {
@@ -92,7 +91,7 @@ function seeOnePatient() {
 
         incomeDocument = await apiPatient.get(
           `/paciente/documento?cpf=${userCpf}&tipoDocumento=Renda`,
-          { responseType: 'arraybuffer' }
+          { responseType: 'arraybuffer' },
         )
       } catch ({ response }) {
       } finally {
@@ -117,7 +116,7 @@ function seeOnePatient() {
       !(
         (documentOk === 'yes' && allDataVerified) ||
         (documentOk === 'no' && resonDocumentNotOk)
-      )
+      ),
     )
   }, [validations])
 
@@ -129,12 +128,12 @@ function seeOnePatient() {
     try {
       Loading.turnOn()
       await apiPatient.patch(
-        `/paciente/${patientData.idPaciente}/assumir-validacao?forcar=false`
+        `/paciente/${patientData.idPaciente}/assumir-validacao?forcar=false`,
       )
 
       localStorage.setItem(
         `@Rita/Validate/OnePatient/${patientData.idPaciente}`,
-        JSON.stringify(validations)
+        JSON.stringify(validations),
       )
 
       showMessage(SimpleModal, {
@@ -183,7 +182,7 @@ function seeOnePatient() {
           rendaBaixa: {
             resposta: validations.incomeOk === 'yes',
           },
-        }
+        },
       )
 
       if (response.status === 201) {
@@ -260,4 +259,4 @@ function seeOnePatient() {
   )
 }
 
-export default seeOnePatient
+export default SeeOnePatient
