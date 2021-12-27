@@ -67,7 +67,7 @@ export const EditPlan = () => {
       try {
         const { data } = await apiPatient.get('/servico')
 
-        const servicesOptionsMapped = data.dados.map(service => ({
+        const servicesOptionsMapped = data.dados.map((service) => ({
           id: service.id,
           name: service.nome,
         }))
@@ -126,7 +126,7 @@ export const EditPlan = () => {
 
     setErrors(errorsTemporary)
 
-    hasErrors = Object.values(errorsTemporary).some(value => value !== '')
+    hasErrors = Object.values(errorsTemporary).some((value) => value !== '')
 
     if (!rangesOfUse.length) {
       hasErrors = true
@@ -178,10 +178,10 @@ export const EditPlan = () => {
 
     let servicesSelected = services
 
-    services.forEach(service => {
+    services.forEach((service) => {
       if (service.id === 'all') {
         servicesSelected = servicesOptions.filter(
-          service => service.id !== 'all',
+          (service) => service.id !== 'all',
         )
       }
     })
@@ -208,7 +208,7 @@ export const EditPlan = () => {
       )
 
       if (Array.isArray(data)) {
-        const sellableItemsMapped = data.map(sellableItem => ({
+        const sellableItemsMapped = data.map((sellableItem) => ({
           name: sellableItem.nome,
           price: formatPrice(Number(sellableItem.preco)),
         }))
