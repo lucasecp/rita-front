@@ -7,6 +7,7 @@ import { ReactComponent as SuspenseIcon } from '@/assets/icons/suspense.svg'
 import CustomTooltip from '@/components/Tooltip'
 import { useHistory } from 'react-router'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
+import { Inactivate } from './Inactivate'
 
 const Actions = ({ status, planInformations }) => {
   const history = useHistory()
@@ -16,7 +17,9 @@ const Actions = ({ status, planInformations }) => {
       <CustomTooltip label="Visualizar">
         <EyePurpleIcon
           onClick={() =>
-            history.push(DIRECTOR_SEE_PLAN_MANAGMENT, { idPlan: planInformations.idPlano })
+            history.push(DIRECTOR_SEE_PLAN_MANAGMENT, {
+              idPlan: planInformations.idPlano,
+            })
           }
         />
       </CustomTooltip>
@@ -31,13 +34,7 @@ const Actions = ({ status, planInformations }) => {
         />
       </CustomTooltip>
 
-      <CustomTooltip label="Inativar">
-        <InactiveIcon
-          hidden={
-            status !== 'Ativo' && status !== 'Suspenso' && status !== 'Em digitação'
-          }
-        />
-      </CustomTooltip>
+      <Inactivate status={status} />
 
       <CustomTooltip label="Suspender">
         <SuspenseIcon hidden={status !== 'Inativo' && status !== 'Ativo'} />

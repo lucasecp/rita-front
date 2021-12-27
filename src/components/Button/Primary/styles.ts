@@ -1,7 +1,14 @@
 import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 
-export const Container = styled.button`
+interface ContainerProps {
+  small?: boolean
+  medium?: boolean
+  disabledWithEvents?: boolean
+  variation?: string
+}
+
+export const Container = styled.button<ContainerProps>`
   position: relative;
   padding: 14px 32px;
   cursor: pointer;
@@ -20,13 +27,17 @@ export const Container = styled.button`
     color: #fff;
     border-color: ${colors.purple.main.darkness};
   }
-  ${({small}) => small && css`
-     padding: 10px 16px;
-  `}
+  ${({ small }) =>
+    small &&
+    css`
+      padding: 10px 16px;
+    `}
 
-  ${({medium}) => medium && css`
-     padding: 10px 32px;
-  `}
+  ${({ medium }) =>
+    medium &&
+    css`
+      padding: 10px 32px;
+    `}
 
 
 
