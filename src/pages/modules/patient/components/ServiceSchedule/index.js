@@ -2,6 +2,7 @@ import React from 'react'
 import { Container } from './styles'
 
 const ServiceSchedule = ({ dataSchedule = [] }) => {
+  
   const hasDayInSchedule = (day) => {
     return dataSchedule.some(
       (schedule) => schedule[day] && schedule[day].length

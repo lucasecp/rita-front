@@ -6,7 +6,6 @@ import HoldingDocument from './types/HoldingDocument'
 import OwnDocument from './types/OwnDocument'
 import ProofOfIncome from './types/ProofOfIncome'
 
-import { incomeType } from './constants/income'
 
 const Document = ({ setButtonPass, onGetDocumentFiles, savedFiles }) => {
   const [holdingDocumentFile, setHoldingDocumentFile] = useState('')

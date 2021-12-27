@@ -1,6 +1,6 @@
 import { Container, ButtonGroup } from './styles'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router'
+// import { useHistory } from 'react-router'
 import ButtonLink from '@/components/Button/Link'
 import OutilineButton from '@/components/Button/Outline'
 import { DependentAddress } from '../components/DependentAddress'
@@ -9,10 +9,9 @@ import { Documents } from '../components/Documents'
 import { Situation } from '../components/Situation'
 import Danied from '../messages/Denied'
 import { useModal } from '@/hooks/useModal'
-import { toApi, fromApi } from '../adapters'
+// import { toApi, fromApi } from '../adapters'
 
 const EditDependent = ({ dependentData }) => {
-  const { showSimple, showMessage } = useModal()
   const [isEditing, setIsEditing] = useState(false)
   const [personalDatas, setPersonalDatas] = useState(
     dependentData.personalDatas || {}
@@ -23,14 +22,15 @@ const EditDependent = ({ dependentData }) => {
   const [buttonIsDisabled, setButtonIsDisabled] = useState(false)
   const [cancelEdit, setCancelEdit] = useState(false)
   const [prevData, setPrevData] = useState(dependentData)
-  const history = useHistory()
+  const { showSimple, showMessage } = useModal()
+  // const history = useHistory()
 
   useEffect(() => {
     setButtonIsDisabled(personalDatas?.hasError || address?.hasError)
   }, [address, personalDatas])
 
   const onEdit = () => {
-    const status = personalDatas.status
+    const status = dependentData.personalDatas.status
 
     if (status === 'PENDING') {
       return showSimple.warning(

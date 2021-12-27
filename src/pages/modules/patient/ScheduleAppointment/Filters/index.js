@@ -1,6 +1,6 @@
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import InputAutoComplete from '@/components/Form/InputAutoComplete'
+// import InputAutoComplete from '@/components/Form/InputAutoComplete'
 import InputAutoCompleteAntd from '@/components/Form/InputAutoCompleteAntd'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
@@ -8,10 +8,8 @@ import SelectCity from '../components/SelectCity'
 import SelectUf from '../components/SelectUf'
 import { BtnGroup, Container } from './styles'
 import Results from '../Results'
-import { useModal } from '@/hooks/useModal'
 import { MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
 import { useHistory } from 'react-router'
-import InputText from '@/components/Form/InputText'
 import { useLoading } from '@/hooks/useLoading'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { fromApi } from '../Adapters'
@@ -24,7 +22,6 @@ const Filters = () => {
   const [results, setResults] = useState(false)
   const [filter, setFilter] = useState([])
   const [queryApiPagination, setQueryApiPagination] = useState('?limit=10&skip=0')
-  const { showSimple } = useModal()
   const history = useHistory()
   const { Loading } = useLoading()
 
@@ -71,7 +68,7 @@ const Filters = () => {
   const verifyTypedFields = (fields) => {
     return fields.filter((field) => field.value)
   }
-  
+
 
   return (
     <>

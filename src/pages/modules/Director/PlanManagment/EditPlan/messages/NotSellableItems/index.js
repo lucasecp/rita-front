@@ -1,5 +1,4 @@
 import React from 'react'
-import { useHistory } from 'react-router'
 
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 

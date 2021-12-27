@@ -31,12 +31,18 @@ const ClinicItemDetails = ({ clinicDetails }) => {
               )}
             </li>
           )}
-        {
+        { clinicDetails?.specialtys[0].defaultPrice && clinicDetails?.specialtys[0].ritaPrice &&
           <li>
             <MoneyIcon /> Valor:
-            <span>Balcão {clinicDetails?.specialtys[0].defaultPrice}</span>{' '}
-            <span>-</span>
-            <span>Rita: {clinicDetails?.specialtys[0].ritaPrice}</span>
+            {clinicDetails?.specialtys[0].defaultPrice && (
+              <span>Balcão {clinicDetails?.specialtys[0].defaultPrice}</span>
+            )}
+            {clinicDetails?.specialtys[0].ritaPrice && (
+              <>
+                <span>-</span>
+                <span>Rita: {clinicDetails?.specialtys[0].ritaPrice}</span>
+              </>
+            )}
           </li>
         }
         <li>
@@ -46,9 +52,7 @@ const ClinicItemDetails = ({ clinicDetails }) => {
         </li>
       </ul>
 
-      {!!clinicDetails?.scheduleAppointment.length && (
-        <ServiceSchedule dataSchedule={clinicDetails?.scheduleAppointment} />
-      )}
+      <ServiceSchedule dataSchedule={clinicDetails?.scheduleAppointment} />
     </Container>
   )
 }

@@ -33,7 +33,7 @@ export const fromApi = (dataClinic) => {
       formation: spe.medico.formacao,
       verified: spe.medico.validadoClinica,
       hasSchedule: spe.medico.receberAgendamentos,
-      // phone: spe.medico.numero,
+      phone: spe.medico.numero,
       schedule: scheduleFromApi(spe.medico.agenda),
     })),
   }))

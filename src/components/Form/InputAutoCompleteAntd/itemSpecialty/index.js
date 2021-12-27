@@ -1,7 +1,7 @@
 import React from 'react'
 import { Item } from '../styles'
 import profileIcon from '@/assets/img/profile.png'
-import generateRandomString from '@/helpers/generateRandomString'
+
 const ItemSpecialty = (id, name, group, photo) => {
   return {
     value: name,
@@ -10,7 +10,7 @@ const ItemSpecialty = (id, name, group, photo) => {
         <div>
           <div>
           <div> <img src={profileIcon} /> </div>
-          </div>
+          </div> 
           <span> {name}</span>
         </div>
         <span>{group}</span>

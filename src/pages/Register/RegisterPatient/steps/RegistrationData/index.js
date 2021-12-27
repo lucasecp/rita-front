@@ -17,7 +17,6 @@ import {
 } from '../../helpers/validator'
 import { validateConfEmail, validateTerms } from './validateFields'
 import { useModal } from '@/hooks/useModal'
-import MsgError from '@/components/MsgError'
 
 const RegistrationData = ({
   setData,

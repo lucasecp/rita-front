@@ -1,9 +1,9 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
-import { staticAutocomplete } from './static'
+import { useEffect } from 'react'
+// import { staticAutocomplete } from './static'
 
-import ItemDoctor from './iItemDoctor'
-import ItemClinic from './iItemClinic'
+// import ItemDoctor from './iItemDoctor'
+// import ItemClinic from './iItemClinic'
 import ItemSpecialty from './itemSpecialty'
 import apiPatient from '@/services/apiPatient'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'

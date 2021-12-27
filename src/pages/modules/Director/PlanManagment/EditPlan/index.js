@@ -25,7 +25,6 @@ import {
 import { CancelAndExit } from './messages/CancelAndExit'
 import { useModal } from '@/hooks/useModal'
 import { toast } from '@/styles/components/toastify'
-import { twoObjectsAreTheSame } from '@/helpers/twoObjectsAreTheSame'
 import { planToApi } from './adapters/toApi'
 import { NotSellableItems } from './messages/NotSellableItems'
 import { formatPrice } from '@/helpers/formatPrice'
@@ -35,7 +34,7 @@ export const EditPlan = () => {
   const initialPlan = plan
 
   const { Loading } = useLoading()
-  const { showMessage, showSimple } = useModal()
+  const { showMessage } = useModal()
   const history = useHistory()
 
   const [code, setCode] = useState(initialPlan?.codigo || '')

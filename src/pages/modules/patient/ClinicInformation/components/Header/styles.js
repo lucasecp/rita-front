@@ -1,12 +1,20 @@
 import styled from 'styled-components'
 
+export const DefaultPhoto = styled.div`
+  width: 320px;
+  height: 188px;
+  border-radius: 8px;
+  background: #f5f5f5;
+  margin-right: 24px;
+`
+
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 
   .link-address {
-    margin-left: 8px
+    margin-left: 8px;
   }
 
   > div:first-child {
@@ -16,7 +24,7 @@ export const Container = styled.div`
       max-width: 320px;
       max-height: 188px;
       border-radius: 8px;
-      object-fit: fill;
+      object-fit: cover;
     }
   }
   > div:last-child {

@@ -12,7 +12,6 @@ import OutilineButton from '@/components/Button/Outline'
 
 import { Container } from './styles'
 import apiPatient from '@/services/apiPatient'
-import { useLoading } from '@/hooks/useLoading'
 import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 import { CancelAndExit } from './messages/CancelAndExit'
 import { toApi } from './adapters/toApi'
@@ -20,7 +19,6 @@ import { useModal } from '@/hooks/useModal'
 import { toast } from '@/styles/components/toastify'
 
 export const CreatePlan = () => {
-  const { Loading } = useLoading()
   const { showMessage } = useModal()
   const history = useHistory()
   const [servicesOptions, setServicesOptions] = useState([])
