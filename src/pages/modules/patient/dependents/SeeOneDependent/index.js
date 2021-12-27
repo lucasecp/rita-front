@@ -28,7 +28,7 @@ const SeeDependents = () => {
   return (
     <DefaultLayout title="Visualizar informações de dependente">
       <EditDependent dependentData={dependentData} />
-    </DefaultLayout> 
+    </DefaultLayout>
   )
 }
 

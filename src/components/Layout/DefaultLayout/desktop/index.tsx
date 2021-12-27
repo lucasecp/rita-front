@@ -5,7 +5,16 @@ import Footer from '../../shared/Footer'
 
 import { Container } from './styles'
 
-export const DesktopLayout = ({ title, children,headerChildren }) => {
+interface DesktopLayoutI {
+  title: string
+  headerChildren?: JSX.Element | null
+}
+
+export const DesktopLayout: React.FC<DesktopLayoutI> = ({
+  title,
+  children,
+  headerChildren,
+}) => {
   return (
     <Container>
       <Header title={title}>{headerChildren}</Header>
