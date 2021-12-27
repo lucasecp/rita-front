@@ -8,6 +8,7 @@ import { formatPhone } from '@/helpers/formatPhone'
 import CustomTooltip from '@/components/Tooltip'
 
 const Header = ({ clinicInfo }) => {
+  
   return (
     <Container>
       {clinicInfo?.photo ? (

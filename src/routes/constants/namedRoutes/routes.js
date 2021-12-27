@@ -36,6 +36,7 @@ export const PATIENT_DOCTOR_INFORMATION =
   '/agendar-consulta/informacoes-especialista'
 
 export const PATIENT_SEE_DEPENDENT = '/paciente/dependentes/ver-dependente'
+export const PATIENT_DEPENDENTS = '/paciente/dependentes'
 
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'
