@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import EditDependent from './EditDependent'
 import { fromApi } from './adapters'
 const SeeDependents = () => {
+  useEffect(() => {
+    document.title = 'Rita Saúde | Dependentes'
+  }, [])
+
   const dataFromApi = {
     nome: 'Hiago Alves ',
     cpf: '09872058032',

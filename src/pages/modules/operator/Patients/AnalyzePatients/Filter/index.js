@@ -165,6 +165,7 @@ const Filter = () => {
               options={[
                 { label: 'Todos', value: 'ALL' },
                 { label: 'Pendente', value: 'P' },
+                { label: 'Inativo', value: 'I' },
                 { label: 'Em análise', value: 'EA' },
                 { label: 'Aprovado', value: 'A' },
                 { label: 'Negado', value: 'N' },

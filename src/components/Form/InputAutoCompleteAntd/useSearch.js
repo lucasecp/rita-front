@@ -40,8 +40,8 @@ export default (inputValue, setOptions) => {
           spec.idPaciente,
           spec.nome,
           'Especialidade',
-          firstLetterCapitalize(spec.nome, 50)
-        )
+          firstLetterCapitalize(spec.nome, 50),
+        ),
       ),
     }
     // const doctor = {
@@ -65,7 +65,6 @@ export default (inputValue, setOptions) => {
     //   ),
     // }
 
-    return [ specialty]
-
+    return [specialty]
   }
 }

@@ -151,11 +151,11 @@ export const ConsultEligibility = () => {
   }
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Consulta de Elegibilidade'
+    document.title = 'Rita Saúde | Elegibilidade'
   },[])
 
   return (
-    <DefaultLayout title="Consulta de Elegibilidade">
+    <DefaultLayout title="Elegibilidade">
       <Container hasMessage={errorInCpf.message}>
         <InputMask
           label="Informe o CPF*:"
