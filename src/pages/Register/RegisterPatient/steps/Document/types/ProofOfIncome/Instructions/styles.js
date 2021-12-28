@@ -7,7 +7,7 @@ export const Container = styled.div`
 
   > header {
     margin-bottom: 8px;
-    
+
     > div {
       width: 300px;
     }

@@ -7,16 +7,18 @@ import { Container, ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
-import { PRE_REGISTER, RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
+import {
+  PRE_REGISTER,
+  RESGISTE_PATIENT,
+} from '@/routes/constants/namedRoutes/routes'
 
 function ImportData(data) {
   const history = useHistory()
   const { closeModal } = useModal()
 
-
   const pushToRegister = () => {
     closeModal()
-    history.push(RESGISTE_PATIENT,{userData:{cpf: data.cpf}})
+    history.push(RESGISTE_PATIENT, { userData: { cpf: data.cpf } })
   }
   const pushToPreRegister = () => {
     closeModal()

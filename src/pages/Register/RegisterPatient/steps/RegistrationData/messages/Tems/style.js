@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   max-width: 1160px;
   position: relative;
-  margin-top:33px;
+  margin-top: 33px;
   margin-right: -11px;
   margin-bottom: 90px;
   display: flex;
@@ -13,12 +13,12 @@ export const Container = styled.div`
     font-size: 16px;
     line-height: 20px;
     color: #6a6a6a;
-    margin-right:35px;
-    +p{
+    margin-right: 35px;
+    + p {
       margin-top: 20px;
     }
   }
-  strong{
+  strong {
     text-transform: uppercase;
   }
   h2 {
@@ -29,33 +29,32 @@ export const Container = styled.div`
     color: #6a6a6a;
     align-self: flex-start;
   }
-  > button{
+  > button {
     position: absolute;
-    bottom:-90px;
+    bottom: -90px;
   }
 `
 export const TextGroup = styled.div`
   overflow-y: auto;
   max-height: 300px;
   ::-webkit-scrollbar {
-  width: 12px;
-}
+    width: 12px;
+  }
 
-/* Track */
-::-webkit-scrollbar-track {
-  border-radius: 8px;
-  background: #EEEEEE;
-;
-}
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background: #eeeeee;
+  }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #AFAFAF;
-  border-radius: 8px;
-}
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #afafaf;
+    border-radius: 8px;
+  }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `

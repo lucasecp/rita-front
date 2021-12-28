@@ -80,7 +80,7 @@ export const Container = styled.div`
         margin-left: -20px;
         margin-top: 48px;
         filter: brightness(6.5);
-        position: absolute
+        position: absolute;
       }
     }
     > main {

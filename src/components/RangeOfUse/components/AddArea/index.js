@@ -30,7 +30,7 @@ export const AddArea = ({ onGetArea, rangesOfUse = [] }) => {
         mapRangesToSendApi(rangesOfUse),
         {
           params: { regional: regionalSelected },
-        }
+        },
       )
       const ufsMapped = ufsApi.data.map((uf) => ({
         value: uf.idUF,
@@ -52,7 +52,7 @@ export const AddArea = ({ onGetArea, rangesOfUse = [] }) => {
         const citiesApi = await apiPatient.post(
           '/plano/municipio',
           mapRangesToSendApi(rangesOfUse),
-          { params: { uf: ufSelected } }
+          { params: { uf: ufSelected } },
         )
 
         const citiesMapped = citiesApi.data.map((city) => ({
@@ -71,7 +71,7 @@ export const AddArea = ({ onGetArea, rangesOfUse = [] }) => {
 
   const addArea = () => {
     const findRegional = regionals.find(
-      (regional) => regional.value === +regionalSelected
+      (regional) => regional.value === +regionalSelected,
     )
 
     const findUf = ufs.find((uf) => uf.value === +ufSelected)
@@ -93,17 +93,17 @@ export const AddArea = ({ onGetArea, rangesOfUse = [] }) => {
     const updateAreas = async () => {
       const regionalsApi = await apiPatient.post(
         '/plano/regional',
-        mapRangesToSendApi(rangesOfUse)
+        mapRangesToSendApi(rangesOfUse),
       )
 
       const ufsApi = await apiPatient.post(
         '/plano/uf',
-        mapRangesToSendApi(rangesOfUse)
+        mapRangesToSendApi(rangesOfUse),
       )
 
       const citiesApi = await apiPatient.post(
         '/plano/municipio',
-        mapRangesToSendApi(rangesOfUse)
+        mapRangesToSendApi(rangesOfUse),
       )
 
       const regionalsMapped = regionalsApi.data.map((regional) => ({

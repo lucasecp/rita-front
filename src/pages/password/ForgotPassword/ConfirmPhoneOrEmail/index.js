@@ -90,7 +90,7 @@ function ConfirmPhoneOrEmail() {
     }
 
     try {
-     const {data} = await apiUser.post(
+      const { data } = await apiUser.post(
         '/token',
         choice === 'email'
           ? {
@@ -100,7 +100,7 @@ function ConfirmPhoneOrEmail() {
           : {
               cpf: userData.cpf,
               celular: phone.trim(),
-            }
+            },
       )
       const ultimaTentativa = data?.ultimaTentativa
       isLastTry = ultimaTentativa
@@ -137,7 +137,6 @@ function ConfirmPhoneOrEmail() {
       return showMessage(DataDontMatch, { choice })
     }
 
-
     const propsToInComumSend = {
       isLastTry,
       cpf: userData.cpf,
@@ -148,7 +147,7 @@ function ConfirmPhoneOrEmail() {
       choice === 'email'
         ? { ...propsToInComumSend, email }
         : { ...propsToInComumSend, phone },
-      true
+      true,
     )
   }
 

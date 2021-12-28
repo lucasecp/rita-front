@@ -1,7 +1,7 @@
 import clear from '@/helpers/clear/SpecialCaracteres'
 import cpfValidate from '@/helpers/validateCpf'
 import moment from 'moment'
-import { parse, intervalToDuration, isValid } from 'date-fns';
+import { parse, intervalToDuration, isValid } from 'date-fns'
 
 export const validateName = (value) => {
   if (!value.trim()) return { name: 'Nome Obrigatório.' }

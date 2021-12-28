@@ -1,7 +1,7 @@
 const convertImageFromApiToBase64 = (responseApi) => {
   return `data:${responseApi.headers['content-type']};base64,${Buffer.from(
     responseApi.data,
-    'binary'
+    'binary',
   ).toString('base64')}`
 }
 

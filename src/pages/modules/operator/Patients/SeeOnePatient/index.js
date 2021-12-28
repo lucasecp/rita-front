@@ -42,7 +42,7 @@ function seeOnePatient() {
   const [patientDocuments, setPatientDocuments] = useState({})
 
   const [validations, setValidations] = useState()
-  const [table, setTable] = useState('');
+  const [table, setTable] = useState('')
 
   useEffect(() => {
     document.title = 'Rita Saúde | Pacientes'
@@ -61,8 +61,7 @@ function seeOnePatient() {
         setPatientDependents(data.dependentes)
         setPatientAddress(data.endereco)
         incomeDocumentType = data.renda
-        setTable(data.status !== "N" && data.tabela.nome)
-
+        setTable(data.status !== 'N' && data.tabela.nome)
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
@@ -73,7 +72,7 @@ function seeOnePatient() {
 
         holdingDocument = await apiPatient.get(
           `/paciente/documento?cpf=${userCpf}&tipoDocumento=FotoSegurandoDoc`,
-          { responseType: 'arraybuffer' }
+          { responseType: 'arraybuffer' },
         )
       } catch ({ response }) {
       } finally {
@@ -85,7 +84,7 @@ function seeOnePatient() {
 
         identifyDocument = await apiPatient.get(
           `/paciente/documento?cpf=${userCpf}&tipoDocumento=Cpf`,
-          { responseType: 'arraybuffer' }
+          { responseType: 'arraybuffer' },
         )
       } catch ({ response }) {
       } finally {
@@ -97,7 +96,7 @@ function seeOnePatient() {
 
         incomeDocument = await apiPatient.get(
           `/paciente/documento?cpf=${userCpf}&tipoDocumento=Renda`,
-          { responseType: 'arraybuffer' }
+          { responseType: 'arraybuffer' },
         )
       } catch ({ response }) {
       } finally {
@@ -114,14 +113,13 @@ function seeOnePatient() {
     loadPatientInformations()
   }, [])
 
-
   useEffect(() => {
     const loadValidationInformations = async () => {
       try {
         Loading.turnOn()
 
         const response = await apiPatient.get(
-          `/paciente/${patientData.idPaciente}/validar`
+          `/paciente/${patientData.idPaciente}/validar`,
         )
 
         const validationsFromApi = response.data[0]
@@ -137,7 +135,6 @@ function seeOnePatient() {
 
         setValidations(validationsMapped)
       } catch ({ response }) {
-
         if (response?.status.toString()[0] === '5') {
           showSimple.error('Erro no Servidor!')
         }
@@ -149,11 +146,11 @@ function seeOnePatient() {
     if (patientData?.idPaciente) {
       loadValidationInformations()
     }
-  }, [patientData?.idPaciente,table])
+  }, [patientData?.idPaciente, table])
 
   useEffect(() => {
     const dependentErrorExists = patientDependents.some(
-      (dependent) => dependent?.error
+      (dependent) => dependent?.error,
     )
 
     setDisableSaveButton(dependentErrorExists || patientData?.error)
@@ -175,7 +172,7 @@ function seeOnePatient() {
     const dataToSend = getDataMapped(
       patientData,
       patientDependents,
-      patientAddress
+      patientAddress,
     )
 
     try {

@@ -12,7 +12,7 @@ import {
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
 import DirectorGetPlan from '@/pages/modules/Director/PlanManagment/GetPlan'
 import SeePlan from '@/pages/modules/Director/PlanManagment/SeePlan'
-import {EditPlanConfirm} from '@/pages/modules/Director/PlanManagment/EditPlanConfirm'
+import { EditPlanConfirm } from '@/pages/modules/Director/PlanManagment/EditPlanConfirm'
 import { CreatePlan } from '@/pages/modules/Director/PlanManagment/CreatePlan'
 
 const directorRoutes = [
@@ -22,7 +22,7 @@ const directorRoutes = [
   },
   {
     path: DIRECTOR_EDIT_PLAN_CONFIRM,
-    component: EditPlanConfirm
+    component: EditPlanConfirm,
   },
   {
     path: DIRECTOR_PLAN_MANAGMENT,

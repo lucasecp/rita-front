@@ -15,7 +15,11 @@ export const staticAutocomplete = {
     { nome: 'Fabio', foto: 'base64', id: 10 },
   ],
   clinicas: [
-    { nome: 'Rita testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', foto: 'base64', id: 1 },
+    {
+      nome: 'Rita testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+      foto: 'base64',
+      id: 1,
+    },
     { nome: 'Mais R', foto: 'base64', id: 3 },
     { nome: 'Clinica Mais', foto: 'base64', id: 25 },
     { nome: 'Clinica da Família', foto: 'base64', id: 19 },

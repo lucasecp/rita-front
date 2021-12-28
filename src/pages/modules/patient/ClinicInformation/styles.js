@@ -23,33 +23,31 @@ export const Content = styled.div`
     font-size: 20px;
     font-weight: 400;
     line-height: 25px;
-    color: #7338CB;
+    color: #7338cb;
     display: flex;
     align-items: center;
     white-space: nowrap;
     margin: 40px 0 16px 0;
-    &::after{
+    &::after {
       content: '';
       display: inline-block;
       height: 1px;
       width: 100%;
       margin-left: 16px;
-      background: #7338CB;
-      margin-top: 3px
+      background: #7338cb;
+      margin-top: 3px;
     }
-
   }
-  @media (max-width:767px){
+  @media (max-width: 767px) {
     padding: 0 24px 40px 24px;
     > div:first-child {
       margin: 0 -24px 40px -24px;
       padding: 16px 24px;
     }
   }
-  `
+`
 export const ListItems = styled.div`
-> * + *{
-  margin-top: 32px
-}
-
+  > * + * {
+    margin-top: 32px;
+  }
 `

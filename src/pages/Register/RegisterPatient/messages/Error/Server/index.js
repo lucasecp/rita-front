@@ -5,7 +5,7 @@ import error from '@/assets/icons/alerts/error.svg'
 import { useModal } from '@/hooks/useModal'
 // import { useHistory } from 'react-router'
 const Server = () => {
-  const {closeModal} = useModal()
+  const { closeModal } = useModal()
   return (
     <Container>
       <img src={error} />

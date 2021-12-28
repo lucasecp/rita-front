@@ -43,9 +43,10 @@ export const Container = styled.div`
   tr {
     position: relative;
   }
- thead tr:after,thead tr:before {
-    width:0;
-    height:0
+  thead tr:after,
+  thead tr:before {
+    width: 0;
+    height: 0;
   }
   tr:after {
     content: '';
@@ -54,7 +55,7 @@ export const Container = styled.div`
     position: absolute;
     background: #efeafa;
     left: -32px;
-    bottom:0
+    bottom: 0;
   }
   tr:before {
     content: '';
@@ -63,8 +64,8 @@ export const Container = styled.div`
     position: absolute;
     background: #efeafa;
     right: -32px;
-    bottom:0;
-    margin-left:-32px;
+    bottom: 0;
+    margin-left: -32px;
   }
 `
 export const Td = styled.td`

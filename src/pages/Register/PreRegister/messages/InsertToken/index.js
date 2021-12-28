@@ -32,11 +32,11 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
   const { Loading } = useLoading()
 
   const [typeOfModal, setTypeOfModal] = useState(
-    isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN
+    isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN,
   )
   useEffect(() => {
-     setTypeOfModal(isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN)
-  }, [isLastTry]);
+    setTypeOfModal(isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN)
+  }, [isLastTry])
 
   const onRequestNewToken = async () => {
     Loading.turnOn()
@@ -52,7 +52,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
           : {
               cpf,
               celular: phone,
-            }
+            },
       )
 
       if (response?.data.ultimaTentativa) {
@@ -78,7 +78,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
 
     try {
       const response = await apiPatient.get(
-        `/paciente/token?token=${token}&cpf=${cpf}`
+        `/paciente/token?token=${token}&cpf=${cpf}`,
       )
 
       if (response.status === 200) {
@@ -167,7 +167,14 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
           <footer>
             {acessOrRequestToken ? (
               <>
-                <OutlineButton onClick={()=> {closeModal();setAcessOrRequestToken(false)}}>Não</OutlineButton>
+                <OutlineButton
+                  onClick={() => {
+                    closeModal()
+                    setAcessOrRequestToken(false)
+                  }}
+                >
+                  Não
+                </OutlineButton>
                 <ButtonPrimary
                   onClick={() => switchModalTo(MODAL.INSERT_TOKEN)}
                 >

@@ -13,7 +13,7 @@ import { LOGIN } from '@/routes/constants/namedRoutes/routes'
 function DefinePasswordSuccess() {
   const { closeModal } = useModal()
   const history = useHistory()
-  const pushToLogin = () =>{
+  const pushToLogin = () => {
     deleteHeaderToken()
     closeModal()
     history.push(LOGIN)
@@ -22,7 +22,9 @@ function DefinePasswordSuccess() {
     <Container>
       <img src={success} />
       <p>Senha alterada com sucesso.</p>
-      <ButtonPrimary onClick={pushToLogin}>Ir para a tela de login</ButtonPrimary>
+      <ButtonPrimary onClick={pushToLogin}>
+        Ir para a tela de login
+      </ButtonPrimary>
     </Container>
   )
 }

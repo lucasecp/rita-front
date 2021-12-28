@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "react-jsx",
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -21,12 +17,7 @@
     "module": "esnext",
     "baseUrl": "."
   },
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ],
-  "include": [
-    "src"
-  ],
+  "exclude": ["node_modules", "**/*.spec.ts"],
+  "include": ["src"],
   "extends": "./tsconfig.paths.json"
 }

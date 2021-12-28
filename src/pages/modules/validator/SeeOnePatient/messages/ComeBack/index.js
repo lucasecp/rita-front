@@ -27,7 +27,7 @@ function ComeBack({ idPatient }) {
       Loading.turnOn()
 
       const response = await apiPatient.patch(
-        `/paciente/${idPatient}/liberar-validacao`
+        `/paciente/${idPatient}/liberar-validacao`,
       )
 
       if (response.status === 200) {

@@ -7,8 +7,9 @@ const ButtonHeader = () => {
   const history = useHistory()
 
   return (
-    <ButtonPrimary medium
-    onClick={() => history.push(DIRECTOR_CREATE_PLAN_MANAGMENT)}
+    <ButtonPrimary
+      medium
+      onClick={() => history.push(DIRECTOR_CREATE_PLAN_MANAGMENT)}
     >
       Incluir
     </ButtonPrimary>

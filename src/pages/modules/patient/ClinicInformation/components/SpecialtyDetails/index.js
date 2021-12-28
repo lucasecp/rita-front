@@ -17,19 +17,22 @@ const SpecialtyDetails = ({ parentWasClosed, dataSpecialtyDetails }) => {
     <Container>
       <div onClick={toggle}>
         <div>
-          { dataSpecialtyDetails.photo ? <Photo>
-            <img
-              src={`data:image/png;base64,${dataSpecialtyDetails.photo}`}
-              alt="Imagem do médico"
-            />
-          </Photo> : <DefaultPhoto/>}
+          {dataSpecialtyDetails.photo ? (
+            <Photo>
+              <img
+                src={`data:image/png;base64,${dataSpecialtyDetails.photo}`}
+                alt="Imagem do médico"
+              />
+            </Photo>
+          ) : (
+            <DefaultPhoto />
+          )}
           <div>
             <h2>
               {dataSpecialtyDetails.title} {dataSpecialtyDetails?.name}
             </h2>
             <h3>{dataSpecialtyDetails.specialtyName}</h3>
           </div>
-
         </div>
         <DropdownIconStyled data-expanded={state ? 1 : 0} />
       </div>

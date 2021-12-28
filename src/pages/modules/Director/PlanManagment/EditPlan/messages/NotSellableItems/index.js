@@ -20,14 +20,13 @@ export const NotSellableItems = ({ plan }) => {
 
   const onProceed = async () => {
     showMessage(ReasonUpdate, { plan, hasSellableItems: false })
-
   }
 
   return (
     <Container>
       <img src={warningIcon} />
       <h6>
-      Não há itens vendáveis associados a esse plano, deseja prosseguir?
+        Não há itens vendáveis associados a esse plano, deseja prosseguir?
       </h6>
       <footer>
         <OutlineButton onClick={onDoNotProceed}>Não</OutlineButton>

@@ -21,12 +21,12 @@ export const Header = ({ title, children }) => {
 
   const nameFormated = useMemo(
     () => formatFirstLastName(user?.nome),
-    [user?.nome]
+    [user?.nome],
   )
 
   const initialName = useMemo(
     () => getInitialLetterName(user?.nome),
-    [user?.nome]
+    [user?.nome],
   )
 
   return (

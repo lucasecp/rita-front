@@ -9,7 +9,7 @@ const mapResponseFromApi = async () => {
         params: {
           dataToSendInQueryParams,
         },
-      }
+      },
     )
 
     // remove when finished configuring API responses

@@ -16,15 +16,15 @@ export const Container = styled.section`
     border-radius: 8px;
     display: flex;
     align-items: center;
-   & + div {
-     margin-top: 24px;
+    & + div {
+      margin-top: 24px;
     }
     > h4 {
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
       line-height: 20px;
-      color: #6A6A6A;
+      color: #6a6a6a;
 
       margin-right: 20px;
     }

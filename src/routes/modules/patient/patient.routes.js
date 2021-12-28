@@ -5,11 +5,13 @@ import {
   PATIENT_SEE_DEPENDENT,
   PATIENT_DOCTOR_INFORMATION,
   PATIENT_SCHEDULE_APPOINTMENT,
+  PATIENT_DEPENDENTS,
 } from '../../constants/namedRoutes/routes'
 import ScheduleAppointment from '@/pages/modules/patient/ScheduleAppointment'
 import ClinicInformation from '@/pages/modules/patient/ClinicInformation'
 import DoctorInformation from '@/pages/modules/patient/DoctorInformation'
 import SeeDependents from '@/pages/modules/patient/dependents/SeeOneDependent'
+import SeeAllDependents from '@/pages/modules/patient/dependents/SeeAllDependents'
 
 const patientRoutes = [
   {
@@ -27,6 +29,10 @@ const patientRoutes = [
   {
     path: PATIENT_SEE_DEPENDENT,
     component: SeeDependents,
+  },
+  {
+    path: PATIENT_DEPENDENTS,
+    component: SeeAllDependents,
   },
 ]
 

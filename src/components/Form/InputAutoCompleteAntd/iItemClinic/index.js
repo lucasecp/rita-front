@@ -17,14 +17,14 @@ const ComponentRedirect = ({ children, id }) => {
 
 const ItemDoctorAndClinic = (id, name, group, formatedName) => {
   return {
-    value:  id,
+    value: id,
     label: (
       <ComponentRedirect id={id}>
         <div>
           <div>
             <img src={clinicIcon} />
           </div>
-         <span> {name}</span>
+          <span> {name}</span>
         </div>
         <span>{group}</span>
       </ComponentRedirect>

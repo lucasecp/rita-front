@@ -17,7 +17,6 @@ export const Documents = ({ address, setAddress, isEditing }) => {
       <div>
         <h4>Comprovante de renda </h4> <VerifiedIcon />
       </div>
-
     </Container>
   )
 }

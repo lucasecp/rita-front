@@ -35,7 +35,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
         const response = await apiPatient.get(
           `/paciente${queryPagination}${
             queryFilterString(filters) + queryOrderString(orders)
-          }`
+          }`,
         )
         if (response.status === 200) {
           setPatients(response.data)
@@ -83,7 +83,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                     >
                       <div>
                         {convertToCaptalize(
-                          formatTextWithLimit(patient.nome,38)
+                          formatTextWithLimit(patient.nome, 38),
                         ) || '-'}
                       </div>
                     </CustomTooltip>

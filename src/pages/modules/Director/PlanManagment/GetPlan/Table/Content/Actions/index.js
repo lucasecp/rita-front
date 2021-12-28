@@ -16,7 +16,9 @@ const Actions = ({ status, planInformations }) => {
       <CustomTooltip label="Visualizar">
         <EyePurpleIcon
           onClick={() =>
-            history.push(DIRECTOR_SEE_PLAN_MANAGMENT, { idPlan: planInformations.idPlano })
+            history.push(DIRECTOR_SEE_PLAN_MANAGMENT, {
+              idPlan: planInformations.idPlano,
+            })
           }
         />
       </CustomTooltip>
@@ -34,7 +36,9 @@ const Actions = ({ status, planInformations }) => {
       <CustomTooltip label="Inativar">
         <InactiveIcon
           hidden={
-            status !== 'Ativo' && status !== 'Suspenso' && status !== 'Em digitação'
+            status !== 'Ativo' &&
+            status !== 'Suspenso' &&
+            status !== 'Em digitação'
           }
         />
       </CustomTooltip>

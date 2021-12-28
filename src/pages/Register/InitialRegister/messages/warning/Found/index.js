@@ -7,7 +7,10 @@ import { Container, ButtonGroup } from '../../styles'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
-import { PRE_REGISTER, RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
+import {
+  PRE_REGISTER,
+  RESGISTE_PATIENT,
+} from '@/routes/constants/namedRoutes/routes'
 
 function Found(data) {
   const history = useHistory()

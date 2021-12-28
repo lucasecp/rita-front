@@ -40,7 +40,7 @@ export const Button = styled.div`
       margin-top: 20px;
     }
   }
-  @media(max-width: 767px){
-    margin-top:50px;
+  @media (max-width: 767px) {
+    margin-top: 50px;
   }
 `

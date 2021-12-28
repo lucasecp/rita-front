@@ -14,9 +14,9 @@ export const Container = styled.div`
     margin: 0 -32px;
     box-shadow: 0px 2px 8px 0px #dfd2ff26;
     border-radius: 8px 8px 0px 0px;
-    @media(max-width: 767px){
+    @media (max-width: 767px) {
       margin: 0 -24px;
-      padding: 30px 24px
+      padding: 30px 24px;
     }
     h3 {
       font-size: 18px;
@@ -33,7 +33,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 767px) {
-    padding: 0  24px 16px 24px;
+    padding: 0 24px 16px 24px;
 
     > header {
       grid-column: span 1;

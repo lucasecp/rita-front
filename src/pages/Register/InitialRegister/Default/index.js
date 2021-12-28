@@ -42,7 +42,7 @@ function DefaultRegister() {
     try {
       Loading.turnOn()
       const { data: responseApi } = await axios.get(
-        `/paciente/status?cpf=${cpf}`
+        `/paciente/status?cpf=${cpf}`,
       )
 
       if (responseApi.status === status.INACTIVE) {
@@ -69,7 +69,7 @@ function DefaultRegister() {
           cpf,
           email: responseApi.email,
           phone: responseApi.telefone,
-          status: responseApi.status
+          status: responseApi.status,
         })
       }
       if (responseApi.status === status.DENIED_SECOND_TIME) {
@@ -87,7 +87,7 @@ function DefaultRegister() {
 
   useEffect(() => {
     document.title = 'Rita Saúde | Cadastro'
-}, [])
+  }, [])
 
   return (
     <>

@@ -31,12 +31,12 @@ export const Address = ({
     setUf(newDataAddress?.uf || addressFromSabinCard?.uf || '')
     setCity(newDataAddress?.cidade || addressFromSabinCard?.cidade || '')
     setAdress(
-      newDataAddress?.logradouro || addressFromSabinCard?.logradouro || ''
+      newDataAddress?.logradouro || addressFromSabinCard?.logradouro || '',
     )
     setNumberHome(newDataAddress?.numero || addressFromSabinCard?.numero || '')
     setDistrict(newDataAddress?.bairro || addressFromSabinCard?.bairro || '')
     setComplement(
-      newDataAddress?.complemento || addressFromSabinCard?.complemento || ''
+      newDataAddress?.complemento || addressFromSabinCard?.complemento || '',
     )
   }, [])
 

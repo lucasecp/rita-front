@@ -13,7 +13,10 @@ function AnalyzingData() {
   return (
     <Container>
       <img src={warningIcon} />
-      <p>Seus dados estão sendo analisados, pedimos que aguarde a aprovação pela nossa equipe.</p>
+      <p>
+        Seus dados estão sendo analisados, pedimos que aguarde a aprovação pela
+        nossa equipe.
+      </p>
       <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )

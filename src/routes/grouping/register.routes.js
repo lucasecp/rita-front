@@ -34,7 +34,7 @@ const registerRoutes = [
 const registerRoutesComponent = registerRoutes.map(
   ({ path, component }, key) => (
     <CustomRoutes path={path} component={component} key={key} />
-  )
+  ),
 )
 
 export default registerRoutesComponent

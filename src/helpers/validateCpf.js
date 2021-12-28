@@ -1,6 +1,6 @@
 export default function validateCpf(cpf) {
   const newCpf = [...cpf].toString().replace(/\D+/g, '')
-  if(newCpf.length < 11) return false
+  if (newCpf.length < 11) return false
   if (
     newCpf === '00000000000' ||
     newCpf === '11111111111' ||

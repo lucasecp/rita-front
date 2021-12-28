@@ -7,7 +7,7 @@ import { Container } from '../../styles'
 import { useModal } from '@/hooks/useModal'
 
 function TokenIncorrect({ origin }) {
-  const {closeModal} = useModal()
+  const { closeModal } = useModal()
 
   return (
     <Container>

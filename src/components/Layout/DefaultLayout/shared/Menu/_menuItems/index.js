@@ -16,11 +16,11 @@ import {
   OPERATOR_CONSULT_ELIGIBILITY,
   OPERATOR_REPORTS,
   CHANGE_PASSWORD,
-  PATIENT_SEE_DEPENDENT,
   // PATIENT_START,
   PROFILE,
   VALIDATOR_ANALYZE_PATIENTS,
   DIRECTOR_PLAN_MANAGMENT,
+  PATIENT_DEPENDENTS,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -75,7 +75,7 @@ export const menuItens = [
     permission: permissionList.VER_ELEGIBILIDADE_PACIENTE,
   },
   {
-    path: PATIENT_SEE_DEPENDENT,
+    path: PATIENT_DEPENDENTS,
     icon: <GroupUserIcon />,
     name: 'Dependentes',
     permission: permissionList.VER_MEUS_DEPENDENTES,

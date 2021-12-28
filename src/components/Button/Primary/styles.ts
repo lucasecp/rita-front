@@ -1,7 +1,13 @@
 import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 
-export const Container = styled.button`
+interface ButtonProps{
+  small?: boolean
+  medium?: boolean
+  disabledWithEvents?: boolean
+}
+
+export const Container = styled.button<ButtonProps>`
   position: relative;
   padding: 14px 32px;
   cursor: pointer;

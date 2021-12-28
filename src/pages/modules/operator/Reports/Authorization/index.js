@@ -1,5 +1,5 @@
-import {DefaultLayout} from '@/components/Layout/DefaultLayout'
-import React,{useEffect} from 'react'
+import { DefaultLayout } from '@/components/Layout/DefaultLayout'
+import React, { useEffect } from 'react'
 import Filter from './Filter'
 
 import { Container } from './styles'

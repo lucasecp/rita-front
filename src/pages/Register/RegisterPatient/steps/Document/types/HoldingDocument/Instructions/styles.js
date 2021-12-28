@@ -53,25 +53,25 @@ export const Container = styled.div`
         margin-bottom: 8px;
       }
 
-              > div {
-    display: flex;
-    flex-direction: column;
+      > div {
+        display: flex;
+        flex-direction: column;
 
-    > span {
-      font-size: 12px;
-      line-height: 125%;
-      color: ${colors.gray.middle};
-      font-size: 12px;
-      font-weight: 400;
-      line-height: 15px;
-    }
-    > span:first-child {
-      color: ${colors.orange.middleDark};
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 15px;
-    }
-  }
+        > span {
+          font-size: 12px;
+          line-height: 125%;
+          color: ${colors.gray.middle};
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 15px;
+        }
+        > span:first-child {
+          color: ${colors.orange.middleDark};
+          font-size: 12px;
+          font-weight: 700;
+          line-height: 15px;
+        }
+      }
 
       > p {
         margin-bottom: 16px;

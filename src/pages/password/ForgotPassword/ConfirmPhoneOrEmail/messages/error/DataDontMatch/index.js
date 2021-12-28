@@ -6,7 +6,7 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 import { Container } from '../../styles'
 import { useModal } from '@/hooks/useModal'
 
-function DataDontMatch({choice}) {
+function DataDontMatch({ choice }) {
   const { closeModal } = useModal()
 
   const renderMessage = () => {
@@ -22,7 +22,10 @@ function DataDontMatch({choice}) {
   return (
     <Container>
       <img src={errorIcon} />
-      <p>{renderMessage()} não confere com o cadastrado, preencha o dado corretamente.</p>
+      <p>
+        {renderMessage()} não confere com o cadastrado, preencha o dado
+        corretamente.
+      </p>
       <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )

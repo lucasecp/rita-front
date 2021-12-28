@@ -1,9 +1,9 @@
 import clearCpf from '@/helpers/clear/SpecialCaracteres'
 import cpfValidate from '@/helpers/validateCpf'
 
-export const validateDepCpf = (value, allDeps, clientCpf,action) => {
+export const validateDepCpf = (value, allDeps, clientCpf, action) => {
   const alreadyExist = allDeps.some(
-    (dep) => clearCpf(dep.cpf) === clearCpf(value)
+    (dep) => clearCpf(dep.cpf) === clearCpf(value),
   )
   const isClientCpf = clearCpf(clientCpf) === clearCpf(value)
 
@@ -11,7 +11,7 @@ export const validateDepCpf = (value, allDeps, clientCpf,action) => {
 
   if (!cpfValidate(value)) return { cpf: 'CPF Inválido.' }
 
-  if (alreadyExist )
+  if (alreadyExist)
     return {
       cpf: 'O CPF não pode ser igual ao de outro dependente, por favor verifique os dados e preencha novamente',
     }

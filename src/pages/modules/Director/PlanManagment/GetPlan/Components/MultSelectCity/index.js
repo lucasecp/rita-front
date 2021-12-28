@@ -17,7 +17,6 @@ const MultSelectCity = ({ setCity, city, uf }) => {
       return
     }
 
-
     const ufValue = verifyTypedFields([
       {
         name: 'idUF',
@@ -29,7 +28,7 @@ const MultSelectCity = ({ setCity, city, uf }) => {
       try {
         Loading.turnOn()
         const { data } = await apiPatient.get(
-          `/municipio?${queryFilterString(ufValue)}`
+          `/municipio?${queryFilterString(ufValue)}`,
         )
         const dataMapped = mapCity(data?.dados)
 
@@ -38,13 +37,11 @@ const MultSelectCity = ({ setCity, city, uf }) => {
         }
 
         setCityOptions(() => {
-
           if (dataMapped.length === 1) {
             return dataMapped
           }
           return [{ name: 'Todas', id: 'All' }, ...dataMapped]
         })
-
       } catch ({ response }) {
       } finally {
         Loading.turnOff()

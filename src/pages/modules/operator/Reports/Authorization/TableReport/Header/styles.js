@@ -12,10 +12,10 @@ export const Content = styled.div`
   min-height: 83px;
   max-height: 83px;
   justify-content: flex-start;
-  :first-child{
-    margin-left:  32px;
+  :first-child {
+    margin-left: 32px;
   }
-  :last-child{
+  :last-child {
     /* justify-content: space-between; */
   }
 
@@ -30,8 +30,7 @@ export const Content = styled.div`
     height: 100%;
     margin-left: 4px;
     margin-right: 4px;
-    :last-child{
-
+    :last-child {
     }
   }
   h5 {
@@ -40,18 +39,17 @@ export const Content = styled.div`
     font-size: 14px;
     font-weight: 700;
     line-height: 17px;
-    max-width: 80px
+    max-width: 80px;
   }
 `
 export const Container = styled.header`
-
-  margin:  0 -32px;
+  margin: 0 -32px;
   background: #afafaf;
   min-width: fit-content;
-  > div{
+  > div {
     display: flex;
-  align-items: center;
-  width: 100%
+    align-items: center;
+    width: 100%;
   }
 `
 

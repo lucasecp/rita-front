@@ -9,7 +9,6 @@ import Filter from './Filter'
 import { Container } from './styles'
 
 function AnalyzePatients() {
-
   useEffect(() => {
     document.title = 'Rita Saúde | Pacientes'
   }, [])

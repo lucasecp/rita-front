@@ -6,16 +6,21 @@ import { useHistory } from 'react-router'
 import { useModal } from '@/hooks/useModal'
 const Success = () => {
   const history = useHistory()
-  const {closeModal} = useModal()
-  const handleCloseModal = () =>{
+  const { closeModal } = useModal()
+  const handleCloseModal = () => {
     closeModal()
     history.push('/')
   }
   return (
     <Container>
       <img src={success} />
-      <p>Agradecemos o seu contato e pedimos que aguarde a aprovação pela nossa equipe.</p>
-      <ButtonPrimary onClick={handleCloseModal}>Voltar a página inicial</ButtonPrimary>
+      <p>
+        Agradecemos o seu contato e pedimos que aguarde a aprovação pela nossa
+        equipe.
+      </p>
+      <ButtonPrimary onClick={handleCloseModal}>
+        Voltar a página inicial
+      </ButtonPrimary>
     </Container>
   )
 }

@@ -38,7 +38,7 @@ export const ReasonUpdate = ({ plan, hasSellableItems }) => {
     if (plan.status === 'A' && !hasSellableItems) {
       closeModal()
       toast.warning(
-        'Para ativar um plano, é necessário que ele possua pelo menos um item vendável associado'
+        'Para ativar um plano, é necessário que ele possua pelo menos um item vendável associado',
       )
       return
     }

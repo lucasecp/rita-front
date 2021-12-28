@@ -17,7 +17,7 @@ const DocumentNoSent = () => {
       <img src={success} />
       <p>
         Seus dados foram cadastrados, porém, os documentos não foram enviados.
-        Entre em contato com a central de atendimento Rita no 
+        Entre em contato com a central de atendimento Rita no
         <a
           href="https://api.whatsapp.com/send?phone=556131810999"
           target="_blank"
