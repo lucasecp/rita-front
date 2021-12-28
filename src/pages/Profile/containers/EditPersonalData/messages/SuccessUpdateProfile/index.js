@@ -6,7 +6,7 @@ import successIcon from '@/assets/icons/alerts/success.svg'
 import { Container } from './styles'
 
 import { useModal } from '@/hooks/useModal'
-import { MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
+import { INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes'
 import { useHistory } from 'react-router'
 
 export const SuccessUpdateProfile = () => {
@@ -14,7 +14,7 @@ export const SuccessUpdateProfile = () => {
   const history = useHistory()
 
   const onComeBackInitialPage = () => {
-    history.push(MASTERPAGE)
+    history.push(INITIAL_PAGE)
     closeModal()
   }
 

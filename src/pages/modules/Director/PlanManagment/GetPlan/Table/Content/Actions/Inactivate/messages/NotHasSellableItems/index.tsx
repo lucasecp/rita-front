@@ -6,28 +6,27 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { useModal } from '@/hooks/useModal'
+import { ReasonInactivate } from '../ReasonInactivate'
 
 import { Container } from './styles'
 
-interface VerifyIfHasSellableItemsProps {
+interface NotHasSellableItemsProps {
   plan: any
   sellableItems: boolean
 }
 
-export const VerifyIfHasSellableItems: React.FC<
-  VerifyIfHasSellableItemsProps
-> = ({ plan, sellableItems }) => {
+export const NotHasSellableItems: React.FC<NotHasSellableItemsProps> = ({
+  plan,
+}) => {
   const { showMessage } = useModal()
   const { closeModal } = useModal()
-
-  console.log(sellableItems)
 
   const onDoNotProceed = () => {
     closeModal()
   }
 
   const onProceed = async () => {
-    // showMessage(ReasonUpdate, { plan, hasSellableItems: false }, true)
+    showMessage(ReasonInactivate, { plan }, true)
   }
 
   return (
@@ -37,8 +36,8 @@ export const VerifyIfHasSellableItems: React.FC<
         Não há itens vendáveis associados a esse plano, deseja prosseguir?
       </h6>
       <footer>
-        <OutlineButton onClick={onDoNotProceed}>Não</OutlineButton>
         <ButtonPrimary onClick={onProceed}>Sim</ButtonPrimary>
+        <OutlineButton onClick={onDoNotProceed}>Não</OutlineButton>
       </footer>
     </Container>
   )

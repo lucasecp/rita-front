@@ -1,6 +1,6 @@
 import { useModal } from '@/hooks/useModal'
 import CustomTooltip from '@/components/Tooltip'
-import { VerifyIfHasSellableItems } from './messages/VerifyIfHasSellableItems'
+import { NotHasSellableItems } from './messages/NotHasSellableItems'
 
 import InactivateIcon from './styles'
 
@@ -11,20 +11,24 @@ interface InactivateProps {
 export const Inactivate: React.FC<InactivateProps> = ({ status }) => {
   const { showMessage } = useModal()
 
-  const hasSellableItems = true
+  // const sellableItems = [
+  //   { id: 1, item: 'Plano 01' },
+  //   { id: 2, item: 'Plano 02' },
+  // ]
+
+  const sellableItems: any = []
 
   const onInactivePlan = () => {
-    if (hasSellableItems) {
+    if (sellableItems.length) {
+      console.log('Tem itens vendáveis')
+    } else {
       showMessage(
-        VerifyIfHasSellableItems,
+        NotHasSellableItems,
         {
-          sellableItems: hasSellableItems,
+          sellableItems,
         },
         true,
       )
-      console.log('Tem itens vendáveis')
-    } else {
-      console.log('Não tem itens vendáveis')
     }
   }
 
