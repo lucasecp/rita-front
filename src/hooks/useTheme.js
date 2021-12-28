@@ -1,7 +1,8 @@
-import colors from '@/styles/colors'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useAuth } from './login'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
+
+import { themes } from '@/styles/themes'
 
 const ThemeContext = createContext({})
 
@@ -11,14 +12,22 @@ const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     switch (user?.perfis[0]) {
+      case 'Paciente':
+        setTheme(themes.purple)
+        break
       case 'Conveniado':
-      case 'Diretor':
+        setTheme(themes.orange)
+        break
+      case 'Validador':
       case 'Operador':
-        setTheme(colors.themeOrange)
+      case 'Diretor':
+      case 'Gerente Comercial':
+      case 'Gestor de Contas':
+        setTheme(themes.blue)
         break
 
       default:
-        setTheme(colors.themePurple)
+        setTheme(themes.green)
     }
   }, [user])
 
