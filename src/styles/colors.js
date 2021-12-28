@@ -51,8 +51,6 @@ const colors = {
     dark: '#084C4F',
   },
 
-
-
   themePurple: {
     light: '#DFD2FF',
     middle: '#C0A6FF',
@@ -65,7 +63,7 @@ const colors = {
   themeBlue: {
     light: '#EAF1FC',
     middle: '#326BF6',
-    dark: '#1C23BD' ,
+    dark: '#1C23BD',
     darkness: '#9146FF',
     bgLight: '#F8F5FF',
     bgMiddle: '#EFEAFA',
