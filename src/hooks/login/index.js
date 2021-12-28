@@ -13,7 +13,7 @@ import { useLoading } from '../useLoading'
 import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
 import { useHistory } from 'react-router'
-import { LOGIN, MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
+import { LOGIN, INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes'
 import apiPatient from '@/services/apiPatient'
 import AnalyzingData from './messages/AnalzingData'
 
@@ -49,7 +49,7 @@ export default function AuthProvider({ children }) {
         Loading.turnOn()
 
         const { data } = await apiPatient.get(
-          `paciente/status?cpf=${payload.cpf}`
+          `paciente/status?cpf=${payload.cpf}`,
         )
 
         if (data.status === 'P' || data.status === 'D') {
@@ -100,7 +100,7 @@ export default function AuthProvider({ children }) {
   }
 
   const pushToUrl = (url) => {
-    if (!url) return history.push(MASTERPAGE)
+    if (!url) return history.push(INITIAL_PAGE)
     history.push(url.from)
   }
   const clearDataLogout = () => {

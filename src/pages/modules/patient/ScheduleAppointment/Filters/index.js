@@ -8,7 +8,7 @@ import SelectCity from '../components/SelectCity'
 import SelectUf from '../components/SelectUf'
 import { BtnGroup, Container } from './styles'
 import Results from '../Results'
-import { MASTERPAGE } from '@/routes/constants/namedRoutes/routes'
+import { INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes'
 import { useHistory } from 'react-router'
 import { useLoading } from '@/hooks/useLoading'
 import { queryFilterString } from '@/helpers/queryString/filter'
@@ -95,7 +95,7 @@ const Filters = () => {
         <SelectUf setUf={setUf} uf={uf} />
         <SelectCity setCity={setCity} uf={uf} city={city} />
         <BtnGroup>
-          <OutlineButton onClick={() => history.push(MASTERPAGE)}>
+          <OutlineButton onClick={() => history.push(INITIAL_PAGE)}>
             Voltar
           </OutlineButton>
           <ButtonPrimary onClick={onFilter}>Filtrar Resultados</ButtonPrimary>
