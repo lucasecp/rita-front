@@ -54,7 +54,6 @@ export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({ plan }) => {
       <img src={warningIcon} />
       <h6>Descreva o motivo da alteração:</h6>
       <Textarea
-        label="Reason"
         setValue={setReason}
         value={reason}
         limit={200}

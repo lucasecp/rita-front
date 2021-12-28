@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { TextareaHTMLAttributes } from 'react'
 
 import { Container } from './styles'
 
-function Textarea({
-  label,
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string
+  value: string
+  setValue: React.Dispatch<React.SetStateAction<string>>
+  limit?: number | string
+  showCaractersInformation?: boolean
+  hasError?: boolean
+  messageError?: string
+}
+
+const Textarea: React.FC<TextareaProps> = ({
+  label = '',
+  value,
   setValue,
   limit = 255,
-  showCaractersInformation,
-  value,
-  hasError,
-  messageError,
+  showCaractersInformation = false,
+  hasError = false,
+  messageError = '',
   ...rest
-}) {
-  const onChangeText = (event) => {
+}) => {
+  const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target
 
     if (value.length <= limit) {
