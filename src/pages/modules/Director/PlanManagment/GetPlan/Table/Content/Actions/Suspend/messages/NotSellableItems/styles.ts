@@ -20,6 +20,10 @@ export const Container = styled.div`
     line-height: 30px;
 
     color: inherit;
+
+    > span {
+      color: ${({ theme }) => theme.darkness};
+    }
   }
 
   > * + * {

@@ -13,7 +13,7 @@ export const Container = styled.div`
 
     > h1 {
       margin-bottom: 16px;
-      color: ${colors.purple.main.darkness};
+      color: ${({ theme }) => theme.darkness};
       font-weight: 500;
       font-size: 24px;
       line-height: 30px;
@@ -31,7 +31,7 @@ export const Container = styled.div`
       font-weight: 500;
       font-size: 16px;
       line-height: 20px;
-      color: ${colors.purple.main.darkness};
+      color: ${({ theme }) => theme.darkness};
       cursor: pointer;
     }
   }

@@ -6,11 +6,18 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { useModal } from '@/hooks/useModal'
-import { ReasonUpdate } from '@/pages/modules/Director/PlanManagment/EditPlan/messages/ReasonUpdate'
+import { ReasonUpdate } from '../ReasonUpdate'
 
 import { Container } from './styles'
 
-export const NotSellableItems = ({ idPlan }) => {
+interface NotSellableItemsProps {
+  plan: {
+    id: number
+    name: string
+  }
+}
+
+export const NotSellableItems: React.FC<NotSellableItemsProps> = ({ plan }) => {
   const { showMessage, closeModal } = useModal()
 
   const onDoNotProceed = () => {
@@ -18,14 +25,15 @@ export const NotSellableItems = ({ idPlan }) => {
   }
 
   const onProceed = async () => {
-    showMessage(ReasonUpdate, { idPlan, hasSellableItems: false })
+    showMessage(ReasonUpdate, { plan })
   }
 
   return (
     <Container>
       <img src={warningIcon} />
       <h6>
-        Não há itens vendáveis associados a esse plano, deseja prosseguir?
+        Não há itens vendáveis associados ao plano <span>{plan.name}</span>,
+        deseja suspender?
       </h6>
       <footer>
         <OutlineButton onClick={onDoNotProceed}>Não</OutlineButton>
