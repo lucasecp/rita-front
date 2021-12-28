@@ -1,5 +1,13 @@
 import React from 'react'
-import { Container, MainInfo, Price ,RitaPrice, DefaultPrice,Phone,ContainerMainInfo} from './styles'
+import {
+  Container,
+  MainInfo,
+  Price,
+  RitaPrice,
+  DefaultPrice,
+  Phone,
+  ContainerMainInfo,
+} from './styles'
 import { ReactComponent as MoneyIcon } from '@/assets/icons/money.svg'
 import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
@@ -37,7 +45,9 @@ const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
           <Price>
             <MoneyIcon /> <h6>Valor:</h6>
             {dataSpecialtyDetails?.defaultPrice && (
-              <DefaultPrice>Balcão {dataSpecialtyDetails?.defaultPrice}</DefaultPrice>
+              <DefaultPrice>
+                Balcão {dataSpecialtyDetails?.defaultPrice}
+              </DefaultPrice>
             )}
             {dataSpecialtyDetails?.defaultPrice && (
               <>

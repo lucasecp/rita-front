@@ -24,7 +24,7 @@ export const Content = styled.div`
   }
 `
 export const BtnGroup = styled.div`
-   margin-left: auto;
+  margin-left: auto;
   justify-content: end;
   display: flex;
   flex-wrap: wrap;
@@ -39,6 +39,6 @@ export const BtnGroup = styled.div`
       margin-left: 0;
       margin-top: 20px;
     }
-    margin-top: 30px
+    margin-top: 30px;
   }
 `

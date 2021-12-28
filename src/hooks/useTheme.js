@@ -16,7 +16,7 @@ const ThemeProvider = ({ children }) => {
       case 'Operador':
         setTheme(colors.themeOrange)
         break
-        
+
       default:
         setTheme(colors.themePurple)
     }

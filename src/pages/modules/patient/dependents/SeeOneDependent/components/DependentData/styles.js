@@ -7,8 +7,7 @@ export const Container = styled.section`
     font-weight: 500;
     line-height: 30px;
 
-    color: #6A6A6A;
-
+    color: #6a6a6a;
 
     margin-bottom: 24px;
   }

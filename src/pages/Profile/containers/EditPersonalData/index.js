@@ -22,7 +22,7 @@ export const EditPersonalData = ({ personalDatas }) => {
   const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState(false)
 
   const [mainPersonalDatas, setMainPersonalDatas] = useState(
-    personalDatas?.personalDatas
+    personalDatas?.personalDatas,
   )
   const [address, setAddress] = useState(personalDatas?.address)
 

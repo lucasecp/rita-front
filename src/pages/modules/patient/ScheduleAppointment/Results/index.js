@@ -12,13 +12,11 @@ const Results = ({ data, setQueryPagination }) => {
   //     (clinic) => clinic?.specialtys?.doctorSpecialty
   //   ))
   // },[data])
-  
 
   return data ? (
     <Container>
       <h2>Resultados encontrados</h2>
       <Content>
-
         {/* {data?.doctor?.map((clinic, index) => (
           <ClinicInfo key={index} dataClinic={clinic} />
         ))} */}
@@ -26,7 +24,6 @@ const Results = ({ data, setQueryPagination }) => {
         {data?.doctor?.map((doctor, index) => (
           <DoctorInfo key={index} isVerify dataDoctor={doctor} />
         ))}
-
       </Content>
       <Pagination setQuery={setQueryPagination} total={data.total} />
     </Container>

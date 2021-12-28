@@ -29,7 +29,7 @@ const PlanManagment = () => {
         const { data } = await apiPatient(
           `/plano${queryApi}${
             queryFilterString(filters) + queryOrderString(order)
-          }`
+          }`,
         )
         setPlans(data)
       } catch ({ response }) {

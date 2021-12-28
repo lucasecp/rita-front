@@ -19,7 +19,7 @@ import {
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import { formatCpf } from '@/helpers/formatCpf'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
-import { SimpleModal,  MODAL_TYPES } from '@/components/Modal/SimpleModal'
+import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 
 const TablePatients = ({ orders, setOrders, filters }) => {
   const [patients, setPatients] = useState({})
@@ -38,7 +38,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
         const response = await apiPatient.get(
           `/paciente${queryPagination}${
             queryFilterString(filters) + queryOrderString(orders)
-          }`
+          }`,
         )
         if (response.status === 200) {
           setPatients(response.data)
@@ -66,7 +66,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
       Loading.turnOn()
 
       const response = await apiPatient.patch(
-        `/paciente/${id}/assumir-validacao?forcar=false`
+        `/paciente/${id}/assumir-validacao?forcar=false`,
       )
       if (response.status === 200) {
         history.push(VALIDATOR_SEE_ONE_PATIENT, { cpf })
@@ -116,7 +116,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                     >
                       <div>
                         {convertToCaptalize(
-                          formatTextWithLimit(patient.nome, 38)
+                          formatTextWithLimit(patient.nome, 38),
                         ) || '-'}
                       </div>
                     </CustomTooltip>

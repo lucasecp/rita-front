@@ -20,7 +20,7 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
 
   useEffect(() => {
     history.push(queryString)
-   return setQuery && setQuery(queryApiString)
+    return setQuery && setQuery(queryApiString)
   }, [limit, currentPage, restQuery])
 
   useEffect(() => {
@@ -29,7 +29,6 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
     }
   }, [total, currentPage, limit])
 
-
   const prevPage = () => {
     if (currentPage === 1) return
     setCurrentPage(currentPage - 1)
@@ -37,7 +36,7 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
 
   const nextPage = () => {
     if (currentPage === totalPages || !totalPages) return
-    console.log((currentTotal + currentTotal));
+    console.log(currentTotal + currentTotal)
 
     setCurrentPage(currentPage + 1)
   }

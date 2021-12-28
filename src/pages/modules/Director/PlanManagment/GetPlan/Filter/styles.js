@@ -24,7 +24,7 @@ export const BtnGroup = styled.div`
   > button:first-child {
     margin-right: 24px;
   }
-  @media(max-width: 540px){
+  @media (max-width: 540px) {
     flex-direction: column;
     > button:first-child {
       margin: 0 0 24px 0;

@@ -34,11 +34,10 @@ export const Container = styled.header`
         height: 40px;
         border-radius: 50%;
 
-
         overflow: hidden;
         margin-left: 16px;
 
-       > img {
+        > img {
           min-height: 100%;
           border: solid 2px ${colors.purple.main.dark};
           border-radius: 50px;

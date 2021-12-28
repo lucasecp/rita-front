@@ -21,7 +21,7 @@ function Textarea({
   }
 
   return (
-    <Container hasError={hasError} >
+    <Container hasError={hasError}>
       {label && <label htmlFor={label}>{label}</label>}
       <textarea id={label} onChange={onChangeText} value={value} {...rest} />
       <div>

@@ -4,7 +4,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
 import RegisterLayout from '@/components/Layout/RegisterLayout'
 import validateCpf from '@/helpers/validateCpf'
-import { useHistory,useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import CpfEmpty from './messages/error/CpfEmpty'
 
@@ -17,20 +17,24 @@ import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
 import OutlineButton from '@/components/Button/Outline'
 import ExpiredSessionDefinePassword from './messages/error/ExpiredToken'
-import { FORGOT_PASSWORD_CONFIRM_DATA, LOGIN } from '@/routes/constants/namedRoutes/routes'
+import {
+  FORGOT_PASSWORD_CONFIRM_DATA,
+  LOGIN,
+} from '@/routes/constants/namedRoutes/routes'
 
 function IdentifyPerson() {
   const [cpf, setCpf] = useState('')
   const { Loading } = useLoading()
   const history = useHistory()
-  const {state} = useLocation()
+  const { state } = useLocation()
   const { showMessage } = useModal()
 
   useEffect(() => {
     document.title = 'Rita Saúde | Recuperar Senha'
-    if(!state && !state?.error) return
-    if(state.error === 'EXPIRED_TOKEN') showMessage(ExpiredSessionDefinePassword)
-  }, []);
+    if (!state && !state?.error) return
+    if (state.error === 'EXPIRED_TOKEN')
+      showMessage(ExpiredSessionDefinePassword)
+  }, [])
 
   const handleConfirm = async () => {
     if (cpf.length === 0) {
@@ -49,7 +53,6 @@ function IdentifyPerson() {
         email: data.email,
         phone: data.telefone,
       })
-
     } catch ({ response }) {
       if (response.status === 404) {
         return showMessage(NotFound)
@@ -62,7 +65,9 @@ function IdentifyPerson() {
   return (
     <RegisterLayout>
       <Content>
-        <h6>Para continuarmos, precisamos confirmar alguns dados. Informe seu CPF:</h6>
+        <h6>
+          Para continuarmos, precisamos confirmar alguns dados. Informe seu CPF:
+        </h6>
         <div>
           <InputMask
             mask="999.999.999-99"
@@ -77,9 +82,9 @@ function IdentifyPerson() {
             </OutlineButton>
             <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
           </BtnGroup>
-          </div>
-        </Content>
-      </RegisterLayout>
+        </div>
+      </Content>
+    </RegisterLayout>
   )
 }
 

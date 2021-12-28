@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { Container } from './styles'
 import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.svg'
 
-const ClinicInfo = ({dataClinic}) => {
-  console.log(dataClinic);
+const ClinicInfo = ({ dataClinic }) => {
+  console.log(dataClinic)
   return (
     <Container>
       <div></div>

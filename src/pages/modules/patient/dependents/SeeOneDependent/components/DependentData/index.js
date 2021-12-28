@@ -18,7 +18,7 @@ export const DependentData = ({
   setPersonalDatas,
   isEditing,
   initialData,
-  cancelEdit
+  cancelEdit,
 }) => {
   const [name, setName] = useState(personalDatas?.name || '')
   const [cpf, setCpf] = useState(personalDatas?.cpf || '')
@@ -47,9 +47,7 @@ export const DependentData = ({
       cpf,
       hasError: Object.values(errors).some((value) => value !== ''),
     })
-  }, [name, birthDate,cpf, gender, phone, email, errors])
-
-
+  }, [name, birthDate, cpf, gender, phone, email, errors])
 
   useEffect(() => {
     if (cancelEdit) {
@@ -61,7 +59,7 @@ export const DependentData = ({
       setPhone(initialData?.phone || '')
       setErrors({})
     }
-  }, [cancelEdit,initialData])
+  }, [cancelEdit, initialData])
 
   return (
     <Container>

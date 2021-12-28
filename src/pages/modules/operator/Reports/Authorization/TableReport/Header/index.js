@@ -10,7 +10,6 @@ const Header = ({ setOrders, orders, columns }) => {
     orders.some((obj) => obj.name === name && obj.value === 'ASC')
 
   const handleClick = (name) => {
-    
     if (hasDescOrder(name)) {
       return setOrders([])
     }

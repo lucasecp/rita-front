@@ -25,8 +25,8 @@ const TableReport = ({
         Loading.turnOn()
         const response = await apiPatient.get(
           `/validacao-paciente?limit=10&skip=0${queryOrderString(
-            orders
-          )}${queryFilterString(filters)}`
+            orders,
+          )}${queryFilterString(filters)}`,
         )
 
         if (response.status === 200) {

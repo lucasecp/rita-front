@@ -25,7 +25,7 @@ const CustomMultSelect = ({
   window.onresize = () => adjustSelectOptions(containerDiv?.current)
 
   return (
-    <Container disabled={disabled}  {...rest}>
+    <Container disabled={disabled} {...rest}>
       {label && <label>{label}</label>}
       <Content
         disabled={disabled}
@@ -33,7 +33,6 @@ const CustomMultSelect = ({
         ref={containerDiv}
         id={generateRandomString(7)}
         onClick={() => adjustSelectOptions(containerDiv?.current)}
-       
         {...rest}
       >
         <Multiselect

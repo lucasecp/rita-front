@@ -1,22 +1,22 @@
 import styled from 'styled-components'
 
 export const DefaultImg = styled.div`
-   width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: #f8f5ff;
-    margin-bottom: 21px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: #f8f5ff;
+  margin-bottom: 21px;
 `
 export const Profile = styled.div`
-   max-width: 130px;
-    max-height: 130px;
-   min-width: 130px;
-   min-height: 130px;
-    border-radius: 50%;
-    margin-bottom: 21px;
-    >img{
-      max-height: 100%
-    }
+  max-width: 130px;
+  max-height: 130px;
+  min-width: 130px;
+  min-height: 130px;
+  border-radius: 50%;
+  margin-bottom: 21px;
+  > img {
+    max-height: 100%;
+  }
 `
 export const Container = styled.div`
   padding: 27px 30px;

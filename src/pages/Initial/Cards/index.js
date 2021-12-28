@@ -19,10 +19,24 @@ import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/rou
 
 const Cards = () => {
   const [plan, SetPlan] = useState('')
+  const [medicinesLink, SetMedicinesLink] = useState('')
   const { Loading } = useLoading()
   const { showMessage } = useModal()
   const history = useHistory()
+
   useEffect(() => {
+    const getMedicineLink = async () => {
+      try {
+        Loading.turnOn()
+        const { data } = await apiPatient.get('/paciente/drogaria')
+        const link = data.farmacia.map((info) => info.site)
+        SetMedicinesLink(link)
+      } catch (error) {
+      } finally {
+        Loading.turnOff()
+      }
+    }
+
     const getPlans = async () => {
       try {
         Loading.turnOn()
@@ -33,7 +47,9 @@ const Cards = () => {
         Loading.turnOff()
       }
     }
+
     getPlans()
+    getMedicineLink()
   }, [])
 
   const onConsult = () => {
@@ -43,10 +59,11 @@ const Cards = () => {
     history.push(PATIENT_SCHEDULE_APPOINTMENT)
   }
 
-  const onMedicament = () => {
+  const onMedicines = () => {
     if (plan === 'Social') {
       return showMessage(Socialplan)
     }
+    window.open(medicinesLink[0])
   }
 
   const onCsd = () => {
@@ -93,7 +110,7 @@ const Cards = () => {
           <img src={Background4} />
           <h3>Medicamentos</h3>
           <p>Descontos especiais em redes de farmácias.</p>
-          <OutlineButton variation="white" onClick={onMedicament}>
+          <OutlineButton variation="white" onClick={onMedicines}>
             Encontre uma farmácia
           </OutlineButton>
         </Card>

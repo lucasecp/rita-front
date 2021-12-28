@@ -42,7 +42,7 @@ export const Container = styled.button`
         background: ${colors.blue.middle} !important;
       }
     `} */
-    ${(props) =>
+  ${(props) =>
     props.variation === 'red' &&
     css`
       color: ${colors.orange.middleDark};
@@ -51,11 +51,11 @@ export const Container = styled.button`
       /* :hover {
         background: ${colors.orange.middleDark} !important;
       } */
-      `}
+    `}
 
-      :hover {
-    opacity: .7;
-    transition: .3s;
+  :hover {
+    opacity: 0.7;
+    transition: 0.3s;
   }
 
   /* ${({ disabled }) =>

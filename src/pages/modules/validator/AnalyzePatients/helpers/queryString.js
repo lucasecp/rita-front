@@ -1,5 +1,3 @@
-
-
 export const queryOrderString = (array) => {
   let valueString = ''
 

@@ -13,7 +13,7 @@ const Reports = () => {
 
   const onUserConfirmReportChoice = () => {
     const report = reportOptions.find(
-      (report) => report.value === reportChoosen
+      (report) => report.value === reportChoosen,
     )
 
     if (!report?.path) {
@@ -25,7 +25,7 @@ const Reports = () => {
 
   useEffect(() => {
     document.title = 'Rita Saúde | Relatórios'
-  },[])
+  }, [])
 
   return (
     <DefaultLayout title="Relatórios">

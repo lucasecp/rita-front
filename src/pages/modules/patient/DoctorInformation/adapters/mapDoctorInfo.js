@@ -5,7 +5,7 @@ import { formatPrice } from '@/helpers/formatPrice'
 
 export const fromApi = (dataClinic) => {
   const doctorSpecialty = dataClinic?.medicoEspecialidade?.find(
-    (dSpecialty) => dSpecialty
+    (dSpecialty) => dSpecialty,
   )
 
   const clinicdoctor = dataClinic?.clinicaMedico?.map((specialty) => ({
@@ -18,7 +18,7 @@ export const fromApi = (dataClinic) => {
           return ac
         }
         return ac
-      }, null)
+      }, null),
     ),
 
     status: specialty.statusMedicoClinica,

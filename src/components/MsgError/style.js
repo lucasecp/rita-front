@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.p`
   font-size: 12px;
@@ -9,5 +9,5 @@ export const Container = styled.p`
   text-align: left;
   color: #df644b;
   margin-top: 6px;
-  margin-bottom: 0
-`;
+  margin-bottom: 0;
+`

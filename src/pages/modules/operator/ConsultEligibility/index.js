@@ -152,7 +152,7 @@ export const ConsultEligibility = () => {
 
   useEffect(() => {
     document.title = 'Rita Saúde | Elegibilidade'
-  },[])
+  }, [])
 
   return (
     <DefaultLayout title="Elegibilidade">

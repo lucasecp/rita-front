@@ -50,7 +50,7 @@ function PreRegister() {
   let isBlocked
 
   useEffect(() => {
-      document.title = 'Rita Saúde | Registrar'
+    document.title = 'Rita Saúde | Registrar'
     if (userData.phone && userData.email) {
       return
     }
@@ -70,7 +70,7 @@ function PreRegister() {
 
   const redirectToRegister = () => {
     if (userData?.status === 'N') return showMessage(ContactUs)
-    history.push(RESGISTE_PATIENT,{ userData: { cpf: userData.cpf } })
+    history.push(RESGISTE_PATIENT, { userData: { cpf: userData.cpf } })
   }
 
   const onForwardData = async () => {
@@ -78,11 +78,9 @@ function PreRegister() {
     isLastTry = false
     isBlocked = false
 
-
     if (choice === 'email') {
       if (!isEmail(email)) {
         isDataMatch = false
-
       }
     }
 
@@ -93,8 +91,8 @@ function PreRegister() {
     }
 
     try {
-     Loading.turnOn()
-        const { data } = await apiPatient.post(
+      Loading.turnOn()
+      const { data } = await apiPatient.post(
         '/paciente/token',
         choice === 'email'
           ? {
@@ -104,12 +102,11 @@ function PreRegister() {
           : {
               cpf: userData.cpf,
               celular: phone.trim(),
-            }
+            },
       )
       const ultimaTentativa = data?.ultimaTentativa
       isLastTry = ultimaTentativa
     } catch ({ response }) {
-
       const messageFromApi = response?.data.message
       const statusFromApi = response?.status
 
@@ -150,7 +147,7 @@ function PreRegister() {
       choice === 'email'
         ? { ...propsToInComumSend, email }
         : { ...propsToInComumSend, phone },
-      true
+      true,
     )
   }
 

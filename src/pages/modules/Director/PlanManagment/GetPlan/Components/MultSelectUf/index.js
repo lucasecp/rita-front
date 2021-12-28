@@ -20,7 +20,7 @@ const MultSelectUf = ({ setUf, uf, regional }) => {
         ]
 
         const { data } = await apiPatient.get(
-          `/uf?${queryFilterString(queryRegional)}`
+          `/uf?${queryFilterString(queryRegional)}`,
         )
         const dataMapped = mapUf(data?.dados)
 

@@ -39,9 +39,9 @@ export const Content = styled.div`
       line-height: 28px;
     }
   }
-  @media(max-width:539px) {
-    div > button{
-      width:100%
+  @media (max-width: 539px) {
+    div > button {
+      width: 100%;
     }
   }
 `

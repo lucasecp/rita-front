@@ -18,7 +18,6 @@ export const Content = styled.div`
   }
   justify-content: space-between;
 
-
   > div {
     display: flex;
     flex-direction: column;

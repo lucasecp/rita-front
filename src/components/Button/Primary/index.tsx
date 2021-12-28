@@ -3,10 +3,10 @@ import React, { ButtonHTMLAttributes } from 'react'
 import { Container } from './styles'
 
 interface IButtonPrimary extends ButtonHTMLAttributes<HTMLButtonElement> {
-  small?: boolean;
-  disabledWithEvents?: boolean;
-  medium?: boolean;
-  variation?: string;
+  small?: boolean
+  disabledWithEvents?: boolean
+  medium?: boolean
+  variation?: string
 }
 
 const ButtonPrimary: React.FC<IButtonPrimary> = ({
@@ -14,7 +14,7 @@ const ButtonPrimary: React.FC<IButtonPrimary> = ({
   small = false,
   disabledWithEvents = false,
   medium = false,
-  variation = "none",
+  variation = 'none',
   ...rest
 }) => {
   return (

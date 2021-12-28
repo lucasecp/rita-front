@@ -12,13 +12,12 @@ export default css`
     border-radius: 8px !important;
     background-color: #fff !important;
   }
-  .ant-picker-range-arrow{
+  .ant-picker-range-arrow {
     border-right: 1px solid #0000001a;
     border-top: 1px solid #0000001a;
-
   }
-  .ant-picker-cell-today div::before{
-    border: none !important
+  .ant-picker-cell-today div::before {
+    border: none !important;
   }
   .ant-picker-header button {
     font-size: 12px;
@@ -28,8 +27,8 @@ export default css`
     color: #6a6a6a;
   }
 
-  .ant-picker-header-view{
-    margin-right: 30px
+  .ant-picker-header-view {
+    margin-right: 30px;
   }
   .ant-picker-cell-inner {
     font-size: 12px;
@@ -57,7 +56,9 @@ export default css`
   .ant-picker-header button:hover {
     color: ${colors.purple.main.dark};
   }
-  .ant-picker-cell-in-range,.ant-picker-cell-range-hover,.ant-picker-cell-range-hover-end {
+  .ant-picker-cell-in-range,
+  .ant-picker-cell-range-hover,
+  .ant-picker-cell-range-hover-end {
     background: ${colors.purple.main.dark};
     div {
       color: #fff;
@@ -81,25 +82,28 @@ export default css`
   }
   .ant-picker-cell-end {
   }
-  .ant-picker-cell-inner *,.ant-picker-cell-inner * {
+  .ant-picker-cell-inner *,
+  .ant-picker-cell-inner * {
     background-color: #000 !important;
   }
 
-  .ant-picker-cell-range-hover::before{
+  .ant-picker-cell-range-hover::before {
     background: ${colors.purple.main.dark} !important;
     border: none !important;
-    box-shadow: none !important
+    box-shadow: none !important;
   }
-  .ant-picker-cell-range-hover-end:hover::after,.ant-picker-cell-range-hover-end:hover::before,.ant-picker-cell-range-hover-end:hover div{
+  .ant-picker-cell-range-hover-end:hover::after,
+  .ant-picker-cell-range-hover-end:hover::before,
+  .ant-picker-cell-range-hover-end:hover div {
     border: none !important;
   }
-  .ant-picker-cell-inner::before,.ant-picker-cell-inner::after{
-   display: none;
+  .ant-picker-cell-inner::before,
+  .ant-picker-cell-inner::after {
+    display: none;
   }
-  @media(max-width:768px){
-    .ant-picker-panels{
+  @media (max-width: 768px) {
+    .ant-picker-panels {
       flex-direction: column;
     }
-
   }
 `

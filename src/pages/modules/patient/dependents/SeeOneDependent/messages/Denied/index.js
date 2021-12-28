@@ -14,7 +14,7 @@ function Denied() {
       <img src={errorIcon} />
       <p>O acesso desse dependente foi bloqueado.</p>
       <p>
-      Pedimos que entre em contato com a central de atendimento
+        Pedimos que entre em contato com a central de atendimento
         <a
           href="https://api.whatsapp.com/send?phone=6131810999"
           target="_blank"

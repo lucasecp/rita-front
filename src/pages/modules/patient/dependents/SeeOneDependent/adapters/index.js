@@ -1,4 +1,4 @@
-import {statusFromApi, statusToApi} from './showStatus'
+import { statusFromApi, statusToApi } from './showStatus'
 
 export const fromApi = (dependentInfo) => {
   return {

@@ -1,1 +1,1 @@
-export default (value) =>  /[`!@#$%^&*()_+\-=[\]{};`´':"\\|,.<>/?~]/.test(value)
+export default (value) => /[`!@#$%^&*()_+\-=[\]{};`´':"\\|,.<>/?~]/.test(value)

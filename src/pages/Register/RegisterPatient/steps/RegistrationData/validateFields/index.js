@@ -1,4 +1,4 @@
-export const validateConfEmail = (email,confirmEmail) => {
+export const validateConfEmail = (email, confirmEmail) => {
   if (email !== confirmEmail)
     return {
       confirmEmail:

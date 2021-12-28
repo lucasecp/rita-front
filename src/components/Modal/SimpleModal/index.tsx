@@ -9,9 +9,9 @@ import ButtonPrimary from '@/components/Button/Primary'
 
 import { Container } from './styles'
 
-interface ISimpleModal{
-  type:string;
-  message: string;
+interface ISimpleModal {
+  type: string
+  message: string
 }
 
 export const MODAL_TYPES = {
@@ -41,4 +41,3 @@ export const SimpleModal: React.FC<ISimpleModal> = ({ type, message }) => {
     </Container>
   )
 }
-
