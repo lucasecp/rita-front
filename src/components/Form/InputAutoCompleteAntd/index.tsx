@@ -10,7 +10,7 @@ const Complete:React.FC<CompleteProps> = ({ setValue }) => {
   const [options, setOptions] = useState([])
   const input = useRef(null)
 
-  useSearch(inputValue, setOptions)
+  // useSearch(inputValue, setOptions)
 
   return (
     <Container>
