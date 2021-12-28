@@ -22,7 +22,7 @@ export const Suspend: React.FC<SuspendProps> = ({ status, idPlan }) => {
     ]
     // sellableItems = []
     if (sellableItems.length) {
-      history.push(DIRECTOR_SUSPEND_PLAN)
+      history.push(DIRECTOR_SUSPEND_PLAN, { sellableItems })
     }
   }
 
