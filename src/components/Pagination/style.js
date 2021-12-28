@@ -7,6 +7,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   > div {
     display: flex;
     align-items: center;
@@ -21,6 +22,7 @@ export const Container = styled.div`
     &:last-child {
       margin-right: -6px;
     }
+
     @media (max-width: 767px) {
       :first-child {
         flex-direction: column;
