@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-
 export const Container = styled.section`
   > h1 {
     font-size: 24px;
@@ -8,7 +7,7 @@ export const Container = styled.section`
     font-weight: 500;
     line-height: 30px;
 
-    color: #6A6A6A
+    color: #6a6a6a;
   }
 
   > section {
@@ -18,10 +17,9 @@ export const Container = styled.section`
     grid-template-columns: 1fr 1fr 1fr;
 
     gap: 24px;
-    >*:nth-child(4){
+    > *:nth-child(4) {
       grid-column: span 2;
     }
-
 
     > section {
       grid-column: span 3;
@@ -34,8 +32,7 @@ export const Container = styled.section`
 
   @media (max-width: 991px) {
     > section {
-
-      >*:nth-child(4){
+      > *:nth-child(4) {
         grid-column: span 1;
       }
       grid-template-columns: 1fr;

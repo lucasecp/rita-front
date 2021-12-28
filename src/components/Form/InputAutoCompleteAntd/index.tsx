@@ -3,13 +3,14 @@ import 'antd/dist/antd.css'
 import { Input, AutoComplete } from 'antd'
 import useSearch from './useSearch'
 import { Container } from './styles'
+import { CompleteProps } from './types/index';
 
-const Complete = ({ setValue }) => {
+const Complete:React.FC<CompleteProps> = ({ setValue }) => {
   const [inputValue, setInputValue] = useState('')
   const [options, setOptions] = useState([])
   const input = useRef(null)
 
-  useSearch(inputValue, setOptions)
+  // useSearch(inputValue, setOptions)
 
   return (
     <Container>

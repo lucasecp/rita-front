@@ -22,7 +22,9 @@ function LastTry({ email, switchModalTo, requestNewToken }) {
       <img src={warningIcon} />
       <p>
         {requestNewToken
-          ? `Por favor, verifique o número fornecido em seu ${email? 'email' : 'celular'}. Esta é sua última tentativa, caso realize nova solicitação, seu acesso será bloqueado! Deseja continuar?`
+          ? `Por favor, verifique o número fornecido em seu ${
+              email ? 'email' : 'celular'
+            }. Esta é sua última tentativa, caso realize nova solicitação, seu acesso será bloqueado! Deseja continuar?`
           : 'Esta é sua última tentativa, caso insira informações incorretas novamente seu acesso será bloqueado!'}
       </p>
       <footer>

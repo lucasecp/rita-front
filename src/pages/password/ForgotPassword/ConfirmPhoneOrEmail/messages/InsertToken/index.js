@@ -36,7 +36,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
     setTypeOfModal(isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN)
   }, [isLastTry])
 
-  const switchModalTo = modalName => {
+  const switchModalTo = (modalName) => {
     setTypeOfModal(modalName)
   }
 

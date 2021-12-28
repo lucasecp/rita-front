@@ -18,13 +18,13 @@ function ValidationSeeOnePatient({
   const [documentOk, setDocumentOk] = useState(validations.documentOk || '')
 
   const [resonDocumentNotOk, setResonDocumentNotOk] = useState(
-    validations.resonDocumentNotOk || ''
+    validations.resonDocumentNotOk || '',
   )
 
   const [incomeOk, setIncomeOk] = useState(validations.incomeOk || 'no')
 
   const [allDataVerified, setCheckAllData] = useState(
-    validations.allDataVerified || false
+    validations.allDataVerified || false,
   )
 
   useEffect(() => {

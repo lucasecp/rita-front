@@ -50,7 +50,7 @@ export const Avatar = () => {
           <>
             Não foi possível atualizar sua foto de perfil. <br /> Por favor,
             tente novamente!
-          </>
+          </>,
         )
         setPhotoSource(photoProfileStoraged)
       } finally {

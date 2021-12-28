@@ -23,13 +23,13 @@ const ClinicInformation = () => {
 
   useEffect(() => {
     // if (!location.state) {
-      //   return history.push(PATIENT_SCHEDULE_APPOINTMENT)
-      // }
-      const getClinic = async () => {
-        try {
+    //   return history.push(PATIENT_SCHEDULE_APPOINTMENT)
+    // }
+    const getClinic = async () => {
+      try {
         Loading.turnOn()
         const { data } = await apiPatient.get(
-         `clinica/19/especialidades/medicos`
+          `clinica/19/especialidades/medicos`,
         )
         setClinicInfo(fromApi(data))
         console.log(fromApi(data))

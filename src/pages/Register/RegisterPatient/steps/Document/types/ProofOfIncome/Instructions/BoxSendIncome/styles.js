@@ -51,9 +51,9 @@ export const Container = styled.div`
       font-size: 16px;
       font-weight: 400;
       line-height: 19px;
-      @media(max-width: 540px){
+      @media (max-width: 540px) {
         margin-left: 0;
-        text-align: center
+        text-align: center;
       }
     }
   }

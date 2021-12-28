@@ -107,10 +107,10 @@ export const Container = styled.div`
       }
     }
   }
-  @media(max-width:539px) {
-    footer{
-      button{
-        width:100%
+  @media (max-width: 539px) {
+    footer {
+      button {
+        width: 100%;
       }
     }
   }

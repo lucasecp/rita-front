@@ -13,7 +13,7 @@ export const AccordionContainer = styled(Accordion)`
     line-height: 24px;
     color: ${colors.gray.middle};
   }
-  
+
   > h4 {
     font-size: 20px;
     font-style: normal;

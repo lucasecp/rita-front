@@ -21,17 +21,17 @@ export const Price = styled.li`
   padding-bottom: 25.5px;
   margin-top: -8px;
   margin-bottom: -8px;
-  `
+`
 
 export const Phone = styled.li`
-padding-bottom: 25.5px;
+  padding-bottom: 25.5px;
   > span {
     color: #303030;
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
   }
-  `
+`
 
 export const RitaPrice = styled.span`
   padding: 8px;
@@ -41,7 +41,7 @@ export const RitaPrice = styled.span`
   font-weight: 700;
   line-height: 20px;
   border-radius: 16px;
-  `
+`
 export const DefaultPrice = styled.span`
     font-size: 16px;
     font-weight: 700;
@@ -97,6 +97,6 @@ export const Container = styled.div`
     }
   }
   @media (max-width: 767px) {
-    padding: 16px ;
+    padding: 16px;
   }
 `

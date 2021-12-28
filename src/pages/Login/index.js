@@ -37,7 +37,7 @@ function Login() {
         senha: password,
         permanecerConectado: stayConnected,
       },
-      state
+      state,
     )
   }
 

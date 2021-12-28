@@ -14,7 +14,7 @@ import { useModal } from '@/hooks/useModal'
 const EditDependent = ({ dependentData }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [personalDatas, setPersonalDatas] = useState(
-    dependentData.personalDatas || {}
+    dependentData.personalDatas || {},
   )
 
   const [address, setAddress] = useState(dependentData.address || {})
@@ -34,7 +34,7 @@ const EditDependent = ({ dependentData }) => {
 
     if (status === 'PENDING') {
       return showSimple.warning(
-        'Os dados desse dependente estão sendo analisados, pedimos que aguarde a aprovação pela nossa equipe.'
+        'Os dados desse dependente estão sendo analisados, pedimos que aguarde a aprovação pela nossa equipe.',
       )
     }
 

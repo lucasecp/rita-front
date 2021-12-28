@@ -20,13 +20,11 @@ const MultSelectRegional = ({ setRegional, regional }) => {
         }
 
         setRegionalOptions(() => {
-
           if (dataMapped.length === 1) {
             return dataMapped
           }
           return [{ name: 'Todas', id: 'All' }, ...dataMapped]
         })
-
       } catch ({ response }) {
       } finally {
         Loading.turnOff()

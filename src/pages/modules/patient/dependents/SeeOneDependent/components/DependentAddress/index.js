@@ -13,7 +13,7 @@ export const DependentAddress = ({
   setAddress,
   isEditing,
   initialData,
-  cancelEdit
+  cancelEdit,
 }) => {
   const [cep, setCep] = useState(address?.cep || '')
   const [uf, setUf] = useState(address?.uf || '')

@@ -31,20 +31,21 @@ const ClinicItemDetails = ({ clinicDetails }) => {
               )}
             </li>
           )}
-        { clinicDetails?.specialtys[0].defaultPrice && clinicDetails?.specialtys[0].ritaPrice &&
-          <li>
-            <MoneyIcon /> Valor:
-            {clinicDetails?.specialtys[0].defaultPrice && (
-              <span>Balcão {clinicDetails?.specialtys[0].defaultPrice}</span>
-            )}
-            {clinicDetails?.specialtys[0].ritaPrice && (
-              <>
-                <span>-</span>
-                <span>Rita: {clinicDetails?.specialtys[0].ritaPrice}</span>
-              </>
-            )}
-          </li>
-        }
+        {clinicDetails?.specialtys[0].defaultPrice &&
+          clinicDetails?.specialtys[0].ritaPrice && (
+            <li>
+              <MoneyIcon /> Valor:
+              {clinicDetails?.specialtys[0].defaultPrice && (
+                <span>Balcão {clinicDetails?.specialtys[0].defaultPrice}</span>
+              )}
+              {clinicDetails?.specialtys[0].ritaPrice && (
+                <>
+                  <span>-</span>
+                  <span>Rita: {clinicDetails?.specialtys[0].ritaPrice}</span>
+                </>
+              )}
+            </li>
+          )}
         <li>
           <PhoneIcon />
           <div> Telefone de Agendamento: </div>

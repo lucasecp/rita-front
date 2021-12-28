@@ -44,9 +44,9 @@ export const Content = styled.div`
         font-weight: 500;
         line-height: 21px;
         color: #6a6a6a;
-        padding:0;
-        +button{
-          margin-left:25px
+        padding: 0;
+        + button {
+          margin-left: 25px;
         }
         img {
           margin-right: 10px;
@@ -66,7 +66,9 @@ export const Content = styled.div`
         font-weight: 400;
         line-height: 17px;
         color: #909090;
-       :first-child {margin-bottom: 10px;}
+        :first-child {
+          margin-bottom: 10px;
+        }
         span {
           color: #6a6a6a;
           font-family: Athletics;
@@ -76,26 +78,26 @@ export const Content = styled.div`
           margin-left: 3px;
         }
       }
-      @media(max-width: 539px){
+      @media (max-width: 539px) {
         flex-direction: column;
         align-items: flex-start;
-        ::after{
-          flex:none
+        ::after {
+          flex: none;
         }
-        ul{
+        ul {
           margin-bottom: 15px;
         }
       }
     }
-    @media(max-width:539px){
-      div{
-            justify-content: space-between;
-            width:100%;
-            flex-wrap: wrap;
-            >button:last-child{
-              margin-left: 0;
-            }
-          }
+    @media (max-width: 539px) {
+      div {
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+        > button:last-child {
+          margin-left: 0;
+        }
+      }
     }
   }
 `

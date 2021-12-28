@@ -21,14 +21,14 @@ const Filters = () => {
   const [city, setCity] = useState('')
   const [results, setResults] = useState(false)
   const [filter, setFilter] = useState([])
-  const [queryApiPagination, setQueryApiPagination] = useState('?limit=10&skip=0')
+  const [queryApiPagination, setQueryApiPagination] =
+    useState('?limit=10&skip=0')
   const history = useHistory()
   const { Loading } = useLoading()
 
   useEffect(() => {
-    if(!filter.length) return
+    if (!filter.length) return
     filterResults()
-
   }, [queryApiPagination, filter])
 
   const someFieldWasTyped = !!city || !!uf || !!researchDoctor
@@ -50,16 +50,16 @@ const Filters = () => {
     try {
       Loading.turnOn()
       const { data } = await apiPatient.get(
-        `/paciente/agenda-consulta${queryApiPagination}${queryFilterString(filter)}`
-        )
-        if (data.total === 0) {
-         return toast.warning('Nenhum resultado encontrado.')
-
-        }
-      setResults({total: data.total, doctor: fromApi(data.clinicas) })
-
+        `/paciente/agenda-consulta${queryApiPagination}${queryFilterString(
+          filter,
+        )}`,
+      )
+      if (data.total === 0) {
+        return toast.warning('Nenhum resultado encontrado.')
+      }
+      setResults({ total: data.total, doctor: fromApi(data.clinicas) })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     } finally {
       Loading.turnOff()
     }
@@ -68,7 +68,6 @@ const Filters = () => {
   const verifyTypedFields = (fields) => {
     return fields.filter((field) => field.value)
   }
-
 
   return (
     <>
@@ -85,7 +84,10 @@ const Filters = () => {
           keyLabelFromApi="nome"
           keyValueFromApi="idPaciente"
         /> */}
-        <InputAutoCompleteAntd setValue={setResearchDoctor} value={researchDoctor} />
+        <InputAutoCompleteAntd
+          setValue={setResearchDoctor}
+          value={researchDoctor}
+        />
         {/* <InputText
           label="Especialista ou Especialidade:"
           setValue={setResearchDoctor}
@@ -102,7 +104,9 @@ const Filters = () => {
         </BtnGroup>
       </Container>
 
-      { results.total && <Results data={results} setQueryPagination={setQueryApiPagination}/>}
+      {results.total && (
+        <Results data={results} setQueryPagination={setQueryApiPagination} />
+      )}
     </>
   )
 }

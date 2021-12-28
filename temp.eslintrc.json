@@ -1,25 +1,28 @@
 {
-    "env": {
-      "browser": true,
-      "es2021": true,
-      "jest": true
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": ["plugin:react/recommended", "standard", "prettier"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": ["plugin:react/recommended", "standard", "prettier"],
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 12,
-      "sourceType": "module"
-    },
-    "plugins": ["react", "prettier", "only-warn"],
-    "rules": {
-      "prettier/prettier": "on",
-      "react/jsx-filename-extension": ["warn", { "extensions": [".jsx", ".js", ".tsx", ".ts"] }],
-      "react/prop-types": 0,
-      "@TypeScript-eslint/no-explicit-any": "off",
-      "import/prefer-default-export": "off",
-     "prefer-regex-literals": "off"
-    }
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier", "only-warn"],
+  "rules": {
+    "prettier/prettier": "on",
+    "react/jsx-filename-extension": [
+      "warn",
+      { "extensions": [".jsx", ".js", ".tsx", ".ts"] }
+    ],
+    "react/prop-types": 0,
+    "@TypeScript-eslint/no-explicit-any": "off",
+    "import/prefer-default-export": "off",
+    "prefer-regex-literals": "off"
   }
+}

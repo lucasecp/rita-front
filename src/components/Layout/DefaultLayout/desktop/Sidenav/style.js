@@ -68,17 +68,17 @@ export const Container = styled.aside`
         transition: 0.3s;
 
         ${({ isExpanded }) =>
-          isExpanded &&
-          css`
-            background-image: url(${expandedLogo});
-            height: 64px;
-          `}
+        isExpanded &&
+        css`
+          background-image: url(${expandedLogo});
+          height: 64px;
+        `}
         ${({ isExpanded }) =>
-          !isExpanded &&
-          css`
-            background-image: url(${iconLogo});
-            height: 52px;
-          `}
+        !isExpanded &&
+        css`
+          background-image: url(${iconLogo});
+          height: 52px;
+        `}
       } */
     }
   }

@@ -3,7 +3,6 @@ import React from 'react'
 import { Container } from './styles'
 import { ReactComponent as WarningIcon } from '@/assets/icons/warning-circle-red.svg'
 
-
 export const Situation = ({ address, setAddress, isEditing }) => {
   return (
     <Container>
@@ -18,9 +17,9 @@ export const Situation = ({ address, setAddress, isEditing }) => {
 
       <h3>Associado à Tabela Padrão</h3>
 
-      <p>Associação à Tabela Especial vencida em 10/12/2021 <WarningIcon/></p>
-
-
+      <p>
+        Associação à Tabela Especial vencida em 10/12/2021 <WarningIcon />
+      </p>
     </Container>
   )
 }

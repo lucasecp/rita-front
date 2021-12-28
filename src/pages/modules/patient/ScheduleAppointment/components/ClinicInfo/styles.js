@@ -6,13 +6,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  >div:first-child{
-    width:130px;
+  > div:first-child {
+    width: 130px;
     height: 130px;
     border-radius: 50%;
     background: #f8f5ff;
     margin-bottom: 21px;
-
   }
   > h4 {
     font-size: 20px;
@@ -25,7 +24,6 @@ export const Container = styled.div`
     margin-bottom: 22px;
 
     > li {
-
       h6 {
         font-size: 10px;
         font-style: normal;
@@ -42,7 +40,7 @@ export const Container = styled.div`
       & + li {
         margin-top: 11px;
       }
-      >svg{
+      > svg {
         margin-left: 7px;
         align-self: flex-end;
       }
@@ -54,11 +52,11 @@ export const Container = styled.div`
     font-size: 14px;
     font-weight: 700;
     line-height: 17px;
-    color: #9146FF;
+    color: #9146ff;
     margin-top: auto;
     align-self: flex-end;
-    svg{
-      margin-left:4px
+    svg {
+      margin-left: 4px;
     }
   }
 `

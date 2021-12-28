@@ -122,7 +122,7 @@ export const CreatePlan = () => {
     setErrors(errorsTemporary)
 
     const hasErrors = Object.values(errorsTemporary).some(
-      (value) => value !== ''
+      (value) => value !== '',
     )
 
     return hasErrors
@@ -142,7 +142,7 @@ export const CreatePlan = () => {
       services.forEach((service) => {
         if (service.id === 'all') {
           servicesSelected = servicesOptions.filter(
-            (service) => service.id !== 'all'
+            (service) => service.id !== 'all',
           )
         }
       })

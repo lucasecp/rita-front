@@ -157,7 +157,7 @@ export const RangeOfUse = ({
                           )}
                         </div>
                       )
-                    )
+                    ),
                   )}
                   {range.cities.length > 2 && (
                     <button

@@ -9,8 +9,11 @@ const ItemSpecialty = (id, name, group, photo) => {
       <Item>
         <div>
           <div>
-          <div> <img src={profileIcon} /> </div>
-          </div> 
+            <div>
+              {' '}
+              <img src={profileIcon} />{' '}
+            </div>
+          </div>
           <span> {name}</span>
         </div>
         <span>{group}</span>

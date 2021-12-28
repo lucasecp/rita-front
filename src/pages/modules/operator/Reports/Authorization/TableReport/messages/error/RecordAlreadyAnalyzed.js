@@ -10,9 +10,7 @@ import OutlineButton from '@/components/Button/Outline'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { useHistory } from 'react-router'
-import {
-  OPERATOR_SEE_ONE_PATIENT,
-} from '@/routes/constants/namedRoutes/routes'
+import { OPERATOR_SEE_ONE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 function RecordAlreadyAnalized(data) {
   const { closeModal } = useModal()
@@ -24,7 +22,7 @@ function RecordAlreadyAnalized(data) {
       Loading.turnOn()
 
       const response = await apiPatient.patch(
-        `/paciente/${data.id}/assumir-validacao?forcar=true`
+        `/paciente/${data.id}/assumir-validacao?forcar=true`,
       )
       if (response.status === 200) {
         closeModal()

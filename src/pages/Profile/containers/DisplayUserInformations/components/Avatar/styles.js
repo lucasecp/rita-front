@@ -54,8 +54,6 @@ export const Container = styled.div`
       :last-child {
         right: -8px;
         bottom: 4px;
-
-       
       }
     }
   }

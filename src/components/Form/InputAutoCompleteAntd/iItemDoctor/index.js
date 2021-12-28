@@ -8,8 +8,11 @@ const ItemDoctor = (id, name, group, formatedName) => {
     label: (
       <Item>
         <div>
-         <div> <img src={profileIcon} /> </div>
-         <span> {name}</span>
+          <div>
+            {' '}
+            <img src={profileIcon} />{' '}
+          </div>
+          <span> {name}</span>
         </div>
         <span>{group}</span>
       </Item>

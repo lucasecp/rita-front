@@ -49,7 +49,7 @@ export default function AuthProvider({ children }) {
         Loading.turnOn()
 
         const { data } = await apiPatient.get(
-          `paciente/status?cpf=${payload.cpf}`
+          `paciente/status?cpf=${payload.cpf}`,
         )
 
         if (data.status === 'P' || data.status === 'D') {
