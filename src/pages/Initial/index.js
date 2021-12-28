@@ -18,10 +18,16 @@ const MasterPage = () => {
     setCheckPatientPerfil(getUserStorage().perfis.includes('Paciente'))
   }, [])
 
-  return (
+  return checkPatientPerfil ? (
+    <DefaultLayout>
+      <TemplateBox>
+        <Cards />
+      </TemplateBox>
+    </DefaultLayout>
+  ) : (
     <DefaultLayout title={'Página Inicial'}>
       <TemplateBox>
-        { checkPatientPerfil ? <Cards /> : <NotPatientInitialPage /> }
+        <NotPatientInitialPage />
       </TemplateBox>
     </DefaultLayout>
   )
