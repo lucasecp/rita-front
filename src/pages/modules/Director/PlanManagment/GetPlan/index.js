@@ -40,6 +40,8 @@ const PlanManagment = () => {
     getPlans()
   }, [queryApi, filters, order])
 
+  console.log(plans)
+
   return (
     <Container>
       <DefaultLayout title="Gestão de Planos" headerChildren={<ButtonHeader />}>
