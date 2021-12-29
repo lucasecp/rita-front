@@ -5,14 +5,12 @@ import Cards from './Cards'
 import { getUserStorage } from '@/storage/user'
 import NotPatientInitialPage from './NotPatientInitialPage'
 
-const MasterPage = () => {
+export const Initial = () => {
   const [checkPatientPerfil, setCheckPatientPerfil] = useState(false)
 
   useEffect(() => {
     document.title = 'Rita Saúde | Início'
   }, [])
-
-  console.log(getUserStorage())
 
   useEffect(() => {
     setCheckPatientPerfil(getUserStorage().perfis.includes('Paciente'))
@@ -32,5 +30,3 @@ const MasterPage = () => {
     </DefaultLayout>
   )
 }
-
-export default MasterPage

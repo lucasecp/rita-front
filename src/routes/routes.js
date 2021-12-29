@@ -3,7 +3,7 @@ import { Switch } from 'react-router-dom'
 
 import Route from './custom.routes'
 
-import InitialPage from '@/pages/Initial'
+import { Initial } from '@/pages/Initial'
 import Login from '@/pages/Login'
 import { Profile } from '@/pages/Profile'
 import NotFound from '@/pages/404'
@@ -42,7 +42,7 @@ function Routes() {
 
       <Route path={PROFILE} isPrivate component={Profile} />
 
-      <Route path={INITIAL_PAGE} isPrivate component={InitialPage} />
+      <Route path={INITIAL_PAGE} isPrivate component={Initial} />
 
       <Route path={LOGIN} exact component={Login} />
 
