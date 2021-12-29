@@ -4,9 +4,12 @@ import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.svg'
 import { useHistory } from 'react-router'
 import { PATIENT_DOCTOR_INFORMATION } from '@/routes/constants/namedRoutes/routes'
-const DoctorInfo = ({ dataDoctor }) => {
+import { ClinicInfoProps, DoctorSpecialtyI } from '../../types/index';
+
+const DoctorInfo:React.FC<ClinicInfoProps> = ({ dataDoctor, isVerify }) => {
   const history = useHistory()
-  const specialty = dataDoctor.doctorSpecialty.reduce((ac, spe, index) => {
+
+  const specialty: DoctorSpecialtyI  = dataDoctor.doctorSpecialty.reduce((ac, spe, index) => {
     if (index === 0) {
       ac = spe
     }
@@ -31,7 +34,7 @@ const DoctorInfo = ({ dataDoctor }) => {
           <div>
             <h6>Conselho Regional:</h6>
             <p>
-              CRM - {dataDoctor.crm} - {dataDoctor.crmuf}
+              CRM - {dataDoctor.crm} - {dataDoctor.crmUf}
             </p>
           </div>
           {dataDoctor.verified && <VerifiedIcon />}

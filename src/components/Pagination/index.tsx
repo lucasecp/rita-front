@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { Select } from '../Form/Select'
 import { Container, Prev, Next } from './style'
+import { PaginationProps } from './types';
 
-const Pagination = ({ total, restQuery, range, setQuery }) => {
+const Pagination: React.FC<PaginationProps>= ({ total, restQuery, range, setQuery }) => {
   const history = useHistory()
   const query = useQuery()
   const [limit, setLimit] = useState(Number(query.get('limit')) || 10)
@@ -20,7 +21,7 @@ const Pagination = ({ total, restQuery, range, setQuery }) => {
 
   useEffect(() => {
     history.push(queryString)
-    return setQuery && setQuery(queryApiString)
+     setQuery(queryApiString)
   }, [limit, currentPage, restQuery])
 
   useEffect(() => {

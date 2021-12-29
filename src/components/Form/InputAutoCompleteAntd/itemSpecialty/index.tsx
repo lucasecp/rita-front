@@ -2,7 +2,7 @@ import React from 'react'
 import { Item } from '../styles'
 import profileIcon from '@/assets/img/profile.png'
 
-const ItemSpecialty = (id, name, group, photo) => {
+const ItemSpecialty = (id: number, name: string, group: string) => {
   return {
     value: name,
     label: (
@@ -10,8 +10,8 @@ const ItemSpecialty = (id, name, group, photo) => {
         <div>
           <div>
             <div>
-              {' '}
-              <img src={profileIcon} />{' '}
+
+              <img src={profileIcon} />
             </div>
           </div>
           <span> {name}</span>

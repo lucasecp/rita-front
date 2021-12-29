@@ -14,15 +14,19 @@ import { useLoading } from '@/hooks/useLoading'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { fromApi } from '../Adapters'
 import { toast } from '@/styles/components/toastify'
+import { DataI } from '../types/index'
 
 const Filters = () => {
   const [researchDoctor, setResearchDoctor] = useState('')
   const [uf, setUf] = useState('')
+  const [ufName,setUfName] = useState('')
   const [city, setCity] = useState('')
-  const [results, setResults] = useState(false)
-  const [filter, setFilter] = useState([])
+  const [results, setResults] = useState<DataI>({ total: 0, doctor: [] })
+  const [filter, setFilter] = useState<any[]>([])
+
   const [queryApiPagination, setQueryApiPagination] =
     useState('?limit=10&skip=0')
+
   const history = useHistory()
   const { Loading } = useLoading()
 
@@ -35,7 +39,7 @@ const Filters = () => {
 
   const arrayQuery = [
     { name: 'palavraChave', value: researchDoctor },
-    { name: 'municipio', value: city },
+    { name: 'municipio', value: city === 'All' ? '' : city },
     { name: 'uf', value: uf === 'All' ? '' : uf },
   ]
 
@@ -43,7 +47,7 @@ const Filters = () => {
     if (!someFieldWasTyped) {
       return toast.warning('Informe pelo menos um filtro.')
     }
-    setFilter(verifyTypedFields(arrayQuery))
+    setFilter(arrayQuery)
   }
 
   const filterResults = async () => {
@@ -51,7 +55,7 @@ const Filters = () => {
       Loading.turnOn()
       const { data } = await apiPatient.get(
         `/paciente/agenda-consulta${queryApiPagination}${queryFilterString(
-          filter,
+          verifyTypedFields(filter),
         )}`,
       )
       if (data.total === 0) {
@@ -65,7 +69,7 @@ const Filters = () => {
     }
   }
 
-  const verifyTypedFields = (fields) => {
+  const verifyTypedFields = (fields: any[]) => {
     return fields.filter((field) => field.value)
   }
 
@@ -84,10 +88,7 @@ const Filters = () => {
           keyLabelFromApi="nome"
           keyValueFromApi="idPaciente"
         /> */}
-        <InputAutoCompleteAntd
-          setValue={setResearchDoctor}
-          value={researchDoctor}
-        />
+        <InputAutoCompleteAntd setValue={setResearchDoctor} />
         {/* <InputText
           label="Especialista ou Especialidade:"
           setValue={setResearchDoctor}
@@ -104,7 +105,7 @@ const Filters = () => {
         </BtnGroup>
       </Container>
 
-      {results.total && (
+      {!!results.total && (
         <Results data={results} setQueryPagination={setQueryApiPagination} />
       )}
     </>

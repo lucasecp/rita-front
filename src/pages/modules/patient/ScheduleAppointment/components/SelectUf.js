@@ -9,10 +9,15 @@ const SelectUf = ({ setUf, uf }) => {
     setUf('')
     const getUf = async () => {
       try {
-        const { data } = await apiPatient.get(`/uf/todas`)
-        const dataMapped = mapUf(data?.dados)
+        const { data } = await apiPatient.get(`/uf`)
+        const dataMapped = mapUf(data)
 
-        setUfOptions(dataMapped)
+        const allOptions =
+          dataMapped.length && dataMapped.length >= 2
+            ? [{ label: 'Todas', value: 'All' }]
+            : []
+
+        setUfOptions([...allOptions, ...dataMapped])
       } catch ({ response }) {}
     }
 
