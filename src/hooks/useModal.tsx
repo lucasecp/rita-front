@@ -1,14 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 
-interface IShowMessage {
-  MessageComponent: typeof React.Component
-  props: {
-    [x: string]: string
-  }
-  isCloseable: boolean
-}
-
 interface IShowSimple {
   error: (message: string) => void
   warning: (message: string) => void
@@ -22,7 +14,7 @@ interface ModalContextData {
   showMessage: (
     MessageComponent: React.FC<any>,
     props: { [x: string]: any },
-    isCloseable: boolean,
+    isCloseable?: boolean,
   ) => void
   closeModal: () => void
   showSimple: IShowSimple

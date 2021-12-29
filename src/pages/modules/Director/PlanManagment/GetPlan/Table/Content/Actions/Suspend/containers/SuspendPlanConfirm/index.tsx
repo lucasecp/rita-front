@@ -1,11 +1,14 @@
 import ButtonPrimary from '@/components/Button/Primary'
+import OutlineButton from '@/components/Button/Outline'
+
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { useModal } from '@/hooks/useModal'
 import { useToggle } from '@/hooks/useToggle'
-import { ReasonUpdate } from '@/pages/modules/Director/PlanManagment/EditPlan/messages/ReasonUpdate'
+import { ReasonUpdate } from '../../messages/ReasonUpdate'
 import { useHistory, useLocation } from 'react-router'
 
 import { Container } from './styles'
+import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
 interface SellableItem {
   id: number
@@ -15,21 +18,25 @@ interface SellableItem {
 
 interface StateLocation {
   sellableItems: SellableItem[]
+  plan: {
+    id: number
+    name: string
+  }
 }
 
 export const SuspendPlanConfirm: React.FC = () => {
   const history = useHistory()
-  const { sellableItems } = useLocation<StateLocation>().state
+  const { sellableItems, plan } = useLocation<StateLocation>().state
   const { showMessage } = useModal()
 
   const [isSellableItemsExpanded, toggleIsSellableItemsExpanded] = useToggle()
 
   const onDoNotProceed = () => {
-    history.back()
+    history.push(DIRECTOR_SEE_PLAN_MANAGMENT)
   }
 
   const onProceed = () => {
-    // showMessage(ReasonUpdate, { plan, hasSellableItems: true })
+    showMessage(ReasonUpdate, { plan })
   }
 
   return (
@@ -37,7 +44,7 @@ export const SuspendPlanConfirm: React.FC = () => {
       <Container>
         <div>
           <h1>
-            Ao suspender o plano Especial +60, os itens abaixo deixam de ser
+            Ao suspender o plano {plan.name}, os itens abaixo deixam de ser
             disponibilizados para venda, deseja prosseguir?
           </h1>
 
@@ -65,7 +72,7 @@ export const SuspendPlanConfirm: React.FC = () => {
         </div>
         <footer>
           <ButtonPrimary onClick={onDoNotProceed}>Não</ButtonPrimary>
-          {/* <OutilineButton onClick={onProceed}>Sim</OutilineButton> */}
+          <OutlineButton onClick={onProceed}>Sim</OutlineButton>
         </footer>
       </Container>
     </DefaultLayout>

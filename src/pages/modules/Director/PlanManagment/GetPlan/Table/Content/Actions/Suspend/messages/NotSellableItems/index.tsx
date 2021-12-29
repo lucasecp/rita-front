@@ -6,35 +6,34 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { useModal } from '@/hooks/useModal'
+import { ReasonUpdate } from '../ReasonUpdate'
 
 import { Container } from './styles'
 
-interface VerifyIfHasSellableItemsProps {
-  plan: any
-  sellableItems: boolean
+interface NotSellableItemsProps {
+  plan: {
+    id: number
+    name: string
+  }
 }
 
-export const VerifyIfHasSellableItems: React.FC<
-  VerifyIfHasSellableItemsProps
-> = ({ plan, sellableItems }) => {
-  const { showMessage } = useModal()
-  const { closeModal } = useModal()
-
-  console.log(sellableItems)
+export const NotSellableItems: React.FC<NotSellableItemsProps> = ({ plan }) => {
+  const { showMessage, closeModal } = useModal()
 
   const onDoNotProceed = () => {
     closeModal()
   }
 
   const onProceed = async () => {
-    // showMessage(ReasonUpdate, { plan, hasSellableItems: false }, true)
+    showMessage(ReasonUpdate, { plan })
   }
 
   return (
     <Container>
       <img src={warningIcon} />
       <h6>
-        Não há itens vendáveis associados a esse plano, deseja prosseguir?
+        Não há itens vendáveis associados ao plano <span>{plan.name}</span>,
+        deseja suspender?
       </h6>
       <footer>
         <OutlineButton onClick={onDoNotProceed}>Não</OutlineButton>

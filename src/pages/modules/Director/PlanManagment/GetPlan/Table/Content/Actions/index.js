@@ -36,7 +36,10 @@ const Actions = ({ status, planInformations }) => {
 
       <Inactivate status={status} />
 
-      <Suspend status={status} idPlan={planInformations.idPlano} />
+      <Suspend
+        status={status}
+        plan={{ id: planInformations.idPlano, name: planInformations.nome }}
+      />
     </Container>
   )
 }
