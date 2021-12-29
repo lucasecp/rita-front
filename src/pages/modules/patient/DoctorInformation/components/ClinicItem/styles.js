@@ -17,6 +17,7 @@ export const Container = styled.div`
       font-weight: 500;
       line-height: 30px;
       letter-spacing: 0em;
+      margin-bottom: 8px;
     }
     > div > ul {
       font-size: 16px;
@@ -47,7 +48,10 @@ export const Container = styled.div`
         }
       }
       > li > svg {
-        margin: 0 16px 0 8px;
+        margin: 0 0px 0 8px;
+      }
+      > li >  a {
+        margin-left: 16px
       }
     }
     > svg {
@@ -65,7 +69,7 @@ export const Container = styled.div`
         margin: 0 26px 8px 0;
       }
       > div > ul {
-        margin-bottom: 8px;
+        margin-bottom: 16px;
       }
       > button {
         width: 100%;
