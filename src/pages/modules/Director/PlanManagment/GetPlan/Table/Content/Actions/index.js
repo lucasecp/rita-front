@@ -8,6 +8,7 @@ import { useHistory } from 'react-router'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 import { Inactivate } from './Inactivate'
 import { Suspend } from './Suspend'
+import { Activate } from './Activate'
 
 const Actions = ({ status, planInformations }) => {
   const history = useHistory()
@@ -24,15 +25,10 @@ const Actions = ({ status, planInformations }) => {
         />
       </CustomTooltip>
 
-      <CustomTooltip label="Ativar">
-        <ActiveIcon
-          hidden={
-            status !== 'Inativo' &&
-            status !== 'Suspenso' &&
-            status !== 'Em digitação'
-          }
-        />
-      </CustomTooltip>
+      <Activate
+        status={status}
+        plan={planInformations}
+      />
 
       <Inactivate status={status} />
 

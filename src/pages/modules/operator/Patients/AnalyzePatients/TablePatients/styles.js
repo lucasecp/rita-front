@@ -123,8 +123,8 @@ export const Td = styled.td`
     status === 'Inativo' &&
     css`
       > span {
-        background: ${colors.orange.middleDark};
-        color: ${colors.purple.background.light};
+        background: ${colors.blue.light};
+        color: ${colors.gray.dark};
       }
     `}
 
