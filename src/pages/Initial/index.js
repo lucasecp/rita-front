@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { DefaultLayout } from '../../components/Layout/DefaultLayout'
-import { TemplateBox } from './style'
-import Cards from './Cards'
-import { getUserStorage } from '@/storage/user'
-import NotPatientInitialPage from './NotPatientInitialPage'
+import React, { useEffect } from 'react'
+import { Services } from './containers/Services'
+import { LogoPage } from './containers/LogoPage'
 
 export const Initial = () => {
-  const [checkPatientPerfil, setCheckPatientPerfil] = useState(false)
+  const getUserFromStorage = () => JSON.parse(localStorage.getItem('user'))
+
+  const hasPatientProfile = getUserFromStorage().perfis.includes('Paciente')
 
   useEffect(() => {
     document.title = 'Rita Saúde | Início'
   }, [])
 
-  useEffect(() => {
-    setCheckPatientPerfil(getUserStorage().perfis.includes('Paciente'))
-  }, [])
-
-  return checkPatientPerfil ? (
-    <DefaultLayout>
-      <TemplateBox>
-        <Cards />
-      </TemplateBox>
-    </DefaultLayout>
-  ) : (
-    <DefaultLayout title={'Página Inicial'}>
-      <TemplateBox>
-        <NotPatientInitialPage />
-      </TemplateBox>
-    </DefaultLayout>
-  )
+  return hasPatientProfile ? <Services /> : <LogoPage />
 }
