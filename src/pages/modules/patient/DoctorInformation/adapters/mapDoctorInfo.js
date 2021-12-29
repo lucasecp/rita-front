@@ -12,9 +12,9 @@ export const fromApi = (dataClinic) => {
     linkGoogleMap: specialty.clinica.comoChegar,
 
     scheduleAppointment: scheduleFromApi(
-      dataClinic.agenda.reduce((ac, schedule) => {
+      dataClinic.agenda?.reduce((ac, schedule) => {
         if (schedule.idMedico === specialty.idMedico) {
-          ac = schedule.agenda
+          ac = schedule?.agenda
           return ac
         }
         return ac
@@ -33,10 +33,10 @@ export const fromApi = (dataClinic) => {
       uf: specialty.clinica.uf,
       number: specialty.clinica.numero,
     },
-    specialtys: specialty.clinica.especialidade.map((spe) => ({
+    specialtys: specialty.clinica?.especialidade?.map((spe) => ({
       description: firstLetterCapitalize(spe.descricao),
 
-      defaultPrice: spe.precos.reduce((ac, price) => {
+      defaultPrice: spe?.precos?.reduce((ac, price) => {
         if (price.idEspecialidade === spe.idEspecialidade) {
           ac = formatPrice(price.precoNormal)
           return ac
@@ -44,7 +44,7 @@ export const fromApi = (dataClinic) => {
         return ac
       }, null),
 
-      ritaPrice: spe.precos.reduce((ac, price) => {
+      ritaPrice: spe?.precos?.reduce((ac, price) => {
         if (price.idEspecialidade === spe.idEspecialidade) {
           ac = formatPrice(price.precoRita)
           return ac
