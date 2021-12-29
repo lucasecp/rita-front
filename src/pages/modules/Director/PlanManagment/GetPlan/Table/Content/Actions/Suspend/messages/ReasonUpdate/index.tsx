@@ -13,7 +13,7 @@ import { useLoading } from '@/hooks/useLoading'
 import { Container } from './styles'
 import { toast } from '@/styles/components/toastify'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
-
+import apiPatient from '@/services/apiPatient'
 interface ReasonUpdateProps {
   plan: {
     id: number
@@ -24,7 +24,7 @@ interface ReasonUpdateProps {
 export const ReasonUpdate: React.FC<ReasonUpdateProps> = ({ plan }) => {
   const [reason, setReason] = useState('')
   const [reasonError, setReasonError] = useState('')
-  const { closeModal, showSimple } = useModal()
+  const { closeModal } = useModal()
   const { Loading } = useLoading()
   const history = useHistory()
 
@@ -39,9 +39,24 @@ export const ReasonUpdate: React.FC<ReasonUpdateProps> = ({ plan }) => {
       return setReasonError('Informe 20 caracteres ou mais')
     }
 
-    // call to api
+    try {
+      Loading.turnOn()
 
-    toast.success(`${plan.name} Suspenso.`)
+      const {
+        data: { mensagem: message },
+      } = await apiPatient.patch(`/plano/${plan.id}/suspender`, null, {
+        params: { confirmado: true, motivo: reason },
+      })
+
+      if (message === 'Sucesso') {
+        toast.success(`${plan.name} Suspenso.`)
+      }
+    } catch (error) {
+      toast.error(`Erro ao suspender o plano ${plan.name}`)
+    } finally {
+      Loading.turnOff()
+    }
+
     closeModal()
     history.push(DIRECTOR_SEE_PLAN_MANAGMENT)
   }

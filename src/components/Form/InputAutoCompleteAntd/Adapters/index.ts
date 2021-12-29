@@ -21,7 +21,7 @@ export const fromApi = (data: any[]) => {
 
   const clinics = {
     options: clinicMapped.map((clinic) =>
-      ItemClinic(clinic.idPaciente, clinic.nome, 'Clínica'),
+      ItemClinic(clinic.idClinica, clinic.nome, 'Clínica'),
     ),
   }
 

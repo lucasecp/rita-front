@@ -1,23 +1,31 @@
 import styled from 'styled-components'
 
+export const DoctorImage = styled.div`
+  width: 147px;
+  height: 147px;
+  margin-right: 24px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  > img {
+    max-width: 147px;
+    max-height: 147px;
+    border-radius: 50%;
+    object-fit: fill;
+  }
+`
+export const DefaultImage = styled.div`
+  width: 147px;
+  height: 147px;
+  background: #eeeeee;
+  border-radius: 50%;
+  margin-right: 24px;
+`
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 
-  > div:first-child {
-    width: 147px;
-    height: 147px;
-    background: #eeeeee;
-    border-radius: 50%;
-    margin-right: 24px;
-    > img {
-      max-width: 147px;
-      max-height: 147px;
-      border-radius: 50%;
-      object-fit: fill;
-    }
-  }
   h2 {
     font-size: 24px;
     font-weight: 700;
@@ -55,5 +63,8 @@ export const Container = styled.div`
   }
   @media (max-width: 767px) {
     justify-content: center;
+    >div:first-child {
+      margin-right: 0
+    }
   }
 `

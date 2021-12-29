@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import colors from '@/styles/colors'
 
 export const Container = styled.div`
   margin: 0 -32px;
@@ -116,6 +117,14 @@ export const Td = styled.td`
       span {
         background: #f89bff;
         color: #ffffff;
+      }
+    `}
+    ${({ status }) =>
+    status === 'Inativo' &&
+    css`
+      > span {
+        background: ${colors.blue.light};
+        color: ${colors.gray.dark};
       }
     `}
 

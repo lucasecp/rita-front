@@ -1,17 +1,21 @@
 import React from 'react'
-import { Container } from './styles'
+import { Container, DoctorImage, DefaultImage } from './styles'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import CustomTooltip from '@/components/Tooltip'
 
 const Header = ({ doctorInfo }) => {
   return (
     <Container>
-      <div>
-        <img
-          src={`data:image/png;base64,${doctorInfo?.photo}`}
-          alt="Imagem do Médico"
-        />
-      </div>
+      {doctorInfo?.photo ? (
+        <DoctorImage>
+          <img
+            src={`data:image/png;base64,${doctorInfo?.photo}`}
+            alt="Imagem do Médico"
+          />
+        </DoctorImage>
+      ) : (
+        <DefaultImage />
+      )}
       <div>
         <h2>
           {doctorInfo?.title}&nbsp;{doctorInfo?.name}

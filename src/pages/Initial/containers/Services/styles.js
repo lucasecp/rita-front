@@ -1,73 +1,13 @@
 import styled, { css } from 'styled-components'
 import { Col } from 'react-bootstrap'
 
-export const Box = styled.div`
-  padding: 40px 32px;
-  border-radius: 8px;
-  background-color: #ffffff;
-  max-height: 232px;
-  margin: 15px 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-areas: 'img content' 'img content' 'img btn';
-  justify-content: start;
-  align-items: start;
-
-  > div:first-child {
-    max-width: 194px;
-    max-height: 168px;
-    height: 100%;
-    background: #eeeeee;
-    border-radius: 8px;
-    margin-right: 32px;
-    grid-area: img;
-  }
-  > div:last-child {
-    grid-area: content;
-  }
-  h2 {
-    margin-bottom: 20px;
-  }
-  h2,
-  p {
-    height: 20px;
-    background: #eeeeee;
-    border-radius: 8px;
-    color: transparent;
-  }
-  button {
-    grid-area: btn;
-  }
-
-  @media (max-width: 767px) {
-    grid-template-areas: 'img content' 'img content' 'btn btn';
-    grid-template-rows: 50px 50px auto;
-
-    > div {
-      margin-right: 20px;
-    }
-
-    button {
-      margin-top: 20px;
-    }
-  }
-`
-export const TemplateBox = styled.div`
+export const Container = styled.div`
   padding: 32px;
-  background: #fff;
-  box-shadow: 0px 2px 8px 0px #dfd2ff26;
+  background: rgb(255, 255, 255);
+  box-shadow: rgb(223 210 255 / 15%) 0px 2px 8px 0px;
   border-radius: 8px;
-  ${(props) =>
-    props.transparent &&
-    css`
-      background: transparent;
-      padding: 0 !important;
-    `};
-  @media (max-width: 767px) {
-    padding: 24px 25px;
-  }
 `
+
 export const CustomCol = styled(Col)`
   order: ${({ order }) => order};
 `
