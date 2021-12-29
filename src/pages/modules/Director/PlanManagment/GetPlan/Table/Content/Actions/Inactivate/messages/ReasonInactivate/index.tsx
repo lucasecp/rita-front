@@ -12,12 +12,16 @@ import { useLoading } from '@/hooks/useLoading'
 import { toast } from '@/styles/components/toastify'
 
 import { Container } from './styles'
+import apiPatient from '@/services/apiPatient'
+import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
 interface ReasonInactivateProps {
-  plan: any
+  planId: string
 }
 
-export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({ plan }) => {
+export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({
+  planId,
+}) => {
   const [reason, setReason] = useState('')
   const [reasonError, setReasonError] = useState('')
   const { closeModal, showSimple } = useModal()
@@ -38,12 +42,19 @@ export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({ plan }) => {
     try {
       Loading.turnOn()
 
-      // Chamada a API
+      const response = await apiPatient.delete(`/plano/${planId}`, {
+        params: {
+          motivo: reason,
+        },
+      })
+
+      console.log(response)
       toast.success('Dados atualizados com sucesso.')
       closeModal()
+      history.push(DIRECTOR_PLAN_MANAGMENT)
     } catch (error) {
       console.log(error)
-      showSimple.error('Erro ao editar um plano!')
+      showSimple.error('Erro ao inativar um plano!')
     } finally {
       Loading.turnOff()
     }

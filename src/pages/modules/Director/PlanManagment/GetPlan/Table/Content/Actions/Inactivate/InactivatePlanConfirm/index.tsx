@@ -1,12 +1,16 @@
-import React from 'react'
-import { useLocation, useHistory } from 'react-router'
+import { useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Container } from './styles'
 import OutilineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import { useToggle } from '@/hooks/useToggle'
+import { useLoading } from '@/hooks/useLoading'
+import apiPatient from '@/services/apiPatient'
+import { toast } from '@/styles/components/toastify'
+import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 import { useModal } from '@/hooks/useModal'
+import { ReasonInactivate } from '../messages/ReasonInactivate'
 
 interface SellableItem {
   id: number
@@ -16,22 +20,25 @@ interface SellableItem {
 
 interface LocationData {
   sellableItems: SellableItem[]
+  plan: {
+    id: string
+    name: string
+  }
 }
 
 export const InactivatePlanConfirm = () => {
   const history = useHistory()
-  const { sellableItems } = useLocation<LocationData>().state
+  const { showMessage } = useModal()
+  const { sellableItems, plan } = useLocation<LocationData>().state
 
-  const [isSellableItemsExpanded, toggleIsSellableItemsExpanded] = useToggle()
-
-  console.log(sellableItems)
+  const [expandPlan, setExpandPlan] = useState(false)
 
   const onDoNotProceed = () => {
-    history.back()
+    history.goBack()
   }
 
-  const onProceed = () => {
-    // showMessage(ReasonUpdate, { plan, hasSellableItems: true })
+  const onProceed = async () => {
+    showMessage(ReasonInactivate, { planId: plan.id })
   }
 
   return (
@@ -39,12 +46,12 @@ export const InactivatePlanConfirm = () => {
       <Container>
         <div>
           <h1>
-            Suas alterações afetarão os itens abaixo do Plano Vida, deseja
-            prosseguir?
+            Suas alterações afetarão os itens abaixo do Plano {plan.name},
+            deseja prosseguir?
           </h1>
 
           {sellableItems.map((sellableItem, index) =>
-            isSellableItemsExpanded ? (
+            expandPlan ? (
               <p key={sellableItem.id}>
                 {sellableItem.name} - {sellableItem.price}
               </p>
@@ -56,14 +63,11 @@ export const InactivatePlanConfirm = () => {
               )
             ),
           )}
-          {/* {sellableItems.length > 3 && (
-            <span onClick={toggleIsSellableItemsExpanded}>
-              Ver{' '}
-              {isSellableItemsExpanded
-                ? '-'
-                : `+  (${sellableItems.length - 4})`}
+          {sellableItems.length > 3 && (
+            <span onClick={() => setExpandPlan(!expandPlan)}>
+              Ver {expandPlan ? '-' : `+  (${sellableItems.length - 4})`}
             </span>
-          )} */}
+          )}
         </div>
         <footer>
           <ButtonPrimary onClick={onDoNotProceed}>Não</ButtonPrimary>

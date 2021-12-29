@@ -12,6 +12,8 @@ import { Suspend } from './Suspend'
 const Actions = ({ status, planInformations }) => {
   const history = useHistory()
 
+  console.log(planInformations)
+
   return (
     <Container>
       <CustomTooltip label="Visualizar">
@@ -34,7 +36,10 @@ const Actions = ({ status, planInformations }) => {
         />
       </CustomTooltip>
 
-      <Inactivate status={status} />
+      <Inactivate
+        status={status}
+        plan={{ id: planInformations.idPlano, name: planInformations.nome }}
+      />
 
       <Suspend
         status={status}
