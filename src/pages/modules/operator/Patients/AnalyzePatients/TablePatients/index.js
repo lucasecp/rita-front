@@ -56,6 +56,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
     if (status === 'P') return 'Pendente'
     if (status === 'A') return 'Aprovado'
     if (status === 'EA') return 'Em análise'
+    if (status === 'I') return 'Inativo'
   }
 
   const handleClick = async (cpf) => {
