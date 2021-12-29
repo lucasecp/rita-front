@@ -53,6 +53,7 @@ const TablePatients = ({ orders, setOrders, filters }) => {
 
   const showStatus = (status) => {
     if (status === 'N') return 'Negado'
+    if (status === 'I') return 'Inativo'
     if (status === 'P') return 'Pendente'
     if (status === 'A') return 'Aprovado'
     if (status === 'EA') return 'Em análise'
