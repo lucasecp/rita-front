@@ -84,13 +84,11 @@ export const Container = styled.div`
 
     :focus {
       border: 1px solid #419eff;
-      border-color: ${({ hasError }) =>
-        hasError ? colors.orange.light : '#419eff'};
+      border-color: #419eff;
 
       ::after {
         border: 1px solid #419eff;
-        border-color: ${({ hasError }) =>
-          hasError ? colors.orange.light : '#419eff'};
+        border-color: #419eff;
       }
     }
     :hover:not(:focus) {
@@ -105,6 +103,8 @@ export const Item = styled.div`
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
+  padding: 14px 16px;
+  color: #6a6a6a;
   > span {
     text-align: end;
     margin-left: 10px;
@@ -121,6 +121,37 @@ export const Item = styled.div`
       margin-right: 10px;
       min-width: 30px;
       max-width: 30px;
+    }
+  }
+`
+export const ItemWithLink = styled.div`
+  > a {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 14px 16px;
+    color: #6a6a6a;
+
+    > span {
+      text-align: end;
+      margin-left: 10px;
+    }
+    > div {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      > span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      > div {
+        margin-right: 10px;
+        min-width: 30px;
+        max-width: 30px;
+      }
     }
   }
 `

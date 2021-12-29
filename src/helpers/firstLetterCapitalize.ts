@@ -1,4 +1,4 @@
-export const firstLetterCapitalize = (stringOriginal) => {
+export const firstLetterCapitalize = (stringOriginal: string) => {
   if (typeof stringOriginal !== 'string') {
     return ''
   }

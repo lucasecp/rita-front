@@ -1,4 +1,4 @@
-export default (length) => {
+export default (length: number) => {
   const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
   let result = ''
   for (let i = 0; i < length; i++) {

@@ -3,14 +3,15 @@ import 'antd/dist/antd.css'
 import { Input, AutoComplete } from 'antd'
 import useSearch from './useSearch'
 import { Container } from './styles'
-import { CompleteProps } from './types/index';
+import { CompleteProps } from './types/index'
 
-const Complete:React.FC<CompleteProps> = ({ setValue }) => {
+const Complete: React.FC<CompleteProps> = ({ setValue }) => {
   const [inputValue, setInputValue] = useState('')
-  const [options, setOptions] = useState([])
+  const [options, setOptions] = useState<any[]>([])
   const input = useRef(null)
 
-  // useSearch(inputValue, setOptions)
+  useSearch(inputValue, setOptions)
+  // console.log(options);
 
   return (
     <Container>
@@ -21,10 +22,10 @@ const Complete:React.FC<CompleteProps> = ({ setValue }) => {
         onSearch={(value) => setInputValue(value)}
         filterOption
         notFoundContent="Nenhum resultado."
-        onSelect={(value, option) => setValue(option.value)}
+        onChange={(value) => setValue(value)}
         allowClear
       >
-        <Input.Search
+        <Input.Search 
           size="large"
           placeholder="O que você procura?"
           ref={input}

@@ -3,6 +3,10 @@ import arrowLeft from '@/assets/icons/arrow-left.svg'
 import arrowRight from '@/assets/icons/arrow-right.svg'
 // import { Link } from 'react-router-dom'
 
+interface PrevNextProps{
+  active: boolean;
+}
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
@@ -35,7 +39,7 @@ export const Container = styled.div`
     }
   }
 `
-export const Next = styled.button`
+export const Next = styled.button<PrevNextProps>`
   background-image: url(${arrowRight});
   background-size: contain;
   background-repeat: no-repeat;
@@ -52,7 +56,7 @@ export const Next = styled.button`
         brightness(101%) contrast(101%);
     `}
 `
-export const Prev = styled.button`
+export const Prev = styled.button<PrevNextProps>`
   background-image: url(${arrowLeft});
   background-size: contain;
   background-repeat: no-repeat;
