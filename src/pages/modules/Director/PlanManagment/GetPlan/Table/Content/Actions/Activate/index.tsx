@@ -4,6 +4,8 @@ import { useHistory } from 'react-router'
 import { ReactComponent as ActiveIcon } from '@/assets/icons/active.svg'
 import apiPatient from '@/services/apiPatient'
 
+import { ActivateIcon } from './styles'
+
 interface ActivateProps {
   status: string
   plan: {
@@ -15,19 +17,22 @@ export const Activate: React.FC<ActivateProps> = ({ status, plan }) => {
   const history = useHistory()
   const { showMessage } = useModal()
 
-  console.log(plan)
-
   const CheckSellableItems = async () => {
-    const data = await apiPatient.get(`/PATCH/plano/${plan.idPlano}`, {
+    const data = await apiPatient.patch(`/plano/${plan.idPlano}/ativar`, {
       params: { confirmado: false },
     })
-
-    console.log(data)
   }
 
   return (
     <CustomTooltip label="Ativar">
-      <ActiveIcon onClick={CheckSellableItems} />
+      <ActivateIcon
+        hidden={
+          status !== 'Inativo' &&
+          status !== 'Suspenso' &&
+          status !== 'Em digitação'
+        }
+        onClick={CheckSellableItems}
+      />
     </CustomTooltip>
   )
 }
