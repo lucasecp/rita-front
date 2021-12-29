@@ -5,7 +5,7 @@ export default css`
     padding: 0 !important;
   }
   .ant-select-item {
-    padding: 14px 16px;
+    padding: 0 !important;
 
     & + .ant-select-item-group {
       height: 1px;

@@ -11,7 +11,7 @@ import { ReactComponent as ManagmentIcon } from '@/assets/icons/managment.svg'
 import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
 
 import {
-  MASTERPAGE,
+  INITIAL_PAGE,
   OPERATOR_ANALYZE_PATIENT,
   OPERATOR_CONSULT_ELIGIBILITY,
   OPERATOR_REPORTS,
@@ -27,7 +27,7 @@ import { permissionList } from './permissionList'
 
 export const menuItens = [
   {
-    path: MASTERPAGE,
+    path: INITIAL_PAGE,
     icon: <HomeIcon />,
     name: 'Início',
     // permission: permissionList.

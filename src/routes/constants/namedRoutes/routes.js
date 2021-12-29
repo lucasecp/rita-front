@@ -1,5 +1,5 @@
 export const LOGIN = '/'
-export const MASTERPAGE = '/inicio'
+export const INITIAL_PAGE = '/inicio'
 
 export const PROFILE = '/perfil'
 export const CHANGE_PASSWORD = '/trocar-senha'

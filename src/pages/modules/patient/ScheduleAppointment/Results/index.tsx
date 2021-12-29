@@ -3,8 +3,9 @@ import DoctorInfo from '../components/DoctorInfo'
 // import ClinicInfo from '../components/ClinicInfo'
 import { Container, Content } from './styles'
 import Pagination from '@/components/Pagination/'
+import { ResultsProps } from '../types'
 
-const Results = ({ data, setQueryPagination }) => {
+const Results: React.FC<ResultsProps>= ({ data, setQueryPagination }) => {
   // const [doctors, setDoctors] = useState([])
 
   // useEffect(() => {

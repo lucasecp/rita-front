@@ -4,7 +4,12 @@ import colors from '@/styles/colors'
 
 import arrowDownIcon from '@/assets/icons/arrow-down-select.svg'
 
-export const Container = styled.div`
+interface ContainerProps {
+  hasError?: string | boolean
+  variation?: string
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
 
@@ -75,7 +80,7 @@ export const Container = styled.div`
 
     ${({ variation }) =>
       variation === 'secondary' &&
-      css`
+      css<ContainerProps>`
         border: none;
         border-bottom: 2px solid
           ${({ hasError }) =>

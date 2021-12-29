@@ -1,9 +1,9 @@
 import React from 'react'
 // import MsgError from '../../MsgError'
-
 import { Container } from './styles'
+import { SelectProps } from './types'
 
-export const Select = ({
+export const Select: React.FC<SelectProps> = ({
   options = [],
   label,
   setValue,
@@ -19,7 +19,7 @@ export const Select = ({
       {label && <label htmlFor={label}>{label}</label>}
       <select
         onChange={({ target }) => {
-          setValue(target.value)
+          setValue && setValue(target.value)
         }}
         value={value}
         id={label}
