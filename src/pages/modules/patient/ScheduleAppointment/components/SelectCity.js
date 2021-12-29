@@ -6,17 +6,23 @@ const SelectCity = ({ setCity, city, uf }) => {
   const [cityOptions, setCityOptions] = useState([])
 
   useEffect(() => {
-    console.log(uf)
-    if (!uf) {
-      return
+    if (!uf || uf === 'All') {
+      return setCityOptions([])
     }
+    setCity('')
 
     const getCity = async () => {
       try {
-        const { data } = await apiPatient.get(`/municipio?idUF=${uf}`)
-        const dataMapped = mapCity(data?.dados)
+        const { data } = await apiPatient.get(`/municipio?uf=${uf}`)
+        const dataMapped = mapCity(data)
 
-        setCityOptions([{ label: 'Todos', value: 'ALL' }, ...dataMapped])
+        const allOptions =
+          dataMapped.length && dataMapped.length >= 2
+            ? [{ label: 'Todas', value: 'ALL' }]
+            : []
+
+        setCityOptions([...allOptions, ...dataMapped])
+        console.log(dataMapped)
       } catch ({ response }) {}
     }
 
@@ -26,7 +32,7 @@ const SelectCity = ({ setCity, city, uf }) => {
   const mapCity = (array = []) => {
     if (!array) return []
     return array.map((obj) => ({
-      value: obj.idMunicipio,
+      value: obj.descricao,
       label: obj.descricao,
     }))
   }
@@ -35,7 +41,7 @@ const SelectCity = ({ setCity, city, uf }) => {
     <Select
       options={cityOptions}
       label="Cidade:"
-      labelDefaultOption="Necessário selecionar a UF"
+      labelDefaultOption={!uf ? 'Necessário selecionar a UF' : 'Selecione:'}
       value={city}
       setValue={setCity}
     />

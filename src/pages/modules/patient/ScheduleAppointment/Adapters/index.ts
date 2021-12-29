@@ -1,8 +1,9 @@
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 import { formatMobilePhone } from '@/helpers/formatMobilePhone'
+import { DoctorI } from '../types'
 
-export const fromApi = (dataDoctor) => {
-  const doctor = dataDoctor?.map((clinic) => ({
+export const fromApi = (dataDoctor: any[]) => {
+  const doctor: DoctorI[] = dataDoctor?.map((clinic) => ({
     photo: clinic.avatar,
     name: firstLetterCapitalize(clinic.nome),
     id: clinic.idMedico,
@@ -18,7 +19,7 @@ export const fromApi = (dataDoctor) => {
     title: firstLetterCapitalize(clinic.titulo),
     verified: clinic.validadoClinica,
 
-    doctorSpecialty: clinic?.medicoEspecialidade?.map((spe) => ({
+    doctorSpecialty: clinic?.medicoEspecialidade?.map((spe: any) => ({
       rqe: spe.RQE,
 
       name: firstLetterCapitalize(spe.especialidade.descricao),

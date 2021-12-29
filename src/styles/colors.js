@@ -50,42 +50,6 @@ const colors = {
     light: '#ACFFC5',
     dark: '#084C4F',
   },
-
-  themePurple: {
-    light: '#DFD2FF',
-    middle: '#C0A6FF',
-    dark: '#9146FF',
-    darkness: '#7338CB',
-    bgLight: '#F8F5FF',
-    bgMiddle: '#EFEAFA',
-  },
-
-  themeBlue: {
-    light: '#EAF1FC',
-    middle: '#326BF6',
-    dark: '#1C23BD',
-    darkness: '#9146FF',
-    bgLight: '#F8F5FF',
-    bgMiddle: '#EFEAFA',
-  },
-
-  themeOrange: {
-    darkness: '#c33124',
-    dark: '#fe793d',
-    middle: '#e9723d',
-    light: '#fd9a7e',
-    bgLight: '#edc596',
-    bgMiddle: '#e2d4c4',
-  },
-
-  themeGray: {
-    bgLight: '#F5F5F5',
-    bgMiddle: '#AFAFAF',
-    light: '#EEEEEE',
-    middle: '#AFAF99',
-    darkness: '#909090',
-    dark: '#6A6A6A',
-  },
 }
 
 export default colors
