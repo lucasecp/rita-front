@@ -1,6 +1,6 @@
 import React from 'react'
 import { Item } from '../styles'
-import profileIcon from '@/assets/img/profile.png'
+import profileIcon from '@/assets/icons/ic-specialty.svg'
 
 const ItemSpecialty = (id: number, name: string, group: string) => {
   return {

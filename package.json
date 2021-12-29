@@ -47,7 +47,7 @@
       "not dead",
       "not op_mini all"
     ],
-    "development": [
+    "development": [ 
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
@@ -61,10 +61,7 @@
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@types/react-router": "^5.1.17",
-<<<<<<< HEAD
     "@types/react-router-dom": "^5.3.2",
-=======
->>>>>>> 05128f182ffb1a1845bf77634ce051df77910577
     "@types/styled-components": "^5.1.19",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",

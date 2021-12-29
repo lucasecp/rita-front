@@ -1,5 +1,5 @@
 import { ItemWithLink } from '../styles'
-import clinicIcon from '@/assets/img/avatar.svg'
+import clinicIcon from '@/assets/icons/ic-clinic.svg'
 import React from 'react'
 import { PATIENT_CLINIC_INFORMATION } from '@/routes/constants/namedRoutes/routes'
 import { Link } from 'react-router-dom'

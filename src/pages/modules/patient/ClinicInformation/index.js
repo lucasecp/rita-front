@@ -1,7 +1,7 @@
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import React, { useEffect, useState } from 'react'
 import { Content, ListItems } from './styles'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useHistory } from 'react-router-dom'
 import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/routes'
 import { ReactComponent as ArrowLeftIcon } from '@/assets/icons/arrow-left2.svg'
 import Header from './components/Header'
@@ -12,8 +12,8 @@ import { useLoading } from '@/hooks/useLoading'
 
 const ClinicInformation = () => {
   const [clinicInfo, setClinicInfo] = useState({})
-  // const location = useLocation()
-  // const history = useHistory()
+  const location = useLocation()
+  const history = useHistory()
 
   const { Loading } = useLoading()
 
@@ -22,14 +22,14 @@ const ClinicInformation = () => {
   }, [])
 
   useEffect(() => {
-    // if (!location.state) {
-    //   return history.push(PATIENT_SCHEDULE_APPOINTMENT)
-    // }
+    if (!location.state) {
+      return history.push(PATIENT_SCHEDULE_APPOINTMENT)
+    }
     const getClinic = async () => {
       try {
         Loading.turnOn()
         const { data } = await apiPatient.get(
-          `clinica/19/especialidades/medicos`,
+          `clinica/${location.state.idClinic}/especialidades/medicos`,
         )
         setClinicInfo(fromApi(data))
         console.log(fromApi(data))
