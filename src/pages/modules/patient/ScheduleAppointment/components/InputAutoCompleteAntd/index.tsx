@@ -8,10 +8,8 @@ import { CompleteProps } from './types/index'
 const Complete: React.FC<CompleteProps> = ({ setValue }) => {
   const [inputValue, setInputValue] = useState('')
   const [options, setOptions] = useState<any[]>([])
-  const input = useRef(null)
 
   useSearch(inputValue, setOptions)
-  // console.log(options);
 
   return (
     <Container>
@@ -25,11 +23,7 @@ const Complete: React.FC<CompleteProps> = ({ setValue }) => {
         onChange={(value) => setValue(value)}
         allowClear
       >
-        <Input.Search 
-          size="large"
-          placeholder="O que você procura?"
-          ref={input}
-        />
+        <Input.Search size="large" placeholder="O que você procura?" />
       </AutoComplete>
     </Container>
   )

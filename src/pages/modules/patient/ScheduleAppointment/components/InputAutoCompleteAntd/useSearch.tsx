@@ -15,11 +15,10 @@ export default (inputValue: string, setOptions: setOptionsType) => {
           cancelToken: new axios.CancelToken((c) => (cancel = c)),
         })
         setOptions(fromApi(data))
-       console.log(fromApi(data));
-       
-        
-      } catch (error) {
-        console.log(error)
+      } catch (error: any) {
+        if (axios.isCancel(error)) {
+          console.log('Request canceled', error.message)
+        }
       }
     }
 

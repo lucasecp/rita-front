@@ -8,6 +8,7 @@ import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg'
 import ServiceSchedule from '../../../components/ServiceSchedule'
 
 const ClinicItemDetails = ({ clinicDetails }) => {
+  console.log(clinicDetails)
   return (
     <Container>
       <ul>
@@ -15,23 +16,8 @@ const ClinicItemDetails = ({ clinicDetails }) => {
           <HeartIcon /> Atendimento:
           <span>{clinicDetails?.clinic?.description}</span>
         </li>
-        {clinicDetails?.clinic?.defaultPrice &&
-          clinicDetails?.clinic?.ritaPrice && (
-            <li>
-              <MoneyIcon /> <h6>Valor:</h6>
-              {clinicDetails?.clinic?.defaultPrice && (
-                <span>Balcão {clinicDetails?.clinic?.defaultPrice}</span>
-              )}
-              {clinicDetails?.clinic?.defaultPrice && (
-                <>
-                  <span>-</span>{' '}
-                  <span>Rita {clinicDetails?.clinic?.ritaPrice}</span>
-                </>
-              )}
-            </li>
-          )}
-        {clinicDetails?.specialtys[0].defaultPrice &&
-          clinicDetails?.specialtys[0].ritaPrice && (
+        {clinicDetails?.specialtys[0]?.defaultPrice &&
+          clinicDetails?.specialtys[0]?.ritaPrice && (
             <li>
               <MoneyIcon /> Valor:
               {clinicDetails?.specialtys[0].defaultPrice && (

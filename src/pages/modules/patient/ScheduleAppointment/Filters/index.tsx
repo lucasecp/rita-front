@@ -1,7 +1,7 @@
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 // import InputAutoComplete from '@/components/Form/InputAutoComplete'
-import InputAutoCompleteAntd from '@/components/Form/InputAutoCompleteAntd'
+import InputAutoCompleteAntd from '../components/InputAutoCompleteAntd'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
 import SelectCity from '../components/SelectCity'
@@ -40,7 +40,7 @@ const Filters = () => {
   const arrayQuery = [
     { name: 'palavraChave', value: researchDoctor },
     { name: 'municipio', value: city === 'All' ? '' : city },
-    { name: 'uf', value: uf === 'All' ? '' : uf },
+    { name: 'uf', value: ufName },
   ]
 
   const onFilter = () => {
@@ -49,6 +49,8 @@ const Filters = () => {
     }
     setFilter(arrayQuery)
   }
+
+
 
   const filterResults = async () => {
     try {
@@ -95,7 +97,7 @@ const Filters = () => {
           value={researchDoctor}
           placeholder="O que você procura?"
         /> */}
-        <SelectUf setUf={setUf} uf={uf} />
+        <SelectUf setUf={setUf} uf={uf} setUfName={setUfName}/>
         <SelectCity setCity={setCity} uf={uf} city={city} />
         <BtnGroup>
           <OutlineButton onClick={() => history.push(INITIAL_PAGE)}>

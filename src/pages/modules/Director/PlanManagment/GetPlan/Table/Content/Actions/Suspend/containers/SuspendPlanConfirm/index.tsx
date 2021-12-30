@@ -39,6 +39,12 @@ export const SuspendPlanConfirm: React.FC = () => {
     showMessage(ReasonUpdate, { plan })
   }
 
+  // const toggleExpandSellableItems = () => {
+  //   // if (toggleIsSellableItemsExpanded) {
+  //   //   toggleIsSellableItemsExpanded()
+  //   // }
+  // }
+
   return (
     <DefaultLayout title="Gestão de Planos - Suspender Plano">
       <Container>
@@ -54,21 +60,21 @@ export const SuspendPlanConfirm: React.FC = () => {
                 {sellableItem.name} - {sellableItem.price}
               </p>
             ) : (
-              index < 4 && (
+              index < 5 && (
                 <p key={sellableItem.id}>
                   {sellableItem.name} - {sellableItem.price}
                 </p>
               )
             ),
           )}
-          {/* {sellableItems.length > 3 && (
+          {sellableItems.length > 5 && (
             <span onClick={toggleIsSellableItemsExpanded}>
               Ver{' '}
               {isSellableItemsExpanded
-                ? '-'
-                : `+  (${sellableItems.length - 4})`}
+                ? 'Menos'
+                : `+  (${sellableItems.length - 5})`}
             </span>
-          )} */}
+          )}
         </div>
         <footer>
           <ButtonPrimary onClick={onDoNotProceed}>Não</ButtonPrimary>
