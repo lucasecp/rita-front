@@ -16,15 +16,16 @@ import apiPatient from '@/services/apiPatient'
 import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
 interface ReasonInactivateProps {
-  planId: string
+  plan: {
+    id: string
+    name: string
+  }
 }
 
-export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({
-  planId,
-}) => {
+export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({ plan }) => {
   const [reason, setReason] = useState('')
   const [reasonError, setReasonError] = useState('')
-  const { closeModal, showSimple } = useModal()
+  const { closeModal } = useModal()
   const { Loading } = useLoading()
   const history = useHistory()
 
@@ -42,22 +43,26 @@ export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({
     try {
       Loading.turnOn()
 
-      const response = await apiPatient.delete(`/plano/${planId}`, {
+      const {
+        data: { mensagem: message },
+      } = await apiPatient.patch(`/plano/${plan.id}/inativar`, null, {
         params: {
+          confirmado: true,
           motivo: reason,
         },
       })
 
-      console.log(response)
-      toast.success('Dados atualizados com sucesso.')
-      closeModal()
-      history.push(DIRECTOR_PLAN_MANAGMENT)
+      if (message === 'Sucesso') {
+        toast.success(`${plan.name} inativado.`)
+      }
     } catch (error) {
-      console.log(error)
-      showSimple.error('Erro ao inativar um plano!')
+      toast.error(`Erro ao inativar o plano ${plan.name}`)
     } finally {
       Loading.turnOff()
     }
+
+    closeModal()
+    history.push(DIRECTOR_PLAN_MANAGMENT)
   }
 
   return (

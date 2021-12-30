@@ -11,11 +11,14 @@ import { ReasonInactivate } from '../ReasonInactivate'
 import { Container } from './styles'
 
 interface NotHasSellableItemsProps {
-  planId: string
+  plan: {
+    id: string
+    name: string
+  }
 }
 
 export const NotHasSellableItems: React.FC<NotHasSellableItemsProps> = ({
-  planId,
+  plan,
 }) => {
   const { showMessage, closeModal } = useModal()
 
@@ -24,7 +27,7 @@ export const NotHasSellableItems: React.FC<NotHasSellableItemsProps> = ({
   }
 
   const onProceed = async () => {
-    showMessage(ReasonInactivate, { planId })
+    showMessage(ReasonInactivate, { plan })
   }
 
   return (

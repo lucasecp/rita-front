@@ -38,7 +38,7 @@ export const InactivatePlanConfirm = () => {
   }
 
   const onProceed = async () => {
-    showMessage(ReasonInactivate, { planId: plan.id })
+    showMessage(ReasonInactivate, { plan })
   }
 
   return (

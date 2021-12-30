@@ -13,8 +13,6 @@ import { Activate } from './Activate'
 const Actions = ({ status, planInformations }) => {
   const history = useHistory()
 
-  console.log(planInformations)
-
   return (
     <Container>
       <CustomTooltip label="Visualizar">
@@ -27,10 +25,7 @@ const Actions = ({ status, planInformations }) => {
         />
       </CustomTooltip>
 
-      <Activate
-        status={status}
-        plan={planInformations}
-      />
+      <Activate status={status} plan={planInformations} />
 
       <Inactivate
         status={status}

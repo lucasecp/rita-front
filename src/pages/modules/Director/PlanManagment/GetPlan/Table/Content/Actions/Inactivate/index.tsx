@@ -6,6 +6,7 @@ import { formatPrice } from '@/helpers/formatPrice'
 
 import { DIRECTOR_INACTIVATE_PLAN } from '@/routes/constants/namedRoutes/routes'
 import InactivateIcon from './styles'
+import apiPatient from '@/services/apiPatient'
 
 interface InactivateProps {
   status: string
@@ -14,28 +15,34 @@ interface InactivateProps {
     name: string
   }
 }
+interface SellableItem {
+  nome: string
+  preco: string
+}
 
 export const Inactivate: React.FC<InactivateProps> = ({ status, plan }) => {
   const history = useHistory()
   const { showMessage } = useModal()
 
-  const sellableItems = [
-    { id: 1, nome: 'Plano 01', preco: '10' },
-    { id: 2, nome: 'Plano 02', preco: '10' },
-    { id: 3, nome: 'Plano 03', preco: '10' },
-    { id: 4, nome: 'Plano 04', preco: '10' },
-    { id: 5, nome: 'Plano 05', preco: '10' },
-  ]
+  const onInactivePlan = async () => {
+    const response = await apiPatient.patch<SellableItem[] | []>(
+      `/plano/${plan.id}/inativar`,
+      {
+        params: {
+          confirmado: false,
+        },
+      },
+    )
 
-  // const sellableItems: any = []
+    const sellableItems: SellableItem[] = response.data
 
-  const onInactivePlan = () => {
     if (sellableItems.length) {
-      // POSSUI ITENS VENDÁVEIS
-      const sellableItemsMapped = sellableItems.map((sellableItem: any) => ({
-        name: sellableItem.nome,
-        price: formatPrice(Number(sellableItem.preco)),
-      }))
+      const sellableItemsMapped = sellableItems.map(
+        (sellableItem: SellableItem) => ({
+          name: sellableItem.nome,
+          price: formatPrice(Number(sellableItem.preco)),
+        }),
+      )
 
       history.push(DIRECTOR_INACTIVATE_PLAN, {
         sellableItems: sellableItemsMapped,
@@ -45,9 +52,8 @@ export const Inactivate: React.FC<InactivateProps> = ({ status, plan }) => {
         },
       })
     } else {
-      // NÃO POSSUI ITENS VENDÁVEIS
       showMessage(NotHasSellableItems, {
-        planId: plan.id,
+        plan,
       })
     }
   }
