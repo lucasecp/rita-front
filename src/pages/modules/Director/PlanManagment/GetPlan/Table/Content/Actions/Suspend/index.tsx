@@ -26,6 +26,7 @@ export const Suspend: React.FC<SuspendProps> = ({ status, plan }) => {
       { id: 2, name: 'Centro Oeste - Goiás (Estadual)', price: 'R$ 39,90' },
     ]
     // sellableItems = []
+
     if (sellableItems.length) {
       history.push(DIRECTOR_SUSPEND_PLAN, { sellableItems, plan })
     } else {
