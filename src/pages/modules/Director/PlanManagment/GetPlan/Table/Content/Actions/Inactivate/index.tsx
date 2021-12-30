@@ -7,6 +7,7 @@ import { formatPrice } from '@/helpers/formatPrice'
 import { DIRECTOR_INACTIVATE_PLAN } from '@/routes/constants/namedRoutes/routes'
 import InactivateIcon from './styles'
 import apiPatient from '@/services/apiPatient'
+import { useLoading } from '@/hooks/useLoading'
 
 interface InactivateProps {
   status: string
@@ -23,29 +24,35 @@ interface SellableItem {
 export const Inactivate: React.FC<InactivateProps> = ({ status, plan }) => {
   const history = useHistory()
   const { showMessage } = useModal()
+  const { Loading } = useLoading()
 
   const onInactivePlan = async () => {
-    const response = await apiPatient.patch<SellableItem[] | []>(
-      `/plano/${plan.id}/inativar`,
-      {
+    let sellableItems: SellableItem[] = []
+
+    try {
+      Loading.turnOn()
+
+      const { data } = await apiPatient.patch(`/plano/${plan.id}/inativar`, {
         params: {
           confirmado: false,
         },
-      },
-    )
+      })
 
-    const sellableItems: SellableItem[] = response.data
+      const sellableItemsMapped = data.map((sellableItem: SellableItem) => ({
+        name: sellableItem.nome,
+        price: formatPrice(Number(sellableItem.preco)),
+      }))
+
+      sellableItems = sellableItemsMapped
+    } catch (error) {
+      console.log(error)
+    } finally {
+      Loading.turnOff()
+    }
 
     if (sellableItems.length) {
-      const sellableItemsMapped = sellableItems.map(
-        (sellableItem: SellableItem) => ({
-          name: sellableItem.nome,
-          price: formatPrice(Number(sellableItem.preco)),
-        }),
-      )
-
       history.push(DIRECTOR_INACTIVATE_PLAN, {
-        sellableItems: sellableItemsMapped,
+        sellableItems: sellableItems,
         plan: {
           id: plan.id,
           name: plan.name,
