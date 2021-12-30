@@ -5,17 +5,16 @@ import apiPatient from '@/services/apiPatient'
 interface SelectUfProps {
   setUf: (value: string) => void
   uf: string
-  setUfName: (value: string) => void
 }
 
-const SelectUf: React.FC<SelectUfProps> = ({ setUf, uf, setUfName }) => {
+const SelectUf: React.FC<SelectUfProps> = ({ setUf, uf }) => {
   const [ufOptions, setUfOptions] = useState<any[]>([])
 
   useEffect(() => {
     setUf('')
     const getUf = async () => {
       try {
-        const { data } = await apiPatient.get(`/uf`)
+        const { data } = await apiPatient.get(`/clinica/ufs`)
         const dataMapped = mapUf(data)
 
         const allLabelOption =
@@ -30,23 +29,9 @@ const SelectUf: React.FC<SelectUfProps> = ({ setUf, uf, setUfName }) => {
     getUf()
   }, [])
 
-  useEffect(() => {
-    setUfNameToApi()
-  }, [uf])
-
-  const setUfNameToApi = () => {
-    const ufMaches = ufOptions.find(
-      (opt) => opt.value === uf && opt.value !== 'All',
-    )
-
-    if (ufMaches) {
-      setUfName(ufMaches.label)
-    }
-  }
-
   const mapUf = (array: any[]) => {
     if (!array) return []
-    return array.map((obj) => ({ value: String(obj.idUF), label: obj.sigla }))
+    return array.map((obj) => ({ value: obj.uf, label: obj.uf }))
   }
 
   return (

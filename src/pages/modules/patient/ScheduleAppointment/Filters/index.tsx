@@ -15,14 +15,15 @@ import { queryFilterString } from '@/helpers/queryString/filter'
 import { fromApi } from '../Adapters'
 import { toast } from '@/styles/components/toastify'
 import { DataI } from '../types/index'
+import { queryOrderString } from '@/helpers/queryString/order'
 
 const Filters = () => {
   const [researchDoctor, setResearchDoctor] = useState('')
   const [uf, setUf] = useState('')
-  const [ufName,setUfName] = useState('')
   const [city, setCity] = useState('')
-  const [results, setResults] = useState<DataI>({ total: 0, doctor: [] })
+  const [results, setResults] = useState<DataI>({ total: 0 })
   const [filter, setFilter] = useState<any[]>([])
+  const [order, setOrder] = useState<any>('')
 
   const [queryApiPagination, setQueryApiPagination] =
     useState('?limit=10&skip=0')
@@ -40,7 +41,7 @@ const Filters = () => {
   const arrayQuery = [
     { name: 'palavraChave', value: researchDoctor },
     { name: 'municipio', value: city === 'All' ? '' : city },
-    { name: 'uf', value: ufName },
+    { name: 'uf', value: uf === 'All' ? '' : uf },
   ]
 
   const onFilter = () => {
@@ -50,22 +51,22 @@ const Filters = () => {
     setFilter(arrayQuery)
   }
 
-
-
   const filterResults = async () => {
     try {
       Loading.turnOn()
       const { data } = await apiPatient.get(
         `/paciente/agenda-consulta${queryApiPagination}${queryFilterString(
           verifyTypedFields(filter),
-        )}`,
+        )}${order}`,
       )
       if (data.total === 0) {
         return toast.warning('Nenhum resultado encontrado.')
       }
-      setResults({ total: data.total, doctor: fromApi(data.clinicas) })
+
+      setOrder(queryOrderString({ name: data.orderBy, value: data.order }))
+      setResults({ total: data.total, data: fromApi(data.dados) })
     } catch (error) {
-      console.log(error)
+
     } finally {
       Loading.turnOff()
     }
@@ -81,23 +82,8 @@ const Filters = () => {
         <header>
           <h3>Como você precisa cuidar de sua saúde hoje?</h3>
         </header>
-        {/* <InputAutoComplete
-          setValue={setResearchDoctor}
-          endPoint="/paciente?limit=10&skip=0"
-          urlApi={apiPatient}
-          placeholder="O que você procura?"
-          label="Especialista, Especialidade ou Clínica:"
-          keyLabelFromApi="nome"
-          keyValueFromApi="idPaciente"
-        /> */}
         <InputAutoCompleteAntd setValue={setResearchDoctor} />
-        {/* <InputText
-          label="Especialista ou Especialidade:"
-          setValue={setResearchDoctor}
-          value={researchDoctor}
-          placeholder="O que você procura?"
-        /> */}
-        <SelectUf setUf={setUf} uf={uf} setUfName={setUfName}/>
+        <SelectUf setUf={setUf} uf={uf} />
         <SelectCity setCity={setCity} uf={uf} city={city} />
         <BtnGroup>
           <OutlineButton onClick={() => history.push(INITIAL_PAGE)}>

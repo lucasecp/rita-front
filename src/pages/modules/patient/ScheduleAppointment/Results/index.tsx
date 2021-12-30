@@ -4,6 +4,7 @@ import DoctorInfo from '../components/DoctorInfo'
 import { Container, Content } from './styles'
 import Pagination from '@/components/Pagination/'
 import { ResultsProps } from '../types'
+import ClinicInfo from '../components/ClinicInfo'
 
 const Results: React.FC<ResultsProps>= ({ data, setQueryPagination }) => {
   // const [doctors, setDoctors] = useState([])
@@ -18,11 +19,11 @@ const Results: React.FC<ResultsProps>= ({ data, setQueryPagination }) => {
     <Container>
       <h2>Resultados encontrados</h2>
       <Content>
-        {/* {data?.doctor?.map((clinic, index) => (
+        {data?.data?.clinic?.map((clinic, index) => (
           <ClinicInfo key={index} dataClinic={clinic} />
-        ))} */}
+        ))}
 
-        {data?.doctor?.map((doctor, index) => (
+        {data?.data?.doctor.map((doctor, index) => (
           <DoctorInfo key={index} isVerify dataDoctor={doctor} />
         ))}
       </Content>
