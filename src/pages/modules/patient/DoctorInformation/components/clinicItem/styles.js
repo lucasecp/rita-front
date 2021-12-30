@@ -50,8 +50,8 @@ export const Container = styled.div`
       > li > svg {
         margin: 0 0px 0 8px;
       }
-      > li >  a {
-        margin-left: 16px
+      > li > a {
+        margin-left: 16px;
       }
     }
     > svg {
