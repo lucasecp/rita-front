@@ -35,15 +35,6 @@ export const Suspend: React.FC<SuspendProps> = ({ status, plan }) => {
 
   const onSuspendPlan = async () => {
     let sellableItems: SellableItem[] = []
-    sellableItems = [
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-    ]
 
     try {
       Loading.turnOn()
@@ -56,13 +47,13 @@ export const Suspend: React.FC<SuspendProps> = ({ status, plan }) => {
         },
       )
 
-      // const sellableItemsMapped = data.map((sellableItem, index) => ({
-      //   id: index,
-      //   name: sellableItem.nome,
-      //   price: formatPrice(Number(sellableItem.preco)),
-      // }))
+      const sellableItemsMapped = data.map((sellableItem, index) => ({
+        id: index,
+        name: sellableItem.nome,
+        price: formatPrice(Number(sellableItem.preco)),
+      }))
 
-      // sellableItems = sellableItemsMapped
+      sellableItems = sellableItemsMapped
     } catch (error) {
       console.log(error)
     } finally {
