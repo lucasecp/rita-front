@@ -13,7 +13,7 @@ const Actions: React.FC<ActionsProps> = ({ status, warning, idDependent }) => {
 
   return (
     <Container>
-      <CustomTooltip label="Atençao">
+      <CustomTooltip label="Atenção">
         {warning && <WarningIcon />}
       </CustomTooltip>
 

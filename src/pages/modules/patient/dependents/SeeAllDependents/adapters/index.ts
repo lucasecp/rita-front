@@ -1,3 +1,4 @@
+import { formatCpf } from '@/helpers/formatCpf'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 
 export const fromApi = (dataDependent: any[]) => {
@@ -5,7 +6,7 @@ export const fromApi = (dataDependent: any[]) => {
     id: dep.idPaciente,
     name: formatTextWithLimit(dep.nome, 38),
     birthdate: dep.dataNascimento,
-    cpf: dep.cpf,
+    cpf: formatCpf(dep.cpf),
     status: dep.status,
     isValidate: dep.validacaoUltrapassada,
     documentsOk: dep.cpfCadastrado,
