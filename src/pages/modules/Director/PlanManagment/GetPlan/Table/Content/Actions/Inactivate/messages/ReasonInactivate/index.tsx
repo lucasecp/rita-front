@@ -12,15 +12,20 @@ import { useLoading } from '@/hooks/useLoading'
 import { toast } from '@/styles/components/toastify'
 
 import { Container } from './styles'
+import apiPatient from '@/services/apiPatient'
+import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
 interface ReasonInactivateProps {
-  plan: any
+  plan: {
+    id: string
+    name: string
+  }
 }
 
 export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({ plan }) => {
   const [reason, setReason] = useState('')
   const [reasonError, setReasonError] = useState('')
-  const { closeModal, showSimple } = useModal()
+  const { closeModal } = useModal()
   const { Loading } = useLoading()
   const history = useHistory()
 
@@ -38,15 +43,26 @@ export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({ plan }) => {
     try {
       Loading.turnOn()
 
-      // Chamada a API
-      toast.success('Dados atualizados com sucesso.')
-      closeModal()
+      const {
+        data: { mensagem: message },
+      } = await apiPatient.patch(`/plano/${plan.id}/inativar`, null, {
+        params: {
+          confirmado: true,
+          motivo: reason,
+        },
+      })
+
+      if (message === 'Sucesso') {
+        toast.success(`${plan.name} inativado.`)
+      }
     } catch (error) {
-      console.log(error)
-      showSimple.error('Erro ao editar um plano!')
+      toast.error(`Erro ao inativar o plano ${plan.name}`)
     } finally {
       Loading.turnOff()
     }
+
+    closeModal()
+    history.push(DIRECTOR_PLAN_MANAGMENT)
   }
 
   return (
@@ -54,7 +70,6 @@ export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({ plan }) => {
       <img src={warningIcon} />
       <h6>Descreva o motivo da alteração:</h6>
       <Textarea
-        label="Reason"
         setValue={setReason}
         value={reason}
         limit={200}

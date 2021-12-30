@@ -1,18 +1,28 @@
 import styled from 'styled-components'
 
+export const DefaultPhoto = styled.div`
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: #f8f5ff;
+  margin-bottom: 21px;
+`
+export const PhotoClinic = styled.div`
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  margin-bottom: 21px;
+  > img {
+    min-width: 100%;
+    border-radius: 50%;
+  }
+`
 export const Container = styled.div`
   padding: 27px 30px;
   background: #fff;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  > div:first-child {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: #f8f5ff;
-    margin-bottom: 21px;
-  }
   > h4 {
     font-size: 20px;
     font-weight: 700;
@@ -31,11 +41,19 @@ export const Container = styled.div`
         line-height: 12px;
         color: #909090;
       }
+      > div {
+        display: flex;
+        margin: -8px 0;
+      }
       p {
+        margin: 8px 0;
         color: #303030;
         font-size: 14px;
         font-weight: 400;
         line-height: 15px;
+        & + p {
+          margin-left: 2px;
+        }
       }
       & + li {
         margin-top: 11px;

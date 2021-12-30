@@ -2,7 +2,11 @@ import styled from 'styled-components'
 
 import colors from '@/styles/colors'
 
-export const Container = styled.div`
+interface ContainerProps {
+  hasError: boolean
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
 

@@ -13,12 +13,12 @@ const Actions: React.FC<ActionsProps> = ({ status, warning, idDependent }) => {
 
   return (
     <Container>
-      <CustomTooltip label="Atençao">
+      <CustomTooltip label="Atenção">
         {warning && <WarningIcon />}
       </CustomTooltip>
 
       {status === 'inativo' ||
-        (status === 'excluido' ? null : (
+        (status === 'Excluído' ? null : (
           <CustomTooltip label="Visualizar">
             <EyePurpleIcon
               onClick={() =>

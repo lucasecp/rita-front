@@ -13,13 +13,13 @@ const SelectCity: React.FC<SelectCityProps> = ({ setCity, city, uf }) => {
 
   useEffect(() => {
     if (!uf || uf === 'All') {
+      setCity('')
       return setCityOptions([])
     }
-    setCity('')
 
     const getCity = async () => {
       try {
-        const { data } = await apiPatient.get(`/municipio?uf=${uf}`)
+        const { data } = await apiPatient.get(`/clinica/municipios?uf=${uf}`)
         const dataMapped = mapCity(data)
 
         const allOptions =
@@ -37,8 +37,8 @@ const SelectCity: React.FC<SelectCityProps> = ({ setCity, city, uf }) => {
   const mapCity = (array: any[]) => {
     if (!array) return []
     return array.map((obj) => ({
-      value: obj.descricao,
-      label: obj.descricao,
+      value: obj.cidade,
+      label: obj.cidade,
     }))
   }
 
@@ -47,7 +47,7 @@ const SelectCity: React.FC<SelectCityProps> = ({ setCity, city, uf }) => {
       return 'Necessário selecionar a UF'
     }
     if (uf === 'All') {
-      return 'Todas'
+      return ''
     }
     return 'Selecione:'
   }
@@ -62,6 +62,6 @@ const SelectCity: React.FC<SelectCityProps> = ({ setCity, city, uf }) => {
       disabled={uf === 'All'}
     />
   )
-} 
+}
 
 export default SelectCity

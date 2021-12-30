@@ -18,10 +18,16 @@ const SeeAllDependents = () => {
     document.title = 'Rita Saúde | Depedentes'
 
     const getDependents = async () => {
+      const ordertoApi = Object.keys(order).length
+        ? order
+        : {
+            name: 'nome',
+            value: 'ASC',
+          }
       try {
         Loading.turnOn()
         const { data } = await apiPatient(
-          `paciente/meu-perfil?${queryOrderString(order)}`,
+          `paciente/meu-perfil?${queryOrderString(ordertoApi)}`,
         )
         setDependents(fromApi(data.dependentes))
       } catch ({ response }) {
