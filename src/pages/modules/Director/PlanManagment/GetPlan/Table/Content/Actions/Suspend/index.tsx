@@ -2,7 +2,7 @@ import CustomTooltip from '@/components/Tooltip'
 import { useModal } from '@/hooks/useModal'
 import { NotSellableItems } from './messages/NotSellableItems'
 import { DIRECTOR_SUSPEND_PLAN } from '@/routes/constants/namedRoutes/routes'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import { SuspendIcon } from './styles'
 import apiPatient from '@/services/apiPatient'

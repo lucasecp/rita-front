@@ -8,7 +8,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { toast } from '@/styles/components/toastify'
-import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
+import { DIRECTOR_PLAN_MANAGMENT, DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 import { useModal } from '@/hooks/useModal'
 import { ReasonInactivate } from '../messages/ReasonInactivate'
 
@@ -34,7 +34,7 @@ export const InactivatePlanConfirm = () => {
   const [expandPlan, setExpandPlan] = useState(false)
 
   const onDoNotProceed = () => {
-    history.goBack()
+    history.push(DIRECTOR_SEE_PLAN_MANAGMENT)
   }
 
   const onProceed = async () => {
