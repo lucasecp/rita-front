@@ -28,9 +28,9 @@ const Actions: React.FC<ActionsProps> = ({ status, warning, idDependent }) => {
           </CustomTooltip>
         ))}
 
-      <CustomTooltip label="Exlcuir">
+      {/* <CustomTooltip label="Excluir">
         <DeleteIcon />
-      </CustomTooltip>
+      </CustomTooltip> */}
     </Container>
   )
 }
