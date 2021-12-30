@@ -18,7 +18,7 @@ const Actions: React.FC<ActionsProps> = ({ status, warning, idDependent }) => {
       </CustomTooltip>
 
       {status === 'inativo' ||
-        (status === 'excluido' ? null : (
+        (status === 'Excluído' ? null : (
           <CustomTooltip label="Visualizar">
             <EyePurpleIcon
               onClick={() =>
