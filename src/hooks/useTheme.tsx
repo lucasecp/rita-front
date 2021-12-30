@@ -1,14 +1,21 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useAuth } from './login'
-import { ThemeProvider as StyledThemeProvider } from 'styled-components'
+import {
+  ThemeProvider as StyledThemeProvider,
+  DefaultTheme,
+} from 'styled-components'
 
 import { themes } from '@/styles/themes'
 
-const ThemeContext = createContext({})
+interface ThemeContextData {
+  theme: DefaultTheme
+}
 
-const ThemeProvider = ({ children }) => {
+const ThemeContext = createContext({} as ThemeContextData)
+
+const ThemeProvider: React.FC = ({ children }) => {
   const { user } = useAuth()
-  const [theme, setTheme] = useState({})
+  const [theme, setTheme] = useState({} as DefaultTheme)
 
   useEffect(() => {
     switch (user?.perfis[0]) {
