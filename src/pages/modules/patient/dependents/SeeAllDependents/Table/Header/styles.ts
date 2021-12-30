@@ -27,7 +27,7 @@ export const Content = styled.div`
     flex-direction: column;
     justify-content: center;
     cursor: pointer;
-    padding: 20px;
+    padding: 20px 0 20px 20px;
     height: 100%;
     margin-left: 4px;
     margin-right: 4px;
@@ -39,7 +39,6 @@ export const Content = styled.div`
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
-    max-width: 80px;
   }
 `
 export const Container = styled.header`

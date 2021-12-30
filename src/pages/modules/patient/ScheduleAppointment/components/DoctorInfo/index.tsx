@@ -4,20 +4,10 @@ import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.svg'
 import { useHistory } from 'react-router'
 import { PATIENT_DOCTOR_INFORMATION } from '@/routes/constants/namedRoutes/routes'
-import { ClinicInfoProps, DoctorSpecialtyI } from '../../types/index'
+import { DoctorInfoProps } from '../../types/index'
 
-const DoctorInfo: React.FC<ClinicInfoProps> = ({ dataDoctor, isVerify }) => {
+const DoctorInfo: React.FC<DoctorInfoProps> = ({ dataDoctor, isVerify }) => {
   const history = useHistory()
-
-  const specialty: DoctorSpecialtyI = dataDoctor.doctorSpecialty.reduce(
-    (ac, spe, index) => {
-      if (index === 0) {
-        ac = spe
-      }
-      return ac
-    },
-    {},
-  )
 
   return (
     <Container>
@@ -29,25 +19,19 @@ const DoctorInfo: React.FC<ClinicInfoProps> = ({ dataDoctor, isVerify }) => {
         <DefaultImg />
       )}
 
-      <h4>
-        {dataDoctor.title} {dataDoctor.name}
-      </h4>
+      <h4>{dataDoctor.name}</h4>
       <ul>
         <li>
           <div>
             <h6>Conselho Regional:</h6>
-            <p>
-              CRM - {dataDoctor.crm} - {dataDoctor.crmUf}
-            </p>
+            <p>{dataDoctor.crm}</p>
           </div>
           {dataDoctor.verified && <VerifiedIcon />}
         </li>
         <li>
           <div>
             <h6>Especialidade:</h6>
-            <p>
-              {specialty.name} - RQE Nº: {specialty.rqe}
-            </p>
+            <p>{dataDoctor.specialtys}</p>
           </div>
         </li>
       </ul>

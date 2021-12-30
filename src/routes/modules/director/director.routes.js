@@ -8,6 +8,7 @@ import {
   DIRECTOR_EDIT_PLAN_CONFIRM,
   DIRECTOR_CREATE_PLAN_MANAGMENT,
   DIRECTOR_SUSPEND_PLAN,
+  DIRECTOR_INACTIVATE_PLAN,
 } from '../../constants/namedRoutes/routes'
 
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
@@ -16,6 +17,7 @@ import SeePlan from '@/pages/modules/Director/PlanManagment/SeePlan'
 import { EditPlanConfirm } from '@/pages/modules/Director/PlanManagment/EditPlanConfirm'
 import { CreatePlan } from '@/pages/modules/Director/PlanManagment/CreatePlan'
 import { SuspendPlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Suspend/containers/SuspendPlanConfirm'
+import { InactivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Inactivate/InactivatePlanConfirm'
 
 const directorRoutes = [
   {
@@ -33,6 +35,10 @@ const directorRoutes = [
   {
     path: DIRECTOR_SUSPEND_PLAN,
     component: SuspendPlanConfirm,
+  },
+  {
+    path: DIRECTOR_INACTIVATE_PLAN,
+    component: InactivatePlanConfirm,
   },
   {
     path: DIRECTOR_SEE_PLAN_MANAGMENT,

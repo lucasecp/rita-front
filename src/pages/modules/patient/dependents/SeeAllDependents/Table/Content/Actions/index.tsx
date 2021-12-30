@@ -1,53 +1,35 @@
 import React from 'react'
 import { Container } from './styles'
-import { ReactComponent as InactiveIcon } from '@/assets/icons/inactive.svg'
+import { ReactComponent as WarningIcon } from '@/assets/icons/warning-red.svg'
 import { ReactComponent as EyePurpleIcon } from '@/assets/icons/eye-purple.svg'
-import { ReactComponent as ActiveIcon } from '@/assets/icons/active.svg'
-import { ReactComponent as SuspenseIcon } from '@/assets/icons/suspense.svg'
+import { ReactComponent as DeleteIcon } from '@/assets/icons/trash.svg'
 import CustomTooltip from '@/components/Tooltip'
 import { useHistory } from 'react-router'
-import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 import { ActionsProps } from '../../../types'
+import { PATIENT_SEE_DEPENDENT } from '@/routes/constants/namedRoutes/routes'
 
-const Actions: React.FC<ActionsProps> = ({ status, idDependent }) => {
+const Actions: React.FC<ActionsProps> = ({ status, warning, idDependent }) => {
   const history = useHistory()
 
   return (
     <Container>
-      <CustomTooltip label="Visualizar">
-        <EyePurpleIcon
-          onClick={() =>
-            history.push(DIRECTOR_SEE_PLAN_MANAGMENT, {
-              idPlan: idDependent,
-            })
-          }
-        />
+      <CustomTooltip label="Atenção">
+        {warning && <WarningIcon />}
       </CustomTooltip>
 
-      <CustomTooltip label="Ativar">
-        <ActiveIcon
-        // hidden={
-        //   status !== 'Inativo' &&
-        //   status !== 'Suspenso' &&
-        //   status !== 'Em digitação'
-        // }
-        />
-      </CustomTooltip>
+      {status === 'inativo' ||
+        (status === 'Excluído' ? null : (
+          <CustomTooltip label="Visualizar">
+            <EyePurpleIcon
+              onClick={() =>
+                history.push(PATIENT_SEE_DEPENDENT, { idDependent })
+              }
+            />
+          </CustomTooltip>
+        ))}
 
-      <CustomTooltip label="Inativar">
-        <InactiveIcon
-        // hidden={
-        //   status !== 'Ativo' &&
-        //   status !== 'Suspenso' &&
-        //   status !== 'Em digitação'
-        // }
-        />
-      </CustomTooltip>
-
-      <CustomTooltip label="Suspender">
-        <SuspenseIcon
-        // hidden={status !== 'Inativo' && status !== 'Ativo'}
-        />
+      <CustomTooltip label="Exlcuir">
+        <DeleteIcon />
       </CustomTooltip>
     </Container>
   )

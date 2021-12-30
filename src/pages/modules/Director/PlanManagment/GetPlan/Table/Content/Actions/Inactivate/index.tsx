@@ -1,34 +1,60 @@
+import { useHistory } from 'react-router'
 import { useModal } from '@/hooks/useModal'
 import CustomTooltip from '@/components/Tooltip'
 import { NotHasSellableItems } from './messages/NotHasSellableItems'
+import { formatPrice } from '@/helpers/formatPrice'
 
+import { DIRECTOR_INACTIVATE_PLAN } from '@/routes/constants/namedRoutes/routes'
 import InactivateIcon from './styles'
+import apiPatient from '@/services/apiPatient'
 
 interface InactivateProps {
   status: string
+  plan: {
+    id: string
+    name: string
+  }
+}
+interface SellableItem {
+  nome: string
+  preco: string
 }
 
-export const Inactivate: React.FC<InactivateProps> = ({ status }) => {
+export const Inactivate: React.FC<InactivateProps> = ({ status, plan }) => {
+  const history = useHistory()
   const { showMessage } = useModal()
 
-  // const sellableItems = [
-  //   { id: 1, item: 'Plano 01' },
-  //   { id: 2, item: 'Plano 02' },
-  // ]
-
-  const sellableItems: any = []
-
-  const onInactivePlan = () => {
-    if (sellableItems.length) {
-      console.log('Tem itens vendáveis')
-    } else {
-      showMessage(
-        NotHasSellableItems,
-        {
-          sellableItems,
+  const onInactivePlan = async () => {
+    const response = await apiPatient.patch<SellableItem[] | []>(
+      `/plano/${plan.id}/inativar`,
+      {
+        params: {
+          confirmado: false,
         },
-        true,
+      },
+    )
+
+    const sellableItems: SellableItem[] = response.data
+
+    if (sellableItems.length) {
+      const sellableItemsMapped = sellableItems.map(
+        (sellableItem: SellableItem) => ({
+          name: sellableItem.nome,
+          price: formatPrice(Number(sellableItem.preco)),
+        }),
       )
+
+      history.push(DIRECTOR_INACTIVATE_PLAN, {
+        sellableItems: sellableItemsMapped,
+        plan: {
+          id: plan.id,
+          name: plan.name,
+        },
+      })
+    } else {
+      showMessage(NotHasSellableItems, {
+        plan,
+      })
     }
   }
 

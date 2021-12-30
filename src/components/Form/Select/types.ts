@@ -18,4 +18,5 @@ export interface SelectProps {
   variation?: string
   hasError?: string | boolean
   onChange?: (props: OnChangeProps) => void
+  disabled?:boolean
 }
