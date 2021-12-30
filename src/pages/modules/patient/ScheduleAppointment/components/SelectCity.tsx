@@ -2,8 +2,14 @@ import { Select } from '@/components/Form/Select'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
 
-const SelectCity = ({ setCity, city, uf }) => {
-  const [cityOptions, setCityOptions] = useState([])
+interface SelectCityProps {
+  setCity: (value: string) => void
+  city: string
+  uf: string
+}
+
+const SelectCity: React.FC<SelectCityProps> = ({ setCity, city, uf }) => {
+  const [cityOptions, setCityOptions] = useState<any[]>([])
 
   useEffect(() => {
     if (!uf || uf === 'All') {
@@ -22,14 +28,13 @@ const SelectCity = ({ setCity, city, uf }) => {
             : []
 
         setCityOptions([...allOptions, ...dataMapped])
-        console.log(dataMapped)
       } catch ({ response }) {}
     }
 
     getCity()
   }, [uf])
 
-  const mapCity = (array = []) => {
+  const mapCity = (array: any[]) => {
     if (!array) return []
     return array.map((obj) => ({
       value: obj.descricao,
@@ -37,15 +42,26 @@ const SelectCity = ({ setCity, city, uf }) => {
     }))
   }
 
+  const labelDefaultOption = () => {
+    if (!uf) {
+      return 'Necessário selecionar a UF'
+    }
+    if (uf === 'All') {
+      return 'Todas'
+    }
+    return 'Selecione:'
+  }
+
   return (
     <Select
       options={cityOptions}
       label="Cidade:"
-      labelDefaultOption={!uf ? 'Necessário selecionar a UF' : 'Selecione:'}
+      labelDefaultOption={labelDefaultOption()}
       value={city}
       setValue={setCity}
+      disabled={uf === 'All'}
     />
   )
-}
+} 
 
 export default SelectCity

@@ -1,19 +1,35 @@
 import React from 'react'
-import { Container, Status } from './styles'
+import { Container, ListItem } from './styles'
 import Actions from './Actions'
-import { showStatus } from '../../helpers/showStatus'
-import formatDate from '@/helpers/formatDate'
-import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../types'
+import { useHistory } from 'react-router'
+import { PATIENT_SEE_DEPENDENT } from '@/routes/constants/namedRoutes/routes'
 
 const Content: React.FC<ContentProps> = ({ dependents }) => {
+  const history = useHistory()
   return (
     <Container>
-      {dependents?.data?.map((plan, index) => (
-        <ul key={index}></ul>
+      {dependents?.map((dep, index) => (
+        <ListItem
+          key={index}
+          warning={!dep.documentsOk && !dep.isValidate}
+          onClick={() =>
+            history.push(PATIENT_SEE_DEPENDENT, { idDependent: dep.id })
+          }
+        >
+          <li>{dep.name}</li>
+          <li>{dep.birthdate}</li>
+          <li>{dep.cpf}</li>
+          <li>{dep.status}</li>
+          <Actions
+            idDependent={dep.id}
+            status={dep.status}
+            warning={!dep.documentsOk && !dep.isValidate}
+          />
+        </ListItem>
       ))}
-      {!dependents.total && <h2>Nenhum resultado encontrado</h2>}
+      {/* {!dependents.total && <h2>Nenhum resultado encontrado</h2>} */}
     </Container>
   )
 }

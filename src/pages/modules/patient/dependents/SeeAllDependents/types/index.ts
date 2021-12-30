@@ -4,32 +4,31 @@ export interface OrderI {
 }
 
 export interface DependentsI {
-  total?: number
-  data?: [
-    {
-      name?: string
-      birthdate?: string
-      cpf?: string
-      status?: string
-    },
-  ]
+  id?: number
+  name?: string
+  birthdate?: string
+  cpf?: string
+  status?: string
+  isValidate?: boolean
+  documentsOk?: boolean
 }
 
 type SetOrderI = (order: OrderI | Record<never, string>) => void
 
 export interface TableProps {
-  dependents: DependentsI
+  dependents: DependentsI[]
   order: OrderI
   setOrder: SetOrderI
 }
 
 export interface ContentProps {
-  dependents: DependentsI
+  dependents: DependentsI[]
 }
 
 export interface ActionsProps {
-  status: string
-  idDependent: string
+  status?: string
+  warning?: boolean
+  idDependent?: number
 }
 
 export interface HeaderProps {
