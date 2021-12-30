@@ -1,39 +1,38 @@
-export interface DoctorI{
-    photo: string,
-    name: string,
-    id: number,
-    address: string,
-    district: string,
-    city: string,
-    uf: string,
-    number: number,
-    complement: string,
-    phone: string,
-    crm: string,
-    crmUf: string,
-    title: string,
-    verified: boolean,
-
-    doctorSpecialty:  DoctorSpecialtyI[]
+export interface DoctorI {
+  photo: string
+  name: string
+  id: number
+  crm: string
+  verified: boolean
+  specialtys: string[]
 }
 
-export interface DoctorSpecialtyI{
-    rqe?: string,
-    name?: string
+export interface ClinicI {
+  photo: string
+  name: string
+  id: number
+  specialtys: string[]
 }
 
-export interface DataI{
+export interface DataFromApi {
+  doctor: DoctorI[]
+  clinic: ClinicI[]
+}
+
+export interface DataI {
   total: number
-   doctor:DoctorI[]
+  data?: DataFromApi
 }
 
-export interface ResultsProps{
+export interface ResultsProps {
   data: DataI
   setQueryPagination: (query: string) => void
 }
 
-export interface ClinicInfoProps{
+export interface DoctorInfoProps {
   dataDoctor: DoctorI
- isVerify: boolean
-
+  isVerify: boolean
+}
+export interface ClinicInfoProps {
+  dataClinic: ClinicI
 }

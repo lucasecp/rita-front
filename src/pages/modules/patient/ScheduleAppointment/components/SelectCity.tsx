@@ -2,18 +2,24 @@ import { Select } from '@/components/Form/Select'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
 
-const SelectCity = ({ setCity, city, uf }) => {
-  const [cityOptions, setCityOptions] = useState([])
+interface SelectCityProps {
+  setCity: (value: string) => void
+  city: string
+  uf: string
+}
+
+const SelectCity: React.FC<SelectCityProps> = ({ setCity, city, uf }) => {
+  const [cityOptions, setCityOptions] = useState<any[]>([])
 
   useEffect(() => {
     if (!uf || uf === 'All') {
+      setCity('')
       return setCityOptions([])
     }
-    setCity('')
 
     const getCity = async () => {
       try {
-        const { data } = await apiPatient.get(`/municipio?uf=${uf}`)
+        const { data } = await apiPatient.get(`/clinica/municipios?uf=${uf}`)
         const dataMapped = mapCity(data)
 
         const allOptions =
@@ -22,28 +28,38 @@ const SelectCity = ({ setCity, city, uf }) => {
             : []
 
         setCityOptions([...allOptions, ...dataMapped])
-        console.log(dataMapped)
       } catch ({ response }) {}
     }
 
     getCity()
   }, [uf])
 
-  const mapCity = (array = []) => {
+  const mapCity = (array: any[]) => {
     if (!array) return []
     return array.map((obj) => ({
-      value: obj.descricao,
-      label: obj.descricao,
+      value: obj.cidade,
+      label: obj.cidade,
     }))
+  }
+
+  const labelDefaultOption = () => {
+    if (!uf) {
+      return 'Necessário selecionar a UF'
+    }
+    if (uf === 'All') {
+      return ''
+    }
+    return 'Selecione:'
   }
 
   return (
     <Select
       options={cityOptions}
       label="Cidade:"
-      labelDefaultOption={!uf ? 'Necessário selecionar a UF' : 'Selecione:'}
+      labelDefaultOption={labelDefaultOption()}
       value={city}
       setValue={setCity}
+      disabled={uf === 'All'}
     />
   )
 }

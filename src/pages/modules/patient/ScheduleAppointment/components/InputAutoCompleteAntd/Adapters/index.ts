@@ -25,5 +25,5 @@ export const fromApi = (data: any[]) => {
     ),
   }
 
-  return [doctors, clinics, specialtys]
+  return [specialtys, doctors, clinics]
 }

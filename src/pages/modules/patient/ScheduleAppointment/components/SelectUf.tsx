@@ -1,32 +1,37 @@
 import { Select } from '@/components/Form/Select'
-import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
+import apiPatient from '@/services/apiPatient'
 
-const SelectUf = ({ setUf, uf }) => {
-  const [ufOptions, setUfOptions] = useState([])
+interface SelectUfProps {
+  setUf: (value: string) => void
+  uf: string
+}
+
+const SelectUf: React.FC<SelectUfProps> = ({ setUf, uf }) => {
+  const [ufOptions, setUfOptions] = useState<any[]>([])
 
   useEffect(() => {
     setUf('')
     const getUf = async () => {
       try {
-        const { data } = await apiPatient.get(`/uf`)
+        const { data } = await apiPatient.get(`/clinica/ufs`)
         const dataMapped = mapUf(data)
 
-        const allOptions =
+        const allLabelOption =
           dataMapped.length && dataMapped.length >= 2
             ? [{ label: 'Todas', value: 'All' }]
             : []
 
-        setUfOptions([...allOptions, ...dataMapped])
+        setUfOptions([...allLabelOption, ...dataMapped])
       } catch ({ response }) {}
     }
 
     getUf()
   }, [])
 
-  const mapUf = (array = []) => {
+  const mapUf = (array: any[]) => {
     if (!array) return []
-    return array.map((obj) => ({ value: obj.idUF, label: obj.sigla }))
+    return array.map((obj) => ({ value: obj.uf, label: obj.uf }))
   }
 
   return (
