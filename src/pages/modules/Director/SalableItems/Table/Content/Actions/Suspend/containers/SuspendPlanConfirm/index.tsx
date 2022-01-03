@@ -50,8 +50,8 @@ export const SuspendPlanConfirm: React.FC = () => {
       <Container>
         <div>
           <h1>
-            Ao suspender o plano {plan.name.toUpperCase()}, os itens abaixo
-            deixam de ser disponibilizados para venda, deseja prosseguir?
+            Ao suspender o plano {plan.name}, os itens abaixo deixam de ser
+            disponibilizados para venda, deseja prosseguir?
           </h1>
 
           {sellableItems.map((sellableItem, index) =>
