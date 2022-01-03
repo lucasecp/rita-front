@@ -26,16 +26,18 @@ export const DependentData = ({
   const [gender, setGender] = useState(personalDatas?.gender || '')
   const [email, setEmail] = useState(personalDatas?.email || '')
   const [phone, setPhone] = useState(personalDatas?.phone || '')
+  console.log(personalDatas)
 
   const [errors, setErrors] = useState({})
 
-  // useEffect(() => {
-  //   setName(personalDatas?.name || '')
-  //   setBirthDate(personalDatas?.birthdate || '')
-  //   setGender(personalDatas?.gender || '')
-  //   setEmail(personalDatas?.email || '')
-  //   setPhone(personalDatas?.phone || '')
-  // }, [personalDatas])
+  useEffect(() => {
+    setName(personalDatas?.name || '')
+    setBirthDate(personalDatas?.birthdate || '')
+    setGender(personalDatas?.gender || '')
+    setEmail(personalDatas?.email || '')
+    setPhone(personalDatas?.phone || '')
+    setCpf(personalDatas?.cpf || '')
+  }, [personalDatas])
 
   useEffect(() => {
     setPersonalDatas({

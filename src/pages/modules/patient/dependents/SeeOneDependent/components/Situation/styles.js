@@ -44,8 +44,7 @@ export const Container = styled.section`
     }
   }
   > div {
-    background: #eeeeee;
-    padding: 14px 16px;
+    padding: 16px 0;
     border-radius: 8px;
     display: flex;
     align-items: center;

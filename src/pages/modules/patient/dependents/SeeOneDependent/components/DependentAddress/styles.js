@@ -20,13 +20,8 @@ export const Container = styled.section`
     > *:nth-child(4) {
       grid-column: span 2;
     }
-
-    > section {
-      grid-column: span 3;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-
-      gap: 24px;
+    > *:nth-child(6) {
+      grid-column: span 2; 
     }
   }
 
@@ -35,16 +30,12 @@ export const Container = styled.section`
       > *:nth-child(4) {
         grid-column: span 1;
       }
+      > *:nth-child(6) {
+        grid-column: span 1;
+      }
       grid-template-columns: 1fr;
 
       gap: 16px;
-
-      > section {
-        grid-column: span 1;
-        grid-template-columns: 1fr;
-
-        gap: 16px;
-      }
     }
   }
 `

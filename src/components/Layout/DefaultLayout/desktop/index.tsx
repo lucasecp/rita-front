@@ -8,6 +8,7 @@ import { Container } from './styles'
 interface DesktopLayoutI {
   title: string
   headerChildren?: JSX.Element | null
+
 }
 
 export const DesktopLayout: React.FC<DesktopLayoutI> = ({
@@ -16,7 +17,7 @@ export const DesktopLayout: React.FC<DesktopLayoutI> = ({
   headerChildren,
 }) => {
   return (
-    <Container>
+    <Container >
       <Header title={title}>{headerChildren}</Header>
       <Sidenav />
       <main>{children}</main>

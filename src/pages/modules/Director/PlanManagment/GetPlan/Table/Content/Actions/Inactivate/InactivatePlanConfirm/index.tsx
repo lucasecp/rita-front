@@ -34,7 +34,7 @@ export const InactivatePlanConfirm = () => {
   const [expandPlan, setExpandPlan] = useState(false)
 
   const onDoNotProceed = () => {
-    history.goBack()
+    // history.goBack()
   }
 
   const onProceed = async () => {

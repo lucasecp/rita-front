@@ -38,8 +38,6 @@ const SeeAllDependents = () => {
     getDependents()
   }, [order])
 
-  console.log(order)
-
   return (
     <Container>
       <DefaultLayout title="Dependentes" headerChildren={<ButtonHeader />}>
