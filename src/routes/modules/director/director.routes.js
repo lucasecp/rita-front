@@ -15,7 +15,7 @@ import {
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
 import DirectorGetPlan from '@/pages/modules/Director/PlanManagment/GetPlan'
 import SeePlan from '@/pages/modules/Director/PlanManagment/SeePlan'
-import { EditPlanConfirm } from '@/pages/modules/Director/PlanManagment/EditPlanConfirm'
+// import { EditPlanConfirm } from '@/pages/modules/Director/PlanManagment/EditPlanConfirm'
 import { CreatePlan } from '@/pages/modules/Director/PlanManagment/CreatePlan'
 import { SuspendPlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Suspend/containers/SuspendPlanConfirm'
 import { ActivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Activate/ActivatePlanConfirm'
@@ -26,10 +26,10 @@ const directorRoutes = [
     path: DIRECTOR_EDIT_PLAN,
     component: EditPlan,
   },
-  {
-    path: DIRECTOR_EDIT_PLAN_CONFIRM,
-    component: EditPlanConfirm,
-  },
+  // {
+  //   path: DIRECTOR_EDIT_PLAN_CONFIRM,
+  //   component: EditPlanConfirm,
+  // },
   {
     path: DIRECTOR_PLAN_MANAGMENT,
     component: DirectorGetPlan,

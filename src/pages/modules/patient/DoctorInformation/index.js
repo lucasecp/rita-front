@@ -32,6 +32,7 @@ const DoctorInformation = () => {
           `/medico/${location.state.idDoctor}`,
         )
         setDoctorInfo(fromApi(data))
+        console.log(fromApi(data),data);
       } catch (error) {
         console.log(error)
       } finally {
