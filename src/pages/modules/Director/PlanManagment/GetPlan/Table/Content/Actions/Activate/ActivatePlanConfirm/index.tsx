@@ -8,6 +8,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/hooks/useModal'
 import { ReasonActivate } from '../messages/ReasonActivate'
 import { useToggle } from '@/hooks/useToggle'
+import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
 interface SellableItem {
   id: number
@@ -23,14 +24,15 @@ interface LocationData {
   }
 }
 
-export const ActivatePlanConfirm = () => {
+export const ActivatePlanConfirm : React.FC<SellableItem> =() => {
   const history = useHistory()
   const { showMessage } = useModal()
   const { sellableItems, plan } = useLocation<LocationData>().state
   const [isSellableItemsExpanded, toggleIsSellableItemsExpanded] = useToggle()
 
   const onDoNotProceed = () => {
-    history.back() // nao está retornando
+    // history.back()
+    history.push(DIRECTOR_SEE_PLAN_MANAGMENT)
   }
 
   const onProceed = async () => {
@@ -46,14 +48,16 @@ export const ActivatePlanConfirm = () => {
             venda, deseja prosseguir?
           </h1>
 
+          {console.log(sellableItems, plan)}
+
           {sellableItems.map((sellableItem, index) =>
             isSellableItemsExpanded ? (
-              <p key={sellableItem.id}>
+              <p key={index}>
                 {sellableItem.name} - {sellableItem.price}
               </p>
             ) : (
               index < 4 && (
-                <p key={sellableItem.id}>
+                <p key={index}>
                   {sellableItem.name} - {sellableItem.price}
                 </p>
               )
