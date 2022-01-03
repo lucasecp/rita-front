@@ -1,33 +1,42 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import EditDependent from './EditDependent'
 import { fromApi } from './adapters'
-const SeeDependents = () => {
-  useEffect(() => {
-    document.title = 'Rita Saúde | Dependentes'
-  }, [])
+import { useLoading } from '@/hooks/useLoading'
+import apiPatient from '@/services/apiPatient'
+import { useHistory, useLocation } from 'react-router'
+import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 
-  const dataFromApi = {
-    nome: 'Hiago Alves ',
-    cpf: '09872058032',
-    sexo: 'M',
-    dataNascimento: '01/02/1985',
-    telefone: '(61) 98498-4848',
-    email: 'teste@teste.com',
-    status: 'I',
-    cep: '21992292',
-    uf: 'RJ',
-    municipio: 'Rio de Janeiro',
-    endereco: 'Rua Tal ',
-    numero: '123',
-    bairro: 'Tijuca',
-    complemento: 'Apartamento',
-  }
-  const dependentData = fromApi(dataFromApi)
+const SeeDependents = () => {
+  const [dependent, setDependent] = useState({})
+  const { Loading } = useLoading()
+  const location = useLocation()
+  const history = useHistory()
+
+  useEffect(() => {
+    // if (!location.state) {
+    //   return history.push(PATIENT_DEPENDENTS)
+    // }
+
+    document.title = 'Rita Saúde | Dependentes'
+
+    const getDependents = async () => {
+      try {
+        Loading.turnOn()
+        const { data } = await apiPatient.get(`/paciente/dependente?id=4880801`)
+        setDependent(fromApi(data))
+      } catch (error) {
+        console.log(error)
+      } finally {
+        Loading.turnOff()
+      }
+    }
+    getDependents()
+  }, [])
 
   return (
     <DefaultLayout title="Visualizar informações de dependente">
-      <EditDependent dependentData={dependentData} />
+      <EditDependent dependentData={dependent} />
     </DefaultLayout>
   )
 }

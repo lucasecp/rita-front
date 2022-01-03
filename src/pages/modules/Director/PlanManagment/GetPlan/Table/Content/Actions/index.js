@@ -25,7 +25,7 @@ const Actions = ({ status, planInformations }) => {
         />
       </CustomTooltip>
 
-us} plan={planInformations} />
+      <Activate status={status} plan={planInformations} />
 
       <Inactivate
         status={status}

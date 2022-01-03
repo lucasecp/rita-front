@@ -10,13 +10,10 @@ export const Situation = ({ address, setAddress, isEditing }) => {
       <h6>Plano:</h6>
 
       <div>
-        <h4>Foto do documento de identificação </h4>
+        <h4>Plano Vida - Paciente desde 03/10/2021 </h4>
       </div>
 
       <h6>Tabela:</h6>
-
-      <h3>Associado à Tabela Padrão</h3>
-
       <p>
         Associação à Tabela Especial vencida em 10/12/2021 <WarningIcon />
       </p>

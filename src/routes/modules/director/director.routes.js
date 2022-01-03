@@ -18,9 +18,8 @@ import SeePlan from '@/pages/modules/Director/PlanManagment/SeePlan'
 import { EditPlanConfirm } from '@/pages/modules/Director/PlanManagment/EditPlanConfirm'
 import { CreatePlan } from '@/pages/modules/Director/PlanManagment/CreatePlan'
 import { SuspendPlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Suspend/containers/SuspendPlanConfirm'
-import { InactivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Inactivate/InactivatePlanConfirm'
 import { ActivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Activate/ActivatePlanConfirm'
-
+import { InactivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Inactivate/containers/InactivatePlanConfirm'
 
 const directorRoutes = [
   {

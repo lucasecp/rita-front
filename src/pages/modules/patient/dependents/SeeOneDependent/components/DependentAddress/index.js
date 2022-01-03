@@ -26,6 +26,15 @@ export const DependentAddress = ({
   const [errors, setErrors] = useState({})
 
   useEffect(() => {
+    setCep(address?.cpf || '')
+    setUf(address?.uf || '')
+    setCity(address?.city || '')
+    setAddressDep(address?.address || '')
+    setDistrict(address?.district || '')
+    setComplement(address?.complement || '')
+  }, [address])
+
+  useEffect(() => {
     setAddress({
       cep,
       uf,
@@ -97,22 +106,21 @@ export const DependentAddress = ({
           name="number"
           disabled={!isEditing}
         />
-        <section>
-          <InputMask
-            label="Bairro:"
-            value={district}
-            setValue={setDistrict}
-            name="district"
-            disabled={!isEditing}
-          />
-          <InputText
-            label="Complemento:"
-            value={complement}
-            setValue={setComplement}
-            name="complement"
-            disabled={!isEditing}
-          />
-        </section>
+
+        <InputMask
+          label="Bairro:"
+          value={district}
+          setValue={setDistrict}
+          name="district"
+          disabled={!isEditing}
+        />
+        <InputText
+          label="Complemento:"
+          value={complement}
+          setValue={setComplement}
+          name="complement"
+          disabled={!isEditing}
+        />
       </section>
     </Container>
   )

@@ -13,7 +13,7 @@ import { Container, HamburgerButton } from './styles'
 import useProfilePhoto from '../../hooks/useProfilePhoto'
 import { getInitialLetterName } from '../../helpers/getInitialLetterName'
 
-export const Header = () => {
+export const Header= () => {
   const { openMenu } = useMenu()
   const { clearDataLogout, user } = useAuth()
   const [photo, getProfilePhoto] = useProfilePhoto()

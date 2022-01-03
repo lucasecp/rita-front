@@ -2,7 +2,7 @@ import CustomTooltip from '@/components/Tooltip'
 import { useModal } from '@/hooks/useModal'
 import { NotSellableItems } from './messages/NotSellableItems'
 import { DIRECTOR_SUSPEND_PLAN } from '@/routes/constants/namedRoutes/routes'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import { SuspendIcon } from './styles'
 import apiPatient from '@/services/apiPatient'
@@ -35,18 +35,6 @@ export const Suspend: React.FC<SuspendProps> = ({ status, plan }) => {
 
   const onSuspendPlan = async () => {
     let sellableItems: SellableItem[] = []
-    sellableItems = [
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-      { id: 0, name: 'Estadual', price: Number('10') },
-    ]
-<<<<<<< HEAD
-    // sellableItems = []
-=======
 
     try {
       Loading.turnOn()
@@ -59,19 +47,18 @@ export const Suspend: React.FC<SuspendProps> = ({ status, plan }) => {
         },
       )
 
-      // const sellableItemsMapped = data.map((sellableItem, index) => ({
-      //   id: index,
-      //   name: sellableItem.nome,
-      //   price: formatPrice(Number(sellableItem.preco)),
-      // }))
+      const sellableItemsMapped = data.map((sellableItem, index) => ({
+        id: index,
+        name: sellableItem.nome,
+        price: formatPrice(Number(sellableItem.preco)),
+      }))
 
-      // sellableItems = sellableItemsMapped
+      sellableItems = sellableItemsMapped
     } catch (error) {
       console.log(error)
     } finally {
       Loading.turnOff()
     }
->>>>>>> 4a67a969178d1b23a6c5e3e4d6e05f3a2975d952
 
     if (sellableItems.length) {
       history.push(DIRECTOR_SUSPEND_PLAN, { sellableItems, plan })
