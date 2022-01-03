@@ -1,7 +1,7 @@
 FROM ECR_NODE_BASE:14 as build
 WORKDIR /app
 COPY package.json ./
-# COPY package-lock.json ./
+COPY package-lock.json ./
 RUN npm install
 ENV REACT_APP_PATIENT_API_HOST https://patient-qa.cloudsabin.com
 ENV REACT_APP_USER_API_HOST https://user-qa.cloudsabin.com

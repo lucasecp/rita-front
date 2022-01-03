@@ -22,6 +22,7 @@ import {
   VALIDATOR_ANALYZE_PATIENTS,
   DIRECTOR_PLAN_MANAGMENT,
   PATIENT_DEPENDENTS,
+  SALABLE_ITEMS,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -88,9 +89,9 @@ export const menuItens = [
     permission: permissionList.LISTAR_PLANO_DIRETOR,
   },
   {
-    path: DIRECTOR_PLAN_MANAGMENT,
+    path: SALABLE_ITEMS,
     icon: <SalableItemsIcon />,
-    name: 'Gestão de Planos',
-    permission: permissionList.LISTAR_PLANO_DIRETOR,
+    name: 'Itens Vendáveis',
+    permission: permissionList.LISTAR_ITENS_VENDAVEIS,
   },
 ]
