@@ -38,6 +38,7 @@ const PlanInformationsDisabled = ({ data }) => {
         />
         {data?.abrangencia && (
           <RangeOfUse
+            label="Abrangência de Utilização*: "
             rangesOfUse={mapToRangeOfUse(data?.abrangencia)}
             viewMode
           />

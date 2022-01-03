@@ -17,6 +17,7 @@ export const RangeOfUse = ({
   rangesOfUse,
   setRangesOfUse = () => {},
   viewMode,
+  label = '',
 }) => {
   const { Loading } = useLoading()
   const [listRangeOfUse, setListRangeOfUse] = useState(rangesOfUse)
@@ -93,9 +94,11 @@ export const RangeOfUse = ({
 
   return (
     <Container viewMode={viewMode}>
-      <header>
-        Abrangência de Utilização*: <span />
-      </header>
+      {label && (
+        <header>
+          {label} <span />
+        </header>
+      )}
       {!viewMode && (
         <>
           <AddArea onGetArea={onGetArea} rangesOfUse={listRangeOfUse} />
