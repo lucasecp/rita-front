@@ -29,6 +29,8 @@ export const DIRECTOR_INACTIVATE_PLAN = '/gestao/planos/inativar'
 export const DIRECTOR_SEE_PLAN_MANAGMENT = '/gestao/planos/visualizar'
 export const DIRECTOR_CREATE_PLAN_MANAGMENT = '/gestao/planos/criar'
 
+export const DIRECTOR_SEE_SELLABLE_ITEMS = '/itens-vendaveis/visualizar'
+
 export const PATIENT_SCHEDULE_APPOINTMENT = '/agendar-consulta'
 
 export const PATIENT_CLINIC_INFORMATION =

@@ -285,6 +285,7 @@ export const EditPlan = () => {
           />
           <RangeOfUse
             id="rangeOfUse"
+            label="Abrangência de Utilização*: "
             rangesOfUse={rangesOfUse}
             setRangesOfUse={setRangesOfUse}
           />
