@@ -9,6 +9,7 @@ import { ReactComponent as PadLockIcon } from '@/assets/icons/pad-lock.svg'
 import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 import { ReactComponent as ManagmentIcon } from '@/assets/icons/managment.svg'
 import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
+import { ReactComponent as SalableItemsIcon } from '@/assets/icons/salable-items.svg'
 
 import {
   INITIAL_PAGE,
@@ -83,6 +84,12 @@ export const menuItens = [
   {
     path: DIRECTOR_PLAN_MANAGMENT,
     icon: <ManagmentIcon />,
+    name: 'Gestão de Planos',
+    permission: permissionList.LISTAR_PLANO_DIRETOR,
+  },
+  {
+    path: DIRECTOR_PLAN_MANAGMENT,
+    icon: <SalableItemsIcon />,
     name: 'Gestão de Planos',
     permission: permissionList.LISTAR_PLANO_DIRETOR,
   },

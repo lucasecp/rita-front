@@ -18,7 +18,7 @@ export const SalableItems = () => {
   const { Loading } = useLoading()
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Gestão de Planos'
+    document.title = 'Rita Saúde | Itens Vendáveis'
     if (!queryApi) {
       return
     }
@@ -40,11 +40,9 @@ export const SalableItems = () => {
     getPlans()
   }, [queryApi, filters, order])
 
-  console.log(plans)
-
   return (
     <Container>
-      <DefaultLayout title="Gestão de Planos" headerChildren={<ButtonHeader />}>
+      <DefaultLayout title="Itens Vendáveis" headerChildren={<ButtonHeader />}>
         <Content>
           <Filter setFilters={setFilters} />
           <Table

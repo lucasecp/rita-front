@@ -23,6 +23,7 @@ import {
   INITIAL_PAGE,
   NOT_FOUND,
   PROFILE,
+  SALABLE_ITEMS,
 } from './constants/namedRoutes/routes'
 
 function Routes() {
@@ -39,6 +40,8 @@ function Routes() {
       {directorRoutes}
 
       {patientRoutes}
+
+      <Route path={SALABLE_ITEMS} isPrivate component={Profile} />
 
       <Route path={PROFILE} isPrivate component={Profile} />
 
