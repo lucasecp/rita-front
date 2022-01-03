@@ -6,7 +6,7 @@ import { Container } from './styles'
 import OutilineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/hooks/useModal'
-import { ReasonActivate } from '../messages/ReasonActivate'
+import { ReasonActivate } from './messages/ReasonActivate'
 import { useToggle } from '@/hooks/useToggle'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
@@ -24,14 +24,13 @@ interface LocationData {
   }
 }
 
-export const ActivatePlanConfirm : React.FC<SellableItem> =() => {
+export const ActivatePlanConfirm: React.FC<SellableItem> = () => {
   const history = useHistory()
   const { showMessage } = useModal()
   const { sellableItems, plan } = useLocation<LocationData>().state
   const [isSellableItemsExpanded, toggleIsSellableItemsExpanded] = useToggle()
 
   const onDoNotProceed = () => {
-    // history.back()
     history.push(DIRECTOR_SEE_PLAN_MANAGMENT)
   }
 
@@ -40,15 +39,13 @@ export const ActivatePlanConfirm : React.FC<SellableItem> =() => {
   }
 
   return (
-    <DefaultLayout title="Gestão de Planos - Editar Plano">
+    <DefaultLayout title="Gestão de Planos - Ativar Plano">
       <Container>
         <div>
           <h1>
-            Ao ativar o {plan.name}, os itens abaixo serão disponibilizados para
-            venda, deseja prosseguir?
+            Ao ativar o {plan.name?.toUpperCase() || 'PLANO SEM NOME'}, os itens
+            abaixo serão disponibilizados para venda, deseja prosseguir?
           </h1>
-
-          {console.log(sellableItems, plan)}
 
           {sellableItems.map((sellableItem, index) =>
             isSellableItemsExpanded ? (

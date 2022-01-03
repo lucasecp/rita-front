@@ -25,7 +25,10 @@ const Actions = ({ status, planInformations }) => {
         />
       </CustomTooltip>
 
-      <Activate status={status} plan={planInformations} />
+      <Activate
+        status={status}
+        plan={{ id: planInformations.idPlano, name: planInformations.nome }}
+      />
 
       <Inactivate
         status={status}

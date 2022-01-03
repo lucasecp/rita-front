@@ -21,7 +21,7 @@ interface ReasonUpdateProps {
   }
 }
 
-export const ReasonUpdate: React.FC<ReasonUpdateProps> = ({ plan }) => {
+export const ReasonSuspend: React.FC<ReasonUpdateProps> = ({ plan }) => {
   const [reason, setReason] = useState('')
   const [reasonError, setReasonError] = useState('')
   const { closeModal } = useModal()

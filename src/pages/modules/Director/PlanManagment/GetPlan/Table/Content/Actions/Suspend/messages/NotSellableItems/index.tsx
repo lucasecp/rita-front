@@ -6,7 +6,7 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { useModal } from '@/hooks/useModal'
-import { ReasonUpdate } from '../ReasonUpdate'
+import { ReasonSuspend } from '../ReasonSuspend'
 
 import { Container } from './styles'
 
@@ -25,7 +25,7 @@ export const NotSellableItems: React.FC<NotSellableItemsProps> = ({ plan }) => {
   }
 
   const onProceed = async () => {
-    showMessage(ReasonUpdate, { plan })
+    showMessage(ReasonSuspend, { plan })
   }
 
   return (
