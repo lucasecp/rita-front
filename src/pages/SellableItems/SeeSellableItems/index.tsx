@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import { SellableItemsDisabled } from '@/pages/modules/SeeSellableItems/components/SellableItemsDisabled'
+import { SellableItemsDisabled } from './components/SellableItemsDisabled'
 
 export const SeeSellableItems: React.FC = () => {
   useEffect(() => {

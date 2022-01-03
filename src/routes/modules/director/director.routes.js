@@ -5,12 +5,10 @@ import {
   DIRECTOR_EDIT_PLAN,
   DIRECTOR_PLAN_MANAGMENT,
   DIRECTOR_SEE_PLAN_MANAGMENT,
-  DIRECTOR_EDIT_PLAN_CONFIRM,
   DIRECTOR_CREATE_PLAN_MANAGMENT,
   DIRECTOR_ACTIVATE_PLAN,
   DIRECTOR_SUSPEND_PLAN,
   DIRECTOR_INACTIVATE_PLAN,
-  DIRECTOR_SEE_SELLABLE_ITEMS,
 } from '../../constants/namedRoutes/routes'
 
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
@@ -22,17 +20,11 @@ import { SuspendPlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPl
 import { ActivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Activate/ActivatePlanConfirm'
 import { InactivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Inactivate/containers/InactivatePlanConfirm'
 
-import { SeeSellableItems } from '@/pages/modules/SeeSellableItems'
-
 const directorRoutes = [
   {
     path: DIRECTOR_EDIT_PLAN,
     component: EditPlan,
   },
-  // {
-  //   path: DIRECTOR_EDIT_PLAN_CONFIRM,
-  //   component: EditPlanConfirm,
-  // },
   {
     path: DIRECTOR_PLAN_MANAGMENT,
     component: DirectorGetPlan,
@@ -57,15 +49,10 @@ const directorRoutes = [
     path: DIRECTOR_CREATE_PLAN_MANAGMENT,
     component: CreatePlan,
   },
-  {
-    path: DIRECTOR_SEE_SELLABLE_ITEMS,
-    component: SeeSellableItems,
-  },
 ]
 
 const directorRoutesComponents = directorRoutes.map((props, index) => (
-  <Route {...props} exact key={index} />
-  // <Route {...props} exact isPrivate key={index} />
+  <Route {...props} exact isPrivate key={index} />
 ))
 
 export default directorRoutesComponents

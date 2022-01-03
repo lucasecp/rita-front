@@ -10,7 +10,7 @@ import apiPatient from '@/services/apiPatient'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 
-export const SellableItems: React.FC = () => {
+export const FilterSellableItems: React.FC = () => {
   // const { Loading } = useLoading()
 
   const [filters, setFilters] = useState([])
