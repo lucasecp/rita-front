@@ -1,8 +1,10 @@
 import React from 'react'
-import { Container } from './styles'
-import { ReactComponent as WarningIcon } from '@/assets/icons/warning-red.svg'
-import { ReactComponent as EyePurpleIcon } from '@/assets/icons/eye-purple.svg'
-import { ReactComponent as DeleteIcon } from '@/assets/icons/trash.svg'
+import {
+  Container,
+  EyePurpleIconStyled,
+  DeleteIconStyled,
+  WarningIconStyled,
+} from './styles'
 import CustomTooltip from '@/components/Tooltip'
 import { useHistory } from 'react-router'
 import { ActionsProps } from '../../../types'
@@ -13,25 +15,19 @@ const Actions: React.FC<ActionsProps> = ({ status, warning, idDependent }) => {
 
   return (
     <Container>
-      {warning && (
-        <CustomTooltip label="Atenção">
-          <WarningIcon />
-        </CustomTooltip>
-      )}
+      <CustomTooltip label="Atenção">
+        <WarningIconStyled hidden={!warning} />
+      </CustomTooltip>
 
-      {status === 'inativo' ||
-        (status === 'Excluído' ? null : (
-          <CustomTooltip label="Visualizar">
-            <EyePurpleIcon
-              onClick={() =>
-                history.push(PATIENT_SEE_DEPENDENT, { idDependent })
-              }
-            />
-          </CustomTooltip>
-        ))}
+      <CustomTooltip label="Visualizar">
+        <EyePurpleIconStyled
+          hidden={status !== 'inativo' && status !== 'Excluido'}
+          onClick={() => history.push(PATIENT_SEE_DEPENDENT, { idDependent })}
+        />
+      </CustomTooltip>
 
       {/* <CustomTooltip label="Excluir">
-        <DeleteIcon />
+        <DeleteIconStyled />
       </CustomTooltip> */}
     </Container>
   )

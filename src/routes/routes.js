@@ -7,6 +7,8 @@ import { Initial } from '@/pages/Initial'
 import Login from '@/pages/Login'
 import { Profile } from '@/pages/Profile'
 import NotFound from '@/pages/404'
+import { FilterSellableItems } from '@/pages/SellableItems/FilterSellableItems'
+import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
 
 import {
   directorRoutes,
@@ -23,6 +25,8 @@ import {
   INITIAL_PAGE,
   NOT_FOUND,
   PROFILE,
+  SEE_SELLABLE_ITEMS,
+  FILTER_SELLABLE_ITEMS,
 } from './constants/namedRoutes/routes'
 
 function Routes() {
@@ -39,6 +43,15 @@ function Routes() {
       {directorRoutes}
 
       {patientRoutes}
+
+      <Route
+        path={FILTER_SELLABLE_ITEMS}
+        isPrivate
+        component={FilterSellableItems}
+        exact
+      />
+
+      <Route path={SEE_SELLABLE_ITEMS} isPrivate component={SeeSellableItems} />
 
       <Route path={PROFILE} isPrivate component={Profile} />
 

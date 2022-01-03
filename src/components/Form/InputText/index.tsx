@@ -1,22 +1,33 @@
 import hasLetter from '@/helpers/hasLetter'
 import hasNumber from '@/helpers/hasNumber'
 import hasSpecialCaracter from '@/helpers/hasSpecialCaracter'
-import React from 'react'
+import React, { InputHTMLAttributes } from 'react'
 import MsgError from '../../MsgError'
 import { Container } from './styles'
 
-const InputText = ({
-  label,
+interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string
+  setValue: React.Dispatch<React.SetStateAction<string>>
+  hasError?: boolean
+  type?: string
+  msgError?: string
+  variation?: 'secondary'
+  onlyLetter?: boolean
+  onlyNumber?: boolean
+}
+
+const InputText: React.FC<InputTextProps> = ({
+  label = '',
   setValue,
-  hasError,
-  type,
-  msgError,
-  variation,
-  onlyLetter,
-  onlyNumber,
+  hasError = false,
+  type = 'text',
+  msgError = '',
+  variation = '',
+  onlyLetter = false,
+  onlyNumber = false,
   ...rest
 }) => {
-  const handleChange = ({ target }) => {
+  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     if (!setValue) return
 
     if (
@@ -38,12 +49,7 @@ const InputText = ({
   return (
     <Container variation={variation} hasError={msgError || hasError}>
       {label && <label htmlFor={label}>{label}</label>}
-      <input
-        type={type || 'text'}
-        id={label}
-        onChange={handleChange}
-        {...rest}
-      />
+      <input type={type} id={label} onChange={handleChange} {...rest} />
       {msgError && <MsgError>{msgError}</MsgError>}
     </Container>
   )

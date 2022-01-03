@@ -6,16 +6,23 @@ export const Container = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  > h1 {
-    font-size: 32px;
-    line-height: 39px;
-    font-weight: 500;
-    color: ${colors.gray.dark};
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+
+    > h1 {
+      font-size: 32px;
+      line-height: 39px;
+      font-weight: 500;
+      color: ${colors.gray.dark};
+    }
   }
 
   > nav {
     display: flex;
     align-items: center;
+    margin-left: 24px;
 
     > a {
       display: flex;
