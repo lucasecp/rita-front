@@ -88,10 +88,10 @@ export const menuItens = [
     name: 'Gestão de Planos',
     permission: permissionList.LISTAR_PLANO_DIRETOR,
   },
-  {
-    path: SALABLE_ITEMS,
-    icon: <SalableItemsIcon />,
-    name: 'Itens Vendáveis',
-    permission: permissionList.LISTAR_ITENS_VENDAVEIS,
-  },
+  // {
+  //   path: SALABLE_ITEMS,
+  //   icon: <SalableItemsIcon />,
+  //   name: 'Itens Vendáveis',
+  //   permission: permissionList.LISTAR_ITENS_VENDAVEIS,
+  // },
 ]
