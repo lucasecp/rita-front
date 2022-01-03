@@ -24,11 +24,8 @@ const Actions = ({ status, planInformations }) => {
           }
         />
       </CustomTooltip>
-<<<<<<< HEAD
-=======
 
->>>>>>> 4a67a969178d1b23a6c5e3e4d6e05f3a2975d952
-      <Activate status={status} plan={planInformations} />
+us} plan={planInformations} />
 
       <Inactivate
         status={status}
