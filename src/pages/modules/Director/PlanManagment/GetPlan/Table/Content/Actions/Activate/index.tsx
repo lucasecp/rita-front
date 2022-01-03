@@ -6,47 +6,64 @@ import apiPatient from '@/services/apiPatient'
 
 import { ActivateIcon } from './styles'
 import { toast } from 'react-toastify'
-import { DIRECTOR_EDIT_PLAN_CONFIRM } from '@/routes/constants/namedRoutes/routes'
+import { DIRECTOR_ACTIVATE_PLAN } from '@/routes/constants/namedRoutes/routes'
+import { formatPrice } from '@/helpers/formatPrice'
+import { useLoading } from '@/hooks/useLoading'
 
 interface ActivateProps {
   status: string
   plan: {
-    idPlano: number
+    id: number
+    name: string
   }
+}
+interface SellableItem {
+  id: number
+  nome: string
+  preco: string
 }
 
 export const Activate: React.FC<ActivateProps> = ({ status, plan }) => {
   const history = useHistory()
-  const { showMessage } = useModal()
-
-  let sellableItems: any[] = []
-  // call to api
-  sellableItems = [
-    { id: 1, name: 'Centro Oeste - Goiás (Estadual)', price: 'R$ 39,90' },
-    { id: 2, name: 'Centro Oeste - Goiás (Estadual)', price: 'R$ 39,90' },
-  ]
+  const { Loading } = useLoading()
 
   const CheckSellableItems = async () => {
-    const data = await apiPatient.patch(`/plano/${plan.idPlano}/ativar`, {
-      params: { confirmado: false },
-    })
+    try {
+      Loading.turnOn()
 
-    console.log(data.data, "data")
-
-    if (!data.data.length) {
-      return toast.warning(
-        'Para ativar um plano, é necessário que ele possua pelo menos um item vendável associado',
-      )
-    }
-
-    if (data.data.length) {
-      return history.push(DIRECTOR_EDIT_PLAN_CONFIRM, {
-        plan: plan,
-        sellableItems, //Precisando do ID para o index
+      const response = await apiPatient.patch(`/plano/${plan.id}/ativar`, {
+        params: { confirmado: false },
       })
+
+      if (!response.data.length) {
+        toast.warning(
+          'Para ativar um plano, é necessário que ele possua pelo menos um item vendável associado',
+        )
+        return
+      }
+
+      const sellableItemsMapped = response.data.map(
+        (sellableItem: SellableItem) => ({
+          name: sellableItem.nome,
+          price: formatPrice(Number(sellableItem.preco)),
+        }),
+      )
+
+      if (response.data.length) {
+        history.push(DIRECTOR_ACTIVATE_PLAN, {
+          sellableItems: sellableItemsMapped,
+          plan: {
+            id: plan.id,
+            name: plan.name,
+          },
+        })
+      }
+    } catch (error) {
+      toast.error(`Erro ao ativar o plano ${plan.name}`)
+    } finally {
+      Loading.turnOff()
     }
   }
-
   return (
     <CustomTooltip label="Ativar">
       <ActivateIcon

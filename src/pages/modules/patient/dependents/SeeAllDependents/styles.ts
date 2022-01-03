@@ -8,7 +8,7 @@ export const Content = styled.div`
   background: ${colors.purple.background.light};
 
   @media (max-width: 767px) {
-    padding: 25px 24px 0;
+    padding: 0 24px 0;
     margin: 40px 0 0 0;
   }
 `

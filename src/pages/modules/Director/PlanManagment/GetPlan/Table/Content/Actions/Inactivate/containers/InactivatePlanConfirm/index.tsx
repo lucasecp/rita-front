@@ -37,6 +37,7 @@ export const InactivatePlanConfirm: React.FC = () => {
   const [expandPlan, setExpandPlan] = useState(false)
 
   const onDoNotProceed = () => {
+    // history.goBack()
     history.push(DIRECTOR_SEE_PLAN_MANAGMENT)
   }
 

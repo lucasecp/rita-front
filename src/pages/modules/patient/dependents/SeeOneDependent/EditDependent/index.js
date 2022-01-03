@@ -9,6 +9,8 @@ import { Documents } from '../components/Documents'
 import { Situation } from '../components/Situation'
 import Danied from '../messages/Denied'
 import { useModal } from '@/hooks/useModal'
+import { useHistory } from 'react-router'
+import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 // import { toApi, fromApi } from '../adapters'
 
 const EditDependent = ({ dependentData }) => {
@@ -23,8 +25,8 @@ const EditDependent = ({ dependentData }) => {
   const [cancelEdit, setCancelEdit] = useState(false)
   const [prevData, setPrevData] = useState(dependentData)
   const { showSimple, showMessage } = useModal()
-  // const history = useHistory()
-
+  const history = useHistory()
+  console.log(dependentData)
   useEffect(() => {
     setButtonIsDisabled(personalDatas?.hasError || address?.hasError)
   }, [address, personalDatas])
@@ -62,14 +64,14 @@ const EditDependent = ({ dependentData }) => {
     <Container>
       <DependentData
         isEditing={isEditing}
-        personalDatas={personalDatas}
+        personalDatas={dependentData.personalDatas}
         setPersonalDatas={setPersonalDatas}
         initialData={prevData?.personalDatas}
         cancelEdit={cancelEdit}
       />
       <DependentAddress
         isEditing={isEditing}
-        address={address}
+        address={dependentData.address}
         setAddress={setAddress}
         initialData={prevData?.address}
         cancelEdit={cancelEdit}
@@ -79,7 +81,9 @@ const EditDependent = ({ dependentData }) => {
 
       {!isEditing ? (
         <ButtonGroup>
-          <ButtonLink>Voltar</ButtonLink>
+          <ButtonLink onClick={() => history.push(PATIENT_DEPENDENTS)}>
+            Voltar
+          </ButtonLink>
           <OutilineButton onClick={onEdit}>Editar</OutilineButton>
         </ButtonGroup>
       ) : (

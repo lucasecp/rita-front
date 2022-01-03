@@ -7,6 +7,7 @@ import {
   DIRECTOR_SEE_PLAN_MANAGMENT,
   DIRECTOR_EDIT_PLAN_CONFIRM,
   DIRECTOR_CREATE_PLAN_MANAGMENT,
+  DIRECTOR_ACTIVATE_PLAN,
   DIRECTOR_SUSPEND_PLAN,
   DIRECTOR_INACTIVATE_PLAN,
   DIRECTOR_SEE_SELLABLE_ITEMS,
@@ -15,9 +16,10 @@ import {
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
 import DirectorGetPlan from '@/pages/modules/Director/PlanManagment/GetPlan'
 import SeePlan from '@/pages/modules/Director/PlanManagment/SeePlan'
-import { EditPlanConfirm } from '@/pages/modules/Director/PlanManagment/EditPlanConfirm'
+// import { EditPlanConfirm } from '@/pages/modules/Director/PlanManagment/EditPlanConfirm'
 import { CreatePlan } from '@/pages/modules/Director/PlanManagment/CreatePlan'
 import { SuspendPlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Suspend/containers/SuspendPlanConfirm'
+import { ActivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Activate/ActivatePlanConfirm'
 import { InactivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Inactivate/containers/InactivatePlanConfirm'
 
 import { SeeSellableItems } from '@/pages/modules/SeeSellableItems'
@@ -27,13 +29,17 @@ const directorRoutes = [
     path: DIRECTOR_EDIT_PLAN,
     component: EditPlan,
   },
-  {
-    path: DIRECTOR_EDIT_PLAN_CONFIRM,
-    component: EditPlanConfirm,
-  },
+  // {
+  //   path: DIRECTOR_EDIT_PLAN_CONFIRM,
+  //   component: EditPlanConfirm,
+  // },
   {
     path: DIRECTOR_PLAN_MANAGMENT,
     component: DirectorGetPlan,
+  },
+  {
+    path: DIRECTOR_ACTIVATE_PLAN,
+    component: ActivatePlanConfirm,
   },
   {
     path: DIRECTOR_SUSPEND_PLAN,

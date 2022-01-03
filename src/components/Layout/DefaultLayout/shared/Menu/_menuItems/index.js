@@ -9,6 +9,7 @@ import { ReactComponent as PadLockIcon } from '@/assets/icons/pad-lock.svg'
 import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 import { ReactComponent as ManagmentIcon } from '@/assets/icons/managment.svg'
 import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
+import { ReactComponent as SalableItemsIcon } from '@/assets/icons/salable-items.svg'
 
 import {
   INITIAL_PAGE,
@@ -21,6 +22,7 @@ import {
   VALIDATOR_ANALYZE_PATIENTS,
   DIRECTOR_PLAN_MANAGMENT,
   PATIENT_DEPENDENTS,
+  SALABLE_ITEMS,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -86,4 +88,10 @@ export const menuItens = [
     name: 'Gestão de Planos',
     permission: permissionList.LISTAR_PLANO_DIRETOR,
   },
+  // {
+  //   path: SALABLE_ITEMS,
+  //   icon: <SalableItemsIcon />,
+  //   name: 'Itens Vendáveis',
+  //   permission: permissionList.LISTAR_ITENS_VENDAVEIS,
+  // },
 ]

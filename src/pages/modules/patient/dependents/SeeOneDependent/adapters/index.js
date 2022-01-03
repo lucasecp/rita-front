@@ -1,3 +1,4 @@
+import formatDate from '@/helpers/formatDate'
 import { statusFromApi, statusToApi } from './showStatus'
 
 export const fromApi = (dependentInfo) => {
@@ -5,17 +6,27 @@ export const fromApi = (dependentInfo) => {
     personalDatas: {
       name: dependentInfo.nome,
       cpf: dependentInfo.cpf,
-      gender: dependentInfo.sexo,
-      birthdate: dependentInfo.dataNascimento,
-      phone: dependentInfo.telefone,
+      gender: dependentInfo.genero,
+      birthdate: formatDate(dependentInfo.dataNascimento),
+      phone: dependentInfo.celular,
       email: dependentInfo.email,
       status: statusFromApi(dependentInfo.status),
+      table: dependentInfo.tabela,
+      income: dependentInfo.renda,
+      plan: {
+        name: dependentInfo.plano?.nome,
+        dateStart: formatDate(dependentInfo.plano?.dataAtivacao),
+      },
+      documents: dependentInfo.documentosCadastrados?.reduce((ac, doc) => {
+        ac[doc?.tipoArquivo] = true
+        return ac
+      }, {}),
     },
 
     address: {
       cep: dependentInfo.cep,
       uf: dependentInfo.uf,
-      city: dependentInfo.municipio,
+      city: dependentInfo.cidade,
       address: dependentInfo.endereco,
       number: dependentInfo.numero,
       district: dependentInfo.bairro,
@@ -28,7 +39,7 @@ export const toApi = (personalDatas, address) => {
   return {
     nome: personalDatas.name,
     sexo: personalDatas.gender,
-    dataNascimento: personalDatas.birthDate,
+    dataNascimento: personalDatas.birthdate,
     telefone: personalDatas.phone,
     email: personalDatas.email,
     status: statusToApi(personalDatas.status),
