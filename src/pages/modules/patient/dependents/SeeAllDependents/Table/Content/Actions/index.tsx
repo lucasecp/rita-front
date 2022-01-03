@@ -19,16 +19,13 @@ const Actions: React.FC<ActionsProps> = ({ status, warning, idDependent }) => {
         </CustomTooltip>
       )}
 
-      {status === 'inativo' ||
-        (status === 'Excluído' ? null : (
-          <CustomTooltip label="Visualizar">
-            <EyePurpleIcon
-              onClick={() =>
-                history.push(PATIENT_SEE_DEPENDENT, { idDependent })
-              }
-            />
-          </CustomTooltip>
-        ))}
+      {status === 'inativo' || status === 'Excluído' ? null : (
+        <CustomTooltip label="Visualizar">
+          <EyePurpleIcon
+            onClick={() => history.push(PATIENT_SEE_DEPENDENT, { idDependent })}
+          />
+        </CustomTooltip>
+      )}
 
       {/* <CustomTooltip label="Excluir">
         <DeleteIcon />
