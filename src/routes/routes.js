@@ -7,6 +7,7 @@ import { Initial } from '@/pages/Initial'
 import Login from '@/pages/Login'
 import { Profile } from '@/pages/Profile'
 import NotFound from '@/pages/404'
+import { SellableItems } from '@/pages/SellableItems'
 
 import {
   directorRoutes,
@@ -23,9 +24,8 @@ import {
   INITIAL_PAGE,
   NOT_FOUND,
   PROFILE,
-  SALABLE_ITEMS,
+  SELLABLE_ITEMS,
 } from './constants/namedRoutes/routes'
-import { SalableItems } from '@/pages/SalableItems'
 
 function Routes() {
   return (
@@ -42,7 +42,7 @@ function Routes() {
 
       {patientRoutes}
 
-      <Route path={SALABLE_ITEMS} isPrivate component={SalableItems} />
+      <Route path={SELLABLE_ITEMS} isPrivate component={SellableItems} />
 
       <Route path={PROFILE} isPrivate component={Profile} />
 

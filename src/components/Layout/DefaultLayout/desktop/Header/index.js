@@ -31,8 +31,10 @@ export const Header = ({ title, children }) => {
 
   return (
     <Container>
-      <h1>{title || 'Como você precisa cuidar da sua saúde hoje?'}</h1>
-      {children}
+      <div>
+        <h1>{title || 'Como você precisa cuidar da sua saúde hoje?'}</h1>
+        {children}
+      </div>
       <nav>
         <Link to="/perfil">
           Olá, {nameFormated}

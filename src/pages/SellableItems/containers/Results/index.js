@@ -4,7 +4,7 @@ import { Container } from './styles'
 import Header from './Header'
 import Content from './Content'
 
-const Table = ({ plans, order, setOrder }) => {
+export const Results = ({ plans, order, setOrder }) => {
   return (
     <Container>
       <Header order={order} setOrder={setOrder} />
@@ -12,5 +12,3 @@ const Table = ({ plans, order, setOrder }) => {
     </Container>
   )
 }
-
-export default Table

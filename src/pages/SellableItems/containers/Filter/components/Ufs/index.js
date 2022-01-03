@@ -4,15 +4,15 @@ import { queryFilterString } from '@/helpers/queryString/filter'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
-import { mapUf } from '../../helpers/mapDataFromApiToMultSelect'
+import { mapUf } from '../../../../helpers/mapDataFromApiToMultSelect'
 
-const MultSelectUf = ({ setUf, uf, regional }) => {
+export const Ufs = ({ setUf, uf, regional }) => {
   const [ufOptions, setUfOptions] = useState([])
   const { Loading } = useLoading()
 
   useEffect(() => {
     setUf([])
-    const getUf = async () => {
+    const loadUfs = async () => {
       try {
         Loading.turnOn()
         const queryRegional = [
@@ -40,7 +40,7 @@ const MultSelectUf = ({ setUf, uf, regional }) => {
       }
     }
 
-    getUf()
+    loadUfs()
   }, [regional])
 
   return (
@@ -52,5 +52,3 @@ const MultSelectUf = ({ setUf, uf, regional }) => {
     />
   )
 }
-
-export default MultSelectUf
