@@ -21,7 +21,7 @@ const Actions: React.FC<ActionsProps> = ({ status, warning, idDependent }) => {
 
       <CustomTooltip label="Visualizar">
         <EyePurpleIconStyled
-          hidden={status !== 'inativo' && status !== 'Excluido'}
+          hidden={status === 'inativo' || status === 'Excluido'}
           onClick={() => history.push(PATIENT_SEE_DEPENDENT, { idDependent })}
         />
       </CustomTooltip>
