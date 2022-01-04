@@ -26,6 +26,8 @@ const Content: React.FC<ContentProps> = ({ dependents }) => {
             idDependent={dep.id}
             status={dep.status}
             warning={!dep.documentsOk && !dep.isValidate}
+            documentsOk={dep.documentsOk}
+            isValidate={dep.isValidate}
           />
         </ListItem>
       ))}
