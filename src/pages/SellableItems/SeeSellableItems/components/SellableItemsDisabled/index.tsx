@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import mapDataToMultSelect from './helpers/mapDataToMultSelect'
+import mapToRangeOfUse from './helpers/mapToRangeOfUse'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import { RangeOfUse } from '@/components/RangeOfUse'
@@ -9,8 +11,31 @@ import { FormItem } from './FormItem'
 import { Container, ArrowLeft } from './styles'
 
 export const SellableItemsDisabled: React.FC = () => {
-  const [services, setServices] = useState([])
-  const [rangesOfUse, setRangesOfUse] = useState([])
+  const [services, setServices] = useState<any[]>([])
+  const [rangesOfUse, setRangesOfUse] = useState<any[]>([])
+
+  useEffect(() => {
+    setServices([{ id: 1, nome: 'Consulta Dermatologista' }])
+    setRangesOfUse([
+      {
+        regional: {
+          id: 1,
+          nome: 'Sudeste',
+        },
+      },
+      {
+        regional: {
+          id: 5,
+          nome: 'Centro-Oeste',
+        },
+        uf: {
+          id: 14,
+          sigla: 'MS',
+          nome: 'Mato Grosso do Sul',
+        },
+      },
+    ])
+  }, [])
 
   const isDirector = false
 
@@ -36,9 +61,9 @@ export const SellableItemsDisabled: React.FC = () => {
 
           <CustomMultSelect
             disabled
-            label="Serviços*:"
+            label="Serviços:"
             variation="secondary"
-            value={services}
+            value={mapDataToMultSelect(services)}
             setValue={setServices}
             hasError={false}
             messageError=""

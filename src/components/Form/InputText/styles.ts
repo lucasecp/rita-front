@@ -85,7 +85,6 @@ export const Container = styled.div<ContainerProps>`
           border-color: ${
             hasError ? colors.orange.light : colors.purple.main.dark
           };
-        padding: 5px;
       `}
   }
 `

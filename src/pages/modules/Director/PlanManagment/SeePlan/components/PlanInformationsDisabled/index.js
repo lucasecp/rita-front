@@ -18,6 +18,7 @@ import { useHistory } from 'react-router'
 
 const PlanInformationsDisabled = ({ data }) => {
   const history = useHistory()
+
   return (
     <>
       <Container>
