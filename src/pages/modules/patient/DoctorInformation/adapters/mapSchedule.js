@@ -1,4 +1,5 @@
 export const scheduleFromApi = (schedules) => {
+
   if (!schedules) return []
 
   return [schedules]?.map((schedule) => ({

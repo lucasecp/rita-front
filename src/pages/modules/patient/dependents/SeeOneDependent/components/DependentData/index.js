@@ -26,7 +26,6 @@ export const DependentData = ({
   const [gender, setGender] = useState(personalDatas?.gender || '')
   const [email, setEmail] = useState(personalDatas?.email || '')
   const [phone, setPhone] = useState(personalDatas?.phone || '')
-  console.log(personalDatas)
 
   const [errors, setErrors] = useState({})
 
