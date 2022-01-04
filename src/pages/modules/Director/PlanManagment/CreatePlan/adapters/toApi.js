@@ -1,4 +1,4 @@
-import { mapRangesToSendApi } from '@/components/RangeOfUse/helpers/mapDataToSendApi'
+import { mapRangesToSendApi } from '../helpers/mapRangesToSendApi'
 
 export const toApi = (data) => {
   const { code, name, description, services, rangesOfUse } = data

@@ -220,6 +220,7 @@ export const CreatePlan = () => {
             messageError={errors.services}
           />
           <RangeOfUse
+            label="Abrangência de Utilização*: "
             rangesOfUse={rangesOfUse}
             setRangesOfUse={setRangesOfUse}
           />

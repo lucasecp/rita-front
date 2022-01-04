@@ -2,46 +2,47 @@ import CustomMultSelect from '@/components/Form/MultSelect'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
-import mapDataFromApiToMultSelect from '../../helpers/mapDataFromApiToMultSelect'
+import mapDataFromApiToMultSelect from '../../../../helpers/mapDataFromApiToMultSelect'
 
-const MultSelectRegional = ({ setRegional, regional }) => {
-  const [regionalOptions, setRegionalOptions] = useState([])
+export const Services = ({ setServices, services }) => {
+  const [serviceOptions, setServicesOptions] = useState([])
   const { Loading } = useLoading()
 
   useEffect(() => {
-    const getRegional = async () => {
+    const loadServices = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get('/regional')
+        const { data } = await apiPatient.get('/servico')
         const dataMapped = mapDataFromApiToMultSelect(data?.dados)
 
         if (!dataMapped.length) {
-          return setRegionalOptions([])
+          return setServicesOptions([])
         }
 
-        setRegionalOptions(() => {
+        setServicesOptions(() => {
           if (dataMapped.length === 1) {
             return dataMapped
           }
-          return [{ name: 'Todas', id: 'All' }, ...dataMapped]
+          return [{ name: 'Todos', id: 'All' }, ...dataMapped]
         })
       } catch ({ response }) {
+        // toast.error('Erro ao carregar serviços!')
       } finally {
         Loading.turnOff()
       }
     }
 
-    getRegional()
+    loadServices()
   }, [])
 
   return (
     <CustomMultSelect
-      options={regionalOptions}
-      label="Regional:"
-      value={regional}
-      setValue={setRegional}
+      options={serviceOptions}
+      label="Serviços:"
+      value={services}
+      setValue={setServices}
     />
   )
 }
 
-export default MultSelectRegional
+export default Services

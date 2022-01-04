@@ -5,7 +5,6 @@ import {
   DIRECTOR_EDIT_PLAN,
   DIRECTOR_PLAN_MANAGMENT,
   DIRECTOR_SEE_PLAN_MANAGMENT,
-  DIRECTOR_EDIT_PLAN_CONFIRM,
   DIRECTOR_CREATE_PLAN_MANAGMENT,
   DIRECTOR_ACTIVATE_PLAN,
   DIRECTOR_SUSPEND_PLAN,
@@ -26,10 +25,6 @@ const directorRoutes = [
     path: DIRECTOR_EDIT_PLAN,
     component: EditPlan,
   },
-  // {
-  //   path: DIRECTOR_EDIT_PLAN_CONFIRM,
-  //   component: EditPlanConfirm,
-  // },
   {
     path: DIRECTOR_PLAN_MANAGMENT,
     component: DirectorGetPlan,
@@ -57,8 +52,7 @@ const directorRoutes = [
 ]
 
 const directorRoutesComponents = directorRoutes.map((props, index) => (
-  <Route {...props} exact key={index} />
-  // <Route {...props} exact isPrivate key={index} />
+  <Route {...props} exact isPrivate key={index} />
 ))
 
 export default directorRoutesComponents
