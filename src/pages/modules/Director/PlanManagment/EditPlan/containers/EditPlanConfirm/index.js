@@ -7,7 +7,7 @@ import OutilineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useToggle } from '@/hooks/useToggle'
 import { useModal } from '@/hooks/useModal'
-import { ReasonUpdate } from '../EditPlan/messages/ReasonUpdate'
+import { ReasonUpdate } from '../../messages/ReasonUpdate'
 
 export const EditPlanConfirm = () => {
   const history = useHistory()
