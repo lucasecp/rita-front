@@ -9,6 +9,7 @@ import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
+import Table from '@/pages/modules/Director/PlanManagment/GetPlan/Table'
 
 export const FilterSellableItems: React.FC = () => {
   // const { Loading } = useLoading()
@@ -45,13 +46,14 @@ export const FilterSellableItems: React.FC = () => {
     <DefaultLayout title="Itens Vendáveis" headerChildren={<IncludeButton />}>
       <Container>
         <Filter setFilters={setFilters} />
-        {/* <Filter setFilters={setFilters} /> */}
         {/* <Table
-            plans={plans}
-            setPlans={setPlans}
-            setOrder={setOrder}
-            order={order}
-          />
+          plans={plans}
+          setPlans={setPlans}
+          setOrder={setOrder}
+          order={order}
+        /> */}
+        <Results filters={filters} />
+        {/*
           <Pagination
             total={plans?.total}
             setQuery={setQueryApi}

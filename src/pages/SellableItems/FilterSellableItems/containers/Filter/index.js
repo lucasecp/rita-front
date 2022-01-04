@@ -57,7 +57,7 @@ export const Filter = ({ setFilters }) => {
   }
 
   const onFilterResults = () => {
-    //   setFilters(verifyTypedFields(arrayQuery))
+    setFilters({ code, plan, services, status, regional, uf, city })
   }
 
   return (

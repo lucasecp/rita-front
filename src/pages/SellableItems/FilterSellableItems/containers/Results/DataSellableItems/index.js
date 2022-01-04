@@ -1,12 +1,12 @@
 import React from 'react'
 import { Container, Status } from './styles'
 import Actions from './Actions'
-import { showStatus } from '../../helpers/showStatus'
+import { showStatus } from '../../../helpers/showStatus'
 import formatDate from '@/helpers/formatDate'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import CustomTooltip from '@/components/Tooltip'
 
-const Content = ({ plans }) => {
+export const DataSellableItems = ({ plans }) => {
   return (
     <Container>
       {plans?.dados?.map((plan, index) => (
@@ -29,5 +29,3 @@ const Content = ({ plans }) => {
     </Container>
   )
 }
-
-export default Content
