@@ -32,6 +32,7 @@
     "react-scripts": "4.0.3",
     "react-toastify": "^8.0.3",
     "styled-components": "^5.3.0",
+    "use-local-storage": "^2.2.5",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -47,7 +48,7 @@
       "not dead",
       "not op_mini all"
     ],
-    "development": [ 
+    "development": [
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"

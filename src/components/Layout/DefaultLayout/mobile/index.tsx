@@ -14,10 +14,10 @@ interface MobileLayoutI {
 export const MobileLayout: React.FC<MobileLayoutI> = ({
   title,
   children,
-  headerChildren
+  headerChildren,
 }) => {
   return (
-    <Container >
+    <Container>
       <Header />
       <Sidenav />
       <main>

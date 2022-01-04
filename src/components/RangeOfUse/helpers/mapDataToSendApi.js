@@ -1,12 +1,3 @@
-export const mapDataToSendApi = (area, ranges) => {
-  return {
-    regional: area.regional.value,
-    uf: area.uf.value,
-    municipios: area.cities.map((city) => city.id),
-    abrangencia: mapRangesToSendApi(ranges),
-  }
-}
-
 export const mapRangesToSendApi = (ranges) => {
   const rangesMapped = ranges?.map((range) => ({
     regional: range.regional
@@ -20,4 +11,13 @@ export const mapRangesToSendApi = (ranges) => {
   }))
 
   return rangesMapped
+}
+
+export const mapDataToSendApi = (area, ranges) => {
+  return {
+    regional: area.regional.value,
+    uf: area.uf.value,
+    municipios: area.cities.map((city) => city.id),
+    abrangencia: mapRangesToSendApi(ranges),
+  }
 }
