@@ -14,16 +14,18 @@ const SeeDependents = () => {
   const history = useHistory()
 
   useEffect(() => {
-    // if (!location.state) {
-    //   return history.push(PATIENT_DEPENDENTS)
-    // }
+    if (!location.state) {
+      return history.push(PATIENT_DEPENDENTS)
+    }
 
     document.title = 'Rita Saúde | Dependentes'
 
     const getDependents = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get(`/paciente/dependente?id=4880801`)
+        const { data } = await apiPatient.get(
+          `/paciente/dependente?id=${location.state.idDependent}`,
+        )
         setDependent(fromApi(data))
       } catch (error) {
         console.log(error)

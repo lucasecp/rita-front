@@ -1,7 +1,9 @@
 import formatDate from '@/helpers/formatDate'
+import formatIncome from './formatIncome'
 import { statusFromApi, statusToApi } from './showStatus'
 
 export const fromApi = (dependentInfo) => {
+
   return {
     personalDatas: {
       name: dependentInfo.nome,
@@ -11,11 +13,12 @@ export const fromApi = (dependentInfo) => {
       phone: dependentInfo.celular,
       email: dependentInfo.email,
       status: statusFromApi(dependentInfo.status),
-      table: dependentInfo.tabela,
-      income: dependentInfo.renda,
+      table: dependentInfo.tabela?.nome,
+      income: formatIncome(dependentInfo.renda),
       plan: {
         name: dependentInfo.plano?.nome,
-        dateStart: formatDate(dependentInfo.plano?.dataAtivacao),
+        startDate: formatDate(dependentInfo.plano?.dataAtivacao),
+        endDate: formatDate(dependentInfo.plano?.dataTermino),
       },
       documents: dependentInfo.documentosCadastrados?.reduce((ac, doc) => {
         ac[doc?.tipoArquivo] = true
