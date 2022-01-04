@@ -4,22 +4,23 @@ import { Container } from './styles'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as ZoomIcon } from '@/assets/icons/zoom.svg'
 
-export const Documents = ({ address, setAddress, isEditing }) => {
+export const Documents = ({ data }) => {
   return (
     <Container>
       <h1>Documentos Cadastrados</h1>
-
       <div>
-        <h4>Foto do documento de identificação </h4> <VerifiedIcon />
+        <h4>Foto do documento de identificação </h4>
+        {data?.documents?.Cpf && <VerifiedIcon />}
       </div>
       <div>
-        <h4>Foto segurando documento de identificação </h4> <VerifiedIcon />
+        <h4>Foto segurando documento de identificação </h4>{' '}
+        {data?.documents?.FotoSegurandoDoc && <VerifiedIcon />}
       </div>
       <section>
         <h5>Renda:</h5>
         <div>
           <div>
-            <h4>Até 1 salário mínimo e meio </h4>
+            <h4>{data?.income} </h4>
           </div>
           <div>
             <h4>Comprovante de renda </h4>

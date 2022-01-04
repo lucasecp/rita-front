@@ -11,15 +11,17 @@ export const fromApi = (dataClinic) => {
   const clinicdoctor = dataClinic?.clinicaMedico?.map((specialty) => ({
     linkGoogleMap: specialty.clinica.comoChegar,
 
-    scheduleAppointment: scheduleFromApi(
-      dataClinic.agenda?.reduce((ac, schedule) => {
-        if (schedule.idMedico === specialty.idMedico) {
-          ac = schedule?.agenda
-          return ac
-        }
+    scheduleAppointment: dataClinic.agenda?.reduce((ac, schedule) => {
+      const hasSchedule = dataClinic?.medicoEspecialidade?.some(
+        (spe) => spe.idMedico === schedule.idMedico,
+      )
+      console.log(hasSchedule)
+      if (hasSchedule) {
+        ac = schedule?.agenda
         return ac
-      }, null),
-    ),
+      }
+      return ac
+    }, null),
 
     status: specialty.statusMedicoClinica,
     clinic: {

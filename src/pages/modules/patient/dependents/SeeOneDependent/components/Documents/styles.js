@@ -14,6 +14,9 @@ export const Container = styled.section`
     display: flex;
     flex-direction: column;
     margin-top: 24px;
+    > h5 {
+      margin-bottom: 4px;
+    }
     > h5,
     > div div > h4 {
       font-size: 16px;
@@ -35,13 +38,20 @@ export const Container = styled.section`
         justify-content: space-between;
         background: #eeeeee;
         padding: 14px 16px;
+        max-height: 50px;
+        min-height: 50px;
         > span {
+          cursor: pointer;
           font-size: 14px;
           font-weight: 500;
           line-height: 21px;
 
           color: #6a6a6a;
           margin-left: 8px;
+          > svg {
+            width: 21px;
+            height: 22px;
+          }
         }
       }
     }
@@ -57,6 +67,8 @@ export const Container = styled.section`
     border-radius: 8px;
     display: flex;
     align-items: center;
+    max-height: 50px;
+    min-height: 50px;
     & + div {
       margin-top: 24px;
     }
