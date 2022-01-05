@@ -5,6 +5,7 @@ import mapToRangeOfUse from './helpers/mapToRangeOfUse'
 import ButtonPrimary from '@/components/Button/Primary'
 import { RangeOfUse } from '@/components/RangeOfUse'
 import CustomMultSelect from '@/components/Form/MultSelect'
+import InputText from '@/components/Form/InputText'
 
 import { FormItem } from './FormItem'
 
@@ -37,7 +38,7 @@ export const SellableItemsDisabled: React.FC = () => {
     ])
   }, [])
 
-  const isDirector = false
+  const isDirector = true
 
   return (
     <>
@@ -75,11 +76,17 @@ export const SellableItemsDisabled: React.FC = () => {
           </p>
 
           <RangeOfUse rangesOfUse={rangesOfUse} viewMode />
+
+          <div id="containerInput">
+            <InputText label="Valor:" value="R$ 10,00" disabled />
+          </div>
         </main>
         {isDirector && (
-          <ButtonPrimary onClick={() => console.log('Editar')}>
-            Editar
-          </ButtonPrimary>
+          <footer>
+            <ButtonPrimary onClick={() => console.log('Editar')}>
+              Editar
+            </ButtonPrimary>
+          </footer>
         )}
       </Container>
     </>
