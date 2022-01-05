@@ -22,9 +22,6 @@ export const RangeOfUse = ({
   const { Loading } = useLoading()
   const [listRangeOfUse, setListRangeOfUse] = useState(rangesOfUse)
 
-  console.log('rangesOfUse: ', rangesOfUse)
-  console.log('listRangeOfUse: ', listRangeOfUse)
-
   const onGetArea = async (area) => {
     // setListRangeOfUse([...listRangeOfUse, { ...area, showCities: false }])
     const dataToSend = mapDataToSendApi(area, listRangeOfUse)

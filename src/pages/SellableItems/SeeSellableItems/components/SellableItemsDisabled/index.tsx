@@ -1,6 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+
+import { formatPrice } from '@/helpers/formatPrice'
 import mapDataToMultSelect from './helpers/mapDataToMultSelect'
 import mapToRangeOfUse from './helpers/mapToRangeOfUse'
+import {
+  EDIT_SELLABLE_ITEMS,
+  FILTER_SELLABLE_ITEMS,
+} from '@/routes/constants/namedRoutes/routes'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import { RangeOfUse } from '@/components/RangeOfUse'
@@ -11,31 +18,71 @@ import { FormItem } from './FormItem'
 
 import { Container, ArrowLeft } from './styles'
 
+interface ServicesData {
+  id: string
+  nome: string
+}
+
+interface PlaceOfSaleData {
+  municipios: {
+    id: string
+    nome: string
+  }
+  regional: {
+    id: string
+    nome: string
+  }
+  uf: {
+    id: string
+    sigla: string
+    nome: string
+  }
+}
+
+interface SellableItemsData {
+  code: string
+  name: string
+  status: string
+  description: string
+  services: ServicesData[]
+  placeOfSale: PlaceOfSaleData[]
+  price: number
+}
+
 export const SellableItemsDisabled: React.FC = () => {
-  const [services, setServices] = useState<any[]>([])
-  const [rangesOfUse, setRangesOfUse] = useState<any[]>([])
+  const history = useHistory()
+
+  const [sellableItemsData, setSellableItemsData] = useState(
+    {} as SellableItemsData,
+  )
 
   useEffect(() => {
-    setServices([{ id: 1, nome: 'Consulta Dermatologista' }])
-    setRangesOfUse([
-      {
-        regional: {
-          id: 1,
-          nome: 'Sudeste',
+    // Chama a API
+    const data = {
+      code: 'PPR',
+      name: 'Plano Vida +50',
+      status: 'Ativo',
+      description:
+        'Plano Vida especialmente configurado para pessoas com mais de 50 anos da região Centro Oeste',
+      services: [{ id: '1', nome: 'Consulta Dermatologista' }],
+      placeOfSale: [
+        {
+          municipios: { id: '2', nome: 'Timbó' },
+          regional: {
+            id: '1',
+            nome: 'Sul',
+          },
+          uf: {
+            id: '10',
+            sigla: 'SC',
+            nome: 'Santa Catarina',
+          },
         },
-      },
-      {
-        regional: {
-          id: 5,
-          nome: 'Centro-Oeste',
-        },
-        uf: {
-          id: 14,
-          sigla: 'MS',
-          nome: 'Mato Grosso do Sul',
-        },
-      },
-    ])
+      ],
+      price: 10,
+    }
+
+    setSellableItemsData(data)
   }, [])
 
   const isDirector = true
@@ -44,7 +91,7 @@ export const SellableItemsDisabled: React.FC = () => {
     <>
       <Container>
         <header>
-          <ArrowLeft />
+          <ArrowLeft onClick={() => history.push(FILTER_SELLABLE_ITEMS)} />
           <p>Voltar à Filtragem</p>
         </header>
         <main>
@@ -52,20 +99,19 @@ export const SellableItemsDisabled: React.FC = () => {
             Plano Base <span />
           </p>
 
-          <FormItem label="Código - Nome:" value="PPR - Plano Vida +50" />
-          <FormItem label="Status" value="Ativo" />
           <FormItem
-            label="Descrição"
-            value="Plano Vida especialmente configurado para pessoas com mais de 50
-              anos da região Centro Oeste"
+            label="Código - Nome:"
+            value={`${sellableItemsData.code} - ${sellableItemsData.name}`}
           />
+          <FormItem label="Status" value={sellableItemsData.status} />
+          <FormItem label="Descrição" value={sellableItemsData.description} />
 
           <CustomMultSelect
             disabled
             label="Serviços:"
             variation="secondary"
-            value={mapDataToMultSelect(services)}
-            setValue={setServices}
+            value={mapDataToMultSelect(sellableItemsData.services)}
+            setValue={() => console.log('')}
             hasError={false}
             messageError=""
             options={[]}
@@ -75,15 +121,22 @@ export const SellableItemsDisabled: React.FC = () => {
             Local de Venda <span />
           </p>
 
-          <RangeOfUse rangesOfUse={rangesOfUse} viewMode />
+          <RangeOfUse
+            rangesOfUse={mapToRangeOfUse(sellableItemsData.placeOfSale)}
+            viewMode
+          />
 
           <div id="containerInput">
-            <InputText label="Valor:" value="R$ 10,00" disabled />
+            <InputText
+              label="Valor:"
+              value={formatPrice(sellableItemsData.price)}
+              disabled
+            />
           </div>
         </main>
         {isDirector && (
           <footer>
-            <ButtonPrimary onClick={() => console.log('Editar')}>
+            <ButtonPrimary onClick={() => history.push(EDIT_SELLABLE_ITEMS)}>
               Editar
             </ButtonPrimary>
           </footer>

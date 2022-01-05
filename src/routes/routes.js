@@ -9,6 +9,7 @@ import { Profile } from '@/pages/Profile'
 import NotFound from '@/pages/404'
 import { FilterSellableItems } from '@/pages/SellableItems/FilterSellableItems'
 import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
+import { EditSellableItems } from '@/pages/SellableItems/EditSellableItems'
 
 import {
   directorRoutes,
@@ -27,6 +28,7 @@ import {
   PROFILE,
   SEE_SELLABLE_ITEMS,
   FILTER_SELLABLE_ITEMS,
+  EDIT_SELLABLE_ITEMS,
 } from './constants/namedRoutes/routes'
 
 function Routes() {
@@ -52,6 +54,12 @@ function Routes() {
       />
 
       <Route path={SEE_SELLABLE_ITEMS} isPrivate component={SeeSellableItems} />
+
+      <Route
+        path={EDIT_SELLABLE_ITEMS}
+        isPrivate
+        component={EditSellableItems}
+      />
 
       <Route path={PROFILE} isPrivate component={Profile} />
 

@@ -54,8 +54,17 @@ export const Container = styled.div`
         display: block;
       }
     }
+  }
 
-    > footer {
+  > footer {
+    padding: 30px 32px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      padding: 10px 32px;
     }
   }
 `

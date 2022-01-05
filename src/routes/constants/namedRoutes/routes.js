@@ -33,6 +33,7 @@ export const DIRECTOR_CREATE_PLAN_MANAGMENT = '/gestao/planos/criar'
 export const FILTER_SELLABLE_ITEMS = '/itens-vendaveis/'
 export const CREATE_SELLABLE_ITEMS = '/itens-vendaveis/criar'
 export const SEE_SELLABLE_ITEMS = '/itens-vendaveis/visualizar'
+export const EDIT_SELLABLE_ITEMS = '/itens-vendaveis/editar'
 
 export const PATIENT_SCHEDULE_APPOINTMENT = '/agendar-consulta'
 
