@@ -18,8 +18,8 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Segunda</h6>
             {dataSchedule.map((schedule) =>
-              schedule.monday.reduce((ac, day) => {
-                ac = `${day.start} às ${day.end}`
+              schedule.monday.reduce((ac, hour) => {
+                ac = `${hour.start} às ${hour.end}`
                 return <li>{ac}</li>
               }, ''),
             )}
@@ -29,8 +29,8 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Terça</h6>
             {dataSchedule.map((schedule) =>
-              schedule.tuesday.reduce((ac, day) => {
-                ac = `${day.start} às ${day.end}`
+              schedule.tuesday.reduce((ac, hour) => {
+                ac = `${hour.start} às ${hour.end}`
                 return <li>{ac}</li>
               }, ''),
             )}
@@ -40,8 +40,8 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Quarta</h6>
             {dataSchedule.map((schedule) =>
-              schedule.wednesday.reduce((ac, day) => {
-                ac = `${day.start} às ${day.end}`
+              schedule.wednesday.reduce((ac, hour) => {
+                ac = `${hour.start} às ${hour.end}`
                 return <li>{ac}</li>
               }, ''),
             )}
@@ -51,8 +51,8 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Quinta</h6>
             {dataSchedule.map((schedule) =>
-              schedule.thursday.reduce((ac, day) => {
-                ac = `${day.start} às ${day.end}`
+              schedule.thursday.reduce((ac, hour) => {
+                ac = `${hour.start} às ${hour.end}`
                 return <li>{ac}</li>
               }, ''),
             )}
@@ -62,8 +62,8 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Sexta</h6>
             {dataSchedule.map((schedule) =>
-              schedule.friday.reduce((ac, day) => {
-                ac = `${day.start} às ${day.end}`
+              schedule.friday.reduce((ac, hour) => {
+                ac = `${hour.start} às ${hour.end}`
                 return <li>{ac}</li>
               }, ''),
             )}
@@ -73,8 +73,8 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Sábado</h6>
             {dataSchedule.map((schedule) =>
-              schedule.saturday.reduce((ac, day) => {
-                ac = `${day.start} às ${day.end}`
+              schedule.saturday.reduce((ac, hour) => {
+                ac = `${hour.start} às ${hour.end}`
                 return <li>{ac}</li>
               }, ''),
             )}
@@ -84,8 +84,8 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Domingo</h6>
             {dataSchedule.map((schedule) =>
-              schedule.sunday.reduce((ac, day) => {
-                ac = `${day.start} às ${day.end}`
+              schedule.sunday.reduce((ac, hour) => {
+                ac = `${hour.start} às ${hour.end}`
                 return <li>{ac}</li>
               }, ''),
             )}

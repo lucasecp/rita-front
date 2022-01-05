@@ -2,7 +2,7 @@ export const scheduleFromApi = (schedules) => {
 
   if (!schedules) return []
 
-  return [schedules]?.map((schedule) => ({
+  return schedules?.map((schedule) => ({
     monday: schedule?.segunda?.map((day) => ({
       start: day.inicio,
       end: day.fim,
