@@ -31,7 +31,7 @@ export const DataSellableItems = ({ filters, order }) => {
           <li>
             <div>{sellableItem.amount || '-'}</div>
           </li>
-          {/* <Actions /> */}
+          <Actions />
         </ul>
       ))}
       {!sellableItems.length && <h2>Nenhum resultado encontrado</h2>}

@@ -2,7 +2,7 @@ import React from 'react'
 import { Container } from './styles'
 import { ReactComponent as InactiveIcon } from '@/assets/icons/inactive.svg'
 import { ReactComponent as EyePurpleIcon } from '@/assets/icons/eye-purple.svg'
-import { ReactComponent as ActiveIcon } from '@/assets/icons/active.svg'
+import { ReactComponent as TrashIcon } from '@/assets/icons/trash.svg'
 import CustomTooltip from '@/components/Tooltip'
 import { useHistory } from 'react-router'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
@@ -10,7 +10,7 @@ import { Inactivate } from './Inactivate'
 import { Suspend } from './Suspend'
 import { Activate } from './Activate'
 
-const Actions = ({ status, planInformations }) => {
+const Actions = ({}) => {
   const history = useHistory()
 
   return (
@@ -19,23 +19,14 @@ const Actions = ({ status, planInformations }) => {
         <EyePurpleIcon
           onClick={() =>
             history.push(DIRECTOR_SEE_PLAN_MANAGMENT, {
-              idPlan: planInformations.idPlano,
+              id: 2,
             })
           }
         />
       </CustomTooltip>
-      
-      <Activate status={status} plan={planInformations} />
-
-      <Inactivate
-        status={status}
-        plan={{ id: planInformations.idPlano, name: planInformations.nome }}
-      />
-
-      <Suspend
-        status={status}
-        plan={{ id: planInformations.idPlano, name: planInformations.nome }}
-      />
+      <CustomTooltip label="Visualizar">
+        <TrashIcon />
+      </CustomTooltip>
     </Container>
   )
 }
