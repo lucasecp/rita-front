@@ -17,8 +17,13 @@ import convertDateToIso from '@/helpers/convertDateToIso'
 import { verifyTypedFields } from '../../helpers/verifyTypedFields'
 import useQuery from '@/hooks/useQuery'
 import moment from 'moment'
+import { SellableItemsFilters } from '../../@types'
 
-export const Filter = ({ setFilters }) => {
+interface FilterProps {
+  setFilters: React.Dispatch<React.SetStateAction<SellableItemsFilters>>
+}
+
+export const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   // const query = useQuery()
 
   const [code, setCode] = useState('')
@@ -48,11 +53,11 @@ export const Filter = ({ setFilters }) => {
   const onClearFields = () => {
     setCode('')
     setPlan('')
-    setStatus('')
-    setServices('')
-    setRegional('')
-    setUf('')
-    setCity('')
+    setStatus([])
+    setServices([])
+    setRegional([])
+    setUf([])
+    setCity([])
     setFilters([])
   }
 

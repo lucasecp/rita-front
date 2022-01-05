@@ -3,9 +3,14 @@ import React, { useState } from 'react'
 import { Container } from './styles'
 import { FieldsSellableItems } from './FieldsSellableItems'
 import { DataSellableItems } from './DataSellableItems'
+import { SellableItemsFilters } from '../../@types'
 
-export const Results = ({ filters }) => {
-  const [order, setOrder] = useState()
+interface ResultsProps {
+  filters: SellableItemsFilters
+}
+
+export const Results: React.FC<ResultsProps> = ({ filters }) => {
+  const [order, setOrder] = useState('')
 
   console.log(filters)
   console.log(order)
@@ -13,7 +18,7 @@ export const Results = ({ filters }) => {
   return (
     <Container>
       <FieldsSellableItems onGetOrder={setOrder} />
-      {/* <DataSellableItems plans={plans} /> */}
+      <DataSellableItems filters={filters} order={order} />
     </Container>
   )
 }

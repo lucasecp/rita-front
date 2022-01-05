@@ -10,11 +10,12 @@ import apiPatient from '@/services/apiPatient'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 import Table from '@/pages/modules/Director/PlanManagment/GetPlan/Table'
+import { SellableItemsFilters } from './@types'
 
 export const FilterSellableItems: React.FC = () => {
   // const { Loading } = useLoading()
 
-  const [filters, setFilters] = useState([])
+  const [filters, setFilters] = useState({} as SellableItemsFilters)
   // const [queryApi, setQueryApi] = useState('')
   // const [order, setOrder] = useState({})
   // const [plans, setPlans] = useState({})
