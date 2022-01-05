@@ -29,6 +29,8 @@ export interface ActionsProps {
   status?: string
   warning?: boolean
   idDependent?: number
+  isValidate?: boolean
+  documentsOk?: boolean
 }
 
 export interface HeaderProps {
