@@ -1,18 +1,44 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import mapDataToMultSelect from './helpers/mapDataToMultSelect'
+import mapToRangeOfUse from './helpers/mapToRangeOfUse'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import { RangeOfUse } from '@/components/RangeOfUse'
 import CustomMultSelect from '@/components/Form/MultSelect'
+import InputText from '@/components/Form/InputText'
 
 import { FormItem } from './FormItem'
 
 import { Container, ArrowLeft } from './styles'
 
 export const SellableItemsDisabled: React.FC = () => {
-  const [services, setServices] = useState([])
-  const [rangesOfUse, setRangesOfUse] = useState([])
+  const [services, setServices] = useState<any[]>([])
+  const [rangesOfUse, setRangesOfUse] = useState<any[]>([])
 
-  const isDirector = false
+  useEffect(() => {
+    setServices([{ id: 1, nome: 'Consulta Dermatologista' }])
+    setRangesOfUse([
+      {
+        regional: {
+          id: 1,
+          nome: 'Sudeste',
+        },
+      },
+      {
+        regional: {
+          id: 5,
+          nome: 'Centro-Oeste',
+        },
+        uf: {
+          id: 14,
+          sigla: 'MS',
+          nome: 'Mato Grosso do Sul',
+        },
+      },
+    ])
+  }, [])
+
+  const isDirector = true
 
   return (
     <>
@@ -36,9 +62,9 @@ export const SellableItemsDisabled: React.FC = () => {
 
           <CustomMultSelect
             disabled
-            label="Serviços*:"
+            label="Serviços:"
             variation="secondary"
-            value={services}
+            value={mapDataToMultSelect(services)}
             setValue={setServices}
             hasError={false}
             messageError=""
@@ -50,11 +76,17 @@ export const SellableItemsDisabled: React.FC = () => {
           </p>
 
           <RangeOfUse rangesOfUse={rangesOfUse} viewMode />
+
+          <div id="containerInput">
+            <InputText label="Valor:" value="R$ 10,00" disabled />
+          </div>
         </main>
         {isDirector && (
-          <ButtonPrimary onClick={() => console.log('Editar')}>
-            Editar
-          </ButtonPrimary>
+          <footer>
+            <ButtonPrimary onClick={() => console.log('Editar')}>
+              Editar
+            </ButtonPrimary>
+          </footer>
         )}
       </Container>
     </>

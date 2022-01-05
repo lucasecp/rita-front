@@ -7,7 +7,7 @@ import { Container } from './styles'
 
 interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
-  setValue: React.Dispatch<React.SetStateAction<string>>
+  setValue?: React.Dispatch<React.SetStateAction<string>>
   hasError?: boolean
   type?: string
   msgError?: string
