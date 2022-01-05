@@ -1,21 +1,34 @@
 import styled, { css } from 'styled-components'
+
 import arrowDown from '@/assets/icons/arrow-down-order.svg'
 import arrowUp from '@/assets/icons/arrow-up-order.svg'
-import colors from '@/styles/colors'
+
+export const Container = styled.header`
+  background: ${({ theme }) => theme.light};
+  min-width: fit-content;
+  padding: 0 32px;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
+`
 
 export const Content = styled.div`
   display: flex;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: #9146ff;
+  background: ${({ theme }) => theme.light};
   align-items: center;
   justify-content: flex-start;
   min-width: 150px;
   margin-right: 24px;
+
   :last-child {
     margin-right: 0px;
   }
+
   justify-content: space-between;
 
   > div {
@@ -30,21 +43,13 @@ export const Content = styled.div`
     :last-child {
     }
   }
-  h5 {
-    color: ${colors.purple.main.dark};
+
+  > h5 {
+    color: ${({ theme }) => theme.main};
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
     max-width: 80px;
-  }
-`
-export const Container = styled.header`
-  background: ${colors.purple.background.middle};
-  min-width: fit-content;
-  padding: 0 32px;
-  > div {
-    display: flex;
-    justify-content: space-between;
   }
 `
 
@@ -53,6 +58,7 @@ export const ArrowUp = styled.button`
   background-color: transparent;
   padding: 0;
   margin-bottom: 1.5px;
+
   &:after {
     content: '';
     width: 9px;
@@ -76,6 +82,7 @@ export const ArrowDown = styled.button`
   background-color: transparent;
   padding: 0;
   margin-top: 1.5px;
+
   &:after {
     content: '';
     width: 9px;
@@ -86,6 +93,7 @@ export const ArrowDown = styled.button`
     background-repeat: no-repeat;
     display: block;
   }
+
   ${({ order }) =>
     order &&
     css`

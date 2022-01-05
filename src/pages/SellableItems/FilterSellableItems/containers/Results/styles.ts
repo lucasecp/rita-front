@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
+import colors from '@/styles/colors'
+
 export const Container = styled.div`
-  margin: 0px -32px 0 -32px;
+  background-color: ${colors.white};
+
   overflow-x: auto;
-  background-color: #fff;
-  margin-top: 40px;
 `
