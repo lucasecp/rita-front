@@ -122,8 +122,6 @@ function seeOnePatient() {
           `/paciente/${patientData.idPaciente}/validar`,
         )
 
-        console.log(response)
-
         const validationsFromApi = response.data[0]
         const validationsMapped = {
           documentOk: validationsFromApi.documentoOk ? 'yes' : 'no',
