@@ -9,6 +9,8 @@ import {
   FILTER_SELLABLE_ITEMS,
 } from '@/routes/constants/namedRoutes/routes'
 
+import { useAuth } from '@/hooks/login'
+
 import ButtonPrimary from '@/components/Button/Primary'
 import { RangeOfUse } from '@/components/RangeOfUse'
 import CustomMultSelect from '@/components/Form/MultSelect'
@@ -51,13 +53,19 @@ interface SellableItemsData {
 
 export const SellableItemsDisabled: React.FC = () => {
   const history = useHistory()
+  const auth = useAuth()
+  const userPermissions = auth.user.permissoes
+
+  const canEditSellableItems = userPermissions.includes(
+    'EDITAR_ITENS_VENDAVEIS',
+  )
 
   const [sellableItemsData, setSellableItemsData] = useState(
     {} as SellableItemsData,
   )
 
   useEffect(() => {
-    // Chama a API
+    // Chamada a API
     const data = {
       code: 'PPR',
       name: 'Plano Vida +50',
@@ -84,8 +92,6 @@ export const SellableItemsDisabled: React.FC = () => {
 
     setSellableItemsData(data)
   }, [])
-
-  const isDirector = true
 
   return (
     <>
@@ -134,7 +140,7 @@ export const SellableItemsDisabled: React.FC = () => {
             />
           </div>
         </main>
-        {isDirector && (
+        {canEditSellableItems && (
           <footer>
             <ButtonPrimary onClick={() => history.push(EDIT_SELLABLE_ITEMS)}>
               Editar
