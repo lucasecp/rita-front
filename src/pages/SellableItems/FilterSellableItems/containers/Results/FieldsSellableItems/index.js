@@ -1,11 +1,19 @@
-import React from 'react'
-import orderly from '../../static/orderly'
+import React, { useEffect, useState } from 'react'
+import { sellableItemsFields } from './constants/sellableItemsFields'
 import { Container, ArrowUp, ArrowDown, Content } from './styles'
 
-const Header = ({ order, setOrder }) => {
-  const hasDescOrder = (name) => name === order?.name && order?.value === 'DESC'
+export const FieldsSellableItems = ({ onGetOrder }) => {
+  const [order, setOrder] = useState()
 
-  const hasAscOrder = (name) => name === order?.name && order?.value === 'ASC'
+  useEffect(() => {
+    onGetOrder(order)
+  }, [order])
+
+  const hasDescOrder = (name) =>
+    name === order?.name && order?.value === 'descending'
+
+  const hasAscOrder = (name) =>
+    name === order?.name && order?.value === 'ascending'
 
   const toggleOrder = (name) => {
     if (hasDescOrder(name)) {
@@ -17,16 +25,16 @@ const Header = ({ order, setOrder }) => {
       !hasAscOrder(name) ||
       !Object.keys(order).length
     ) {
-      return setOrder({ name, value: 'ASC' })
+      return setOrder({ name, value: 'ascending' })
     }
 
-    setOrder({ name, value: 'DESC' })
+    setOrder({ name, value: 'descending' })
   }
 
   return (
     <Container>
       <div>
-        {orderly.map((order) => (
+        {sellableItemsFields.map((order) => (
           <Content key={order.name}>
             <h5> {order.label} </h5>
             <div onClick={() => toggleOrder(order.name)}>
@@ -39,5 +47,3 @@ const Header = ({ order, setOrder }) => {
     </Container>
   )
 }
-
-export default Header
