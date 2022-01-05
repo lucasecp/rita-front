@@ -122,13 +122,18 @@ function seeOnePatient() {
           `/paciente/${patientData.idPaciente}/validar`,
         )
 
+        console.log(response)
+
         const validationsFromApi = response.data[0]
         const validationsMapped = {
           documentOk: validationsFromApi.documentoOk ? 'yes' : 'no',
           resonDocumentNotOk: validationsFromApi.motivoDocumento || '',
           incomeOk: validationsFromApi.rendaBaixa ? 'yes' : 'no',
           validatorName: validationsFromApi.nomeValidador,
-          dateAndHour: formateDateAndHour(validationsFromApi.dataValidacao),
+          dateAndHour: formateDateAndHour(
+            validationsFromApi.dataValidacao,
+            ' às ',
+          ),
           status: validationsFromApi.status,
           table,
         }
