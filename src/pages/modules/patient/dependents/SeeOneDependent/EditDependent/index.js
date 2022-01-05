@@ -26,7 +26,7 @@ const EditDependent = ({ dependentData }) => {
   const [prevData, setPrevData] = useState(dependentData)
   const { showSimple, showMessage } = useModal()
   const history = useHistory()
-  console.log(dependentData)
+
   useEffect(() => {
     setButtonIsDisabled(personalDatas?.hasError || address?.hasError)
   }, [address, personalDatas])
@@ -76,8 +76,8 @@ const EditDependent = ({ dependentData }) => {
         initialData={prevData?.address}
         cancelEdit={cancelEdit}
       />
-      <Documents />
-      <Situation />
+      <Documents data={dependentData.personalDatas} />
+      <Situation data={dependentData.personalDatas} />
 
       {!isEditing ? (
         <ButtonGroup>

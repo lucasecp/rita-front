@@ -1,4 +1,13 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import colors from '@/styles/colors'
+
+export const TableInfo = styled.p`
+  ${({ isDefeated }) =>
+    isDefeated &&
+    css`
+      color: ${colors.orange.middleDark} !important;
+    `}
+`
 
 export const Container = styled.section`
   > h1 {

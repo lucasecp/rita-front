@@ -25,12 +25,9 @@ export const Container = styled.div`
 
   > footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: end;
     margin-top: 24px;
-
-    > button + button {
-      margin-left: 24px;
-    }
+    gap: 24px;
   }
 
   @media (max-width: 767px) {

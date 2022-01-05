@@ -1,7 +1,5 @@
 import CustomTooltip from '@/components/Tooltip'
-import { useModal } from '@/hooks/useModal'
 import { useHistory } from 'react-router'
-import { ReactComponent as ActiveIcon } from '@/assets/icons/active.svg'
 import apiPatient from '@/services/apiPatient'
 
 import { ActivateIcon } from './styles'

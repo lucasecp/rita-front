@@ -1,22 +1,34 @@
 import React from 'react'
 
-import { Container } from './styles'
+import { Container, TableInfo } from './styles'
 import { ReactComponent as WarningIcon } from '@/assets/icons/warning-circle-red.svg'
+import { ReactComponent as ActiveIcon } from '@/assets/icons/active-green.svg'
 
-export const Situation = ({ address, setAddress, isEditing }) => {
+export const Situation = ({ data }) => {
+  const isDefeated =
+    new Date() > new Date(new Date(data?.plan.endDate).toLocaleString('pt-br'))
+
   return (
     <Container>
       <h1>Situação do contrato</h1>
       <h6>Plano:</h6>
 
       <div>
-        <h4>Plano Vida - Paciente desde 03/10/2021 </h4>
+        {data?.plan.startDate && (
+          <h4>Plano Vida - Paciente desde {data?.plan.startDate} </h4>
+        )}
       </div>
 
       <h6>Tabela:</h6>
-      <p>
-        Associação à Tabela Especial vencida em 10/12/2021 <WarningIcon />
-      </p>
+      {data?.table && (
+        <TableInfo isDefeated={isDefeated}>
+          Associação à {data?.table}
+          {isDefeated ? ` vencida em ` : ` Válida até `}
+          {data?.plan.endDate}
+          {isDefeated && data?.plan.endDate && <WarningIcon />}
+          {!isDefeated && data?.plan.endDate && <ActiveIcon />}
+        </TableInfo>
+      )}
     </Container>
   )
 }
