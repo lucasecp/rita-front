@@ -128,7 +128,10 @@ function seeOnePatient() {
           resonDocumentNotOk: validationsFromApi.motivoDocumento || '',
           incomeOk: validationsFromApi.rendaBaixa ? 'yes' : 'no',
           validatorName: validationsFromApi.nomeValidador,
-          dateAndHour: formateDateAndHour(validationsFromApi.dataValidacao),
+          dateAndHour: formateDateAndHour(
+            validationsFromApi.dataValidacao,
+            ' às ',
+          ),
           status: validationsFromApi.status,
           table,
         }

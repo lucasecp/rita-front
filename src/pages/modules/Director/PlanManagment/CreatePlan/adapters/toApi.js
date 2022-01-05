@@ -10,7 +10,7 @@ export const toApi = (data) => {
     codigo: code,
     nome: name,
     descricao: description,
-    associarServico: mappedServices,
+    servicos: mappedServices,
     abrangencia: mappedRangesOfUse,
   }
 }

@@ -90,7 +90,7 @@ function ValidationSeeOnePatient({ validations }) {
           <>
             <br />
             <br />
-            Paciente associado á <strong>{validations.table}.</strong>
+            Paciente associado à <strong>{validations.table}.</strong>
           </>
         )}
       </h6>
