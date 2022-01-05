@@ -46,7 +46,7 @@ export const SuspendPlanConfirm: React.FC = () => {
   // }
 
   return (
-    <DefaultLayout title="Gestão de Planos - Suspender Plano">
+    <DefaultLayout title="Gestão de Planos">
       <Container>
         <div>
           <h1>

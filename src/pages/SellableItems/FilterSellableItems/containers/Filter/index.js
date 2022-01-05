@@ -10,8 +10,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import InputText from '@/components/Form/InputText'
 import CustomRangePicker from '@/components/Form/CustomRangePicker'
 import CustomMultSelect from '@/components/Form/MultSelect'
-import { STATUS } from '../../constants/status'
-import { BtnGroup, Container } from './styles'
+import { Container } from './styles'
 import formatMultSelectValue from '@/helpers/formatMultSelectValue'
 import convertDateToIso from '@/helpers/convertDateToIso'
 import { verifyTypedFields } from '../../helpers/verifyTypedFields'
@@ -20,7 +19,7 @@ import moment from 'moment'
 import { SellableItemsFilters } from '../../@types'
 
 interface FilterProps {
-  setFilters: React.Dispatch<React.SetStateAction<SellableItemsFilters>>
+  setFilters: React.Dispatch<React.SetStateAction<SellableItemsFilters>>;
 }
 
 export const Filter: React.FC<FilterProps> = ({ setFilters }) => {
@@ -62,7 +61,33 @@ export const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   }
 
   const onFilterResults = () => {
-    setFilters({ code, plan, services, status, regional, uf, city })
+    let servicesWithoutAll = []
+    let statusWithoutAll = []
+    let RegionalWithoutAll = []
+
+    const hasAllOptionInServices = services.some((service) => service.id === 0)
+
+    if (hasAllOptionInServices) {
+      servicesWithoutAll = services.filter((service) => service.id !== 0)
+    }
+
+    const hasAllOptionInStatus = status.some((status) => status.id === 0)
+
+    if (hasAllOptionInStatus) {
+      statusWithoutAll = status.filter((status) => status.id !== 0)
+    }
+
+    
+
+    setFilters({
+      code,
+      plan,
+      servicesWithoutAll,
+      statusWithoutAll,
+      regional,
+      uf,
+      city,
+    })
   }
 
   return (
@@ -86,7 +111,13 @@ export const Filter: React.FC<FilterProps> = ({ setFilters }) => {
         <MultSelectServices services={services} setServices={setServices} />
         <CustomMultSelect
           label="Status:"
-          options={STATUS}
+          options={[
+            { name: 'Todos', id: 0 },
+            { name: 'Ativo', id: 1 },
+            { name: 'Inativo', id: 2 },
+            { name: 'Em digitação', id: 3 },
+            { name: 'Suspenso', id: 4 },
+          ]}
           value={status}
           setValue={setStatus}
         />

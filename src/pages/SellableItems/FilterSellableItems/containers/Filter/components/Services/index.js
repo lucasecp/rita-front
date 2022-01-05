@@ -1,6 +1,7 @@
 import CustomMultSelect from '@/components/Form/MultSelect'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
+import { toast } from '@/styles/components/toastify'
 import React, { useEffect, useState } from 'react'
 import mapDataFromApiToMultSelect from '../../../../helpers/mapDataFromApiToMultSelect'
 
@@ -23,10 +24,10 @@ export const Services = ({ setServices, services }) => {
           if (dataMapped.length === 1) {
             return dataMapped
           }
-          return [{ name: 'Todos', id: 'All' }, ...dataMapped]
+          return [{ name: 'Todos', id: 0 }, ...dataMapped]
         })
       } catch ({ response }) {
-        // toast.error('Erro ao carregar serviços!')
+        toast.error('Erro ao carregar serviços!')
       } finally {
         Loading.turnOff()
       }

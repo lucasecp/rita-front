@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
 import { Container } from './styles'
-import { FieldsSellableItems } from './FieldsSellableItems'
-import { DataSellableItems } from './DataSellableItems'
+import { FieldsSellableItems } from './components/FieldsSellableItems'
+import { DataSellableItems } from './components/DataSellableItems'
 import { SellableItemsFilters } from '../../@types'
 
 interface ResultsProps {
@@ -10,10 +10,7 @@ interface ResultsProps {
 }
 
 export const Results: React.FC<ResultsProps> = ({ filters }) => {
-  const [order, setOrder] = useState('')
-
-  console.log(filters)
-  console.log(order)
+  const [order, setOrder] = useState({ name: '', value: '' })
 
   return (
     <Container>
