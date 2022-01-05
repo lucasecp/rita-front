@@ -4,8 +4,8 @@ export default function (value, separator) {
   const separatorOrDefault = separator || ' '
 
   return (
-    value.split('T')[0].split('-').reverse().join('/') +
+    new Date(value).toLocaleDateString('pt-br') +
     separatorOrDefault +
-    value.split('T')[1].slice(0, 5)
+    new Date(value).toLocaleTimeString('pt-br')
   )
 }
