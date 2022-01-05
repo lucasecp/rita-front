@@ -22,6 +22,14 @@ export const Container = styled.div`
     color: inherit;
   }
 
+  > p {
+    margin-top: 26px;
+
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+  }
+
   > * + * {
     margin-top: 24px;
   }

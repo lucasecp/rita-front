@@ -46,12 +46,12 @@ export const InactivatePlanConfirm: React.FC = () => {
   }
 
   return (
-    <DefaultLayout title="Confirmação Inativar Plano">
+    <DefaultLayout title="Gestão de Planos">
       <Container>
         <div>
           <h1>
-            Suas alterações afetarão os itens abaixo do Plano {plan.name},
-            deseja prosseguir?
+            Ao inativar o plano {plan.name}, os itens abaixo serão desativados,
+            deseja prosseguir ?
           </h1>
 
           {sellableItems.map((sellableItem, index) =>

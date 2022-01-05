@@ -61,6 +61,7 @@ export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({ plan }) => {
       Loading.turnOff()
     }
 
+    setReason('')
     closeModal()
     history.push(DIRECTOR_PLAN_MANAGMENT)
   }
