@@ -50,8 +50,8 @@ export const InactivatePlanConfirm: React.FC = () => {
       <Container>
         <div>
           <h1>
-            Ao inativar o plano {plan.name}, os itens abaixo serão desativados,
-            deseja prosseguir ?
+            Ao inativar o plano {plan.name.toUpperCase()}, os itens abaixo serão
+            desativados, deseja prosseguir ?
           </h1>
 
           {sellableItems.map((sellableItem, index) =>

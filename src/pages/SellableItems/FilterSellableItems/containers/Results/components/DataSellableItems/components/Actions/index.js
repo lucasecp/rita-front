@@ -1,31 +1,52 @@
 import React from 'react'
 import { Container } from './styles'
-import { ReactComponent as InactiveIcon } from '@/assets/icons/inactive.svg'
 import { ReactComponent as EyePurpleIcon } from '@/assets/icons/eye-purple.svg'
 import { ReactComponent as TrashIcon } from '@/assets/icons/trash.svg'
 import CustomTooltip from '@/components/Tooltip'
 import { useHistory } from 'react-router'
-import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
-import { Inactivate } from './Inactivate'
-import { Suspend } from './Suspend'
-import { Activate } from './Activate'
+import { SEE_SELLABLE_ITEMS } from '@/routes/constants/namedRoutes/routes'
+import { useLoading } from '@/hooks/useLoading'
+import { useModal } from '@/hooks/useModal'
+import DeleteModal from './messages/DeleteModal'
 
-const Actions = ({}) => {
+const Actions = ({ plan }) => {
   const history = useHistory()
+  const { Loading } = useLoading()
+  const { showMessage } = useModal()
+
+  const toSeeSellableItem = () => {
+    try {
+      Loading.turnOn()
+
+      history.push(SEE_SELLABLE_ITEMS, {
+        plan,
+      })
+    } catch (err) {
+      console.log(err)
+    } finally {
+      Loading.turnOff()
+    }
+  }
+
+  const toDeleteSellableItem = async () => {
+    try {
+      Loading.turnOn()
+
+      showMessage(DeleteModal)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      Loading.turnOff()
+    }
+  }
 
   return (
     <Container>
       <CustomTooltip label="Visualizar">
-        <EyePurpleIcon
-        // onClick={() =>
-        //   history.push(DIRECTOR_SEE_PLAN_MANAGMENT, {
-        //     id: 2,
-        //   })
-        // }
-        />
+        <EyePurpleIcon onClick={toSeeSellableItem} />
       </CustomTooltip>
       <CustomTooltip label="Excluir">
-        <TrashIcon />
+        <TrashIcon onClick={toDeleteSellableItem} />
       </CustomTooltip>
     </Container>
   )
