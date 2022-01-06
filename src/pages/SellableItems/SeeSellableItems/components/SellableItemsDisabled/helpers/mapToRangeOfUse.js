@@ -4,10 +4,17 @@ export default (ranges) => {
   if (!ranges) return []
 
   const dataMaped = ranges.map((range) => {
+    let citiesOfRange = []
+
+    if (range.municipios) {
+      citiesOfRange = range.municipios.map((city) => ({
+        name: city.nome,
+        id: city.id,
+      }))
+    }
+
     return {
-      cities: range.municipios
-        ? { label: range.municipios.nome, value: range.municipios.id }
-        : '',
+      cities: citiesOfRange,
 
       uf: range.uf
         ? { label: firstLetterCapitalize(range.uf?.nome), value: range.uf?.id }
