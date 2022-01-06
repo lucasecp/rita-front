@@ -32,8 +32,9 @@ export const NotSellableItems: React.FC<NotSellableItemsProps> = ({ plan }) => {
     <Container>
       <img src={warningIcon} />
       <h6>
-        Não há itens vendáveis associados ao plano <span>{plan.name}</span>,
-        deseja suspender?
+        Não há itens vendáveis associados ao plano <span>{plan.name}</span>.
+        <br />
+        Deseja suspender?
       </h6>
       <footer>
         <OutlineButton onClick={onDoNotProceed}>Não</OutlineButton>

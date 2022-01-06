@@ -3,6 +3,7 @@ import formatMultSelectValue from '@/helpers/formatMultSelectValue'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
+import { toast } from '@/styles/components/toastify'
 import React, { useEffect, useState } from 'react'
 import { mapUf } from '../../../../helpers/mapDataFromApiToMultSelect'
 
@@ -32,9 +33,10 @@ export const Ufs = ({ setUf, uf, regional }) => {
           if (dataMapped.length === 1) {
             return dataMapped
           }
-          return [{ name: 'Todos', id: 'All' }, ...dataMapped]
+          return [{ name: 'Todos', id: 0 }, ...dataMapped]
         })
       } catch ({ response }) {
+        toast.error('Erro ao carregar ufs!')
       } finally {
         Loading.turnOff()
       }

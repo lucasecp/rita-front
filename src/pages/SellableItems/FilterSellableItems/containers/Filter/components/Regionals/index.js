@@ -1,6 +1,7 @@
 import CustomMultSelect from '@/components/Form/MultSelect'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
+import { toast } from '@/styles/components/toastify'
 import React, { useEffect, useState } from 'react'
 import mapDataFromApiToMultSelect from '../../../../helpers/mapDataFromApiToMultSelect'
 
@@ -25,10 +26,10 @@ export const Regionals: React.FC = ({ setRegional, regional }) => {
           if (dataMapped.length === 1) {
             return dataMapped
           }
-          return [{ name: 'Todas', id: 'All' }, ...dataMapped]
+          return [{ name: 'Todas', id: 0 }, ...dataMapped]
         })
       } catch ({ response }) {
-        // toast.error('Erro ao carregar regionais!')
+        toast.error('Erro ao carregar regionais!')
       } finally {
         Loading.turnOff()
       }

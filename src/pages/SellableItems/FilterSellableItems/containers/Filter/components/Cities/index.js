@@ -40,7 +40,7 @@ export const Cities = ({ setCity, city, uf }) => {
           if (dataMapped.length === 1) {
             return dataMapped
           }
-          return [{ name: 'Todas', id: 'All' }, ...dataMapped]
+          return [{ name: 'Todas', id: 0 }, ...dataMapped]
         })
       } catch ({ response }) {
       } finally {

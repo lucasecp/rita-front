@@ -1,5 +1,10 @@
 import colors from '@/styles/colors'
+import { LiHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
+
+interface DataSellableItemsStylesProps extends LiHTMLAttributes<HTMLLIElement> {
+  type: 'Ativo' | 'Inativo' | 'Em digitação' | 'Suspenso'
+}
 
 export const Container = styled.div`
   padding: 0px 32px;
@@ -43,7 +48,7 @@ export const Container = styled.div`
     padding: 32px 0;
   }
 `
-export const Status = styled.li`
+export const Status = styled.li<DataSellableItemsStylesProps>`
   > span {
     font-size: 16px;
     font-weight: 500;

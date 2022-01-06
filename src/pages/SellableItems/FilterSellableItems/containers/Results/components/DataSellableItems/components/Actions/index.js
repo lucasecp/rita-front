@@ -17,14 +17,14 @@ const Actions = ({}) => {
     <Container>
       <CustomTooltip label="Visualizar">
         <EyePurpleIcon
-          onClick={() =>
-            history.push(DIRECTOR_SEE_PLAN_MANAGMENT, {
-              id: 2,
-            })
-          }
+        // onClick={() =>
+        //   history.push(DIRECTOR_SEE_PLAN_MANAGMENT, {
+        //     id: 2,
+        //   })
+        // }
         />
       </CustomTooltip>
-      <CustomTooltip label="Visualizar">
+      <CustomTooltip label="Excluir">
         <TrashIcon />
       </CustomTooltip>
     </Container>
