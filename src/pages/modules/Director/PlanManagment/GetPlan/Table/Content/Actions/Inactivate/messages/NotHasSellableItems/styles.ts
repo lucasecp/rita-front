@@ -20,14 +20,20 @@ export const Container = styled.div`
     line-height: 30px;
 
     color: inherit;
+
+    > span {
+      color: ${({ theme }) => theme.darkness};
+    }
   }
 
   > p {
     margin-top: 26px;
 
-    font-weight: 400;
-    font-size: 20px;
+    font-weight: 500;
+    font-size: 24px;
     line-height: 30px;
+
+    color: inherit;
   }
 
   > * + * {

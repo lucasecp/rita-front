@@ -33,11 +33,13 @@ export const NotHasSellableItems: React.FC<NotHasSellableItemsProps> = ({
   return (
     <Container>
       <img src={warningIcon} />
-      <h6>Não há itens vendáveis associados ao plano {plan.name}.</h6>
-      <p>Deseja prosseguir ?</p>
+      <h6>
+        Não há itens vendáveis associados ao plano <span>{plan.name}</span>.
+      </h6>
+      <p>Deseja inativar ?</p>
       <footer>
-        <ButtonPrimary onClick={onProceed}>Sim</ButtonPrimary>
         <OutlineButton onClick={onDoNotProceed}>Não</OutlineButton>
+        <ButtonPrimary onClick={onProceed}>Sim</ButtonPrimary>
       </footer>
     </Container>
   )
