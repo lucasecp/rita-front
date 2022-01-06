@@ -8,7 +8,7 @@ import { useHistory } from 'react-router'
 import { SEE_SELLABLE_ITEMS } from '@/routes/constants/namedRoutes/routes'
 import { useLoading } from '@/hooks/useLoading'
 
-const Actions = ({ idPlan }) => {
+const Actions = ({ plan }) => {
   const history = useHistory()
   const { Loading } = useLoading()
 
@@ -16,8 +16,10 @@ const Actions = ({ idPlan }) => {
     try {
       Loading.turnOn()
 
+      console.log(plan)
+
       history.push(SEE_SELLABLE_ITEMS, {
-        idPlan,
+        plan,
       })
     } catch (err) {
       console.log(err)
