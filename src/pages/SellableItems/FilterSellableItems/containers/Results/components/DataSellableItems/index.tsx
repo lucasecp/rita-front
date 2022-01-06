@@ -34,6 +34,7 @@ interface sellableItem {
   status: 'Ativo' | 'Inativo' | 'Em digitação' | 'Suspenso'
   localVenda: string
   valor: string
+  tipo: string
 }
 
 export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
@@ -94,7 +95,13 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
           <li>
             <div>{sellableItem.valor || '-'}</div>
           </li>
-          <Actions idPlan={sellableItem.idPlano} />
+          <Actions
+            plan={{
+              idPlan: sellableItem.idPlano,
+              id: sellableItem.id,
+              type: sellableItem.tipo,
+            }}
+          />
         </ul>
       ))}
       {!data.length && <h2>Nenhum resultado encontrado</h2>}
