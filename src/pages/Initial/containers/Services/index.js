@@ -14,10 +14,10 @@ import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
 import Socialplan from './messages/Socialplan'
 import DifferentPlanLife from './messages/DifferentPlanLife'
+import VidaPlanLife from './messages/VidaPlanLife'
 import { useHistory } from 'react-router'
 import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/routes'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-
 
 export const Services = () => {
   const [plan, SetPlan] = useState('')
@@ -69,9 +69,10 @@ export const Services = () => {
   }
 
   const onCsd = () => {
-    if (plan !== 'Vida') {
-      return showMessage(DifferentPlanLife)
+    if (plan === 'Vida') {
+      return showMessage(VidaPlanLife)
     }
+    return showMessage(DifferentPlanLife)
   }
 
   return (
@@ -125,7 +126,7 @@ export const Services = () => {
               <h3>CSD</h3>
               <p>Consulta online com a equipe de saúde da Rita.</p>
               <OutlineButton variation="white" onClick={onCsd}>
-                Solicite Atendimento
+                Agendar Consulta
               </OutlineButton>
             </Card>
           </CustomCol>
