@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { formatPrice } from '@/helpers/formatPrice'
 import mapDataToMultSelect from './helpers/mapDataToMultSelect'
@@ -20,27 +20,26 @@ import { FormItem } from './FormItem'
 import { PlaceOfSale } from '../PlaceOfSale'
 
 import { Container, ArrowLeft } from './styles'
+import apiPatient from '@/services/apiPatient'
 
 interface ServicesData {
   id: string
   nome: string
 }
 
-interface Cities {
-  id: string
-  nome: string
-}
-
 interface PlaceOfSaleData {
-  municipios: Cities[]
-  regional: {
+  city?: {
     id: string
-    nome: string
+    label: string
   }
-  uf: {
+  uf?: {
     id: string
     sigla: string
-    nome: string
+    label: string
+  }
+  regional: {
+    id: string
+    label: string
   }
 }
 
@@ -56,6 +55,8 @@ interface SellableItemsData {
 
 export const SellableItemsDisabled: React.FC = () => {
   const history = useHistory()
+  // const location = useLocation().state
+  const id = 57
   const auth = useAuth()
   const userPermissions = auth.user.permissoes
 
@@ -68,32 +69,57 @@ export const SellableItemsDisabled: React.FC = () => {
   )
 
   useEffect(() => {
-    // Chamada a API
-    const data = {
-      code: 'PPR',
-      name: 'Plano Vida +50',
-      status: 'Ativo',
-      description:
-        'Plano Vida especialmente configurado para pessoas com mais de 50 anos da região Centro Oeste',
-      services: [{ id: '1', nome: 'Consulta Dermatologista' }],
-      placeOfSale: [
-        {
-          municipios: [{ id: '2', nome: 'Timbó' }],
-          regional: {
-            id: '1',
-            nome: 'Sul',
-          },
-          uf: {
-            id: '10',
-            sigla: 'SC',
-            nome: 'Santa Catarina',
-          },
+    const getSellableItem = async () => {
+      const response = await apiPatient.get(`/itens-vendaveis/2`, {
+        params: {
+          idPlano: 80,
+          tipo: 'regional',
         },
-      ],
-      price: 10,
+      })
+
+      console.log(response.data)
+
+      const data = {
+        code: 'PPR',
+        name: 'Plano Vida +50',
+        status: 'Ativo',
+        description:
+          'Plano Vida especialmente configurado para pessoas com mais de 50 anos da região Centro Oeste',
+        services: [{ id: '1', nome: 'Consulta Dermatologista' }],
+        placeOfSale: [
+          {
+            city: { id: '2', label: 'Timbó' },
+            regional: {
+              id: '1',
+              label: 'Sul',
+            },
+            uf: {
+              id: '10',
+              sigla: 'SC',
+              label: 'Santa Catarina',
+            },
+          },
+          {
+            regional: {
+              id: '1',
+              label: 'Sul',
+            },
+            uf: {
+              id: '10',
+              sigla: 'SC',
+              label: 'Santa Catarina',
+            },
+            city: { id: '1', label: 'Blumenau' },
+          },
+        ],
+        price: 10,
+      }
+
+      // setSellableItemsData(response.data)
+      setSellableItemsData(data)
     }
 
-    setSellableItemsData(data)
+    getSellableItem()
   }, [])
 
   return (
@@ -130,7 +156,7 @@ export const SellableItemsDisabled: React.FC = () => {
             Local de Venda <span />
           </p>
 
-          {/* <PlaceOfSale /> */}
+          <PlaceOfSale places={sellableItemsData.placeOfSale} />
 
           <RangeOfUse
             rangesOfUse={mapToRangeOfUse(sellableItemsData.placeOfSale)}
