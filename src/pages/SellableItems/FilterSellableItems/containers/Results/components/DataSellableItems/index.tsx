@@ -42,22 +42,20 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
   order,
 }) => {
   const { Loading } = useLoading()
-  const [data, setData] = useState([])
+  const [data, setData] = useState<any>([])
 
   useEffect(() => {
     const loadSellableItems = async () => {
       try {
         Loading.turnOn()
 
-        const paramsToApi = sellableItemsFiltersToApi(order, filters)
+        const paramsToApi = await sellableItemsFiltersToApi(order, filters)
 
         const response = await apiPatient.get('/plano/itens-vendaveis', {
           params: paramsToApi,
         })
 
-        setData(response.data)
-
-        console.log(data)
+        setData(response.data.dados)
         // const sellableItemsMapped = fromApi()
       } catch (error) {
         toast.error('Erro ao carregar itens vendáveis!')
@@ -69,22 +67,11 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
     loadSellableItems()
   }, [order, filters])
 
-  // const loadSellableItems: DataSellableItemsItem[] = [
-  //   {
-  //     id: 1,
-  //     code: 'CÓDIGO',
-  //     plan: 'Plano Vida',
-  //     status: 'Inativo',
-  //     outlets: 'Sudeste',
-  //     amount: 'R$ 99,90',
-  //   },
-  // ]
-
-  console.log(data, 'aquiiiii')
+  console.log(data)
 
   return (
     <Container>
-      {data?.map((sellableItem: sellableItem, index) => (
+      {data?.map((sellableItem: sellableItem, index: number) => (
         <ul key={index}>
           <li>{sellableItem.codigo || '-'}</li>
           <li>{sellableItem.nome || '-'}</li>
