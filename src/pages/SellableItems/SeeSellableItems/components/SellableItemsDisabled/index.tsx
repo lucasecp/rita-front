@@ -17,6 +17,7 @@ import CustomMultSelect from '@/components/Form/MultSelect'
 import InputText from '@/components/Form/InputText'
 
 import { FormItem } from './FormItem'
+import { PlaceOfSale } from '../PlaceOfSale'
 
 import { Container, ArrowLeft } from './styles'
 
@@ -25,11 +26,13 @@ interface ServicesData {
   nome: string
 }
 
+interface Cities {
+  id: string
+  nome: string
+}
+
 interface PlaceOfSaleData {
-  municipios: {
-    id: string
-    nome: string
-  }
+  municipios: Cities[]
   regional: {
     id: string
     nome: string
@@ -75,7 +78,7 @@ export const SellableItemsDisabled: React.FC = () => {
       services: [{ id: '1', nome: 'Consulta Dermatologista' }],
       placeOfSale: [
         {
-          municipios: { id: '2', nome: 'Timbó' },
+          municipios: [{ id: '2', nome: 'Timbó' }],
           regional: {
             id: '1',
             nome: 'Sul',
@@ -126,6 +129,8 @@ export const SellableItemsDisabled: React.FC = () => {
           <p>
             Local de Venda <span />
           </p>
+
+          {/* <PlaceOfSale /> */}
 
           <RangeOfUse
             rangesOfUse={mapToRangeOfUse(sellableItemsData.placeOfSale)}
