@@ -5,7 +5,7 @@ import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { toast } from '@/styles/components/toastify'
 import React, { useEffect, useState } from 'react'
-import { mapUf } from '../../../../helpers/mapDataFromApiToMultSelect'
+import { mapUf } from '../../helpers/mapDataFromApiToMultSelect'
 
 export const Ufs = ({ setUf, uf, regional }) => {
   const [ufOptions, setUfOptions] = useState([])

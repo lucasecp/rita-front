@@ -3,7 +3,7 @@ import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { toast } from '@/styles/components/toastify'
 import React, { useEffect, useState } from 'react'
-import mapDataFromApiToMultSelect from '../../../../helpers/mapDataFromApiToMultSelect'
+import mapDataFromApiToMultSelect from '../../helpers/mapDataFromApiToMultSelect'
 
 interface RegionalProps {}
 

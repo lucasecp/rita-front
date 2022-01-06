@@ -5,7 +5,24 @@ import { adjustSelectOptions } from './adjustSelectOptions'
 import { ReactComponent as CloseMultSelectIcon } from '@/assets/icons/close-multselct.svg'
 import generateRandomString from '@/helpers/generateRandomString'
 
-const CustomMultSelect = ({
+export interface MultiSelectOption {
+  id: string | number
+  name: string
+}
+
+interface MultiSelectCustomProps {
+  label?: string
+  value: MultiSelectOption[]
+  setValue: React.Dispatch<React.SetStateAction<MultiSelectOption[]>>
+  options: MultiSelectOption[]
+  messageError?: string
+  hasError?: boolean
+  disabled?: boolean
+  variation?: 'secondary'
+  // [x: string]: string
+}
+
+const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
   label,
   value,
   setValue,

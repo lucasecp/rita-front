@@ -1,12 +1,25 @@
-import CustomMultSelect from '@/components/Form/MultSelect'
+import React, { useEffect, useState } from 'react'
+
+import CustomMultSelect, {
+  MultiSelectOption,
+} from '@/components/Form/MultSelect'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { toast } from '@/styles/components/toastify'
-import React, { useEffect, useState } from 'react'
-import mapDataFromApiToMultSelect from '../../../../helpers/mapDataFromApiToMultSelect'
+import mapDataFromApiToMultSelect from '../../helpers/mapDataFromApiToMultSelect'
 
-export const Services = ({ setServices, services }) => {
-  const [serviceOptions, setServicesOptions] = useState([])
+interface ServicesFilterSellableItems {
+  setServices: React.Dispatch<React.SetStateAction<MultiSelectOption[]>>
+  services: MultiSelectOption[]
+}
+
+export const Services: React.FC<ServicesFilterSellableItems> = ({
+  setServices,
+  services,
+}) => {
+  const [serviceOptions, setServicesOptions] = useState(
+    [] as MultiSelectOption[],
+  )
   const { Loading } = useLoading()
 
   useEffect(() => {

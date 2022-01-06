@@ -49,7 +49,7 @@ export const ReasonSuspend: React.FC<ReasonUpdateProps> = ({ plan }) => {
       })
 
       if (message === 'Sucesso') {
-        toast.success(`${plan.name} Suspenso.`)
+        toast.success(`Plano ${plan.name} Suspenso.`)
       }
     } catch (error) {
       toast.error(`Erro ao suspender o plano ${plan.name}`)

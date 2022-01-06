@@ -3,14 +3,16 @@ import arrowLeft from '@/assets/icons/arrow-left.svg'
 import arrowRight from '@/assets/icons/arrow-right.svg'
 // import { Link } from 'react-router-dom'
 
-interface PrevNextProps{
-  active: boolean;
+interface PrevNextProps {
+  active: boolean
 }
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  padding: 24px 32px;
 
   > div {
     display: flex;

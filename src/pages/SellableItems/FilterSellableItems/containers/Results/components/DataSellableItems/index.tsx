@@ -1,29 +1,30 @@
-import React, { useEffect } from 'react'
-import { Container, Status } from './styles'
+import React, { useEffect, useState } from 'react'
+import qs from 'qs'
+import {
+  DataSellableItemsItem,
+  OrderSellableItems,
+  SellableItemsFilters,
+} from '../../../../@types'
+
 import Actions from './components/Actions'
 import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
-import { SellableItemsFilters } from '../../../../@types'
-import { sellableItemsFiltersToApi } from './adapters/toApi'
-import { PaginationSimple } from './components/PaginationSimple'
-// import formatTextWithLimit from '@/helpers/formatTextWithLimit'
+import { Container, Status } from './styles'
 
+import { sellableItemsToApi } from './adapters/toApi'
+import { PaginationSimple } from './components/PaginationSimple'
+import { sellableItemsFromApi } from './adapters/fromApi'
+
+// import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 interface DataSellableItemsProps {
   filters: SellableItemsFilters
-  order: {
-    name: string
-    value: string
-  }
+  order: OrderSellableItems
 }
 
-interface DataSellableItemsItem {
-  id: 1
-  code: string
-  plan: string
-  status: 'Ativo' | 'Inativo' | 'Em digitação' | 'Suspenso'
-  outlets: string
-  amount: string
+interface PaginationState {
+  limit: number
+  skip: number
 }
 
 export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
@@ -32,46 +33,51 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
 }) => {
   const { Loading } = useLoading()
 
-  // useEffect(() => {
-  //   const loadSellableItems = async () => {
-  //     try {
-  //       Loading.turnOn()
+  const [sellableItems, setSellableItems] = useState(
+    [] as DataSellableItemsItem[],
+  )
 
-  //       const paramsToApi = sellableItemsFiltersToApi(order, filters)
+  const [pagination, setPagination] = useState({} as PaginationState)
+  const [paginationTotal, setPaginationTotal] = useState(0)
 
-  //       const { data } = await apiPatient.get('/plano/itens-vendaveis', {
-  //         params: paramsToApi,
-  //       })
+  useEffect(() => {
+    const loadSellableItems = async () => {
+      try {
+        Loading.turnOn()
 
-  //       console.log(data)
-  //       // const sellableItemsMapped = fromApi()
-  //     } catch (error) {
-  //       toast.error('Erro ao carregar itens vendáveis!')
-  //     } finally {
-  //       Loading.turnOff()
-  //     }
-  //   }
+        const paramsToApi = sellableItemsToApi(pagination, order, filters)
 
-  //   loadSellableItems()
-  // }, [order, filters])
+        const {
+          data: { dados: data, total },
+        } = await apiPatient.get('/itens-vendaveis', {
+          params: paramsToApi,
+          paramsSerializer: (params) => {
+            return qs.stringify(params, { arrayFormat: 'repeat' })
+          },
+        })
 
-  const sellableItems: DataSellableItemsItem[] = [
-    {
-      id: 1,
-      code: 'CÓDIGO',
-      plan: 'Plano Vida',
-      status: 'Inativo',
-      outlets: 'Sudeste',
-      amount: 'R$ 99,90',
-    },
-  ]
+        setPaginationTotal(total)
+
+        const sellableItemsMapped = sellableItemsFromApi(data)
+
+        setSellableItems(sellableItemsMapped)
+      } catch (error) {
+        console.log(error)
+        toast.error('Erro ao carregar itens vendáveis!')
+      } finally {
+        Loading.turnOff()
+      }
+    }
+
+    loadSellableItems()
+  }, [pagination, order, filters])
 
   return (
     <Container>
       {sellableItems?.map((sellableItem, index) => (
         <ul key={index}>
           <li>{sellableItem.code || '-'}</li>
-          <li>{sellableItem.plan || '-'}</li>
+          <li>{sellableItem.plan.name || '-'}</li>
           <Status type={sellableItem.status}>
             <span>{sellableItem.status || '-'}</span>
           </Status>
@@ -82,8 +88,11 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
           <Actions />
         </ul>
       ))}
-      {!sellableItems.length && <h2>Nenhum resultado encontrado</h2>}
-      <PaginationSimple />
+      {!sellableItems?.length && <h2>Nenhum resultado encontrado</h2>}
+      <PaginationSimple
+        total={paginationTotal}
+        onGetPagination={setPagination}
+      />
     </Container>
   )
 }
