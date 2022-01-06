@@ -14,6 +14,7 @@ const ClinicInformation = () => {
   const [clinicInfo, setClinicInfo] = useState({})
   const location = useLocation()
   const history = useHistory()
+  const prevUrlResults = location.state.urlPrevResults || ''
 
   const { Loading } = useLoading()
 
@@ -32,7 +33,6 @@ const ClinicInformation = () => {
           `clinica/${location.state.idClinic}/especialidades/medicos`,
         )
         setClinicInfo(fromApi(data))
-        console.log(fromApi(data))
       } catch (error) {
         console.log(error)
       } finally {
@@ -46,7 +46,7 @@ const ClinicInformation = () => {
     <DefaultLayout title="Informações da Clínica">
       <Content>
         <div>
-          <Link to={PATIENT_SCHEDULE_APPOINTMENT}>
+          <Link to={PATIENT_SCHEDULE_APPOINTMENT + prevUrlResults}>
             <ArrowLeftIcon /> Voltar aos resultados
           </Link>
         </div>

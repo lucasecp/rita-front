@@ -27,6 +27,7 @@ export interface DataI {
 export interface ResultsProps {
   data: DataI
   setQueryPagination: (query: string) => void
+  restQuery: string
 }
 
 export interface DoctorInfoProps {

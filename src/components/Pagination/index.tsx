@@ -42,8 +42,6 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const nextPage = () => {
     if (currentPage === totalPages || !totalPages) return
-    console.log(currentTotal + currentTotal)
-
     setCurrentPage(currentPage + 1)
   }
 

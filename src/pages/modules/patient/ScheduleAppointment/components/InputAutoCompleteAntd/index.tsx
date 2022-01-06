@@ -5,7 +5,7 @@ import useSearch from './useSearch'
 import { Container } from './styles'
 import { CompleteProps } from './types/index'
 
-const Complete: React.FC<CompleteProps> = ({ setValue }) => {
+const Complete: React.FC<CompleteProps> = ({ setValue, value }) => {
   const [inputValue, setInputValue] = useState('')
   const [options, setOptions] = useState<any[]>([])
 
@@ -18,10 +18,10 @@ const Complete: React.FC<CompleteProps> = ({ setValue }) => {
         dropdownClassName="certain-category-search-dropdown"
         options={options}
         onSearch={(value) => setInputValue(value)}
-        filterOption
         notFoundContent="Nenhum resultado."
         onChange={(value) => setValue(value)}
         allowClear
+        value={value}
       >
         <Input.Search size="large" placeholder="O que você procura?" />
       </AutoComplete>

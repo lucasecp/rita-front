@@ -29,7 +29,10 @@ const ClinicInfo: React.FC<ClinicInfoProps> = ({ dataClinic }) => {
       <Link
         to={{
           pathname: PATIENT_CLINIC_INFORMATION,
-          state: { idClinic: dataClinic.id },
+          state: {
+            idClinic: dataClinic.id,
+            urlPrevResults: window.location.search,
+          },
         }}
       >
         Ver mais <ArrowRightIcon />{' '}

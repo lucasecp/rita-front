@@ -1,5 +1,6 @@
 export interface CompleteProps {
   setValue: (value: string) => void
+  value: string
 }
 
 export type OptionsI = {

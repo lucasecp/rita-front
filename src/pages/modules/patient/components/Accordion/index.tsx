@@ -1,0 +1,39 @@
+import React, { useRef } from 'react'
+import { Accordion } from './styles'
+
+interface AccordionProps {
+  expanded: boolean
+  isChildren?: boolean
+}
+
+const index: React.FC<AccordionProps> = ({
+  children,
+  expanded,
+  isChildren,
+  ...rest
+}) => {
+  const AccordionElement = useRef<HTMLDivElement>(null)
+  const childrensAccordion = AccordionElement.current?.childNodes || []
+
+  const totalHeight = Array.from(childrensAccordion).reduce(
+    (ac, child: any) => {
+      ac += child.offsetHeight
+      return ac
+    },
+    0,
+  )
+  const height = isChildren ? totalHeight + totalHeight : totalHeight
+
+  return (
+    <Accordion
+      ref={AccordionElement}
+      expanded={expanded}
+      height={height}
+      {...rest}
+    >
+      {children}
+    </Accordion>
+  )
+}
+
+export default index

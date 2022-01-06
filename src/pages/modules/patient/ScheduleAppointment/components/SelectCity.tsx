@@ -11,6 +11,7 @@ interface SelectCityProps {
 const SelectCity: React.FC<SelectCityProps> = ({ setCity, city, uf }) => {
   const [cityOptions, setCityOptions] = useState<any[]>([])
 
+
   useEffect(() => {
     if (!uf || uf === 'All') {
       setCity('')

@@ -35,8 +35,9 @@ export const Container = styled.div`
       }
     }
   }
-  > *:last-child > * + * {
-    margin-top: 27px;
+  > *:last-child  {
+    gap: 27px;
+    display: grid;
   }
   > *:last-child[data-expanded='1'] {
     margin-top: 27px;
