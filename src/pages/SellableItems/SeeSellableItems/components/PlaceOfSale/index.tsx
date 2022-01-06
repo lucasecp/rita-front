@@ -2,17 +2,17 @@ import { Table } from './styles'
 
 interface Place {
   city?: {
-    id: string
-    label: string
-  }
+    id: number
+    nome: string
+  }[]
   uf?: {
-    id: string
+    id: number
     sigla: string
-    label: string
+    nome: string
   }
   regional: {
-    id: string
-    label: string
+    id: number
+    nome: string
   }
 }
 interface PlaceOfSaleProps {
@@ -50,20 +50,20 @@ export const PlaceOfSale: React.FC<PlaceOfSaleProps> = ({ places }) => {
             <tr key={index}>
               <td>
                 <div>
-                  <p>{range.regional.label}</p>
+                  <p>{range.regional.nome}</p>
                 </div>
               </td>
               <td>
                 {range.uf && (
                   <div>
-                    <p>{range.uf.label}</p>
+                    <p>{range.uf.nome}</p>
                   </div>
                 )}
               </td>
               <td>
                 {range.city && (
-                  <div key={range.city.id}>
-                    <p>{range.city.label}</p>
+                  <div key={range.city[0].id}>
+                    <p>{range.city[0].nome}</p>
                   </div>
                 )}
               </td>

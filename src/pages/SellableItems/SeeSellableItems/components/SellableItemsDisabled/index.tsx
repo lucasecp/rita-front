@@ -10,6 +10,7 @@ import {
 } from '@/routes/constants/namedRoutes/routes'
 
 import { useAuth } from '@/hooks/login'
+import { useLoading } from '@/hooks/useLoading'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import { RangeOfUse } from '@/components/RangeOfUse'
@@ -22,6 +23,27 @@ import { PlaceOfSale } from '../PlaceOfSale'
 import { Container, ArrowLeft } from './styles'
 import apiPatient from '@/services/apiPatient'
 
+interface ResponseLocation {
+  plan: {
+    id: number
+    idPlan: number
+    type: string
+  }
+}
+
+interface ResponseAPISellableItem {
+  locaisVenda: PlaceOfSaleData[]
+  valor: number
+}
+
+interface ResponseAPIPlan {
+  codigo: string
+  nome: string
+  status: string
+  descricao: string
+  servicos: ServicesData[]
+}
+
 interface ServicesData {
   id: string
   nome: string
@@ -29,17 +51,17 @@ interface ServicesData {
 
 interface PlaceOfSaleData {
   city?: {
-    id: string
-    label: string
-  }
+    id: number
+    nome: string
+  }[]
   uf?: {
-    id: string
+    id: number
     sigla: string
-    label: string
+    nome: string
   }
   regional: {
-    id: string
-    label: string
+    id: number
+    nome: string
   }
 }
 
@@ -55,68 +77,122 @@ interface SellableItemsData {
 
 export const SellableItemsDisabled: React.FC = () => {
   const history = useHistory()
-  // const location = useLocation().state
-  const id = 57
+  const { Loading } = useLoading()
+  const { plan } = useLocation<ResponseLocation>().state
   const auth = useAuth()
   const userPermissions = auth.user.permissoes
+  const [sellableItemsData, setSellableItemsData] = useState(
+    {} as SellableItemsData,
+  )
+
+  console.log(plan)
 
   const canEditSellableItems = userPermissions.includes(
     'EDITAR_ITENS_VENDAVEIS',
   )
 
-  const [sellableItemsData, setSellableItemsData] = useState(
-    {} as SellableItemsData,
-  )
+  const sellableItemLocation = plan && {
+    idItem: plan.id,
+    idPlan: plan.idPlan,
+    typeItem: plan.type,
+  }
 
   useEffect(() => {
+    const { idItem, idPlan, typeItem } = sellableItemLocation
+
     const getSellableItem = async () => {
-      const response = await apiPatient.get(`/itens-vendaveis/2`, {
-        params: {
-          idPlano: 80,
-          tipo: 'regional',
-        },
-      })
+      try {
+        Loading.turnOn()
 
-      console.log(response.data)
+        const responseSellableItem =
+          await apiPatient.get<ResponseAPISellableItem>(
+            `/itens-vendaveis/${idItem}`,
+            {
+              params: {
+                idPlano: idPlan,
+                tipo: typeItem,
+              },
+            },
+          )
 
-      const data = {
-        code: 'PPR',
-        name: 'Plano Vida +50',
-        status: 'Ativo',
-        description:
-          'Plano Vida especialmente configurado para pessoas com mais de 50 anos da região Centro Oeste',
-        services: [{ id: '1', nome: 'Consulta Dermatologista' }],
-        placeOfSale: [
-          {
-            city: { id: '2', label: 'Timbó' },
-            regional: {
-              id: '1',
-              label: 'Sul',
+        const responsePlan = await apiPatient.get<ResponseAPIPlan>(
+          `/plano/${idPlan}`,
+        )
+
+        const { locaisVenda, valor } = responseSellableItem.data
+        const { codigo, nome, status, descricao, servicos } = responsePlan.data
+
+        let fullStatus = ''
+
+        switch (status) {
+          case 'I':
+            fullStatus = 'Inativo'
+            break
+          case 'P':
+            fullStatus = 'Pendente'
+            break
+          case 'A':
+            fullStatus = 'Ativo'
+            break
+          case 'S':
+            fullStatus = 'Suspenso'
+            break
+          default:
+            break
+        }
+
+        const ajustedData = {
+          code: codigo,
+          name: nome,
+          status: fullStatus,
+          description: descricao,
+          services: servicos,
+          placeOfSale: locaisVenda,
+          price: valor,
+        }
+
+        const data = {
+          code: 'PPR',
+          name: 'Plano Vida +50',
+          status: 'Ativo',
+          description:
+            'Plano Vida especialmente configurado para pessoas com mais de 50 anos da região Centro Oeste',
+          services: [{ id: '1', nome: 'Consulta Dermatologista' }],
+          placeOfSale: [
+            {
+              city: { id: '2', nome: 'Timbó' },
+              regional: {
+                id: '1',
+                nome: 'Sul',
+              },
+              uf: {
+                id: '10',
+                sigla: 'SC',
+                nome: 'Santa Catarina',
+              },
             },
-            uf: {
-              id: '10',
-              sigla: 'SC',
-              label: 'Santa Catarina',
+            {
+              regional: {
+                id: '1',
+                nome: 'Sul',
+              },
+              uf: {
+                id: '10',
+                sigla: 'SC',
+                nome: 'Santa Catarina',
+              },
+              city: { id: '1', nome: 'Blumenau' },
             },
-          },
-          {
-            regional: {
-              id: '1',
-              label: 'Sul',
-            },
-            uf: {
-              id: '10',
-              sigla: 'SC',
-              label: 'Santa Catarina',
-            },
-            city: { id: '1', label: 'Blumenau' },
-          },
-        ],
-        price: 10,
+          ],
+          price: 10,
+        }
+
+        setSellableItemsData(ajustedData)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        Loading.turnOff()
       }
-
-      // setSellableItemsData(response.data)
-      setSellableItemsData(data)
     }
 
     getSellableItem()
@@ -134,34 +210,35 @@ export const SellableItemsDisabled: React.FC = () => {
             Plano Base <span />
           </p>
 
-          <FormItem
-            label="Código - Nome:"
-            value={`${sellableItemsData.code} - ${sellableItemsData.name}`}
-          />
-          <FormItem label="Status" value={sellableItemsData.status} />
-          <FormItem label="Descrição" value={sellableItemsData.description} />
-
-          <CustomMultSelect
-            disabled
-            label="Serviços:"
-            variation="secondary"
-            value={mapDataToMultSelect(sellableItemsData.services)}
-            setValue={() => console.log('')}
-            hasError={false}
-            messageError=""
-            options={[]}
-          />
+          <>
+            <FormItem
+              label="Código - Nome:"
+              value={`${sellableItemsData.code || 'Código'} - ${
+                sellableItemsData.name || 'Nome'
+              }`}
+            />
+            <FormItem label="Status" value={sellableItemsData.status} />
+            <FormItem
+              label="Descrição"
+              value={sellableItemsData.description || 'Descrição'}
+            />
+            <CustomMultSelect
+              disabled
+              label="Serviços:"
+              variation="secondary"
+              value={mapDataToMultSelect(sellableItemsData.services)}
+              setValue={() => console.log('')}
+              hasError={false}
+              messageError=""
+              options={[]}
+            />
+          </>
 
           <p>
             Local de Venda <span />
           </p>
 
           <PlaceOfSale places={sellableItemsData.placeOfSale} />
-
-          <RangeOfUse
-            rangesOfUse={mapToRangeOfUse(sellableItemsData.placeOfSale)}
-            viewMode
-          />
 
           <div id="containerInput">
             <InputText
