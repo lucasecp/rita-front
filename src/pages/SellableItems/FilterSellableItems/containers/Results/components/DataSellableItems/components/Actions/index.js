@@ -1,22 +1,22 @@
 import React from 'react'
 import { Container } from './styles'
-import { ReactComponent as InactiveIcon } from '@/assets/icons/inactive.svg'
 import { ReactComponent as EyePurpleIcon } from '@/assets/icons/eye-purple.svg'
 import { ReactComponent as TrashIcon } from '@/assets/icons/trash.svg'
 import CustomTooltip from '@/components/Tooltip'
 import { useHistory } from 'react-router'
 import { SEE_SELLABLE_ITEMS } from '@/routes/constants/namedRoutes/routes'
 import { useLoading } from '@/hooks/useLoading'
+import { useModal } from '@/hooks/useModal'
+import DeleteModal from './messages/DeleteModal'
 
 const Actions = ({ plan }) => {
   const history = useHistory()
   const { Loading } = useLoading()
+  const { showMessage } = useModal()
 
   const toSeeSellableItem = () => {
     try {
       Loading.turnOn()
-
-      console.log(plan)
 
       history.push(SEE_SELLABLE_ITEMS, {
         plan,
@@ -32,10 +32,7 @@ const Actions = ({ plan }) => {
     try {
       Loading.turnOn()
 
-      showMessage(SimpleModal, {
-        type: 'error',
-        message: 'kdsnfsjdkfndskjfn',
-      })
+      showMessage(DeleteModal)
     } catch (err) {
       console.log(err)
     } finally {
@@ -48,8 +45,8 @@ const Actions = ({ plan }) => {
       <CustomTooltip label="Visualizar">
         <EyePurpleIcon onClick={toSeeSellableItem} />
       </CustomTooltip>
-      <CustomTooltip label="Excluir" onClick={toDeleteSellableItem}>
-        <TrashIcon />
+      <CustomTooltip label="Excluir">
+        <TrashIcon onClick={toDeleteSellableItem} />
       </CustomTooltip>
     </Container>
   )
