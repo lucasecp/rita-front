@@ -53,7 +53,7 @@ export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({ plan }) => {
       })
 
       if (message === 'Sucesso') {
-        toast.success(`${plan.name} inativado.`)
+        toast.success(`Plano ${plan.name} inativado`)
       }
     } catch (error) {
       toast.error(`Erro ao inativar o plano ${plan.name}`)
