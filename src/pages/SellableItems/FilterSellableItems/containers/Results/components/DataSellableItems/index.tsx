@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Status } from './styles'
 import Actions from './components/Actions'
 import { toast } from '@/styles/components/toastify'
@@ -18,12 +18,22 @@ interface DataSellableItemsProps {
 }
 
 interface DataSellableItemsItem {
-  id: 1
+  id: number
   code: string
-  plan: string
+  plano: string
   status: 'Ativo' | 'Inativo' | 'Em digitação' | 'Suspenso'
   outlets: string
   amount: string
+}
+
+interface sellableItem {
+  id: number
+  idPlano: number
+  codigo: string
+  nome: string
+  status: 'Ativo' | 'Inativo' | 'Em digitação' | 'Suspenso'
+  localVenda: string
+  valor: string
 }
 
 export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
@@ -31,58 +41,63 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
   order,
 }) => {
   const { Loading } = useLoading()
+  const [data, setData] = useState([])
 
-  // useEffect(() => {
-  //   const loadSellableItems = async () => {
-  //     try {
-  //       Loading.turnOn()
+  useEffect(() => {
+    const loadSellableItems = async () => {
+      try {
+        Loading.turnOn()
 
-  //       const paramsToApi = sellableItemsFiltersToApi(order, filters)
+        const paramsToApi = sellableItemsFiltersToApi(order, filters)
 
-  //       const { data } = await apiPatient.get('/plano/itens-vendaveis', {
-  //         params: paramsToApi,
-  //       })
+        const response = await apiPatient.get('/plano/itens-vendaveis', {
+          params: paramsToApi,
+        })
 
-  //       console.log(data)
-  //       // const sellableItemsMapped = fromApi()
-  //     } catch (error) {
-  //       toast.error('Erro ao carregar itens vendáveis!')
-  //     } finally {
-  //       Loading.turnOff()
-  //     }
-  //   }
+        setData(response.data)
 
-  //   loadSellableItems()
-  // }, [order, filters])
+        console.log(data)
+        // const sellableItemsMapped = fromApi()
+      } catch (error) {
+        toast.error('Erro ao carregar itens vendáveis!')
+      } finally {
+        Loading.turnOff()
+      }
+    }
 
-  const sellableItems: DataSellableItemsItem[] = [
-    {
-      id: 1,
-      code: 'CÓDIGO',
-      plan: 'Plano Vida',
-      status: 'Inativo',
-      outlets: 'Sudeste',
-      amount: 'R$ 99,90',
-    },
-  ]
+    loadSellableItems()
+  }, [order, filters])
+
+  // const loadSellableItems: DataSellableItemsItem[] = [
+  //   {
+  //     id: 1,
+  //     code: 'CÓDIGO',
+  //     plan: 'Plano Vida',
+  //     status: 'Inativo',
+  //     outlets: 'Sudeste',
+  //     amount: 'R$ 99,90',
+  //   },
+  // ]
+
+  console.log(data, 'aquiiiii')
 
   return (
     <Container>
-      {sellableItems?.map((sellableItem, index) => (
+      {data?.map((sellableItem: sellableItem, index) => (
         <ul key={index}>
-          <li>{sellableItem.code || '-'}</li>
-          <li>{sellableItem.plan || '-'}</li>
+          <li>{sellableItem.codigo || '-'}</li>
+          <li>{sellableItem.nome || '-'}</li>
           <Status type={sellableItem.status}>
             <span>{sellableItem.status || '-'}</span>
           </Status>
-          <li>{sellableItem.outlets || '-'}</li>
+          <li>{sellableItem.localVenda || '-'}</li>
           <li>
-            <div>{sellableItem.amount || '-'}</div>
+            <div>{sellableItem.valor || '-'}</div>
           </li>
-          <Actions />
+          <Actions idPlan={sellableItem.idPlano} />
         </ul>
       ))}
-      {!sellableItems.length && <h2>Nenhum resultado encontrado</h2>}
+      {!data.length && <h2>Nenhum resultado encontrado</h2>}
       <PaginationSimple />
     </Container>
   )
