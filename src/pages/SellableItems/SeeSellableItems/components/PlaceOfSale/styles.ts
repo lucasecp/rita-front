@@ -45,7 +45,7 @@ export const Table = styled.table`
             align-items: center;
 
             border-radius: 16px;
-            border: 1px solid ${colors.purple.main.darkness};
+            border: 1px solid ${colors.gray.dark};
 
             + div {
               margin-top: 8px;
@@ -55,20 +55,20 @@ export const Table = styled.table`
               font-weight: 500;
               font-size: 16px;
               line-height: 20px;
-              color: ${colors.purple.main.darkness};
+              color: ${colors.gray.dark};
               padding: 4px 0px;
             }
 
             > svg {
               cursor: pointer;
-              fill: ${colors.purple.main.darkness};
+              fill: ${colors.gray.dark};
               padding: 10px 0px 10px 8px;
               box-sizing: content-box;
             }
           }
 
           > button {
-            color: ${colors.purple.main.darkness};
+            color: ${colors.gray.dark};
 
             font-weight: 500;
             font-size: 16px;

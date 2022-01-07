@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
 import { useModal } from '@/hooks/useModal'
-import { Container, ButtonGroup } from './style'
+import { Container, ButtonGroup, PlanName, Price } from './styles'
 import { useLoading } from '@/hooks/useLoading'
 
 import OutlineButton from '@/components/Button/Outline'
 
 import Textarea from '@/components/Form/Textarea'
+
+import warning from '@/assets/icons/alerts/warning.svg'
+import ButtonPrimary from '@/components/Button/Primary'
 
 const DeleteModal = ({ plan }) => {
   const { closeModal } = useModal()
@@ -40,16 +43,18 @@ const DeleteModal = ({ plan }) => {
   return (
     <Container>
       <div>
+        <img src={warning} />
         <h1>
           O item abaixo deixará de ser disponibilizado, deseja prosseguir?
         </h1>
-        <h2>
-          {plan.name} - {plan.rangeOfUse} - R$ {plan.amount}
-        </h2>
-        <h3>Esta ação não afeta contratos ativos!</h3>
+
+        <PlanName>{plan.name}</PlanName>
+        <p>{plan.rangeOfUse}</p>
+        <Price>{plan.amount}</Price>
+
+        <h2>Esta ação não afeta contratos ativos!</h2>
 
         <Textarea
-          label="justificativa:"
           limit="200"
           showCaractersInformation
           setValue={setDescription}
@@ -60,7 +65,7 @@ const DeleteModal = ({ plan }) => {
       </div>
       <ButtonGroup>
         <OutlineButton onClick={closeModal}>Não</OutlineButton>
-        <a onClick={onConfirm}>Sim</a>
+        <ButtonPrimary onClick={onConfirm}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>
   )
