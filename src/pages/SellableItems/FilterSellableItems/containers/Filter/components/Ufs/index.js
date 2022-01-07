@@ -17,14 +17,13 @@ export const Ufs = ({ setUf, uf, regional }) => {
       try {
         Loading.turnOn()
         const queryRegional = [
-          { name: 'idRegional', value: formatMultSelectValue(regional) },
+          { name: 'regional', value: formatMultSelectValue(regional) },
         ]
 
         const { data } = await apiPatient.get(
           `/uf?${queryFilterString(queryRegional)}`,
         )
-        const dataMapped = mapUf(data?.dados)
-
+        const dataMapped = mapUf(data)
         if (!dataMapped.length) {
           return setUfOptions([])
         }

@@ -30,7 +30,7 @@ const MultSelectCity = ({ setCity, city, uf }) => {
         const { data } = await apiPatient.get(
           `/municipio?${queryFilterString(ufValue)}`,
         )
-        const dataMapped = mapCity(data?.dados)
+        const dataMapped = mapCity(data)
 
         if (!dataMapped.length) {
           return setCityOptions([])
