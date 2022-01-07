@@ -16,14 +16,24 @@ import { fromApi } from '../Adapters'
 import { toast } from '@/styles/components/toastify'
 import { DataI } from '../types/index'
 import { queryOrderString } from '@/helpers/queryString/order'
+import useQueryParams from './useQueryParams'
 
 const Filters = () => {
-  const [researchDoctor, setResearchDoctor] = useState('')
-  const [uf, setUf] = useState('')
-  const [city, setCity] = useState('')
+  const params = useQueryParams()
+  const [researchDoctor, setResearchDoctor] = useState(
+    params.researchDoctor || '',
+  )
+  const [uf, setUf] = useState(params.uf || '')
+  const [city, setCity] = useState(params.city || '')
   const [results, setResults] = useState<DataI>({ total: 0 })
   const [filter, setFilter] = useState<any[]>([])
-  const [order, setOrder] = useState<any>('')
+
+  const [order, setOrder] = useState<any>(
+    params.order && params.orderBy
+      ? queryOrderString({ name: params.orderBy, value: params.order })
+      : '',
+  )
+  const [wasSubmited, setWasSubmited] = useState(false);
 
   const [queryApiPagination, setQueryApiPagination] =
     useState('?limit=10&skip=0')
@@ -44,6 +54,13 @@ const Filters = () => {
     { name: 'uf', value: uf === 'All' ? '' : uf },
   ]
 
+  useEffect(() => {
+    if (someFieldWasTyped) {
+      setFilter(arrayQuery)
+      setWasSubmited(true)
+    }
+  }, [])
+
   const onFilter = () => {
     if (!someFieldWasTyped) {
       return toast.warning('Informe pelo menos um filtro.')
@@ -51,6 +68,9 @@ const Filters = () => {
     setFilter(arrayQuery)
   }
 
+  const verifyTypedFields = (fields: any[]) => {
+    return fields.filter((field) => field.value)
+  }
   const filterResults = async () => {
     try {
       Loading.turnOn()
@@ -59,21 +79,13 @@ const Filters = () => {
           verifyTypedFields(filter),
         )}${order}`,
       )
-      if (data.total === 0) {
-        return toast.warning('Nenhum resultado encontrado.')
-      }
-
-      setOrder(queryOrderString({ name: data.orderBy, value: data.order }))
       setResults({ total: data.total, data: fromApi(data.dados) })
+      setOrder(queryOrderString({ name: data.orderBy, value: data.order }))
+      setWasSubmited(true)
     } catch (error) {
-
     } finally {
       Loading.turnOff()
     }
-  }
-
-  const verifyTypedFields = (fields: any[]) => {
-    return fields.filter((field) => field.value)
   }
 
   return (
@@ -82,7 +94,10 @@ const Filters = () => {
         <header>
           <h3>Como você precisa cuidar de sua saúde hoje?</h3>
         </header>
-        <InputAutoCompleteAntd setValue={setResearchDoctor} />
+        <InputAutoCompleteAntd
+          setValue={setResearchDoctor}
+          value={researchDoctor}
+        />
         <SelectUf setUf={setUf} uf={uf} />
         <SelectCity setCity={setCity} uf={uf} city={city} />
         <BtnGroup>
@@ -93,8 +108,12 @@ const Filters = () => {
         </BtnGroup>
       </Container>
 
-      {!!results.total && (
-        <Results data={results} setQueryPagination={setQueryApiPagination} />
+      {wasSubmited && (
+        <Results
+          data={results}
+          setQueryPagination={setQueryApiPagination}
+          restQuery={queryFilterString(filter) + order}
+        />
       )}
     </>
   )

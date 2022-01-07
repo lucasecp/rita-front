@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import MultSelectServices from './components/Services'
 import { Ufs } from './components/Ufs'
@@ -8,14 +8,8 @@ import { Regionals } from './components/Regionals'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import InputText from '@/components/Form/InputText'
-import CustomRangePicker from '@/components/Form/CustomRangePicker'
 import CustomMultSelect from '@/components/Form/MultSelect'
 import { Container } from './styles'
-import formatMultSelectValue from '@/helpers/formatMultSelectValue'
-import convertDateToIso from '@/helpers/convertDateToIso'
-import { verifyTypedFields } from '../../helpers/verifyTypedFields'
-import useQuery from '@/hooks/useQuery'
-import moment from 'moment'
 import { SellableItemsFilters } from '../../@types'
 
 interface FilterProps {
@@ -23,70 +17,71 @@ interface FilterProps {
 }
 
 export const Filter: React.FC<FilterProps> = ({ setFilters }) => {
-  // const query = useQuery()
-
   const [code, setCode] = useState('')
   const [plan, setPlan] = useState('')
   const [services, setServices] = useState([])
   const [status, setStatus] = useState([])
-  const [regional, setRegional] = useState([])
-  const [uf, setUf] = useState([])
-  const [city, setCity] = useState([])
+  const [regionals, setRegionals] = useState([])
+  const [ufs, setUfs] = useState([])
+  const [cities, setCities] = useState([])
 
-  // useEffect(() => {
-  //   setFilters(verifyTypedFields(arrayQuery))
-  // }, [])
-
-  // const arrayQuery = [
-  //   { name: 'nome', value: name },
-  //   { name: 'codigo', value: code },
-  //   { name: 'status', value: formatMultSelectValue(status) },
-  //   { name: 'idServico', value: formatMultSelectValue(services) },
-  //   { name: 'idRegional', value: formatMultSelectValue(regional) },
-  //   { name: 'idUf', value: formatMultSelectValue(uf) },
-  //   { name: 'idCidade', value: formatMultSelectValue(city) },
-  //   { name: 'periodoAtivacaoInicio', value: convertDateToIso(validityDate[0]) },
-  //   { name: 'periodoAtivacaoFim', value: convertDateToIso(validityDate[1]) },
-  // ]
+  const hasNoFilterSelected = useMemo(() => {
+    return (
+      code === '' &&
+      plan === '' &&
+      !services.length &&
+      !status.length &&
+      !regionals.length &&
+      !ufs.length &&
+      !cities.length
+    )
+  }, [code, plan, services, status, regionals, ufs, cities])
 
   const onClearFields = () => {
     setCode('')
     setPlan('')
     setStatus([])
     setServices([])
-    setRegional([])
-    setUf([])
-    setCity([])
+    setRegionals([])
+    setUfs([])
+    setCities([])
+
     setFilters([])
   }
 
   const onFilterResults = () => {
-    let servicesWithoutAll = []
-    let statusWithoutAll = []
-    let RegionalWithoutAll = []
+    // let servicesWithoutAll = services
+    // let statusWithoutAll = status
+    // let regionalsWithoutAll = regionals
 
-    const hasAllOptionInServices = services.some((service) => service.id === 0)
+    // const hasAllOptionInServices = services.some((service) => service.id === 0)
 
-    if (hasAllOptionInServices) {
-      servicesWithoutAll = services.filter((service) => service.id !== 0)
-    }
+    // if (hasAllOptionInServices) {
+    //   servicesWithoutAll = services.filter((service) => service.id !== 0)
+    // }
 
-    const hasAllOptionInStatus = status.some((status) => status.id === 0)
+    // const hasAllOptionInStatus = status.some((status) => status.id === 0)
 
-    if (hasAllOptionInStatus) {
-      statusWithoutAll = status.filter((status) => status.id !== 0)
-    }
+    // if (hasAllOptionInStatus) {
+    //   statusWithoutAll = status.filter((status) => status.id !== 0)
+    // }
 
-    
+    // const hasAllOptionInRegional = regionals.some(
+    //   (regional) => regional.id === 0,
+    // )
+
+    // if (hasAllOptionInRegional) {
+    //   regionalsWithoutAll = regionals.filter((regional) => regional.id !== 0)
+    // }
 
     setFilters({
       code,
       plan,
-      servicesWithoutAll,
-      statusWithoutAll,
-      regional,
-      uf,
-      city,
+      services,
+      status,
+      regionals,
+      ufs,
+      cities,
     })
   }
 
@@ -103,7 +98,7 @@ export const Filter: React.FC<FilterProps> = ({ setFilters }) => {
         <InputText
           variation="secondary"
           label="Nome:"
-          onlyLetter
+          // onlyLetter
           value={plan}
           setValue={setPlan}
           maxLength="50"
@@ -123,16 +118,25 @@ export const Filter: React.FC<FilterProps> = ({ setFilters }) => {
         />
       </div>
       <div>
-        <Regionals regional={regional} setRegional={setRegional} />
-        <Ufs uf={uf} setUf={setUf} regional={regional} />
-        <Cities city={city} setCity={setCity} uf={uf} />
+        <Regionals regional={regionals} setRegional={setRegionals} />
+        <Ufs uf={ufs} setUf={setUfs} regional={regionals} />
+        <Cities city={cities} setCity={setCities} uf={ufs} />
       </div>
 
       <footer>
-        <OutlineButton small variation="red" onClick={onClearFields}>
+        <OutlineButton
+          small
+          variation="red"
+          onClick={onClearFields}
+          disabled={hasNoFilterSelected}
+        >
           Limpar Filtro
         </OutlineButton>
-        <ButtonPrimary medium onClick={onFilterResults}>
+        <ButtonPrimary
+          medium
+          onClick={onFilterResults}
+          disabled={hasNoFilterSelected}
+        >
           Filtrar Resultados
         </ButtonPrimary>
       </footer>

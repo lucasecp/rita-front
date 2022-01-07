@@ -11,7 +11,6 @@ const SelectUf: React.FC<SelectUfProps> = ({ setUf, uf }) => {
   const [ufOptions, setUfOptions] = useState<any[]>([])
 
   useEffect(() => {
-    setUf('')
     const getUf = async () => {
       try {
         const { data } = await apiPatient.get(`/clinica/ufs`)

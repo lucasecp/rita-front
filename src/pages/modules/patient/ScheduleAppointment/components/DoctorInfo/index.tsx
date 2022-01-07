@@ -37,7 +37,10 @@ const DoctorInfo: React.FC<DoctorInfoProps> = ({ dataDoctor, isVerify }) => {
       </ul>
       <button
         onClick={() =>
-          history.push(PATIENT_DOCTOR_INFORMATION, { idDoctor: dataDoctor.id })
+          history.push(PATIENT_DOCTOR_INFORMATION, {
+            idDoctor: dataDoctor.id,
+            urlPrevResults: window.location.search,
+          })
         }
       >
         Ver mais <ArrowRightIcon />{' '}

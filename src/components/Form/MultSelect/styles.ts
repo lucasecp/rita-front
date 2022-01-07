@@ -3,7 +3,17 @@ import styled, { css } from 'styled-components'
 import checkedIcon from '@/assets/icons/checked.svg'
 import closeIcon from '@/assets/icons/close.svg'
 
-export const Content = styled.div`
+export const Content = styled.div.attrs(
+  (props: {
+    hasError: boolean
+    disabled: boolean
+    variation: '' | 'secondary'
+  }) => ({
+    hasError: props.hasError,
+    disabled: props.disabled,
+    variation: props.variation,
+  }),
+)`
   display: grid;
   align-items: start;
   border-bottom: 2px solid ${colors.purple.main.middle};
@@ -181,7 +191,7 @@ export const Content = styled.div`
       border-color: ${colors.orange.light};
     `}
 
-  ${({ variation }) =>
+  ${({ variation, hasError }) =>
     variation === 'secondary' &&
     css`
       border: 1px solid #eeeeee;
@@ -213,9 +223,7 @@ export const Content = styled.div`
         max-height: 100%;
       }
 
-      border: 1px solid
-        ${({ hasError }) =>
-          hasError ? colors.orange.light : colors.gray.light};
+      border: 1px solid ${hasError ? colors.orange.light : colors.gray.light};
     `}
 
         ${({ disabled }) =>
@@ -251,7 +259,12 @@ export const Content = styled.div`
       }
     `}
 `
-export const Container = styled.div`
+export const Container = styled.div.attrs(
+  (props: { disabled: boolean; variation: '' | 'secondary' }) => ({
+    disabled: props.disabled,
+    variation: props.variation,
+  }),
+)`
   display: grid;
 
   > label {

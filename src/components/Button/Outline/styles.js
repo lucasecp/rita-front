@@ -77,15 +77,14 @@ export const Container = styled.button`
   ${({ disabled }) =>
     disabled &&
     css`
-      /* background: ${colors.purple.main.light}; */
-      border-color: ${colors.purple.main.light};
       cursor: default !important;
-      color: ${colors.purple.background.middle} !important;
+      color: ${colors.gray.middleLight};
+      border-color: ${colors.gray.middleLight} !important;
 
       :hover {
-        background: unset;
-        border-color: ${colors.purple.main.light};
-        color: unset;
+        background: unset !important;
+        border-color: ${colors.gray.middleLight};
+        color: ${colors.gray.middleLight};
       }
     `}
 `

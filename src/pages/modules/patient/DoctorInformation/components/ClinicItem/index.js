@@ -4,7 +4,7 @@ import { Container } from './styles'
 import ClinicItemDetails from '../ClinicItemDetails'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg'
-import { Accordion } from '../../../styles/accordion'
+import Accordion from '../../../components/Accordion'
 import { useToggle } from '@/hooks/useToggle'
 import CustomTooltip from '@/components/Tooltip'
 
@@ -48,7 +48,7 @@ const ClinicItem = ({ clinic }) => {
           <OutlineButton onClick={toggle}>Ver detalhes</OutlineButton>
         )}
       </div>
-      <Accordion data-expanded={state ? 1 : 0}>
+      <Accordion expanded={state ? 1 : 0}>
         <ClinicItemDetails clinicDetails={clinic} />
       </Accordion>
     </Container>

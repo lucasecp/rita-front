@@ -53,7 +53,9 @@ export const Content = styled.div`
   }
 `
 
-export const ArrowUp = styled.button`
+export const ArrowUp = styled.button.attrs((props: { order: number }) => ({
+  order: props.order,
+}))`
   border: none;
   background-color: transparent;
   padding: 0;
@@ -77,7 +79,9 @@ export const ArrowUp = styled.button`
   }
 `
 
-export const ArrowDown = styled.button`
+export const ArrowDown = styled.button.attrs((props: { order: number }) => ({
+  order: props.order,
+}))`
   border: none;
   background-color: transparent;
   padding: 0;

@@ -21,8 +21,8 @@ export const Container = styled.div`
     margin-right: 24px;
 
     > img {
-      max-width: 320px;
-      max-height: 188px;
+      width: 320px;
+      height: 188px;
       border-radius: 8px;
       object-fit: cover;
     }

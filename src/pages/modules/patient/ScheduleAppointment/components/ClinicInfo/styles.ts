@@ -8,13 +8,14 @@ export const DefaultPhoto = styled.div`
   margin-bottom: 21px;
 `
 export const PhotoClinic = styled.div`
-  width: 130px;
-  height: 130px;
   border-radius: 50%;
   margin-bottom: 21px;
   > img {
-    min-width: 100%;
     border-radius: 50%;
+    min-width: 130px;
+    min-height: 130px;
+    max-width: 130px;
+    max-height: 130px;
   }
 `
 export const Container = styled.div`
