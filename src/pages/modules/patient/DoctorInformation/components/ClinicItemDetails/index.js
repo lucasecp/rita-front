@@ -21,12 +21,17 @@ const ClinicItemDetails = ({ clinicDetails }) => {
             <li>
               <MoneyIcon /> Valor:
               {clinicDetails?.specialtys[0].defaultPrice && (
-                <span>Balcão {clinicDetails?.specialtys[0].defaultPrice}</span>
+                <span>
+                  Particular {clinicDetails?.specialtys[0].defaultPrice}
+                </span>
               )}
               {clinicDetails?.specialtys[0].ritaPrice && (
                 <>
                   <span>-</span>
-                  <span>Rita: {clinicDetails?.specialtys[0].ritaPrice}</span>
+                  <span>
+                    Preço Rita para você:{' '}
+                    {clinicDetails?.specialtys[0].ritaPrice}
+                  </span>
                 </>
               )}
             </li>
