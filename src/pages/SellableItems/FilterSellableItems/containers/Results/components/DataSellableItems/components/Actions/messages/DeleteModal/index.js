@@ -8,11 +8,14 @@ import { useLoading } from '@/hooks/useLoading'
 import OutlineButton from '@/components/Button/Outline'
 
 import Textarea from '@/components/Form/Textarea'
+import apiPatient from '@/services/apiPatient'
 
 import warning from '@/assets/icons/alerts/warning.svg'
 import ButtonPrimary from '@/components/Button/Primary'
-import { toast } from '@/styles/components/toastify'
-import apiPatient from '@/services/apiPatient'
+import {
+  DELETE_SELLABLE_ITEMS,
+  FILTER_SELLABLE_ITEMS,
+} from '@/routes/constants/namedRoutes/routes'
 
 const DeleteModal = ({ plan }) => {
   const { closeModal } = useModal()
@@ -25,24 +28,28 @@ const DeleteModal = ({ plan }) => {
   const onConfirm = async () => {
     if (description.length > 20) {
       Loading.turnOn()
-      // try {
-      //   const response = await apiPatient.delete(
-      //     `/itens-vendaveis/local-venda/${plan.idPlan}`,
-      //   )
+      try {
+        const response = await apiPatient.delete(`/itens-vendaveis/${plan.id}`, {
+          params: {
+            idPlano: plan.idPlan,
+            tipo: plan.type === 'city' ? 'municipio' : plan.type,
+          },
+        })
 
-      //   console.log(response)
-      //   if (response.RESPOSTA) toast.success(`Plano ${plan.name} Excluído`)
-      // } catch (error) {
-      //   toast.error(`Erro ao tentar excluir o plano ${plan.name}`)
-      //   Loading.turnOff()
-      // } finally {
-      //   Loading.turnOff()
-      // }
+        location.reload()
+        closeModal()
+      } catch (error) {
+        console.log(error)
+      } finally {
+        Loading.turnOff()
+      }
     } else {
       setError('Informe 20 caracteres ou mais.')
       Loading.turnOff()
     }
   }
+
+  console.log(plan)
 
   return (
     <Container>
