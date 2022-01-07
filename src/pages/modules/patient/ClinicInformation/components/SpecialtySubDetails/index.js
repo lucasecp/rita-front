@@ -46,13 +46,15 @@ const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
             <MoneyIcon /> <h6>Valor:</h6>
             {dataSpecialtyDetails?.defaultPrice && (
               <DefaultPrice>
-                Balcão {dataSpecialtyDetails?.defaultPrice}
+                Particular {dataSpecialtyDetails?.defaultPrice}
               </DefaultPrice>
             )}
             {dataSpecialtyDetails?.defaultPrice && (
               <>
                 <span>-</span>
-                <RitaPrice>Rita {dataSpecialtyDetails?.ritaPrice}</RitaPrice>
+                <RitaPrice>
+                  Preço Rita para você: {dataSpecialtyDetails?.ritaPrice}
+                </RitaPrice>
               </>
             )}
           </Price>
