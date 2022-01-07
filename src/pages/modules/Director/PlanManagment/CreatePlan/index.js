@@ -227,7 +227,7 @@ export const CreatePlan = () => {
         </div>
         <footer>
           <OutilineButton onClick={onCancelCreatePlan}>Cancelar</OutilineButton>
-          <ButtonPrimary disable={disabledSaveButton} onClick={onCreatePlan}>
+          <ButtonPrimary disabled={disabledSaveButton} onClick={onCreatePlan}>
             Salvar
           </ButtonPrimary>
         </footer>

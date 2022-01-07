@@ -10,6 +10,7 @@ export const statusFromApi: any = (status: any) => {
 
   return statusObject[status]
 }
+;('municipio')
 
 export const sellableItemsFromApi: any = (sellableItemsResponse: any) => {
   // const {  } = sellableItemsResponse
@@ -24,5 +25,6 @@ export const sellableItemsFromApi: any = (sellableItemsResponse: any) => {
     status: statusFromApi(item.status),
     outlets: item.localVenda,
     amount: formatPrice(item.valor),
+    type: item.tipo === 'municipio' ? 'city' : item.tipo,
   }))
 }

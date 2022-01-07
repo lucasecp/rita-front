@@ -12,7 +12,7 @@ export const FilterSellableItems: React.FC = () => {
   return (
     <DefaultLayout title="Itens Vendáveis" headerChildren={<IncludeButton />}>
       <Container>
-        <Filter setFilters={setFilters} />
+        <Filter onGetFilters={setFilters} />
         <Results filters={filters} />
       </Container>
     </DefaultLayout>

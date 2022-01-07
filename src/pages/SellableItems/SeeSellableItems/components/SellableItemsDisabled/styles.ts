@@ -20,6 +20,8 @@ export const Container = styled.div`
 
     background: ${colors.gray.light};
     border-radius: 8px 8px 0 0;
+
+    cursor: pointer;
   }
 
   > main {
@@ -36,11 +38,11 @@ export const Container = styled.div`
       font-size: 16px;
       line-height: 20px;
 
-      color: ${colors.blue.middle};
+      color: ${({ theme }) => theme.main};
 
       > span {
         flex: 1;
-        border-bottom: 1px solid ${colors.blue.middle};
+        border-bottom: 1px solid ${({ theme }) => theme.main};
         margin-bottom: 8px;
         margin-left: 4px;
       }
