@@ -3,7 +3,6 @@ import { useHistory, useLocation } from 'react-router-dom'
 
 import { formatPrice } from '@/helpers/formatPrice'
 import mapDataToMultSelect from './helpers/mapDataToMultSelect'
-import mapToRangeOfUse from './helpers/mapToRangeOfUse'
 import {
   EDIT_SELLABLE_ITEMS,
   FILTER_SELLABLE_ITEMS,
@@ -104,13 +103,15 @@ export const SellableItemsDisabled: React.FC = () => {
       try {
         Loading.turnOn()
 
+        console.log(typeItem === 'city' ? 'municipio' : typeItem)
+
         const responseSellableItem =
           await apiPatient.get<ResponseAPISellableItem>(
             `/itens-vendaveis/${idItem}`,
             {
               params: {
                 idPlano: idPlan,
-                tipo: typeItem,
+                tipo: typeItem === 'city' ? 'municipio' : typeItem,
               },
             },
           )
@@ -122,69 +123,21 @@ export const SellableItemsDisabled: React.FC = () => {
         const { locaisVenda, valor } = responseSellableItem.data
         const { codigo, nome, status, descricao, servicos } = responsePlan.data
 
-        let fullStatus = ''
-
-        switch (status) {
-          case 'I':
-            fullStatus = 'Inativo'
-            break
-          case 'P':
-            fullStatus = 'Pendente'
-            break
-          case 'A':
-            fullStatus = 'Ativo'
-            break
-          case 'S':
-            fullStatus = 'Suspenso'
-            break
-          default:
-            break
+        const setStatus: { [x: string]: string } = {
+          I: 'Inativo',
+          P: 'Em Digitação',
+          A: 'Ativo',
+          S: 'Suspenso',
         }
 
         const ajustedData = {
           code: codigo,
           name: nome,
-          status: fullStatus,
+          status: setStatus[status],
           description: descricao,
           services: servicos,
           placeOfSale: locaisVenda,
           price: valor,
-        }
-
-        const data = {
-          code: 'PPR',
-          name: 'Plano Vida +50',
-          status: 'Ativo',
-          description:
-            'Plano Vida especialmente configurado para pessoas com mais de 50 anos da região Centro Oeste',
-          services: [{ id: '1', nome: 'Consulta Dermatologista' }],
-          placeOfSale: [
-            {
-              city: { id: '2', nome: 'Timbó' },
-              regional: {
-                id: '1',
-                nome: 'Sul',
-              },
-              uf: {
-                id: '10',
-                sigla: 'SC',
-                nome: 'Santa Catarina',
-              },
-            },
-            {
-              regional: {
-                id: '1',
-                nome: 'Sul',
-              },
-              uf: {
-                id: '10',
-                sigla: 'SC',
-                nome: 'Santa Catarina',
-              },
-              city: { id: '1', nome: 'Blumenau' },
-            },
-          ],
-          price: 10,
         }
 
         setSellableItemsData(ajustedData)
@@ -228,8 +181,6 @@ export const SellableItemsDisabled: React.FC = () => {
               variation="secondary"
               value={mapDataToMultSelect(sellableItemsData.services)}
               setValue={() => console.log('')}
-              hasError={false}
-              messageError=""
               options={[]}
             />
           </>

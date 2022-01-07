@@ -15,7 +15,7 @@ export const Cities: React.FC = ({ setCity, city, uf }: any) => {
 
   useEffect(() => {
     setCity([])
-    if (!uf.length) {
+    if (!uf?.length) {
       return
     }
 
@@ -55,7 +55,7 @@ export const Cities: React.FC = ({ setCity, city, uf }: any) => {
 
   return (
     <CustomMultSelect
-      disabled={!uf.length}
+      disabled={!uf?.length}
       options={cityOptions}
       label="Cidade:"
       value={city}
