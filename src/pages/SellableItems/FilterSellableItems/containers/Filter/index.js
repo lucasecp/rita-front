@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 
 import MultSelectServices from './components/Services'
 import { Ufs } from './components/Ufs'
@@ -11,42 +11,58 @@ import InputText from '@/components/Form/InputText'
 import CustomMultSelect from '@/components/Form/MultSelect'
 import { Container } from './styles'
 import { SellableItemsFilters } from '../../@types'
+import useLocalStorage from 'use-local-storage'
 
 interface FilterProps {
-  setFilters: React.Dispatch<React.SetStateAction<SellableItemsFilters>>;
+  onGetFilters: React.Dispatch<React.SetStateAction<SellableItemsFilters>>;
 }
 
-export const Filter: React.FC<FilterProps> = ({ setFilters }) => {
-  const [code, setCode] = useState('')
-  const [plan, setPlan] = useState('')
-  const [services, setServices] = useState([])
-  const [status, setStatus] = useState([])
-  const [regionals, setRegionals] = useState([])
-  const [ufs, setUfs] = useState([])
-  const [cities, setCities] = useState([])
+export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
+  const [filters, setFilters] = useLocalStorage(
+    '@Rita/SellableItems/Filters',
+    {},
+  )
+
+  // const [code, setCode] = useState('')
+  // const [plan, setPlan] = useState('')
+  // const [services, setServices] = useState([])
+  // const [status, setStatus] = useState([])
+  // const [regionals, setRegionals] = useState([])
+  // const [ufs, setUfs] = useState([])
+  // const [cities, setCities] = useState([])
 
   const hasNoFilterSelected = useMemo(() => {
     return (
-      code === '' &&
-      plan === '' &&
-      !services.length &&
-      !status.length &&
-      !regionals.length &&
-      !ufs.length &&
-      !cities.length
+      filters.code === '' &&
+      filters.plan === '' &&
+      !filters.services.length &&
+      !filters.status.length &&
+      !filters.regionals.length &&
+      !filters.ufs.length &&
+      !filters.cities.length
     )
-  }, [code, plan, services, status, regionals, ufs, cities])
+  }, [
+    filters.code,
+    filters.plan,
+    filters.services,
+    filters.status,
+    filters.regionals,
+    filters.ufs,
+    filters.cities,
+  ])
 
   const onClearFields = () => {
-    setCode('')
-    setPlan('')
-    setStatus([])
-    setServices([])
-    setRegionals([])
-    setUfs([])
-    setCities([])
+    setFilters({
+      code: '',
+      plan: '',
+      services: [],
+      status: [],
+      regionals: [],
+      ufs: [],
+      cities: [],
+    })
 
-    setFilters([])
+    onGetFilters({})
   }
 
   const onFilterResults = () => {
@@ -74,14 +90,14 @@ export const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     //   regionalsWithoutAll = regionals.filter((regional) => regional.id !== 0)
     // }
 
-    setFilters({
-      code,
-      plan,
-      services,
-      status,
-      regionals,
-      ufs,
-      cities,
+    onGetFilters({
+      code: filters.code,
+      plan: filters.plan,
+      services: filters.services,
+      status: filters.status,
+      regionals: filters.regionals,
+      ufs: filters.ufs,
+      cities: filters.cities,
     })
   }
 
@@ -91,19 +107,22 @@ export const Filter: React.FC<FilterProps> = ({ setFilters }) => {
         <InputText
           variation="secondary"
           label="Código:"
-          value={code}
-          setValue={setCode}
-          maxLength="10"
+          value={filters.code}
+          setValue={(value) => setFilters({ ...filters, code: value })}
+          maxLength={10}
         />
         <InputText
           variation="secondary"
           label="Nome:"
           // onlyLetter
-          value={plan}
-          setValue={setPlan}
-          maxLength="50"
+          value={filters.plan}
+          setValue={(value) => setFilters({ ...filters, plan: value })}
+          maxLength={50}
         />
-        <MultSelectServices services={services} setServices={setServices} />
+        <MultSelectServices
+          services={filters.services}
+          setServices={(value) => setFilters({ ...filters, services: value })}
+        />
         <CustomMultSelect
           label="Status:"
           options={[
@@ -113,14 +132,25 @@ export const Filter: React.FC<FilterProps> = ({ setFilters }) => {
             { name: 'Em digitação', id: 3 },
             { name: 'Suspenso', id: 4 },
           ]}
-          value={status}
-          setValue={setStatus}
+          value={filters.status}
+          setValue={(value) => setFilters({ ...filters, status: value })}
         />
       </div>
       <div>
-        <Regionals regional={regionals} setRegional={setRegionals} />
-        <Ufs uf={ufs} setUf={setUfs} regional={regionals} />
-        <Cities city={cities} setCity={setCities} uf={ufs} />
+        <Regionals
+          regional={filters.regionals}
+          setRegional={(value) => setFilters({ ...filters, regionals: value })}
+        />
+        <Ufs
+          uf={filters.ufs}
+          setUf={(value) => setFilters({ ...filters, ufs: value })}
+          regional={filters.regionals}
+        />
+        <Cities
+          city={filters.cities}
+          setCity={(value) => setFilters({ ...filters, cities: value })}
+          uf={filters.ufs}
+        />
       </div>
 
       <footer>

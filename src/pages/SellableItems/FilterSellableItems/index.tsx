@@ -8,15 +8,12 @@ import { SellableItemsFilters } from './@types'
 import useLocalStorage from 'use-local-storage'
 
 export const FilterSellableItems: React.FC = () => {
-  const [filters, setFilters] = useLocalStorage(
-    '@Rita/SellableItems/Filters',
-    {} as SellableItemsFilters,
-  )
+  const [filters, setFilters] = useState({} as SellableItemsFilters)
 
   return (
     <DefaultLayout title="Itens Vendáveis" headerChildren={<IncludeButton />}>
       <Container>
-        <Filter setFilters={setFilters} />
+        <Filter onGetFilters={setFilters} />
         <Results filters={filters} />
       </Container>
     </DefaultLayout>
