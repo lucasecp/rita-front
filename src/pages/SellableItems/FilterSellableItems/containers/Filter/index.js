@@ -24,6 +24,8 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
   )
 
   const hasNoFilterSelected = useMemo(() => {
+    onGetFilters({})
+
     return (
       filters.code === '' &&
       filters.plan === '' &&
