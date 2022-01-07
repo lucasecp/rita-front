@@ -21,7 +21,7 @@ export const Cities: React.FC = ({ setCity, city, uf }: any) => {
 
     const ufValue = verifyTypedFields([
       {
-        name: 'idUF',
+        name: 'uf',
         value: formatMultSelectValue(uf),
       },
     ])
@@ -32,7 +32,7 @@ export const Cities: React.FC = ({ setCity, city, uf }: any) => {
         const { data } = await apiPatient.get(
           `/municipio?${queryFilterString(ufValue)}`,
         )
-        const dataMapped = mapCity(data?.dados)
+        const dataMapped = mapCity(data)
 
         if (!dataMapped.length) {
           return setCityOptions([])
