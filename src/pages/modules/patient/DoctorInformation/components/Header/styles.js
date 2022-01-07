@@ -1,15 +1,13 @@
 import styled from 'styled-components'
 
 export const DoctorImage = styled.div`
-  width: 147px;
-  height: 147px;
   margin-right: 24px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   > img {
-    max-width: 147px;
-    max-height: 147px;
+    width: 147px;
+    height: 147px;
     border-radius: 50%;
     object-fit: fill;
   }
@@ -63,8 +61,11 @@ export const Container = styled.div`
   }
   @media (max-width: 767px) {
     justify-content: center;
-    >div:first-child {
-      margin-right: 0
+  }
+  
+  @media (max-width: 560px) {
+    > div:first-child {
+      margin-right: 0;
     }
   }
 `

@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react'
 import { Container, DropdownIconStyled, DefaultPhoto, Photo } from './styles'
 import SpecialtySubDetails from '../SpecialtySubDetails'
-import { Accordion } from '../../../styles/accordion'
+import Accordion from '../../../components/Accordion'
 import { useToggle } from '@/hooks/useToggle'
 
-const SpecialtyDetails = ({ parentWasClosed, dataSpecialtyDetails }) => {
+const SpecialtyDetails = ({
+  parentWasClosed,
+  dataSpecialtyDetails,
+
+}) => {
   const [state, toggle] = useToggle()
 
   useEffect(() => {
@@ -12,6 +16,8 @@ const SpecialtyDetails = ({ parentWasClosed, dataSpecialtyDetails }) => {
       toggle()
     }
   }, [parentWasClosed])
+
+
 
   return (
     <Container>
@@ -36,7 +42,7 @@ const SpecialtyDetails = ({ parentWasClosed, dataSpecialtyDetails }) => {
         </div>
         <DropdownIconStyled data-expanded={state ? 1 : 0} />
       </div>
-      <Accordion data-expanded={state ? 1 : 0}>
+      <Accordion expanded={state ? 1 : 0}>
         <SpecialtySubDetails dataSpecialtyDetails={dataSpecialtyDetails} />
       </Accordion>
     </Container>

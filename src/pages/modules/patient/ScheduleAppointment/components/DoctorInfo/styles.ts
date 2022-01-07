@@ -8,14 +8,13 @@ export const DefaultImg = styled.div`
   margin-bottom: 21px;
 `
 export const Profile = styled.div`
-  max-width: 130px;
-  max-height: 130px;
-  min-width: 130px;
-  min-height: 130px;
-  border-radius: 50%;
   margin-bottom: 21px;
   > img {
-    max-height: 100%;
+    min-width: 130px;
+    min-height: 130px;
+    max-width: 130px;
+    max-height: 130px;
+    border-radius: 50%;
   }
 `
 export const Container = styled.div`

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Container,
   MainInfo,
@@ -16,6 +16,7 @@ import ServiceSchedule from '../../../components/ServiceSchedule'
 import CustomTooltip from '@/components/Tooltip'
 
 const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
+
   return (
     <Container>
       <ul>

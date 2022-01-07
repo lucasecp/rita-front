@@ -8,7 +8,7 @@ export const Accordion = styled.div`
 
   &[data-expanded='1'] {
     overflow: visible;
-    max-height: 2000px;
+    max-height: 10000px;
     visibility: visible;
   }
 `

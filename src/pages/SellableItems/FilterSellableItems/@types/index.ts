@@ -7,18 +7,42 @@ export interface SellableItemsFilters {
   }[]
   status: {
     id: number
-    name: string
+    name: StatusSellableItems
   }[]
-  regional: {
+  regionals: {
     id: number
     name: string
   }[]
-  uf: {
+  ufs: {
     id: number
     name: string
   }[]
-  city: {
+  cities: {
     id: number
     name: string
   }[]
 }
+
+export interface DataSellableItemsItem {
+  id: 1
+  code: string
+  plan: {
+    id: number
+    name: string
+  }
+  status: StatusSellableItems
+  outlets: string
+  amount: string
+}
+
+export interface OrderSellableItems {
+  name: 'code' | 'plan' | 'status' | 'outlets' | 'amount' | 'actions'
+  value: 'ascending' | 'descending' | undefined
+}
+
+export type StatusSellableItems =
+  | 'Ativo'
+  | 'Inativo'
+  | 'Em digitação'
+  | 'Suspenso'
+

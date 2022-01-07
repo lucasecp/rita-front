@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container } from './styles'
 import OutlineButton from '@/components/Button/Outline'
 import SpecialtyDetails from '../SpecialtyDetails'
 import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg'
-import { Accordion } from '../../../styles/accordion'
+import Accordion from '../../../components/Accordion'
 import { useToggle } from '@/hooks/useToggle'
 
 const SpecialtyItem = ({ specialtyInfo }) => {
@@ -21,7 +21,11 @@ const SpecialtyItem = ({ specialtyInfo }) => {
           <OutlineButton onClick={toggle}>Ver Especialistas</OutlineButton>
         )}
       </div>
-      <Accordion data-expanded={state ? 1 : 0}>
+      <Accordion
+        expanded={state ? 1 : 0}
+        isChildren
+        data-expanded={state ? 1 : 0}
+      >
         {specialtyInfo?.doctorSpecialty?.map((dataSpecialtyDetails, index) => (
           <SpecialtyDetails
             key={index}

@@ -1,40 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Status } from './styles'
+import qs from 'qs'
+import {
+  DataSellableItemsItem,
+  OrderSellableItems,
+  SellableItemsFilters,
+} from '../../../../@types'
+
 import Actions from './components/Actions'
 import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
-import { SellableItemsFilters } from '../../../../@types'
-import { sellableItemsFiltersToApi } from './adapters/toApi'
-import { PaginationSimple } from './components/PaginationSimple'
-// import formatTextWithLimit from '@/helpers/formatTextWithLimit'
+import { Container, Status } from './styles'
 
+import { sellableItemsToApi } from './adapters/toApi'
+import { PaginationSimple } from './components/PaginationSimple'
+import { sellableItemsFromApi } from './adapters/fromApi'
+
+// import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 interface DataSellableItemsProps {
   filters: SellableItemsFilters
-  order: {
-    name: string
-    value: string
-  }
+  order: OrderSellableItems
 }
 
-// interface DataSellableItemsItem {
-//   id: number
-//   code: string
-//   plano: string
-//   status: 'Ativo' | 'Inativo' | 'Em digitação' | 'Suspenso'
-//   outlets: string
-//   amount: string
-// }
-
-interface sellableItem {
-  id: number
-  idPlano: number
-  codigo: string
-  nome: string
-  status: 'Ativo' | 'Inativo' | 'Em digitação' | 'Suspenso'
-  localVenda: string
-  valor: string
-  tipo: string
+interface PaginationState {
+  limit: number
+  skip: number
 }
 
 export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
@@ -42,22 +32,37 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
   order,
 }) => {
   const { Loading } = useLoading()
-  const [data, setData] = useState<sellableItem[]>([])
+
+  const [sellableItems, setSellableItems] = useState(
+    [] as DataSellableItemsItem[],
+  )
+
+  const [pagination, setPagination] = useState({} as PaginationState)
+  const [paginationTotal, setPaginationTotal] = useState(0)
 
   useEffect(() => {
     const loadSellableItems = async () => {
       try {
         Loading.turnOn()
 
-        const paramsToApi = await sellableItemsFiltersToApi(order, filters)
+        const paramsToApi = sellableItemsToApi(pagination, order, filters)
 
-        const response = await apiPatient.get('/plano/itens-vendaveis', {
+        const {
+          data: { dados: data, total },
+        } = await apiPatient.get('/itens-vendaveis', {
           params: paramsToApi,
+          paramsSerializer: (params) => {
+            return qs.stringify(params, { arrayFormat: 'repeat' })
+          },
         })
 
-        setData(response.data.dados)
-        // const sellableItemsMapped = fromApi()
+        setPaginationTotal(total)
+
+        const sellableItemsMapped = sellableItemsFromApi(data)
+
+        setSellableItems(sellableItemsMapped)
       } catch (error) {
+        console.log(error)
         toast.error('Erro ao carregar itens vendáveis!')
       } finally {
         Loading.turnOff()
@@ -65,35 +70,35 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
     }
 
     loadSellableItems()
-  }, [order, filters])
+  }, [pagination, order, filters])
 
   return (
     <Container>
-      {data?.map((sellableItem: sellableItem, index: number) => (
+      {sellableItems?.map((sellableItem, index) => (
         <ul key={index}>
-          <li>{sellableItem.codigo || '-'}</li>
-          <li>{sellableItem.nome || '-'}</li>
+          <li>{sellableItem.code || '-'}</li>
+          <li>{sellableItem.plan.name || '-'}</li>
           <Status type={sellableItem.status}>
             <span>{sellableItem.status || '-'}</span>
           </Status>
-          <li>{sellableItem.localVenda || '-'}</li>
+          <li>{sellableItem.outlets || '-'}</li>
           <li>
-            <div>{sellableItem.valor || '-'}</div>
+            <div>{sellableItem.amount || '-'}</div>
           </li>
           <Actions
             plan={{
-              name: sellableItem.nome,
-              amount: sellableItem.valor,
-              rangeOfUse: sellableItem.localVenda,
-              idPlan: sellableItem.idPlano,
+              idPlan: sellableItem.plan.id,
               id: sellableItem.id,
-              type: sellableItem.tipo,
+              outlets: sellableItem.outlets,
             }}
           />
         </ul>
       ))}
-      {!data.length && <h2>Nenhum resultado encontrado</h2>}
-      <PaginationSimple />
+      {!sellableItems?.length && <h2>Nenhum resultado encontrado</h2>}
+      <PaginationSimple
+        total={paginationTotal}
+        onGetPagination={setPagination}
+      />
     </Container>
   )
 }

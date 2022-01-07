@@ -1,14 +1,16 @@
-import CustomMultSelect from '@/components/Form/MultSelect'
+import CustomMultSelect, {
+  MultiSelectOption,
+} from '@/components/Form/MultSelect'
 import formatMultSelectValue from '@/helpers/formatMultSelectValue'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
-import { mapCity } from '../../../../helpers/mapDataFromApiToMultSelect'
-import { verifyTypedFields } from '../../../../helpers/verifyTypedFields'
+import { mapCity } from '../../helpers/mapDataFromApiToMultSelect'
+import { verifyTypedFields } from '../../helpers/verifyTypedFields'
 
-export const Cities = ({ setCity, city, uf }) => {
-  const [cityOptions, setCityOptions] = useState([])
+export const Cities: React.FC = ({ setCity, city, uf }: any) => {
+  const [cityOptions, setCityOptions] = useState([] as MultiSelectOption[])
   const { Loading } = useLoading()
 
   useEffect(() => {

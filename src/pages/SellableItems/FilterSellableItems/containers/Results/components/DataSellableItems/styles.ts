@@ -1,24 +1,26 @@
+import { StatusSellableItems } from '@/pages/SellableItems/FilterSellableItems/@types';
 import colors from '@/styles/colors'
 import { LiHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 
 interface DataSellableItemsStylesProps extends LiHTMLAttributes<HTMLLIElement> {
-  type: 'Ativo' | 'Inativo' | 'Em digitação' | 'Suspenso'
+  type: StatusSellableItems
 }
 
 export const Container = styled.div`
-  padding: 0px 32px;
   min-width: max-content;
 
   > ul {
     display: flex;
-    padding: 25px 0;
+    padding: 24px 32px;
+
     justify-content: space-between;
     position: relative;
+
     &::after {
       content: '';
       height: 1px;
-      width: calc(100% + 64px);
+      width: calc(100% + 32);
       position: absolute;
       display: block;
       bottom: 0;

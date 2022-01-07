@@ -27,7 +27,7 @@
   "rules": {
     "react/prop-types": 0,
     "react-hooks/rules-of-hooks": "warn",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "off",
     "react/jsx-filename-extension": [
       1,
       {
@@ -54,14 +54,16 @@
       }
     ],
     // disable the rule for all files
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": "off"
   },
   "overrides": [
     {
       // enable the rule specifically for TypeScript files
       "files": ["*.ts", "*.tsx"],
       "rules": {
-        "@typescript-eslint/explicit-module-boundary-types": ["error"]
+        "@typescript-eslint/explicit-module-boundary-types": ["error"],
+        "@typescript-eslint/no-unused-vars": ["error"]
       }
     }
   ],
