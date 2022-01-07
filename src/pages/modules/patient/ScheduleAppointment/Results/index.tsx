@@ -6,16 +6,12 @@ import Pagination from '@/components/Pagination/'
 import { ResultsProps } from '../types'
 import ClinicInfo from '../components/ClinicInfo'
 
-const Results: React.FC<ResultsProps>= ({ data, setQueryPagination }) => {
-  // const [doctors, setDoctors] = useState([])
-
-  // useEffect(() => {
-  //   setDoctors(data?.doctor?.map(
-  //     (clinic) => clinic?.specialtys?.doctorSpecialty
-  //   ))
-  // },[data])
-
-  return data ? (
+const Results: React.FC<ResultsProps> = ({
+  data,
+  setQueryPagination,
+  restQuery,
+}) => {
+  return (
     <Container>
       <h2>Resultados encontrados</h2>
       <Content>
@@ -26,10 +22,15 @@ const Results: React.FC<ResultsProps>= ({ data, setQueryPagination }) => {
         {data?.data?.doctor.map((doctor, index) => (
           <DoctorInfo key={index} isVerify dataDoctor={doctor} />
         ))}
+        {!data.total && <h2>Nenhum resultado encontrado</h2>}
       </Content>
-      <Pagination setQuery={setQueryPagination} total={data.total} />
+      <Pagination
+        setQuery={setQueryPagination}
+        total={data.total}
+        restQuery={restQuery}
+      />
     </Container>
-  ) : null
+  )
 }
 
 export default Results

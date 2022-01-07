@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Container,
   MainInfo,
@@ -16,6 +16,7 @@ import ServiceSchedule from '../../../components/ServiceSchedule'
 import CustomTooltip from '@/components/Tooltip'
 
 const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
+
   return (
     <Container>
       <ul>
@@ -46,13 +47,15 @@ const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
             <MoneyIcon /> <h6>Valor:</h6>
             {dataSpecialtyDetails?.defaultPrice && (
               <DefaultPrice>
-                Balcão {dataSpecialtyDetails?.defaultPrice}
+                Particular {dataSpecialtyDetails?.defaultPrice}
               </DefaultPrice>
             )}
             {dataSpecialtyDetails?.defaultPrice && (
               <>
                 <span>-</span>
-                <RitaPrice>Rita {dataSpecialtyDetails?.ritaPrice}</RitaPrice>
+                <RitaPrice>
+                  Preço Rita para você: {dataSpecialtyDetails?.ritaPrice}
+                </RitaPrice>
               </>
             )}
           </Price>

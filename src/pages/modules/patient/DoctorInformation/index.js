@@ -15,6 +15,7 @@ const DoctorInformation = () => {
   const location = useLocation()
   const history = useHistory()
   const { Loading } = useLoading()
+  const prevUrlResults = location.state.urlPrevResults || ''
 
   useEffect(() => {
     document.title = 'Rita Saúde | Informações do Médico'
@@ -32,9 +33,7 @@ const DoctorInformation = () => {
           `/medico/${location.state.idDoctor}`,
         )
         setDoctorInfo(fromApi(data))
-        console.log(fromApi(data),data);
       } catch (error) {
-        console.log(error)
       } finally {
         Loading.turnOff()
       }
@@ -46,7 +45,7 @@ const DoctorInformation = () => {
     <DefaultLayout title="Informações do Especialista">
       <Content>
         <div>
-          <Link to={PATIENT_SCHEDULE_APPOINTMENT}>
+          <Link to={PATIENT_SCHEDULE_APPOINTMENT + prevUrlResults}>
             <ArrowLeftIcon /> Voltar aos resultados
           </Link>
         </div>

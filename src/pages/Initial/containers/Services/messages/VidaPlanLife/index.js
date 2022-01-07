@@ -40,7 +40,7 @@ const DifferentPlanLife = () => {
   return (
     <Container>
       <img src={warning} />
-      <p>Agendar Consulta Médica &nbsp;</p>
+      <p>Você não possui nenhuma consulta marcada &nbsp;</p>
       <ButtonGroup>
         <OutlineButton onClick={closeModal}>Cancelar</OutlineButton>
         <ButtonPrimary onClick={scheduleAppointment}>
