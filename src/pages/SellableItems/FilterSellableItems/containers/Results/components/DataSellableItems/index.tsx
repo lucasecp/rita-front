@@ -89,6 +89,7 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
             plan={{
               idPlan: sellableItem.plan.id,
               id: sellableItem.id,
+              outlets: sellableItem.outlets,
             }}
           />
         </ul>
