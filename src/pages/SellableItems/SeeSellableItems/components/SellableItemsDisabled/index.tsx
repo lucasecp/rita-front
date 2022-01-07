@@ -80,8 +80,16 @@ export const SellableItemsDisabled: React.FC = () => {
   const { plan } = useLocation<ResponseLocation>().state
   const auth = useAuth()
   const userPermissions = auth.user.permissoes
-  const [sellableItemsData, setSellableItemsData] = useState(
-    {} as SellableItemsData,
+  const [sellableItemsData, setSellableItemsData] = useState<SellableItemsData>(
+    {
+      code: 'Código',
+      description: 'Descrição',
+      name: 'Nome',
+      placeOfSale: [],
+      price: 0,
+      services: [],
+      status: '',
+    },
   )
 
   const canEditSellableItems = userPermissions.includes(
@@ -150,8 +158,8 @@ export const SellableItemsDisabled: React.FC = () => {
   return (
     <>
       <Container>
-        <header>
-          <ArrowLeft onClick={() => history.push(FILTER_SELLABLE_ITEMS)} />
+        <header onClick={() => history.push(FILTER_SELLABLE_ITEMS)}>
+          <ArrowLeft />
           <p>Voltar à Filtragem</p>
         </header>
         <main>
@@ -159,27 +167,18 @@ export const SellableItemsDisabled: React.FC = () => {
             Plano Base <span />
           </p>
 
-          <>
-            <FormItem
-              label="Código - Nome:"
-              value={`${sellableItemsData.code || 'Código'} - ${
-                sellableItemsData.name || 'Nome'
-              }`}
-            />
-            <FormItem label="Status" value={sellableItemsData.status} />
-            <FormItem
-              label="Descrição"
-              value={sellableItemsData.description || 'Descrição'}
-            />
-            <CustomMultSelect
-              disabled
-              label="Serviços:"
-              variation="secondary"
-              value={mapDataToMultSelect(sellableItemsData.services)}
-              setValue={() => console.log('')}
-              options={[]}
-            />
-          </>
+          <FormItem
+            label="Código - Nome:"
+            value={`${sellableItemsData.code} - ${sellableItemsData.name}`}
+          />
+          <FormItem label="Status" value={sellableItemsData.status} />
+          <FormItem label="Descrição" value={sellableItemsData.description} />
+          <CustomMultSelect
+            disabled
+            label="Serviços:"
+            variation="secondary"
+            value={mapDataToMultSelect(sellableItemsData.services)}
+          />
 
           <p>
             Local de Venda <span />
