@@ -84,8 +84,6 @@ export const SellableItemsDisabled: React.FC = () => {
     {} as SellableItemsData,
   )
 
-  console.log(plan)
-
   const canEditSellableItems = userPermissions.includes(
     'EDITAR_ITENS_VENDAVEIS',
   )
@@ -102,8 +100,6 @@ export const SellableItemsDisabled: React.FC = () => {
     const getSellableItem = async () => {
       try {
         Loading.turnOn()
-
-        console.log(typeItem === 'city' ? 'municipio' : typeItem)
 
         const responseSellableItem =
           await apiPatient.get<ResponseAPISellableItem>(
