@@ -17,14 +17,14 @@ interface DataSellableItemsProps {
   }
 }
 
-interface DataSellableItemsItem {
-  id: number
-  code: string
-  plano: string
-  status: 'Ativo' | 'Inativo' | 'Em digitação' | 'Suspenso'
-  outlets: string
-  amount: string
-}
+// interface DataSellableItemsItem {
+//   id: number
+//   code: string
+//   plano: string
+//   status: 'Ativo' | 'Inativo' | 'Em digitação' | 'Suspenso'
+//   outlets: string
+//   amount: string
+// }
 
 interface sellableItem {
   id: number
@@ -42,7 +42,7 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
   order,
 }) => {
   const { Loading } = useLoading()
-  const [data, setData] = useState<any>([])
+  const [data, setData] = useState<sellableItem[]>([])
 
   useEffect(() => {
     const loadSellableItems = async () => {
@@ -67,8 +67,6 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
     loadSellableItems()
   }, [order, filters])
 
-  console.log(data)
-
   return (
     <Container>
       {data?.map((sellableItem: sellableItem, index: number) => (
@@ -84,6 +82,9 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
           </li>
           <Actions
             plan={{
+              name: sellableItem.nome,
+              amount: sellableItem.valor,
+              rangeOfUse: sellableItem.localVenda,
               idPlan: sellableItem.idPlano,
               id: sellableItem.id,
               type: sellableItem.tipo,

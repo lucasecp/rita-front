@@ -32,7 +32,9 @@ const Actions = ({ plan }) => {
     try {
       Loading.turnOn()
 
-      showMessage(DeleteModal)
+      showMessage(DeleteModal, {
+        plan,
+      })
     } catch (err) {
       console.log(err)
     } finally {
