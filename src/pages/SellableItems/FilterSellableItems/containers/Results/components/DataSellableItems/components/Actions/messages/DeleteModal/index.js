@@ -11,6 +11,8 @@ import Textarea from '@/components/Form/Textarea'
 
 import warning from '@/assets/icons/alerts/warning.svg'
 import ButtonPrimary from '@/components/Button/Primary'
+import { toast } from '@/styles/components/toastify'
+import apiPatient from '@/services/apiPatient'
 
 const DeleteModal = ({ plan }) => {
   const { closeModal } = useModal()
@@ -20,23 +22,25 @@ const DeleteModal = ({ plan }) => {
   const [description, setDescription] = useState(initialDescription)
   const [error, setError] = useState('')
 
-  const onConfirm = () => {
+  const onConfirm = async () => {
     if (description.length > 20) {
-      try {
-        Loading.turnOn()
-        //   // history.push() Lógica para excluir item vendavel
+      Loading.turnOn()
+      // try {
+      //   const response = await apiPatient.delete(
+      //     `/itens-vendaveis/local-venda/${plan.idPlan}`,
+      //   )
 
-        //   if () {
-        //     toast.success(`PLANO EXCLUIDO`)
-        //   }
-        // } catch (error) {
-        //   toast.error(`ERRO AO TENTAR EXCLUIR PLANO`)
-        // } finally {
-        //   Loading.turnOff()
-        // }
-      } finally {
-        setError('Informe 20 caracteres ou mais.')
-      }
+      //   console.log(response)
+      //   if (response.RESPOSTA) toast.success(`Plano ${plan.name} Excluído`)
+      // } catch (error) {
+      //   toast.error(`Erro ao tentar excluir o plano ${plan.name}`)
+      //   Loading.turnOff()
+      // } finally {
+      //   Loading.turnOff()
+      // }
+    } else {
+      setError('Informe 20 caracteres ou mais.')
+      Loading.turnOff()
     }
   }
 
