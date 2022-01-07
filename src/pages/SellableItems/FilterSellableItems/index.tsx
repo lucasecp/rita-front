@@ -5,7 +5,6 @@ import { Filter } from './containers/Filter'
 import { Container } from './styles'
 import { Results } from './containers/Results'
 import { SellableItemsFilters } from './@types'
-import useLocalStorage from 'use-local-storage'
 
 export const FilterSellableItems: React.FC = () => {
   const [filters, setFilters] = useState({} as SellableItemsFilters)

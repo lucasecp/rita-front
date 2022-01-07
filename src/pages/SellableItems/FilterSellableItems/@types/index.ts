@@ -33,6 +33,7 @@ export interface DataSellableItemsItem {
   status: StatusSellableItems
   outlets: string
   amount: string
+  type: 'regional' | 'uf' | 'city'
 }
 
 export interface OrderSellableItems {
@@ -45,4 +46,3 @@ export type StatusSellableItems =
   | 'Inativo'
   | 'Em digitação'
   | 'Suspenso'
-

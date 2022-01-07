@@ -23,14 +23,6 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
     {},
   )
 
-  // const [code, setCode] = useState('')
-  // const [plan, setPlan] = useState('')
-  // const [services, setServices] = useState([])
-  // const [status, setStatus] = useState([])
-  // const [regionals, setRegionals] = useState([])
-  // const [ufs, setUfs] = useState([])
-  // const [cities, setCities] = useState([])
-
   const hasNoFilterSelected = useMemo(() => {
     return (
       filters.code === '' &&
