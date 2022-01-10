@@ -1,10 +1,16 @@
 import colors from '@/styles/colors'
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
+interface ContainerProps {
+  variation?: string
+  hasError?: boolean | string
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
 
   label {
     margin-bottom: 6px;
@@ -49,13 +55,12 @@ export const Container = styled.div`
       border-color: ${({ hasError }) =>
         hasError ? colors.orange.light : '#419eff'};
     }
-    ${({ variation }) =>
+    ${({ variation, hasError }) =>
       variation === 'secondary' &&
       css`
         border: none;
         border-bottom: 2px solid
-          ${({ hasError }) =>
-            hasError ? colors.orange.light : colors.purple.main.middle};
+          ${() => (hasError ? colors.orange.light : colors.purple.main.middle)};
         border-radius: 0;
         box-shadow: none;
         background-color: transparent;
@@ -63,7 +68,7 @@ export const Container = styled.div`
         ::after {
           border: none;
           border-bottom: 2px solid #419eff;
-          border-color: ${({ hasError }) =>
+          border-color: ${() =>
             hasError ? colors.orange.light : colors.purple.main.dark};
         }
         padding: 5px;

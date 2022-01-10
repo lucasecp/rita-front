@@ -23,7 +23,7 @@ const SpecialtyItem = ({ specialtyInfo }) => {
       </div>
       <Accordion
         expanded={state ? 1 : 0}
-        isChildren
+        hasChildren
         data-expanded={state ? 1 : 0}
       >
         {specialtyInfo?.doctorSpecialty?.map((dataSpecialtyDetails, index) => (

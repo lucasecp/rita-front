@@ -73,6 +73,7 @@ export const Container = styled.div<ContainerProps>`
       variation === 'secondary' &&
       css`
         border: none;
+        padding: 5px;
         border-bottom: 2px solid
           ${hasError ? colors.orange.light : colors.purple.main.middle};
         border-radius: 0;
@@ -82,9 +83,9 @@ export const Container = styled.div<ContainerProps>`
         ::after {
           border: none;
           border-bottom: 2px solid #419eff;
-          border-color: ${
-            hasError ? colors.orange.light : colors.purple.main.dark
-          };
+          border-color: ${hasError
+            ? colors.orange.light
+            : colors.purple.main.dark};
+        }
       `}
-  }
 `

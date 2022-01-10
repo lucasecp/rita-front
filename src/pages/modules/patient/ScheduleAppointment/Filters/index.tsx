@@ -1,6 +1,5 @@
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-// import InputAutoComplete from '@/components/Form/InputAutoComplete'
 import InputAutoCompleteAntd from '../components/InputAutoCompleteAntd'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'

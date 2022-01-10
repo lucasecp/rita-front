@@ -3,13 +3,13 @@ import { Accordion } from './styles'
 
 interface AccordionProps {
   expanded: boolean
-  isChildren?: boolean
+  hasChildren?: boolean
 }
 
 const index: React.FC<AccordionProps> = ({
   children,
   expanded,
-  isChildren,
+  hasChildren,
   ...rest
 }) => {
   const AccordionElement = useRef<HTMLDivElement>(null)
@@ -22,7 +22,7 @@ const index: React.FC<AccordionProps> = ({
     },
     0,
   )
-  const height = isChildren ? totalHeight + totalHeight : totalHeight
+  const height = hasChildren ? totalHeight + totalHeight : totalHeight
 
   return (
     <Accordion

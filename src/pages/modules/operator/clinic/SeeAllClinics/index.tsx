@@ -3,56 +3,56 @@ import React, { useEffect, useState } from 'react'
 import Filter from './Filter'
 import Table from './Table'
 import { Container, Content } from './styles'
-import ButtonHeader from './Components/ButtonHeader'
+
 import Pagination from '@/components/Pagination'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 
-const PlanManagment = () => {
+const SeeAllClinics = () => {
   const [queryApi, setQueryApi] = useState('')
   const [filters, setFilters] = useState([])
   const [order, setOrder] = useState({})
-  const [plans, setPlans] = useState({})
+  const [clinics, setClinics] = useState({ total: 0 })
   const { Loading } = useLoading()
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Gestão de Planos'
+    document.title = 'Rita Saúde | Clínicas'
     if (!queryApi) {
       return
     }
 
-    const getPlans = async () => {
+    const getClinics = async () => {
       try {
         Loading.turnOn()
         const { data } = await apiPatient(
-          `/plano${queryApi}${
+          `/clinica${queryApi}${
             queryFilterString(filters) + queryOrderString(order)
           }`,
         )
-        setPlans(data)
+        setClinics(data)
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
       }
     }
-    getPlans()
+    getClinics()
   }, [queryApi, filters, order])
 
   return (
     <Container>
-      <DefaultLayout title="Gestão de Planos" headerChildren={<ButtonHeader />}>
+      <DefaultLayout title="Gestão de Planos">
         <Content>
           <Filter setFilters={setFilters} />
           <Table
-            plans={plans}
-            setPlans={setPlans}
+            clinics={clinics}
+            setClinics={setClinics}
             setOrder={setOrder}
             order={order}
           />
           <Pagination
-            total={plans?.total}
+            total={clinics?.total}
             setQuery={setQueryApi}
             restQuery={queryFilterString(filters) + queryOrderString(order)}
           />
@@ -62,4 +62,4 @@ const PlanManagment = () => {
   )
 }
 
-export default PlanManagment
+export default SeeAllClinics
