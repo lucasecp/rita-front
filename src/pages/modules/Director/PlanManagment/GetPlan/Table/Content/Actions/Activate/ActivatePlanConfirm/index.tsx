@@ -39,7 +39,7 @@ export const ActivatePlanConfirm: React.FC<SellableItem> = () => {
   }
 
   return (
-    <DefaultLayout title="Gestão de Planos - Ativar Plano">
+    <DefaultLayout title="Gestão de Planos">
       <Container>
         <div>
           <h1>

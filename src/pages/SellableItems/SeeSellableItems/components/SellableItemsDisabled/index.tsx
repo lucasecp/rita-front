@@ -3,7 +3,6 @@ import { useHistory, useLocation } from 'react-router-dom'
 
 import { formatPrice } from '@/helpers/formatPrice'
 import mapDataToMultSelect from './helpers/mapDataToMultSelect'
-import mapToRangeOfUse from './helpers/mapToRangeOfUse'
 import {
   EDIT_SELLABLE_ITEMS,
   FILTER_SELLABLE_ITEMS,
@@ -81,11 +80,17 @@ export const SellableItemsDisabled: React.FC = () => {
   const { plan } = useLocation<ResponseLocation>().state
   const auth = useAuth()
   const userPermissions = auth.user.permissoes
-  const [sellableItemsData, setSellableItemsData] = useState(
-    {} as SellableItemsData,
+  const [sellableItemsData, setSellableItemsData] = useState<SellableItemsData>(
+    {
+      code: 'Código',
+      description: 'Descrição',
+      name: 'Nome',
+      placeOfSale: [],
+      price: 0,
+      services: [],
+      status: '',
+    },
   )
-
-  console.log(plan)
 
   const canEditSellableItems = userPermissions.includes(
     'EDITAR_ITENS_VENDAVEIS',
@@ -110,7 +115,7 @@ export const SellableItemsDisabled: React.FC = () => {
             {
               params: {
                 idPlano: idPlan,
-                tipo: typeItem,
+                tipo: typeItem === 'city' ? 'municipio' : typeItem,
               },
             },
           )
@@ -122,69 +127,21 @@ export const SellableItemsDisabled: React.FC = () => {
         const { locaisVenda, valor } = responseSellableItem.data
         const { codigo, nome, status, descricao, servicos } = responsePlan.data
 
-        let fullStatus = ''
-
-        switch (status) {
-          case 'I':
-            fullStatus = 'Inativo'
-            break
-          case 'P':
-            fullStatus = 'Pendente'
-            break
-          case 'A':
-            fullStatus = 'Ativo'
-            break
-          case 'S':
-            fullStatus = 'Suspenso'
-            break
-          default:
-            break
+        const setStatus: { [x: string]: string } = {
+          I: 'Inativo',
+          P: 'Em Digitação',
+          A: 'Ativo',
+          S: 'Suspenso',
         }
 
         const ajustedData = {
           code: codigo,
           name: nome,
-          status: fullStatus,
+          status: setStatus[status],
           description: descricao,
           services: servicos,
           placeOfSale: locaisVenda,
           price: valor,
-        }
-
-        const data = {
-          code: 'PPR',
-          name: 'Plano Vida +50',
-          status: 'Ativo',
-          description:
-            'Plano Vida especialmente configurado para pessoas com mais de 50 anos da região Centro Oeste',
-          services: [{ id: '1', nome: 'Consulta Dermatologista' }],
-          placeOfSale: [
-            {
-              city: { id: '2', nome: 'Timbó' },
-              regional: {
-                id: '1',
-                nome: 'Sul',
-              },
-              uf: {
-                id: '10',
-                sigla: 'SC',
-                nome: 'Santa Catarina',
-              },
-            },
-            {
-              regional: {
-                id: '1',
-                nome: 'Sul',
-              },
-              uf: {
-                id: '10',
-                sigla: 'SC',
-                nome: 'Santa Catarina',
-              },
-              city: { id: '1', nome: 'Blumenau' },
-            },
-          ],
-          price: 10,
         }
 
         setSellableItemsData(ajustedData)
@@ -201,8 +158,8 @@ export const SellableItemsDisabled: React.FC = () => {
   return (
     <>
       <Container>
-        <header>
-          <ArrowLeft onClick={() => history.push(FILTER_SELLABLE_ITEMS)} />
+        <header onClick={() => history.push(FILTER_SELLABLE_ITEMS)}>
+          <ArrowLeft />
           <p>Voltar à Filtragem</p>
         </header>
         <main>
@@ -210,29 +167,18 @@ export const SellableItemsDisabled: React.FC = () => {
             Plano Base <span />
           </p>
 
-          <>
-            <FormItem
-              label="Código - Nome:"
-              value={`${sellableItemsData.code || 'Código'} - ${
-                sellableItemsData.name || 'Nome'
-              }`}
-            />
-            <FormItem label="Status" value={sellableItemsData.status} />
-            <FormItem
-              label="Descrição"
-              value={sellableItemsData.description || 'Descrição'}
-            />
-            <CustomMultSelect
-              disabled
-              label="Serviços:"
-              variation="secondary"
-              value={mapDataToMultSelect(sellableItemsData.services)}
-              setValue={() => console.log('')}
-              hasError={false}
-              messageError=""
-              options={[]}
-            />
-          </>
+          <FormItem
+            label="Código - Nome:"
+            value={`${sellableItemsData.code} - ${sellableItemsData.name}`}
+          />
+          <FormItem label="Status" value={sellableItemsData.status} />
+          <FormItem label="Descrição" value={sellableItemsData.description} />
+          <CustomMultSelect
+            disabled
+            label="Serviços:"
+            variation="secondary"
+            value={mapDataToMultSelect(sellableItemsData.services)}
+          />
 
           <p>
             Local de Venda <span />

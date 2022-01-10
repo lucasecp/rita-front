@@ -15,13 +15,13 @@ export const Cities: React.FC = ({ setCity, city, uf }: any) => {
 
   useEffect(() => {
     setCity([])
-    if (!uf.length) {
+    if (!uf?.length) {
       return
     }
 
     const ufValue = verifyTypedFields([
       {
-        name: 'idUF',
+        name: 'uf',
         value: formatMultSelectValue(uf),
       },
     ])
@@ -32,7 +32,7 @@ export const Cities: React.FC = ({ setCity, city, uf }: any) => {
         const { data } = await apiPatient.get(
           `/municipio?${queryFilterString(ufValue)}`,
         )
-        const dataMapped = mapCity(data?.dados)
+        const dataMapped = mapCity(data)
 
         if (!dataMapped.length) {
           return setCityOptions([])
@@ -55,7 +55,7 @@ export const Cities: React.FC = ({ setCity, city, uf }: any) => {
 
   return (
     <CustomMultSelect
-      disabled={!uf.length}
+      disabled={!uf?.length}
       options={cityOptions}
       label="Cidade:"
       value={city}

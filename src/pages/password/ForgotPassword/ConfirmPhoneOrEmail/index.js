@@ -32,24 +32,14 @@ function ConfirmPhoneOrEmail() {
   const history = useHistory()
   const location = useLocation()
   const { showMessage } = useModal()
-
-  const userData = location.state
-
-  if (!userData) {
-    history.push(LOGIN)
-    return null
-  }
+  const { Loading } = useLoading()
 
   const [choice, setChoice] = useState('')
 
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
 
-  const { Loading } = useLoading()
-
-  let isDataMatch
-  let isLastTry
-  let isBlocked
+  const userData = location.state
 
   useEffect(() => {
     document.title = 'Rita Saúde | Confirmar Telefone ou Email'
@@ -65,6 +55,15 @@ function ConfirmPhoneOrEmail() {
       return setChoice('email')
     }
   }, [])
+
+  if (!userData) {
+    history.push(LOGIN)
+    return null
+  }
+
+  let isDataMatch
+  let isLastTry
+  let isBlocked
 
   const onChoiceChange = (event) => {
     setChoice(event.target.value)

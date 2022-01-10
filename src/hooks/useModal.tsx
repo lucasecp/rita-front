@@ -40,6 +40,7 @@ const ModalProvider: React.FC = ({ children }) => {
 
   const closeModal = () => {
     setModalVisible(false)
+    setMessage(null)
   }
 
   const error = (message: string) => {
