@@ -5,18 +5,17 @@ import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 
 import { Container } from './styles'
+import { TextMask } from '@/components/TextMask'
 
 const AddressPatientData = ({ address }) => {
   return (
     <Container>
       <h2>Endereço</h2>
       <div>
-        <InputText
-          label="Endereço:"
-          value={address?.logradouro || ''}
-          name="address"
-          disabled
-        />
+        <div>
+          <label>Endereço:</label>
+          <p>{address?.logradouro || ''}</p>
+        </div>
         <section>
           <InputText
             label="Número:"
@@ -24,6 +23,7 @@ const AddressPatientData = ({ address }) => {
             name="number"
             disabled
           />
+
           <InputText
             label="Complemento:"
             value={address?.complemento || ''}
@@ -31,13 +31,17 @@ const AddressPatientData = ({ address }) => {
             disabled
           />
         </section>
-        <InputMask
+        {/* <InputMask
           label="CEP:"
           mask="99.999-999"
           value={address?.cep || ''}
           name="cep"
           disabled
-        />
+        /> */}
+        <div>
+          <label>CEP:</label>
+          <TextMask mask="99.999-999" text={address?.cep || ''} />
+        </div>
         <InputMask
           label="Bairro:"
           value={address?.bairro || ''}

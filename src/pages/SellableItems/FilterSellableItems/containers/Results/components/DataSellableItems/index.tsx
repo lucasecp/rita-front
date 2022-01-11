@@ -70,6 +70,8 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
     }
 
     loadSellableItems()
+
+    console.log(pagination, order, filters)
   }, [pagination, order, filters])
 
   return (

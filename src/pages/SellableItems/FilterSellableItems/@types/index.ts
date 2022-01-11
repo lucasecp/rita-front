@@ -24,7 +24,7 @@ export interface SellableItemsFilters {
 }
 
 export interface DataSellableItemsItem {
-  id: 1
+  id: number
   code: string
   plan: {
     id: number

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 // import { format, parseISO } from 'date-fns'
 
 import arrowDownOutlineIcon from '@/assets/icons/arrow-down-outline.svg'
@@ -9,15 +9,29 @@ import { Select } from '@/components/Form/Select'
 
 import { Container } from './styles'
 import { useToggle } from '@/hooks/useToggle'
+import { formatCpf } from '@/helpers/formatCpf'
+import { formatPhone } from '@/helpers/formatPhone'
 
 function PersonExpandable({ title, personData, holder }) {
-  // const birthDate =
-  //   personData?.dataNascimento &&
-  //   format(parseISO(personData?.dataNascimento), 'dd/MM/yyyy')
-
   const [expanded, toggleExpanded] = useToggle(!!holder)
 
-  const isOldDigit = () => personData?.telefone?.length === 10
+  const cpfFormatted = useMemo(() => {
+    return formatCpf(personData?.cpf)
+  }, [personData?.cpf])
+
+  const genderFormatted = useMemo(() => {
+    const genderOptions = {
+      M: 'Masculino',
+      F: 'Feminino',
+      O: 'Outros',
+    }
+
+    return genderOptions[personData?.sexo]
+  }, [personData?.sexo])
+
+  const phoneFormatted = useMemo(() => {
+    return formatPhone(personData?.telefone)
+  }, [personData?.telefone])
 
   return (
     <Container expanded={expanded}>
@@ -26,43 +40,32 @@ function PersonExpandable({ title, personData, holder }) {
         <img src={arrowDownOutlineIcon} onClick={toggleExpanded} />
       </header>
       <section>
-        <InputText
-          label="Nome Completo:"
-          value={personData?.nome || ''}
-          disabled
-        />
-        <InputMask
-          label="CPF:"
-          mask="999.999.999-99"
-          value={personData?.cpf || ''}
-          disabled
-        />
+        <div>
+          <label>Nome Completo:</label>
+          <p>{personData?.nome || ''}</p>
+        </div>
+        <div>
+          <label>CPF:</label>
+          <p>{cpfFormatted || ''}</p>
+        </div>
       </section>
       <section>
-        <InputMask
-          label="Data de Nascimento:"
-          mask="99/99/9999"
-          value={personData?.dataNascimento || ''}
-          disabled
-        />
-        <Select
-          label="Gênero:"
-          labelDefaultOption="Selecione"
-          options={[
-            { label: 'Masculino', value: 'M' },
-            { label: 'Feminino', value: 'F' },
-            { label: 'Outros', value: 'O' },
-          ]}
-          value={personData?.sexo || ''}
-          disabled
-        />
-        <InputMask
-          label="Celular:"
-          mask={isOldDigit() ? '(99) 9999-9999' : '(99) 99999-9999'}
-          value={personData?.telefone || ''}
-          disabled
-        />
-        <InputText label="E-mail:" value={personData?.email || ''} disabled />
+        <div>
+          <label>Data de Nascimento:</label>
+          <p>{personData?.dataNascimento || ''}</p>
+        </div>
+        <div>
+          <label>Gênero:</label>
+          <p>{genderFormatted || ''}</p>
+        </div>
+        <div>
+          <label>Celular:</label>
+          <p>{phoneFormatted || ''}</p>
+        </div>
+        <div>
+          <label>E-mail:</label>
+          <p>{personData?.email || ''}</p>
+        </div>
       </section>
     </Container>
   )
