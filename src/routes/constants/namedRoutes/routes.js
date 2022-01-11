@@ -18,6 +18,7 @@ export const OPERATOR_CONSULT_ELIGIBILITY = '/elegibilidade/consultar'
 export const OPERATOR_REPORTS = '/relatorios'
 export const OPERATOR_REPORTS_AUTHORIZATION = '/relatorios/autorizacoes'
 export const OPERATOR_SEE_ALL_CLINICS = '/clinicas'
+export const OPERATOR_SEE_ONE_CLINIC = '/clinicas/ver-clinica'
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'

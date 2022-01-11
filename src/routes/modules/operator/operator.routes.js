@@ -12,10 +12,12 @@ import {
   OPERATOR_SEE_ONE_PATIENT,
   OPERATOR_REPORTS,
   OPERATOR_REPORTS_AUTHORIZATION,
-  OPERATOR_SEE_ALL_CLINICS
+  OPERATOR_SEE_ALL_CLINICS,
+  OPERATOR_SEE_ONE_CLINIC,
 } from '../../constants/namedRoutes/routes'
 import Authorization from '@/pages/modules/operator/Reports/Authorization'
 import SeeAllClinics from '@/pages/modules/operator/clinic/SeeAllClinics'
+import SeeOneClinic from '@/pages/modules/operator/clinic/SeeOneClinic'
 
 const operatorRoutes = [
   {
@@ -41,6 +43,10 @@ const operatorRoutes = [
   {
     path: OPERATOR_SEE_ALL_CLINICS,
     component: SeeAllClinics,
+  },
+  {
+    path: OPERATOR_SEE_ONE_CLINIC,
+    component: SeeOneClinic,
   },
 ]
 

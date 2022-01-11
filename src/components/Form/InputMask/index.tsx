@@ -14,6 +14,7 @@ interface InputMaskProps {
   variation?: 'secondary'
   mask: string
   value?: string
+  disabled?: boolean
 }
 
 const InputMask: React.FC<InputMaskProps> = ({

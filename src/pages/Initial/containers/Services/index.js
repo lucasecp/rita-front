@@ -20,7 +20,7 @@ import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/rou
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
 export const Services = () => {
-  const [plan, SetPlan] = useState('')
+  const [plan, SetPlan] = useState('Vida')
   const [medicinesLink, SetMedicinesLink] = useState('')
   const { Loading } = useLoading()
   const { showMessage } = useModal()
@@ -50,7 +50,7 @@ export const Services = () => {
       }
     }
 
-    getPlans()
+    // getPlans()
     getMedicineLink()
   }, [])
 
