@@ -42,6 +42,7 @@ function SeeOnePatient() {
 
   useEffect(() => {
     document.title = 'Rita Saúde | Autorizações'
+
     const loadPatientInformations = async () => {
       const userCpf = location.state.cpf
       let holdingDocument
