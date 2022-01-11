@@ -39,7 +39,7 @@ const RegistrationData = ({
   useEffect(() => {
     setName(newData.nome || newData.nome || dataClientSabin.nome || '')
     setEmail(newData.email || dataClientSabin.email || '')
-    setConfirmEmail(newData.email || '')
+    setConfirmEmail(newData.email || dataClientSabin.email || '')
     setGender(newData.sexo || dataClientSabin.sexo || '')
     setBirthdate(newData.dataNascimento || dataClientSabin.dataNascimento || '')
     setPhone(newData.telefone || dataClientSabin.telefone || '')
@@ -108,7 +108,6 @@ const RegistrationData = ({
             onlyLetter
           />
         </Col>
-
         <Col md="6" className="mt-4">
           <InputText
             label="E-mail*:"
@@ -126,7 +125,6 @@ const RegistrationData = ({
             maxLength={100}
           />
         </Col>
-
         <Col md="6" className="mt-4">
           <InputText
             autoComplete="off"
