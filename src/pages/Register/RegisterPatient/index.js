@@ -17,6 +17,7 @@ import { useModal } from '@/hooks/useModal'
 import axios from 'axios'
 import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import DocumentNoSent from './messages/Success/DocumentNotSent'
+import FieldsErrorMessage from './messages/Error/FieldsErrorMessage'
 
 const status = {
   SUCCESS: 'success',
@@ -36,7 +37,7 @@ const RegisterPatient = () => {
   const [data, setData] = useState({})
 
   const [dataClientSabin, setDataClientSabin] = useState({})
-  const [buttonPass, setButtonPass] = useState(false)
+  const [fieldsError, setFieldsError] = useState(false)
   const [documentFiles, setdocumentFiles] = useState({})
 
   useEffect(() => {
@@ -126,6 +127,9 @@ const RegisterPatient = () => {
     }
   }
 
+  const checkFields = () =>
+    !fieldsError ? showMessage(FieldsErrorMessage) : setStep(step + 1)
+
   return (
     <RegisterLayout>
       <Content>
@@ -142,7 +146,7 @@ const RegisterPatient = () => {
         {step === 1 && (
           <RegistrationData
             setData={setData}
-            setButtonPass={setButtonPass}
+            setButtonPass={setFieldsError}
             dataClientSabin={dataClientSabin}
             newData={data}
           />
@@ -150,7 +154,7 @@ const RegisterPatient = () => {
         {step === 2 && (
           <Address
             setData={setData}
-            setButtonPass={setButtonPass}
+            setButtonPass={setFieldsError}
             dataClientSabin={dataClientSabin}
             newData={data}
           />
@@ -158,7 +162,7 @@ const RegisterPatient = () => {
         {step === 3 && (
           <Document
             onGetDocumentFiles={setdocumentFiles}
-            setButtonPass={setButtonPass}
+            setButtonPass={setFieldsError}
             savedFiles={documentFiles}
           />
         )}
@@ -176,9 +180,7 @@ const RegisterPatient = () => {
           {step === 4 ? (
             <CustomBtn onClick={handleSubmit}>Concluir cadastro</CustomBtn>
           ) : (
-            <CustomBtn disabled={!buttonPass} onClick={() => setStep(step + 1)}>
-              Próxima Etapa
-            </CustomBtn>
+            <CustomBtn onClick={() => checkFields()}>Próxima Etapa</CustomBtn>
           )}
         </BtnGroup>
       </Content>
