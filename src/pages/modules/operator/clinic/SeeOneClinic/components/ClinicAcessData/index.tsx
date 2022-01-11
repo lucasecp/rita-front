@@ -1,15 +1,8 @@
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import { MultiSelectOption } from '@/components/Form/MultSelect'
 import { AcessDatasI, ErrorsAddressI } from '../../Types'
-import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
-import {
-  validateEmail,
-  validateName,
-  validatePhone,
-  validateCPF,
-} from '../../helpers/validatorFields'
+import { validateName } from '../../helpers/validatorFields'
 
 import { Container } from './styles'
 
@@ -41,7 +34,7 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
     setPhone(acessDatas?.phone || '')
     setCpf(acessDatas?.cpf || '')
   }, [acessDatas])
-  console.log(acessDatas)
+
   useEffect(() => {
     setAcessDatas({
       nameAdmin,

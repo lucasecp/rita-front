@@ -13,14 +13,13 @@ import { useHistory } from 'react-router'
 import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes'
 // import { toApi, fromApi } from '../adapters'
 
-const EditClinic = ({ clinicData }) => {
+const EditClinic: React.FC<any> = ({ clinicData }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [personalDatas, setPersonalDatas] = useState(
     clinicData.personalDatas || {},
   )
 
   const [acessDatas, setAcessDatas] = useState(clinicData.acessDatas || {})
-  console.log(clinicData)
   const [specialtys, setSpecialtys] = useState(
     clinicData?.specialtys?.name || {},
   )
@@ -56,12 +55,12 @@ const EditClinic = ({ clinicData }) => {
   }
 
   const onCancel = () => {
-    setPrevData((prevState) => ({
-      personalDatas: prevState.personalDatas,
-      address: prevState.address,
-    }))
-    setCancelEdit(true)
-    setIsEditing(false)
+    // setPrevData((prevState) => ({
+    //   personalDatas: prevState.personalDatas,
+    //   address: prevState.address,
+    // }))
+    // setCancelEdit(true)
+    // setIsEditing(false)
   }
 
   return (

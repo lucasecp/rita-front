@@ -6,7 +6,6 @@ import { Select } from '@/components/Form/Select'
 
 import { Container } from './styles'
 import { UF } from '@/constants/ufs'
-import { validateCep } from '../../helpers/validatorFields'
 import { AddressI, ErrorsAddressI } from '../../Types'
 
 interface ClinicAddressProps {

@@ -21,7 +21,6 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
   const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>(
     clinicSpecialtys || [],
   )
-  console.log(clinicSpecialtys)
   const [errors, setErrors] = useState({})
 
   useEffect(() => {

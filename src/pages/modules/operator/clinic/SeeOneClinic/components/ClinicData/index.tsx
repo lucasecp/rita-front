@@ -1,9 +1,8 @@
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
-import { status } from '@/pages/Register/InitialRegister/services'
 import React, { useEffect, useState } from 'react'
-import { validateName, validatePhone } from '../../helpers/validatorFields'
+import { validateName } from '../../helpers/validatorFields'
 import { DataI, PersonalErrorsI } from '../../Types'
 
 import { Container } from './styles'
@@ -34,7 +33,6 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
   const [phone, setPhone] = useState(personalDatas?.phone || '')
 
   const [errors, setErrors] = useState<PersonalErrorsI>({})
-  console.log(personalDatas)
 
   useEffect(() => {
     setName(personalDatas?.name || '')
