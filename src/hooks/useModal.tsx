@@ -13,7 +13,7 @@ interface ModalContextData {
   closeable: boolean
   showMessage: (
     MessageComponent: React.FC<any>,
-    props: { [x: string]: any },
+    props?: { [x: string]: any },
     isCloseable?: boolean,
   ) => void
   closeModal: () => void
@@ -30,7 +30,7 @@ const ModalProvider: React.FC = ({ children }) => {
 
   const showMessage = (
     MessageComponent: React.FC<any>,
-    props: { [x: string]: any },
+    props?: { [x: string]: any },
     isCloseable = false,
   ) => {
     setCloseable(isCloseable)
