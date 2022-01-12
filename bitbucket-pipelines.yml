@@ -4,6 +4,13 @@ definitions:
     - step: &codecommit_mirror
         name: Default mirror
         script:
+          - npm i --save-dev @types/node
+          - npm install typescript ts-node
+          - npm install -D tslib @types/node
+          - npx ts-node --skip-project ./src/updateVersion.ts ${BITBUCKET_BUILD_NUMBER}
+          - git add .
+          - git commit -m "Versão atualizada [skip ci]"
+          - git push
           - echo "Host git-codecommit.*.amazonaws.com" >> ~/.ssh/config
           - echo "User $SSHKEY" >> ~/.ssh/config
           - git remote add codecommit $URL

@@ -5,6 +5,7 @@ import { fromApi } from './adapters'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { useHistory, useLocation } from 'react-router'
+import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes'
 
 const SeeOneClinic = () => {
   const [clinic, setClinic] = useState({})
@@ -13,64 +14,23 @@ const SeeOneClinic = () => {
   const history = useHistory()
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Clínicas'
+    if (!location.state) {
+      return history.push(OPERATOR_SEE_ALL_CLINICS)
+    }
+
+    document.title = 'Rita Saúde | Informações da Clínica'
 
     const getClinic = async () => {
       try {
         Loading.turnOn()
-        // const { data } = await apiPatient.get(`/paciente/dependente?id=2879956`)
-        // console.log(data)
+        const { data } = await apiPatient.get(
+          `/clinica/{id}?id=${location.state.idClinic}`,
+        )
 
-        // const clinicMapped = fromApi(data)
+        const clinicMapped = fromApi(data)
 
-        // setClinic(clinicMapped)
-
-        const clinicFromApi = {
-          personalDatas: {
-            name: 'Clinica Sao Paulo',
-            socialreason: 'Clinica Sao Paulo Me',
-            cnpj: '99.999.999/999-99',
-            status: 'Ativa',
-            phone: '(99) 9999-9999',
-          },
-          acessDatas: {
-            nameAdmin: 'Jose Junior',
-            cpf: '999.999.999-99',
-            phone: '(99) 99999-9999',
-            email: 'clinica@clinicasaopaulo.com.br',
-          },
-          address: {
-            cep: '20333-000',
-            uf: 'RJ',
-            city: 'Rio de Janeiro',
-            address: 'Rua 6',
-            number: '30',
-            district: 'Copacabana',
-            complement: 'Bloco 2',
-          },
-          specialtys: [
-            {
-              id: 2,
-              name: 'Cardiologia',
-            },
-            {
-              id: 3,
-              name: 'Dermatologia',
-            },
-            {
-              id: 4,
-              name: 'Neurologia',
-            },
-            {
-              id: 6,
-              name: 'Ortopedia',
-            },
-          ],
-        }
-
-        setClinic(clinicFromApi)
+        setClinic(clinicMapped)
       } catch (error) {
-        console.log(error)
       } finally {
         Loading.turnOff()
       }

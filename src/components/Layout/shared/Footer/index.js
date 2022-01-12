@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import logoFooter from '@/assets/logo/symbol.svg'
 import { Container, Time } from './styles'
+import CustomTooltip from '@/components/Tooltip'
 
 const Footer = () => {
   const formatDate = () =>
@@ -24,7 +25,9 @@ const Footer = () => {
   return (
     <Container>
       <img src={logoFooter} />
-      <h6>Rita Saúde</h6>
+      <CustomTooltip label="v0.0.2.536">
+        <h6>Rita Saúde</h6>
+      </CustomTooltip>
       <Time className="text-end">{dateNow}</Time>
     </Container>
   )
