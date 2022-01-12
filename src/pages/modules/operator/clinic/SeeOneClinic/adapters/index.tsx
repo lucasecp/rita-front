@@ -1,21 +1,21 @@
 import { showStatus } from './showStatus'
+import { mapSpecialtys } from './mapSpecialtys'
 
 export const fromApi = (clinicInfo: any) => {
   return {
     personalDatas: {
-      name: clinicInfo.nome,
+      name: clinicInfo.descricao,
       socialreason: clinicInfo.razaoSocial,
       cnpj: clinicInfo.cnpj,
       status: showStatus(clinicInfo.status),
-      phone: clinicInfo.celular,
+      phone: clinicInfo.telefone,
     },
 
     acessDatas: {
-      nameAdmin: clinicInfo.adminNome,
-      cpf: clinicInfo.cpf,
-      phone: clinicInfo.celular,
+      nameAdmin: clinicInfo.responsavel,
+      cpf: clinicInfo.cpfResponsavel,
+      phone: clinicInfo.telefoneResponsavel,
       email: clinicInfo.email,
-      // socialReason: clinicInfo.razaoSocial,
     },
 
     address: {
@@ -28,9 +28,7 @@ export const fromApi = (clinicInfo: any) => {
       complement: clinicInfo.complemento,
     },
 
-    specialtys: {
-      name: clinicInfo.especialidades,
-    },
+    specialtys: mapSpecialtys(clinicInfo.especialidade),
   }
 }
 
