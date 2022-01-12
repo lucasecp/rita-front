@@ -15,6 +15,7 @@ import { useLoading } from '@/hooks/useLoading'
 import Socialplan from './messages/Socialplan'
 import DifferentPlanLife from './messages/DifferentPlanLife'
 import VidaPlanLife from './messages/VidaPlanLife'
+import VidaPlanLifeConfirm from './messages/VidaPlanLifeConfirm'
 import { useHistory } from 'react-router'
 import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/routes'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
@@ -43,7 +44,7 @@ export const Services = () => {
       try {
         Loading.turnOn()
         const { data } = await apiPatient.get('/paciente/meu-perfil')
-        SetPlan(data.plano)
+        SetPlan(data.plano.nome)
       } catch (error) {
       } finally {
         Loading.turnOff()
@@ -68,11 +69,18 @@ export const Services = () => {
     window.open(medicinesLink[0])
   }
 
-  const onCsd = () => {
-    if (plan === 'Vida') {
-      return showMessage(VidaPlanLife)
+  const onCsd = async () => {
+    try {
+      const { data } = await apiPatient.get('/atendimento')
+      if (plan === 'Vida' && data) {
+        return showMessage(VidaPlanLifeConfirm)
+      }
+    } catch {
+      if (plan === 'Vida') {
+        return showMessage(VidaPlanLife)
+      }
+      return showMessage(DifferentPlanLife)
     }
-    return showMessage(DifferentPlanLife)
   }
 
   return (

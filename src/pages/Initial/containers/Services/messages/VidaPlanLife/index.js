@@ -10,7 +10,8 @@ import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { useAuth } from '@/hooks/login'
 
-const DifferentPlanLife = () => {
+
+const VidaPlanLife = () => {
   const { closeModal, showSimple } = useModal()
   const { Loading } = useLoading()
   const { user } = useAuth()
@@ -18,15 +19,7 @@ const DifferentPlanLife = () => {
     try {
       Loading.turnOn()
       closeModal()
-      const response = await apiPatient.post('/Atendimento', {
-        idPaciente: user.id,
-        idEspecialidade: 56,
-        modalidade: 'T',
-        dataInicio: new Date().toLocaleDateString(),
-        idClinicaDesejada: 1,
-        status: 'AB',
-      })
-      console.log(response)
+      const response = await apiPatient.post('/atendimento')
       if (response.status === 201) {
         showSimple.success(
           'Em breve você receberá um telefonema de nossos Profissionais de Saúde',
@@ -51,4 +44,4 @@ const DifferentPlanLife = () => {
   )
 }
 
-export default DifferentPlanLife
+export default VidaPlanLife
