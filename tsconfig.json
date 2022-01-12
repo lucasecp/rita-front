@@ -16,7 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "target": "es5",
+    "target": "es2021",
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "baseUrl": "."
