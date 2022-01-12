@@ -25,7 +25,7 @@ const Footer = () => {
   return (
     <Container>
       <img src={logoFooter} />
-      <CustomTooltip label="v0.0.2.536">
+      <CustomTooltip label="v0.0.3.537">
         <h6>Rita Saúde</h6>
       </CustomTooltip>
       <Time className="text-end">{dateNow}</Time>
