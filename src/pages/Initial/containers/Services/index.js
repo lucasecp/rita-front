@@ -43,7 +43,7 @@ export const Services = () => {
       try {
         Loading.turnOn()
         const { data } = await apiPatient.get('/paciente/meu-perfil')
-        SetPlan(data.plano)
+        SetPlan(data.plano.nome)
       } catch (error) {
       } finally {
         Loading.turnOff()
