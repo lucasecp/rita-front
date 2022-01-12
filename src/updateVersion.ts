@@ -1,11 +1,11 @@
-import { readFileSync, writeFileSync, readdir } from 'fs';
+const fs = require("fs");
 
 const myArgs = process.argv.slice(2);
 const build = myArgs[0];
 
 // Atualizando o main.ts
 
-let data = readFileSync('./src/components/Layout/shared/Footer/index.js', 'utf-8');
+let data = fs.readFileSync('./src/components/Layout/shared/Footer/index.js', 'utf-8');
 
 let indexOfVersion = data.indexOf('<CustomTooltip label="v') + 23;
 
@@ -46,4 +46,4 @@ data =
   newVersion +
   data.substring(indexOfEndOfVersion, data.length);
 
-writeFileSync('./src/components/Layout/shared/Footer/index.js', data, 'utf-8');
+fs.writeFileSync('./src/components/Layout/shared/Footer/index.js', data, 'utf-8');
