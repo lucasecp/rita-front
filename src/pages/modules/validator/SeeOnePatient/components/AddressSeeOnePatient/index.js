@@ -1,9 +1,5 @@
 import React from 'react'
 
-import InputMask from '@/components/Form/InputMask'
-import InputText from '@/components/Form/InputText'
-import { Select } from '@/components/Form/Select'
-
 import { Container } from './styles'
 import { TextMask } from '@/components/TextMask'
 
@@ -17,49 +13,31 @@ const AddressPatientData = ({ address }) => {
           <p>{address?.logradouro || ''}</p>
         </div>
         <section>
-          <InputText
-            label="Número:"
-            value={address?.numero || ''}
-            name="number"
-            disabled
-          />
-
-          <InputText
-            label="Complemento:"
-            value={address?.complemento || ''}
-            name="complement"
-            disabled
-          />
+          <div>
+            <label>Número:</label>
+            <p>{address?.numero || ''}</p>
+          </div>
+          <div>
+            <label>Complemento:</label>
+            <p>{address?.complemento || ''}</p>
+          </div>
         </section>
-        {/* <InputMask
-          label="CEP:"
-          mask="99.999-999"
-          value={address?.cep || ''}
-          name="cep"
-          disabled
-        /> */}
         <div>
           <label>CEP:</label>
           <TextMask mask="99.999-999" text={address?.cep || ''} />
         </div>
-        <InputMask
-          label="Bairro:"
-          value={address?.bairro || ''}
-          name="district"
-          disabled
-        />
-        <InputText
-          label="Cidade:"
-          value={address?.cidade || ''}
-          name="city"
-          disabled
-        />
-        <Select
-          label="UF:"
-          labelDefaultOption={address?.uf}
-          name="uf"
-          disabled
-        />
+        <div>
+          <label>Bairro:</label>
+          <p>{address?.bairro || ''}</p>
+        </div>
+        <div>
+          <label>Cidade:</label>
+          <p>{address?.cidade || ''}</p>
+        </div>
+        <div>
+          <label>UF:</label>
+          <p>{address?.uf || ''}</p>
+        </div>
       </div>
     </Container>
   )
