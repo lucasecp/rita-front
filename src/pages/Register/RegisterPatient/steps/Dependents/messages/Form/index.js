@@ -19,6 +19,7 @@ import { validateDepCpf } from './ValidateDepCpf'
 import { useLoading } from '@/hooks/useLoading'
 import clearCpf from '@/helpers/clear/SpecialCaracteres'
 import apiPatient from '@/services/apiPatient'
+import { validateBirthDependent } from '../helpers/validateBirthDependent'
 
 const CpfAlreadyExistsError =
   'Este CPF já está cadastrado na plataforma Rita, por favor verifique os dados e preencha novamente.'
@@ -173,10 +174,10 @@ const Form = ({
             setValue={setBirthdate}
             hasError={errors.birthdate}
             onBlur={() =>
-              setErrors({ ...errors, ...validateBirthdate(birthdate) })
+              setErrors({ ...errors, ...validateBirthDependent(birthdate) })
             }
             onKeyUp={() =>
-              setErrors({ ...errors, ...validateBirthdate(birthdate) })
+              setErrors({ ...errors, ...validateBirthDependent(birthdate) })
             }
             msgError={errors.birthdate}
           />
