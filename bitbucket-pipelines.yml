@@ -7,7 +7,7 @@ definitions:
           - npm i --save-dev @types/node
           - npm install typescript ts-node
           - npm install -D tslib @types/node
-          - npx ts-node ./src/updateVersion.ts ${BITBUCKET_BUILD_NUMBER}
+          - npx --experimental-modules ts-node ./src/updateVersion.ts ${BITBUCKET_BUILD_NUMBER}
           - git add .
           - git commit -m "Versão atualizada [skip ci]"
           - git push
