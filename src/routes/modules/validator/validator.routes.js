@@ -1,6 +1,6 @@
 import React from 'react'
 import Route from '../../custom.routes'
-import SeeOnePatient from '@/pages/modules/validator/SeeOnePatient'
+import { SeeOnePatient } from '@/pages/modules/validator/SeeOnePatient'
 import AnalyzePatients from '@/pages/modules/validator/AnalyzePatients'
 
 import {

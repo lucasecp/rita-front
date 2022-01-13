@@ -9,7 +9,7 @@ interface OnChangeProps {
 }
 
 export interface SelectProps {
-  options: OptionsI[]
+  options?: OptionsI[]
   label?: string
   setValue?: (value: any) => void
   value: string | number
@@ -18,5 +18,5 @@ export interface SelectProps {
   variation?: string
   hasError?: string | boolean
   onChange?: (props: OnChangeProps) => void
-  disabled?:boolean
+  disabled?: boolean
 }

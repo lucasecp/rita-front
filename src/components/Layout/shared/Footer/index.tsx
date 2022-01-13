@@ -4,7 +4,7 @@ import logoFooter from '@/assets/logo/symbol.svg'
 import { Container, Time } from './styles'
 import CustomTooltip from '@/components/Tooltip'
 
-const Footer = () => {
+export const Footer: React.FC = () => {
   const formatDate = () =>
     `${new Date().toLocaleDateString('pt-br')} - ${new Date().getHours()}:${
       new Date().getMinutes() < 10

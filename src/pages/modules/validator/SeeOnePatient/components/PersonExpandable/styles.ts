@@ -2,7 +2,9 @@ import styled, { css } from 'styled-components'
 
 import colors from '@/styles/colors'
 
-export const Container = styled.div`
+export const Container = styled.div.attrs((props: { expanded: boolean }) => ({
+  expanded: props.expanded,
+}))`
   padding-bottom: 22px;
   border-bottom: 2px solid ${colors.gray.light};
 

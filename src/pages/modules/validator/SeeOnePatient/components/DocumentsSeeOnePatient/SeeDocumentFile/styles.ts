@@ -2,7 +2,9 @@ import styled, { css } from 'styled-components'
 
 import colors from '@/styles/colors'
 
-export const Container = styled.div.attrs()`
+export const Container = styled.div.attrs((props: { disabled: boolean }) => ({
+  disabled: props.disabled,
+}))`
   display: flex;
   align-items: center;
   justify-content: space-between;

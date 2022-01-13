@@ -22,7 +22,7 @@ export const Container = styled.div`
     color: inherit;
 
     > span {
-      color: ${({ theme }) => theme.darkness};
+      color: ${({ theme }) => theme.main};
     }
   }
 
