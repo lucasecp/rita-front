@@ -1,11 +1,11 @@
+import React, { useEffect, useState } from 'react'
 import Checkbox from '@/components/Form/Checkbox'
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
-import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { Container } from '../style'
-import { BtnTerms } from './style'
+import { BtnTerms, CustomBtn } from './style'
 import Terms from './messages/Tems'
 import {
   validateBirthdate,
@@ -17,6 +17,8 @@ import {
 } from '../../helpers/validator'
 import { validateConfEmail, validateTerms } from './validateFields'
 import { useModal } from '@/hooks/useModal'
+import { BtnGroup } from '@/pages/modules/validator/AnalyzePatients/Filter/styles'
+import FieldsErrorMessage from '../../messages/Error/FieldsErrorMessage';
 
 const RegistrationData = ({
   setData,
@@ -31,7 +33,6 @@ const RegistrationData = ({
   const [birthdate, setBirthdate] = useState('')
   const [phone, setPhone] = useState('')
   const [cpf, setCpf] = useState('')
-
   const [terms, setTerms] = useState(false)
   const [errors, setErrors] = useState({})
   const { showMessage } = useModal()
@@ -90,6 +91,25 @@ const RegistrationData = ({
       da plataforma Rita.
     </>
   )
+
+  const checkFields = () => {
+    setErrors({
+      ...errors,
+      ...validateName(name),
+      ...validateEmail(email, confirmEmail),
+      ...validateConfEmail(email, confirmEmail),
+      ...validateGender(gender),
+      ...validateBirthdate(birthdate),
+      // ...validatePhone(phone),
+      ...validateCpf(cpf),
+      ...validateTerms(terms),
+    })
+
+    errors ? showMessage(FieldsErrorMessage) : console.log(errors)
+
+    // setStep(step + 1)
+  }
+
   return (
     <Container>
       <h1>Dados Cadastrais</h1>
@@ -193,8 +213,8 @@ const RegistrationData = ({
             value={phone}
             setValue={setPhone}
             hasError={errors.phone}
-            onBlur={() => setErrors({ ...errors, ...validatePhone(phone) })}
-            onKeyUp={() => setErrors({ ...errors, ...validatePhone(phone) })}
+            // onBlur={() => setErrors({ ...errors, ...validatePhone(phone) })}
+            // onKeyUp={() => setErrors({ ...errors, ...validatePhone(phone) })}
             msgError={errors.phone}
           />
         </Col>
@@ -229,6 +249,9 @@ const RegistrationData = ({
       {/* {!hasPermitionToNext() && (
         <MsgError className="mt-3">Todos os campos são obrigatórios.</MsgError>
       )} */}
+      <BtnGroup>
+        <CustomBtn onClick={() => checkFields()}>Próxima Etapa</CustomBtn>
+      </BtnGroup>
     </Container>
   )
 }

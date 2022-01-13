@@ -14,9 +14,9 @@ const Content: React.FC<ContentProps> = ({ dependents }) => {
         <ListItem
           key={index}
           warning={!dep.documentsOk && !dep.isValidate}
-          onClick={() =>
-            history.push(PATIENT_SEE_DEPENDENT, { idDependent: dep.id })
-          }
+          // onClick={() =>
+          //   history.push(PATIENT_SEE_DEPENDENT, { idDependent: dep.id })
+          // }
         >
           <li>{dep.name}</li>
           <li>{dep.birthdate}</li>

@@ -8,7 +8,10 @@ import {
 import CustomTooltip from '@/components/Tooltip'
 import { useHistory } from 'react-router'
 import { ActionsProps } from '../../../types'
-import { PATIENT_SEE_DEPENDENT } from '@/routes/constants/namedRoutes/routes'
+import {
+  PATIENT_SEE_DEPENDENT,
+  PATIENT_ADD_DOCUMENT_DEPENDENT,
+} from '@/routes/constants/namedRoutes/routes'
 
 const Actions: React.FC<ActionsProps> = ({
   status,
@@ -31,7 +34,12 @@ const Actions: React.FC<ActionsProps> = ({
   return (
     <Container>
       <CustomTooltip label={warninglabel()}>
-        <WarningIconStyled hidden={!warning} />
+        <WarningIconStyled
+          hidden={!warning}
+          onClick={() =>
+            history.push(PATIENT_ADD_DOCUMENT_DEPENDENT, { idDependent })
+          }
+        />
       </CustomTooltip>
 
       <CustomTooltip label="Visualizar">
