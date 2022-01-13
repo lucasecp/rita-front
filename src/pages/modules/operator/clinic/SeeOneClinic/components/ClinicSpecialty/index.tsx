@@ -15,6 +15,7 @@ interface ClinicSpecialtysProps {
 export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
   clinicSpecialtys,
   setClinicSpecialtys,
+  isEditing,
   initialData,
   cancelEdit,
 }) => {
@@ -46,11 +47,11 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
       <h1>Especialidades</h1>
       <section>
         <CustomMultiSelect
-          disabled
           value={specialtys}
           setValue={setSpecialtys}
           variation="secondary"
           options={[]}
+          disabled={!isEditing}
         />
       </section>
     </Container>
