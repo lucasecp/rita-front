@@ -30,7 +30,7 @@ const SeeAllClinics: React.FC = () => {
       const ordertoApi = Object.keys(order).length
         ? order
         : {
-            name: 'descricao',
+            name: 'status',
             value: 'ASC',
           }
 
@@ -38,7 +38,7 @@ const SeeAllClinics: React.FC = () => {
         Loading.turnOn()
         const { data } = await apiPatient(
           `/clinica${queryApi}${
-            queryFilterString(filters) + queryOrderString(order)
+            queryFilterString(filters) + queryOrderString(ordertoApi)
           }`,
         )
         setClinics({ total: data.total, data: fromApi(data.clinicas) })
