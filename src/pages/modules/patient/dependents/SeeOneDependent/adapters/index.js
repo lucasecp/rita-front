@@ -18,7 +18,7 @@ export const fromApi = (dependentInfo) => {
       plan: {
         name: dependentInfo.plano?.nome,
         startDate: formatDate(dependentInfo.plano?.dataAtivacao),
-        endDate: formatDate(dependentInfo.plano?.dataTermino),
+        endDate: formatDate(dependentInfo.tabela?.dataVencimentoTabela),
       },
       documents: dependentInfo.documentosCadastrados?.reduce((ac, doc) => {
         ac[doc?.tipoArquivo] = true

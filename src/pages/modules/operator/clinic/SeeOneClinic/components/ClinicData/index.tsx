@@ -2,7 +2,6 @@ import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
-import { validateName } from '../../helpers/validatorFields'
 import { DataI, PersonalErrorsI } from '../../Types'
 
 import { Container } from './styles'
@@ -39,6 +38,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
     setsocialReason(personalDatas?.socialReason || '')
     setCnpj(personalDatas?.cnpj || '')
     setPhone(personalDatas?.phone || '')
+    setselectedStatus(personalDatas?.status || '')
   }, [personalDatas])
 
   useEffect(() => {
@@ -86,12 +86,12 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
           hasError={!!errors?.socialReason}
           msgError={errors?.socialReason}
           maxLength={100}
-          onBlur={() =>
-            setErrors({ ...errors, socialReason: validateName(socialReason) })
-          }
-          onKeyUp={() =>
-            setErrors({ ...errors, socialReason: validateName(socialReason) })
-          }
+          // onBlur={() =>
+          //   setErrors({ ...errors, socialReason: validateName(socialReason) })
+          // }
+          // onKeyUp={() =>
+          //   setErrors({ ...errors, socialReason: validateName(socialReason) })
+          // }
           onlyLetter
           disabled={!isEditing}
         />
@@ -108,7 +108,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
         />
         <Select
           label="Situação:"
-          labelDefaultOption="Selecione:"
+          labelDefaultOption={isEditing ? 'Selecione:' : ' '}
           options={[
             { label: 'Pendente', value: 'Pendente' },
             { label: 'Ativo', value: 'Ativo' },

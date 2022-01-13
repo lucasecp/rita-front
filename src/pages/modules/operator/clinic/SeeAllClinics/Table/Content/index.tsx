@@ -1,26 +1,32 @@
 import React from 'react'
 import { Container, Status } from './styles'
 import { showStatus } from '../../helpers/showStatus'
-import formatDate from '@/helpers/formatDate'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../types'
+import { useHistory } from 'react-router-dom'
+import { OPERATOR_SEE_ONE_CLINIC } from '@/routes/constants/namedRoutes/routes'
 
 const Content: React.FC<ContentProps> = ({ clinics }) => {
+  const history = useHistory()
+
   return (
     <Container>
       {clinics?.data?.map((clinic, index) => (
-        <ul key={index}>
-          <li>{formatDate(clinic.dataAtivacao) || '-'}</li>
-          <li>{formatDate(clinic.dataTermino) || '-'}</li>
-          <li>{clinic.codigo || '-'}</li>
+        <ul
+          key={index}
+          onClick={() =>
+            history.push(OPERATOR_SEE_ONE_CLINIC, { idClinic: clinic.id })
+          }
+        >
           <li>
-            <CustomTooltip label={clinic.nome}>
-              <div>{formatTextWithLimit(clinic.nome, 33) || '-'}</div>
+            <CustomTooltip label={clinic.name}>
+              <div>{formatTextWithLimit(clinic.name, 33)}</div>
             </CustomTooltip>
           </li>
+          <li>{clinic.cnpj}</li>
           <Status type={showStatus(clinic.status)}>
-            <span>{showStatus(clinic.status) || '-'}</span>
+            <span>{showStatus(clinic.status)}</span>
           </Status>
         </ul>
       ))}

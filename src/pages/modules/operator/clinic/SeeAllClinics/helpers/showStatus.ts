@@ -1,4 +1,4 @@
-type StatusFromApi = 'I' | 'P' | 'A' | 'N'
+import { StatusFromApi } from "../types"
 
 export const showStatus = (status: StatusFromApi): string => {
   const formatStatus = {
