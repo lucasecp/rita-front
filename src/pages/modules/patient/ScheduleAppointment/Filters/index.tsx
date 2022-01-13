@@ -78,7 +78,7 @@ const Filters = () => {
           verifyTypedFields(filter),
         )}${order}`,
       )
-      setResults({ total: data.total, data: data })
+      setResults({ total: data.total, data: fromApi(data.dados) })
       setOrder(queryOrderString({ name: data.orderBy, value: data.order }))
       setWasSubmited(true)
     } catch (error) {

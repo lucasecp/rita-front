@@ -31,7 +31,9 @@ const DoctorInfo: React.FC<DoctorInfoProps> = ({ dataDoctor, isVerify }) => {
         <li>
           <div>
             <h6>Especialidade:</h6>
-            <p>{dataDoctor.specialtys}</p>
+            {dataDoctor.specialtys.map((spec) => (
+              <p key={spec}>{dataDoctor.specialtys}</p>
+            ))}
           </div>
         </li>
       </ul>
