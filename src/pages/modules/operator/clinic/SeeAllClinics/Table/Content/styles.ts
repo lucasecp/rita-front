@@ -1,7 +1,7 @@
 import colors from '@/styles/colors'
 import styled, { css } from 'styled-components'
 
-interface StatusTypeProps{
+interface StatusTypeProps {
   type: string
 }
 
@@ -14,6 +14,7 @@ export const Container = styled.div`
     padding: 25px 0;
     justify-content: space-between;
     position: relative;
+    cursor: pointer;
     &::after {
       content: '';
       height: 1px;
@@ -32,8 +33,14 @@ export const Container = styled.div`
     font-weight: 500;
     line-height: 20px;
     margin-right: 24px;
-    min-width: 150px;
-    max-width: 150px;
+    min-width: 217px;
+    max-width: 217px;
+    :first-child {
+    min-width: 474px;
+  }
+    > div {
+      width: fit-content;
+    }
     &:last-child {
       margin-right: 0;
     }
@@ -65,7 +72,7 @@ export const Status = styled.li<StatusTypeProps>`
       }
     `}
   ${({ type }) =>
-    type === 'Inativo' &&
+    type === 'Negado' &&
     css`
       > span {
         background: ${colors.orange.middleDark};
@@ -73,7 +80,7 @@ export const Status = styled.li<StatusTypeProps>`
       }
     `}
   ${({ type }) =>
-    type === 'Em digitação' &&
+    type === 'Pendente' &&
     css`
       > span {
         background: ${colors.pink.middle};
@@ -81,11 +88,11 @@ export const Status = styled.li<StatusTypeProps>`
       }
     `}
   ${({ type }) =>
-    type === 'Suspenso' &&
+    type === 'Inativo' &&
     css`
       > span {
-        background: ${colors.blueViola.middle};
-        color: ${colors.blue.light};
+        background: ${colors.gray.middleLight};
+        color: #fff;
       }
     `}
 `

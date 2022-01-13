@@ -3,9 +3,18 @@ interface OrderI {
   value?: string
 }
 
-interface ClinicI {
-  total?: number
-  data?: any[]
+export type StatusFromApi = 'I' | 'P' | 'A' | 'N'
+
+export interface DataClinicI {
+  id: string
+  name: string
+  cnpj: string
+  status: StatusFromApi
+}
+
+export interface ClinicI {
+  total: number
+  data?: DataClinicI[]
 }
 
 type SetOrder = (order: OrderI) => void

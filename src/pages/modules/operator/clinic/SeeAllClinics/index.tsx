@@ -9,12 +9,15 @@ import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
+import { fromApi } from './adapters'
+import { ClinicI } from './types'
+import { fieldsApi } from './static/fieldsApi'
 
-const SeeAllClinics = () => {
+const SeeAllClinics: React.FC = () => {
   const [queryApi, setQueryApi] = useState('')
-  const [filters, setFilters] = useState([])
+  const [filters, setFilters] = useState<any[]>([])
   const [order, setOrder] = useState({})
-  const [clinics, setClinics] = useState({ total: 0 })
+  const [clinics, setClinics] = useState<ClinicI>({ total: 0, data: [] })
   const { Loading } = useLoading()
 
   useEffect(() => {
@@ -24,6 +27,13 @@ const SeeAllClinics = () => {
     }
 
     const getClinics = async () => {
+      const ordertoApi = Object.keys(order).length
+        ? order
+        : {
+            name: 'descricao',
+            value: 'ASC',
+          }
+
       try {
         Loading.turnOn()
         const { data } = await apiPatient(
@@ -31,7 +41,7 @@ const SeeAllClinics = () => {
             queryFilterString(filters) + queryOrderString(order)
           }`,
         )
-        setClinics(data)
+        setClinics({ total: data.total, data: fromApi(data.clinicas) })
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
@@ -42,7 +52,7 @@ const SeeAllClinics = () => {
 
   return (
     <Container>
-      <DefaultLayout title="Gestão de Planos">
+      <DefaultLayout title="Clínicas">
         <Content>
           <Filter setFilters={setFilters} />
           <Table
@@ -51,11 +61,7 @@ const SeeAllClinics = () => {
             setOrder={setOrder}
             order={order}
           />
-          <Pagination
-            total={clinics?.total}
-            setQuery={setQueryApi}
-            restQuery={queryFilterString(filters) + queryOrderString(order)}
-          />
+          <Pagination total={clinics?.total} setQuery={setQueryApi} />
         </Content>
       </DefaultLayout>
     </Container>

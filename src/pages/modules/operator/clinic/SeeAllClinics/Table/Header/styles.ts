@@ -15,8 +15,11 @@ export const Content = styled.div`
   color: #9146ff;
   align-items: center;
   justify-content: flex-start;
-  min-width: 150px;
+  min-width: 217px;
   margin-right: 24px;
+  :first-child {
+    min-width: 474px;
+  }
   :last-child {
     margin-right: 0px;
   }
@@ -39,7 +42,7 @@ export const Content = styled.div`
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
-    max-width: 80px;
+
   }
 `
 export const Container = styled.header`

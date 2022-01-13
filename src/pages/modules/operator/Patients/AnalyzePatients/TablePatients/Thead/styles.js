@@ -9,21 +9,47 @@ export const Content = styled.div`
   font-weight: 700;
   line-height: 20px;
   color: #9146ff;
-  background-color: ${colors.purple.main.light};
-  margin-top: -2px;
-  margin-bottom: -2px;
-  justify-content: space-between;
-  padding-right: 24px;
   align-items: center;
+  justify-content: flex-start;
+  min-width: 150px;
+  margin-right: 24px;
+
+  :last-child {
+    margin-right: 0px;
+  }
+  justify-content: space-between;
 
   > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     cursor: pointer;
-    margin-left: 55px;
     padding: 20px;
     height: 100%;
+    margin-left: 4px;
+    margin-right: 4px;
+    :last-child {
+    }
+  }
+  h5 {
+    color: ${colors.purple.main.dark};
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+  }
+`
+export const Container = styled.header`
+  background: ${colors.purple.background.middle};
+  min-width: fit-content;
+  padding: 0 32px;
+  margin: 0 -32px;
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
+  @media (max-width: 767px) {
+    padding: 0 24px;
+    margin: 0 -24px;
   }
 `
 
@@ -41,13 +67,13 @@ export const ArrowUp = styled.button`
     background-size: contain;
     background-repeat: no-repeat;
     display: block;
+    ${({ order }) =>
+      order &&
+      css`
+        filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
+          brightness(100%) contrast(103%);
+      `}
   }
-  ${({ order }) =>
-    order &&
-    css`
-      filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
-        brightness(100%) contrast(103%);
-    `}
 `
 
 export const ArrowDown = styled.button`
