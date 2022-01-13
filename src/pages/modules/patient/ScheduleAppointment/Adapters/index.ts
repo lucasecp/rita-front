@@ -1,5 +1,4 @@
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-import { formatMobilePhone } from '@/helpers/formatMobilePhone'
 import { DoctorI } from '../types'
 import { ClinicI } from '../types/index'
 
