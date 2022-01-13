@@ -6,11 +6,26 @@ import { Container } from './styles'
 import PreviewImage from '../../../messages/PreviewImage'
 import { useModal } from '@/hooks/useModal'
 import convertImageFromApiToBase64 from '@/helpers/convertImageFromApiToBase64'
+import { AxiosResponse } from 'axios'
 
-function SeeDocumentFile({ title, document, disabled }) {
+interface SeeDocumentFileProps {
+  title: string
+  document: AxiosResponse | undefined
+  disabled: boolean
+}
+
+export const SeeDocumentFile: React.FC<SeeDocumentFileProps> = ({
+  title,
+  document,
+  disabled,
+}) => {
   const { showMessage } = useModal()
 
   const onZoomDocument = () => {
+    if (!document) {
+      return
+    }
+
     const typeDocument = document.headers['content-type']
 
     if (typeDocument === 'application/pdf') {
@@ -38,5 +53,3 @@ function SeeDocumentFile({ title, document, disabled }) {
     </Container>
   )
 }
-
-export default SeeDocumentFile

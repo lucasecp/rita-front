@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useHistory, useLocation } from 'react-router'
+import { AxiosError } from 'axios'
+import { differenceInYears, parse } from 'date-fns'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
-import { Container } from './styles'
+import { PersonExpandable } from './components/PersonExpandable'
+import { AddressSeeOnePatient } from './components/AddressSeeOnePatient'
+import { DocumentsSeeOnePatient } from './components/DocumentsSeeOnePatient'
+import { ValidationSeeOnePatient } from './components/ValidationSeeOnePatient'
 
-import PersonExpandable from './components/PersonExpandable'
-import AddressSeeOnePatient from './components/AddressSeeOnePatient'
-import { useHistory, useLocation } from 'react-router'
 import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
-import DocumentsSeeOnePatient from './components/DocumentsSeeOnePatient'
-import ValidationSeeOnePatient from './components/ValidationSeeOnePatient'
 
 import ButtonLink from '@/components/Button/Link'
 import OutlineButton from '@/components/Button/Outline'
@@ -21,90 +22,60 @@ import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import { VALIDATOR_ANALYZE_PATIENTS } from '@/routes/constants/namedRoutes/routes'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
 
-function SeeOnePatient() {
+import { fromApi } from './adapters/fromApi'
+import { PatientAddress, PatientData, PatientValidation } from './@types'
+import { Container } from './styles'
+
+export const SeeOnePatient: React.FC = () => {
   const history = useHistory()
   const location = useLocation()
+  const cpf = location.state?.cpf
+
   const { Loading } = useLoading()
   const { showMessage, showSimple } = useModal()
 
-  if (!location.state) {
+  if (!cpf) {
     history.push(VALIDATOR_ANALYZE_PATIENTS)
   }
 
   const [disableFinishButton, setDisableFinishButton] = useState(true)
 
-  const [patientData, setPatientData] = useState({})
-  const [patientDependents, setPatientDependents] = useState([])
-  const [patientAddress, setPatientAddress] = useState({})
-  const [patientDocuments, setPatientDocuments] = useState({})
+  const [patientData, setPatientData] = useState({} as PatientData)
+  const [patientDependents, setPatientDependents] = useState(
+    [] as PatientData[],
+  )
+  const [patientAddress, setPatientAddress] = useState({} as PatientAddress)
+  const [dependent, setDependent] = useState({} as PatientData)
 
-  const [validations, setValidations] = useState({})
+  const [incomeType, setIncomeType] = useState('')
+
+  const [validations, setValidations] = useState({} as PatientValidation)
 
   useEffect(() => {
     document.title = 'Rita Saúde | Autorizações'
 
     const loadPatientInformations = async () => {
-      const userCpf = location.state.cpf
-      let holdingDocument
-      let identifyDocument
-      let incomeDocument
-      let incomeDocumentType
-
       try {
         Loading.turnOn()
-        const response = await apiPatient.get(`/paciente/cpf?cpf=${userCpf}`)
-
-        setPatientData(response.data)
-        setPatientDependents(response.data.dependentes)
-        setPatientAddress(response.data.endereco)
-        incomeDocumentType = response.data.renda
-      } catch ({ response }) {
-      } finally {
-        Loading.turnOff()
-      }
-
-      try {
-        Loading.turnOn()
-
-        holdingDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumento=FotoSegurandoDoc`,
-          { responseType: 'arraybuffer' },
+        const { data: dataPatient } = await apiPatient.get(
+          `/paciente/cpf?cpf=${cpf}`,
         )
-      } catch ({ response }) {
-      } finally {
-        Loading.turnOff()
-      }
 
-      try {
-        Loading.turnOn()
-
-        identifyDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumento=Cpf`,
-          { responseType: 'arraybuffer' },
+        const { data: dataDependent } = await apiPatient.get(
+          `/paciente/cpf?cpf=${cpf}`,
         )
+
+        const patientMapped = fromApi(dataPatient, dataDependent)
+
+        setPatientData(patientMapped.patientData)
+        setPatientDependents(patientMapped.patientDependents)
+        setPatientAddress(patientMapped.patientAddress)
+        setDependent(patientMapped?.dependent)
+        setIncomeType(patientMapped.incomeType)
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
       }
-
-      try {
-        Loading.turnOn()
-
-        incomeDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumento=Renda`,
-          { responseType: 'arraybuffer' },
-        )
-      } catch ({ response }) {
-      } finally {
-        Loading.turnOff()
-      }
-
-      setPatientDocuments({
-        holdingDocument,
-        identifyDocument,
-        incomeDocument,
-        incomeDocumentType,
-      })
     }
 
     loadPatientInformations()
@@ -121,19 +92,32 @@ function SeeOnePatient() {
     )
   }, [validations])
 
+  const hasDependentUnderAge = useMemo(() => {
+    if (!dependent) {
+      return false
+    }
+
+    const dateParsed = parse(dependent.birthDate, 'dd/MM/yyyy', new Date())
+    const age = differenceInYears(new Date(), dateParsed)
+
+    return age < 18
+  }, [dependent])
+
+  console.log(hasDependentUnderAge)
+
   const onComeBack = () => {
-    showMessage(ComeBack, { idPatient: patientData.idPaciente })
+    showMessage(ComeBack, { idPatient: patientData.id })
   }
 
   const onSaveValidations = async () => {
     try {
       Loading.turnOn()
       await apiPatient.patch(
-        `/paciente/${patientData.idPaciente}/assumir-validacao?forcar=false`,
+        `/paciente/${patientData.id}/assumir-validacao?forcar=false`,
       )
 
       localStorage.setItem(
-        `@Rita/Validate/OnePatient/${patientData.idPaciente}`,
+        `@Rita/Validate/OnePatient/${patientData.id}`,
         JSON.stringify(validations),
       )
 
@@ -141,8 +125,10 @@ function SeeOnePatient() {
         type: MODAL_TYPES.SUCCESS,
         message: 'Validação salva!',
       })
-    } catch ({ response }) {
-      if (response.status.toString()[0] === '4') {
+    } catch (error) {
+      const { response } = error as AxiosError
+
+      if (response?.status.toString()[0] === '4') {
         if (
           response.data.message ===
           'Atenção Este registro está sendo analisado por outro validador.'
@@ -161,7 +147,7 @@ function SeeOnePatient() {
         }
       }
 
-      if (response.status.toString()[0] === '5') {
+      if (response?.status.toString()[0] === '5') {
         showSimple.error('Erro no Servidor!')
       }
     } finally {
@@ -174,7 +160,7 @@ function SeeOnePatient() {
     try {
       Loading.turnOn()
       const response = await apiPatient.post(
-        `/paciente/${patientData.idPaciente}/validar`,
+        `/paciente/${patientData.id}/validar`,
         {
           dadosOk: {
             resposta: validations.documentOk === 'yes',
@@ -195,8 +181,10 @@ function SeeOnePatient() {
           })
         }
       }
-    } catch ({ response }) {
-      if (response.status.toString()[0] === '4') {
+    } catch (error) {
+      const { response } = error as AxiosError
+
+      if (response?.status.toString()[0] === '4') {
         if (
           response.data.message ===
           'Atenção Este registro está sendo analisado por outro validador.'
@@ -214,7 +202,7 @@ function SeeOnePatient() {
         }
       }
 
-      if (response.status.toString()[0] === '5') {
+      if (response?.status.toString()[0] === '5') {
         showSimple.error('Erro no Servidor!')
       }
     } finally {
@@ -231,6 +219,12 @@ function SeeOnePatient() {
           personData={patientData}
           holder
         />
+        {dependent && (
+          <PersonExpandable
+            title="Dados cadastrais para análise"
+            personData={dependent}
+          />
+        )}
         {patientDependents?.map((dependent, index) => (
           <PersonExpandable
             title={`Dados cadastrais do dependente ${index + 1}`}
@@ -239,9 +233,13 @@ function SeeOnePatient() {
           />
         ))}
         <AddressSeeOnePatient address={patientAddress} />
-        <DocumentsSeeOnePatient documents={patientDocuments} />
+        <DocumentsSeeOnePatient
+          incomeType={incomeType}
+          cpf={cpf}
+          hasDependentUnderAge={hasDependentUnderAge}
+        />
         <ValidationSeeOnePatient
-          patientId={patientData.idPaciente}
+          patientId={patientData.id}
           validations={validations}
           onChangeValidations={setValidations}
         />
@@ -259,5 +257,3 @@ function SeeOnePatient() {
     </DefaultLayout>
   )
 }
-
-export default SeeOnePatient

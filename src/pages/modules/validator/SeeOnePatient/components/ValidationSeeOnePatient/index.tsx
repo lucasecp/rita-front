@@ -9,12 +9,17 @@ import { Container } from './styles'
 import getValidationsFromLocalStorage from '../../helpers/getValidationsFromLocalStorage'
 
 import { isObjectEmpty } from '@/helpers/isObjectEmpty'
+import { PatientValidation } from '../../@types'
 
-function ValidationSeeOnePatient({
-  patientId,
-  validations,
-  onChangeValidations,
-}) {
+interface ValidationSeeOnePatientProps {
+  patientId: number
+  validations: PatientValidation
+  onChangeValidations: React.Dispatch<React.SetStateAction<PatientValidation>>
+}
+
+export const ValidationSeeOnePatient: React.FC<
+  ValidationSeeOnePatientProps
+> = ({ patientId, validations, onChangeValidations }) => {
   const [documentOk, setDocumentOk] = useState(validations.documentOk || '')
 
   const [resonDocumentNotOk, setResonDocumentNotOk] = useState(
@@ -47,11 +52,11 @@ function ValidationSeeOnePatient({
     })
   }, [documentOk, resonDocumentNotOk, incomeOk, allDataVerified])
 
-  const onDocumentOkChange = (_, value) => {
+  const onDocumentOkChange = (_: unknown, value: string) => {
     setDocumentOk(value)
   }
 
-  const onIncomeOkChange = (_, value) => {
+  const onIncomeOkChange = (_: unknown, value: string) => {
     setIncomeOk(value)
   }
   return (
@@ -74,7 +79,7 @@ function ValidationSeeOnePatient({
       {documentOk === 'no' && (
         <Textarea
           label="Descreva o motivo*:"
-          rows="3"
+          rows={3}
           limit="2000"
           value={resonDocumentNotOk}
           setValue={setResonDocumentNotOk}
@@ -109,5 +114,3 @@ function ValidationSeeOnePatient({
     </Container>
   )
 }
-
-export default ValidationSeeOnePatient
