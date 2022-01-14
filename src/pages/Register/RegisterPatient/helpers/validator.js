@@ -44,8 +44,6 @@ export const validateBirthdate = (value) => {
   const dateFormate = moment(value, 'DD/MM/YYYY', true)
   const birthDate = parse(value, 'dd/MM/yyyy', new Date())
 
-  console.log(isValid(birthDate))
-
   if (
     !dateFormate.isValid() ||
     moment().diff(dateFormate, 'years') >= 200 ||

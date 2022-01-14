@@ -150,6 +150,7 @@ const RegisterPatient = () => {
             setButtonPass={setFieldsError}
             dataClientSabin={dataClientSabin}
             newData={data}
+            setStep={setStep}
           />
         )}
         {step === 2 && (

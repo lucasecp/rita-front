@@ -9,7 +9,6 @@ import { BtnTerms, CustomBtn } from './style'
 import Terms from './messages/Tems'
 import {
   validateBirthdate,
-  validateCpf,
   validateEmail,
   validateGender,
   validateName,
@@ -18,14 +17,9 @@ import {
 import { validateConfEmail, validateTerms } from './validateFields'
 import { useModal } from '@/hooks/useModal'
 import { BtnGroup } from '@/pages/modules/validator/AnalyzePatients/Filter/styles'
-import FieldsErrorMessage from '../../messages/Error/FieldsErrorMessage';
+import FieldsErrorMessage from '../../messages/Error/FieldsErrorMessage'
 
-const RegistrationData = ({
-  setData,
-  setButtonPass,
-  dataClientSabin,
-  newData,
-}) => {
+const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [confirmEmail, setConfirmEmail] = useState('')
@@ -33,8 +27,9 @@ const RegistrationData = ({
   const [birthdate, setBirthdate] = useState('')
   const [phone, setPhone] = useState('')
   const [cpf, setCpf] = useState('')
-  const [terms, setTerms] = useState(false)
+  const [terms, setTerms] = useState('')
   const [errors, setErrors] = useState({})
+
   const { showMessage } = useModal()
 
   useEffect(() => {
@@ -47,38 +42,31 @@ const RegistrationData = ({
     setCpf(newData.cpf || dataClientSabin.cpf || '')
   }, [dataClientSabin])
 
-  useEffect(() => {
-    if (hasPermitionToNext()) {
-      const dataObj = {
-        nome: name,
-        email,
-        sexo: gender,
-        dataNascimento: birthdate,
-        telefone: phone,
-        cpf,
-      }
-      setButtonPass(true)
-      setData((data) => {
-        if (dataClientSabin?.idPaciente) {
-          return { ...data, ...dataObj, idPaciente: dataClientSabin.idPaciente }
-        }
-        return { ...data, ...dataObj }
-      })
-    } else {
-      setButtonPass(false)
+  const checkFields = () => {
+    const permit = {
+      ...validateName(name),
+      ...validateEmail(email, confirmEmail),
+      ...validateConfEmail(email, confirmEmail),
+      ...validateGender(gender),
+      ...validateBirthdate(birthdate),
+      ...validatePhone(phone),
+      ...validateTerms(terms),
     }
-  }, [name, email, cpf, terms, confirmEmail, birthdate, gender, phone, errors])
 
-  const hasPermitionToNext = () =>
-    !Object.values(errors).filter((err) => err).length &&
-    name &&
-    email &&
-    cpf &&
-    terms &&
-    confirmEmail &&
-    birthdate &&
-    gender &&
-    phone
+    setErrors(permit)
+
+    if (
+      !permit.name &&
+      !permit.email &&
+      !permit.gender &&
+      !permit.birthdate &&
+      !permit.terms
+    ) {
+      setStep(2)
+    } else {
+      showMessage(FieldsErrorMessage)
+    }
+  }
 
   const labelTerms = (
     <>
@@ -92,167 +80,111 @@ const RegistrationData = ({
     </>
   )
 
-  const checkFields = () => {
-    setErrors({
-      ...errors,
-      ...validateName(name),
-      ...validateEmail(email, confirmEmail),
-      ...validateConfEmail(email, confirmEmail),
-      ...validateGender(gender),
-      ...validateBirthdate(birthdate),
-      // ...validatePhone(phone),
-      ...validateCpf(cpf),
-      ...validateTerms(terms),
-    })
-
-    errors ? showMessage(FieldsErrorMessage) : console.log(errors)
-
-    // setStep(step + 1)
-  }
-
   return (
-    <Container>
-      <h1>Dados Cadastrais</h1>
-      <Row>
-        <Col md="12">
-          <InputText
-            label="Nome Completo*:"
-            value={name}
-            setValue={setName}
-            hasError={errors.name}
-            name="name"
-            onBlur={() => setErrors({ ...errors, ...validateName(name) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
-            msgError={errors.name}
-            maxLength={100}
-            onlyLetter
-          />
-        </Col>
-        <Col md="6" className="mt-4">
-          <InputText
-            label="E-mail*:"
-            name="email"
-            hasError={errors.email}
-            value={email}
-            setValue={setEmail}
-            onBlur={() =>
-              setErrors({ ...errors, ...validateEmail(email, confirmEmail) })
-            }
-            onKeyUp={() =>
-              setErrors({ ...errors, ...validateEmail(email, confirmEmail) })
-            }
-            msgError={errors.email}
-            maxLength={100}
-          />
-        </Col>
-        <Col md="6" className="mt-4">
-          <InputText
-            autoComplete="off"
-            label="Confirme seu e-mail*:"
-            hasError={errors.confirmEmail}
-            value={confirmEmail}
-            setValue={setConfirmEmail}
-            onBlur={() =>
-              setErrors({
-                ...errors,
-                ...validateConfEmail(email, confirmEmail),
-              })
-            }
-            onKeyUp={() =>
-              setErrors({
-                ...errors,
-                ...validateConfEmail(email, confirmEmail),
-              })
-            }
-            msgError={errors.confirmEmail}
-            onPaste={(e) => e.preventDefault()}
-          />
-        </Col>
-        <Col md="6" className="mt-4">
-          <Select
-            label="Gênero*:"
-            labelDefaultOption="Selecione"
-            options={[
-              { label: 'Masculino', value: 'M' },
-              { label: 'Feminino', value: 'F' },
-              { label: 'Outros', value: 'O' },
-            ]}
-            setValue={setGender}
-            hasError={errors.gender}
-            onChange={(e) => {
-              setGender(e.target.value)
-              setErrors({ ...errors, ...validateGender(gender) })
-            }}
-            onBlur={() => setErrors({ ...errors, ...validateGender(gender) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateGender(gender) })}
-            value={gender}
-            msgError={errors.gender}
-          />
-        </Col>
-        <Col md="6" className="mt-4">
-          <InputMask
-            label="Data de Nascimento*:"
-            mask="99/99/9999"
-            value={birthdate}
-            setValue={setBirthdate}
-            hasError={errors.birthdate}
-            autoComplete="off"
-            onBlur={() =>
-              setErrors({ ...errors, ...validateBirthdate(birthdate) })
-            }
-            onKeyUp={() =>
-              setErrors({ ...errors, ...validateBirthdate(birthdate) })
-            }
-            msgError={errors.birthdate}
-          />
-        </Col>
-        <Col md="6" className="mt-4">
-          <InputMask
-            label="Celular*:"
-            mask="(99) 99999-9999"
-            value={phone}
-            setValue={setPhone}
-            hasError={errors.phone}
-            // onBlur={() => setErrors({ ...errors, ...validatePhone(phone) })}
-            // onKeyUp={() => setErrors({ ...errors, ...validatePhone(phone) })}
-            msgError={errors.phone}
-          />
-        </Col>
-        <Col md="6" className="mt-4">
-          <InputMask
-            label="CPF*:"
-            mask="999.999.999-99"
-            value={cpf}
-            setValue={setCpf}
-            hasError={errors.cpf}
-            onBlur={() => setErrors({ ...errors, ...validateCpf(cpf) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateCpf(cpf) })}
-            disabled={dataClientSabin.cpf}
-            msgError={errors.cpf}
-          />
-        </Col>
-        <Col md="12" className="mt-4">
-          <Checkbox
-            id="terms"
-            label={labelTerms}
-            hasError={errors.terms}
-            checked={terms}
-            setValue={setTerms}
-            onChange={() => {
-              setTerms(!terms)
-              setErrors({ ...errors, ...validateTerms(terms) })
-            }}
-            msgError={errors.terms}
-          />
-        </Col>
-      </Row>
-      {/* {!hasPermitionToNext() && (
+    <>
+      <Container>
+        <h1>Dados Cadastrais</h1>
+        <Row>
+          <Col md="12">
+            <InputText
+              label="Nome Completo*:"
+              value={name}
+              setValue={setName}
+              hasError={errors.name}
+              name="name"
+              msgError={errors.name}
+              maxLength={100}
+              onlyLetter
+            />
+          </Col>
+          <Col md="6" className="mt-4">
+            <InputText
+              label="E-mail*:"
+              name="email"
+              hasError={errors.email}
+              value={email}
+              setValue={setEmail}
+              msgError={errors.email}
+              maxLength={100}
+            />
+          </Col>
+          <Col md="6" className="mt-4">
+            <InputText
+              autoComplete="off"
+              label="Confirme seu e-mail*:"
+              hasError={errors.confirmEmail}
+              value={confirmEmail}
+              setValue={setConfirmEmail}
+              msgError={errors.confirmEmail}
+              onPaste={(e) => e.preventDefault()}
+            />
+          </Col>
+          <Col md="6" className="mt-4">
+            <Select
+              label="Gênero*:"
+              labelDefaultOption="Selecione"
+              options={[
+                { label: 'Masculino', value: 'M' },
+                { label: 'Feminino', value: 'F' },
+                { label: 'Outros', value: 'O' },
+              ]}
+              setValue={setGender}
+              hasError={errors.gender}
+              value={gender}
+              msgError={errors.gender}
+            />
+          </Col>
+          <Col md="6" className="mt-4">
+            <InputMask
+              label="Data de Nascimento*:"
+              mask="99/99/9999"
+              value={birthdate}
+              setValue={setBirthdate}
+              hasError={errors.birthdate}
+              autoComplete="off"
+              msgError={errors.birthdate}
+            />
+          </Col>
+          <Col md="6" className="mt-4">
+            <InputMask
+              label="Celular*:"
+              mask="(99) 99999-9999"
+              value={phone}
+              setValue={setPhone}
+              hasError={errors.phone}
+              msgError={errors.phone}
+            />
+          </Col>
+          <Col md="6" className="mt-4">
+            <InputMask
+              label="CPF*:"
+              mask="999.999.999-99"
+              value={cpf}
+              setValue={setCpf}
+              hasError={errors.cpf}
+              disabled={dataClientSabin.cpf}
+              msgError={errors.cpf}
+            />
+          </Col>
+          <Col md="12" className="mt-4">
+            <Checkbox
+              id="terms"
+              label={labelTerms}
+              hasError={errors.terms}
+              checked={terms}
+              setValue={setTerms}
+              msgError={errors.terms}
+            />
+          </Col>
+        </Row>
+        {/* {!hasPermitionToNext() && (
         <MsgError className="mt-3">Todos os campos são obrigatórios.</MsgError>
       )} */}
+      </Container>
       <BtnGroup>
-        <CustomBtn onClick={() => checkFields()}>Próxima Etapa</CustomBtn>
+        <CustomBtn onClick={checkFields}>Próxima Etapa</CustomBtn>
       </BtnGroup>
-    </Container>
+    </>
   )
 }
 
