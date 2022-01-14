@@ -6,7 +6,7 @@ import { useHistory } from 'react-router'
 import { PATIENT_DOCTOR_INFORMATION } from '@/routes/constants/namedRoutes/routes'
 import { DoctorInfoProps } from '../../types/index'
 
-const DoctorInfo: React.FC<DoctorInfoProps> = ({ dataDoctor, isVerify }) => {
+const DoctorInfo: React.FC<DoctorInfoProps> = ({ dataDoctor }) => {
   const history = useHistory()
 
   return (

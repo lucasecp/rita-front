@@ -1,6 +1,5 @@
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-import { DoctorI } from '../types'
-import { ClinicI } from '../types/index'
+import { DoctorI, ClinicI } from '../types'
 
 export const fromApi = (dataResults: any[]) => {
   const doctor: DoctorI[] = dataResults

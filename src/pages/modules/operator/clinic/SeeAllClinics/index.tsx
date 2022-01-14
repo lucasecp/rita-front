@@ -11,7 +11,6 @@ import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 import { fromApi } from './adapters'
 import { ClinicI } from './types'
-import { fieldsApi } from './static/fieldsApi'
 
 const SeeAllClinics: React.FC = () => {
   const [queryApi, setQueryApi] = useState('')
