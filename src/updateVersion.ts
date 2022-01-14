@@ -6,11 +6,11 @@ const build = myArgs[0]
 // Atualizando o index.js
 
 let data = readFileSync(
-  './src/components/Layout/shared/Footer/index.js',
+  './src/components/Layout/shared/Footer/index.tsx',
   'utf-8',
 )
 
-let indexOfVersion = data.indexOf('<CustomTooltip label="v') + 23
+const indexOfVersion = data.indexOf('<CustomTooltip label="v') + 23
 
 let indexOfEndOfVersion = indexOfVersion
 while (data.substr(indexOfEndOfVersion, 1) != '"') {
@@ -49,4 +49,4 @@ data =
   newVersion +
   data.substring(indexOfEndOfVersion, data.length)
 
-writeFileSync('./src/components/Layout/shared/Footer/index.js', data, 'utf-8')
+writeFileSync('./src/components/Layout/shared/Footer/index.tsx', data, 'utf-8')
