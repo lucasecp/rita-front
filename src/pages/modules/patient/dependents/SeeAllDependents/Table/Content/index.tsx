@@ -13,7 +13,7 @@ const Content: React.FC<ContentProps> = ({ dependents }) => {
       {dependents?.map((dep, index) => (
         <ListItem
           key={index}
-          warning={!dep.documentsOk && !dep.isValidate}
+          warning={!dep.documentsOk || dep.isValidate}
           onClick={() =>
             history.push(PATIENT_SEE_DEPENDENT, { idDependent: dep.id })
           }

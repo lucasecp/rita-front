@@ -32,7 +32,7 @@ export const Container = styled.div`
 `
 export const Content = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(316px,316px));
   gap: 28px;
   > h2 {
     font-size: 20px;

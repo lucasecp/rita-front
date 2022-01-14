@@ -29,7 +29,7 @@ const SelectCity: React.FC<MultSelectSelectCityProps> = ({
   }
 
   useEffect(() => {
-    if (uf.some((value) => value.id === 'All')) {
+    if (!uf.length) {
       setCity([])
       return setCityOptions([])
     }
