@@ -21,7 +21,7 @@ const Actions: React.FC<ActionsProps> = ({
   const warninglabel = () => {
     let label: any
 
-    if (!documentsOk && !isValidate) {
+    if (!documentsOk) {
       label = (
         <>
           O dependente cadastrado ainda não possui documentos incluídos.
@@ -30,7 +30,7 @@ const Actions: React.FC<ActionsProps> = ({
         </>
       )
     }
-    if (isValidate && !documentsOk) {
+    if (isValidate) {
       label = (
         <>
           A data de validação do seu cadastro ultrapassou os 730 dias.
