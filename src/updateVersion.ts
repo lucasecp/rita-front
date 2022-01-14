@@ -6,7 +6,7 @@ const build = myArgs[0]
 // Atualizando o index.js
 
 let data = readFileSync(
-  './src/components/Layout/shared/Footer/index.ts',
+  './src/components/Layout/shared/Footer/index.tsx',
   'utf-8',
 )
 
@@ -49,4 +49,4 @@ data =
   newVersion +
   data.substring(indexOfEndOfVersion, data.length)
 
-writeFileSync('./src/components/Layout/shared/Footer/index.ts', data, 'utf-8')
+writeFileSync('./src/components/Layout/shared/Footer/index.tsx', data, 'utf-8')
