@@ -12,6 +12,11 @@ interface SelectUfProps {
 const SelectUf: React.FC<SelectUfProps> = ({ setUf, uf }) => {
   const [ufOptions, setUfOptions] = useState<MultiSelectOption[]>([])
 
+  const mapUf = (array: any[]) => {
+    if (!array) return []
+    return array.map((obj) => ({ id: obj.uf, name: obj.uf }))
+  }
+
   useEffect(() => {
     const getUf = async () => {
       try {
@@ -29,11 +34,6 @@ const SelectUf: React.FC<SelectUfProps> = ({ setUf, uf }) => {
 
     getUf()
   }, [])
-
-  const mapUf = (array: any[]) => {
-    if (!array) return []
-    return array.map((obj) => ({ id: obj.uf, name: obj.uf }))
-  }
 
   return (
     <CustomMultSelect

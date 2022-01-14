@@ -32,18 +32,13 @@ const Filters = () => {
       ? queryOrderString({ name: params.orderBy, value: params.order })
       : '',
   )
-  const [wasSubmited, setWasSubmited] = useState(false);
+  const [wasSubmited, setWasSubmited] = useState(false)
 
   const [queryApiPagination, setQueryApiPagination] =
     useState('?limit=10&skip=0')
 
   const history = useHistory()
   const { Loading } = useLoading()
-
-  useEffect(() => {
-    if (!filter.length) return
-    filterResults()
-  }, [queryApiPagination, filter])
 
   const someFieldWasTyped = !!city || !!uf || !!researchDoctor
 
@@ -86,6 +81,11 @@ const Filters = () => {
       Loading.turnOff()
     }
   }
+
+  useEffect(() => {
+    if (!filter.length) return
+    filterResults()
+  }, [queryApiPagination, filter])
 
   return (
     <>

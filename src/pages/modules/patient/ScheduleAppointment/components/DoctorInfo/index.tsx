@@ -6,8 +6,9 @@ import { useHistory } from 'react-router'
 import { PATIENT_DOCTOR_INFORMATION } from '@/routes/constants/namedRoutes/routes'
 import { DoctorInfoProps } from '../../types/index'
 
-const DoctorInfo: React.FC<DoctorInfoProps> = ({ dataDoctor, isVerify }) => {
+const DoctorInfo: React.FC<DoctorInfoProps> = ({ dataDoctor }) => {
   const history = useHistory()
+console.log(dataDoctor.specialtys);
 
   return (
     <Container>
@@ -32,7 +33,7 @@ const DoctorInfo: React.FC<DoctorInfoProps> = ({ dataDoctor, isVerify }) => {
           <div>
             <h6>Especialidade:</h6>
             {dataDoctor.specialtys.map((spec) => (
-              <p key={spec}>{dataDoctor.specialtys}</p>
+              <p key={spec}>{spec}</p>
             ))}
           </div>
         </li>

@@ -20,6 +20,14 @@ const SelectCity: React.FC<MultSelectSelectCityProps> = ({
 }) => {
   const [cityOptions, setCityOptions] = useState<MultiSelectOption[]>([])
 
+  const mapCity = (array: any[]) => {
+    if (!array) return []
+    return array.map((obj) => ({
+      id: obj.cidade,
+      name: obj.cidade,
+    }))
+  }
+
   useEffect(() => {
     if (!uf.length) {
       setCity([])
@@ -36,13 +44,13 @@ const SelectCity: React.FC<MultSelectSelectCityProps> = ({
     const getCity = async () => {
       try {
         const { data } = await apiPatient.get(
-          `/clinica/municipios?${queryFilterString(ufValue)}`,
+          `/clinica/municipios?=${queryFilterString(ufValue)}`,
         )
         const dataMapped = mapCity(data)
 
         const allOptions =
           dataMapped.length && dataMapped.length >= 2
-            ? [{ name: 'Todas', id: 'ALL' }]
+            ? [{ name: 'Todas', id: 'All' }]
             : []
 
         setCityOptions([...allOptions, ...dataMapped])
@@ -51,14 +59,6 @@ const SelectCity: React.FC<MultSelectSelectCityProps> = ({
 
     getCity()
   }, [uf])
-
-  const mapCity = (array: any[]) => {
-    if (!array) return []
-    return array.map((obj) => ({
-      id: obj.cidade,
-      name: obj.cidade,
-    }))
-  }
 
   return (
     <CustomMultSelect

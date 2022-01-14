@@ -5,7 +5,6 @@ import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { mapSpecialtys } from '../helpers/mapDataFromApiToMultSelect'
-import useQueryParams from '../Filter/useQueryParams'
 
 interface MultSelectSpecialtysProps {
   setSpecialtys: Dispatch<SetStateAction<MultiSelectOption[]>>
@@ -45,18 +44,6 @@ const MultSelectSpecialtys: React.FC<MultSelectSpecialtysProps> = ({
     }
 
     getSpecialtys()
-  }, [])
-
-  useEffect(() => {
-
-    // const queryParamsSpecialtys = () => {
-    //   const specialtyParams = useQueryParams().specialtys
-    //   return specialtysOptions.filter((specialty) =>
-    //     specialtyParams.includes(specialty.id),
-    //   )
-    // }
-
-    // setSpecialtys(queryParamsSpecialtys())
   }, [])
 
   return (

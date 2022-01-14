@@ -13,10 +13,10 @@ const Content: React.FC<ContentProps> = ({ dependents }) => {
       {dependents?.map((dep, index) => (
         <ListItem
           key={index}
-          warning={!dep.documentsOk && !dep.isValidate}
-          // onClick={() =>
-          //   history.push(PATIENT_SEE_DEPENDENT, { idDependent: dep.id })
-          // }
+          warning={!dep.documentsOk || dep.isValidate}
+          onClick={() =>
+            history.push(PATIENT_SEE_DEPENDENT, { idDependent: dep.id })
+          }
         >
           <li>{dep.name}</li>
           <li>{dep.birthdate}</li>
@@ -25,7 +25,7 @@ const Content: React.FC<ContentProps> = ({ dependents }) => {
           <Actions
             idDependent={dep.id}
             status={dep.status}
-            warning={!dep.documentsOk && !dep.isValidate}
+            warning={!dep.documentsOk || dep.isValidate}
             documentsOk={dep.documentsOk}
             isValidate={dep.isValidate}
           />

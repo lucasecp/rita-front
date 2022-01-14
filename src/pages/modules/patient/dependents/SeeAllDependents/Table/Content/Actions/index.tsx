@@ -22,13 +22,27 @@ const Actions: React.FC<ActionsProps> = ({
 }) => {
   const history = useHistory()
   const warninglabel = () => {
+    let label: any
+
     if (!documentsOk) {
-      return 'O dependente cadastrado ainda não possui documentos incluídos. Para maiores informações entre em contato pelo Whatsapp (61) 3181-0999'
+      label = (
+        <>
+          O dependente cadastrado ainda não possui documentos incluídos.
+          <br /> Para maiores informações entre em contato pelo Whatsapp (61)
+          3181-0999
+        </>
+      )
     }
-    if (!isValidate) {
-      return 'A data de validação do seu cadastro ultrapassou os 730 dias. Para maiores informações, entre em contato pelo Whatsapp (61) 3181-0999'
+    if (isValidate) {
+      label = (
+        <>
+          A data de validação do seu cadastro ultrapassou os 730 dias.
+          <br /> Para maiores informações, entre em contato pelo Whatsapp (61)
+          3181-0999
+        </>
+      )
     }
-    return ''
+    return label
   }
 
   return (
