@@ -29,7 +29,7 @@ const SelectCity: React.FC<MultSelectSelectCityProps> = ({
   }
 
   useEffect(() => {
-    if (!uf.length) {
+    if (uf.some((value) => value.id === 'All')) {
       setCity([])
       return setCityOptions([])
     }
@@ -44,13 +44,13 @@ const SelectCity: React.FC<MultSelectSelectCityProps> = ({
     const getCity = async () => {
       try {
         const { data } = await apiPatient.get(
-          `/clinica/municipios?${queryFilterString(ufValue)}`,
+          `/clinica/municipios?=${queryFilterString(ufValue)}`,
         )
         const dataMapped = mapCity(data)
 
         const allOptions =
           dataMapped.length && dataMapped.length >= 2
-            ? [{ name: 'Todas', id: 'ALL' }]
+            ? [{ name: 'Todas', id: 'All' }]
             : []
 
         setCityOptions([...allOptions, ...dataMapped])
