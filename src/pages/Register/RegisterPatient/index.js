@@ -135,9 +135,6 @@ const RegisterPatient = () => {
     }
   }
 
-  const checkFields = () =>
-    !fieldsError ? showMessage(Warning) : setStep(step + 1)
-
   return (
     <RegisterLayout>
       <Content>
@@ -184,16 +181,12 @@ const RegisterPatient = () => {
             dataClientSabin={dataClientSabin}
           />
         )}
-        <BtnGroup>
-          {step === 4 && (
-            <>
-              <BtnPrev onClick={() => setStep(step - 1)}>
-                Etapa Anterior
-              </BtnPrev>
-              <CustomBtn onClick={handleSubmit}>Concluir cadastro</CustomBtn>
-            </>
-          )}
-        </BtnGroup>
+        {step === 4 && (
+          <BtnGroup>
+            <BtnPrev onClick={() => setStep(step - 1)}>Etapa Anterior</BtnPrev>
+            <CustomBtn onClick={handleSubmit}>Concluir cadastro</CustomBtn>
+          </BtnGroup>
+        )}
       </Content>
     </RegisterLayout>
   )
