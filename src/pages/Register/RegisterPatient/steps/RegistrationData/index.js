@@ -3,9 +3,7 @@ import Checkbox from '@/components/Form/Checkbox'
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
-import { Col, Row } from 'react-bootstrap'
-import { Container } from '../style'
-import { BtnTerms, CustomBtn } from './style'
+import { Container, BtnTerms, CustomBtn } from './styles'
 import Terms from './messages/Tems'
 import {
   validateBirthdate,
@@ -41,6 +39,15 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
     setPhone(newData.telefone || dataClientSabin.telefone || '')
     setCpf(newData.cpf || dataClientSabin.cpf || '')
   }, [dataClientSabin])
+
+  const checkConfirmEmail = () => {
+    const previousErrorsAndErrorsInConfirmEmail = {
+      ...errors,
+      ...validateConfEmail(email, confirmEmail),
+    }
+
+    setErrors(previousErrorsAndErrorsInConfirmEmail)
+  }
 
   const checkFields = () => {
     const permit = {
@@ -84,8 +91,6 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
     <>
       <Container>
         <h1>Dados Cadastrais</h1>
-        <Row>
-          <Col md="12">
             <InputText
               label="Nome Completo*:"
               value={name}
@@ -96,30 +101,27 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
               maxLength={100}
               onlyLetter
             />
-          </Col>
-          <Col md="6" className="mt-4">
+            <section>
             <InputText
               label="E-mail*:"
               name="email"
               hasError={errors.email}
               value={email}
+              onKeyUp={checkConfirmEmail}
               setValue={setEmail}
               msgError={errors.email}
               maxLength={100}
             />
-          </Col>
-          <Col md="6" className="mt-4">
             <InputText
               autoComplete="off"
               label="Confirme seu e-mail*:"
               hasError={errors.confirmEmail}
+              onKeyUp={checkConfirmEmail}
               value={confirmEmail}
               setValue={setConfirmEmail}
               msgError={errors.confirmEmail}
               onPaste={(e) => e.preventDefault()}
             />
-          </Col>
-          <Col md="6" className="mt-4">
             <Select
               label="Gênero*:"
               labelDefaultOption="Selecione"
@@ -133,8 +135,6 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
               value={gender}
               msgError={errors.gender}
             />
-          </Col>
-          <Col md="6" className="mt-4">
             <InputMask
               label="Data de Nascimento*:"
               mask="99/99/9999"
@@ -144,8 +144,6 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
               autoComplete="off"
               msgError={errors.birthdate}
             />
-          </Col>
-          <Col md="6" className="mt-4">
             <InputMask
               label="Celular*:"
               mask="(99) 99999-9999"
@@ -154,8 +152,6 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
               hasError={errors.phone}
               msgError={errors.phone}
             />
-          </Col>
-          <Col md="6" className="mt-4">
             <InputMask
               label="CPF*:"
               mask="999.999.999-99"
@@ -165,8 +161,7 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
               disabled={dataClientSabin.cpf}
               msgError={errors.cpf}
             />
-          </Col>
-          <Col md="12" className="mt-4">
+            </section>
             <Checkbox
               id="terms"
               label={labelTerms}
@@ -175,8 +170,6 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
               setValue={setTerms}
               msgError={errors.terms}
             />
-          </Col>
-        </Row>
         {/* {!hasPermitionToNext() && (
         <MsgError className="mt-3">Todos os campos são obrigatórios.</MsgError>
       )} */}

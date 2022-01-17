@@ -1,5 +1,35 @@
 import styled from 'styled-components'
+import colors from '@/styles/colors'
+
 import ButtonPrimary from '@/components/Button/Primary'
+
+export const Container = styled.div`
+  background: #fff;
+  width: 100%;
+  padding: 32px;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 40px;
+    color: ${colors.gray.dark};
+    margin-bottom: 40px;
+  }
+
+  > section {
+    margin: 24px 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  @media (max-width: 767px){
+    > section {
+      grid-template-columns: 1fr;
+    }
+  }
+`
 
 export const BtnTerms = styled.button`
   background-color: transparent;
