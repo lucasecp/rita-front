@@ -1,63 +1,92 @@
-import { PatientAddress, PatientData, PatientDataHolder } from '../@types'
+import { isObjectEmpty } from '@/helpers/isObjectEmpty'
+import { formatCpf } from '@/helpers/formatCpf'
+import { formatPhone } from '@/helpers/formatPhone'
 
-interface IFromApi {
-  patientData: PatientData & PatientDataHolder
-  patientDependents: PatientData[]
-  patientAddress: PatientAddress
-  dependent: PatientData
-  incomeType: string
+import { FromApi, FromApiResponse } from './@types/index'
+
+const genderFromApi = (gender: string) => {
+  const genderObject: { [x: string]: string } = {
+    M: 'Masculino',
+    F: 'Feminino',
+    O: 'Outros',
+  }
+
+  return genderObject[gender] || 'Não definido'
 }
 
-export const fromApi = (
-  dataPatient: unknown,
-  dataDependent: unknown,
-): IFromApi => {
-  console.log(dataPatient)
-  console.log(dataDependent)
+const incomeFromApi = (income: string) => {
+  const incomeObject: { [x: string]: string } = {
+    AcimaDeUmSalarioMinimoEMeio: 'Acima de um salário mínimo e meio',
+    NaopossuoRenda: 'Não possui renda',
+    AteUmSalarioMinimoEMeio: 'Até um salário mínimo e meio',
+  }
 
-  const patientMapped: IFromApi = {
-    patientData: {
-      id: 435454,
-      name: 'Matheus Almeida',
-      cpf: '518.251.251-21',
-      plan: 'Econômico',
-      table: 'Econômico',
-      company: 'Tetris LTDA',
-      birthDate: '16/01/1999',
-      gender: 'Masculino',
-      phone: '(22) 99881-1565',
-      email: 'matheus@email.com',
-    },
-    patientDependents: [
-      {
-        id: 435424,
-        name: 'Dependente 2',
-        cpf: '518.251.251-21',
-        birthDate: '16/01/1999',
-        gender: 'Masculino',
-        phone: '(22) 99881-1565',
-        email: 'matheus@email.com',
-      },
-    ],
+  return incomeObject[income] || 'Não definido'
+}
+
+export const fromApi = (data: FromApiResponse): FromApi => {
+  let patientDataFromApi
+  let dependentFromApi
+
+  if (isObjectEmpty(data.titular)) {
+    patientDataFromApi = {
+      id: data.idPaciente,
+      name: data.nome,
+      cpf: formatCpf(data.cpf),
+      birthDate: data.dataNascimento,
+      gender: genderFromApi(data.sexo),
+      phone: formatPhone(data.telefone),
+      email: data.email,
+      plan: data.plano?.nome,
+      table: data.tabela?.nome,
+      company: data.empresa,
+    }
+  } else {
+    patientDataFromApi = {
+      id: data.titular.idPaciente,
+      name: data.titular.nome,
+      cpf: formatCpf(data.titular.cpf),
+      birthDate: data.titular.dataNascimento,
+      gender: genderFromApi(data.titular.sexo),
+      phone: formatPhone(data.titular.telefone),
+      email: data.titular.email,
+      plan: data.titular.plano?.nome,
+      table: data.titular.tabela?.nome,
+      company: data.titular.empresa,
+    }
+    dependentFromApi = {
+      id: data.idPaciente,
+      name: data.nome,
+      cpf: formatCpf(data.cpf),
+      birthDate: data.dataNascimento,
+      gender: genderFromApi(data.sexo),
+      phone: formatPhone(data.telefone),
+      email: data.email,
+    }
+  }
+
+  const patientMapped: FromApi = {
+    patientData: patientDataFromApi,
+    patientDependents: data?.dependentes.map((dependent) => ({
+      id: dependent.idPaciente,
+      name: dependent.nome,
+      cpf: formatCpf(dependent.cpf),
+      birthDate: dependent.dataNascimento,
+      gender: genderFromApi(dependent.sexo),
+      phone: formatPhone(dependent.telefone),
+      email: dependent.email,
+    })),
     patientAddress: {
-      cep: '28.083-040',
-      uf: 'RJ',
-      city: 'Campos dos Goytacazes',
-      address: 'Rua Jorge Barreto',
-      number: '54',
-      district: 'Guarus',
-      complement: 'Casa',
+      cep: data.endereco.cep,
+      uf: data.endereco.uf,
+      city: data.endereco.cidade,
+      address: data.endereco.logradouro,
+      number: data.endereco.numero,
+      district: data.endereco.bairro,
+      complement: data.endereco.complemento,
     },
-    dependent: {
-      id: 435424,
-      name: 'Dependente 2',
-      cpf: '518.251.251-21',
-      birthDate: '13/01/2004',
-      gender: 'Masculino',
-      phone: '(22) 99881-1565',
-      email: 'matheus@email.com',
-    },
-    incomeType: 'Até 1 salário mínimo e meio',
+    dependent: dependentFromApi,
+    incomeType: incomeFromApi(data.renda),
   }
 
   return patientMapped

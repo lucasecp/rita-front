@@ -8,11 +8,11 @@ import { useToggle } from '@/hooks/useToggle'
 import { formatCpf } from '@/helpers/formatCpf'
 import { formatPhone } from '@/helpers/formatPhone'
 
-import { PatientData } from '../../@types/index'
+import { PatientData, PatientDataHolder } from '../../@types/index'
 
 interface PersonExpandableProps {
   title: string
-  personData: PatientData
+  personData: PatientData & PatientDataHolder
   holder?: boolean
 }
 

@@ -6,14 +6,16 @@ import { Container } from './styles'
 
 import { useModal } from '@/hooks/useModal'
 
-function Modal() {
+export const Modal: React.FC = () => {
   const body = document.querySelector('body')
 
   const { message, modalVisible, closeable, closeModal } = useModal()
 
   useEffect(() => {
-    body.style.overflow = modalVisible ? 'hidden' : 'auto'
-  }, [modalVisible, body.style.overflow])
+    if (body) {
+      body.style.overflow = modalVisible ? 'hidden' : 'auto'
+    }
+  }, [modalVisible, body?.style.overflow])
 
   return (
     <Container show={modalVisible}>
@@ -28,5 +30,3 @@ function Modal() {
     </Container>
   )
 }
-
-export default Modal

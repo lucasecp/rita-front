@@ -2,7 +2,11 @@ import hexToRgba from '@/helpers/hexToRgba'
 import colors from '@/styles/colors'
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
+interface SimpleModalStylesProps {
+  show: boolean
+}
+
+export const Container = styled.div<SimpleModalStylesProps>`
   position: fixed;
   top: 0;
   left: 0;
