@@ -21,7 +21,7 @@ const Content: React.FC<ContentProps> = ({ clinics }) => {
         >
           <li>
             <CustomTooltip label={clinic.name}>
-              <div>{formatTextWithLimit(clinic.name, 33)}</div>
+              <div>{clinic.name}</div>
             </CustomTooltip>
           </li>
           <li>{clinic.cnpj}</li>

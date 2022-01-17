@@ -19,6 +19,7 @@ import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import DocumentNoSent from './messages/Success/DocumentNotSent'
 import FieldsErrorMessage from './messages/Error/FieldsErrorMessage'
 
+
 const status = {
   SUCCESS: 'success',
   SERVER_ERROR: 'server_error',
@@ -128,7 +129,7 @@ const RegisterPatient = () => {
   }
 
   const checkFields = () =>
-    !fieldsError ? showMessage(FieldsErrorMessage) : setStep(step + 1)
+    !fieldsError ? showMessage(Warning) : setStep(step + 1)
 
   return (
     <RegisterLayout>
@@ -149,6 +150,7 @@ const RegisterPatient = () => {
             setButtonPass={setFieldsError}
             dataClientSabin={dataClientSabin}
             newData={data}
+            setStep={setStep}
           />
         )}
         {step === 2 && (
@@ -173,7 +175,7 @@ const RegisterPatient = () => {
             dataClientSabin={dataClientSabin}
           />
         )}
-        <BtnGroup>
+        {/* <BtnGroup>
           {step > 1 && (
             <BtnPrev onClick={() => setStep(step - 1)}>Etapa Anterior</BtnPrev>
           )}
@@ -182,7 +184,7 @@ const RegisterPatient = () => {
           ) : (
             <CustomBtn onClick={() => checkFields()}>Próxima Etapa</CustomBtn>
           )}
-        </BtnGroup>
+        </BtnGroup> */}
       </Content>
     </RegisterLayout>
   )

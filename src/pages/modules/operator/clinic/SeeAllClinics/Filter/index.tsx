@@ -148,7 +148,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           label="CNPJ:"
           value={cnpj}
           setValue={setCnpj}
-          mask="99.999.999/999-99"
+          mask="99.999.999/9999-99"
           hasError={!!errors.cnpj}
           msgError={errors.cnpj}
         />

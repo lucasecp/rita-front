@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
 import { Container } from './styles'
-
 import HoldingDocument from './types/HoldingDocument'
 import OwnDocument from './types/OwnDocument'
 import ProofOfIncome from './types/ProofOfIncome'

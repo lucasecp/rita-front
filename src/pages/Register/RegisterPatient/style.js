@@ -5,7 +5,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 26px 0;
+  padding: 26px 0 0;
   box-shadow: 0px 2px 8px 0px #dfd2ff26;
   background: #f8f5ff;
   margin: 20px 0px 100px 0;
@@ -75,23 +75,6 @@ export const DotSteps = styled.span`
   }
 `
 
-export const BtnGroup = styled.div`
-  margin-top: 24px;
-  padding: 0 32px;
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-  > button:last-child {
-    margin-left: auto;
-  }
-  @media (max-width: 539px) {
-    flex-direction: column;
-    > button:last-child {
-      margin-left: 0;
-      margin-top: 20px;
-    }
-  }
-`
 export const BtnPrev = styled.button`
   font-size: 16px;
   font-style: normal;

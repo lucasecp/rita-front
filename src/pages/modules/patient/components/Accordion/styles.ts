@@ -15,7 +15,7 @@ export const Accordion = styled.div<AccordionProps>`
     expanded &&
     css`
       overflow: visible;
-      max-height: ${height}px;
+      max-height: 10000000px;
       visibility: visible;
     `}
 `
