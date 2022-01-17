@@ -1,7 +1,5 @@
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-import { formatMobilePhone } from '@/helpers/formatMobilePhone'
-import { DoctorI } from '../types'
-import { ClinicI } from '../types/index'
+import { DoctorI, ClinicI } from '../types'
 
 export const fromApi = (dataResults: any[]) => {
   const doctor: DoctorI[] = dataResults
@@ -11,8 +9,10 @@ export const fromApi = (dataResults: any[]) => {
       name: firstLetterCapitalize(docInfo.nome),
       id: docInfo.id,
       crm: docInfo.conselhoRegional,
-      verified: docInfo.validadoClinica,
-      specialtys: docInfo?.especialidades?.map((spe: any) => spe),
+      verified: docInfo.conselhoValidado,
+      specialtys: docInfo.especialidades.map(
+        (spe: any) => `${spe.descricao} - RQE Nº: ${spe.RQE || ''}`,
+      ),
     }))
 
   const clinic: ClinicI[] = dataResults

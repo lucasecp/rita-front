@@ -7,7 +7,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 26px 0;
+  padding: 26px 0 0;
   box-shadow: 0px 2px 8px 0px #dfd2ff26;
   background: ${colors.gray.extraLight};
   margin: 20px 0px 100px 0;
@@ -78,8 +78,8 @@ export const DotSteps = styled.span`
 `
 
 export const BtnGroup = styled.div`
-  margin-top: 24px;
-  padding: 0 32px;
+  background: ${colors.gray.extraLight};
+  padding: 24px 32px;
   display: flex;
   align-items: center;
   align-self: stretch;

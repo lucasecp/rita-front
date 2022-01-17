@@ -1,6 +1,6 @@
 import React from 'react'
 import _static from './static'
-import { ArrowDown, ArrowUp, Content } from './styles'
+import { Container, ArrowUp, ArrowDown, Content } from './styles'
 
 const Thead = ({ setOrders, orders }) => {
   const hasDescOrder = (name) =>
@@ -9,7 +9,7 @@ const Thead = ({ setOrders, orders }) => {
   const hasAscOrder = (name) =>
     orders.some((obj) => obj.name === name && obj.value === 'ASC')
 
-  const handleClick = (name) => {
+  const toggleOrder = (name) => {
     if (hasDescOrder(name)) {
       return setOrders([])
     }
@@ -23,21 +23,19 @@ const Thead = ({ setOrders, orders }) => {
   }
 
   return (
-    <thead>
-      <tr>
-        {_static.map((field) => (
-          <th key={field.label}>
-            <Content>
-              {field.label}
-              <div onClick={() => handleClick(field.name)}>
-                <ArrowUp order={hasAscOrder(field.name) ? 1 : 0} />
-                <ArrowDown order={hasDescOrder(field.name) ? 1 : 0} />
-              </div>
-            </Content>
-          </th>
+    <Container>
+      <div>
+        {_static.map((order) => (
+          <Content key={order.name}>
+            <h5> {order.label} </h5>
+            <div onClick={() => toggleOrder(order.name)}>
+              <ArrowUp order={hasAscOrder(order.name) ? 1 : 0} />
+              <ArrowDown order={hasDescOrder(order.name) ? 1 : 0} />
+            </div>
+          </Content>
         ))}
-      </tr>
-    </thead>
+      </div>
+    </Container>
   )
 }
 

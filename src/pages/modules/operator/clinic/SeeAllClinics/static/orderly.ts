@@ -1,5 +1,5 @@
 export default [
-  { label: 'Nome Fantasia', name: 'nomeFantasia' },
+  { label: 'Nome Fantasia', name: 'descricao' },
   { label: 'CNPJ', name: 'cnpj' },
   { label: 'Status', name: 'status' },
 ]

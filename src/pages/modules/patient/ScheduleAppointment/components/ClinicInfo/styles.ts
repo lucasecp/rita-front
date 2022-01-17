@@ -45,6 +45,8 @@ export const Container = styled.div`
       > div {
         display: flex;
         margin: -8px 0;
+        flex-wrap: wrap;
+        align-items: center;
       }
       p {
         margin: 8px 0;
@@ -52,6 +54,7 @@ export const Container = styled.div`
         font-size: 14px;
         font-weight: 400;
         line-height: 15px;
+
         & + p {
           margin-left: 2px;
         }

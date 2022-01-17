@@ -13,7 +13,7 @@ interface ModalContextData {
   closeable: boolean
   showMessage: (
     MessageComponent: React.FC<any>,
-    props: { [x: string]: any },
+    props?: { [x: string]: unknown },
     isCloseable?: boolean,
   ) => void
   closeModal: () => void
@@ -30,7 +30,7 @@ const ModalProvider: React.FC = ({ children }) => {
 
   const showMessage = (
     MessageComponent: React.FC<any>,
-    props: { [x: string]: any },
+    props?: { [x: string]: unknown },
     isCloseable = false,
   ) => {
     setCloseable(isCloseable)
@@ -40,7 +40,12 @@ const ModalProvider: React.FC = ({ children }) => {
 
   const closeModal = () => {
     setModalVisible(false)
-    setMessage(null)
+
+    const removeContentToAnimation = () => {
+      setMessage(null)
+    }
+
+    setTimeout(removeContentToAnimation, 300)
   }
 
   const error = (message: string) => {
@@ -86,7 +91,7 @@ const ModalProvider: React.FC = ({ children }) => {
   )
 }
 
-const useModal = () => {
+const useModal = (): ModalContextData => {
   const context = useContext(ModalContext)
 
   return context

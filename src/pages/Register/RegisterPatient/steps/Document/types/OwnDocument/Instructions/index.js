@@ -1,5 +1,3 @@
-import React from 'react'
-
 import documentFrontImage from '@/assets/img/document-front.png'
 
 import { Container } from './styles'

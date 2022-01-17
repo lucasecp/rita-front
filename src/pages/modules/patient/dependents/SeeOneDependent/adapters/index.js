@@ -3,7 +3,6 @@ import formatIncome from './formatIncome'
 import { statusFromApi, statusToApi } from './showStatus'
 
 export const fromApi = (dependentInfo) => {
-
   return {
     personalDatas: {
       name: dependentInfo.nome,
@@ -18,7 +17,7 @@ export const fromApi = (dependentInfo) => {
       plan: {
         name: dependentInfo.plano?.nome,
         startDate: formatDate(dependentInfo.plano?.dataAtivacao),
-        endDate: formatDate(dependentInfo.plano?.dataTermino),
+        endDate: formatDate(dependentInfo.tabela?.dataVencimentoTabela),
       },
       documents: dependentInfo.documentosCadastrados?.reduce((ac, doc) => {
         ac[doc?.tipoArquivo] = true

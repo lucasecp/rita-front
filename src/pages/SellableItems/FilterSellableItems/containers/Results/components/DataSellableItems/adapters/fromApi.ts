@@ -10,7 +10,6 @@ export const statusFromApi: any = (status: any) => {
 
   return statusObject[status]
 }
-;('municipio')
 
 export const sellableItemsFromApi: any = (sellableItemsResponse: any) => {
   // const {  } = sellableItemsResponse

@@ -17,6 +17,7 @@ import { useModal } from '@/hooks/useModal'
 import axios from 'axios'
 import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import DocumentNoSent from './messages/Success/DocumentNotSent'
+import FieldsErrorMessage from './messages/Error/FieldsErrorMessage'
 
 const status = {
   SUCCESS: 'success',
@@ -36,8 +37,8 @@ const RegisterPatient = () => {
   const [data, setData] = useState({})
 
   const [dataClientSabin, setDataClientSabin] = useState({})
-  const [buttonPass, setButtonPass] = useState(false)
   const [documentFiles, setDocumentFiles] = useState({})
+  const [fieldsError, setFieldsError] = useState(false)
 
   useEffect(() => {
     document.title = 'Rita Saúde | Cadastro'
@@ -134,6 +135,9 @@ const RegisterPatient = () => {
     }
   }
 
+  const checkFields = () =>
+    !fieldsError ? showMessage(Warning) : setStep(step + 1)
+
   return (
     <RegisterLayout>
       <Content>
@@ -150,25 +154,26 @@ const RegisterPatient = () => {
         {step === 1 && (
           <RegistrationData
             setData={setData}
-            setButtonPass={setButtonPass}
+            setButtonPass={setFieldsError}
             dataClientSabin={dataClientSabin}
             newData={data}
+            setStep={setStep}
           />
         )}
         {step === 2 && (
           <Address
             setData={setData}
-            setButtonPass={setButtonPass}
+            setButtonPass={setFieldsError}
             dataClientSabin={dataClientSabin}
             newData={data}
+            setStep={setStep}
+            step={step}
           />
         )}
         {step === 3 && (
           <Document
             onGetDocumentFiles={setDocumentFiles}
-            setButtonPass={setButtonPass}
             savedFiles={documentFiles}
-            step={step}
             setStep={setStep}
           />
         )}
@@ -180,15 +185,13 @@ const RegisterPatient = () => {
           />
         )}
         <BtnGroup>
-          {step > 1 && (
-            <BtnPrev onClick={() => setStep(step - 1)}>Etapa Anterior</BtnPrev>
-          )}
-          {step === 4 ? (
-            <CustomBtn onClick={handleSubmit}>Concluir cadastro</CustomBtn>
-          ) : (
-            <CustomBtn disabled={!buttonPass} onClick={() => setStep(step + 1)}>
-              Próxima Etapa
-            </CustomBtn>
+          {step === 4 && (
+            <>
+              <BtnPrev onClick={() => setStep(step - 1)}>
+                Etapa Anterior
+              </BtnPrev>
+              <CustomBtn onClick={handleSubmit}>Concluir cadastro</CustomBtn>
+            </>
           )}
         </BtnGroup>
       </Content>

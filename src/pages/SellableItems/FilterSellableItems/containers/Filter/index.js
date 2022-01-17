@@ -24,8 +24,6 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
   )
 
   const hasNoFilterSelected = useMemo(() => {
-    onGetFilters({})
-
     return (
       filters.code === '' &&
       filters.plan === '' &&
@@ -35,15 +33,7 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
       !filters.ufs.length &&
       !filters.cities.length
     )
-  }, [
-    filters.code,
-    filters.plan,
-    filters.services,
-    filters.status,
-    filters.regionals,
-    filters.ufs,
-    filters.cities,
-  ])
+  }, [filters])
 
   const onClearFields = () => {
     setFilters({
@@ -60,30 +50,6 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
   }
 
   const onFilterResults = () => {
-    // let servicesWithoutAll = services
-    // let statusWithoutAll = status
-    // let regionalsWithoutAll = regionals
-
-    // const hasAllOptionInServices = services.some((service) => service.id === 0)
-
-    // if (hasAllOptionInServices) {
-    //   servicesWithoutAll = services.filter((service) => service.id !== 0)
-    // }
-
-    // const hasAllOptionInStatus = status.some((status) => status.id === 0)
-
-    // if (hasAllOptionInStatus) {
-    //   statusWithoutAll = status.filter((status) => status.id !== 0)
-    // }
-
-    // const hasAllOptionInRegional = regionals.some(
-    //   (regional) => regional.id === 0,
-    // )
-
-    // if (hasAllOptionInRegional) {
-    //   regionalsWithoutAll = regionals.filter((regional) => regional.id !== 0)
-    // }
-
     onGetFilters({
       code: filters.code,
       plan: filters.plan,

@@ -6,28 +6,42 @@ import CustomMultSelect, {
 } from '@/components/Form/MultSelect'
 import React, { useEffect, useState } from 'react'
 import MultSelectCity from '../Components/MultSelectCity'
-import MultSelectRegional from '../Components/MultSelectRegional'
 import MultSelectSpecialtys from '../Components/MultSelectSpecialtys'
 import MultSelectUf from '../Components/MultSelectUf'
 import { staticStatus } from '../static/fieldsMultSelect'
 import { BtnGroup, Container } from './styles'
 import formatMultSelectValue from '@/helpers/formatMultSelectValue'
 import { verifyTypedFields } from '../helpers/verifyTypedFields'
-import useQuery from '@/hooks/useQuery'
 import InputMask from '@/components/Form/InputMask'
 import { fieldsApi } from '../static/fieldsApi'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import useQueryParams from './useQueryParams'
 
-const Filter = ({ setFilters }) => {
-  const query = useQuery()
+interface FilterProps {
+  setFilters: React.Dispatch<React.SetStateAction<any[]>>
+}
 
-  const [name, setName] = useState('')
-  const [cnpj, setCnpj] = useState('')
-  const [status, setStatus] = useState<MultiSelectOption[]>([])
-  const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>([])
-  const [specialist, setSpecialist] = useState('')
-  const [district, setDistrict] = useState('')
-  const [uf, setUf] = useState<MultiSelectOption[]>([])
-  const [city, setCity] = useState<MultiSelectOption[]>([])
+const Filter: React.FC<FilterProps> = ({ setFilters }) => {
+  const local = useQueryParams()
+
+  const [name, setName] = useState(local.name || '')
+
+  const [cnpj, setCnpj] = useState(local.cnpj || '')
+  const [status, setStatus] = useState<MultiSelectOption[]>(local.status || [])
+  const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>(
+    local.specialtys || [],
+  )
+  const [specialist, setSpecialist] = useState(local.specialists || '')
+  const [district, setDistrict] = useState(local.district || '')
+  const [uf, setUf] = useState<MultiSelectOption[]>(local.uf || [])
+  const [city, setCity] = useState<MultiSelectOption[]>(local.citys || [])
+  const [errors, setErrors] = useState({
+    name: '',
+    specialist: '',
+    district: '',
+    cnpj: '',
+  })
+  const cnpjFormated = clearSpecialCaracter(cnpj)
 
   useEffect(() => {
     setFilters(verifyTypedFields(arrayQuery))
@@ -35,7 +49,7 @@ const Filter = ({ setFilters }) => {
 
   const arrayQuery = [
     { name: fieldsApi.NOME_FANTASIA, value: name },
-    { name: fieldsApi.CNPJ, value: cnpj },
+    { name: fieldsApi.CNPJ, value: cnpjFormated },
     { name: fieldsApi.STATUS, value: formatMultSelectValue(status) },
     {
       name: fieldsApi.ESPECIALIDADES,
@@ -55,13 +69,64 @@ const Filter = ({ setFilters }) => {
     setCnpj('')
     setStatus([])
     setSpecialtys([])
+    setSpecialist('')
     setDistrict('')
     setUf([])
     setCity([])
     setFilters([])
+    setErrors({ name: '', specialist: '', district: '', cnpj: '' })
+    window.localStorage.removeItem('@Rita/clinic-filter')
+  }
+
+  const hasErrors = () => {
+    let newErrors = false
+    setErrors({ name: '', specialist: '', district: '', cnpj: '' })
+
+    if (specialist.length < 3 && specialist) {
+      setErrors((errors) => ({
+        ...errors,
+        specialist: 'Informe 3 letras ou mais',
+      }))
+      newErrors = true
+    }
+    if (cnpjFormated.length < 3 && cnpjFormated) {
+      setErrors((errors) => ({
+        ...errors,
+        cnpj: 'Informe 3 dígitos ou mais',
+      }))
+      newErrors = true
+    }
+    if (district.length < 3 && district) {
+      setErrors((errors) => ({
+        ...errors,
+        district: 'Informe 3 letras ou mais',
+      }))
+      newErrors = true
+    }
+    if (name.length < 3 && name) {
+      setErrors((errors) => ({ ...errors, name: 'Informe 3 letras ou mais' }))
+      newErrors = true
+    }
+    return newErrors
   }
 
   const onFilter = () => {
+    if (hasErrors()) {
+      return
+    }
+    window.localStorage.setItem(
+      '@Rita/clinic-filter',
+      JSON.stringify({
+        name,
+        uf,
+        specialtys,
+        specialist,
+        district,
+        city,
+        cnpj,
+        status,
+      }),
+    )
     setFilters(verifyTypedFields(arrayQuery))
   }
 
@@ -74,6 +139,8 @@ const Filter = ({ setFilters }) => {
           value={name}
           setValue={setName}
           maxLength={100}
+          hasError={!!errors.name}
+          msgError={errors.name}
         />
 
         <InputMask
@@ -81,7 +148,9 @@ const Filter = ({ setFilters }) => {
           label="CNPJ:"
           value={cnpj}
           setValue={setCnpj}
-          mask="99.999.999/999-99"
+          mask="99.999.999/9999-99"
+          hasError={!!errors.cnpj}
+          msgError={errors.cnpj}
         />
 
         <CustomMultSelect
@@ -103,9 +172,11 @@ const Filter = ({ setFilters }) => {
           setValue={setSpecialist}
           maxLength={100}
           onlyLetter
+          hasError={!!errors.specialist}
+          msgError={errors.specialist}
         />
 
-        <MultSelectUf uf={uf} setUf={setUf} district={district} />
+        <MultSelectUf uf={uf} setUf={setUf} />
 
         <MultSelectCity city={city} setCity={setCity} uf={uf} />
 
@@ -115,6 +186,8 @@ const Filter = ({ setFilters }) => {
           value={district}
           setValue={setDistrict}
           maxLength={100}
+          hasError={!!errors.district}
+          msgError={errors.district}
         />
       </div>
 

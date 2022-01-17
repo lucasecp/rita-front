@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import { incomeType } from './constants/income'
-
 import { Container, BtnGroup, BtnPrev, CustomBtn } from './styles'
 
 import HoldingDocument from './types/HoldingDocument'
@@ -10,13 +8,7 @@ import OwnBackDocument from './types/OwnBackDocument'
 import ProofOfIncome from './types/ProofOfIncome'
 import ProofOfAddress from './types/ProofOfAddress'
 
-const Document = ({
-  setButtonPass,
-  onGetDocumentFiles,
-  savedFiles,
-  step,
-  setStep,
-}) => {
+const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
   const [holdingDocumentFile, setHoldingDocumentFile] = useState('')
   const [ownDocumentFile, setOwnDocumentFile] = useState('')
   const [ownBackDocumentFile, setOwnBackDocumentFile] = useState('')
@@ -104,7 +96,7 @@ const Document = ({
     }
 
     setErrors({})
-    setStep(step + 1)
+    setStep(4)
   }
 
   return (
@@ -151,7 +143,7 @@ const Document = ({
         />
       </Container>
       <BtnGroup>
-        <BtnPrev onClick={() => setStep(step - 1)}>Etapa Anterior</BtnPrev>
+        <BtnPrev onClick={() => setStep(2)}>Etapa Anterior</BtnPrev>
         <CustomBtn onClick={nextStep}>Próxima Etapa</CustomBtn>
       </BtnGroup>
     </>
