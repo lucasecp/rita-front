@@ -67,7 +67,8 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
       !permit.email &&
       !permit.gender &&
       !permit.birthdate &&
-      !permit.terms
+      !permit.terms &&
+      !permit.phone
     ) {
       setStep(2)
     } else {
@@ -91,85 +92,85 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
     <>
       <Container>
         <h1>Dados Cadastrais</h1>
-            <InputText
-              label="Nome Completo*:"
-              value={name}
-              setValue={setName}
-              hasError={errors.name}
-              name="name"
-              msgError={errors.name}
-              maxLength={100}
-              onlyLetter
-            />
-            <section>
-            <InputText
-              label="E-mail*:"
-              name="email"
-              hasError={errors.email}
-              value={email}
-              onKeyUp={checkConfirmEmail}
-              setValue={setEmail}
-              msgError={errors.email}
-              maxLength={100}
-            />
-            <InputText
-              autoComplete="off"
-              label="Confirme seu e-mail*:"
-              hasError={errors.confirmEmail}
-              onKeyUp={checkConfirmEmail}
-              value={confirmEmail}
-              setValue={setConfirmEmail}
-              msgError={errors.confirmEmail}
-              onPaste={(e) => e.preventDefault()}
-            />
-            <Select
-              label="Gênero*:"
-              labelDefaultOption="Selecione"
-              options={[
-                { label: 'Masculino', value: 'M' },
-                { label: 'Feminino', value: 'F' },
-                { label: 'Outros', value: 'O' },
-              ]}
-              setValue={setGender}
-              hasError={errors.gender}
-              value={gender}
-              msgError={errors.gender}
-            />
-            <InputMask
-              label="Data de Nascimento*:"
-              mask="99/99/9999"
-              value={birthdate}
-              setValue={setBirthdate}
-              hasError={errors.birthdate}
-              autoComplete="off"
-              msgError={errors.birthdate}
-            />
-            <InputMask
-              label="Celular*:"
-              mask="(99) 99999-9999"
-              value={phone}
-              setValue={setPhone}
-              hasError={errors.phone}
-              msgError={errors.phone}
-            />
-            <InputMask
-              label="CPF*:"
-              mask="999.999.999-99"
-              value={cpf}
-              setValue={setCpf}
-              hasError={errors.cpf}
-              disabled={dataClientSabin.cpf}
-              msgError={errors.cpf}
-            />
-            </section>
-            <Checkbox
-              id="terms"
-              label={labelTerms}
-              hasError={errors.terms}
-              checked={terms}
-              setValue={setTerms}
-              msgError={errors.terms}
-            />
+        <InputText
+          label="Nome Completo*:"
+          value={name}
+          setValue={setName}
+          hasError={errors.name}
+          name="name"
+          msgError={errors.name}
+          maxLength={100}
+          onlyLetter
+        />
+        <section>
+          <InputText
+            label="E-mail*:"
+            name="email"
+            hasError={errors.email}
+            value={email}
+            onKeyUp={checkConfirmEmail}
+            setValue={setEmail}
+            msgError={errors.email}
+            maxLength={100}
+          />
+          <InputText
+            autoComplete="off"
+            label="Confirme seu e-mail*:"
+            hasError={errors.confirmEmail}
+            onKeyUp={checkConfirmEmail}
+            value={confirmEmail}
+            setValue={setConfirmEmail}
+            msgError={errors.confirmEmail}
+            onPaste={(e) => e.preventDefault()}
+          />
+          <Select
+            label="Gênero*:"
+            labelDefaultOption="Selecione"
+            options={[
+              { label: 'Masculino', value: 'M' },
+              { label: 'Feminino', value: 'F' },
+              { label: 'Outros', value: 'O' },
+            ]}
+            setValue={setGender}
+            hasError={errors.gender}
+            value={gender}
+            msgError={errors.gender}
+          />
+          <InputMask
+            label="Data de Nascimento*:"
+            mask="99/99/9999"
+            value={birthdate}
+            setValue={setBirthdate}
+            hasError={errors.birthdate}
+            autoComplete="off"
+            msgError={errors.birthdate}
+          />
+          <InputMask
+            label="Celular*:"
+            mask="(99) 99999-9999"
+            value={phone}
+            setValue={setPhone}
+            hasError={errors.phone}
+            msgError={errors.phone}
+          />
+          <InputMask
+            label="CPF*:"
+            mask="999.999.999-99"
+            value={cpf}
+            setValue={setCpf}
+            hasError={errors.cpf}
+            disabled={dataClientSabin.cpf}
+            msgError={errors.cpf}
+          />
+        </section>
+        <Checkbox
+          id="terms"
+          label={labelTerms}
+          hasError={errors.terms}
+          checked={terms}
+          setValue={setTerms}
+          msgError={errors.terms}
+        />
         {/* {!hasPermitionToNext() && (
         <MsgError className="mt-3">Todos os campos são obrigatórios.</MsgError>
       )} */}
