@@ -35,6 +35,7 @@ const RegisterPatient = () => {
 
   const [step, setStep] = useState(1)
   const [data, setData] = useState({})
+  const [term, setTerm] = useState(false)
 
   const [dataClientSabin, setDataClientSabin] = useState({})
   const [documentFiles, setDocumentFiles] = useState({})
@@ -45,6 +46,8 @@ const RegisterPatient = () => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
+
+  console.log(data)
 
   const formatDocumentFiles = () => {
     if (documentFiles.selectIncome === 'no_income') return 'NaopossuoRenda'
@@ -155,6 +158,8 @@ const RegisterPatient = () => {
             dataClientSabin={dataClientSabin}
             newData={data}
             setStep={setStep}
+            term={term}
+            setTerm={setTerm}
           />
         )}
         {step === 2 && (

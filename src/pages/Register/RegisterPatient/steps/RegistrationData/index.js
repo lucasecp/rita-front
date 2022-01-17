@@ -17,7 +17,14 @@ import { useModal } from '@/hooks/useModal'
 import { BtnGroup } from '@/pages/modules/validator/AnalyzePatients/Filter/styles'
 import FieldsErrorMessage from '../../messages/Error/FieldsErrorMessage'
 
-const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
+const RegistrationData = ({
+  dataClientSabin,
+  newData,
+  setStep,
+  setData,
+  term,
+  setTerm,
+}) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [confirmEmail, setConfirmEmail] = useState('')
@@ -25,7 +32,6 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
   const [birthdate, setBirthdate] = useState('')
   const [phone, setPhone] = useState('')
   const [cpf, setCpf] = useState('')
-  const [terms, setTerms] = useState('')
   const [errors, setErrors] = useState({})
 
   const { showMessage } = useModal()
@@ -70,6 +76,13 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
       !permit.terms &&
       !permit.phone
     ) {
+      setData({
+        nome: name,
+        sexo: gender,
+        dataNascimento: birthdate,
+        telefone: phone,
+        email: email,
+      })
       setStep(2)
     } else {
       showMessage(FieldsErrorMessage)
@@ -167,8 +180,8 @@ const RegistrationData = ({ dataClientSabin, newData, setStep }) => {
           id="terms"
           label={labelTerms}
           hasError={errors.terms}
-          checked={terms}
-          setValue={setTerms}
+          checked={term}
+          setValue={setTerm}
           msgError={errors.terms}
         />
         {/* {!hasPermitionToNext() && (
