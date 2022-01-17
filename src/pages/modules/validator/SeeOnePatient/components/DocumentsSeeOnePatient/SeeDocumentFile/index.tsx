@@ -3,7 +3,7 @@ import React from 'react'
 import { ReactComponent as ZoomIcon } from '@/assets/icons/zoom.svg'
 
 import { Container } from './styles'
-import PreviewImage from '../../../messages/PreviewImage'
+import { PreviewImage } from './messages/PreviewImage'
 import { useModal } from '@/hooks/useModal'
 import convertImageFromApiToBase64 from '@/helpers/convertImageFromApiToBase64'
 import { AxiosResponse } from 'axios'

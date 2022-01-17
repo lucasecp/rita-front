@@ -8,12 +8,18 @@ import ButtonPrimary from '@/components/Button/Primary'
 
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
+
 import apiPatient from '@/services/apiPatient'
+import { AxiosError } from 'axios'
 
 import { Container } from './styles'
 import { VALIDATOR_ANALYZE_PATIENTS } from '@/routes/constants/namedRoutes/routes'
 
-function ComeBack({ idPatient }) {
+interface ComeBackProps {
+  idPatient: number
+}
+
+export const ComeBack: React.FC<ComeBackProps> = ({ idPatient }) => {
   const { closeModal, showSimple } = useModal()
   const { Loading } = useLoading()
   const history = useHistory()
@@ -39,8 +45,10 @@ function ComeBack({ idPatient }) {
           closeModal()
         }
       }
-    } catch ({ response }) {
-      if (response.status.toString()[0] === '5') {
+    } catch (error) {
+      const { response } = error as AxiosError
+
+      if (response?.status.toString()[0] === '5') {
         showSimple.error('Erro no Servidor!')
       }
     } finally {
@@ -63,5 +71,3 @@ function ComeBack({ idPatient }) {
     </Container>
   )
 }
-
-export default ComeBack

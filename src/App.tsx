@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 
-import Modal from './components/Modal'
+import { Modal } from './components/Modal'
 
 import Routes from './routes/routes'
 import GlobalStyle from './styles/global'
@@ -16,16 +16,7 @@ import { RitaLoading } from './components/Loading/RitaLoading'
 
 import { ToastContainer } from 'react-toastify'
 
-import { getUserStorage } from '@/storage/user'
-import apiPatient from '@/services/apiPatient'
-import apiUser from '@/services/apiUser'
-
-const user = getUserStorage()
-
-apiUser.defaults.headers.token = user?.token
-apiPatient.defaults.headers.token = user?.token
-
-const App = () => {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ModalProvider>
