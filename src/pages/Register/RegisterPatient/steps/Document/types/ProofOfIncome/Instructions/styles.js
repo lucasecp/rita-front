@@ -40,12 +40,13 @@ export const Container = styled.div`
     > small {
       font-weight: 500;
       font-size: 12px;
-      line-height: 120%;
+      line-height: 14.5px;
 
       color: ${colors.gray.dark};
       margin-left: 12px;
 
       > a {
+        font-weight: 700;
         text-decoration: underline;
       }
     }

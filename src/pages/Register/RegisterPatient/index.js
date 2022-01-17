@@ -37,7 +37,7 @@ const RegisterPatient = () => {
 
   const [dataClientSabin, setDataClientSabin] = useState({})
   const [buttonPass, setButtonPass] = useState(false)
-  const [documentFiles, setdocumentFiles] = useState({})
+  const [documentFiles, setDocumentFiles] = useState({})
 
   useEffect(() => {
     document.title = 'Rita Saúde | Cadastro'
@@ -52,17 +52,17 @@ const RegisterPatient = () => {
     if (documentFiles.selectIncome === 'more_one_half')
       return 'AcimaDeUmSalarioMinimoEMeio'
   }
-
   const handleSubmit = async () => {
     const formFile1 = new FormData()
     formFile1.append('file', documentFiles.holdingDocumentFile)
-
     const formFile2 = new FormData()
     formFile2.append('file', documentFiles.ownDocumentFile)
-
     const formFile3 = new FormData()
-    formFile3.append('file', documentFiles.proofOfIncomeFile)
-
+    formFile3.append('file', documentFiles.ownBackDocumentFile)
+    const formFile4 = new FormData()
+    formFile4.append('file', documentFiles.proofOfAddressFile)
+    const formFile5 = new FormData()
+    formFile5.append('file', documentFiles.proofOfIncomeFile)
     Loading.turnOn()
     try {
       const response = await apiPatient.post('/paciente', {
@@ -80,7 +80,6 @@ const RegisterPatient = () => {
         responseApiStatus = status.SERVER_ERROR
       }
     }
-
     try {
       await axios.all([
         apiPatient.post(
@@ -91,11 +90,21 @@ const RegisterPatient = () => {
           `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Cpf`,
           formFile2,
         ),
+        apiPatient.post(
+          `/paciente/documento?cpf=${data.cpf}&tipoDocumento=DocVerso`,
+          formFile3,
+        ),
+        !documentFiles.proofOfAddressFile
+          ? ''
+          : apiPatient.post(
+              `/paciente/documento?cpf=${data.cpf}&tipoDocumento=ComprovanteResi`,
+              formFile4,
+            ),
         !documentFiles.proofOfIncomeFile
           ? ''
           : apiPatient.post(
               `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
-              formFile3,
+              formFile5,
             ),
       ])
     } catch ({ response }) {
@@ -107,7 +116,6 @@ const RegisterPatient = () => {
       }
     } finally {
       Loading.turnOff()
-
       if (responseApiStatus === status.ALREADY_EXISTS) {
         showMessage(SimpleModal, {
           type: MODAL_TYPES.ERROR,
@@ -157,9 +165,11 @@ const RegisterPatient = () => {
         )}
         {step === 3 && (
           <Document
-            onGetDocumentFiles={setdocumentFiles}
+            onGetDocumentFiles={setDocumentFiles}
             setButtonPass={setButtonPass}
             savedFiles={documentFiles}
+            step={step}
+            setStep={setStep}
           />
         )}
         {step === 4 && (

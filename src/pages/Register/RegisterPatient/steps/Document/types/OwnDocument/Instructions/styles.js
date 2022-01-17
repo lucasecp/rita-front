@@ -5,9 +5,9 @@ export const Container = styled.div`
   padding-top: 16px;
 
   > h3 {
-    font-weight: 500;
+    font-weight: 400;
     font-size: 16px;
-    line-height: 150%;
+    line-height: 24px;
 
     color: ${colors.gray.dark};
   }
@@ -19,54 +19,49 @@ export const Container = styled.div`
 
     gap: 64px;
 
-    > section {
-      > img {
-      }
-    }
     > aside {
-      > h4 {
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 25px;
+      > #box-information {
+        padding: 16px;
+        background-color: ${colors.gray.extraLight};
+        border-radius: 8px;
 
-        color: ${colors.purple.main.dark};
-      }
-      > ul {
-        margin-top: 8px;
-        margin-bottom: 40px;
-        padding-left: 24px;
-
-        > li {
-          list-style: disc;
+        > h4 {
           font-weight: 500;
-          font-size: 16px;
-          line-height: 120%;
-          color: ${colors.gray.middle};
+          font-size: 20px;
+          line-height: 25px;
+
+          color: ${colors.purple.main.dark};
         }
 
-        > li + li {
-          margin-top: 12px;
+        > ul {
+          margin-top: 16px;
+          padding-left: 24px;
+
+          > li {
+            list-style: disc;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16px;
+            color: ${colors.gray.middle};
+          }
+
+          > li + li {
+            margin-top: 12px;
+          }
         }
       }
 
-      > ul + div {
+      > #box-information + div {
+        margin-top: 24px;
         margin-bottom: 8px;
       }
 
-      > p {
-        margin-bottom: 16px;
-
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 150%;
-
+      p#error {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 17.5px;
         color: ${colors.orange.middleDark};
-      }
-
-      > span {
-        font-size: 12px;
-        line-height: 125%;
-        color: ${colors.gray.middle};
+        margin-bottom: 8px;
       }
 
       > div {
@@ -74,18 +69,15 @@ export const Container = styled.div`
         flex-direction: column;
 
         > span {
-          font-size: 12px;
-          line-height: 125%;
           color: ${colors.gray.middle};
           font-size: 12px;
           font-weight: 400;
           line-height: 15px;
         }
+
         > span:first-child {
-          color: ${colors.orange.middleDark};
-          font-size: 12px;
+          color: ${colors.gray.dark};
           font-weight: 700;
-          line-height: 15px;
         }
       }
     }

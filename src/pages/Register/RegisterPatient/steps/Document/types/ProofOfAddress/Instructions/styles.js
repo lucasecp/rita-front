@@ -1,5 +1,6 @@
-import colors from '@/styles/colors'
 import styled from 'styled-components'
+
+import colors from '@/styles/colors'
 
 export const Container = styled.div`
   padding-top: 16px;
@@ -11,6 +12,7 @@ export const Container = styled.div`
 
     color: ${colors.gray.dark};
   }
+
   > div {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -53,14 +55,6 @@ export const Container = styled.div`
 
       > #box-information + div {
         margin-top: 24px;
-        margin-bottom: 8px;
-      }
-
-      p#error {
-        font-weight: 700;
-        font-size: 14px;
-        line-height: 17.5px;
-        color: ${colors.orange.middleDark};
         margin-bottom: 8px;
       }
 

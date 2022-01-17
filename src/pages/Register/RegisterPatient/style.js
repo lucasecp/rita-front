@@ -1,13 +1,15 @@
 import ButtonPrimary from '@/components/Button/Primary'
 import styled, { css } from 'styled-components'
 
+import colors from '@/styles/colors'
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 26px 0;
   box-shadow: 0px 2px 8px 0px #dfd2ff26;
-  background: #f8f5ff;
+  background: ${colors.gray.extraLight};
   margin: 20px 0px 100px 0;
   border-radius: 8px;
   position: relative;

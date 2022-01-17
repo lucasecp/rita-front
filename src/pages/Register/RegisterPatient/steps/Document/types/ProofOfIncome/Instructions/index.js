@@ -8,7 +8,12 @@ import BoxSendIncome from './BoxSendIncome'
 import { Container } from './styles'
 import { incomeType, incomeOptions } from '../../../constants/income'
 
-function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
+function InstructionsIncome({
+  selectIncome,
+  onGetSelectIncome,
+  onGetFile,
+  error,
+}) {
   return (
     <Container>
       <header>
@@ -20,7 +25,7 @@ function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
           value={selectIncome}
         />
       </header>
-      {!selectIncome && <h6>A seleção da sua faixa de renda é obrigatória.</h6>}
+      {error && !selectIncome && <h6>{error}</h6>}
       {!selectIncome && (
         <p>
           <WarningIcon />
@@ -33,8 +38,8 @@ function InstructionsIncome({ selectIncome, onGetSelectIncome, onGetFile }) {
             >
               clique aqui
             </a>{' '}
-            para ter acesso ao CADÚNICO. Lá você poderá gerar o seu comprovante
-            para concluir o cadastro.
+            para ter acesso ao CADÚNICO. Lá no site do governo você consegue
+            gerar o seu comprovante para incluir aqui no seu cadastro
           </small>
         </p>
       )}

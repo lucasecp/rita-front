@@ -1,3 +1,4 @@
+import ButtonPrimary from '@/components/Button/Primary'
 import colors from '@/styles/colors'
 import styled from 'styled-components'
 
@@ -17,16 +18,20 @@ export const Container = styled.div`
 
   .MuiAccordionSummary-root {
     padding: 0;
-    border-bottom: 2px solid ${colors.purple.background.middle};
+    border-bottom: 2px solid ${colors.gray.light};
 
     h2 {
       width: 100%;
 
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 500;
       line-height: 25px;
 
       color: ${colors.gray.dark};
+
+      > span {
+        color: ${colors.purple.main.dark};
+      }
     }
 
     &.Mui-disabled {
@@ -72,4 +77,36 @@ export const Container = styled.div`
       }
     }
   }
+`
+
+export const BtnGroup = styled.div`
+  background: ${colors.gray.extraLight};
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  > button:last-child {
+    margin-left: auto;
+  }
+  @media (max-width: 539px) {
+    flex-direction: column;
+    > button:last-child {
+      margin-left: 0;
+      margin-top: 20px;
+    }
+  }
+`
+export const BtnPrev = styled.button`
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  color: #9146ff;
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+`
+export const CustomBtn = styled(ButtonPrimary)`
+  margin-left: auto;
 `

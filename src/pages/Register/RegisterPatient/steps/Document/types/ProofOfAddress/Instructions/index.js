@@ -1,22 +1,17 @@
-import React from 'react'
-
-import documentFrontImage from '@/assets/img/document-front.png'
-
-import { Container } from './styles'
+import proofAddressImage from '@/assets/img/proof-address.png'
 
 import OutlineButton from '@/components/Button/Outline'
 import { InputFile } from '@/components/Form/InputFile/'
 
-function InstructionsOwnDocuments({ onGetFile, error }) {
+import { Container } from './styles'
+
+function InstructionsAddress({ onGetFile }) {
   return (
     <Container>
-      <h3>
-        Faça o envio de uma foto da frente do seu documento de identificação que
-        contenha o seu CPF
-      </h3>
+      <h3>Faça o envio de uma foto do seu comprovante de residência</h3>
       <div>
         <section>
-          <img src={documentFrontImage} />
+          <img src={proofAddressImage} />
         </section>
         <aside>
           <div id="box-information">
@@ -32,7 +27,6 @@ function InstructionsOwnDocuments({ onGetFile, error }) {
               Selecionar Arquivo
             </OutlineButton>
           </InputFile>
-          {error && <p id="error">{error}</p>}
           <div>
             <span>Permitido apenas o envio de 1 arquivo</span>
             <span>Tipos de arquivos aceitos: jpg, jpeg, png ou pdf.</span>
@@ -44,4 +38,4 @@ function InstructionsOwnDocuments({ onGetFile, error }) {
   )
 }
 
-export default InstructionsOwnDocuments
+export default InstructionsAddress

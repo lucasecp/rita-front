@@ -1,6 +1,6 @@
 import React from 'react'
 
-import documentFrontImage from '@/assets/img/document-front.png'
+import documentBackImage from '@/assets/img/document-back.png'
 
 import { Container } from './styles'
 
@@ -11,12 +11,12 @@ function InstructionsOwnDocuments({ onGetFile, error }) {
   return (
     <Container>
       <h3>
-        Faça o envio de uma foto da frente do seu documento de identificação que
+        Faça o envio de uma foto do verso do seu documento de identificação que
         contenha o seu CPF
       </h3>
       <div>
         <section>
-          <img src={documentFrontImage} />
+          <img src={documentBackImage} />
         </section>
         <aside>
           <div id="box-information">
