@@ -208,11 +208,13 @@ export const SeeOnePatient: React.FC = () => {
           title="Dados cadastrais do titular"
           personData={patientData}
           holder
+          defaultExpanded={!dependent}
         />
         {dependent && (
           <PersonExpandable
             title="Dados cadastrais para análise"
             personData={dependent}
+            defaultExpanded
           />
         )}
         {patientDependents?.map((dependent, index) => (

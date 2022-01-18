@@ -1,12 +1,10 @@
-import React, { useMemo } from 'react'
+import React, { useEffect } from 'react'
 // import { format, parseISO } from 'date-fns'
 
 import arrowDownOutlineIcon from '@/assets/icons/arrow-down-outline.svg'
 
 import { Container } from './styles'
 import { useToggle } from '@/hooks/useToggle'
-import { formatCpf } from '@/helpers/formatCpf'
-import { formatPhone } from '@/helpers/formatPhone'
 
 import { PatientData, PatientDataHolder } from '../../@types/index'
 
@@ -14,32 +12,22 @@ interface PersonExpandableProps {
   title: string
   personData: PatientData & PatientDataHolder
   holder?: boolean
+  defaultExpanded?: boolean
 }
 
 export const PersonExpandable: React.FC<PersonExpandableProps> = ({
   title,
   personData,
   holder = false,
+  defaultExpanded = false,
 }) => {
-  const [expanded, toggleExpanded] = useToggle(!!holder)
+  const [expanded, toggleExpanded] = useToggle(defaultExpanded)
 
-  // const cpfFormatted = useMemo(() => {
-  //   return formatCpf(personData?.cpf)
-  // }, [personData?.cpf])
-
-  // const genderFormatted = useMemo(() => {
-  //   const genderOptions: { [key: string]: string } = {
-  //     M: 'Masculino',
-  //     F: 'Feminino',
-  //     O: 'Outros',
-  //   }
-
-  //   return genderOptions[personData?.sexo]
-  // }, [personData?.sexo])
-
-  // const phoneFormatted = useMemo(() => {
-  //   return formatPhone(personData?.telefone)
-  // }, [personData?.telefone])
+  useEffect(() => {
+    if (!expanded && defaultExpanded) {
+      toggleExpanded()
+    }
+  }, [defaultExpanded])
 
   return (
     <Container expanded={expanded}>
