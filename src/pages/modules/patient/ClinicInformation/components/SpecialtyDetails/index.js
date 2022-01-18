@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Container, DropdownIconStyled, DefaultPhoto, Photo } from './styles'
 import SpecialtySubDetails from '../SpecialtySubDetails'
-import Accordion from '../../../components/Accordion'
+import Accordion from '../../../dependents/AddDependentDocument/containers/MinorAge/components/Accordion'
 import { useToggle } from '@/hooks/useToggle'
 
 const SpecialtyDetails = ({

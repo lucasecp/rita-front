@@ -3,8 +3,6 @@ import { ReactComponent as WarningIcon } from '@/assets/icons/warning-red.svg'
 import { ReactComponent as EyePurpleIcon } from '@/assets/icons/eye-purple.svg'
 import { ReactComponent as DeleteIcon } from '@/assets/icons/trash.svg'
 
-
-
 export const Container = styled.li`
   > svg + svg {
     margin-left: 30px;
@@ -23,7 +21,7 @@ export const WarningIconStyled = styled(WarningIcon)<IconProps>`
     hidden &&
     css`
       display: none;
-    `}
+    `};
 `
 
 export const EyePurpleIconStyled = styled(EyePurpleIcon)<IconProps>`

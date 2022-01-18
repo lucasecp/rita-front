@@ -4,7 +4,7 @@ import { AccordionContainer } from './styles'
 
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
 
-import InstructionsHoldingDocuments from '../Instruction/HoldingDocument'
+import InstructionsHoldingDocuments from './HoldingDocument'
 
 const InstructionDocument = ({ holdingDocumentFile, onGetFile }) => {
   return (

@@ -3,7 +3,7 @@ import { Container } from './styles'
 import OutlineButton from '@/components/Button/Outline'
 import SpecialtyDetails from '../SpecialtyDetails'
 import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg'
-import Accordion from '../../../components/Accordion'
+import Accordion from '../../../dependents/AddDependentDocument/containers/MinorAge/components/Accordion'
 import { useToggle } from '@/hooks/useToggle'
 
 const SpecialtyItem = ({ specialtyInfo }) => {

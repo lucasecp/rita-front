@@ -13,7 +13,7 @@ import ClinicInformation from '@/pages/modules/patient/ClinicInformation'
 import DoctorInformation from '@/pages/modules/patient/DoctorInformation'
 import SeeDependents from '@/pages/modules/patient/dependents/SeeOneDependent'
 import SeeAllDependents from '@/pages/modules/patient/dependents/SeeAllDependents'
-import AddDependentDocument from '@/pages/modules/patient/dependents/AddDependentDocument'
+import { AddDependentDocument } from '@/pages/modules/patient/dependents/AddDependentDocument'
 
 const patientRoutes = [
   {

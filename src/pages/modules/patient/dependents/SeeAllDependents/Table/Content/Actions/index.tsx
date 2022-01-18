@@ -16,13 +16,14 @@ import {
 const Actions: React.FC<ActionsProps> = ({
   status,
   warning,
-  idDependent,
   documentsOk,
   isValidate,
+  dependent,
 }) => {
   const history = useHistory()
+
   const warninglabel = () => {
-    let label: any
+    let label = <></>
 
     if (!documentsOk) {
       label = (
@@ -51,7 +52,7 @@ const Actions: React.FC<ActionsProps> = ({
         <WarningIconStyled
           hidden={!warning}
           onClick={() =>
-            history.push(PATIENT_ADD_DOCUMENT_DEPENDENT, { idDependent })
+            history.push(PATIENT_ADD_DOCUMENT_DEPENDENT, { dependent })
           }
         />
       </CustomTooltip>
@@ -59,7 +60,9 @@ const Actions: React.FC<ActionsProps> = ({
       <CustomTooltip label="Visualizar">
         <EyePurpleIconStyled
           hidden={status === 'inativo' || status === 'Excluido'}
-          onClick={() => history.push(PATIENT_SEE_DEPENDENT, { idDependent })}
+          onClick={() =>
+            history.push(PATIENT_SEE_DEPENDENT, { idDependent: dependent.id })
+          }
         />
       </CustomTooltip>
 
