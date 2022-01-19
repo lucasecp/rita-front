@@ -1,19 +1,42 @@
-import ButtonPrimary from '@/components/Button/Primary'
 import colors from '@/styles/colors'
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background: #fff;
-  padding: 40px 32px;
   width: 100%;
 
-  h1 {
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 40px;
-    color: ${colors.gray.dark};
-    margin-bottom: 32px;
+  > div {
+    background: #fff;
+    padding: 40px 32px;
+    border-radius: 8px 8px 0 0;
+
+    > h1 {
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 40px;
+      color: ${colors.gray.dark};
+      margin-bottom: 32px;
+    }
+  }
+
+  > footer {
+    background: ${colors.gray.light};
+    border-radius: 0 0 8px 8px;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  @media (max-width: 539px) {
+    > footer {
+      flex-direction: column;
+      > button:last-child {
+        margin-left: 0;
+        margin-top: 20px;
+      }
+    }
   }
 
   .MuiAccordionSummary-root {
@@ -77,36 +100,4 @@ export const Container = styled.div`
       }
     }
   }
-`
-
-export const BtnGroup = styled.div`
-  background: ${colors.gray.extraLight};
-  padding: 24px 32px;
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-  > button:last-child {
-    margin-left: auto;
-  }
-  @media (max-width: 539px) {
-    flex-direction: column;
-    > button:last-child {
-      margin-left: 0;
-      margin-top: 20px;
-    }
-  }
-`
-export const BtnPrev = styled.button`
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px;
-  text-align: center;
-  color: #9146ff;
-  background-color: transparent;
-  border: none;
-  text-decoration: underline;
-`
-export const CustomBtn = styled(ButtonPrimary)`
-  margin-left: auto;
 `

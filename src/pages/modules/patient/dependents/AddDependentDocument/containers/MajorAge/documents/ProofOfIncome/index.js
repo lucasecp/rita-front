@@ -5,7 +5,7 @@ import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
 import { AccordionContainer } from '../styles'
 import InstructionsIncome from './Instructions'
-import SendedFile from '../../components/SendedFile'
+import SendedFile from '../components/SendedFile'
 
 import { incomeType } from '../../constants/income'
 

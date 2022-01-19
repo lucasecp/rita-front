@@ -5,8 +5,8 @@ import trashIcon from '@/assets/icons/trash.svg'
 
 import { Container } from './styles'
 
-import BigSize from '../../messages/BigSize'
-import InvalidFormat from '../../messages/InvalidFormat'
+import BigSize from './messages/BigSize'
+import InvalidFormat from './messages/InvalidFormat'
 
 import OutlineButton from '@/components/Button/Outline'
 import { InputFile } from '@/components/Form/InputFile'
@@ -15,7 +15,7 @@ import { useModal } from '@/hooks/useModal'
 
 import { isValidSizeFile } from '@/helpers/file/isValidSizeFile'
 import { isValidTypeFile } from '@/helpers/file/isValidTypeFile'
-import ImagePreview from '../../messages/ImagePreview'
+import ImagePreview from './messages/ImagePreview'
 import downloadFile from '@/helpers/downloadFile'
 import { useMediaPredicate } from 'react-media-hook'
 import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'

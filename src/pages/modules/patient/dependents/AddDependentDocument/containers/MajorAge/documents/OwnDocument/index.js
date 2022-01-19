@@ -5,10 +5,10 @@ import { AccordionContainer } from '../styles'
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
 import InstructionsOwnDocuments from './Instructions'
-import SendedFile from '../../components/SendedFile'
+import SendedFile from '../components/SendedFile'
 
-const OwnBackDocument = ({
-  ownBackDocumentFile,
+const OwnDocument = ({
+  ownDocumentFile,
   onGetFile,
   hasPreviousDocument,
   error,
@@ -18,23 +18,23 @@ const OwnBackDocument = ({
       <AccordionContainer
         square={true}
         defaultExpanded={false}
-        expanded={hasPreviousDocument || !!ownBackDocumentFile}
+        expanded={hasPreviousDocument || !!ownDocumentFile}
       >
         <AccordionSummary
           aria-controls="panel2a-content"
           id="panel2a-header"
-          expandIcon={!ownBackDocumentFile && <ArrowDownIcon />}
-          disabled={!!ownBackDocumentFile}
+          expandIcon={!ownDocumentFile && <ArrowDownIcon />}
+          disabled={!!ownDocumentFile}
         >
           <h2>
-            Foto do documento de identificação - Verso <span>*</span>
+            Foto do documento de identificação - Frente <span>*</span>
           </h2>
         </AccordionSummary>
         <AccordionDetails>
-          {ownBackDocumentFile && (
-            <SendedFile file={ownBackDocumentFile} onGetFile={onGetFile} />
+          {ownDocumentFile && (
+            <SendedFile file={ownDocumentFile} onGetFile={onGetFile} />
           )}
-          {!ownBackDocumentFile && (
+          {!ownDocumentFile && (
             <InstructionsOwnDocuments onGetFile={onGetFile} error={error} />
           )}
         </AccordionDetails>
@@ -43,4 +43,4 @@ const OwnBackDocument = ({
   )
 }
 
-export default OwnBackDocument
+export default OwnDocument

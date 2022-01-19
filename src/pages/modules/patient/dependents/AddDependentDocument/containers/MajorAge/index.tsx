@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react'
 
-import { Container, BtnGroup, BtnPrev, CustomBtn } from './styles'
+import { Container } from './styles'
 
-import HoldingDocument from './types/HoldingDocument'
-import OwnDocument from './types/OwnDocument'
-import OwnBackDocument from './types/OwnBackDocument'
-import ProofOfIncome from './types/ProofOfIncome'
-import ProofOfAddress from './types/ProofOfAddress'
+import HoldingDocument from './documents/HoldingDocument'
+import OwnDocument from './documents/OwnDocument'
+import OwnBackDocument from './documents/OwnBackDocument'
+import ProofOfIncome from './documents/ProofOfIncome'
+import ProofOfAddress from './documents/ProofOfAddress'
+import OutlineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
+import { useModal } from '@/hooks/useModal'
+import { ComeBack } from './messages/ComeBack'
+import { useHistory } from 'react-router-dom'
+import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 
 interface MajorAgeProps {
   dependent: {
@@ -16,6 +22,9 @@ interface MajorAgeProps {
 }
 
 export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
+  const { showMessage } = useModal()
+  const history = useHistory()
+
   const [holdingDocumentFile, setHoldingDocumentFile] = useState('')
   const [ownDocumentFile, setOwnDocumentFile] = useState('')
   const [ownBackDocumentFile, setOwnBackDocumentFile] = useState('')
@@ -62,7 +71,22 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
   //   setSelectIncome(savedFiles.selectIncome || '')
   // }
 
-  const nextStep = () => {
+  const onCancelAddDependentDocuments = () => {
+    if (
+      holdingDocumentFile ||
+      ownDocumentFile ||
+      ownBackDocumentFile ||
+      proofOfIncomeFile ||
+      proofOfAddressFile ||
+      selectIncome
+    ) {
+      return showMessage(ComeBack)
+    }
+
+    history.push(PATIENT_DEPENDENTS)
+  }
+
+  const onSaveDocumentDependent = () => {
     if (holdingDocumentFile === '') {
       setErrors((prevState) => ({
         ...prevState,
@@ -105,9 +129,9 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
   }
 
   return (
-    <>
-      <Container>
-        <h1>Documentos</h1>
+    <Container>
+      <div>
+        <h1>Atualização de Documentos</h1>
         <HoldingDocument
           onGetFile={setHoldingDocumentFile}
           holdingDocumentFile={holdingDocumentFile}
@@ -146,13 +170,13 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
           selectIncome={selectIncome}
           error={errors.selectIncome}
         />
-      </Container>
-      <BtnGroup>
-        <BtnPrev onClick={() => console.log('Abrir modal cancelar!')}>
+      </div>
+      <footer>
+        <OutlineButton onClick={onCancelAddDependentDocuments}>
           Cancelar
-        </BtnPrev>
-        <CustomBtn onClick={nextStep}>Próxima Etapa</CustomBtn>
-      </BtnGroup>
-    </>
+        </OutlineButton>
+        <ButtonPrimary onClick={onSaveDocumentDependent}>Salvar</ButtonPrimary>
+      </footer>
+    </Container>
   )
 }
