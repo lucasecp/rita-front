@@ -4,11 +4,18 @@ import { AccordionContainer } from '../styles'
 
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
-import InstructionsOwnDocuments from './Instructions'
+import { InstructionsOwnFrontDocument } from './Instructions'
 import { SendedFile } from '../components/SendedFile'
 
-const OwnDocument = ({
-  ownDocumentFile,
+interface OwnFrontDocumentProps {
+  ownFrontDocumentFile: File | string
+  onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+  hasPreviousDocument: boolean
+  error: string
+}
+
+export const OwnFrontDocument: React.FC<OwnFrontDocumentProps> = ({
+  ownFrontDocumentFile,
   onGetFile,
   hasPreviousDocument,
   error,
@@ -18,29 +25,27 @@ const OwnDocument = ({
       <AccordionContainer
         square={true}
         defaultExpanded={false}
-        expanded={hasPreviousDocument || !!ownDocumentFile}
+        expanded={hasPreviousDocument || !!ownFrontDocumentFile}
       >
         <AccordionSummary
           aria-controls="panel2a-content"
           id="panel2a-header"
-          expandIcon={!ownDocumentFile && <ArrowDownIcon />}
-          disabled={!!ownDocumentFile}
+          expandIcon={!ownFrontDocumentFile && <ArrowDownIcon />}
+          disabled={!!ownFrontDocumentFile}
         >
           <h2>
             Foto do documento de identificação - Frente <span>*</span>
           </h2>
         </AccordionSummary>
         <AccordionDetails>
-          {ownDocumentFile && (
-            <SendedFile file={ownDocumentFile} onGetFile={onGetFile} />
+          {ownFrontDocumentFile && (
+            <SendedFile file={ownFrontDocumentFile} onGetFile={onGetFile} />
           )}
-          {!ownDocumentFile && (
-            <InstructionsOwnDocuments onGetFile={onGetFile} error={error} />
+          {!ownFrontDocumentFile && (
+            <InstructionsOwnFrontDocument onGetFile={onGetFile} error={error} />
           )}
         </AccordionDetails>
       </AccordionContainer>
     </>
   )
 }
-
-export default OwnDocument

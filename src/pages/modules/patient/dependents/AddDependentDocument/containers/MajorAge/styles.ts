@@ -32,9 +32,13 @@ export const Container = styled.div`
   @media (max-width: 539px) {
     > footer {
       flex-direction: column;
+
+      > button {
+        width: 100%;
+      }
+
       > button:last-child {
         margin-left: 0;
-        margin-top: 20px;
       }
     }
   }

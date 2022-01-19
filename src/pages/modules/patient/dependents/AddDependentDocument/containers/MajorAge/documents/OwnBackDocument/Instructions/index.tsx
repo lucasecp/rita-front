@@ -1,28 +1,35 @@
-import selfieImage from '@/assets/img/selfie.png'
+import React from 'react'
+
+import documentBackImage from '@/assets/img/document-back.png'
 
 import { Container } from './styles'
 
 import OutlineButton from '@/components/Button/Outline'
-import { InputFile } from '@/components/Form/InputFile'
+import { InputFile } from '@/components/Form/InputFile/'
 
-function InstructionsHoldingDocuments({ onGetFile, error }) {
+interface InstructionsOwnBackDocumentProps {
+  onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+  error: string
+}
+
+export const InstructionsOwnBackDocument: React.FC<
+  InstructionsOwnBackDocumentProps
+> = ({ onGetFile, error }) => {
   return (
     <Container>
       <h3>
-        Faça o envio de uma foto segurando o documento de identificação que
+        Faça o envio de uma foto do verso do seu documento de identificação que
         contenha o seu CPF
       </h3>
       <div>
         <section>
-          <img src={selfieImage} />
+          <img src={documentBackImage} />
         </section>
         <aside>
           <div id="box-information">
             <h4>Como tirar a foto:</h4>
             <ul>
               <li>Vá a um local seguro e iluminado;</li>
-              <li>Deixe o documento próximo ao rosto, conforme imagem;</li>
-              <li>Seu rosto deve aparecer por inteiro;</li>
               <li>O documento deve aparecer por inteiro;</li>
               <li>Verifique se a imagem ficou nítida;</li>
             </ul>
@@ -43,5 +50,3 @@ function InstructionsHoldingDocuments({ onGetFile, error }) {
     </Container>
   )
 }
-
-export default InstructionsHoldingDocuments

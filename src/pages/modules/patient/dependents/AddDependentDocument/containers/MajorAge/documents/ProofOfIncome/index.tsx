@@ -1,15 +1,23 @@
-import { useState, useEffect } from 'react'
 import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
 import { AccordionContainer } from '../styles'
-import InstructionsIncome from './Instructions'
+import { InstructionsProofOfIncome } from './Instructions'
 import { SendedFile } from '../components/SendedFile'
 
 import { incomeType } from '../../constants/income'
 
-const ProofOfIncome = ({
+interface ProofOfIncomeProps {
+  proofOfIncomeFile: File | string
+  onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+  selectIncome: string
+  onSelectIncome: React.Dispatch<React.SetStateAction<string>>
+  hasPreviousDocument: boolean
+  error: string
+}
+
+export const ProofOfIncome: React.FC<ProofOfIncomeProps> = ({
   proofOfIncomeFile,
   onGetFile,
   selectIncome,
@@ -17,30 +25,12 @@ const ProofOfIncome = ({
   hasPreviousDocument,
   error,
 }) => {
-  const [toggle, setToggle] = useState(false)
-
-  useEffect(() => {
-    if (hasPreviousDocument && (selectIncome || proofOfIncomeFile)) {
-      setToggle(true)
-    } else {
-      setToggle(false)
-    }
-  }, [hasPreviousDocument, proofOfIncomeFile, selectIncome])
-
-  const toggleAccordion = () => {
-    if (hasPreviousDocument || !!proofOfIncomeFile) {
-      setToggle(!toggle)
-    }
-  }
-
   return (
     <>
       <AccordionContainer
         square={true}
         defaultExpanded={false}
-        expanded={toggle}
-        onChange={toggleAccordion}
-        // expanded={hasPreviousDocument || !!proofOfIncomeFile}
+        expanded={hasPreviousDocument || !!proofOfIncomeFile}
       >
         <AccordionSummary
           aria-controls="panel3a-content"
@@ -62,7 +52,7 @@ const ProofOfIncome = ({
             <SendedFile file={proofOfIncomeFile} onGetFile={onGetFile} />
           )}
           {!proofOfIncomeFile && (
-            <InstructionsIncome
+            <InstructionsProofOfIncome
               selectIncome={selectIncome}
               onGetSelectIncome={onSelectIncome}
               onGetFile={onGetFile}
@@ -74,5 +64,3 @@ const ProofOfIncome = ({
     </>
   )
 }
-
-export default ProofOfIncome

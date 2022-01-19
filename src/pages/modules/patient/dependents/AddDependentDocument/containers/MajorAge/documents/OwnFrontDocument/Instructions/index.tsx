@@ -5,7 +5,15 @@ import { Container } from './styles'
 import OutlineButton from '@/components/Button/Outline'
 import { InputFile } from '@/components/Form/InputFile/'
 
-function InstructionsOwnDocuments({ onGetFile, error }) {
+interface OwnFrontDocumentProps {
+  onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+  error: string
+}
+
+export const InstructionsOwnFrontDocument: React.FC<OwnFrontDocumentProps> = ({
+  onGetFile,
+  error,
+}) => {
   return (
     <Container>
       <h3>
@@ -41,5 +49,3 @@ function InstructionsOwnDocuments({ onGetFile, error }) {
     </Container>
   )
 }
-
-export default InstructionsOwnDocuments

@@ -4,10 +4,17 @@ import { AccordionContainer } from '../styles'
 
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
-import InstructionsOwnDocuments from './Instructions'
+import { InstructionsOwnBackDocument } from './Instructions'
 import { SendedFile } from '../components/SendedFile'
 
-const OwnBackDocument = ({
+interface OwnBackDocumentProps {
+  ownBackDocumentFile: File | string
+  onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+  hasPreviousDocument: boolean
+  error: string
+}
+
+export const OwnBackDocument: React.FC<OwnBackDocumentProps> = ({
   ownBackDocumentFile,
   onGetFile,
   hasPreviousDocument,
@@ -35,12 +42,10 @@ const OwnBackDocument = ({
             <SendedFile file={ownBackDocumentFile} onGetFile={onGetFile} />
           )}
           {!ownBackDocumentFile && (
-            <InstructionsOwnDocuments onGetFile={onGetFile} error={error} />
+            <InstructionsOwnBackDocument onGetFile={onGetFile} error={error} />
           )}
         </AccordionDetails>
       </AccordionContainer>
     </>
   )
 }
-
-export default OwnBackDocument

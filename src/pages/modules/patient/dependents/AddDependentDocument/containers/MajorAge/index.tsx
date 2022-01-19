@@ -2,17 +2,21 @@ import React, { useEffect, useState } from 'react'
 
 import { Container } from './styles'
 
-import HoldingDocument from './documents/HoldingDocument'
-import OwnDocument from './documents/OwnDocument'
-import OwnBackDocument from './documents/OwnBackDocument'
-import ProofOfIncome from './documents/ProofOfIncome'
-import ProofOfAddress from './documents/ProofOfAddress'
+import { HoldingDocument } from './documents/HoldingDocument'
+import { OwnFrontDocument } from './documents/OwnFrontDocument'
+import { OwnBackDocument } from './documents/OwnBackDocument'
+import { ProofOfIncome } from './documents/ProofOfIncome'
+import { ProofOfAddress } from './documents/ProofOfAddress'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/hooks/useModal'
 import { ComeBack } from './messages/ComeBack'
 import { useHistory } from 'react-router-dom'
 import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
+import { toast } from 'react-toastify'
+import apiPatient from '@/services/apiPatient'
+import axios, { AxiosResponse } from 'axios'
+import { useLoading } from '@/hooks/useLoading'
 
 interface MajorAgeProps {
   dependent: {
@@ -21,60 +25,37 @@ interface MajorAgeProps {
   }
 }
 
-export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
-  const { showMessage } = useModal()
-  const history = useHistory()
+interface ErrorState {
+  holdingDocument: string
+  ownDocument: string
+  ownBackDocument: string
+  selectIncome: string
+}
 
-  const [holdingDocumentFile, setHoldingDocumentFile] = useState('')
-  const [ownDocumentFile, setOwnDocumentFile] = useState('')
-  const [ownBackDocumentFile, setOwnBackDocumentFile] = useState('')
-  const [proofOfIncomeFile, setProofOfIncomeFile] = useState('')
-  const [proofOfAddressFile, setProofOfAddressFile] = useState('')
+export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
+  const history = useHistory()
+  const { Loading } = useLoading()
+  const { showMessage } = useModal()
+
+  const [holdingDocumentFile, setHoldingDocumentFile] = useState<File | string>(
+    '',
+  )
+  const [ownFrontDocumentFile, setOwnDocumentFile] = useState<File | string>('')
+  const [ownBackDocumentFile, setOwnBackDocumentFile] = useState<File | string>(
+    '',
+  )
+  const [proofOfIncomeFile, setProofOfIncomeFile] = useState<File | string>('')
+  const [proofOfAddressFile, setProofOfAddressFile] = useState<File | string>(
+    '',
+  )
   const [selectIncome, setSelectIncome] = useState('')
 
-  const [errors, setErrors] = useState({
-    holdingDocument: '',
-    ownDocument: '',
-    ownBackDocument: '',
-    selectIncome: '',
-  })
-
-  // useEffect(() => {
-  //   verifySavedFiles()
-  // }, [])
-
-  // useEffect(() => {
-  //   onGetDocumentFiles({
-  //     holdingDocumentFile,
-  //     ownDocumentFile,
-  //     ownBackDocumentFile,
-  //     proofOfIncomeFile,
-  //     proofOfAddressFile,
-  //     selectIncome,
-  //   })
-  // }, [
-  //   holdingDocumentFile,
-  //   ownDocumentFile,
-  //   ownBackDocumentFile,
-  //   proofOfIncomeFile,
-  //   proofOfAddressFile,
-  //   selectIncome,
-  // ])
-
-  // const verifySavedFiles = () => {
-  //   if (!Object.keys(savedFiles).length) return
-  //   setHoldingDocumentFile(savedFiles.holdingDocumentFile || '')
-  //   setOwnDocumentFile(savedFiles.ownDocumentFile || '')
-  //   setOwnBackDocumentFile(savedFiles.ownBackDocumentFile || '')
-  //   setProofOfIncomeFile(savedFiles.proofOfIncomeFile || '')
-  //   setProofOfAddressFile(savedFiles.proofOfAddressFile || '')
-  //   setSelectIncome(savedFiles.selectIncome || '')
-  // }
+  const [errors, setErrors] = useState({} as ErrorState)
 
   const onCancelAddDependentDocuments = () => {
     if (
       holdingDocumentFile ||
-      ownDocumentFile ||
+      ownFrontDocumentFile ||
       ownBackDocumentFile ||
       proofOfIncomeFile ||
       proofOfAddressFile ||
@@ -86,7 +67,9 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
     history.push(PATIENT_DEPENDENTS)
   }
 
-  const onSaveDocumentDependent = () => {
+  const onSaveDocumentDependent = async () => {
+    setErrors({} as ErrorState)
+
     if (holdingDocumentFile === '') {
       setErrors((prevState) => ({
         ...prevState,
@@ -97,7 +80,7 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
       return
     }
 
-    if (ownDocumentFile === '') {
+    if (ownFrontDocumentFile === '') {
       setErrors((prevState) => ({
         ...prevState,
         ownDocument:
@@ -125,7 +108,59 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
       scrollTo(0, 0)
     }
 
-    // setErrors({})
+    const formFile1 = new FormData()
+    formFile1.append('file', holdingDocumentFile)
+    const formFile2 = new FormData()
+    formFile2.append('file', ownFrontDocumentFile)
+    const formFile3 = new FormData()
+    formFile3.append('file', ownBackDocumentFile)
+    const formFile4 = new FormData()
+    formFile4.append('file', proofOfAddressFile)
+    const formFile5 = new FormData()
+    formFile5.append('file', proofOfIncomeFile)
+
+    try {
+      await axios.all([
+        apiPatient.post(
+          `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=FotoSegurandoDoc`,
+          formFile1,
+        ),
+        apiPatient.post(
+          `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
+          formFile2,
+        ),
+        apiPatient.post(
+          `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=DocVerso`,
+          formFile3,
+        ),
+        !proofOfAddressFile
+          ? new Promise(() => null)
+          : apiPatient.post(
+              `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=ComprovanteResi`,
+              formFile4,
+            ),
+        !proofOfIncomeFile
+          ? new Promise(() => null)
+          : apiPatient.post(
+              `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Renda`,
+              formFile5,
+            ),
+      ])
+
+      const response = await apiPatient.patch(
+        `/paciente/dependente/documento/confirmar`,
+        formFile5,
+        {
+          params: { cpf: dependent.cpf },
+        },
+      )
+
+      console.log(response)
+    } catch ({ response }) {
+      toast.error('Erro ao enviar os documentos!')
+    } finally {
+      Loading.turnOff()
+    }
   }
 
   return (
@@ -138,15 +173,15 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
           error={errors.holdingDocument}
         />
 
-        <OwnDocument
+        <OwnFrontDocument
           hasPreviousDocument={!!holdingDocumentFile}
           onGetFile={setOwnDocumentFile}
-          ownDocumentFile={ownDocumentFile}
+          ownFrontDocumentFile={ownFrontDocumentFile}
           error={errors.ownDocument}
         />
 
         <OwnBackDocument
-          hasPreviousDocument={!!ownDocumentFile}
+          hasPreviousDocument={!!ownFrontDocumentFile}
           onGetFile={setOwnBackDocumentFile}
           ownBackDocumentFile={ownBackDocumentFile}
           error={errors.ownBackDocument}
@@ -154,7 +189,9 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
 
         <ProofOfAddress
           hasPreviousDocument={
-            !!holdingDocumentFile && !!ownDocumentFile && !!ownBackDocumentFile
+            !!holdingDocumentFile &&
+            !!ownFrontDocumentFile &&
+            !!ownBackDocumentFile
           }
           onGetFile={setProofOfAddressFile}
           proofOfAddressFile={proofOfAddressFile}
@@ -162,7 +199,9 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
 
         <ProofOfIncome
           hasPreviousDocument={
-            !!holdingDocumentFile && !!ownDocumentFile && !!ownBackDocumentFile
+            !!holdingDocumentFile &&
+            !!ownFrontDocumentFile &&
+            !!ownBackDocumentFile
           }
           onGetFile={setProofOfIncomeFile}
           proofOfIncomeFile={proofOfIncomeFile}

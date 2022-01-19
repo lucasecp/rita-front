@@ -8,12 +8,16 @@ import BoxSendIncome from './BoxSendIncome'
 import { Container } from './styles'
 import { incomeType, incomeOptions } from '../../../constants/income'
 
-function InstructionsIncome({
-  selectIncome,
-  onGetSelectIncome,
-  onGetFile,
-  error,
-}) {
+interface InstructionsProofOfIncomeProps {
+  onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+  selectIncome: string
+  onGetSelectIncome: React.Dispatch<React.SetStateAction<string>>
+  error: string
+}
+
+export const InstructionsProofOfIncome: React.FC<
+  InstructionsProofOfIncomeProps
+> = ({ selectIncome, onGetSelectIncome, onGetFile, error }) => {
   return (
     <Container>
       <header>
@@ -49,5 +53,3 @@ function InstructionsIncome({
     </Container>
   )
 }
-
-export default InstructionsIncome

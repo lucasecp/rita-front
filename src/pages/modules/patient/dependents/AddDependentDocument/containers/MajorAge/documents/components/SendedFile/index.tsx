@@ -21,8 +21,8 @@ import { useMediaPredicate } from 'react-media-hook'
 import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
 
 interface SendedFileProps {
-  file: File
-  onGetFile: React.Dispatch<React.SetStateAction<string>>
+  file: File | string
+  onGetFile: React.Dispatch<React.SetStateAction<File | string>>
 }
 
 export const SendedFile: React.FC<SendedFileProps> = ({ file, onGetFile }) => {
@@ -55,7 +55,7 @@ export const SendedFile: React.FC<SendedFileProps> = ({ file, onGetFile }) => {
   }
 
   const showPreview = () => {
-    if (file.type === 'application/pdf') {
+    if (typeof file === 'object' && file.type === 'application/pdf') {
       return previewForPdf()
     }
 
@@ -70,7 +70,7 @@ export const SendedFile: React.FC<SendedFileProps> = ({ file, onGetFile }) => {
             Selecionar Arquivo
           </OutlineButton>
         </InputFile>
-        <h6>{file.name}</h6>
+        <h6>{typeof file === 'object' && file.name}</h6>
       </section>
       <aside>
         <button onClick={showPreview}>
