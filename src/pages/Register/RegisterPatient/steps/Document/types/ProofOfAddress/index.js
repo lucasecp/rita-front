@@ -36,6 +36,7 @@ const ProofOfAddress = ({
       expanded={toggle}
       onChange={toggleAccordion}
       // expanded={hasPreviousDocument || !!proofOfAddressFile}
+      style={{ display: 'none' }}
     >
       <AccordionSummary
         aria-controls="panel4a-content"
