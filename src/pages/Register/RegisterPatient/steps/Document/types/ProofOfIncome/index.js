@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
@@ -6,8 +5,6 @@ import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 import { AccordionContainer } from '../styles'
 import InstructionsIncome from './Instructions'
 import SendedFile from '../../components/SendedFile'
-
-import { incomeType } from '../../constants/income'
 
 const ProofOfIncome = ({
   proofOfIncomeFile,
@@ -17,41 +14,18 @@ const ProofOfIncome = ({
   hasPreviousDocument,
   error,
 }) => {
-  const [toggle, setToggle] = useState(false)
-
-  useEffect(() => {
-    if (hasPreviousDocument && (selectIncome || proofOfIncomeFile)) {
-      setToggle(true)
-    } else {
-      setToggle(false)
-    }
-  }, [hasPreviousDocument, proofOfIncomeFile, selectIncome])
-
-  const toggleAccordion = () => {
-    if (hasPreviousDocument || !!proofOfIncomeFile) {
-      setToggle(!toggle)
-    }
-  }
-
   return (
     <>
       <AccordionContainer
         square={true}
         defaultExpanded={false}
-        expanded={toggle}
-        onChange={toggleAccordion}
-        // expanded={hasPreviousDocument || !!proofOfIncomeFile}
+        expanded={hasPreviousDocument || !!proofOfIncomeFile}
       >
         <AccordionSummary
           aria-controls="panel3a-content"
           id="panel3a-header"
-          expandIcon={
-            !proofOfIncomeFile &&
-            selectIncome !== incomeType.MORE_ONE_HALF && <ArrowDownIcon />
-          }
-          disabled={
-            !!proofOfIncomeFile || selectIncome === incomeType.MORE_ONE_HALF
-          }
+          expandIcon={!proofOfIncomeFile && <ArrowDownIcon />}
+          disabled={!!proofOfIncomeFile}
         >
           <h2>
             Comprovante de Renda <span>*</span>
