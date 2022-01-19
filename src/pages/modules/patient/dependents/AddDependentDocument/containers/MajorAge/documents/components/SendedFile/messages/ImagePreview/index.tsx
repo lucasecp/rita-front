@@ -2,7 +2,11 @@ import React from 'react'
 
 import { Container } from './styles'
 
-function ImagePreview({ file }) {
+interface ImagePreviewProps {
+  file: File
+}
+
+export const ImagePreview: React.FC<ImagePreviewProps> = ({ file }) => {
   const sourceFile = URL.createObjectURL(file)
 
   return (
@@ -11,5 +15,3 @@ function ImagePreview({ file }) {
     </Container>
   )
 }
-
-export default ImagePreview

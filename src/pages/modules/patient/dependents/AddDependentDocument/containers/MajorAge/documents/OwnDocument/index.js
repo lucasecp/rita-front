@@ -5,7 +5,7 @@ import { AccordionContainer } from '../styles'
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
 import InstructionsOwnDocuments from './Instructions'
-import SendedFile from '../components/SendedFile'
+import { SendedFile } from '../components/SendedFile'
 
 const OwnDocument = ({
   ownDocumentFile,
