@@ -31,11 +31,7 @@ export const AddDependentDocument: React.FC<AddDependentDocumentProps> = () => {
 
   return (
     <DefaultLayout title="Dependentes">
-      {isMinorAge ? (
-        <MinorAge dependent={{ id, cpf }} />
-      ) : (
-        <MajorAge dependent={{ id, cpf }} />
-      )}
+      {isMinorAge ? <MinorAge dependent={{ id, cpf }} /> : <></>}
     </DefaultLayout>
   )
 }
