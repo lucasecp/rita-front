@@ -82,6 +82,7 @@ const RegistrationData = ({
         dataNascimento: birthdate,
         telefone: phone,
         email: email,
+        cpf: cpf,
       })
       setStep(2)
     } else {

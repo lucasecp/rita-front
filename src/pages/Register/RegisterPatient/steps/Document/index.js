@@ -120,7 +120,7 @@ const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
           hasPreviousDocument={!!ownDocumentFile}
           onGetFile={setOwnBackDocumentFile}
           ownBackDocumentFile={ownBackDocumentFile}
-          error={errors.ownBackDocument}
+          errors={errors.ownBackDocument}
         />
 
         <ProofOfAddress
@@ -139,7 +139,7 @@ const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
           proofOfIncomeFile={proofOfIncomeFile}
           onSelectIncome={setSelectIncome}
           selectIncome={selectIncome}
-          error={errors.selectIncome}
+          errors={errors.selectIncome}
         />
       </Container>
       <BtnGroup>
