@@ -44,7 +44,7 @@ export const ProofOfIncome: React.FC<ProofOfIncomeProps> = ({
           }
         >
           <h2>
-            Comprovante de Renda <span>*</span>
+            Comprovante de renda <span>*</span>
           </h2>
         </AccordionSummary>
         <AccordionDetails>
