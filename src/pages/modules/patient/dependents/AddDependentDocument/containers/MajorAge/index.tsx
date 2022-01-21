@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 import { Container } from './styles'
 
@@ -11,12 +13,10 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/hooks/useModal'
 import { ComeBack } from './messages/ComeBack'
-import { useHistory } from 'react-router-dom'
 import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
-import { toast } from 'react-toastify'
 import apiPatient from '@/services/apiPatient'
-import axios, { AxiosResponse } from 'axios'
 import { useLoading } from '@/hooks/useLoading'
+import { toast } from '@/styles/components/toastify'
 
 interface MajorAgeProps {
   dependent: {
@@ -106,6 +106,7 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
         selectIncome: 'A escolha da sua faixa de renda é obrigatório.',
       }))
       scrollTo(0, 0)
+      return
     }
 
     const formFile1 = new FormData()
@@ -120,6 +121,8 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
     formFile5.append('file', proofOfIncomeFile)
 
     try {
+      Loading.turnOn()
+
       await axios.all([
         apiPatient.post(
           `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=FotoSegurandoDoc`,
@@ -134,28 +137,29 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
           formFile3,
         ),
         !proofOfAddressFile
-          ? new Promise(() => null)
+          ? new Promise((resolve) => {
+              resolve('')
+            })
           : apiPatient.post(
               `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=ComprovanteResi`,
               formFile4,
             ),
         !proofOfIncomeFile
-          ? new Promise(() => null)
+          ? new Promise((resolve) => {
+              resolve('')
+            })
           : apiPatient.post(
               `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Renda`,
               formFile5,
             ),
       ])
 
-      const response = await apiPatient.patch(
-        `/paciente/dependente/documento/confirmar`,
-        formFile5,
-        {
-          params: { cpf: dependent.cpf },
-        },
-      )
+      await apiPatient.patch(`/paciente/dependente/documento/confirmar`, null, {
+        params: { cpf: dependent.cpf },
+      })
 
-      console.log(response)
+      toast.success('Cadastro atualizado com sucesso.')
+      history.push(PATIENT_DEPENDENTS)
     } catch ({ response }) {
       toast.error('Erro ao enviar os documentos!')
     } finally {
