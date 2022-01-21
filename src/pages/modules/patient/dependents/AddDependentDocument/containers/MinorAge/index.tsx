@@ -36,105 +36,104 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
 
   const { Loading } = useLoading()
 
-  useEffect(() => {
-    const loadDocuments = async () => {
-      try {
-        Loading.turnOn()
+  // useEffect(() => {
+  //   const loadDocuments = async () => {
+  //     try {
+  //       Loading.turnOn()
 
-        const response: any = await apiPatient.get(
-          `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=FotoSegurandoDoc`,
-          { responseType: 'arraybuffer' },
-        )
+  //       const response: any = await apiPatient.get(
+  //         `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=FotoSegurandoDoc`,
+  //         { responseType: 'arraybuffer' },
+  //       )
 
-        setOwnDocumentFile(response)
-      } catch (error) {
-        console.error(error)
-      } finally {
-        Loading.turnOff()
-      }
+  //       setOwnDocumentFile(response)
+  //     } catch (error) {
+  //       console.error(error)
+  //     } finally {
+  //       Loading.turnOff()
+  //     }
 
-      try {
-        Loading.turnOn()
+  //     try {
+  //       Loading.turnOn()
 
-        const response: any = await apiPatient.get(
-          `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
-          { responseType: 'arraybuffer' },
-        )
+  //       const response: any = await apiPatient.get(
+  //         `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
+  //         { responseType: 'arraybuffer' },
+  //       )
 
-        setOwnBackDocumentFile(response)
-      } catch (error) {
-        console.log(error)
-      } finally {
-        Loading.turnOff()
-      }
+  //       setOwnBackDocumentFile(response)
+  //     } catch (error) {
+  //       console.log(error)
+  //     } finally {
+  //       Loading.turnOff()
+  //     }
 
-      try {
-        Loading.turnOn()
+  //     try {
+  //       Loading.turnOn()
 
-        const response: any = await apiPatient.get(
-          `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=DocVerso`,
-          { responseType: 'arraybuffer' },
-        )
+  //       const response: any = await apiPatient.get(
+  //         `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=DocVerso`,
+  //         { responseType: 'arraybuffer' },
+  //       )
 
-        setBirthdayCertificateFile(response)
-      } catch (error) {
-        console.log(error)
-      } finally {
-        Loading.turnOff()
-      }
-    }
+  //       setBirthdayCertificateFile(response)
+  //     } catch (error) {
+  //       console.log(error)
+  //     } finally {
+  //       Loading.turnOff()
+  //     }
+  //   }
 
-    loadDocuments()
-  }, [])
+  //   loadDocuments()
+  // }, [])
 
   const backToList = () => history.push(PATIENT_DEPENDENTS)
 
   const VerifyFilesAndCallAPI = async () => {
-    if (!ownDocumentFile || !birthdayCertificateFile) {
-      return
-    }
+    if (ownDocumentFile || birthdayCertificateFile)
+      if (documentTypeSelected === 'identidade') {
+        Loading.turnOn()
 
-    if (documentTypeSelected === 'identidade') {
-      Loading.turnOn()
+        const formFile1 = new FormData()
+        formFile1.append('file', ownDocumentFile)
 
-      const formFile1 = new FormData()
-      formFile1.append('file', ownDocumentFile)
+        const formFile2 = new FormData()
+        formFile2.append('file', ownBackDocumentFile)
 
-      const formFile2 = new FormData()
-      formFile1.append('file', ownBackDocumentFile)
+        try {
+          console.log('passou')
+          await axios.all([
+            apiPatient.post(
+              `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
+              formFile1,
+            ),
+            !ownBackDocumentFile
+              ? new Promise((resolve) => {
+                  resolve('')
+                })
+              : apiPatient.post(
+                  `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=DocVerso`,
+                  formFile2,
+                ),
+          ])
+          console.log('passou denovo')
 
-      try {
-        await axios.all([
-          apiPatient.post(
-            `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=FotoSegurandoDoc`,
-            formFile1,
-          ),
-          !ownBackDocumentFile
-            ? new Promise(() => null)
-            : apiPatient.post(
-                `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=FotoSegurandoDoc`,
-                formFile2,
-              ),
-        ])
+          await apiPatient.patch(
+            `/paciente/dependente/documento/confirmar`,
+            null,
+            {
+              params: { cpf: dependent.cpf },
+            },
+          )
+        } catch ({ response }) {
+          toast.error('Erro ao enviar os documentos!')
+        } finally {
+          toast.success('Cadastro realizado com sucesso')
 
-        const response = await apiPatient.patch(
-          `/paciente/dependente/documento/confirmar`,
-          formFile1,
-          {
-            params: { cpf: dependent.cpf },
-          },
-        )
-      } catch ({ response }) {
-        toast.error('Erro ao enviar os documentos!')
-      } finally {
-        toast.error('Cadastro realizado com sucesso')
-
-        // REDIRECIONAMENTO
-
-        backToList()
-        Loading.turnOff()
+          backToList()
+          Loading.turnOff()
+        }
       }
-    }
 
     if (documentTypeSelected === 'certidao_de_nascimento') {
       Loading.turnOn()
@@ -143,16 +142,21 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
         const formFile1 = new FormData()
         formFile1.append('file', birthdayCertificateFile)
 
-        apiPatient.post(
-          `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=FotoSegurandoDoc`,
+        await apiPatient.post(
+          `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
           formFile1,
+        )
+        await apiPatient.patch(
+          `/paciente/dependente/documento/confirmar`,
+          null,
+          {
+            params: { cpf: dependent.cpf },
+          },
         )
       } catch (error) {
         toast.error('Erro ao enviar os documentos!')
       } finally {
-        toast.error('Cadastro realizado com sucesso')
-
-        // REDIRECIONAMENTO
+        toast.success('Cadastro realizado com sucesso')
 
         backToList()
         Loading.turnOff()
