@@ -20,9 +20,9 @@ function InstructionsBirthCertificate({ onGetFile, error }) {
           <div id="box-information">
             <h4>Como tirar a foto:</h4>
             <ul>
-              <li>Vá a um local seguro e iluminado;</li>
-              <li>O documento deve aparecer por inteiro;</li>
-              <li>Verifique se a imagem ficou nítida;</li>
+              <li>Verifique se o documento está legível;</li>
+              <li>Coloque todos os dados dentro da foto;</li>
+              {/* <li>Verifique se a imagem ficou nítida;</li> */}
             </ul>
           </div>
           <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
