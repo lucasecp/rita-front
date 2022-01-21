@@ -32,7 +32,10 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
 
   const history = useHistory()
 
-  const [error, setError] = useState('')
+  const [error, setError] = useState({
+    select: '',
+    document: '',
+  })
 
   const { Loading } = useLoading()
   const { showMessage } = useModal()
@@ -89,24 +92,37 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
   // }, [])
 
   const backToList = () => {
+    history.push(PATIENT_DEPENDENTS)
+  }
+
+  const cancel = () => {
     if (ownDocumentFile || birthdayCertificateFile)
       return showMessage(CancelAndExit)
 
-    history.push(PATIENT_DEPENDENTS)
+    backToList()
   }
 
   const VerifyFilesAndCallAPI = async () => {
     if ((!ownDocumentFile && documentTypeSelected === 'identidade') || '')
-      return setError('O envio da foto do documento é obrigatório.')
+      return setError({
+        select: '',
+        document: 'O envio da foto do documento é obrigatório.',
+      })
 
     if (
       !birthdayCertificateFile &&
       documentTypeSelected === 'certidao_de_nascimento'
     )
-      return setError('O envio da foto do documento é obrigatório.')
+      return setError({
+        select: '',
+        document: 'O envio da foto do documento é obrigatório.',
+      })
 
     if (documentTypeSelected === '')
-      return setError('O envio da foto do documento é obrigatório.')
+      return setError({
+        select: 'Necessário escolher uma opção',
+        document: '',
+      })
 
     if (ownDocumentFile || birthdayCertificateFile)
       if (documentTypeSelected === 'identidade') {
@@ -118,67 +134,67 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
         const formFile2 = new FormData()
         formFile2.append('file', ownBackDocumentFile)
 
-        try {
-          await axios.all([
-            apiPatient.post(
-              `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
-              formFile1,
-            ),
-            !ownBackDocumentFile
-              ? new Promise((resolve) => {
-                  resolve('')
-                })
-              : apiPatient.post(
-                  `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=DocVerso`,
-                  formFile2,
-                ),
-          ])
+        // try {
+        // await axios.all([
+        //   apiPatient.post(
+        //     `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
+        //     formFile1,
+        //   ),
+        //   !ownBackDocumentFile
+        //     ? new Promise((resolve) => {
+        //         resolve('')
+        //       })
+        //     : apiPatient.post(
+        //         `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=DocVerso`,
+        //         formFile2,
+        //       ),
+        // ])
 
-          await apiPatient.patch(
-            `/paciente/dependente/documento/confirmar`,
-            null,
-            {
-              params: { cpf: dependent.cpf },
-            },
-          )
-        } catch ({ response }) {
-          toast.error('Erro ao enviar os documentos!')
-        } finally {
-          toast.success('Cadastro realizado com sucesso')
+        // await apiPatient.patch(
+        //   `/paciente/dependente/documento/confirmar`,
+        //   null,
+        //   {
+        //     params: { cpf: dependent.cpf },
+        //   },
+        // )
+        // } catch ({ response }) {
+        //   toast.error('Erro ao enviar os documentos!')
+        // } finally {
+        //   toast.success('Cadastro realizado com sucesso')
 
-          backToList()
-          Loading.turnOff()
-        }
+        //   backToList()
+        //   Loading.turnOff()
+        // }
+        // }
+
+        // if (documentTypeSelected === 'certidao_de_nascimento') {
+        //   Loading.turnOn()
+
+        // try {
+        //   const formFile1 = new FormData()
+        //   formFile1.append('file', birthdayCertificateFile)
+
+        //   await apiPatient.post(
+        //     `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
+        //     formFile1,
+        //   )
+        //   await apiPatient.patch(
+        //     `/paciente/dependente/documento/confirmar`,
+        //     null,
+        //     {
+        //       params: { cpf: dependent.cpf },
+        //     },
+        //   )
+        // } catch (error) {
+        //   toast.error('Erro ao enviar os documentos!')
+        // } finally {
+        //   toast.success('Cadastro realizado com sucesso')
+
+        //   backToList()
+        //   Loading.turnOff()
+        // }
+        //   Loading.turnOff()
       }
-
-    if (documentTypeSelected === 'certidao_de_nascimento') {
-      Loading.turnOn()
-
-      try {
-        const formFile1 = new FormData()
-        formFile1.append('file', birthdayCertificateFile)
-
-        await apiPatient.post(
-          `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
-          formFile1,
-        )
-        await apiPatient.patch(
-          `/paciente/dependente/documento/confirmar`,
-          null,
-          {
-            params: { cpf: dependent.cpf },
-          },
-        )
-      } catch (error) {
-        toast.error('Erro ao enviar os documentos!')
-      } finally {
-        toast.success('Cadastro realizado com sucesso')
-
-        backToList()
-        Loading.turnOff()
-      }
-      Loading.turnOff()
-    }
   }
 
   return (
@@ -202,8 +218,7 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
             name="regional"
             setValue={setDocumentTypeSelected}
             value={documentTypeSelected}
-            msgError={error}
-            hasError={error}
+            msgError={error.select}
           />
         </div>
         {documentTypeSelected === 'identidade' && (
@@ -211,13 +226,13 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
             <OwnDocument
               ownDocumentFile={ownDocumentFile}
               onGetFile={setOwnDocumentFile}
-              error={error}
+              error={error.document}
             />
             <OwnBackDocument
               ownBackDocumentFile={ownBackDocumentFile}
               onGetFile={setOwnBackDocumentFile}
               hasPreviousDocument={!!ownDocumentFile}
-              error={error}
+              error={error.document}
             />
           </>
         )}
@@ -225,12 +240,12 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
           <BirthCertificate
             BirthdayCertificateFile={birthdayCertificateFile}
             onGetFile={setBirthdayCertificateFile}
-            error={error}
+            error={error.document}
           />
         )}
       </Container>
       <Footer>
-        <OutilineButton onClick={backToList}>Cancelar</OutilineButton>
+        <OutilineButton onClick={cancel}>Cancelar</OutilineButton>
         <CustomBtn onClick={VerifyFilesAndCallAPI}>Salvar</CustomBtn>
       </Footer>
     </>
