@@ -81,15 +81,27 @@ export const Container = styled.div`
 `
 
 export const Footer = styled.div`
+  background: ${colors.gray.light};
+  border-radius: 0 0 8px 8px;
+  padding: 24px 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #6a6a6a;
   gap: 24px;
-  border-radius: 0 0 8px 8px;
-  padding: 25px;
+
+  @media (max-width: 539px) {
+    flex-direction: column;
+
+    > button {
+      width: 100%;
+    }
+
+    > button:last-child {
+      margin-left: 0;
+    }
+  }
 `
 
 export const CustomBtn = styled(ButtonPrimary)`
-  margin-left: auto;
+  margin-left: none;
 `
