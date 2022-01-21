@@ -4,7 +4,7 @@ export interface DoctorI {
   id: number
   crm: string
   verified: boolean
-  specialtys: string[]
+  specialtys: any[]
 }
 
 export interface ClinicI {
