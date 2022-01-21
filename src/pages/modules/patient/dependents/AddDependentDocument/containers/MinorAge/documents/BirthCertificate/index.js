@@ -7,7 +7,7 @@ import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 import InstructionsBirthCertificate from './Instructions'
 import SendedFile from '../components/SendedFile'
 
-const BirthCertificate = ({ BirthdayCertificateFile, onGetFile, errors }) => {
+const BirthCertificate = ({ BirthdayCertificateFile, onGetFile, error }) => {
   return (
     <>
       <AccordionContainer square={true} defaultExpanded={true} expanded={true}>
@@ -28,7 +28,7 @@ const BirthCertificate = ({ BirthdayCertificateFile, onGetFile, errors }) => {
           {!BirthdayCertificateFile && (
             <InstructionsBirthCertificate
               onGetFile={onGetFile}
-              errors={errors}
+              error={error}
             />
           )}
         </AccordionDetails>

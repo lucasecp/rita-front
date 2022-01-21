@@ -32,11 +32,7 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
 
   const history = useHistory()
 
-  const [errors, setErrors] = useState({
-    birthdayCertificate: '',
-    ownDocument: '',
-    ownBackDocument: '',
-  })
+  const [error, setError] = useState('')
 
   const { Loading } = useLoading()
   const { showMessage } = useModal()
@@ -100,13 +96,17 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
   }
 
   const VerifyFilesAndCallAPI = async () => {
-    if (!ownDocumentFile || documentTypeSelected === 'identidade' || '')
-      return showMessage(AddADocument)
+    if ((!ownDocumentFile && documentTypeSelected === 'identidade') || '')
+      return setError('O envio da foto do documento é obrigatório.')
+
     if (
-      !birthdayCertificateFile ||
+      !birthdayCertificateFile &&
       documentTypeSelected === 'certidao_de_nascimento'
     )
-      return showMessage(AddABirthCertificate)
+      return setError('O envio da foto do documento é obrigatório.')
+
+    if (documentTypeSelected === '')
+      return setError('O envio da foto do documento é obrigatório.')
 
     if (ownDocumentFile || birthdayCertificateFile)
       if (documentTypeSelected === 'identidade') {
@@ -119,7 +119,6 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
         formFile2.append('file', ownBackDocumentFile)
 
         try {
-          console.log('passou')
           await axios.all([
             apiPatient.post(
               `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
@@ -134,7 +133,6 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
                   formFile2,
                 ),
           ])
-          console.log('passou denovo')
 
           await apiPatient.patch(
             `/paciente/dependente/documento/confirmar`,
@@ -204,6 +202,8 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
             name="regional"
             setValue={setDocumentTypeSelected}
             value={documentTypeSelected}
+            msgError={error}
+            hasError={error}
           />
         </div>
         {documentTypeSelected === 'identidade' && (
@@ -211,13 +211,13 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
             <OwnDocument
               ownDocumentFile={ownDocumentFile}
               onGetFile={setOwnDocumentFile}
-              errors={errors.ownDocument}
+              error={error}
             />
             <OwnBackDocument
               ownBackDocumentFile={ownBackDocumentFile}
               onGetFile={setOwnBackDocumentFile}
               hasPreviousDocument={!!ownDocumentFile}
-              errors={errors.ownBackDocument}
+              error={error}
             />
           </>
         )}
@@ -225,7 +225,7 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
           <BirthCertificate
             BirthdayCertificateFile={birthdayCertificateFile}
             onGetFile={setBirthdayCertificateFile}
-            errors={errors.birthdayCertificate}
+            error={error}
           />
         )}
       </Container>

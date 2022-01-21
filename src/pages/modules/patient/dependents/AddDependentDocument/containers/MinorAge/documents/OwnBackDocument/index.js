@@ -11,7 +11,7 @@ const OwnBackDocument = ({
   ownBackDocumentFile,
   onGetFile,
   hasPreviousDocument,
-  errors,
+  error
 }) => {
   return (
     <>
@@ -35,7 +35,7 @@ const OwnBackDocument = ({
             <SendedFile file={ownBackDocumentFile} onGetFile={onGetFile} />
           )}
           {!ownBackDocumentFile && (
-            <InstructionsOwnDocuments onGetFile={onGetFile} errors={errors} />
+            <InstructionsOwnDocuments onGetFile={onGetFile} error={error} />
           )}
         </AccordionDetails>
       </AccordionContainer>

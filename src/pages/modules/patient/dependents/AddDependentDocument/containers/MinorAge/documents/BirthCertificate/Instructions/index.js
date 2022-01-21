@@ -7,7 +7,8 @@ import { InputFile } from '@/components/Form/InputFile/'
 
 function InstructionsBirthCertificate({ onGetFile, error }) {
   return (
-    <Container>
+    <Container>~
+    {console.log(error)}
       <h3>
         Faça o envio de uma foto do verso do seu documento de identificação que
         contenha o seu CPF
