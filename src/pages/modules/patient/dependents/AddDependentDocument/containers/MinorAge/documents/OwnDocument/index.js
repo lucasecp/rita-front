@@ -10,7 +10,7 @@ import SendedFile from '../components/SendedFile'
 const OwnDocument = ({ ownDocumentFile, onGetFile, errors }) => {
   return (
     <>
-      <AccordionContainer square={true} defaultExpanded={false}>
+      <AccordionContainer square={true} defaultExpanded={true}>
         <AccordionSummary
           aria-controls="panel2a-content"
           id="panel2a-header"
