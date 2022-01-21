@@ -37,6 +37,15 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
     document: '',
   })
 
+  useEffect(() => {
+    if (error.select && documentTypeSelected) {
+      setError({
+        select: '',
+        document: '',
+      })
+    }
+  }, [documentTypeSelected])
+
   const { Loading } = useLoading()
   const { showMessage } = useModal()
 
@@ -103,7 +112,10 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
   }
 
   const VerifyFilesAndCallAPI = async () => {
-    if ((!ownDocumentFile && documentTypeSelected === 'identidade') || '')
+    if (
+      (!ownDocumentFile || !ownBackDocumentFile) &&
+      documentTypeSelected === 'identidade'
+    )
       return setError({
         select: '',
         document: 'O envio da foto do documento é obrigatório.',
@@ -124,77 +136,76 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
         document: '',
       })
 
-    if (ownDocumentFile || birthdayCertificateFile)
-      if (documentTypeSelected === 'identidade') {
-        Loading.turnOn()
+    if (documentTypeSelected === 'identidade') {
+      Loading.turnOn()
 
-        const formFile1 = new FormData()
-        formFile1.append('file', ownDocumentFile)
+      const formFile1 = new FormData()
+      formFile1.append('file', ownDocumentFile)
 
-        const formFile2 = new FormData()
-        formFile2.append('file', ownBackDocumentFile)
+      const formFile2 = new FormData()
+      formFile2.append('file', ownBackDocumentFile)
 
-        // try {
-        // await axios.all([
-        //   apiPatient.post(
-        //     `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
-        //     formFile1,
-        //   ),
-        //   !ownBackDocumentFile
-        //     ? new Promise((resolve) => {
-        //         resolve('')
-        //       })
-        //     : apiPatient.post(
-        //         `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=DocVerso`,
-        //         formFile2,
-        //       ),
-        // ])
+      try {
+        await axios.all([
+          apiPatient.post(
+            `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
+            formFile1,
+          ),
+          !ownBackDocumentFile
+            ? new Promise((resolve) => {
+                resolve('')
+              })
+            : apiPatient.post(
+                `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=DocVerso`,
+                formFile2,
+              ),
+        ])
 
-        // await apiPatient.patch(
-        //   `/paciente/dependente/documento/confirmar`,
-        //   null,
-        //   {
-        //     params: { cpf: dependent.cpf },
-        //   },
-        // )
-        // } catch ({ response }) {
-        //   toast.error('Erro ao enviar os documentos!')
-        // } finally {
-        //   toast.success('Cadastro realizado com sucesso')
+        await apiPatient.patch(
+          `/paciente/dependente/documento/confirmar`,
+          null,
+          {
+            params: { cpf: dependent.cpf },
+          },
+        )
+      } catch ({ response }) {
+        toast.error('Erro ao enviar os documentos!')
+      } finally {
+        toast.success('Cadastro realizado com sucesso')
 
-        //   backToList()
-        //   Loading.turnOff()
-        // }
-        // }
-
-        // if (documentTypeSelected === 'certidao_de_nascimento') {
-        //   Loading.turnOn()
-
-        // try {
-        //   const formFile1 = new FormData()
-        //   formFile1.append('file', birthdayCertificateFile)
-
-        //   await apiPatient.post(
-        //     `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
-        //     formFile1,
-        //   )
-        //   await apiPatient.patch(
-        //     `/paciente/dependente/documento/confirmar`,
-        //     null,
-        //     {
-        //       params: { cpf: dependent.cpf },
-        //     },
-        //   )
-        // } catch (error) {
-        //   toast.error('Erro ao enviar os documentos!')
-        // } finally {
-        //   toast.success('Cadastro realizado com sucesso')
-
-        //   backToList()
-        //   Loading.turnOff()
-        // }
-        //   Loading.turnOff()
+        backToList()
+        Loading.turnOff()
       }
+    }
+
+    if (documentTypeSelected === 'certidao_de_nascimento') {
+      Loading.turnOn()
+
+      try {
+        const formFile1 = new FormData()
+        formFile1.append('file', birthdayCertificateFile)
+
+        await apiPatient.post(
+          `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
+          formFile1,
+        )
+        await apiPatient.patch(
+          `/paciente/dependente/documento/confirmar`,
+          null,
+          {
+            params: { cpf: dependent.cpf },
+          },
+        )
+      } catch (error) {
+        toast.error('Erro ao enviar os documentos!')
+      } finally {
+        toast.success('Cadastro realizado com sucesso')
+
+        backToList()
+        Loading.turnOff()
+      }
+      Loading.turnOff()
+    }
   }
 
   return (
