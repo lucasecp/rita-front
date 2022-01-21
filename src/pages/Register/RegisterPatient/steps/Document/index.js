@@ -57,40 +57,36 @@ const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
 
   const nextStep = () => {
     if (holdingDocumentFile === '') {
-      setErrors((prevState) => ({
-        ...prevState,
+      setErrors({
         holdingDocument:
           'O envio da sua foto segurando o documento é obrigatório.',
-      }))
+      })
       scrollTo(0, 0)
       return
     }
 
     if (ownDocumentFile === '') {
-      setErrors((prevState) => ({
-        ...prevState,
+      setErrors({
         ownDocument:
           'O envio da foto do documento de identificação é obrigatório.',
-      }))
+      })
       scrollTo(0, 0)
       return
     }
 
     if (ownBackDocumentFile === '') {
-      setErrors((prevState) => ({
-        ...prevState,
+      setErrors({
         ownBackDocument:
           'O envio da foto do documento de identificação é obrigatório.',
-      }))
+      })
       scrollTo(0, 0)
       return
     }
 
     if (selectIncome === '') {
-      setErrors((prevState) => ({
-        ...prevState,
+      setErrors({
         selectIncome: 'A escolha da sua faixa de renda é obrigatório.',
-      }))
+      })
       scrollTo(0, 0)
       return
     }
@@ -98,6 +94,8 @@ const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
     setErrors({})
     setStep(4)
   }
+
+  console.log(errors)
 
   return (
     <>
@@ -120,7 +118,7 @@ const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
           hasPreviousDocument={!!holdingDocumentFile && !!ownDocumentFile}
           onGetFile={setOwnBackDocumentFile}
           ownBackDocumentFile={ownBackDocumentFile}
-          errors={errors.ownBackDocument}
+          error={errors.ownBackDocument}
         />
 
         <ProofOfAddress
@@ -139,7 +137,7 @@ const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
           proofOfIncomeFile={proofOfIncomeFile}
           onSelectIncome={setSelectIncome}
           selectIncome={selectIncome}
-          errors={errors.selectIncome}
+          error={errors.selectIncome}
         />
       </Container>
       <BtnGroup>
