@@ -13,7 +13,8 @@ export const ListItem = styled.ul<ListItemProps>`
   padding: 25px 0;
   justify-content: space-between;
   position: relative;
-  cursor: pointer;
+  /* cursor: pointer; */
+
   &::after {
     content: '';
     height: 1px;
