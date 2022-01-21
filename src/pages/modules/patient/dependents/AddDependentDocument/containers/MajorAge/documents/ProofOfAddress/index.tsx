@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react'
 import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 
-import InstructionsIncome from './Instructions'
-import SendedFile from '../../components/SendedFile'
+import { InstructionsProofOfAddress } from './Instructions'
+import { SendedFile } from '../components/SendedFile'
 
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
 import { AccordionContainer } from '../styles'
 
-const ProofOfAddress = ({
+interface ProofOfAddressProps {
+  proofOfAddressFile: File | string
+  onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+  hasPreviousDocument: boolean
+}
+
+export const ProofOfAddress: React.FC<ProofOfAddressProps> = ({
   proofOfAddressFile,
   onGetFile,
   hasPreviousDocument,
@@ -35,8 +41,8 @@ const ProofOfAddress = ({
       defaultExpanded={false}
       expanded={toggle}
       onChange={toggleAccordion}
-      // expanded={hasPreviousDocument || !!proofOfAddressFile}
       style={{ display: 'none' }}
+      // expanded={hasPreviousDocument || !!proofOfAddressFile}
     >
       <AccordionSummary
         aria-controls="panel4a-content"
@@ -50,11 +56,9 @@ const ProofOfAddress = ({
         {proofOfAddressFile ? (
           <SendedFile file={proofOfAddressFile} onGetFile={onGetFile} />
         ) : (
-          <InstructionsIncome onGetFile={onGetFile} />
+          <InstructionsProofOfAddress onGetFile={onGetFile} />
         )}
       </AccordionDetails>
     </AccordionContainer>
   )
 }
-
-export default ProofOfAddress

@@ -117,7 +117,7 @@ const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
         />
 
         <OwnBackDocument
-          hasPreviousDocument={!!ownDocumentFile}
+          hasPreviousDocument={!!holdingDocumentFile && !!ownDocumentFile}
           onGetFile={setOwnBackDocumentFile}
           ownBackDocumentFile={ownBackDocumentFile}
           errors={errors.ownBackDocument}

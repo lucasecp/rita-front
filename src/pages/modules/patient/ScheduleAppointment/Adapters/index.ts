@@ -10,9 +10,11 @@ export const fromApi = (dataResults: any[]) => {
       id: docInfo.id,
       crm: docInfo.conselhoRegional,
       verified: docInfo.conselhoValidado,
-      specialtys: docInfo.especialidades.map(
-        (spe: any) => `${spe.descricao} - RQE Nº: ${spe.RQE || ''}`,
-      ),
+      specialtys: docInfo.especialidades.map((spe: any) => ({
+        verified: spe.rqeValidado,
+        RQE: spe.RQE,
+        name: spe.descricao,
+      })),
     }))
 
   const clinic: ClinicI[] = dataResults

@@ -5,7 +5,8 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
 import { MajorAge } from './containers/MajorAge'
 import { MinorAge } from './containers/MinorAge'
-import { useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
+import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
 interface AddDependentDocumentProps {
   id: number
@@ -15,19 +16,23 @@ interface AddDependentDocumentProps {
 
 export const AddDependentDocument: React.FC<AddDependentDocumentProps> = () => {
   const location = useLocation()
+  const history = useHistory()
 
   const { dependent } = location.state
 
   const { id, birthdate, cpf } = dependent
 
   const isMinorAge = useMemo(() => {
-    console.log(birthdate)
-
     const dateParsed = parse(birthdate, 'dd/MM/yyyy', new Date())
     const age = differenceInYears(new Date(), dateParsed)
 
     return age < 18
   }, [birthdate])
+
+  if (!location.state) {
+    history.push(DIRECTOR_PLAN_MANAGMENT)
+    return <></>
+  }
 
   return (
     <DefaultLayout title="Dependentes">
