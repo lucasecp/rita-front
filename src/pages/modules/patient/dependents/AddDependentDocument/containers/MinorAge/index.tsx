@@ -12,6 +12,10 @@ import axios from 'axios'
 import { toast } from '@/styles/components/toastify'
 import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 import { useHistory } from 'react-router'
+import { useModal } from '@/hooks/useModal'
+import { CancelAndExit } from './documents/messages/CancelAndExit'
+import { AddADocument } from './documents/messages/AddADocument'
+import { AddABirthCertificate } from './documents/messages/AddABirthCertificate'
 
 interface MinorAgeProps {
   dependent: {
@@ -35,6 +39,7 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
   })
 
   const { Loading } = useLoading()
+  const { showMessage } = useModal()
 
   // useEffect(() => {
   //   const loadDocuments = async () => {
@@ -87,9 +92,22 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
   //   loadDocuments()
   // }, [])
 
-  const backToList = () => history.push(PATIENT_DEPENDENTS)
+  const backToList = () => {
+    if (ownDocumentFile || birthdayCertificateFile)
+      return showMessage(CancelAndExit)
+
+    history.push(PATIENT_DEPENDENTS)
+  }
 
   const VerifyFilesAndCallAPI = async () => {
+    if (!ownDocumentFile || documentTypeSelected === 'identidade' || '')
+      return showMessage(AddADocument)
+    if (
+      !birthdayCertificateFile ||
+      documentTypeSelected === 'certidao_de_nascimento'
+    )
+      return showMessage(AddABirthCertificate)
+
     if (ownDocumentFile || birthdayCertificateFile)
       if (documentTypeSelected === 'identidade') {
         Loading.turnOn()
