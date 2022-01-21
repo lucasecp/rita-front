@@ -22,7 +22,8 @@ export const MobileLayout: React.FC<MobileLayoutI> = ({
       <Sidenav />
       <main>
         <h1>
-          {title || 'Page Title'} {headerChildren}
+          {title || 'Como você precisa cuidar da sua saúde hoje?'}{' '}
+          {headerChildren}
         </h1>
         {children}
       </main>

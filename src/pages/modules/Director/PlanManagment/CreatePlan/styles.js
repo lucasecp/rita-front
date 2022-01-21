@@ -64,7 +64,7 @@ export const Container = styled.div`
       > div:last-child {
         /* display: block; */
         /* width: fit-content; */
-        display: unset;
+        /* display: unset; */
       }
     }
 
