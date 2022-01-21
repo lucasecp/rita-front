@@ -4,7 +4,7 @@ import { Accordion } from '@material-ui/core'
 import colors from '@/styles/colors'
 
 export const AccordionContainer = styled(Accordion)`
-  margin-bottom: 30px;
+  margin: 30px 0;
 
   > h3 {
     margin-top: 16px;

@@ -103,14 +103,16 @@ export const SeeOnePatient: React.FC = () => {
   }
 
   const onSaveValidations = async () => {
+    const idPatient = dependent ? dependent?.id : patientData?.id
+
     try {
       Loading.turnOn()
       await apiPatient.patch(
-        `/paciente/${patientData.id}/assumir-validacao?forcar=false`,
+        `/paciente/${idPatient}/assumir-validacao?forcar=false`,
       )
 
       localStorage.setItem(
-        `@Rita/Validate/OnePatient/${patientData.id}`,
+        `@Rita/Validate/OnePatient/${idPatient}`,
         JSON.stringify(validations),
       )
 
@@ -147,20 +149,19 @@ export const SeeOnePatient: React.FC = () => {
   }
 
   const onFinishValidations = async () => {
+    const idPatient = dependent ? dependent?.id : patientData?.id
+
     try {
       Loading.turnOn()
-      const response = await apiPatient.post(
-        `/paciente/${patientData.id}/validar`,
-        {
-          dadosOk: {
-            resposta: validations.documentOk === 'yes',
-            motivo: validations.resonDocumentNotOk,
-          },
-          rendaBaixa: {
-            resposta: validations.incomeOk === 'yes',
-          },
+      const response = await apiPatient.post(`/paciente/${idPatient}/validar`, {
+        dadosOk: {
+          resposta: validations.documentOk === 'yes',
+          motivo: validations.resonDocumentNotOk,
         },
-      )
+        rendaBaixa: {
+          resposta: validations.incomeOk === 'yes',
+        },
+      })
 
       if (response.status === 201) {
         if (response.data.mensagem === 'Validação concluída!') {
@@ -231,7 +232,7 @@ export const SeeOnePatient: React.FC = () => {
           hasDependentUnderAge={hasDependentUnderAge}
         />
         <ValidationSeeOnePatient
-          patientId={patientData.id}
+          patientId={dependent ? dependent.id : patientData.id}
           validations={validations}
           onChangeValidations={setValidations}
         />

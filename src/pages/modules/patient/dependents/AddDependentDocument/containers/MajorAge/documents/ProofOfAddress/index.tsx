@@ -50,7 +50,7 @@ export const ProofOfAddress: React.FC<ProofOfAddressProps> = ({
         expandIcon={!proofOfAddressFile && <ArrowDownIcon />}
         disabled={!!proofOfAddressFile}
       >
-        <h2>Comprovante de Residência</h2>
+        <h2>Comprovante de residência</h2>
       </AccordionSummary>
       <AccordionDetails>
         {proofOfAddressFile ? (

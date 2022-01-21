@@ -28,9 +28,8 @@ const Actions: React.FC<ActionsProps> = ({
     if (!documentsOk) {
       label = (
         <>
-          O dependente cadastrado ainda não possui documentos incluídos.
-          <br /> Para maiores informações entre em contato pelo Whatsapp (61)
-          3181-0999
+          O dependente cadastrado ainda não possui documentos incluídos, clique
+          aqui para adicionar.
         </>
       )
     }
