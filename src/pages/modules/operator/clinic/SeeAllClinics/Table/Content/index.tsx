@@ -9,6 +9,8 @@ import { OPERATOR_SEE_ONE_CLINIC } from '@/routes/constants/namedRoutes/routes'
 
 const Content: React.FC<ContentProps> = ({ clinics }) => {
   const history = useHistory()
+  console.log(clinics);
+
 
   return (
     <Container>

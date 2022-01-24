@@ -39,7 +39,7 @@ const SeeOneClinic = () => {
   }, [])
 
   return (
-    <DefaultLayout title="Visualizar informações">
+    <DefaultLayout title="Informações da Clínica">
       <EditClinic clinicData={clinic} />
     </DefaultLayout>
   )

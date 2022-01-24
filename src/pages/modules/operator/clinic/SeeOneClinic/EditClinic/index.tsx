@@ -34,6 +34,7 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
     setButtonIsDisabled(personalDatas?.hasError || address?.hasError)
   }, [address, personalDatas])
 
+
   const onEdit = () => {
     const status = clinicData.personalDatas.status
 
@@ -104,7 +105,7 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
       ) : (
         <ButtonGroup>
           <ButtonLink onClick={onCancel}>Cancelar</ButtonLink>
-          <OutilineButton onClick={onSave} disabled={buttonIsDisabled}>
+          <OutilineButton onClick={onSave} disabled>
             Salvar
           </OutilineButton>
         </ButtonGroup>

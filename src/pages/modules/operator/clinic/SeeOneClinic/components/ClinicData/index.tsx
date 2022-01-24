@@ -3,8 +3,14 @@ import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import { DataI, PersonalErrorsI } from '../../Types'
-
+import {
+  validateSocialReason,
+  validateStatus,
+  validateTwoPhone,
+} from '../../helpers/validatorFields'
 import { Container } from './styles'
+import { useCnpjValidate } from './useCnpjValidate'
+import { validateName } from '../../helpers/validatorFields';
 
 interface ClinicDataProps {
   personalDatas: DataI
@@ -32,6 +38,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
   const [phone, setPhone] = useState(personalDatas?.phone || '')
 
   const [errors, setErrors] = useState<PersonalErrorsI>({})
+  const { validatorCNPJ } = useCnpjValidate()
 
   useEffect(() => {
     setName(personalDatas?.name || '')
@@ -69,41 +76,53 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
           label="Nome Fantasia:"
           value={name}
           setValue={setName}
-          name="name"
           hasError={!!errors?.name}
           msgError={errors?.name}
           maxLength={100}
-          // onBlur={() => setErrors({ ...errors, name: validateName(name) })}
-          // onKeyUp={() => setErrors({ ...errors, name: validateName(name) })}
+          onBlur={() =>
+            setErrors({ ...errors, name: validateName(name) })
+          }
+          onKeyUp={() =>
+            setErrors({ ...errors, name: validateName(name) })
+          }
           onlyLetter
           disabled={!isEditing}
         />
         <InputText
           label="Razão Social:"
-          value={name}
+          value={socialReason}
           setValue={setsocialReason}
-          name="socialReason"
           hasError={!!errors?.socialReason}
           msgError={errors?.socialReason}
           maxLength={100}
-          // onBlur={() =>
-          //   setErrors({ ...errors, socialReason: validateName(socialReason) })
-          // }
-          // onKeyUp={() =>
-          //   setErrors({ ...errors, socialReason: validateName(socialReason) })
-          // }
+          onBlur={() =>
+            setErrors({
+              ...errors,
+              socialReason: validateSocialReason(socialReason),
+            })
+          }
+          onKeyUp={() =>
+            setErrors({
+              ...errors,
+              socialReason: validateSocialReason(socialReason),
+            })
+          }
           onlyLetter
           disabled={!isEditing}
         />
         <InputMask
-          mask="99.999.999/999-99"
+          mask="99.999.999/9999-99"
           label="CNPJ:"
           value={cnpj}
           setValue={setCnpj}
           hasError={!!errors?.cnpj}
           msgError={errors?.cnpj}
-          // onBlur={() => setErrors({ ...errors, name: validatename(name) })}
-          // onKeyUp={() => setErrors({ ...errors, name: validatename(name) })}
+          onBlur={async () =>
+            setErrors({ ...errors, cnpj: await validatorCNPJ(cnpj) })
+          }
+          onKeyUp={async () =>
+            setErrors({ ...errors, cnpj: await validatorCNPJ(cnpj) })
+          }
           disabled={!isEditing}
         />
         <Select
@@ -117,16 +136,25 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
           ]}
           value={selectedStatus}
           disabled={!isEditing}
+          onBlur={() =>
+            setErrors({ ...errors, status: validateStatus(selectedStatus) })
+          }
+          hasError={!!errors?.status}
+          msgError={errors?.status}
         />
         <InputMask
           label="Telefone/Celular para agendamento:"
-          mask="(99) 9999-9999"
+          mask="(99) 99999-9999"
           value={phone}
           setValue={setPhone}
           hasError={!!errors?.phone}
           msgError={errors?.phone}
-          // onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
-          // onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
+          onBlur={() =>
+            setErrors({ ...errors, phone: validateTwoPhone(phone) })
+          }
+          onKeyUp={() =>
+            setErrors({ ...errors, phone: validateTwoPhone(phone) })
+          }
           disabled={!isEditing}
         />
       </section>

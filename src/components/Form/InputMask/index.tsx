@@ -15,6 +15,8 @@ interface InputMaskProps {
   mask: string
   value?: string
   disabled?: boolean
+  onBlur?: () => void
+  onKeyUp?: () => void
 }
 
 const InputMask: React.FC<InputMaskProps> = ({

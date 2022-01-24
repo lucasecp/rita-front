@@ -29,6 +29,10 @@ export interface ErrorsAddressI {
   email?: string
   cpf?: string
   cep?: string
+  city?: string
+  address?: string
+  number?: string
+  district?: string
 }
 
 export interface PersonalErrorsI {
@@ -36,4 +40,5 @@ export interface PersonalErrorsI {
   phone?: string
   socialReason?: string
   cnpj?: string
+  status?: string
 }

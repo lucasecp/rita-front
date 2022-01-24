@@ -1,7 +1,9 @@
 import CustomMultiSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
+import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
+import { mapSpecialtys } from '../../adapters/mapSpecialtys'
 
 import { Container } from './styles'
 interface ClinicSpecialtysProps {
@@ -23,6 +25,33 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
     clinicSpecialtys || [],
   )
   const [errors, setErrors] = useState({})
+  const [specialtysOptions, setSpecialtysOptions] = useState<
+    MultiSelectOption[]
+  >([])
+
+  useEffect(() => {
+    const getSpecialtys = async () => {
+      try {
+        const { data } = await apiPatient.get('/especialidade')
+        const dataMapped = mapSpecialtys(data?.especialidade)
+
+        if (!dataMapped.length) {
+          return setSpecialtysOptions([])
+        }
+
+        setSpecialtysOptions(() => {
+          if (dataMapped.length === 1) {
+            return dataMapped
+          }
+          return [{ name: 'Todas', id: 'All' }, ...dataMapped]
+        })
+      } catch ({ response }) {
+      } finally {
+      }
+    }
+
+    getSpecialtys()
+  }, [])
 
   useEffect(() => {
     setSpecialtys(clinicSpecialtys || '')
@@ -42,6 +71,14 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
     }
   }, [cancelEdit, initialData])
 
+  const onChangeSelect = (values: MultiSelectOption[]) => {
+    const hasAllOption = values.some((val) => val.id === 'All')
+    if (hasAllOption) {
+      return setSpecialtys(specialtysOptions)
+    }
+    return setSpecialtys(values)
+  }
+
   return (
     <Container>
       <h1>Especialidades</h1>
@@ -50,8 +87,10 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
           value={specialtys}
           setValue={setSpecialtys}
           variation="secondary"
-          options={[]}
+          options={specialtysOptions}
           disabled={!isEditing}
+          onSelect={onChangeSelect}
+          onRemove={onChangeSelect}
         />
       </section>
     </Container>
