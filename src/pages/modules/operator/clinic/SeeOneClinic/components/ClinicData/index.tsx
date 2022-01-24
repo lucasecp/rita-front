@@ -85,7 +85,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
           onKeyUp={() =>
             setErrors({ ...errors, name: validateName(name) })
           }
-          onlyLetter
+          
           disabled={!isEditing}
         />
         <InputText
