@@ -1,5 +1,5 @@
 import { showStatus } from './showStatus'
-import { mapSpecialtys } from './mapSpecialtys'
+import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys'
 
 export const fromApi = (clinicInfo: any) => {
   return {
@@ -9,6 +9,7 @@ export const fromApi = (clinicInfo: any) => {
       cnpj: clinicInfo.cnpj,
       status: showStatus(clinicInfo.status),
       phone: clinicInfo.telefone,
+      id: clinicInfo.idClinica,
     },
 
     acessDatas: {
@@ -32,31 +33,25 @@ export const fromApi = (clinicInfo: any) => {
   }
 }
 
-// export const toApi = (personalDatas, address) => {
-//   return {
-//     nome: personalDatas.name,
-//     sexo: personalDatas.gender,
-//     dataNascimento: personalDatas.birthdate,
-//     telefone: personalDatas.phone,
-//     email: personalDatas.email,
-//     status: statusToApi(personalDatas.status),
-
-//     cep: address.cep,
-//     logradouro: address.address,
-//     numero: address.number,
-//     complemento: address.complement,
-//     bairro: address.district,
-//     municipio: address.city,
-//     uf: address.uf,
-//   }
-// }
-
-// {
-//   "idPaciente": 4880811,
-//   "nome": "Hiago Alves ",
-//   "cpf": "09872058032",
-//   "sexo": "M",
-//   "dataNascimento": "01/02/1985",
-//   "telefone": "(61) 98498-4848",
-//   "email": "teste@teste.com"
-// }
+export const toApi = (clinicInfo: any) => {
+  return {
+    idClinica: clinicInfo.id,
+    descricao: clinicInfo.name,
+    razaoSocial: clinicInfo.socialreason,
+    status: clinicInfo.status,
+    cnpj: clinicInfo.cnpj,
+    telefone: clinicInfo.phone,
+    endereco: clinicInfo.address,
+    bairro: clinicInfo.district,
+    cidade: clinicInfo.city,
+    uf: clinicInfo.uf,
+    cep: clinicInfo.cep,
+    complemento: clinicInfo.complement,
+    numero: clinicInfo.number,
+    responsavel: clinicInfo.nameAdmin,
+    emailResponsavel: clinicInfo.adminEmail,
+    telefoneResponsavel: clinicInfo.adminPhone,
+    cpfResponsavel: clinicInfo.adminCpf,
+    especialidade: [mapSpecialtysToApi(clinicInfo.specialtys)],
+  }
+}

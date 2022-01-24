@@ -2,7 +2,12 @@ import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { AcessDatasI, ErrorsAddressI } from '../../Types'
 import React, { useEffect, useState } from 'react'
-import { validateName } from '../../helpers/validatorFields'
+import {
+  validateAdminName,
+  validateCPF,
+  validateEmail,
+  validatePhone,
+} from '../../helpers/validatorFields'
 
 import { Container } from './styles'
 
@@ -68,10 +73,10 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
           msgError={errors?.nameAdmin}
           maxLength={100}
           onBlur={() =>
-            setErrors({ ...errors, nameAdmin: validateName(nameAdmin) })
+            setErrors({ ...errors, nameAdmin: validateAdminName(nameAdmin) })
           }
           onKeyUp={() =>
-            setErrors({ ...errors, nameAdmin: validateName(nameAdmin) })
+            setErrors({ ...errors, nameAdmin: validateAdminName(nameAdmin) })
           }
           onlyLetter
           disabled={!isEditing}
@@ -83,8 +88,8 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
           setValue={setCpf}
           hasError={!!errors?.cpf}
           msgError={errors?.cpf}
-          // onBlur={() => setErrors({ ...errors, cpf: validateCPF(cpf) })}
-          // onKeyUp={() => setErrors({ ...errors, cpf: validateCPF(cpf) })}
+          onBlur={() => setErrors({ ...errors, cpf: validateCPF(cpf) })}
+          onKeyUp={() => setErrors({ ...errors, cpf: validateCPF(cpf) })}
           disabled={!isEditing}
         />
         <InputText
@@ -94,8 +99,8 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
           setValue={setEmail}
           hasError={!!errors?.email}
           msgError={errors?.email}
-          // onBlur={() => setErrors({ ...errors, email: validateEmail(email) })}
-          // onKeyUp={() => setErrors({ ...errors, email: validateEmail(email) })}
+          onBlur={() => setErrors({ ...errors, email: validateEmail(email) })}
+          onKeyUp={() => setErrors({ ...errors, email: validateEmail(email) })}
           maxLength={100}
           disabled={!isEditing}
         />
@@ -106,8 +111,8 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
           setValue={setPhone}
           hasError={!!errors?.phone}
           msgError={errors?.phone}
-          // onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
-          // onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
+          onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
+          onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           disabled={!isEditing}
         />
       </section>

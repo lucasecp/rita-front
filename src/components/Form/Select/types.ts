@@ -19,4 +19,5 @@ export interface SelectProps {
   hasError?: string | boolean
   onChange?: (props: OnChangeProps) => void
   disabled?: boolean
+  onBlur?: () => void
 }
