@@ -62,7 +62,7 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
 
   return (
     <Container>
-      <h1>Responsável pelas clínica</h1>
+      <h1>Responsável pela clínica</h1>
       <section>
         <InputText
           label="Administrador da clínica:"
