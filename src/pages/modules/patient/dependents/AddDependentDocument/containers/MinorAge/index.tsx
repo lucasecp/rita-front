@@ -34,17 +34,19 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
 
   const [error, setError] = useState({
     select: '',
+    birthdayCertificate: '',
     document: '',
   })
 
-  useEffect(() => {
-    if (error.select && documentTypeSelected) {
-      setError({
-        select: '',
-        document: '',
-      })
-    }
-  }, [documentTypeSelected])
+  // useEffect(() => {
+  //   if (error.select && documentTypeSelected) {
+  //     setError({
+  //       select: '',
+  //       birthdayCertificate: '',
+  //       document: '',
+  //     })
+  //   }
+  // }, [documentTypeSelected])
 
   const { Loading } = useLoading()
   const { showMessage } = useModal()
@@ -118,6 +120,7 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
     )
       return setError({
         select: '',
+        birthdayCertificate: '',
         document: 'O envio da foto do documento é obrigatório.',
       })
 
@@ -127,12 +130,14 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
     )
       return setError({
         select: '',
-        document: 'O envio da foto do documento é obrigatório.',
+        birthdayCertificate: 'O envio da foto do documento é obrigatório.',
+        document: '',
       })
 
     if (documentTypeSelected === '')
       return setError({
         select: 'Necessário escolher uma opção',
+        birthdayCertificate: '',
         document: '',
       })
 
@@ -230,6 +235,13 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
             setValue={setDocumentTypeSelected}
             value={documentTypeSelected}
             msgError={error.select}
+            onClick={() =>
+              setError({
+                select: '',
+                birthdayCertificate: '',
+                document: '',
+              })
+            }
           />
         </div>
         {documentTypeSelected === 'identidade' && (
@@ -251,7 +263,7 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
           <BirthCertificate
             BirthdayCertificateFile={birthdayCertificateFile}
             onGetFile={setBirthdayCertificateFile}
-            error={error.document}
+            error={error.birthdayCertificate}
           />
         )}
       </Container>
