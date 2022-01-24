@@ -52,6 +52,15 @@ export const Container = styled.div`
         font-weight: 400;
         line-height: 17.43px;
       }
+      > div > div {
+        display: flex;
+        flex-wrap: wrap;
+        > svg {
+          width: 19px;
+          height: 15px;
+          margin-left: 7px;
+        }
+      }
       & + li {
         margin-top: 11px;
       }

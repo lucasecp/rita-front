@@ -1,13 +1,10 @@
-import React from 'react'
 import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 
-import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
+import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
 import { AccordionContainer } from '../styles'
 import InstructionsIncome from './Instructions'
 import SendedFile from '../../components/SendedFile'
-
-import { incomeType } from '../../constants/income'
 
 const ProofOfIncome = ({
   proofOfIncomeFile,
@@ -15,6 +12,7 @@ const ProofOfIncome = ({
   selectIncome,
   onSelectIncome,
   hasPreviousDocument,
+  error,
 }) => {
   return (
     <>
@@ -26,15 +24,12 @@ const ProofOfIncome = ({
         <AccordionSummary
           aria-controls="panel3a-content"
           id="panel3a-header"
-          expandIcon={
-            !proofOfIncomeFile &&
-            selectIncome !== incomeType.MORE_ONE_HALF && <ArrowDownIcon />
-          }
-          disabled={
-            !!proofOfIncomeFile || selectIncome === incomeType.MORE_ONE_HALF
-          }
+          expandIcon={!proofOfIncomeFile && <ArrowDownIcon />}
+          disabled={!!proofOfIncomeFile}
         >
-          <h2>Comprovante de Renda</h2>
+          <h2>
+            Comprovante de Renda <span>*</span>
+          </h2>
         </AccordionSummary>
         <AccordionDetails>
           {proofOfIncomeFile && (
@@ -45,6 +40,7 @@ const ProofOfIncome = ({
               selectIncome={selectIncome}
               onGetSelectIncome={onSelectIncome}
               onGetFile={onGetFile}
+              error={error}
             />
           )}
         </AccordionDetails>

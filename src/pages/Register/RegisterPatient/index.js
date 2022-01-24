@@ -35,16 +35,19 @@ const RegisterPatient = () => {
 
   const [step, setStep] = useState(1)
   const [data, setData] = useState({})
+  const [term, setTerm] = useState(false)
 
   const [dataClientSabin, setDataClientSabin] = useState({})
+  const [documentFiles, setDocumentFiles] = useState({})
   const [fieldsError, setFieldsError] = useState(false)
-  const [documentFiles, setdocumentFiles] = useState({})
 
   useEffect(() => {
     document.title = 'Rita Saúde | Cadastro'
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
+
+  console.log(data)
 
   const formatDocumentFiles = () => {
     if (documentFiles.selectIncome === 'no_income') return 'NaopossuoRenda'
@@ -53,17 +56,17 @@ const RegisterPatient = () => {
     if (documentFiles.selectIncome === 'more_one_half')
       return 'AcimaDeUmSalarioMinimoEMeio'
   }
-
   const handleSubmit = async () => {
     const formFile1 = new FormData()
     formFile1.append('file', documentFiles.holdingDocumentFile)
-
     const formFile2 = new FormData()
     formFile2.append('file', documentFiles.ownDocumentFile)
-
     const formFile3 = new FormData()
-    formFile3.append('file', documentFiles.proofOfIncomeFile)
-
+    formFile3.append('file', documentFiles.ownBackDocumentFile)
+    const formFile4 = new FormData()
+    formFile4.append('file', documentFiles.proofOfAddressFile)
+    const formFile5 = new FormData()
+    formFile5.append('file', documentFiles.proofOfIncomeFile)
     Loading.turnOn()
     try {
       const response = await apiPatient.post('/paciente', {
@@ -81,7 +84,6 @@ const RegisterPatient = () => {
         responseApiStatus = status.SERVER_ERROR
       }
     }
-
     try {
       await axios.all([
         apiPatient.post(
@@ -92,11 +94,21 @@ const RegisterPatient = () => {
           `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Cpf`,
           formFile2,
         ),
+        apiPatient.post(
+          `/paciente/documento?cpf=${data.cpf}&tipoDocumento=DocVerso`,
+          formFile3,
+        ),
+        !documentFiles.proofOfAddressFile
+          ? ''
+          : apiPatient.post(
+              `/paciente/documento?cpf=${data.cpf}&tipoDocumento=ComprovanteResi`,
+              formFile4,
+            ),
         !documentFiles.proofOfIncomeFile
           ? ''
           : apiPatient.post(
               `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
-              formFile3,
+              formFile5,
             ),
       ])
     } catch ({ response }) {
@@ -108,7 +120,6 @@ const RegisterPatient = () => {
       }
     } finally {
       Loading.turnOff()
-
       if (responseApiStatus === status.ALREADY_EXISTS) {
         showMessage(SimpleModal, {
           type: MODAL_TYPES.ERROR,
@@ -126,9 +137,6 @@ const RegisterPatient = () => {
       }
     }
   }
-
-  const checkFields = () =>
-    !fieldsError ? showMessage(FieldsErrorMessage) : setStep(step + 1)
 
   return (
     <RegisterLayout>
@@ -149,6 +157,9 @@ const RegisterPatient = () => {
             setButtonPass={setFieldsError}
             dataClientSabin={dataClientSabin}
             newData={data}
+            setStep={setStep}
+            term={term}
+            setTerm={setTerm}
           />
         )}
         {step === 2 && (
@@ -157,13 +168,15 @@ const RegisterPatient = () => {
             setButtonPass={setFieldsError}
             dataClientSabin={dataClientSabin}
             newData={data}
+            setStep={setStep}
+            step={step}
           />
         )}
         {step === 3 && (
           <Document
-            onGetDocumentFiles={setdocumentFiles}
-            setButtonPass={setFieldsError}
+            onGetDocumentFiles={setDocumentFiles}
             savedFiles={documentFiles}
+            setStep={setStep}
           />
         )}
         {step === 4 && (
@@ -173,16 +186,12 @@ const RegisterPatient = () => {
             dataClientSabin={dataClientSabin}
           />
         )}
-        <BtnGroup>
-          {step > 1 && (
+        {step === 4 && (
+          <BtnGroup>
             <BtnPrev onClick={() => setStep(step - 1)}>Etapa Anterior</BtnPrev>
-          )}
-          {step === 4 ? (
             <CustomBtn onClick={handleSubmit}>Concluir cadastro</CustomBtn>
-          ) : (
-            <CustomBtn onClick={() => checkFields()}>Próxima Etapa</CustomBtn>
-          )}
-        </BtnGroup>
+          </BtnGroup>
+        )}
       </Content>
     </RegisterLayout>
   )

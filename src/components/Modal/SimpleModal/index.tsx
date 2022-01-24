@@ -9,11 +9,6 @@ import ButtonPrimary from '@/components/Button/Primary'
 
 import { Container } from './styles'
 
-interface ISimpleModal {
-  type: string
-  message: string
-}
-
 export const MODAL_TYPES = {
   ERROR: 'error',
   WARNING: 'warning',
@@ -24,6 +19,11 @@ const icons = {
   [MODAL_TYPES.ERROR]: errorIcon,
   [MODAL_TYPES.WARNING]: warningIcon,
   [MODAL_TYPES.SUCCESS]: successIcon,
+}
+
+interface ISimpleModal {
+  type: string
+  message: string
 }
 
 export const SimpleModal: React.FC<ISimpleModal> = ({ type, message }) => {

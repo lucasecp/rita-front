@@ -1,14 +1,15 @@
 import React from 'react'
 import { Container, DefaultImg, Profile } from './styles'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
+import { ReactComponent as WaitingIcon } from '@/assets/icons/waiting.svg'
 import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.svg'
 import { useHistory } from 'react-router'
 import { PATIENT_DOCTOR_INFORMATION } from '@/routes/constants/namedRoutes/routes'
 import { DoctorInfoProps } from '../../types/index'
+import CustomTooltip from '@/components/Tooltip'
 
 const DoctorInfo: React.FC<DoctorInfoProps> = ({ dataDoctor }) => {
   const history = useHistory()
-console.log(dataDoctor.specialtys);
 
   return (
     <Container>
@@ -27,13 +28,35 @@ console.log(dataDoctor.specialtys);
             <h6>Conselho Regional:</h6>
             <p>{dataDoctor.crm}</p>
           </div>
-          {dataDoctor.verified && <VerifiedIcon />}
+          {dataDoctor.verified ? (
+            <CustomTooltip label="Conselho de classe validado">
+              <VerifiedIcon />
+            </CustomTooltip>
+          ) : (
+            <CustomTooltip label="Conselho de classe aguardando validação">
+              <WaitingIcon />
+            </CustomTooltip>
+          )}
         </li>
         <li>
           <div>
             <h6>Especialidade:</h6>
             {dataDoctor.specialtys.map((spec) => (
-              <p key={spec}>{spec}</p>
+              <div key={spec.name}>
+                <p>
+                  {spec.RQE ? `${spec.name} - RQE Nº: ${spec.RQE}` : spec.name}
+                </p>
+                {spec.verified && spec.RQE !== undefined && (
+                  <CustomTooltip label="RQE validado">
+                    <VerifiedIcon />
+                  </CustomTooltip>
+                )}
+                {!spec.verified && spec.RQE !== undefined && (
+                  <CustomTooltip label="RQE aguardando validação">
+                    <WaitingIcon />
+                  </CustomTooltip>
+                )}
+              </div>
             ))}
           </div>
         </li>

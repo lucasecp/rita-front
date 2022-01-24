@@ -31,6 +31,7 @@ export interface ActionsProps {
   idDependent?: number
   isValidate?: boolean
   documentsOk?: boolean
+  dependent: Pick<DependentsI, 'id' | 'birthdate' | 'cpf'>
 }
 
 export interface HeaderProps {

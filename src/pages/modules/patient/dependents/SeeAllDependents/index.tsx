@@ -15,7 +15,7 @@ const SeeAllDependents = () => {
   const { Loading } = useLoading()
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Depedentes'
+    document.title = 'Rita Saúde | Dependentes'
 
     const getDependents = async () => {
       const ordertoApi = Object.keys(order).length

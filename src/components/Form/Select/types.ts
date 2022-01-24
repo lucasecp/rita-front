@@ -1,3 +1,5 @@
+import { SelectHTMLAttributes } from 'react'
+
 interface OptionsI {
   value: string | number
   label: string | number
@@ -8,7 +10,7 @@ interface OnChangeProps {
   }
 }
 
-export interface SelectProps {
+export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options?: OptionsI[]
   label?: string
   setValue?: (value: any) => void

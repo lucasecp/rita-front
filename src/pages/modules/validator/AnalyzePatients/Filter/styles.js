@@ -20,13 +20,16 @@ export const Container = styled.header`
     }
   }
 `
+
 export const BtnGroup = styled.div`
   margin-top: 24px;
   display: flex;
   justify-content: flex-end;
+
   button:first-child {
     margin-right: 24px;
   }
+
   @media (max-width: 540px) {
     flex-direction: column;
     button:first-child {
@@ -34,4 +37,6 @@ export const BtnGroup = styled.div`
       margin-bottom: 24px;
     }
   }
+
+  margin: 24px 24px 24px auto;
 `

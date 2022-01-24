@@ -17,7 +17,7 @@ import ButtonLink from '@/components/Button/Link'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/hooks/useModal'
-import ComeBack from './messages/ComeBack'
+import { ComeBack } from './messages/ComeBack'
 import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import { VALIDATOR_ANALYZE_PATIENTS } from '@/routes/constants/namedRoutes/routes'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
@@ -45,7 +45,7 @@ export const SeeOnePatient: React.FC = () => {
     [] as PatientData[],
   )
   const [patientAddress, setPatientAddress] = useState({} as PatientAddress)
-  const [dependent, setDependent] = useState({} as PatientData)
+  const [dependent, setDependent] = useState({} as PatientData | undefined)
 
   const [incomeType, setIncomeType] = useState('')
 
@@ -57,22 +57,17 @@ export const SeeOnePatient: React.FC = () => {
     const loadPatientInformations = async () => {
       try {
         Loading.turnOn()
-        const { data: dataPatient } = await apiPatient.get(
-          `/paciente/cpf?cpf=${cpf}`,
-        )
+        const { data } = await apiPatient.get(`/paciente/cpf?cpf=${cpf}`)
 
-        const { data: dataDependent } = await apiPatient.get(
-          `/paciente/cpf?cpf=${cpf}`,
-        )
-
-        const patientMapped = fromApi(dataPatient, dataDependent)
+        const patientMapped = fromApi(data)
 
         setPatientData(patientMapped.patientData)
         setPatientDependents(patientMapped.patientDependents)
         setPatientAddress(patientMapped.patientAddress)
         setDependent(patientMapped?.dependent)
         setIncomeType(patientMapped.incomeType)
-      } catch ({ response }) {
+      } catch (error) {
+        console.log(error)
       } finally {
         Loading.turnOff()
       }
@@ -103,28 +98,25 @@ export const SeeOnePatient: React.FC = () => {
     return age < 18
   }, [dependent])
 
-  console.log(hasDependentUnderAge)
-
   const onComeBack = () => {
     showMessage(ComeBack, { idPatient: patientData.id })
   }
 
   const onSaveValidations = async () => {
+    const idPatient = dependent ? dependent?.id : patientData?.id
+
     try {
       Loading.turnOn()
       await apiPatient.patch(
-        `/paciente/${patientData.id}/assumir-validacao?forcar=false`,
+        `/paciente/${idPatient}/assumir-validacao?forcar=false`,
       )
 
       localStorage.setItem(
-        `@Rita/Validate/OnePatient/${patientData.id}`,
+        `@Rita/Validate/OnePatient/${idPatient}`,
         JSON.stringify(validations),
       )
 
-      showMessage(SimpleModal, {
-        type: MODAL_TYPES.SUCCESS,
-        message: 'Validação salva!',
-      })
+      showSimple.success('Validação salva!')
     } catch (error) {
       const { response } = error as AxiosError
 
@@ -157,20 +149,19 @@ export const SeeOnePatient: React.FC = () => {
   }
 
   const onFinishValidations = async () => {
+    const idPatient = dependent ? dependent?.id : patientData?.id
+
     try {
       Loading.turnOn()
-      const response = await apiPatient.post(
-        `/paciente/${patientData.id}/validar`,
-        {
-          dadosOk: {
-            resposta: validations.documentOk === 'yes',
-            motivo: validations.resonDocumentNotOk,
-          },
-          rendaBaixa: {
-            resposta: validations.incomeOk === 'yes',
-          },
+      const response = await apiPatient.post(`/paciente/${idPatient}/validar`, {
+        dadosOk: {
+          resposta: validations.documentOk === 'yes',
+          motivo: validations.resonDocumentNotOk,
         },
-      )
+        rendaBaixa: {
+          resposta: validations.incomeOk === 'yes',
+        },
+      })
 
       if (response.status === 201) {
         if (response.data.mensagem === 'Validação concluída!') {
@@ -218,11 +209,13 @@ export const SeeOnePatient: React.FC = () => {
           title="Dados cadastrais do titular"
           personData={patientData}
           holder
+          defaultExpanded={!dependent}
         />
         {dependent && (
           <PersonExpandable
             title="Dados cadastrais para análise"
             personData={dependent}
+            defaultExpanded
           />
         )}
         {patientDependents?.map((dependent, index) => (
@@ -239,7 +232,7 @@ export const SeeOnePatient: React.FC = () => {
           hasDependentUnderAge={hasDependentUnderAge}
         />
         <ValidationSeeOnePatient
-          patientId={patientData.id}
+          patientId={dependent ? dependent.id : patientData.id}
           validations={validations}
           onChangeValidations={setValidations}
         />

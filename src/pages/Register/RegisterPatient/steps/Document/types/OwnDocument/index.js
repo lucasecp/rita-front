@@ -2,12 +2,17 @@ import React from 'react'
 import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 import { AccordionContainer } from '../styles'
 
-import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down.svg'
+import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
 import InstructionsOwnDocuments from './Instructions'
 import SendedFile from '../../components/SendedFile'
 
-const OwnDocument = ({ ownDocumentFile, onGetFile, hasPreviousDocument }) => {
+const OwnDocument = ({
+  ownDocumentFile,
+  onGetFile,
+  hasPreviousDocument,
+  error,
+}) => {
   return (
     <>
       <AccordionContainer
@@ -21,14 +26,16 @@ const OwnDocument = ({ ownDocumentFile, onGetFile, hasPreviousDocument }) => {
           expandIcon={!ownDocumentFile && <ArrowDownIcon />}
           disabled={!!ownDocumentFile}
         >
-          <h2>Foto do documento de identificação</h2>
+          <h2>
+            Foto do documento de identificação - Frente <span>*</span>
+          </h2>
         </AccordionSummary>
         <AccordionDetails>
           {ownDocumentFile && (
             <SendedFile file={ownDocumentFile} onGetFile={onGetFile} />
           )}
           {!ownDocumentFile && (
-            <InstructionsOwnDocuments onGetFile={onGetFile} />
+            <InstructionsOwnDocuments onGetFile={onGetFile} error={error} />
           )}
         </AccordionDetails>
       </AccordionContainer>

@@ -4,7 +4,7 @@ import { Container } from './styles'
 import ClinicItemDetails from '../ClinicItemDetails'
 import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg'
-import Accordion from '../../../components/Accordion'
+import Accordion from '../../../dependents/AddDependentDocument/containers/MinorAge/components/Accordion'
 import { useToggle } from '@/hooks/useToggle'
 import CustomTooltip from '@/components/Tooltip'
 
