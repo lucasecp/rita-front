@@ -26,10 +26,7 @@ const BirthCertificate = ({ BirthdayCertificateFile, onGetFile, error }) => {
             <SendedFile file={BirthdayCertificateFile} onGetFile={onGetFile} />
           )}
           {!BirthdayCertificateFile && (
-            <InstructionsBirthCertificate
-              onGetFile={onGetFile}
-              error={error}
-            />
+            <InstructionsBirthCertificate onGetFile={onGetFile} error={error} />
           )}
         </AccordionDetails>
       </AccordionContainer>
