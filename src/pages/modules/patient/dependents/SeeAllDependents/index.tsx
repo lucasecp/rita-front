@@ -2,14 +2,14 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import React, { useState, useEffect } from 'react'
 import { Content, Container } from './styles'
 import Table from './Table'
-import ButtonHeader from './components/ButtonHeader'
+import { AddDependentButton } from './components/AddDependentButton'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { queryOrderString } from '@/helpers/queryString/order'
 import { fromApi } from './adapters'
 import { DependentsI } from './types'
 
-const SeeAllDependents = () => {
+export const SeeAllDependents: React.FC = () => {
   const [dependents, setDependents] = useState<DependentsI[]>([])
   const [order, setOrder] = useState({})
   const { Loading } = useLoading()
@@ -40,7 +40,12 @@ const SeeAllDependents = () => {
 
   return (
     <Container>
-      <DefaultLayout title="Dependentes" headerChildren={<ButtonHeader />}>
+      <DefaultLayout
+        title="Dependentes"
+        headerChildren={
+          <AddDependentButton currentDependent={dependents.length} />
+        }
+      >
         <Content>
           <Table dependents={dependents} order={order} setOrder={setOrder} />
         </Content>
@@ -48,5 +53,3 @@ const SeeAllDependents = () => {
     </Container>
   )
 }
-
-export default SeeAllDependents

@@ -62,7 +62,7 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
 
   return (
     <Container>
-      <h1>Dados de Acesso</h1>
+      <h1>Responsável pela clínica</h1>
       <section>
         <InputText
           label="Administrador da clínica:"
@@ -71,7 +71,7 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
           name="name"
           hasError={!!errors?.nameAdmin}
           msgError={errors?.nameAdmin}
-          maxLength={100}
+          maxLength={70}
           onBlur={() =>
             setErrors({ ...errors, nameAdmin: validateAdminName(nameAdmin) })
           }
