@@ -10,6 +10,7 @@ import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 import { ReactComponent as ManagmentIcon } from '@/assets/icons/managment.svg'
 import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
 import { ReactComponent as SellableItemsIcon } from '@/assets/icons/salable-items.svg'
+import { ReactComponent as ProfilesIcon } from '@/assets/icons/profiles.svg'
 import { ReactComponent as ClinicsIcon } from '@/assets/icons/clinic.svg'
 
 import {
@@ -24,7 +25,8 @@ import {
   DIRECTOR_PLAN_MANAGMENT,
   PATIENT_DEPENDENTS,
   FILTER_SELLABLE_ITEMS,
-  OPERATOR_SEE_ALL_CLINICS
+  OPERATOR_SEE_ALL_CLINICS,
+  DIRECTOR_SEE_PERFIS,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -94,6 +96,12 @@ export const menuItens = [
     path: FILTER_SELLABLE_ITEMS,
     icon: <SellableItemsIcon />,
     name: 'Itens Vendáveis',
+    permission: permissionList.LISTAR_ITENS_VENDAVEIS,
+  },
+  {
+    path: DIRECTOR_SEE_PERFIS,
+    icon: <ProfilesIcon />,
+    name: 'Perfis',
     permission: permissionList.LISTAR_ITENS_VENDAVEIS,
   },
   {
