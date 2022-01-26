@@ -11,7 +11,7 @@ export const Accordion = styled.div<AccordionProps>`
   visibility: hidden;
   overflow: hidden;
 
-  ${({ expanded, height }) =>
+  ${({ expanded }) =>
     expanded &&
     css`
       overflow: visible;

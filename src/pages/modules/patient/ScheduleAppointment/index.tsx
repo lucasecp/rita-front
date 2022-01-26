@@ -3,7 +3,7 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Content } from './styles'
 import Filters from './Filters'
 
-const ScheduleAppointment = () => {
+const ScheduleAppointment: React.FC = () => {
   useEffect(() => {
     document.title = 'Rita Saúde | Agende sua Consulta'
   }, [])
