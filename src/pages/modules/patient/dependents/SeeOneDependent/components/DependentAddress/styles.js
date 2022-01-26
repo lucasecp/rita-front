@@ -21,7 +21,7 @@ export const Container = styled.section`
       grid-column: span 2;
     }
     > *:nth-child(6) {
-      grid-column: span 2; 
+      grid-column: span 2;
     }
   }
 

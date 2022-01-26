@@ -3,7 +3,7 @@ import React from 'react'
 import { ReactComponent as WarningIcon } from '@/assets/icons/alerts/warning.svg'
 
 import { Select } from '@/components/Form/Select'
-import BoxSendIncome from './BoxSendIncome'
+import { BoxSendIncome } from './BoxSendIncome'
 
 import { Container } from './styles'
 import { incomeType, incomeOptions } from '../../../constants/income'

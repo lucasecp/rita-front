@@ -11,7 +11,7 @@ const OwnBackDocument = ({
   ownBackDocumentFile,
   onGetFile,
   hasPreviousDocument,
-  error
+  error,
 }) => {
   return (
     <>

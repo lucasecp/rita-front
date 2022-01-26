@@ -14,12 +14,47 @@ import { useModal } from '@/hooks/useModal'
 import { SuccessUpdateProfile } from './messages/SuccessUpdateProfile'
 import { SupplementaryData } from './components/SupplementaryData'
 
-export const EditPersonalData = ({ personalDatas }) => {
+interface EditPersonalDataProps {
+  personalDatas: {
+    personalDatas: {
+      name: string
+      birthDate: string
+      gender: string
+      phone: string
+      email: string
+      hasError?: boolean
+    }
+    address: {
+      cep: string
+      uf: string
+      city: string
+      addressUser: string
+      number: string
+      district: string
+      complement: string
+      hasError?: boolean
+    }
+    supplementaryData: {
+      contractedPlan: string
+      contractedPlanSince: string
+      price: string
+      channel: string
+      company: string
+      hasError?: boolean
+    }
+  }
+}
+
+export const EditPersonalData: React.FC<EditPersonalDataProps> = ({
+  personalDatas,
+}) => {
   const { Loading } = useLoading()
   const { showSimple, showMessage } = useModal()
 
   const [isEditing, toogleEditing] = useToggle()
-  const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState(false)
+  const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState<
+    boolean | undefined
+  >(false)
 
   const [mainPersonalDatas, setMainPersonalDatas] = useState(
     personalDatas?.personalDatas,
@@ -54,7 +89,7 @@ export const EditPersonalData = ({ personalDatas }) => {
         },
       }
 
-      await apiPatient.put('/paciente', {
+      await apiPatient.put('/paciente/meu-perfil', {
         ...mainPersonalDatasMapped,
         ...addressMapped,
       })

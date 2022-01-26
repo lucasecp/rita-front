@@ -6,22 +6,26 @@ import { LimitDependent } from './messages/LimitDependent'
 // import { useAuth } from '@/hooks/login'
 
 interface AddDependentButtonProps {
+  company: string
   currentDependent: number
 }
 
 export const AddDependentButton: React.FC<AddDependentButtonProps> = ({
+  company,
   currentDependent,
 }) => {
   const { showMessage } = useModal()
   // const { user } = useAuth()
 
   const limitOfDependents = 2
-  const isPatientLinkedCompany = true
+  const isPatientLinkedCompany = !!company
 
   const onAddDependent = () => {
     if (isPatientLinkedCompany && currentDependent >= limitOfDependents) {
       return showMessage(LimitDependent)
     }
+
+    console.log('Redirecionar para pagina de adicionar um novo dependente')
   }
 
   return (
