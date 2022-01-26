@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import OutilineButton from '@/components/Button/Outline'
-import ButtonPrimary from '@/components/Button/Primary'
 import { Container, Footer, CustomBtn } from './styles'
 import { Select } from '@/components/Form/Select'
 import OwnDocument from './documents/OwnDocument'
@@ -14,8 +13,6 @@ import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 import { useHistory } from 'react-router'
 import { useModal } from '@/hooks/useModal'
 import { CancelAndExit } from './documents/messages/CancelAndExit'
-import { AddADocument } from './documents/messages/AddADocument'
-import { AddABirthCertificate } from './documents/messages/AddABirthCertificate'
 
 interface MinorAgeProps {
   dependent: {

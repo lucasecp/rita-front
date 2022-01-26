@@ -40,15 +40,6 @@ const Filter = () => {
   const [filters, setFilters] = useState([])
   const [submited, setSubmited] = useState(false)
 
-  useEffect(() => {
-    setFilters(verifyTypedFields(objQuery))
-  }, [])
-
-  useEffect(() => {
-    if (!dates[0] && !dates[1] && submited)
-      setFilters(verifyTypedFields(objQuery))
-  }, [dates])
-
   const objQuery = [
     { name: 'nome', value: name },
     { name: 'cpf', value: clearFormat(cpf) },
@@ -57,6 +48,19 @@ const Filter = () => {
     { name: 'dataCadastroFim', value: convertDate(dates[1]) },
     { name: 'idValidador', value: validator === 'ALL' ? '' : validator },
   ]
+
+  const verifyTypedFields = (fields) => {
+    return fields.filter((field) => field.value)
+  }
+
+  useEffect(() => {
+    setFilters(verifyTypedFields(objQuery))
+  }, [])
+
+  useEffect(() => {
+    if (!dates[0] && !dates[1] && submited)
+      setFilters(verifyTypedFields(objQuery))
+  }, [dates])
 
   const validateFields = () => {
     const newErrors = {}
@@ -93,10 +97,6 @@ const Filter = () => {
     if (Object.keys(validateFields()).length) return
 
     setFilters(verifyTypedFields(objQuery))
-  }
-
-  const verifyTypedFields = (fields) => {
-    return fields.filter((field) => field.value)
   }
 
   return (

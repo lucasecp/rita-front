@@ -2,16 +2,20 @@ import OutlineButton from '@/components/Button/Outline'
 import React, { useEffect, useState } from 'react'
 import { Container } from '../style'
 import Form from './messages/Form'
-import { Content } from './style'
+import { Content } from './styles'
 import trash from '@/assets/icons/trash.svg'
 import edit from '@/assets/icons/edit.svg'
 import { useModal } from '@/hooks/useModal'
 import { formatCpf } from '@/helpers/formatCpf'
 import mapDeps from '../../helpers/formatDateCardSabin'
+import { LimitDependent } from '@/pages/modules/patient/dependents/SeeAllDependents/components/AddDependentButton/messages/LimitDependent'
 
-const Dependents = ({ dataClientSabin, setData, newData }) => {
+export const Dependents = ({ dataClientSabin, setData, newData }) => {
   const [allDeps, setAllDeps] = useState([])
   const { showMessage } = useModal()
+
+  const limitOfDependents = 2
+  const isPatientLinkedCompany = true
 
   useEffect(() => {
     setAllDeps(
@@ -20,9 +24,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
   }, [])
 
   useEffect(() => {
-    setData((data) => {
-      return { ...data, dependentes: allDeps }
-    })
+    setData((data) => ({ ...data, dependentes: allDeps }))
   }, [allDeps])
 
   const handleUpdate = (infoDep, id) => {
@@ -36,6 +38,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
       dataClientSabin,
     })
   }
+
   const handleDelete = (id) => {
     const valueUpdated = allDeps.filter((dep, index) => index !== id)
     if (dataClientSabin?.dependentes) {
@@ -43,7 +46,12 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
     }
     setAllDeps(valueUpdated)
   }
-  const handleAddDep = () => {
+
+  const onAddDependent = () => {
+    if (isPatientLinkedCompany && allDeps.length >= limitOfDependents) {
+      return showMessage(LimitDependent)
+    }
+
     showMessage(Form, {
       editDep: {},
       allDeps,
@@ -53,6 +61,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
       dataClientSabin,
     })
   }
+
   return (
     <Container>
       <Content>
@@ -84,7 +93,7 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
         <OutlineButton
           disabled={allDeps.length === 5}
           variation="blue"
-          onClick={handleAddDep}
+          onClick={onAddDependent}
         >
           Adicionar Dependentes
         </OutlineButton>
@@ -92,5 +101,3 @@ const Dependents = ({ dataClientSabin, setData, newData }) => {
     </Container>
   )
 }
-
-export default Dependents

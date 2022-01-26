@@ -44,13 +44,19 @@ export const validateBirthdate = (value) => {
   const dateFormate = moment(value, 'DD/MM/YYYY', true)
   const birthDate = parse(value, 'dd/MM/yyyy', new Date())
 
+  if (!value) {
+    return { birthdate: 'Data de Nascimento Obrigatória.' }
+  }
+
   if (
     !dateFormate.isValid() ||
     moment().diff(dateFormate, 'years') >= 200 ||
     dateFormate.isAfter(moment())
   ) {
     return { birthdate: 'Data de Nascimento Inválida.' }
-  } else if (isValid(birthDate)) {
+  }
+
+  if (isValid(birthDate)) {
     const { years } = intervalToDuration({ start: birthDate, end: new Date() })
 
     if (years < 18) {
@@ -59,6 +65,7 @@ export const validateBirthdate = (value) => {
 
     return { birthdate: '' }
   }
+
   return { birthdate: '' }
 }
 

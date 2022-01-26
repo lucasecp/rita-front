@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Address } from './steps/Address'
 import RegistrationData from './steps/RegistrationData'
 import Document from './steps/Document'
-import Dependents from './steps/Dependents'
+import { Dependents } from './steps/Dependents'
 import { Content, DotSteps, BtnGroup, BtnPrev, CustomBtn } from './style'
 import { useLocation } from 'react-router'
 // import { DATAFAKE } from './static'
@@ -56,7 +56,8 @@ const RegisterPatient = () => {
     if (documentFiles.selectIncome === 'more_one_half')
       return 'AcimaDeUmSalarioMinimoEMeio'
   }
-  const handleSubmit = async () => {
+
+  const onFinishRegistration = async () => {
     const formFile1 = new FormData()
     formFile1.append('file', documentFiles.holdingDocumentFile)
     const formFile2 = new FormData()
@@ -67,8 +68,10 @@ const RegisterPatient = () => {
     formFile4.append('file', documentFiles.proofOfAddressFile)
     const formFile5 = new FormData()
     formFile5.append('file', documentFiles.proofOfIncomeFile)
-    Loading.turnOn()
+
     try {
+      Loading.turnOn()
+
       const response = await apiPatient.post('/paciente', {
         ...data,
         renda: formatDocumentFiles(),
@@ -84,6 +87,7 @@ const RegisterPatient = () => {
         responseApiStatus = status.SERVER_ERROR
       }
     }
+
     try {
       await axios.all([
         apiPatient.post(
@@ -120,21 +124,25 @@ const RegisterPatient = () => {
       }
     } finally {
       Loading.turnOff()
-      if (responseApiStatus === status.ALREADY_EXISTS) {
-        showMessage(SimpleModal, {
-          type: MODAL_TYPES.ERROR,
-          message: 'Paciente já cadastrado.',
-        })
-      }
-      if (responseApiStatus === status.SERVER_ERROR) {
-        showMessage(Server)
-      }
-      if (responseApiStatus === status.BAD_REQUEST_DOCUMENTS) {
-        showMessage(DocumentNoSent)
-      }
-      if (responseApiStatus === status.SUCCESS) {
-        showMessage(Success)
-      }
+    }
+
+    if (responseApiStatus === status.ALREADY_EXISTS) {
+      showMessage(SimpleModal, {
+        type: MODAL_TYPES.ERROR,
+        message: 'Paciente já cadastrado.',
+      })
+    }
+
+    if (responseApiStatus === status.SERVER_ERROR) {
+      showMessage(Server)
+    }
+
+    if (responseApiStatus === status.BAD_REQUEST_DOCUMENTS) {
+      showMessage(DocumentNoSent)
+    }
+
+    if (responseApiStatus === status.SUCCESS) {
+      showMessage(Success)
     }
   }
 
@@ -189,7 +197,9 @@ const RegisterPatient = () => {
         {step === 4 && (
           <BtnGroup>
             <BtnPrev onClick={() => setStep(step - 1)}>Etapa Anterior</BtnPrev>
-            <CustomBtn onClick={handleSubmit}>Concluir cadastro</CustomBtn>
+            <CustomBtn onClick={onFinishRegistration}>
+              Concluir cadastro
+            </CustomBtn>
           </BtnGroup>
         )}
       </Content>

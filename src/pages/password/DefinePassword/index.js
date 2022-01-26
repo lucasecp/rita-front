@@ -43,6 +43,21 @@ function Password() {
     if (!state) return history.push(LOGIN)
   }, [])
 
+  const validateErrors = () => {
+    const newErrors = {}
+    if (!hasSpecialCaracter(password)) newErrors.password = msgErrorPass
+    if (!hasLetter(password)) newErrors.password = msgErrorPass
+    if (!hasNumber(password)) newErrors.password = msgErrorPass
+    if (password.includes(' ')) newErrors.password = msgErrorPass
+    if (password.trim().length < 6) newErrors.password = msgErrorPass
+    if (password.trim() !== confirmPass.trim())
+      newErrors.confirmPass = msgErrorPass
+    if (!password.trim()) newErrors.password = 'Campo Obrigatório'
+    if (!confirmPass.trim()) newErrors.confirmPass = 'Campo Obrigatório'
+    setErrors(newErrors)
+    return newErrors
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (Object.values(validateErrors()).length) return
@@ -71,21 +86,6 @@ function Password() {
     } finally {
       Loading.turnOff()
     }
-  }
-
-  const validateErrors = () => {
-    const newErrors = {}
-    if (!hasSpecialCaracter(password)) newErrors.password = msgErrorPass
-    if (!hasLetter(password)) newErrors.password = msgErrorPass
-    if (!hasNumber(password)) newErrors.password = msgErrorPass
-    if (password.includes(' ')) newErrors.password = msgErrorPass
-    if (password.trim().length < 6) newErrors.password = msgErrorPass
-    if (password.trim() !== confirmPass.trim())
-      newErrors.confirmPass = msgErrorPass
-    if (!password.trim()) newErrors.password = 'Campo Obrigatório'
-    if (!confirmPass.trim()) newErrors.confirmPass = 'Campo Obrigatório'
-    setErrors(newErrors)
-    return newErrors
   }
 
   return (

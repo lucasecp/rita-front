@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router'
+// import { useHistory } from 'react-router'
 
 import { useModal } from '@/hooks/useModal'
 import { Container, ButtonGroup, PlanName, Price } from './styles'
@@ -12,15 +12,15 @@ import apiPatient from '@/services/apiPatient'
 
 import warning from '@/assets/icons/alerts/warning.svg'
 import ButtonPrimary from '@/components/Button/Primary'
-import {
-  DELETE_SELLABLE_ITEMS,
-  FILTER_SELLABLE_ITEMS,
-} from '@/routes/constants/namedRoutes/routes'
+// import {
+//   DELETE_SELLABLE_ITEMS,
+//   FILTER_SELLABLE_ITEMS,
+// } from '@/routes/constants/namedRoutes/routes'
 
 const DeleteModal = ({ plan }) => {
   const { closeModal } = useModal()
   const { Loading } = useLoading()
-  const history = useHistory()
+  // const history = useHistory()
   const initialDescription = ''
   const [description, setDescription] = useState(initialDescription)
   const [error, setError] = useState('')
@@ -29,7 +29,7 @@ const DeleteModal = ({ plan }) => {
     if (description.length > 20) {
       Loading.turnOn()
       try {
-        const response = await apiPatient.delete(`/itens-vendaveis/${plan.id}`, {
+        await apiPatient.delete(`/itens-vendaveis/${plan.id}`, {
           params: {
             idPlano: plan.idPlan,
             tipo: plan.type === 'city' ? 'municipio' : plan.type,

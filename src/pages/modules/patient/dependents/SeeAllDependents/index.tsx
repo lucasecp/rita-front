@@ -11,6 +11,8 @@ import { DependentsI } from './types'
 
 export const SeeAllDependents: React.FC = () => {
   const [dependents, setDependents] = useState<DependentsI[]>([])
+  const [company, setCompany] = useState('')
+
   const [order, setOrder] = useState({})
   const { Loading } = useLoading()
 
@@ -29,7 +31,12 @@ export const SeeAllDependents: React.FC = () => {
         const { data } = await apiPatient(
           `paciente/meu-perfil?${queryOrderString(ordertoApi)}`,
         )
-        setDependents(fromApi(data.dependentes))
+
+        const { companyMapped, dependentsMapped } = fromApi(data)
+
+        setCompany(companyMapped)
+
+        setDependents(dependentsMapped)
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
@@ -43,7 +50,10 @@ export const SeeAllDependents: React.FC = () => {
       <DefaultLayout
         title="Dependentes"
         headerChildren={
-          <AddDependentButton currentDependent={dependents.length} />
+          <AddDependentButton
+            company={company}
+            currentDependent={dependents.length}
+          />
         }
       >
         <Content>

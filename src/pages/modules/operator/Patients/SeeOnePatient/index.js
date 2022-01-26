@@ -22,16 +22,11 @@ import { toast } from 'react-toastify'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 // import apiUser from '@/services/apiUser'
 
-function seeOnePatient() {
+export const SeeOnePatient = () => {
   const history = useHistory()
   const location = useLocation()
   const { Loading } = useLoading()
   const { showMessage, showSimple } = useModal()
-
-  if (!location.state) {
-    history.push(OPERATOR_ANALYZE_PATIENT)
-    return null
-  }
 
   const [disableSaveButton, setDisableSaveButton] = useState(true)
 
@@ -46,6 +41,12 @@ function seeOnePatient() {
 
   useEffect(() => {
     document.title = 'Rita Saúde | Pacientes'
+
+    if (!location.state) {
+      history.push(OPERATOR_ANALYZE_PATIENT)
+      return null
+    }
+
     const loadPatientInformations = async () => {
       const userCpf = location.state.cpf
       let holdingDocument
@@ -239,5 +240,3 @@ function seeOnePatient() {
     </DefaultLayout>
   )
 }
-
-export default seeOnePatient

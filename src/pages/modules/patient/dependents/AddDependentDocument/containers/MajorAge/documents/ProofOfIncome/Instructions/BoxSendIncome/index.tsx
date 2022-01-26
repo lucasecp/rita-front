@@ -5,7 +5,11 @@ import { InputFile } from '@/components/Form/InputFile'
 
 import { Container } from './styles'
 
-function BoxSendIncome({ onGetFile }) {
+interface BoxSendIncomeProps {
+  onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+}
+
+export const BoxSendIncome: React.FC<BoxSendIncomeProps> = ({ onGetFile }) => {
   return (
     <Container>
       <div id="box-information">
@@ -52,5 +56,3 @@ function BoxSendIncome({ onGetFile }) {
     </Container>
   )
 }
-
-export default BoxSendIncome
