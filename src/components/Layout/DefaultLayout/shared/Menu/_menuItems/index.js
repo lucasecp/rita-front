@@ -24,7 +24,8 @@ import {
   DIRECTOR_PLAN_MANAGMENT,
   PATIENT_DEPENDENTS,
   FILTER_SELLABLE_ITEMS,
-  OPERATOR_SEE_ALL_CLINICS
+  OPERATOR_SEE_ALL_CLINICS,
+  OPERATOR_DEPENDENT_MANAGMENT
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -101,5 +102,11 @@ export const menuItens = [
     icon: <ClinicsIcon />,
     name: 'Clínicas',
     permission: permissionList.LISTAR_CLINICAS,
+  },
+  {
+    path: OPERATOR_DEPENDENT_MANAGMENT,
+    icon: <GroupUserIcon />,
+    name: 'Gestão de Dependentes',
+    permission: permissionList.ALTERAR_DADOS_PACIENTE,
   },
 ]

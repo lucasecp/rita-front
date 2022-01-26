@@ -25,7 +25,7 @@ const SelectCity: React.FC<SelectCityProps> = ({ setCity, city, uf }) => {
 
         const allOptions =
           dataMapped.length && dataMapped.length >= 2
-            ? [{ label: 'Todas', value: 'ALL' }]
+            ? [{ label: 'Todas', value: 'All' }]
             : []
 
         setCityOptions([...allOptions, ...dataMapped])
