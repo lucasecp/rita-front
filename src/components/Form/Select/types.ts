@@ -21,4 +21,5 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   hasError?: string | boolean
   onChange?: (props: OnChangeProps) => void
   disabled?: boolean
+  onBlur?: () => void
 }

@@ -19,6 +19,9 @@ interface MultiSelectCustomProps {
   hasError?: boolean
   disabled?: boolean
   variation?: 'secondary'
+  onSelect?: (value: MultiSelectOption[]) => void
+  onRemove?: (value: MultiSelectOption[]) => void
+  closeOnSelect?: boolean
   // [x: string]: string
 }
 
@@ -42,7 +45,7 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
   window.onresize = () => adjustSelectOptions(containerDiv?.current)
 
   return (
-    <Container disabled={disabled} variation={variation} {...rest}>
+    <Container disabled={disabled} variation={variation}>
       {label && <label>{label}</label>}
       <Content
         disabled={disabled}
@@ -51,7 +54,6 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
         id={generateRandomString(7)}
         onClick={() => adjustSelectOptions(containerDiv?.current)}
         variation={variation}
-        {...rest}
       >
         <Multiselect
           options={options || []}
@@ -64,6 +66,7 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
           onSelect={(values) => setValue !== undefined && setValue(values)}
           onRemove={(values) => setValue !== undefined && setValue(values)}
           selectedValues={value}
+
           {...rest}
         />
         {!!value?.length && (

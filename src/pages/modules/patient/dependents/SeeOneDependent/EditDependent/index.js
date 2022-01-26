@@ -84,12 +84,14 @@ const EditDependent = ({ dependentData }) => {
           <ButtonLink onClick={() => history.push(PATIENT_DEPENDENTS)}>
             Voltar
           </ButtonLink>
-          <OutilineButton onClick={onEdit} disabled>Editar</OutilineButton>
+          <OutilineButton onClick={onEdit} disabled>
+            Editar
+          </OutilineButton>
         </ButtonGroup>
       ) : (
         <ButtonGroup>
           <ButtonLink onClick={onCancel}>Cancelar</ButtonLink>
-          <OutilineButton onClick={onSave} disabled={buttonIsDisabled} disabled>
+          <OutilineButton onClick={onSave} disabled={buttonIsDisabled}>
             Salvar
           </OutilineButton>
         </ButtonGroup>

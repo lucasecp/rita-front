@@ -1,4 +1,4 @@
-import documentBackImage from '@/assets/img/document-back.png'
+import proofAddress from '@/assets/img/proof-address.png'
 
 import { Container } from './styles'
 
@@ -14,7 +14,7 @@ function InstructionsBirthCertificate({ onGetFile, error }) {
       </h3>
       <div>
         <section>
-          <img src={documentBackImage} />
+          <img src={proofAddress} />
         </section>
         <aside>
           <div id="box-information">

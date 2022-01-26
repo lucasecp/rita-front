@@ -2,11 +2,18 @@ import React, { useEffect, useState } from 'react'
 
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import { Select } from '@/components/Form/Select'
 
 import { Container } from './styles'
-import { UF } from '@/constants/ufs'
 import { AddressI, ErrorsAddressI } from '../../Types'
+import SelectCity from '../SelectCity'
+import SelectUf from '../SelectUf'
+import {
+  validateCep,
+  validateAddress,
+  validateNumberHome,
+  validateDistrict,
+  validateCity
+} from '../../helpers/validatorFields'
 
 interface ClinicAddressProps {
   address: AddressI
@@ -25,6 +32,7 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
 }) => {
   const [cep, setCep] = useState(address?.cep || '')
   const [uf, setUf] = useState(address?.uf || '')
+  const [ufToApi, setUfToApi] = useState('')
   const [city, setCity] = useState(address?.city || '')
   const [addressDep, setAddressDep] = useState(address?.address || '')
   const [number, setNumber] = useState(address?.number || '')
@@ -46,7 +54,7 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
   useEffect(() => {
     setAddress({
       cep,
-      uf,
+      uf: ufToApi,
       city,
       address: addressDep,
       number,
@@ -79,25 +87,27 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
           value={cep}
           setValue={setCep}
           disabled={!isEditing}
-          // onBlur={() => setErrors({ ...errors, cep: validateCep(cep) })}
-          // onKeyUp={() => setErrors({ ...errors, cep: validateCep(cep) })}
+          onBlur={() => setErrors({ ...errors, cep: validateCep(cep) })}
+          onKeyUp={() => setErrors({ ...errors, cep: validateCep(cep) })}
           msgError={errors.cep}
           hasError={!!errors.cep}
         />
-        <Select
-          label="UF:"
-          labelDefaultOption="Selecione:"
-          options={UF}
-          setValue={setUf}
-          value={uf}
+        <SelectUf
+          setUf={setUf}
+          uf={uf}
           disabled={!isEditing}
+          setUfToApi={setUfToApi}
         />
         <InputText
           label="Cidade:"
           value={city}
           setValue={setCity}
-          name="city"
           disabled={!isEditing}
+          onBlur={() => setErrors({ ...errors, city: validateCity(city) })}
+          onKeyUp={() => setErrors({ ...errors, city: validateCity(city) })}
+          msgError={errors.city}
+          hasError={!!errors.city}
+          maxLength={50}
         />
         <InputText
           label="Endereço:"
@@ -105,6 +115,15 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
           setValue={setAddressDep}
           name="address"
           disabled={!isEditing}
+          onBlur={() =>
+            setErrors({ ...errors, address: validateAddress(addressDep) })
+          }
+          onKeyUp={() =>
+            setErrors({ ...errors, address: validateAddress(addressDep) })
+          }
+          msgError={errors.address}
+          hasError={!!errors.address}
+          maxLength={100}
         />
         <InputText
           label="Número:"
@@ -112,6 +131,15 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
           setValue={setNumber}
           name="number"
           disabled={!isEditing}
+          onBlur={() =>
+            setErrors({ ...errors, number: validateNumberHome(number) })
+          }
+          onKeyUp={() =>
+            setErrors({ ...errors, number: validateNumberHome(number) })
+          }
+          msgError={errors.number}
+          hasError={!!errors.number}
+          maxLength={20}
         />
         <InputText
           label="Complemento:"
@@ -119,12 +147,22 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
           setValue={setComplement}
           name="complement"
           disabled={!isEditing}
+          maxLength={100}
         />
         <InputText
           label="Bairro:"
           value={district}
           setValue={setDistrict}
           disabled={!isEditing}
+          onBlur={() =>
+            setErrors({ ...errors, district: validateDistrict(district) })
+          }
+          onKeyUp={() =>
+            setErrors({ ...errors, district: validateDistrict(district) })
+          }
+          msgError={errors.district}
+          hasError={!!errors.district}
+          maxLength={100}
         />
       </section>
     </Container>

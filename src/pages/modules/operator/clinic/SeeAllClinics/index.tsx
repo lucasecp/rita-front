@@ -41,7 +41,7 @@ const SeeAllClinics: React.FC = () => {
           }`,
         )
         setClinics({ total: data.total, data: fromApi(data.clinicas) })
-      } catch ({ response }) {
+      } catch (error) {
       } finally {
         Loading.turnOff()
       }

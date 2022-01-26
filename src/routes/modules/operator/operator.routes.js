@@ -1,10 +1,14 @@
 import React from 'react'
 import Route from '../../custom.routes'
 
-import SeeOnePatient from '@/pages/modules/operator/Patients/SeeOnePatient'
+import { SeeOnePatient } from '@/pages/modules/operator/Patients/SeeOnePatient'
 import AnalyzePatients from '@/pages/modules/operator/Patients/AnalyzePatients'
 import Reports from '@/pages/modules/operator/Reports'
 import { ConsultEligibility } from '@/pages/modules/operator/ConsultEligibility'
+
+import Authorization from '@/pages/modules/operator/Reports/Authorization'
+import SeeAllClinics from '@/pages/modules/operator/clinic/SeeAllClinics'
+import SeeOneClinic from '@/pages/modules/operator/clinic/SeeOneClinic'
 
 import {
   OPERATOR_ANALYZE_PATIENT,
@@ -15,11 +19,11 @@ import {
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ONE_CLINIC,
   OPERATOR_SEE_ALL_SPECIALTYS,
+  OPERATOR_DEPENDENT_MANAGMENT,
 } from '../../constants/namedRoutes/routes'
-import Authorization from '@/pages/modules/operator/Reports/Authorization'
-import SeeAllClinics from '@/pages/modules/operator/clinic/SeeAllClinics'
-import SeeOneClinic from '@/pages/modules/operator/clinic/SeeOneClinic'
+
 import SeeAllSpecialtys from '@/pages/modules/operator/clinic/SeeAllSpecialtys'
+import Managment from '@/pages/modules/operator/dependent/Managment'
 
 const operatorRoutes = [
   {
@@ -53,6 +57,10 @@ const operatorRoutes = [
   {
     path: OPERATOR_SEE_ALL_SPECIALTYS,
     component: SeeAllSpecialtys,
+  },
+  {
+    path: OPERATOR_DEPENDENT_MANAGMENT,
+    component: Managment,
   },
 ]
 

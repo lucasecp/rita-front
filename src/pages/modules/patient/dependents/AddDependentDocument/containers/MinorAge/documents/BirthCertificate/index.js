@@ -2,7 +2,7 @@ import React from 'react'
 import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 import { AccordionContainer } from '../styles'
 
-import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
+// import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
 import InstructionsBirthCertificate from './Instructions'
 import SendedFile from '../components/SendedFile'
@@ -26,10 +26,7 @@ const BirthCertificate = ({ BirthdayCertificateFile, onGetFile, error }) => {
             <SendedFile file={BirthdayCertificateFile} onGetFile={onGetFile} />
           )}
           {!BirthdayCertificateFile && (
-            <InstructionsBirthCertificate
-              onGetFile={onGetFile}
-              error={error}
-            />
+            <InstructionsBirthCertificate onGetFile={onGetFile} error={error} />
           )}
         </AccordionDetails>
       </AccordionContainer>
