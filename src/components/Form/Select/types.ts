@@ -1,7 +1,7 @@
 import { SelectHTMLAttributes } from 'react'
 
 interface OptionsI {
-  value: string | number
+  value: boolean | string | number
   label: string | number
 }
 interface OnChangeProps {
