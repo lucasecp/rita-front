@@ -25,6 +25,10 @@ function SendedFile({ file, onGetFile }) {
 
   const isMobile = useMediaPredicate('(max-width: 800px)')
 
+  const removeFile = () => {
+    onGetFile('')
+  }
+
   useEffect(() => {
     if (!isValidTypeFile(file)) {
       showMessage(InvalidFormat)
@@ -36,10 +40,6 @@ function SendedFile({ file, onGetFile }) {
       return removeFile()
     }
   }, [file])
-
-  const removeFile = () => {
-    onGetFile('')
-  }
 
   const previewForPdf = () => {
     if (isMobile) {

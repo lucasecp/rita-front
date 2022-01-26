@@ -9,7 +9,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/hooks/useModal'
 
 import { Container } from './styles'
-import { DIRECTOR_PLAN_MANAGMENT, PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
+import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 
 export const CancelAndExit = () => {
   const { closeModal } = useModal()

@@ -10,7 +10,7 @@ import {
 } from '../../helpers/validatorFields'
 import { Container } from './styles'
 import { useCnpjValidate } from './useCnpjValidate'
-import { validateName } from '../../helpers/validatorFields';
+import { validateName } from '../../helpers/validatorFields'
 
 interface ClinicDataProps {
   personalDatas: DataI
@@ -79,13 +79,8 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
           hasError={!!errors?.name}
           msgError={errors?.name}
           maxLength={100}
-          onBlur={() =>
-            setErrors({ ...errors, name: validateName(name) })
-          }
-          onKeyUp={() =>
-            setErrors({ ...errors, name: validateName(name) })
-          }
-          onlyLetter
+          onBlur={() => setErrors({ ...errors, name: validateName(name) })}
+          onKeyUp={() => setErrors({ ...errors, name: validateName(name) })}
           disabled={!isEditing}
         />
         <InputText

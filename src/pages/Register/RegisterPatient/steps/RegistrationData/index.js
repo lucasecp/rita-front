@@ -55,6 +55,24 @@ const RegistrationData = ({
     setErrors(previousErrorsAndErrorsInConfirmEmail)
   }
 
+  const checkMinorAge = () => {
+    const validated = validateBirthdate(birthdate)
+
+    if (validated.birthdate === 'O titular deve ser maior de 18 anos') {
+      const pacientIsMinorAge = {
+        ...errors,
+        ...validateBirthdate(birthdate),
+      }
+
+      setErrors(pacientIsMinorAge)
+    } else {
+      setErrors({
+        ...errors,
+        birthdate: '',
+      })
+    }
+  }
+
   const checkFields = () => {
     const permit = {
       ...validateName(name),
@@ -63,16 +81,21 @@ const RegistrationData = ({
       ...validateGender(gender),
       ...validateBirthdate(birthdate),
       ...validatePhone(phone),
-      ...validateTerms(terms),
+      ...validateTerms(term),
     }
 
     setErrors(permit)
+
+    // Se não tiver erro, ou se o titular for menor que 18 anos
+    const permitBirth =
+      !permit.birthdate ||
+      permit.birthdate === 'O titular deve ser maior de 18 anos'
 
     if (
       !permit.name &&
       !permit.email &&
       !permit.gender &&
-      !permit.birthdate &&
+      permitBirth &&
       !permit.terms &&
       !permit.phone
     ) {
@@ -158,6 +181,7 @@ const RegistrationData = ({
             hasError={errors.birthdate}
             autoComplete="off"
             msgError={errors.birthdate}
+            onKeyUp={checkMinorAge}
           />
           <InputMask
             label="Celular*:"
