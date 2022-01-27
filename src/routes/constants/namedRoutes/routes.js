@@ -32,6 +32,7 @@ export const DIRECTOR_SUSPEND_PLAN = '/gestao/planos/suspender'
 export const DIRECTOR_INACTIVATE_PLAN = '/gestao/planos/inativar'
 export const DIRECTOR_SEE_PLAN_MANAGMENT = '/gestao/planos/visualizar'
 export const DIRECTOR_CREATE_PLAN_MANAGMENT = '/gestao/planos/criar'
+export const DIRECTOR_IMPORTS = '/importacoes'
 
 export const FILTER_SELLABLE_ITEMS = '/itens-vendaveis/'
 export const CREATE_SELLABLE_ITEMS = '/itens-vendaveis/criar'
