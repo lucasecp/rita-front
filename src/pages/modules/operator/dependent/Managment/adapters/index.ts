@@ -1,8 +1,8 @@
 import { formatCpf } from '@/helpers/formatCpf'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import { DataDependentI } from '../types/index'
-import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize';
-import formatFirstLastName from '@/helpers/formatFirstLastName';
+import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
+import formatFirstLastName from '@/helpers/formatFirstLastName'
 
 export const fromApi = (dataDependent: any): DataDependentI => {
   const holder = {
@@ -15,6 +15,10 @@ export const fromApi = (dataDependent: any): DataDependentI => {
   const dependents = dataDependent?.dependentes.map((dep: any) => ({
     name: formatTextWithLimit(firstLetterCapitalize(dep.nome), 38),
     cpf: formatCpf(dep.cpf),
+    id: dep.idPaciente,
+    isAMinor:
+      new Date().getFullYear() - new Date(dep.dataNascimento).getFullYear() <
+      18,
   }))
   return { holder, dependents }
 }

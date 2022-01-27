@@ -12,6 +12,7 @@ interface DependentI {
   id?: string
   cpf?: string
   name?: string
+  isAMinor?: boolean
 }
 
 export interface DataDependentI {
@@ -24,10 +25,12 @@ type SetOrder = (order: OrderI) => void
 export interface TableProps {
   dependents: DataDependentI
   hidden: boolean
+  setStep: (step: number) => void
 }
 
 export interface ContentProps {
   dependents: DataDependentI
+  setStep: (step: number) => void
 }
 
 export interface HeaderProps {
