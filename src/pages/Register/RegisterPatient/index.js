@@ -183,6 +183,7 @@ const RegisterPatient = () => {
             onGetDocumentFiles={setDocumentFiles}
             savedFiles={documentFiles}
             setStep={setStep}
+            isPatientLinkedCompany={!!dataClientSabin.company}
           />
         )}
         {step === 4 && (
