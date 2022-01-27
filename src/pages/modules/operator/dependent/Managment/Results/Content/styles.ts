@@ -14,6 +14,7 @@ export const Container = styled.div`
     padding: 25px 0;
     justify-content: space-between;
     position: relative;
+    align-items: center;
     &::after {
       content: '';
       height: 1px;
@@ -34,11 +35,10 @@ export const Container = styled.div`
     margin-right: 24px;
     min-width: 170px;
     max-width: 170px;
+    display: flex;
+    justify-content: center;
     > div {
       width: fit-content;
-    }
-    &:last-child {
-      margin-right: 0;
     }
   }
   > h2 {
@@ -48,6 +48,13 @@ export const Container = styled.div`
     color: ${colors.gray.middle};
     text-align: center;
     padding: 32px 0;
+  }
+  @media (max-width: 767px) {
+    padding: 0 24px;
+    > ul::after {
+      left: -24px;
+      width: calc(100% + 48px);
+    }
   }
 `
 export const Status = styled.li<StatusTypeProps>`
