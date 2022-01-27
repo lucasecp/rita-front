@@ -1,5 +1,6 @@
-import ButtonPrimary from '@/components/Button/Primary'
 import styled, { css } from 'styled-components'
+
+import ButtonPrimary from '@/components/Button/Primary'
 
 import colors from '@/styles/colors'
 
@@ -38,13 +39,20 @@ export const Content = styled.div`
   }
 `
 
-export const DotSteps = styled.span`
+interface DotStepsProps {
+  waiting: boolean
+  finish: boolean
+  active: boolean
+}
+
+export const DotSteps = styled.span<DotStepsProps>`
   height: 24px;
   width: 24px;
   border-radius: 50%;
   display: block;
   transition: 0.3s;
   margin-bottom: 26px;
+
   ${({ waiting }) =>
     waiting &&
     css`
