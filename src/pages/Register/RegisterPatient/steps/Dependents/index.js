@@ -15,7 +15,9 @@ export const Dependents = ({ dataClientSabin, setData, newData }) => {
   const { showMessage } = useModal()
 
   const limitOfDependents = 2
-  const isPatientLinkedCompany = true
+  const isPatientLinkedCompany = !!dataClientSabin.company
+
+  console.log(dataClientSabin)
 
   useEffect(() => {
     setAllDeps(

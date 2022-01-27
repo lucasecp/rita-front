@@ -6,15 +6,17 @@ import errorIcon from '@/assets/icons/alerts/error.svg'
 
 import { Container } from '../../styles'
 import { useModal } from '@/hooks/useModal'
-import { RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
+import { REGISTER_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
-function NotFound({ ...data }) {
+function NotFound({ cpf, company }) {
   const history = useHistory()
   const { closeModal } = useModal()
 
-  const handleCloseModal = () => {
+  const onDoRegister = () => {
     closeModal()
-    history.push(RESGISTE_PATIENT, { userData: { cpf: data.cpf } })
+    history.push(REGISTER_PATIENT, {
+      userData: { cpf, company },
+    })
   }
 
   return (
@@ -24,9 +26,7 @@ function NotFound({ ...data }) {
         Desculpe, os seus dados não foram encontrados na nossa base. Isso não
         significa que seu cadastro do cartão Sabin Saúde não exista.
       </p>
-      <ButtonPrimary onClick={handleCloseModal}>
-        Faça seu cadastro
-      </ButtonPrimary>
+      <ButtonPrimary onClick={onDoRegister}>Faça seu cadastro</ButtonPrimary>
     </Container>
   )
 }

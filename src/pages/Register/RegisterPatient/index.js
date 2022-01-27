@@ -33,7 +33,7 @@ const RegisterPatient = () => {
   const { Loading } = useLoading()
   const { showMessage } = useModal()
 
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(4)
   const [data, setData] = useState({})
   const [term, setTerm] = useState(false)
 
@@ -46,8 +46,6 @@ const RegisterPatient = () => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
-
-  console.log(data)
 
   const formatDocumentFiles = () => {
     if (documentFiles.selectIncome === 'no_income') return 'NaopossuoRenda'

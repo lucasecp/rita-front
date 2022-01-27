@@ -9,20 +9,20 @@ import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
 import {
   PRE_REGISTER,
-  RESGISTE_PATIENT,
+  REGISTER_PATIENT,
 } from '@/routes/constants/namedRoutes/routes'
 
-function Found(data) {
+function Found({ cpf, company, email, phone }) {
   const history = useHistory()
   const { closeModal } = useModal()
 
   const pushToRegister = () => {
     closeModal()
-    return history.push(RESGISTE_PATIENT, { userData: { cpf: data.cpf } })
+    return history.push(REGISTER_PATIENT, { userData: { cpf, company } })
   }
   const pushToPreRegister = () => {
     closeModal()
-    history.push(PRE_REGISTER, data)
+    history.push(PRE_REGISTER, { cpf, email, phone })
   }
 
   return (

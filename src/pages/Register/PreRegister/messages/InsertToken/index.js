@@ -12,7 +12,7 @@ import InputMask from '@/components/Form/InputMask'
 import { useHistory } from 'react-router-dom'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
-import { RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
+import { REGISTER_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 const MODAL = {
   INSERT_TOKEN: 'insert_token',
@@ -83,7 +83,7 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
 
       if (response.status === 200) {
         closeModal()
-        history.push(RESGISTE_PATIENT, { userData: response.data })
+        history.push(REGISTER_PATIENT, { userData: response.data })
       }
     } catch ({ response }) {
       const messageFromApi = response?.data.message

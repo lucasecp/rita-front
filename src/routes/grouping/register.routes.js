@@ -9,7 +9,7 @@ import {
   DEFAULT_REGISTER,
   PRE_REGISTER,
   REGISTER_CARD_SABIN,
-  RESGISTE_PATIENT,
+  REGISTER_PATIENT,
 } from '../constants/namedRoutes/routes'
 
 const registerRoutes = [
@@ -26,7 +26,7 @@ const registerRoutes = [
     component: RegisterCardSabin,
   },
   {
-    path: RESGISTE_PATIENT,
+    path: REGISTER_PATIENT,
     component: RegisterPatient,
   },
 ]
