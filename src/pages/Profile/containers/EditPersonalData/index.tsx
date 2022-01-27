@@ -103,8 +103,6 @@ export const EditPersonalData: React.FC<EditPersonalDataProps> = ({
   }
 
   const onCancelEditing = () => {
-    // setMainPersonalDatas(personalDatas?.personalDatas)
-    // setAddress(personalDatas?.address)
     toogleEditing()
   }
 

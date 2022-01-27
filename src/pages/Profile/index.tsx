@@ -12,7 +12,7 @@ import { fromApiDataToDisplay, fromApiPersonalDatas } from './adapters/fromApi'
 
 import { IPersonalDatasState, IDataToDisplayState } from './types/IPersonal'
 
-export const Profile = () => {
+export const Profile: React.FC = () => {
   const { Loading } = useLoading()
   const { showMessage } = useModal()
 
