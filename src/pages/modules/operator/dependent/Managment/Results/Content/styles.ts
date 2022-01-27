@@ -14,7 +14,6 @@ export const Container = styled.div`
     padding: 25px 0;
     justify-content: space-between;
     position: relative;
-    cursor: pointer;
     &::after {
       content: '';
       height: 1px;
@@ -33,11 +32,8 @@ export const Container = styled.div`
     font-weight: 500;
     line-height: 20px;
     margin-right: 24px;
-    min-width: 217px;
-    max-width: 217px;
-    :first-child {
-    min-width: 474px;
-  }
+    min-width: 170px;
+    max-width: 170px;
     > div {
       width: fit-content;
     }

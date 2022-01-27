@@ -5,9 +5,9 @@ import Header from './Header'
 import Content from './Content'
 import { TableProps } from '../types/index'
 
-const Results: React.FC<TableProps> = ({ dependents }) => {
+const Results: React.FC<TableProps> = ({ dependents, hidden }) => {
   return (
-    <Container>
+    <Container hidden={hidden}>
       <Header />
       <Content dependents={dependents} />
     </Container>
