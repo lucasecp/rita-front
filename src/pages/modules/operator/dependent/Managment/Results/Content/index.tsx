@@ -5,9 +5,10 @@ import { ContentProps } from '../../types'
 import OutlineButton from '@/components/Button/Outline'
 
 const Content: React.FC<ContentProps> = ({ dependents }) => {
+  
   return (
     <Container>
-      {dependents?.map((dependent, index) => (
+      {dependents?.dependents?.map((dependent, index) => (
         <ul key={index}>
           <li>{dependent.cpf}</li>
           <li>
@@ -16,12 +17,13 @@ const Content: React.FC<ContentProps> = ({ dependents }) => {
             </CustomTooltip>
           </li>
           <li>
-            <OutlineButton>Desassociar</OutlineButton>
+            <OutlineButton medium>Desassociar</OutlineButton>
           </li>
         </ul>
       ))}
-      {dependents?.length === 0 ||
-        (!dependents && <h2>Nenhum resultado encontrado</h2>)}
+      {dependents?.dependents?.length === 0 && (
+        <h2>Nenhum resultado encontrado</h2>
+      )}
     </Container>
   )
 }

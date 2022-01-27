@@ -2,20 +2,32 @@ interface OrderI {
   name?: string
   value?: string
 }
+export interface HolderI {
+  id?: string
+  cpf?: string
+  name?: string
+  plan?: string
+}
+interface DependentI {
+  id?: string
+  cpf?: string
+  name?: string
+}
 
 export interface DataDependentI {
-  cpf: string
-  name: string
+  holder: HolderI
+  dependents: DependentI[]
 }
 
 type SetOrder = (order: OrderI) => void
 
 export interface TableProps {
-  dependents: DataDependentI[]
+  dependents: DataDependentI
+  hidden: boolean
 }
 
 export interface ContentProps {
-  dependents: DataDependentI[]
+  dependents: DataDependentI
 }
 
 export interface HeaderProps {

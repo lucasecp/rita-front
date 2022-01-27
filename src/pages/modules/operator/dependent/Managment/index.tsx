@@ -8,14 +8,21 @@ import { Content } from './styles'
 import { useCpfValidate } from './useCpfValidate'
 import { useLoading } from '@/hooks/useLoading'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import ButtonPrimary from '@/components/Button/Primary'
+import OutlineButton from '@/components/Button/Outline'
+import { DataDependentI } from './types/index'
+import HolderInfo from './Header/HolderInfo'
 
 const Managment: React.FC = () => {
   const [cpf, setCpf] = useState('')
   const [errors, setErrors] = useState('')
-  const [dependents, setDependents] = useState<any[]>([])
+  const [dependents, setDependents] = useState<DataDependentI>({
+    dependents: [],
+    holder: {},
+  })
   const { validatorCpf } = useCpfValidate()
   const { Loading } = useLoading()
-  const [steps, setSteps] = useState(1);
+  const [step, setStep] = useState(1)
 
   useEffect(() => {
     document.title = 'Rita Saúde | Informações da Clínica'
@@ -23,17 +30,18 @@ const Managment: React.FC = () => {
 
   const getDependents = async () => {
     const error = await validatorCpf(cpf)
-    
     if (error) {
       return setErrors(error)
     }
+    setErrors('')
 
     try {
       Loading.turnOn()
       const { data } = await apiPatient.get(
-        `/paciente/?cpf=${clearSpecialCaracter(cpf)}`,
+        `/paciente/cpf?cpf=${clearSpecialCaracter(cpf)}`,
       )
-      setDependents(fromApi(data.dependentes))
+      setDependents(fromApi(data))
+      setStep(2)
     } catch (error) {
     } finally {
       Loading.turnOff()
@@ -43,14 +51,25 @@ const Managment: React.FC = () => {
   return (
     <DefaultLayout title="Dependentes">
       <Content>
-        <Header
-          setCpf={setCpf}
-          cpf={cpf}
-          errors={errors}
-          setErrors={setErrors}
-        />
-        <Results dependents={dependents} />
-        <footer></footer>
+        <Header setCpf={setCpf} cpf={cpf} errors={errors} hidden={step !== 1} />
+
+        <HolderInfo data={dependents.holder} hidden={step !== 2} />
+
+        <Results dependents={dependents} hidden={step !== 2} />
+
+        <footer>
+          <ButtonPrimary onClick={getDependents} hidden={step !== 1}>
+            Filtrar Resultados
+          </ButtonPrimary>
+
+          <OutlineButton onClick={() => setStep(1)} hidden={step !== 2}>
+            Voltar
+          </OutlineButton>
+
+          <ButtonPrimary hidden={step !== 2}>
+            Adicionar Dependentes
+          </ButtonPrimary>
+        </footer>
       </Content>
     </DefaultLayout>
   )

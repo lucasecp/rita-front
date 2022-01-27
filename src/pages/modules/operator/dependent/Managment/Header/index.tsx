@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Container } from './styles'
 import InputMask from '@/components/Form/InputMask'
 
@@ -6,12 +6,12 @@ interface HeaderProps {
   setCpf: React.Dispatch<React.SetStateAction<string>>
   cpf: string
   errors: string
-  setErrors: React.Dispatch<React.SetStateAction<string>>
+  hidden: boolean
 }
 
-const Header: React.FC<HeaderProps> = ({ setCpf, cpf, errors, setErrors }) => {
+const Header: React.FC<HeaderProps> = ({ setCpf, cpf, errors, hidden }) => {
   return (
-    <Container>
+    <Container hidden={hidden}>
       <InputMask
         mask="999.999.999-99"
         label="CPF do titular:"
