@@ -13,7 +13,7 @@ const HolderInfo: React.FC<HolderInfoProps> = ({ data, hidden }) => {
       <div>
         <h3>{data.name}</h3> <h3>CPF: {data.cpf}</h3>
       </div>
-      <span>{data.plan}</span>
+      <span hidden={!data.plan}>Plano {data.plan}</span>
     </Container>
   )
 }

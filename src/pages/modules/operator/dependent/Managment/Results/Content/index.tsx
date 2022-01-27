@@ -3,9 +3,25 @@ import { Container } from './styles'
 import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../types'
 import OutlineButton from '@/components/Button/Outline'
+import { useModal } from '@/hooks/useModal'
+import Messages from './Messages'
 
-const Content: React.FC<ContentProps> = ({ dependents }) => {
-  
+const Content: React.FC<ContentProps> = ({ dependents, setStep }) => {
+  const { showMessage } = useModal()
+
+  const Disassociate = (
+    idDependent?: string,
+    IdHolder?: string,
+    isAMinor?: boolean,
+  ) => {
+    showMessage(Messages, {
+      idDependent,
+      IdHolder,
+      isAMinor,
+      setStep,
+    })
+  }
+
   return (
     <Container>
       {dependents?.dependents?.map((dependent, index) => (
@@ -17,7 +33,18 @@ const Content: React.FC<ContentProps> = ({ dependents }) => {
             </CustomTooltip>
           </li>
           <li>
-            <OutlineButton medium>Desassociar</OutlineButton>
+            <OutlineButton
+              medium
+              onClick={() =>
+                Disassociate(
+                  dependent.id,
+                  dependents.holder.id,
+                  dependent.isAMinor,
+                )
+              }
+            >
+              Desassociar
+            </OutlineButton>
           </li>
         </ul>
       ))}
