@@ -10,6 +10,7 @@ import NotFound from '@/pages/404'
 import { FilterSellableItems } from '@/pages/SellableItems/FilterSellableItems'
 import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
 import { EditSellableItems } from '@/pages/SellableItems/EditSellableItems'
+import { SeeAllProfiles } from '@/pages/Profile/ManageProfile/SeeAllProfiles'
 
 import {
   directorRoutes,
@@ -29,6 +30,7 @@ import {
   SEE_SELLABLE_ITEMS,
   FILTER_SELLABLE_ITEMS,
   EDIT_SELLABLE_ITEMS,
+  DIRECTOR_SEE_PERFIS,
 } from './constants/namedRoutes/routes'
 
 function Routes() {
@@ -50,6 +52,13 @@ function Routes() {
         path={FILTER_SELLABLE_ITEMS}
         isPrivate
         component={FilterSellableItems}
+        exact
+      />
+
+      <Route
+        path={DIRECTOR_SEE_PERFIS}
+        isPrivate
+        component={SeeAllProfiles}
         exact
       />
 
