@@ -33,7 +33,7 @@ const RegisterPatient = () => {
   const { Loading } = useLoading()
   const { showMessage } = useModal()
 
-  const [step, setStep] = useState(4)
+  const [step, setStep] = useState(1)
   const [data, setData] = useState({})
   const [term, setTerm] = useState(false)
 
