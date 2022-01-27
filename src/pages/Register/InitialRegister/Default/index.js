@@ -17,19 +17,23 @@ import Denied from '../messages/warning/Denied'
 import Inactive from '../messages/warning/Inactive'
 import Found from '../messages/warning/Found'
 import { status } from '../services'
-import axios from '@/services/apiPatient'
+import apiPatient from '@/services/apiPatient'
 import AlreadyExists from '../messages/warning/AlreadyExists'
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
-import { RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
+import { REGISTER_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import StatusD from '../messages/warning/StatusD'
 
 function DefaultRegister() {
-  const [cpf, setCpf] = useState('')
   const { Loading } = useLoading()
   const history = useHistory()
-
   const { showMessage } = useModal()
+
+  const [cpf, setCpf] = useState('')
+
+  useEffect(() => {
+    document.title = 'Rita Saúde | Cadastro'
+  }, [])
 
   const handleConfirm = async () => {
     if (cpf.length === 0) {
@@ -39,11 +43,15 @@ function DefaultRegister() {
     if (!validateCpf(cpf)) {
       return showMessage(InvalidCpf)
     }
+
+    let company
     try {
       Loading.turnOn()
-      const { data: responseApi } = await axios.get(
+      const { data: responseApi } = await apiPatient.get(
         `/paciente/status?cpf=${cpf}`,
       )
+
+      company = responseApi.empresa
 
       if (responseApi.status === status.INACTIVE) {
         return showMessage(Inactive)
@@ -53,6 +61,7 @@ function DefaultRegister() {
       }
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
         return showMessage(Found, {
+          company,
           cpf,
           email: responseApi.email,
           phone: responseApi.telefone,
@@ -77,17 +86,15 @@ function DefaultRegister() {
       }
     } catch ({ response }) {
       const apiStatus = response.status
+      company = response.data.empresa
+
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return history.push(RESGISTE_PATIENT, { userData: { cpf } })
+        return history.push(REGISTER_PATIENT, { userData: { cpf, company } })
       }
     } finally {
       Loading.turnOff()
     }
   }
-
-  useEffect(() => {
-    document.title = 'Rita Saúde | Cadastro'
-  }, [])
 
   return (
     <>

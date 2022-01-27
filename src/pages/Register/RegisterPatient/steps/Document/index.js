@@ -95,8 +95,6 @@ const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
     setStep(4)
   }
 
-  console.log(errors)
-
   return (
     <>
       <Container>

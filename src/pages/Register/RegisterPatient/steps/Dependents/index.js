@@ -1,6 +1,6 @@
 import OutlineButton from '@/components/Button/Outline'
 import React, { useEffect, useState } from 'react'
-import { Container } from '../style'
+import { Container } from '../styles'
 import Form from './messages/Form'
 import { Content } from './styles'
 import trash from '@/assets/icons/trash.svg'
@@ -15,7 +15,9 @@ export const Dependents = ({ dataClientSabin, setData, newData }) => {
   const { showMessage } = useModal()
 
   const limitOfDependents = 2
-  const isPatientLinkedCompany = true
+  const isPatientLinkedCompany = !!dataClientSabin.company
+
+  console.log(dataClientSabin)
 
   useEffect(() => {
     setAllDeps(
