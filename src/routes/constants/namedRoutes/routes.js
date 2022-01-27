@@ -19,7 +19,8 @@ export const OPERATOR_REPORTS = '/relatorios'
 export const OPERATOR_REPORTS_AUTHORIZATION = '/relatorios/autorizacoes'
 export const OPERATOR_SEE_ALL_CLINICS = '/clinicas'
 export const OPERATOR_SEE_ONE_CLINIC = '/clinicas/ver-clinica'
-export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes'
+export const OPERATOR_SEE_ALL_SPECIALTYS = '/clinicas/especialidades'
+export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
@@ -39,6 +40,8 @@ export const CREATE_SELLABLE_ITEMS = '/itens-vendaveis/criar'
 export const SEE_SELLABLE_ITEMS = '/itens-vendaveis/visualizar'
 export const EDIT_SELLABLE_ITEMS = '/itens-vendaveis/editar'
 
+export const DIRECTOR_SEE_PERFIS = '/perfis'
+
 export const PATIENT_SCHEDULE_APPOINTMENT = '/agendar-consulta'
 
 export const PATIENT_CLINIC_INFORMATION =
@@ -55,7 +58,7 @@ export const PATIENT_ADD_DOCUMENT_DEPENDENT =
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'
 export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'
-export const RESGISTE_PATIENT = '/cadastro/paciente'
+export const REGISTER_PATIENT = '/cadastro/paciente'
 
 export const TESTE = '/teste'
 

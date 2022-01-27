@@ -4,7 +4,7 @@ import { Address } from './steps/Address'
 import RegistrationData from './steps/RegistrationData'
 import Document from './steps/Document'
 import { Dependents } from './steps/Dependents'
-import { Content, DotSteps, BtnGroup, BtnPrev, CustomBtn } from './style'
+import { Content, DotSteps, BtnGroup, BtnPrev, CustomBtn } from './styles'
 import { useLocation } from 'react-router'
 // import { DATAFAKE } from './static'
 import apiPatient from '@/services/apiPatient'
@@ -46,8 +46,6 @@ const RegisterPatient = () => {
     if (!location.state) return
     setDataClientSabin(location.state.userData)
   }, [])
-
-  console.log(data)
 
   const formatDocumentFiles = () => {
     if (documentFiles.selectIncome === 'no_income') return 'NaopossuoRenda'

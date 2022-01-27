@@ -4,6 +4,7 @@ export const Container = styled.section`
   background: #fff;
   padding: 32px;
   width: 100%;
+
   .MuiAccordionDetails-root {
     padding: 0;
     display: block;

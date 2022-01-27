@@ -7,7 +7,7 @@ import validateCpf from '@/helpers/validateCpf'
 import cardSabinImg from '@/assets/img/card-sabin.png'
 import { Content } from './styles'
 
-import axios from '@/services/apiPatient'
+import apiPatient from '@/services/apiPatient'
 import { status } from '../services'
 import InvalidCpf from '../messages/error/InvalidCpf'
 import CpfEmpty from '../messages/error/CpfEmpty'
@@ -26,6 +26,7 @@ function RegisterCardSabin() {
   const [cpf, setCpf] = useState('')
   const { showMessage } = useModal()
   const { Loading } = useLoading()
+
   const handleConfirm = async () => {
     if (cpf.length === 0) {
       return showMessage(CpfEmpty)
@@ -34,20 +35,27 @@ function RegisterCardSabin() {
     if (!validateCpf(cpf)) {
       return showMessage(InvalidCpf)
     }
+
+    let company
     try {
       Loading.turnOn()
-      const { data: responseApi } = await axios.get(
+      const { data: responseApi } = await apiPatient.get(
         `/paciente/status?cpf=${cpf}`,
       )
+
+      company = responseApi.empresa
+
       if (responseApi.status === status.INACTIVE) {
         return showMessage(Inactive)
       }
+
       if (responseApi.status === status.DEPENDENT) {
         return showMessage(StatusD)
       }
 
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
         return showMessage(ImportData, {
+          company,
           cpf,
           email: responseApi.email,
           phone: responseApi.telefone,
@@ -72,6 +80,8 @@ function RegisterCardSabin() {
       }
     } catch ({ response }) {
       const apiStatus = response.status
+      company = response.data.empresa
+
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
         return showMessage(NotFound, { cpf }, true)
       }

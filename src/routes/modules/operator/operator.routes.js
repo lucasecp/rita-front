@@ -18,8 +18,11 @@ import {
   OPERATOR_REPORTS_AUTHORIZATION,
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ONE_CLINIC,
+  OPERATOR_SEE_ALL_SPECIALTYS,
   OPERATOR_DEPENDENT_MANAGMENT,
 } from '../../constants/namedRoutes/routes'
+
+import SeeAllSpecialtys from '@/pages/modules/operator/clinic/SeeAllSpecialtys'
 import Managment from '@/pages/modules/operator/dependent/Managment'
 
 const operatorRoutes = [
@@ -50,6 +53,10 @@ const operatorRoutes = [
   {
     path: OPERATOR_SEE_ONE_CLINIC,
     component: SeeOneClinic,
+  },
+  {
+    path: OPERATOR_SEE_ALL_SPECIALTYS,
+    component: SeeAllSpecialtys,
   },
   {
     path: OPERATOR_DEPENDENT_MANAGMENT,

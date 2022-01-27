@@ -19,7 +19,7 @@ import InputMask from '@/components/Form/InputMask'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 import ContactUs from '../messages/error/ContactUs'
-import { RESGISTE_PATIENT } from '@/routes/constants/namedRoutes/routes'
+import { REGISTER_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 const MESSAGEAPI = {
   LAST_TRY: 'Ultima tentativa antes de ser bloqueado definitivamente',
@@ -70,7 +70,7 @@ function PreRegister() {
 
   const redirectToRegister = () => {
     if (userData?.status === 'N') return showMessage(ContactUs)
-    history.push(RESGISTE_PATIENT, { userData: { cpf: userData.cpf } })
+    history.push(REGISTER_PATIENT, { userData: { cpf: userData.cpf } })
   }
 
   const onForwardData = async () => {

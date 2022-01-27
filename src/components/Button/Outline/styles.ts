@@ -1,18 +1,36 @@
 import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 
-export const Container = styled.button`
+interface ContainerProps {
+  small?: boolean
+  medium?: boolean
+  disabledWithEvents?: boolean
+  variation?: string
+}
+
+export const Container = styled.button<ContainerProps>`
   border: 2px solid ${colors.purple.main.dark};
   border-radius: 8px;
   cursor: pointer;
   background: transparent;
   color: ${colors.purple.main.dark};
-  padding: ${({ small }) => (small ? '10px 16px' : '14px 32px')};
+  padding: 14px 32px;
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
   transition: 0.3s;
+  ${({ small }) =>
+    small &&
+    css`
+      padding: 10px 16px;
+    `}
 
+  ${({ medium }) =>
+    medium &&
+    css`
+      padding: 10px 32px;
+    `}
+    
   ${(props) =>
     props.variation === 'white' &&
     css`

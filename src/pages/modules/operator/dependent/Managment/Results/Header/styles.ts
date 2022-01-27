@@ -15,12 +15,10 @@ export const Content = styled.div`
   color: #9146ff;
   align-items: center;
   justify-content: flex-start;
-  min-width: 150px;
+  min-width: 170px;
   margin-right: 24px;
-  :last-child {
-    margin-right: 0px;
-  }
-  justify-content: space-between;
+
+  justify-content: center;
 
   > div {
     display: flex;
@@ -48,6 +46,9 @@ export const Container = styled.header`
   > div {
     display: flex;
     justify-content: space-between;
+  }
+  @media (max-width: 767px) {
+    padding: 16px 24px;
   }
 `
 
