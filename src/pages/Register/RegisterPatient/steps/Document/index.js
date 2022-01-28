@@ -8,7 +8,12 @@ import OwnBackDocument from './types/OwnBackDocument'
 import ProofOfIncome from './types/ProofOfIncome'
 import ProofOfAddress from './types/ProofOfAddress'
 
-const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
+const Document = ({
+  onGetDocumentFiles,
+  savedFiles,
+  setStep,
+  isPatientLinkedCompany,
+}) => {
   const [holdingDocumentFile, setHoldingDocumentFile] = useState('')
   const [ownDocumentFile, setOwnDocumentFile] = useState('')
   const [ownBackDocumentFile, setOwnBackDocumentFile] = useState('')
@@ -22,6 +27,16 @@ const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
     ownBackDocument: '',
     selectIncome: '',
   })
+
+  const verifySavedFiles = () => {
+    if (!Object.keys(savedFiles).length) return
+    setHoldingDocumentFile(savedFiles.holdingDocumentFile || '')
+    setOwnDocumentFile(savedFiles.ownDocumentFile || '')
+    setOwnBackDocumentFile(savedFiles.ownBackDocumentFile || '')
+    setProofOfIncomeFile(savedFiles.proofOfIncomeFile || '')
+    setProofOfAddressFile(savedFiles.proofOfAddressFile || '')
+    setSelectIncome(savedFiles.selectIncome || '')
+  }
 
   useEffect(() => {
     verifySavedFiles()
@@ -44,16 +59,6 @@ const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
     proofOfAddressFile,
     selectIncome,
   ])
-
-  const verifySavedFiles = () => {
-    if (!Object.keys(savedFiles).length) return
-    setHoldingDocumentFile(savedFiles.holdingDocumentFile || '')
-    setOwnDocumentFile(savedFiles.ownDocumentFile || '')
-    setOwnBackDocumentFile(savedFiles.ownBackDocumentFile || '')
-    setProofOfIncomeFile(savedFiles.proofOfIncomeFile || '')
-    setProofOfAddressFile(savedFiles.proofOfAddressFile || '')
-    setSelectIncome(savedFiles.selectIncome || '')
-  }
 
   const nextStep = () => {
     if (holdingDocumentFile === '') {
@@ -127,16 +132,20 @@ const Document = ({ onGetDocumentFiles, savedFiles, setStep }) => {
           proofOfAddressFile={proofOfAddressFile}
         />
 
-        <ProofOfIncome
-          hasPreviousDocument={
-            !!holdingDocumentFile && !!ownDocumentFile && !!ownBackDocumentFile
-          }
-          onGetFile={setProofOfIncomeFile}
-          proofOfIncomeFile={proofOfIncomeFile}
-          onSelectIncome={setSelectIncome}
-          selectIncome={selectIncome}
-          error={errors.selectIncome}
-        />
+        {isPatientLinkedCompany && (
+          <ProofOfIncome
+            hasPreviousDocument={
+              !!holdingDocumentFile &&
+              !!ownDocumentFile &&
+              !!ownBackDocumentFile
+            }
+            onGetFile={setProofOfIncomeFile}
+            proofOfIncomeFile={proofOfIncomeFile}
+            onSelectIncome={setSelectIncome}
+            selectIncome={selectIncome}
+            error={errors.selectIncome}
+          />
+        )}
       </Container>
       <BtnGroup>
         <BtnPrev onClick={() => setStep(2)}>Etapa Anterior</BtnPrev>
