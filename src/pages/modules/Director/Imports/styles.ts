@@ -19,27 +19,37 @@ export const Container = styled.div`
       font-size: 16px;
       line-height: 20px;
     }
+
+    > p.error {
+      margin-top: 5px;
+      color: ${colors.orange.middleDark};
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17.5px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
   }
 `
 
 export const BtnGroup = styled.div`
-  background: ${colors.gray.extraLight};
+  background: ${colors.gray.light};
   padding: 24px 32px;
   border-radius: 0 0 8px 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 24px;
 
-  /* > button:last-child {
-    margin-left: auto;
-  }
-  @media (max-width: 539px) {
+  @media (max-width: 767px) {
     flex-direction: column;
-    > button:last-child {
-      margin-left: 0;
-      margin-top: 20px;
+
+    > button {
+      width: 100%;
     }
-  } */
+  }
 `
 export const ContentFile = styled.div`
   margin-top: 5px;
@@ -62,44 +72,8 @@ export const ContentFile = styled.div`
     padding: 14px 16px;
     width: 100%;
     height: 100%;
-    color: #000cec;
-    background: ${colors.blue.light};
+    color: ${({ theme }) => theme.main};
+    background: ${({ theme }) => theme.light};
     border-radius: 0 8px 8px 0;
-  }
-`
-
-export const AutoComplete = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  position: relative;
-
-  > input {
-    padding: 14px 16px;
-    height: 100%;
-    border: 1px solid ${colors.gray.light};
-    border-radius: 8px;
-  }
-
-  > ul {
-    // Posição da listagem de opções
-    position: absolute;
-    z-index: 2;
-    top: 100%;
-    left: 0;
-    right: 0;
-
-    width: 100%;
-    border: 1px solid #d4d4d4;
-    background: #fff;
-    box-shadow: 0px 4px 4px 0px #00000040;
-
-    > li {
-      padding: 10px;
-
-      &:hover {
-        background: ${colors.gray.light};
-      }
-    }
   }
 `
