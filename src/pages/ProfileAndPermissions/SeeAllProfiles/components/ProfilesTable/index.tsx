@@ -1,5 +1,4 @@
 import React from 'react'
-import qs from 'qs'
 
 import Actions from '../Actions'
 import { Container } from './styles'

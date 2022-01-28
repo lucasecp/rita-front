@@ -1,4 +1,4 @@
-import { StatusFromApi } from "../types"
+import { StatusFromApi } from '../types'
 
 export const showStatus = (status: StatusFromApi): string => {
   const formatStatus = {

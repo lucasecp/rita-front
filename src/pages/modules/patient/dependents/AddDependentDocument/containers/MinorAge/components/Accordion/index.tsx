@@ -6,7 +6,7 @@ interface AccordionProps {
   hasChildren?: boolean
 }
 
-const index: React.FC<AccordionProps> = ({
+const Index: React.FC<AccordionProps> = ({
   children,
   expanded,
   hasChildren,
@@ -36,4 +36,4 @@ const index: React.FC<AccordionProps> = ({
   )
 }
 
-export default index
+export default Index

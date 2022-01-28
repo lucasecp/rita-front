@@ -26,6 +26,17 @@ export default function AuthProvider({ children }) {
 
   const [user, setUser] = useState(getUserStorage() || null)
 
+  const setDataLogin = (payload) => {
+    setUser(payload)
+    setLocalStorage(payload)
+    setHeaderToken(payload.token)
+  }
+
+  const pushToUrl = (url) => {
+    if (!url) return history.push(INITIAL_PAGE)
+    history.push(url.from)
+  }
+
   const login = async (payload, prevPath) => {
     let searchPatientStatus = false
     let canDoLogin = false
@@ -86,12 +97,6 @@ export default function AuthProvider({ children }) {
     }
   }
 
-  const setDataLogin = (payload) => {
-    setUser(payload)
-    setLocalStorage(payload)
-    setHeaderToken(payload.token)
-  }
-
   const logout = () => {
     setUser(null)
     deleteLocalStorage()
@@ -99,10 +104,6 @@ export default function AuthProvider({ children }) {
     window.localStorage.removeItem('@Rita/Photo/Profile')
   }
 
-  const pushToUrl = (url) => {
-    if (!url) return history.push(INITIAL_PAGE)
-    history.push(url.from)
-  }
   const clearDataLogout = () => {
     logout()
     history.push(LOGIN)

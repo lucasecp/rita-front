@@ -7,10 +7,10 @@ import {
   validateSocialReason,
   validateStatus,
   validateTwoPhone,
+  validateName,
 } from '../../helpers/validatorFields'
 import { Container } from './styles'
 import { useCnpjValidate } from './useCnpjValidate'
-import { validateName } from '../../helpers/validatorFields'
 
 interface ClinicDataProps {
   personalDatas: DataI

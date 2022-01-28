@@ -10,11 +10,10 @@ import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
 import { useAuth } from '@/hooks/login'
 
-
 const VidaPlanLife = () => {
   const { closeModal, showSimple } = useModal()
   const { Loading } = useLoading()
-  const { user } = useAuth()
+  // const { user } = useAuth()
   const scheduleAppointment = async () => {
     try {
       Loading.turnOn()

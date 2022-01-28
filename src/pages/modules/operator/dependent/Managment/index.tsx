@@ -30,6 +30,7 @@ const Managment: React.FC = () => {
 
   const getDependents = async () => {
     const error = await validatorCpf(cpf)
+
     if (error) {
       return setErrors(error)
     }

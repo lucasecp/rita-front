@@ -28,6 +28,15 @@ function Login() {
     state && state.message && showMessage(ExpiredSession)
   }, [])
 
+  const validateErrors = () => {
+    const newErrors = {}
+    if (!cpf.trim()) newErrors.cpf = 'Este campo é obrigatório.'
+    else if (!validateCpf(cpf.trim())) newErrors.cpf = 'CPF inválido.'
+    if (!password.trim()) newErrors.password = 'Este campo é obrigatório.'
+    setErrors(newErrors)
+    return newErrors
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     if (validateErrors().cpf || validateErrors().password) return
@@ -39,15 +48,6 @@ function Login() {
       },
       state,
     )
-  }
-
-  const validateErrors = () => {
-    const newErrors = {}
-    if (!cpf.trim()) newErrors.cpf = 'Este campo é obrigatório.'
-    else if (!validateCpf(cpf.trim())) newErrors.cpf = 'CPF inválido.'
-    if (!password.trim()) newErrors.password = 'Este campo é obrigatório.'
-    setErrors(newErrors)
-    return newErrors
   }
 
   return (

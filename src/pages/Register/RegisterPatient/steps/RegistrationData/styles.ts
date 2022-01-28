@@ -24,7 +24,7 @@ export const Container = styled.div`
     gap: 32px;
   }
 
-  @media (max-width: 767px){
+  @media (max-width: 767px) {
     > section {
       grid-template-columns: 1fr;
     }
