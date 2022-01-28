@@ -21,7 +21,6 @@ export const useCnpjValidate = (): any => {
   const validatorCNPJ = async (value: string, initialCNPJ: string) => {
     const newValue = clear(value)
     const initialValue = clear(initialCNPJ)
-    console.log(newValue, initialValue)
 
     if (newValue === initialValue) {
       return ''

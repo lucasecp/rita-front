@@ -32,7 +32,7 @@ export const useCpfValidate = (): any => {
   const validatorCpf = async (value: string) => {
     
     const newValue = clear(value)
-    console.log(await alreadyExist(newValue));
+ 
     if (!newValue) return 'CPF Obrigatório.'
     else if (!validateCpf(newValue)) return 'CPF Inválido.'
     else if (await alreadyExist(newValue)) {
