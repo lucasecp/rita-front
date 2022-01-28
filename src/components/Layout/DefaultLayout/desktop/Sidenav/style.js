@@ -52,7 +52,29 @@ export const Container = styled.aside`
     display: flex;
     flex-direction: column;
 
-    overflow: hidden;
+    transition: 0.3s;
+
+    overflow-y: auto;
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      border-radius: 8px;
+      background: #eeeeee;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #afafaf;
+      border-radius: 8px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
 
     > header {
       padding: 40px 32px 52px;

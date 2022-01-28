@@ -20,7 +20,7 @@ const Header = ({ doctorInfo }) => {
         <h2>
           {doctorInfo?.title}&nbsp;{doctorInfo?.name}
         </h2>
-        <h4>{doctorInfo?.doctorSpecialty.especialidade.descricao}</h4>
+        <h4>{doctorInfo?.doctorSpecialty?.especialidade?.descricao}</h4>
         <ul>
           <li>
             <h6>
@@ -35,7 +35,7 @@ const Header = ({ doctorInfo }) => {
               Especialidades:
               <span>
                 &nbsp;
-                {doctorInfo?.doctorSpecialty.especialidade.descricao} -
+                {doctorInfo?.doctorSpecialty?.especialidade?.descricao} -
                 {doctorInfo?.doctorSpecialty.RQE}
               </span>
               {doctorInfo?.verified && (

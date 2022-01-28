@@ -32,7 +32,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
     personalDatas?.socialReason || '',
   )
   const [cnpj, setCnpj] = useState(personalDatas?.cnpj || '')
-  const [selectedStatus, setselectedStatus] = useState<string>(
+  const [selectedStatus, setSelectedStatus] = useState<string>(
     personalDatas?.status || '',
   )
   const [phone, setPhone] = useState(personalDatas?.phone || '')
@@ -45,7 +45,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
     setsocialReason(personalDatas?.socialReason || '')
     setCnpj(personalDatas?.cnpj || '')
     setPhone(personalDatas?.phone || '')
-    setselectedStatus(personalDatas?.status || '')
+    setSelectedStatus(personalDatas?.status || '')
   }, [personalDatas])
 
   useEffect(() => {
@@ -113,10 +113,16 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
           hasError={!!errors?.cnpj}
           msgError={errors?.cnpj}
           onBlur={async () =>
-            setErrors({ ...errors, cnpj: await validatorCNPJ(cnpj) })
+            setErrors({
+              ...errors,
+              cnpj: await validatorCNPJ(cnpj, personalDatas?.cnpj ),
+            })
           }
           onKeyUp={async () =>
-            setErrors({ ...errors, cnpj: await validatorCNPJ(cnpj) })
+            setErrors({
+              ...errors,
+              cnpj: await validatorCNPJ(cnpj, personalDatas?.cnpj ),
+            })
           }
           disabled={!isEditing}
         />
@@ -130,6 +136,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
             { label: 'Negado', value: 'Negado' },
           ]}
           value={selectedStatus}
+          setValue={setSelectedStatus}
           disabled={!isEditing}
           onBlur={() =>
             setErrors({ ...errors, status: validateStatus(selectedStatus) })
