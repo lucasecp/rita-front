@@ -9,8 +9,8 @@ import { useLoading } from '@/hooks/useLoading'
 // import DeleteModal from './messages/DeleteModal'
 
 const Actions = ({ id }) => {
-  const history = useHistory()
-  const { Loading } = useLoading()
+  // const history = useHistory()
+  // const { Loading } = useLoading()
 
   return (
     <Container>

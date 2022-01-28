@@ -47,6 +47,21 @@ const Filter = () => {
   const [filters, setFilters] = useState([])
   const [submited, setSubmited] = useState(false)
 
+  const objQuery = [
+    { name: 'nome', value: name },
+    { name: 'cpf', value: clearFormat(cpf) },
+    { name: 'status', value: status === 'ALL' ? '' : status },
+    { name: 'dataCadastroInicio', value: convertDate(registerDates[0]) },
+    { name: 'dataCadastroFim', value: convertDate(registerDates[1]) },
+    { name: 'dataValidacaoInicio', value: convertDate(validationDates[0]) },
+    { name: 'dataValidacaoFim', value: convertDate(validationDates[1]) },
+    { name: 'idValidador', value: validator === 'ALL' ? '' : validator },
+  ]
+
+  const verifyTypedFields = (fields) => {
+    return fields.filter((field) => field.value)
+  }
+
   useEffect(() => {
     setFilters(verifyTypedFields(objQuery))
   }, [])
@@ -60,17 +75,6 @@ const Filter = () => {
     if (!validationDates[0] && !validationDates[1])
       setFilters(verifyTypedFields(objQuery))
   }, [validationDates])
-
-  const objQuery = [
-    { name: 'nome', value: name },
-    { name: 'cpf', value: clearFormat(cpf) },
-    { name: 'status', value: status === 'ALL' ? '' : status },
-    { name: 'dataCadastroInicio', value: convertDate(registerDates[0]) },
-    { name: 'dataCadastroFim', value: convertDate(registerDates[1]) },
-    { name: 'dataValidacaoInicio', value: convertDate(validationDates[0]) },
-    { name: 'dataValidacaoFim', value: convertDate(validationDates[1]) },
-    { name: 'idValidador', value: validator === 'ALL' ? '' : validator },
-  ]
 
   const validateFields = () => {
     const newErrors = {}
@@ -110,10 +114,6 @@ const Filter = () => {
 
     history.push('?page=1&limit=10&orderBy=dataValidacao&order=DESC')
     setFilters(verifyTypedFields(objQuery))
-  }
-
-  const verifyTypedFields = (fields) => {
-    return fields.filter((field) => field.value)
   }
 
   return (

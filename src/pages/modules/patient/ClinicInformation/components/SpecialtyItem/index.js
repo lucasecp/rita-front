@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Container } from './styles'
 import OutlineButton from '@/components/Button/Outline'
 import SpecialtyDetails from '../SpecialtyDetails'

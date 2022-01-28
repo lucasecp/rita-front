@@ -1,4 +1,3 @@
-import colors from '@/styles/colors'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -41,6 +40,7 @@ export const ButtonGroup = styled.div`
   > button + button {
     margin-left: 20px;
   }
+
   @media (max-width: 539px) {
     flex-direction: column;
     width: 100%;

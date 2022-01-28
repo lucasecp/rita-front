@@ -1,4 +1,4 @@
-import { StatusSellableItems } from '@/pages/SellableItems/FilterSellableItems/@types';
+import { StatusSellableItems } from '@/pages/SellableItems/FilterSellableItems/@types'
 import colors from '@/styles/colors'
 import { LiHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
