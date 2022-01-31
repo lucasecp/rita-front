@@ -2,8 +2,6 @@ export const isValidTypeFile = (
   file: File | string,
   options?: any,
 ): boolean => {
-  console.log(file)
-
   if (typeof file === 'object') {
     const fileType = file.type.split('/')[1]
 

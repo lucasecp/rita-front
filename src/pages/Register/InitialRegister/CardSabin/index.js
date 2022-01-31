@@ -83,7 +83,7 @@ function RegisterCardSabin() {
       company = response.data.empresa
 
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return showMessage(NotFound, { cpf }, true)
+        return showMessage(NotFound, { cpf, company }, true)
       }
     } finally {
       Loading.turnOff()

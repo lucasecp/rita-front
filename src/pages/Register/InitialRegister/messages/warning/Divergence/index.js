@@ -14,6 +14,7 @@ function Divergence(data) {
     closeModal()
     history.push(PRE_REGISTER, data)
   }
+
   return (
     <Container>
       <img src={WarningError} />

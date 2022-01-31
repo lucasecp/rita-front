@@ -1,4 +1,4 @@
-import { DependentsI } from './../types/index';
+import { DependentsI } from './../types/index'
 import { formatCpf } from '@/helpers/formatCpf'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 

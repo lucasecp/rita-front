@@ -65,80 +65,64 @@ export const Address = ({
     <>
       <Container>
         <h1>Endereço</h1>
-        <Row>
-          <Col md="6">
-            <InputMask
-              label="CEP:"
-              mask="99.999-999"
-              value={cep}
-              setValue={setCep}
-              name="cep"
-              onBlur={() => setErrors({ ...errors, ...validateCep(cep) })}
-              onKeyUp={() => setErrors({ ...errors, ...validateCep(cep) })}
-              msgError={errors.cep}
-              hasError={errors.cep}
-            />
-          </Col>
-          <Col md="6" className="mt-4 mt-md-0">
-            <Select
-              label="UF:"
-              labelDefaultOption="Selecione:"
-              options={UF}
-              setValue={setUf}
-              value={uf}
-              name="uf"
-            />
-          </Col>
-          <Col md="6" className="mt-4">
+        <section>
+          <InputMask
+            label="CEP:"
+            mask="99.999-999"
+            value={cep}
+            setValue={setCep}
+            name="cep"
+            onBlur={() => setErrors({ ...errors, ...validateCep(cep) })}
+            onKeyUp={() => setErrors({ ...errors, ...validateCep(cep) })}
+            msgError={errors.cep}
+            hasError={errors.cep}
+          />
+          <Select
+            label="UF:"
+            labelDefaultOption="Selecione:"
+            options={UF}
+            setValue={setUf}
+            value={uf}
+            name="uf"
+          />
+          <InputText
+            label="Cidade:"
+            value={city}
+            setValue={setCity}
+            name="city"
+            maxLength={100}
+          />
+          <section>
             <InputText
-              label="Cidade:"
-              value={city}
-              setValue={setCity}
-              name="city"
+              label="Endereço:"
+              value={address}
+              setValue={setAdress}
+              name="address"
               maxLength={100}
             />
-          </Col>
-          <Col md="6" className="mt-4">
-            <Row>
-              <Col md="8">
-                <InputText
-                  label="Endereço:"
-                  value={address}
-                  setValue={setAdress}
-                  name="address"
-                  maxLength={100}
-                />
-              </Col>
-              <Col md="4" className="mt-4 mt-md-0">
-                <InputText
-                  label="Número:"
-                  value={numberHome}
-                  setValue={setNumberHome}
-                  name="numberHome"
-                  maxLength="50"
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col md="6" className="mt-4">
-            <InputMask
-              label="Bairro:"
-              value={district}
-              setValue={setDistrict}
-              name="district"
-              maxLength={100}
-            />
-          </Col>
-          <Col md="6" className="mt-4">
             <InputText
-              label="Complemento:"
-              value={complement}
-              setValue={setComplement}
-              name="complement"
-              maxLength={100}
+              label="Número:"
+              value={numberHome}
+              setValue={setNumberHome}
+              name="numberHome"
+              maxLength="50"
             />
-          </Col>
-        </Row>
+          </section>
+          <InputMask
+            label="Bairro:"
+            value={district}
+            setValue={setDistrict}
+            name="district"
+            maxLength={100}
+          />
+          <InputText
+            label="Complemento:"
+            value={complement}
+            setValue={setComplement}
+            name="complement"
+            maxLength={100}
+          />
+        </section>
       </Container>
       <BtnGroup>
         <BtnPrev onClick={() => setStep(step - 1)}>Etapa Anterior</BtnPrev>

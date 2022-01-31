@@ -39,7 +39,33 @@ interface IPersonalDataAddressFromApi {
   complemento: string
 }
 
-export const fromApiDataToDisplay = (data: IDataToDisplayFromApi) => {
+interface FromApiPersonalDatas {
+  personalDatas: {
+    name: string
+    birthDate: string
+    gender: string
+    phone: string
+    email: string
+  }
+  address: {
+    cep: string
+    uf: string
+    city: string
+    addressUser: string
+    number: string
+    district: string
+    complement: string
+  }
+  supplementaryData: {
+    contractedPlan: string
+    contractedPlanSince: string
+    price: string
+    channel: string
+    company: string
+  }
+}
+
+export const fromApiDataToDisplay = (data: IDataToDisplayFromApi): any => {
   return {
     name: data.nome,
     cpf: formatCpf(data.cpf),
@@ -60,7 +86,7 @@ export const fromApiDataToDisplay = (data: IDataToDisplayFromApi) => {
 export const fromApiPersonalDatas = (
   data: IPersonalDataFromApi,
   endereco: IPersonalDataAddressFromApi,
-) => {
+): FromApiPersonalDatas => {
   return {
     personalDatas: {
       name: data.nome,
@@ -83,7 +109,7 @@ export const fromApiPersonalDatas = (
       contractedPlanSince: data.plano?.data,
       price: data.plano?.valor ? formatPrice(data.plano?.valor) : 'Isento',
       channel: data.canal,
-      company: data?.empresa,
+      company: data.empresa,
     },
   }
 }

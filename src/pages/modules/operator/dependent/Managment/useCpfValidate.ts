@@ -12,8 +12,8 @@ export const useCpfValidate = (): any => {
     
     try {
       Loading.turnOn()
-      const { data } = await apiPatient.get(`/paciente/status?cpf=${cpf}`)
-      if (data.status === 'D') {
+      const { data } = await apiPatient.get(`/paciente/cpf?cpf=${cpf}`)
+      if (data.titular?.nome) {
         error = true
       } else {
         error = false
@@ -32,7 +32,7 @@ export const useCpfValidate = (): any => {
   const validatorCpf = async (value: string) => {
     
     const newValue = clear(value)
-    console.log(await alreadyExist(newValue));
+ 
     if (!newValue) return 'CPF Obrigatório.'
     else if (!validateCpf(newValue)) return 'CPF Inválido.'
     else if (await alreadyExist(newValue)) {

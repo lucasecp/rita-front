@@ -152,6 +152,10 @@ const Filter = () => {
     return hasError
   }
 
+  const verifyTypedFields = (fields) => {
+    return fields.filter((field) => field.value)
+  }
+
   const onPreview = async () => {
     if (hasFieldErrors()) return
 
@@ -221,9 +225,6 @@ const Filter = () => {
     }
   }
 
-  const verifyTypedFields = (fields) => {
-    return fields.filter((field) => field.value)
-  }
   return (
     <>
       <Container>

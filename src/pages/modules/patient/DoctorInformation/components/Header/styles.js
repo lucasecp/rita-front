@@ -62,7 +62,7 @@ export const Container = styled.div`
   @media (max-width: 767px) {
     justify-content: center;
   }
-  
+
   @media (max-width: 560px) {
     > div:first-child {
       margin-right: 0;

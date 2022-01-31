@@ -15,6 +15,12 @@ export const Container = styled.div`
 
     color: ${colors.gray.dark};
   }
+
+  section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
 `
 export const BtnTerms = styled.button`
   background-color: transparent;
@@ -30,9 +36,11 @@ export const BtnGroup = styled.div`
   display: flex;
   align-items: center;
   align-self: stretch;
+
   > button:last-child {
     margin-left: auto;
   }
+
   @media (max-width: 539px) {
     flex-direction: column;
     > button:last-child {

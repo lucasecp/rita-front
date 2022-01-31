@@ -1,16 +1,16 @@
 import React, { createContext, useContext, useState } from 'react'
 
 interface LoadingContextData {
-  isLoading: Boolean;
+  isLoading: boolean
   Loading: {
-    turnOff: () => void;
-    turnOn: () => void;
+    turnOff: () => void
+    turnOn: () => void
   }
 }
 
 const LoadingContext = createContext<LoadingContextData>({} as LoadingContextData)
 
-const LoadingProvider : React.FC = ({ children }) => {
+const LoadingProvider: React.FC = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const turnOff = () => {

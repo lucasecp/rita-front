@@ -3,8 +3,8 @@ import arrowLeft from '@/assets/icons/arrow-left.svg'
 import arrowRight from '@/assets/icons/arrow-right.svg'
 // import { Link } from 'react-router-dom'
 
-interface PrevNextProps{
-  active: boolean;
+interface PrevNextProps {
+  active: boolean
 }
 
 export const Container = styled.div`

@@ -5,7 +5,7 @@ export const Container = styled.div`
   overflow-x: auto;
   background-color: #fff;
 
-  @media (max-width:767px){
+  @media (max-width: 767px) {
     margin: 40px -24px 0 -24px;
 
   }

@@ -5,7 +5,7 @@ import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
-import { Container } from './style'
+import { Container } from './styles'
 import {
   validateBirthdate,
   validateEmail,

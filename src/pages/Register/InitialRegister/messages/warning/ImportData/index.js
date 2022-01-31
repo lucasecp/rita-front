@@ -12,17 +12,18 @@ import {
   REGISTER_PATIENT,
 } from '@/routes/constants/namedRoutes/routes'
 
-function ImportData(data) {
+function ImportData({ cpf, company }) {
   const history = useHistory()
   const { closeModal } = useModal()
 
   const pushToRegister = () => {
     closeModal()
-    history.push(REGISTER_PATIENT, { userData: { cpf: data.cpf } })
+    history.push(REGISTER_PATIENT, { userData: { cpf, company } })
   }
+
   const pushToPreRegister = () => {
     closeModal()
-    history.push(PRE_REGISTER, data)
+    history.push(PRE_REGISTER, { cpf, company })
   }
 
   return (

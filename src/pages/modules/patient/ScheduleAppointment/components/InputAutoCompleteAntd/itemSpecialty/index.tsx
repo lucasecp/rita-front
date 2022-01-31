@@ -10,7 +10,6 @@ const ItemSpecialty = (id: number, name: string, group: string) => {
         <div>
           <div>
             <div>
-
               <img src={profileIcon} />
             </div>
           </div>

@@ -35,7 +35,7 @@ export const Container = styled.div`
       }
     }
   }
-  > *:last-child  {
+  > *:last-child {
     gap: 27px;
     display: grid;
   }

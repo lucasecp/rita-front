@@ -30,6 +30,7 @@ const Managment: React.FC = () => {
 
   const getDependents = async () => {
     const error = await validatorCpf(cpf)
+
     if (error) {
       return setErrors(error)
     }
@@ -48,14 +49,24 @@ const Managment: React.FC = () => {
     }
   }
 
+  useEffect(() => {
+    if (step === 3) {
+      getDependents()
+    }
+  }, [step])
+
   return (
-    <DefaultLayout title="Dependentes">
+    <DefaultLayout title="Gestão de Dependentes">
       <Content>
         <Header setCpf={setCpf} cpf={cpf} errors={errors} hidden={step !== 1} />
 
         <HolderInfo data={dependents.holder} hidden={step !== 2} />
 
-        <Results dependents={dependents} hidden={step !== 2} />
+        <Results
+          setStep={setStep}
+          dependents={dependents}
+          hidden={step !== 2}
+        />
 
         <footer>
           <ButtonPrimary onClick={getDependents} hidden={step !== 1}>

@@ -1,4 +1,4 @@
-import { ItemWithLink } from '../styles';
+import { ItemWithLink } from '../styles'
 import profileIcon from '@/assets/icons/ic-doctor.svg'
 import React from 'react'
 import { Link } from 'react-router-dom'
