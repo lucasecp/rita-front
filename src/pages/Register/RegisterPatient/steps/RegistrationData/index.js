@@ -4,7 +4,7 @@ import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 import { Container, BtnTerms, CustomBtn } from './styles'
-import Terms from './messages/Tems'
+import Terms from './messages/Terms'
 import {
   validateBirthdate,
   validateEmail,
@@ -23,7 +23,7 @@ const RegistrationData = ({
   setStep,
   setData,
   term,
-  setTerm,
+  setTerms,
 }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -206,7 +206,7 @@ const RegistrationData = ({
           label={labelTerms}
           hasError={errors.terms}
           checked={term}
-          setValue={setTerm}
+          setValue={setTerms}
           msgError={errors.terms}
         />
         {/* {!hasPermitionToNext() && (

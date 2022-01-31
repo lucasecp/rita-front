@@ -9,6 +9,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+
   p {
     font-size: 16px;
     line-height: 20px;
@@ -18,9 +19,11 @@ export const Container = styled.div`
       margin-top: 20px;
     }
   }
+
   strong {
     text-transform: uppercase;
   }
+
   h2 {
     font-weight: 500;
     font-size: 24px;
@@ -29,6 +32,7 @@ export const Container = styled.div`
     color: #6a6a6a;
     align-self: flex-start;
   }
+
   > button {
     position: absolute;
     bottom: -90px;

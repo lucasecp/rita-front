@@ -2,14 +2,12 @@ import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
-import { Col, Row } from 'react-bootstrap'
 
 import { Container, BtnGroup, BtnPrev, CustomBtn } from './styles'
 import { UF } from './static'
 import { validateCep } from '../../helpers/validator'
 
 export const Address = ({
-  setButtonPass,
   setData,
   dataClientSabin,
   newData,
@@ -52,14 +50,18 @@ export const Address = ({
       cep,
       complemento: complement,
     }
-    setButtonPass(true)
     setData((data) => {
       return { ...data, endereco: dataObj }
     })
-    return () => {
-      setButtonPass(false)
-    }
   }, [address, cep, numberHome, city, complement, uf, district])
+
+  const onNextStep = () => {
+    const hasErrors = Object.values(errors).some((value) => value !== '')
+
+    if (!hasErrors) {
+      setStep(step + 1)
+    }
+  }
 
   return (
     <>
@@ -126,7 +128,7 @@ export const Address = ({
       </Container>
       <BtnGroup>
         <BtnPrev onClick={() => setStep(step - 1)}>Etapa Anterior</BtnPrev>
-        <CustomBtn onClick={() => setStep(step + 1)}>Próxima Etapa</CustomBtn>
+        <CustomBtn onClick={onNextStep}>Próxima Etapa</CustomBtn>
       </BtnGroup>
     </>
   )
