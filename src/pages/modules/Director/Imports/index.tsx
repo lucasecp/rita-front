@@ -7,6 +7,11 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { InputFile } from '@/components/Form/InputFile'
 import { Autocomplete } from '@/components/Form/Autocomplete'
 
+import { useModal } from '@/hooks/useModal'
+
+import { ConfirmImport } from './messages/ConfirmImport'
+import { Importing } from './messages/Importing'
+
 import { Container, BtnGroup, ContentFile } from './styles'
 
 interface AutocompleteOptions {
@@ -20,6 +25,8 @@ interface Errors {
 }
 
 export const Imports: React.FC = () => {
+  const { showMessage } = useModal()
+
   const [file, setFile] = useState<File | string>({} as File)
   const [company, setCompany] = useState('')
   const [autocompleteOptions, setAutocompleteOptions] = useState<
@@ -73,16 +80,16 @@ export const Imports: React.FC = () => {
   }
 
   const onSubmitImport = () => {
-    if (typeof file === 'object') {
-      const errorsSearched = validateErrors(file, company)
-      setErrors(errorsSearched)
-    }
+    // if (typeof file === 'object') {
+    //   const errorsSearched = validateErrors(file, company)
+    //   setErrors(errorsSearched)
+    // }
+
+    showMessage(ConfirmImport)
   }
 
-  // console.log('File: ', file)
-
   return (
-    <DefaultLayout title="Importações">
+    <DefaultLayout title="Importação">
       <Container>
         <InputFile setValue={setFile} clearOnClick accept=".xlsx, .xls">
           <label>Arquivo:</label>
