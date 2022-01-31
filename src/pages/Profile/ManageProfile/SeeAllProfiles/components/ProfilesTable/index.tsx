@@ -21,11 +21,7 @@ export const ProfilesTable: React.FC<DataProfilesProps> = ({ profiles }) => {
         <ul key={index}>
           <li>{profile.name || '-'}</li>
           <li>{profile.usersQuantity || '-'}</li>
-          <Actions
-            id={{
-              id: profile.id,
-            }}
-          />
+          <Actions id={profile.id} />
         </ul>
       ))}
       {!profiles?.length && <h2>Nenhum resultado encontrado</h2>}

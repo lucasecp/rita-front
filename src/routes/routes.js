@@ -11,6 +11,7 @@ import { FilterSellableItems } from '@/pages/SellableItems/FilterSellableItems'
 import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
 import { EditSellableItems } from '@/pages/SellableItems/EditSellableItems'
 import { SeeAllProfiles } from '@/pages/Profile/ManageProfile/SeeAllProfiles'
+import { SeeOneProfile } from '@/pages/Profile/ManageProfile/SeeOneProfile'
 
 import {
   directorRoutes,
@@ -61,6 +62,8 @@ function Routes() {
         component={SeeAllProfiles}
         exact
       />
+
+      <Route path={DIRECTOR_SEE_PERFIS} isPrivate component={SeeOneProfile} />
 
       <Route path={SEE_SELLABLE_ITEMS} isPrivate component={SeeSellableItems} />
 
