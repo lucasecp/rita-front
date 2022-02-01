@@ -30,7 +30,7 @@ import {
   OPERATOR_SEE_ALL_SPECIALTYS,
   DIRECTOR_SEE_PERFIS,
   OPERATOR_DEPENDENT_MANAGMENT,
-  DIRECTOR_IMPORTS,
+  DIRECTOR_IMPORT,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -127,7 +127,7 @@ export const menuItens = [
     permission: permissionList.ALTERAR_DADOS_PACIENTE,
   },
   {
-    path: DIRECTOR_IMPORTS,
+    path: DIRECTOR_IMPORT,
     icon: <ImportIcon />,
     name: 'Importação',
     permission: permissionList.IMPORTAR_PACIENTES,

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import ButtonOutline from '@/components/Button/Outline'
@@ -8,10 +9,12 @@ import { Importing } from '../Importing'
 
 import { useModal } from '@/hooks/useModal'
 import { toast } from '@/styles/components/toastify'
+import { DIRECTOR_IMPORT_REPORT } from '@/routes/constants/namedRoutes/routes'
 
 import { Container, ButtonsArea } from './styles'
 
 export const ConfirmImport: React.FC = () => {
+  const history = useHistory()
   const { closeModal, showMessage } = useModal()
 
   const onMakeImport = () => {
@@ -21,12 +24,13 @@ export const ConfirmImport: React.FC = () => {
 
     return new Promise(function () {
       setTimeout(() => {
-        const success = false
+        const success = true
 
         if (success) {
           console.log('Importação finalizada!')
           toast.success('Importação realizada com sucesso')
           closeModal()
+          history.push(DIRECTOR_IMPORT_REPORT)
         } else {
           console.log('Importação há erros!')
           toast.error('Houve algum erro durante a importação')

@@ -10,7 +10,6 @@ import { Autocomplete } from '@/components/Form/Autocomplete'
 import { useModal } from '@/hooks/useModal'
 
 import { ConfirmImport } from './messages/ConfirmImport'
-import { Importing } from './messages/Importing'
 
 import { Container, BtnGroup, ContentFile } from './styles'
 
@@ -24,7 +23,7 @@ interface Errors {
   company: string
 }
 
-export const Imports: React.FC = () => {
+export const Import: React.FC = () => {
   const { showMessage } = useModal()
 
   const [file, setFile] = useState<File | string>({} as File)
@@ -79,10 +78,10 @@ export const Imports: React.FC = () => {
     return objectError
   }
 
-  const onSubmitImport = () => {
+  const onRealizeImport = () => {
     // if (typeof file === 'object') {
     //   const errorsSearched = validateErrors(file, company)
-    //   setErrors(errorsSearched)
+    //   return setErrors(errorsSearched)
     // }
 
     showMessage(ConfirmImport)
@@ -111,7 +110,7 @@ export const Imports: React.FC = () => {
         {((typeof file === 'object' && file?.name) || company) && (
           <ButtonOutline onClick={onCancel}>Cancelar</ButtonOutline>
         )}
-        <ButtonPrimary onClick={onSubmitImport}>
+        <ButtonPrimary onClick={onRealizeImport}>
           Realizar importação
         </ButtonPrimary>
       </BtnGroup>
