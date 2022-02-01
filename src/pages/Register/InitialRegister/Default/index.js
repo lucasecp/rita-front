@@ -87,7 +87,6 @@ function DefaultRegister() {
       }
     } catch ({ response }) {
       const apiStatus = response.status
-      console.log(response)
       // company = response.data.empresa[0]
 
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {

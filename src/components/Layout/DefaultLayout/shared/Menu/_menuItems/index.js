@@ -27,7 +27,7 @@ import {
   FILTER_SELLABLE_ITEMS,
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ALL_SPECIALTYS,
-  DIRECTOR_SEE_PERFIS,
+  DIRECTOR_SEE_ALL_PROFILES,
   OPERATOR_DEPENDENT_MANAGMENT,
 } from '@/routes/constants/namedRoutes/routes'
 
@@ -101,7 +101,7 @@ export const menuItens = [
     permission: permissionList.LISTAR_ITENS_VENDAVEIS,
   },
   {
-    path: DIRECTOR_SEE_PERFIS,
+    path: DIRECTOR_SEE_ALL_PROFILES,
     icon: <ProfilesIcon />,
     name: 'Perfis',
     permission: permissionList.LISTAR_ITENS_VENDAVEIS,
