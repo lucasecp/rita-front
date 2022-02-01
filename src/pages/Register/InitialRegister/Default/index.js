@@ -87,10 +87,11 @@ function DefaultRegister() {
       }
     } catch ({ response }) {
       const apiStatus = response.status
-      company = response.data.empresa[0]
+      console.log(response)
+      // company = response.data.empresa[0]
 
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return history.push(REGISTER_PATIENT, { userData: { cpf, company } })
+        return history.push(REGISTER_PATIENT, { userData: { cpf } })
       }
     } finally {
       Loading.turnOff()
