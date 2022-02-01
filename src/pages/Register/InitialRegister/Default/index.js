@@ -75,6 +75,7 @@ function DefaultRegister() {
       }
       if (responseApi.status === status.DENIED_FIRST_TIME) {
         return showMessage(Divergence, {
+          company,
           cpf,
           email: responseApi.email,
           phone: responseApi.telefone,

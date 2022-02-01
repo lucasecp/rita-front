@@ -10,7 +10,7 @@ import NotFound from '@/pages/404'
 import { FilterSellableItems } from '@/pages/SellableItems/FilterSellableItems'
 import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
 import { EditSellableItems } from '@/pages/SellableItems/EditSellableItems'
-import { SeeAllProfiles } from '@/pages/Profile/ManageProfile/SeeAllProfiles'
+import { SeeAllProfiles } from '@/pages/ProfileAndPermissions/SeeAllProfiles'
 import { SeeOneProfile } from '@/pages/Profile/ManageProfile/SeeOneProfile'
 
 import {

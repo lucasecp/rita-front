@@ -17,7 +17,7 @@ import { useModal } from '@/hooks/useModal'
 import axios from 'axios'
 import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import DocumentNoSent from './messages/Success/DocumentNotSent'
-import FieldsErrorMessage from './messages/Error/FieldsErrorMessage'
+// import FieldsErrorMessage from './messages/Error/FieldsErrorMessage'
 
 const status = {
   SUCCESS: 'success',
@@ -39,11 +39,14 @@ const RegisterPatient = () => {
 
   const [dataClientSabin, setDataClientSabin] = useState({})
   const [documentFiles, setDocumentFiles] = useState({})
-  const [fieldsError, setFieldsError] = useState(false)
 
   useEffect(() => {
     document.title = 'Rita Saúde | Cadastro'
-    if (!location.state) return
+
+    if (!location.state) {
+      return
+    }
+
     setDataClientSabin(location.state.userData)
   }, [])
 
@@ -160,18 +163,16 @@ const RegisterPatient = () => {
         {step === 1 && (
           <RegistrationData
             setData={setData}
-            setButtonPass={setFieldsError}
             dataClientSabin={dataClientSabin}
             newData={data}
             setStep={setStep}
             term={term}
-            setTerm={setTerm}
+            setTerms={setTerm}
           />
         )}
         {step === 2 && (
           <Address
             setData={setData}
-            setButtonPass={setFieldsError}
             dataClientSabin={dataClientSabin}
             newData={data}
             setStep={setStep}
@@ -183,6 +184,7 @@ const RegisterPatient = () => {
             onGetDocumentFiles={setDocumentFiles}
             savedFiles={documentFiles}
             setStep={setStep}
+            isPatientLinkedCompany={!!dataClientSabin.company}
           />
         )}
         {step === 4 && (

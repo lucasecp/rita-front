@@ -20,7 +20,7 @@ export const fromApi = (dataClinic) => {
     status: specialty.statusMedicoClinica,
     clinic: {
       photo: specialty.clinica.foto,
-      description: firstLetterCapitalize(specialty.clinica.descricao),
+      description: firstLetterCapitalize(specialty.clinica?.descricao),
       phone: formatPhone(specialty.clinica.telefone),
       status: specialty.clinica.status,
       address: specialty.clinica.endereco,

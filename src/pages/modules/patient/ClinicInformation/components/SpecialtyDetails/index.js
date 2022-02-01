@@ -4,11 +4,7 @@ import SpecialtySubDetails from '../SpecialtySubDetails'
 import Accordion from '../../../dependents/AddDependentDocument/containers/MinorAge/components/Accordion'
 import { useToggle } from '@/hooks/useToggle'
 
-const SpecialtyDetails = ({
-  parentWasClosed,
-  dataSpecialtyDetails,
-
-}) => {
+const SpecialtyDetails = ({ parentWasClosed, dataSpecialtyDetails }) => {
   const [state, toggle] = useToggle()
 
   useEffect(() => {
@@ -16,8 +12,6 @@ const SpecialtyDetails = ({
       toggle()
     }
   }, [parentWasClosed])
-
-
 
   return (
     <Container>

@@ -69,6 +69,7 @@ function RegisterCardSabin() {
       }
       if (responseApi.status === status.DENIED_FIRST_TIME) {
         return showMessage(Divergence, {
+          company,
           cpf,
           email: responseApi.email,
           phone: responseApi.telefone,
@@ -83,7 +84,7 @@ function RegisterCardSabin() {
       company = response.data.empresa
 
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return showMessage(NotFound, { cpf }, true)
+        return showMessage(NotFound, { cpf, company }, true)
       }
     } finally {
       Loading.turnOff()

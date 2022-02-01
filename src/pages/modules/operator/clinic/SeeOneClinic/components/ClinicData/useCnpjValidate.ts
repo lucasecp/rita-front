@@ -18,8 +18,14 @@ export const useCnpjValidate = (): any => {
     return error
   }
 
-  const validatorCNPJ = async (value: string) => {
+  const validatorCNPJ = async (value: string, initialCNPJ: string) => {
     const newValue = clear(value)
+    const initialValue = clear(initialCNPJ)
+
+    if (newValue === initialValue) {
+      return ''
+    }
+
     if (!newValue) return 'CNPJ Obrigatório.'
     else if (!validateCNPJ(newValue)) return 'CNPJ Inválido.'
     else if (await alreadyExist(newValue)) {

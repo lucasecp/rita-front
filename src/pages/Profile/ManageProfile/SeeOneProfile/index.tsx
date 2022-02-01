@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import { Container } from './styles'
+import {
+  Container,
+  useViewStyles,
+  useItemStyles,
+  useAccordionStyles,
+} from './styles'
 import { useLoading } from '@/hooks/useLoading'
 import apiUser from '@/services/apiUser'
 import { profilesAndPermissionMapped } from './adapters/fromApi'
@@ -8,6 +13,7 @@ import InputText from '@/components/Form/InputText'
 import { DIRECTOR_SEE_PERFIS } from '@/routes/constants/namedRoutes/routes'
 import OutilineButton from '@/components/Button/Outline'
 import ButtonLink from '@/components/Button/Link'
+import { ReactComponent as ExpandedLogo } from '@/assets/logo/expanded-logo.svg'
 
 import { makeStyles } from '@material-ui/core/styles'
 import TreeView from '@material-ui/lab/TreeView'
@@ -26,79 +32,37 @@ export const SeeOneProfile: React.FC = () => {
   const history = useHistory()
   const { id } = useLocation().state
 
-  const [profileAndPermissions, setProfileAndPermissions] = useState([])
+  // const [profileAndPermissions, setProfileAndPermissions] = useState([])
 
-  useEffect(() => {
-    const loadProfiles = async () => {
-      try {
-        Loading.turnOn()
+  // useEffect(() => {
+  //   const loadProfiles = async () => {
+  //     try {
+  //       Loading.turnOn()
 
-        const { data: perfil } = await apiUser.get(`/perfil/${id}`)
-        const { data: permissions } = await apiUser.get('/grupo-permissao')
+  //       const { data: perfil } = await apiUser.get(`/perfil/${id}`)
+  //       const { data: permissions } = await apiUser.get('/grupo-permissao')
 
-        console.log(perfil, permissions)
+  //       console.log(perfil, permissions)
 
-        const profilesAndMapped = profilesAndPermissionMapped(data)
+  //       const profilesAndMapped = profilesAndPermissionMapped(data)
 
-        setProfileAndPermissions(profilesAndMapped)
+  //       setProfileAndPermissions(profilesAndMapped)
 
-        console.log(profilesAndMapped)
-      } catch (error) {
-        // console.log(error)
-        // toast.error('Erro ao carregar itens vendáveis!')
-      } finally {
-        Loading.turnOff()
-      }
-    }
+  //       console.log(profilesAndMapped)
+  //     } catch (error) {
+  //       // console.log(error)
+  //       // toast.error('Erro ao carregar itens vendáveis!')
+  //     } finally {
+  //       Loading.turnOff()
+  //     }
+  //   }
 
-    loadProfiles()
-  }, [])
-
-  const useViewStyles = makeStyles({
-    root: {},
-  })
-
-  const useItemStyles = makeStyles((theme) => ({
-    root: {
-      '& > .MuiTreeItem-content > .MuiTreeItem-label': {
-        display: 'flex',
-        alignItems: 'center',
-        padding: '4px 0',
-        background: 'transparent !important',
-        pointerEvents: 'none',
-      },
-      '& > .MuiTreeItem-content  > .MuiTreeItem-label::before': {
-        content: "''",
-        display: 'inline-block',
-        width: 12,
-        height: 12,
-        marginRight: 8,
-        border: '1px solid #ccc',
-        background: 'white',
-      },
-    },
-    iconContainer: {
-      marginRight: 12,
-      '& > svg': {
-        padding: 8,
-        '&:hover': {
-          opacity: 0.6,
-        },
-      },
-    },
-    label: {
-      padding: 0,
-    },
-    selected: {
-      '& > .MuiTreeItem-content  > .MuiTreeItem-label::before': {
-        background: theme.palette.primary.main,
-        border: '1px solid transparent',
-      },
-    },
-  }))
+  //   loadProfiles()
+  // }, [])
 
   const classesView = useViewStyles()
   const classesItem = useItemStyles()
+  const classesAccordion = useAccordionStyles()
 
   const [expanded, setExpanded] = React.useState([])
   const [selected, setSelected] = React.useState([])
@@ -126,10 +90,11 @@ export const SeeOneProfile: React.FC = () => {
     <DefaultLayout title="Perfis - Visualização">
       <Container>
         <InputText
-          value={profileAndPermissions.name}
+          // value={profileAndPermissions.name}
           label="Nome do Perfil"
           disabled
         />
+        <label htmlFor="telas">Telas</label>
         <TreeView
           classes={classesView}
           defaultCollapseIcon={<ExpandMoreIcon />}
@@ -140,7 +105,27 @@ export const SeeOneProfile: React.FC = () => {
           onNodeSelect={handleSelect}
           multiSelect
         >
-          {profileAndPermissions.permissions &&
+          <TreeItem classes={classesAccordion} nodeId="1" label="teste 1">
+            <TreeItem classes={classesItem} nodeId="2" label="Calendar" />
+            <TreeItem classes={classesItem} nodeId="3" label="Chrome" />
+            <TreeItem classes={classesItem} nodeId="4" label="Webstorm" />
+          </TreeItem>
+          <TreeItem classes={classesAccordion} nodeId="5" label="teste 2">
+            <TreeItem classes={classesItem} nodeId="6" label="Calendar" />
+            <TreeItem classes={classesItem} nodeId="7" label="Chrome" />
+            <TreeItem classes={classesItem} nodeId="8" label="Webstorm" />
+          </TreeItem>
+          <TreeItem classes={classesAccordion} nodeId="9" label="teste 3">
+            <TreeItem classes={classesItem} nodeId="10" label="Calendar" />
+            <TreeItem classes={classesItem} nodeId="11" label="Chrome" />
+            <TreeItem classes={classesItem} nodeId="12" label="Webstorm" />
+          </TreeItem>
+          <TreeItem classes={classesAccordion} nodeId="13" label="teste 4 ">
+            <TreeItem classes={classesItem} nodeId="14" label="Calendar" />
+            <TreeItem classes={classesItem} nodeId="15" label="Chrome" />
+            <TreeItem classes={classesItem} nodeId="16" label="Webstorm" />
+          </TreeItem>
+          {/* {profileAndPermissions.permissions &&
             profileAndPermissions.permissions.map((permission) => {
               return (
                 <TreeItem
@@ -153,7 +138,7 @@ export const SeeOneProfile: React.FC = () => {
                   <TreeItem classes={classesItem} nodeId="4" label="Webstorm" />
                 </TreeItem>
               )
-            })}
+            })} */}
         </TreeView>
 
         <footer>

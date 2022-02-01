@@ -66,7 +66,6 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
           onSelect={(values) => setValue !== undefined && setValue(values)}
           onRemove={(values) => setValue !== undefined && setValue(values)}
           selectedValues={value}
-
           {...rest}
         />
         {!!value?.length && (

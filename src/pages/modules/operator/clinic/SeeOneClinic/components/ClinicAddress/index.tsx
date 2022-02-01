@@ -12,7 +12,7 @@ import {
   validateAddress,
   validateNumberHome,
   validateDistrict,
-  validateCity
+  validateCity,
 } from '../../helpers/validatorFields'
 
 interface ClinicAddressProps {

@@ -17,10 +17,7 @@ const Actions = ({ id }) => {
     <Container>
       <CustomTooltip label="Visualizar">
         <EyePurpleIcon
-          onClick={
-            // () => console.log(id, 'visualizar')
-            () => history.push(`${DIRECTOR_SEE_PERFIS}/${id}`, { id })
-          }
+          onClick={() => history.push(`${DIRECTOR_SEE_PERFIS}/${id}`, { id })}
         />
       </CustomTooltip>
       <CustomTooltip label="Excluir">

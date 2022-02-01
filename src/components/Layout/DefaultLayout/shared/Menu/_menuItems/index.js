@@ -26,6 +26,7 @@ import {
   PATIENT_DEPENDENTS,
   FILTER_SELLABLE_ITEMS,
   OPERATOR_SEE_ALL_CLINICS,
+  OPERATOR_SEE_ALL_SPECIALTYS,
   DIRECTOR_SEE_PERFIS,
   OPERATOR_DEPENDENT_MANAGMENT,
 } from '@/routes/constants/namedRoutes/routes'
@@ -107,9 +108,15 @@ export const menuItens = [
   },
   {
     path: OPERATOR_SEE_ALL_CLINICS,
-    icon: <ClinicsIcon />,
+    icon: <AuthorizationIcon />,
     name: 'Clínicas',
     permission: permissionList.LISTAR_CLINICAS,
+  },
+  {
+    path: OPERATOR_SEE_ALL_SPECIALTYS,
+    icon: <AuthorizationIcon />,
+    name: 'Especialidades',
+    permission: permissionList.LISTAR_ESPECIALIDADES,
   },
   {
     path: OPERATOR_DEPENDENT_MANAGMENT,

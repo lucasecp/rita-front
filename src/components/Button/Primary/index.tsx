@@ -14,7 +14,7 @@ const ButtonPrimary: React.FC<IButtonPrimary> = ({
   small = false,
   disabledWithEvents = false,
   medium = false,
-  variation = 'none',
+  // variation = 'none',
   ...rest
 }) => {
   return (

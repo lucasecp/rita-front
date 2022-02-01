@@ -27,11 +27,12 @@ export const Content = styled.div`
     padding: 35px 32px;
     background: #fff;
   }
+
   @media (max-width: 767px) {
     padding: 25px 24px 0;
     > *:last-child {
       margin: 0 -24px;
-    padding: 35px 24px;
+      padding: 35px 24px;
     }
   }
 `

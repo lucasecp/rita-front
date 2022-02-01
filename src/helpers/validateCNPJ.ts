@@ -3,7 +3,7 @@ export const validateCNPJ = (cnpj: string): boolean => {
 
   if (cnpj === '') return false
 
-  if (cnpj.length != 14) return false
+  if (cnpj.length !== 14) return false
 
   // Elimina CNPJs invalidos conhecidos
   if (
@@ -43,6 +43,6 @@ export const validateCNPJ = (cnpj: string): boolean => {
   }
   resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11)
   if (resultado !== Number(digitos.charAt(1))) return false
-  
+
   return true
 }

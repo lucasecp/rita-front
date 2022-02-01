@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Status } from './styles'
 import { showStatus } from '../../helpers/showStatus'
-import formatTextWithLimit from '@/helpers/formatTextWithLimit'
+// import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../types'
 import { useHistory } from 'react-router-dom'
@@ -9,8 +9,6 @@ import { OPERATOR_SEE_ONE_CLINIC } from '@/routes/constants/namedRoutes/routes'
 
 const Content: React.FC<ContentProps> = ({ clinics }) => {
   const history = useHistory()
-  console.log(clinics);
-
 
   return (
     <Container>

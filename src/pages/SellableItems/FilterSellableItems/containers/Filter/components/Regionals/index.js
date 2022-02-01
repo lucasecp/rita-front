@@ -5,7 +5,7 @@ import { toast } from '@/styles/components/toastify'
 import React, { useEffect, useState } from 'react'
 import mapDataFromApiToMultSelect from '../../helpers/mapDataFromApiToMultSelect'
 
-interface RegionalProps {}
+// interface RegionalProps {}
 
 export const Regionals: React.FC = ({ setRegional, regional }) => {
   const [regionalOptions, setRegionalOptions] = useState([])

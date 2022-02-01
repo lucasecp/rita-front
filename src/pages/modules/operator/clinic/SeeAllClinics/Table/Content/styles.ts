@@ -36,8 +36,8 @@ export const Container = styled.div`
     min-width: 217px;
     max-width: 217px;
     :first-child {
-    min-width: 474px;
-  }
+      min-width: 474px;
+    }
     > div {
       width: fit-content;
     }

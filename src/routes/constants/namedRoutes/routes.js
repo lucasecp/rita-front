@@ -19,7 +19,7 @@ export const OPERATOR_REPORTS = '/relatorios'
 export const OPERATOR_REPORTS_AUTHORIZATION = '/relatorios/autorizacoes'
 export const OPERATOR_SEE_ALL_CLINICS = '/clinicas'
 export const OPERATOR_SEE_ONE_CLINIC = '/clinicas/ver-clinica'
-export const OPERATOR_SEE_ALL_SPECIALTYS = '/clinicas/especialidades'
+export const OPERATOR_SEE_ALL_SPECIALTYS = '/especialidades'
 export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'

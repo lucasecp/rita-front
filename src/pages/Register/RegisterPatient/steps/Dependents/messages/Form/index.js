@@ -5,9 +5,9 @@ import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
-import { Container } from './style'
+import { Container } from './styles'
 import {
-  validateBirthdate,
+  // validateBirthdate,
   validateEmail,
   validateGender,
   validateName,
@@ -33,6 +33,9 @@ const Form = ({
   clientCpf,
   dataClientSabin,
 }) => {
+  const { closeModal } = useModal()
+  const { Loading } = useLoading()
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
@@ -40,8 +43,15 @@ const Form = ({
   const [phone, setPhone] = useState('')
   const [cpf, setCpf] = useState('')
   const [errors, setErrors] = useState({})
-  const { closeModal } = useModal()
-  const { Loading } = useLoading()
+
+  const updateData = () => {
+    setName(editDep.nome || '')
+    setEmail(editDep.email || '')
+    setGender(editDep.sexo || '')
+    setBirthdate(formatBirthdate(editDep.dataNascimento) || '')
+    setPhone(editDep.telefone || '')
+    setCpf(editDep.cpf || '')
+  }
 
   useEffect(() => {
     updateData()
@@ -66,15 +76,6 @@ const Form = ({
     return dataBaseForm
   }
 
-  const updateData = () => {
-    setName(editDep.nome || '')
-    setEmail(editDep.email || '')
-    setGender(editDep.sexo || '')
-    setBirthdate(formatBirthdate(editDep.dataNascimento) || '')
-    setPhone(editDep.telefone || '')
-    setCpf(editDep.cpf || '')
-  }
-
   const isValidData = () =>
     name &&
     email &&
@@ -83,6 +84,19 @@ const Form = ({
     gender &&
     phone &&
     !Object.values(errors).filter((err) => err).length
+
+  const cpfAlreadyExistsApi = async () => {
+    try {
+      Loading.turnOn()
+
+      await apiPatient.get(`/paciente/status?cpf=${clearCpf(cpf)}`)
+      return true
+    } catch ({ response }) {
+      if (response.status === 404) return false
+    } finally {
+      Loading.turnOff()
+    }
+  }
 
   const hanldeSubmit = async () => {
     setErrors({})
@@ -114,18 +128,6 @@ const Form = ({
     closeModal()
   }
 
-  const cpfAlreadyExistsApi = async () => {
-    try {
-      Loading.turnOn()
-
-      await apiPatient.get(`/paciente/status?cpf=${clearCpf(cpf)}`)
-      return true
-    } catch ({ response }) {
-      if (response.status === 404) return false
-    } finally {
-      Loading.turnOff()
-    }
-  }
   return (
     <Container>
       <h2>Dependente</h2>
