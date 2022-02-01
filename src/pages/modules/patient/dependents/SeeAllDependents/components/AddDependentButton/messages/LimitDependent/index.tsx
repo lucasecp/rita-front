@@ -27,7 +27,7 @@ export const LimitDependent: React.FC = () => {
       <p>
         Permitido somente dois dependentes
         <br />
-        Entre em contato com com o RH da sua empresa
+        Entre em contato com o RH da sua empresa
       </p>
       <footer>
         <ButtonPrimary onClick={onPressOk}>OK</ButtonPrimary>

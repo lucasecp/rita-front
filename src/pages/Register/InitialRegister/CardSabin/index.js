@@ -43,7 +43,7 @@ function RegisterCardSabin() {
         `/paciente/status?cpf=${cpf}`,
       )
 
-      company = responseApi.empresa
+      company = responseApi.empresa[0]
 
       if (responseApi.status === status.INACTIVE) {
         return showMessage(Inactive)
@@ -81,10 +81,10 @@ function RegisterCardSabin() {
       }
     } catch ({ response }) {
       const apiStatus = response.status
-      company = response.data.empresa
+      // company = response.data.empresa[0]
 
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return showMessage(NotFound, { cpf, company }, true)
+        return showMessage(NotFound, { cpf }, true)
       }
     } finally {
       Loading.turnOff()
