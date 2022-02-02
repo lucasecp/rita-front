@@ -14,12 +14,6 @@ export default createGlobalStyle`
   ${toastifyStyles}
   ${listInputAutoComplete}
 
-  @import "/node_modules/@syncfusion/ej2-base/styles/material.css";
-  @import "/node_modules/@syncfusion/ej2-react-navigations/styles/material.css";
-  @import "/node_modules/@syncfusion/ej2-inputs/styles/material.css";
-  @import "/node_modules/@syncfusion/ej2-buttons/styles/material.css";
-
-
   body, *{
     font-family: "Athletics";
     box-sizing: border-box;
