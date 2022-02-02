@@ -39,7 +39,7 @@ export const toApi = (clinicInfo: any) => {
     descricao: clinicInfo.name,
     razaoSocial: clinicInfo.socialReason,
     status: clinicInfo.status,
-    cnpj: clinicInfo.cnpj,
+    cnpj: clearSpecialCaracter(clinicInfo.cnpj),
     telefone: clearSpecialCaracter(clinicInfo.phone),
     endereco: clinicInfo.address,
     bairro: clinicInfo.district,
