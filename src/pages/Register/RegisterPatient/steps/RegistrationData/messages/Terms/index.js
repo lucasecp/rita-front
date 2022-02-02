@@ -1,7 +1,8 @@
+import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/hooks/useModal'
-import React from 'react'
-import { Container, TextGroup } from './style'
+import { Container, TextGroup } from './styles'
+
 const Terms = ({ setTerms, setErrors }) => {
   const { closeModal } = useModal()
 
@@ -12,6 +13,7 @@ const Terms = ({ setTerms, setErrors }) => {
     })
     closeModal()
   }
+
   return (
     <Container>
       <h2>Termos de uso - PACIENTE</h2>

@@ -12,6 +12,7 @@ import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
 import { ReactComponent as SellableItemsIcon } from '@/assets/icons/salable-items.svg'
 import { ReactComponent as ProfilesIcon } from '@/assets/icons/profiles.svg'
 import { ReactComponent as ClinicsIcon } from '@/assets/icons/clinic.svg'
+import { ReactComponent as ImportIcon } from '@/assets/icons/import.svg'
 
 import {
   INITIAL_PAGE,
@@ -27,8 +28,9 @@ import {
   FILTER_SELLABLE_ITEMS,
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ALL_SPECIALTYS,
-  DIRECTOR_SEE_PERFIS,
+  DIRECTOR_SEE_ALL_PROFILES,
   OPERATOR_DEPENDENT_MANAGMENT,
+  DIRECTOR_IMPORT,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -101,7 +103,7 @@ export const menuItens = [
     permission: permissionList.LISTAR_ITENS_VENDAVEIS,
   },
   {
-    path: DIRECTOR_SEE_PERFIS,
+    path: DIRECTOR_SEE_ALL_PROFILES,
     icon: <ProfilesIcon />,
     name: 'Perfis',
     permission: permissionList.LISTAR_ITENS_VENDAVEIS,
@@ -123,5 +125,11 @@ export const menuItens = [
     icon: <GroupUserIcon />,
     name: 'Gestão de Dependentes',
     permission: permissionList.ALTERAR_DADOS_PACIENTE,
+  },
+  {
+    path: DIRECTOR_IMPORT,
+    icon: <ImportIcon />,
+    name: 'Importação',
+    permission: permissionList.IMPORTAR_PACIENTES,
   },
 ]

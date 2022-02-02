@@ -88,7 +88,7 @@ const Document = ({
       return
     }
 
-    if (selectIncome === '') {
+    if (!isPatientLinkedCompany && selectIncome === '') {
       setErrors({
         selectIncome: 'A escolha da sua faixa de renda é obrigatório.',
       })
@@ -132,7 +132,7 @@ const Document = ({
           proofOfAddressFile={proofOfAddressFile}
         />
 
-        {isPatientLinkedCompany && (
+        {!isPatientLinkedCompany && (
           <ProofOfIncome
             hasPreviousDocument={
               !!holdingDocumentFile &&

@@ -39,10 +39,7 @@ export const SeeAllProfiles: React.FC = () => {
   }, [])
 
   return (
-    <DefaultLayout
-      title="Perfis - Visualização"
-      headerChildren={<IncludeButton />}
-    >
+    <DefaultLayout title="Perfis" headerChildren={<IncludeButton />}>
       <Container>
         <Header />
         <ProfilesTable profiles={profiles} />

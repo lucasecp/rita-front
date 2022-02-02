@@ -17,8 +17,6 @@ export const Dependents = ({ dataClientSabin, setData, newData }) => {
   const limitOfDependents = 2
   const isPatientLinkedCompany = !!dataClientSabin.company
 
-  console.log(dataClientSabin)
-
   useEffect(() => {
     setAllDeps(
       newData.dependentes || mapDeps(dataClientSabin.dependentes) || [],

@@ -14,7 +14,6 @@ export default createGlobalStyle`
   ${toastifyStyles}
   ${listInputAutoComplete}
 
-
   body, *{
     font-family: "Athletics";
     box-sizing: border-box;

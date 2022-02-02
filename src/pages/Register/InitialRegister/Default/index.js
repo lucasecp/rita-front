@@ -51,7 +51,7 @@ function DefaultRegister() {
         `/paciente/status?cpf=${cpf}`,
       )
 
-      company = responseApi.empresa
+      company = responseApi.empresa[0]
 
       if (responseApi.status === status.INACTIVE) {
         return showMessage(Inactive)
@@ -75,6 +75,7 @@ function DefaultRegister() {
       }
       if (responseApi.status === status.DENIED_FIRST_TIME) {
         return showMessage(Divergence, {
+          company,
           cpf,
           email: responseApi.email,
           phone: responseApi.telefone,
@@ -86,10 +87,10 @@ function DefaultRegister() {
       }
     } catch ({ response }) {
       const apiStatus = response.status
-      company = response.data.empresa
+      // company = response.data.empresa[0]
 
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return history.push(REGISTER_PATIENT, { userData: { cpf, company } })
+        return history.push(REGISTER_PATIENT, { userData: { cpf } })
       }
     } finally {
       Loading.turnOff()

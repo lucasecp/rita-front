@@ -11,6 +11,7 @@ import { FilterSellableItems } from '@/pages/SellableItems/FilterSellableItems'
 import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
 import { EditSellableItems } from '@/pages/SellableItems/EditSellableItems'
 import { SeeAllProfiles } from '@/pages/ProfileAndPermissions/SeeAllProfiles'
+import { SeeOneProfile } from '@/pages/ProfileAndPermissions/SeeOneProfile'
 
 import {
   directorRoutes,
@@ -30,7 +31,8 @@ import {
   SEE_SELLABLE_ITEMS,
   FILTER_SELLABLE_ITEMS,
   EDIT_SELLABLE_ITEMS,
-  DIRECTOR_SEE_PERFIS,
+  DIRECTOR_SEE_ALL_PROFILES,
+  DIRECTOR_SEE_ONE_PROFILE,
 } from './constants/namedRoutes/routes'
 
 function Routes() {
@@ -56,10 +58,16 @@ function Routes() {
       />
 
       <Route
-        path={DIRECTOR_SEE_PERFIS}
+        path={DIRECTOR_SEE_ALL_PROFILES}
         isPrivate
         component={SeeAllProfiles}
         exact
+      />
+
+      <Route
+        path={DIRECTOR_SEE_ONE_PROFILE}
+        isPrivate
+        component={SeeOneProfile}
       />
 
       <Route path={SEE_SELLABLE_ITEMS} isPrivate component={SeeSellableItems} />

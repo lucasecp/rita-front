@@ -21,7 +21,7 @@ const MODAL = {
   BLOCKED: 'blocked',
 }
 
-function InsertToken({ isLastTry, cpf, email, phone }) {
+function InsertToken({ isLastTry, cpf, email, phone, company }) {
   const history = useHistory()
   const { closeModal } = useModal()
 
@@ -37,6 +37,10 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
   useEffect(() => {
     setTypeOfModal(isLastTry ? MODAL.LAST_TRY : MODAL.INSERT_TOKEN)
   }, [isLastTry])
+
+  const switchModalTo = (modalName) => {
+    setTypeOfModal(modalName)
+  }
 
   const onRequestNewToken = async () => {
     Loading.turnOn()
@@ -83,7 +87,9 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
 
       if (response.status === 200) {
         closeModal()
-        history.push(REGISTER_PATIENT, { userData: response.data })
+        history.push(REGISTER_PATIENT, {
+          userData: { ...response.data, company },
+        })
       }
     } catch ({ response }) {
       const messageFromApi = response?.data.message
@@ -103,10 +109,6 @@ function InsertToken({ isLastTry, cpf, email, phone }) {
     } finally {
       Loading.turnOff()
     }
-  }
-
-  const switchModalTo = (modalName) => {
-    setTypeOfModal(modalName)
   }
 
   return (
