@@ -14,6 +14,8 @@ interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   variation?: 'secondary'
   onlyLetter?: boolean
   onlyNumber?: boolean
+  [x: string]: any
+
 }
 
 const InputText: React.FC<InputTextProps> = ({
@@ -47,7 +49,7 @@ const InputText: React.FC<InputTextProps> = ({
   }
 
   return (
-    <Container variation={variation} hasError={msgError || hasError}>
+    <Container variation={variation} hasError={msgError || hasError} {...rest}>
       {label && <label htmlFor={label}>{label}</label>}
       <input type={type} id={label} onChange={handleChange} {...rest} />
       {msgError && <MsgError>{msgError}</MsgError>}

@@ -1,13 +1,13 @@
-import { showStatus } from './showStatus'
 import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 
 export const fromApi = (clinicInfo: any) => {
   return {
     personalDatas: {
       name: clinicInfo.descricao,
-      socialreason: clinicInfo.razaoSocial,
+      socialReason: clinicInfo.razaoSocial,
       cnpj: clinicInfo.cnpj,
-      status: showStatus(clinicInfo.status),
+      status: clinicInfo.status,
       phone: clinicInfo.telefone,
       id: clinicInfo.idClinica,
     },
@@ -16,7 +16,7 @@ export const fromApi = (clinicInfo: any) => {
       nameAdmin: clinicInfo.responsavel,
       cpf: clinicInfo.cpfResponsavel,
       phone: clinicInfo.telefoneResponsavel,
-      email: clinicInfo.email,
+      email: clinicInfo.emailResponsavel,
     },
 
     address: {
@@ -37,10 +37,10 @@ export const toApi = (clinicInfo: any) => {
   return {
     idClinica: clinicInfo.id,
     descricao: clinicInfo.name,
-    razaoSocial: clinicInfo.socialreason,
+    razaoSocial: clinicInfo.socialReason,
     status: clinicInfo.status,
     cnpj: clinicInfo.cnpj,
-    telefone: clinicInfo.phone,
+    telefone: clearSpecialCaracter(clinicInfo.phone),
     endereco: clinicInfo.address,
     bairro: clinicInfo.district,
     cidade: clinicInfo.city,
@@ -49,9 +49,9 @@ export const toApi = (clinicInfo: any) => {
     complemento: clinicInfo.complement,
     numero: clinicInfo.number,
     responsavel: clinicInfo.nameAdmin,
-    emailResponsavel: clinicInfo.adminEmail,
-    telefoneResponsavel: clinicInfo.adminPhone,
-    cpfResponsavel: clinicInfo.adminCpf,
-    especialidade: [mapSpecialtysToApi(clinicInfo.specialtys)],
+    email: clinicInfo.email,
+    telefoneResponsavel: clearSpecialCaracter(clinicInfo.celPhone),
+    cpfResponsavel: clearSpecialCaracter(clinicInfo.cpf),
+    especialidade: mapSpecialtysToApi(clinicInfo.specialtys),
   }
 }

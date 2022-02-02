@@ -1,6 +1,5 @@
 import { Container, ButtonGroup } from './styles'
 import React, { useEffect, useState } from 'react'
-// import { useHistory } from 'react-router'
 import ButtonLink from '@/components/Button/Link'
 import OutilineButton from '@/components/Button/Outline'
 import { ClinicAddress } from '../components/ClinicAddress'
@@ -11,7 +10,13 @@ import Denied from '../messages/Denied'
 import { useModal } from '@/hooks/useModal'
 import { useHistory } from 'react-router'
 import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes'
-// import { toApi, fromApi } from '../adapters'
+import CancelEdting from '../messages/CancelEdting/index'
+import { ErrorsI } from '../Types'
+import scrollOntoField from '../helpers/scrollOntoField'
+import { toApi } from '../adapters'
+import apiPatient from '@/services/apiPatient'
+import { toast } from '@/styles/components/toastify'
+import { useLoading } from '@/hooks/useLoading'
 
 const EditClinic: React.FC<any> = ({ clinicData }) => {
   const [isEditing, setIsEditing] = useState(false)
@@ -24,19 +29,23 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
     clinicData?.specialtys?.name || {},
   )
   const [address, setAddress] = useState(clinicData.address || {})
-  const [buttonIsDisabled, setButtonIsDisabled] = useState(false)
-  const [cancelEdit, setCancelEdit] = useState(false)
-  const [prevData, setPrevData] = useState(clinicData)
+  const [fieldWasChanged, setFieldWasChanged] = useState(false)
+  const [errors, setErrors] = useState<ErrorsI>({})
+  const [clickOnSave, setClickOnSave] = useState(false)
+
   const { showSimple, showMessage } = useModal()
+  const { Loading } = useLoading()
+
   const history = useHistory()
 
   useEffect(() => {
-    setButtonIsDisabled(personalDatas?.hasError || address?.hasError)
-  }, [address, personalDatas])
-
+    if (isEditing) {
+      setFieldWasChanged(true)
+    }
+  }, [address, personalDatas, acessDatas, specialtys])
 
   const onEdit = () => {
-    const status = clinicData.personalDatas.status
+    const status = clinicData.personalDatas?.status
 
     if (status === 'PENDING') {
       return showSimple.warning(
@@ -50,18 +59,74 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
     setIsEditing(true)
     scrollTo(0, 0)
   }
-  const onSave = () => {
-    setIsEditing(false)
-    setPrevData({ personalDatas, address })
+
+  const hasErrorOnFields = (fields: any) => {
+    let error = false
+    for (const field in fields) {
+      if ((!fields[field] || !fields[field].length) && field !== 'complement') {
+        setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
+        error = true
+      }
+    }
+    return error
   }
 
+  const onSave = async () => {
+    setClickOnSave(!clickOnSave)
+    if (
+      hasErrorOnFields({
+        ...personalDatas,
+        ...acessDatas,
+        ...address,
+        ...specialtys,
+      })
+    ) {
+      return
+    }
+
+    try {
+      Loading.turnOn()
+
+      await apiPatient.put(
+        `/clinica/${clinicData.personalDatas?.id}`,
+        toApi({
+          id: clinicData.personalDatas?.id,
+          ...personalDatas,
+          ...acessDatas,
+          ...address,
+          ...specialtys,
+        }),
+      )
+
+      toast.success('Alteração realizada com sucesso.')
+
+      history.push(OPERATOR_SEE_ALL_CLINICS)
+    } catch (error) {
+      toast.error('Erro ao editar.')
+    } finally {
+      Loading.turnOff()
+    }
+  }
+
+  useEffect(() => {
+    const newArray = []
+    for (const error in errors) {
+      if (errors[error]) {
+        newArray.push(error)
+      }
+    }
+
+    scrollOntoField(newArray[0])
+  }, [clickOnSave])
+
   const onCancel = () => {
-    // setPrevData((prevState) => ({
-    //   personalDatas: prevState.personalDatas,
-    //   address: prevState.address,
-    // }))
-    // setCancelEdit(true)
-    // setIsEditing(false)
+    if (fieldWasChanged) {
+      return showMessage(CancelEdting, {
+        setEdting: setIsEditing,
+        setFieldWasChanged,
+      })
+    }
+    setIsEditing(false)
   }
 
   return (
@@ -70,29 +135,33 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
         isEditing={isEditing}
         personalDatas={clinicData.personalDatas}
         setPersonalDatas={setPersonalDatas}
-        initialData={prevData?.personalDatas}
-        cancelEdit={cancelEdit}
+        initialData={clinicData?.personalDatas}
+        errors={errors}
+        setErrors={setErrors}
       />
       <ClinicAcessData
         isEditing={isEditing}
         acessDatas={clinicData.acessDatas}
         setAcessDatas={setAcessDatas}
-        initialData={prevData?.acessDatas}
-        cancelEdit={cancelEdit}
+        initialData={clinicData?.acessDatas}
+        errors={errors}
+        setErrors={setErrors}
       />
       <ClinicAddress
         isEditing={isEditing}
         address={clinicData.address}
         setAddress={setAddress}
-        initialData={prevData?.address}
-        cancelEdit={cancelEdit}
+        initialData={clinicData?.address}
+        errors={errors}
+        setErrors={setErrors}
       />
       <ClinicSpecialty
         isEditing={isEditing}
         clinicSpecialtys={clinicData?.specialtys}
         setClinicSpecialtys={setSpecialtys}
-        initialData={prevData?.address}
-        cancelEdit={cancelEdit}
+        initialData={clinicData?.specialtys}
+        errors={errors}
+        setErrors={setErrors}
       />
 
       {!isEditing ? (
@@ -105,9 +174,7 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
       ) : (
         <ButtonGroup>
           <ButtonLink onClick={onCancel}>Cancelar</ButtonLink>
-          <OutilineButton onClick={onSave} disabled>
-            Salvar
-          </OutilineButton>
+          <OutilineButton onClick={onSave}>Salvar</OutilineButton>
         </ButtonGroup>
       )}
     </Container>

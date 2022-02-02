@@ -1,7 +1,7 @@
 import { SelectHTMLAttributes } from 'react'
 
 interface OptionsI {
-  value: boolean | string | number
+  value:  string | number
   label: string | number
 }
 interface OnChangeProps {
@@ -22,4 +22,5 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   onChange?: (props: OnChangeProps) => void
   disabled?: boolean
   onBlur?: () => void
+  [x: string]: any
 }

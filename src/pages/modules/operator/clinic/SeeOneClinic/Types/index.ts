@@ -1,3 +1,4 @@
+
 export interface AcessDatasI {
   nameAdmin: string
   cpf: string
@@ -23,9 +24,9 @@ export interface AddressI {
   complement?: string
 }
 
-export interface ErrorsAddressI {
+export interface ErrorsI {
   nameAdmin?: string
-  phone?: string
+  celPhone?: string
   email?: string
   cpf?: string
   cep?: string
@@ -33,12 +34,12 @@ export interface ErrorsAddressI {
   address?: string
   number?: string
   district?: string
-}
-
-export interface PersonalErrorsI {
   name?: string
   phone?: string
   socialReason?: string
   cnpj?: string
   status?: string
+  specialtys?: ''
+  uf?: string
+  [x: string]: any
 }

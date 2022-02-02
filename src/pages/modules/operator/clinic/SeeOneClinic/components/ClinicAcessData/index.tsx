@@ -1,6 +1,6 @@
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import { AcessDatasI, ErrorsAddressI } from '../../Types'
+import { AcessDatasI, ErrorsI } from '../../Types'
 import React, { useEffect, useState } from 'react'
 import {
   validateAdminName,
@@ -16,7 +16,8 @@ interface ClinicAcessDataProps {
   setAcessDatas: (value: any) => void
   initialData: AcessDatasI
   isEditing: boolean
-  cancelEdit: boolean
+  errors: ErrorsI
+  setErrors: (error: ErrorsI) => void
 }
 
 export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
@@ -24,14 +25,13 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
   setAcessDatas,
   isEditing,
   initialData,
-  cancelEdit,
+  errors,
+  setErrors,
 }) => {
   const [nameAdmin, setnameAdmin] = useState(acessDatas?.nameAdmin || '')
   const [cpf, setCpf] = useState(acessDatas?.cpf || '')
   const [email, setEmail] = useState(acessDatas?.email || '')
   const [phone, setPhone] = useState(acessDatas?.phone || '')
-
-  const [errors, setErrors] = useState<ErrorsAddressI>({})
 
   useEffect(() => {
     setnameAdmin(acessDatas?.nameAdmin || '')
@@ -43,22 +43,21 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
   useEffect(() => {
     setAcessDatas({
       nameAdmin,
-      phone,
-      email,
       cpf,
-      hasError: Object.values(errors).some((value) => value !== ''),
+      email,
+      celPhone: phone,
     })
   }, [nameAdmin, cpf, phone, email, errors])
 
   useEffect(() => {
-    if (cancelEdit) {
+    if (!isEditing) {
       setnameAdmin(initialData?.nameAdmin || '')
       setCpf(initialData?.cpf || '')
       setEmail(initialData?.email || '')
       setPhone(initialData?.phone || '')
       setErrors({})
     }
-  }, [cancelEdit, initialData])
+  }, [isEditing, initialData])
 
   return (
     <Container>
@@ -68,7 +67,7 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
           label="Administrador da clínica:"
           value={nameAdmin}
           setValue={setnameAdmin}
-          name="name"
+          name="nameAdmin"
           hasError={!!errors?.nameAdmin}
           msgError={errors?.nameAdmin}
           maxLength={70}
@@ -91,6 +90,7 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
           onBlur={() => setErrors({ ...errors, cpf: validateCPF(cpf) })}
           onKeyUp={() => setErrors({ ...errors, cpf: validateCPF(cpf) })}
           disabled={!isEditing}
+          name="cpf"
         />
         <InputText
           label="E-mail:"
@@ -109,11 +109,16 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
           mask="(99) 99999-9999"
           value={phone}
           setValue={setPhone}
-          hasError={!!errors?.phone}
-          msgError={errors?.phone}
-          onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
-          onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
+          hasError={!!errors?.celPhone}
+          msgError={errors?.celPhone}
+          onBlur={() =>
+            setErrors({ ...errors, celPhone: validatePhone(phone) })
+          }
+          onKeyUp={() =>
+            setErrors({ ...errors, celPhone: validatePhone(phone) })
+          }
           disabled={!isEditing}
+          name="celPhone"
         />
       </section>
     </Container>
