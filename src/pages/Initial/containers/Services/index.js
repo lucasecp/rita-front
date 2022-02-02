@@ -6,9 +6,9 @@ import { useModal } from '@/hooks/useModal'
 
 import { Row } from 'react-bootstrap'
 
-import Background1 from '@/assets/img/element1.svg'
+import Background1 from '@/assets/img/element1.png'
 import Background2 from '@/assets/img/element2.svg'
-import Background3 from '@/assets/img/element5.svg'
+import Background3 from '@/assets/img/element3.svg'
 import Background4 from '@/assets/img/element4.svg'
 import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'

@@ -36,7 +36,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     },
     {
       name: fieldsApi.REQUER_INSCRICAO,
-      value: subscriptionRequired,
+      value: !!subscriptionRequired,
     },
   ]
 
@@ -104,8 +104,8 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           value={subscriptionRequired}
           setValue={setSubscriptionRequired}
           options={[
-            { label: 'Sim', value: true },
-            { label: 'Não', value: false },
+            { label: 'Sim', value: 1 },
+            { label: 'Não', value: 0 },
           ]}
         />
         <BtnGroup>

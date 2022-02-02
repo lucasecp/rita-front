@@ -17,6 +17,7 @@ interface InputMaskProps {
   disabled?: boolean
   onBlur?: () => void
   onKeyUp?: () => void
+  [x: string]: any
 }
 
 const InputMask: React.FC<InputMaskProps> = ({
@@ -30,7 +31,7 @@ const InputMask: React.FC<InputMaskProps> = ({
   ...rest
 }) => {
   return (
-    <Container hasError={msgError || hasError} variation={variation}>
+    <Container hasError={msgError || hasError} variation={variation} {...rest}>
       {label && <label htmlFor={label}>{label}</label>}
       <ReactInputMask
         value={value}

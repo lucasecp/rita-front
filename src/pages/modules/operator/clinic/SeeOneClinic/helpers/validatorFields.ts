@@ -54,7 +54,7 @@ export const validatePhone = (value: string): string => {
   const phone = clear(value)
   const phoneIsValid = phone[0] !== '0' && phone[2] === '9'
 
-  if (phone.length < 10 || !phoneIsValid) {
+  if (phone.length < 11 || !phoneIsValid) {
     return 'Celular inválido.'
   }
 
@@ -89,6 +89,13 @@ export const validateCep = (value: string): string => {
 export const validateCity = (value: string): string => {
   if (!value.trim()) {
     return 'Cidade Obrigatória.'
+  }
+
+  return ''
+}
+export const validateUf = (value: string): string => {
+  if (!value) {
+    return 'UF Obrigatória.'
   }
 
   return ''

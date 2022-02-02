@@ -33,6 +33,8 @@ export const DIRECTOR_SUSPEND_PLAN = '/gestao/planos/suspender'
 export const DIRECTOR_INACTIVATE_PLAN = '/gestao/planos/inativar'
 export const DIRECTOR_SEE_PLAN_MANAGMENT = '/gestao/planos/visualizar'
 export const DIRECTOR_CREATE_PLAN_MANAGMENT = '/gestao/planos/criar'
+export const DIRECTOR_IMPORT = '/importacao'
+export const DIRECTOR_IMPORT_REPORT = '/importacao/relatorio'
 
 export const DIRECTOR_SEE_ALL_PROFILES = '/perfis'
 export const DIRECTOR_SEE_ONE_PROFILE = '/perfis/visualizar'

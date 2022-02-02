@@ -6,7 +6,7 @@ import whatsApp from '@/assets/icons/whatsapp.svg'
 import { Container } from './styles'
 import { useModal } from '@/hooks/useModal'
 
-function Denied() {
+const Denied: React.FC = () => {
   const { closeModal } = useModal()
 
   return (
