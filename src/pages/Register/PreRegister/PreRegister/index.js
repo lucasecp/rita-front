@@ -33,11 +33,6 @@ function PreRegister() {
 
   const userData = location.state
 
-  if (!userData) {
-    history.push('/')
-    return null
-  }
-
   const [choice, setChoice] = useState('')
 
   const [phone, setPhone] = useState('')
@@ -51,6 +46,12 @@ function PreRegister() {
 
   useEffect(() => {
     document.title = 'Rita Saúde | Registrar'
+
+    if (!userData) {
+      history.push('/')
+      return null
+    }
+
     if (userData.phone && userData.email) {
       return
     }
@@ -69,8 +70,12 @@ function PreRegister() {
   }
 
   const redirectToRegister = () => {
-    if (userData?.status === 'N') return showMessage(ContactUs)
-    history.push(REGISTER_PATIENT, { userData: { cpf: userData.cpf } })
+    if (userData?.status === 'N') {
+      showMessage(ContactUs)
+      return
+    }
+
+    history.push(REGISTER_PATIENT, { userData })
   }
 
   const onForwardData = async () => {
@@ -140,6 +145,7 @@ function PreRegister() {
     const propsToInComumSend = {
       isLastTry,
       cpf: userData.cpf,
+      company: userData.company,
     }
 
     return showMessage(

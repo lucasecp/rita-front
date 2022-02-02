@@ -8,7 +8,6 @@ export const Container = styled.div`
   > ul {
     display: flex;
     padding: 24px 32px;
-
     justify-content: space-between;
     position: relative;
     text-align: center;

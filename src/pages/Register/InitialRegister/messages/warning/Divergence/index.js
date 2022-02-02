@@ -6,13 +6,13 @@ import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
 import { PRE_REGISTER } from '@/routes/constants/namedRoutes/routes'
 
-function Divergence(data) {
+function Divergence({ company, cpf, email, phone, status }) {
   const history = useHistory()
   const { closeModal } = useModal()
 
   const pushToPreRegister = () => {
     closeModal()
-    history.push(PRE_REGISTER, data)
+    history.push(PRE_REGISTER, { company, cpf, email, phone, status })
   }
 
   return (
