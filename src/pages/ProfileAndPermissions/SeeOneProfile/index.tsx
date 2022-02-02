@@ -24,9 +24,71 @@ export const SeeOneProfile: React.FC = () => {
 
   const { Loading } = useLoading()
   const history = useHistory()
-  const { id } = useLocation().state
+  // const { id } = useLocation().state
 
   // const [profileAndPermissions, setProfileAndPermissions] = useState([])
+
+  const permissions = [
+    {
+      id: '01',
+      name: 'Local Disk (C:)',
+      expanded: true,
+      subChild: [
+        {
+          id: '01-01',
+          name: 'Program Files',
+          isChecked: true,
+        },
+        {
+          id: '01-02',
+          name: 'Users',
+          // expanded: true,
+        },
+        {
+          id: '01-03',
+          name: 'Windows',
+        },
+      ],
+    },
+    {
+      id: '02',
+      name: 'Local Disk (D:)',
+      subChild: [
+        {
+          id: '02-01',
+          name: 'Personals',
+        },
+        {
+          id: '02-02',
+          name: 'Projects',
+        },
+        {
+          id: '02-03',
+          name: 'Office',
+        },
+      ],
+    },
+    {
+      id: '03',
+      name: 'Local Disk (E:)',
+      icon: 'folder',
+      isChecked: true,
+      subChild: [
+        {
+          id: '03-01',
+          name: 'Pictures',
+        },
+        {
+          id: '03-02',
+          name: 'Documents',
+        },
+        {
+          id: '03-03',
+          name: 'Study Materials',
+        },
+      ],
+    },
+  ]
 
   // useEffect(() => {
   //   const loadProfiles = async () => {
@@ -90,7 +152,7 @@ export const SeeOneProfile: React.FC = () => {
         />
         <label htmlFor="categorias">Categoria</label>
 
-        <PermissionsSelect />
+        <PermissionsSelect permissions={permissions} />
         <footer>
           <ButtonLink onClick={() => history.push(DIRECTOR_SEE_ALL_PROFILES)}>
             Voltar
