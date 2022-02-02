@@ -29,7 +29,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 786px) {
     grid-template-columns: 1fr;
   }
 `
@@ -43,7 +43,7 @@ export const BtnGroup = styled.div`
   justify-content: center;
   gap: 24px;
 
-  @media (max-width: 767px) {
+  @media (max-width: 786px) {
     flex-direction: column;
 
     > button {
@@ -57,6 +57,10 @@ export const ContentFile = styled.div`
   display: grid;
   grid-template-columns: 0.7fr 0.3fr;
 
+  @media (max-width: 767px) {
+    grid-template-columns: 0.6fr 0.4fr;
+  }
+
   > span {
     border: 1px solid ${colors.gray.light};
     padding: 14px 16px;
@@ -66,6 +70,11 @@ export const ContentFile = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 50px;
   }
 
   > button {

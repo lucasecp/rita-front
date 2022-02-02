@@ -12,15 +12,35 @@ import { toast } from '@/styles/components/toastify'
 import { DIRECTOR_IMPORT_REPORT } from '@/routes/constants/namedRoutes/routes'
 
 import { Container, ButtonsArea } from './styles'
+import apiPatient from '@/services/apiPatient'
 
-export const ConfirmImport: React.FC = () => {
+interface ConfirmImportProps {
+  file: File
+  company: string
+}
+
+export const ConfirmImport: React.FC<ConfirmImportProps> = ({
+  file,
+  company,
+}) => {
   const history = useHistory()
   const { closeModal, showMessage } = useModal()
 
-  const onMakeImport = () => {
-    console.log('Importação aceita!')
+  const onMakeImport = async () => {
+    const formData = new FormData()
+    formData.append('file', file)
 
     showMessage(Importing)
+
+    const response = await apiPatient.put(
+      '/paciente/importacaoPaciente',
+      {
+        planilha: formData,
+      },
+      {
+        params: { gravar: true },
+      },
+    )
 
     return new Promise(function () {
       setTimeout(() => {

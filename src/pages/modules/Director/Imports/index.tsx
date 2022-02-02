@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { isValidTypeFileExcel } from '@/helpers/file/isValidTypeFileExcel'
 import { isObjectEmpty } from '@/helpers/isObjectEmpty'
 
 import ButtonPrimary from '@/components/Button/Primary'
@@ -10,6 +11,7 @@ import { Autocomplete } from '@/components/Form/Autocomplete'
 import { useModal } from '@/hooks/useModal'
 
 import { ConfirmImport } from './messages/ConfirmImport'
+import { InvalidFormat } from './messages/InvalidFormat'
 
 import { Container, BtnGroup, ContentFile } from './styles'
 
@@ -26,7 +28,7 @@ interface Errors {
 export const Import: React.FC = () => {
   const { showMessage } = useModal()
 
-  const [file, setFile] = useState<File | string>({} as File)
+  const [file, setFile] = useState<File | null>({} as File)
   const [company, setCompany] = useState('')
   const [autocompleteOptions, setAutocompleteOptions] = useState<
     AutocompleteOptions[]
@@ -37,7 +39,7 @@ export const Import: React.FC = () => {
   })
 
   useEffect(() => {
-    document.title = 'Rita Saúde | Importações'
+    document.title = 'Rita Saúde | Importação'
 
     setAutocompleteOptions([
       { label: 'Sabin', value: '1' },
@@ -46,32 +48,72 @@ export const Import: React.FC = () => {
     ])
   }, [])
 
+  useEffect(() => {
+    const canValidateFile =
+      typeof file === 'object' && file !== null && file.name
+
+    if (canValidateFile && !isValidTypeFileExcel(file)) {
+      showMessage(InvalidFormat)
+      return setFile(null)
+    }
+  }, [file])
+
   const onCancel = () => {
-    setFile('')
+    setFile(null)
     setCompany('')
   }
 
-  const validateErrors = (fileParam: File, companyParam: string) => {
+  const validateErrors = (fileParam: File | null, companyParam: string) => {
     let objectError = {} as Errors
 
-    if (!fileParam.name) {
-      objectError = {
-        file: 'Inserir arquivo para realizar a importação.',
-        company: '',
+    // Se não for null (click cancelar ou abriu explorer e fechou)
+    if (fileParam === null) {
+      if (companyParam) {
+        objectError = {
+          file: 'Inserir arquivo para realizar a importação.',
+          company: '',
+        }
+      } else {
+        objectError = {
+          file: 'Inserir arquivo para realizar a importação.',
+          company: 'A seleção da empresa é obrigatória.',
+        }
       }
     }
 
-    if (!companyParam) {
-      objectError = {
-        file: '',
-        company: 'A seleção da empresa é obrigatória.',
+    // Se for do tipo File, e tiver um nome (arquivo adicionado)
+    if (typeof fileParam === 'object' && fileParam?.name) {
+      if (companyParam) {
+        objectError = {
+          file: '',
+          company: '',
+        }
+      } else {
+        objectError = {
+          file: '',
+          company: 'A seleção da empresa é obrigatória.',
+        }
       }
     }
 
-    if (!fileParam.name && !companyParam) {
-      objectError = {
-        file: 'Inserir arquivo para realizar a importação.',
-        company: 'A seleção da empresa é obrigatória.',
+    // Se for do tipo File
+    // Não tiver um nome (não tem arquivo adicionado)
+    // E não for null (click cancelar ou abriu explorer e fechou)
+    if (
+      typeof fileParam === 'object' &&
+      !fileParam?.name &&
+      fileParam !== null
+    ) {
+      if (companyParam) {
+        objectError = {
+          file: 'Inserir arquivo para realizar a importação.',
+          company: '',
+        }
+      } else {
+        objectError = {
+          file: 'Inserir arquivo para realizar a importação.',
+          company: 'A seleção da empresa é obrigatória.',
+        }
       }
     }
 
@@ -79,12 +121,14 @@ export const Import: React.FC = () => {
   }
 
   const onRealizeImport = () => {
-    // if (typeof file === 'object') {
-    //   const errorsSearched = validateErrors(file, company)
-    //   return setErrors(errorsSearched)
-    // }
+    const errorsSearched = validateErrors(file, company)
 
-    showMessage(ConfirmImport)
+    if (errorsSearched.file || errorsSearched.company) {
+      return setErrors(errorsSearched)
+    }
+
+    setErrors({ file: '', company: '' })
+    showMessage(ConfirmImport, { file, company })
   }
 
   return (
@@ -99,7 +143,7 @@ export const Import: React.FC = () => {
           {errors.file && <p className="error">{errors.file}</p>}
         </InputFile>
         <Autocomplete
-          label="Empresa"
+          label="Empresa:"
           value={company}
           setValue={setCompany}
           options={autocompleteOptions}
