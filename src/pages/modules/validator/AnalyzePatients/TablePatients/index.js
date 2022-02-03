@@ -1,7 +1,7 @@
 import Pagination from '@/components/Pagination'
 import CustomTooltip from '@/components/Tooltip'
 import { useLoading } from '@/hooks/useLoading'
-import convertToCaptalize from '@/helpers/convertToCaptalize'
+import { everyFirstLetterCapitalize } from '@/helpers/everyFirstLetterCapitalize'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import apiPatient from '@/services/apiPatient'
 import { useModal } from '@/hooks/useModal'
@@ -112,10 +112,10 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                   </Td>
                   <Td strong id="patient-name">
                     <CustomTooltip
-                      label={convertToCaptalize(patient.nome) || '-'}
+                      label={everyFirstLetterCapitalize(patient.nome) || '-'}
                     >
                       <div>
-                        {convertToCaptalize(
+                        {everyFirstLetterCapitalize(
                           formatTextWithLimit(patient.nome, 38),
                         ) || '-'}
                       </div>
