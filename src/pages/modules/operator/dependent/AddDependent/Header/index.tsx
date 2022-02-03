@@ -13,7 +13,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({}) => {
   const location = useLocation()
   const history = useHistory()
-  const holder = location.state.holder
+  const holder = location.state?.holder
 
   useEffect(() => {
     if (!holder) {
@@ -29,10 +29,10 @@ const Header: React.FC<HeaderProps> = ({}) => {
         </div>
         <div>
           <h6>CPF:</h6>
-          <h5>{holder.cpf}</h5>
+          <h5>{holder?.cpf}</h5>
         </div>
       </div>
-      <span>Plano {holder.plan}</span>
+      <span>Plano {holder?.plan}</span>
     </Container>
   )
 }
