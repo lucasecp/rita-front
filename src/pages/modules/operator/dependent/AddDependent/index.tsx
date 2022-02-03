@@ -3,7 +3,6 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import Header from './Header'
 import apiPatient from '@/services/apiPatient'
 import { fromApi } from './adapters'
-import Results from './Results'
 import { Content } from './styles'
 import { useCpfValidate } from './useCpfValidate'
 import { useLoading } from '@/hooks/useLoading'
@@ -12,10 +11,8 @@ import ButtonPrimary from '@/components/Button/Primary'
 import OutlineButton from '@/components/Button/Outline'
 import { DataDependentI } from './types/index'
 import HolderInfo from './Header/HolderInfo'
-import { useHistory } from 'react-router-dom'
-import { OPERATOR_ADD_DEPENDENT } from '@/routes/constants/namedRoutes/routes'
 
-const Managment: React.FC = () => {
+const AddDependent: React.FC = () => {
   const [cpf, setCpf] = useState('')
   const [errors, setErrors] = useState('')
   const [dependents, setDependents] = useState<DataDependentI>({
@@ -25,7 +22,6 @@ const Managment: React.FC = () => {
   const { validatorCpf } = useCpfValidate()
   const { Loading } = useLoading()
   const [step, setStep] = useState(1)
-  const history = useHistory()
 
   useEffect(() => {
     document.title = 'Rita Saúde | Informações da Clínica'
@@ -59,32 +55,26 @@ const Managment: React.FC = () => {
   }, [step])
 
   return (
-    <DefaultLayout title="Gestão de Dependentes">
+    <DefaultLayout title="Dependentes - Adicionar Dependentes">
       <Content>
-        <Header setCpf={setCpf} cpf={cpf} errors={errors} hidden={step !== 1} />
+        <Header setCpf={setCpf} cpf={cpf}   />
 
-        <HolderInfo data={dependents.holder} hidden={step !== 2} />
+        <HolderInfo data={dependents.holder}  />
 
-        <Results
-          setStep={setStep}
-          dependents={dependents}
-          hidden={step !== 2}
-        />
-
+    
         <footer>
-          <ButtonPrimary onClick={getDependents} hidden={step !== 1}>
+          <ButtonPrimary onClick={getDependents}>
             Filtrar Resultados
           </ButtonPrimary>
 
-          <OutlineButton onClick={() => setStep(1)} hidden={step !== 2}>
-            Voltar
+          <OutlineButton onClick={() => setStep(1)} >
+            Cancelar
           </OutlineButton>
 
           <ButtonPrimary
-            hidden={step !== 2}
-            onClick={() => history.push(OPERATOR_ADD_DEPENDENT)}
+          
           >
-            Adicionar Dependentes
+            Associar Dependentes
           </ButtonPrimary>
         </footer>
       </Content>
@@ -92,4 +82,4 @@ const Managment: React.FC = () => {
   )
 }
 
-export default Managment
+export default AddDependent

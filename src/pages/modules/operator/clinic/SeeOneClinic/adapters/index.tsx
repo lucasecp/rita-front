@@ -49,7 +49,7 @@ export const toApi = (clinicInfo: any) => {
     complemento: clinicInfo.complement,
     numero: clinicInfo.number,
     responsavel: clinicInfo.nameAdmin,
-    email: clinicInfo.email,
+    emailResponsavel: clinicInfo.email,
     telefoneResponsavel: clearSpecialCaracter(clinicInfo.celPhone),
     cpfResponsavel: clearSpecialCaracter(clinicInfo.cpf),
     especialidade: mapSpecialtysToApi(clinicInfo.specialtys),

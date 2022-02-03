@@ -1,0 +1,99 @@
+import styled, { css } from 'styled-components'
+import arrowDown from '@/assets/icons/arrow-down-order.svg'
+import arrowUp from '@/assets/icons/arrow-up-order.svg'
+import colors from '@/styles/colors'
+
+interface ArrowProps {
+  order: number
+}
+
+export const Content = styled.div`
+  display: flex;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #9146ff;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 170px;
+  margin-right: 24px;
+
+  justify-content: center;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    padding: 20px 0 20px 20px;
+    height: 100%;
+    margin-left: 4px;
+    margin-right: 4px;
+    :last-child {
+    }
+  }
+  h5 {
+    color: ${colors.purple.main.dark};
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+  }
+`
+export const Container = styled.header`
+  background: ${colors.purple.background.middle};
+  min-width: fit-content;
+  padding: 16px 32px;
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
+  @media (max-width: 767px) {
+    padding: 16px 24px;
+  }
+`
+
+export const ArrowUp = styled.button<ArrowProps>`
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 1.5px;
+  &:after {
+    content: '';
+    width: 9px;
+    height: 5px;
+    background-image: url(${arrowUp});
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+    ${({ order }) =>
+      order &&
+      css`
+        filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
+          brightness(100%) contrast(103%);
+      `}
+  }
+`
+
+export const ArrowDown = styled.button<ArrowProps>`
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin-top: 1.5px;
+  &:after {
+    content: '';
+    width: 9px;
+    height: 5px;
+    background-image: url(${arrowDown});
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+  }
+  ${({ order }) =>
+    order &&
+    css`
+      filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
+        brightness(100%) contrast(103%);
+    `}
+`
