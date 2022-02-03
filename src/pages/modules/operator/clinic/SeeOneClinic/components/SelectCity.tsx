@@ -1,7 +1,6 @@
 import { Select } from '@/components/Form/Select'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 
 interface SelectCityProps {
   setCity: (value: string) => void
@@ -27,7 +26,6 @@ const SelectCity: React.FC<SelectCityProps> = ({
   }
 
   useEffect(() => {
-
     if (!uf) {
       return
     }
@@ -37,7 +35,6 @@ const SelectCity: React.FC<SelectCityProps> = ({
         const { data } = await apiPatient.get(`/municipio?idUF=${uf}`)
         const dataMapped = mapCity(data)
 
-        
         setCityOptions(dataMapped)
       } catch ({ response }) {}
     }
@@ -63,6 +60,7 @@ const SelectCity: React.FC<SelectCityProps> = ({
       value={city}
       setValue={setCity}
       disabled={disabled}
+      name="comboCity"
     />
   )
 }

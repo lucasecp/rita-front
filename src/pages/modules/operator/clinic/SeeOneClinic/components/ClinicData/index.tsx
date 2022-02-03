@@ -2,7 +2,7 @@ import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
-import { DataI, PersonalErrorsI } from '../../Types'
+import { DataI, ErrorsI } from '../../Types'
 import {
   validateSocialReason,
   validateStatus,
@@ -17,7 +17,8 @@ interface ClinicDataProps {
   setPersonalDatas: (value: any) => void
   initialData: DataI
   isEditing: boolean
-  cancelEdit: boolean
+  errors: ErrorsI
+  setErrors: (error: ErrorsI) => void
 }
 
 export const ClinicData: React.FC<ClinicDataProps> = ({
@@ -25,7 +26,8 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
   setPersonalDatas,
   isEditing,
   initialData,
-  cancelEdit,
+  errors,
+  setErrors,
 }) => {
   const [name, setName] = useState(personalDatas?.name || '')
   const [socialReason, setsocialReason] = useState(
@@ -37,7 +39,6 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
   )
   const [phone, setPhone] = useState(personalDatas?.phone || '')
 
-  const [errors, setErrors] = useState<PersonalErrorsI>({})
   const { validatorCNPJ } = useCnpjValidate()
 
   useEffect(() => {
@@ -52,21 +53,21 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
     setPersonalDatas({
       name,
       socialReason,
-      phone,
       cnpj,
-      hasError: Object.values(errors).some((value) => value !== ''),
+      status: selectedStatus,
+      phone,
     })
   }, [name, socialReason, cnpj, phone, errors])
 
   useEffect(() => {
-    if (cancelEdit) {
+    if (!isEditing) {
       setName(initialData?.name || '')
       setsocialReason(initialData?.socialReason || '')
       setCnpj(initialData?.cnpj || '')
       setPhone(initialData?.phone || '')
       setErrors({})
     }
-  }, [cancelEdit, initialData])
+  }, [isEditing, initialData])
 
   return (
     <Container>
@@ -82,6 +83,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
           onBlur={() => setErrors({ ...errors, name: validateName(name) })}
           onKeyUp={() => setErrors({ ...errors, name: validateName(name) })}
           disabled={!isEditing}
+          name="name"
         />
         <InputText
           label="Razão Social:"
@@ -104,6 +106,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
           }
           onlyLetter
           disabled={!isEditing}
+          name="socialReason"
         />
         <InputMask
           mask="99.999.999/9999-99"
@@ -115,25 +118,26 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
           onBlur={async () =>
             setErrors({
               ...errors,
-              cnpj: await validatorCNPJ(cnpj, personalDatas?.cnpj ),
+              cnpj: await validatorCNPJ(cnpj, personalDatas?.cnpj),
             })
           }
           onKeyUp={async () =>
             setErrors({
               ...errors,
-              cnpj: await validatorCNPJ(cnpj, personalDatas?.cnpj ),
+              cnpj: await validatorCNPJ(cnpj, personalDatas?.cnpj),
             })
           }
           disabled={!isEditing}
+          name="cnpj"
         />
         <Select
           label="Situação:"
           labelDefaultOption={isEditing ? 'Selecione:' : ' '}
           options={[
-            { label: 'Pendente', value: 'Pendente' },
-            { label: 'Ativo', value: 'Ativo' },
-            { label: 'Inativo', value: 'Inativo' },
-            { label: 'Negado', value: 'Negado' },
+            { label: 'Pendente', value: 'P' },
+            { label: 'Ativo', value: 'A' },
+            { label: 'Inativo', value: 'I' },
+            { label: 'Negado', value: 'N' },
           ]}
           value={selectedStatus}
           setValue={setSelectedStatus}
@@ -143,6 +147,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
           }
           hasError={!!errors?.status}
           msgError={errors?.status}
+          name="status"
         />
         <InputMask
           label="Telefone/Celular para agendamento:"
@@ -158,6 +163,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
             setErrors({ ...errors, phone: validateTwoPhone(phone) })
           }
           disabled={!isEditing}
+          name="phone"
         />
       </section>
     </Container>

@@ -2,15 +2,26 @@ import React, { useRef } from 'react'
 
 import { Container } from './styles'
 
-export const InputFile = ({ children, setValue, ...rest }) => {
+export const InputFile = ({
+  children,
+  setValue,
+  clearOnClick = false,
+  ...rest
+}) => {
   const inpFile = useRef(null)
+
   return (
     <Container onClick={() => inpFile.current.click()}>
       <input
         type="file"
         ref={inpFile}
         hidden
-        onChange={({ target }) => setValue(target.files[0])}
+        onChange={({ target }) => {
+          setValue(target.files[0])
+        }}
+        onClick={({ target }) => {
+          clearOnClick && setValue((target.value = null))
+        }}
         {...rest}
       />
       {children}

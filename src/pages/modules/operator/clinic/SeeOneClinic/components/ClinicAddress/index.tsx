@@ -4,8 +4,7 @@ import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 
 import { Container } from './styles'
-import { AddressI, ErrorsAddressI } from '../../Types'
-import SelectCity from '../SelectCity'
+import { AddressI, ErrorsI } from '../../Types'
 import SelectUf from '../SelectUf'
 import {
   validateCep,
@@ -13,6 +12,7 @@ import {
   validateNumberHome,
   validateDistrict,
   validateCity,
+  validateUf,
 } from '../../helpers/validatorFields'
 
 interface ClinicAddressProps {
@@ -20,7 +20,8 @@ interface ClinicAddressProps {
   setAddress: (value: any) => void
   initialData: AddressI
   isEditing: boolean
-  cancelEdit: boolean
+  errors: ErrorsI
+  setErrors: (error: ErrorsI) => void
 }
 
 export const ClinicAddress: React.FC<ClinicAddressProps> = ({
@@ -28,7 +29,8 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
   setAddress,
   isEditing,
   initialData,
-  cancelEdit,
+  errors,
+  setErrors,
 }) => {
   const [cep, setCep] = useState(address?.cep || '')
   const [uf, setUf] = useState(address?.uf || '')
@@ -38,8 +40,6 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
   const [number, setNumber] = useState(address?.number || '')
   const [district, setDistrict] = useState(address?.district || '')
   const [complement, setComplement] = useState(address?.complement || '')
-
-  const [errors, setErrors] = useState<ErrorsAddressI>({})
 
   useEffect(() => {
     setCep(address?.cep || '')
@@ -58,14 +58,13 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
       city,
       address: addressDep,
       number,
-      district,
       complement,
-      hasError: Object.values(errors).some((value) => value !== ''),
+      district,
     })
   }, [cep, uf, city, addressDep, number, district, complement, errors])
 
   useEffect(() => {
-    if (cancelEdit) {
+    if (!isEditing) {
       setCep(initialData?.cep || '')
       setUf(initialData?.uf || '')
       setCity(initialData?.city || '')
@@ -75,7 +74,7 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
       setComplement(initialData?.complement || '')
       setErrors({})
     }
-  }, [cancelEdit, initialData])
+  }, [isEditing, initialData])
 
   return (
     <Container>
@@ -91,12 +90,16 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
           onKeyUp={() => setErrors({ ...errors, cep: validateCep(cep) })}
           msgError={errors.cep}
           hasError={!!errors.cep}
+          name="cep"
         />
         <SelectUf
           setUf={setUf}
           uf={uf}
           disabled={!isEditing}
           setUfToApi={setUfToApi}
+          onBlur={() => setErrors({ ...errors, uf: validateUf(uf) })}
+          hasError={!!errors?.uf}
+          msgError={errors?.uf}
         />
         <InputText
           label="Cidade:"
@@ -108,6 +111,7 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
           msgError={errors.city}
           hasError={!!errors.city}
           maxLength={50}
+          name="city"
         />
         <InputText
           label="Endereço:"
@@ -163,6 +167,7 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
           msgError={errors.district}
           hasError={!!errors.district}
           maxLength={100}
+          name="district"
         />
       </section>
     </Container>

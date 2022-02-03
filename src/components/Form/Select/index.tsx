@@ -15,7 +15,7 @@ export const Select: React.FC<SelectProps> = ({
   ...rest
 }) => {
   return (
-    <Container hasError={hasError} variation={variation}>
+    <Container hasError={hasError} variation={variation} {...rest}>
       {label && <label htmlFor={label}>{label}</label>}
       <select
         onChange={({ target }) => {

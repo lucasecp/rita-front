@@ -1,4 +1,5 @@
 import clear from '@/helpers/clear/SpecialCaracteres'
+import isEmail from '@/helpers/isEmail'
 import validateCpf from '@/helpers/validateCpf'
 
 export const validateName = (value: string): string => {
@@ -43,7 +44,7 @@ export const validateCPF = (value: string): string => {
 export const validateEmail = (email: string): string => {
   if (!email.trim()) {
     return 'Email Obrigatório'
-  } else if (!/\S+@\S+\.\S+/.test(email)) {
+  } else if (!isEmail(email)) {
     return 'Email inválido.'
   }
 
@@ -54,7 +55,7 @@ export const validatePhone = (value: string): string => {
   const phone = clear(value)
   const phoneIsValid = phone[0] !== '0' && phone[2] === '9'
 
-  if (phone.length < 10 || !phoneIsValid) {
+  if (phone.length < 11 || !phoneIsValid) {
     return 'Celular inválido.'
   }
 
@@ -89,6 +90,13 @@ export const validateCep = (value: string): string => {
 export const validateCity = (value: string): string => {
   if (!value.trim()) {
     return 'Cidade Obrigatória.'
+  }
+
+  return ''
+}
+export const validateUf = (value: string): string => {
+  if (!value) {
+    return 'UF Obrigatória.'
   }
 
   return ''

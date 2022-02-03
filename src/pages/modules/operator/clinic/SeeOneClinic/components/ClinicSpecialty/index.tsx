@@ -4,14 +4,17 @@ import CustomMultiSelect, {
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
 import { mapSpecialtys } from '../../adapters/mapSpecialtys'
+import { ErrorsI } from '../../Types'
 
 import { Container } from './styles'
+
 interface ClinicSpecialtysProps {
   clinicSpecialtys: MultiSelectOption[]
   setClinicSpecialtys: (value: any) => void
   initialData: MultiSelectOption[]
-  cancelEdit: boolean
   isEditing: boolean
+  errors: ErrorsI
+  setErrors: (error: any) => any
 }
 
 export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
@@ -19,12 +22,13 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
   setClinicSpecialtys,
   isEditing,
   initialData,
-  cancelEdit,
+  errors,
+  setErrors,
 }) => {
   const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>(
     clinicSpecialtys || [],
   )
-  const [errors, setErrors] = useState({})
+
   const [specialtysOptions, setSpecialtysOptions] = useState<
     MultiSelectOption[]
   >([])
@@ -45,9 +49,7 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
           }
           return [{ name: 'Todas', id: 'All' }, ...dataMapped]
         })
-      } catch ({ response }) {
-      } finally {
-      }
+      } catch ({ response }) {}
     }
 
     getSpecialtys()
@@ -60,19 +62,19 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
   useEffect(() => {
     setClinicSpecialtys({
       specialtys,
-      hasError: Object.values(errors).some((value) => value !== ''),
     })
   }, [specialtys, errors])
 
   useEffect(() => {
-    if (cancelEdit) {
+    if (!isEditing) {
       setSpecialtys(initialData || '')
       setErrors({})
     }
-  }, [cancelEdit, initialData])
+  }, [isEditing, initialData])
 
-  const onChangeSelect = (values: MultiSelectOption[]) => {
+  const onChangingSelect = (values: MultiSelectOption[]) => {
     const hasAllOption = values.some((val) => val.id === 'All')
+
     if (hasAllOption) {
       return setSpecialtys(specialtysOptions)
     }
@@ -89,8 +91,11 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
           variation="secondary"
           options={specialtysOptions}
           disabled={!isEditing}
-          onSelect={onChangeSelect}
-          onRemove={onChangeSelect}
+          hasError={!!errors.specialtys}
+          messageError={errors?.specialtys}
+          name="specialtys"
+          onSelect={onChangingSelect}
+          onRemove={onChangingSelect}
         />
       </section>
     </Container>

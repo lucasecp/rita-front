@@ -12,6 +12,8 @@ import ButtonPrimary from '@/components/Button/Primary'
 import OutlineButton from '@/components/Button/Outline'
 import { DataDependentI } from './types/index'
 import HolderInfo from './Header/HolderInfo'
+import { useHistory } from 'react-router-dom'
+import { OPERATOR_ADD_DEPENDENT } from '@/routes/constants/namedRoutes/routes'
 
 const Managment: React.FC = () => {
   const [cpf, setCpf] = useState('')
@@ -23,6 +25,7 @@ const Managment: React.FC = () => {
   const { validatorCpf } = useCpfValidate()
   const { Loading } = useLoading()
   const [step, setStep] = useState(1)
+  const history = useHistory()
 
   useEffect(() => {
     document.title = 'Rita Saúde | Informações da Clínica'
@@ -77,7 +80,10 @@ const Managment: React.FC = () => {
             Voltar
           </OutlineButton>
 
-          <ButtonPrimary hidden={step !== 2}>
+          <ButtonPrimary
+            hidden={step !== 2}
+            onClick={() => history.push(OPERATOR_ADD_DEPENDENT)}
+          >
             Adicionar Dependentes
           </ButtonPrimary>
         </footer>

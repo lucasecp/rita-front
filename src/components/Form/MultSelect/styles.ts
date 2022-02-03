@@ -260,7 +260,11 @@ export const Content = styled.div.attrs(
     `}
 `
 export const Container = styled.div.attrs(
-  (props: { disabled: boolean; variation: '' | 'secondary' }) => ({
+  (props: {
+    disabled: boolean
+    variation: '' | 'secondary'
+    name?: string
+  }) => ({
     disabled: props.disabled,
     variation: props.variation,
   }),

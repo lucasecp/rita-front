@@ -10,6 +10,8 @@ import {
   DIRECTOR_ACTIVATE_PLAN,
   DIRECTOR_SUSPEND_PLAN,
   DIRECTOR_INACTIVATE_PLAN,
+  DIRECTOR_IMPORT,
+  DIRECTOR_IMPORT_REPORT,
 } from '../../constants/namedRoutes/routes'
 
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
@@ -20,6 +22,8 @@ import { CreatePlan } from '@/pages/modules/Director/PlanManagment/CreatePlan'
 import { SuspendPlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Suspend/containers/SuspendPlanConfirm'
 import { ActivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Activate/ActivatePlanConfirm'
 import { InactivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Inactivate/containers/InactivatePlanConfirm'
+import { Import } from '@/pages/modules/Director/Imports'
+import { Report as ImportReport } from '@/pages/modules/Director/Imports/containers/Report'
 
 const directorRoutes = [
   {
@@ -53,6 +57,14 @@ const directorRoutes = [
   {
     path: DIRECTOR_CREATE_PLAN_MANAGMENT,
     component: CreatePlan,
+  },
+  {
+    path: DIRECTOR_IMPORT,
+    component: Import,
+  },
+  {
+    path: DIRECTOR_IMPORT_REPORT,
+    component: ImportReport,
   },
 ]
 
