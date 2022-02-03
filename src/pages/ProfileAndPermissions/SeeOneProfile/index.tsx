@@ -8,7 +8,7 @@ import {
 } from './styles'
 import { useLoading } from '@/hooks/useLoading'
 import apiUser from '@/services/apiUser'
-import { profilesAndPermissionMapped } from './adapters/fromApi'
+import { fromApi } from './adapters/fromApi'
 import InputText from '@/components/Form/InputText'
 import { DIRECTOR_SEE_ALL_PROFILES } from '@/routes/constants/namedRoutes/routes'
 import OutilineButton from '@/components/Button/Outline'
@@ -90,31 +90,29 @@ export const SeeOneProfile: React.FC = () => {
     },
   ]
 
-  // useEffect(() => {
-  //   const loadProfiles = async () => {
-  //     try {
-  //       Loading.turnOn()
+  useEffect(() => {
+    const loadProfiles = async () => {
+      try {
+        Loading.turnOn()
 
-  //       const { data: perfil } = await apiUser.get(`/perfil/${id}`)
-  //       const { data: permissions } = await apiUser.get('/grupo-permissao')
+        const { data: profilesAndPermissions } = await apiUser.get(
+          '/grupo-permissao',
+        )
 
-  //       console.log(perfil, permissions)
+        const profilesAndPermissionsMapped = fromApi(profilesAndPermissions)
 
-  //       const profilesAndMapped = profilesAndPermissionMapped(data)
+        // const { data: perfil } = await apiUser.get(`/perfil/${id}`)
 
-  //       setProfileAndPermissions(profilesAndMapped)
+      } catch (error) {
+        // console.log(error)
+        // toast.error('Erro ao carregar itens vendáveis!')
+      } finally {
+        Loading.turnOff()
+      }
+    }
 
-  //       console.log(profilesAndMapped)
-  //     } catch (error) {
-  //       // console.log(error)
-  //       // toast.error('Erro ao carregar itens vendáveis!')
-  //     } finally {
-  //       Loading.turnOff()
-  //     }
-  //   }
-
-  //   loadProfiles()
-  // }, [])
+    loadProfiles()
+  }, [])
 
   // const classesView = useViewStyles()
   // const classesItem = useItemStyles()
@@ -151,7 +149,7 @@ export const SeeOneProfile: React.FC = () => {
           disabled
         />
         <label htmlFor="categorias">Categoria</label>
-        <PermissionsSelect permissions={permissions} />
+        {/* <PermissionsSelect permissions={permissions} disabled /> */}
         <footer>
           <ButtonLink onClick={() => history.push(DIRECTOR_SEE_ALL_PROFILES)}>
             Voltar

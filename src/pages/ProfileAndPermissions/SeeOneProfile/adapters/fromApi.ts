@@ -1,16 +1,10 @@
-export const profilesAndPermissionMapped: any = (
-  profilesAndPermissionsFromApi: any,
-) => {
-  return {
-    id: profilesAndPermissionsFromApi.id,
-    name: profilesAndPermissionsFromApi.nome,
-    permissions: profilesAndPermissionsFromApi.permissoes.map(
-      (permission: any) => ({
-        key: permission.chave,
-        id: permission.id,
-        idPermissionGroup: permission.idGrupoPermissao,
-        name: permission.nome,
-      }),
-    ),
-  }
+export const fromApi: any = (profilesAndPermissions: any) => {
+  return profilesAndPermissions.dados.map((profileAndPermissions) => ({
+    id: profileAndPermissions.id,
+    name: profileAndPermissions.nome,
+    subChild: profileAndPermissions.permissao.map((permission: any) => ({
+      id: permission.id,
+      name: permission.nome,
+    })),
+  }))
 }
