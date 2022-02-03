@@ -151,7 +151,6 @@ export const SeeOneProfile: React.FC = () => {
           disabled
         />
         <label htmlFor="categorias">Categoria</label>
-
         <PermissionsSelect permissions={permissions} />
         <footer>
           <ButtonLink onClick={() => history.push(DIRECTOR_SEE_ALL_PROFILES)}>
