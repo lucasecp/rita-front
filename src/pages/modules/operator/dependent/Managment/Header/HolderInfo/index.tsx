@@ -11,9 +11,16 @@ const HolderInfo: React.FC<HolderInfoProps> = ({ data, hidden }) => {
   return (
     <Container hidden={hidden}>
       <div>
-        <h3>{data.name}</h3> <h3>CPF: {data.cpf}</h3>
+        <div>
+          <h6>Titular:</h6>
+          <h5>{data.name}</h5>
+        </div>
+        <div>
+          <h6>CPF:</h6>
+          <h5>{data.cpf}</h5>
+        </div>
       </div>
-      <span hidden={!data.plan}>Plano {data.plan}</span>
+      <span>Plano {data.plan}</span>
     </Container>
   )
 }

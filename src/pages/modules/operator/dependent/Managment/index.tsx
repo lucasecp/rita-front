@@ -60,10 +60,9 @@ const Managment: React.FC = () => {
 
   return (
     <DefaultLayout title="Gestão de Dependentes">
+      <HolderInfo data={dependents.holder} hidden={step !== 2} />
       <Content>
         <Header setCpf={setCpf} cpf={cpf} errors={errors} hidden={step !== 1} />
-
-        <HolderInfo data={dependents.holder} hidden={step !== 2} />
 
         <Results
           setStep={setStep}
@@ -82,7 +81,11 @@ const Managment: React.FC = () => {
 
           <ButtonPrimary
             hidden={step !== 2}
-            onClick={() => history.push(OPERATOR_ADD_DEPENDENT)}
+            onClick={() =>
+              history.push(OPERATOR_ADD_DEPENDENT, {
+                holder: dependents.holder,
+              })
+            }
           >
             Adicionar Dependentes
           </ButtonPrimary>
