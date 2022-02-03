@@ -16,6 +16,7 @@ import ButtonLink from '@/components/Button/Link'
 import { PermissionsSelect } from './components/PermissionsSelect'
 
 import { useHistory, useLocation } from 'react-router'
+import { id } from 'date-fns/locale'
 
 export const SeeOneProfile: React.FC = () => {
   useEffect(() => {
@@ -24,73 +25,78 @@ export const SeeOneProfile: React.FC = () => {
 
   const { Loading } = useLoading()
   const history = useHistory()
-  // const { id } = useLocation().state
+  const { id } = useLocation().state || {}
 
-  // const [profileAndPermissions, setProfileAndPermissions] = useState([])
+  const [profilesAndPermissions, setProfilesAndPermissions] = useState([])
 
-  const permissions = [
-    {
-      id: '01',
-      name: 'Local Disk (C:)',
-      expanded: true,
-      subChild: [
-        {
-          id: '01-01',
-          name: 'Program Files',
-          isChecked: true,
-        },
-        {
-          id: '01-02',
-          name: 'Users',
-          // expanded: true,
-        },
-        {
-          id: '01-03',
-          name: 'Windows',
-        },
-      ],
-    },
-    {
-      id: '02',
-      name: 'Local Disk (D:)',
-      subChild: [
-        {
-          id: '02-01',
-          name: 'Personals',
-        },
-        {
-          id: '02-02',
-          name: 'Projects',
-        },
-        {
-          id: '02-03',
-          name: 'Office',
-        },
-      ],
-    },
-    {
-      id: '03',
-      name: 'Local Disk (E:)',
-      icon: 'folder',
-      isChecked: true,
-      subChild: [
-        {
-          id: '03-01',
-          name: 'Pictures',
-        },
-        {
-          id: '03-02',
-          name: 'Documents',
-        },
-        {
-          id: '03-03',
-          name: 'Study Materials',
-        },
-      ],
-    },
-  ]
+  // const permissions = [
+  //   {
+  //     id: '01',
+  //     name: 'Local Disk (C:)',
+  //     expanded: true,
+  //     subChild: [
+  //       {
+  //         id: '01-01',
+  //         name: 'Program Files',
+  //         isChecked: true,
+  //       },
+  //       {
+  //         id: '01-02',
+  //         name: 'Users',
+  //         // expanded: true,
+  //       },
+  //       {
+  //         id: '01-03',
+  //         name: 'Windows',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: '02',
+  //     name: 'Local Disk (D:)',
+  //     subChild: [
+  //       {
+  //         id: '02-01',
+  //         name: 'Personals',
+  //       },
+  //       {
+  //         id: '02-02',
+  //         name: 'Projects',
+  //       },
+  //       {
+  //         id: '02-03',
+  //         name: 'Office',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: '03',
+  //     name: 'Local Disk (E:)',
+  //     icon: 'folder',
+  //     isChecked: true,
+  //     subChild: [
+  //       {
+  //         id: '03-01',
+  //         name: 'Pictures',
+  //       },
+  //       {
+  //         id: '03-02',
+  //         name: 'Documents',
+  //       },
+  //       {
+  //         id: '03-03',
+  //         name: 'Study Materials',
+  //       },
+  //     ],
+  //   },
+  // ]
 
   useEffect(() => {
+    if (!id) {
+      history.push(DIRECTOR_SEE_ALL_PROFILES)
+      return
+    }
+
     const loadProfiles = async () => {
       try {
         Loading.turnOn()
@@ -101,8 +107,11 @@ export const SeeOneProfile: React.FC = () => {
 
         const profilesAndPermissionsMapped = fromApi(profilesAndPermissions)
 
-        // const { data: perfil } = await apiUser.get(`/perfil/${id}`)
+        setProfilesAndPermissions(profilesAndPermissionsMapped)
 
+        const { data: profile } = await apiUser.get(`/perfil/${id}`)
+
+        console.log(profile)
       } catch (error) {
         // console.log(error)
         // toast.error('Erro ao carregar itens vendáveis!')
@@ -144,12 +153,14 @@ export const SeeOneProfile: React.FC = () => {
     <DefaultLayout title="Perfis - Visualização">
       <Container>
         <InputText
-          // value={profileAndPermissions.name}
+          // value={profilesAndPermissions.name}
           label="Nome do Perfil"
           disabled
         />
         <label htmlFor="categorias">Categoria</label>
-        {/* <PermissionsSelect permissions={permissions} disabled /> */}
+        {profilesAndPermissions.length && (
+          <PermissionsSelect permissions={profilesAndPermissions} disabled />
+        )}
         <footer>
           <ButtonLink onClick={() => history.push(DIRECTOR_SEE_ALL_PROFILES)}>
             Voltar

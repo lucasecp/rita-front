@@ -23,7 +23,7 @@ interface PermissionsSelectProps {
 }
 
 export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
-  permissions,
+  permissions = [],
   disabled,
 }) => {
   const fields = {
