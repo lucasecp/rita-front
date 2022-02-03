@@ -28,11 +28,13 @@ export const Container = styled.div`
   }
   @media (max-width: 767px) {
     padding: 24px 24px 0 24px;
+    > footer {
+      margin: 24px -24px 24px -24px;
+    }
   }
   @media (max-width: 539px) {
     > footer {
       flex-direction: column;
-      margin: 24px -24px 24px -24px;
       > * + * {
         margin: 24px 0 0 0;
       }
