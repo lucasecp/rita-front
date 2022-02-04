@@ -1,15 +1,15 @@
 import { InputHTMLAttributes, useState } from 'react'
 import { Container, ListSuggestions } from './styles'
 
-interface AutocompleteOptions {
+export interface AutocompleteOptions {
   label: string
-  value: string
+  value: number
 }
 
-interface AutocompleteProps extends InputHTMLAttributes<HTMLInputElement> {
+interface AutocompleteProps {
   label: string
-  value: string
-  setValue: React.Dispatch<React.SetStateAction<string>>
+  value: AutocompleteOptions
+  setValue: React.Dispatch<React.SetStateAction<AutocompleteOptions>>
   options: AutocompleteOptions[]
   error: string
 }
@@ -37,7 +37,10 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
     setSuggestions(matches)
   }
 
-  const onClickSuggestion = (valueClicked: string) => {
+  const onClickSuggestion = (valueClicked: {
+    label: string
+    value: number
+  }) => {
     setValue(valueClicked)
     setSuggestions([])
   }
@@ -48,9 +51,12 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
       <input
         type="text"
         id={label}
-        value={value}
+        value={value.label}
         onChange={(e) => {
-          setValue(e.target.value)
+          setValue({
+            label: e.target.value,
+            value: 0,
+          })
           onChangeAutocomplete(e.target.value)
         }}
         onBlur={() => {
@@ -58,6 +64,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
             setSuggestions([])
           }, 100)
         }}
+        autoComplete="off"
         {...rest}
       />
       {error && <p className="error">{error}</p>}
@@ -66,7 +73,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
           {suggestions.map((suggestion) => (
             <li
               key={suggestion.value}
-              onClick={() => onClickSuggestion(suggestion.label)}
+              onClick={() => onClickSuggestion(suggestion)}
             >
               {suggestion.label}
             </li>

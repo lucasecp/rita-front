@@ -5,18 +5,20 @@ import ButtonPrimary from '@/components/Button/Primary'
 import ButtonOutline from '@/components/Button/Outline'
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 
-import { Importing } from '../Importing'
+import apiPatient from '@/services/apiPatient'
 
+import { Importing } from '../Importing'
 import { useModal } from '@/hooks/useModal'
 import { toast } from '@/styles/components/toastify'
 import { DIRECTOR_IMPORT_REPORT } from '@/routes/constants/namedRoutes/routes'
+import { AutocompleteOptions } from '@/components/Form/Autocomplete'
+import { fromApiImport } from '../../adapters/fromApiImport'
 
 import { Container, ButtonsArea } from './styles'
-import apiPatient from '@/services/apiPatient'
 
 interface ConfirmImportProps {
   file: File
-  company: string
+  company: AutocompleteOptions
 }
 
 export const ConfirmImport: React.FC<ConfirmImportProps> = ({
@@ -27,37 +29,39 @@ export const ConfirmImport: React.FC<ConfirmImportProps> = ({
   const { closeModal, showMessage } = useModal()
 
   const onMakeImport = async () => {
-    const formData = new FormData()
-    formData.append('file', file)
+    const formFile = new FormData()
+    formFile.append('planilha', file)
 
     showMessage(Importing)
 
+    const dateNow = new Date()
+
     const response = await apiPatient.put(
-      '/paciente/importacaoPaciente',
+      `/paciente/importacaoPaciente?empresa=${company.value}`,
+      formFile,
       {
-        planilha: formData,
-      },
-      {
-        params: { gravar: true },
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       },
     )
 
-    return new Promise(function () {
-      setTimeout(() => {
-        const success = true
-
-        if (success) {
-          console.log('Importação finalizada!')
-          toast.success('Importação realizada com sucesso')
-          closeModal()
-          history.push(DIRECTOR_IMPORT_REPORT)
-        } else {
-          console.log('Importação há erros!')
-          toast.error('Houve algum erro durante a importação')
-          closeModal()
-        }
-      }, 5000)
-    })
+    if (response.status === 200) {
+      const apiData = fromApiImport(response.data)
+      toast.success('Importação realizada com sucesso')
+      closeModal()
+      history.push(DIRECTOR_IMPORT_REPORT, {
+        reportDetails: {
+          data: dateNow.toLocaleDateString(),
+          hour: dateNow.toLocaleTimeString().slice(0, -3),
+          company,
+        },
+        apiData,
+      })
+    } else {
+      toast.error('Houve algum erro durante a importação')
+      closeModal()
+    }
   }
 
   return (

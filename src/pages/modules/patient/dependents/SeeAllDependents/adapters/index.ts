@@ -31,7 +31,7 @@ export const fromApi = (data: FromApiResponse): FromApi => {
     documentsOk: dependent.cpfCadastrado,
   }))
 
-  const companyMapped = data.empresa
+  const companyMapped = data.empresa[0]
 
   return { companyMapped, dependentsMapped }
 }

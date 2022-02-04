@@ -12,6 +12,7 @@ export const Container = styled.div`
 
   > div {
     width: 100%;
+    height: fit-content;
 
     > label {
       color: ${colors.gray.middle};

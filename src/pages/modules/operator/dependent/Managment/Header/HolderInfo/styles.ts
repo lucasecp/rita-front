@@ -1,39 +1,56 @@
 import styled from 'styled-components'
 
 export const Container = styled.header`
-  padding: 16px 24px;
-  border: solid 1px #eeeeee;
-  max-width: 400px;
-  border-radius: 4px;
+  background: ${({ theme }) => theme.light};
+  position: relative;
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  border-radius: 0px 8px 8px 0px;
+  flex-wrap: wrap;
   > div {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -12px;
-    > * {
-      font-size: 20px;
-      font-weight: 500;
-      line-height: 25px;
-      color: #6a6a6a;
-      margin: 12px;
+    > div {
+      margin-bottom: 11px; 
+      > h6 {
+        margin-bottom: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 17px;
+        color: #6a6a6a;
+      }
+      > h5 {
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 25px;
+        color: #6a6a6a;
+      }
     }
   }
   > span {
     font-size: 16px;
+    font-style: normal;
     font-weight: 500;
     line-height: 20px;
-    color: #326bf6;
-    margin-top: 4px;
+    color: #fff;
+    padding: 7px 14px;
     display: block;
+    background: #f89bff;
+    border-radius: 28px;
+    text-align: center
   }
-  /* @media (max-width: 767px) {
-    max-width: 100%;
-  } */
-  @media (max-width: 539px) {
-    > div {
-      margin: -4px;
-      > * {
-        margin: 4px;
-      }
-    }
+  ::before {
+    content: '';
+    position: absolute;
+    background: ${({ theme }) => theme.darkness};
+    height: 100%;
+    width: 10px;
+    display: block;
+    left: 0;
+    top: 0;
+    border-radius: 8px 0px 0px 8px;
+
   }
 `
