@@ -2,9 +2,9 @@ import styled from 'styled-components'
 
 export const Content = styled.div`
   overflow: hidden;
-  padding: 32px 32px 0 32px;
+  padding: 24px 32px 0 32px;
   background: #fff;
-  border-radius: 8px 8px 0px 0px;
+  border-radius: 8px;
   > footer {
     display: flex;
     justify-content: center;

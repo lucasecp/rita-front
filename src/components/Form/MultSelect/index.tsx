@@ -22,7 +22,8 @@ interface MultiSelectCustomProps {
   onSelect?: (value: MultiSelectOption[]) => void
   onRemove?: (value: MultiSelectOption[]) => void
   closeOnSelect?: boolean
-  // [x: string]: string
+  [x: string]: any
+  name?: string
 }
 
 const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
@@ -34,6 +35,7 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
   hasError,
   disabled,
   variation,
+  name,
   ...rest
 }) => {
   const containerDiv = useRef(null)
@@ -45,7 +47,7 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
   window.onresize = () => adjustSelectOptions(containerDiv?.current)
 
   return (
-    <Container disabled={disabled} variation={variation}>
+    <Container disabled={disabled} variation={variation} name={name}>
       {label && <label>{label}</label>}
       <Content
         disabled={disabled}
@@ -60,6 +62,7 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
           displayValue="name"
           showCheckbox
           placeholder=""
+          
           customCloseIcon={<CloseMultSelectIcon />}
           emptyRecordMsg="Nenhum resultado."
           closeOnSelect={false}

@@ -7,6 +7,7 @@ interface SelectUfProps {
   setUfToApi: (value: string) => void
   uf: string
   disabled: boolean
+  [x: string]: any
 }
 
 const SelectUf: React.FC<SelectUfProps> = ({
@@ -14,6 +15,7 @@ const SelectUf: React.FC<SelectUfProps> = ({
   setUfToApi,
   uf,
   disabled,
+  ...rest
 }) => {
   const [ufOptions, setUfOptions] = useState<any[]>([])
 
@@ -46,7 +48,7 @@ const SelectUf: React.FC<SelectUfProps> = ({
     setUfToApi(ufFromApi.label)
 
     setUf(ufFromApi.value)
-  }, [uf])
+  }, [uf, ufOptions])
 
   return (
     <Select
@@ -56,6 +58,8 @@ const SelectUf: React.FC<SelectUfProps> = ({
       value={uf}
       setValue={setUf}
       disabled={disabled}
+      name="uf"
+      {...rest}
     />
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import { enableRipple } from '@syncfusion/ej2-base'
 import { TreeViewComponent } from '@syncfusion/ej2-react-navigations'
@@ -8,6 +8,7 @@ import { Container } from './styles'
 enableRipple(true)
 
 interface PermissionsSelectProps {
+  disabled?: boolean
   permissions: {
     id: string
     name: string
@@ -22,8 +23,8 @@ interface PermissionsSelectProps {
 }
 
 export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
-  permissions,
-  onGetPermissions,
+  permissions = [],
+  disabled,
 }) => {
   const fields = {
     dataSource: permissions,
@@ -36,12 +37,20 @@ export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
     console.log(any1)
   }
 
+  const allParentsId = useMemo(() => {
+    return permissions.map((permission) => permission.id)
+  }, [permissions])
+
   return (
     <Container>
       <TreeViewComponent
+        disabled={disabled}
         fields={fields}
         showCheckBox
-        onChange={onTreeViewChange}
+        nodeChecked={onTreeViewChange}
+        expandedNodes={allParentsId}
+        // // selectedNodes={}
+        // nodeSelecting={setTest}
       />
     </Container>
   )

@@ -21,6 +21,7 @@ export const OPERATOR_SEE_ALL_CLINICS = '/clinicas'
 export const OPERATOR_SEE_ONE_CLINIC = '/clinicas/ver-clinica'
 export const OPERATOR_SEE_ALL_SPECIALTYS = '/especialidades'
 export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
+export const OPERATOR_ADD_DEPENDENT = '/dependentes/associar'
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
