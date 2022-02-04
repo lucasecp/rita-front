@@ -38,8 +38,16 @@ export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
   }
 
   const allParentsId = useMemo(() => {
-    return permissions.map((permission) => permission.id)
+    console.log(permissions)
+
+    const allParentPermissionsId = permissions.map(
+      (permission) => permission.id,
+    )
+    console.log(allParentPermissionsId)
+    return allParentPermissionsId
   }, [permissions])
+
+  console.log(permissions)
 
   return (
     <Container>
@@ -48,7 +56,7 @@ export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
         fields={fields}
         showCheckBox
         nodeChecked={onTreeViewChange}
-        expandedNodes={allParentsId}
+        // expandedNodes={allParentsId}
         // // selectedNodes={}
         // nodeSelecting={setTest}
       />
