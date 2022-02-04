@@ -8,7 +8,11 @@ import {
 } from './styles'
 import { useLoading } from '@/hooks/useLoading'
 import apiUser from '@/services/apiUser'
-import { fromApi } from './adapters/fromApi'
+import {
+  profileAndPermissionsFromApi,
+  profilesAndPermissionsWithCheckedFromApi,
+  oneProfileFromApi,
+} from './adapters/fromApi'
 import InputText from '@/components/Form/InputText'
 import { DIRECTOR_SEE_ALL_PROFILES } from '@/routes/constants/namedRoutes/routes'
 import OutilineButton from '@/components/Button/Outline'
@@ -27,69 +31,9 @@ export const SeeOneProfile: React.FC = () => {
   const history = useHistory()
   const { id } = useLocation().state || {}
 
+  const [disabled, setDisabled] = useState(true)
   const [profilesAndPermissions, setProfilesAndPermissions] = useState([])
-
-  // const permissions = [
-  //   {
-  //     id: '01',
-  //     name: 'Local Disk (C:)',
-  //     expanded: true,
-  //     subChild: [
-  //       {
-  //         id: '01-01',
-  //         name: 'Program Files',
-  //         isChecked: true,
-  //       },
-  //       {
-  //         id: '01-02',
-  //         name: 'Users',
-  //         // expanded: true,
-  //       },
-  //       {
-  //         id: '01-03',
-  //         name: 'Windows',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: '02',
-  //     name: 'Local Disk (D:)',
-  //     subChild: [
-  //       {
-  //         id: '02-01',
-  //         name: 'Personals',
-  //       },
-  //       {
-  //         id: '02-02',
-  //         name: 'Projects',
-  //       },
-  //       {
-  //         id: '02-03',
-  //         name: 'Office',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: '03',
-  //     name: 'Local Disk (E:)',
-  //     icon: 'folder',
-  //     isChecked: true,
-  //     subChild: [
-  //       {
-  //         id: '03-01',
-  //         name: 'Pictures',
-  //       },
-  //       {
-  //         id: '03-02',
-  //         name: 'Documents',
-  //       },
-  //       {
-  //         id: '03-03',
-  //         name: 'Study Materials',
-  //       },
-  //     ],
-  //   },
-  // ]
+  const [oneProfile, setOneProfile] = useState({})
 
   useEffect(() => {
     if (!id) {
@@ -105,13 +49,27 @@ export const SeeOneProfile: React.FC = () => {
           '/grupo-permissao',
         )
 
-        const profilesAndPermissionsMapped = fromApi(profilesAndPermissions)
+        const profilesAndPermissionsMapped = profileAndPermissionsFromApi(
+          profilesAndPermissions,
+        )
 
-        setProfilesAndPermissions(profilesAndPermissionsMapped)
+        const { data: oneProfileAndItsPermissions } = await apiUser.get(
+          `/perfil/${id}`,
+        )
 
-        const { data: profile } = await apiUser.get(`/perfil/${id}`)
+        const oneProfileFromApiMapped = oneProfileFromApi(
+          oneProfileAndItsPermissions,
+        )
 
-        console.log(profile)
+        setOneProfile(oneProfileFromApiMapped)
+
+        const profilesAndPermissionsWithCheckedMapped =
+          profilesAndPermissionsWithCheckedFromApi(
+            profilesAndPermissionsMapped,
+            oneProfileAndItsPermissions,
+          )
+
+        setProfilesAndPermissions(profilesAndPermissionsWithCheckedMapped)
       } catch (error) {
         // console.log(error)
         // toast.error('Erro ao carregar itens vendáveis!')
@@ -123,51 +81,22 @@ export const SeeOneProfile: React.FC = () => {
     loadProfiles()
   }, [])
 
-  // const classesView = useViewStyles()
-  // const classesItem = useItemStyles()
-  // const classesAccordion = useAccordionStyles()
-
-  // const [expanded, setExpanded] = React.useState([])
-  // const [selected, setSelected] = React.useState([])
-
-  // const handleToggle = (event, nodeIds) => {
-  //   if (event.target.nodeName !== 'svg') {
-  //     return
-  //   }
-  //   setExpanded(nodeIds)
-  // }
-
-  // const handleSelect = (event, nodeIds) => {
-  //   if (event.target.nodeName === 'svg') {
-  //     return
-  //   }
-  //   const first = nodeIds[0]
-  //   if (selected.includes(first)) {
-  //     setSelected(selected.filter((id) => id !== first))
-  //   } else {
-  //     setSelected([first, ...selected])
-  //   }
-  // }
-
   return (
     <DefaultLayout title="Perfis - Visualização">
       <Container>
-        <InputText
-          // value={profilesAndPermissions.name}
-          label="Nome do Perfil"
-          disabled
-        />
+        <InputText value={oneProfile.name} label="Nome do Perfil" disabled />
         <label htmlFor="categorias">Categoria</label>
         {profilesAndPermissions.length && (
-          <PermissionsSelect permissions={profilesAndPermissions} disabled />
+          <PermissionsSelect
+            permissions={profilesAndPermissions}
+            // disabled={disabled}
+          />
         )}
         <footer>
           <ButtonLink onClick={() => history.push(DIRECTOR_SEE_ALL_PROFILES)}>
             Voltar
           </ButtonLink>
-          <OutilineButton
-          // onClick={() => history.push(DIRECTOR_SEE_PERFIS)}
-          >
+          <OutilineButton onClick={() => setDisabled(false)}>
             Editar
           </OutilineButton>
         </footer>
