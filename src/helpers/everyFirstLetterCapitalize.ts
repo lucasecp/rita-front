@@ -5,16 +5,17 @@ export const everyFirstLetterCapitalize = (text: string): string => {
 
   const loweredText = text.toLowerCase()
   const words = loweredText.trim().split(' ')
+  const wordsCleared = words.filter((word) => word !== '')
 
-  for (let index = 0; index < words.length; index++) {
-    const word = words[index]
+  for (let index = 0; index < wordsCleared.length; index++) {
+    const word = wordsCleared[index]
 
     const firstLetter = word[0]
 
     const newWord = firstLetter.toUpperCase() + word.slice(1)
 
-    words[index] = newWord
+    wordsCleared[index] = newWord
   }
 
-  return words.join(' ')
+  return wordsCleared.join(' ')
 }
