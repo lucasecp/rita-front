@@ -56,7 +56,7 @@ export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
         fields={fields}
         showCheckBox
         nodeChecked={onTreeViewChange}
-        expandedNodes={allParentsId}
+        // expandedNodes={allParentsId}
         // // selectedNodes={}
         // nodeSelecting={setTest}
       />
