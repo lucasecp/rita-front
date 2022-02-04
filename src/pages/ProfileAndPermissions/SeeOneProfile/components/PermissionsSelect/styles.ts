@@ -13,7 +13,6 @@ export const Container = styled.div`
   .e-text-content.e-icon-wrapper {
     background: ${colors.gray.light};
     padding: 8px;
-    flex-direction: row-reverse;
   }
 
   .e-checkbox-wrapper .e-frame.e-check:hover {
@@ -28,6 +27,10 @@ export const Container = styled.div`
   .e-list-item.e-level-1.e-has-child.e-node-focus.e-node-collapsed {
     pointer-events: none;
   }
+
+  .e-treeview .e-list-item.e-active > .e-text-content .e-list-text {
+    color: ${({ theme }) => theme.main};
+}
 
   .e-checkbox-wrapper .e-stop::before,
   .e-css.e-checkbox-wrapper .e-stop::before {
@@ -55,7 +58,7 @@ export const Container = styled.div`
   }
 
   .e-list-item.e-level-1 ul {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
   }
 
   .e-list-parent.e-ul {
@@ -66,8 +69,7 @@ export const Container = styled.div`
 
   .e-list-text {
     font-size: 20px;
-    margin: auto;
-  }
+    }
 
   .e-list-item .e-level-2 {
     font-size: 32px;
@@ -76,7 +78,7 @@ export const Container = styled.div`
   }
 
   .e-list-parent {
-    border-radius: 8px;
+    /* border-radius: 8px; */
   }
 
   .e-control {
@@ -85,6 +87,8 @@ export const Container = styled.div`
 
   .e-text-content {
     overflow: hidden;
+    align-items: center;
+    display: flex;
   }
 
   .e-list-text {
@@ -96,10 +100,13 @@ export const Container = styled.div`
   }
 
   .e-text-content.e-icon-wrapper {
-    flex-direction: row-reverse;
-    border-radius: 8px 8px 0 0;
+    /* flex-direction: row-reverse; */
+    /* border-radius: 8px 8px 0 0; */
   }
 
+  li {
+    /* border-radius: 8px; */
+  }
   /* .e-treeview .e-list-item {
     border-radius: 8px;
   } */
