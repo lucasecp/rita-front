@@ -5,6 +5,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import ButtonOutline from '@/components/Button/Outline'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { InputFile } from '@/components/Form/InputFile'
+import CustomTooltip from '@/components/Tooltip'
 import {
   Autocomplete,
   AutocompleteOptions,
@@ -13,6 +14,7 @@ import {
 import { useModal } from '@/hooks/useModal'
 
 import { fromApiCompanies } from './adapters/fromApiCompanies'
+import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 
 import { ConfirmImport } from './messages/ConfirmImport'
 import { InvalidFormat } from './messages/InvalidFormat'
@@ -152,7 +154,13 @@ export const Import: React.FC = () => {
         <InputFile setValue={setFile} clearOnClick accept=".xlsx, .xls">
           <label>Arquivo:</label>
           <ContentFile>
-            <span>{file && typeof file === 'object' && file.name}</span>
+            <CustomTooltip label={file && file.name}>
+              <span>
+                {file &&
+                  typeof file === 'object' &&
+                  formatTextWithLimit(file.name, 28)}
+              </span>
+            </CustomTooltip>
             <button>Inserir arquivo</button>
           </ContentFile>
           {errors.file && <p className="error">{errors.file}</p>}

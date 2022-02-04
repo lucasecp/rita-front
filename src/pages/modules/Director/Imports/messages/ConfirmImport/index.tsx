@@ -36,30 +36,34 @@ export const ConfirmImport: React.FC<ConfirmImportProps> = ({
 
     const dateNow = new Date()
 
-    const response = await apiPatient.put(
-      `/paciente/importacaoPaciente?empresa=${company.value}`,
-      formFile,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
+    try {
+      const response = await apiPatient.put(
+        `/paciente/importacaoPaciente?empresa=${company.value}`,
+        formFile,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         },
-      },
-    )
+      )
 
-    if (response.status === 200) {
-      const apiData = fromApiImport(response.data)
-      toast.success('Importação realizada com sucesso')
-      closeModal()
-      history.push(DIRECTOR_IMPORT_REPORT, {
-        reportDetails: {
-          data: dateNow.toLocaleDateString(),
-          hour: dateNow.toLocaleTimeString().slice(0, -3),
-          company,
-        },
-        apiData,
-      })
-    } else {
+      if (response.status === 200) {
+        const importedDataMapped = fromApiImport(response.data)
+        toast.success('Importação realizada com sucesso')
+        closeModal()
+        history.push(DIRECTOR_IMPORT_REPORT, {
+          reportDetails: {
+            data: dateNow.toLocaleDateString(),
+            hour: dateNow.toLocaleTimeString().slice(0, -3),
+            company,
+          },
+          importedDataMapped,
+        })
+      }
+    } catch {
       toast.error('Houve algum erro durante a importação')
+      closeModal()
+    } finally {
       closeModal()
     }
   }
