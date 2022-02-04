@@ -19,12 +19,13 @@ interface useLocationState {
     hour: string
     company: AutocompleteOptions
   }
-  apiData: FromApiResponse
+  importedDataMapped: FromApiResponse
 }
 
 export const Report: React.FC = () => {
   const history = useHistory()
-  const { reportDetails, apiData } = useLocation<useLocationState>().state
+  const { reportDetails, importedDataMapped } =
+    useLocation<useLocationState>().state
 
   const onBack = () => {
     history.push(DIRECTOR_IMPORT)
@@ -38,12 +39,12 @@ export const Report: React.FC = () => {
           Empresa {reportDetails.company.label}
         </h1>
         <AccordionSuccess
-          listSucessRegister={apiData.listSucessRegister}
-          countSucessRegisters={apiData.countSucessRegisters}
+          listSucessRegister={importedDataMapped.listSucessRegister}
+          countSucessRegisters={importedDataMapped.countSucessRegisters}
         />
         <AccordionError
-          listErrorsRegister={apiData.listErrorsRegister}
-          countErrorsRegister={apiData.countErrorsRegister}
+          listErrorsRegister={importedDataMapped.listErrorsRegister}
+          countErrorsRegister={importedDataMapped.countErrorsRegister}
         />
       </Container>
       <BtnGroup>

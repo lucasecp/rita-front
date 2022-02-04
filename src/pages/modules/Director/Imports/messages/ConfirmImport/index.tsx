@@ -47,7 +47,7 @@ export const ConfirmImport: React.FC<ConfirmImportProps> = ({
     )
 
     if (response.status === 200) {
-      const apiData = fromApiImport(response.data)
+      const importedDataMapped = fromApiImport(response.data)
       toast.success('Importação realizada com sucesso')
       closeModal()
       history.push(DIRECTOR_IMPORT_REPORT, {
@@ -56,7 +56,7 @@ export const ConfirmImport: React.FC<ConfirmImportProps> = ({
           hour: dateNow.toLocaleTimeString().slice(0, -3),
           company,
         },
-        apiData,
+        importedDataMapped,
       })
     } else {
       toast.error('Houve algum erro durante a importação')

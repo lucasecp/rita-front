@@ -49,6 +49,7 @@ export const ListSuggestions = styled.ul<ListSuggestionsProps>`
   border: 1px solid #d4d4d4;
   background: #fff;
   box-shadow: 0px 4px 4px 0px #00000040;
+  cursor: pointer;
 
   animation: fadein 0.3s;
 
