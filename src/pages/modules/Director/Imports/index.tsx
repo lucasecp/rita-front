@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { isValidTypeFileExcel } from '@/helpers/file/isValidTypeFileExcel'
-import { isObjectEmpty } from '@/helpers/isObjectEmpty'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import ButtonOutline from '@/components/Button/Outline'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { InputFile } from '@/components/Form/InputFile'
-import { Autocomplete } from '@/components/Form/Autocomplete'
+import {
+  Autocomplete,
+  AutocompleteOptions,
+} from '@/components/Form/Autocomplete'
 
 import { useModal } from '@/hooks/useModal'
+
+import { fromApiCompanies } from './adapters/fromApiCompanies'
 
 import { ConfirmImport } from './messages/ConfirmImport'
 import { InvalidFormat } from './messages/InvalidFormat'
 
 import { Container, BtnGroup, ContentFile } from './styles'
-
-interface AutocompleteOptions {
-  label: string
-  value: string
-}
+import apiUser from '@/services/apiUser'
 
 interface Errors {
   file: string
@@ -29,7 +29,10 @@ export const Import: React.FC = () => {
   const { showMessage } = useModal()
 
   const [file, setFile] = useState<File | null>({} as File)
-  const [company, setCompany] = useState('')
+  const [company, setCompany] = useState({
+    value: 0,
+    label: '',
+  })
   const [autocompleteOptions, setAutocompleteOptions] = useState<
     AutocompleteOptions[]
   >([])
@@ -41,11 +44,13 @@ export const Import: React.FC = () => {
   useEffect(() => {
     document.title = 'Rita Saúde | Importação'
 
-    setAutocompleteOptions([
-      { label: 'Sabin', value: '1' },
-      { label: 'CSP', value: '2' },
-      { label: 'Rita', value: '3' },
-    ])
+    const loadCompanies = async () => {
+      const response = await apiUser.get('/empresa')
+      const companyOptions = fromApiCompanies(response.data.dados)
+      setAutocompleteOptions(companyOptions)
+    }
+
+    loadCompanies()
   }, [])
 
   useEffect(() => {
@@ -60,11 +65,22 @@ export const Import: React.FC = () => {
 
   const onCancel = () => {
     setFile(null)
-    setCompany('')
+    setCompany({
+      value: 0,
+      label: '',
+    })
   }
 
   const validateErrors = (fileParam: File | null, companyParam: string) => {
     let objectError = {} as Errors
+
+    // A empresa está inclusa no array de empresas vindo da API
+    const companyIsValid = autocompleteOptions
+      .map((option) => {
+        if (option.label === company.label && company.value !== 0) return true
+        return false
+      })
+      .filter((option) => option === true)
 
     // Se não for null (click cancelar ou abriu explorer e fechou)
     if (fileParam === null) {
@@ -104,7 +120,7 @@ export const Import: React.FC = () => {
       !fileParam?.name &&
       fileParam !== null
     ) {
-      if (companyParam) {
+      if (companyParam && companyIsValid[0]) {
         objectError = {
           file: 'Inserir arquivo para realizar a importação.',
           company: '',
@@ -121,8 +137,7 @@ export const Import: React.FC = () => {
   }
 
   const onRealizeImport = () => {
-    const errorsSearched = validateErrors(file, company)
-
+    const errorsSearched = validateErrors(file, company.label)
     if (errorsSearched.file || errorsSearched.company) {
       return setErrors(errorsSearched)
     }
