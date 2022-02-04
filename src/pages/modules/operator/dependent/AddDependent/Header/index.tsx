@@ -1,16 +1,9 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Container } from './styles'
 import { useLocation, useHistory } from 'react-router-dom'
 import { OPERATOR_DEPENDENT_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
-interface HeaderProps {
-  setCpf: React.Dispatch<React.SetStateAction<string>>
-  cpf: string
-  errors: string
-  hidden: boolean
-}
-
-const Header: React.FC<HeaderProps> = ({}) => {
+const Header: React.FC = () => {
   const location = useLocation()
   const history = useHistory()
   const holder = location.state?.holder
@@ -20,6 +13,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
       history.push(OPERATOR_DEPENDENT_MANAGMENT)
     }
   }, [])
+  
   return (
     <Container>
       <div>

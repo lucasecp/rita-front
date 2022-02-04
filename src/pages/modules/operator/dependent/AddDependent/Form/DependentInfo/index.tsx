@@ -8,8 +8,8 @@ interface DependentInfoProps {}
 const DependentInfo: React.FC<DependentInfoProps> = () => {
   return (
     <Container>
-      <InputText label="Nome" value={'Luísa Castilhos Silvestre'} disabled />
-      <InputText label="Status" value={'Inativo'} disabled />
+      <InputText label="Nome:" value={'Luísa Castilhos Silvestre'} disabled />
+      <InputText label="Status:" value={'Inativo'} disabled />
       <InputText label="Titular Atual:" value={'999.999.999-99'} disabled />
       <InputMask
         mask="999.999.999-99"
