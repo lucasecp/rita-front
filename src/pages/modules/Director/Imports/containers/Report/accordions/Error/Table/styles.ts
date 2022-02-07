@@ -8,7 +8,7 @@ export const Container = styled.div`
   header {
     min-width: max-content;
     display: grid;
-    grid-template-columns: 0.1fr 0.3fr 0.2fr 0.2fr 0.2fr;
+    grid-template-columns: 0.1fr 0.3fr 0.3fr 0.3fr;
 
     padding: 8px 16px;
     background: #f5f5f5;
@@ -22,7 +22,7 @@ export const Container = styled.div`
 
     @media (max-width: 868px) {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 25px;
       text-align: center;
 
@@ -38,7 +38,7 @@ export const Container = styled.div`
       min-width: max-content;
       padding: 8px 16px;
       display: grid;
-      grid-template-columns: 0.1fr 0.3fr 0.2fr 0.2fr 0.2fr;
+      grid-template-columns: 0.1fr 0.3fr 0.3fr 0.3fr;
       border-bottom: 1px solid ${colors.gray.light};
 
       > p {
@@ -49,7 +49,7 @@ export const Container = styled.div`
 
       @media (max-width: 868px) {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 25px;
         text-align: center;
 

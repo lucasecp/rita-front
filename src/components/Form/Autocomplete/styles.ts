@@ -14,7 +14,7 @@ export const Container = styled.div`
   > input {
     margin-top: 5px;
     padding: 14px 16px;
-    height: 100%;
+    height: fit-content;
     border: 1px solid ${colors.gray.light};
     border-radius: 8px;
   }
@@ -49,8 +49,27 @@ export const ListSuggestions = styled.ul<ListSuggestionsProps>`
   border: 1px solid #d4d4d4;
   background: #fff;
   box-shadow: 0px 4px 4px 0px #00000040;
+  cursor: pointer;
 
   animation: fadein 0.3s;
+
+  max-height: 260px;
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background: #eeeeee;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #afafaf;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 
   > li {
     padding: 10px;
