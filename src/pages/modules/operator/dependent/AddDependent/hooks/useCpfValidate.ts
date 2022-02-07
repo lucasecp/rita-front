@@ -9,7 +9,7 @@ export const useCpfValidate = (): any => {
 
   const alreadyExist = async (cpf: string) => {
     let error = false
-    
+
     try {
       Loading.turnOn()
       const { data } = await apiPatient.get(`/paciente/cpf?cpf=${cpf}`)
@@ -27,20 +27,18 @@ export const useCpfValidate = (): any => {
     }
     return msgApi ? true : error
   }
-  
 
-  const validatorCpf = async (value: string) => {
-    
+  const validatorCpf = (value: string) => {
     const newValue = clear(value)
- 
+
     if (!newValue) return 'CPF Obrigatório.'
     else if (!validateCpf(newValue)) return 'CPF Inválido.'
-    else if (await alreadyExist(newValue)) {
-      return (
-        msgApi ||
-        'O CPF informado pertence a um dependente, preencha o campo com o CPF de um titular'
-      )
-    }
+    // else if (await alreadyExist(newValue)) {
+    //   return (
+    //     msgApi ||
+    //     'O CPF informado pertence a um dependente, preencha o campo com o CPF de um titular'
+    //   )
+    // }
     return ''
   }
 

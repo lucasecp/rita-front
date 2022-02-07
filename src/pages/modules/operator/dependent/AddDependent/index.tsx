@@ -1,55 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import Header from './Header'
-import apiPatient from '@/services/apiPatient'
-import { fromApi } from './adapters'
 import { Content } from './styles'
-import { useCpfValidate } from './useCpfValidate'
-import { useLoading } from '@/hooks/useLoading'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
-import { DataDependentI } from './types/index'
-import Form from './Form';
+import Form from './Form'
+import { useLocation, useHistory } from 'react-router-dom'
+import { OPERATOR_DEPENDENT_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
 const AddDependent: React.FC = () => {
-  const [cpf, setCpf] = useState('')
-  const [errors, setErrors] = useState('')
-  const [dependents, setDependents] = useState<DataDependentI>({
-    dependents: [],
-    holder: {},
-  })
-  const { validatorCpf } = useCpfValidate()
-  const { Loading } = useLoading()
+  const location = useLocation()
+  const history = useHistory()
+  const holder = location.state?.holder
+
+  useEffect(() => {
+    if (!holder) {
+      history.push(OPERATOR_DEPENDENT_MANAGMENT)
+    }
+  }, [])
 
   useEffect(() => {
     document.title = 'Rita Saúde | Informações da Clínica'
   }, [])
 
-  const getDependents = async () => {
-    const error = await validatorCpf(cpf)
-
-    if (error) {
-      return setErrors(error)
-    }
-    setErrors('')
-
-    try {
-      Loading.turnOn()
-      const { data } = await apiPatient.get(
-        `/paciente/cpf?cpf=${clearSpecialCaracter(cpf)}`,
-      )
-      setDependents(fromApi(data))
-    } catch (error) {
-    } finally {
-      Loading.turnOff()
-    }
-  }
-  
-
   return (
     <DefaultLayout title="Dependentes - Adicionar Dependentes">
       <Content>
-        <Header />
-        <Form/>
+        <Header holder={holder} />
+        <Form holder={holder} />
       </Content>
     </DefaultLayout>
   )
