@@ -2,7 +2,7 @@ import CustomMultSelect from '@/components/Form/MultSelect'
 import formatMultSelectValue from '@/helpers/formatMultSelectValue'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 import { mapUf } from '../../helpers/mapDataFromApiToMultSelect'
 
@@ -19,7 +19,7 @@ const MultSelectUf = ({ setUf, uf, regional }) => {
           { name: 'regional', value: formatMultSelectValue(regional) },
         ]
 
-        const { data } = await apiPatient.get(
+        const { data } = await apiAdmin.get(
           `/uf?${queryFilterString(queryRegional)}`,
         )
         const dataMapped = mapUf(data)

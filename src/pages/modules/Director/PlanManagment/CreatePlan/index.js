@@ -11,7 +11,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import OutilineButton from '@/components/Button/Outline'
 
 import { Container } from './styles'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 import { CancelAndExit } from './messages/CancelAndExit'
 import { toApi } from './adapters/toApi'
@@ -43,7 +43,7 @@ export const CreatePlan = () => {
   useEffect(() => {
     const loadServices = async () => {
       try {
-        const { data } = await apiPatient.get('/servico')
+        const { data } = await apiAdmin.get('/servico')
 
         const servicesOptionsMapped = data.dados.map((service) => ({
           id: service.id,
@@ -72,7 +72,7 @@ export const CreatePlan = () => {
 
       const {
         data: { mensagem: codeExists },
-      } = await apiPatient.get(`/plano/codigo/${code}/existe`)
+      } = await apiAdmin.get(`/plano/codigo/${code}/existe`)
 
       if (codeExists === 'true') {
         setErrors({ ...errors, code: 'O código informado já existe!' })
@@ -155,7 +155,7 @@ export const CreatePlan = () => {
         rangesOfUse,
       })
 
-      await apiPatient.post('/plano', planMapped)
+      await apiAdmin.post('/plano', planMapped)
 
       toast.success('Cadastro realizado com sucesso')
       history.push(DIRECTOR_PLAN_MANAGMENT)
