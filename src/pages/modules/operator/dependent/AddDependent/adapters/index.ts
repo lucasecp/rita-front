@@ -1,32 +1,31 @@
 import { formatCpf } from '@/helpers/formatCpf'
-import formatTextWithLimit from '@/helpers/formatTextWithLimit'
-import { DataDependentI } from '../types/index'
+import { DependentI } from '../types/index'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
-import { intervalToDuration, parse } from 'date-fns'
 
-export const fromApi = (dataDependent: any): DataDependentI => {
-  const holder = {
+const showStatus = (status: 'I' | 'P' | 'N' | 'D' | 'A') => {
+  const formatedStatus = {
+    I: 'Inativo',
+    P: 'Pendente',
+    N: 'Negado',
+    D: 'Dependente',
+    A: 'Aprovado'
+  }
+  return formatedStatus[status] || ''
+}
+
+export const fromApi = (dataDependent: any): DependentI => {
+  return {
     id: dataDependent.idPaciente,
     name: formatFirstLastName(firstLetterCapitalize(dataDependent.nome)),
     cpf: formatCpf(dataDependent.cpf),
-    plan: dataDependent.plano?.nome,
+    isAHolder: !!dataDependent?.dependentes?.length,
+    status: showStatus(dataDependent?.status),
+    holder: {
+      name: dataDependent?.titular?.nome,
+      cpf: dataDependent?.titular?.cpf,
+    },
   }
-
-  const dependents = dataDependent?.dependentes.map((dep: any) => {
-    const birthDate = parse(dep.dataNascimento, 'dd/MM/yyyy', new Date())
-
-    const { years } = intervalToDuration({
-      start: birthDate,
-      end: new Date(),
-    })
-
-    return {
-      name: formatTextWithLimit(firstLetterCapitalize(dep.nome), 38),
-      cpf: formatCpf(dep.cpf),
-      id: dep.idPaciente,
-      isAMinor: years ? years < 18 : false,
-    }
-  })
-  return { holder, dependents }
 }
+
+
