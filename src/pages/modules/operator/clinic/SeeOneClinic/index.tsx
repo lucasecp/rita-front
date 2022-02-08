@@ -3,7 +3,7 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import EditClinic from './EditClinic'
 import { fromApi } from './adapters'
 import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { useHistory, useLocation } from 'react-router'
 import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes'
 
@@ -23,8 +23,8 @@ const SeeOneClinic = () => {
     const getClinic = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get(
-          `/clinica/{id}?id=${location.state.idClinic}`,
+        const { data } = await apiAdmin.get(
+          `/clinica/${location.state.idClinic}/visualizar`,
         )
 
         const clinicMapped = fromApi(data)

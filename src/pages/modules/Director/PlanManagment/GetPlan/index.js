@@ -6,7 +6,7 @@ import { Container, Content } from './styles'
 import ButtonHeader from './Components/ButtonHeader'
 import Pagination from '@/components/Pagination'
 import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 
@@ -26,7 +26,7 @@ const PlanManagment = () => {
     const getPlans = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient(
+        const { data } = await apiAdmin(
           `/plano${queryApi}${
             queryFilterString(filters) + queryOrderString(order)
           }`,

@@ -14,7 +14,7 @@ import CancelEdting from '../messages/CancelEdting/index'
 import { ErrorsI } from '../Types'
 import scrollOntoField from '../helpers/scrollOntoField'
 import { toApi } from '../adapters'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
 
@@ -90,7 +90,7 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
     try {
       Loading.turnOn()
 
-      await apiPatient.put(
+      await apiAdmin.put(
         `/clinica/${clinicData.personalDatas?.id}`,
         toApi({
           id: clinicData.personalDatas?.id,

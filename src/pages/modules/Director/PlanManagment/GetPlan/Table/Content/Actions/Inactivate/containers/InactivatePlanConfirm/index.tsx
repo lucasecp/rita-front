@@ -1,19 +1,13 @@
-import { useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import OutilineButton from '@/components/Button/Outline';
+import ButtonPrimary from '@/components/Button/Primary';
+import { DefaultLayout } from '@/components/Layout/DefaultLayout';
+import { useModal } from '@/hooks/useModal';
+import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes';
+import { useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
-import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import { Container } from './styles'
-import OutilineButton from '@/components/Button/Outline'
-import ButtonPrimary from '@/components/Button/Primary'
-import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
-import { toast } from '@/styles/components/toastify'
-import {
-  DIRECTOR_PLAN_MANAGMENT,
-  DIRECTOR_SEE_PLAN_MANAGMENT,
-} from '@/routes/constants/namedRoutes/routes'
-import { useModal } from '@/hooks/useModal'
-import { ReasonInactivate } from '../../messages/ReasonInactivate'
+import { ReasonInactivate } from '../../messages/ReasonInactivate';
+import { Container } from './styles';
 
 interface SellableItem {
   id: number

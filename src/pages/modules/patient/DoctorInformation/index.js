@@ -6,7 +6,7 @@ import { Link, useLocation, useHistory } from 'react-router-dom'
 import { Content } from './styles'
 import { ReactComponent as ArrowLeftIcon } from '@/assets/icons/arrow-left2.svg'
 import ClinicItem from './components/ClinicItem'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { fromApi } from './adapters/mapDoctorInfo'
 import { useLoading } from '@/hooks/useLoading'
 
@@ -29,7 +29,7 @@ const DoctorInformation = () => {
     const getDoctor = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get(
+        const { data } = await apiAdmin.get(
           `/medico/${location.state.idDoctor}`,
         )
         setDoctorInfo(fromApi(data))

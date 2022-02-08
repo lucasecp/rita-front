@@ -4,7 +4,7 @@ import CustomMultSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
 import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { toast } from '@/styles/components/toastify'
 import mapDataFromApiToMultSelect from '../../helpers/mapDataFromApiToMultSelect'
 
@@ -26,7 +26,7 @@ export const Services: React.FC<ServicesFilterSellableItems> = ({
     const loadServices = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get('/servico')
+        const { data } = await apiAdmin.get('/servico')
         const dataMapped = mapDataFromApiToMultSelect(data?.dados)
 
         if (!dataMapped.length) {

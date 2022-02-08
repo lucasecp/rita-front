@@ -6,7 +6,7 @@ import { formatPrice } from '@/helpers/formatPrice'
 
 import { DIRECTOR_INACTIVATE_PLAN } from '@/routes/constants/namedRoutes/routes'
 import InactivateIcon from './styles'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 
 interface InactivateProps {
@@ -32,7 +32,7 @@ export const Inactivate: React.FC<InactivateProps> = ({ status, plan }) => {
     try {
       Loading.turnOn()
 
-      const { data } = await apiPatient.patch(`/plano/${plan.id}/inativar`, {
+      const { data } = await apiAdmin.patch(`/plano/${plan.id}/inativar`, {
         params: {
           confirmado: false,
         },

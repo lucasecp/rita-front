@@ -3,7 +3,7 @@ import CustomMultSelect, {
 } from '@/components/Form/MultSelect'
 import formatMultSelectValue from '@/helpers/formatMultSelectValue'
 import { queryFilterString } from '@/helpers/queryString/filter'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 import { verifyTypedFields } from '../helpers/verifyTypedFields'
 
@@ -43,7 +43,7 @@ const SelectCity: React.FC<MultSelectSelectCityProps> = ({
 
     const getCity = async () => {
       try {
-        const { data } = await apiPatient.get(
+        const { data } = await apiAdmin.get(
           `/clinica/municipios?=${queryFilterString(ufValue)}`,
         )
         const dataMapped = mapCity(data)

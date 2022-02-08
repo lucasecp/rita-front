@@ -1,12 +1,12 @@
 import clear from '@/helpers/clear/SpecialCaracteres'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { validateCNPJ } from '@/helpers/validateCNPJ'
 
 export const useCnpjValidate = (): any => {
   const alreadyExist = async (cnpj: string) => {
     let error = false
     try {
-      const { data } = await apiPatient(`/clinica?limit=10&skip=0&cnpj=${cnpj}`)
+      const { data } = await apiAdmin(`/clinica?limit=10&skip=0&cnpj=${cnpj}`)
       if (data.total === 0) {
         error = false
       } else {

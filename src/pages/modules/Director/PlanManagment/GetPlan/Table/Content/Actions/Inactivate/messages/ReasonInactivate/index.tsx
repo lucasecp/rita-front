@@ -12,7 +12,7 @@ import { useLoading } from '@/hooks/useLoading'
 import { toast } from '@/styles/components/toastify'
 
 import { Container } from './styles'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
 interface ReasonInactivateProps {
@@ -45,7 +45,7 @@ export const ReasonInactivate: React.FC<ReasonInactivateProps> = ({ plan }) => {
 
       const {
         data: { mensagem: message },
-      } = await apiPatient.patch(`/plano/${plan.id}/inativar`, null, {
+      } = await apiAdmin.patch(`/plano/${plan.id}/inativar`, null, {
         params: {
           confirmado: true,
           motivo: reason,

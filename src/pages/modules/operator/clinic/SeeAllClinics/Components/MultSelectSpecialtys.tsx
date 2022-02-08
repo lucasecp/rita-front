@@ -2,7 +2,7 @@ import CustomMultSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
 import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { mapSpecialtys } from '../helpers/mapDataFromApiToMultSelect'
 
@@ -24,7 +24,7 @@ const MultSelectSpecialtys: React.FC<MultSelectSpecialtysProps> = ({
     const getSpecialtys = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get('/especialidade')
+        const { data } = await apiAdmin.get('/especialidade')
         const dataMapped = mapSpecialtys(data?.especialidade)
 
         if (!dataMapped.length) {

@@ -6,7 +6,7 @@ import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/rou
 import { ReactComponent as ArrowLeftIcon } from '@/assets/icons/arrow-left2.svg'
 import Header from './components/Header'
 import SpecialtyItem from './components/SpecialtyItem'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { fromApi } from './Adapters'
 import { useLoading } from '@/hooks/useLoading'
 
@@ -29,7 +29,7 @@ const ClinicInformation = () => {
     const getClinic = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get(
+        const { data } = await apiAdmin.get(
           `clinica/${location.state.idClinic}/especialidades/medicos`,
         )
         setClinicInfo(fromApi(data))

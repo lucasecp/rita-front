@@ -5,4 +5,3 @@ function isEmail(email) {
 }
 
 export default isEmail
- 
