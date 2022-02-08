@@ -1,5 +1,5 @@
 import { Select } from '@/components/Form/Select'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 
 interface SelectCityProps {
@@ -32,7 +32,7 @@ const SelectCity: React.FC<SelectCityProps> = ({
 
     const getCity = async () => {
       try {
-        const { data } = await apiPatient.get(`/municipio?idUF=${uf}`)
+        const { data } = await apiAdmin.get(`/municipio?idUF=${uf}`)
         const dataMapped = mapCity(data)
 
         setCityOptions(dataMapped)

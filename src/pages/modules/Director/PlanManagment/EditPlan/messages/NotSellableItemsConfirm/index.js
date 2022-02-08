@@ -15,7 +15,7 @@ import { Container } from './styles'
 import { statusOptions, statusOptionsWithoutInTyping } from './helpers/status'
 import mapDataToMultSelect from './helpers/mapDataToMultSelect'
 import mapToRangeOfUse from './helpers/mapToRangeOfUse'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import {
   DIRECTOR_PLAN_MANAGMENT,
@@ -42,10 +42,10 @@ export const EditPlan = () => {
   const [description, setDescription] = useState(initialPlan?.descricao || '')
   const [servicesOptions, setServicesOptions] = useState([])
   const [services, setServices] = useState(
-    mapDataToMultSelect(initialPlan?.servicos) || []
+    mapDataToMultSelect(initialPlan?.servicos) || [],
   )
   const [rangesOfUse, setRangesOfUse] = useState(
-    mapToRangeOfUse(initialPlan?.abrangencia) || []
+    mapToRangeOfUse(initialPlan?.abrangencia) || [],
   )
   const [status, setStatus] = useState(initialPlan?.status || '')
   const [disabledSaveButton, setDisabledSaveButton] = useState(false)
@@ -59,7 +59,7 @@ export const EditPlan = () => {
     code: '',
     name: '',
     description: '',
-    services: ''
+    services: '',
   }
 
   const [errors, setErrors] = useState(initialErrors)
@@ -68,7 +68,7 @@ export const EditPlan = () => {
     document.title = 'Rita Saúde | Editar Plano'
     const loadServices = async () => {
       try {
-        const { data } = await apiPatient.get('/servico')
+        const { data } = await apiAdmin.get('/servico')
 
         const servicesOptionsMapped = data.dados.map((service) => ({
           id: service.id,
@@ -126,7 +126,7 @@ export const EditPlan = () => {
     setErrors(errorsTemporary)
 
     const hasErrors = Object.values(errorsTemporary).some(
-      (value) => value !== ''
+      (value) => value !== '',
     )
 
     return hasErrors
@@ -138,7 +138,7 @@ export const EditPlan = () => {
 
       const {
         data: { mensagem: codeExists },
-      } = await apiPatient.get(`/plano/codigo/${code}/existe`)
+      } = await apiAdmin.get(`/plano/codigo/${code}/existe`)
 
       if (codeExists === 'true' && code !== plan?.codigo) {
         setErrors({ ...errors, code: 'O código informado já existe!' })
@@ -201,10 +201,10 @@ export const EditPlan = () => {
     const planMapped = planToApi(planObject)
 
     try {
-      const response = await apiPatient.put(
+      const response = await apiAdmin.put(
         `/plano/${initialPlan.idPlano}`,
         planMapped,
-        { params: { confirmado: false } }
+        { params: { confirmado: false } },
       )
       // console.log(response)
 

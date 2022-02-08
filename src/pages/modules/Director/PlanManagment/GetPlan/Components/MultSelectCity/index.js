@@ -2,7 +2,7 @@ import CustomMultSelect from '@/components/Form/MultSelect'
 import formatMultSelectValue from '@/helpers/formatMultSelectValue'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 import { mapCity } from '../../helpers/mapDataFromApiToMultSelect'
 import { verifyTypedFields } from '../../helpers/verifyTypedFields'
@@ -27,7 +27,7 @@ const MultSelectCity = ({ setCity, city, uf }) => {
     const getCity = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get(
+        const { data } = await apiAdmin.get(
           `/municipio?${queryFilterString(ufValue)}`,
         )
         const dataMapped = mapCity(data)

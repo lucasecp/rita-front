@@ -1,6 +1,6 @@
 import CustomMultSelect from '@/components/Form/MultSelect'
 import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 import mapDataFromApiToMultSelect from '../../helpers/mapDataFromApiToMultSelect'
 
@@ -12,7 +12,7 @@ const MultSelectRegional = ({ setRegional, regional }) => {
     const getRegional = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get('/regional')
+        const { data } = await apiAdmin.get('/regional')
         const dataMapped = mapDataFromApiToMultSelect(data?.dados)
 
         if (!dataMapped.length) {

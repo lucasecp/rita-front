@@ -6,7 +6,7 @@ import { Container, Content } from './styles'
 
 import Pagination from '@/components/Pagination'
 import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 import { fromApi } from './adapters'
@@ -35,7 +35,7 @@ const SeeAllClinics: React.FC = () => {
 
       try {
         Loading.turnOn()
-        const { data } = await apiPatient(
+        const { data } = await apiAdmin(
           `/clinica${queryApi}${
             queryFilterString(filters) + queryOrderString(ordertoApi)
           }`,

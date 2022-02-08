@@ -20,7 +20,7 @@ import { FormItem } from './FormItem'
 import { PlaceOfSale } from '../PlaceOfSale'
 
 import { Container, ArrowLeft } from './styles'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 
 interface ResponseLocation {
   plan: {
@@ -110,7 +110,7 @@ export const SellableItemsDisabled: React.FC = () => {
         Loading.turnOn()
 
         const responseSellableItem =
-          await apiPatient.get<ResponseAPISellableItem>(
+          await apiAdmin.get<ResponseAPISellableItem>(
             `/itens-vendaveis/${idItem}`,
             {
               params: {
@@ -120,7 +120,7 @@ export const SellableItemsDisabled: React.FC = () => {
             },
           )
 
-        const responsePlan = await apiPatient.get<ResponseAPIPlan>(
+        const responsePlan = await apiAdmin.get<ResponseAPIPlan>(
           `/plano/${idPlan}`,
         )
 
