@@ -18,7 +18,7 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi }) => {
   useEffect(() => {
     setDataToApi({
       code,
-      requireSubscription: !!requireSubscription,
+      requireSubscription,
       description,
     })
   }, [code, requireSubscription, description])

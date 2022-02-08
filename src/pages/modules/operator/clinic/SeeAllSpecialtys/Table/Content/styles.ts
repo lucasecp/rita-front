@@ -52,9 +52,7 @@ export const Container = styled.div`
   }
 `
 
-export const Item = styled.li`
-  min-width: 400px !important;
-`
+
 
 export const Status = styled.li<StatusTypeProps>`
   > span {

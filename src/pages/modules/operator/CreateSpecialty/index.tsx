@@ -4,7 +4,7 @@ import Form from './Form'
 import { ErrorsI, DataReceivedI } from './types'
 import ButtonPrimary from '@/components/Button/Primary'
 import OutlineButton from '@/components/Button/Outline'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { OPERATOR_SEE_ALL_SPECIALTYS } from '@/routes/constants/namedRoutes/routes'
 import { useHistory } from 'react-router'
@@ -38,21 +38,35 @@ const CreateSpecialty: React.FC = () => {
     if (hasError()) {
       return
     }
-    const data = toApi(dataToApi)
+
+    const data = toApi({
+      code: dataToApi.code,
+      requireSubscription: !!Number(dataToApi.requireSubscription),
+      description: dataToApi.description,
+    })
 
     try {
       Loading.turnOn()
-      await apiPatient.post('/especialidade', data)
+
+      await apiAdmin.post('/especialidade', data)
+
       toast.success('Cadastro realizado com sucesso.')
       history.push(OPERATOR_SEE_ALL_SPECIALTYS)
     } catch (error) {
+      if (error?.response?.status === 409) {
+        toast.error(
+          error?.response?.data?.message || 'Erro ao incluir especialidade.',
+        )
+      }
     } finally {
       Loading.turnOff()
     }
   }
 
   const onCancel = () => {
-    if (Object.values(dataToApi).length) {
+    const someFieldsWasChanged = Object.values(dataToApi).some((data) => data)
+
+    if (someFieldsWasChanged) {
       return showMessage(CancelCreating)
     }
 

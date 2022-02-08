@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Item, Status } from './styles'
+import { Container, Status } from './styles'
 import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../types'
 import { useHistory } from 'react-router-dom'
@@ -19,11 +19,11 @@ const Content: React.FC<ContentProps> = ({ specialtys }) => {
           // }
         >
           <li>{specialtys.code}</li>
-          <Item>
+          <li>
             <CustomTooltip label={specialtys.name}>
               <div>{specialtys.name}</div>
             </CustomTooltip>
-          </Item>
+          </li>
           <Status type={specialtys.subscriptionRequired}>
             <span>{specialtys.subscriptionRequired}</span>
           </Status>
