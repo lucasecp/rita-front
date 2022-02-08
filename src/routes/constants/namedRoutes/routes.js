@@ -20,6 +20,7 @@ export const OPERATOR_REPORTS_AUTHORIZATION = '/relatorios/autorizacoes'
 export const OPERATOR_SEE_ALL_CLINICS = '/clinicas'
 export const OPERATOR_SEE_ONE_CLINIC = '/clinicas/ver-clinica'
 export const OPERATOR_SEE_ALL_SPECIALTYS = '/especialidades'
+export const OPERATOR_CREATE_SPRECIALTY = '/especialidades/criar'
 export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 export const OPERATOR_ADD_DEPENDENT = '/dependentes/associar'
 
