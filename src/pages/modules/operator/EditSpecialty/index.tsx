@@ -1,5 +1,5 @@
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from './Form'
 import { ErrorsI, DataReceivedI } from './types'
 import ButtonPrimary from '@/components/Button/Primary'
@@ -13,20 +13,48 @@ import { useModal } from '@/hooks/useModal'
 import CancelCreating from './messages/CancelCreating'
 import { Content } from './styles'
 import { toApi } from './adapters'
+import { useLocation } from 'react-router-dom'
 
-const CreateSpecialty: React.FC = () => {
+const EditSpecialty: React.FC = () => {
   const [errors, setErrors] = useState<ErrorsI>({})
+  const [dataFromApi, setDataFromApi] = useState<any>({})
+  const [someFieldsWasChanged, setSomeFieldsWasChanged] = useState(false)
   const [dataToApi, setSetDataToApi] = useState<DataReceivedI>({})
   const { Loading } = useLoading()
   const history = useHistory()
   const { showMessage } = useModal()
+  const location = useLocation()
+
+  const specialtyInfo = location.state?.specialtyInfo
+
+  useEffect(() => {
+    if (!specialtyInfo) {
+      return history.push(OPERATOR_SEE_ALL_SPECIALTYS)
+    }
+    setDataFromApi({
+      code: specialtyInfo.code,
+      requireSubscription: specialtyInfo.subscriptionRequired ? 1 : 0,
+      description: specialtyInfo.name,
+    })
+  }, [])
+
+  useEffect(() => {
+    for (const field in dataToApi) {
+      if (dataToApi[field] !== dataFromApi[field]) {
+        setSomeFieldsWasChanged(true)
+        break
+      } else {
+        setSomeFieldsWasChanged(false)
+      }
+    }
+  }, [dataToApi])
 
   const hasError = () => {
     let error = false
     setErrors({})
 
     for (const field in dataToApi) {
-      if (!dataToApi[field]) {
+      if (!dataToApi[field] && dataToApi[field] !== 0) {
         setErrors((errors) => ({ ...errors, [field]: 'Campo Obrigatório.' }))
         error = true
       }
@@ -48,7 +76,7 @@ const CreateSpecialty: React.FC = () => {
     try {
       Loading.turnOn()
 
-      await apiAdmin.post('/especialidade', data)
+      await apiAdmin.put(`/especialidade/${specialtyInfo?.id}/editar`, data)
 
       toast.success('Cadastro realizado com sucesso.')
       history.push(OPERATOR_SEE_ALL_SPECIALTYS)
@@ -64,8 +92,6 @@ const CreateSpecialty: React.FC = () => {
   }
 
   const onCancel = () => {
-    const someFieldsWasChanged = Object.values(dataToApi).some((data) => data)
-
     if (someFieldsWasChanged) {
       return showMessage(CancelCreating)
     }
@@ -74,9 +100,13 @@ const CreateSpecialty: React.FC = () => {
   }
 
   return (
-    <DefaultLayout title="Especialidades - Inclusão">
+    <DefaultLayout title="Especialidades - Edição">
       <Content>
-        <Form errors={errors} setDataToApi={setSetDataToApi} />
+        <Form
+          errors={errors}
+          setDataToApi={setSetDataToApi}
+          dataFromApi={dataFromApi}
+        />
         <footer>
           <OutlineButton onClick={onCancel}>Cancelar</OutlineButton>
           <ButtonPrimary
@@ -91,4 +121,4 @@ const CreateSpecialty: React.FC = () => {
   )
 }
 
-export default CreateSpecialty
+export default EditSpecialty

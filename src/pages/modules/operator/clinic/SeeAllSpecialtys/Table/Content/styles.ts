@@ -2,7 +2,7 @@ import colors from '@/styles/colors'
 import styled, { css } from 'styled-components'
 
 interface StatusTypeProps {
-  type: string
+  type: number
 }
 
 export const Container = styled.div`
@@ -14,7 +14,6 @@ export const Container = styled.div`
     padding: 25px 0;
     justify-content: space-between;
     position: relative;
-    cursor: pointer;
     &::after {
       content: '';
       height: 1px;
@@ -35,6 +34,10 @@ export const Container = styled.div`
     margin-right: 24px;
     min-width: 217px;
     max-width: 217px;
+    ::marker{
+      display: none;
+      color: transparent
+    }
     > div {
       width: fit-content;
     }
@@ -52,8 +55,6 @@ export const Container = styled.div`
   }
 `
 
-
-
 export const Status = styled.li<StatusTypeProps>`
   > span {
     font-size: 16px;
@@ -64,19 +65,17 @@ export const Status = styled.li<StatusTypeProps>`
   }
 
   ${({ type }) =>
-    type === 'Sim' &&
-    css`
-      > span {
-        background: ${colors.green.light};
-        color: ${colors.green.dark};
-      }
-    `}
-  ${({ type }) =>
-    type === 'Não' &&
-    css`
-      > span {
-        background: ${colors.orange.middleDark};
-        color: ${colors.purple.background.light};
-      }
-    `}
+    type
+      ? css`
+          > span {
+            background: ${colors.green.light};
+            color: ${colors.green.dark};
+          }
+        `
+      : css`
+          > span {
+            background: ${colors.orange.middleDark};
+            color: ${colors.purple.background.light};
+          }
+        `}}
 `

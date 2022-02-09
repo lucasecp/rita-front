@@ -12,7 +12,7 @@ import { useHistory } from 'react-router'
 import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes'
 import CancelEdting from '../messages/CancelEdting/index'
 import { ErrorsI } from '../Types'
-import scrollOntoField from '../helpers/scrollOntoField'
+import { scrollOntoFieldError } from '../../../../../../helpers/scrollOntoFieldError'
 import { toApi } from '../adapters'
 import apiAdmin from '@/services/apiAdmin'
 import { toast } from '@/styles/components/toastify'
@@ -31,7 +31,6 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
   const [address, setAddress] = useState(clinicData.address || {})
   const [fieldWasChanged, setFieldWasChanged] = useState(false)
   const [errors, setErrors] = useState<ErrorsI>({})
-  const [clickOnSave, setClickOnSave] = useState(false)
 
   const { showSimple, showMessage } = useModal()
   const { Loading } = useLoading()
@@ -75,7 +74,8 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
   }
 
   const onSave = async () => {
-    setClickOnSave(!clickOnSave)
+    scrollOntoFieldError(errors)
+
     if (
       hasErrorOnFields({
         ...personalDatas,
@@ -110,17 +110,6 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
       Loading.turnOff()
     }
   }
-
-  useEffect(() => {
-    const newArray = []
-    for (const error in errors) {
-      if (errors[error]) {
-        newArray.push(error)
-      }
-    }
-
-    scrollOntoField(newArray[0])
-  }, [clickOnSave])
 
   const onCancel = () => {
     if (fieldWasChanged) {
