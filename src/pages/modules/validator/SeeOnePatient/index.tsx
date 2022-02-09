@@ -6,6 +6,7 @@ import { differenceInYears, parse } from 'date-fns'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
 import { PersonExpandable } from './components/PersonExpandable'
+import { DependentExpandable } from './components/DependentExpandable'
 import { AddressSeeOnePatient } from './components/AddressSeeOnePatient'
 import { DocumentsSeeOnePatient } from './components/DocumentsSeeOnePatient'
 import { ValidationSeeOnePatient } from './components/ValidationSeeOnePatient'
@@ -208,13 +209,12 @@ export const SeeOnePatient: React.FC = () => {
         <PersonExpandable
           title="Dados cadastrais do titular"
           personData={patientData}
-          holder
           defaultExpanded={!dependent}
         />
         {dependent && (
-          <PersonExpandable
+          <DependentExpandable
             title="Dados cadastrais para análise"
-            personData={dependent}
+            dependentData={dependent}
             defaultExpanded
           />
         )}
