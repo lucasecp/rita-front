@@ -41,5 +41,5 @@ export interface ErrorsI {
   status?: string
   specialtys?: ''
   uf?: string
-  [x: string]: any
+  [x: string]: string | undefined
 }
