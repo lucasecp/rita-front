@@ -68,6 +68,7 @@ const EditSpecialty: React.FC = () => {
     }
 
     const data = toApi({
+      id: specialtyInfo?.id,
       code: dataToApi.code,
       requireSubscription: !!Number(dataToApi.requireSubscription),
       description: dataToApi.description,
