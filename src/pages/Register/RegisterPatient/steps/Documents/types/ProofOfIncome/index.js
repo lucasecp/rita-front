@@ -2,7 +2,7 @@ import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
-import { AccordionContainer } from '../styles'
+import { Container, AccordionContainer } from '../styles'
 import InstructionsIncome from './Instructions'
 import SendedFile from '../../components/SendedFile'
 
@@ -15,7 +15,7 @@ const ProofOfIncome = ({
   error,
 }) => {
   return (
-    <>
+    <Container>
       <AccordionContainer
         square={true}
         defaultExpanded={false}
@@ -45,7 +45,7 @@ const ProofOfIncome = ({
           )}
         </AccordionDetails>
       </AccordionContainer>
-    </>
+    </Container>
   )
 }
 

@@ -1,5 +1,6 @@
-import styled, { css } from 'styled-components'
+import ButtonPrimary from '@/components/Button/Primary'
 import colors from '@/styles/colors'
+import styled, { css } from 'styled-components'
 
 interface RegistrationDataStylesProps {
   active: boolean
@@ -22,22 +23,11 @@ export const Container = styled.div<RegistrationDataStylesProps>`
 
     > h1 {
       font-size: 32px;
+      font-style: normal;
       font-weight: 500;
       line-height: 40px;
       color: ${colors.gray.dark};
-      margin-bottom: 40px;
-    }
-
-    > section {
-      margin: 24px 0;
-
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-
-      @media (max-width: 767px) {
-        grid-template-columns: 1fr;
-      }
+      margin-bottom: 32px;
     }
   }
 
@@ -62,13 +52,4 @@ export const Container = styled.div<RegistrationDataStylesProps>`
       }
     }
   }
-`
-
-export const ButtonLinkBlue = styled.button`
-  background-color: transparent;
-  color: blue;
-  text-decoration: underline;
-  border: none;
-  padding: 0;
-  margin: 0 3px;
 `

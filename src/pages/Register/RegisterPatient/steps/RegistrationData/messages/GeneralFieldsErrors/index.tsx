@@ -1,10 +1,10 @@
 import React from 'react'
-import { Container, ButtonGroup } from '../../style'
+import { Container } from './styles'
 import warning from '@/assets/icons/alerts/warning.svg'
 import OutlineButton from '@/components/Button/Outline'
 import { useModal } from '@/hooks/useModal'
 
-const FieldsErrorMessage = () => {
+export const GeneralFieldsErrors: React.FC = () => {
   const { closeModal } = useModal()
 
   return (
@@ -14,11 +14,9 @@ const FieldsErrorMessage = () => {
         Algumas informações estão incorretas. Preencha os campos em vermelho
         para continuar
       </p>
-      <ButtonGroup>
-        <OutlineButton onClick={closeModal}>Ok</OutlineButton>
-      </ButtonGroup>
+      <footer>
+        <OutlineButton onClick={closeModal}>OK</OutlineButton>
+      </footer>
     </Container>
   )
 }
-
-export default FieldsErrorMessage

@@ -3,17 +3,17 @@ import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 
-import { Container, BtnGroup, BtnPrev, CustomBtn } from './styles'
+import { Container } from './styles'
 import { UF } from './static'
 import { validateCep } from '../../helpers/validator'
+import { useRegisterPatient } from '../../hooks'
+import ButtonLink from '@/components/Button/Link'
+import ButtonPrimary from '@/components/Button/Primary'
 
-export const Address = ({
-  setData,
-  dataClientSabin,
-  newData,
-  setStep,
-  step,
-}) => {
+export const Address = ({ isActive }) => {
+  const { initialRegisterData, setAddress, previousStep, nextStep } =
+    useRegisterPatient()
+
   const [cep, setCep] = useState('')
   const [uf, setUf] = useState('')
   const [city, setCity] = useState('')
@@ -24,21 +24,14 @@ export const Address = ({
   const [errors, setErrors] = useState({})
 
   useEffect(() => {
-    const addressFromSabinCard = dataClientSabin.endereco
-    const newDataAddress = newData.endereco
-
-    setCep(newDataAddress?.cep || addressFromSabinCard?.cep || '')
-    setUf(newDataAddress?.uf || addressFromSabinCard?.uf || '')
-    setCity(newDataAddress?.cidade || addressFromSabinCard?.cidade || '')
-    setAdress(
-      newDataAddress?.logradouro || addressFromSabinCard?.logradouro || '',
-    )
-    setNumberHome(newDataAddress?.numero || addressFromSabinCard?.numero || '')
-    setDistrict(newDataAddress?.bairro || addressFromSabinCard?.bairro || '')
-    setComplement(
-      newDataAddress?.complemento || addressFromSabinCard?.complemento || '',
-    )
-  }, [])
+    setCep(initialRegisterData?.address?.cep || '')
+    setUf(initialRegisterData?.address?.uf || '')
+    setCity(initialRegisterData?.address?.city || '')
+    setAdress(initialRegisterData?.address?.address || '')
+    setNumberHome(initialRegisterData?.address?.numberHome || '')
+    setDistrict(initialRegisterData?.address?.district || '')
+    setComplement(initialRegisterData?.address?.complement || '')
+  }, [initialRegisterData])
 
   useEffect(() => {
     const dataObj = {
@@ -50,7 +43,8 @@ export const Address = ({
       cep,
       complemento: complement,
     }
-    setData((data) => {
+
+    setAddress((data) => {
       return { ...data, endereco: dataObj }
     })
   }, [address, cep, numberHome, city, complement, uf, district])
@@ -59,13 +53,13 @@ export const Address = ({
     const hasErrors = Object.values(errors).some((value) => value !== '')
 
     if (!hasErrors) {
-      setStep(step + 1)
+      nextStep()
     }
   }
 
   return (
-    <>
-      <Container>
+    <Container active={isActive}>
+      <div>
         <h1>Endereço</h1>
         <section>
           <InputMask
@@ -125,11 +119,12 @@ export const Address = ({
             maxLength={100}
           />
         </section>
-      </Container>
-      <BtnGroup>
-        <BtnPrev onClick={() => setStep(step - 1)}>Etapa Anterior</BtnPrev>
-        <CustomBtn onClick={onNextStep}>Próxima Etapa</CustomBtn>
-      </BtnGroup>
-    </>
+      </div>
+
+      <footer>
+        <ButtonLink onClick={previousStep}>Etapa Anterior</ButtonLink>
+        <ButtonPrimary onClick={onNextStep}>Próxima Etapa</ButtonPrimary>
+      </footer>
+    </Container>
   )
 }

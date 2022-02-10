@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { RadioGroup } from '@material-ui/core'
 
-import RegisterLayout from '@/components/Layout/RegisterLayout'
+import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 import InputText from '@/components/Form/InputText'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
@@ -10,15 +10,15 @@ import ButtonPrimary from '@/components/Button/Primary'
 import RadioButton from '@/styles/components/RadioButton'
 
 import { Content } from './styles'
-import InsertToken from '../messages/InsertToken'
-import DataDontMatch from '../messages/error/DataDontMatch'
-import Denied from '../messages/error/Danied'
+import InsertToken from './messages/InsertToken'
+import DataDontMatch from './messages/error/DataDontMatch'
+import Denied from './messages/error/Danied'
 import isEmail from '@/helpers/isEmail'
 import apiPatient from '@/services/apiPatient'
 import InputMask from '@/components/Form/InputMask'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
-import ContactUs from '../messages/error/ContactUs'
+import ContactUs from './messages/error/ContactUs'
 import { REGISTER_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 const MESSAGEAPI = {
@@ -26,6 +26,7 @@ const MESSAGEAPI = {
   DENIED: 'Usuario Bloqueado',
   INVALID_DATA: 'Dados inválido',
 }
+
 function PreRegister() {
   const history = useHistory()
   const location = useLocation()

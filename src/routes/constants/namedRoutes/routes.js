@@ -61,7 +61,9 @@ export const PATIENT_ADD_DOCUMENT_DEPENDENT =
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'
 export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'
-export const REGISTER_PATIENT = '/cadastro/paciente'
+
+export const REGISTER_PATIENT = '/cadastro/paciente/'
+export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const TESTE = '/teste'
 

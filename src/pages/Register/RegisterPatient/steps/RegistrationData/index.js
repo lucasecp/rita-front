@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Checkbox from '@/components/Form/Checkbox'
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
-import { Container, BtnTerms, CustomBtn } from './styles'
+import { Container, ButtonLinkBlue } from './styles'
 import Terms from './messages/Terms'
 import {
   validateBirthdate,
@@ -14,17 +14,16 @@ import {
 } from '../../helpers/validator'
 import { validateConfEmail, validateTerms } from './validateFields'
 import { useModal } from '@/hooks/useModal'
-import { BtnGroup } from '@/pages/modules/validator/AnalyzePatients/Filter/styles'
-import FieldsErrorMessage from '../../messages/Error/FieldsErrorMessage'
+import { GeneralFieldsErrors } from './messages/GeneralFieldsErrors'
 
-const RegistrationData = ({
-  dataClientSabin,
-  newData,
-  setStep,
-  setData,
-  term,
-  setTerms,
-}) => {
+import { useRegisterPatient } from '../../hooks'
+import ButtonPrimary from '@/components/Button/Primary'
+
+export const RegistrationData = ({ isActive }) => {
+  const { showMessage } = useModal()
+  const { initialRegisterData, setRegistrationData, nextStep, isActiveStep } =
+    useRegisterPatient()
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [confirmEmail, setConfirmEmail] = useState('')
@@ -32,19 +31,18 @@ const RegistrationData = ({
   const [birthdate, setBirthdate] = useState('')
   const [phone, setPhone] = useState('')
   const [cpf, setCpf] = useState('')
+  const [terms, setTerms] = useState(false)
   const [errors, setErrors] = useState({})
 
-  const { showMessage } = useModal()
-
   useEffect(() => {
-    setName(newData.nome || newData.nome || dataClientSabin.nome || '')
-    setEmail(newData.email || dataClientSabin.email || '')
-    setConfirmEmail(newData.email || dataClientSabin.email || '')
-    setGender(newData.sexo || dataClientSabin.sexo || '')
-    setBirthdate(newData.dataNascimento || dataClientSabin.dataNascimento || '')
-    setPhone(newData.telefone || dataClientSabin.telefone || '')
-    setCpf(newData.cpf || dataClientSabin.cpf || '')
-  }, [dataClientSabin])
+    setName(initialRegisterData?.registrationData?.name || '')
+    setEmail(initialRegisterData?.registrationData?.email || '')
+    setConfirmEmail(initialRegisterData?.registrationData?.email || '')
+    setGender(initialRegisterData?.registrationData?.gender || '')
+    setBirthdate(initialRegisterData?.registrationData?.birthdate || '')
+    setPhone(initialRegisterData?.registrationData?.phone || '')
+    setCpf(initialRegisterData?.registrationData?.cpf || '')
+  }, [initialRegisterData])
 
   const checkConfirmEmail = () => {
     const previousErrorsAndErrorsInConfirmEmail = {
@@ -81,12 +79,11 @@ const RegistrationData = ({
       ...validateGender(gender),
       ...validateBirthdate(birthdate),
       ...validatePhone(phone),
-      ...validateTerms(term),
+      ...validateTerms(terms),
     }
 
     setErrors(permit)
 
-    // Se não tiver erro, ou se o titular for menor que 18 anos
     const permitBirth =
       !permit.birthdate ||
       permit.birthdate === 'O titular deve ser maior de 18 anos'
@@ -99,35 +96,27 @@ const RegistrationData = ({
       !permit.terms &&
       !permit.phone
     ) {
-      setData({
-        nome: name,
-        sexo: gender,
-        dataNascimento: birthdate,
-        telefone: phone,
-        email: email,
-        cpf: cpf,
+      setRegistrationData({
+        name,
+        gender,
+        birthdate,
+        phone,
+        email,
+        cpf,
       })
-      setStep(2)
+      nextStep()
     } else {
-      showMessage(FieldsErrorMessage)
+      showMessage(GeneralFieldsErrors)
     }
   }
 
-  const labelTerms = (
-    <>
-      Li e aceito os
-      <BtnTerms
-        onClick={() => showMessage(Terms, { setTerms, setErrors }, true)}
-      >
-        Termos de uso{' '}
-      </BtnTerms>{' '}
-      da plataforma Rita.
-    </>
-  )
+  const onSeeTermsOfUse = () => {
+    showMessage(Terms, { setTerms, setErrors }, true)
+  }
 
   return (
-    <>
-      <Container>
+    <Container active={isActive}>
+      <div>
         <h1>Dados Cadastrais</h1>
         <InputText
           label="Nome Completo*:"
@@ -197,27 +186,30 @@ const RegistrationData = ({
             value={cpf}
             setValue={setCpf}
             hasError={errors.cpf}
-            disabled={dataClientSabin.cpf}
+            disabled={initialRegisterData?.registrationData?.cpf}
             msgError={errors.cpf}
           />
         </section>
         <Checkbox
           id="terms"
-          label={labelTerms}
+          label={
+            <>
+              Li e aceito os
+              <ButtonLinkBlue onClick={onSeeTermsOfUse}>
+                Termos de uso
+              </ButtonLinkBlue>
+              da plataforma Rita.
+            </>
+          }
           hasError={errors.terms}
-          checked={term}
+          checked={terms}
           setValue={setTerms}
           msgError={errors.terms}
         />
-        {/* {!hasPermitionToNext() && (
-        <MsgError className="mt-3">Todos os campos são obrigatórios.</MsgError>
-      )} */}
-      </Container>
-      <BtnGroup>
-        <CustomBtn onClick={checkFields}>Próxima Etapa</CustomBtn>
-      </BtnGroup>
-    </>
+      </div>
+      <footer>
+        <ButtonPrimary onClick={checkFields}>Próxima Etapa</ButtonPrimary>
+      </footer>
+    </Container>
   )
 }
-
-export default RegistrationData

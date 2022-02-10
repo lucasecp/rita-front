@@ -27,8 +27,8 @@ const CpfAlreadyExistsError =
 const Form = ({
   editDep,
   id,
-  setAllDeps,
-  allDeps,
+  setAllDependents,
+  allDependents,
   action,
   clientCpf,
   dataClientSabin,
@@ -45,11 +45,11 @@ const Form = ({
   const [errors, setErrors] = useState({})
 
   const updateData = () => {
-    setName(editDep.nome || '')
+    setName(editDep.name || '')
     setEmail(editDep.email || '')
-    setGender(editDep.sexo || '')
-    setBirthdate(formatBirthdate(editDep.dataNascimento) || '')
-    setPhone(editDep.telefone || '')
+    setGender(editDep.gender || '')
+    setBirthdate(formatBirthdate(editDep.birthdate) || '')
+    setPhone(editDep.phone || '')
     setCpf(editDep.cpf || '')
   }
 
@@ -58,18 +58,18 @@ const Form = ({
   }, [editDep])
 
   const dataBaseForm = {
-    nome: name,
-    email: email,
-    sexo: gender,
-    dataNascimento: birthdate,
-    telefone: phone,
+    name,
+    email,
+    gender,
+    birthdate,
+    phone,
     cpf,
   }
 
   const verifyNewPatinet = () => {
-    if (dataClientSabin?.idPaciente && action === 'edit') {
+    if (dataClientSabin?.id && action === 'edit') {
       return {
-        ...dataClientSabin?.dependentes[id],
+        ...dataClientSabin?.dependents[id],
         ...dataBaseForm,
       }
     }
@@ -107,7 +107,7 @@ const Form = ({
       })
     }
     const newDep = [{ ...verifyNewPatinet() }]
-    setAllDeps((data) => [...data, ...newDep])
+    setAllDependents((data) => [...data, ...newDep])
     closeModal()
   }
 
@@ -120,11 +120,11 @@ const Form = ({
       })
     }
 
-    const depsUpdated = allDeps.map((dep, index) => {
+    const depsUpdated = allDependents.map((dep, index) => {
       if (id === index) return { ...verifyNewPatinet() }
       return dep
     })
-    setAllDeps(depsUpdated)
+    setAllDependents(depsUpdated)
     closeModal()
   }
 
@@ -155,13 +155,13 @@ const Form = ({
             onBlur={() =>
               setErrors({
                 ...errors,
-                ...validateDepCpf(cpf, allDeps, clientCpf, action),
+                ...validateDepCpf(cpf, allDependents, clientCpf, action),
               })
             }
             onKeyUp={() =>
               setErrors({
                 ...errors,
-                ...validateDepCpf(cpf, allDeps, clientCpf, action),
+                ...validateDepCpf(cpf, allDependents, clientCpf, action),
               })
             }
             msgError={errors.cpf}
