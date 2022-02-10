@@ -10,6 +10,7 @@ export const Content = styled.div`
   line-height: 20px;
   color: #9146ff;
   align-items: center;
+  text-align: center;
   justify-content: flex-start;
   min-width: 150px;
   margin-right: 24px;
@@ -35,16 +36,17 @@ export const Content = styled.div`
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
+    text-align: center;
     /* max-width: 80px; */
   }
 `
 export const Container = styled.header`
   background: ${colors.purple.background.middle};
-  min-width: fit-content;
+  /* min-width: fit-content; */
   padding: 0 32px;
 
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 40% 40% 20%;
 `
 
 export const ArrowUp = styled.button`
