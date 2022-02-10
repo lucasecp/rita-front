@@ -49,6 +49,14 @@ export const SeeOneProfile: React.FC = () => {
           '/grupo-permissao',
         )
 
+        for (const element of profilesAndPermissions.dados) {
+          element.id = element.id + 'F'
+        }
+
+        // profilesAndPermissions.array.forEach((element) => {
+        //   element.id = element.id + 2
+        // })
+
         const profilesAndPermissionsMapped = profileAndPermissionsFromApi(
           profilesAndPermissions,
         )

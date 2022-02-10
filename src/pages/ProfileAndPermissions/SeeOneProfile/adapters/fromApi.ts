@@ -22,13 +22,18 @@ export const profilesAndPermissionsWithCheckedFromApi = (
   oneProfileAndItsPermissions,
 ) => {
   // oneProfileAndItsPermissions.forEach(profile)
-  console.log(oneProfileAndItsPermissions)
+  console.log(profilesAndPermissionsMapped)
 
   return profilesAndPermissionsMapped.map((profile) => ({
     ...profile,
-    expanded: true,
+    teste: 'teste',
+    // expanded: true,
     subChild: profile.subChild.map((permission) => {
-      console.log(oneProfileAndItsPermissions.permissoes, 'permission')
+      console.log(
+        oneProfileAndItsPermissions.permissoes.some(
+          (oneProfilePermission) => oneProfilePermission.id === permission.id,
+        ),
+      )
       return {
         ...permission,
         isChecked: oneProfileAndItsPermissions.permissoes.some(
