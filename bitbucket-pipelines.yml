@@ -4,6 +4,9 @@ definitions:
     - step: &codecommit_mirror
         name: Default mirror
         script:
+          - node --version
+          - nvm install node
+          - node --version
           - npm i --save-dev @types/node
           - npm install typescript ts-node
           - npm install -D tslib @types/node

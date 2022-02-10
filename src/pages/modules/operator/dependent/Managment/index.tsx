@@ -12,7 +12,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import OutlineButton from '@/components/Button/Outline'
 import { DataDependentI } from './types/index'
 import HolderInfo from './Header/HolderInfo'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { OPERATOR_ADD_DEPENDENT } from '@/routes/constants/namedRoutes/routes'
 
 const Managment: React.FC = () => {
@@ -26,23 +26,14 @@ const Managment: React.FC = () => {
   const { Loading } = useLoading()
   const [step, setStep] = useState(1)
   const history = useHistory()
-
-  useEffect(() => {
-    document.title = 'Rita Saúde | Informações da Clínica'
-  }, [])
+  const location = useLocation()
+  const cpfFromOtherPage = location.state?.cpf
 
   const getDependents = async () => {
-    const error = await validatorCpf(cpf)
-
-    if (error) {
-      return setErrors(error)
-    }
-    setErrors('')
-
     try {
       Loading.turnOn()
       const { data } = await apiPatient.get(
-        `/paciente/cpf?cpf=${clearSpecialCaracter(cpf)}`,
+        `/paciente/cpf?cpf=${clearSpecialCaracter(cpfFromOtherPage || cpf)}`,
       )
       setDependents(fromApi(data))
       setStep(2)
@@ -51,6 +42,24 @@ const Managment: React.FC = () => {
       Loading.turnOff()
     }
   }
+
+  const onAddDependent = async () => {
+    const error = await validatorCpf(cpf)
+
+    if (error) {
+      return setErrors(error)
+    }
+    setErrors('')
+    getDependents()
+  }
+
+  useEffect(() => {
+    document.title = 'Rita Saúde | Informações da Clínica'
+    if (cpfFromOtherPage) {
+      setStep(2)
+      getDependents()
+    }
+  }, [cpfFromOtherPage])
 
   useEffect(() => {
     if (step === 3) {
@@ -71,7 +80,7 @@ const Managment: React.FC = () => {
         />
 
         <footer>
-          <ButtonPrimary onClick={getDependents} hidden={step !== 1}>
+          <ButtonPrimary onClick={onAddDependent} hidden={step !== 1}>
             Filtrar Resultados
           </ButtonPrimary>
 

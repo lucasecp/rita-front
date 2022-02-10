@@ -1,6 +1,6 @@
 import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 
 interface SelectUfProps {
   setUf: (value: string) => void
@@ -27,7 +27,7 @@ const SelectUf: React.FC<SelectUfProps> = ({
   useEffect(() => {
     const getUf = async () => {
       try {
-        const { data } = await apiPatient.get(`/uf`)
+        const { data } = await apiAdmin.get(`/uf`)
         const dataMapped = mapUf(data)
 
         setUfOptions(dataMapped)

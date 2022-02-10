@@ -32,7 +32,7 @@ export const BtnGroup = styled.div`
   @media (max-width: 540px) {
     flex-direction: column;
     > button:first-child {
-      margin: 0;
+      margin: 0 0 24px 0;
     }
   }
   @media (max-width: 1400px) {

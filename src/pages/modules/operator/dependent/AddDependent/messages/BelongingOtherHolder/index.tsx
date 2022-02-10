@@ -5,10 +5,25 @@ import WarningIcon from '@/assets/icons/alerts/warning.svg'
 import { Container, ButtonGroup } from './styles'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
-import AlreadyIsAHolder from '../AlreadyIsAHolder'
+import { DependentI, HolderI } from '../../types/index'
+import { useConnectDependent } from '../../hooks/useConnectDependent'
 
-const BelongingOtherHolder: React.FC = () => {
-  const { closeModal, showMessage } = useModal()
+interface BelongingOtherHolderProps {
+  holder: HolderI
+  dependent: DependentI
+}
+
+const BelongingOtherHolder: React.FC<BelongingOtherHolderProps> = ({
+  holder,
+  dependent,
+}) => {
+  const { closeModal } = useModal()
+  const { connectDependent } = useConnectDependent()
+
+  const onClickYes = () => {
+    connectDependent({ id: holder.id, cpf: holder.cpf }, dependent.id)
+    closeModal()
+  }
 
   return (
     <Container>
@@ -16,15 +31,17 @@ const BelongingOtherHolder: React.FC = () => {
 
       <p>CPF informado já associado a outro titular.</p>
       <p>Confirma a associação do dependente</p>
-      <span>Luísa Castilhos Silvestre - CPF: 969.803.890-68</span>
+      <span>
+        {dependent.name} - CPF: {dependent.cpf}
+      </span>
       <p>Para o titular </p>
-      <span>Felipe Dantas Souza - CPF: 365.123.861-90</span>
+      <span>
+        {holder.name} - CPF: {holder.cpf}
+      </span>
 
       <ButtonGroup>
         <OutlineButton onClick={closeModal}>Não</OutlineButton>
-        <ButtonPrimary onClick={() => showMessage(AlreadyIsAHolder)}>
-          Sim
-        </ButtonPrimary>
+        <ButtonPrimary onClick={onClickYes}>Sim</ButtonPrimary>
       </ButtonGroup>
     </Container>
   )

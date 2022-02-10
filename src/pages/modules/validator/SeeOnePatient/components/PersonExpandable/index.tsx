@@ -11,14 +11,12 @@ import { PatientData, PatientDataHolder } from '../../@types/index'
 interface PersonExpandableProps {
   title: string
   personData: PatientData & PatientDataHolder
-  holder?: boolean
   defaultExpanded?: boolean
 }
 
 export const PersonExpandable: React.FC<PersonExpandableProps> = ({
   title,
   personData,
-  holder = false,
   defaultExpanded = false,
 }) => {
   const [expanded, toggleExpanded] = useToggle(defaultExpanded)
@@ -44,24 +42,6 @@ export const PersonExpandable: React.FC<PersonExpandableProps> = ({
           <label>CPF:</label>
           <p>{personData?.cpf || ''}</p>
         </div>
-        {holder && (
-          <>
-            <div>
-              <label>Plano Contratado:</label>
-              <p>{personData?.plan || '-'}</p>
-            </div>
-            <div>
-              <label>Tabela Especial:</label>
-              <p>{personData?.table || '-'}</p>
-            </div>
-            <div>
-              <label>Empresa:</label>
-              <p>{personData?.company || '-'}</p>
-            </div>
-          </>
-        )}
-      </section>
-      <section>
         <div>
           <label>Data de Nascimento:</label>
           <p>{personData?.birthDate || ''}</p>
@@ -77,6 +57,30 @@ export const PersonExpandable: React.FC<PersonExpandableProps> = ({
         <div>
           <label>E-mail:</label>
           <p>{personData?.email || ''}</p>
+        </div>
+      </section>
+      <section>
+        <div>
+          <label>Plano Contratado:</label>
+          <p>{personData?.plan || '-'}</p>
+        </div>
+        <div>
+          <label>Tabela:</label>
+          <p>{personData?.table || '-'}</p>
+        </div>
+        <div>
+          <label>Nome da Empresa:</label>
+          <p>{personData?.company?.corporateName || '-'}</p>
+        </div>
+        <div className="has-three-in-row">
+          <div>
+            <label>CNPJ da empresa:</label>
+            <p>{personData?.company?.cnpj || '-'}</p>
+          </div>
+          <div>
+            <label>Sigla da empresa:</label>
+            <p>-</p>
+          </div>
         </div>
       </section>
     </Container>

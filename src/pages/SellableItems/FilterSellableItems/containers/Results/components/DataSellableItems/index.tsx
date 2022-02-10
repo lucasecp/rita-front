@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import qs from 'qs'
+import { useLoading } from '@/hooks/useLoading';
+import apiAdmin from '@/services/apiAdmin';
+import { toast } from '@/styles/components/toastify';
+import qs from 'qs';
+import React, { useEffect, useState } from 'react';
+
 import {
   DataSellableItemsItem,
   OrderSellableItems,
   SellableItemsFilters,
 } from '../../../../@types'
-
-import Actions from './components/Actions'
-import { toast } from '@/styles/components/toastify'
-import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
-import { Container, Status } from './styles'
-
-import { sellableItemsToApi } from './adapters/toApi'
-import { PaginationSimple } from './components/PaginationSimple'
-import { sellableItemsFromApi } from './adapters/fromApi'
+import { sellableItemsFromApi } from './adapters/fromApi';
+import { sellableItemsToApi } from './adapters/toApi';
+import Actions from './components/Actions';
+import { PaginationSimple } from './components/PaginationSimple';
+import { Container, Status } from './styles';
 
 // import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 interface DataSellableItemsProps {
@@ -49,7 +48,7 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
 
         const {
           data: { dados: data, total },
-        } = await apiPatient.get('/itens-vendaveis', {
+        } = await apiAdmin.get('/itens-vendaveis', {
           params: paramsToApi,
           paramsSerializer: (params) => {
             return qs.stringify(params, { arrayFormat: 'repeat' })

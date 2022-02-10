@@ -1,13 +1,13 @@
 import React from 'react'
-import { Container, Item, Status } from './styles'
+import { Container, Status } from './styles'
 import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../types'
 import { useHistory } from 'react-router-dom'
-import { OPERATOR_SEE_ALL_SPECIALTYS } from '@/routes/constants/namedRoutes/routes'
+import { OPERATOR_EDIT_SPRECIALTY } from '@/routes/constants/namedRoutes/routes'
 import edit from '@/assets/icons/edit.svg'
 
 const Content: React.FC<ContentProps> = ({ specialtys }) => {
-  // const history = useHistory()
+  const history = useHistory()
 
   return (
     <Container>
@@ -19,18 +19,26 @@ const Content: React.FC<ContentProps> = ({ specialtys }) => {
           // }
         >
           <li>{specialtys.code}</li>
-          <Item>
+          <li>
             <CustomTooltip label={specialtys.name}>
               <div>{specialtys.name}</div>
             </CustomTooltip>
-          </Item>
-          <Status type={specialtys.subscriptionRequired}>
-            <span>{specialtys.subscriptionRequired}</span>
+          </li>
+          <Status type={specialtys.subscriptionRequired ? 1 : 0}>
+            <span>{specialtys.subscriptionRequired ? 'Sim' : 'Não'}</span>
           </Status>
           <li>
-            <button>
-              <img src={edit} />
-            </button>
+            <CustomTooltip label="Editar">
+              <button
+                onClick={() =>
+                  history.push(OPERATOR_EDIT_SPRECIALTY, {
+                    specialtyInfo: specialtys,
+                  })
+                }
+              >
+                <img src={edit} />
+              </button>
+            </CustomTooltip>
           </li>
         </ul>
       ))}

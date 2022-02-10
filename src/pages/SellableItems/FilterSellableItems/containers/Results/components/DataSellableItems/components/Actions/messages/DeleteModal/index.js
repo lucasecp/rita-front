@@ -8,7 +8,7 @@ import { useLoading } from '@/hooks/useLoading'
 import OutlineButton from '@/components/Button/Outline'
 
 import Textarea from '@/components/Form/Textarea'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 
 import warning from '@/assets/icons/alerts/warning.svg'
 import ButtonPrimary from '@/components/Button/Primary'
@@ -29,7 +29,7 @@ const DeleteModal = ({ plan }) => {
     if (description.length > 20) {
       Loading.turnOn()
       try {
-        await apiPatient.delete(`/itens-vendaveis/${plan.id}`, {
+        await apiAdmin.delete(`/itens-vendaveis/${plan.id}`, {
           params: {
             idPlano: plan.idPlan,
             tipo: plan.type === 'city' ? 'municipio' : plan.type,

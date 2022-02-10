@@ -1,6 +1,6 @@
 import CustomTooltip from '@/components/Tooltip'
 import { useHistory } from 'react-router'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 
 import { ActivateIcon } from './styles'
 import { toast } from 'react-toastify'
@@ -29,7 +29,7 @@ export const Activate: React.FC<ActivateProps> = ({ status, plan }) => {
     try {
       Loading.turnOn()
 
-      const response = await apiPatient.patch(`/plano/${plan.id}/ativar`, {
+      const response = await apiAdmin.patch(`/plano/${plan.id}/ativar`, {
         params: { confirmado: false },
       })
 

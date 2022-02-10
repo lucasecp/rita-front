@@ -10,11 +10,11 @@ interface OnChangeProps {
   }
 }
 
-export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps  {
   options?: OptionsI[]
   label?: string
   setValue?: (value: any) => void
-  value: string | number
+  value: string | number | boolean
   labelDefaultOption?: string
   msgError?: string
   variation?: string

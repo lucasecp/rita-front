@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Container } from './styles'
-import { useLocation, useHistory } from 'react-router-dom'
-import { OPERATOR_DEPENDENT_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
+import { HolderI } from '../types/index'
 
-const Header: React.FC = () => {
-  const location = useLocation()
-  const history = useHistory()
-  const holder = location.state?.holder
+interface HeaderProps {
+  holder: HolderI
+}
 
-  useEffect(() => {
-    if (!holder) {
-      history.push(OPERATOR_DEPENDENT_MANAGMENT)
-    }
-  }, [])
-  
+const Header: React.FC<HeaderProps> = ({ holder }) => {
   return (
     <Container>
       <div>

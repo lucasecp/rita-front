@@ -1,3 +1,4 @@
+import apiAdmin from '@/services/apiAdmin'
 import apiPatient from '@/services/apiPatient'
 import apiUser from '@/services/apiUser'
 
@@ -11,9 +12,11 @@ export const deleteLocalStorage = () => localStorage.removeItem('user')
 export const deleteHeaderToken = () => {
   delete apiUser.defaults.headers.token
   delete apiPatient.defaults.headers.token
+  delete apiAdmin.defaults.headers.token
 }
 
 export const setHeaderToken = (token) => {
   apiUser.defaults.headers.token = token
   apiPatient.defaults.headers.token = token
+  apiAdmin.defaults.headers.token = token
 }

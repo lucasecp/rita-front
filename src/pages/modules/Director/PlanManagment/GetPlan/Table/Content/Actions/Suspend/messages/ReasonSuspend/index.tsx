@@ -13,7 +13,7 @@ import { useLoading } from '@/hooks/useLoading'
 import { Container } from './styles'
 import { toast } from '@/styles/components/toastify'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 interface ReasonUpdateProps {
   plan: {
     id: number
@@ -44,7 +44,7 @@ export const ReasonSuspend: React.FC<ReasonUpdateProps> = ({ plan }) => {
 
       const {
         data: { mensagem: message },
-      } = await apiPatient.patch(`/plano/${plan.id}/suspender`, null, {
+      } = await apiAdmin.patch(`/plano/${plan.id}/suspender`, null, {
         params: { confirmado: true, motivo: reason },
       })
 

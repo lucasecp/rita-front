@@ -21,11 +21,15 @@ import {
   OPERATOR_SEE_ALL_SPECIALTYS,
   OPERATOR_DEPENDENT_MANAGMENT,
   OPERATOR_ADD_DEPENDENT,
+  OPERATOR_CREATE_SPRECIALTY,
+  OPERATOR_EDIT_SPRECIALTY,
 } from '../../constants/namedRoutes/routes'
 
 import SeeAllSpecialtys from '@/pages/modules/operator/clinic/SeeAllSpecialtys'
 import Managment from '@/pages/modules/operator/dependent/Managment'
 import AddDependent from '@/pages/modules/operator/dependent/AddDependent'
+import CreateSpecialty from '@/pages/modules/operator/CreateSpecialty'
+import EditSpecialty from '@/pages/modules/operator/EditSpecialty'
 
 const operatorRoutes = [
   {
@@ -67,6 +71,14 @@ const operatorRoutes = [
   {
     path: OPERATOR_ADD_DEPENDENT,
     component: AddDependent,
+  },
+  {
+    path: OPERATOR_CREATE_SPRECIALTY,
+    component: CreateSpecialty,
+  },
+  {
+    path: OPERATOR_EDIT_SPRECIALTY,
+    component: EditSpecialty,
   },
 ]
 

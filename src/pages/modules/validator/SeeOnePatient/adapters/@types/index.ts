@@ -18,7 +18,11 @@ export interface FromApiResponse {
   tabela: {
     nome: string
   }
-  empresa: string
+  empresa: {
+    nome: string
+    razaoSocial: string
+    cnpj: string
+  }[]
   renda: string
   dependentes: {
     idPaciente: number
@@ -52,7 +56,11 @@ export interface FromApiResponse {
     tabela: {
       nome: string
     }
-    empresa: string
+    empresa: {
+      nome: string
+      razaoSocial: string
+      cnpj: string
+    }[]
   }
 }
 export interface FromApi {
