@@ -14,7 +14,6 @@ import { Row } from 'react-bootstrap'
 import { useHistory } from 'react-router'
 
 import DifferentPlanLife from './messages/DifferentPlanLife'
-import Socialplan from './messages/Socialplan'
 import VidaPlanLife from './messages/VidaPlanLife'
 import VidaPlanLifeConfirm from './messages/VidaPlanLifeConfirm'
 import { Card, Container, CustomCol } from './styles'
@@ -48,14 +47,14 @@ export const Services = () => {
 
   const onConsult = () => {
     if (!hasPermission('SERVICO_CONSULTA')) {
-      return showMessage(Socialplan)
+      return showMessage(DifferentPlanLife)
     }
     history.push(PATIENT_SCHEDULE_APPOINTMENT)
   }
 
   const onMedicines = () => {
     if (!hasPermission('SERVICO_MEDICAMENTO')) {
-      return showMessage(Socialplan)
+      return showMessage(DifferentPlanLife)
     }
     window.open(medicinesLink[0])
   }
