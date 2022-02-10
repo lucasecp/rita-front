@@ -112,7 +112,7 @@ const EditSpecialty: React.FC = () => {
           <OutlineButton onClick={onCancel}>Cancelar</OutlineButton>
           <ButtonPrimary
             onClick={onSave}
-            // disabled={Object.values(dataToApi).some(field=> !field)}
+            disabled={Object.values(dataToApi).some((field) => !field)}
           >
             Salvar
           </ButtonPrimary>
