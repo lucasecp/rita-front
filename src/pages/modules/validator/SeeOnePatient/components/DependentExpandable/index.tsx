@@ -8,15 +8,15 @@ import { useToggle } from '@/hooks/useToggle'
 
 import { PatientData, PatientDataHolder } from '../../@types/index'
 
-interface PersonExpandableProps {
+interface DependentExpandableProps {
   title: string
-  personData: PatientData & PatientDataHolder
+  dependentData: PatientData & PatientDataHolder
   defaultExpanded?: boolean
 }
 
-export const PersonExpandable: React.FC<PersonExpandableProps> = ({
+export const DependentExpandable: React.FC<DependentExpandableProps> = ({
   title,
-  personData,
+  dependentData,
   defaultExpanded = false,
 }) => {
   const [expanded, toggleExpanded] = useToggle(defaultExpanded)
@@ -36,51 +36,29 @@ export const PersonExpandable: React.FC<PersonExpandableProps> = ({
       <section>
         <div>
           <label>Nome Completo:</label>
-          <p>{personData?.name || ''}</p>
+          <p>{dependentData?.name || ''}</p>
         </div>
         <div>
           <label>CPF:</label>
-          <p>{personData?.cpf || ''}</p>
-        </div>
-        <div>
-          <label>Data de Nascimento:</label>
-          <p>{personData?.birthDate || ''}</p>
-        </div>
-        <div>
-          <label>Gênero:</label>
-          <p>{personData?.gender || ''}</p>
-        </div>
-        <div>
-          <label>Celular:</label>
-          <p>{personData?.phone || ''}</p>
-        </div>
-        <div>
-          <label>E-mail:</label>
-          <p>{personData?.email || ''}</p>
+          <p>{dependentData?.cpf || ''}</p>
         </div>
       </section>
       <section>
         <div>
-          <label>Plano Contratado:</label>
-          <p>{personData?.plan || '-'}</p>
+          <label>Data de Nascimento:</label>
+          <p>{dependentData?.birthDate || ''}</p>
         </div>
         <div>
-          <label>Tabela:</label>
-          <p>{personData?.table || '-'}</p>
+          <label>Gênero:</label>
+          <p>{dependentData?.gender || ''}</p>
         </div>
         <div>
-          <label>Nome da Empresa:</label>
-          <p>{personData?.company?.corporateName || '-'}</p>
+          <label>Celular:</label>
+          <p>{dependentData?.phone || ''}</p>
         </div>
-        <div className="has-three-in-row">
-          <div>
-            <label>CNPJ da empresa:</label>
-            <p>{personData?.company?.cnpj || '-'}</p>
-          </div>
-          <div>
-            <label>Sigla da empresa:</label>
-            <p>-</p>
-          </div>
+        <div>
+          <label>E-mail:</label>
+          <p>{dependentData?.email || ''}</p>
         </div>
       </section>
     </Container>

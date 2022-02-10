@@ -11,7 +11,10 @@ export interface PatientData {
 export interface PatientDataHolder {
   plan?: string
   table?: string
-  company?: string
+  company?: {
+    corporateName: string
+    cnpj: string
+  }
 }
 
 export interface PatientAddress {

@@ -5,6 +5,7 @@ import colors from '@/styles/colors'
 export const Container = styled.div.attrs((props: { expanded: boolean }) => ({
   expanded: props.expanded,
 }))`
+  padding-top: 24px;
   padding-bottom: 22px;
   border-bottom: 2px solid ${colors.gray.light};
 
@@ -44,8 +45,7 @@ export const Container = styled.div.attrs((props: { expanded: boolean }) => ({
 
     gap: 24px 32px;
 
-    > div,
-    div.has-three-in-row div {
+    > div {
       display: flex;
       flex-direction: column;
 
@@ -68,14 +68,10 @@ export const Container = styled.div.attrs((props: { expanded: boolean }) => ({
       }
     }
 
-    div.has-three-in-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
     + section {
       transition: 0.3s;
 
+      /* opacity: 0; */
       visibility: hidden;
       overflow: hidden;
       min-height: 0px;
@@ -91,15 +87,6 @@ export const Container = styled.div.attrs((props: { expanded: boolean }) => ({
           height: 120px;
         `}
     }
-  }
-
-  > section:first-of-type {
-    ${({ expanded }) =>
-      expanded &&
-      css`
-        padding-bottom: 22px;
-        border-bottom: 2px solid #eeeeee;
-      `}
   }
 
   @media (max-width: 767px) {
