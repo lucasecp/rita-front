@@ -15,7 +15,7 @@ import { Container } from './styles'
 import { statusOptions, statusOptionsWithoutInTyping } from './helpers/status'
 import mapDataToMultSelect from './helpers/mapDataToMultSelect'
 import mapToRangeOfUse from './helpers/mapToRangeOfUse'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import {
   DIRECTOR_PLAN_MANAGMENT,
@@ -65,7 +65,7 @@ export const EditPlan = () => {
     document.title = 'Rita Saúde | Editar Plano'
     const loadServices = async () => {
       try {
-        const { data } = await apiPatient.get('/servico')
+        const { data } = await apiAdmin.get('/servico')
 
         const servicesOptionsMapped = data.dados.map((service) => ({
           id: service.id,
@@ -140,7 +140,7 @@ export const EditPlan = () => {
 
       const {
         data: { mensagem: codeExists },
-      } = await apiPatient.get(`/plano/codigo/${code}/existe`)
+      } = await apiAdmin.get(`/plano/codigo/${code}/existe`)
 
       if (codeExists === 'true' && code !== plan?.codigo) {
         setErrors({ ...errors, code: 'O código informado já existe!' })
@@ -201,7 +201,7 @@ export const EditPlan = () => {
     try {
       Loading.turnOn()
 
-      const { data } = await apiPatient.put(
+      const { data } = await apiAdmin.put(
         `/plano/${initialPlan.idPlano}`,
         planMapped,
         { params: { confirmado: false } },

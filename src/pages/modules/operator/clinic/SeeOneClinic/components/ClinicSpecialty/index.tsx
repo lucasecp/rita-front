@@ -1,7 +1,7 @@
 import CustomMultiSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 import { mapSpecialtys } from '../../adapters/mapSpecialtys'
 import { ErrorsI } from '../../Types'
@@ -36,7 +36,7 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
   useEffect(() => {
     const getSpecialtys = async () => {
       try {
-        const { data } = await apiPatient.get('/especialidade')
+        const { data } = await apiAdmin.get('/especialidade')
         const dataMapped = mapSpecialtys(data?.especialidade)
 
         if (!dataMapped.length) {

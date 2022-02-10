@@ -30,16 +30,9 @@ export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
     dataSource: permissions,
     id: 'id',
     text: 'name',
+    teste: 'teste',
     child: 'subChild',
   }
-
-  console.log(permissions)
-
-  const onTreeViewChange = (any1) => {
-    console.log(any1)
-  }
-
-  console.log(fields)
 
   return (
     <Container>
@@ -47,7 +40,7 @@ export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
         disabled={disabled}
         fields={fields}
         showCheckBox
-        nodeChecked={onTreeViewChange}
+        // expandedNodes={[]}
       />
     </Container>
   )

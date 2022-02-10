@@ -1,5 +1,5 @@
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 import PlanInformationsDisabled from './components/PlanInformationsDisabled'
 import { useLoading } from '@/hooks/useLoading'
@@ -22,7 +22,7 @@ const SeePlan = () => {
     const getPlanInfo = async () => {
       try {
         Loading.turnOn()
-        const response = await apiPatient.get(`/plano/${location.state.idPlan}`)
+        const response = await apiAdmin.get(`/plano/${location.state.idPlan}`)
         console.log(response)
         setPlanInfo(response.data)
       } catch (error) {

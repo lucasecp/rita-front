@@ -11,6 +11,8 @@ export const Container = styled.div`
     justify-content: space-between;
     position: relative;
     text-align: center;
+    display: grid;
+    grid-template-columns: 40% 40% 20%;
 
     &::after {
       content: '';
@@ -31,8 +33,9 @@ export const Container = styled.div`
     line-height: 20px;
     margin-right: 24px;
     min-width: 150px;
-    max-width: 150px;
+    max-width: 200px;
     text-align: center;
+    word-break: keep-all;
 
     &:last-child {
       margin-right: 0;

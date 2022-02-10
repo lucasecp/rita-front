@@ -13,7 +13,7 @@ import { useLoading } from '@/hooks/useLoading'
 import { Container } from './styles'
 import { toast } from '@/styles/components/toastify'
 
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 import { planToApi } from '../../adapters/toApi'
 
@@ -48,7 +48,7 @@ export const ReasonUpdate = ({ plan, hasSellableItems }) => {
 
       const planMapped = planToApi(plan)
 
-      const response = await apiPatient.put(`/plano/${plan.id}`, planMapped, {
+      const response = await apiAdmin.put(`/plano/${plan.id}`, planMapped, {
         params: { confirmado: true, motivo: reason },
       })
 

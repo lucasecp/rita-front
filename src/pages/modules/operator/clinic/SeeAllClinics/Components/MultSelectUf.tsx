@@ -2,7 +2,7 @@ import CustomMultSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
 import React, { useEffect, useState } from 'react'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 
 interface SelectUfProps {
   setUf: React.Dispatch<React.SetStateAction<MultiSelectOption[]>>
@@ -20,7 +20,7 @@ const SelectUf: React.FC<SelectUfProps> = ({ setUf, uf }) => {
   useEffect(() => {
     const getUf = async () => {
       try {
-        const { data } = await apiPatient.get(`/clinica/ufs`)
+        const { data } = await apiAdmin.get(`/clinica/ufs`)
         const dataMapped = mapUf(data)
 
         const allLabelOption =

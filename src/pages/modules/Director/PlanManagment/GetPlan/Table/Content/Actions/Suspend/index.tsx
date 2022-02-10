@@ -5,7 +5,7 @@ import { DIRECTOR_SUSPEND_PLAN } from '@/routes/constants/namedRoutes/routes'
 import { useHistory } from 'react-router-dom'
 
 import { SuspendIcon } from './styles'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { formatPrice } from '@/helpers/formatPrice'
 import { useLoading } from '@/hooks/useLoading'
 
@@ -39,7 +39,7 @@ export const Suspend: React.FC<SuspendProps> = ({ status, plan }) => {
     try {
       Loading.turnOn()
 
-      const { data } = await apiPatient.patch<SellableItemResponse[]>(
+      const { data } = await apiAdmin.patch<SellableItemResponse[]>(
         `/plano/${plan.id}/suspender`,
         null,
         {

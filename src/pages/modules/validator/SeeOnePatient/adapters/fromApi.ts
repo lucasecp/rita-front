@@ -1,6 +1,7 @@
 import { isObjectEmpty } from '@/helpers/isObjectEmpty'
 import { formatCpf } from '@/helpers/formatCpf'
 import { formatPhone } from '@/helpers/formatPhone'
+import formatCnpj from '@/helpers/formatCnpj'
 
 import { FromApi, FromApiResponse } from './@types/index'
 
@@ -39,7 +40,10 @@ export const fromApi = (data: FromApiResponse): FromApi => {
       email: data.email,
       plan: data.plano?.nome,
       table: data.tabela?.nome,
-      company: data.empresa,
+      company: {
+        corporateName: data.empresa[0].razaoSocial,
+        cnpj: formatCnpj(data.empresa[0].cnpj),
+      },
     }
   } else {
     patientDataFromApi = {
@@ -52,7 +56,10 @@ export const fromApi = (data: FromApiResponse): FromApi => {
       email: data.titular.email,
       plan: data.titular.plano?.nome,
       table: data.titular.tabela?.nome,
-      company: data.titular.empresa,
+      company: {
+        corporateName: data.empresa[0].razaoSocial,
+        cnpj: formatCnpj(data.empresa[0].cnpj),
+      },
     }
     dependentFromApi = {
       id: data.idPaciente,
