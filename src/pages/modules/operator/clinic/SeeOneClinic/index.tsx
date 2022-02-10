@@ -24,7 +24,7 @@ const SeeOneClinic = () => {
       try {
         Loading.turnOn()
         const { data } = await apiAdmin.get(
-          `/clinica/${location.state.idClinic}/visualizar`,
+          `/clinica/${location.state.idClinic}`,
         )
 
         const clinicMapped = fromApi(data)
