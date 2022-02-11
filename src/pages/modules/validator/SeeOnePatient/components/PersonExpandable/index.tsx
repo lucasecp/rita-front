@@ -72,7 +72,7 @@ export const PersonExpandable: React.FC<PersonExpandableProps> = ({
           <label>Nome da Empresa:</label>
           <p>{personData?.company?.corporateName || '-'}</p>
         </div>
-        <div className="has-three-in-row">
+        <section className="has-three-in-row">
           <div>
             <label>CNPJ da empresa:</label>
             <p>{personData?.company?.cnpj || '-'}</p>
@@ -81,7 +81,7 @@ export const PersonExpandable: React.FC<PersonExpandableProps> = ({
             <label>Sigla da empresa:</label>
             <p>-</p>
           </div>
-        </div>
+        </section>
       </section>
     </Container>
   )

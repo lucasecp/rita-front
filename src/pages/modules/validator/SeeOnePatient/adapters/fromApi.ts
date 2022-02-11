@@ -40,7 +40,7 @@ export const fromApi = (data: FromApiResponse): FromApi => {
       email: data.email,
       plan: data.plano?.nome,
       table: data.tabela?.nome,
-      company: {
+      company: data.empresa[0] && {
         corporateName: data.empresa[0].razaoSocial,
         cnpj: formatCnpj(data.empresa[0].cnpj),
       },
@@ -56,7 +56,7 @@ export const fromApi = (data: FromApiResponse): FromApi => {
       email: data.titular.email,
       plan: data.titular.plano?.nome,
       table: data.titular.tabela?.nome,
-      company: {
+      company: data.empresa[0] && {
         corporateName: data.empresa[0].razaoSocial,
         cnpj: formatCnpj(data.empresa[0].cnpj),
       },
