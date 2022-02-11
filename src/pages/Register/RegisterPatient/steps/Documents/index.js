@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import HoldingDocument from './types/HoldingDocument'
 import OwnDocument from './types/OwnDocument'
@@ -30,20 +30,6 @@ export const Documents = ({ isActive }) => {
     ownBackDocument: '',
     selectIncome: '',
   })
-
-  // const verifySavedFiles = () => {
-  //   // if (!Object.keys(savedFiles).length) return
-  //   setHoldingDocumentFile(savedFiles?.holdingDocumentFile || '')
-  //   setOwnDocumentFile(savedFiles?.ownDocumentFile || '')
-  //   setOwnBackDocumentFile(savedFiles?.ownBackDocumentFile || '')
-  //   setProofOfIncomeFile(savedFiles?.proofOfIncomeFile || '')
-  //   setProofOfAddressFile(savedFiles?.proofOfAddressFile || '')
-  //   setSelectIncome(savedFiles?.selectIncome || '')
-  // }
-
-  // useEffect(() => {
-  //   verifySavedFiles()
-  // }, [])
 
   useEffect(() => {
     setDocumentsFile({

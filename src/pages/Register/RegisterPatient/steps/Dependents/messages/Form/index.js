@@ -12,7 +12,7 @@ import {
   validateGender,
   validateName,
   validatePhone,
-} from '../../../../helpers/validator'
+} from '../../../shared/helpers/validator'
 import formatBirthdate from '@/helpers/formatDate'
 import { useModal } from '@/hooks/useModal'
 import { validateDepCpf } from './ValidateDepCpf'
@@ -20,6 +20,7 @@ import { useLoading } from '@/hooks/useLoading'
 import clearCpf from '@/helpers/clear/SpecialCaracteres'
 import apiPatient from '@/services/apiPatient'
 import { validateBirthDependent } from '../helpers/validateBirthDependent'
+import { useRegisterPatient } from '@/pages/Register/RegisterPatient/hooks'
 
 const CpfAlreadyExistsError =
   'Este CPF já está cadastrado na plataforma Rita, por favor verifique os dados e preencha novamente.'
@@ -31,10 +32,10 @@ const Form = ({
   allDependents,
   action,
   clientCpf,
-  dataClientSabin,
 }) => {
   const { closeModal } = useModal()
   const { Loading } = useLoading()
+  const { initialRegisterData, setDependents } = useRegisterPatient()
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -67,9 +68,9 @@ const Form = ({
   }
 
   const verifyNewPatinet = () => {
-    if (dataClientSabin?.id && action === 'edit') {
+    if (initialRegisterData?.registrationData?.id && action === 'edit') {
       return {
-        ...dataClientSabin?.dependents[id],
+        ...initialRegisterData?.dependents[id],
         ...dataBaseForm,
       }
     }
@@ -100,6 +101,7 @@ const Form = ({
 
   const hanldeSubmit = async () => {
     setErrors({})
+
     if (await cpfAlreadyExistsApi()) {
       return setErrors({
         ...errors,
@@ -108,12 +110,16 @@ const Form = ({
     }
     const newDep = [{ ...verifyNewPatinet() }]
     setAllDependents((data) => [...data, ...newDep])
+    setDependents((data) => [...data, ...newDep])
     closeModal()
   }
 
   const handleUpdate = async () => {
     setErrors({})
-    if ((await cpfAlreadyExistsApi()) && !dataClientSabin?.idPaciente) {
+    if (
+      (await cpfAlreadyExistsApi()) &&
+      !initialRegisterData?.registrationData?.id
+    ) {
       return setErrors({
         ...errors,
         cpf: CpfAlreadyExistsError,
@@ -124,7 +130,9 @@ const Form = ({
       if (id === index) return { ...verifyNewPatinet() }
       return dep
     })
+
     setAllDependents(depsUpdated)
+    setDependents(depsUpdated)
     closeModal()
   }
 

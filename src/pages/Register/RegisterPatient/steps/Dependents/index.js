@@ -42,9 +42,7 @@ export const Dependents = ({ isActive }) => {
 
   const handleDelete = (id) => {
     const valueUpdated = allDependents.filter((dep, index) => index !== id)
-    // if (dataClientSabin?.dependentes) {
-    //   dataClientSabin.dependentes.splice(id, 1)
-    // }
+
     setAllDependents(valueUpdated)
   }
 

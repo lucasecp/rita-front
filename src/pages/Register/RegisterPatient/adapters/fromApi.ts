@@ -53,7 +53,7 @@ export const initialRegisterPatientFromApi = (
       district: initialRegisterPatientFromApi.endereco?.bairro,
       complement: initialRegisterPatientFromApi.endereco?.complemento,
     },
-    dependents: initialRegisterPatientFromApi.dependentes.map((dependent) => ({
+    dependents: initialRegisterPatientFromApi.dependentes?.map((dependent) => ({
       id: dependent.idPaciente,
       name: dependent.nome,
       cpf: formatCpf(dependent.cpf),

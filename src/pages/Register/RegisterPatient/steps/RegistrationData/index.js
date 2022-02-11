@@ -11,7 +11,7 @@ import {
   validateGender,
   validateName,
   validatePhone,
-} from '../../helpers/validator'
+} from '../shared/helpers/validator'
 import { validateConfEmail, validateTerms } from './validateFields'
 import { useModal } from '@/hooks/useModal'
 import { GeneralFieldsErrors } from './messages/GeneralFieldsErrors'
@@ -21,7 +21,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 
 export const RegistrationData = ({ isActive }) => {
   const { showMessage } = useModal()
-  const { initialRegisterData, setRegistrationData, nextStep, isActiveStep } =
+  const { initialRegisterData, setRegistrationData, nextStep } =
     useRegisterPatient()
 
   const [name, setName] = useState('')

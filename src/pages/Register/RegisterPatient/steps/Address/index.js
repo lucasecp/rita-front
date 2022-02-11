@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Container } from './styles'
 import { UF } from './static'
-import { validateCep } from '../../helpers/validator'
+import { validateCep } from '../shared/helpers/validator'
 import { useRegisterPatient } from '../../hooks'
 import ButtonLink from '@/components/Button/Link'
 import ButtonPrimary from '@/components/Button/Primary'
@@ -34,19 +34,7 @@ export const Address = ({ isActive }) => {
   }, [initialRegisterData])
 
   useEffect(() => {
-    const dataObj = {
-      bairro: district,
-      uf,
-      cidade: city,
-      logradouro: address,
-      numero: numberHome,
-      cep,
-      complemento: complement,
-    }
-
-    setAddress((data) => {
-      return { ...data, endereco: dataObj }
-    })
+    setAddress({ district, uf, city, address, numberHome, cep, complement })
   }, [address, cep, numberHome, city, complement, uf, district])
 
   const onNextStep = () => {
