@@ -4,12 +4,11 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+
   > img {
     margin-bottom: 24px;
   }
-  > button {
-    margin-top: 24px;
-  }
+
   > p {
     max-width: 455px;
     word-wrap: break-word;
@@ -18,16 +17,31 @@ export const Container = styled.div`
     font-weight: 500;
     line-height: 24px;
     color: #6a6a6a;
-    + p {
-      margin-top: 10px;
+  }
+
+  > footer {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+
+    > button + button {
+      margin-left: 20px;
     }
-    a {
-      display: inline-flex;
-      align-items: center;
-      color: #1c23bd;
-    }
-    img {
-      margin-left: 6px;
+  }
+
+  @media (max-width: 539px) {
+    > footer {
+      flex-direction: column;
+      width: 100%;
+
+      > button + button {
+        margin-top: 20px;
+        margin-left: 0;
+      }
+
+      > button {
+        width: 100%;
+      }
     }
   }
 `

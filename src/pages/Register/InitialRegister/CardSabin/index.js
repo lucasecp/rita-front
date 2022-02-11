@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
-import RegisterLayout from '@/components/Layout/RegisterLayout'
+import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 import validateCpf from '@/helpers/validateCpf'
 import cardSabinImg from '@/assets/img/card-sabin.png'
 import { Content } from './styles'

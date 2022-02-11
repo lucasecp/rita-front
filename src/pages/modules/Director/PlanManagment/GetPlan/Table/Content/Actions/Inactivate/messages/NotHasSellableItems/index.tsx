@@ -8,6 +8,8 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/hooks/useModal'
 import { ReasonInactivate } from '../ReasonInactivate'
 
+import { useTheme } from '@/hooks/useTheme'
+
 import { Container } from './styles'
 
 interface NotHasSellableItemsProps {

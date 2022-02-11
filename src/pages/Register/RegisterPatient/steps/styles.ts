@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.section`
-  background: #fff;
+  /* background: #fff;
   padding: 32px;
   width: 100%;
 
@@ -32,5 +32,5 @@ export const Container = styled.section`
     text-align: left;
     color: #6a6a6a;
     margin-bottom: 40px;
-  }
+  } */
 `

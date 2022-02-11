@@ -68,6 +68,7 @@ const EditSpecialty: React.FC = () => {
     }
 
     const data = toApi({
+      id: specialtyInfo?.id,
       code: dataToApi.code,
       requireSubscription: !!Number(dataToApi.requireSubscription),
       description: dataToApi.description,
@@ -111,7 +112,7 @@ const EditSpecialty: React.FC = () => {
           <OutlineButton onClick={onCancel}>Cancelar</OutlineButton>
           <ButtonPrimary
             onClick={onSave}
-            disabled={!!Object.values(errors).length}
+            disabled={Object.values(dataToApi).some((field) => !field)}
           >
             Salvar
           </ButtonPrimary>

@@ -7,7 +7,7 @@ export interface ErrorsI {
 export interface DataReceivedI {
   code?: string
   description?: string
-  requireSubscription?: boolean | string
+  requireSubscription?: boolean | string | number
   [x: string]: any
 }
 

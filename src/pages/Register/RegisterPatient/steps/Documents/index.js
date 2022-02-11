@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-
-import { Container, BtnGroup, BtnPrev, CustomBtn } from './styles'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import HoldingDocument from './types/HoldingDocument'
 import OwnDocument from './types/OwnDocument'
@@ -8,12 +6,17 @@ import OwnBackDocument from './types/OwnBackDocument'
 import ProofOfIncome from './types/ProofOfIncome'
 import ProofOfAddress from './types/ProofOfAddress'
 
-const Document = ({
-  onGetDocumentFiles,
-  savedFiles,
-  setStep,
-  isPatientLinkedCompany,
-}) => {
+import ButtonPrimary from '@/components/Button/Primary'
+import ButtonLink from '@/components/Button/Link'
+
+import { useRegisterPatient } from '../../hooks'
+
+import { Container } from './styles'
+
+export const Documents = ({ isActive }) => {
+  const { isPatientLinkedCompany, setDocumentsFile, previousStep, nextStep } =
+    useRegisterPatient()
+
   const [holdingDocumentFile, setHoldingDocumentFile] = useState('')
   const [ownDocumentFile, setOwnDocumentFile] = useState('')
   const [ownBackDocumentFile, setOwnBackDocumentFile] = useState('')
@@ -28,22 +31,22 @@ const Document = ({
     selectIncome: '',
   })
 
-  const verifySavedFiles = () => {
-    if (!Object.keys(savedFiles).length) return
-    setHoldingDocumentFile(savedFiles.holdingDocumentFile || '')
-    setOwnDocumentFile(savedFiles.ownDocumentFile || '')
-    setOwnBackDocumentFile(savedFiles.ownBackDocumentFile || '')
-    setProofOfIncomeFile(savedFiles.proofOfIncomeFile || '')
-    setProofOfAddressFile(savedFiles.proofOfAddressFile || '')
-    setSelectIncome(savedFiles.selectIncome || '')
-  }
+  // const verifySavedFiles = () => {
+  //   // if (!Object.keys(savedFiles).length) return
+  //   setHoldingDocumentFile(savedFiles?.holdingDocumentFile || '')
+  //   setOwnDocumentFile(savedFiles?.ownDocumentFile || '')
+  //   setOwnBackDocumentFile(savedFiles?.ownBackDocumentFile || '')
+  //   setProofOfIncomeFile(savedFiles?.proofOfIncomeFile || '')
+  //   setProofOfAddressFile(savedFiles?.proofOfAddressFile || '')
+  //   setSelectIncome(savedFiles?.selectIncome || '')
+  // }
+
+  // useEffect(() => {
+  //   verifySavedFiles()
+  // }, [])
 
   useEffect(() => {
-    verifySavedFiles()
-  }, [])
-
-  useEffect(() => {
-    onGetDocumentFiles({
+    setDocumentsFile({
       holdingDocumentFile,
       ownDocumentFile,
       ownBackDocumentFile,
@@ -60,7 +63,7 @@ const Document = ({
     selectIncome,
   ])
 
-  const nextStep = () => {
+  const onNextStep = () => {
     if (holdingDocumentFile === '') {
       setErrors({
         holdingDocument:
@@ -97,12 +100,12 @@ const Document = ({
     }
 
     setErrors({})
-    setStep(4)
+    nextStep()
   }
 
   return (
-    <>
-      <Container>
+    <Container active={isActive}>
+      <div>
         <h1>Documentos</h1>
         <HoldingDocument
           onGetFile={setHoldingDocumentFile}
@@ -146,13 +149,11 @@ const Document = ({
             error={errors.selectIncome}
           />
         )}
-      </Container>
-      <BtnGroup>
-        <BtnPrev onClick={() => setStep(2)}>Etapa Anterior</BtnPrev>
-        <CustomBtn onClick={nextStep}>Próxima Etapa</CustomBtn>
-      </BtnGroup>
-    </>
+      </div>
+      <footer>
+        <ButtonLink onClick={previousStep}>Etapa Anterior</ButtonLink>
+        <ButtonPrimary onClick={onNextStep}>Próxima Etapa</ButtonPrimary>
+      </footer>
+    </Container>
   )
 }
-
-export default Document

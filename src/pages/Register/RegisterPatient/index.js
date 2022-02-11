@@ -1,210 +1,64 @@
-import RegisterLayout from '@/components/Layout/RegisterLayout'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+
+import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 import { Address } from './steps/Address'
-import RegistrationData from './steps/RegistrationData'
-import Document from './steps/Document'
+import { RegistrationData } from './steps/RegistrationData'
+import { Documents } from './steps/Documents'
 import { Dependents } from './steps/Dependents'
-import { Content, DotSteps, BtnGroup, BtnPrev, CustomBtn } from './styles'
-import { useLocation } from 'react-router'
-// import { DATAFAKE } from './static'
-import apiPatient from '@/services/apiPatient'
-import Success from './messages/Success'
-import Warning from './messages/Warning'
-import Server from './messages/Error/Server'
-import exitImg from '@/assets/icons/times.svg'
-import { useLoading } from '@/hooks/useLoading'
-import { useModal } from '@/hooks/useModal'
-import axios from 'axios'
-import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
-import DocumentNoSent from './messages/Success/DocumentNotSent'
-// import FieldsErrorMessage from './messages/Error/FieldsErrorMessage'
+import { Container } from './styles'
+import { useLocation, useParams } from 'react-router'
+import { ExitAndSteps } from './components/ExitAndSteps'
+import { useRegisterPatient } from './hooks'
+import { initialRegisterPatientFromApi } from './adapters/fromApi'
 
-const status = {
-  SUCCESS: 'success',
-  SERVER_ERROR: 'server_error',
-  ALREADY_EXISTS: 'already_exists',
-  BAD_REQUEST_DOCUMENTS: 'bad_request_documents',
-}
-
-const RegisterPatient = () => {
-  let responseApiStatus = ''
-
+export const RegisterPatient = () => {
   const location = useLocation()
   const { Loading } = useLoading()
-  const { showMessage } = useModal()
+  const { token } = useParams()
 
-  const [step, setStep] = useState(1)
-  const [data, setData] = useState({})
-  const [term, setTerm] = useState(false)
-
-  const [dataClientSabin, setDataClientSabin] = useState({})
-  const [documentFiles, setDocumentFiles] = useState({})
+  const { isActiveStep, setInitialRegisterData } = useRegisterPatient()
 
   useEffect(() => {
     document.title = 'Rita Saúde | Cadastro'
 
-    if (!location.state) {
+    if (location.state) {
+      const initialRegisterMapped = initialRegisterPatientFromApi(
+        location.state?.userData,
+      )
+
+      setInitialRegisterData(initialRegisterMapped)
       return
     }
 
-    setDataClientSabin(location.state.userData)
+    if (token) {
+      try {
+        Loading.turnOn()
+        // NjE5NDgxOTUzNzIxOTc1MDQxMA==
+      } catch (error) {
+        console.log(error)
+      } finally {
+        Loading.turnOff()
+      }
+    }
   }, [])
 
-  const formatDocumentFiles = () => {
-    if (documentFiles.selectIncome === 'no_income') return 'NaopossuoRenda'
-    if (documentFiles.selectIncome === 'one_half')
-      return 'AteUmSalarioMinimoEMeio'
-    if (documentFiles.selectIncome === 'more_one_half')
-      return 'AcimaDeUmSalarioMinimoEMeio'
-  }
+  const isActiveStepOne = useMemo(() => isActiveStep(1), [isActiveStep])
 
-  const onFinishRegistration = async () => {
-    const formFile1 = new FormData()
-    formFile1.append('file', documentFiles.holdingDocumentFile)
-    const formFile2 = new FormData()
-    formFile2.append('file', documentFiles.ownDocumentFile)
-    const formFile3 = new FormData()
-    formFile3.append('file', documentFiles.ownBackDocumentFile)
-    const formFile4 = new FormData()
-    formFile4.append('file', documentFiles.proofOfAddressFile)
-    const formFile5 = new FormData()
-    formFile5.append('file', documentFiles.proofOfIncomeFile)
+  const isActiveStepTwo = useMemo(() => isActiveStep(2), [isActiveStep])
 
-    try {
-      Loading.turnOn()
+  const isActiveStepThree = useMemo(() => isActiveStep(3), [isActiveStep])
 
-      const response = await apiPatient.post('/paciente', {
-        ...data,
-        renda: formatDocumentFiles(),
-      })
-      if (response.status === 201) {
-        responseApiStatus = status.SUCCESS
-      }
-    } catch ({ response }) {
-      if (response.status === 400) {
-        responseApiStatus = status.ALREADY_EXISTS
-      }
-      if (response.status === 500) {
-        responseApiStatus = status.SERVER_ERROR
-      }
-    }
-
-    try {
-      await axios.all([
-        apiPatient.post(
-          `/paciente/documento?cpf=${data.cpf}&tipoDocumento=FotoSegurandoDoc`,
-          formFile1,
-        ),
-        apiPatient.post(
-          `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Cpf`,
-          formFile2,
-        ),
-        apiPatient.post(
-          `/paciente/documento?cpf=${data.cpf}&tipoDocumento=DocVerso`,
-          formFile3,
-        ),
-        !documentFiles.proofOfAddressFile
-          ? ''
-          : apiPatient.post(
-              `/paciente/documento?cpf=${data.cpf}&tipoDocumento=ComprovanteResi`,
-              formFile4,
-            ),
-        !documentFiles.proofOfIncomeFile
-          ? ''
-          : apiPatient.post(
-              `/paciente/documento?cpf=${data.cpf}&tipoDocumento=Renda`,
-              formFile5,
-            ),
-      ])
-    } catch ({ response }) {
-      if (
-        (response.status === 500 || response.status === 400) &&
-        responseApiStatus === status.SUCCESS
-      ) {
-        responseApiStatus = status.BAD_REQUEST_DOCUMENTS
-      }
-    } finally {
-      Loading.turnOff()
-    }
-
-    if (responseApiStatus === status.ALREADY_EXISTS) {
-      showMessage(SimpleModal, {
-        type: MODAL_TYPES.ERROR,
-        message: 'Paciente já cadastrado.',
-      })
-    }
-
-    if (responseApiStatus === status.SERVER_ERROR) {
-      showMessage(Server)
-    }
-
-    if (responseApiStatus === status.BAD_REQUEST_DOCUMENTS) {
-      showMessage(DocumentNoSent)
-    }
-
-    if (responseApiStatus === status.SUCCESS) {
-      showMessage(Success)
-    }
-  }
+  const isActiveStepFour = useMemo(() => isActiveStep(4), [isActiveStep])
 
   return (
     <RegisterLayout>
-      <Content>
-        <button onClick={() => showMessage(Warning)}>
-          Sair
-          <img src={exitImg} />
-        </button>
-        <header>
-          <DotSteps active={step === 1} finish={step >= 2} />
-          <DotSteps active={step === 2} finish={step >= 3} waiting={step < 2} />
-          <DotSteps active={step === 3} finish={step >= 4} waiting={step < 3} />
-          <DotSteps active={step === 4} waiting={step < 4} />
-        </header>
-        {step === 1 && (
-          <RegistrationData
-            setData={setData}
-            dataClientSabin={dataClientSabin}
-            newData={data}
-            setStep={setStep}
-            term={term}
-            setTerms={setTerm}
-          />
-        )}
-        {step === 2 && (
-          <Address
-            setData={setData}
-            dataClientSabin={dataClientSabin}
-            newData={data}
-            setStep={setStep}
-            step={step}
-          />
-        )}
-        {step === 3 && (
-          <Document
-            onGetDocumentFiles={setDocumentFiles}
-            savedFiles={documentFiles}
-            setStep={setStep}
-            isPatientLinkedCompany={!!dataClientSabin.company}
-          />
-        )}
-        {step === 4 && (
-          <Dependents
-            newData={data}
-            setData={setData}
-            dataClientSabin={dataClientSabin}
-          />
-        )}
-        {step === 4 && (
-          <BtnGroup>
-            <BtnPrev onClick={() => setStep(step - 1)}>Etapa Anterior</BtnPrev>
-            <CustomBtn onClick={onFinishRegistration}>
-              Concluir cadastro
-            </CustomBtn>
-          </BtnGroup>
-        )}
-      </Content>
+      <Container>
+        <ExitAndSteps />
+        <RegistrationData isActive={isActiveStepOne} />
+        <Address isActive={isActiveStepTwo} />
+        <Documents isActive={isActiveStepThree} />
+        <Dependents isActive={isActiveStepFour} />
+      </Container>
     </RegisterLayout>
   )
 }
-
-export default RegisterPatient

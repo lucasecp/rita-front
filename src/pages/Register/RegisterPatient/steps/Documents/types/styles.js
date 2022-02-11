@@ -3,18 +3,81 @@ import styled from 'styled-components'
 import { Accordion } from '@material-ui/core'
 import colors from '@/styles/colors'
 
-export const AccordionContainer = styled(Accordion)`
+export const Container = styled.div`
   margin-bottom: 30px;
 
-  > h3 {
+  .MuiAccordionSummary-root {
+    padding: 0;
+    border-bottom: 2px solid ${colors.gray.light};
+
+    h2 {
+      width: 100%;
+
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 25px;
+
+      color: ${colors.gray.dark};
+
+      > span {
+        color: ${colors.purple.main.dark};
+      }
+    }
+
+    &.Mui-disabled {
+      opacity: unset;
+
+      > div h2 {
+        color: ${colors.gray.middle};
+      }
+    }
+  }
+
+  .MuiAccordionDetails-root {
+    padding: 0;
+    display: block;
+  }
+
+  .MuiPaper-elevation1 {
+    box-shadow: none;
+  }
+
+  .MuiAccordion-root::before {
+    display: none;
+  }
+
+  .MuiAccordionSummary-content,
+  .MuiAccordionSummary-content.Mui-expanded {
+    margin: 0;
+    padding: 4px 0;
+  }
+
+  .MuiAccordion-rounded:last-child {
+    border-radius: unset;
+  }
+
+  .MuiAccordionSummary-expandIcon {
+    width: 48px;
+    height: 48px;
+
+    &.Mui-expanded {
+      span svg {
+        fill: ${colors.purple.main.light};
+      }
+    }
+  }
+`
+
+export const AccordionContainer = styled(Accordion)`
+  /* > h3 {
     margin-top: 16px;
     font-size: 16px;
     font-weight: 700;
     line-height: 24px;
     color: ${colors.gray.middle};
-  }
+  } */
 
-  > h4 {
+  /* > h4 {
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
@@ -22,7 +85,7 @@ export const AccordionContainer = styled(Accordion)`
     letter-spacing: 0em;
     color: ${colors.purple.main.dark};
     margin-bottom: 15px;
-  }
+  } */
 `
 export const Content = styled.div`
   display: flex;
