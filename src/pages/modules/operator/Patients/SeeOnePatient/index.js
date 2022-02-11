@@ -5,6 +5,7 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Container } from './styles'
 
 import PersonExpandable from './components/PersonExpandable'
+import DependentExpandable from './components/DependentExpandable'
 import AddressSeeOnePatient from './components/AddressSeeOnePatient'
 import { useHistory, useLocation } from 'react-router'
 import apiPatient from '@/services/apiPatient'
@@ -23,7 +24,7 @@ import formateDateAndHour from '@/helpers/formateDateAndHour'
 // import apiUser from '@/services/apiUser'
 
 export const SeeOnePatient = () => {
-  const history = useHistory()
+  const { cpf } = useHistory().location.state
   const location = useLocation()
   const { Loading } = useLoading()
   const { showMessage, showSimple } = useModal()
@@ -34,7 +35,8 @@ export const SeeOnePatient = () => {
 
   const [patientDependents, setPatientDependents] = useState([])
   const [patientAddress, setPatientAddress] = useState()
-  const [patientDocuments, setPatientDocuments] = useState({})
+  // const [patientDocuments, setPatientDocuments] = useState({})
+  const [incomeDocumentType, setIncomeDocumentType] = ''
 
   const [validations, setValidations] = useState()
   const [table, setTable] = useState('')
@@ -48,68 +50,19 @@ export const SeeOnePatient = () => {
     }
 
     const loadPatientInformations = async () => {
-      const userCpf = location.state.cpf
-      let holdingDocument
-      let identifyDocument
-      let incomeDocument
-      let incomeDocumentType
-
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get(`/paciente/cpf?cpf=${userCpf}`)
+        const { data } = await apiPatient.get(`/paciente/cpf?cpf=${cpf}`)
 
         setPatientData(data)
         setPatientDependents(data.dependentes)
         setPatientAddress(data.endereco)
-        incomeDocumentType = data.renda
+        setIncomeDocumentType(data.renda)
         setTable(data.status !== 'N' && data.tabela.nome)
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
       }
-
-      try {
-        Loading.turnOn()
-
-        holdingDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumento=FotoSegurandoDoc`,
-          { responseType: 'arraybuffer' },
-        )
-      } catch ({ response }) {
-      } finally {
-        Loading.turnOff()
-      }
-
-      try {
-        Loading.turnOn()
-
-        identifyDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumento=Cpf`,
-          { responseType: 'arraybuffer' },
-        )
-      } catch ({ response }) {
-      } finally {
-        Loading.turnOff()
-      }
-
-      try {
-        Loading.turnOn()
-
-        incomeDocument = await apiPatient.get(
-          `/paciente/documento?cpf=${userCpf}&tipoDocumento=Renda`,
-          { responseType: 'arraybuffer' },
-        )
-      } catch ({ response }) {
-      } finally {
-        Loading.turnOff()
-      }
-
-      setPatientDocuments({
-        holdingDocument,
-        identifyDocument,
-        incomeDocument,
-        incomeDocumentType,
-      })
     }
     loadPatientInformations()
   }, [])
@@ -196,6 +149,8 @@ export const SeeOnePatient = () => {
     }
   }
 
+  // console.log('patientDocuments: ', patientDocuments)
+
   return (
     <DefaultLayout title="Pacientes">
       <Container>
@@ -209,7 +164,7 @@ export const SeeOnePatient = () => {
           />
         )}
         {patientDependents?.map((dependent, index) => (
-          <PersonExpandable
+          <DependentExpandable
             title={`Dados cadastrais do dependente ${index + 1}`}
             allPersonData={[patientData, ...patientDependents]}
             personData={dependent}
@@ -225,7 +180,10 @@ export const SeeOnePatient = () => {
             setAddress={setPatientAddress}
           />
         )}
-        <DocumentsSeeOnePatient documents={patientDocuments} />
+        <DocumentsSeeOnePatient
+          incomeDocumentType={incomeDocumentType}
+          cpf={cpf}
+        />
         {validations && <ValidationSeeOnePatient validations={validations} />}
         <footer>
           <ButtonLink onClick={onComeBack}>Voltar</ButtonLink>
