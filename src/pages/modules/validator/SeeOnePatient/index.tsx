@@ -219,9 +219,9 @@ export const SeeOnePatient: React.FC = () => {
           />
         )}
         {patientDependents?.map((dependent, index) => (
-          <PersonExpandable
+          <DependentExpandable
             title={`Dados cadastrais do dependente ${index + 1}`}
-            personData={dependent}
+            dependentData={dependent}
             key={index}
           />
         ))}
