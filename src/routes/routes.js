@@ -34,6 +34,7 @@ import {
   DIRECTOR_SEE_ALL_PROFILES,
   DIRECTOR_SEE_ONE_PROFILE,
 } from './constants/namedRoutes/routes'
+import { TestAddressPage } from '@/pages/TestAddressPage'
 
 function Routes() {
   return (
@@ -83,6 +84,8 @@ function Routes() {
       <Route path={INITIAL_PAGE} isPrivate component={Initial} />
 
       <Route path={LOGIN} exact component={Login} />
+
+      <Route path="/teste-de-endereco" exact component={TestAddressPage} />
 
       {/* <Route
         path="/gestao/planos/editar"
