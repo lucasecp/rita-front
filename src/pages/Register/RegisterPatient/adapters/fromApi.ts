@@ -46,7 +46,8 @@ export const initialRegisterPatientFromApi = (
       phone: initialRegisterPatientFromApi.telefone,
       cpf: initialRegisterPatientFromApi.cpf,
       company:
-        initialRegisterPatientFromApi.empresa[0] ||
+        (initialRegisterPatientFromApi.empresa &&
+          initialRegisterPatientFromApi.empresa[0]) ||
         initialRegisterPatientFromApi.company,
     },
     address: {
