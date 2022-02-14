@@ -1,17 +1,23 @@
-import ButtonPrimary from '@/components/Button/Primary'
 import React from 'react'
-import { Container } from '../../style'
+
+import ButtonPrimary from '@/components/Button/Primary'
 import success from '@/assets/icons/alerts/success.svg'
 import whatsApp from '@/assets/icons/whatsapp.svg'
+
 import { useHistory } from 'react-router'
 import { useModal } from '@/hooks/useModal'
-const DocumentNoSent = () => {
+
+import { Container } from './styles'
+
+export const DocumentsNotSended: React.FC = () => {
   const history = useHistory()
   const { closeModal } = useModal()
-  const handleCloseModal = () => {
+
+  const onComeBack = () => {
     closeModal()
     history.push('/')
   }
+
   return (
     <Container>
       <img src={success} />
@@ -26,11 +32,11 @@ const DocumentNoSent = () => {
           (61) 3181-0999 <img src={whatsApp} />
         </a>
       </p>
-      <ButtonPrimary onClick={handleCloseModal}>
-        Voltar a página inicial
-      </ButtonPrimary>
+      <footer>
+        <ButtonPrimary onClick={onComeBack}>
+          Voltar a página inicial
+        </ButtonPrimary>
+      </footer>
     </Container>
   )
 }
-
-export default DocumentNoSent

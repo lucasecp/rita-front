@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import Checkbox from '@/components/Form/Checkbox'
+import React, { useEffect, useState } from 'react'
+import { Checkbox } from '@/components/Form/Checkbox'
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
@@ -19,7 +19,24 @@ import { GeneralFieldsErrors } from './messages/GeneralFieldsErrors'
 import { useRegisterPatient } from '../../hooks'
 import ButtonPrimary from '@/components/Button/Primary'
 
-export const RegistrationData = ({ isActive }) => {
+interface ErrorState {
+  name?: string
+  email?: string
+  confirmEmail?: string
+  gender?: string
+  birthdate?: string
+  phone?: string
+  cpf?: string
+  terms?: string
+}
+
+interface RegistrationDataProps {
+  isActive: boolean
+}
+
+export const RegistrationData: React.FC<RegistrationDataProps> = ({
+  isActive,
+}) => {
   const { showMessage } = useModal()
   const { initialRegisterData, setRegistrationData, nextStep } =
     useRegisterPatient()
@@ -32,7 +49,7 @@ export const RegistrationData = ({ isActive }) => {
   const [phone, setPhone] = useState('')
   const [cpf, setCpf] = useState('')
   const [terms, setTerms] = useState(false)
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({} as ErrorState)
 
   useEffect(() => {
     setName(initialRegisterData?.registrationData?.name || '')
@@ -122,7 +139,7 @@ export const RegistrationData = ({ isActive }) => {
           label="Nome Completo*:"
           value={name}
           setValue={setName}
-          hasError={errors.name}
+          hasError={!!errors.name}
           name="name"
           msgError={errors.name}
           maxLength={100}
@@ -132,7 +149,7 @@ export const RegistrationData = ({ isActive }) => {
           <InputText
             label="E-mail*:"
             name="email"
-            hasError={errors.email}
+            hasError={!!errors.email}
             value={email}
             onKeyUp={checkConfirmEmail}
             setValue={setEmail}
@@ -142,7 +159,7 @@ export const RegistrationData = ({ isActive }) => {
           <InputText
             autoComplete="off"
             label="Confirme seu e-mail*:"
-            hasError={errors.confirmEmail}
+            hasError={!!errors.confirmEmail}
             onKeyUp={checkConfirmEmail}
             value={confirmEmail}
             setValue={setConfirmEmail}
@@ -167,7 +184,7 @@ export const RegistrationData = ({ isActive }) => {
             mask="99/99/9999"
             value={birthdate}
             setValue={setBirthdate}
-            hasError={errors.birthdate}
+            hasError={!!errors.birthdate}
             autoComplete="off"
             msgError={errors.birthdate}
             onKeyUp={checkMinorAge}
@@ -177,7 +194,7 @@ export const RegistrationData = ({ isActive }) => {
             mask="(99) 99999-9999"
             value={phone}
             setValue={setPhone}
-            hasError={errors.phone}
+            hasError={!!errors.phone}
             msgError={errors.phone}
           />
           <InputMask
@@ -185,13 +202,12 @@ export const RegistrationData = ({ isActive }) => {
             mask="999.999.999-99"
             value={cpf}
             setValue={setCpf}
-            hasError={errors.cpf}
-            disabled={initialRegisterData?.registrationData?.cpf}
+            hasError={!!errors.cpf}
+            disabled={!!initialRegisterData?.registrationData?.cpf}
             msgError={errors.cpf}
           />
         </section>
         <Checkbox
-          id="terms"
           label={
             <>
               Li e aceito os
@@ -201,10 +217,10 @@ export const RegistrationData = ({ isActive }) => {
               da plataforma Rita.
             </>
           }
-          hasError={errors.terms}
+          hasError={!!errors.terms}
           checked={terms}
           setValue={setTerms}
-          msgError={errors.terms}
+          messageError={errors.terms}
         />
       </div>
       <footer>

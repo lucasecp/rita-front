@@ -10,7 +10,7 @@ import axios from 'axios'
 import { registerPatientToApi } from './adapters/toApi'
 
 import { RegisterSuccess } from './messages/RegisterSuccess'
-import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
+import { DocumentsNotSended } from './messages/DocumentsNotSended'
 export interface RegistrationDataState {
   id?: number
   name?: string
@@ -195,7 +195,7 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
             ),
       ])
     } catch ({ response }) {
-      toast.error('Erro ao enviar os documentos!')
+      showMessage(DocumentsNotSended)
     } finally {
       Loading.turnOff()
     }
