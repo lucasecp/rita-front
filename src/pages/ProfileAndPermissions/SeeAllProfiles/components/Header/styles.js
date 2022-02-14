@@ -29,6 +29,7 @@ export const Content = styled.div`
     margin-left: 4px;
     margin-right: 4px;
     :last-child {
+      justify-content: left;
     }
   }
   h5 {

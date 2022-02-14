@@ -1,14 +1,17 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React from 'react'
 
-import { enableRipple } from '@syncfusion/ej2-base'
-import { TreeViewComponent } from '@syncfusion/ej2-react-navigations'
+import { EmitType, enableRipple } from '@syncfusion/ej2-base'
+import {
+  NodeCheckEventArgs,
+  TreeViewComponent,
+} from '@syncfusion/ej2-react-navigations'
 
 import { Container } from './styles'
 
 enableRipple(true)
 
 interface PermissionsSelectProps {
-  disabled?: boolean
+  nodeChecked: EmitType<NodeCheckEventArgs>
   permissions: {
     id: string
     name: string
@@ -24,19 +27,22 @@ interface PermissionsSelectProps {
 
 export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
   permissions = [],
-  disabled,
+  nodeChecked,
 }) => {
   const fields = {
     dataSource: permissions,
     id: 'id',
     text: 'name',
-    teste: 'teste',
     child: 'subChild',
   }
 
   return (
     <Container>
-      <TreeViewComponent fields={fields} showCheckBox/>
+      <TreeViewComponent
+        fields={fields}
+        showCheckBox={true}
+        nodeChecked={nodeChecked}
+      />
     </Container>
   )
 }

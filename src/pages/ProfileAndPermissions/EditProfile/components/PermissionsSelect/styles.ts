@@ -6,18 +6,11 @@ export const Container = styled.div`
   .e-checkbox-wrapper .e-frame.e-check,
   .e-css.e-checkbox-wrapper .e-frame.e-check::before {
     background: ${({ theme }) => theme.main};
-    pointer-events: none;
     border-color: ${({ theme }) => theme.main};
-  }
-
-  .e-checkbox-wrapper .e-ripple-element,
-  .e-css.e-checkbox-wrapper .e-ripple-element {
-    background: transparent;
   }
 
   .e-checkbox-wrapper .e-frame,
   .e-css.e-checkbox-wrapper .e-frame {
-    pointer-events: none;
     border-color: ${({ theme }) => theme.main};
   }
 
@@ -46,10 +39,6 @@ export const Container = styled.div`
       .e-list-text {
         font-size: 20px;
         color: ${colors.gray.dark};
-        pointer-events: none;
-        :hover {
-          pointer-events: none;
-        }
       }
       div.e-icons {
         order: 1;
@@ -95,14 +84,12 @@ export const Container = styled.div`
         color: ${colors.gray.dark};
       }
       .e-node-focus.e-node-collapsed {
-        pointer-events: none;
       }
     }
   }
 
   .e-treeview .e-list-item.e-active > .e-text-content .e-list-text {
     color: ${colors.gray.dark};
-    pointer-events: none;
   }
 
   .e-text-content.e-icon-wrapper {
@@ -119,8 +106,14 @@ export const Container = styled.div`
     display: flex;
   }
 
+  .e-checkbox-wrapper .e-ripple-element,
+  .e-css.e-checkbox-wrapper .e-ripple-element {
+    background: transparent;
+  }
+
+  /* e-ripple-container e-ripple //bolinha rosa */
+
   .e-checkbox-wrapper {
-    pointer-events: none;
     .e-frame.e-stop,
     .e-css.e-checkbox-wrapper .e-frame.e-stop {
       background-color: #fff;
@@ -131,7 +124,6 @@ export const Container = styled.div`
       background: ${({ theme }) => theme.main};
     }
     .e-css {
-      pointer-events: none;
     }
     .e-stop::before,
     .e-css.e-checkbox-wrapper.e-stop::before {

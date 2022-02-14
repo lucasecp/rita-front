@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import {
-  Container,
-  useViewStyles,
-  useItemStyles,
-  useAccordionStyles,
-} from './styles'
+import { Container } from './styles'
 import { useLoading } from '@/hooks/useLoading'
 import apiUser from '@/services/apiUser'
 import {
@@ -14,7 +9,10 @@ import {
   oneProfileFromApi,
 } from './adapters/fromApi'
 import InputText from '@/components/Form/InputText'
-import { DIRECTOR_SEE_ALL_PROFILES } from '@/routes/constants/namedRoutes/routes'
+import {
+  DIRECTOR_SEE_ALL_PROFILES,
+  DIRECTOR_EDIT_PROFILE,
+} from '@/routes/constants/namedRoutes/routes'
 import OutilineButton from '@/components/Button/Outline'
 import ButtonLink from '@/components/Button/Link'
 import { PermissionsSelect } from './components/PermissionsSelect'
@@ -97,14 +95,22 @@ export const SeeOneProfile: React.FC = () => {
         {profilesAndPermissions.length && (
           <PermissionsSelect
             permissions={profilesAndPermissions}
-            // disabled={disabled}
+            disabled={disabled}
           />
         )}
         <footer>
           <ButtonLink onClick={() => history.push(DIRECTOR_SEE_ALL_PROFILES)}>
             Voltar
           </ButtonLink>
-          <OutilineButton onClick={() => setDisabled(false)}>
+          <OutilineButton
+            onClick={() =>
+              history.push(DIRECTOR_EDIT_PROFILE, {
+                id,
+                profilesAndPermissions,
+                oneProfile,
+              })
+            }
+          >
             Editar
           </OutilineButton>
         </footer>
