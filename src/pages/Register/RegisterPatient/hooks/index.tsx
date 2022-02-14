@@ -110,8 +110,8 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
   )
 
   const isPatientLinkedCompany = useMemo(() => {
-    return !!registrationData?.company
-  }, [registrationData])
+    return !!initialRegisterData.registrationData?.company
+  }, [initialRegisterData])
 
   const isActiveStep = (stepNumber: number) => {
     return step === stepNumber
@@ -132,8 +132,6 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
   }
 
   const onFinishRegister = async () => {
-    const registerAndDocumentsSucess = false
-
     try {
       Loading.turnOn()
 
