@@ -5,7 +5,7 @@ import LoginLayout from '@/components/Layout/LoginLayout'
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Content } from './style'
-import CheckboxComponent from '@/components/Form/Checkbox'
+import { Checkbox } from '@/components/Form/Checkbox'
 import validateCpf from '@/helpers/validateCpf'
 import { useAuth } from '@/hooks/login'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
@@ -71,7 +71,7 @@ function Login() {
           hasError={errors.password}
           messageError={errors.password}
         />
-        <CheckboxComponent
+        <Checkbox
           setValue={setStayConnected}
           checked={stayConnected}
           label="Permanecer Conectado"

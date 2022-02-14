@@ -6,11 +6,12 @@ import InputText from '@/components/Form/InputText'
 import InputMask from '@/components/Form/InputMask'
 import { Select } from '@/components/Form/Select'
 
+import { formatCpf } from '@/helpers/formatCpf'
+
 import { Container } from './styles'
 
 import {
   validateBirthdate,
-  validateCpf,
   validateEmail,
   validateGender,
   validateName,
@@ -65,22 +66,10 @@ function PersonExpandable({
           onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
           msgError={errors.name}
         />
-        <InputMask
-          label="CPF:"
-          mask="999.999.999-99"
-          value={cpf}
-          setValue={setCpf}
-          onBlur={() =>
-            setErrors({ ...errors, ...validateCpf(cpf, allPersonData) })
-          }
-          onKeyUp={() =>
-            setErrors({ ...errors, ...validateCpf(cpf, allPersonData) })
-          }
-          msgError={errors.cpf}
-          disabled={holder}
-        />
-      </section>
-      <section>
+        <div className="static-field">
+          <label>CPF:</label>
+          <p>{formatCpf(cpf)}</p>
+        </div>
         <InputMask
           label="Data de Nascimento:"
           mask="99/99/9999"
@@ -126,6 +115,30 @@ function PersonExpandable({
           onKeyUp={() => setErrors({ ...errors, ...validateEmail(email) })}
           msgError={errors.email}
         />
+      </section>
+      <section>
+        <div className="static-field">
+          <label>Plano Contratado:</label>
+          <p>-</p>
+        </div>
+        <div className="static-field">
+          <label>Tabela:</label>
+          <p>-</p>
+        </div>
+        <div className="static-field">
+          <label>Nome da Empresa:</label>
+          <p>-</p>
+        </div>
+        <div className="has-three-in-row">
+          <div className="static-field">
+            <label>CNPJ da empresa:</label>
+            <p>-</p>
+          </div>
+          <div className="static-field">
+            <label>Sigla da empresa:</label>
+            <p>-</p>
+          </div>
+        </div>
       </section>
     </Container>
   )

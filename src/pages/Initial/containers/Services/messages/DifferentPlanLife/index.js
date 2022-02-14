@@ -12,7 +12,8 @@ const DifferentPlanLife = () => {
     <Container>
       <img src={warning} />
       <p>
-        Este serviço não faz parte do seu plano. Deseja Conhecer o CSD? &nbsp;
+        Este serviço não faz parte do seu pacote. Deseja atualizar seu plano da
+        Rita? &nbsp;
       </p>
       <ButtonGroup>
         <OutlineButton onClick={closeModal}>Não</OutlineButton>

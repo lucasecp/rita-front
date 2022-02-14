@@ -1,29 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import { Container, Card, CustomCol } from './styles'
-import OutlineButton from '@/components/Button/Outline'
-
-import { useModal } from '@/hooks/useModal'
-
-import { Row } from 'react-bootstrap'
-
 import Background1 from '@/assets/img/element1.png'
 import Background2 from '@/assets/img/element2.svg'
 import Background3 from '@/assets/img/element3.svg'
 import Background4 from '@/assets/img/element4.svg'
-import apiPatient from '@/services/apiPatient'
+import OutlineButton from '@/components/Button/Outline'
+import { DefaultLayout } from '@/components/Layout/DefaultLayout'
+import { useAuth } from '@/hooks/login'
 import { useLoading } from '@/hooks/useLoading'
-import Socialplan from './messages/Socialplan'
+import { useModal } from '@/hooks/useModal'
+import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/routes'
+import apiPatient from '@/services/apiPatient'
+import React, { useEffect, useState } from 'react'
+import { Row } from 'react-bootstrap'
+import { useHistory } from 'react-router'
+
 import DifferentPlanLife from './messages/DifferentPlanLife'
 import VidaPlanLife from './messages/VidaPlanLife'
 import VidaPlanLifeConfirm from './messages/VidaPlanLifeConfirm'
-import { useHistory } from 'react-router'
-import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/routes'
-import { DefaultLayout } from '@/components/Layout/DefaultLayout'
+import { Card, Container, CustomCol } from './styles'
 
 export const Services = () => {
-  const [plan, SetPlan] = useState('')
   const [medicinesLink, SetMedicinesLink] = useState('')
   const { Loading } = useLoading()
+  const { user } = useAuth()
   const { showMessage } = useModal()
   const history = useHistory()
 
@@ -40,45 +38,42 @@ export const Services = () => {
       }
     }
 
-    const getPlans = async () => {
-      try {
-        Loading.turnOn()
-        const { data } = await apiPatient.get('/paciente/meu-perfil')
-        SetPlan(data.plano.nome)
-      } catch (error) {
-      } finally {
-        Loading.turnOff()
-      }
-    }
-
-    getPlans()
     getMedicineLink()
   }, [])
 
+  const hasPermission = (permission) => {
+    return user.permissoes.some((p) => p === permission)
+  }
+
   const onConsult = () => {
-    if (plan === 'Social') {
-      return showMessage(Socialplan)
+    if (!hasPermission('SERVICO_CONSULTA')) {
+      return showMessage(DifferentPlanLife)
     }
     history.push(PATIENT_SCHEDULE_APPOINTMENT)
   }
 
   const onMedicines = () => {
-    if (plan === 'Social') {
-      return showMessage(Socialplan)
+    if (!hasPermission('SERVICO_MEDICAMENTO')) {
+      return showMessage(DifferentPlanLife)
     }
     window.open(medicinesLink[0])
   }
 
   const onCsd = async () => {
     try {
-      const { data } = await apiPatient.get('/atendimento')
-      if (plan === 'Vida' && data) {
-        return showMessage(VidaPlanLifeConfirm)
+      if (hasPermission('ATENDIMENTO_CSD')) {
+        const { data } = await apiPatient.get('/atendimento')
+        if (data) {
+          return showMessage(VidaPlanLifeConfirm)
+        }
+      } else {
+        return showMessage(DifferentPlanLife)
       }
-    } catch {
-      if (plan === 'Vida') {
+    } catch (e) {
+      if (hasPermission('ATENDIMENTO_CSD')) {
         return showMessage(VidaPlanLife)
       }
+
       return showMessage(DifferentPlanLife)
     }
   }
@@ -87,7 +82,7 @@ export const Services = () => {
     <DefaultLayout>
       <Container>
         <Row>
-          <CustomCol md={6} order={plan === 'Vida' ? 2 : 1}>
+          <CustomCol md={6} order={hasPermission('ATENDIMENTO_CSD') ? 2 : 1}>
             <Card variation="middle-blue">
               <img src={Background2} />
               <h3>Consultas</h3>
@@ -99,7 +94,7 @@ export const Services = () => {
               </OutlineButton>
             </Card>
           </CustomCol>
-          <CustomCol md={6} order={plan === 'Vida' ? 3 : 2}>
+          <CustomCol md={6} order={hasPermission('ATENDIMENTO_CSD') ? 3 : 2}>
             <Card variation="light-blue">
               <img src={Background1} />
               <h3>Exames</h3>
@@ -118,7 +113,7 @@ export const Services = () => {
               </a>
             </Card>
           </CustomCol>
-          <CustomCol md={6} order={plan === 'Vida' ? 4 : 3}>
+          <CustomCol md={6} order={hasPermission('ATENDIMENTO_CSD') ? 4 : 3}>
             <Card variation="dark-blue">
               <img src={Background4} />
               <h3>Medicamentos</h3>
@@ -128,7 +123,7 @@ export const Services = () => {
               </OutlineButton>
             </Card>
           </CustomCol>
-          <CustomCol md={6} order={plan === 'Vida' ? 1 : 4}>
+          <CustomCol md={6} order={hasPermission('ATENDIMENTO_CSD') ? 1 : 4}>
             <Card variation="red">
               <img src={Background3} />
               <h3>CSD</h3>
