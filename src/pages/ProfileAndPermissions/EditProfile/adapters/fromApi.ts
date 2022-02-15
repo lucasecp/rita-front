@@ -19,11 +19,3 @@ export const arrayOfCheckedPermissions = (
     arrayToBeSetOnInitialCheckedPermissions.map(Number).sort((a, b) => a - b),
   )
 }
-
-export const checkedPermissionsWithoutFathersId = (checkedPermissions) => {
-  const checkedPermissionsToSave = checkedPermissions.filter(
-    (id) => id.toString().charAt(id.length - 1) !== 'F',
-  )
-
-  return checkedPermissionsToSave.map(Number).sort((a, b) => a - b)
-}

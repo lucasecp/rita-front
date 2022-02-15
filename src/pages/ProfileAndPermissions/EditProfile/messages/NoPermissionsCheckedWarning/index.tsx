@@ -3,7 +3,7 @@ import React from 'react'
 import warning from '@/assets/icons/alerts/warning.svg'
 
 import { useModal } from '@/hooks/useModal'
-import { Container, ButtonGroup } from './style'
+import { Container, ButtonGroup } from './styles'
 import OutlineButton from '@/components/Button/Outline'
 
 const NoPermissionsCheckedWarning: React.FC = () => {
@@ -13,9 +13,9 @@ const NoPermissionsCheckedWarning: React.FC = () => {
     <Container>
       <img src={warning} />
       <p>Deve haver pelo menos uma permissão associada</p>
-      <ButtonGroup>
+      <footer>
         <OutlineButton onClick={closeModal}>Ok</OutlineButton>
-      </ButtonGroup>
+      </footer>
     </Container>
   )
 }

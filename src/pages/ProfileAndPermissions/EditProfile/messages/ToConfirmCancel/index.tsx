@@ -23,10 +23,10 @@ const toConfirmCancel: React.FC = () => {
     <Container>
       <img src={warning} />
       <p>As alterações não serão salvas. Confirma a saída?</p>
-      <ButtonGroup>
+      <footer>
         <OutlineButton onClick={closeModal}>Não</OutlineButton>
         <ButtonPrimary onClick={cancel}>Sim</ButtonPrimary>
-      </ButtonGroup>
+      </footer>
     </Container>
   )
 }

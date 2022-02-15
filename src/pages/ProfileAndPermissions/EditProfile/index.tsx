@@ -5,14 +5,6 @@ import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 import { useHistory, useLocation } from 'react-router'
 
-import { DIRECTOR_SEE_ALL_PROFILES } from '@/routes/constants/namedRoutes/routes'
-import apiUser from '@/services/apiUser'
-import { profileAndPermissionsToApi } from './adapters/toApi'
-import {
-  arrayOfCheckedPermissions,
-  checkedPermissionsWithoutFathersId,
-} from './adapters/arrayOfCheckedPermissions'
-
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { PermissionsSelect } from './components/PermissionsSelect'
 import NoPermissionsCheckedWarning from './messages/NoPermissionsCheckedWarning'
@@ -22,6 +14,14 @@ import OutilineButton from '@/components/Button/Outline'
 import ButtonLink from '@/components/Button/Link'
 import { toast } from '@/styles/components/toastify'
 
+import { DIRECTOR_SEE_ALL_PROFILES } from '@/routes/constants/namedRoutes/routes'
+import apiUser from '@/services/apiUser'
+import {
+  profileAndPermissionsToApi,
+  checkedPermissionsWithoutFathersId,
+} from './adapters/toApi'
+import { arrayOfCheckedPermissions } from './adapters/fromApi'
+
 export const EditProfile: React.FC = () => {
   document.title = 'Rita Saúde | Perfis - Edição'
 
@@ -29,10 +29,7 @@ export const EditProfile: React.FC = () => {
   const history = useHistory()
   const { showMessage } = useModal()
 
-  const { id } = useLocation().state || {}
-  const { profilesAndPermissions } = useLocation().state || {}
-
-  const { oneProfile } = useLocation().state || {}
+  const { id, profilesAndPermissions, oneProfile } = useLocation().state || {}
 
   const initialOneProfileName = oneProfile.name
   const [oneProfileName, setOneProfileName] = useState(oneProfile.name)
@@ -53,7 +50,7 @@ export const EditProfile: React.FC = () => {
     setCheckedPermissions([...this.checkedNodes])
   }
 
-  const save = () => {
+  const onSaveEditProfile = async () => {
     if (
       JSON.stringify(initialOneProfileName) ===
         JSON.stringify(oneProfileName) &&
@@ -79,29 +76,29 @@ export const EditProfile: React.FC = () => {
       return showMessage(NoPermissionsCheckedWarning)
     }
 
-    const callApiToSave = async () => {
-      try {
-        Loading.turnOn()
-        const ProfilePermissionsAndNAmesToSAve = profileAndPermissionsToApi(
-          oneProfileName,
-          checkedPermissionsWithoutFathersId(checkedPermissions),
-        )
-        await apiUser.put(`/perfil/${id}`, ProfilePermissionsAndNAmesToSAve)
-      } catch (error) {
-        console.log(error)
-      } finally {
-        history.push(DIRECTOR_SEE_ALL_PROFILES)
-        Loading.turnOff()
-        toast.success('Dados atualizados com sucesso.')
-      }
+    try {
+      Loading.turnOn()
+      const profilePermissionsAndNamesMApped = profileAndPermissionsToApi(
+        oneProfileName,
+        checkedPermissions,
+      )
+      await apiUser.put(`/perfil/${id}`, profilePermissionsAndNamesMApped)
+
+      toast.success('Dados atualizados com sucesso.')
+      history.push(DIRECTOR_SEE_ALL_PROFILES)
+    } catch (error) {
+      toast.error('Erro ao atualizar perfil e permissões')
+      console.log('Erro ao atualizar perfil e permissões')
+    } finally {
+      Loading.turnOff()
     }
-    // callApiToSave()
   }
 
-  const cancel = () => {
+  const onBackEditProfile = () => {
     if (
       initialOneProfileName === oneProfileName &&
-      initialCheckedPermissions === checkedPermissions
+      JSON.stringify(initialCheckedPermissions) ===
+        JSON.stringify(checkedPermissionsWithoutFathersId(checkedPermissions))
     ) {
       return history.push(DIRECTOR_SEE_ALL_PROFILES)
     }
@@ -131,8 +128,8 @@ export const EditProfile: React.FC = () => {
           />
         )}
         <footer>
-          <ButtonLink onClick={cancel}>Voltar</ButtonLink>
-          <OutilineButton onClick={save}>Salvar</OutilineButton>
+          <ButtonLink onClick={onBackEditProfile}>Voltar</ButtonLink>
+          <OutilineButton onClick={onSaveEditProfile}>Salvar</OutilineButton>
         </footer>
       </Container>
     </DefaultLayout>
