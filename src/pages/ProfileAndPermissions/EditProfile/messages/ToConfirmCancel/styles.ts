@@ -30,26 +30,25 @@ export const Container = styled.div`
       margin-left: 6px;
     }
   }
-`
-export const ButtonGroup = styled.div`
-  margin-top: 24px;
-  display: flex;
-  align-items: center;
-  }
+  footer {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
 
-  > button + button {
-    margin-left: 20px;
-  }
-
-  @media (max-width: 539px) {
-    flex-direction: column;
-    width: 100%;
-    button + button {
-      margin-top: 20px;
-      margin-left: 0;
+    > button + button {
+      margin-left: 20px;
     }
-    button {
+
+    @media (max-width: 539px) {
+      flex-direction: column;
       width: 100%;
+      button + button {
+        margin-top: 20px;
+        margin-left: 0;
+      }
+      button {
+        width: 100%;
+      }
     }
   }
 `

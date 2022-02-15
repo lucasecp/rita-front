@@ -1,8 +1,4 @@
-export const arrayOfCheckedPermissions = (
-  profilesAndPermissions,
-  setInitialCheckedPermissions,
-  setCheckedPermissions,
-) => {
+export const arrayOfCheckedPermissions = (profilesAndPermissions) => {
   const arrayToBeSetOnInitialCheckedPermissions = []
   profilesAndPermissions.map((profile) => {
     return profile.subChild.map((subChild) => {
@@ -12,10 +8,7 @@ export const arrayOfCheckedPermissions = (
     })
   })
 
-  setInitialCheckedPermissions(
-    arrayToBeSetOnInitialCheckedPermissions.map(Number).sort((a, b) => a - b),
-  )
-  setCheckedPermissions(
-    arrayToBeSetOnInitialCheckedPermissions.map(Number).sort((a, b) => a - b),
-  )
+  return arrayToBeSetOnInitialCheckedPermissions
+    .map(Number)
+    .sort((a, b) => a - b)
 }

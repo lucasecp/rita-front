@@ -3,7 +3,7 @@ import React from 'react'
 import warning from '@/assets/icons/alerts/warning.svg'
 
 import { useModal } from '@/hooks/useModal'
-import { Container, ButtonGroup } from './style'
+import { Container } from './styles'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useHistory } from 'react-router'

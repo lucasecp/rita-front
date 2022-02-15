@@ -16,10 +16,7 @@ import { toast } from '@/styles/components/toastify'
 
 import { DIRECTOR_SEE_ALL_PROFILES } from '@/routes/constants/namedRoutes/routes'
 import apiUser from '@/services/apiUser'
-import {
-  profileAndPermissionsToApi,
-  checkedPermissionsWithoutFathersId,
-} from './adapters/toApi'
+import { profileAndPermissionsToApi } from './adapters/toApi'
 import { arrayOfCheckedPermissions } from './adapters/fromApi'
 
 export const EditProfile: React.FC = () => {
@@ -31,32 +28,32 @@ export const EditProfile: React.FC = () => {
 
   const { id, profilesAndPermissions, oneProfile } = useLocation().state || {}
 
-  const initialOneProfileName = oneProfile.name
   const [oneProfileName, setOneProfileName] = useState(oneProfile.name)
   const [oneProfileNameError, setOneProfileNameError] = useState('')
 
-  const [initialCheckedPermissions, setInitialCheckedPermissions] = useState([])
   const [checkedPermissions, setCheckedPermissions] = useState([])
 
+  const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(0)
+
   useEffect(() => {
-    arrayOfCheckedPermissions(
+    const arrayOfCheckedPermissionsToSet = arrayOfCheckedPermissions(
       profilesAndPermissions,
-      setInitialCheckedPermissions,
-      setCheckedPermissions,
     )
+    setCheckedPermissions(arrayOfCheckedPermissionsToSet)
   }, [])
+
+  useEffect(() => {
+    setAnyFieldsHasChanged(anyFieldsHasChanged + 1)
+  }, [checkedPermissions, oneProfileName])
+
+  console.log(anyFieldsHasChanged)
 
   const nodeChecked = function () {
     setCheckedPermissions([...this.checkedNodes])
   }
 
   const onSaveEditProfile = async () => {
-    if (
-      JSON.stringify(initialOneProfileName) ===
-        JSON.stringify(oneProfileName) &&
-      JSON.stringify(initialCheckedPermissions) ===
-        JSON.stringify(checkedPermissionsWithoutFathersId(checkedPermissions))
-    ) {
+    if (anyFieldsHasChanged === 2) {
       return history.push(DIRECTOR_SEE_ALL_PROFILES)
     }
 
@@ -95,18 +92,11 @@ export const EditProfile: React.FC = () => {
   }
 
   const onBackEditProfile = () => {
-    if (
-      initialOneProfileName === oneProfileName &&
-      JSON.stringify(initialCheckedPermissions) ===
-        JSON.stringify(checkedPermissionsWithoutFathersId(checkedPermissions))
-    ) {
+    if (anyFieldsHasChanged === 2) {
       return history.push(DIRECTOR_SEE_ALL_PROFILES)
     }
 
-    if (
-      initialOneProfileName !== oneProfileName ||
-      initialCheckedPermissions !== checkedPermissions
-    ) {
+    if (anyFieldsHasChanged > 2) {
       return showMessage(ToConfirmCancel)
     }
   }
@@ -120,7 +110,7 @@ export const EditProfile: React.FC = () => {
           label="Nome do Perfil"
           msgError={oneProfileNameError}
         />
-        <label htmlFor="categorias">Categoria</label>
+        <label htmlFor="Telas">Categoria</label>
         {profilesAndPermissions.length && (
           <PermissionsSelect
             permissions={profilesAndPermissions}
@@ -128,7 +118,7 @@ export const EditProfile: React.FC = () => {
           />
         )}
         <footer>
-          <ButtonLink onClick={onBackEditProfile}>Voltar</ButtonLink>
+          <ButtonLink onClick={onBackEditProfile}>Cancelar</ButtonLink>
           <OutilineButton onClick={onSaveEditProfile}>Salvar</OutilineButton>
         </footer>
       </Container>
