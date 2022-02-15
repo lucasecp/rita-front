@@ -13,6 +13,7 @@ definitions:
           - npx ts-node --skip-project ./src/updateVersion.ts ${BITBUCKET_BUILD_NUMBER}
           - git add .
           - git commit -m "Versão atualizada [skip ci]"
+          - git pull
           - git push
           - echo "Host git-codecommit.*.amazonaws.com" >> ~/.ssh/config
           - echo "User $SSHKEY" >> ~/.ssh/config
