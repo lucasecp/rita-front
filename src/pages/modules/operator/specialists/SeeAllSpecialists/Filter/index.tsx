@@ -137,19 +137,20 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
 
         <SelectIssuingAgency  />
 
+
         <InputText
           variation="secondary"
           label="Número do Registro:"
           // value={name}
           // setValue={setName}
-          maxLength={100}
+          maxLength={40}
         />
         <InputText
           variation="secondary"
           label="Nome:"
           // value={name}
           // setValue={setName}
-          maxLength={100}
+          maxLength={200}
         />
 
         <InputMask
