@@ -36,12 +36,7 @@ export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
 
   return (
     <Container>
-      <TreeViewComponent
-        disabled={disabled}
-        fields={fields}
-        showCheckBox
-        // expandedNodes={[]}
-      />
+      <TreeViewComponent fields={fields} showCheckBox/>
     </Container>
   )
 }

@@ -12,7 +12,7 @@ import {
   validateGender,
   validateName,
   validatePhone,
-} from '../../../../helpers/validator'
+} from '../../../shared/helpers/validator'
 import formatBirthdate from '@/helpers/formatDate'
 import { useModal } from '@/hooks/useModal'
 import { validateDepCpf } from './ValidateDepCpf'
@@ -20,6 +20,7 @@ import { useLoading } from '@/hooks/useLoading'
 import clearCpf from '@/helpers/clear/SpecialCaracteres'
 import apiPatient from '@/services/apiPatient'
 import { validateBirthDependent } from '../helpers/validateBirthDependent'
+import { useRegisterPatient } from '@/pages/Register/RegisterPatient/hooks'
 
 const CpfAlreadyExistsError =
   'Este CPF já está cadastrado na plataforma Rita, por favor verifique os dados e preencha novamente.'
@@ -27,14 +28,14 @@ const CpfAlreadyExistsError =
 const Form = ({
   editDep,
   id,
-  setAllDeps,
-  allDeps,
+  setAllDependents,
+  allDependents,
   action,
   clientCpf,
-  dataClientSabin,
 }) => {
   const { closeModal } = useModal()
   const { Loading } = useLoading()
+  const { initialRegisterData, setDependents } = useRegisterPatient()
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -45,11 +46,11 @@ const Form = ({
   const [errors, setErrors] = useState({})
 
   const updateData = () => {
-    setName(editDep.nome || '')
+    setName(editDep.name || '')
     setEmail(editDep.email || '')
-    setGender(editDep.sexo || '')
-    setBirthdate(formatBirthdate(editDep.dataNascimento) || '')
-    setPhone(editDep.telefone || '')
+    setGender(editDep.gender || '')
+    setBirthdate(formatBirthdate(editDep.birthdate) || '')
+    setPhone(editDep.phone || '')
     setCpf(editDep.cpf || '')
   }
 
@@ -58,18 +59,18 @@ const Form = ({
   }, [editDep])
 
   const dataBaseForm = {
-    nome: name,
-    email: email,
-    sexo: gender,
-    dataNascimento: birthdate,
-    telefone: phone,
+    name,
+    email,
+    gender,
+    birthdate,
+    phone,
     cpf,
   }
 
   const verifyNewPatinet = () => {
-    if (dataClientSabin?.idPaciente && action === 'edit') {
+    if (initialRegisterData?.registrationData?.id && action === 'edit') {
       return {
-        ...dataClientSabin?.dependentes[id],
+        ...initialRegisterData?.dependents[id],
         ...dataBaseForm,
       }
     }
@@ -100,6 +101,7 @@ const Form = ({
 
   const hanldeSubmit = async () => {
     setErrors({})
+
     if (await cpfAlreadyExistsApi()) {
       return setErrors({
         ...errors,
@@ -107,24 +109,30 @@ const Form = ({
       })
     }
     const newDep = [{ ...verifyNewPatinet() }]
-    setAllDeps((data) => [...data, ...newDep])
+    setAllDependents((data) => [...data, ...newDep])
+    setDependents((data) => [...data, ...newDep])
     closeModal()
   }
 
   const handleUpdate = async () => {
     setErrors({})
-    if ((await cpfAlreadyExistsApi()) && !dataClientSabin?.idPaciente) {
+    if (
+      (await cpfAlreadyExistsApi()) &&
+      !initialRegisterData?.registrationData?.id
+    ) {
       return setErrors({
         ...errors,
         cpf: CpfAlreadyExistsError,
       })
     }
 
-    const depsUpdated = allDeps.map((dep, index) => {
+    const depsUpdated = allDependents.map((dep, index) => {
       if (id === index) return { ...verifyNewPatinet() }
       return dep
     })
-    setAllDeps(depsUpdated)
+
+    setAllDependents(depsUpdated)
+    setDependents(depsUpdated)
     closeModal()
   }
 
@@ -155,13 +163,13 @@ const Form = ({
             onBlur={() =>
               setErrors({
                 ...errors,
-                ...validateDepCpf(cpf, allDeps, clientCpf, action),
+                ...validateDepCpf(cpf, allDependents, clientCpf, action),
               })
             }
             onKeyUp={() =>
               setErrors({
                 ...errors,
-                ...validateDepCpf(cpf, allDeps, clientCpf, action),
+                ...validateDepCpf(cpf, allDependents, clientCpf, action),
               })
             }
             msgError={errors.cpf}

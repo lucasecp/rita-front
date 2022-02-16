@@ -43,6 +43,7 @@ export const DIRECTOR_IMPORT_REPORT = '/importacao/relatorio'
 
 export const DIRECTOR_SEE_ALL_PROFILES = '/perfis'
 export const DIRECTOR_SEE_ONE_PROFILE = '/perfis/visualizar'
+export const DIRECTOR_EDIT_PROFILE = '/perfis/editar'
 
 export const FILTER_SELLABLE_ITEMS = '/itens-vendaveis/'
 export const CREATE_SELLABLE_ITEMS = '/itens-vendaveis/criar'
@@ -65,7 +66,9 @@ export const PATIENT_ADD_DOCUMENT_DEPENDENT =
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'
 export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'
-export const REGISTER_PATIENT = '/cadastro/paciente'
+
+export const REGISTER_PATIENT = '/cadastro/paciente/'
+export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const TESTE = '/teste'
 

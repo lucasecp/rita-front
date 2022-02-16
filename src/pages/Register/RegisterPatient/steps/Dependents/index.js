@@ -1,84 +1,89 @@
 import OutlineButton from '@/components/Button/Outline'
 import React, { useEffect, useState } from 'react'
-import { Container } from '../styles'
+import { Container } from './styles'
 import Form from './messages/Form'
-import { Content } from './styles'
 import trash from '@/assets/icons/trash.svg'
 import edit from '@/assets/icons/edit.svg'
 import { useModal } from '@/hooks/useModal'
-import { formatCpf } from '@/helpers/formatCpf'
-import mapDeps from '../../helpers/formatDateCardSabin'
 import { LimitDependent } from '@/pages/modules/patient/dependents/SeeAllDependents/components/AddDependentButton/messages/LimitDependent'
+import ButtonLink from '@/components/Button/Link'
+import ButtonPrimary from '@/components/Button/Primary'
+import { useRegisterPatient } from '../../hooks'
 
-export const Dependents = ({ dataClientSabin, setData, newData }) => {
-  const [allDeps, setAllDeps] = useState([])
+export const Dependents = ({ isActive }) => {
   const { showMessage } = useModal()
+  const {
+    cpfHolder,
+    isPatientLinkedCompany,
+    initialRegisterData,
+    limitOfDependents,
+    setDependents,
+    previousStep,
+    onFinishRegister,
+  } = useRegisterPatient()
 
-  const limitOfDependents = 2
-  const isPatientLinkedCompany = !!dataClientSabin.company
+  const [allDependents, setAllDependents] = useState([])
 
   useEffect(() => {
-    setAllDeps(
-      newData.dependentes || mapDeps(dataClientSabin.dependentes) || [],
-    )
-  }, [])
-
-  useEffect(() => {
-    setData((data) => ({ ...data, dependentes: allDeps }))
-  }, [allDeps])
+    setAllDependents(initialRegisterData?.dependents || [])
+  }, [initialRegisterData])
 
   const handleUpdate = (infoDep, id) => {
     showMessage(Form, {
       editDep: infoDep,
       id,
-      allDeps,
-      setAllDeps,
+      allDependents,
+      setAllDependents,
       action: 'edit',
-      clientCpf: newData.cpf,
-      dataClientSabin,
+      clientCpf: cpfHolder,
+      dataClientSabin: initialRegisterData,
     })
   }
 
   const handleDelete = (id) => {
-    const valueUpdated = allDeps.filter((dep, index) => index !== id)
-    if (dataClientSabin?.dependentes) {
-      dataClientSabin.dependentes.splice(id, 1)
-    }
-    setAllDeps(valueUpdated)
+    const valueUpdated = allDependents.filter((dep, index) => index !== id)
+
+    setAllDependents(valueUpdated)
   }
 
   const onAddDependent = () => {
-    if (isPatientLinkedCompany && allDeps.length >= limitOfDependents) {
+    if (isPatientLinkedCompany && allDependents.length >= limitOfDependents) {
       return showMessage(LimitDependent)
     }
 
     showMessage(Form, {
       editDep: {},
-      allDeps,
-      setAllDeps,
+      allDependents,
+      setAllDependents,
       action: 'create',
-      clientCpf: newData.cpf,
-      dataClientSabin,
+      clientCpf: cpfHolder,
+      dataClientSabin: initialRegisterData,
     })
   }
 
+  const onFinishRegisterInDependent = () => {
+    setDependents(allDependents)
+
+    onFinishRegister()
+  }
+
   return (
-    <Container>
-      <Content>
+    <Container active={isActive}>
+      <div>
         <h2>Dependentes</h2>
         <ul>
-          {allDeps.map((dep, index) => (
+          {allDependents.map((dependent, index) => (
             <li key={index}>
               <ul>
                 <li>
-                  Nome: <span>{dep.nome}</span>
+                  Nome: <span>{dependent.name}</span>
                 </li>
                 <li>
-                  CPF: <span>{formatCpf(dep.cpf)}</span>
+                  CPF: <span>{dependent.cpf}</span>
                 </li>
               </ul>
               <div>
-                <button onClick={() => handleUpdate(dep, index)}>
+                <button onClick={() => handleUpdate(dependent, index)}>
                   <img src={edit} />
                   Editar
                 </button>
@@ -91,13 +96,19 @@ export const Dependents = ({ dataClientSabin, setData, newData }) => {
           ))}
         </ul>
         <OutlineButton
-          disabled={allDeps.length === 5}
+          disabled={allDependents.length === 5}
           variation="blue"
           onClick={onAddDependent}
         >
           Adicionar Dependentes
         </OutlineButton>
-      </Content>
+      </div>
+      <footer>
+        <ButtonLink onClick={previousStep}>Etapa Anterior</ButtonLink>
+        <ButtonPrimary onClick={onFinishRegisterInDependent}>
+          Concluir cadastro
+        </ButtonPrimary>
+      </footer>
     </Container>
   )
 }

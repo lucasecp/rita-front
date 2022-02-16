@@ -44,8 +44,13 @@ export const Container = styled.div.attrs((props: { expanded: boolean }) => ({
 
     gap: 24px 32px;
 
+    > section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
     > div,
-    div.has-three-in-row div {
+    section div {
       display: flex;
       flex-direction: column;
 
@@ -66,11 +71,6 @@ export const Container = styled.div.attrs((props: { expanded: boolean }) => ({
         font-weight: 500;
         font-size: 16px;
       }
-    }
-
-    div.has-three-in-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
     }
 
     + section {
