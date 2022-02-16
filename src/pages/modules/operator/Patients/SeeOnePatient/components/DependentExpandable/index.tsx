@@ -19,27 +19,44 @@ import {
 import { useToggle } from '@/hooks/useToggle'
 // import formatDate from '@/helpers/formatDate'
 
-function PersonExpandable({
+import { Dependent } from '../../types/index'
+
+interface DependentExpandableProps {
+  title: string
+  allDependents: any
+  dependentData: Dependent
+  setDependentData: any
+  defaultExpanded?: boolean
+}
+
+export const DependentExpandable: React.FC<DependentExpandableProps> = ({
   title,
-  allPersonData,
-  personData,
-  setPersonData,
-  holder,
-}) {
-  const [expanded, toggleExpanded] = useToggle(!!holder)
+  allDependents,
+  dependentData,
+  setDependentData,
+  defaultExpanded = false,
+}) => {
+  const [expanded, toggleExpanded] = useToggle(defaultExpanded)
 
-  const [name, setName] = useState(personData.nome || '')
-  const [cpf, setCpf] = useState(personData.cpf || '')
-  const [birthDate, setBirthDate] = useState(personData?.dataNascimento || '')
-  const [gender, setGender] = useState(personData.sexo || '')
-  const [phone, setPhone] = useState(personData.telefone || '')
-  const [email, setEmail] = useState(personData.email || '')
+  const [name, setName] = useState(dependentData.name || '')
+  const [cpf, setCpf] = useState(dependentData.cpf || '')
+  const [birthDate, setBirthDate] = useState(dependentData?.birthDate || '')
+  const [gender, setGender] = useState(dependentData.gender || '')
+  const [phone, setPhone] = useState(dependentData.phone || '')
+  const [email, setEmail] = useState(dependentData.email || '')
 
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({
+    name: '',
+    cpf: '',
+    birthDate: '',
+    gender: '',
+    phone: '',
+    email: '',
+  })
 
   useEffect(() => {
-    setPersonData({
-      idPaciente: personData.idPaciente,
+    setDependentData({
+      id: dependentData.id,
       name,
       cpf,
       birthDate,
@@ -71,13 +88,12 @@ function PersonExpandable({
           value={cpf}
           setValue={setCpf}
           onBlur={() =>
-            setErrors({ ...errors, ...validateCpf(cpf, allPersonData) })
+            setErrors({ ...errors, ...validateCpf(cpf, allDependents) })
           }
           onKeyUp={() =>
-            setErrors({ ...errors, ...validateCpf(cpf, allPersonData) })
+            setErrors({ ...errors, ...validateCpf(cpf, allDependents) })
           }
           msgError={errors.cpf}
-          disabled={holder}
         />
       </section>
       <section>
@@ -104,7 +120,7 @@ function PersonExpandable({
           ]}
           value={gender}
           setValue={setGender}
-          onKeyUp={(e) => {
+          onKeyUp={(e: React.ChangeEvent<HTMLInputElement>) => {
             setErrors({ ...errors, ...validateGender(e.target.value) })
           }}
           msgError={errors.gender}
@@ -130,5 +146,3 @@ function PersonExpandable({
     </Container>
   )
 }
-
-export default PersonExpandable

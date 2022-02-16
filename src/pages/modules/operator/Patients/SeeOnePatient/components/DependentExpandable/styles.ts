@@ -2,7 +2,12 @@ import styled, { css } from 'styled-components'
 
 import colors from '@/styles/colors'
 
-export const Container = styled.div`
+interface ContainerProps {
+  expanded: boolean
+}
+
+export const Container = styled.div<ContainerProps>`
+  padding-top: 24px;
   padding-bottom: 20px;
   border-bottom: 2px solid ${colors.gray.light};
 
@@ -42,35 +47,6 @@ export const Container = styled.div`
 
     gap: 24px 32px;
 
-    > div.static-field,
-    div.has-three-in-row div {
-      display: flex;
-      flex-direction: column;
-
-      gap: 8px;
-
-      line-height: 20px;
-
-      > label {
-        color: ${colors.gray.middleLight};
-
-        font-weight: 300;
-        font-size: 14px;
-      }
-
-      > p {
-        color: ${colors.black};
-
-        font-weight: 500;
-        font-size: 16px;
-      }
-    }
-
-    div.has-three-in-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
     + section {
       transition: 0.3s;
 
@@ -92,15 +68,6 @@ export const Container = styled.div`
           padding-bottom: 4px;
         `}
     }
-  }
-
-  > section:first-of-type {
-    ${({ expanded }) =>
-      expanded &&
-      css`
-        padding-bottom: 22px;
-        border-bottom: 2px solid #eeeeee;
-      `}
   }
 
   @media (max-width: 767px) {
