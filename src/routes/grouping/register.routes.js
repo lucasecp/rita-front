@@ -3,7 +3,7 @@ import CustomRoutes from '../custom.routes'
 import RegisterCardSabin from '@/pages/Register/InitialRegister/CardSabin'
 import DefaultRegister from '@/pages/Register/InitialRegister/Default'
 import PreRegister from '@/pages/Register/PreRegister/'
-import { RegisterPatient } from '@/pages/Register/RegisterPatient'
+import  {RegisterPatient} from '@/pages/Register/RegisterPatient'
 
 import {
   DEFAULT_REGISTER,
