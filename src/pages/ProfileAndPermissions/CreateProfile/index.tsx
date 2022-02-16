@@ -19,7 +19,7 @@ import apiUser from '@/services/apiUser'
 import { profileAndPermissionsToApi } from './adapters/toApi'
 import { arrayOfCheckedPermissions } from './adapters/fromApi'
 
-export const EditProfile: React.FC = () => {
+export const CreateProfile: React.FC = () => {
   document.title = 'Rita Saúde | Perfis - Edição'
 
   const { Loading } = useLoading()
@@ -70,7 +70,7 @@ export const EditProfile: React.FC = () => {
       return window.scrollTo(0, 0)
     }
     if (!checkedPermissions.length) {
-      return toast.error('Deve haver pelo menos uma permissão associada')
+      return showMessage(NoPermissionsCheckedWarning)
     }
 
     try {
@@ -80,11 +80,12 @@ export const EditProfile: React.FC = () => {
         checkedPermissions,
       )
       await apiUser.put(`/perfil/${id}`, profilePermissionsAndNamesMApped)
-      toast.success('Edição realizada com sucesso.')
+
+      toast.success('Dados atualizados com sucesso.')
       history.push(DIRECTOR_SEE_ALL_PROFILES)
-    } catch ({ response }) {
-      console.log(response.data.message)
-      toast.error(response.data.message)
+    } catch (error) {
+      toast.error('Erro ao atualizar perfil e permissões')
+      console.log('Erro ao atualizar perfil e permissões')
     } finally {
       Loading.turnOff()
     }

@@ -25,7 +25,6 @@ export const profilesAndPermissionsWithCheckedFromApi = (
 
   return profilesAndPermissionsMapped.map((profile) => ({
     ...profile,
-    teste: 'teste',
     // expanded: true,
     subChild: profile.subChild.map((permission) => {
       return {
