@@ -13,6 +13,7 @@ import { ReactComponent as SellableItemsIcon } from '@/assets/icons/salable-item
 import { ReactComponent as ProfilesIcon } from '@/assets/icons/profiles.svg'
 import { ReactComponent as ClinicsIcon } from '@/assets/icons/clinic.svg'
 import { ReactComponent as ImportIcon } from '@/assets/icons/import.svg'
+import { ReactComponent as StethoscopeIcon } from '@/assets/icons/stethoscope.svg'
 
 import {
   INITIAL_PAGE,
@@ -28,6 +29,7 @@ import {
   FILTER_SELLABLE_ITEMS,
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ALL_SPECIALTYS,
+  OPERATOR_SEE_ALL_SPECIALISTS,
   DIRECTOR_SEE_ALL_PROFILES,
   OPERATOR_DEPENDENT_MANAGMENT,
   DIRECTOR_IMPORT,
@@ -131,5 +133,11 @@ export const menuItens = [
     icon: <ImportIcon />,
     name: 'Importação',
     permission: permissionList.IMPORTAR_PACIENTES,
+  },
+  {
+    path: OPERATOR_SEE_ALL_SPECIALISTS,
+    icon: <StethoscopeIcon />,
+    name: 'Especialistas',
+    permission: permissionList.LISTAR_MEDICOS,
   },
 ]

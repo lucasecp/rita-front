@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { RadioGroup } from '@material-ui/core'
 
-import CheckboxComponent from '@/components/Form/Checkbox'
+import { Checkbox } from '@/components/Form/Checkbox'
 import Textarea from '@/components/Form/Textarea'
 import RadioButton from '@/styles/components/RadioButton'
 
@@ -100,14 +100,16 @@ export const ValidationSeeOnePatient: React.FC<
       </RadioGroup>
       {documentOk === 'yes' && (
         <section>
-          <CheckboxComponent
+          <Checkbox
             id="terms"
             label="Atesto que verifiquei todos os dados preenchidos pelo usuário como dados reais."
             checked={allDataVerified}
             setValue={setCheckAllData}
             colorLight
             hasError={!allDataVerified}
-            msgError={!allDataVerified && 'A seleção do campo é obrigatória'}
+            messageError={
+              !allDataVerified && 'A seleção do campo é obrigatória'
+            }
           />
         </section>
       )}

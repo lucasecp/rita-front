@@ -10,7 +10,11 @@ import { useRegisterPatient } from '../../hooks'
 import ButtonLink from '@/components/Button/Link'
 import ButtonPrimary from '@/components/Button/Primary'
 
-export const Address = ({ isActive }) => {
+interface AddressProps {
+  isActive: boolean
+}
+
+export const Address: React.FC<AddressProps> = ({ isActive }) => {
   const { initialRegisterData, setAddress, previousStep, nextStep } =
     useRegisterPatient()
 
@@ -21,7 +25,7 @@ export const Address = ({ isActive }) => {
   const [numberHome, setNumberHome] = useState('')
   const [district, setDistrict] = useState('')
   const [complement, setComplement] = useState('')
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({} as { cep: string })
 
   useEffect(() => {
     setCep(initialRegisterData?.address?.cep || '')
@@ -59,7 +63,7 @@ export const Address = ({ isActive }) => {
             onBlur={() => setErrors({ ...errors, ...validateCep(cep) })}
             onKeyUp={() => setErrors({ ...errors, ...validateCep(cep) })}
             msgError={errors.cep}
-            hasError={errors.cep}
+            hasError={!!errors.cep}
           />
           <Select
             label="UF:"
@@ -89,10 +93,10 @@ export const Address = ({ isActive }) => {
               value={numberHome}
               setValue={setNumberHome}
               name="numberHome"
-              maxLength="50"
+              maxLength={50}
             />
           </section>
-          <InputMask
+          <InputText
             label="Bairro:"
             value={district}
             setValue={setDistrict}
@@ -108,7 +112,6 @@ export const Address = ({ isActive }) => {
           />
         </section>
       </div>
-
       <footer>
         <ButtonLink onClick={previousStep}>Etapa Anterior</ButtonLink>
         <ButtonPrimary onClick={onNextStep}>Próxima Etapa</ButtonPrimary>

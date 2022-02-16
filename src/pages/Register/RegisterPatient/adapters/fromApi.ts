@@ -10,6 +10,7 @@ interface InitialFromApi {
   telefone?: string
   cpf?: string
   company?: string
+  empresa: string[]
   endereco: {
     cep?: string
     uf?: string
@@ -33,6 +34,8 @@ interface InitialFromApi {
 export const initialRegisterPatientFromApi = (
   initialRegisterPatientFromApi: InitialFromApi,
 ): RegisterDataState => {
+  console.log(initialRegisterPatientFromApi)
+
   return {
     registrationData: {
       id: initialRegisterPatientFromApi.idPaciente,
@@ -42,7 +45,10 @@ export const initialRegisterPatientFromApi = (
       birthdate: initialRegisterPatientFromApi.dataNascimento,
       phone: initialRegisterPatientFromApi.telefone,
       cpf: initialRegisterPatientFromApi.cpf,
-      company: initialRegisterPatientFromApi.company,
+      company:
+        (initialRegisterPatientFromApi.empresa &&
+          initialRegisterPatientFromApi.empresa[0]) ||
+        initialRegisterPatientFromApi.company,
     },
     address: {
       cep: initialRegisterPatientFromApi.endereco?.cep,
