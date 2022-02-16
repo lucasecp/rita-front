@@ -1,3 +1,4 @@
+// Esse componente será apagado. Apenas esperando a confirmação do uso do toast e nao mais do modal
 import React from 'react'
 
 import warning from '@/assets/icons/alerts/warning.svg'
