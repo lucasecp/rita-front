@@ -13,6 +13,7 @@ import { EditSellableItems } from '@/pages/SellableItems/EditSellableItems'
 import { SeeAllProfiles } from '@/pages/ProfileAndPermissions/SeeAllProfiles'
 import { SeeOneProfile } from '@/pages/ProfileAndPermissions/SeeOneProfile'
 import { EditProfile } from '@/pages/ProfileAndPermissions/EditProfile'
+import { CreateProfile } from '@/pages/ProfileAndPermissions/CreateProfile'
 
 import {
   directorRoutes,
@@ -35,6 +36,7 @@ import {
   DIRECTOR_SEE_ALL_PROFILES,
   DIRECTOR_SEE_ONE_PROFILE,
   DIRECTOR_EDIT_PROFILE,
+  DIRECTOR_CREATE_PROFILE,
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
 
@@ -74,6 +76,12 @@ function Routes() {
       />
 
       <Route path={DIRECTOR_EDIT_PROFILE} isPrivate component={EditProfile} />
+
+      <Route
+        path={DIRECTOR_CREATE_PROFILE}
+        isPrivate
+        component={CreateProfile}
+      />
 
       <Route path={SEE_SELLABLE_ITEMS} isPrivate component={SeeSellableItems} />
 

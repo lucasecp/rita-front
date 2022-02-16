@@ -42,6 +42,7 @@ export const DIRECTOR_IMPORT_REPORT = '/importacao/relatorio'
 export const DIRECTOR_SEE_ALL_PROFILES = '/perfis'
 export const DIRECTOR_SEE_ONE_PROFILE = '/perfis/visualizar'
 export const DIRECTOR_EDIT_PROFILE = '/perfis/editar'
+export const DIRECTOR_CREATE_PROFILE = '/perfis/criar'
 
 export const FILTER_SELLABLE_ITEMS = '/itens-vendaveis/'
 export const CREATE_SELLABLE_ITEMS = '/itens-vendaveis/criar'
