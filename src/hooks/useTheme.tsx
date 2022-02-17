@@ -30,6 +30,7 @@ const ThemeProvider: React.FC = ({ children }) => {
       case 'Diretor':
       case 'Gerente Comercial':
       case 'Gestor de Contas':
+      case 'Gestor da Plataforma':
         setTheme(themes.blue)
         break
 

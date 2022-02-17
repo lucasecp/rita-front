@@ -7,6 +7,18 @@ export const Container = styled.div`
   .e-css.e-checkbox-wrapper .e-frame.e-check::before {
     background: ${({ theme }) => theme.main};
     pointer-events: none;
+    border-color: ${({ theme }) => theme.main};
+  }
+
+  .e-checkbox-wrapper .e-ripple-element,
+  .e-css.e-checkbox-wrapper .e-ripple-element {
+    background: transparent;
+  }
+
+  .e-checkbox-wrapper .e-frame,
+  .e-css.e-checkbox-wrapper .e-frame {
+    pointer-events: none;
+    border-color: ${({ theme }) => theme.main};
   }
 
   .e-frame.e-icons.e-check {
@@ -63,13 +75,15 @@ export const Container = styled.div`
       .e-icons.interaction {
         .e-icon-expandable {
           display: flex;
+          margin: auto;
         }
       }
       .e-level-2 {
+        display: flex;
         width: 100%;
-        height: 32px;
+        height: 41px;
         font-size: 32px;
-        justify-content: center;
+        justify-content: left;
         background: ${colors.gray.extraLight};
       }
     }
@@ -95,6 +109,7 @@ export const Container = styled.div`
     display: grid;
     grid-template-columns: 30px 30px 1fr;
     width: 100%;
+    height: 41px;
     background: ${colors.gray.light};
     padding: 8px;
   }
@@ -128,6 +143,7 @@ export const Container = styled.div`
     border-radius: 8px;
     border: none;
     margin: 0;
+    height: 41px;
   }
 
   .e-list-parent.e-ul {

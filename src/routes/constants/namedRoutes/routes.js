@@ -24,6 +24,8 @@ export const OPERATOR_CREATE_SPRECIALTY = '/especialidades/criar'
 export const OPERATOR_EDIT_SPRECIALTY = '/especialidades/editar'
 export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 export const OPERATOR_ADD_DEPENDENT = '/dependentes/associar'
+export const OPERATOR_SEE_ALL_SPECIALISTS = '/especialistas'
+
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
@@ -41,6 +43,8 @@ export const DIRECTOR_IMPORT_REPORT = '/importacao/relatorio'
 
 export const DIRECTOR_SEE_ALL_PROFILES = '/perfis'
 export const DIRECTOR_SEE_ONE_PROFILE = '/perfis/visualizar'
+export const DIRECTOR_EDIT_PROFILE = '/perfis/editar'
+export const DIRECTOR_CREATE_PROFILE = '/perfis/criar'
 
 export const FILTER_SELLABLE_ITEMS = '/itens-vendaveis/'
 export const CREATE_SELLABLE_ITEMS = '/itens-vendaveis/criar'
@@ -63,7 +67,9 @@ export const PATIENT_ADD_DOCUMENT_DEPENDENT =
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'
 export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'
-export const REGISTER_PATIENT = '/cadastro/paciente'
+
+export const REGISTER_PATIENT = '/cadastro/paciente/'
+export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const TESTE = '/teste'
 

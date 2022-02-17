@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
-import RegisterLayout from '@/components/Layout/RegisterLayout'
+import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 import validateCpf from '@/helpers/validateCpf'
 import cardSabinImg from '@/assets/img/card-sabin.png'
 import { Content } from './styles'
@@ -43,7 +43,7 @@ function RegisterCardSabin() {
         `/paciente/status?cpf=${cpf}`,
       )
 
-      company = responseApi.empresa[0]
+      company = responseApi.empresa && responseApi.empresa[0]
 
       if (responseApi.status === status.INACTIVE) {
         return showMessage(Inactive)
@@ -79,8 +79,9 @@ function RegisterCardSabin() {
       if (responseApi.status === status.DENIED_SECOND_TIME) {
         return showMessage(Denied)
       }
-    } catch ({ response }) {
-      const apiStatus = response.status
+    } catch (error) {
+      console.log('in catch', error)
+      const apiStatus = error.response?.status
       // company = response.data.empresa[0]
 
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {

@@ -18,10 +18,10 @@ export const SeeAllProfiles: React.FC = () => {
   const [profiles, setProfiles] = useState([])
 
   useEffect(() => {
+    Loading.turnOn()
+
     const loadProfiles = async () => {
       try {
-        Loading.turnOn()
-
         const { data } = await apiUser.get('/perfil')
 
         const profilesMapped = profilesFromApi(data)

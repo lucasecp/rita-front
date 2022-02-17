@@ -12,6 +12,8 @@ import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
 import { EditSellableItems } from '@/pages/SellableItems/EditSellableItems'
 import { SeeAllProfiles } from '@/pages/ProfileAndPermissions/SeeAllProfiles'
 import { SeeOneProfile } from '@/pages/ProfileAndPermissions/SeeOneProfile'
+import { EditProfile } from '@/pages/ProfileAndPermissions/EditProfile'
+import { CreateProfile } from '@/pages/ProfileAndPermissions/CreateProfile'
 
 import {
   directorRoutes,
@@ -33,7 +35,10 @@ import {
   EDIT_SELLABLE_ITEMS,
   DIRECTOR_SEE_ALL_PROFILES,
   DIRECTOR_SEE_ONE_PROFILE,
+  DIRECTOR_EDIT_PROFILE,
+  DIRECTOR_CREATE_PROFILE,
 } from './constants/namedRoutes/routes'
+import { TestAddressPage } from '@/pages/TestAddressPage'
 
 function Routes() {
   return (
@@ -70,6 +75,14 @@ function Routes() {
         component={SeeOneProfile}
       />
 
+      <Route path={DIRECTOR_EDIT_PROFILE} isPrivate component={EditProfile} />
+
+      <Route
+        path={DIRECTOR_CREATE_PROFILE}
+        isPrivate
+        component={CreateProfile}
+      />
+
       <Route path={SEE_SELLABLE_ITEMS} isPrivate component={SeeSellableItems} />
 
       <Route
@@ -83,6 +96,8 @@ function Routes() {
       <Route path={INITIAL_PAGE} isPrivate component={Initial} />
 
       <Route path={LOGIN} exact component={Login} />
+
+      <Route path="/teste-de-endereco" exact component={TestAddressPage} />
 
       {/* <Route
         path="/gestao/planos/editar"

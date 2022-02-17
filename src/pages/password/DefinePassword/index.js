@@ -1,7 +1,7 @@
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { InputPassword } from '@/components/Form/InputPassword'
-import RegisterLayout from '@/components/Layout/RegisterLayout'
+import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 import { useAuth } from '@/hooks/login'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
