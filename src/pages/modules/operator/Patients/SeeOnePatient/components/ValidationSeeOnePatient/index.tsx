@@ -76,14 +76,10 @@ export const ValidationSeeOnePatient: React.FC<
       {validations.documentOk === 'yes' && (
         <section>
           <Checkbox
-            id="terms"
             label="Atesto que verifiquei todos os dados preenchidos pelo usuário como dados reais."
             checked={validations.documentOk === 'yes'}
             colorLight
             disabled
-            setValue={() => {}}
-            hasError={false}
-            msgError=""
           />
         </section>
       )}
