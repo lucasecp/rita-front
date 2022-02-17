@@ -5,29 +5,30 @@ interface OrderI {
 
 export type StatusFromApi = 'I' | 'P' | 'A' | 'N'
 
-export interface DataClinicI {
+export interface DataSpecialist {
   id: string
   name: string
-  cnpj: string
+  cpf: string
+  issuingAgency: string
+  registerNumber: string
   status: StatusFromApi
 }
 
-export interface ClinicI {
+export interface SpecialistI {
   total: number
-  data?: DataClinicI[]
+  data?: DataSpecialist[]
 }
 
 type SetOrder = (order: OrderI) => void
 
 export interface TableProps {
-  clinics: ClinicI
-  setClinics: (value: any) => void
+  specialists: SpecialistI
   setOrder: SetOrder
   order: OrderI
 }
 
 export interface ContentProps {
-  clinics: ClinicI
+  specialists: SpecialistI
 }
 
 export interface HeaderProps {

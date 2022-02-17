@@ -1,12 +1,18 @@
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
-import formatCnpj from '@/helpers/formatCnpj'
-import { DataClinicI } from '../types'
+import { formatCpf } from '@/helpers/formatCpf'
+import { DataSpecialist } from '../types'
+import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 
-export const fromApi = (clinicInfo: any[]): DataClinicI[] => {
-  return clinicInfo.map((clinic) => ({
-    id: clinic.idClinica,
-    name: formatTextWithLimit(clinic.descricao, 50) || '-',
-    cnpj: formatCnpj(clinic.cnpj) || '-',
-    status: clinic.status || '-',
+export const fromApi = (specialistInfo: any[]): DataSpecialist[] => {
+  return specialistInfo.map((spec) => ({
+    id: spec.idMedico,
+    name: spec.nome,
+    cpf: formatCpf(spec.cpf) || '-',
+    status: spec.status || '-',
+    registerNumber: spec.registroProfissional || '-',
+    // issuingAgency: spec.orgaoEmissor?.descricao
+    //   ? spec.orgaoEmissor?.descricao + ' ' + spec.ufOrgaoEmissor.toUpperCase()
+    //   : '-',
+    issuingAgency: spec.orgaoEmissor?.descricao || '-',
   }))
 }

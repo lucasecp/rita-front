@@ -10,13 +10,16 @@ import apiAdmin from '@/services/apiAdmin'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 import { fromApi } from './adapters'
-import { ClinicI } from './types'
+import { SpecialistI } from './types'
 
 const SeeAllSpecialists: React.FC = () => {
   const [queryApi, setQueryApi] = useState('')
   const [filters, setFilters] = useState<any[]>([])
   const [order, setOrder] = useState({})
-  const [clinics, setClinics] = useState<ClinicI>({ total: 0, data: [] })
+  const [specialists, setSpecislists] = useState<SpecialistI>({
+    total: 0,
+    data: [],
+  })
   const { Loading } = useLoading()
 
   useEffect(() => {
@@ -26,27 +29,20 @@ const SeeAllSpecialists: React.FC = () => {
     }
 
     const getClinics = async () => {
-      const ordertoApi = Object.keys(order).length
-        ? order
-        : {
-            name: 'status',
-            value: 'ASC',
-          }
-
       try {
         Loading.turnOn()
         const { data } = await apiAdmin(
-          `/clinica${queryApi}${
-            queryFilterString(filters) + queryOrderString(ordertoApi)
+          `/medico${queryApi}${
+            queryFilterString(filters) + queryOrderString(order)
           }`,
         )
-        setClinics({ total: data.total, data: fromApi(data.clinicas) })
+        setSpecislists({ total: data.total, data: fromApi(data.medicos) })
       } catch (error) {
       } finally {
         Loading.turnOff()
       }
     }
-    // getClinics()
+    getClinics()
   }, [queryApi, filters, order])
 
   return (
@@ -54,13 +50,8 @@ const SeeAllSpecialists: React.FC = () => {
       <DefaultLayout title="Especialistas - Filtragem">
         <Content>
           <Filter setFilters={setFilters} />
-          <Table
-            clinics={clinics}
-            setClinics={setClinics}
-            setOrder={setOrder}
-            order={order}
-          />
-          <Pagination total={clinics?.total} setQuery={setQueryApi} />
+          <Table specialists={specialists} setOrder={setOrder} order={order} />
+          <Pagination total={specialists?.total} setQuery={setQueryApi} />
         </Content>
       </DefaultLayout>
     </Container>
