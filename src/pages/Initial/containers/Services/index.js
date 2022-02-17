@@ -53,7 +53,7 @@ export const Services = () => {
   }
 
   const onMedicines = () => {
-    if (!hasPermission('SERVICO_MEDICAMENTO')) {
+    if (!hasPermission('SERVICO_MEDICAMENTOS')) {
       return showMessage(DifferentPlanLife)
     }
     window.open(medicinesLink[0])
