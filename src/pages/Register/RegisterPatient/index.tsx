@@ -1,17 +1,23 @@
 import React, { useEffect, useMemo } from 'react'
 
+import { useLocation, useParams } from 'react-router'
+
 import { RegisterLayout } from '@/components/Layout/RegisterLayout'
-import { Address } from './steps/Address'
+
+import { ExitAndSteps } from './components/ExitAndSteps'
+
 import { RegistrationData } from './steps/RegistrationData'
+import { Address } from './steps/Address'
 import { Documents } from './steps/Documents'
 import { Dependents } from './steps/Dependents'
-import { Container } from './styles'
-import { useLocation, useParams } from 'react-router'
-import { ExitAndSteps } from './components/ExitAndSteps'
+
 import { useRegisterPatient } from './hooks'
-import { initialRegisterPatientFromApi } from './adapters/fromApi'
-import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
+
+import { Container } from './styles'
+
+import apiPatient from '@/services/apiPatient'
+import { initialRegisterPatientFromApi } from './adapters/fromApi'
 
 export const RegisterPatient: React.FC = () => {
   const location = useLocation()
@@ -32,12 +38,11 @@ export const RegisterPatient: React.FC = () => {
       return
     }
 
-    const loadPatientDataFromTokenParams = async () => {
-      if (token) {
+    if (token) {
+      const loadPatientDataFromTokenParams = async () => {
         try {
           Loading.turnOn()
 
-          // NjE5NDgxOTUzNzIxOTc1MDQxMA==
           const { data } = await apiPatient.get('/paciente/token/', {
             params: { token },
           })
@@ -51,9 +56,9 @@ export const RegisterPatient: React.FC = () => {
           Loading.turnOff()
         }
       }
-    }
 
-    loadPatientDataFromTokenParams()
+      loadPatientDataFromTokenParams()
+    }
   }, [])
 
   const activeStep = useMemo(() => {

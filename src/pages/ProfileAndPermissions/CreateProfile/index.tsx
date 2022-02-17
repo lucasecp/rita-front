@@ -3,60 +3,71 @@ import { Container } from './styles'
 
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory } from 'react-router'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { PermissionsSelect } from './components/PermissionsSelect'
-import NoPermissionsCheckedWarning from './messages/NoPermissionsCheckedWarning'
 import ToConfirmCancel from './messages/ToConfirmCancel'
 import InputText from '@/components/Form/InputText'
 import OutilineButton from '@/components/Button/Outline'
-import ButtonLink from '@/components/Button/Link'
 import { toast } from '@/styles/components/toastify'
 
 import { DIRECTOR_SEE_ALL_PROFILES } from '@/routes/constants/namedRoutes/routes'
 import apiUser from '@/services/apiUser'
 import { profileAndPermissionsToApi } from './adapters/toApi'
-import { arrayOfCheckedPermissions } from './adapters/fromApi'
+import { profileAndPermissionsFromApi } from './adapters/fromApi'
+import ButtonPrimary from '@/components/Button/Primary'
 
 export const CreateProfile: React.FC = () => {
-  document.title = 'Rita Saúde | Perfis - Edição'
+  document.title = 'Rita Saúde | Perfis - Incluir'
 
   const { Loading } = useLoading()
   const history = useHistory()
   const { showMessage } = useModal()
 
-  const { id, profilesAndPermissions, oneProfile } = useLocation().state || {}
-
-  const [oneProfileName, setOneProfileName] = useState(oneProfile.name)
+  const [oneProfileName, setOneProfileName] = useState('')
   const [oneProfileNameError, setOneProfileNameError] = useState('')
+
+  const [profilesAndPermissions, setProfilesAndPermissions] = useState([])
 
   const [checkedPermissions, setCheckedPermissions] = useState([])
 
-  const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(0)
-
   useEffect(() => {
-    const arrayOfCheckedPermissionsToSet = arrayOfCheckedPermissions(
-      profilesAndPermissions,
-    )
-    setCheckedPermissions(arrayOfCheckedPermissionsToSet)
+    const loadProfiles = async () => {
+      try {
+        Loading.turnOn()
+
+        const { data: profilesAndPermissions } = await apiUser.get(
+          '/grupo-permissao',
+        )
+
+        for (const element of profilesAndPermissions.dados) {
+          element.id = element.id + 'F'
+        }
+
+        const profilesAndPermissionsMapped = profileAndPermissionsFromApi(
+          profilesAndPermissions,
+        )
+
+        console.log(profilesAndPermissionsMapped)
+
+        setProfilesAndPermissions(profilesAndPermissionsMapped)
+      } catch (error) {
+        // console.log(error)
+        // toast.error('Erro ao carregar itens vendáveis!')
+      } finally {
+        Loading.turnOff()
+      }
+    }
+
+    loadProfiles()
   }, [])
-
-  useEffect(() => {
-    setAnyFieldsHasChanged(anyFieldsHasChanged + 1)
-  }, [checkedPermissions, oneProfileName])
-
-  console.log(anyFieldsHasChanged)
 
   const nodeChecked = function () {
     setCheckedPermissions([...this.checkedNodes])
   }
 
-  const onSaveEditProfile = async () => {
-    if (anyFieldsHasChanged === 2) {
-      return history.push(DIRECTOR_SEE_ALL_PROFILES)
-    }
-
+  const onSaveProfile = async () => {
     if (!oneProfileName.length) {
       setOneProfileNameError('Nome é obrigatório')
       return window.scrollTo(0, 0)
@@ -70,7 +81,7 @@ export const CreateProfile: React.FC = () => {
       return window.scrollTo(0, 0)
     }
     if (!checkedPermissions.length) {
-      return showMessage(NoPermissionsCheckedWarning)
+      return toast.error('Deve haver pelo menos uma permissão associada')
     }
 
     try {
@@ -79,30 +90,29 @@ export const CreateProfile: React.FC = () => {
         oneProfileName,
         checkedPermissions,
       )
-      await apiUser.put(`/perfil/${id}`, profilePermissionsAndNamesMApped)
 
-      toast.success('Dados atualizados com sucesso.')
+      console.log(profilePermissionsAndNamesMApped)
+
+      await apiUser.post(`/perfil`, profilePermissionsAndNamesMApped)
+      toast.success('Cadastro realizado com sucesso.')
       history.push(DIRECTOR_SEE_ALL_PROFILES)
-    } catch (error) {
-      toast.error('Erro ao atualizar perfil e permissões')
-      console.log('Erro ao atualizar perfil e permissões')
+    } catch ({ response }) {
+      toast.error(response.data.message)
     } finally {
       Loading.turnOff()
     }
   }
 
-  const onBackEditProfile = () => {
-    if (anyFieldsHasChanged === 2) {
-      return history.push(DIRECTOR_SEE_ALL_PROFILES)
-    }
-
-    if (anyFieldsHasChanged > 2) {
+  const onBackCreateProfile = () => {
+    if (checkedPermissions.length > 0 || oneProfileName.length > 0) {
       return showMessage(ToConfirmCancel)
+    } else {
+      return history.push(DIRECTOR_SEE_ALL_PROFILES)
     }
   }
 
   return (
-    <DefaultLayout title="Perfis - Edição">
+    <DefaultLayout title="Perfis - Incluir">
       <Container>
         <InputText
           value={oneProfileName}
@@ -111,15 +121,13 @@ export const CreateProfile: React.FC = () => {
           msgError={oneProfileNameError}
         />
         <label htmlFor="Telas">Categoria</label>
-        {profilesAndPermissions.length && (
-          <PermissionsSelect
-            permissions={profilesAndPermissions}
-            nodeChecked={nodeChecked}
-          />
-        )}
+        <PermissionsSelect
+          permissions={profilesAndPermissions}
+          nodeChecked={nodeChecked}
+        />
         <footer>
-          <ButtonLink onClick={onBackEditProfile}>Cancelar</ButtonLink>
-          <OutilineButton onClick={onSaveEditProfile}>Salvar</OutilineButton>
+          <OutilineButton onClick={onBackCreateProfile}>Cancelar</OutilineButton>
+          <ButtonPrimary onClick={onSaveProfile}>Salvar</ButtonPrimary>
         </footer>
       </Container>
     </DefaultLayout>

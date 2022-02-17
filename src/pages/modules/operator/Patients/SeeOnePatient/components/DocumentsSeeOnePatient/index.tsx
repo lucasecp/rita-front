@@ -6,8 +6,6 @@ import { useLoading } from '@/hooks/useLoading'
 import { Select } from '@/components/Form/Select'
 import { SeeDocumentFile } from './SeeDocumentFile'
 
-// import { incomeOptions } from '../../constants/income'
-
 import { Container } from './styles'
 import formatIncome from '../../helpers/formatIncome'
 

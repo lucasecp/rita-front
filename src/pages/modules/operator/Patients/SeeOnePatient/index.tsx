@@ -19,7 +19,7 @@ import { useModal } from '@/hooks/useModal'
 import ComeBack from './messages/ComeBack'
 import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import { getDataMapped } from './helpers/getDataMapped'
-import { toast } from 'react-toastify'
+import { toast } from '@/styles/components/toastify'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import { differenceInYears, parse } from 'date-fns'
 
@@ -36,12 +36,13 @@ import {
   Validations,
   ResponseApi,
 } from './types/index'
+import { isObjectEmpty } from '@/helpers/isObjectEmpty'
 
 export const SeeOnePatient: React.FC = () => {
   const history = useHistory()
   const { cpf } = useLocation().state
   const { Loading } = useLoading()
-  const { showMessage, showSimple } = useModal()
+  const { showMessage } = useModal()
 
   const [disableSaveButton, setDisableSaveButton] = useState(true)
 
@@ -224,7 +225,7 @@ export const SeeOnePatient: React.FC = () => {
             key={index}
           />
         ))}
-        {patientAddress && (
+        {!isObjectEmpty(patientAddress) && (
           <AddressSeeOnePatient
             address={patientAddress}
             setAddress={setPatientAddress}

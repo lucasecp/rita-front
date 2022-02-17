@@ -12,7 +12,6 @@ import { Container } from './styles'
 
 import {
   validateBirthdate,
-  validateEmail,
   validateGender,
   validateName,
   validatePhone,
@@ -20,6 +19,8 @@ import {
 import { useToggle } from '@/hooks/useToggle'
 
 import { PatientData } from '../../types/index'
+import { useMessage } from '@/hooks/useMessage'
+import { InputEmail } from '@/components/smarts/InputEmail'
 
 interface PersonExpandableProps {
   title: string
@@ -44,13 +45,14 @@ const PersonExpandable: React.FC<PersonExpandableProps> = ({
   const [gender, setGender] = useState(personData.gender)
   const [phone, setPhone] = useState(personData.phone)
   const [email, setEmail] = useState(personData.email)
+  const [errorMessage, sendErrorMessage] = useMessage()
 
   const [errors, setErrors] = useState({
     name: '',
     birthDate: '',
     gender: '',
     phone: '',
-    email: '',
+    email: false,
   })
 
   useEffect(() => {
@@ -70,7 +72,7 @@ const PersonExpandable: React.FC<PersonExpandableProps> = ({
           : '-',
         cnpj: personData.company ? personData.company?.cnpj : '-',
       },
-      error: Object.values(errors).some((value) => value !== ''),
+      error: Object.values(errors).some((value) => value),
     })
   }, [name, cpf, birthDate, gender, phone, email, errors])
 
@@ -159,13 +161,13 @@ const PersonExpandable: React.FC<PersonExpandableProps> = ({
               onKeyUp={() => setErrors({ ...errors, ...validatePhone(phone) })}
               msgError={errors.phone}
             />
-            <InputText
-              label="E-mail:"
-              value={email}
-              setValue={setEmail}
-              onBlur={() => setErrors({ ...errors, ...validateEmail(email) })}
-              onKeyUp={() => setErrors({ ...errors, ...validateEmail(email) })}
-              msgError={errors.email}
+            <InputEmail
+              initialEmail={email}
+              onGetEmail={setEmail}
+              hasError={(hasError) => setErrors({ ...errors, email: hasError })}
+              checkHasError={errorMessage}
+              onKeyUp={sendErrorMessage}
+              onBlur={sendErrorMessage}
             />
           </>
         )}

@@ -217,8 +217,8 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
         setInitialRegisterData,
         setRegistrationData,
         setAddress,
-        setDependents,
         setDocumentsFile,
+        setDependents,
         onFinishRegister,
       }}
     >

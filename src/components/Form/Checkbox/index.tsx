@@ -6,21 +6,23 @@ import {
 } from '@material-ui/core'
 
 interface CheckboxProps {
-  checked: boolean;
-  setValue: React.Dispach<React.SetStateAction<boolean>>;
-  label: string | JSX.Element;
-  hasError: boolean;
-  messageError?: string;
-  colorLight?: boolean;
+  checked: boolean
+  setValue?: React.Dispatch<React.SetStateAction<boolean>>
+  label: string | JSX.Element
+  hasError?: boolean
+  messageError?: string
+  colorLight?: boolean
+  disabled?: boolean
 }
 
 export const Checkbox: React.FC<CheckboxProps> = ({
   checked,
   setValue,
   label,
-  hasError,
-  messageError,
-  colorLight,
+  hasError = false,
+  messageError = '',
+  colorLight = false,
+  disabled = false,
   ...rest
 }) => {
   return (
@@ -29,9 +31,9 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         control={
           <MaterialCheckbox
             checked={checked}
-            onChange={() => setValue(!checked)}
+            onChange={setValue && (() => setValue(!checked))}
             inputProps={{ 'aria-label': 'primary checkbox' }}
-            color="primary"
+            disabled={disabled}
             {...rest}
           />
         }

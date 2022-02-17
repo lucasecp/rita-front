@@ -26,7 +26,11 @@ interface IPersonalDataFromApi {
     valor: string
   }
   canal: string
-  empresa: string
+  empresa: {
+    nome: string
+    razaoSocial: string
+    cnpj: string
+  }[]
 }
 
 interface IPersonalDataAddressFromApi {
@@ -109,7 +113,7 @@ export const fromApiPersonalDatas = (
       contractedPlanSince: data.plano?.data,
       price: data.plano?.valor ? formatPrice(data.plano?.valor) : 'Isento',
       channel: data.canal,
-      company: data.empresa,
+      company: data.empresa[0].nome,
     },
   }
 }
