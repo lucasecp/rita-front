@@ -11,13 +11,11 @@ import { AxiosResponse } from 'axios'
 interface SeeDocumentFileProps {
   title: string
   document: AxiosResponse | undefined
-  disabled: boolean
 }
 
 export const SeeDocumentFile: React.FC<SeeDocumentFileProps> = ({
   title,
   document,
-  disabled,
 }) => {
   const { showMessage } = useModal()
 
@@ -44,7 +42,7 @@ export const SeeDocumentFile: React.FC<SeeDocumentFileProps> = ({
   }
 
   return (
-    <Container onClick={onZoomDocument} disabled={disabled}>
+    <Container onClick={onZoomDocument} disabled={!document}>
       <h4>{title}</h4>
       <button>
         <ZoomIcon />
