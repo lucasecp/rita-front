@@ -1,23 +1,32 @@
 import { useEffect, useState } from 'react'
+import { AxiosResponse } from 'axios'
 
 import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
 import { Select } from '@/components/Form/Select'
 import { SeeDocumentFile } from './SeeDocumentFile'
 
-// import { incomeOptions } from '../../constants/income'
-
 import { Container } from './styles'
 import formatIncome from '../../helpers/formatIncome'
 
-function DocumentsSeeOnePatient({ incomeDocumentType, cpf }) {
+interface DocumentsSeeOnePatientProps {
+  incomeDocumentType: string
+  cpf: string
+  isDependentMinorAge: boolean
+}
+
+const DocumentsSeeOnePatient: React.FC<DocumentsSeeOnePatientProps> = ({
+  incomeDocumentType,
+  cpf,
+  isDependentMinorAge,
+}) => {
   const { Loading } = useLoading()
 
-  const [holdingDocument, setHoldingDocument] = useState()
-  const [frontDocument, setFrontDocument] = useState()
-  const [backDocument, setBackDocument] = useState()
-  const [incomeDocument, setIncomeDocument] = useState()
-  const [addressDocument, setAddressDocument] = useState()
+  const [holdingDocument, setHoldingDocument] = useState<AxiosResponse>()
+  const [frontDocument, setFrontDocument] = useState<AxiosResponse>()
+  const [backDocument, setBackDocument] = useState<AxiosResponse>()
+  const [incomeDocument, setIncomeDocument] = useState<AxiosResponse>()
+  const [addressDocument, setAddressDocument] = useState<AxiosResponse>()
 
   useEffect(() => {
     const loadDocuments = async () => {
@@ -91,44 +100,55 @@ function DocumentsSeeOnePatient({ incomeDocumentType, cpf }) {
     loadDocuments()
   }, [])
 
+  const showBackDocument = (isDependentMinorAge: boolean, document: any) => {
+    if (!isDependentMinorAge || (isDependentMinorAge && document)) {
+      return true
+    }
+
+    return false
+  }
+
   return (
     <Container>
       <h2>Documentos</h2>
-      <SeeDocumentFile
-        title="Foto segurando o documento de identificação"
-        document={holdingDocument}
-        disabled={!holdingDocument}
-      />
+      {!isDependentMinorAge && (
+        <SeeDocumentFile
+          title="Foto segurando o documento de identificação"
+          document={holdingDocument}
+        />
+      )}
       <SeeDocumentFile
         title="Foto do documento de identificação frente"
         document={frontDocument}
-        disabled={!frontDocument}
       />
-      <SeeDocumentFile
-        title="Foto do documento de identificação verso"
-        document={backDocument}
-        disabled={!backDocument}
-      />
-      <SeeDocumentFile
-        title="Comprovante de endereço"
-        document={addressDocument}
-        disabled={!addressDocument}
-      />
-      <section>
-        <Select
-          label="Renda:"
-          labelDefaultOption={formatIncome(incomeDocumentType)}
-          value={''}
-          disabled
+      {showBackDocument(isDependentMinorAge, backDocument) && (
+        <SeeDocumentFile
+          title="Foto do documento de identificação verso"
+          document={backDocument}
         />
-        <aside>
+      )}
+      {!isDependentMinorAge && (
+        <>
           <SeeDocumentFile
-            title="Comprovante de renda"
-            document={incomeDocument}
-            disabled={!incomeDocument}
+            title="Comprovante de endereço"
+            document={addressDocument}
           />
-        </aside>
-      </section>
+          <section>
+            <Select
+              label="Renda:"
+              labelDefaultOption={formatIncome(incomeDocumentType)}
+              value={''}
+              disabled
+            />
+            <aside>
+              <SeeDocumentFile
+                title="Comprovante de renda"
+                document={incomeDocument}
+              />
+            </aside>
+          </section>
+        </>
+      )}
     </Container>
   )
 }

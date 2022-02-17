@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
 import { Container } from './styles'
 
 import PersonExpandable from './components/PersonExpandable'
-import DependentExpandable from './components/DependentExpandable'
+import { DependentExpandable } from './components/DependentExpandable'
 import AddressSeeOnePatient from './components/AddressSeeOnePatient'
 import { useHistory, useLocation } from 'react-router'
 import apiPatient from '@/services/apiPatient'
@@ -19,46 +19,85 @@ import { useModal } from '@/hooks/useModal'
 import ComeBack from './messages/ComeBack'
 import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import { getDataMapped } from './helpers/getDataMapped'
-import { toast } from 'react-toastify'
+import { toast } from '@/styles/components/toastify'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
-// import apiUser from '@/services/apiUser'
+import { differenceInYears, parse } from 'date-fns'
 
-export const SeeOnePatient = () => {
-  const { cpf } = useHistory().location.state
-  const location = useLocation()
+import {
+  fromApiDependents,
+  fromApiPatientAddress,
+  fromApiPatientData,
+  fromApiPatientTable,
+} from './adapters/fromApi'
+import {
+  PatientData,
+  PatientAddress,
+  Dependent,
+  Validations,
+  ResponseApi,
+} from './types/index'
+import { isObjectEmpty } from '@/helpers/isObjectEmpty'
+
+export const SeeOnePatient: React.FC = () => {
+  const history = useHistory()
+  const { cpf } = useLocation().state
   const { Loading } = useLoading()
-  const { showMessage, showSimple } = useModal()
+  const { showMessage } = useModal()
 
   const [disableSaveButton, setDisableSaveButton] = useState(true)
 
-  const [patientData, setPatientData] = useState()
+  const [patientData, setPatientData] = useState({} as PatientData)
 
-  const [patientDependents, setPatientDependents] = useState([])
-  const [patientAddress, setPatientAddress] = useState()
-  // const [patientDocuments, setPatientDocuments] = useState({})
-  const [incomeDocumentType, setIncomeDocumentType] = ''
+  const [patientDependents, setPatientDependents] = useState<
+    Dependent[] | undefined
+  >([])
+  const [patientAddress, setPatientAddress] = useState({} as PatientAddress)
+  const [dependent, setDependent] = useState({} as PatientData | undefined)
+  const [incomeDocumentType, setIncomeDocumentType] = useState('')
 
-  const [validations, setValidations] = useState()
+  const [validations, setValidations] = useState({} as Validations)
   const [table, setTable] = useState('')
+  const [isDependentMinorAge, setIsDependentMinorAge] = useState(false)
 
   useEffect(() => {
     document.title = 'Rita Saúde | Pacientes'
 
-    if (!location.state) {
+    if (!cpf) {
       history.push(OPERATOR_ANALYZE_PATIENT)
-      return null
+      return
     }
 
     const loadPatientInformations = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiPatient.get(`/paciente/cpf?cpf=${cpf}`)
+        const { data } = await apiPatient.get<ResponseApi>(
+          `/paciente/cpf?cpf=${cpf}`,
+        )
 
-        setPatientData(data)
-        setPatientDependents(data.dependentes)
-        setPatientAddress(data.endereco)
+        const dateParsed = parse(data.dataNascimento, 'dd/MM/yyyy', new Date())
+        const age = differenceInYears(new Date(), dateParsed)
+
+        const titularObjectIsNull = Array.isArray(data.titular)
+
+        if (titularObjectIsNull) {
+          setIsDependentMinorAge(false)
+        } else if (data.titular && !titularObjectIsNull && age < 18) {
+          setIsDependentMinorAge(true)
+        } else {
+          setIsDependentMinorAge(false)
+        }
+
+        const patientDataMapped = fromApiPatientData(data)
+        const patientDependentsMapped = fromApiDependents(data)
+        const patientAddressMapped = fromApiPatientAddress(data)
+        const patientTableMapped = fromApiPatientTable(data)
+
+        setPatientData(patientDataMapped.patientData)
+        setDependent(patientDataMapped?.dependentData)
+        setPatientDependents(patientDependentsMapped)
+        setPatientAddress(patientAddressMapped)
         setIncomeDocumentType(data.renda)
-        setTable(data.status !== 'N' && data.tabela.nome)
+        setTable(patientTableMapped)
       } catch ({ response }) {
       } finally {
         Loading.turnOff()
@@ -73,7 +112,7 @@ export const SeeOnePatient = () => {
         Loading.turnOn()
 
         const response = await apiPatient.get(
-          `/paciente/${patientData.idPaciente}/validar`,
+          `/paciente/${patientData.id}/validar`,
         )
 
         const validationsFromApi = response.data[0]
@@ -91,38 +130,43 @@ export const SeeOnePatient = () => {
         }
 
         setValidations(validationsMapped)
-      } catch ({ response }) {
-        if (response?.status.toString()[0] === '5') {
-          showSimple.error('Erro no Servidor!')
-        }
+      } catch (error) {
       } finally {
         Loading.turnOff()
       }
     }
 
-    if (patientData?.idPaciente) {
+    if (patientData?.id) {
       loadValidationInformations()
     }
-  }, [patientData?.idPaciente, table])
+  }, [patientData?.id, table])
 
   useEffect(() => {
-    const dependentErrorExists = patientDependents.some(
-      (dependent) => dependent?.error,
-    )
+    if (patientDependents) {
+      const dependentErrorExists = patientDependents.some(
+        (dependent) => dependent?.error,
+      )
 
-    setDisableSaveButton(dependentErrorExists || patientData?.error)
+      if (dependentErrorExists || patientData.error) {
+        setDisableSaveButton(true)
+      } else {
+        setDisableSaveButton(false)
+      }
+    }
   }, [patientData, patientDependents])
 
-  const onDependentsChange = (personDataReceived, index) => {
-    const patientDependentsTemporary = patientDependents
+  const onDependentsChange = (personDataReceived: Dependent, index: number) => {
+    if (patientDependents) {
+      const patientDependentsTemporary = patientDependents
 
-    patientDependentsTemporary[index] = personDataReceived
+      patientDependentsTemporary[index] = personDataReceived
 
-    setPatientDependents([...patientDependentsTemporary])
+      setPatientDependents([...patientDependentsTemporary])
+    }
   }
 
   const onComeBack = () => {
-    showMessage(ComeBack, { idPatient: patientData.idPaciente })
+    showMessage(ComeBack, { idPatient: patientData.id })
   }
 
   const onSavePatientData = async () => {
@@ -149,32 +193,39 @@ export const SeeOnePatient = () => {
     }
   }
 
-  // console.log('patientDocuments: ', patientDocuments)
-
   return (
     <DefaultLayout title="Pacientes">
       <Container>
-        {patientData && (
+        {patientData.cpf && (
           <PersonExpandable
             title="Dados cadastrais do titular"
-            allPersonData={[patientData, ...patientDependents]}
             personData={patientData}
             setPersonData={setPatientData}
-            holder
+            defaultExpanded={!!dependent}
+            viewMode={!!dependent}
+          />
+        )}
+        {dependent?.id && (
+          <DependentExpandable
+            title="Dados cadastrais para análise"
+            dependentData={dependent}
+            defaultExpanded
+            setDependentData={() => {}}
+            allDependents={patientDependents}
           />
         )}
         {patientDependents?.map((dependent, index) => (
           <DependentExpandable
             title={`Dados cadastrais do dependente ${index + 1}`}
-            allPersonData={[patientData, ...patientDependents]}
-            personData={dependent}
-            setPersonData={(personDataReceived) =>
+            allDependents={patientDependents}
+            dependentData={dependent}
+            setDependentData={(personDataReceived: Dependent) =>
               onDependentsChange(personDataReceived, index)
             }
             key={index}
           />
         ))}
-        {patientAddress && (
+        {!isObjectEmpty(patientAddress) && (
           <AddressSeeOnePatient
             address={patientAddress}
             setAddress={setPatientAddress}
@@ -183,6 +234,7 @@ export const SeeOnePatient = () => {
         <DocumentsSeeOnePatient
           incomeDocumentType={incomeDocumentType}
           cpf={cpf}
+          isDependentMinorAge={isDependentMinorAge}
         />
         {validations && <ValidationSeeOnePatient validations={validations} />}
         <footer>

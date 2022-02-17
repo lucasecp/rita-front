@@ -2,7 +2,13 @@ import styled, { css } from 'styled-components'
 
 import colors from '@/styles/colors'
 
-export const Container = styled.div`
+interface ContainerProps {
+  hasError?: boolean
+  checked: boolean
+  colorLight?: boolean
+}
+
+export const Container = styled.div<ContainerProps>`
   span + span {
     font-size: 16px;
     line-height: 20px;

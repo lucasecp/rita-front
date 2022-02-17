@@ -6,27 +6,23 @@ import colors from '@/styles/colors'
 interface ArrowProps {
   order: number
 }
-interface ContentProps {
-  isSpeciality: boolean
-}
 
-export const Content = styled.div<ContentProps>`
+export const Content = styled.div`
   display: flex;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: #9146ff;
   align-items: center;
   justify-content: flex-start;
-  min-width: 217px;
+  min-width: 210px;
+  max-width: 210px;
   margin-right: 24px;
-  ${({ isSpeciality }) =>
-    isSpeciality &&
-    css`
-      min-width: 400px;
-    `}
   :last-child {
     margin-right: 0px;
+  }
+  :first-child {
+    min-width: 250px;
+    max-width: 250px;
   }
   justify-content: space-between;
 
@@ -43,14 +39,14 @@ export const Content = styled.div<ContentProps>`
     }
   }
   h5 {
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.darkness};
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
   }
 `
 export const Container = styled.header`
-  background: ${colors.purple.background.middle};
+  background: ${({ theme }) => theme.light};
   min-width: fit-content;
   padding: 0 32px;
   > div {

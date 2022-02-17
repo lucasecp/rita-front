@@ -6,19 +6,25 @@ import colors from '@/styles/colors'
 interface ArrowProps {
   order: number
 }
+interface ContentProps {
+  isSpeciality: boolean
+}
 
-export const Content = styled.div`
+export const Content = styled.div<ContentProps>`
   display: flex;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
+  color: #9146ff;
   align-items: center;
   justify-content: flex-start;
   min-width: 217px;
   margin-right: 24px;
-  :first-child {
-    min-width: 474px;
-  }
+  ${({ isSpeciality }) =>
+    isSpeciality &&
+    css`
+      min-width: 400px;
+    `}
   :last-child {
     margin-right: 0px;
   }

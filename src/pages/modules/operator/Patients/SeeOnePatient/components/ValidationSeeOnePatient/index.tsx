@@ -7,13 +7,15 @@ import RadioButton from '@/styles/components/RadioButton'
 
 import { Container } from './styles'
 import formatFirstLastName from '@/helpers/formatFirstLastName'
+import { Validations } from '../../types/index'
 
-// function ValidationSeeOnePatient({validations}) {
-function ValidationSeeOnePatient({ validations }) {
-  // const extendedStatus = (status) => {
-  //   return status === 'N' ? 'Negado' : 'Aprovado'
-  // }
+interface ValidationSeeOnePatientProps {
+  validations: Validations
+}
 
+export const ValidationSeeOnePatient: React.FC<
+  ValidationSeeOnePatientProps
+> = ({ validations }) => {
   return (
     <Container>
       <h1>Validação</h1>
@@ -42,9 +44,10 @@ function ValidationSeeOnePatient({ validations }) {
       {validations.documentOk === 'no' && (
         <Textarea
           label="Descreva o motivo*:"
-          rows="3"
+          rows={3}
           limit="2000"
           value={validations.resonDocumentNotOk}
+          setValue={() => {}}
           disabled
         />
       )}
@@ -73,7 +76,6 @@ function ValidationSeeOnePatient({ validations }) {
       {validations.documentOk === 'yes' && (
         <section>
           <Checkbox
-            id="terms"
             label="Atesto que verifiquei todos os dados preenchidos pelo usuário como dados reais."
             checked={validations.documentOk === 'yes'}
             colorLight

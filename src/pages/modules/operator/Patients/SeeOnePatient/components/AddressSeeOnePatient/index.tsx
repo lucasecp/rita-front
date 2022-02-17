@@ -7,17 +7,35 @@ import { Select } from '@/components/Form/Select'
 import { Container } from './styles'
 import { UF } from '../../constants/UFs'
 
-const AddressSeeOnePatient = ({ address, setAddress }) => {
+import { PatientAddress } from '../../types/index'
+
+interface AddressSeeOnePatientProps {
+  address: PatientAddress
+  setAddress: React.Dispatch<React.SetStateAction<PatientAddress>>
+}
+
+const AddressSeeOnePatient: React.FC<AddressSeeOnePatientProps> = ({
+  address,
+  setAddress,
+}) => {
   const [cep, setCep] = useState(address.cep || '')
   const [uf, setUf] = useState(address.uf || '')
-  const [city, setCity] = useState(address.cidade || '')
-  const [addressPatient, setAddressPatient] = useState(address.logradouro || '')
-  const [number, setNumber] = useState(address.numero || '')
-  const [district, setDistrict] = useState(address.bairro || '')
-  const [complement, setComplement] = useState(address.complemento || '')
+  const [city, setCity] = useState(address.city || '')
+  const [addressPatient, setAddressPatient] = useState(address.address || '')
+  const [number, setNumber] = useState(address.number || '')
+  const [district, setDistrict] = useState(address.district || '')
+  const [complement, setComplement] = useState(address.complement || '')
 
   useEffect(() => {
-    setAddress({ cep, uf, city, addressPatient, number, district, complement })
+    setAddress({
+      cep,
+      uf,
+      city,
+      address: addressPatient,
+      number,
+      district,
+      complement,
+    })
   }, [cep, uf, city, addressPatient, number, district, complement])
 
   return (
@@ -51,7 +69,7 @@ const AddressSeeOnePatient = ({ address, setAddress }) => {
           setValue={setCep}
           name="cep"
         />
-        <InputMask
+        <InputText
           label="Bairro:"
           value={district}
           setValue={setDistrict}
