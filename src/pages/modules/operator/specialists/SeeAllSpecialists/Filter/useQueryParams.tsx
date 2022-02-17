@@ -2,14 +2,12 @@ import useQuery from '@/hooks/useQuery'
 import { fieldsApi } from '../static/fieldsApi'
 
 interface UseQueryParamsProps {
-  uf: any[]
-  citys: any[]
   name: string | null
-  cnpj: string | null
-  district: string | null
+  cpf: string | null
+  registerNumber: string | null
   specialtys: any[]
   status: any[]
-  specialists: string | null
+  issuingAgency: string | null
 }
 
 export default (): UseQueryParamsProps => {
@@ -19,19 +17,15 @@ export default (): UseQueryParamsProps => {
 
   const name = localStorageValues?.name
 
-  const cnpj = localStorageValues?.cnpj
+  const cpf = localStorageValues?.cpf
 
-  const uf = localStorageValues?.uf
+  const registerNumber = localStorageValues?.registerNumber
 
   const specialtys = localStorageValues?.specialtys
 
-  const specialists = localStorageValues?.specialists
-
-  const citys = localStorageValues?.citys
-
-  const district = localStorageValues?.district
+  const issuingAgency = localStorageValues?.issuingAgency
 
   const status = localStorageValues?.status
 
-  return { uf, citys, name, cnpj, specialtys, specialists, district, status }
+  return { registerNumber, status, name, cpf, specialtys, issuingAgency }
 }

@@ -3,29 +3,33 @@ import React, { useEffect, useState } from 'react'
 import apiAdmin from '@/services/apiAdmin'
 
 interface SelectIssuingAgencyProps {
-  setUf: (value: string) => void
-  uf: string
+  issuingAgency: string
+  setIssuingAgency: (value: string) => void
 }
 
 const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
-  setUf,
-  uf,
+  issuingAgency,
+  setIssuingAgency,
 }) => {
-  const [ufOptions, setUfOptions] = useState<any[]>([])
 
-  const mapUf = (array: any[]) => {
+  const [issuingAgencyOptions, setIssuingAgencyOptions] = useState<any[]>([])
+
+  const mapIssuingAgency = (array: any[]) => {
     if (!array) return []
-    return array.map((obj) => ({ value: obj.idUF, label: obj.sigla }))
+    return array.map((obj) => ({
+      value: obj.idOrgaoEmissor,
+      label: obj.descricao,
+    }))
   }
 
   useEffect(() => {
     const getUf = async () => {
       try {
-        const { data } = await apiAdmin.get(`/uf`)
-        const dataMapped = mapUf(data)
+        const { data } = await apiAdmin.get(`/orgao-emissor`)
+        const dataMapped = mapIssuingAgency(data)
 
-        setUfOptions(dataMapped)
-      } catch ({ response }) {}
+        setIssuingAgencyOptions(dataMapped)
+      } catch (error) {}
     }
 
     getUf()
@@ -33,12 +37,12 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
 
   return (
     <Select
-      options={[{ label: 'CRM', value: 'CRM'}]}
+      options={issuingAgencyOptions}
       label="Órgão Emissor:"
       labelDefaultOption="Selecione:"
       variation="secondary"
-      value={uf}
-      setValue={setUf}
+      value={issuingAgency}
+      setValue={setIssuingAgency}
     />
   )
 }

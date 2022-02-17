@@ -15,6 +15,7 @@ import { fieldsApi } from '../static/fieldsApi'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import useQueryParams from './useQueryParams'
 import SelectIssuingAgency from '../Components/SelectIssuingAgencyf'
+import validateCpf from '@/helpers/validateCpf'
 
 interface FilterProps {
   setFilters: React.Dispatch<React.SetStateAction<any[]>>
@@ -25,81 +26,64 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
 
   const [name, setName] = useState(local.name || '')
 
-  const [cnpj, setCnpj] = useState(local.cnpj || '')
+  const [cpf, setCpf] = useState(local.cpf || '')
   const [status, setStatus] = useState<MultiSelectOption[]>(local.status || [])
   const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>(
     local.specialtys || [],
   )
-  const [specialist, setSpecialist] = useState(local.specialists || '')
-  const [district, setDistrict] = useState(local.district || '')
-  const [uf, setUf] = useState<MultiSelectOption[]>(local.uf || [])
-  const [city, setCity] = useState<MultiSelectOption[]>(local.citys || [])
+  const [issuingAgency, setIssuingAgency] = useState(local.issuingAgency || '')
+  const [registerNumber, setRegisterNumber] = useState(
+    local.registerNumber || '',
+  )
   const [errors, setErrors] = useState({
     name: '',
-    specialist: '',
-    district: '',
-    cnpj: '',
+    cpf: '',
   })
-  const cnpjFormated = clearSpecialCaracter(cnpj)
+  const cpfFormated = clearSpecialCaracter(cpf)
 
   useEffect(() => {
     setFilters(verifyTypedFields(arrayQuery))
   }, [])
 
   const arrayQuery = [
-    { name: fieldsApi.NOME_FANTASIA, value: name },
-    { name: fieldsApi.CNPJ, value: cnpjFormated },
+    { name: fieldsApi.NOME, value: name },
+    { name: fieldsApi.CPF, value: cpfFormated },
     { name: fieldsApi.STATUS, value: formatMultSelectValue(status) },
     {
       name: fieldsApi.ESPECIALIDADES,
       value: formatMultSelectValue(specialtys),
     },
     {
-      name: fieldsApi.ESPECIALISTAS,
-      value: specialist,
+      name: fieldsApi.ORGAO_EMISSOR,
+      value: issuingAgency,
     },
-    { name: fieldsApi.BAIRRO, value: district },
+    { name: fieldsApi.NUMERO_REGISTRO, value: registerNumber },
   ]
 
   const clearFields = () => {
     setName('')
-    setCnpj('')
+    setCpf('')
     setStatus([])
     setSpecialtys([])
-    setSpecialist('')
-    setDistrict('')
-    setUf([])
-    setCity([])
+    setIssuingAgency('')
+    setRegisterNumber('')
     setFilters([])
-    setErrors({ name: '', specialist: '', district: '', cnpj: '' })
-    window.localStorage.removeItem('@Rita/clinic-filter')
+    setErrors({ name: '', cpf: '' })
+    window.localStorage.removeItem('@Rita/specialists-filter')
   }
 
   const hasErrors = () => {
     let newErrors = false
-    setErrors({ name: '', specialist: '', district: '', cnpj: '' })
+    setErrors({ name: '', cpf: '' })
 
-    if (specialist.length < 3 && specialist) {
+    if ((cpfFormated.length < 11 || !validateCpf(cpfFormated)) && cpfFormated) {
       setErrors((errors) => ({
         ...errors,
-        specialist: 'Informe 3 letras ou mais',
+        cpf: 'CPF inválido.',
       }))
       newErrors = true
     }
-    if (cnpjFormated.length < 3 && cnpjFormated) {
-      setErrors((errors) => ({
-        ...errors,
-        cnpj: 'Informe 3 dígitos ou mais',
-      }))
-      newErrors = true
-    }
-    if (district.length < 3 && district) {
-      setErrors((errors) => ({
-        ...errors,
-        district: 'Informe 3 letras ou mais',
-      }))
-      newErrors = true
-    }
+
     if (name.length < 3 && name) {
       setErrors((errors) => ({ ...errors, name: 'Informe 3 letras ou mais' }))
       newErrors = true
@@ -112,15 +96,13 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
       return
     }
     window.localStorage.setItem(
-      '@Rita/clinic-filter',
+      '@Rita/specialists-filter',
       JSON.stringify({
         name,
-        uf,
         specialtys,
-        specialist,
-        district,
-        city,
-        cnpj,
+        issuingAgency,
+        registerNumber,
+        cpf,
         status,
       }),
     )
@@ -135,30 +117,36 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           setSpecialtys={setSpecialtys}
         />
 
-        <SelectIssuingAgency  />
-
+        <SelectIssuingAgency
+          issuingAgency={issuingAgency}
+          setIssuingAgency={setIssuingAgency}
+        />
 
         <InputText
           variation="secondary"
           label="Número do Registro:"
-          // value={name}
-          // setValue={setName}
+          value={registerNumber}
+          setValue={setRegisterNumber}
           maxLength={40}
         />
         <InputText
           variation="secondary"
           label="Nome:"
-          // value={name}
-          // setValue={setName}
+          value={name}
+          setValue={setName}
           maxLength={200}
+          hasError={!!errors.name}
+          msgError={errors.name}
         />
 
         <InputMask
           variation="secondary"
           label="CPF:"
-          // value={cnpj}
-          // setValue={setCnpj}
+          value={cpf}
+          setValue={setCpf}
           mask="999.999.999-99"
+          hasError={!!errors.cpf}
+          msgError={errors.cpf}
         />
 
         <CustomMultSelect
