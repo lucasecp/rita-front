@@ -1,10 +1,8 @@
 export const fieldsApi = {
-  NOME_FANTASIA: 'nomeFantasia',
-  CNPJ: 'cnpj',
+  NOME: 'nome',
+  CPF: 'cpf',
   STATUS: 'status',
   ESPECIALIDADES: 'especialidades',
-  ESPECIALISTAS: 'especialista',
-  UF: 'uf',
-  CIDADES: 'cidades',
-  BAIRRO: 'bairro',
+  ORGAO_EMISSOR: 'idOrgaoEmissor',
+  NUMERO_REGISTRO: 'registroProfissional',
 }

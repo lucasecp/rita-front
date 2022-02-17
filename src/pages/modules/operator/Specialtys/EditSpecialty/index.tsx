@@ -77,7 +77,7 @@ const EditSpecialty: React.FC = () => {
     try {
       Loading.turnOn()
 
-      await apiAdmin.put(`/especialidade/${specialtyInfo?.id}/editar`, data)
+      await apiAdmin.put(`/especialidade/${specialtyInfo?.id}`, data)
 
       toast.success('Cadastro realizado com sucesso.')
       history.push(OPERATOR_SEE_ALL_SPECIALTYS)

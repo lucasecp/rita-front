@@ -1,72 +1,42 @@
 import React from 'react'
 import { Container, Status } from './styles'
 import { showStatus } from '../../helpers/showStatus'
-// import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../types'
 import { useHistory } from 'react-router-dom'
-import { formatCpf } from '@/helpers/formatCpf'
+import formatTextWithLimit from '@/helpers/formatTextWithLimit'
+import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 
-const Content: React.FC<ContentProps> = ({ clinics }) => {
-  const history = useHistory()
+const Content: React.FC<ContentProps> = ({ specialists }) => {
+  // const history = useHistory()
 
   return (
     <Container>
-      <ul
-      // key={index}
-      // onClick={() =>
-      //   history.push()
-      // }
-      >
-        <li>
-          <CustomTooltip label="Pedro Vasconcelos ">
-            <div>Pedro Vasconcelos </div>
-          </CustomTooltip>
-        </li>
-        <li>{formatCpf('14275351220')}</li>
-        <li>010992-SP</li>
-        <li>CRM</li>
-        <Status type={showStatus('I')}>
-          <span>{showStatus('I')}</span>
-        </Status>
-      </ul>
-      <ul
-      // key={index}
-      // onClick={() =>
-      //   history.push()
-      // }
-      >
-        <li>
-          <CustomTooltip label="Pedro Vasconcelos ">
-            <div>Pedro Vasconcelos </div>
-          </CustomTooltip>
-        </li>
-        <li>{formatCpf('14275351220')}</li>
-        <li>010992-SP</li>
-        <li>CRM</li>
-        <Status type={showStatus('I')}>
-          <span>{showStatus('I')}</span>
-        </Status>
-      </ul>
-      <ul
-      // key={index}
-      // onClick={() =>
-      //   history.push()
-      // }
-      >
-        <li>
-          <CustomTooltip label="Pedro Vasconcelos ">
-            <div>Pedro Vasconcelos </div>
-          </CustomTooltip>
-        </li>
-        <li>{formatCpf('14275351220')}</li>
-        <li>010992-SP</li>
-        <li>CRM</li>
-        <Status type={showStatus('I')}>
-          <span>{showStatus('I')}</span>
-        </Status>
-      </ul>
-      {/* {!clinics.total && <h2>Nenhum resultado encontrado</h2>} */}
+      {specialists?.data?.map((spec, index) => (
+        <ul
+          key={index}
+          // onClick={() =>
+          //   history.push()
+          // }
+        >
+          <li>
+            <CustomTooltip label={firstLetterCapitalize(spec.name)}>
+              <div>
+                {formatTextWithLimit(firstLetterCapitalize(spec.name), 33) ||
+                  '-'}
+              </div>
+            </CustomTooltip>
+          </li>
+          <li>{spec.cpf}</li>
+          <li>{spec.registerNumber}</li>
+          <li>{spec.issuingAgency}</li>
+          <Status type={showStatus(spec.status)}>
+            <span>{showStatus(spec.status)}</span>
+          </Status>
+        </ul>
+      ))}
+
+      {!specialists.total && <h2>Nenhum resultado encontrado</h2>}
     </Container>
   )
 }

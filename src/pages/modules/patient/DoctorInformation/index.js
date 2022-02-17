@@ -15,7 +15,7 @@ const DoctorInformation = () => {
   const location = useLocation()
   const history = useHistory()
   const { Loading } = useLoading()
-  const prevUrlResults = location.state.urlPrevResults || ''
+  const prevUrlResults = location.state?.urlPrevResults || ''
 
   useEffect(() => {
     document.title = 'Rita Saúde | Informações do Médico'
