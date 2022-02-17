@@ -1,14 +1,13 @@
 import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
-// import { CREATE_SELLABLE_ITEMS } from '@/routes/constants/namedRoutes/routes'
-// import { useHistory } from 'react-router-dom'
+import { DIRECTOR_CREATE_PROFILE } from '@/routes/constants/namedRoutes/routes'
+import { useHistory } from 'react-router'
 
 export const IncludeButton: React.FC = () => {
-  // const history = useHistory()
+  const history = useHistory()
 
   const onIncludeSellableItem = () => {
-    // history.push(CREATE_SELLABLE_ITEMS)
-    console.log('include')
+    return history.push(DIRECTOR_CREATE_PROFILE)
   }
 
   return (

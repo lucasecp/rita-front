@@ -9,6 +9,13 @@ import { DIRECTOR_SEE_ONE_PROFILE } from '@/routes/constants/namedRoutes/routes'
 const Actions = ({ id }) => {
   const history = useHistory()
 
+  const ToDelete = () => {
+
+//   history.push(ENDPOINT DO PERFIL, {
+            //     id: planInformations.idPlano,
+            //   })
+  }
+
   return (
     <Container>
       <CustomTooltip label="Visualizar">
@@ -19,10 +26,8 @@ const Actions = ({ id }) => {
       <CustomTooltip label="Excluir">
         <TrashIcon
           onClick={
-            () => console.log(id, 'deletar')
-            //   history.push(ENDPOINT DO PERFIL, {
-            //     id: planInformations.idPlano,
-            //   })
+            ToDelete
+            // () => console.log(id, 'deletar')
           }
         />
       </CustomTooltip>
