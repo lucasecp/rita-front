@@ -10,16 +10,6 @@ export const validateName = (value) => {
   return { name: '' }
 }
 
-export const validateEmail = (email, confirmEmail) => {
-  if (!email.trim()) {
-    return { email: 'Email Obrigatório' }
-  } else if (!/\S+@\S+\.\S+/.test(email)) {
-    return { email: 'Email inválido.' }
-  }
-
-  return { email: '' }
-}
-
 // export const validateCpf = (value) => {
 //   const newValue = clear(value)
 

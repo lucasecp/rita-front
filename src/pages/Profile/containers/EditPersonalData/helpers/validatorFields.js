@@ -9,16 +9,6 @@ export const validateName = (value) => {
   return ''
 }
 
-export const validateEmail = (email, confirmEmail) => {
-  if (!email.trim()) {
-    return 'Email Obrigatório'
-  } else if (!/\S+@\S+\.\S+/.test(email)) {
-    return 'Email inválido.'
-  }
-
-  return ''
-}
-
 export const validatePhone = (value) => {
   const phone = clear(value)
   const phoneIsValid = phone[0] !== '0' && phone[2] === '9'

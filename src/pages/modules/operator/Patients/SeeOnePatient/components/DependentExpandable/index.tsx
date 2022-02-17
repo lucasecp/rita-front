@@ -11,7 +11,6 @@ import { Container } from './styles'
 import {
   validateBirthdate,
   validateCpf,
-  validateEmail,
   validateGender,
   validateName,
   validatePhone,
@@ -20,6 +19,8 @@ import { useToggle } from '@/hooks/useToggle'
 // import formatDate from '@/helpers/formatDate'
 
 import { Dependent } from '../../types/index'
+import { useMessage } from '@/hooks/useMessage'
+import { InputEmail } from '@/components/smarts/InputEmail'
 
 interface DependentExpandableProps {
   title: string
@@ -51,8 +52,10 @@ export const DependentExpandable: React.FC<DependentExpandableProps> = ({
     birthDate: '',
     gender: '',
     phone: '',
-    email: '',
+    email: false,
   })
+
+  const [errorMessage, sendErrorMessage] = useMessage()
 
   useEffect(() => {
     setDependentData({
@@ -63,7 +66,7 @@ export const DependentExpandable: React.FC<DependentExpandableProps> = ({
       gender,
       phone,
       email,
-      error: Object.values(errors).some((value) => value !== ''),
+      error: Object.values(errors).some((value) => value),
     })
   }, [name, cpf, birthDate, gender, phone, email, errors])
 
@@ -134,13 +137,13 @@ export const DependentExpandable: React.FC<DependentExpandableProps> = ({
           onKeyUp={() => setErrors({ ...errors, ...validatePhone(phone) })}
           msgError={errors.phone}
         />
-        <InputText
-          label="E-mail:"
-          value={email}
-          setValue={setEmail}
-          onBlur={() => setErrors({ ...errors, ...validateEmail(email) })}
-          onKeyUp={() => setErrors({ ...errors, ...validateEmail(email) })}
-          msgError={errors.email}
+        <InputEmail
+          initialEmail={email}
+          onGetEmail={setEmail}
+          hasError={(hasError) => setErrors({ ...errors, email: hasError })}
+          checkHasError={errorMessage}
+          onKeyUp={sendErrorMessage}
+          onBlur={sendErrorMessage}
         />
       </section>
     </Container>

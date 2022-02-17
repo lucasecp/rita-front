@@ -8,17 +8,6 @@ export const validateName = (value) => {
   return { name: '' }
 }
 
-export const validateEmail = (email, confirmEmail) => {
-  if (!email.trim()) return { email: 'Email Obrigatório' }
-  else if (!/\S+@\S+\.\S+/.test(email)) return { email: 'Email inválido.' }
-  else if (email !== confirmEmail && confirmEmail)
-    return {
-      confirmEmail:
-        'Os e-mails preenchidos estão diferentes, por favor verifique os campos E-mail e Confirme seu e-mail.',
-    }
-  return { email: '', confirmEmail: '' }
-}
-
 export const validateCpf = (value) => {
   const newValue = clear(value)
   if (!newValue) return { cpf: 'CPF Obrigatório.' }
