@@ -11,15 +11,23 @@ interface profile {
 }
 
 interface profilesAndPermissions {
-  profile: profile
+  dados: {
+    profile: profile
+  }
 }
 
-type arrayToBeSetOnInitialCheckedPermissions = number[]
+type ArrayToBeSetOnInitialCheckedPermissions = number[]
+
+interface permissions {
+  id: number
+  nome: string
+}
 
 export const arrayOfCheckedPermissions = (
   profilesAndPermissions: profilesAndPermissions,
-): arrayToBeSetOnInitialCheckedPermissions => {
-  const arrayToBeSetOnInitialCheckedPermissions = []
+): ArrayToBeSetOnInitialCheckedPermissions => {
+  const arrayToBeSetOnInitialCheckedPermissions: ArrayToBeSetOnInitialCheckedPermissions =
+    []
   profilesAndPermissions.map((profile: profile) => {
     return profile.subChild.map((subChild) => {
       if (subChild.isChecked) {
@@ -28,11 +36,22 @@ export const arrayOfCheckedPermissions = (
     })
   })
 
-  console.log(
-    arrayToBeSetOnInitialCheckedPermissions.map(Number).sort((a, b) => a - b),
-  )
-
   return arrayToBeSetOnInitialCheckedPermissions
     .map(Number)
     .sort((a, b) => a - b)
+}
+
+export const profileAndPermissionsFromApi = (
+  profilesAndPermissions: profilesAndPermissions,
+): profilesAndPermissions => {
+  return profilesAndPermissions.dados.map((profileAndPermissions) => ({
+    id: profileAndPermissions.id,
+    name: profileAndPermissions.nome,
+    subChild: profileAndPermissions.permissao.map(
+      (permission: permissions) => ({
+        id: permission.id,
+        name: permission.nome,
+      }),
+    ),
+  }))
 }

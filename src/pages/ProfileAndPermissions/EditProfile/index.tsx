@@ -46,7 +46,6 @@ export const EditProfile: React.FC = () => {
     setAnyFieldsHasChanged(anyFieldsHasChanged + 1)
   }, [checkedPermissions, oneProfileName])
 
-  console.log(anyFieldsHasChanged)
 
   const nodeChecked = function () {
     setCheckedPermissions([...this.checkedNodes])
@@ -83,7 +82,6 @@ export const EditProfile: React.FC = () => {
       toast.success('Edição realizada com sucesso.')
       history.push(DIRECTOR_SEE_ALL_PROFILES)
     } catch ({ response }) {
-      console.log(response.data.message)
       toast.error(response.data.message)
     } finally {
       Loading.turnOff()
