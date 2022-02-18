@@ -34,6 +34,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
             onChange={setValue && (() => setValue(!checked))}
             inputProps={{ 'aria-label': 'primary checkbox' }}
             disabled={disabled}
+            color="primary"
             {...rest}
           />
         }
