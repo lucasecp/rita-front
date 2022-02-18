@@ -79,7 +79,6 @@ export const ContentFile = styled.div`
   }
 
   > button {
-    padding: 14px 16px;
     width: 100%;
     height: 100%;
     color: ${({ theme }) => theme.main};

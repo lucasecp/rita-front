@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useState } from 'react'
+import { InputHTMLAttributes, useEffect, useState } from 'react'
 import { Container, ListSuggestions } from './styles'
 
 export interface AutocompleteOptions {
@@ -11,7 +11,9 @@ interface AutocompleteProps {
   value: AutocompleteOptions
   setValue: React.Dispatch<React.SetStateAction<AutocompleteOptions>>
   options: AutocompleteOptions[]
+  setOptions: React.Dispatch<React.SetStateAction<AutocompleteOptions[]>>
   error: string
+  onFocusAutocomplete?: () => void
 }
 
 export const Autocomplete: React.FC<AutocompleteProps> = ({
@@ -19,30 +21,19 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
   value,
   setValue,
   options,
+  setOptions,
   error,
   ...rest
 }) => {
-  const [suggestions, setSuggestions] = useState<AutocompleteOptions[]>([])
-
-  const onChangeAutocomplete = (text: string) => {
-    let matches: AutocompleteOptions[] = []
-
-    if (text.length > 0) {
-      matches = options.filter((option) => {
-        const regex = new RegExp(`${text}`, 'gi')
-        return option.label.match(regex)
-      })
-    }
-
-    setSuggestions(matches)
-  }
+  const [showList, setShowList] = useState(false)
 
   const onClickSuggestion = (valueClicked: {
     label: string
     value: number
   }) => {
     setValue(valueClicked)
-    setSuggestions([])
+    setOptions([])
+    setShowList(false)
   }
 
   return (
@@ -57,25 +48,24 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
             label: e.target.value,
             value: 0,
           })
-          onChangeAutocomplete(e.target.value)
+        }}
+        onFocus={() => {
+          setShowList(true)
         }}
         onBlur={() => {
           setTimeout(() => {
-            setSuggestions([])
-          }, 100)
+            setShowList(false)
+          }, 300)
         }}
         autoComplete="off"
         {...rest}
       />
       {error && <p className="error">{error}</p>}
-      {suggestions.length > 0 && (
+      {options.length > 0 && showList && (
         <ListSuggestions fieldError={!!error}>
-          {suggestions.map((suggestion) => (
-            <li
-              key={suggestion.value}
-              onClick={() => onClickSuggestion(suggestion)}
-            >
-              {suggestion.label}
+          {options.map((option) => (
+            <li key={option.value} onClick={() => onClickSuggestion(option)}>
+              {option.label}
             </li>
           ))}
         </ListSuggestions>

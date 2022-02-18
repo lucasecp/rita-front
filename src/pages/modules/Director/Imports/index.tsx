@@ -20,7 +20,7 @@ import { ConfirmImport } from './messages/ConfirmImport'
 import { InvalidFormat } from './messages/InvalidFormat'
 
 import { Container, BtnGroup, ContentFile } from './styles'
-import apiUser from '@/services/apiUser'
+import apiAdmin from '@/services/apiAdmin'
 
 interface Errors {
   file: string
@@ -46,14 +46,36 @@ export const Import: React.FC = () => {
   useEffect(() => {
     document.title = 'Rita Saúde | Importação'
 
-    const loadCompanies = async () => {
-      const response = await apiUser.get('/empresa')
-      const companyOptions = fromApiCompanies(response.data.dados)
-      setAutocompleteOptions(companyOptions)
+    // const loadCompanies = async () => {
+    //   const response = await apiUser.get('/empresa')
+    //   const companyOptions = fromApiCompanies(response.data.dados)
+    //   setAutocompleteOptions(companyOptions)
+    // }
+
+    // loadCompanies()
+  }, [])
+
+  useEffect(() => {
+    if (company.label.length > 0) {
+      apiAdmin
+        .get('/empresa', {
+          params: {
+            busca: company.label,
+          },
+        })
+        .then((response) => {
+          const companyOptions = fromApiCompanies(response.data.dados)
+          setAutocompleteOptions(companyOptions)
+        })
     }
 
-    loadCompanies()
-  }, [])
+    if (company.label.length === 0) {
+      apiAdmin.get('/empresa').then((response) => {
+        const companyOptions = fromApiCompanies(response.data.dados)
+        setAutocompleteOptions(companyOptions)
+      })
+    }
+  }, [company])
 
   useEffect(() => {
     const canValidateFile =
@@ -170,6 +192,7 @@ export const Import: React.FC = () => {
           value={company}
           setValue={setCompany}
           options={autocompleteOptions}
+          setOptions={setAutocompleteOptions}
           error={errors.company}
         />
       </Container>
