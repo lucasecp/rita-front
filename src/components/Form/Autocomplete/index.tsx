@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useEffect, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Container, ListSuggestions } from './styles'
 
 export interface AutocompleteOptions {
@@ -13,7 +13,6 @@ interface AutocompleteProps {
   options: AutocompleteOptions[]
   setOptions: React.Dispatch<React.SetStateAction<AutocompleteOptions[]>>
   error: string
-  onFocusAutocomplete?: () => void
 }
 
 export const Autocomplete: React.FC<AutocompleteProps> = ({
@@ -36,6 +35,23 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
     setShowList(false)
   }
 
+  const onChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue({
+      label: e.target.value,
+      value: 0,
+    })
+  }
+
+  const onFocusInput = () => {
+    setShowList(true)
+  }
+
+  const onBlurInput = () => {
+    setTimeout(() => {
+      setShowList(false)
+    }, 300)
+  }
+
   return (
     <Container>
       <label htmlFor={label}>{label}</label>
@@ -43,20 +59,9 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
         type="text"
         id={label}
         value={value.label}
-        onChange={(e) => {
-          setValue({
-            label: e.target.value,
-            value: 0,
-          })
-        }}
-        onFocus={() => {
-          setShowList(true)
-        }}
-        onBlur={() => {
-          setTimeout(() => {
-            setShowList(false)
-          }, 300)
-        }}
+        onChange={onChangeInputValue}
+        onFocus={onFocusInput}
+        onBlur={onBlurInput}
         autoComplete="off"
         {...rest}
       />
