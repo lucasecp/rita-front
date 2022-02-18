@@ -236,7 +236,9 @@ export const SeeOnePatient: React.FC = () => {
           cpf={cpf}
           isDependentMinorAge={isDependentMinorAge}
         />
-        {validations && <ValidationSeeOnePatient validations={validations} />}
+        {!isObjectEmpty(validations) && (
+          <ValidationSeeOnePatient validations={validations} />
+        )}
         <footer>
           <ButtonLink onClick={onComeBack}>Voltar</ButtonLink>
           <OutlineButton
