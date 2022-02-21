@@ -14,6 +14,7 @@ interface InputEmailProps extends InputHTMLAttributes<HTMLInputElement> {
   onGetEmail: React.Dispatch<React.SetStateAction<string>>
   checkHasError: number
   hasError: (hasError: boolean) => void
+  label?: string
 }
 
 export const InputEmail: React.FC<InputEmailProps> = ({
@@ -21,6 +22,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
   onGetEmail,
   checkHasError,
   hasError,
+  label,
   ...rest
 }) => {
   const [email, setEmail] = useState('')
@@ -73,7 +75,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
 
   return (
     <InputText
-      label="E-mail*:"
+      label={label || 'Email:'}
       name="email"
       hasError={!!emailError}
       value={email}
