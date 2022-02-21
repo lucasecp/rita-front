@@ -27,9 +27,16 @@ export const InputEmail: React.FC<InputEmailProps> = ({
 }) => {
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState('')
+  const [isToLoadInitialEmail, setIsToLoadInitialEmail] = useState(true)
 
   useEffect(() => {
-    setEmail(initialEmail || '')
+    if (isToLoadInitialEmail) {
+      setEmail(initialEmail || '')
+    }
+
+    if (initialEmail) {
+      setIsToLoadInitialEmail(false)
+    }
   }, [initialEmail])
 
   useEffect(() => {

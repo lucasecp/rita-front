@@ -20,7 +20,8 @@ import { ConfirmImport } from './messages/ConfirmImport'
 import { InvalidFormat } from './messages/InvalidFormat'
 
 import { Container, BtnGroup, ContentFile } from './styles'
-import apiUser from '@/services/apiUser'
+import apiAdmin from '@/services/apiAdmin'
+import { toast } from '@/styles/components/toastify'
 
 interface Errors {
   file: string
@@ -45,15 +46,38 @@ export const Import: React.FC = () => {
 
   useEffect(() => {
     document.title = 'Rita Saúde | Importação'
+  }, [])
 
+  useEffect(() => {
     const loadCompanies = async () => {
-      const response = await apiUser.get('/empresa')
-      const companyOptions = fromApiCompanies(response.data.dados)
-      setAutocompleteOptions(companyOptions)
+      if (company.label.length > 0) {
+        try {
+          const response = await apiAdmin.get('/empresa', {
+            params: {
+              busca: company.label,
+            },
+          })
+
+          const companyOptions = fromApiCompanies(response.data.dados)
+          setAutocompleteOptions(companyOptions)
+        } catch (error) {
+          toast.error('Erro ao carregar empresas')
+        }
+      }
+
+      if (company.label.length === 0) {
+        try {
+          const response = await apiAdmin.get('/empresa')
+          const companyOptions = fromApiCompanies(response.data.dados)
+          setAutocompleteOptions(companyOptions)
+        } catch (error) {
+          toast.error('Erro ao carregar empresas')
+        }
+      }
     }
 
     loadCompanies()
-  }, [])
+  }, [company])
 
   useEffect(() => {
     const canValidateFile =
@@ -170,6 +194,7 @@ export const Import: React.FC = () => {
           value={company}
           setValue={setCompany}
           options={autocompleteOptions}
+          setOptions={setAutocompleteOptions}
           error={errors.company}
         />
       </Container>
