@@ -15,7 +15,6 @@ export const Container = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 30px;
-    margin-bottom: 24px;
     color: #6a6a6a;
   }
   @media (max-width: 767px) {
