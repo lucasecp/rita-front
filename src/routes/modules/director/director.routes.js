@@ -12,6 +12,7 @@ import {
   DIRECTOR_INACTIVATE_PLAN,
   DIRECTOR_IMPORT,
   DIRECTOR_IMPORT_REPORT,
+  DIRECTOR_FILTER_USERS,
 } from '../../constants/namedRoutes/routes'
 
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
@@ -24,6 +25,7 @@ import { ActivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetP
 import { InactivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/GetPlan/Table/Content/Actions/Inactivate/containers/InactivatePlanConfirm'
 import { Import } from '@/pages/modules/Director/Imports'
 import { Report as ImportReport } from '@/pages/modules/Director/Imports/containers/Report'
+import { FilterUsers } from '@/pages/modules/Director/Users/FilterUsers'
 
 const directorRoutes = [
   {
@@ -65,6 +67,10 @@ const directorRoutes = [
   {
     path: DIRECTOR_IMPORT_REPORT,
     component: ImportReport,
+  },
+  {
+    path: DIRECTOR_FILTER_USERS,
+    component: FilterUsers,
   },
 ]
 
