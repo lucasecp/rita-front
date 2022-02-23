@@ -18,8 +18,13 @@ import { useLoading } from '@/hooks/useLoading'
 import OutlineButton from '../../../../../../components/Button/Outline/index'
 import ButtonPrimary from '../../../../../../components/Button/Primary/index'
 
-const EditSpecialist: React.FC<{ specialistData: any }> = ({
+interface EditSpecialistProps {
+  specialistData: any
+  id: string | undefined
+}
+const EditSpecialist: React.FC<EditSpecialistProps> = ({
   specialistData,
+  id,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [personalDatas, setPersonalDatas] = useState(
@@ -34,6 +39,7 @@ const EditSpecialist: React.FC<{ specialistData: any }> = ({
     specialistData?.specialtys?.name || {},
   )
   const [fieldWasChanged, setFieldWasChanged] = useState(false)
+  const [clickOnSave, setClickOnSave] = useState(false)
   const [errors, setErrors] = useState<ErrorsI>({})
 
   const { showSimple, showMessage } = useModal()
@@ -47,45 +53,30 @@ const EditSpecialist: React.FC<{ specialistData: any }> = ({
     }
   }, [personalDatas, profissionalData, specialtys])
 
-  const onEdit = () => {
-    const status = specialistData.personalDatas?.status
-
-    if (status === 'PENDING') {
-      return showSimple.warning(
-        'Os dados desse dependente estão sendo analisados, pedimos que aguarde a aprovação pela nossa equipe.',
-      )
-    }
-
-    if (status === 'BLOCKED') {
-      return showMessage(Denied)
-    }
-    setIsEditing(true)
-    scrollTo(0, 0)
-  }
-
   const hasErrorOnFields = (fields: any) => {
     let error = false
     const hasSpecificError = Object.values(errors)
     error = !!hasSpecificError[0]
 
     for (const field in fields) {
-      if ((!fields[field] || !fields[field].length) && field !== 'complement') {
+      if (!fields[field] || Array.isArray(fields[field]) && !fields[field].length ) {
+        console.log(fields[field].length,fields[field]);
         setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
         error = true
       }
     }
     return error
   }
+  
 
   const onSave = async () => {
-    scrollOntoFieldError(errors)
-
+    setClickOnSave(!clickOnSave)
     if (
       hasErrorOnFields({
         ...personalDatas,
         ...profissionalData,
-
         ...specialtys,
+        ...clinics,
       })
     ) {
       return
@@ -95,12 +86,10 @@ const EditSpecialist: React.FC<{ specialistData: any }> = ({
       Loading.turnOn()
 
       await apiAdmin.put(
-        `/clinica/${specialistData.personalDatas?.id}`,
+        `/medico/${id}`,
         toApi({
-          id: specialistData.personalDatas?.id,
           ...personalDatas,
           ...profissionalData,
-
           ...specialtys,
         }),
       )
@@ -114,6 +103,10 @@ const EditSpecialist: React.FC<{ specialistData: any }> = ({
       Loading.turnOff()
     }
   }
+
+  useEffect(() => {
+    scrollOntoFieldError(errors)
+  }, [clickOnSave])
 
   const onCancel = () => {
     if (fieldWasChanged) {

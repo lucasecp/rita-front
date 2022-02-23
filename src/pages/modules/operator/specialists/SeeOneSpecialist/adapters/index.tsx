@@ -5,21 +5,21 @@ import { mapClinics, mapClinicsToAPi } from './mapClinic'
 export const fromApi = (specialistInfo: any) => {
   return {
     personalDatas: {
-      name: specialistInfo.nome,
-      cpf: specialistInfo.cpf,
-      phone: specialistInfo.celular,
-      email: specialistInfo.email,
+      name: specialistInfo.medico?.nome,
+      cpf: specialistInfo.medico?.cpf,
+      phone: specialistInfo.medico?.celular,
+      email: specialistInfo.medico?.email,
     },
 
     profissionalData: {
-      profissionalName: specialistInfo.nomeProfissional,
-      registerNumber: specialistInfo.CRM,
-      issuingAgency: specialistInfo.orgaoEmissor,
-      uf: specialistInfo.crmuf,
+      profissionalName: specialistInfo.medico?.nomeProfissional,
+      registerNumber: specialistInfo.medico?.CRM,
+      issuingAgency: specialistInfo.medico?.orgaoEmissor?.idOrgaoEmissor,
+      uf: specialistInfo.medico?.ufRegistroProfissional,
     },
 
-    specialtys: mapSpecialtys(specialistInfo.especialidade),
-    clinics: mapClinics(specialistInfo.clinica),
+    specialtys: mapSpecialtys(specialistInfo.medico?.especialidade),
+    clinics: mapClinics(specialistInfo.medico?.clinica),
   }
 }
 
