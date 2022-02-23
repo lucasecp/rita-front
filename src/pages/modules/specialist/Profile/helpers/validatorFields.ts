@@ -36,7 +36,7 @@ export const validateUf = (value: string): string => {
   return ''
 }
 
-export const validateStatus = (value: string): string => {
+export const validateReceiveService = (value: string): string => {
   if (!value) return 'Receber agendamento é obrigatório'
 
   return ''
@@ -45,5 +45,14 @@ export const validateStatus = (value: string): string => {
 export const validateClassCouncil = (value: string): string => {
   if (!value) return 'Conselho de classe é obrigatório'
 
+  return ''
+}
+
+export const validateEmail = (value: string): string => {
+  if (!value.trim()) {
+    return 'Email Obrigatório'
+  } else if (!/\S+@\S+\.\S+/.test(value)) {
+    return 'Email inválido.'
+  }
   return ''
 }

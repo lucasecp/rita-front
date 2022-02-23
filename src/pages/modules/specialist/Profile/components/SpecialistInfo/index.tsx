@@ -1,4 +1,3 @@
-import { InputEmail } from '@/components/smarts/InputEmail';
 import React, { useEffect, useState } from 'react';
 
 import InputMask from '../../../../../../components/Form/InputMask';
@@ -7,9 +6,10 @@ import { Select } from '../../../../../../components/Form/Select';
 import {
   validateClassCouncil,
   validateCPF,
+  validateEmail,
   validateName,
   validatePhone,
-  validateStatus,
+  validateReceiveService,
 } from '../../helpers/validatorFields';
 import { ErrorsI, SpecialistInfoI } from '../../Types';
 import SelectUf from './SelectUf';
@@ -148,7 +148,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
         onBlur={() =>
           setErrors({
             ...errors,
-            receiveService: validateStatus(receiveService),
+            receiveService: validateReceiveService(receiveService),
           })
         }
         hasError={!!errors?.receiveService}
@@ -181,13 +181,16 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
         disabled={!isEditing}
         name="classCouncil"
       />
-      <InputEmail
+      <InputText
         label="Email:"
-        initialEmail={email}
-        onGetEmail={setEmail}
-        hasError={(hasError) => setErrors({ ...errors, email: hasError })}
-        // checkHasError={errorMessage}
-        // onKeyUp={checkConfirmEmail}
+        value={email}
+        setValue={setEmail}
+        hasError={!!errors?.email}
+        msgError={errors?.email}
+        onBlur={() => setErrors({ ...errors, email: validateEmail(email) })}
+        onKeyUp={() => setErrors({ ...errors, email: validateEmail(email) })}
+        name="email"
+        maxLength={100}
         disabled={!isEditing}
       />
       <InputMask
