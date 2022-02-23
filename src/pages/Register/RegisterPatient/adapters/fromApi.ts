@@ -34,8 +34,6 @@ interface InitialFromApi {
 export const initialRegisterPatientFromApi = (
   initialRegisterPatientFromApi: InitialFromApi,
 ): RegisterDataState => {
-  console.log(initialRegisterPatientFromApi)
-
   return {
     registrationData: {
       id: initialRegisterPatientFromApi.idPaciente,
