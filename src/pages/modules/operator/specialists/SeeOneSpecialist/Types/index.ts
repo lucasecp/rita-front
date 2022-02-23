@@ -20,7 +20,7 @@ export interface ErrorsI {
   name?: string
   cpf?: string
   phone?: string
-  email?: string | boolean
+  email?: string 
   specialtys?: string
   clinics?: string
 }

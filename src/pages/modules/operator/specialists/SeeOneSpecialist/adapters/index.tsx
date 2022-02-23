@@ -14,7 +14,7 @@ export const fromApi = (specialistInfo: any) => {
     profissionalData: {
       profissionalName: specialistInfo.nomeProfissional,
       registerNumber: specialistInfo.CRM,
-      issuingAgency: specialistInfo.orgaoEmissor,
+      issuingAgency: specialistInfo.orgaoEmissor?.idOrgaoEmissor,
       uf: specialistInfo.crmuf,
     },
 

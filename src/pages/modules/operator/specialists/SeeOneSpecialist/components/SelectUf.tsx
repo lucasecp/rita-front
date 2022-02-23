@@ -6,16 +6,16 @@ interface SelectUfProps {
   setUf: (value: string) => void
   setUfToApi: (value: string) => void
   uf: string
+  error?: string
 }
 
-const SelectUf: React.FC<SelectUfProps> = ({ setUf, setUfToApi,uf }) => {
+const SelectUf: React.FC<SelectUfProps> = ({ setUf, setUfToApi,uf,error }) => {
   const [ufOptions, setUfOptions] = useState<any[]>([])
 
   const mapUf = (array: any[]) => {
     if (!array) return []
     return array.map((obj) => ({ value: obj.idUF, label: obj.sigla }))
   }
-  console.log(uf)
 
   useEffect(() => {
     const getUf = async () => {
@@ -51,6 +51,8 @@ const SelectUf: React.FC<SelectUfProps> = ({ setUf, setUfToApi,uf }) => {
       value={uf}
       setValue={setUf}
       name="uf"
+      hasError={!!error}
+      msgError={error}
     />
   )
 }
