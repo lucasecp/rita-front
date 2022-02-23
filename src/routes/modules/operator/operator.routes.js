@@ -23,7 +23,7 @@ import {
   OPERATOR_ADD_DEPENDENT,
   OPERATOR_CREATE_SPRECIALTY,
   OPERATOR_EDIT_SPRECIALTY,
-  OPERATOR_SEE_ALL_SPECIALISTS
+  OPERATOR_SEE_ALL_SPECIALISTS,
 } from '../../constants/namedRoutes/routes'
 
 import SeeAllSpecialtys from '@/pages/modules/operator/Specialtys/SeeAllSpecialtys'

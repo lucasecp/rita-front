@@ -10,10 +10,9 @@ const Actions = ({ id }) => {
   const history = useHistory()
 
   const ToDelete = () => {
-
-//   history.push(ENDPOINT DO PERFIL, {
-            //     id: planInformations.idPlano,
-            //   })
+    //   history.push(ENDPOINT DO PERFIL, {
+    //     id: planInformations.idPlano,
+    //   })
   }
 
   return (
