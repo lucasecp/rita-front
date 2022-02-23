@@ -40,8 +40,6 @@ export const RangeOfUse = ({
     } finally {
       Loading.turnOff()
     }
-
-    // console.log(regional)
   }
 
   const removeRegional = async (id) => {

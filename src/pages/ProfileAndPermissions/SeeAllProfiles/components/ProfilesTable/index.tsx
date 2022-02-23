@@ -1,12 +1,13 @@
 import React from 'react'
 
-import Actions from '../Actions'
+import { Actions } from '../Actions'
 import { Container } from './styles'
 
 interface Profile {
   id: number
   name: string
   usersQuantity: number
+  keyProfile: boolean
 }
 
 interface DataProfilesProps {
@@ -21,7 +22,11 @@ export const ProfilesTable: React.FC<DataProfilesProps> = ({ profiles }) => {
           <li>{profile.name || '-'}</li>
           <li>{profile.usersQuantity || '-'}</li>
           <li>
-            <Actions id={profile.id} />
+            <Actions
+              id={profile.id}
+              usersQuantity={profile.usersQuantity}
+              keyProfile={profile.keyProfile}
+            />
           </li>
         </ul>
       ))}
