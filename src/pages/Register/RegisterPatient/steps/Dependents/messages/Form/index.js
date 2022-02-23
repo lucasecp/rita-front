@@ -8,7 +8,6 @@ import { Col, Row } from 'react-bootstrap'
 import { Container } from './styles'
 import {
   // validateBirthdate,
-  validateEmail,
   validateGender,
   validateName,
   validatePhone,
@@ -21,6 +20,8 @@ import clearCpf from '@/helpers/clear/SpecialCaracteres'
 import apiPatient from '@/services/apiPatient'
 import { validateBirthDependent } from '../helpers/validateBirthDependent'
 import { useRegisterPatient } from '@/pages/Register/RegisterPatient/hooks'
+import { InputEmail } from '@/components/smarts/InputEmail'
+import { useMessage } from '@/hooks/useMessage'
 
 const CpfAlreadyExistsError =
   'Este CPF já está cadastrado na plataforma Rita, por favor verifique os dados e preencha novamente.'
@@ -44,6 +45,8 @@ const Form = ({
   const [phone, setPhone] = useState('')
   const [cpf, setCpf] = useState('')
   const [errors, setErrors] = useState({})
+
+  const [errorMessage, sendErrorMessage] = useMessage()
 
   const updateData = () => {
     setName(editDep.name || '')
@@ -226,15 +229,13 @@ const Form = ({
         </Col>
 
         <Col md="6" className="mt-4">
-          <InputText
-            label="E-mail*:"
-            value={email}
-            setValue={setEmail}
-            hasError={errors.email}
-            onBlur={() => setErrors({ ...errors, ...validateEmail(email) })}
-            onKeyUp={() => setErrors({ ...errors, ...validateEmail(email) })}
-            msgError={errors.email}
-            maxLength={100}
+          <InputEmail
+            initialEmail={email}
+            onGetEmail={setEmail}
+            hasError={(hasError) => setErrors({ ...errors, email: hasError })}
+            checkHasError={errorMessage}
+            onKeyUp={sendErrorMessage}
+            onBlur={sendErrorMessage}
           />
         </Col>
       </Row>

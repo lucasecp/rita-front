@@ -30,7 +30,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 786px) {
+  @media (max-width: 1038px) {
     grid-template-columns: 1fr;
   }
 `
@@ -64,7 +64,7 @@ export const ContentFile = styled.div`
 
   > span {
     border: 1px solid ${colors.gray.light};
-    padding: 14px 16px;
+    padding: 0 16px;
     border-radius: 8px 0 0 8px;
 
     color: ${colors.black};
@@ -79,7 +79,6 @@ export const ContentFile = styled.div`
   }
 
   > button {
-    padding: 14px 16px;
     width: 100%;
     height: 100%;
     color: ${({ theme }) => theme.main};

@@ -1,4 +1,3 @@
-
 export interface AcessDatasI {
   nameAdmin: string
   cpf: string
@@ -27,7 +26,7 @@ export interface AddressI {
 export interface ErrorsI {
   nameAdmin?: string
   celPhone?: string
-  email?: string
+  email?: boolean
   cpf?: string
   cep?: string
   city?: string
@@ -41,5 +40,4 @@ export interface ErrorsI {
   status?: string
   specialtys?: ''
   uf?: string
-  [x: string]: string | undefined
 }

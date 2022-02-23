@@ -7,7 +7,6 @@ import { Container, ButtonLinkBlue } from './styles'
 import Terms from './messages/Terms'
 import {
   validateBirthdate,
-  validateEmail,
   validateGender,
   validateName,
   validatePhone,
@@ -18,10 +17,12 @@ import { GeneralFieldsErrors } from './messages/GeneralFieldsErrors'
 
 import { useRegisterPatient } from '../../hooks'
 import ButtonPrimary from '@/components/Button/Primary'
+import { InputEmail } from '@/components/smarts/InputEmail'
+import { useMessage } from '@/hooks/useMessage'
 
 interface ErrorState {
   name?: string
-  email?: string
+  email?: boolean
   confirmEmail?: string
   gender?: string
   birthdate?: string
@@ -50,6 +51,8 @@ export const RegistrationData: React.FC<RegistrationDataProps> = ({
   const [cpf, setCpf] = useState('')
   const [terms, setTerms] = useState(false)
   const [errors, setErrors] = useState({} as ErrorState)
+
+  const [errorMessage, sendErrorMessage] = useMessage()
 
   useEffect(() => {
     setName(initialRegisterData?.registrationData?.name || '')
@@ -88,10 +91,11 @@ export const RegistrationData: React.FC<RegistrationDataProps> = ({
     }
   }
 
-  const checkFields = () => {
+  const onNextStep = () => {
+    sendErrorMessage()
+
     const permit = {
       ...validateName(name),
-      ...validateEmail(email, confirmEmail),
       ...validateConfEmail(email, confirmEmail),
       ...validateGender(gender),
       ...validateBirthdate(birthdate),
@@ -107,9 +111,9 @@ export const RegistrationData: React.FC<RegistrationDataProps> = ({
 
     if (
       !permit.name &&
-      !permit.email &&
       !permit.gender &&
       permitBirth &&
+      !permit.confirmEmail &&
       !permit.terms &&
       !permit.phone
     ) {
@@ -146,15 +150,12 @@ export const RegistrationData: React.FC<RegistrationDataProps> = ({
           onlyLetter
         />
         <section>
-          <InputText
-            label="E-mail*:"
-            name="email"
-            hasError={!!errors.email}
-            value={email}
+          <InputEmail
+            initialEmail={email}
+            onGetEmail={setEmail}
+            hasError={(hasError) => setErrors({ ...errors, email: hasError })}
+            checkHasError={errorMessage}
             onKeyUp={checkConfirmEmail}
-            setValue={setEmail}
-            msgError={errors.email}
-            maxLength={100}
           />
           <InputText
             autoComplete="off"
@@ -165,6 +166,7 @@ export const RegistrationData: React.FC<RegistrationDataProps> = ({
             setValue={setConfirmEmail}
             msgError={errors.confirmEmail}
             onPaste={(e) => e.preventDefault()}
+            maxLength={100}
           />
           <Select
             label="Gênero*:"
@@ -224,7 +226,7 @@ export const RegistrationData: React.FC<RegistrationDataProps> = ({
         />
       </div>
       <footer>
-        <ButtonPrimary onClick={checkFields}>Próxima Etapa</ButtonPrimary>
+        <ButtonPrimary onClick={onNextStep}>Próxima Etapa</ButtonPrimary>
       </footer>
     </Container>
   )

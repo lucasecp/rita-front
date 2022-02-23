@@ -33,6 +33,7 @@ import {
   DIRECTOR_SEE_ALL_PROFILES,
   OPERATOR_DEPENDENT_MANAGMENT,
   DIRECTOR_IMPORT,
+  SPECIALIST_PROFILE,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -139,5 +140,11 @@ export const menuItens = [
     icon: <StethoscopeIcon />,
     name: 'Especialistas',
     permission: permissionList.LISTAR_MEDICOS,
+  },
+  {
+    path: SPECIALIST_PROFILE,
+    icon: <UserIcon />,
+    name: 'Perfil',
+    permission: permissionList.ALTERAR_MEUS_DADOS_ESPECIALISTA,
   },
 ]

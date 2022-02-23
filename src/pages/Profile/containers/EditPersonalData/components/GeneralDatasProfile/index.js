@@ -1,10 +1,11 @@
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
+import { InputEmail } from '@/components/smarts/InputEmail'
+import { useMessage } from '@/hooks/useMessage'
 import React, { useEffect, useState } from 'react'
 import {
   validateBirthdate,
-  validateEmail,
   validateGender,
   validateName,
   validatePhone,
@@ -25,6 +26,7 @@ export const GeneralDatas = ({
   const [phone, setPhone] = useState(personalDatas?.phone || '')
 
   const [errors, setErrors] = useState({})
+  const [errorMessage, sendErrorMessage] = useMessage()
 
   useEffect(() => {
     setPersonalDatas({
@@ -33,8 +35,9 @@ export const GeneralDatas = ({
       gender,
       phone,
       email,
-      hasError: Object.values(errors).some((value) => value !== ''),
+      hasError: Object.values(errors).some((value) => value),
     })
+    console.log(errors)
   }, [name, birthDate, gender, phone, email, errors])
 
   useEffect(() => {
@@ -105,16 +108,13 @@ export const GeneralDatas = ({
           }
           disabled={!isEditing}
         />
-        <InputText
-          label="E-mail:"
-          name="email"
-          value={email}
-          setValue={setEmail}
-          hasError={errors?.email}
-          msgError={errors?.email}
-          onBlur={() => setErrors({ ...errors, email: validateEmail(email) })}
-          onKeyUp={() => setErrors({ ...errors, email: validateEmail(email) })}
-          maxLength={100}
+        <InputEmail
+          initialEmail={email}
+          onGetEmail={setEmail}
+          hasError={(hasError) => setErrors({ ...errors, email: hasError })}
+          checkHasError={errorMessage}
+          onKeyUp={sendErrorMessage}
+          onBlur={sendErrorMessage}
           disabled={!isEditing}
         />
         <InputMask

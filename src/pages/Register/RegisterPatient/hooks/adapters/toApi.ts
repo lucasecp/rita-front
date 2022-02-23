@@ -1,4 +1,3 @@
-import { StatusSellableItems } from '@/pages/SellableItems/FilterSellableItems/@types'
 import { RegisterDataState, DocumentsState } from '../index'
 
 interface ToApi {
