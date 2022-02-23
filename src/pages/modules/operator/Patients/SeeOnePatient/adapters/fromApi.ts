@@ -7,6 +7,7 @@ import {
   PatientData,
   PatientAddress,
   Dependent,
+  PatientStatusLimit,
 } from '../types/index'
 
 export interface fromApiResponse {
@@ -91,6 +92,15 @@ export const fromApiPatientAddress = (data: ResponseApi): PatientAddress => {
     number: data.endereco.numero,
     district: data.endereco.bairro,
     complement: data.endereco.complemento,
+  }
+}
+
+export const fromApiPatientStatusLimit = (
+  data: ResponseApi,
+): PatientStatusLimit => {
+  return {
+    status: data.status,
+    limitTry: data.limiteTentativas,
   }
 }
 

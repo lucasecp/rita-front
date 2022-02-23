@@ -28,6 +28,7 @@ import {
   fromApiPatientAddress,
   fromApiPatientData,
   fromApiPatientTable,
+  fromApiPatientStatusLimit,
 } from './adapters/fromApi'
 import {
   PatientData,
@@ -35,8 +36,10 @@ import {
   Dependent,
   Validations,
   ResponseApi,
+  PatientStatusLimit,
 } from './types/index'
 import { isObjectEmpty } from '@/helpers/isObjectEmpty'
+import ResetStatusOnePatient from './components/ResetStatusOnePatient'
 
 export const SeeOnePatient: React.FC = () => {
   const history = useHistory()
@@ -52,6 +55,7 @@ export const SeeOnePatient: React.FC = () => {
     Dependent[] | undefined
   >([])
   const [patientAddress, setPatientAddress] = useState({} as PatientAddress)
+  const [patientStatusLimit, setPatientStatusLimit] = useState({} as PatientStatusLimit)
   const [dependent, setDependent] = useState({} as PatientData | undefined)
   const [incomeDocumentType, setIncomeDocumentType] = useState('')
 
@@ -86,12 +90,13 @@ export const SeeOnePatient: React.FC = () => {
         } else {
           setIsDependentMinorAge(false)
         }
-
+        const patientStatusMapped = fromApiPatientStatusLimit(data)
         const patientDataMapped = fromApiPatientData(data)
         const patientDependentsMapped = fromApiDependents(data)
         const patientAddressMapped = fromApiPatientAddress(data)
         const patientTableMapped = fromApiPatientTable(data)
 
+        setPatientStatusLimit(patientStatusMapped)
         setPatientData(patientDataMapped.patientData)
         setDependent(patientDataMapped?.dependentData)
         setPatientDependents(patientDependentsMapped)
@@ -174,12 +179,18 @@ export const SeeOnePatient: React.FC = () => {
       patientData,
       patientDependents,
       patientAddress,
+      patientStatusLimit,
     )
+    console.log(patientStatusLimit)
+    console.log(dataToSend)
 
     try {
       Loading.turnOn()
 
-      const response = await apiPatient.put('/paciente/operador', dataToSend)
+      const response = await apiPatient.put(
+        `/paciente/${patientData.id}`,
+        dataToSend,
+      )
 
       if (response.status === 200) {
         if (response.data.mensagem === 'Sucesso') {
@@ -239,6 +250,11 @@ export const SeeOnePatient: React.FC = () => {
         {!isObjectEmpty(validations) && (
           <ValidationSeeOnePatient validations={validations} />
         )}
+
+        <ResetStatusOnePatient
+          patientStatus={patientStatusLimit}
+          setpatientStatus={setPatientStatusLimit}
+        />
         <footer>
           <ButtonLink onClick={onComeBack}>Voltar</ButtonLink>
           <OutlineButton

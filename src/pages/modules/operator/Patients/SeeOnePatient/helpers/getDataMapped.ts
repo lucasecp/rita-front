@@ -1,4 +1,4 @@
-import { PatientData, Dependent, PatientAddress } from '../index'
+import { PatientData, Dependent, PatientAddress, PatientStatus } from '../index'
 
 // interface getDataMappedResponse {
 //   patientMapped: {
@@ -34,6 +34,7 @@ export const getDataMapped = (
   patientData: PatientData,
   patientDependents: Dependent[] | undefined,
   patientAddress: PatientAddress,
+  patientStatus: PatientStatus,
 ): any => {
   const patientMapped = {
     idPaciente: patientData.id,
@@ -43,6 +44,8 @@ export const getDataMapped = (
     dataNascimento: patientData.birthDate,
     telefone: patientData.phone,
     email: patientData.email,
+    status: patientStatus.status,
+    limiteTentativas: patientStatus.limitTry,
   }
 
   const dependentsMapped = patientDependents?.map((dependent) => ({

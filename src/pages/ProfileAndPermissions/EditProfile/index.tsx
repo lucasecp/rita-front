@@ -7,7 +7,6 @@ import { useHistory, useLocation } from 'react-router'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { PermissionsSelect } from './components/PermissionsSelect'
-import NoPermissionsCheckedWarning from './messages/NoPermissionsCheckedWarning'
 import ToConfirmCancel from './messages/ToConfirmCancel'
 import InputText from '@/components/Form/InputText'
 import OutilineButton from '@/components/Button/Outline'
@@ -46,6 +45,9 @@ export const EditProfile: React.FC = () => {
     setAnyFieldsHasChanged(anyFieldsHasChanged + 1)
   }, [checkedPermissions, oneProfileName])
 
+  useEffect(() => {
+    scrollTo(0, 0)
+  }, [])
 
   const nodeChecked = function () {
     setCheckedPermissions([...this.checkedNodes])
