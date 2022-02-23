@@ -27,7 +27,7 @@ const SeeOneSpecialist = () => {
         const { data } = await apiAdmin.get(
           `/medico/${location.state.idDoctor}`,
         )
-
+console.log(fromApi(data))
         setSpecialist(fromApi(data))
       } catch (error) {
       } finally {

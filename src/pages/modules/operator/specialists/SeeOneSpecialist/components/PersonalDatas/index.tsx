@@ -73,6 +73,7 @@ export const PersonalDatas: React.FC<PersonalDatasProps> = ({
           onBlur={() => setErrors({ ...errors, email: validateEmail(email) })}
           onKeyUp={() => setErrors({ ...errors, email: validateEmail(email) })}
           name="email"
+          maxLength={100}
         />
 
         {/* <InputEmail

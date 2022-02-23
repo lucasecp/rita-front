@@ -59,14 +59,15 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
     error = !!hasSpecificError[0]
 
     for (const field in fields) {
-      if (!fields[field] || !fields[field].length) {
+      if (!fields[field] || Array.isArray(fields[field]) && !fields[field].length ) {
+        console.log(fields[field].length,fields[field]);
         setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
         error = true
       }
     }
     return error
   }
-  console.log(errors)
+  
 
   const onSave = async () => {
     setClickOnSave(!clickOnSave)
@@ -75,7 +76,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
         ...personalDatas,
         ...profissionalData,
         ...specialtys,
-        ...clinics
+        ...clinics,
       })
     ) {
       return
@@ -104,7 +105,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
   }
 
   useEffect(() => {
-      scrollOntoFieldError(errors)
+    scrollOntoFieldError(errors)
   }, [clickOnSave])
 
   const onCancel = () => {
