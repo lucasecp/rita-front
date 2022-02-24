@@ -31,9 +31,9 @@ const Header: React.FC<HeaderProps> = ({ data, setValue }) => {
           )}
         </div>
         <span>
-          <InputFile setValue={setValue}>
+          {/* <InputFile setValue={setValue}> */}
             <PenIcon />
-          </InputFile>
+          {/* </InputFile> */}
         </span>
       </div>
 
