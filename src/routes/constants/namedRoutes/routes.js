@@ -73,6 +73,9 @@ export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'
 export const REGISTER_PATIENT = '/cadastro/paciente/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
+export const SEE_ONE_USER = '/usuarios/visualizar'
+export const EDIT_USER = '/usuarios/editar'
+
 export const TESTE = '/teste'
 
 export const NOT_FOUND = '*'

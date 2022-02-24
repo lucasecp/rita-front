@@ -111,12 +111,16 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
 
     const formFile1 = new FormData()
     formFile1.append('file', holdingDocumentFile)
+
     const formFile2 = new FormData()
     formFile2.append('file', ownFrontDocumentFile)
+
     const formFile3 = new FormData()
     formFile3.append('file', ownBackDocumentFile)
+
     const formFile4 = new FormData()
     formFile4.append('file', proofOfAddressFile)
+
     const formFile5 = new FormData()
     formFile5.append('file', proofOfIncomeFile)
 

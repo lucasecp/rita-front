@@ -11,15 +11,15 @@ import { specialCharacters } from './constants/specialCharacters'
 
 interface InputEmailProps extends InputHTMLAttributes<HTMLInputElement> {
   initialEmail?: string
-  onGetEmail: React.Dispatch<React.SetStateAction<string>>
-  checkHasError: number
-  hasError: (hasError: boolean) => void
+  onGetEmail?: React.Dispatch<React.SetStateAction<string>>
+  checkHasError?: number
+  hasError?: (hasError: boolean) => void
   label?: string
 }
 
 export const InputEmail: React.FC<InputEmailProps> = ({
   initialEmail,
-  onGetEmail,
+  onGetEmail = () => null,
   checkHasError,
   hasError,
   label,

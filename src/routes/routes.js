@@ -38,8 +38,12 @@ import {
   DIRECTOR_SEE_ONE_PROFILE,
   DIRECTOR_EDIT_PROFILE,
   DIRECTOR_CREATE_PROFILE,
+  SEE_ONE_USER,
+  EDIT_USER,
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
+import { SeeOneUser } from '@/pages/SeeOneUser'
+import { EditUser } from '@/pages/EditUser'
 
 function Routes() {
   return (
@@ -93,6 +97,10 @@ function Routes() {
         isPrivate
         component={EditSellableItems}
       />
+
+      <Route path={SEE_ONE_USER} isPrivate component={SeeOneUser} />
+
+      <Route path={EDIT_USER} isPrivate component={EditUser} />
 
       <Route path={PROFILE} isPrivate component={Profile} />
 
