@@ -62,7 +62,6 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
           displayValue="name"
           showCheckbox
           placeholder=""
-          
           customCloseIcon={<CloseMultSelectIcon />}
           emptyRecordMsg="Nenhum resultado."
           closeOnSelect={false}
