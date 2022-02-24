@@ -79,7 +79,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
   }
 
   const onSave = async () => {
-    setClickOnSave(true)
+    setClickOnSave(!clickOnSave)
     if (
       hasErrorOnFields({
         ...personalDatas,
@@ -98,6 +98,8 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
       await apiAdmin.put(
         `/medico/${id}`,
         toApi({
+          id,
+          status: specialistData.status,
           ...personalDatas,
           ...profissionalData,
           ...specialtys,

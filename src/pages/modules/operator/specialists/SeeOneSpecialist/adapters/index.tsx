@@ -10,6 +10,7 @@ export const fromApi = (specialistInfo: any) => {
       phone: specialistInfo.celular,
       email: specialistInfo.email,
     },
+   status:  specialistInfo.status,
 
     profissionalData: {
       profissionalName: specialistInfo.nomeProfissional,
@@ -25,16 +26,19 @@ export const fromApi = (specialistInfo: any) => {
 
 export const toApi = (specialistInfo: any) => {
   return {
-    idClinica: specialistInfo.id,
+    idMedico: specialistInfo.id,
     nome: specialistInfo.name,
     cpf: clearSpecialCaracter(specialistInfo.cpf),
     celular: clearSpecialCaracter(specialistInfo.phone),
     email: specialistInfo.email,
     nomeProfissional: specialistInfo.profissionalName,
-    registroProfissional: specialistInfo.registerNumber,
-    conseloClasse: specialistInfo.issuingAgency,
-    uf: specialistInfo.uf, 
-    clinicas: mapClinicsToAPi(specialistInfo.clinics),
+    CRM: specialistInfo.registerNumber,
+    idOrgaoEmissor: specialistInfo.issuingAgency,
+    crmuf: specialistInfo.uf,
+    clinica: mapClinicsToAPi(specialistInfo.clinics),
     especialidade: mapSpecialtysToApi(specialistInfo.specialtys),
+    cashBack: 0,
+    takeRate: 0,
+    status: specialistInfo.status
   }
 }
