@@ -15,6 +15,11 @@ export interface PatientData {
   error?: boolean
 }
 
+export interface PatientStatusLimit {
+  status: string
+  limitTry: string
+}
+
 export interface PatientAddress {
   cep: string
   uf: string
@@ -55,6 +60,7 @@ export interface ResponseApi {
   email: string
   renda: string
   sexo: string
+  limiteTentativas: string
   status: string
   telefone: string
   titular?: any

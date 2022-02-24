@@ -1,29 +1,65 @@
-import React, { useState, useEffect } from 'react'
-import { Container } from './styles'
-import InputText from '../../../../../../components/Form/InputText/index'
-import InputMask from '../../../../../../components/Form/InputMask/index'
-import { Select } from '../../../../../../components/Form/Select/index'
-import SelectUf from './SelectUf'
-import { InputEmail } from '@/components/smarts/InputEmail'
-import { SpecialistInfoI } from '../../Types/index'
+import React, { useEffect, useState } from 'react';
+
+import InputMask from '../../../../../../components/Form/InputMask';
+import InputText from '../../../../../../components/Form/InputText';
+import { Select } from '../../../../../../components/Form/Select';
+import {
+  validateClassCouncil,
+  validateCPF,
+  validateEmail,
+  validateName,
+  validatePhone,
+  validateReceiveService,
+} from '../../helpers/validatorFields';
+import { ErrorsI, SpecialistInfoI } from '../../Types';
+import SelectUf from './SelectUf';
+import { Container } from './styles';
 
 interface SpecialistInfoProps {
   data?: SpecialistInfoI
+  isEditing?: boolean
+  errors: ErrorsI
+  setErrors: (error: any) => any
+  setSpecialistInfo: (data: SpecialistInfoI) => any
 }
 
-const SpecialistInfo: React.FC<SpecialistInfoProps> = ({ data }) => {
+const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
+  data,
+  isEditing,
+  errors,
+  setErrors,
+  setSpecialistInfo,
+}) => {
   const [name, setName] = useState('')
   const [profissionalName, setProfissionalName] = useState('')
-
   const [cpf, setCpf] = useState('')
-  const [receiveService, setReceiveService] = useState<string | number>('')
-
+  const [receiveService, setReceiveService] = useState<string>('')
   const [ufProfissionaRegister, setUfProfissionaRegister] = useState('')
-  const [ufProfissionaRegisterToApi, setUfProfissionaRegisterToApi] =
-    useState('')
   const [classCouncil, setClassCouncil] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+
+  useEffect(() => {
+    setSpecialistInfo({
+      classCouncil,
+      cpf,
+      email,
+      name,
+      phone,
+      profissionalName,
+      ufProfissionaRegister,
+      receiveService,
+    })
+  }, [
+    classCouncil,
+    cpf,
+    email,
+    name,
+    phone,
+    profissionalName,
+    ufProfissionaRegister,
+    receiveService,
+  ])
 
   useEffect(() => {
     setName(data?.name || '')
@@ -43,13 +79,12 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({ data }) => {
         label="Nome Completo:"
         value={name}
         setValue={setName}
-        // hasError={!!errors?.name}
-        // msgError={errors?.name}
+        hasError={!!errors?.name}
+        msgError={errors?.name}
         maxLength={100}
-        // onBlur={() => setErrors({ ...errors, name: validateName(name) })}
-        // onKeyUp={() => setErrors({ ...errors, name: validateName(name) })}
-        // disabled={!isEditing}
-        disabled
+        onBlur={() => setErrors({ ...errors, name: validateName(name) })}
+        onKeyUp={() => setErrors({ ...errors, name: validateName(name) })}
+        disabled={!isEditing}
         name="name"
       />
 
@@ -57,13 +92,22 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({ data }) => {
         label="Nome Profissional:"
         value={profissionalName}
         setValue={setProfissionalName}
-        // hasError={!!errors?.profissionalName}
-        // msgError={errors?.profissionalName}
+        hasError={!!errors?.profissionalName}
+        msgError={errors?.profissionalName}
         maxLength={100}
-        // onBlur={() => setErrors({ ...errors, profissionalName: validateName(profissionalName) })}
-        // onKeyUp={() => setErrors({ ...errors, profissionalName: validateName(profissionalName) })}
-        // disabled={!isEditing}
-        disabled
+        onBlur={() =>
+          setErrors({
+            ...errors,
+            profissionalName: validateName(profissionalName),
+          })
+        }
+        onKeyUp={() =>
+          setErrors({
+            ...errors,
+            profissionalName: validateName(profissionalName),
+          })
+        }
+        disabled={!isEditing}
         name="profissionalName"
       />
 
@@ -72,94 +116,104 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({ data }) => {
         label="CPF:"
         value={cpf}
         setValue={setCpf}
-        // hasError={!!errors?.cpf}
-        // msgError={errors?.cpf}
-        // onBlur={async () =>
-        //   setErrors({
-        //     ...errors,
-        //     cpf: await validatorCNPJ(cpf, personalDatas?.cpf),
-        //   })
-        // }
-        // onKeyUp={async () =>
-        //   setErrors({
-        //     ...errors,
-        //     cpf: await validatorCNPJ(cpf, personalDatas?.cpf),
-        //   })
-        // }
-        // disabled={!isEditing}
+        hasError={!!errors?.cpf}
+        msgError={errors?.cpf}
+        onBlur={async () =>
+          setErrors({
+            ...errors,
+            cpf: validateCPF(cpf),
+          })
+        }
+        onKeyUp={async () =>
+          setErrors({
+            ...errors,
+            cpf: validateCPF(cpf),
+          })
+        }
+        disabled={!isEditing}
         name="cpf"
-        disabled
       />
 
       <Select
         label="Receber Agendamentos:"
-        labelDefaultOption="Selecione:"
         options={[
-          { label: 'Sim', value: 1 },
-          { label: 'Não', value: 0 },
+          { label: 'Sim', value: 'S' },
+          { label: 'Não', value: 'N' },
         ]}
         value={receiveService}
         setValue={setReceiveService}
         name="receiveService"
-        disabled
-        // disabled={!isEditing}
-        // labelDefaultOption={isEditing ? 'Selecione:' : ' '}
-        // onBlur={() =>
-        //   setErrors({ ...errors, receiveService: validateStatus(receiveService) })
-        // }
-        // hasError={!!errors?.receiveService}
-        // msgError={errors?.receiveService}
+        disabled={!isEditing}
+        labelDefaultOption={isEditing ? 'Selecione:' : ' '}
+        onBlur={() =>
+          setErrors({
+            ...errors,
+            receiveService: validateReceiveService(receiveService),
+          })
+        }
+        hasError={!!errors?.receiveService}
+        msgError={errors?.receiveService}
       />
       <SelectUf
         ufProfissionaRegister={ufProfissionaRegister}
         setUfProfissionaRegister={setUfProfissionaRegister}
-        setUfProfissionaRegisterToApi={setUfProfissionaRegisterToApi}
-        disabled
+        disabled={!isEditing}
       />
       <InputText
         label="Conselho de classe:"
         value={classCouncil}
         setValue={setClassCouncil}
-        // hasError={!!errors?.classCouncil}
-        // msgError={errors?.classCouncil}
+        hasError={!!errors?.classCouncil}
+        msgError={errors?.classCouncil}
         maxLength={100}
-        // onBlur={() => setErrors({ ...errors, classCouncil: validateName(classCouncil) })}
-        // onKeyUp={() => setErrors({ ...errors, classCouncil: validateName(classCouncil) })}
-        // disabled={!isEditing}
-        disabled
+        onBlur={() =>
+          setErrors({
+            ...errors,
+            classCouncil: validateClassCouncil(classCouncil),
+          })
+        }
+        onKeyUp={() =>
+          setErrors({
+            ...errors,
+            classCouncil: validateClassCouncil(classCouncil),
+          })
+        }
+        disabled={!isEditing}
         name="classCouncil"
       />
-      <InputEmail
+      <InputText
         label="Email:"
-        initialEmail={email}
-        onGetEmail={setEmail}
-        // hasError={(hasError) => setErrors({ ...errors, email: hasError })}
-        // checkHasError={errorMessage}
-        // onKeyUp={checkConfirmEmail}
-        disabled
+        value={email}
+        setValue={setEmail}
+        hasError={!!errors?.email}
+        msgError={errors?.email}
+        onBlur={() => setErrors({ ...errors, email: validateEmail(email) })}
+        onKeyUp={() => setErrors({ ...errors, email: validateEmail(email) })}
+        name="email"
+        maxLength={100}
+        disabled={!isEditing}
       />
       <InputMask
         mask="(99) 99999-9999"
         label="Celular:"
         value={phone}
         setValue={setPhone}
-        // hasError={!!errors?.phone}
-        // msgError={errors?.phone}
-        // onBlur={async () =>
-        //   setErrors({
-        //     ...errors,
-        //     phone: await validatorCNPJ(phone, personalDatas?.phone),
-        //   })
-        // }
-        // onKeyUp={async () =>
-        //   setErrors({
-        //     ...errors,
-        //     phone: await validatorCNPJ(phone, personalDatas?.phone),
-        //   })
-        // }
-        // disabled={!isEditing}
+        hasError={!!errors?.phone}
+        msgError={errors?.phone}
+        onBlur={async () =>
+          setErrors({
+            ...errors,
+            phone: validatePhone(phone),
+          })
+        }
+        onKeyUp={async () =>
+          setErrors({
+            ...errors,
+            phone: validatePhone(phone),
+          })
+        }
+        disabled={!isEditing}
         name="phone"
-        disabled
       />
     </Container>
   )

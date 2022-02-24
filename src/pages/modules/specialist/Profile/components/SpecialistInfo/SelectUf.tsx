@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import apiAdmin from '@/services/apiAdmin'
 
 interface SelectUfProps {
-  setUfProfissionaRegisterToApi: (value: string) => void
   setUfProfissionaRegister: (value: string) => void
   ufProfissionaRegister: string
   disabled: boolean
@@ -12,7 +11,6 @@ interface SelectUfProps {
 
 const SelectUf: React.FC<SelectUfProps> = ({
   setUfProfissionaRegister,
-  setUfProfissionaRegisterToApi,
   ufProfissionaRegister,
   disabled,
   ...rest
@@ -21,7 +19,7 @@ const SelectUf: React.FC<SelectUfProps> = ({
 
   const mapUf = (array: any[]) => {
     if (!array) return []
-    return array.map((obj) => ({ value: obj.idUF, label: obj.sigla }))
+    return array.map((obj) => ({ value: obj.sigla, label: obj.sigla }))
   }
 
   useEffect(() => {
@@ -47,7 +45,6 @@ const SelectUf: React.FC<SelectUfProps> = ({
     if (!ufFromApi?.value) {
       return
     }
-    setUfProfissionaRegisterToApi(ufFromApi.label)
 
     setUfProfissionaRegister(ufFromApi.value)
   }, [ufProfissionaRegister, ufOptions])

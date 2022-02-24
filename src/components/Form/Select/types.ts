@@ -3,6 +3,7 @@ import { SelectHTMLAttributes } from 'react'
 interface OptionsI {
   value:  string | number
   label: string | number
+  disabled?: boolean
 }
 interface OnChangeProps {
   target: {

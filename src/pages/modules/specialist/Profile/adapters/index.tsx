@@ -1,45 +1,38 @@
-import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
-import { mapClinics } from './mapClinic';
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres';
 
-export const fromApi = (clinicInfo: any) => {
+import { mapClinics, mapClinicsToApi } from './mapClinic';
+import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys';
+
+export const fromApi = (doctorInfo: any) => {
   return {
     specialistInfo: {
-      name: clinicInfo.nome,
-      profissionalName: clinicInfo.nomeProfissional,
-      cpf: clinicInfo.cpf,
-      receiveService: clinicInfo.recebeAtendimento ? 1 : 0,
-      ufProfissionaRegister: clinicInfo.ufRegistroProfissional,
-      classCouncil: clinicInfo.conseloClasse,
-      email: clinicInfo.email,
-      phone: clinicInfo.celular,
+      name: doctorInfo.nome,
+      profissionalName: doctorInfo.nomeProfissional,
+      cpf: doctorInfo.cpf,
+      receiveService: doctorInfo.receberAgendamentos,
+      ufProfissionaRegister: doctorInfo.ufRegistroProfissional,
+      classCouncil: doctorInfo.numeroRegistro,
+      email: doctorInfo.email,
+      phone: doctorInfo.celular,
+      photo: doctorInfo.avatar,
     },
-    crm: clinicInfo.crm,
 
-    specialtys: mapSpecialtys(clinicInfo.especialidade),
-    clinics: mapClinics(clinicInfo.clinica),
+    specialtys: mapSpecialtys(doctorInfo.especialidade),
+    clinics: mapClinics(doctorInfo.clinica),
   }
 }
 
-export const toApi = (clinicInfo: any) => {
+export const toApi = (doctorInfo: any) => {
   return {
-    idClinica: clinicInfo.id,
-    descricao: clinicInfo.name,
-    razaoSocial: clinicInfo.socialReason,
-    status: clinicInfo.status,
-    cnpj: clearSpecialCaracter(clinicInfo.cnpj),
-    telefone: clearSpecialCaracter(clinicInfo.phone),
-    endereco: clinicInfo.address,
-    bairro: clinicInfo.district,
-    cidade: clinicInfo.city,
-    uf: clinicInfo.uf,
-    cep: clinicInfo.cep,
-    complemento: clinicInfo.complement,
-    numero: clinicInfo.number,
-    responsavel: clinicInfo.nameAdmin,
-    emailResponsavel: clinicInfo.email,
-    telefoneResponsavel: clearSpecialCaracter(clinicInfo.celPhone),
-    cpfResponsavel: clearSpecialCaracter(clinicInfo.cpf),
-    especialidade: mapSpecialtysToApi(clinicInfo.specialtys),
+    nome: doctorInfo.specialistInfo?.name,
+    nomeProfissional: doctorInfo.specialistInfo?.profissionalName,
+    email: doctorInfo.specialistInfo?.email,
+    cpf: clearSpecialCaracter(doctorInfo.specialistInfo?.cpf),
+    receberAgendamentos: doctorInfo.specialistInfo?.receiveService,
+    celular: clearSpecialCaracter(doctorInfo.specialistInfo?.phone),
+    crmuf: doctorInfo.specialistInfo?.ufProfissionaRegister,
+    CRM: doctorInfo.specialistInfo?.classCouncil,
+    clinica: mapClinicsToApi(doctorInfo.clinic),
+    especialidade: mapSpecialtysToApi(doctorInfo.specialtys),
   }
 }
