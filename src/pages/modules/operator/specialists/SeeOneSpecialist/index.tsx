@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import EditClinic from './EditClinic'
+import EditClinic from './EditSpecialist'
 import { fromApi } from './adapters'
 import { useLoading } from '@/hooks/useLoading'
 import apiAdmin from '@/services/apiAdmin'

@@ -33,7 +33,7 @@ export const toApi = (specialistInfo: any) => {
     nomeProfissional: specialistInfo.profissionalName,
     registroProfissional: specialistInfo.registerNumber,
     conseloClasse: specialistInfo.issuingAgency,
-    uf: specialistInfo.uf,
+    uf: specialistInfo.uf, 
     clinicas: mapClinicsToAPi(specialistInfo.clinics),
     especialidade: mapSpecialtysToApi(specialistInfo.specialtys),
   }
