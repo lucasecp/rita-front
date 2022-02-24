@@ -19,6 +19,7 @@ export const Specialty: React.FC<ClinicSpecialtysProps> = ({
   specialistSpecialtys,
   setSpecialistSpecialtys,
   errors,
+  setErrors,
 }) => {
   const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>(
     specialistSpecialtys || [],
@@ -57,8 +58,8 @@ export const Specialty: React.FC<ClinicSpecialtysProps> = ({
     setSpecialistSpecialtys({
       specialtys,
     })
-  }, [specialtys, errors])
-
+    setErrors((error: ErrorsI) => ({ ...error, specialtys: '' }))
+  }, [specialtys])
 
   const onChangingSelect = (values: MultiSelectOption[]) => {
     const hasAllOption = values.some((val) => val.id === 'All')

@@ -1,23 +1,23 @@
-import ButtonLink from '@/components/Button/Link';
-import OutilineButton from '@/components/Button/Outline';
-import CancelEdting from '@/components/Modal/CancelEdting';
-import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError';
-import { useLoading } from '@/hooks/useLoading';
-import { useModal } from '@/hooks/useModal';
-import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes';
-import apiAdmin from '@/services/apiAdmin';
-import { toast } from '@/styles/components/toastify';
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import ButtonLink from '@/components/Button/Link'
+import OutilineButton from '@/components/Button/Outline'
+import CancelEdting from '@/components/Modal/CancelEdting'
+import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
+import { useLoading } from '@/hooks/useLoading'
+import { useModal } from '@/hooks/useModal'
+import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes'
+import apiAdmin from '@/services/apiAdmin'
+import { toast } from '@/styles/components/toastify'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router'
 
-import { toApi } from '../adapters';
-import { ClinicAcessData } from '../components/ClinicAcessData';
-import { ClinicAddress } from '../components/ClinicAddress';
-import { ClinicData } from '../components/ClinicData';
-import { ClinicSpecialty } from '../components/ClinicSpecialty';
-import Denied from '../messages/Denied';
-import { ErrorsI } from '../Types';
-import { ButtonGroup, Container } from './styles';
+import { toApi } from '../adapters'
+import { ClinicAcessData } from '../components/ClinicAcessData'
+import { ClinicAddress } from '../components/ClinicAddress'
+import { ClinicData } from '../components/ClinicData'
+import { ClinicSpecialty } from '../components/ClinicSpecialty'
+import Denied from '../messages/Denied'
+import { ErrorsI } from '../Types'
+import { ButtonGroup, Container } from './styles'
 
 const EditClinic: React.FC<any> = ({ clinicData }) => {
   const [isEditing, setIsEditing] = useState(false)
@@ -32,6 +32,7 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
   const [address, setAddress] = useState(clinicData.address || {})
   const [fieldWasChanged, setFieldWasChanged] = useState(false)
   const [errors, setErrors] = useState<ErrorsI>({})
+  const [clickOnSave, setClickOnSave] = useState(false)
 
   const { showSimple, showMessage } = useModal()
   const { Loading } = useLoading()
@@ -75,8 +76,7 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
   }
 
   const onSave = async () => {
-    scrollOntoFieldError(errors)
-
+    setClickOnSave(!clickOnSave)
     if (
       hasErrorOnFields({
         ...personalDatas,
@@ -121,6 +121,11 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
     }
     setIsEditing(false)
   }
+  useEffect(() => {
+    if (clickOnSave) {
+      scrollOntoFieldError(errors)
+    }
+  }, [clickOnSave])
 
   return (
     <Container>

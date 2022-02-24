@@ -63,7 +63,8 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
     setClinicSpecialtys({
       specialtys,
     })
-  }, [specialtys, errors])
+    setErrors((error: ErrorsI) => ({ ...error, specialtys: '' }))
+  }, [specialtys])
 
   useEffect(() => {
     if (!isEditing) {

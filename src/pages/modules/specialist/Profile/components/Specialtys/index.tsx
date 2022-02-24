@@ -1,12 +1,12 @@
 import CustomMultiSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
-import apiAdmin from '@/services/apiAdmin';
-import React, { useEffect, useState } from 'react';
+import apiAdmin from '@/services/apiAdmin'
+import React, { useEffect, useState } from 'react'
 
-import { mapSpecialtys } from '../../adapters/mapSpecialtys';
-import { ErrorsI } from '../../Types';
-import { Container } from './styles';
+import { mapSpecialtys } from '../../adapters/mapSpecialtys'
+import { ErrorsI } from '../../Types'
+import { Container } from './styles'
 
 interface ClinicSpecialtysProps {
   specialistSpecialtys?: MultiSelectOption[]
@@ -16,7 +16,6 @@ interface ClinicSpecialtysProps {
   errors: ErrorsI
   setErrors: (error: any) => any
   formWasSubmited: boolean
-
 }
 
 export const Specialtys: React.FC<ClinicSpecialtysProps> = ({
@@ -26,7 +25,7 @@ export const Specialtys: React.FC<ClinicSpecialtysProps> = ({
   initialData,
   errors,
   setErrors,
-  formWasSubmited
+  formWasSubmited,
 }) => {
   const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>([])
 
@@ -64,7 +63,8 @@ export const Specialtys: React.FC<ClinicSpecialtysProps> = ({
     setSpecialistSpecialtys({
       specialtys,
     })
-  }, [specialtys, errors])
+    setErrors((error: ErrorsI) => ({ ...error, specialtys: '' }))
+  }, [specialtys])
 
   useEffect(() => {
     if (!isEditing && !formWasSubmited) {
