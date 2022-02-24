@@ -27,7 +27,6 @@ export const Specialty: React.FC<ClinicSpecialtysProps> = ({
   const [specialtysOptions, setSpecialtysOptions] = useState<
     MultiSelectOption[]
   >([])
-
   useEffect(() => {
     const getSpecialtys = async () => {
       try {

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 
-import InputMask from '../../../../../../components/Form/InputMask';
-import InputText from '../../../../../../components/Form/InputText';
-import { Select } from '../../../../../../components/Form/Select';
+import InputMask from '../../../../../../components/Form/InputMask'
+import InputText from '../../../../../../components/Form/InputText'
+import { Select } from '../../../../../../components/Form/Select'
 import {
   validateClassCouncil,
   validateCPF,
@@ -10,10 +10,10 @@ import {
   validateName,
   validatePhone,
   validateReceiveService,
-} from '../../helpers/validatorFields';
-import { ErrorsI, SpecialistInfoI } from '../../Types';
-import SelectUf from './SelectUf';
-import { Container } from './styles';
+} from '../../helpers/validatorFields'
+import { ErrorsI, SpecialistInfoI } from '../../Types'
+import SelectUf from './SelectUf'
+import { Container } from './styles'
 
 interface SpecialistInfoProps {
   data?: SpecialistInfoI
@@ -21,6 +21,7 @@ interface SpecialistInfoProps {
   errors: ErrorsI
   setErrors: (error: any) => any
   setSpecialistInfo: (data: SpecialistInfoI) => any
+  formWasSubmited: boolean
 }
 
 const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
@@ -29,6 +30,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
   errors,
   setErrors,
   setSpecialistInfo,
+  formWasSubmited
 }) => {
   const [name, setName] = useState('')
   const [profissionalName, setProfissionalName] = useState('')
@@ -71,6 +73,19 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
     setPhone(data?.phone || '')
     setCpf(data?.cpf || '')
   }, [data])
+
+  useEffect(() => {
+    if (!isEditing && !formWasSubmited) {
+      setName(data?.name || '')
+      setProfissionalName(data?.profissionalName || '')
+      setReceiveService(data?.receiveService || '')
+      setUfProfissionaRegister(data?.ufProfissionaRegister || '')
+      setClassCouncil(data?.classCouncil || '')
+      setEmail(data?.email || '')
+      setPhone(data?.phone || '')
+      setCpf(data?.cpf || '')
+    }
+  }, [isEditing])
 
   return (
     <Container>

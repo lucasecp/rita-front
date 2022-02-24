@@ -4,7 +4,6 @@ import { PersonalDatas } from '../components/PersonalDatas'
 import { Clinics } from '../components/Clinics'
 import { ProfissionalDatas } from '../components/ProfissionalDatas'
 import { Specialty } from '../components/Specialty'
-import Denied from '../messages/requiredRqe'
 import { useModal } from '@/hooks/useModal'
 import { useHistory } from 'react-router'
 import { OPERATOR_SEE_ALL_SPECIALISTS } from '@/routes/constants/namedRoutes/routes'
@@ -42,6 +41,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
   const [errors, setErrors] = useState<ErrorsI>({})
   const { Loading } = useLoading()
 
+
   const history = useHistory()
 
   const { showMessage } = useModal()
@@ -62,8 +62,17 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
         !fields[field] ||
         (Array.isArray(fields[field]) && !fields[field].length)
       ) {
-        setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
         error = true
+
+        if (field === 'specialtys') {
+          setErrors((errors) => ({
+            ...errors,
+            [field]: 'O especialista precisa ter no mínimo uma especialidade.',
+          }))
+          continue
+        }
+
+        setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
       }
     }
     return error

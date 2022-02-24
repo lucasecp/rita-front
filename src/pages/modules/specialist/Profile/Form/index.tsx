@@ -1,23 +1,21 @@
-import ButtonLink from '@/components/Button/Link';
-import CancelEdting from '@/components/Modal/CancelEdting';
-import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError';
-import { useLoading } from '@/hooks/useLoading';
-import { useModal } from '@/hooks/useModal';
-import { SPECIALIST_PROFILE } from '@/routes/constants/namedRoutes/routes';
-import apiAdmin from '@/services/apiAdmin';
-import { toast } from '@/styles/components/toastify';
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import ButtonLink from '@/components/Button/Link'
+import CancelEdting from '@/components/Modal/CancelEdting'
+import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
+import { useLoading } from '@/hooks/useLoading'
+import { useModal } from '@/hooks/useModal'
+import apiAdmin from '@/services/apiAdmin'
+import { toast } from '@/styles/components/toastify'
+import React, { useEffect, useState } from 'react'
 
-import ButtonPrimary from '../../../../../components/Button/Primary';
-import { MultiSelectOption } from '../../../../../components/Form/MultSelect';
-import { ButtonGroup } from '../../../operator/clinic/SeeOneClinic/EditClinic/styles';
-import { toApi } from '../adapters';
-import { Clinics } from '../components/Clinics';
-import SpecialistInfo from '../components/SpecialistInfo';
-import { Specialtys } from '../components/Specialtys';
-import { DataSpecialistI, ErrorsI, SpecialistInfoI } from '../Types';
-import { Container } from './styles';
+import ButtonPrimary from '../../../../../components/Button/Primary'
+import { MultiSelectOption } from '../../../../../components/Form/MultSelect'
+import { ButtonGroup } from '../../../operator/clinic/SeeOneClinic/EditClinic/styles'
+import { toApi } from '../adapters'
+import { Clinics } from '../components/Clinics'
+import SpecialistInfo from '../components/SpecialistInfo'
+import { Specialtys } from '../components/Specialtys'
+import { DataSpecialistI, ErrorsI, SpecialistInfoI } from '../Types'
+import { Container } from './styles'
 
 interface FormProps {
   data: DataSpecialistI
@@ -37,12 +35,13 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
   const [specialistClinics, setSpecialistClinic] = useState<
     MultiSelectOption[]
   >([])
+  const [clickOnSave, setClickOnSave] = useState(false)
+  const [formWasSubmited, setFormWasSubmited] = useState(false)
   const { showMessage } = useModal()
   const { Loading } = useLoading()
-  const history = useHistory()
 
   useEffect(() => {
-    if (isEditing === true) {
+    if (isEditing) {
       setFieldWasChanged(true)
     }
   }, [specialistInfo, specialistClinics, specialistSpecialitys, profilePhoto])
@@ -62,8 +61,7 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
   }
 
   const onSave = async () => {
-    scrollOntoFieldError(errors)
-
+    setClickOnSave(!clickOnSave)
     if (
       hasErrorOnFields({
         ...specialistInfo,
@@ -73,6 +71,7 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
     ) {
       return
     }
+    setErrors({})
 
     try {
       Loading.turnOn()
@@ -87,8 +86,8 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
       )
 
       toast.success('Alteração realizada com sucesso.')
-
-      history.push(SPECIALIST_PROFILE)
+      setIsEditing(false)
+      setFormWasSubmited(true)
     } catch (error: any) {
       toast.error(error.message)
     } finally {
@@ -104,7 +103,13 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
       })
     }
     setIsEditing(false)
+    setFormWasSubmited(false)
+    setClickOnSave(false)
   }
+
+  useEffect(() => {
+    scrollOntoFieldError(errors)
+  }, [clickOnSave])
 
   return (
     <Container>
@@ -114,6 +119,7 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
         isEditing={isEditing}
         errors={errors}
         setErrors={setErrors}
+        formWasSubmited={formWasSubmited}
       />
       <Specialtys
         specialistSpecialtys={data?.specialtys}
@@ -122,6 +128,8 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
         setSpecialistSpecialtys={setSpecialistSpecialitys}
         errors={errors}
         setErrors={setErrors}
+        formWasSubmited={formWasSubmited}
+
       />
       <Clinics
         specialistClinic={data?.clinics}
@@ -130,6 +138,8 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
         isEditing={isEditing}
         errors={errors}
         setErrors={setErrors}
+        formWasSubmited={formWasSubmited}
+
       />
       <footer>
         {!isEditing ? (

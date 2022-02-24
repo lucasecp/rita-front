@@ -15,6 +15,8 @@ interface ClinicSpecialtysProps {
   isEditing: boolean
   errors: ErrorsI
   setErrors: (error: any) => any
+  formWasSubmited: boolean
+
 }
 
 export const Specialtys: React.FC<ClinicSpecialtysProps> = ({
@@ -24,6 +26,7 @@ export const Specialtys: React.FC<ClinicSpecialtysProps> = ({
   initialData,
   errors,
   setErrors,
+  formWasSubmited
 }) => {
   const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>([])
 
@@ -64,7 +67,7 @@ export const Specialtys: React.FC<ClinicSpecialtysProps> = ({
   }, [specialtys, errors])
 
   useEffect(() => {
-    if (!isEditing) {
+    if (!isEditing && !formWasSubmited) {
       setSpecialtys(initialData || [])
       setErrors({})
     }
