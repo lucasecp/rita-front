@@ -6,10 +6,11 @@ export const mapClinics = (array: any[]) => {
       id: obj.idClinica,
       name: obj.descricao,
     }))
-    .filter((specialty) => specialty.id && specialty.name)
+    .filter((clinic) => clinic.id && clinic.name)
 }
 
-export const mapClinicsToAPi = (array: any[]) => {
+export const mapClinicsToApi = (array?: any[]) => {
+  console.log(array)
   if (!array) return []
 
   return array

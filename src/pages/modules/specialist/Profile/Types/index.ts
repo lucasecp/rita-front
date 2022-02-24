@@ -1,27 +1,28 @@
 import { MultiSelectOption } from '@/components/Form/MultSelect'
 
-export interface SpecialistInfoI{
+export interface SpecialistInfoI {
+  id?: number
   name?: string
   profissionalName?: string
   cpf?: string
-  receiveService?: string | number
+  receiveService?: string
   ufProfissionaRegister?: string
   classCouncil?: string
   email?: string
   phone?: string
+  photo?: string
 }
 export interface DataSpecialistI {
   specialistInfo?: SpecialistInfoI
   specialtys?: MultiSelectOption[]
   clinics?: MultiSelectOption[]
-  crm?: string
 }
 
 export interface ErrorsI {
   name?: string
   profissionalName?: string
   cpf?: string
-  receiveService?: string | number
+  receiveService?: string
   ufProfissionaRegister?: string
   classCouncil?: string
   email?: string
