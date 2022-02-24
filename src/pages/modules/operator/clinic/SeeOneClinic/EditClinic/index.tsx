@@ -1,22 +1,23 @@
-import { Container, ButtonGroup } from './styles'
-import React, { useEffect, useState } from 'react'
-import ButtonLink from '@/components/Button/Link'
-import OutilineButton from '@/components/Button/Outline'
-import { ClinicAddress } from '../components/ClinicAddress'
-import { ClinicData } from '../components/ClinicData'
-import { ClinicAcessData } from '../components/ClinicAcessData'
-import { ClinicSpecialty } from '../components/ClinicSpecialty'
-import Denied from '../messages/Denied'
-import { useModal } from '@/hooks/useModal'
-import { useHistory } from 'react-router'
-import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes'
-import CancelEdting from '../messages/CancelEdting/index'
-import { ErrorsI } from '../Types'
-import { scrollOntoFieldError } from '../../../../../../helpers/scrollOntoFieldError'
-import { toApi } from '../adapters'
-import apiAdmin from '@/services/apiAdmin'
-import { toast } from '@/styles/components/toastify'
-import { useLoading } from '@/hooks/useLoading'
+import ButtonLink from '@/components/Button/Link';
+import OutilineButton from '@/components/Button/Outline';
+import CancelEdting from '@/components/Modal/CancelEdting';
+import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError';
+import { useLoading } from '@/hooks/useLoading';
+import { useModal } from '@/hooks/useModal';
+import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes';
+import apiAdmin from '@/services/apiAdmin';
+import { toast } from '@/styles/components/toastify';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+
+import { toApi } from '../adapters';
+import { ClinicAcessData } from '../components/ClinicAcessData';
+import { ClinicAddress } from '../components/ClinicAddress';
+import { ClinicData } from '../components/ClinicData';
+import { ClinicSpecialty } from '../components/ClinicSpecialty';
+import Denied from '../messages/Denied';
+import { ErrorsI } from '../Types';
+import { ButtonGroup, Container } from './styles';
 
 const EditClinic: React.FC<any> = ({ clinicData }) => {
   const [isEditing, setIsEditing] = useState(false)

@@ -48,7 +48,11 @@ export const Select: React.FC<SelectProps> = ({
         )}
         {!!options?.length &&
           options?.map((option, index) => (
-            <option value={option?.value} key={index}>
+            <option
+              value={option?.value}
+              key={index}
+              disabled={option?.disabled}
+            >
               {option?.label}
             </option>
           ))}

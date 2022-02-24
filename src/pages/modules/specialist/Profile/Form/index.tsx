@@ -1,23 +1,154 @@
-import React from 'react'
-import SpecialistInfo from '../components/SpecialistInfo'
-import { Specialtys } from '../components/Specialtys'
-import { Clinics } from '../components/Clinics'
-import { Container } from './styles'
-import ButtonPrimary from '../../../../../components/Button/Primary/index'
-import { DataSpecialistI } from '../Types/index'
+import ButtonLink from '@/components/Button/Link';
+import CancelEdting from '@/components/Modal/CancelEdting';
+import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError';
+import { useLoading } from '@/hooks/useLoading';
+import { useModal } from '@/hooks/useModal';
+import { SPECIALIST_PROFILE } from '@/routes/constants/namedRoutes/routes';
+import apiAdmin from '@/services/apiAdmin';
+import { toast } from '@/styles/components/toastify';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+
+import ButtonPrimary from '../../../../../components/Button/Primary';
+import { MultiSelectOption } from '../../../../../components/Form/MultSelect';
+import { ButtonGroup } from '../../../operator/clinic/SeeOneClinic/EditClinic/styles';
+import { toApi } from '../adapters';
+import { Clinics } from '../components/Clinics';
+import SpecialistInfo from '../components/SpecialistInfo';
+import { Specialtys } from '../components/Specialtys';
+import { DataSpecialistI, ErrorsI, SpecialistInfoI } from '../Types';
+import { Container } from './styles';
 
 interface FormProps {
   data: DataSpecialistI
+  profilePhoto: any
 }
 
-const Form: React.FC<FormProps> = ({ data }) => {
+const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
+  const [isEditing, setIsEditing] = useState(false)
+  const [fieldWasChanged, setFieldWasChanged] = useState(false)
+  const [errors, setErrors] = useState<ErrorsI>({})
+  const [specialistInfo, setSpecialistInfo] = useState<SpecialistInfoI>(
+    data.specialistInfo || {},
+  )
+  const [specialistSpecialitys, setSpecialistSpecialitys] = useState<
+    MultiSelectOption[]
+  >([])
+  const [specialistClinics, setSpecialistClinic] = useState<
+    MultiSelectOption[]
+  >([])
+  const { showMessage } = useModal()
+  const { Loading } = useLoading()
+  const history = useHistory()
+
+  useEffect(() => {
+    if (isEditing === true) {
+      setFieldWasChanged(true)
+    }
+  }, [specialistInfo, specialistClinics, specialistSpecialitys, profilePhoto])
+
+  const hasErrorOnFields = (fields: any) => {
+    let error = false
+    const hasSpecificError = Object.values(errors)
+    error = !!hasSpecificError[0]
+
+    for (const field in fields) {
+      if (!fields[field] || !fields[field].length) {
+        setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
+        error = true
+      }
+    }
+    return error
+  }
+
+  const onSave = async () => {
+    scrollOntoFieldError(errors)
+
+    if (
+      hasErrorOnFields({
+        ...specialistInfo,
+        ...specialistClinics,
+        ...specialistSpecialitys,
+      })
+    ) {
+      return
+    }
+
+    try {
+      Loading.turnOn()
+
+      await apiAdmin.put(
+        `/medico/meu-perfil`,
+        toApi({
+          specialistInfo,
+          ...specialistClinics,
+          ...specialistSpecialitys,
+        }),
+      )
+
+      toast.success('Alteração realizada com sucesso.')
+
+      history.push(SPECIALIST_PROFILE)
+    } catch (error: any) {
+      toast.error(error.message)
+    } finally {
+      Loading.turnOff()
+    }
+  }
+
+  const onCancel = () => {
+    if (fieldWasChanged) {
+      return showMessage(CancelEdting, {
+        setEdting: setIsEditing,
+        setFieldWasChanged,
+      })
+    }
+    setIsEditing(false)
+  }
+
   return (
     <Container>
-      <SpecialistInfo data={data.specialistInfo} />
-      <Specialtys specialistSpecialtys={data?.specialtys}/>
-      <Clinics specialistClinic={data?.clinics}/>
+      <SpecialistInfo
+        data={data.specialistInfo}
+        setSpecialistInfo={setSpecialistInfo}
+        isEditing={isEditing}
+        errors={errors}
+        setErrors={setErrors}
+      />
+      <Specialtys
+        specialistSpecialtys={data?.specialtys}
+        isEditing={isEditing}
+        initialData={data?.specialtys}
+        setSpecialistSpecialtys={setSpecialistSpecialitys}
+        errors={errors}
+        setErrors={setErrors}
+      />
+      <Clinics
+        specialistClinic={data?.clinics}
+        setSpecialistClinic={setSpecialistClinic}
+        initialData={data?.clinics}
+        isEditing={isEditing}
+        errors={errors}
+        setErrors={setErrors}
+      />
       <footer>
-        <ButtonPrimary>Editar</ButtonPrimary>
+        {!isEditing ? (
+          <ButtonGroup>
+            <ButtonPrimary
+              onClick={() => {
+                setIsEditing(true)
+                scrollTo(0, 0)
+              }}
+            >
+              Editar
+            </ButtonPrimary>
+          </ButtonGroup>
+        ) : (
+          <ButtonGroup>
+            <ButtonLink onClick={onCancel}>Cancelar</ButtonLink>
+            <ButtonPrimary onClick={onSave}>Salvar</ButtonPrimary>
+          </ButtonGroup>
+        )}
       </footer>
     </Container>
   )

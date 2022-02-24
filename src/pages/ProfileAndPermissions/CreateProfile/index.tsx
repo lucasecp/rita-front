@@ -49,8 +49,6 @@ export const CreateProfile: React.FC = () => {
           profilesAndPermissions,
         )
 
-        console.log(profilesAndPermissionsMapped)
-
         setProfilesAndPermissions(profilesAndPermissionsMapped)
       } catch (error) {
         // console.log(error)
