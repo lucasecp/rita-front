@@ -12,6 +12,7 @@ import { DataSpecialistI } from './Types'
 const SpecialistProfile: React.FC = () => {
   const [data, setData] = useState<DataSpecialistI>({})
   const [photo, setPhoto] = useState<File>()
+  const [makeNewRequest, setMakeNewRequest] = useState(false)
   const { Loading } = useLoading()
 
   useEffect(() => {
@@ -26,13 +27,13 @@ const SpecialistProfile: React.FC = () => {
       }
     }
     getDoctor()
-  }, [])
+  }, [makeNewRequest])
 
   return (
     <DefaultLayout title="Perfil - Visualizar">
       <Content>
         <Header data={data} setValue={setPhoto} />
-        <Form data={data} profilePhoto={photo} />
+        <Form data={data} profilePhoto={photo} setMakeNewRequest={setMakeNewRequest} />
       </Content>
     </DefaultLayout>
   )

@@ -27,7 +27,7 @@ const CancelEdting: React.FC<CancelEdtingProps> = ({
   }
   const onCancelEdting = () => {
     closeModal()
-    history.push(OPERATOR_SEE_ALL_CLINICS)
+    history.push(OPERATOR_SEE_ALL_CLINICS) 
   }
 
   return (

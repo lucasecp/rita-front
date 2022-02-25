@@ -8,17 +8,20 @@ import OutlineButton from '@/components/Button/Outline'
 interface CancelEdtingProps {
   setEdting: (value: boolean) => void
   setFieldWasChanged: (value: boolean) => void
+  setFormWasSubmited: (value: boolean) => void
 }
 
 const CancelEdting: React.FC<CancelEdtingProps> = ({
   setEdting,
   setFieldWasChanged,
+  setFormWasSubmited
 }) => {
   const { closeModal } = useModal()
 
   const onCancelEdting = () => {
     setEdting(false)
     setFieldWasChanged(false)
+    setFormWasSubmited(false)
     closeModal()
   }
 

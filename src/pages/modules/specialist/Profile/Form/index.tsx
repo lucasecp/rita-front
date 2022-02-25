@@ -20,9 +20,10 @@ import { Container } from './styles'
 interface FormProps {
   data: DataSpecialistI
   profilePhoto: any
+  setMakeNewRequest: (v: boolean) => void
 }
 
-const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
+const Form: React.FC<FormProps> = ({ data, profilePhoto,setMakeNewRequest }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [fieldWasChanged, setFieldWasChanged] = useState(false)
   const [errors, setErrors] = useState<ErrorsI>({})
@@ -43,6 +44,9 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
   useEffect(() => {
     if (isEditing) {
       setFieldWasChanged(true)
+    }
+    else {
+      setFieldWasChanged(false)
     }
   }, [specialistInfo, specialistClinics, specialistSpecialitys, profilePhoto])
 
@@ -88,6 +92,7 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
       toast.success('Alteração realizada com sucesso.')
       setIsEditing(false)
       setFormWasSubmited(true)
+      setMakeNewRequest(!clickOnSave)
     } catch (error: any) {
       toast.error(error.message)
     } finally {
@@ -100,6 +105,7 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto }) => {
       return showMessage(CancelEdting, {
         setEdting: setIsEditing,
         setFieldWasChanged,
+        setFormWasSubmited
       })
     }
     setIsEditing(false)
