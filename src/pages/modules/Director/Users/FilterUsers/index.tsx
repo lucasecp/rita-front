@@ -6,15 +6,15 @@ import { IncludeButton } from './components/IncludeButton'
 import { Filter } from './containers/Filter'
 import { Results } from './containers/Results'
 
-import { SellableItemsFilters } from './@types'
+import { UsersFilters } from './@types'
 import { Container } from './styles'
 
 export const FilterUsers: React.FC = () => {
-  const [filters, setFilters] = useState({} as SellableItemsFilters)
+  const [filters, setFilters] = useState({} as UsersFilters)
 
   useEffect(() => {
     document.title = 'Rita Saúde | Usuários'
-  }, [])
+  }, [filters])
 
   return (
     <DefaultLayout title="Gestão de Usuário" headerChildren={<IncludeButton />}>

@@ -3,14 +3,14 @@ import React, { useState } from 'react'
 import { Container } from './styles'
 import { FieldsUsers } from './components/FieldsUsers'
 import { DataUsers } from './components/DataUsers'
-import { OrderSellableItems, SellableItemsFilters } from '../../@types'
+import { OrderUsers, UsersFilters } from '../../@types'
 
 interface ResultsProps {
-  filters: SellableItemsFilters
+  filters: UsersFilters
 }
 
 export const Results: React.FC<ResultsProps> = ({ filters }) => {
-  const [order, setOrder] = useState({} as OrderSellableItems)
+  const [order, setOrder] = useState({} as OrderUsers)
 
   return (
     <Container>

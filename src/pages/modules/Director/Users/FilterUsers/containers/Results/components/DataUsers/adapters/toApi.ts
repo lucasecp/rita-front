@@ -1,28 +1,11 @@
-import {
-  OrderSellableItems,
-  SellableItemsFilters,
-  StatusSellableItems,
-} from '../../../../../@types/index'
+import { OrderUsers, UsersFilters } from '../../../../../@types'
 
-const statusToApi = (status: StatusSellableItems) => {
-  const statusObject: { [x: string]: string } = {
-    Inativo: 'I',
-    'Em digitação': 'P',
-    Ativo: 'A',
-    Suspenso: 'S',
-  }
-
-  return statusObject[status]
-}
-
-const orderToApi = (order: OrderSellableItems) => {
+const orderToApi = (order: OrderUsers) => {
   const orderColumns = {
-    code: 'codigo',
-    plan: 'nome',
-    status: 'status',
-    outlets: 'localVenda',
-    amount: 'valor',
-    actions: 'acoes',
+    name: 'nome',
+    cpf: 'usuario',
+    profiles: 'profiles',
+    status: 'situacao',
   }
 
   const orderColumn = orderColumns[order?.name]
@@ -32,7 +15,7 @@ const orderToApi = (order: OrderSellableItems) => {
     descending: 'DESC',
   }
 
-  let orderType = ''
+  let orderType
   if (order?.value) {
     orderType = orderTypes[order?.value]
   }
@@ -40,11 +23,14 @@ const orderToApi = (order: OrderSellableItems) => {
   return { orderColumn, orderType }
 }
 
-export const sellableItemsToApi: any = (
-  pagination: { limit: number; skip: number },
-  order: OrderSellableItems,
-  filters: SellableItemsFilters,
-) => {
+export const paramsToApiGetUsers = (
+  pagination: {
+    limit: number
+    skip: number
+  },
+  order: OrderUsers,
+  filters: UsersFilters,
+): any => {
   const { orderColumn, orderType } = orderToApi(order)
 
   return {
@@ -52,12 +38,9 @@ export const sellableItemsToApi: any = (
     skip: pagination.skip,
     orderBy: orderColumn,
     order: orderType,
-    codigo: filters.code,
-    nome: filters.plan,
-    status: filters.status?.map((status) => statusToApi(status.name)),
-    idServico: filters.services?.map((service) => Number(service.id)),
-    idRegional: filters.regionals?.map((regional) => regional.id),
-    idUf: filters.ufs?.map((uf) => uf.id),
-    idCidade: filters.cities?.map((city) => city.id),
+    nome: filters.name,
+    usuario: filters.cpf,
+    situacao: filters.status,
+    perfis: filters.profiles,
   }
 }

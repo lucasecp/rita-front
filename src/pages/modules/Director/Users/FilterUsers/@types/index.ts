@@ -47,6 +47,7 @@ export type StatusSellableItems =
   | 'Em digitação'
   | 'Suspenso'
 
+// -----------------------------------------------
 export type StatusUsers = 'Ativo' | 'Inativo'
 
 export interface UsersFilters {
@@ -59,5 +60,19 @@ export interface UsersFilters {
   status: {
     id: number
     name: StatusUsers
-  }
+  }[]
+}
+
+export interface User {
+  id: number
+  name: string
+  cpf: string
+  blocked: string
+  profile: string
+  status: string
+}
+
+export interface OrderUsers {
+  name: 'name' | 'cpf' | 'profiles' | 'status'
+  value: 'ascending' | 'descending' | undefined
 }

@@ -1,22 +1,117 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import InputText from '@/components/Form/InputText'
+import CustomMultSelect, {
+  MultiSelectOption,
+} from '@/components/Form/MultSelect'
+import { ProfilesFromApi } from './adapters/profilesFromApi'
+import useLocalStorage from 'use-local-storage'
 
-import { SellableItemsFilters } from '../../@types'
+import { UsersFilters } from '../../@types'
 
 import { Container } from './styles'
-
+import apiUser from '@/services/apiUser'
 interface FilterProps {
-  onGetFilters: React.Dispatch<React.SetStateAction<SellableItemsFilters>>
+  onGetFilters: React.Dispatch<React.SetStateAction<UsersFilters>>
 }
 
 export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
-  const [name, setName] = useState('')
-  const [cpf, setCpf] = useState('')
-  const [profile, setProfile] = useState('')
-  const [status, setStatus] = useState('')
+  const [filters, setFilters] = useLocalStorage<UsersFilters>(
+    '@Rita/Users/Filters',
+    {
+      cpf: '',
+      name: '',
+      profiles: [],
+      status: [],
+    },
+  )
+  const [profilesOptions, setProfilesOptions] = useState<MultiSelectOption[]>(
+    [],
+  )
+
+  useEffect(() => {
+    const loadProfilesOptions = async () => {
+      const response = await apiUser.get<ProfilesFromApi[]>('/perfil')
+
+      const profilesMappedFromApi = response.data.map((profile) => {
+        return {
+          id: profile.id,
+          name: profile.nome,
+        }
+      })
+
+      setProfilesOptions(profilesMappedFromApi)
+    }
+
+    loadProfilesOptions()
+  }, [])
+
+  const hasNoFilterSelected = useMemo(() => {
+    return (
+      filters.name === '' &&
+      filters.cpf === '' &&
+      !filters.profiles.length &&
+      !filters.status.length
+    )
+  }, [filters])
+
+  const onClearFields = () => {
+    setFilters({
+      name: '',
+      cpf: '',
+      profiles: [],
+      status: [],
+    })
+
+    onGetFilters({
+      cpf: '',
+      name: '',
+      profiles: [],
+      status: [],
+    })
+  }
+
+  const onFilterResults = () => {
+    onGetFilters({
+      name: filters.name,
+      cpf: filters.cpf,
+      profiles: filters.profiles,
+      status: filters.status,
+    })
+  }
+
+  const onChangeInput = (field: string, value: any) => {
+    switch (field) {
+      case 'name':
+        setFilters((prevState) => ({
+          ...prevState,
+          name: value,
+        }))
+        break
+      case 'cpf':
+        setFilters((prevState) => ({
+          ...prevState,
+          cpf: value,
+        }))
+        break
+      case 'profiles':
+        setFilters((prevState) => ({
+          ...prevState,
+          profiles: value,
+        }))
+        break
+      case 'status':
+        setFilters((prevState) => ({
+          ...prevState,
+          status: value,
+        }))
+        break
+      default:
+        break
+    }
+  }
 
   return (
     <Container>
@@ -24,38 +119,51 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
         <InputText
           variation="secondary"
           label="Nome:"
-          value={name}
-          setValue={(value) => setName(value)}
+          value={filters.name}
+          setValue={(value) => onChangeInput('name', value)}
           maxLength={10}
         />
         <InputText
           variation="secondary"
           label="CPF:"
-          value={cpf}
-          setValue={(value) => setCpf(value)}
+          value={filters.cpf}
+          setValue={(value) => onChangeInput('cpf', value)}
           maxLength={10}
         />
-        <InputText
-          variation="secondary"
+        <CustomMultSelect
           label="Perfis:"
-          value={profile}
-          setValue={(value) => setProfile(value)}
-          maxLength={10}
+          options={profilesOptions}
+          value={filters.profiles}
+          setValue={(value) => onChangeInput('profiles', value)}
         />
-        <InputText
-          variation="secondary"
+        <CustomMultSelect
           label="Status:"
-          value={status}
-          setValue={(value) => setStatus(value)}
-          maxLength={10}
+          options={[
+            { id: 1, name: 'Todos' },
+            { id: 2, name: 'Ativo' },
+            { id: 3, name: 'Inativo' },
+          ]}
+          value={filters.status}
+          setValue={(value) => onChangeInput('status', value)}
         />
       </div>
 
       <footer>
-        <OutlineButton small variation="red">
+        <OutlineButton
+          small
+          variation="red"
+          onClick={onClearFields}
+          disabled={hasNoFilterSelected}
+        >
           Limpar Filtro
         </OutlineButton>
-        <ButtonPrimary medium>Filtrar Resultados</ButtonPrimary>
+        <ButtonPrimary
+          medium
+          onClick={onFilterResults}
+          disabled={hasNoFilterSelected}
+        >
+          Filtrar Resultados
+        </ButtonPrimary>
       </footer>
     </Container>
   )

@@ -1,29 +1,57 @@
-import { formatPrice } from '@/helpers/formatPrice'
+import { formatCpf } from '@/helpers/formatCpf'
 
-export const statusFromApi: any = (status: any) => {
-  const statusObject: { [x: string]: string } = {
-    I: 'Inativo',
-    P: 'Em digitação',
-    A: 'Ativo',
-    S: 'Suspenso',
-  }
-
-  return statusObject[status]
+import { User } from '../../../../../@types'
+interface UsersFromApi {
+  idUsuario: number
+  usuario: string
+  nome: string
+  senha: string
+  dataCadastro: string
+  situacao: string
+  email: string
+  celular: string
+  bloqueado: string
+  perfis: {
+    id: number
+    nome: string
+    perfilChave: string
+  }[]
 }
 
-export const sellableItemsFromApi: any = (sellableItemsResponse: any) => {
-  // const {  } = sellableItemsResponse
+const statusFromApi = (status: string) => {
+  const statusObject: { [x: string]: string } = {
+    A: 'Ativo',
+    I: 'Inativo',
+  }
 
-  return sellableItemsResponse?.map((item: any) => ({
-    id: item.id,
-    code: item.codigo,
-    plan: {
-      id: item.idPlano,
-      name: item.nome,
-    },
-    status: statusFromApi(item.status),
-    outlets: item.localVenda,
-    amount: formatPrice(item.valor),
-    type: item.tipo === 'municipio' ? 'city' : item.tipo,
-  }))
+  return statusObject[status] || 'Sem status'
+}
+
+const blockedFromApi = (blocked: string) => {
+  const blockedObject: { [x: string]: string } = {
+    S: 'Sim',
+    N: 'Não',
+  }
+
+  return blockedObject[blocked] || 'Sem status'
+}
+
+const isNumeric = (value: string) => {
+  if (typeof value !== 'string') return false
+  return !isNaN(Number(value)) && !isNaN(parseFloat(value))
+}
+
+export const fromApi = (data: UsersFromApi[]): User[] => {
+  return data.map((user) => {
+    const isValidUserCPF = isNumeric(user.usuario)
+
+    return {
+      id: user.idUsuario,
+      name: user.nome,
+      cpf: isValidUserCPF ? formatCpf(user.usuario) : '-',
+      blocked: blockedFromApi(user.bloqueado),
+      profile: user.perfis.map((profile) => profile.nome).join(', '),
+      status: statusFromApi(user.situacao),
+    }
+  })
 }
