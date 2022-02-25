@@ -32,25 +32,50 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
   const [profissionalData, setProfissionalData] = useState(
     specialistData?.profissionalData || {},
   )
-  const [clinics, setClinics] = useState(specialistData?.clinics || {})
-  const [specialtys, setSpecialtys] = useState(
-    specialistData?.specialtys?.name || {},
-  )
-  const [fieldWasChanged, setFieldWasChanged] = useState(false)
+  const [clinics, setClinics] = useState(specialistData?.clinics || [])
+  const [specialtys, setSpecialtys] = useState(specialistData?.specialtys || [])
   const [clickOnSave, setClickOnSave] = useState(false)
   const [errors, setErrors] = useState<ErrorsI>({})
   const { Loading } = useLoading()
-
 
   const history = useHistory()
 
   const { showMessage } = useModal()
 
-  useEffect(() => {
-    if (clickOnSave) {
-      setFieldWasChanged(true)
+  const someFieldChanged = () => {
+    let fieldWasChanged = false
+    const dataFromApi = {
+      ...specialistData?.personalDatas,
+      ...specialistData?.profissionalData,
     }
-  }, [personalDatas, profissionalData, specialtys, clinics])
+    const dataToApi = { ...personalDatas, ...profissionalData }
+
+    const clinicsAndSpecialtys = [
+      ...specialistData?.clinics,
+      ...specialistData?.specialtys,
+    ]
+    const clinicsAndSpecialtysToApi = [
+      ...specialtys.specialtys,
+      ...clinics.clinics,
+    ]
+
+    for (const field in dataToApi) {
+      if (dataToApi[field] !== dataFromApi[field]) {
+        fieldWasChanged = true
+        break
+      } else {
+        fieldWasChanged = false
+      }
+    }
+    const theyHaveSameLength =
+      clinicsAndSpecialtys.length === clinicsAndSpecialtysToApi.length
+
+    if (!theyHaveSameLength) {
+      fieldWasChanged = true
+    }
+
+    return fieldWasChanged
+  }
 
   const hasErrorOnFields = (fields: any) => {
     let error = false
@@ -124,11 +149,8 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
   }, [clickOnSave])
 
   const onCancel = () => {
-    if (fieldWasChanged) {
-      return showMessage(CancelEdting, {
-        setEdting: setClickOnSave,
-        setFieldWasChanged,
-      })
+    if (someFieldChanged()) {
+      return showMessage(CancelEdting)
     }
     history.push(OPERATOR_SEE_ALL_SPECIALISTS)
   }
