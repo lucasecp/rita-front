@@ -1,5 +1,5 @@
 import ButtonLink from '@/components/Button/Link'
-import CancelEdting from '@/components/Modal/CancelEdting'
+import CancelEdting from '../messages/CancelEdting'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
