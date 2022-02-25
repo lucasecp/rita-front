@@ -25,6 +25,7 @@ export const OPERATOR_EDIT_SPRECIALTY = '/especialidades/editar'
 export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 export const OPERATOR_ADD_DEPENDENT = '/dependentes/associar'
 export const OPERATOR_SEE_ALL_SPECIALISTS = '/especialistas'
+export const OPERATOR_SEE_ONE_SPECIALIST = '/especialistas/ver-especialista'
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
@@ -72,6 +73,9 @@ export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'
 
 export const REGISTER_PATIENT = '/cadastro/paciente/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
+
+export const SEE_ONE_USER = '/usuarios/visualizar'
+export const EDIT_USER = '/usuarios/editar'
 
 export const TESTE = '/teste'
 

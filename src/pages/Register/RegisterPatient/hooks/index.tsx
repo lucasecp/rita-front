@@ -88,7 +88,7 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
   const stepLimit = 4
   const limitOfDependents = 2
 
-  const { showMessage } = useModal()
+  const { showMessage, closeModal } = useModal()
   const { Loading } = useLoading()
 
   const [step, setStep] = useState(1)
@@ -132,32 +132,18 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
   }
 
   const onFinishRegister = async () => {
-    try {
-      Loading.turnOn()
-
-      const registerPatientMapped = registerPatientToApi({
-        registrationData,
-        address,
-        documentsFile,
-        dependents,
-      })
-
-      await apiPatient.post('/paciente', registerPatientMapped)
-    } catch ({ response }) {
-      toast.error('Erro ao finalizar cadastro!')
-      return
-    } finally {
-      Loading.turnOff()
-    }
-
     const formFile1 = new FormData()
     formFile1.append('file', documentsFile.holdingDocumentFile)
+
     const formFile2 = new FormData()
     formFile2.append('file', documentsFile.ownDocumentFile)
+
     const formFile3 = new FormData()
     formFile3.append('file', documentsFile.ownBackDocumentFile)
+
     const formFile4 = new FormData()
     formFile4.append('file', documentsFile.proofOfAddressFile)
+
     const formFile5 = new FormData()
     formFile5.append('file', documentsFile.proofOfIncomeFile)
 
@@ -194,13 +180,35 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
               formFile5,
             ),
       ])
-    } catch ({ response }) {
-      showMessage(DocumentsNotSended)
+
+      closeModal()
+    } catch (error) {
+      console.log(error)
+
+      return showMessage(DocumentsNotSended)
     } finally {
       Loading.turnOff()
     }
 
-    showMessage(RegisterSuccess)
+    try {
+      Loading.turnOn()
+
+      const registerPatientMapped = registerPatientToApi({
+        registrationData,
+        address,
+        documentsFile,
+        dependents,
+      })
+
+      await apiPatient.post('/paciente', registerPatientMapped)
+
+      showMessage(RegisterSuccess)
+    } catch ({ response }) {
+      toast.error('Erro ao finalizar cadastro!')
+      return
+    } finally {
+      Loading.turnOff()
+    }
   }
 
   return (

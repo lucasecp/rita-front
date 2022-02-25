@@ -1,0 +1,69 @@
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router'
+
+import { DefaultLayout } from '@/components/Layout/DefaultLayout'
+
+import { MultiSelectOption } from '@/components/Form/MultSelect'
+
+import OutlineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
+
+import { Container } from './styles'
+
+import { UserData } from './components/UserData'
+
+import { useModal } from '@/hooks/useModal'
+import { useMessage } from '@/hooks/useMessage'
+import { CancelAndExit } from './messages/CancelAndExit'
+
+export interface User {
+  name: string
+  status: string
+  cpf: string
+  email: string
+  phone: string
+  accessProfile: MultiSelectOption[]
+}
+
+export const EditUser: React.FC = () => {
+  const history = useHistory()
+  const { showMessage } = useModal()
+
+  const { user: initialUser } = useLocation().state || {}
+
+  const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(false)
+
+  const [saveMessage, sendSaveMessage] = useMessage()
+
+  useEffect(() => {
+    if (!initialUser) {
+      history.push('/usuarios/')
+    }
+  }, [])
+
+  const onCancelEditing = () => {
+    if (anyFieldsHasChanged) {
+      showMessage(CancelAndExit)
+      return
+    }
+
+    history.push('/usuarios')
+  }
+
+  return (
+    <DefaultLayout title="Visualizar e Editar Usuários">
+      <Container>
+        <h2>Dados do Usuário</h2>
+        <UserData
+          initialUser={initialUser}
+          onGetAnyFieldsHasChanged={setAnyFieldsHasChanged}
+          saveUser={saveMessage}
+        />
+        <footer>
+          <OutlineButton onClick={onCancelEditing}>Cancelar</OutlineButton>
+          <ButtonPrimary onClick={sendSaveMessage}>Salvar</ButtonPrimary>
+        </footer>
+      </Container>
+    </DefaultLayout>
+  )
+}

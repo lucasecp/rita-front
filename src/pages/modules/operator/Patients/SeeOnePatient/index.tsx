@@ -28,6 +28,7 @@ import {
   fromApiPatientAddress,
   fromApiPatientData,
   fromApiPatientTable,
+  fromApiPatientStatusLimit,
 } from './adapters/fromApi'
 import {
   PatientData,
@@ -35,8 +36,11 @@ import {
   Dependent,
   Validations,
   ResponseApi,
+  PatientStatusLimit,
 } from './types/index'
 import { isObjectEmpty } from '@/helpers/isObjectEmpty'
+import ResetStatusOnePatient from './components/ResetStatusOnePatient'
+import { CancelOrSave } from './messages/CancelOrSave'
 
 export const SeeOnePatient: React.FC = () => {
   const history = useHistory()
@@ -52,12 +56,19 @@ export const SeeOnePatient: React.FC = () => {
     Dependent[] | undefined
   >([])
   const [patientAddress, setPatientAddress] = useState({} as PatientAddress)
+  const [patientStatusLimit, setPatientStatusLimit] = useState(
+    {} as PatientStatusLimit,
+  )
+  const [patientStatusLimitInitial, setPatientStatusLimitInitial] = useState(
+    {} as PatientStatusLimit,
+  )
   const [dependent, setDependent] = useState({} as PatientData | undefined)
   const [incomeDocumentType, setIncomeDocumentType] = useState('')
 
   const [validations, setValidations] = useState({} as Validations)
   const [table, setTable] = useState('')
   const [isDependentMinorAge, setIsDependentMinorAge] = useState(false)
+  const [confirmSave, setConfirmSave] = useState(false)
 
   useEffect(() => {
     document.title = 'Rita Saúde | Pacientes'
@@ -86,12 +97,14 @@ export const SeeOnePatient: React.FC = () => {
         } else {
           setIsDependentMinorAge(false)
         }
-
+        const patientStatusMapped = fromApiPatientStatusLimit(data)
         const patientDataMapped = fromApiPatientData(data)
         const patientDependentsMapped = fromApiDependents(data)
         const patientAddressMapped = fromApiPatientAddress(data)
         const patientTableMapped = fromApiPatientTable(data)
 
+        setPatientStatusLimit(patientStatusMapped)
+        setPatientStatusLimitInitial(patientStatusMapped)
         setPatientData(patientDataMapped.patientData)
         setDependent(patientDataMapped?.dependentData)
         setPatientDependents(patientDependentsMapped)
@@ -174,12 +187,16 @@ export const SeeOnePatient: React.FC = () => {
       patientData,
       patientDependents,
       patientAddress,
+      patientStatusLimit,
     )
 
     try {
       Loading.turnOn()
 
-      const response = await apiPatient.put('/paciente/operador', dataToSend)
+      const response = await apiPatient.put(
+        `/paciente/${patientData.id}`,
+        dataToSend,
+      )
 
       if (response.status === 200) {
         if (response.data.mensagem === 'Sucesso') {
@@ -192,6 +209,27 @@ export const SeeOnePatient: React.FC = () => {
       Loading.turnOff()
     }
   }
+
+  const confirmSavePatientData = async () => {
+    if (
+      (patientStatusLimit.status === 'P' ||
+        patientStatusLimit.status === 'I') &&
+      patientStatusLimitInitial.status === 'A'
+    ) {
+      showMessage(CancelOrSave, { setConfirmSave })
+    } else {
+      onSavePatientData()
+    }
+  }
+
+  useEffect(() => {
+    const verifyConfirmSave = async () => {
+      if (confirmSave) {
+        await onSavePatientData()
+      }
+    }
+    verifyConfirmSave()
+  }, [confirmSave])
 
   return (
     <DefaultLayout title="Pacientes">
@@ -239,11 +277,16 @@ export const SeeOnePatient: React.FC = () => {
         {!isObjectEmpty(validations) && (
           <ValidationSeeOnePatient validations={validations} />
         )}
+
+        <ResetStatusOnePatient
+          patientStatus={patientStatusLimit}
+          setpatientStatus={setPatientStatusLimit}
+        />
         <footer>
           <ButtonLink onClick={onComeBack}>Voltar</ButtonLink>
           <OutlineButton
             disabled={disableSaveButton}
-            onClick={onSavePatientData}
+            onClick={confirmSavePatientData}
           >
             Salvar
           </OutlineButton>

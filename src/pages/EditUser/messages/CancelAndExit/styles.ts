@@ -18,11 +18,36 @@ export const Container = styled.div`
     color: ${colors.gray.dark};
     text-align: center;
 
-    max-width: 522px;
+    min-width: 450px;
   }
 
   > * + * {
     margin-top: 24px;
   }
-`
 
+  > footer {
+    button + button {
+      margin-left: 32px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    > p {
+      min-width: unset;
+    }
+
+    > footer {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      > button {
+      }
+
+      > button + button {
+        margin-left: 0px;
+        margin-top: 24px;
+      }
+    }
+  }
+`

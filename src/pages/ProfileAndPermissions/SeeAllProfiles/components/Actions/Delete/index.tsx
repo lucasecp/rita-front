@@ -1,27 +1,39 @@
 import React from 'react'
+import { ReactComponent as TrashIcon } from '@/assets/icons/trash.svg'
+import CustomTooltip from '@/components/Tooltip'
 
 import { useModal } from '@/hooks/useModal'
-import ButtonPrimary from '@/components/Button/Primary'
+import { KeyProfileWarning } from './messages/KeyProfileWarning'
+import { RemainingUsersWarning } from './messages/RemainingUsersWarning'
+import { ConfirmDelete } from './messages/ConfirmDelete'
 
-import { Container } from './styles'
-
-interface ISimpleModal {
-  type: string
-  message: string
+interface ActionDeleteProps {
+  id: number
+  usersQuantity: number
+  keyProfile: boolean
 }
 
-export const c: React.FC<ISimpleModal> = ({ type, message }) => {
-  const { closeModal } = useModal()
+export const ActionDelete: React.FC<ActionDeleteProps> = ({
+  id,
+  usersQuantity,
+  keyProfile,
+}) => {
+  const { showMessage } = useModal()
 
-  const onOk = () => {
-    closeModal()
+  const CheckPossibilityToDelete = () => {
+    if (usersQuantity > 0) {
+      return showMessage(RemainingUsersWarning)
+    }
+
+    if (keyProfile) {
+      return showMessage(KeyProfileWarning)
+    }
+
+    showMessage(ConfirmDelete, { id })
   }
-
   return (
-    <Container>
-      {/* <img src={icons[type]} /> */}
-      <p>njdfkjsnfkjdsnfkjdsf</p>
-      <ButtonPrimary onClick={onOk}>OK</ButtonPrimary>
-    </Container>
+    <CustomTooltip label="Excluir">
+      <TrashIcon onClick={CheckPossibilityToDelete} />
+    </CustomTooltip>
   )
 }

@@ -17,23 +17,25 @@ export const SeeAllProfiles: React.FC = () => {
 
   const [profiles, setProfiles] = useState([])
 
-  useEffect(() => {
+  const loadProfiles = async () => {
     Loading.turnOn()
 
-    const loadProfiles = async () => {
-      try {
-        const { data } = await apiUser.get('/perfil')
+    try {
+      const { data } = await apiUser.get('/perfil')
 
-        const profilesMapped = profilesFromApi(data)
+      const profilesMapped = profilesFromApi(data)
 
-        setProfiles(profilesMapped)
-      } catch (error) {
-        // console.log(error)
-        // toast.error('Erro ao carregar itens vendáveis!')
-      } finally {
-        Loading.turnOff()
-      }
+      setProfiles(profilesMapped)
+    } catch (error) {
+      // console.log(error)
+      // toast.error('')
+    } finally {
+      Loading.turnOff()
     }
+  }
+
+  useEffect(() => {
+    Loading.turnOn()
 
     loadProfiles()
   }, [])
@@ -42,7 +44,7 @@ export const SeeAllProfiles: React.FC = () => {
     <DefaultLayout title="Perfis" headerChildren={<IncludeButton />}>
       <Container>
         <Header />
-        <ProfilesTable profiles={profiles} />
+        <ProfilesTable profiles={profiles} loadProfiles={loadProfiles} />
       </Container>
     </DefaultLayout>
   )

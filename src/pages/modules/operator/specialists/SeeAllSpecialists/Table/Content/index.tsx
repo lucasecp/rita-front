@@ -6,18 +6,19 @@ import { ContentProps } from '../../types'
 import { useHistory } from 'react-router-dom'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
+import { OPERATOR_SEE_ONE_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 
 const Content: React.FC<ContentProps> = ({ specialists }) => {
-  // const history = useHistory()
+  const history = useHistory()
 
   return (
     <Container>
       {specialists?.data?.map((spec, index) => (
         <ul
           key={index}
-          // onClick={() =>
-          //   history.push()
-          // }
+          onClick={() =>
+            history.push(OPERATOR_SEE_ONE_SPECIALIST, { idDoctor: spec.id })
+          }
         >
           <li>
             <CustomTooltip label={firstLetterCapitalize(spec.name)}>
