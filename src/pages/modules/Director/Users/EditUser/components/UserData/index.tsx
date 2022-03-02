@@ -66,6 +66,8 @@ export const UserData: React.FC<IUserDataProps> = ({
 
   useEffect(() => {
     if (saveUser) {
+      sendErrorMessage()
+
       const errorsTemporary = {
         ...errors,
         name: validateFullName(name),
@@ -140,8 +142,6 @@ export const UserData: React.FC<IUserDataProps> = ({
         onGetEmail={setEmail}
         hasError={(hasError) => setErrors({ ...errors, email: hasError })}
         checkHasError={errorMessage}
-        onKeyUp={sendErrorMessage}
-        onBlur={sendErrorMessage}
       />
       <InputMask
         label="Celular:"
