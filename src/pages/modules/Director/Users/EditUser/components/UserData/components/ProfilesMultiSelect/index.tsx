@@ -10,11 +10,14 @@ import { toast } from '@/styles/components/toastify'
 interface IProfilesMultiSelectProps {
   initialProfiles: MultiSelectOption[]
   onGetAccessProfile: React.Dispatch<React.SetStateAction<MultiSelectOption[]>>
+  hasError: boolean
+  messageError: string
 }
 
 const ProfilesMultiSelect: React.FC<IProfilesMultiSelectProps> = ({
   initialProfiles,
   onGetAccessProfile,
+  ...rest
 }) => {
   const [profileOptions, setProfileOptions] = useState(
     [] as MultiSelectOption[],
@@ -53,6 +56,7 @@ const ProfilesMultiSelect: React.FC<IProfilesMultiSelectProps> = ({
       label="Perfil de Acesso:"
       value={accessProfile}
       setValue={setAccessProfile}
+      {...rest}
     />
   )
 }

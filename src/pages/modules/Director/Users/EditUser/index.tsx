@@ -15,8 +15,10 @@ import { UserData } from './components/UserData'
 import { useModal } from '@/hooks/useModal'
 import { useMessage } from '@/hooks/useMessage'
 import { CancelAndExit } from './messages/CancelAndExit'
+import { DIRECTOR_FILTER_USERS } from '@/routes/constants/namedRoutes/routes'
 
 export interface User {
+  id: number
   name: string
   status: string
   cpf: string
@@ -29,7 +31,7 @@ export const EditUser: React.FC = () => {
   const history = useHistory()
   const { showMessage } = useModal()
 
-  const { user: initialUser } = useLocation().state || {}
+  const { user: initialUser } = useLocation<{ user: User }>().state || {}
 
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(false)
 
@@ -37,7 +39,7 @@ export const EditUser: React.FC = () => {
 
   useEffect(() => {
     if (!initialUser) {
-      history.push('/usuarios/')
+      history.push(DIRECTOR_FILTER_USERS)
     }
   }, [])
 
@@ -47,7 +49,7 @@ export const EditUser: React.FC = () => {
       return
     }
 
-    history.push('/usuarios')
+    history.push(DIRECTOR_FILTER_USERS)
   }
 
   return (

@@ -23,6 +23,7 @@ export const UserData: React.FC<IUserDataProps> = ({ user }) => {
       <Select
         label="Status:"
         value={user.status}
+        labelDefaultOption=" "
         options={[
           { label: 'Ativo', value: 'active' },
           { label: 'Inativo', value: 'inactive' },

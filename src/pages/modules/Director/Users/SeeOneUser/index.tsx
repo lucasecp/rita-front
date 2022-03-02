@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory, useLocation } from 'react-router'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
@@ -16,7 +16,10 @@ import { toast } from '@/styles/components/toastify'
 import { UserData } from './components/UserData'
 
 import apiUser from '@/services/apiUser'
-import { EDIT_USER } from '@/routes/constants/namedRoutes/routes'
+import {
+  DIRECTOR_FILTER_USERS,
+  EDIT_USER,
+} from '@/routes/constants/namedRoutes/routes'
 
 export interface User {
   name: string
@@ -31,8 +34,7 @@ export const SeeOneUser: React.FC = () => {
   const history = useHistory()
   const { Loading } = useLoading()
 
-  // const { id } = useLocation().state || {}
-  const id = 3
+  const { id } = useLocation<{ id: number }>().state || {}
 
   const [user, setUser] = useState({} as User)
 
@@ -63,7 +65,7 @@ export const SeeOneUser: React.FC = () => {
   }, [])
 
   const onComeBack = () => {
-    history.push('/usuarios')
+    history.push(DIRECTOR_FILTER_USERS)
   }
 
   const onEditUser = () => {

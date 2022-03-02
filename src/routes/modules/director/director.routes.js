@@ -13,6 +13,8 @@ import {
   DIRECTOR_IMPORT,
   DIRECTOR_IMPORT_REPORT,
   DIRECTOR_FILTER_USERS,
+  SEE_ONE_USER,
+  EDIT_USER,
 } from '../../constants/namedRoutes/routes'
 
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
@@ -26,6 +28,8 @@ import { InactivatePlanConfirm } from '@/pages/modules/Director/PlanManagment/Ge
 import { Import } from '@/pages/modules/Director/Imports'
 import { Report as ImportReport } from '@/pages/modules/Director/Imports/containers/Report'
 import { FilterUsers } from '@/pages/modules/Director/Users/FilterUsers'
+import { SeeOneUser } from '@/pages/modules/Director/Users/SeeOneUser'
+import { EditUser } from '@/pages/modules/Director/Users/EditUser'
 
 const directorRoutes = [
   {
@@ -71,6 +75,14 @@ const directorRoutes = [
   {
     path: DIRECTOR_FILTER_USERS,
     component: FilterUsers,
+  },
+  {
+    path: SEE_ONE_USER,
+    component: SeeOneUser,
+  },
+  {
+    path: EDIT_USER,
+    component: EditUser,
   },
 ]
 

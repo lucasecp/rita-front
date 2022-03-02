@@ -1,4 +1,3 @@
-import { id } from 'date-fns/locale'
 import { User } from './../index'
 
 interface UserFromApi {

@@ -9,6 +9,7 @@ import { User } from '../../../../../../@types'
 import { useHistory } from 'react-router-dom'
 
 import { Container } from './styles'
+import { SEE_ONE_USER } from '@/routes/constants/namedRoutes/routes'
 
 interface ActionProps {
   userData: User
@@ -31,7 +32,7 @@ export const Actions: React.FC<ActionProps> = ({ userData }) => {
   }, [])
 
   const onSeeUser = () => {
-    history.push('ROTA_SEE_USER', {
+    history.push(SEE_ONE_USER, {
       id: userData.id,
     })
   }
