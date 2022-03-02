@@ -30,7 +30,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
   errors,
   setErrors,
   setSpecialistInfo,
-  formWasSubmited
+  formWasSubmited,
 }) => {
   const [name, setName] = useState('')
   const [profissionalName, setProfissionalName] = useState('')
@@ -75,7 +75,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
   }, [data])
 
   useEffect(() => {
-    if (!isEditing && !formWasSubmited) {
+    if (!formWasSubmited) {
       setName(data?.name || '')
       setProfissionalName(data?.profissionalName || '')
       setReceiveService(data?.receiveService || '')
@@ -84,8 +84,17 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
       setEmail(data?.email || '')
       setPhone(data?.phone || '')
       setCpf(data?.cpf || '')
+    } else {
+      setName(name || '')
+      setProfissionalName(profissionalName || '')
+      setReceiveService(receiveService || '')
+      setUfProfissionaRegister(ufProfissionaRegister || '')
+      setClassCouncil(classCouncil || '')
+      setEmail(email || '')
+      setPhone(phone || '')
+      setCpf(cpf || '')
     }
-  }, [isEditing])
+  }, [formWasSubmited])
 
   return (
     <Container>
