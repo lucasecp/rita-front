@@ -24,7 +24,12 @@ import { VALIDATOR_ANALYZE_PATIENTS } from '@/routes/constants/namedRoutes/route
 import formatFirstLastName from '@/helpers/formatFirstLastName'
 
 import { fromApi } from './adapters/fromApi'
-import { PatientAddress, PatientData, PatientValidation } from './@types'
+import {
+  PatientAddress,
+  PatientData,
+  PatientDataHolder,
+  PatientValidation,
+} from './@types'
 import { Container } from './styles'
 
 export const SeeOnePatient: React.FC = () => {
@@ -41,7 +46,9 @@ export const SeeOnePatient: React.FC = () => {
 
   const [disableFinishButton, setDisableFinishButton] = useState(true)
 
-  const [patientData, setPatientData] = useState({} as PatientData)
+  const [patientData, setPatientData] = useState(
+    {} as PatientData & PatientDataHolder,
+  )
   const [patientDependents, setPatientDependents] = useState(
     [] as PatientData[],
   )
@@ -235,6 +242,7 @@ export const SeeOnePatient: React.FC = () => {
           patientId={dependent ? dependent.id : patientData.id}
           validations={validations}
           onChangeValidations={setValidations}
+          isPatientLinkedCompany={!!patientData.company}
         />
         <footer>
           <ButtonLink onClick={onComeBack}>Voltar</ButtonLink>

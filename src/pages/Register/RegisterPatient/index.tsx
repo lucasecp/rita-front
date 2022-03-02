@@ -11,7 +11,7 @@ import { Address } from './steps/Address'
 import { Documents } from './steps/Documents'
 import { Dependents } from './steps/Dependents'
 
-import { useRegisterPatient } from './hooks'
+import { RegisterPatientProvider, useRegisterPatient } from './hooks'
 import { useLoading } from '@/hooks/useLoading'
 
 import { Container } from './styles'
@@ -26,9 +26,16 @@ export const RegisterPatient: React.FC = () => {
 
   const { isActiveStep, setInitialRegisterData } = useRegisterPatient()
 
+  // console.log(
+  //   '🚀 ~ file: index.tsx ~ line 28 ~ setInitialRegisterData',
+  //   setInitialRegisterData,
+  // )
+  // console.log('🚀 ~ file: index.tsx ~ line 28 ~ isActiveStep', isActiveStep)
+
   useEffect(() => {
     document.title = 'Rita Saúde | Cadastro'
 
+    // if (setInitialRegisterData) {
     if (location.state) {
       const initialRegisterMapped = initialRegisterPatientFromApi(
         location.state?.userData,
@@ -59,9 +66,11 @@ export const RegisterPatient: React.FC = () => {
 
       loadPatientDataFromTokenParams()
     }
-  }, [])
+    // }
+  }, [setInitialRegisterData])
 
   const activeStep = useMemo(() => {
+    // if (isActiveStep) {
     const one = isActiveStep(1)
     const two = isActiveStep(2)
     const three = isActiveStep(3)
@@ -73,17 +82,20 @@ export const RegisterPatient: React.FC = () => {
       three,
       four,
     }
+    // }
   }, [isActiveStep])
 
   return (
-    <RegisterLayout>
-      <Container>
-        <ExitAndSteps />
-        <RegistrationData isActive={activeStep.one} />
-        <Address isActive={activeStep.two} />
-        <Documents isActive={activeStep.three} />
-        <Dependents isActive={activeStep.four} />
-      </Container>
-    </RegisterLayout>
+    <RegisterPatientProvider>
+      <RegisterLayout>
+        <Container>
+          <ExitAndSteps />
+          <RegistrationData isActive={!!activeStep?.one} />
+          <Address isActive={!!activeStep?.two} />
+          <Documents isActive={!!activeStep?.three} />
+          <Dependents isActive={!!activeStep?.four} />
+        </Container>
+      </RegisterLayout>
+    </RegisterPatientProvider>
   )
 }
