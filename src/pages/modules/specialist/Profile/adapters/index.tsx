@@ -1,7 +1,7 @@
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres';
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 
-import { mapClinics, mapClinicsToApi } from './mapClinic';
-import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys';
+import { mapClinics, mapClinicsToApi } from './mapClinic'
+import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys'
 
 export const fromApi = (doctorInfo: any) => {
   return {
@@ -15,6 +15,8 @@ export const fromApi = (doctorInfo: any) => {
       email: doctorInfo.email,
       phone: doctorInfo.celular,
       photo: doctorInfo.avatar,
+      cashback: doctorInfo.cashBack,
+      takerate: doctorInfo.takeRate,
     },
 
     specialtys: mapSpecialtys(doctorInfo.especialidade),

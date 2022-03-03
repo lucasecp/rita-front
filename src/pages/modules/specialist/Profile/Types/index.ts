@@ -11,6 +11,8 @@ export interface SpecialistInfoI {
   email?: string
   phone?: string
   photo?: string
+  cashback?: string
+  takerate?: string
 }
 export interface DataSpecialistI {
   specialistInfo?: SpecialistInfoI
