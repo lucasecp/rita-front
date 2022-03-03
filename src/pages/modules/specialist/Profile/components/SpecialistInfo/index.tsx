@@ -241,8 +241,8 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
         disabled={!isEditing}
         name="phone"
       />
-      <InputText label="CashBack:" value={data?.cashback + '%'} disabled />
-      <InputText label="TakeRate:" value={data?.takerate + '%'} disabled />
+      <InputText label="CashBack:" value={data?.cashback} disabled />
+      <InputText label="TakeRate:" value={data?.takerate} disabled />
     </Container>
   )
 }

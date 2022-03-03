@@ -15,8 +15,8 @@ export const fromApi = (doctorInfo: any) => {
       email: doctorInfo.email,
       phone: doctorInfo.celular,
       photo: doctorInfo.avatar,
-      cashback: doctorInfo.cashBack,
-      takerate: doctorInfo.takeRate,
+      cashback: doctorInfo.cashBack ? doctorInfo.cashBack + '%' : '',
+      takerate: doctorInfo.takeRate ? doctorInfo.takeRate + '%' : '',
     },
 
     specialtys: mapSpecialtys(doctorInfo.especialidade),
