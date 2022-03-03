@@ -3,8 +3,7 @@ import { OrderUsers, UsersFilters } from '../../../../../@types'
 const orderToApi = (order: OrderUsers) => {
   const orderColumns = {
     name: 'nome',
-    cpf: 'usuario',
-    profiles: 'profiles',
+    login: 'usuario',
     status: 'situacao',
   }
 
@@ -39,8 +38,8 @@ export const paramsToApiGetUsers = (
     orderBy: orderColumn,
     order: orderType,
     nome: filters.name,
-    usuario: filters.cpf,
-    situacao: filters.status,
-    perfis: filters.profiles,
+    usuario: filters.login,
+    situacao: filters.status?.map((status) => status.id),
+    perfis: filters.profiles?.map((profile) => profile.id),
   }
 }

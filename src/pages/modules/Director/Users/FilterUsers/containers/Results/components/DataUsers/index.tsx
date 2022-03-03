@@ -8,6 +8,7 @@ import { PaginationSimple } from './components/PaginationSimple'
 import { Container, Status } from './styles'
 import qs from 'qs'
 import { useLoading } from '@/hooks/useLoading'
+import { toast } from '@/styles/components/toastify'
 
 interface DataUsersProps {
   filters: UsersFilters
@@ -24,7 +25,10 @@ export const DataUsers: React.FC<DataUsersProps> = ({ filters, order }) => {
 
   const [usersData, setUsersData] = useState<User[]>([])
 
-  const [pagination, setPagination] = useState({} as PaginationState)
+  const [pagination, setPagination] = useState<PaginationState>({
+    skip: 0,
+    limit: 10,
+  })
   const [paginationTotal, setPaginationTotal] = useState(0)
 
   useEffect(() => {
@@ -33,8 +37,6 @@ export const DataUsers: React.FC<DataUsersProps> = ({ filters, order }) => {
         Loading.turnOn()
 
         const paramsToApi = paramsToApiGetUsers(pagination, order, filters)
-
-        console.log('paramsToApi: ', paramsToApi)
 
         const {
           data: { total, dados },
@@ -51,7 +53,7 @@ export const DataUsers: React.FC<DataUsersProps> = ({ filters, order }) => {
 
         setUsersData(usersMapped)
       } catch (error) {
-        console.log('Error: ', error)
+        toast.error('Erro ao carregar usuários')
       } finally {
         Loading.turnOff()
       }
@@ -65,7 +67,7 @@ export const DataUsers: React.FC<DataUsersProps> = ({ filters, order }) => {
       {usersData.map((user, index) => (
         <ul key={index}>
           <li>{user.name || '-'}</li>
-          <li>{user.cpf || '-'}</li>
+          <li>{user.login || '-'}</li>
           <li>{user.profile || '-'}</li>
           <Status type={user.status}>
             <span>{user.status || '-'}</span>

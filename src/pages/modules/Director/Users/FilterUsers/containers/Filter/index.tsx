@@ -21,8 +21,8 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
   const [filters, setFilters] = useLocalStorage<UsersFilters>(
     '@Rita/Users/Filters',
     {
-      cpf: '',
       name: '',
+      login: '',
       profiles: [],
       status: [],
     },
@@ -33,7 +33,7 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
 
   useEffect(() => {
     const loadProfilesOptions = async () => {
-      const response = await apiUser.get<ProfilesFromApi[]>('/perfil')
+      const response = await apiUser.get<ProfilesFromApi[]>('/perfil?tipo=1')
 
       const profilesMappedFromApi = response.data.map((profile) => {
         return {
@@ -51,7 +51,7 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
   const hasNoFilterSelected = useMemo(() => {
     return (
       filters.name === '' &&
-      filters.cpf === '' &&
+      filters.login === '' &&
       !filters.profiles.length &&
       !filters.status.length
     )
@@ -60,14 +60,14 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
   const onClearFields = () => {
     setFilters({
       name: '',
-      cpf: '',
+      login: '',
       profiles: [],
       status: [],
     })
 
     onGetFilters({
-      cpf: '',
-      name: '',
+      name: undefined,
+      login: undefined,
       profiles: [],
       status: [],
     })
@@ -76,7 +76,7 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
   const onFilterResults = () => {
     onGetFilters({
       name: filters.name,
-      cpf: filters.cpf,
+      login: filters.login,
       profiles: filters.profiles,
       status: filters.status,
     })
@@ -90,10 +90,10 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
           name: value,
         }))
         break
-      case 'cpf':
+      case 'login':
         setFilters((prevState) => ({
           ...prevState,
-          cpf: value,
+          login: value,
         }))
         break
       case 'profiles':
@@ -125,9 +125,9 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
         />
         <InputText
           variation="secondary"
-          label="CPF:"
-          value={filters.cpf}
-          setValue={(value) => onChangeInput('cpf', value)}
+          label="Login:"
+          value={filters.login}
+          setValue={(value) => onChangeInput('login', value)}
           maxLength={10}
         />
         <CustomMultSelect
@@ -139,9 +139,9 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
         <CustomMultSelect
           label="Status:"
           options={[
-            { id: 1, name: 'Todos' },
-            { id: 2, name: 'Ativo' },
-            { id: 3, name: 'Inativo' },
+            { id: '', name: 'Todos' },
+            { id: 'A', name: 'Ativo' },
+            { id: 'I', name: 'Inativo' },
           ]}
           value={filters.status}
           setValue={(value) => onChangeInput('status', value)}
