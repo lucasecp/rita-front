@@ -70,3 +70,5 @@ export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 export const TESTE = '/teste'
 
 export const NOT_FOUND = '*'
+
+
