@@ -1,6 +1,7 @@
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import { Select } from '@/components/Form/Select'
+import SelectUf from './SelectUf'
+import SelectCity from './SelectCity'
 import React, { useEffect, useState } from 'react'
 
 import { Container } from './styles'
@@ -20,6 +21,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
 
   const [cep, setCep] = useState('')
   const [uf, setUf] = useState('')
+  const [ufToApi, setUfToApi] = useState('')
   const [city, setCity] = useState('')
   const [address, setAdress] = useState('')
   const [numberHome, setNumberHome] = useState('')
@@ -38,7 +40,15 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
   }, [initialRegisterData])
 
   useEffect(() => {
-    setAddress({ district, uf, city, address, numberHome, cep, complement })
+    setAddress({
+      district,
+      uf: ufToApi,
+      city,
+      address,
+      numberHome,
+      cep,
+      complement,
+    })
   }, [address, cep, numberHome, city, complement, uf, district])
 
   const onNextStep = () => {
@@ -65,44 +75,25 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             msgError={errors.cep}
             hasError={!!errors.cep}
           />
-          <Select
-            label="UF:"
-            labelDefaultOption="Selecione:"
-            options={UF}
-            setValue={setUf}
-            value={uf}
-            name="uf"
-          />
+          <SelectUf setUf={setUf} uf={uf} setUfToApi={setUfToApi} />
+          <SelectCity setCity={setCity} uf={uf} city={city} />
+
           <InputText
-            label="Cidade:"
-            value={city}
-            setValue={setCity}
-            name="city"
+            label="Endereço:"
+            value={address}
+            setValue={setAdress}
+            name="address"
             maxLength={100}
           />
-          <section>
-            <InputText
-              label="Endereço:"
-              value={address}
-              setValue={setAdress}
-              name="address"
-              maxLength={100}
-            />
-            <InputText
-              label="Número:"
-              value={numberHome}
-              setValue={setNumberHome}
-              name="numberHome"
-              maxLength={50}
-            />
-          </section>
           <InputText
-            label="Bairro:"
-            value={district}
-            setValue={setDistrict}
-            name="district"
-            maxLength={100}
+            label="Número:"
+            value={numberHome}
+            setValue={setNumberHome}
+            name="numberHome"
+            maxLength={50}
           />
+        </section>
+        <div>
           <InputText
             label="Complemento:"
             value={complement}
@@ -110,7 +101,14 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             name="complement"
             maxLength={100}
           />
-        </section>
+          <InputText
+            label="Bairro:"
+            value={district}
+            setValue={setDistrict}
+            name="district"
+            maxLength={100}
+          />
+        </div>
       </div>
       <footer>
         <ButtonLink onClick={previousStep}>Etapa Anterior</ButtonLink>
