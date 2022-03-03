@@ -70,6 +70,8 @@ interface FromApiPersonalDatas {
 }
 
 export const fromApiDataToDisplay = (data: IDataToDisplayFromApi): any => {
+  console.log(data)
+
   return {
     name: data.nome,
     cpf: formatCpf(data.cpf),
@@ -113,7 +115,7 @@ export const fromApiPersonalDatas = (
       contractedPlanSince: data.plano?.data,
       price: data.plano?.valor ? formatPrice(data.plano?.valor) : 'Isento',
       channel: data.canal,
-      company: data.empresa[0].nome,
+      company: data.empresa[0]?.nome,
     },
   }
 }
