@@ -40,6 +40,8 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
   const [classCouncil, setClassCouncil] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+  const [cashBack, setCashBack] = useState('')
+  const [takeRate, setTakeRate] = useState('')
 
   useEffect(() => {
     setSpecialistInfo({
@@ -230,7 +232,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
             phone: validatePhone(phone),
           })
         }
-        onKeyUp={async () =>
+        onKeyUp={() =>
           setErrors({
             ...errors,
             phone: validatePhone(phone),
@@ -239,6 +241,8 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
         disabled={!isEditing}
         name="phone"
       />
+      <InputText label="CashBack:" value={data?.cashback} disabled />
+      <InputText label="TakeRate:" value={data?.takerate} disabled />
     </Container>
   )
 }

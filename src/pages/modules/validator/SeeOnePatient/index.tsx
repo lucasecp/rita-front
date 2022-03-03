@@ -242,7 +242,7 @@ export const SeeOnePatient: React.FC = () => {
           patientId={dependent ? dependent.id : patientData.id}
           validations={validations}
           onChangeValidations={setValidations}
-          isPatientLinkedCompany={!!patientData.company}
+          isPatientLinkedPlan={!!patientData.plan}
         />
         <footer>
           <ButtonLink onClick={onComeBack}>Voltar</ButtonLink>

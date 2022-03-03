@@ -80,3 +80,5 @@ export const EDIT_USER = '/usuarios/editar'
 export const TESTE = '/teste'
 
 export const NOT_FOUND = '*'
+
+
