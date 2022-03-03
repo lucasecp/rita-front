@@ -70,8 +70,6 @@ interface FromApiPersonalDatas {
 }
 
 export const fromApiDataToDisplay = (data: IDataToDisplayFromApi): any => {
-  console.log(data)
-
   return {
     name: data.nome,
     cpf: formatCpf(data.cpf),
