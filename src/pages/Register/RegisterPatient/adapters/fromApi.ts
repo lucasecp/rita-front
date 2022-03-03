@@ -1,4 +1,4 @@
-import { RegisterDataState } from '../types'
+import { RegisterDataState } from '../hooks/types'
 import { formatCpf } from '@/helpers/formatCpf'
 
 interface InitialFromApi {
