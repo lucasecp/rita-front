@@ -10,75 +10,16 @@ import axios from 'axios'
 import { registerPatientToApi } from './adapters/toApi'
 
 import { RegisterSuccess } from './messages/RegisterSuccess'
-import { DocumentsNotSended } from './messages/DocumentsNotSended'
-export interface RegistrationDataState {
-  id?: number
-  name?: string
-  email?: string
-  gender?: string
-  birthdate?: string
-  phone?: string
-  cpf?: string
-  company?: string
-}
+import { DocumentsNotSended } from './messages/DocumentsNotSended' 
 
-export interface AddressState {
-  cep?: string
-  uf?: string
-  city?: string
-  address?: string
-  numberHome?: string
-  district?: string
-  complement?: string
-}
-
-export interface DocumentsState {
-  holdingDocumentFile: File | string
-  ownDocumentFile: File | string
-  ownBackDocumentFile: File | string
-  proofOfAddressFile: File | string
-  proofOfIncomeFile: File | string
-  selectIncome?: string
-}
-
-export interface DependentsState {
-  id?: number
-  name?: string
-  cpf?: string
-  email?: string
-  gender?: string
-  birthdate?: string
-  phone?: string
-}
-
-export interface RegisterDataState {
-  registrationData?: RegistrationDataState
-  address?: AddressState
-  dependents?: DependentsState[]
-}
-
-interface RegisterPatientContextData {
-  cpfHolder?: string
-  isPatientLinkedCompany: boolean
-  limitOfDependents: number
-  initialRegisterData: RegisterDataState
-  onFinishRegister: () => void
-  isActiveStep: (stepNumber: number) => boolean
-  currentStep: number
-  previousStep: () => void
-  nextStep: () => void
-  setInitialRegisterData: React.Dispatch<
-    React.SetStateAction<RegisterDataState>
-  >
-  setRegistrationData: React.Dispatch<
-    React.SetStateAction<RegistrationDataState | undefined>
-  >
-  setAddress: React.Dispatch<React.SetStateAction<AddressState | undefined>>
-  setDocumentsFile: React.Dispatch<React.SetStateAction<DocumentsState>>
-  setDependents: React.Dispatch<
-    React.SetStateAction<DependentsState[] | undefined>
-  >
-}
+import {
+  RegistrationDataState,
+  AddressState,
+  DocumentsState,
+  DependentsState,
+  RegisterDataState,
+  RegisterPatientContextData,
+} from './types'
 
 const RegisterPatientContext = createContext<RegisterPatientContextData>(
   {} as RegisterPatientContextData,
@@ -129,6 +70,14 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
       setStep(step + 1)
       scrollTo(0, 0)
     }
+  }
+
+  const resetData = () => {
+    setRegistrationData({})
+    setAddress({})
+    setDocumentsFile({} as DocumentsState)
+    setDependents([])
+    setStep(1)
   }
 
   const onFinishRegister = async () => {
@@ -228,6 +177,7 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
         setDocumentsFile,
         setDependents,
         onFinishRegister,
+        resetData,
       }}
     >
       {children}
