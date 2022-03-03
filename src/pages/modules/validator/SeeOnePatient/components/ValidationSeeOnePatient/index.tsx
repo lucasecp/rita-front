@@ -14,12 +14,18 @@ import { PatientValidation } from '../../@types'
 interface ValidationSeeOnePatientProps {
   patientId: number
   validations: PatientValidation
+  isPatientLinkedCompany: boolean
   onChangeValidations: React.Dispatch<React.SetStateAction<PatientValidation>>
 }
 
 export const ValidationSeeOnePatient: React.FC<
   ValidationSeeOnePatientProps
-> = ({ patientId, validations, onChangeValidations }) => {
+> = ({
+  patientId,
+  validations,
+  isPatientLinkedCompany,
+  onChangeValidations,
+}) => {
   const [documentOk, setDocumentOk] = useState(validations.documentOk || '')
 
   const [resonDocumentNotOk, setResonDocumentNotOk] = useState(
@@ -40,6 +46,10 @@ export const ValidationSeeOnePatient: React.FC<
       setResonDocumentNotOk(validationsStored.resonDocumentNotOk)
       setIncomeOk(validationsStored.incomeOk)
       setCheckAllData(validationsStored.allDataVerified)
+    }
+
+    if (isPatientLinkedCompany) {
+      setIncomeOk('yes')
     }
   }, [patientId])
 
@@ -95,20 +105,29 @@ export const ValidationSeeOnePatient: React.FC<
         value={incomeOk}
         onChange={onIncomeOkChange}
       >
-        <RadioButton value="yes" label="Sim" checked={incomeOk === 'yes'} />
-        <RadioButton value="no" label="Não" checked={incomeOk === 'no'} />
+        <RadioButton
+          value="yes"
+          label="Sim"
+          checked={incomeOk === 'yes'}
+          disabled={isPatientLinkedCompany}
+        />
+        <RadioButton
+          value="no"
+          label="Não"
+          checked={incomeOk === 'no'}
+          disabled={isPatientLinkedCompany}
+        />
       </RadioGroup>
       {documentOk === 'yes' && (
         <section>
           <Checkbox
-            id="terms"
             label="Atesto que verifiquei todos os dados preenchidos pelo usuário como dados reais."
             checked={allDataVerified}
             setValue={setCheckAllData}
             colorLight
             hasError={!allDataVerified}
             messageError={
-              !allDataVerified && 'A seleção do campo é obrigatória'
+              !allDataVerified ? 'A seleção do campo é obrigatória' : ''
             }
           />
         </section>

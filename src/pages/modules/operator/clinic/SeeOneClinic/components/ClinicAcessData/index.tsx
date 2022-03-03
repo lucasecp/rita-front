@@ -5,11 +5,12 @@ import React, { useEffect, useState } from 'react'
 import {
   validateAdminName,
   validateCPF,
-  validateEmail,
   validatePhone,
 } from '../../helpers/validatorFields'
 
 import { Container } from './styles'
+import { InputEmail } from '@/components/smarts/InputEmail'
+import { useMessage } from '@/hooks/useMessage'
 
 interface ClinicAcessDataProps {
   acessDatas: AcessDatasI
@@ -32,6 +33,8 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
   const [cpf, setCpf] = useState(acessDatas?.cpf || '')
   const [email, setEmail] = useState(acessDatas?.email || '')
   const [phone, setPhone] = useState(acessDatas?.phone || '')
+
+  const [errorMessage, sendErrorMessage] = useMessage()
 
   useEffect(() => {
     setnameAdmin(acessDatas?.nameAdmin || '')
@@ -92,16 +95,13 @@ export const ClinicAcessData: React.FC<ClinicAcessDataProps> = ({
           disabled={!isEditing}
           name="cpf"
         />
-        <InputText
-          label="E-mail:"
-          name="email"
-          value={email}
-          setValue={setEmail}
-          hasError={!!errors?.email}
-          msgError={errors?.email}
-          onBlur={() => setErrors({ ...errors, email: validateEmail(email) })}
-          onKeyUp={() => setErrors({ ...errors, email: validateEmail(email) })}
-          maxLength={100}
+        <InputEmail
+          initialEmail={email}
+          onGetEmail={setEmail}
+          hasError={(hasError) => setErrors({ ...errors, email: hasError })}
+          checkHasError={errorMessage}
+          onKeyUp={sendErrorMessage}
+          onBlur={sendErrorMessage}
           disabled={!isEditing}
         />
         <InputMask

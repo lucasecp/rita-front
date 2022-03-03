@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { SelectHTMLAttributes } from 'react'
 // import MsgError from '../../MsgError'
 import { Container } from './styles'
-import { SelectProps } from './types'
+export interface SelectOptions {
+  value: string | number
+  label: string | number
+}
+export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  options?: SelectOptions[]
+  label?: string
+  setValue?: (value: any) => void
+  // value: string | number | boolean
+  labelDefaultOption?: string
+  msgError?: string
+  variation?: string
+  hasError?: string | boolean
+  // onChange?: (props: ChangeEvent<HTMLInputElement>) => void | undefined
+  disabled?: boolean
+  onBlur?: () => void
+}
 
 export const Select: React.FC<SelectProps> = ({
   options = [],
@@ -32,7 +48,11 @@ export const Select: React.FC<SelectProps> = ({
         )}
         {!!options?.length &&
           options?.map((option, index) => (
-            <option value={option?.value} key={index}>
+            <option
+              value={option?.value}
+              key={index}
+              disabled={option?.disabled}
+            >
               {option?.label}
             </option>
           ))}

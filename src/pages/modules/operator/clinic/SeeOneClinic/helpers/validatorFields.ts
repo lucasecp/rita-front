@@ -1,5 +1,4 @@
 import clear from '@/helpers/clear/SpecialCaracteres'
-import isEmail from '@/helpers/isEmail'
 import validateCpf from '@/helpers/validateCpf'
 
 export const validateName = (value: string): string => {
@@ -37,16 +36,6 @@ export const validateCPF = (value: string): string => {
   const newValue = clear(value)
   if (!newValue) return 'CPF Obrigatório.'
   else if (!validateCpf(newValue)) return 'CPF Inválido.'
-
-  return ''
-}
-
-export const validateEmail = (email: string): string => {
-  if (!email.trim()) {
-    return 'Email Obrigatório'
-  } else if (!isEmail(email)) {
-    return 'Email inválido.'
-  }
 
   return ''
 }

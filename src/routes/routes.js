@@ -12,12 +12,15 @@ import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
 import { EditSellableItems } from '@/pages/SellableItems/EditSellableItems'
 import { SeeAllProfiles } from '@/pages/ProfileAndPermissions/SeeAllProfiles'
 import { SeeOneProfile } from '@/pages/ProfileAndPermissions/SeeOneProfile'
+import { EditProfile } from '@/pages/ProfileAndPermissions/EditProfile'
+import { CreateProfile } from '@/pages/ProfileAndPermissions/CreateProfile'
 
 import {
   directorRoutes,
   operatorRoutes,
   validatorRoutes,
   patientRoutes,
+  specialistRotes,
 } from './modules'
 
 import registerRoutesComponent from './grouping/register.routes'
@@ -33,6 +36,8 @@ import {
   EDIT_SELLABLE_ITEMS,
   DIRECTOR_SEE_ALL_PROFILES,
   DIRECTOR_SEE_ONE_PROFILE,
+  DIRECTOR_EDIT_PROFILE,
+  DIRECTOR_CREATE_PROFILE,
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
 
@@ -50,6 +55,8 @@ function Routes() {
       {directorRoutes}
 
       {patientRoutes}
+
+      {specialistRotes}
 
       <Route
         path={FILTER_SELLABLE_ITEMS}
@@ -69,6 +76,14 @@ function Routes() {
         path={DIRECTOR_SEE_ONE_PROFILE}
         isPrivate
         component={SeeOneProfile}
+      />
+
+      <Route path={DIRECTOR_EDIT_PROFILE} isPrivate component={EditProfile} />
+
+      <Route
+        path={DIRECTOR_CREATE_PROFILE}
+        isPrivate
+        component={CreateProfile}
       />
 
       <Route path={SEE_SELLABLE_ITEMS} isPrivate component={SeeSellableItems} />

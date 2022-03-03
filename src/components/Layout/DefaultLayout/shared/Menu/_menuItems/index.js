@@ -13,6 +13,8 @@ import { ReactComponent as SellableItemsIcon } from '@/assets/icons/salable-item
 import { ReactComponent as ProfilesIcon } from '@/assets/icons/profiles.svg'
 import { ReactComponent as ClinicsIcon } from '@/assets/icons/clinic.svg'
 import { ReactComponent as ImportIcon } from '@/assets/icons/import.svg'
+import { ReactComponent as StethoscopeIcon } from '@/assets/icons/stethoscope.svg'
+import { ReactComponent as UsersIcon } from '@/assets/icons/users.svg'
 
 import {
   INITIAL_PAGE,
@@ -28,9 +30,12 @@ import {
   FILTER_SELLABLE_ITEMS,
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ALL_SPECIALTYS,
+  OPERATOR_SEE_ALL_SPECIALISTS,
   DIRECTOR_SEE_ALL_PROFILES,
   OPERATOR_DEPENDENT_MANAGMENT,
   DIRECTOR_IMPORT,
+  SPECIALIST_PROFILE,
+  DIRECTOR_FILTER_USERS,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -106,7 +111,7 @@ export const menuItens = [
     path: DIRECTOR_SEE_ALL_PROFILES,
     icon: <ProfilesIcon />,
     name: 'Perfis',
-    permission: permissionList.LISTAR_ITENS_VENDAVEIS,
+    permission: permissionList.LISTAR_PERFIS,
   },
   {
     path: OPERATOR_SEE_ALL_CLINICS,
@@ -131,5 +136,23 @@ export const menuItens = [
     icon: <ImportIcon />,
     name: 'Importação',
     permission: permissionList.IMPORTAR_PACIENTES,
+  },
+  {
+    path: OPERATOR_SEE_ALL_SPECIALISTS,
+    icon: <StethoscopeIcon />,
+    name: 'Especialistas',
+    permission: permissionList.LISTAR_MEDICOS,
+  },
+  {
+    path: SPECIALIST_PROFILE,
+    icon: <UserIcon />,
+    name: 'Perfil',
+    permission: permissionList.ALTERAR_MEUS_DADOS_ESPECIALISTA,
+  },
+  {
+    path: DIRECTOR_FILTER_USERS,
+    icon: <UsersIcon />,
+    name: 'Usuários',
+    permission: permissionList.LISTAR_USUARIOS,
   },
 ]

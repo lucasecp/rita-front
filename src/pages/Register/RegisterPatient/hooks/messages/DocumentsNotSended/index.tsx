@@ -1,40 +1,26 @@
 import React from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
-import success from '@/assets/icons/alerts/success.svg'
-import whatsApp from '@/assets/icons/whatsapp.svg'
-
-import { useHistory } from 'react-router'
-import { useModal } from '@/hooks/useModal'
 
 import { Container } from './styles'
+import { useRegisterPatient } from '../..'
 
 export const DocumentsNotSended: React.FC = () => {
-  const history = useHistory()
-  const { closeModal } = useModal()
+  const { onFinishRegister } = useRegisterPatient()
 
-  const onComeBack = () => {
-    closeModal()
-    history.push('/')
+  const onTryAgain = () => {
+    onFinishRegister()
   }
 
   return (
     <Container>
-      <img src={success} />
       <p>
-        Seus dados foram cadastrados, porém, os documentos não foram enviados.
-        Entre em contato com a central de atendimento Rita no
-        <a
-          href="https://api.whatsapp.com/send?phone=556131810999"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          (61) 3181-0999 <img src={whatsApp} />
-        </a>
+        Opa! <br />
+        Houve um problema no envio dos documentos!
       </p>
       <footer>
-        <ButtonPrimary onClick={onComeBack}>
-          Voltar a página inicial
+        <ButtonPrimary onClick={onTryAgain}>
+          Clique aqui para tentar novamente
         </ButtonPrimary>
       </footer>
     </Container>

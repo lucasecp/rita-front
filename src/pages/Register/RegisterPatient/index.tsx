@@ -1,17 +1,23 @@
 import React, { useEffect, useMemo } from 'react'
 
+import { useLocation, useParams } from 'react-router'
+
 import { RegisterLayout } from '@/components/Layout/RegisterLayout'
-import { Address } from './steps/Address'
+
+import { ExitAndSteps } from './components/ExitAndSteps'
+
 import { RegistrationData } from './steps/RegistrationData'
+import { Address } from './steps/Address'
 import { Documents } from './steps/Documents'
 import { Dependents } from './steps/Dependents'
-import { Container } from './styles'
-import { useLocation, useParams } from 'react-router'
-import { ExitAndSteps } from './components/ExitAndSteps'
-import { useRegisterPatient } from './hooks'
-import { initialRegisterPatientFromApi } from './adapters/fromApi'
-import apiPatient from '@/services/apiPatient'
+
+import { RegisterPatientProvider, useRegisterPatient } from './hooks'
 import { useLoading } from '@/hooks/useLoading'
+
+import { Container } from './styles'
+
+import apiPatient from '@/services/apiPatient'
+import { initialRegisterPatientFromApi } from './adapters/fromApi'
 
 export const RegisterPatient: React.FC = () => {
   const location = useLocation()
@@ -20,9 +26,16 @@ export const RegisterPatient: React.FC = () => {
 
   const { isActiveStep, setInitialRegisterData } = useRegisterPatient()
 
+  // console.log(
+  //   '🚀 ~ file: index.tsx ~ line 28 ~ setInitialRegisterData',
+  //   setInitialRegisterData,
+  // )
+  // console.log('🚀 ~ file: index.tsx ~ line 28 ~ isActiveStep', isActiveStep)
+
   useEffect(() => {
     document.title = 'Rita Saúde | Cadastro'
 
+    // if (setInitialRegisterData) {
     if (location.state) {
       const initialRegisterMapped = initialRegisterPatientFromApi(
         location.state?.userData,
@@ -32,12 +45,11 @@ export const RegisterPatient: React.FC = () => {
       return
     }
 
-    const loadPatientDataFromTokenParams = async () => {
-      if (token) {
+    if (token) {
+      const loadPatientDataFromTokenParams = async () => {
         try {
           Loading.turnOn()
 
-          // NjE5NDgxOTUzNzIxOTc1MDQxMA==
           const { data } = await apiPatient.get('/paciente/token/', {
             params: { token },
           })
@@ -51,12 +63,14 @@ export const RegisterPatient: React.FC = () => {
           Loading.turnOff()
         }
       }
-    }
 
-    loadPatientDataFromTokenParams()
-  }, [])
+      loadPatientDataFromTokenParams()
+    }
+    // }
+  }, [setInitialRegisterData])
 
   const activeStep = useMemo(() => {
+    // if (isActiveStep) {
     const one = isActiveStep(1)
     const two = isActiveStep(2)
     const three = isActiveStep(3)
@@ -68,17 +82,20 @@ export const RegisterPatient: React.FC = () => {
       three,
       four,
     }
+    // }
   }, [isActiveStep])
 
   return (
-    <RegisterLayout>
-      <Container>
-        <ExitAndSteps />
-        <RegistrationData isActive={activeStep.one} />
-        <Address isActive={activeStep.two} />
-        <Documents isActive={activeStep.three} />
-        <Dependents isActive={activeStep.four} />
-      </Container>
-    </RegisterLayout>
+    <RegisterPatientProvider>
+      <RegisterLayout>
+        <Container>
+          <ExitAndSteps />
+          <RegistrationData isActive={!!activeStep?.one} />
+          <Address isActive={!!activeStep?.two} />
+          <Documents isActive={!!activeStep?.three} />
+          <Dependents isActive={!!activeStep?.four} />
+        </Container>
+      </RegisterLayout>
+    </RegisterPatientProvider>
   )
 }

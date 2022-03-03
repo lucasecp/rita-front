@@ -1,5 +1,4 @@
 import colors from '@/styles/colors'
-
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -10,7 +9,6 @@ export const Container = styled.div`
     padding: 24px 32px;
     justify-content: space-between;
     position: relative;
-    text-align: center;
     display: grid;
     grid-template-columns: 40% 40% 20%;
 
@@ -34,12 +32,12 @@ export const Container = styled.div`
     margin-right: 24px;
     min-width: 150px;
     max-width: 200px;
-    text-align: center;
+    text-align: left;
     word-break: keep-all;
 
     &:last-child {
       margin-right: 0;
-      justify-content: center;
+      justify-content: left;
     }
   }
   > h2 {

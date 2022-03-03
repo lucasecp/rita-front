@@ -14,7 +14,7 @@ const ClinicInformation = () => {
   const [clinicInfo, setClinicInfo] = useState({})
   const location = useLocation()
   const history = useHistory()
-  const prevUrlResults = location.state.urlPrevResults || ''
+  const prevUrlResults = location.state?.urlPrevResults || ''
 
   const { Loading } = useLoading()
 
