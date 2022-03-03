@@ -1,6 +1,6 @@
-export default function (value) {
+export default function (value: string): string {
   if (!value?.trim()) {
-    return 'Sem Nome'
+    return '-'
   }
 
   const separateWord = value.toLowerCase().split(' ')

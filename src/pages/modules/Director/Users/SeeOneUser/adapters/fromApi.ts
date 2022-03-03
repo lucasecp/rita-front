@@ -1,4 +1,3 @@
-import { id } from 'date-fns/locale'
 import { User } from './../index'
 
 interface UserFromApi {
@@ -16,7 +15,7 @@ interface UserFromApi {
 export const userFromApi = (data: UserFromApi): User => {
   return {
     name: data.nome,
-    status: !(data.status === 'A') ? 'active' : 'inactive',
+    status: data.status === 'A' ? 'active' : 'inactive',
     cpf: data.cpf,
     email: data.email,
     phone: data.celular,

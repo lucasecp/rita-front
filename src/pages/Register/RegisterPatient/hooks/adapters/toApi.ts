@@ -1,4 +1,4 @@
-import { RegisterDataState, DocumentsState } from '../index'
+import { RegisterDataState, DocumentsState } from '../types'
 
 interface ToApi {
   idPaciente?: number

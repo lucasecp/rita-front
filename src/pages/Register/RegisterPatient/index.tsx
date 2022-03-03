@@ -1,19 +1,16 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect,useMemo } from 'react'
 
 import { useLocation, useParams } from 'react-router'
-
-import { RegisterLayout } from '@/components/Layout/RegisterLayout'
-
 import { ExitAndSteps } from './components/ExitAndSteps'
 
 import { RegistrationData } from './steps/RegistrationData'
 import { Address } from './steps/Address'
 import { Documents } from './steps/Documents'
 import { Dependents } from './steps/Dependents'
+import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 
 import { useRegisterPatient } from './hooks'
 import { useLoading } from '@/hooks/useLoading'
-
 import { Container } from './styles'
 
 import apiPatient from '@/services/apiPatient'
@@ -24,7 +21,28 @@ export const RegisterPatient: React.FC = () => {
   const { Loading } = useLoading()
   const { token } = useParams<{ token?: string }>()
 
-  const { isActiveStep, setInitialRegisterData } = useRegisterPatient()
+  const { setInitialRegisterData, isActiveStep, resetData } =
+    useRegisterPatient()
+
+  const activeStep = useMemo(() => {
+    const one = isActiveStep(1)
+    const two = isActiveStep(2)
+    const three = isActiveStep(3)
+    const four = isActiveStep(4)
+
+    return {
+      one,
+      two,
+      three,
+      four,
+    }
+  }, [isActiveStep])
+
+  useEffect(() => {
+    return () => {
+      resetData()
+    }
+  }, [])
 
   useEffect(() => {
     document.title = 'Rita Saúde | Cadastro'
@@ -58,31 +76,17 @@ export const RegisterPatient: React.FC = () => {
       }
 
       loadPatientDataFromTokenParams()
-    }
-  }, [])
-
-  const activeStep = useMemo(() => {
-    const one = isActiveStep(1)
-    const two = isActiveStep(2)
-    const three = isActiveStep(3)
-    const four = isActiveStep(4)
-
-    return {
-      one,
-      two,
-      three,
-      four,
-    }
-  }, [isActiveStep])
+    } 
+  }, [setInitialRegisterData])
 
   return (
     <RegisterLayout>
       <Container>
         <ExitAndSteps />
-        <RegistrationData isActive={activeStep.one} />
-        <Address isActive={activeStep.two} />
-        <Documents isActive={activeStep.three} />
-        <Dependents isActive={activeStep.four} />
+        <RegistrationData isActive={!!activeStep?.one} />
+        <Address isActive={!!activeStep?.two} />
+        <Documents isActive={!!activeStep?.three} />
+        <Dependents isActive={!!activeStep?.four} />
       </Container>
     </RegisterLayout>
   )

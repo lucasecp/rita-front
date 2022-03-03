@@ -1,5 +1,4 @@
 export const mapSpecialtys = (array: any[]) => {
-  console.log(array)
   if (!array) return []
 
   return array

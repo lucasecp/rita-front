@@ -67,11 +67,13 @@ export const Specialtys: React.FC<ClinicSpecialtysProps> = ({
   }, [specialtys])
 
   useEffect(() => {
-    if (!isEditing && !formWasSubmited) {
+    if (!formWasSubmited) {
       setSpecialtys(initialData || [])
       setErrors({})
+    } else {
+      setSpecialtys(specialtys || [])
     }
-  }, [isEditing, initialData])
+  }, [ formWasSubmited])
 
   const onChangingSelect = (values: MultiSelectOption[]) => {
     const hasAllOption = values.some((val) => val.id === 'All')
