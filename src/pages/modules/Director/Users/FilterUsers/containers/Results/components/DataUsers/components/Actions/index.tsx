@@ -43,38 +43,26 @@ export const Actions: React.FC<ActionProps> = ({ userData }) => {
       </CustomTooltip>
       {iconsToShow === 'Desbloquear' && (
         <CustomTooltip label="Desbloquear">
-          <UnlockIcon
-            onClick={() => {
-              console.log('Ação')
-            }}
-          />
+          <UnlockIcon />
         </CustomTooltip>
       )}
       {iconsToShow === 'Inativar' && (
         <CustomTooltip label="Inativar">
-          <InactivateIcon
-            onClick={() => {
-              console.log('Ação')
-            }}
-          />
+          <InactivateIcon />
         </CustomTooltip>
       )}
       {iconsToShow === 'Ativar' && (
         <CustomTooltip label="Ativar">
-          <ActivateIcon
-            onClick={() => {
-              console.log('Ação')
-            }}
-          />
+          <ActivateIcon />
         </CustomTooltip>
       )}
-      <CustomTooltip label="Resetar Senha">
+      {/* <CustomTooltip label="Resetar Senha">
         <ResetIcon
           onClick={() => {
             console.log('Ação')
           }}
         />
-      </CustomTooltip>
+      </CustomTooltip> */}
     </Container>
   )
 }

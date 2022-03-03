@@ -1,6 +1,6 @@
 export const usersFields = [
   { label: 'Nome', name: 'name' },
-  { label: 'CPF', name: 'cpf' },
+  { label: 'Login', name: 'login' },
   { label: 'Perfis', name: 'profile' },
   { label: 'Status', name: 'status' },
   { label: 'Bloqueado', name: 'blocked' },
