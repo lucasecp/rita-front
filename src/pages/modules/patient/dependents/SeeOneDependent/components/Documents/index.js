@@ -15,17 +15,18 @@ export const Documents = ({
   console.log(data)
   return (
     <Container>
-      <h1>Documentos Cadastrados</h1>
+      <div>
+        <h1>Documentos Cadastrados</h1>
+      </div>
       <section>
         <InputText label="Renda:" value={data?.income} disabled />
 
         {/* <Select labelDefaultOption={data?.income} /> */}
-        <aside>
-          <SeeDocumentFile
-            title={dependentDocumentName}
-            document={dependentDocument}
-          />
-        </aside>
+
+        <SeeDocumentFile
+          title={dependentDocumentName}
+          document={dependentDocument}
+        />
       </section>
     </Container>
   )

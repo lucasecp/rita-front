@@ -45,10 +45,12 @@ const SeeDependents = () => {
           `/paciente/dependente?id=${location.state.idDependent}`,
         )
 
-        setDependentDocumentName(
-          data.documentosCadastrados[data.documentosCadastrados.length - 1]
-            .nomeOriginal,
-        )
+        if (data.documentosCadastrados.length > 0) {
+          setDependentDocumentName(
+            data.documentosCadastrados[data.documentosCadastrados.length - 1]
+              .nomeOriginal,
+          )
+        }
 
         setDependent(fromApi(data))
       } catch (error) {
@@ -75,15 +77,15 @@ const SeeDependents = () => {
     getDependentIncomeDocument()
   }, [])
 
-  console.log(dependent?.personalDatas);
+  // console.log(dependent.personalDatas.status)
 
   const onEditPatient = () => {
     if (dependent.personalDatas.status === 'PENDING') {
       return showMessage(PendingWarning)
     }
-    if (dependent.personalDatas.status === 'BLOCKED') {
-      return showMessage(BlockingWarning)
-    }
+    // if (dependent.personalDatas.status === 'BLOCKED') {
+    //   return showMessage(BlockingWarning)
+    // }
 
     history.push(PATIENT_EDIT_DEPENDENT, {
       dependent,

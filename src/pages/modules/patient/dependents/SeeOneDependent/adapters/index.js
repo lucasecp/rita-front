@@ -3,6 +3,7 @@ import formatIncome from './formatIncome'
 import { statusFromApi } from './showStatus'
 
 export const fromApi = (dependentInfo) => {
+  console.log(dependentInfo);
   return {
     personalDatas: {
       name: dependentInfo.nome,
