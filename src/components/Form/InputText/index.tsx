@@ -7,7 +7,7 @@ import { Container } from './styles'
 
 interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
-  setValue?: React.Dispatch<React.SetStateAction<string>>
+  setValue?: (value: string) => void
   hasError?: boolean
   type?: string
   msgError?: string
@@ -15,7 +15,6 @@ interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   onlyLetter?: boolean
   onlyNumber?: boolean
   [x: string]: any
-
 }
 
 const InputText: React.FC<InputTextProps> = ({
