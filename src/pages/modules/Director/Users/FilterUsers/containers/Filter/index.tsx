@@ -43,15 +43,6 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
     loadProfilesOptions()
   }, [])
 
-  const hasNoFilterSelected = useMemo(() => {
-    return (
-      filters.name === '' &&
-      filters.login === '' &&
-      !filters.profiles.length &&
-      !filters.status.length
-    )
-  }, [filters])
-
   const onClearFields = () => {
     setFilters({
       name: '',
@@ -143,19 +134,10 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
       </div>
 
       <footer>
-        <OutlineButton
-          small
-          variation="red"
-          onClick={onClearFields}
-          disabled={hasNoFilterSelected}
-        >
+        <OutlineButton small variation="red" onClick={onClearFields}>
           Limpar Filtro
         </OutlineButton>
-        <ButtonPrimary
-          medium
-          onClick={onFilterResults}
-          disabled={hasNoFilterSelected}
-        >
+        <ButtonPrimary medium onClick={onFilterResults}>
           Filtrar Resultados
         </ButtonPrimary>
       </footer>
