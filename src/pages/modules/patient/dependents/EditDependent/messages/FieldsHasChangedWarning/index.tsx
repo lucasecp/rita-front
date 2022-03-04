@@ -22,8 +22,8 @@ export const FieldsHasChangedWarning: React.FC = () => {
       <img src={warningIcon} />
       <p>As informações não serão salvas. Confirma a saída?</p>
       <footer>
-        <ButtonPrimary onClick={onCancel}>Sim</ButtonPrimary>
         <OutlineButton onClick={closeModal}>Não</OutlineButton>
+        <ButtonPrimary onClick={onCancel}>Sim</ButtonPrimary>
       </footer>
     </Container>
   )
