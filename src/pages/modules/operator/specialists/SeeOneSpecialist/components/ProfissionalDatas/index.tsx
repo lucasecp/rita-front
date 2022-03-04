@@ -11,6 +11,8 @@ import { Container } from './styles'
 import { useMessage } from '@/hooks/useMessage'
 import SelectUf from '../SelectUf'
 import SelectIssuingAgency from '../SelectIssuingAgency'
+import InputMask from '@/components/Form/InputMask'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 
 interface ProfissionalDatasProps {
   data: ProfissionalDatasI
@@ -34,13 +36,16 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
   const [issuingAgency, setIssuingAgency] = useState(data?.issuingAgency || '')
   const [uf, setUf] = useState(data?.uf || '')
   const [ufToApi, setUfToApi] = useState('')
-
+  const [cashBack, setCashBack] = useState(data?.cashback || '')
+  const [takeRate, setTakeRate] = useState(data?.takerate || '')
 
   useEffect(() => {
     setProfissionalName(data?.profissionalName || '')
     setIssuingAgency(data?.issuingAgency || '')
     setUf(data?.uf || '')
     setRegisterNumber(data?.registerNumber || '')
+    setCashBack(data?.cashback || '')
+    setTakeRate(data?.takerate || '')
   }, [data])
 
   useEffect(() => {
@@ -48,9 +53,19 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
       profissionalName,
       registerNumber,
       issuingAgency,
-      uf: ufToApi
+      uf: ufToApi,
+      cashBack: Number(clearSpecialCaracter(cashBack)),
+      takeRate: Number(clearSpecialCaracter(takeRate)),
     })
-  }, [profissionalName, registerNumber, uf, issuingAgency, errors])
+  }, [
+    profissionalName,
+    registerNumber,
+    uf,
+    issuingAgency,
+    errors,
+    cashBack,
+    takeRate,
+  ])
 
   return (
     <Container>
@@ -113,6 +128,20 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
           error={errors?.uf}
         />
       </section>
+      <div>
+        <InputMask
+          label="CashBack:"
+          value={cashBack}
+          setValue={setCashBack}
+          mask="999%"
+        />
+        <InputMask
+          label="TakeRate:"
+          value={takeRate}
+          setValue={setTakeRate}
+          mask="999%"
+        />
+      </div>
     </Container>
   )
 }

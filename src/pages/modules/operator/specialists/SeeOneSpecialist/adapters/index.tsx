@@ -17,6 +17,8 @@ export const fromApi = (specialistInfo: any) => {
       registerNumber: specialistInfo.CRM || '',
       issuingAgency: specialistInfo.orgaoEmissor?.idOrgaoEmissor || '',
       uf: specialistInfo.ufRegistroProfissional || '',
+      cashback: specialistInfo.cashBack ? specialistInfo.cashBack + '%' : '',
+      takerate: specialistInfo.takeRate ? specialistInfo.takeRate + '%' : '',
     },
 
     specialtys: mapSpecialtys(specialistInfo.especialidade),
@@ -37,8 +39,8 @@ export const toApi = (specialistInfo: any) => {
     crmuf: specialistInfo.uf,
     clinica: mapClinicsToAPi(specialistInfo.clinics),
     especialidade: mapSpecialtysToApi(specialistInfo.specialtys),
-    cashBack: 0,
-    takeRate: 0,
+    cashBack: specialistInfo.cashBack,
+    takeRate: specialistInfo.takeRate,
     status: specialistInfo.status,
   }
 }
