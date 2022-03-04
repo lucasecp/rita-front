@@ -6,7 +6,7 @@ import InputText from '@/components/Form/InputText'
 import CustomMultSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
-import { ProfilesFromApi } from './adapters/profilesFromApi'
+import { profilesFromApi, ProfilesFromApi } from './adapters/profilesFromApi'
 import useLocalStorage from 'use-local-storage'
 
 import { UsersFilters } from '../../@types'
@@ -35,12 +35,7 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
     const loadProfilesOptions = async () => {
       const response = await apiUser.get<ProfilesFromApi[]>('/perfil?tipo=1')
 
-      const profilesMappedFromApi = response.data.map((profile) => {
-        return {
-          id: profile.id,
-          name: profile.nome,
-        }
-      })
+      const profilesMappedFromApi = profilesFromApi(response.data)
 
       setProfilesOptions(profilesMappedFromApi)
     }
@@ -82,35 +77,14 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
     })
   }
 
-  const onChangeInput = (field: string, value: any) => {
-    switch (field) {
-      case 'name':
-        setFilters((prevState) => ({
-          ...prevState,
-          name: value,
-        }))
-        break
-      case 'login':
-        setFilters((prevState) => ({
-          ...prevState,
-          login: value,
-        }))
-        break
-      case 'profiles':
-        setFilters((prevState) => ({
-          ...prevState,
-          profiles: value,
-        }))
-        break
-      case 'status':
-        setFilters((prevState) => ({
-          ...prevState,
-          status: value,
-        }))
-        break
-      default:
-        break
-    }
+  const onChangeInput = (
+    field: string,
+    value: string | MultiSelectOption[],
+  ) => {
+    setFilters((prevState) => ({
+      ...prevState,
+      [field]: value,
+    }))
   }
 
   return (
@@ -121,14 +95,12 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
           label="Nome:"
           value={filters.name}
           setValue={(value) => onChangeInput('name', value)}
-          maxLength={10}
         />
         <InputText
           variation="secondary"
           label="Login:"
           value={filters.login}
           setValue={(value) => onChangeInput('login', value)}
-          maxLength={10}
         />
         <CustomMultSelect
           label="Perfis:"
