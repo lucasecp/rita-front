@@ -68,7 +68,7 @@ export const ReasonToDeleteModal: React.FC<ResponseProps> = ({
   return (
     <Container>
       <img src={warningIcon} />
-      <h6>Descreva o motivo da alteração:</h6>
+      <h6>Descreva o motivo:</h6>
       <Textarea
         label=""
         setValue={setReason}
