@@ -14,6 +14,7 @@ import { ReactComponent as ProfilesIcon } from '@/assets/icons/profiles.svg'
 import { ReactComponent as ClinicsIcon } from '@/assets/icons/clinic.svg'
 import { ReactComponent as ImportIcon } from '@/assets/icons/import.svg'
 import { ReactComponent as StethoscopeIcon } from '@/assets/icons/stethoscope.svg'
+import { ReactComponent as UsersIcon } from '@/assets/icons/users.svg'
 
 import {
   INITIAL_PAGE,
@@ -34,6 +35,7 @@ import {
   OPERATOR_DEPENDENT_MANAGMENT,
   DIRECTOR_IMPORT,
   SPECIALIST_PROFILE,
+  DIRECTOR_FILTER_USERS,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -109,7 +111,7 @@ export const menuItens = [
     path: DIRECTOR_SEE_ALL_PROFILES,
     icon: <ProfilesIcon />,
     name: 'Perfis',
-    permission: permissionList.LISTAR_ITENS_VENDAVEIS,
+    permission: permissionList.LISTAR_PERFIS,
   },
   {
     path: OPERATOR_SEE_ALL_CLINICS,
@@ -146,5 +148,11 @@ export const menuItens = [
     icon: <UserIcon />,
     name: 'Perfil',
     permission: permissionList.ALTERAR_MEUS_DADOS_ESPECIALISTA,
+  },
+  {
+    path: DIRECTOR_FILTER_USERS,
+    icon: <UsersIcon />,
+    name: 'Usuários',
+    permission: permissionList.LISTAR_USUARIOS,
   },
 ]

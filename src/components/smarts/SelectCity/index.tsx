@@ -6,16 +6,22 @@ interface SelectCityProps {
   setCity: (value: string) => void
   city: string
   uf: string
-  disabled: boolean
+  disabled?: boolean
+  [x: string]: any
 }
+
+const initialLabel = 'Selecione:'
 
 const SelectCity: React.FC<SelectCityProps> = ({
   setCity,
   city,
   uf,
   disabled,
+  ...rest
 }) => {
   const [cityOptions, setCityOptions] = useState<any[]>([])
+
+  const [defaultLabel, setDefaultLabel] = useState(initialLabel)
 
   const mapCity = (array: any[]) => {
     if (!array) return []
@@ -32,35 +38,33 @@ const SelectCity: React.FC<SelectCityProps> = ({
 
     const getCity = async () => {
       try {
+        setDefaultLabel('Carregando')
+
         const { data } = await apiAdmin.get(`/municipio?idUF=${uf}`)
+
         const dataMapped = mapCity(data)
 
         setCityOptions(dataMapped)
-      } catch ({ response }) {}
+
+        setCity('')
+      } catch ({ response }) {
+      } finally {
+        setDefaultLabel(initialLabel)
+      }
     }
 
     getCity()
   }, [uf])
 
-  // const labelDefaultOption = () => {
-  //   if (!uf) {
-  //     return 'Necessário selecionar a UF'
-  //   }
-  //   if (uf === 'All') {
-  //     return ''
-  //   }
-  //   return 'Selecione:'
-  // }
-
   return (
     <Select
       options={cityOptions}
       label="Cidade:"
-      labelDefaultOption="Selecione:"
+      labelDefaultOption={defaultLabel}
       value={city}
       setValue={setCity}
+      {...rest}
       disabled={disabled}
-      name="comboCity"
     />
   )
 }

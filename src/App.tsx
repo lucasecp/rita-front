@@ -13,9 +13,9 @@ import { ModalProvider } from './hooks/useModal'
 import { LoadingProvider } from './hooks/useLoading'
 import { ThemeProvider } from './hooks/useTheme'
 import { RitaLoading } from './components/Loading/RitaLoading'
-import { RegisterPatientProvider } from './pages/Register/RegisterPatient/hooks'
 
 import { ToastContainer } from 'react-toastify'
+import { RegisterPatientProvider } from './pages/Register/RegisterPatient/hooks'
 
 const App: React.FC = () => {
   return (
@@ -25,13 +25,13 @@ const App: React.FC = () => {
           <AuthProvider>
             <MenuProvider>
               <ThemeProvider>
+                <GlobalStyle />
                 <RegisterPatientProvider>
-                  <GlobalStyle />
                   <Routes />
                   <Modal />
-                  <RitaLoading />
-                  <ToastContainer />
                 </RegisterPatientProvider>
+                <RitaLoading />
+                <ToastContainer />
               </ThemeProvider>
             </MenuProvider>
           </AuthProvider>

@@ -5,20 +5,20 @@ import warningIcon from '@/assets/icons/alerts/warning.svg'
 import { Container, ButtonGroup } from './styles'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
+import { useHistory } from 'react-router-dom'
+import { OPERATOR_SEE_ALL_SPECIALISTS } from '@/routes/constants/namedRoutes/routes'
 interface CancelEdtingProps {
   setEdting: (value: boolean) => void
   setFieldWasChanged: (value: boolean) => void
 }
 
-const CancelEdting: React.FC<CancelEdtingProps> = ({
-  setEdting,
-  setFieldWasChanged,
-}) => {
+const CancelEdting: React.FC<CancelEdtingProps> = ({}) => {
   const { closeModal } = useModal()
+  const history = useHistory()
+
   const onCancelEdting = () => {
-    setEdting(false)
-    setFieldWasChanged(false)
     closeModal()
+    history.push(OPERATOR_SEE_ALL_SPECIALISTS)
   }
 
   return (

@@ -14,12 +14,13 @@ import { PatientValidation } from '../../@types'
 interface ValidationSeeOnePatientProps {
   patientId: number
   validations: PatientValidation
+  isPatientLinkedPlan?: boolean
   onChangeValidations: React.Dispatch<React.SetStateAction<PatientValidation>>
 }
 
 export const ValidationSeeOnePatient: React.FC<
   ValidationSeeOnePatientProps
-> = ({ patientId, validations, onChangeValidations }) => {
+> = ({ patientId, validations, isPatientLinkedPlan, onChangeValidations }) => {
   const [documentOk, setDocumentOk] = useState(validations.documentOk || '')
 
   const [resonDocumentNotOk, setResonDocumentNotOk] = useState(
@@ -41,6 +42,10 @@ export const ValidationSeeOnePatient: React.FC<
       setIncomeOk(validationsStored.incomeOk)
       setCheckAllData(validationsStored.allDataVerified)
     }
+
+    if (isPatientLinkedPlan) {
+      setIncomeOk('yes')
+    }
   }, [patientId])
 
   useEffect(() => {
@@ -59,6 +64,7 @@ export const ValidationSeeOnePatient: React.FC<
   const onIncomeOkChange = (_: unknown, value: string) => {
     setIncomeOk(value)
   }
+
   return (
     <Container>
       <h1>Validação</h1>
@@ -95,20 +101,29 @@ export const ValidationSeeOnePatient: React.FC<
         value={incomeOk}
         onChange={onIncomeOkChange}
       >
-        <RadioButton value="yes" label="Sim" checked={incomeOk === 'yes'} />
-        <RadioButton value="no" label="Não" checked={incomeOk === 'no'} />
+        <RadioButton
+          value="yes"
+          label="Sim"
+          checked={incomeOk === 'yes'}
+          disabled={isPatientLinkedPlan}
+        />
+        <RadioButton
+          value="no"
+          label="Não"
+          checked={incomeOk === 'no'}
+          disabled={isPatientLinkedPlan}
+        />
       </RadioGroup>
       {documentOk === 'yes' && (
         <section>
           <Checkbox
-            id="terms"
             label="Atesto que verifiquei todos os dados preenchidos pelo usuário como dados reais."
             checked={allDataVerified}
             setValue={setCheckAllData}
             colorLight
             hasError={!allDataVerified}
             messageError={
-              !allDataVerified && 'A seleção do campo é obrigatória'
+              !allDataVerified ? 'A seleção do campo é obrigatória' : ''
             }
           />
         </section>

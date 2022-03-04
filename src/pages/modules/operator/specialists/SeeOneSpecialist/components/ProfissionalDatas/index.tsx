@@ -1,17 +1,16 @@
-import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { ProfissionalDatasI, ErrorsI } from '../../Types'
 import React, { useEffect, useState } from 'react'
 import {
-  validateAdminName,
-  validateCPF,
-  validatePhone,
+  validateProfissionalName,
+  validateRegisterNumber,
+  validateIssuingAgency,
 } from '../../helpers/validatorFields'
 
 import { Container } from './styles'
-import { InputEmail } from '@/components/smarts/InputEmail'
 import { useMessage } from '@/hooks/useMessage'
 import SelectUf from '../SelectUf'
+import SelectIssuingAgency from '../SelectIssuingAgency'
 
 interface ProfissionalDatasProps {
   data: ProfissionalDatasI
@@ -36,7 +35,6 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
   const [uf, setUf] = useState(data?.uf || '')
   const [ufToApi, setUfToApi] = useState('')
 
-  const [errorMessage, sendErrorMessage] = useMessage()
 
   useEffect(() => {
     setProfissionalName(data?.profissionalName || '')
@@ -50,7 +48,7 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
       profissionalName,
       registerNumber,
       issuingAgency,
-      celPhone: uf,
+      uf: ufToApi
     })
   }, [profissionalName, registerNumber, uf, issuingAgency, errors])
 
@@ -69,13 +67,13 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
           onBlur={() =>
             setErrors({
               ...errors,
-              profissionalName: validateAdminName(profissionalName),
+              profissionalName: validateProfissionalName(profissionalName),
             })
           }
           onKeyUp={() =>
             setErrors({
               ...errors,
-              profissionalName: validateAdminName(profissionalName),
+              profissionalName: validateProfissionalName(profissionalName),
             })
           }
           onlyLetter
@@ -89,40 +87,31 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
           onBlur={() =>
             setErrors({
               ...errors,
-              registerNumber: validateCPF(registerNumber),
+              registerNumber: validateRegisterNumber(registerNumber),
             })
           }
           onKeyUp={() =>
             setErrors({
               ...errors,
-              registerNumber: validateCPF(registerNumber),
+              registerNumber: validateRegisterNumber(registerNumber),
             })
           }
           name="registerNumber"
+          maxLength={40}
         />
 
-        <InputText
-          label="Orgão Emissor:"
-          value={issuingAgency}
-          setValue={setIssuingAgency}
-          hasError={!!errors?.issuingAgency}
-          msgError={errors?.issuingAgency}
-          onBlur={() =>
-            setErrors({
-              ...errors,
-              issuingAgency: validatePhone(issuingAgency),
-            })
-          }
-          onKeyUp={() =>
-            setErrors({
-              ...errors,
-              issuingAgency: validatePhone(issuingAgency),
-            })
-          }
-          name="issuingAgency"
-          maxLength={10}
+        <SelectIssuingAgency
+          issuingAgency={issuingAgency}
+          setIssuingAgency={setIssuingAgency}
+          error={errors?.issuingAgency}
         />
-        <SelectUf uf={uf} setUf={setUf} setUfToApi={setUfToApi} />
+
+        <SelectUf
+          uf={uf}
+          setUf={setUf}
+          setUfToApi={setUfToApi}
+          error={errors?.uf}
+        />
       </section>
     </Container>
   )

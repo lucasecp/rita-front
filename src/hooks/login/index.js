@@ -67,6 +67,7 @@ export default function AuthProvider({ children }) {
           showMessage(AnalyzingData)
         }
       } catch (error) {
+        // console.log(error)
         // Futuro tratamento caso exista um usuário sem paciente
         showMessage(InvalidCredences)
       } finally {

@@ -40,6 +40,7 @@ export const DIRECTOR_SEE_PLAN_MANAGMENT = '/gestao/planos/visualizar'
 export const DIRECTOR_CREATE_PLAN_MANAGMENT = '/gestao/planos/criar'
 export const DIRECTOR_IMPORT = '/importacao'
 export const DIRECTOR_IMPORT_REPORT = '/importacao/relatorio'
+export const DIRECTOR_FILTER_USERS = '/usuarios'
 
 export const DIRECTOR_SEE_ALL_PROFILES = '/perfis'
 export const DIRECTOR_SEE_ONE_PROFILE = '/perfis/visualizar'
@@ -74,6 +75,11 @@ export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'
 export const REGISTER_PATIENT = '/cadastro/paciente/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
+export const SEE_ONE_USER = '/usuarios/visualizar'
+export const EDIT_USER = '/usuarios/editar'
+
 export const TESTE = '/teste'
 
 export const NOT_FOUND = '*'
+
+

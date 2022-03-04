@@ -1,25 +1,39 @@
-import React from 'react'
-import { Container } from './styles'
-import { ReactComponent as ProfileIcon } from '@/assets/icons/profile-green.svg'
-import { ReactComponent as PenIcon } from '@/assets/icons/pen-green.svg'
-import { DataSpecialistI } from '../Types/index'
-import formatTextWithLimit from '@/helpers/formatTextWithLimit'
-import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-import { formatCpf } from '@/helpers/formatCpf'
+import { ReactComponent as PenIcon } from '@/assets/icons/pen-green.svg';
+import { ReactComponent as ProfileIcon } from '@/assets/icons/profile-green.svg';
+import { InputFile } from '@/components/Form/InputFile';
+import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize';
+import { formatCpf } from '@/helpers/formatCpf';
+import formatTextWithLimit from '@/helpers/formatTextWithLimit';
+import React from 'react';
+
+import { DataSpecialistI } from '../Types';
+import { Container } from './styles';
 
 interface HeaderProps {
   data: DataSpecialistI
+  setValue: React.Dispatch<React.SetStateAction<any>>
 }
 
-const Header: React.FC<HeaderProps> = ({ data }) => {
+const Header: React.FC<HeaderProps> = ({ data, setValue }) => {
   return (
     <Container>
       <div>
         <div>
-          <ProfileIcon />
+          {data?.specialistInfo?.photo ? (
+            <div>
+              <img
+                src={`data:image/png;base64,${data?.specialistInfo.photo}`}
+                alt="Imagem do especialista"
+              />
+            </div>
+          ) : (
+            <ProfileIcon />
+          )}
         </div>
         <span>
-          <PenIcon />
+          {/* <InputFile setValue={setValue}> */}
+            <PenIcon />
+          {/* </InputFile> */}
         </span>
       </div>
 
@@ -36,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
           </p>
           <p>
             <h6>CRM:</h6>
-            <span>{data?.crm || ''}</span>
+            <span>{data?.specialistInfo?.classCouncil || ''}</span>
           </p>
         </div>
       </div>

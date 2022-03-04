@@ -11,15 +11,15 @@ import { specialCharacters } from './constants/specialCharacters'
 
 interface InputEmailProps extends InputHTMLAttributes<HTMLInputElement> {
   initialEmail?: string
-  onGetEmail: React.Dispatch<React.SetStateAction<string>>
-  checkHasError: number
-  hasError: (hasError: boolean) => void
+  onGetEmail?: React.Dispatch<React.SetStateAction<string>>
+  checkHasError?: number
+  hasError?: (hasError: boolean) => void
   label?: string
 }
 
 export const InputEmail: React.FC<InputEmailProps> = ({
   initialEmail,
-  onGetEmail,
+  onGetEmail = () => null,
   checkHasError,
   hasError,
   label,
@@ -27,6 +27,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
 }) => {
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState('')
+  const [showEmailError, setShowEmailError] = useState('')
   const [isToLoadInitialEmail, setIsToLoadInitialEmail] = useState(true)
 
   useEffect(() => {
@@ -44,14 +45,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
   }, [email])
 
   useEffect(() => {
-    if (checkHasError) {
-      if (!email.trim()) {
-        return setEmailError('Email Obrigatório')
-      } else if (!/\S+@\S+\.\S+/.test(email)) {
-        return setEmailError('Email inválido.')
-      }
-      return setEmailError('')
-    }
+    setShowEmailError(emailError)
   }, [checkHasError])
 
   useEffect(() => {
@@ -77,17 +71,27 @@ export const InputEmail: React.FC<InputEmailProps> = ({
       valueWithNoSymbols = valueWithNoSymbols.replace(symbol, '')
     })
 
-    setEmail(valueWithNoSymbols)
+    const emailUpdated = valueWithNoSymbols
+
+    setEmail(emailUpdated)
+
+    setEmailError('')
+
+    if (!emailUpdated.trim()) {
+      setEmailError('Email Obrigatório')
+    } else if (!/\S+@\S+\.\S+/.test(emailUpdated)) {
+      setEmailError('Email inválido.')
+    }
   }
 
   return (
     <InputText
       label={label || 'Email:'}
       name="email"
-      hasError={!!emailError}
       value={email}
       onChange={onGetValue}
-      msgError={emailError}
+      hasError={!!showEmailError}
+      msgError={showEmailError}
       maxLength={100}
       {...rest}
     />

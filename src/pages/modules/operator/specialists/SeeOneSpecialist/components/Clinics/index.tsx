@@ -19,8 +19,9 @@ export const Clinics: React.FC<ClinicsProps> = ({
   specialistClinic,
   setSpecialistClinic,
   errors,
+  setErrors
 }) => {
-  const [clinic, setClinic] = useState<MultiSelectOption[]>([])
+  const [clinics, setClinics] = useState<MultiSelectOption[]>([])
 
   const [clinicOptions, setClinicOptions] = useState<MultiSelectOption[]>([])
 
@@ -47,22 +48,23 @@ export const Clinics: React.FC<ClinicsProps> = ({
   }, [])
 
   useEffect(() => {
-    setClinic(specialistClinic || [])
+    setClinics(specialistClinic || [])
   }, [specialistClinic])
 
   useEffect(() => {
     setSpecialistClinic({
-      clinic,
+      clinics,
     })
-  }, [clinic, errors])
+    setErrors((error: ErrorsI) => ({ ...error, clinics: '' }))
+  }, [clinics])
 
   const onChangingSelect = (values: MultiSelectOption[]) => {
     const hasAllOption = values.some((val) => val.id === 'All')
 
     if (hasAllOption) {
-      return setClinic(clinicOptions)
+      return setClinics(clinicOptions)
     }
-    return setClinic(values)
+    return setClinics(values)
   }
 
   return (
@@ -70,8 +72,8 @@ export const Clinics: React.FC<ClinicsProps> = ({
       <h1>Clínicas</h1>
       <section>
         <CustomMultiSelect
-          value={clinic}
-          setValue={setClinic}
+          value={clinics}
+          setValue={setClinics}
           variation="secondary"
           options={clinicOptions}
           hasError={!!errors.clinics}

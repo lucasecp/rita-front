@@ -3,10 +3,10 @@ import InputText from '@/components/Form/InputText'
 import React, { useEffect, useState } from 'react'
 import { PersonalDatasI, ErrorsI } from '../../Types'
 import {
-  validateSocialReason,
-  validateTwoPhone,
+  validatePhone,
   validateName,
   validateCPF,
+  validateEmail,
 } from '../../helpers/validatorFields'
 import { Container } from './styles'
 import { InputEmail } from '../../../../../../../components/smarts/InputEmail/index'
@@ -64,14 +64,26 @@ export const PersonalDatas: React.FC<PersonalDatasProps> = ({
           name="name"
         />
 
-        <InputEmail
+        <InputText
+          label="Email:"
+          value={email}
+          setValue={setEmail}
+          hasError={!!errors?.email}
+          msgError={errors?.email}
+          onBlur={() => setErrors({ ...errors, email: validateEmail(email) })}
+          onKeyUp={() => setErrors({ ...errors, email: validateEmail(email) })}
+          name="email"
+          maxLength={100}
+        />
+
+        {/* <InputEmail
           initialEmail={email}
           onGetEmail={setEmail}
           hasError={(hasError) => setErrors({ ...errors, email: hasError })}
           checkHasError={errorMessage}
           onKeyUp={sendErrorMessage}
           onBlur={sendErrorMessage}
-        />
+        /> */}
 
         <InputMask
           mask="999.999.999-99"
@@ -102,12 +114,8 @@ export const PersonalDatas: React.FC<PersonalDatasProps> = ({
           setValue={setPhone}
           hasError={!!errors?.phone}
           msgError={errors?.phone}
-          onBlur={() =>
-            setErrors({ ...errors, phone: validateTwoPhone(phone) })
-          }
-          onKeyUp={() =>
-            setErrors({ ...errors, phone: validateTwoPhone(phone) })
-          }
+          onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
+          onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           name="phone"
         />
       </section>

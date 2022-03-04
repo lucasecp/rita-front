@@ -9,7 +9,7 @@ export const mapSpecialtys = (array: any[]) => {
     .filter((specialty) => specialty.id && specialty.name)
 }
 
-export const mapSpecialtysToApi = (array: any[]) => {
+export const mapSpecialtysToApi = (array?: any[]) => {
   if (!array) return []
 
   return array

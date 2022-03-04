@@ -1,4 +1,4 @@
-import { RegisterDataState } from '../hooks'
+import { RegisterDataState } from '../hooks/types'
 import { formatCpf } from '@/helpers/formatCpf'
 
 interface InitialFromApi {
@@ -34,8 +34,6 @@ interface InitialFromApi {
 export const initialRegisterPatientFromApi = (
   initialRegisterPatientFromApi: InitialFromApi,
 ): RegisterDataState => {
-  console.log(initialRegisterPatientFromApi)
-
   return {
     registrationData: {
       id: initialRegisterPatientFromApi.idPaciente,

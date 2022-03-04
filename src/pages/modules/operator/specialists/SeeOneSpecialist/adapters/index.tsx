@@ -5,17 +5,18 @@ import { mapClinics, mapClinicsToAPi } from './mapClinic'
 export const fromApi = (specialistInfo: any) => {
   return {
     personalDatas: {
-      name: specialistInfo.nome,
-      cpf: specialistInfo.cpf,
-      phone: specialistInfo.celular,
-      email: specialistInfo.email,
+      name: specialistInfo.nome || '',
+      cpf: specialistInfo.cpf || '',
+      phone: specialistInfo.celular || '',
+      email: specialistInfo.email || '',
     },
+    status: specialistInfo.status || '',
 
     profissionalData: {
-      profissionalName: specialistInfo.nomeProfissional,
-      registerNumber: specialistInfo.CRM,
-      issuingAgency: specialistInfo.orgaoEmissor,
-      uf: specialistInfo.crmuf,
+      profissionalName: specialistInfo.nomeProfissional || '',
+      registerNumber: specialistInfo.CRM || '',
+      issuingAgency: specialistInfo.orgaoEmissor?.idOrgaoEmissor || '',
+      uf: specialistInfo.ufRegistroProfissional || '',
     },
 
     specialtys: mapSpecialtys(specialistInfo.especialidade),
@@ -25,16 +26,19 @@ export const fromApi = (specialistInfo: any) => {
 
 export const toApi = (specialistInfo: any) => {
   return {
-    idClinica: specialistInfo.id,
+    idMedico: specialistInfo.id,
     nome: specialistInfo.name,
     cpf: clearSpecialCaracter(specialistInfo.cpf),
     celular: clearSpecialCaracter(specialistInfo.phone),
     email: specialistInfo.email,
     nomeProfissional: specialistInfo.profissionalName,
-    registroProfissional: specialistInfo.registerNumber,
-    conseloClasse: specialistInfo.issuingAgency,
-    uf: specialistInfo.uf,
-    clinicas: mapClinicsToAPi(specialistInfo.clinics),
+    CRM: specialistInfo.registerNumber,
+    idOrgaoEmissor: specialistInfo.issuingAgency,
+    crmuf: specialistInfo.uf,
+    clinica: mapClinicsToAPi(specialistInfo.clinics),
     especialidade: mapSpecialtysToApi(specialistInfo.specialtys),
+    cashBack: 0,
+    takeRate: 0,
+    status: specialistInfo.status,
   }
 }

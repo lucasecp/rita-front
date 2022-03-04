@@ -3,27 +3,29 @@ import CustomMultiSelect, {
 } from '@/components/Form/MultSelect'
 import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
-import { mapSpecialtys } from '../../adapters/mapSpecialtys'
-import { ErrorsI } from '../../Types'
 
+import { mapClinics } from '../../adapters/mapClinic'
+import { ErrorsI } from '../../Types'
 import { Container } from './styles'
 
 interface SpecialistClinicsProps {
   specialistClinic?: MultiSelectOption[]
-  // setSpecialistClinic: (value: any) => void
-  // initialData: MultiSelectOption[]
-  // isEditing: boolean
-  // errors: ErrorsI
-  // setErrors: (error: any) => any
+  setSpecialistClinic: (value: any) => void
+  initialData?: MultiSelectOption[]
+  isEditing: boolean
+  errors: ErrorsI
+  setErrors: (error: any) => any
+  formWasSubmited: boolean
 }
 
 export const Clinics: React.FC<SpecialistClinicsProps> = ({
   specialistClinic,
-  // setSpecialistClinic,
-  // isEditing,
-  // initialData,
-  // errors,
-  // setErrors,
+  setSpecialistClinic,
+  isEditing,
+  initialData,
+  errors,
+  setErrors,
+  formWasSubmited,
 }) => {
   const [clinic, setClinic] = useState<MultiSelectOption[]>([])
 
@@ -32,20 +34,19 @@ export const Clinics: React.FC<SpecialistClinicsProps> = ({
   useEffect(() => {
     const getSpecialtys = async () => {
       try {
-        // const { data } = await apiAdmin.get('/clinica')
-        // const dataMapped = mapSpecialtys(data?.especialidade)
+        const { data } = await apiAdmin.get('/clinica')
+        const dataMapped = mapClinics(data?.clinicas)
 
-        // if (!dataMapped.length) {
-        //   return setClinicOptions([])
-        // }
+        if (!dataMapped.length) {
+          return setClinicOptions([])
+        }
 
-      //   setClinicOptions(() => {
-      //     if (dataMapped.length === 1) {
-      //     return dataMapped
-      //   }
-      //   return [{ name: 'Todas', id: 'All' }, ...dataMapped]
-      // })
-
+        setClinicOptions(() => {
+          if (dataMapped.length === 1) {
+            return dataMapped
+          }
+          return [{ name: 'Todas', id: 'All' }, ...dataMapped]
+        })
       } catch ({ response }) {}
     }
 
@@ -56,18 +57,20 @@ export const Clinics: React.FC<SpecialistClinicsProps> = ({
     setClinic(specialistClinic || [])
   }, [specialistClinic])
 
-  // useEffect(() => {
-  //   setSpecialistClinic({
-  //     clinic,
-  //   })
-  // }, [clinic, errors])
+  useEffect(() => {
+    setSpecialistClinic({
+      clinic,
+    })
+  }, [clinic, errors])
 
-  // useEffect(() => {
-  //   if (!isEditing) {
-  //     setClinic(initialData || '')
-  //     setErrors({})
-  //   }
-  // }, [isEditing, initialData])
+  useEffect(() => {
+    if (!formWasSubmited) {
+      setClinic(initialData || [])
+      setErrors({})
+    } else {
+      setClinic(clinic || [])
+    }
+  }, [formWasSubmited])
 
   const onChangingSelect = (values: MultiSelectOption[]) => {
     const hasAllOption = values.some((val) => val.id === 'All')
@@ -87,10 +90,9 @@ export const Clinics: React.FC<SpecialistClinicsProps> = ({
           setValue={setClinic}
           variation="secondary"
           options={clinicOptions}
-          // disabled={!isEditing}
-          // hasError={!!errors.clinics}
-          // messageError={errors?.clinics}
-          disabled
+          disabled={!isEditing}
+          hasError={!!errors.clinics}
+          messageError={errors?.clinics}
           name="clinics"
           onSelect={onChangingSelect}
           onRemove={onChangingSelect}

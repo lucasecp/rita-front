@@ -7,7 +7,7 @@ import arrowDownIcon from '@/assets/icons/arrow-down-select.svg'
 interface ContainerProps {
   hasError?: string | boolean
   variation?: string
-  [x:string]: any
+  [x: string]: any
 }
 
 export const Container = styled.div<ContainerProps>`
