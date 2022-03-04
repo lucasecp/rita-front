@@ -216,7 +216,7 @@ export const SeeOnePatient: React.FC = () => {
         <PersonExpandable
           title="Dados cadastrais do titular"
           personData={patientData}
-          defaultExpanded={!dependent}
+          defaultExpanded
         />
         {dependent && (
           <DependentExpandable
