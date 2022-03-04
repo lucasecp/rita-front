@@ -77,7 +77,7 @@ const SeeDependents = () => {
     getDependentIncomeDocument()
   }, [])
 
-  // console.log(dependent.personalDatas.status)
+  console.log(dependent?.personalDatas)
 
   const onEditPatient = () => {
     if (dependent.personalDatas.status === 'PENDING') {

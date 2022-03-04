@@ -114,6 +114,16 @@ export const EditDependent: React.FC = () => {
           `/paciente/documento?cpf=${dependent.personalDatas.cpf}&tipoDocumento=Renda`,
           formFile1,
         )
+
+        console.log(dependent.personalDatas.cpf)
+
+        await apiPatient.patch(
+          `/paciente/dependente/documento/confirmar`,
+          null,
+          {
+            params: { cpf: dependent.personalDatas.cpf },
+          },
+        )
       } catch (error) {
         console.log(error)
       }
