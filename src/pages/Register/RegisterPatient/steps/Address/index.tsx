@@ -1,11 +1,10 @@
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import SelectUf from './SelectUf'
-import SelectCity from './SelectCity'
+import SelectUf from '@/components/smarts/SelectUf'
+import SelectCity from '@/components/smarts/SelectCity'
 import React, { useEffect, useState } from 'react'
 
 import { Container } from './styles'
-import { UF } from './static'
 import { validateCep } from '../shared/helpers/validator'
 import { useRegisterPatient } from '../../hooks'
 import ButtonLink from '@/components/Button/Link'

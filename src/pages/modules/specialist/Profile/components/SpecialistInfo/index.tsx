@@ -40,8 +40,6 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
   const [classCouncil, setClassCouncil] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [cashBack, setCashBack] = useState('')
-  const [takeRate, setTakeRate] = useState('')
 
   useEffect(() => {
     setSpecialistInfo({
