@@ -1,6 +1,6 @@
 import formatDate from '@/helpers/formatDate'
 import formatIncome from './formatIncome'
-import { statusFromApi } from './showStatus'
+import { statusFromApi, statusToApi } from './showStatus'
 
 export const fromApi = (dependentInfo) => {
   return {
@@ -34,6 +34,25 @@ export const fromApi = (dependentInfo) => {
       district: dependentInfo.bairro,
       complement: dependentInfo.complemento,
     },
+  }
+}
+
+export const toApi = (personalDatas, address) => {
+  return {
+    nome: personalDatas.name,
+    sexo: personalDatas.gender,
+    dataNascimento: personalDatas.birthdate,
+    telefone: personalDatas.phone,
+    email: personalDatas.email,
+    status: statusToApi(personalDatas.status),
+
+    cep: address.cep,
+    logradouro: address.address,
+    numero: address.number,
+    complemento: address.complement,
+    bairro: address.district,
+    municipio: address.city,
+    uf: address.uf,
   }
 }
 

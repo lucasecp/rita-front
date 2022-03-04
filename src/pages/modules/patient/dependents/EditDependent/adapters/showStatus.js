@@ -7,3 +7,13 @@ export const statusFromApi = (statusFromApi) => {
   }
   return status[statusFromApi] || ''
 }
+
+export const statusToApi = (statusFromApi) => {
+  const status = {
+    PENDING: 'P',
+    VERIFICATION: 'aVerificar',
+    BLOCKED: 'N',
+    DANIED: 'negado',
+  }
+  return status[statusFromApi] || ''
+}

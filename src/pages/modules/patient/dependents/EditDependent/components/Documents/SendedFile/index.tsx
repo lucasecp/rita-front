@@ -21,7 +21,11 @@ interface SendedFileProps {
   onGetFile: React.Dispatch<React.SetStateAction<File | string>>
 }
 
-export const SendedFile: React.FC<SendedFileProps> = ({ file, onGetFile }) => {
+export const SendedFile: React.FC<SendedFileProps> = ({
+  file,
+  onGetFile,
+  dependentDocumentName,
+}) => {
   const { showMessage } = useModal()
 
   const isMobile = useMediaPredicate('(max-width: 800px)')
@@ -65,7 +69,11 @@ export const SendedFile: React.FC<SendedFileProps> = ({ file, onGetFile }) => {
   return (
     <Container>
       <section>
-        <h6>{typeof file === 'object' ? file.name : 'Não possui arquivo'}</h6>
+        <h6>
+          {file?.name
+            ? file?.name
+            : dependentDocumentName || 'Não possui arquivo'}
+        </h6>
         <aside>
           <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
             <button>Alterar</button>

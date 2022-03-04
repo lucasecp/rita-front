@@ -13,6 +13,9 @@ export const Container = styled.div`
         margin-left: auto;
       }
     }
+    > button {
+      width: 100%;
+    }
 
     > h6 {
       max-width: 187px;
@@ -31,11 +34,14 @@ export const Container = styled.div`
 
   @media (max-width: 930px) {
     > section {
-      justify-content: space-between;
+      /* justify-content: space-between; */
       width: 100%;
-      gap: auto;
+      /* gap: auto; */
       > h6 {
         max-width: 100%;
+      }
+      > button {
+        width: 100%;
       }
     }
   }
@@ -45,9 +51,9 @@ export const Container = styled.div`
       flex-direction: column;
       display: flex;
       grid-template-columns: 1fr 1fr;
-      justify-content: space-between;
+      /* justify-content: space-between; */
       align-items: center;
-      gap: auto;
+      /* gap: auto; */
 
       > div {
         width: 100%;
