@@ -1,13 +1,13 @@
 import MsgError from '@/components/MsgError'
-import React from 'react'
+import React, { InputHTMLAttributes } from 'react'
 
 import ReactInputMask from 'react-input-mask'
 
 import { Container } from './styles'
 
-interface InputMaskProps {
+interface InputMaskProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
-  setValue?: React.Dispatch<React.SetStateAction<string>>
+  setValue?: (value: string) => void
   hasError?: boolean
   type?: string
   msgError?: string

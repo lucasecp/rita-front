@@ -41,10 +41,14 @@ export const FieldsUsers: React.FC<FieldsUsersProps> = ({ onGetOrder }) => {
         {usersFields.map((order) => (
           <Content key={order.name}>
             <h5>{order.label}</h5>
-            <div onClick={() => toggleOrder(order.name)}>
-              <ArrowUp order={hasAscOrder(order.name) ? 1 : 0} />
-              <ArrowDown order={hasDescOrder(order.name) ? 1 : 0} />
-            </div>
+            {(order.label === 'Nome' ||
+              order.label === 'Login' ||
+              order.label === 'Status') && (
+              <div onClick={() => toggleOrder(order.name)}>
+                <ArrowUp order={hasAscOrder(order.name) ? 1 : 0} />
+                <ArrowDown order={hasDescOrder(order.name) ? 1 : 0} />
+              </div>
+            )}
           </Content>
         ))}
       </div>

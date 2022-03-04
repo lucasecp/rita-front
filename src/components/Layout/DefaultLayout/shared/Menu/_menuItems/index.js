@@ -152,7 +152,7 @@ export const menuItens = [
   {
     path: DIRECTOR_FILTER_USERS,
     icon: <UsersIcon />,
-    name: 'Usuários',
+    name: 'Gestão de Usuários',
     permission: permissionList.LISTAR_USUARIOS,
   },
 ]

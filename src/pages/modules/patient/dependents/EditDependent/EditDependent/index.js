@@ -51,7 +51,7 @@ const EditDependent = ({ dependentData }) => {
     setPrevData({ personalDatas, address })
   }
 
-  const onCancel = () => {
+  const onCancel = () =>   {
     setPrevData((prevState) => ({
       personalDatas: prevState.personalDatas,
       address: prevState.address,

@@ -113,7 +113,7 @@ export const fromApiPersonalDatas = (
       contractedPlanSince: data.plano?.data,
       price: data.plano?.valor ? formatPrice(data.plano?.valor) : 'Isento',
       channel: data.canal,
-      company: data.empresa[0].nome,
+      company: data.empresa[0]?.nome,
     },
   }
 }

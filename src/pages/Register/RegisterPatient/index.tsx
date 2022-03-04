@@ -1,19 +1,16 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect,useMemo } from 'react'
 
 import { useLocation, useParams } from 'react-router'
-
-import { RegisterLayout } from '@/components/Layout/RegisterLayout'
-
 import { ExitAndSteps } from './components/ExitAndSteps'
 
 import { RegistrationData } from './steps/RegistrationData'
 import { Address } from './steps/Address'
 import { Documents } from './steps/Documents'
 import { Dependents } from './steps/Dependents'
+import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 
-import { RegisterPatientProvider, useRegisterPatient } from './hooks'
+import { useRegisterPatient } from './hooks'
 import { useLoading } from '@/hooks/useLoading'
-
 import { Container } from './styles'
 
 import apiPatient from '@/services/apiPatient'
@@ -24,18 +21,32 @@ export const RegisterPatient: React.FC = () => {
   const { Loading } = useLoading()
   const { token } = useParams<{ token?: string }>()
 
-  const { isActiveStep, setInitialRegisterData } = useRegisterPatient()
+  const { setInitialRegisterData, isActiveStep, resetData } =
+    useRegisterPatient()
 
-  // console.log(
-  //   '🚀 ~ file: index.tsx ~ line 28 ~ setInitialRegisterData',
-  //   setInitialRegisterData,
-  // )
-  // console.log('🚀 ~ file: index.tsx ~ line 28 ~ isActiveStep', isActiveStep)
+  const activeStep = useMemo(() => {
+    const one = isActiveStep(1)
+    const two = isActiveStep(2)
+    const three = isActiveStep(3)
+    const four = isActiveStep(4)
+
+    return {
+      one,
+      two,
+      three,
+      four,
+    }
+  }, [isActiveStep])
+
+  useEffect(() => {
+    return () => {
+      resetData()
+    }
+  }, [])
 
   useEffect(() => {
     document.title = 'Rita Saúde | Cadastro'
 
-    // if (setInitialRegisterData) {
     if (location.state) {
       const initialRegisterMapped = initialRegisterPatientFromApi(
         location.state?.userData,
@@ -65,37 +76,18 @@ export const RegisterPatient: React.FC = () => {
       }
 
       loadPatientDataFromTokenParams()
-    }
-    // }
+    } 
   }, [setInitialRegisterData])
 
-  const activeStep = useMemo(() => {
-    // if (isActiveStep) {
-    const one = isActiveStep(1)
-    const two = isActiveStep(2)
-    const three = isActiveStep(3)
-    const four = isActiveStep(4)
-
-    return {
-      one,
-      two,
-      three,
-      four,
-    }
-    // }
-  }, [isActiveStep])
-
   return (
-    <RegisterPatientProvider>
-      <RegisterLayout>
-        <Container>
-          <ExitAndSteps />
-          <RegistrationData isActive={!!activeStep?.one} />
-          <Address isActive={!!activeStep?.two} />
-          <Documents isActive={!!activeStep?.three} />
-          <Dependents isActive={!!activeStep?.four} />
-        </Container>
-      </RegisterLayout>
-    </RegisterPatientProvider>
+    <RegisterLayout>
+      <Container>
+        <ExitAndSteps />
+        <RegistrationData isActive={!!activeStep?.one} />
+        <Address isActive={!!activeStep?.two} />
+        <Documents isActive={!!activeStep?.three} />
+        <Dependents isActive={!!activeStep?.four} />
+      </Container>
+    </RegisterLayout>
   )
 }

@@ -13,7 +13,7 @@ export interface MultiSelectOption {
 interface MultiSelectCustomProps {
   label?: string
   value: MultiSelectOption[]
-  setValue?: React.Dispatch<React.SetStateAction<MultiSelectOption[]>>
+  setValue?: (option: MultiSelectOption[]) => void
   options?: MultiSelectOption[]
   messageError?: string
   hasError?: boolean

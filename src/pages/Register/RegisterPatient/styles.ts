@@ -14,6 +14,7 @@ export const Container = styled.div`
   margin: 20px 0px 100px 0;
   border-radius: 8px;
   position: relative;
+
 `
 
 // export const BtnGroup = styled.div`

@@ -61,6 +61,7 @@ export const PATIENT_DOCTOR_INFORMATION =
   '/agendar-consulta/informacoes-especialista'
 
 export const PATIENT_SEE_DEPENDENT = '/paciente/dependentes/ver-dependente'
+export const PATIENT_EDIT_DEPENDENT = '/paciente/dependentes/editar'
 export const PATIENT_DEPENDENTS = '/paciente/dependentes'
 export const PATIENT_ADD_DOCUMENT_DEPENDENT =
   '/paciente/dependentes/incluir-documentos'
