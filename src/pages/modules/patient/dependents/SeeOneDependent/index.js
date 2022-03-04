@@ -75,13 +75,15 @@ const SeeDependents = () => {
     getDependentIncomeDocument()
   }, [])
 
+  console.log(dependent?.personalDatas);
+
   const onEditPatient = () => {
-    // if (dependent.personalDatas.status === '') {
-    //   return showMessage(PendingWarning)
-    // }
-    // if (dependent.personalDatas.status === '') {
-    //   return showMessage(BlockingWarning)
-    // }
+    if (dependent.personalDatas.status === 'PENDING') {
+      return showMessage(PendingWarning)
+    }
+    if (dependent.personalDatas.status === 'BLOCKED') {
+      return showMessage(BlockingWarning)
+    }
 
     history.push(PATIENT_EDIT_DEPENDENT, {
       dependent,
@@ -98,6 +100,7 @@ const SeeDependents = () => {
         <Documents
           data={dependent.personalDatas}
           dependentDocument={dependentDocument}
+          dependentDocumentName={dependentDocumentName}
         />
         <Situation data={dependent.personalDatas} />
 

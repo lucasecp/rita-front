@@ -14,7 +14,6 @@ import OutlineButton from '@/components/Button/Outline'
 import { FieldsHasChangedWarning } from './messages/FieldsHasChangedWarning'
 import { toast } from '@/styles/components/toastify'
 import apiPatient from '@/services/apiPatient'
-import convertImageFromApiToBase64 from '@/helpers/convertImageFromApiToBase64'
 
 interface PersonalDatas {
   name: string
@@ -120,11 +119,7 @@ export const EditDependent: React.FC = () => {
       }
     }
 
-    if (
-      // !formFile1 == &&
-      !hasErrorsPersonalDatas &&
-      !hasErrorsAddress
-    ) {
+    if (!hasErrorsPersonalDatas && !hasErrorsAddress) {
       try {
         Loading.turnOn()
 
@@ -157,7 +152,7 @@ export const EditDependent: React.FC = () => {
   }
 
   const onCancel = () => {
-    if (anyFieldsHasChanged > 2) {
+    if (anyFieldsHasChanged > 1) {
       return showMessage(FieldsHasChangedWarning)
     }
     history.push(PATIENT_DEPENDENTS)
@@ -197,7 +192,7 @@ export const EditDependent: React.FC = () => {
         <Situation data={dependent.personalDatas} />
 
         <ButtonGroup>
-          <ButtonLink onClick={onCancel}>Voltar</ButtonLink>
+          <ButtonLink onClick={onCancel}>Cancelar</ButtonLink>
           <OutlineButton onClick={onSave}>Salvar</OutlineButton>
         </ButtonGroup>
       </Container>
