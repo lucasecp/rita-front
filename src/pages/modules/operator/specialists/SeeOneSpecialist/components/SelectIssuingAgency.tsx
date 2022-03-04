@@ -47,7 +47,6 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
       hasError={!!error}
       msgError={error}
       name="issuingAgency"
-      maxLength={10}
     />
   )
 }

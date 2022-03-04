@@ -5,6 +5,7 @@ import { ReactComponent as WarningIcon } from '@/assets/icons/warning-circle-red
 import { ReactComponent as ActiveIcon } from '@/assets/icons/active-green.svg'
 
 export const Situation = ({ data }) => {
+  console.log(data?.plan)
   const isDefeated =
     new Date() > new Date(new Date(data?.plan.endDate).toLocaleString('pt-br'))
 

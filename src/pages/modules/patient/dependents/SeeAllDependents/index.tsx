@@ -49,12 +49,12 @@ export const SeeAllDependents: React.FC = () => {
     <Container>
       <DefaultLayout
         title="Dependentes"
-        headerChildren={
-          <AddDependentButton
-            company={company}
-            currentDependent={dependents.length}
-          />
-        }
+        // headerChildren={
+        //   <AddDependentButton
+        //     company={company}
+        //     currentDependent={dependents.length}
+        //   />
+        // }
       >
         <Content>
           <Table dependents={dependents} order={order} setOrder={setOrder} />

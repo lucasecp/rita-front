@@ -32,7 +32,7 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
   const { showMessage, closeModal } = useModal()
   const { Loading } = useLoading()
 
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(2)
 
   const [initialRegisterData, setInitialRegisterData] = useState(
     {} as RegisterDataState,
@@ -49,7 +49,6 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
   const [dependents, setDependents] = useState(
     [] as DependentsState[] | undefined,
   )
-  console.log(initialRegisterData)
 
   const isPatientLinkedCompany = useMemo(() => {
     return !!initialRegisterData.registrationData?.company
