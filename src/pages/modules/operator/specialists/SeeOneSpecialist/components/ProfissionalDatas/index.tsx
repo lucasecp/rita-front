@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import {
   validateProfissionalName,
   validateRegisterNumber,
-  validateIssuingAgency,
 } from '../../helpers/validatorFields'
 
 import { Container } from './styles'
@@ -38,6 +37,13 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
   const [ufToApi, setUfToApi] = useState('')
   const [cashBack, setCashBack] = useState(data?.cashback || '')
   const [takeRate, setTakeRate] = useState(data?.takerate || '')
+
+  const formatCash = (e: any) => {
+    setCashBack(clearSpecialCaracter(e.target.value) + '%')
+  }
+  const formatRate = (e: any) => {
+    setTakeRate(clearSpecialCaracter(e.target.value) + '%')
+  }
 
   useEffect(() => {
     setProfissionalName(data?.profissionalName || '')
@@ -129,17 +135,23 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
         />
       </section>
       <div>
-        <InputMask
+        <InputText
           label="CashBack:"
           value={cashBack}
           setValue={setCashBack}
-          mask="999%"
+          onBlur={formatCash}
+          hasError={!!errors?.cashBack}
+          msgError={errors?.cashBack}
+          name="cashBack"
         />
-        <InputMask
+        <InputText
           label="TakeRate:"
           value={takeRate}
           setValue={setTakeRate}
-          mask="999%"
+          onBlur={formatRate}
+          hasError={!!errors?.takeRate}
+          msgError={errors?.takeRate}
+          name="takeRate"
         />
       </div>
     </Container>

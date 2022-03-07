@@ -115,6 +115,21 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
           }))
           continue
         }
+        if (field === 'cashBack') {
+          setErrors((errors) => ({
+            ...errors,
+            [field]: 'Precisa ter um valor mínimo de 1% no CashBack.',
+          }))
+          continue
+        }
+
+        if (field === 'takeRate') {
+          setErrors((errors) => ({
+            ...errors,
+            [field]: 'Precisa ter um valor mínimo de 1% no TakeRate.',
+          }))
+          continue
+        }
 
         setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
       }
@@ -124,6 +139,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
 
   const onSave = async () => {
     setClickOnSave(!clickOnSave)
+    setErrors({})
     if (
       hasErrorOnFields({
         ...personalDatas,
@@ -134,7 +150,6 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
     ) {
       return
     }
-    setErrors({})
 
     try {
       Loading.turnOn()
