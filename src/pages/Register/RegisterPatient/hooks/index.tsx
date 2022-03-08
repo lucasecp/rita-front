@@ -32,7 +32,7 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
   const { showMessage, closeModal } = useModal()
   const { Loading } = useLoading()
 
-  const [step, setStep] = useState(2)
+  const [step, setStep] = useState(1)
 
   const [initialRegisterData, setInitialRegisterData] = useState(
     {} as RegisterDataState,
