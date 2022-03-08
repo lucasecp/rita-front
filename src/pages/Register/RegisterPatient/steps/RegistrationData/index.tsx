@@ -71,6 +71,7 @@ export const RegistrationData: React.FC<RegistrationDataProps> = ({
     }
 
     setErrors(previousErrorsAndErrorsInConfirmEmail)
+    sendErrorMessage()
   }
 
   const checkMinorAge = () => {
@@ -156,6 +157,7 @@ export const RegistrationData: React.FC<RegistrationDataProps> = ({
             hasError={(hasError) => setErrors({ ...errors, email: hasError })}
             checkHasError={errorMessage}
             onKeyUp={checkConfirmEmail}
+            onBlur={sendErrorMessage}
           />
           <InputText
             autoComplete="off"
