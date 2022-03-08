@@ -5,7 +5,7 @@ import {
   deleteLocalStorage,
   getUserStorage,
   setHeaderToken,
-  setLocalStorage,
+  setUserLocalStorage,
 } from '@/storage/user'
 
 import React, { createContext, useState, useContext } from 'react'
@@ -28,7 +28,7 @@ export default function AuthProvider({ children }) {
 
   const setDataLogin = (payload) => {
     setUser(payload)
-    setLocalStorage(payload)
+    setUserLocalStorage(payload)
     setHeaderToken(payload.token)
   }
 
@@ -102,7 +102,6 @@ export default function AuthProvider({ children }) {
     setUser(null)
     deleteLocalStorage()
     deleteHeaderToken()
-    window.localStorage.removeItem('@Rita/Photo/Profile')
   }
 
   const clearDataLogout = () => {

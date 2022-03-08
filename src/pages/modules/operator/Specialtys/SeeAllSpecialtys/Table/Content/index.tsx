@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Status } from './styles'
 import CustomTooltip from '@/components/Tooltip'
-import { ContentProps } from '../../types'
+import { ContentProps } from '../../../SeeAllSpecialtys/types'
 import { useHistory } from 'react-router-dom'
 import { OPERATOR_EDIT_SPRECIALTY } from '@/routes/constants/namedRoutes/routes'
 import edit from '@/assets/icons/edit.svg'

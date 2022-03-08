@@ -25,4 +25,6 @@ export interface ErrorsI {
   email?: string
   specialtys?: string
   clinics?: string
+  cashBack?: string
+  takeRate?: string
 }
