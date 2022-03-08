@@ -1,4 +1,5 @@
 import { OrderUsers, UsersFilters } from '../../../../../@types'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 
 const orderToApi = (order: OrderUsers) => {
   const orderColumns = {
@@ -38,7 +39,10 @@ export const paramsToApiGetUsers = (
     orderBy: orderColumn,
     order: orderType,
     nome: filters.name,
-    usuario: filters.login,
+    usuario:
+      filters.login?.length === 14
+        ? clearSpecialCaracter(filters.login)
+        : filters.login,
     situacao: filters.status?.map((status) => status.id),
     perfis: filters.profiles?.map((profile) => profile.id),
   }

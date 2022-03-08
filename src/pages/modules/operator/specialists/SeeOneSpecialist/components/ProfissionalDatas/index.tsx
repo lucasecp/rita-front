@@ -4,13 +4,14 @@ import React, { useEffect, useState } from 'react'
 import {
   validateProfissionalName,
   validateRegisterNumber,
-  validateIssuingAgency,
 } from '../../helpers/validatorFields'
 
 import { Container } from './styles'
 import { useMessage } from '@/hooks/useMessage'
 import SelectUf from '../SelectUf'
 import SelectIssuingAgency from '../SelectIssuingAgency'
+import InputMask from '@/components/Form/InputMask'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 
 interface ProfissionalDatasProps {
   data: ProfissionalDatasI
@@ -34,13 +35,23 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
   const [issuingAgency, setIssuingAgency] = useState(data?.issuingAgency || '')
   const [uf, setUf] = useState(data?.uf || '')
   const [ufToApi, setUfToApi] = useState('')
+  const [cashBack, setCashBack] = useState(data?.cashback || '')
+  const [takeRate, setTakeRate] = useState(data?.takerate || '')
 
+  const formatCash = (e: any) => {
+    setCashBack(clearSpecialCaracter(e.target.value) + '%')
+  }
+  const formatRate = (e: any) => {
+    setTakeRate(clearSpecialCaracter(e.target.value) + '%')
+  }
 
   useEffect(() => {
     setProfissionalName(data?.profissionalName || '')
     setIssuingAgency(data?.issuingAgency || '')
     setUf(data?.uf || '')
     setRegisterNumber(data?.registerNumber || '')
+    setCashBack(data?.cashback || '')
+    setTakeRate(data?.takerate || '')
   }, [data])
 
   useEffect(() => {
@@ -48,9 +59,19 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
       profissionalName,
       registerNumber,
       issuingAgency,
-      uf: ufToApi
+      uf: ufToApi,
+      cashBack: Number(clearSpecialCaracter(cashBack)),
+      takeRate: Number(clearSpecialCaracter(takeRate)),
     })
-  }, [profissionalName, registerNumber, uf, issuingAgency, errors])
+  }, [
+    profissionalName,
+    registerNumber,
+    uf,
+    issuingAgency,
+    errors,
+    cashBack,
+    takeRate,
+  ])
 
   return (
     <Container>
@@ -113,6 +134,26 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
           error={errors?.uf}
         />
       </section>
+      <div>
+        <InputText
+          label="CashBack:"
+          value={cashBack}
+          setValue={setCashBack}
+          onBlur={formatCash}
+          hasError={!!errors?.cashBack}
+          msgError={errors?.cashBack}
+          name="cashBack"
+        />
+        <InputText
+          label="TakeRate:"
+          value={takeRate}
+          setValue={setTakeRate}
+          onBlur={formatRate}
+          hasError={!!errors?.takeRate}
+          msgError={errors?.takeRate}
+          name="takeRate"
+        />
+      </div>
     </Container>
   )
 }

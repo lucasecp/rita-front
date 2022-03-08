@@ -43,15 +43,6 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
     loadProfilesOptions()
   }, [])
 
-  const hasNoFilterSelected = useMemo(() => {
-    return (
-      filters.name === '' &&
-      filters.login === '' &&
-      !filters.profiles.length &&
-      !filters.status.length
-    )
-  }, [filters])
-
   const onClearFields = () => {
     setFilters({
       name: '',
@@ -87,6 +78,28 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
     }))
   }
 
+  const maskCPF = (value: string) => {
+    const regexIsNumber = /^[0-9]+$/
+    let fieldLoginIsCPF
+
+    if (value.match(regexIsNumber)) {
+      fieldLoginIsCPF = true
+    } else {
+      fieldLoginIsCPF = false
+    }
+
+    if (fieldLoginIsCPF) {
+      const secondReplaced = value.replace(
+        /^(\d{3})(\d{3})(\d{3})(\d{2})/g,
+        '$1.$2.$3-$4',
+      )
+
+      return secondReplaced
+    } else {
+      return value.replaceAll('.', '').replaceAll('-', '')
+    }
+  }
+
   return (
     <Container>
       <div>
@@ -100,7 +113,7 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
           variation="secondary"
           label="Login:"
           value={filters.login}
-          setValue={(value) => onChangeInput('login', value)}
+          setValue={(value) => onChangeInput('login', maskCPF(value))}
         />
         <CustomMultSelect
           label="Perfis:"
@@ -121,19 +134,10 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
       </div>
 
       <footer>
-        <OutlineButton
-          small
-          variation="red"
-          onClick={onClearFields}
-          disabled={hasNoFilterSelected}
-        >
+        <OutlineButton small variation="red" onClick={onClearFields}>
           Limpar Filtro
         </OutlineButton>
-        <ButtonPrimary
-          medium
-          onClick={onFilterResults}
-          disabled={hasNoFilterSelected}
-        >
+        <ButtonPrimary medium onClick={onFilterResults}>
           Filtrar Resultados
         </ButtonPrimary>
       </footer>
