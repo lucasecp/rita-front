@@ -1,6 +1,6 @@
 import React from 'react'
-import orderly from '../../../SeeAllSpecialtys/static/orderly'
-import { HeaderProps } from '../../../SeeAllSpecialtys/types'
+import orderly from '../../static/orderly'
+import { HeaderProps } from '../../types'
 import { Container, ArrowUp, ArrowDown, Content } from './styles'
 
 const Header: React.FC<HeaderProps> = ({ order, setOrder }) => {
@@ -30,10 +30,7 @@ const Header: React.FC<HeaderProps> = ({ order, setOrder }) => {
     <Container>
       <div>
         {orderly.map((order) => (
-          <Content
-            isSpeciality={order.name === 'especialidade'}
-            key={order.name}
-          >
+          <Content key={order.name}>
             <h5> {order.label} </h5>
             <div onClick={() => toggleOrder(order.name)}>
               <ArrowUp order={hasAscOrder(order.name) ? 1 : 0} />
@@ -41,6 +38,12 @@ const Header: React.FC<HeaderProps> = ({ order, setOrder }) => {
             </div>
           </Content>
         ))}
+        <Content>
+          <h5> Quant. de Especialidade </h5>
+        </Content>
+        <Content>
+          <h5> Ações </h5>
+        </Content>
       </div>
     </Container>
   )
