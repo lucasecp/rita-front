@@ -106,7 +106,7 @@ export const PersonalDatas: React.FC<PersonalDatasProps> = ({
           //   })
           // }
           name="cpf"
-          disabeld
+          disabled
         />
 
         <InputMask

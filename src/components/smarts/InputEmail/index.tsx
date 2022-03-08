@@ -77,14 +77,14 @@ export const InputEmail: React.FC<InputEmailProps> = ({
     setEmail(emailUpdated)
 
     setEmailError('')
-    console.log(emailUpdated)
-
+    
     if (!emailUpdated.trim()) {
       setEmailError('Email Obrigatório')
     } else if (!isEmail(emailUpdated)) {
       setEmailError('Email inválido.')
     }
   }
+    console.log(showEmailError)
 
   return (
     <InputText
