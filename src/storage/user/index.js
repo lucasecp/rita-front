@@ -4,10 +4,11 @@ import apiUser from '@/services/apiUser'
 
 export const getUserStorage = () => JSON.parse(localStorage.getItem('user'))
 
-export const setLocalStorage = (payload) => {
+export const setUserLocalStorage = (payload) => {
   localStorage.setItem('user', JSON.stringify(payload))
 }
-export const deleteLocalStorage = () => localStorage.removeItem('user')
+
+export const deleteLocalStorage = () => localStorage.clear()
 
 export const deleteHeaderToken = () => {
   delete apiUser.defaults.headers.token

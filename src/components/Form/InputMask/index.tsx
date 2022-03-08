@@ -28,6 +28,7 @@ const InputMask: React.FC<InputMaskProps> = ({
   variation,
   mask,
   value,
+  disabled,
   ...rest
 }) => {
   return (
@@ -38,6 +39,7 @@ const InputMask: React.FC<InputMaskProps> = ({
         mask={mask}
         id={label}
         onChange={(event) => setValue && setValue(event.target.value)}
+        disabled={disabled}
         {...rest}
       />
       {msgError && <MsgError>{msgError}</MsgError>}

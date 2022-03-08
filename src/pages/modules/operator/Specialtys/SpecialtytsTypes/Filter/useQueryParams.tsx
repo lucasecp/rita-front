@@ -2,21 +2,18 @@ import useQuery from '@/hooks/useQuery'
 import { fieldsApi } from '../../SeeAllSpecialtys/static/fieldsApi'
 
 interface UseQueryParamsProps {
-  name: string | null
+  type: string | null
   code: string | null
-  subscriptionRequired: string | null
 }
 
 export default (): UseQueryParamsProps => {
   const localStorageValues = JSON.parse(
-    window.localStorage.getItem('@Rita/specialty-filter') || '{}',
+    window.localStorage.getItem('@Rita/specialtys-types-filter') || '{}',
   )
 
-  const name = localStorageValues?.name
+  const type = localStorageValues?.type
 
   const code = localStorageValues?.code
 
-  const subscriptionRequired = localStorageValues?.subscriptionRequired
-
-  return { name, code, subscriptionRequired }
+  return { type, code }
 }
