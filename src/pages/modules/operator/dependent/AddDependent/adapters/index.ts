@@ -9,7 +9,7 @@ const showStatus = (status: 'I' | 'P' | 'N' | 'D' | 'A') => {
     P: 'Pendente',
     N: 'Negado',
     D: 'Dependente',
-    A: 'Aprovado'
+    A: 'Aprovado',
   }
   return formatedStatus[status] || ''
 }
@@ -17,7 +17,7 @@ const showStatus = (status: 'I' | 'P' | 'N' | 'D' | 'A') => {
 export const fromApi = (dataDependent: any): DependentI => {
   return {
     id: dataDependent.idPaciente,
-    name: formatFirstLastName(firstLetterCapitalize(dataDependent.nome)),
+    name: firstLetterCapitalize(dataDependent.nome),
     cpf: formatCpf(dataDependent.cpf),
     isAHolder: !!dataDependent?.dependentes?.length,
     status: showStatus(dataDependent?.status),
@@ -27,5 +27,3 @@ export const fromApi = (dataDependent: any): DependentI => {
     },
   }
 }
-
-
