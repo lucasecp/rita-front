@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
 import { MultiSelectOption } from '@/components/Form/MultSelect'
-
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
-import { Container } from './styles'
+import { FILTER_USERS } from '@/routes/constants/namedRoutes/routes'
 
 import { UserData } from './components/UserData'
+import { CancelAndExit } from './messages/CancelAndExit'
 
 import { useModal } from '@/hooks/useModal'
 import { useMessage } from '@/hooks/useMessage'
-import { CancelAndExit } from './messages/CancelAndExit'
-import { FILTER_USERS } from '@/routes/constants/namedRoutes/routes'
+
+import { Container } from './styles'
 
 export interface User {
-  id: number
   name: string
   status: string
   cpf: string
@@ -27,23 +26,15 @@ export interface User {
   accessProfile: MultiSelectOption[]
 }
 
-export const EditUser: React.FC = () => {
+export const CreateUser: React.FC = () => {
   const history = useHistory()
   const { showMessage } = useModal()
-
-  const { user: initialUser } = useLocation<{ user: User }>().state || {}
 
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(false)
 
   const [saveMessage, sendSaveMessage] = useMessage()
 
-  useEffect(() => {
-    if (!initialUser) {
-      history.push(FILTER_USERS)
-    }
-  }, [])
-
-  const onCancelEditing = () => {
+  const onCancelCreateUser = () => {
     if (anyFieldsHasChanged) {
       showMessage(CancelAndExit)
       return
@@ -53,16 +44,15 @@ export const EditUser: React.FC = () => {
   }
 
   return (
-    <DefaultLayout title="Visualizar e Editar Usuários">
+    <DefaultLayout title="Dados do Usuário">
       <Container>
-        <h2>Dados do Usuário</h2>
+        <h2>Inclusão de Usuário</h2>
         <UserData
-          initialUser={initialUser}
           onGetAnyFieldsHasChanged={setAnyFieldsHasChanged}
           saveUser={saveMessage}
         />
         <footer>
-          <OutlineButton onClick={onCancelEditing}>Cancelar</OutlineButton>
+          <OutlineButton onClick={onCancelCreateUser}>Cancelar</OutlineButton>
           <ButtonPrimary onClick={sendSaveMessage}>Salvar</ButtonPrimary>
         </footer>
       </Container>

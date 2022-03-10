@@ -36,8 +36,8 @@ import {
   OPERATOR_DEPENDENT_MANAGMENT,
   DIRECTOR_IMPORT,
   SPECIALIST_PROFILE,
-  DIRECTOR_FILTER_USERS,
-  OPERATOR_SEE_All_SPECIALTYS_TYPES
+  FILTER_USERS,
+  OPERATOR_SEE_All_SPECIALTYS_TYPES,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -152,7 +152,7 @@ export const menuItens = [
     permission: permissionList.ALTERAR_MEUS_DADOS_ESPECIALISTA,
   },
   {
-    path: DIRECTOR_FILTER_USERS,
+    path: FILTER_USERS,
     icon: <UsersIcon />,
     name: 'Gestão de Usuários',
     permission: permissionList.LISTAR_USUARIOS,

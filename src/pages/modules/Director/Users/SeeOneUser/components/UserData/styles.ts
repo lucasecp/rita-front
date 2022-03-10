@@ -4,10 +4,16 @@ export const Container = styled.div`
   padding: 0 32px 32px;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 24px;
 
-  @media (max-width: 767px) {
-    grid-template-columns: 1fr;
+  .two-fields-in-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
   }
 `

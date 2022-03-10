@@ -5,51 +5,52 @@ import InputMask from '@/components/Form/InputMask'
 import { InputEmail } from '@/components/smarts/InputEmail'
 
 import { Select } from '@/components/Form/Select'
-
-import { User } from '../../index'
-
-import { Container } from './styles'
 import ProfilesMultiSelect from './components/ProfilesMultiSelect'
-import { useMessage } from '@/hooks/useMessage'
+import { MultiSelectOption } from '@/components/Form/MultSelect'
 
 import { validateFullName } from '@/helpers/validateFields/validateFullName'
 import { validatePhone } from '@/helpers/validateFields/validatePhone'
+import { validateCPF } from '@/helpers/validateFields/validateCPF'
 import { validateAccessProfile } from './helpers/validateAccessProfile'
+
+import { useMessage } from '@/hooks/useMessage'
 import { useLoading } from '@/hooks/useLoading'
-import apiUser from '@/services/apiUser'
-import { toast } from '@/styles/components/toastify'
+import { useHistory } from 'react-router-dom'
+
 import { userToApi } from './adapters/toApi'
-import { useHistory } from 'react-router'
+import apiUser from '@/services/apiUser'
+
 import { FILTER_USERS } from '@/routes/constants/namedRoutes/routes'
 
+import { toast } from '@/styles/components/toastify'
+import { Container } from './styles'
+
 interface ErrorsState {
-  email: boolean
   name: string
+  cpf: string
+  email: boolean
   phone: string
   accessProfile: string
 }
-interface IUserDataProps {
-  initialUser?: User | undefined
+
+interface UserDataProps {
   onGetAnyFieldsHasChanged: React.Dispatch<React.SetStateAction<boolean>>
   saveUser: number
 }
 
-export const UserData: React.FC<IUserDataProps> = ({
-  initialUser,
+export const UserData: React.FC<UserDataProps> = ({
   onGetAnyFieldsHasChanged,
   saveUser,
 }) => {
   const { Loading } = useLoading()
   const history = useHistory()
 
-  const [name, setName] = useState(initialUser?.name || '')
-  const [status, setStatus] = useState(initialUser?.status || '')
-  const [cpf, setCpf] = useState(initialUser?.cpf || '')
-  const [email, setEmail] = useState(initialUser?.email || '')
-  const [phone, setPhone] = useState(initialUser?.phone || '')
-  const [accessProfile, setAccessProfile] = useState(
-    initialUser?.accessProfile || [],
-  )
+  const [name, setName] = useState('')
+  const [status, setStatus] = useState('active')
+  const [cpf, setCpf] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [accessProfile, setAccessProfile] = useState<MultiSelectOption[]>([])
 
   const [errors, setErrors] = useState({} as ErrorsState)
   const [errorMessage, sendErrorMessage] = useMessage()
@@ -70,6 +71,7 @@ export const UserData: React.FC<IUserDataProps> = ({
 
       const errorsTemporary = {
         ...errors,
+        cpf: validateCPF(cpf),
         name: validateFullName(name, 5),
         phone: validatePhone(phone, true),
         accessProfile: validateAccessProfile(accessProfile),
@@ -79,11 +81,9 @@ export const UserData: React.FC<IUserDataProps> = ({
 
       const hasErrors = Object.values(errorsTemporary).some((value) => value)
 
-      if (hasErrors) {
-        return
-      }
+      if (hasErrors) return
 
-      const sendUserToApi = async () => {
+      const createNewUser = async () => {
         try {
           Loading.turnOn()
 
@@ -96,19 +96,19 @@ export const UserData: React.FC<IUserDataProps> = ({
             accessProfile,
           })
 
-          await apiUser.put(`/usuario/${initialUser?.id}`, userMapped)
+          await apiUser.post('/usuario', userMapped)
 
-          toast.success('Edição realizada com sucesso!')
+          toast.success('Cadastro Realizado com Sucesso')
 
           history.push(FILTER_USERS)
         } catch (error) {
-          toast.error('Erro ao salvar usuário')
+          toast.error('Erro ao criar usuário')
         } finally {
           Loading.turnOff()
         }
       }
 
-      sendUserToApi()
+      createNewUser()
     }
   }, [saveUser])
 
@@ -120,14 +120,16 @@ export const UserData: React.FC<IUserDataProps> = ({
         setValue={setName}
         hasError={!!errors.name}
         msgError={errors.name}
+        maxLength={100}
       />
       <div className="two-fields-in-row">
         <InputMask
           label="CPF:"
           mask="999.999.999-99"
           value={cpf}
-          disabled
           setValue={setCpf}
+          hasError={!!errors.cpf}
+          msgError={errors.cpf}
         />
         <Select
           label="Status:"
@@ -141,7 +143,6 @@ export const UserData: React.FC<IUserDataProps> = ({
       </div>
       <div className="two-fields-in-row">
         <InputEmail
-          initialEmail={email}
           onGetEmail={setEmail}
           hasError={(hasError) => setErrors({ ...errors, email: hasError })}
           checkHasError={errorMessage}
