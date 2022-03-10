@@ -38,7 +38,7 @@ export const toApi = (specialistInfo: any) => {
     idOrgaoEmissor: specialistInfo.issuingAgency,
     crmuf: specialistInfo.uf,
     clinica: mapClinicsToAPi(specialistInfo.clinics),
-    especialidade: mapSpecialtysToApi(specialistInfo.specialtys),
+    especialidades: mapSpecialtysToApi(specialistInfo.specialtys),
     cashBack: specialistInfo.cashBack,
     takeRate: specialistInfo.takeRate,
     status: specialistInfo.status,

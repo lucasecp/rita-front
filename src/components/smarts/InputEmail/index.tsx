@@ -83,7 +83,6 @@ export const InputEmail: React.FC<InputEmailProps> = ({
       setEmailError('Email inválido.')
     }
   }
-  console.log(showEmailError)
 
   return (
     <InputText
