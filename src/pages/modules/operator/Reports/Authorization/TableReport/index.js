@@ -8,6 +8,7 @@ import Header from './Header'
 import { COLUMNS_NAME } from '../static/columns'
 import formatObjectFromApi from '../helpers/formatObjectFromApi'
 import ColumnIsActive from '../helpers/ColumnIsActive'
+import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 
 const TableReport = ({
   orders,
@@ -87,7 +88,7 @@ const TableReport = ({
                 !ColumnIsActive(COLUMNS_NAME.REASON_FOR_NEGATIVE, columns)
               }
             >
-              {patient.reasonForNegative || '-'}
+              {formatTextWithLimit(patient.reasonForNegative,200) || '-'}
             </li>
           </ul>
         ))}

@@ -89,7 +89,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             value={numberHome}
             setValue={setNumberHome}
             name="numberHome"
-            maxLength={50}
+            maxLength={20}
           />
         </section>
         <div>
@@ -98,7 +98,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             value={complement}
             setValue={setComplement}
             name="complement"
-            maxLength={100}
+            maxLength={50}
           />
           <InputText
             label="Bairro:"

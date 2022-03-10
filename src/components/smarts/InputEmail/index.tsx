@@ -8,6 +8,7 @@ import React, {
 import InputText from '@/components/Form/InputText'
 
 import { specialCharacters } from './constants/specialCharacters'
+import isEmail from '@/helpers/isEmail'
 
 interface InputEmailProps extends InputHTMLAttributes<HTMLInputElement> {
   initialEmail?: string
