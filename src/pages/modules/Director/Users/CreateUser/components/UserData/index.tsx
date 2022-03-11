@@ -23,7 +23,7 @@ import apiUser from '@/services/apiUser'
 import { FILTER_USERS } from '@/routes/constants/namedRoutes/routes'
 
 import { toast } from '@/styles/components/toastify'
-import { Container } from './styles'
+import { Container, TwoFieldsInRow } from './styles'
 
 interface ErrorsState {
   name: string
@@ -81,7 +81,9 @@ export const UserData: React.FC<UserDataProps> = ({
 
       const hasErrors = Object.values(errorsTemporary).some((value) => value)
 
-      if (hasErrors) return
+      if (hasErrors) {
+        return
+      }
 
       const createNewUser = async () => {
         try {
@@ -122,7 +124,7 @@ export const UserData: React.FC<UserDataProps> = ({
         msgError={errors.name}
         maxLength={100}
       />
-      <div className="two-fields-in-row">
+      <TwoFieldsInRow>
         <InputMask
           label="CPF:"
           mask="999.999.999-99"
@@ -140,8 +142,8 @@ export const UserData: React.FC<UserDataProps> = ({
           ]}
           setValue={setStatus}
         />
-      </div>
-      <div className="two-fields-in-row">
+      </TwoFieldsInRow>
+      <TwoFieldsInRow>
         <InputEmail
           onGetEmail={setEmail}
           hasError={(hasError) => setErrors({ ...errors, email: hasError })}
@@ -155,7 +157,7 @@ export const UserData: React.FC<UserDataProps> = ({
           hasError={!!errors.phone}
           msgError={errors.phone}
         />
-      </div>
+      </TwoFieldsInRow>
       <ProfilesMultiSelect
         initialProfiles={accessProfile}
         onGetAccessProfile={setAccessProfile}

@@ -8,7 +8,7 @@ import { Select } from '@/components/Form/Select'
 
 import { User } from '../../index'
 
-import { Container } from './styles'
+import { Container, TwoFieldsInRow } from './styles'
 import ProfilesMultiSelect from './components/ProfilesMultiSelect'
 import { useMessage } from '@/hooks/useMessage'
 
@@ -121,7 +121,7 @@ export const UserData: React.FC<IUserDataProps> = ({
         hasError={!!errors.name}
         msgError={errors.name}
       />
-      <div className="two-fields-in-row">
+      <TwoFieldsInRow>
         <InputMask
           label="CPF:"
           mask="999.999.999-99"
@@ -138,8 +138,8 @@ export const UserData: React.FC<IUserDataProps> = ({
           ]}
           setValue={setStatus}
         />
-      </div>
-      <div className="two-fields-in-row">
+      </TwoFieldsInRow>
+      <TwoFieldsInRow>
         <InputEmail
           initialEmail={email}
           onGetEmail={setEmail}
@@ -154,7 +154,7 @@ export const UserData: React.FC<IUserDataProps> = ({
           hasError={!!errors.phone}
           msgError={errors.phone}
         />
-      </div>
+      </TwoFieldsInRow>
       <ProfilesMultiSelect
         initialProfiles={accessProfile}
         onGetAccessProfile={setAccessProfile}

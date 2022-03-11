@@ -10,7 +10,7 @@ import CustomMultSelect from '@/components/Form/MultSelect'
 
 import { User } from '../../index'
 
-import { Container } from './styles'
+import { Container, TwoFieldsInRow } from './styles'
 
 interface IUserDataProps {
   user: User
@@ -20,7 +20,7 @@ export const UserData: React.FC<IUserDataProps> = ({ user }) => {
   return (
     <Container>
       <InputText label="Nome Completo*:" value={user.name} disabled />
-      <div className="two-fields-in-row">
+      <TwoFieldsInRow>
         <InputMask
           label="CPF:"
           mask="999.999.999-99"
@@ -37,8 +37,8 @@ export const UserData: React.FC<IUserDataProps> = ({ user }) => {
           ]}
           disabled
         />
-      </div>
-      <div className="two-fields-in-row">
+      </TwoFieldsInRow>
+      <TwoFieldsInRow>
         <InputEmail initialEmail={user.email} disabled />
         <InputMask
           label="Celular*:"
@@ -46,7 +46,7 @@ export const UserData: React.FC<IUserDataProps> = ({ user }) => {
           value={user.phone}
           disabled
         />
-      </div>
+      </TwoFieldsInRow>
       <CustomMultSelect
         variation="secondary"
         label="Perfil de Acesso:"
