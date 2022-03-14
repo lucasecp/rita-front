@@ -3,6 +3,7 @@ import {
   Dependent,
   PatientAddress,
   PatientStatusLimit,
+  ToApiUpdatePatient,
 } from '../types/index'
 
 export const getDataMapped = (
@@ -10,7 +11,7 @@ export const getDataMapped = (
   patientDependents: Dependent[] | undefined,
   patientAddress: PatientAddress,
   patientStatus: PatientStatusLimit,
-): any => {
+): ToApiUpdatePatient => {
   const patientMapped = {
     idPaciente: patientData.id,
     nome: patientData.name,
@@ -54,7 +55,7 @@ export const getDependentMapped = (
   dependentData: PatientData,
   dependentAddress: PatientAddress,
   dependentStatus: PatientStatusLimit,
-): any => {
+): ToApiUpdatePatient => {
   const dependentMapped = {
     idPaciente: dependentData.id,
     nome: dependentData.name,
