@@ -28,7 +28,7 @@ const ProfilesMultiSelect: React.FC<IProfilesMultiSelectProps> = ({
     const loadProfiles = async () => {
       try {
         const { data } = await apiUser.get<{ id: number; nome: string }[]>(
-          '/perfil',
+          '/perfil?tipo=1',
         )
 
         const profilesOptionsMapped = data.map((profileOption) => ({
