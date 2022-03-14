@@ -1,40 +1,15 @@
-import { PatientData, Dependent, PatientAddress, PatientStatus } from '../index'
-
-// interface getDataMappedResponse {
-//   patientMapped: {
-//     idPaciente: number
-//     nome: string
-//     cpf: string
-//     sexo: string
-//     dataNascimento: string
-//     telefone: string
-//     email: string
-//   }
-//   endereco: {
-//     cep: string
-//     logradouro: string
-//     numero: string
-//     complemento: string
-//     bairro: string
-//     cidade: string
-//     uf: string
-//   }
-//   dependentes: {
-//     idPaciente: number
-//     nome: string
-//     cpf: string
-//     sexo: string
-//     dataNascimento: string
-//     telefone: string
-//     email: string
-//   }[]
-// }
+import {
+  PatientData,
+  Dependent,
+  PatientAddress,
+  PatientStatusLimit,
+} from '../types/index'
 
 export const getDataMapped = (
   patientData: PatientData,
   patientDependents: Dependent[] | undefined,
   patientAddress: PatientAddress,
-  patientStatus: PatientStatus,
+  patientStatus: PatientStatusLimit,
 ): any => {
   const patientMapped = {
     idPaciente: patientData.id,
@@ -72,5 +47,39 @@ export const getDataMapped = (
     ...patientMapped,
     endereco: addressMapped,
     dependentes: dependentsMapped,
+  }
+}
+
+export const getDependentMapped = (
+  dependentData: PatientData,
+  dependentAddress: PatientAddress,
+  dependentStatus: PatientStatusLimit,
+): any => {
+  const dependentMapped = {
+    idPaciente: dependentData.id,
+    nome: dependentData.name,
+    cpf: dependentData.cpf,
+    sexo: dependentData.gender,
+    dataNascimento: dependentData.birthDate,
+    telefone: dependentData.phone,
+    email: dependentData.email,
+    status: dependentStatus.status,
+    limiteTentativas: dependentStatus.limitTry,
+  }
+
+  const addressMapped = {
+    cep: dependentAddress.cep,
+    logradouro: dependentAddress.address,
+    numero: dependentAddress.number,
+    complemento: dependentAddress.complement,
+    bairro: dependentAddress.district,
+    cidade: dependentAddress.city,
+    uf: dependentAddress.uf,
+  }
+
+  return {
+    ...dependentMapped,
+    endereco: addressMapped,
+    dependentes: [],
   }
 }
