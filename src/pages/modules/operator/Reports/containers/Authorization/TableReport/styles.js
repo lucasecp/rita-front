@@ -40,7 +40,7 @@ export const Container = styled.div`
       color: #6a6a6a;
       max-width: 150px;
       margin-right: 24px;
-      word-break: normal;
+      word-break: break-word;
       :last-child {
         padding: 16px 32px 16px 0;
       }

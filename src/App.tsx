@@ -15,6 +15,7 @@ import { ThemeProvider } from './hooks/useTheme'
 import { RitaLoading } from './components/Loading/RitaLoading'
 
 import { ToastContainer } from 'react-toastify'
+import { RegisterPatientProvider } from './pages/Register/RegisterPatient/hooks'
 
 const App: React.FC = () => {
   return (
@@ -25,8 +26,10 @@ const App: React.FC = () => {
             <MenuProvider>
               <ThemeProvider>
                 <GlobalStyle />
-                <Routes />
-                <Modal />
+                <RegisterPatientProvider>
+                  <Routes />
+                  <Modal />
+                </RegisterPatientProvider>
                 <RitaLoading />
                 <ToastContainer />
               </ThemeProvider>

@@ -29,6 +29,7 @@ export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 export const OPERATOR_ADD_DEPENDENT = '/dependentes/associar'
 export const OPERATOR_SEE_ALL_SPECIALISTS = '/especialistas'
 export const OPERATOR_SEE_ONE_SPECIALIST = '/especialistas/ver-especialista'
+export const OPERATOR_SEE_All_SPECIALTYS_TYPES = '/tipos-especialidades'
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
@@ -43,7 +44,6 @@ export const DIRECTOR_SEE_PLAN_MANAGMENT = '/gestao/planos/visualizar'
 export const DIRECTOR_CREATE_PLAN_MANAGMENT = '/gestao/planos/criar'
 export const DIRECTOR_IMPORT = '/importacao'
 export const DIRECTOR_IMPORT_REPORT = '/importacao/relatorio'
-export const DIRECTOR_FILTER_USERS = '/usuarios'
 
 export const DIRECTOR_SEE_ALL_PROFILES = '/perfis'
 export const DIRECTOR_SEE_ONE_PROFILE = '/perfis/visualizar'
@@ -55,6 +55,11 @@ export const CREATE_SELLABLE_ITEMS = '/itens-vendaveis/criar'
 export const SEE_SELLABLE_ITEMS = '/itens-vendaveis/visualizar'
 export const EDIT_SELLABLE_ITEMS = '/itens-vendaveis/editar'
 
+export const FILTER_USERS = '/usuarios'
+export const SEE_ONE_USER = '/usuarios/visualizar'
+export const EDIT_USER = '/usuarios/editar'
+export const CREATE_USER = '/usuarios/criar'
+
 export const PATIENT_SCHEDULE_APPOINTMENT = '/agendar-consulta'
 
 export const PATIENT_CLINIC_INFORMATION =
@@ -64,6 +69,7 @@ export const PATIENT_DOCTOR_INFORMATION =
   '/agendar-consulta/informacoes-especialista'
 
 export const PATIENT_SEE_DEPENDENT = '/paciente/dependentes/ver-dependente'
+export const PATIENT_EDIT_DEPENDENT = '/paciente/dependentes/editar'
 export const PATIENT_DEPENDENTS = '/paciente/dependentes'
 export const PATIENT_ADD_DOCUMENT_DEPENDENT =
   '/paciente/dependentes/incluir-documentos'
@@ -76,9 +82,6 @@ export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'
 
 export const REGISTER_PATIENT = '/cadastro/paciente/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
-
-export const SEE_ONE_USER = '/usuarios/visualizar'
-export const EDIT_USER = '/usuarios/editar'
 
 export const TESTE = '/teste'
 

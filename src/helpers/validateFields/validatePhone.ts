@@ -1,6 +1,10 @@
 import clearSpecialCharacters from '@/helpers/clear/SpecialCaracteres'
 
-export const validatePhone = (phone: string): string => {
+export const validatePhone = (phone: string, isRequired = false): string => {
+  if (isRequired && !phone.trim()) {
+    return 'Celular Obrigatório'
+  }
+
   const phoneCleared = clearSpecialCharacters(phone)
   const phoneIsValid = phoneCleared[0] !== '0' && phoneCleared[2] === '9'
 

@@ -78,6 +78,7 @@ function Routes() {
         component={SeeOneProfile}
       />
 
+
       <Route path={DIRECTOR_EDIT_PROFILE} isPrivate component={EditProfile} />
 
       <Route

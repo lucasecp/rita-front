@@ -8,7 +8,7 @@ import { intervalToDuration, parse } from 'date-fns'
 export const fromApi = (dataDependent: any): DataDependentI => {
   const holder = {
     id: dataDependent.idPaciente,
-    name: formatFirstLastName(firstLetterCapitalize(dataDependent.nome)),
+    name: firstLetterCapitalize(dataDependent.nome),
     cpf: formatCpf(dataDependent.cpf),
     plan: dataDependent.plano?.nome,
   }

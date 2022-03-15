@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 
@@ -18,7 +18,7 @@ import OutlineButton from '@/components/Button/Outline'
 import { useModal } from '@/hooks/useModal'
 import ComeBack from './messages/ComeBack'
 import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
-import { getDataMapped } from './helpers/getDataMapped'
+import { getDataMapped, getDependentMapped } from './helpers/getDataMapped'
 import { toast } from '@/styles/components/toastify'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import { differenceInYears, parse } from 'date-fns'
@@ -29,6 +29,7 @@ import {
   fromApiPatientData,
   fromApiPatientTable,
   fromApiPatientStatusLimit,
+  fromApiValidations,
 } from './adapters/fromApi'
 import {
   PatientData,
@@ -124,23 +125,19 @@ export const SeeOnePatient: React.FC = () => {
       try {
         Loading.turnOn()
 
+        let idToValidate
+
+        if (dependent?.id) {
+          idToValidate = dependent.id
+        } else {
+          idToValidate = patientData.id
+        }
+
         const response = await apiPatient.get(
-          `/paciente/${patientData.id}/validar`,
+          `/paciente/${idToValidate}/validar`,
         )
 
-        const validationsFromApi = response.data[0]
-        const validationsMapped = {
-          documentOk: validationsFromApi.documentoOk ? 'yes' : 'no',
-          resonDocumentNotOk: validationsFromApi.motivoDocumento || '',
-          incomeOk: validationsFromApi.rendaBaixa ? 'yes' : 'no',
-          validatorName: validationsFromApi.nomeValidador,
-          dateAndHour: formateDateAndHour(
-            validationsFromApi.dataValidacao,
-            ' às ',
-          ),
-          status: validationsFromApi.status,
-          table,
-        }
+        const validationsMapped = fromApiValidations(response.data[0], table)
 
         setValidations(validationsMapped)
       } catch (error) {
@@ -149,10 +146,33 @@ export const SeeOnePatient: React.FC = () => {
       }
     }
 
-    if (patientData?.id) {
+    if (patientData?.id || dependent?.id) {
       loadValidationInformations()
     }
-  }, [patientData?.id, table])
+  }, [dependent?.id, patientData?.id, table])
+
+  const showValidation = useMemo(() => {
+    let mustShow
+
+    // Se for dependente, e a validação for do dependente
+    if (dependent && dependent.id === validations.pacientId) {
+      mustShow = true
+    } else {
+      mustShow = false
+    }
+
+    // Se for titular, e a validação for do titular
+    if (!dependent && validations.pacientId === patientData.id) {
+      mustShow = true
+    }
+
+    // Se o objeto de validação estiver vazio
+    if (isObjectEmpty(validations)) {
+      mustShow = false
+    }
+
+    return mustShow
+  }, [dependent?.id, patientData?.id, validations])
 
   useEffect(() => {
     if (patientDependents) {
@@ -183,19 +203,34 @@ export const SeeOnePatient: React.FC = () => {
   }
 
   const onSavePatientData = async () => {
-    const dataToSend = getDataMapped(
-      patientData,
-      patientDependents,
-      patientAddress,
-      patientStatusLimit,
-    )
+    let patientId
+    let patientDataToUpdate
+
+    if (dependent) {
+      patientId = dependent.id
+
+      patientDataToUpdate = getDependentMapped(
+        dependent,
+        patientAddress,
+        patientStatusLimit,
+      )
+    } else {
+      patientId = patientData.id
+
+      patientDataToUpdate = getDataMapped(
+        patientData,
+        patientDependents,
+        patientAddress,
+        patientStatusLimit,
+      )
+    }
 
     try {
       Loading.turnOn()
 
       const response = await apiPatient.put(
-        `/paciente/${patientData.id}`,
-        dataToSend,
+        `/paciente/${patientId}`,
+        patientDataToUpdate,
       )
 
       if (response.status === 200) {
@@ -247,8 +282,8 @@ export const SeeOnePatient: React.FC = () => {
           <DependentExpandable
             title="Dados cadastrais para análise"
             dependentData={dependent}
+            setDependentData={setDependent}
             defaultExpanded
-            setDependentData={() => {}}
             allDependents={patientDependents}
           />
         )}
@@ -274,7 +309,8 @@ export const SeeOnePatient: React.FC = () => {
           cpf={cpf}
           isDependentMinorAge={isDependentMinorAge}
         />
-        {!isObjectEmpty(validations) && (
+
+        {showValidation && (
           <ValidationSeeOnePatient validations={validations} />
         )}
 

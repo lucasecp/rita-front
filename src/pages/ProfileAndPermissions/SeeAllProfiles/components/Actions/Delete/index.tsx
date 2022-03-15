@@ -20,7 +20,7 @@ export const ActionDelete: React.FC<ActionDeleteProps> = ({
 }) => {
   const { showMessage } = useModal()
 
-  const CheckPossibilityToDelete = () => {
+  const onDelete = () => {
     if (usersQuantity > 0) {
       return showMessage(RemainingUsersWarning)
     }
@@ -33,7 +33,7 @@ export const ActionDelete: React.FC<ActionDeleteProps> = ({
   }
   return (
     <CustomTooltip label="Excluir">
-      <TrashIcon onClick={CheckPossibilityToDelete} />
+      <TrashIcon onClick={onDelete} />
     </CustomTooltip>
   )
 }

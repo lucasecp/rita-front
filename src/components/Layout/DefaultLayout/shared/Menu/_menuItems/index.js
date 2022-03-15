@@ -15,6 +15,7 @@ import { ReactComponent as ClinicsIcon } from '@/assets/icons/clinic.svg'
 import { ReactComponent as ImportIcon } from '@/assets/icons/import.svg'
 import { ReactComponent as StethoscopeIcon } from '@/assets/icons/stethoscope.svg'
 import { ReactComponent as UsersIcon } from '@/assets/icons/users.svg'
+import { ReactComponent as SpecialtysTypesIcon } from '@/assets/icons/specialtys-types.svg'
 
 import {
   INITIAL_PAGE,
@@ -35,7 +36,8 @@ import {
   OPERATOR_DEPENDENT_MANAGMENT,
   DIRECTOR_IMPORT,
   SPECIALIST_PROFILE,
-  DIRECTOR_FILTER_USERS,
+  FILTER_USERS,
+  OPERATOR_SEE_All_SPECIALTYS_TYPES,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -150,9 +152,15 @@ export const menuItens = [
     permission: permissionList.ALTERAR_MEUS_DADOS_ESPECIALISTA,
   },
   {
-    path: DIRECTOR_FILTER_USERS,
+    path: FILTER_USERS,
     icon: <UsersIcon />,
-    name: 'Usuários',
+    name: 'Gestão de Usuários',
     permission: permissionList.LISTAR_USUARIOS,
+  },
+  {
+    path: OPERATOR_SEE_All_SPECIALTYS_TYPES,
+    icon: <SpecialtysTypesIcon />,
+    name: 'Tipos de Especialidade',
+    permission: permissionList.LISTAR_TIPO_ESPECIALIDADE,
   },
 ]

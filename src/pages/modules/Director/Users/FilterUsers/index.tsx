@@ -17,7 +17,10 @@ export const FilterUsers: React.FC = () => {
   }, [filters])
 
   return (
-    <DefaultLayout title="Gestão de Usuário" headerChildren={<IncludeButton />}>
+    <DefaultLayout
+      title="Gestão de Usuários"
+      headerChildren={<IncludeButton />}
+    >
       <Container>
         <Filter onGetFilters={setFilters} />
         <Results filters={filters} />

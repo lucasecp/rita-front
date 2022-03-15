@@ -48,7 +48,7 @@ export const fromApi = (data: UsersFromApi[]): User[] => {
     return {
       id: user.idUsuario,
       name: user.nome,
-      cpf: isValidUserCPF ? formatCpf(user.usuario) : '-',
+      login: isValidUserCPF ? formatCpf(user.usuario) : user.usuario,
       blocked: blockedFromApi(user.bloqueado),
       profile: user.perfis.map((profile) => profile.nome).join(', '),
       status: statusFromApi(user.situacao),

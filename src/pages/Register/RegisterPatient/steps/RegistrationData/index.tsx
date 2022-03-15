@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import { Checkbox } from '@/components/Form/Checkbox'
 import InputMask from '@/components/Form/InputMask'
@@ -71,6 +72,7 @@ export const RegistrationData: React.FC<RegistrationDataProps> = ({
     }
 
     setErrors(previousErrorsAndErrorsInConfirmEmail)
+    sendErrorMessage()
   }
 
   const checkMinorAge = () => {
@@ -156,6 +158,7 @@ export const RegistrationData: React.FC<RegistrationDataProps> = ({
             hasError={(hasError) => setErrors({ ...errors, email: hasError })}
             checkHasError={errorMessage}
             onKeyUp={checkConfirmEmail}
+            onBlur={sendErrorMessage}
           />
           <InputText
             autoComplete="off"

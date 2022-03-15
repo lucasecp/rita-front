@@ -31,13 +31,28 @@ export const Container = styled.div<RegistrationDataStylesProps>`
     }
 
     // no > before tag section
-    section {
+    > div {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 24px;
+      margin-top: 24px;
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    section {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      > *:nth-child(4) {
+        grid-column: span 2;
+      }
 
       @media (max-width: 768px) {
         grid-template-columns: 1fr;
+        > *:nth-child(4) {
+          grid-column: 1;
+        }
       }
     }
   }

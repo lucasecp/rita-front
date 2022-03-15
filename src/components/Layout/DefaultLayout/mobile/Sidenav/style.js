@@ -24,5 +24,26 @@ export const Container = styled.aside`
     flex-direction: column;
     overflow: hidden;
     transition: 0.4s;
+    overflow-y: auto;
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      border-radius: 8px;
+      background: #eeeeee;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #afafaf;
+      border-radius: 8px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
   }
 `

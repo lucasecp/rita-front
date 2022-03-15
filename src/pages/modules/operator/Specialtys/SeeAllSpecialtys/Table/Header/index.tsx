@@ -1,6 +1,6 @@
 import React from 'react'
-import orderly from '../../static/orderly'
-import { HeaderProps } from '../../types'
+import orderly from '../../../SeeAllSpecialtys/static/orderly'
+import { HeaderProps } from '../../../SeeAllSpecialtys/types'
 import { Container, ArrowUp, ArrowDown, Content } from './styles'
 
 const Header: React.FC<HeaderProps> = ({ order, setOrder }) => {

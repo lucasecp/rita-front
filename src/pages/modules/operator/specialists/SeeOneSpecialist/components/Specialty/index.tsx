@@ -38,12 +38,7 @@ export const Specialty: React.FC<ClinicSpecialtysProps> = ({
           return setSpecialtysOptions([])
         }
 
-        setSpecialtysOptions(() => {
-          if (dataMapped.length === 1) {
-            return dataMapped
-          }
-          return [{ name: 'Todas', id: 'All' }, ...dataMapped]
-        })
+        setSpecialtysOptions(dataMapped)
       } catch ({ response }) {}
     }
 
@@ -82,8 +77,8 @@ export const Specialty: React.FC<ClinicSpecialtysProps> = ({
           hasError={!!errors.specialtys}
           messageError={errors?.specialtys}
           name="specialtys"
-          onSelect={onChangingSelect}
-          onRemove={onChangingSelect}
+          // onSelect={onChangingSelect}
+          // onRemove={onChangingSelect}
         />
       </section>
     </Container>

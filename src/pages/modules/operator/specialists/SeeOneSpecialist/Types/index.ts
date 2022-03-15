@@ -3,6 +3,8 @@ export interface ProfissionalDatasI {
   registerNumber?: string
   issuingAgency?: string
   uf?: string
+  cashback?: string
+  takerate?: string
 }
 
 export interface PersonalDatasI {
@@ -20,7 +22,9 @@ export interface ErrorsI {
   name?: string
   cpf?: string
   phone?: string
-  email?: string 
+  email?: string
   specialtys?: string
   clinics?: string
+  cashBack?: string
+  takeRate?: string
 }

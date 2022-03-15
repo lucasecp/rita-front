@@ -16,6 +16,7 @@ import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
 import OutlineButton from '../../../../../../components/Button/Outline/index'
 import ButtonPrimary from '../../../../../../components/Button/Primary/index'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 
 interface EditSpecialistProps {
   specialistData: any
@@ -40,7 +41,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
 
   const history = useHistory()
 
-  const { showMessage } = useModal()
+  const { showMessage, showSimple } = useModal()
 
   const someFieldChanged = () => {
     let fieldWasChanged = false
@@ -77,10 +78,28 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
     return fieldWasChanged
   }
 
+  const cashRateValidate = (cash: number, rate: number) => {
+    const values = cash + rate
+    console.log(values)
+    if (values > 100) {
+      return false
+    }
+    return true
+  }
+
   const hasErrorOnFields = (fields: any) => {
+    console.log(fields)
     let error = false
     const hasSpecificError = Object.values(errors)
     error = !!hasSpecificError[0]
+
+    const cashBackIsValid = cashRateValidate(fields.cashBack, fields.takeRate)
+    if (!cashBackIsValid) {
+      showSimple.warning(
+        'A soma dos valores de Cashback e TakeRate tem que ser inferior ou igual a 100%',
+      )
+      return true
+    }
 
     for (const field in fields) {
       if (
@@ -96,6 +115,21 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
           }))
           continue
         }
+        if (field === 'cashBack') {
+          setErrors((errors) => ({
+            ...errors,
+            [field]: 'Precisa ter um valor mínimo de 1% no CashBack.',
+          }))
+          continue
+        }
+
+        if (field === 'takeRate') {
+          setErrors((errors) => ({
+            ...errors,
+            [field]: 'Precisa ter um valor mínimo de 1% no TakeRate.',
+          }))
+          continue
+        }
 
         setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
       }
@@ -105,6 +139,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
 
   const onSave = async () => {
     setClickOnSave(!clickOnSave)
+    setErrors({})
     if (
       hasErrorOnFields({
         ...personalDatas,
@@ -115,7 +150,6 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
     ) {
       return
     }
-    setErrors({})
 
     try {
       Loading.turnOn()

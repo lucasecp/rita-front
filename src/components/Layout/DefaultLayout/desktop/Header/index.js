@@ -36,7 +36,7 @@ export const Header = ({ title, children }) => {
         {children}
       </div>
       <nav>
-        <Link to="/perfil">
+        <p>
           Olá, {nameFormated}
           <div>
             {photo ? (
@@ -45,7 +45,7 @@ export const Header = ({ title, children }) => {
               <span>{initialName}</span>
             )}
           </div>
-        </Link>
+        </p>
         {/* <LetterIcon /> */}
         <ExitIcon onClick={clearDataLogout} />
       </nav>

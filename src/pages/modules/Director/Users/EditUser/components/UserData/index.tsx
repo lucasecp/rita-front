@@ -8,7 +8,7 @@ import { Select } from '@/components/Form/Select'
 
 import { User } from '../../index'
 
-import { Container } from './styles'
+import { Container, TwoFieldsInRow } from './styles'
 import ProfilesMultiSelect from './components/ProfilesMultiSelect'
 import { useMessage } from '@/hooks/useMessage'
 
@@ -20,7 +20,7 @@ import apiUser from '@/services/apiUser'
 import { toast } from '@/styles/components/toastify'
 import { userToApi } from './adapters/toApi'
 import { useHistory } from 'react-router'
-import { DIRECTOR_FILTER_USERS } from '@/routes/constants/namedRoutes/routes'
+import { FILTER_USERS } from '@/routes/constants/namedRoutes/routes'
 
 interface ErrorsState {
   email: boolean
@@ -70,8 +70,8 @@ export const UserData: React.FC<IUserDataProps> = ({
 
       const errorsTemporary = {
         ...errors,
-        name: validateFullName(name),
-        phone: validatePhone(phone),
+        name: validateFullName(name, 5),
+        phone: validatePhone(phone, true),
         accessProfile: validateAccessProfile(accessProfile),
       }
 
@@ -100,7 +100,7 @@ export const UserData: React.FC<IUserDataProps> = ({
 
           toast.success('Edição realizada com sucesso!')
 
-          history.push(DIRECTOR_FILTER_USERS)
+          history.push(FILTER_USERS)
         } catch (error) {
           toast.error('Erro ao salvar usuário')
         } finally {
@@ -121,36 +121,40 @@ export const UserData: React.FC<IUserDataProps> = ({
         hasError={!!errors.name}
         msgError={errors.name}
       />
-      <Select
-        label="Status:"
-        value={status}
-        options={[
-          { label: 'Ativo', value: 'active' },
-          { label: 'Inativo', value: 'inative' },
-        ]}
-        setValue={setStatus}
-      />
-      <InputMask
-        label="CPF:"
-        mask="999.999.999-99"
-        value={cpf}
-        disabled
-        setValue={setCpf}
-      />
-      <InputEmail
-        initialEmail={email}
-        onGetEmail={setEmail}
-        hasError={(hasError) => setErrors({ ...errors, email: hasError })}
-        checkHasError={errorMessage}
-      />
-      <InputMask
-        label="Celular:"
-        mask="(99) 99999-9999"
-        value={phone}
-        setValue={setPhone}
-        hasError={!!errors.phone}
-        msgError={errors.phone}
-      />
+      <TwoFieldsInRow>
+        <InputMask
+          label="CPF:"
+          mask="999.999.999-99"
+          value={cpf}
+          disabled
+          setValue={setCpf}
+        />
+        <Select
+          label="Status:"
+          value={status}
+          options={[
+            { label: 'Ativo', value: 'active' },
+            { label: 'Inativo', value: 'inative' },
+          ]}
+          setValue={setStatus}
+        />
+      </TwoFieldsInRow>
+      <TwoFieldsInRow>
+        <InputEmail
+          initialEmail={email}
+          onGetEmail={setEmail}
+          hasError={(hasError) => setErrors({ ...errors, email: hasError })}
+          checkHasError={errorMessage}
+        />
+        <InputMask
+          label="Celular:"
+          mask="(99) 99999-9999"
+          value={phone}
+          setValue={setPhone}
+          hasError={!!errors.phone}
+          msgError={errors.phone}
+        />
+      </TwoFieldsInRow>
       <ProfilesMultiSelect
         initialProfiles={accessProfile}
         onGetAccessProfile={setAccessProfile}

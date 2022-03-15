@@ -11,76 +11,21 @@ export const Container = styled.section`
     color: #6a6a6a;
   }
   > section {
-    display: flex;
-    flex-direction: column;
     margin-top: 24px;
-    > h5 {
-      margin-bottom: 4px;
-    }
-    > h5,
-    > div div > h4 {
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 20px;
-      color: #6a6a6a;
 
-      margin-right: 20px;
-    }
-    > div {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      > div {
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        background: #eeeeee;
-        padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: flex-end;
 
-        min-height: 50px;
-        > span {
-          cursor: pointer;
-          font-size: 14px;
-          font-weight: 500;
-          line-height: 21px;
-
-          color: #6a6a6a;
-          margin-left: 8px;
-          > svg {
-            width: 21px;
-            height: 22px;
-          }
-        }
-      }
-    }
-    @media (max-width: 991px) {
-      > div {
-        grid-template-columns: 100%;
-      }
+    input {
+      height: 56px;
     }
   }
-  > div {
-    background: #eeeeee;
-    padding: 14px 16px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
 
-    min-height: 50px;
-    & + div {
-      margin-top: 24px;
-    }
-    > h4 {
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 20px;
-      color: #6a6a6a;
-
-      margin-right: 20px;
+  @media (max-width: 767px) {
+    > section {
+      grid-template-columns: 1fr;
     }
   }
 `
