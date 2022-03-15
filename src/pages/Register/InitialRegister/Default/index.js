@@ -105,7 +105,7 @@ function DefaultRegister() {
           <div>
             <InputMask
               mask="999.999.999-99"
-              placeholder="000.000.000-00"
+              placeholder="cpf:___.___.___-__"
               value={cpf}
               setValue={setCpf}
               name="cpf"

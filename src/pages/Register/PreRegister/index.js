@@ -33,6 +33,7 @@ function PreRegister() {
   const { showMessage } = useModal()
 
   const userData = location.state
+  console.log(userData)
 
   const [choice, setChoice] = useState('')
 
@@ -182,7 +183,7 @@ function PreRegister() {
                 {choice === 'phone' && (
                   <InputMask
                     mask="(99) 99999-9999"
-                    placeholder="(00) 00000-0000"
+                    placeholder="celular:(__) _____-____"
                     value={phone}
                     setValue={setPhone}
                   />
@@ -198,7 +199,7 @@ function PreRegister() {
                 />
                 {choice === 'email' && (
                   <InputText
-                    placeholder="nomesobrenome@email.com"
+                    placeholder="Informe seu e-mail."
                     value={email}
                     setValue={setEmail}
                   />
