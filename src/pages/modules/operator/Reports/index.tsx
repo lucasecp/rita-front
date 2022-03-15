@@ -5,9 +5,9 @@ import { Select } from '@/components/Form/Select'
 
 import { Container, Content } from './styles'
 import ButtonPrimary from '@/components/Button/Primary'
-import { reportOptions } from './constants/OptionsPermission'
+import { reportOptions } from './constants/reportOptions'
 
-const Reports = () => {
+export const Reports: React.FC = () => {
   const history = useHistory()
   const [reportChoosen, setReportChoosen] = useState('')
 
@@ -47,4 +47,3 @@ const Reports = () => {
   )
 }
 
-export default Reports

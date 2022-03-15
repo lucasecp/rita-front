@@ -1,4 +1,7 @@
-import { OPERATOR_REPORTS_AUTHORIZATION } from '@/routes/constants/namedRoutes/routes'
+import {
+  OPERATOR_REPORTS_AUTHORIZATION,
+  OPERATOR_REPORTS_BILLING_STATEMENT,
+} from '@/routes/constants/namedRoutes/routes'
 // import { LISTAR_LOG_VALIDACOES } from '@/constants/permissions'
 
 // export const OptionsPermission = [
@@ -14,5 +17,10 @@ export const reportOptions = [
     value: 'autorizacoes',
     label: 'Autorizações',
     path: OPERATOR_REPORTS_AUTHORIZATION,
+  },
+  {
+    value: 'billingStatement',
+    label: 'Analítico de Faturamento',
+    path: OPERATOR_REPORTS_BILLING_STATEMENT,
   },
 ]

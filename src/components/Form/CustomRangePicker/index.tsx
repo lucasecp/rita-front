@@ -7,7 +7,15 @@ import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
 import moment from 'moment'
 import MsgError from '@/components/MsgError'
 
-const CustomRangePicker = ({
+interface CustomRangePickerProps {
+  label: string
+  value: any
+  setValue: (value: any) => void
+  msgError?: string
+  hasError?: boolean
+}
+
+const CustomRangePicker: React.FC<CustomRangePickerProps> = ({
   label,
   value,
   setValue,
@@ -17,7 +25,7 @@ const CustomRangePicker = ({
 }) => {
   const { RangePicker } = DatePicker
 
-  const handleChange = (value) => {
+  const handleChange = (value: any) => {
     const start = moment(value[0]).utcOffset(0)
     const end = moment(value[1]).utcOffset(0)
 

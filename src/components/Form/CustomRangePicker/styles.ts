@@ -2,15 +2,17 @@ import colors from '@/styles/colors'
 import styled from 'styled-components'
 import closeIcon from '@/assets/icons/close.svg'
 
-export const Container = styled.div`
+export const Container = styled.div<{ hasError?: boolean }>`
   /* display: flex;
    flex-direction: column;
    align-items: flex-start; */
   display: grid;
   position: relative;
 
+  height: fit-content;
+
   label {
-    margin-bottom: 9px;
+    margin-bottom: 10px;
     color: #909090;
     font-size: 14px;
     line-height: 16px;

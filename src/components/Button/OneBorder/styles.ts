@@ -1,7 +1,12 @@
 import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 
-export const Container = styled.button`
+interface ButtonOneBorderStyledProps {
+  small?: boolean
+  variation?: string
+}
+
+export const Container = styled.button<ButtonOneBorderStyledProps>`
   border-bottom: 2px solid ${colors.purple.main.dark};
   cursor: pointer;
   background: transparent;

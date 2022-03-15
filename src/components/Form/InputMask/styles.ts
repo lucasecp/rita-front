@@ -11,7 +11,6 @@ export const Container = styled.div<ContainerProps>`
   flex-direction: column;
   align-items: flex-start;
 
-
   label {
     margin-bottom: 6px;
     color: ${colors.gray.middle};
@@ -55,15 +54,18 @@ export const Container = styled.div<ContainerProps>`
       border-color: ${({ hasError }) =>
         hasError ? colors.orange.light : '#419eff'};
     }
-    ${({ variation, hasError }) =>
-      variation === 'secondary' &&
-      css`
+  }
+  ${({ variation, hasError }) =>
+    variation === 'secondary' &&
+    css`
+      > input {
         border: none;
         border-bottom: 2px solid
           ${() => (hasError ? colors.orange.light : colors.purple.main.middle)};
         border-radius: 0;
         box-shadow: none;
         background-color: transparent;
+
         :focus,
         ::after {
           border: none;
@@ -72,9 +74,10 @@ export const Container = styled.div<ContainerProps>`
             hasError ? colors.orange.light : colors.purple.main.dark};
         }
         padding: 5px;
-      `}
-  }
 
-
-  }
+        ::placeholder {
+          color: ${colors.gray.middleLight};
+        }
+      }
+    `}
 `

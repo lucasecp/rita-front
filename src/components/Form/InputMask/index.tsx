@@ -11,7 +11,7 @@ interface InputMaskProps {
   hasError?: boolean
   type?: string
   msgError?: string
-  variation?: 'secondary'
+  variation?: string
   mask: string
   value?: string
   disabled?: boolean
