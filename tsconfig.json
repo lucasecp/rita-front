@@ -26,7 +26,8 @@
     "**/*.spec.ts"
   ],
   "include": [
-    "src"
+    "src",
+    "src/pages/modules/operator/Reports/containers/BillingStatement/containers/Filters/constants/columnsOptions.ts"
   ],
   "extends": "./tsconfig.paths.json"
 }

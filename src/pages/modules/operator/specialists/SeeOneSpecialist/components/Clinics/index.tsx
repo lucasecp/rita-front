@@ -19,7 +19,7 @@ export const Clinics: React.FC<ClinicsProps> = ({
   specialistClinic,
   setSpecialistClinic,
   errors,
-  setErrors
+  setErrors,
 }) => {
   const [clinics, setClinics] = useState<MultiSelectOption[]>([])
 
@@ -35,12 +35,7 @@ export const Clinics: React.FC<ClinicsProps> = ({
           return setClinicOptions([])
         }
 
-        setClinicOptions(() => {
-          if (dataMapped.length === 1) {
-            return dataMapped
-          }
-          return [{ name: 'Todas', id: 'All' }, ...dataMapped]
-        })
+        setClinicOptions(dataMapped)
       } catch ({ response }) {}
     }
 
@@ -79,8 +74,8 @@ export const Clinics: React.FC<ClinicsProps> = ({
           hasError={!!errors.clinics}
           messageError={errors?.clinics}
           name="clinics"
-          onSelect={onChangingSelect}
-          onRemove={onChangingSelect}
+          // onSelect={onChangingSelect}
+          // onRemove={onChangingSelect}
         />
       </section>
     </Container>

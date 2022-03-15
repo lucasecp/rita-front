@@ -23,7 +23,6 @@ const SeePlan = () => {
       try {
         Loading.turnOn()
         const response = await apiAdmin.get(`/plano/${location.state.idPlan}`)
-        console.log(response)
         setPlanInfo(response.data)
       } catch (error) {
       } finally {

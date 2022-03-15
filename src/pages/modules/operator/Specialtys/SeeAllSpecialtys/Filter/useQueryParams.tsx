@@ -1,5 +1,5 @@
 import useQuery from '@/hooks/useQuery'
-import { fieldsApi } from '../static/fieldsApi'
+import { fieldsApi } from '../../SeeAllSpecialtys/static/fieldsApi'
 
 interface UseQueryParamsProps {
   name: string | null

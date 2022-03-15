@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import {
   validateProfissionalName,
   validateRegisterNumber,
-  validateIssuingAgency,
 } from '../../helpers/validatorFields'
 
 import { Container } from './styles'
@@ -13,6 +12,8 @@ import SelectUf from '../SelectUf'
 import SelectIssuingAgency from '../SelectIssuingAgency'
 import InputMask from '@/components/Form/InputMask'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import { specialCharacters } from './specialCharacters'
+import hasSpecialCaracter from '@/helpers/hasSpecialCaracter'
 
 interface ProfissionalDatasProps {
   data: ProfissionalDatasI
@@ -39,6 +40,32 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
   const [cashBack, setCashBack] = useState(data?.cashback || '')
   const [takeRate, setTakeRate] = useState(data?.takerate || '')
 
+  const formatCashRate = (e: any, setValue: (x: string) => void) => {
+    const value = e.target.value.split('')
+
+    const formatedValue = value.reduce((ac: string[], val: string) => {
+      const hasTwoSymbols = ac.includes(',') && val === ','
+
+      if (hasTwoSymbols || (hasSpecialCaracter(val) && val !== ',')) {
+        return ac
+      }
+      ac.push(val)
+      return ac
+    }, [])
+
+    // if the last value is a comma
+    if (formatedValue[formatedValue.length - 1] === ',') {
+      return setValue(formatedValue.slice(0, -1) + '%')
+    }
+
+    // if the first value is a comma
+    if (formatedValue[0] === ',') {
+      return setValue('')
+    }
+
+    setValue(formatedValue.join('') + '%') 
+  }
+
   useEffect(() => {
     setProfissionalName(data?.profissionalName || '')
     setIssuingAgency(data?.issuingAgency || '')
@@ -54,8 +81,8 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
       registerNumber,
       issuingAgency,
       uf: ufToApi,
-      cashBack: Number(clearSpecialCaracter(cashBack)),
-      takeRate: Number(clearSpecialCaracter(takeRate)),
+      cashBack: Number(cashBack.slice(0, -1).replace(',', '.')),
+      takeRate: Number(takeRate.slice(0, -1).replace(',', '.')),
     })
   }, [
     profissionalName,
@@ -129,17 +156,23 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
         />
       </section>
       <div>
-        <InputMask
-          label="CashBack:"
+        <InputText
+          label="CashBack %:"
           value={cashBack}
           setValue={setCashBack}
-          mask="999%"
+          onBlur={(e) => formatCashRate(e, setCashBack)}
+          hasError={!!errors?.cashBack}
+          msgError={errors?.cashBack}
+          name="cashBack"
         />
-        <InputMask
-          label="TakeRate:"
+        <InputText
+          label="TakeRate %:"
           value={takeRate}
           setValue={setTakeRate}
-          mask="999%"
+          onBlur={(e) => formatCashRate(e, setTakeRate)}
+          hasError={!!errors?.takeRate}
+          msgError={errors?.takeRate}
+          name="takeRate"
         />
       </div>
     </Container>

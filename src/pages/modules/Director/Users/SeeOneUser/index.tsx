@@ -16,10 +16,7 @@ import { toast } from '@/styles/components/toastify'
 import { UserData } from './components/UserData'
 
 import apiUser from '@/services/apiUser'
-import {
-  DIRECTOR_FILTER_USERS,
-  EDIT_USER,
-} from '@/routes/constants/namedRoutes/routes'
+import { FILTER_USERS, EDIT_USER } from '@/routes/constants/namedRoutes/routes'
 
 export interface User {
   name: string
@@ -65,11 +62,11 @@ export const SeeOneUser: React.FC = () => {
   }, [])
 
   const onComeBack = () => {
-    history.push(DIRECTOR_FILTER_USERS)
+    history.push(FILTER_USERS)
   }
 
   const onEditUser = () => {
-    history.push(EDIT_USER, { user })
+    history.push(EDIT_USER, { user: { ...user, id } })
   }
 
   return (

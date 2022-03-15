@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react'
+import InputMask from '../InputMask'
 import { Container, ListSuggestions } from './styles'
 
 export interface AutocompleteOptions {
@@ -12,7 +13,11 @@ interface AutocompleteProps {
   setValue: React.Dispatch<React.SetStateAction<AutocompleteOptions>>
   options: AutocompleteOptions[]
   setOptions: React.Dispatch<React.SetStateAction<AutocompleteOptions[]>>
+  mask?: string
   error: string
+  variation: string
+  placeholder: string
+  hasError: boolean
 }
 
 export const Autocomplete: React.FC<AutocompleteProps> = ({
@@ -21,7 +26,9 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
   setValue,
   options,
   setOptions,
+  mask,
   error,
+  variation,
   ...rest
 }) => {
   const [showList, setShowList] = useState(false)
@@ -53,16 +60,19 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
   }
 
   return (
-    <Container>
-      <label htmlFor={label}>{label}</label>
-      <input
+    <Container variation={variation}>
+      {/* <label htmlFor={label}>{label}</label> */}
+      <InputMask
         type="text"
         id={label}
+        label={label}
+        mask={mask || ''}
         value={value.label}
         onChange={onChangeInputValue}
         onFocus={onFocusInput}
         onBlur={onBlurInput}
         autoComplete="off"
+        variation={variation}
         {...rest}
       />
       {error && <p className="error">{error}</p>}

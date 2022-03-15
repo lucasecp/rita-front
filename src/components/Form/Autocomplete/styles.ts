@@ -1,31 +1,46 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 
 interface ListSuggestionsProps {
   fieldError: boolean
 }
 
-export const Container = styled.div`
+export const Container = styled.div<{ variation: string }>`
   display: flex;
   flex-direction: column;
 
   position: relative;
 
-  > input {
-    margin-top: 5px;
+  > div {
+    > input {
+      box-shadow: unset;
+
+      /* margin-top: 5px;
     padding: 14px 16px;
     height: fit-content;
     border: 1px solid ${colors.gray.light};
-    border-radius: 8px;
+    border-radius: 8px; */
+    }
   }
 
   > p.error {
-    margin-top: 5px;
+    margin-top: 4px;
     color: ${colors.orange.middleDark};
-    font-weight: 400;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 12px;
     line-height: 17.5px;
   }
+
+  ${({ variation }) =>
+    variation === 'secondary' &&
+    css`
+      label {
+        color: ${colors.gray.middle};
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 400;
+      }
+    `}
 `
 
 export const ListSuggestions = styled.ul<ListSuggestionsProps>`

@@ -42,12 +42,13 @@ export interface Dependent {
 }
 
 export interface Validations {
+  pacientId: number
   documentOk: string
-  resonDocumentNotOk: any
+  resonDocumentNotOk: string
   incomeOk: string
-  validatorName: any
+  validatorName: string
   dateAndHour: string | undefined
-  status: any
+  status: string
   table: string
 }
 
@@ -105,4 +106,46 @@ export interface ResponseApi {
     razaoSocial: string
     cnpj: string
   }[]
+}
+
+export interface ResponseApiValidations {
+  idPaciente: number
+  documentoOk: boolean
+  motivoDocumento: string
+  rendaBaixa: boolean
+  nomeValidador: string
+  dataValidacao: string
+  status: string
+}
+
+export interface ToApiUpdatePatient {
+  idPaciente: number
+  nome: string
+  cpf: string
+  sexo: string
+  dataNascimento: string
+  telefone: string
+  email: string
+  status: string
+  limiteTentativas: string
+  endereco: {
+    cep: string
+    logradouro: string
+    numero: string
+    complemento: string
+    bairro: string
+    cidade: string
+    uf: string
+  }
+  dependentes:
+    | {
+        idPaciente: number
+        nome: string
+        cpf: string
+        sexo: string
+        dataNascimento: string
+        telefone: string
+        email: string
+      }[]
+    | undefined
 }

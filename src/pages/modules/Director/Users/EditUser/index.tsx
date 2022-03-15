@@ -15,7 +15,7 @@ import { UserData } from './components/UserData'
 import { useModal } from '@/hooks/useModal'
 import { useMessage } from '@/hooks/useMessage'
 import { CancelAndExit } from './messages/CancelAndExit'
-import { DIRECTOR_FILTER_USERS } from '@/routes/constants/namedRoutes/routes'
+import { FILTER_USERS } from '@/routes/constants/namedRoutes/routes'
 
 export interface User {
   id: number
@@ -39,7 +39,7 @@ export const EditUser: React.FC = () => {
 
   useEffect(() => {
     if (!initialUser) {
-      history.push(DIRECTOR_FILTER_USERS)
+      history.push(FILTER_USERS)
     }
   }, [])
 
@@ -49,7 +49,7 @@ export const EditUser: React.FC = () => {
       return
     }
 
-    history.push(DIRECTOR_FILTER_USERS)
+    history.push(FILTER_USERS)
   }
 
   return (

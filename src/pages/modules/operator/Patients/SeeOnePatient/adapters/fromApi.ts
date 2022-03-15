@@ -2,12 +2,15 @@ import { isObjectEmpty } from '@/helpers/isObjectEmpty'
 import { formatCpf } from '@/helpers/formatCpf'
 import { formatPhone } from '@/helpers/formatPhone'
 import formatCnpj from '@/helpers/formatCnpj'
+import formateDateAndHour from '@/helpers/formateDateAndHour'
 import {
   ResponseApi,
   PatientData,
   PatientAddress,
   Dependent,
   PatientStatusLimit,
+  ResponseApiValidations,
+  Validations,
 } from '../types/index'
 
 export interface fromApiResponse {
@@ -123,9 +126,23 @@ export const fromApiDependents = (
     }
   })
 
-  console.log('patientDependents: ', patientDependents)
-
   return patientDependents
+}
+
+export const fromApiValidations = (
+  data: ResponseApiValidations,
+  table: string,
+): Validations => {
+  return {
+    pacientId: data.idPaciente,
+    documentOk: data.documentoOk ? 'yes' : 'no',
+    resonDocumentNotOk: data.motivoDocumento || '',
+    incomeOk: data.rendaBaixa ? 'yes' : 'no',
+    validatorName: data.nomeValidador,
+    dateAndHour: formateDateAndHour(data.dataValidacao, ' às '),
+    status: data.status,
+    table,
+  }
 }
 
 // export const fromApiTitular = (data: any): any => {

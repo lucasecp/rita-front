@@ -74,6 +74,7 @@ export const PersonalDatas: React.FC<PersonalDatasProps> = ({
           onKeyUp={() => setErrors({ ...errors, email: validateEmail(email) })}
           name="email"
           maxLength={100}
+          
         />
 
         {/* <InputEmail
@@ -90,21 +91,22 @@ export const PersonalDatas: React.FC<PersonalDatasProps> = ({
           label="CPF:"
           value={cpf}
           setValue={setCpf}
-          hasError={!!errors?.cpf}
-          msgError={errors?.cpf}
-          onBlur={() =>
-            setErrors({
-              ...errors,
-              cpf: validateCPF(cpf),
-            })
-          }
-          onKeyUp={() =>
-            setErrors({
-              ...errors,
-              cpf: validateCPF(cpf),
-            })
-          }
+          // hasError={!!errors?.cpf}
+          // msgError={errors?.cpf}
+          // onBlur={() =>
+          //   setErrors({
+          //     ...errors,
+          //     cpf: validateCPF(cpf),
+          //   })
+          // }
+          // onKeyUp={() =>
+          //   setErrors({
+          //     ...errors,
+          //     cpf: validateCPF(cpf),
+          //   })
+          // }
           name="cpf"
+          disabled
         />
 
         <InputMask
