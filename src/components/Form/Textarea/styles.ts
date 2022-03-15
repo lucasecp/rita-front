@@ -27,6 +27,11 @@ export const Container = styled.div<ContainerProps>`
     box-shadow: 0px 2px 4px 0px #e5e5e5;
     transition: all 0.3s;
     min-height: 64px;
+    font-size: 14px;
+
+    ::placeholder {
+      color: #afafaf;
+    }
 
     :disabled {
       background: ${colors.gray.light};

@@ -47,6 +47,11 @@ export const Container = styled.div<ContainerProps>`
     background-repeat: no-repeat;
     background-position-x: calc(100% - 16px);
     background-position-y: 50%;
+    font-size: 14px;
+
+    ::placeholder {
+      color: #afafaf;
+    }
 
     :disabled {
       background: #eeeeee;
