@@ -18,7 +18,7 @@ import OutlineButton from '@/components/Button/Outline'
 import { useModal } from '@/hooks/useModal'
 import ComeBack from './messages/ComeBack'
 import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
-import { getDataMapped } from './helpers/getDataMapped'
+import { getDataMapped, getDependentMapped } from './helpers/getDataMapped'
 import { toast } from '@/styles/components/toastify'
 import formateDateAndHour from '@/helpers/formateDateAndHour'
 import { differenceInYears, parse } from 'date-fns'
@@ -203,19 +203,34 @@ export const SeeOnePatient: React.FC = () => {
   }
 
   const onSavePatientData = async () => {
-    const dataToSend = getDataMapped(
-      patientData,
-      patientDependents,
-      patientAddress,
-      patientStatusLimit,
-    )
+    let patientId
+    let patientDataToUpdate
+
+    if (dependent) {
+      patientId = dependent.id
+
+      patientDataToUpdate = getDependentMapped(
+        dependent,
+        patientAddress,
+        patientStatusLimit,
+      )
+    } else {
+      patientId = patientData.id
+
+      patientDataToUpdate = getDataMapped(
+        patientData,
+        patientDependents,
+        patientAddress,
+        patientStatusLimit,
+      )
+    }
 
     try {
       Loading.turnOn()
 
       const response = await apiPatient.put(
-        `/paciente/${patientData.id}`,
-        dataToSend,
+        `/paciente/${patientId}`,
+        patientDataToUpdate,
       )
 
       if (response.status === 200) {
@@ -267,8 +282,8 @@ export const SeeOnePatient: React.FC = () => {
           <DependentExpandable
             title="Dados cadastrais para análise"
             dependentData={dependent}
+            setDependentData={setDependent}
             defaultExpanded
-            setDependentData={() => {}}
             allDependents={patientDependents}
           />
         )}

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { ReactComponent as EyePurpleIcon } from '@/assets/icons/eye-purple.svg'
 import { ReactComponent as ResetIcon } from '@/assets/icons/reset.svg'
 import { ReactComponent as UnlockIcon } from '@/assets/icons/unlock.svg'
@@ -18,19 +17,6 @@ interface ActionProps {
 export const Actions: React.FC<ActionProps> = ({ userData }) => {
   const history = useHistory()
 
-  const [iconsToShow, setIconsToShow] = useState('')
-
-  useEffect(() => {
-    const { status, blocked } = userData
-
-    if (status === 'Ativo' && blocked === 'Não')
-      return setIconsToShow('Inativar')
-    if (status === 'Inativo' && blocked === 'Não')
-      return setIconsToShow('Ativar')
-    if (status === 'Ativo' && blocked === 'Sim')
-      return setIconsToShow('Desbloquear')
-  }, [])
-
   const onSeeUser = () => {
     history.push(SEE_ONE_USER, {
       id: userData.id,
@@ -42,17 +28,17 @@ export const Actions: React.FC<ActionProps> = ({ userData }) => {
       <CustomTooltip label="Visualizar">
         <EyePurpleIcon onClick={onSeeUser} />
       </CustomTooltip>
-      {iconsToShow === 'Desbloquear' && (
+      {userData.status === 'Ativo' && userData.blocked === 'Sim' && (
         <CustomTooltip label="Desbloquear">
           <UnlockIcon />
         </CustomTooltip>
       )}
-      {iconsToShow === 'Inativar' && (
+      {userData.status === 'Ativo' && userData.blocked === 'Não' && (
         <CustomTooltip label="Inativar">
           <InactivateIcon />
         </CustomTooltip>
       )}
-      {iconsToShow === 'Ativar' && (
+      {userData.status === 'Inativo' && userData.blocked === 'Não' && (
         <CustomTooltip label="Ativar">
           <ActivateIcon />
         </CustomTooltip>

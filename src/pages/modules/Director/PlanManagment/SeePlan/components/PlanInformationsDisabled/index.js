@@ -19,11 +19,6 @@ import { useHistory } from 'react-router'
 const PlanInformationsDisabled = ({ data }) => {
   const history = useHistory()
 
-  const abrangencia = mapToRangeOfUse(data?.abrangencia)
-
-  console.log('original: ', data.abrangencia)
-  console.log('fake: ', abrangencia)
-
   return (
     <>
       <Container>

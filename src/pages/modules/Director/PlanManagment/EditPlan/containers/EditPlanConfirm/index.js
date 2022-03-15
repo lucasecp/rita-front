@@ -31,8 +31,8 @@ export const EditPlanConfirm = () => {
       <Container>
         <div>
           <h1>
-            Suas alterações afetarão os itens abaixo do Plano Vida, deseja
-            prosseguir?
+            Suas alterações afetarão os itens abaixo do Plano {plan.name},
+            deseja prosseguir?
           </h1>
 
           {sellableItems.map((sellableItem, index) =>

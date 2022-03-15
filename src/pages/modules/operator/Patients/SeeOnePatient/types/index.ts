@@ -117,3 +117,35 @@ export interface ResponseApiValidations {
   dataValidacao: string
   status: string
 }
+
+export interface ToApiUpdatePatient {
+  idPaciente: number
+  nome: string
+  cpf: string
+  sexo: string
+  dataNascimento: string
+  telefone: string
+  email: string
+  status: string
+  limiteTentativas: string
+  endereco: {
+    cep: string
+    logradouro: string
+    numero: string
+    complemento: string
+    bairro: string
+    cidade: string
+    uf: string
+  }
+  dependentes:
+    | {
+        idPaciente: number
+        nome: string
+        cpf: string
+        sexo: string
+        dataNascimento: string
+        telefone: string
+        email: string
+      }[]
+    | undefined
+}
