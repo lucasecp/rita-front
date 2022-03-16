@@ -14,9 +14,9 @@ export const fromApi = (specialistInfo: any) => {
 
     profissionalData: {
       profissionalName: specialistInfo.nomeProfissional || '',
-      registerNumber: specialistInfo.CRM || '',
+      registerNumber: specialistInfo.registroProfissional || '',
       issuingAgency: specialistInfo.orgaoEmissor?.idOrgaoEmissor || '',
-      uf: specialistInfo.ufRegistroProfissional || '',
+      uf: specialistInfo.ufOrgaoEmissor || '',
       cashback: specialistInfo.cashBack ? specialistInfo.cashBack + '%' : '',
       takerate: specialistInfo.takeRate ? specialistInfo.takeRate + '%' : '',
     },
@@ -34,9 +34,9 @@ export const toApi = (specialistInfo: any) => {
     celular: clearSpecialCaracter(specialistInfo.phone),
     email: specialistInfo.email,
     nomeProfissional: specialistInfo.profissionalName,
-    CRM: specialistInfo.registerNumber,
+    registroProfissional: specialistInfo.registerNumber,
     idOrgaoEmissor: specialistInfo.issuingAgency,
-    crmuf: specialistInfo.uf,
+    ufOrgaoEmissor: specialistInfo.uf,
     clinica: mapClinicsToAPi(specialistInfo.clinics),
     especialidades: mapSpecialtysToApi(specialistInfo.specialtys),
     cashBack: specialistInfo.cashBack,
