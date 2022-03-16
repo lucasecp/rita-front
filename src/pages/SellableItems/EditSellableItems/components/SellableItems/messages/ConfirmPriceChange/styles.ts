@@ -13,7 +13,7 @@ export const Container = styled.div`
     > h1,
     h2,
     h3 {
-      color: ${colors.gray.middle};
+      color: ${colors.gray.dark};
       text-align: center;
     }
 
@@ -21,9 +21,16 @@ export const Container = styled.div`
       margin: 24px auto;
     }
 
-    h2,
-    h3 {
+    h2 {
       margin: 16px auto;
+    }
+
+    h3 {
+      margin-top: 16px;
+    }
+
+    h4 {
+      color: ${colors.gray.middle};
     }
 
     > button {

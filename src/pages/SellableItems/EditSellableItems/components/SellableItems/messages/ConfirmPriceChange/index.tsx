@@ -87,7 +87,7 @@ export const ConfirmPriceChange: React.FC<ConfirmPriceChangeProps> = ({
 
         <h2>teve seu valor alterado para</h2>
         <Price>
-          R${' '}
+          R$ {' '}
           {priceToSave.slice(0, priceToSave.length - 2) +
             ',' +
             priceToSave.slice(-2)}
