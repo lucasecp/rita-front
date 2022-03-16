@@ -174,7 +174,7 @@ function ConfirmPhoneOrEmail() {
                 {choice === 'phone' && (
                   <InputMask
                     mask="(99) 99999-9999"
-                    placeholder="celular: (__) _____-____"
+                    placeholder="(__) _____-____"
                     value={phone}
                     setValue={setPhone}
                   />
