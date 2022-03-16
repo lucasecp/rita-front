@@ -1,6 +1,6 @@
 import { optionsFilteredWithAll } from '@/components/Form/MultSelect/helpers/OptionsFilteredWithAll'
-import { statusOptions } from './../constants/statusOptions'
-import { columnsOptions } from './../constants/columnsOptions'
+import { statusOptions } from '../constants/statusOptions'
+import { columnsOptions } from '../constants/columnsOptions'
 import { MultiSelectOption } from '@/components/Form/MultSelect'
 import { AutocompleteOptions } from '@/components/Form/Autocomplete'
 
@@ -51,7 +51,7 @@ export const columnsToApi = (columns: string): string => {
   return columnsObject[columns] || ''
 }
 
-export const filtersToApi = (
+export const previewFiltersToApi = (
   billingsFilters: BillingsFilters,
 ): BillingsFiltersToApi => {
   const periodStartToApi = billingsFilters.period[0]

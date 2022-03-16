@@ -6,13 +6,11 @@ import { PdfHasBeenDisabledByState, PreviewBillingsState } from '../..'
 
 interface BillingPreviewProps {
   previewBillings: PreviewBillingsState
-  // reportCanBeGenerated: boolean
   pdfHasBeenDisabledBy: PdfHasBeenDisabledByState
 }
 
 export const BillingPreview: React.FC<BillingPreviewProps> = ({
   previewBillings,
-  // reportCanBeGenerated,
   pdfHasBeenDisabledBy,
 }) => {
   const isActiveColumn = useCallback(
@@ -79,7 +77,7 @@ export const BillingPreview: React.FC<BillingPreviewProps> = ({
           </div>
         </>
       )}
-      {!previewBillings?.total && <h4>Nenhum resultado encontrado.</h4>}
+      {previewBillings?.total === 0 && <h4>Nenhum resultado encontrado.</h4>}
     </Container>
   )
 }

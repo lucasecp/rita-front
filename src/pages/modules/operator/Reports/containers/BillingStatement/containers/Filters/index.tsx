@@ -1,31 +1,35 @@
 import React, { useEffect, useState } from 'react'
+import QueryString from 'qs'
 
 import CustomRangePicker from '@/components/Form/CustomRangePicker'
 import CustomMultSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
+import { optionsFilteredWithAll } from '@/components/Form/MultSelect/helpers/OptionsFilteredWithAll'
+import { AutocompleteOptions } from '@/components/Form/Autocomplete'
+import CompanyMultiSelect from './components/CompanyMultiSelect'
 import { toast } from '@/styles/components/toastify'
-
-import { useLoading } from '@/hooks/useLoading'
+import { LengthyReport } from './messages/LengthyReport'
 
 import { Container } from './styles'
 
 import { statusOptions } from './constants/statusOptions'
 import { columnsOptions } from './constants/columnsOptions'
-import { filtersToApi } from './adapters/toApi'
-import { previewBillingsFromApi } from './adapters/fromApi'
-import QueryString from 'qs'
-import apiPatient from '@/services/apiPatient'
+
 import {
   GenerateReportState,
   PdfHasBeenDisabledByState,
   PreviewBillingsState,
 } from '../..'
-import { optionsFilteredWithAll } from '@/components/Form/MultSelect/helpers/OptionsFilteredWithAll'
-import { AutocompleteOptions } from '@/components/Form/Autocomplete'
-import CompanyMultiSelect from './components/CompanyMultiSelect'
-import { LengthyReport } from './messages/LengthyReport'
+
+import apiPatient from '@/services/apiPatient'
+import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
+import downloadFile from '@/helpers/downloadFile'
+
+import { previewBillingsFromApi } from './adapters/fromApi'
+import { previewFiltersToApi } from './adapters/previewFiltersToApi'
+import { reportFiltersToApi } from './adapters/reportFiltersToApi'
 
 interface FiltersProps {
   generatePreview: number
@@ -105,6 +109,10 @@ export const Filters: React.FC<FiltersProps> = ({
   }
 
   useEffect(() => {
+    onGetReportCanBeGenerated(false)
+  }, [cnpj, period, status, columns])
+
+  useEffect(() => {
     if (generatePreview) {
       const loadPreview = async () => {
         if (hasErrors()) {
@@ -112,7 +120,12 @@ export const Filters: React.FC<FiltersProps> = ({
           return
         }
 
-        const filtersMapped = filtersToApi({ cnpj, period, status, columns })
+        const filtersMapped = previewFiltersToApi({
+          cnpj,
+          period,
+          status,
+          columns,
+        })
 
         try {
           Loading.turnOn()
@@ -160,8 +173,50 @@ export const Filters: React.FC<FiltersProps> = ({
     }
   }, [generatePreview])
 
-  const generateBillingReport = () => {
-    console.log('generating report')
+  const generateBillingReport = async () => {
+    const filtersReportMapped = reportFiltersToApi({
+      cnpj,
+      period,
+      status,
+      columns,
+      fileTypeReport: generateReport.fileTypeReport,
+    })
+
+    try {
+      const response = await toast.promise(
+        apiPatient.get('/faturamento-relatorio/documento', {
+          responseType: 'arraybuffer',
+          params: filtersReportMapped,
+          paramsSerializer: (params) => {
+            return QueryString.stringify(params, { arrayFormat: 'repeat' })
+          },
+        }),
+        {
+          pending: 'Gerando arquivo...',
+          success: 'Relatório Emitido com sucesso',
+          error: 'Erro ao gerar relatório',
+        },
+      )
+
+      if (response.status === 200) {
+        if (generateReport.fileTypeReport === 'xlsx') {
+          const blobReportXlsx = new Blob([response.data], {
+            type: 'application/vnd.ms-excel;charset=utf-8',
+          })
+
+          downloadFile(blobReportXlsx, '_Faturamento', 'xls')
+        }
+
+        if (generateReport.fileTypeReport === 'pdf') {
+          const blobReportPdf = new Blob([response.data], {
+            type: 'application/pdf',
+          })
+          downloadFile(blobReportPdf, '_Faturamento', 'pdf')
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
