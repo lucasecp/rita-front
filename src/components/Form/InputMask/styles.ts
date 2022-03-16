@@ -20,6 +20,7 @@ export const Container = styled.div<ContainerProps>`
   }
 
   > input {
+    font-size: 14px;
     color: ${colors.gray.dark};
     border-radius: 8px;
     padding: 14px 16px;
@@ -28,6 +29,12 @@ export const Container = styled.div<ContainerProps>`
     box-shadow: 0px 2px 4px 0px #e5e5e5;
     font-weight: 500;
     width: 100%;
+    
+    ::placeholder {
+      color: #afafaf;
+    }
+    
+  
 
     :disabled {
       background: #eeeeee;

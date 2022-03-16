@@ -61,7 +61,7 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
 
         setSellableItems(sellableItemsMapped)
       } catch (error) {
-        // console.log(error)
+        console.log(error)
         toast.error('Erro ao carregar itens vendáveis!')
       } finally {
         Loading.turnOff()

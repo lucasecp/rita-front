@@ -8,6 +8,7 @@ import Login from '@/pages/Login'
 import { Profile } from '@/pages/Profile'
 import NotFound from '@/pages/404'
 import { FilterSellableItems } from '@/pages/SellableItems/FilterSellableItems'
+import { CreateSellableItem } from '@/pages/SellableItems/CreateSellableItem'
 import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
 import { EditSellableItems } from '@/pages/SellableItems/EditSellableItems'
 import { SeeAllProfiles } from '@/pages/ProfileAndPermissions/SeeAllProfiles'
@@ -38,6 +39,7 @@ import {
   DIRECTOR_SEE_ONE_PROFILE,
   DIRECTOR_EDIT_PROFILE,
   DIRECTOR_CREATE_PROFILE,
+  CREATE_SELLABLE_ITEMS,
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
 
@@ -78,13 +80,18 @@ function Routes() {
         component={SeeOneProfile}
       />
 
-
       <Route path={DIRECTOR_EDIT_PROFILE} isPrivate component={EditProfile} />
 
       <Route
         path={DIRECTOR_CREATE_PROFILE}
         isPrivate
         component={CreateProfile}
+      />
+
+      <Route
+        path={CREATE_SELLABLE_ITEMS}
+        isPrivate
+        component={CreateSellableItem}
       />
 
       <Route path={SEE_SELLABLE_ITEMS} isPrivate component={SeeSellableItems} />

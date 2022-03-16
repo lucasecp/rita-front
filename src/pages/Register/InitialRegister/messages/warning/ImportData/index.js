@@ -12,7 +12,7 @@ import {
   REGISTER_PATIENT,
 } from '@/routes/constants/namedRoutes/routes'
 
-function ImportData({ cpf, company }) {
+function ImportData({ cpf, company, email, phone }) {
   const history = useHistory()
   const { closeModal } = useModal()
 
@@ -23,7 +23,7 @@ function ImportData({ cpf, company }) {
 
   const pushToPreRegister = () => {
     closeModal()
-    history.push(PRE_REGISTER, { cpf, company })
+    history.push(PRE_REGISTER, { cpf, company, email, phone })
   }
 
   return (
