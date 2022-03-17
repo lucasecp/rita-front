@@ -1,33 +1,37 @@
 import { useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-
-import { formatPrice } from '@/helpers/formatPrice'
-import mapDataToMultSelect from './helpers/mapDataToMultSelect'
-import {
-  EDIT_SELLABLE_ITEMS,
-  FILTER_SELLABLE_ITEMS,
-} from '@/routes/constants/namedRoutes/routes'
-
-import { useAuth } from '@/hooks/login'
-import { useLoading } from '@/hooks/useLoading'
-
-import ButtonPrimary from '@/components/Button/Primary'
-import { RangeOfUse } from '@/components/RangeOfUse'
-import CustomMultSelect from '@/components/Form/MultSelect'
-import InputText from '@/components/Form/InputText'
-
-import { FormItem } from './FormItem'
-import { PlaceOfSale } from '../PlaceOfSale'
-
 import { Container, ArrowLeft } from './styles'
 import apiAdmin from '@/services/apiAdmin'
 
+import { useLoading } from '@/hooks/useLoading'
+import { useModal } from '@/hooks/useModal'
+
+import mapDataToMultSelect from './helpers/mapDataToMultSelect'
+import { FILTER_SELLABLE_ITEMS } from '@/routes/constants/namedRoutes/routes'
+
+import OutilineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
+import CustomMultSelect from '@/components/Form/MultSelect'
+import InputCurrency from '../InputCurrency'
+import { DeleteModal } from './messages/DeleteModal'
+import { CancelSaving } from './messages/CancelSaving'
+import { ConfirmPriceChange } from './messages/ConfirmPriceChange'
+import { FormItem } from './FormItem'
+import { PlaceOfSale } from '../PlaceOfSale'
+import { toast } from 'react-toastify'
+
+interface Plan {
+  amount: string
+  id: number
+  idPlan: number
+  name: string
+  outlets: string
+  rangeOfUse: string
+  type: string
+}
+
 interface ResponseLocation {
-  plan: {
-    id: number
-    idPlan: number
-    type: string
-  }
+  plan: Plan
 }
 
 interface ResponseAPISellableItem {
@@ -74,12 +78,12 @@ interface SellableItemsData {
   price: number
 }
 
-export const SellableItemsDisabled: React.FC = () => {
+export const SellableItems: React.FC<Plan> = () => {
   const history = useHistory()
+  const { showMessage } = useModal()
   const { Loading } = useLoading()
   const { plan } = useLocation<ResponseLocation>().state
-  const auth = useAuth()
-  const userPermissions = auth.user.permissoes
+
   const [sellableItemsData, setSellableItemsData] = useState<SellableItemsData>(
     {
       code: 'Código',
@@ -91,37 +95,28 @@ export const SellableItemsDisabled: React.FC = () => {
       status: '',
     },
   )
-
-  const canEditSellableItems = userPermissions.includes(
-    'EDITAR_ITENS_VENDAVEIS',
-  )
-
-  const sellableItemLocation = plan && {
-    idItem: plan.id,
-    idPlan: plan.idPlan,
-    typeItem: plan.type,
-  }
+  const [priceError, setPriceError] = useState('')
+  const [priceToSave, setPriceToSave] = useState<number | string>(0.0)
+  const [fieldWasChanged, setFieldWasChanged] = useState<number>(0)
 
   useEffect(() => {
-    const { idItem, idPlan, typeItem } = sellableItemLocation
-
     const getSellableItem = async () => {
       try {
         Loading.turnOn()
 
         const responseSellableItem =
           await apiAdmin.get<ResponseAPISellableItem>(
-            `/itens-vendaveis/${idItem}`,
+            `/itens-vendaveis/${plan.id}`,
             {
               params: {
-                idPlano: idPlan,
-                tipo: typeItem === 'city' ? 'municipio' : typeItem,
+                idPlano: plan.idPlan,
+                tipo: plan.type === 'city' ? 'municipio' : plan.type,
               },
             },
           )
 
         const responsePlan = await apiAdmin.get<ResponseAPIPlan>(
-          `/plano/${idPlan}`,
+          `/plano/${plan.idPlan}`,
         )
 
         const { locaisVenda, valor } = responseSellableItem.data
@@ -153,7 +148,49 @@ export const SellableItemsDisabled: React.FC = () => {
     }
 
     getSellableItem()
+
+    setPriceToSave(
+      plan.amount.replace('R', '').replace('$', '').replace(' ', ''),
+    )
   }, [])
+
+  useEffect(() => {
+    setFieldWasChanged(fieldWasChanged + 1)
+  }, [priceToSave])
+
+  const onSave = async () => {
+    if (fieldWasChanged < 2) {
+      history.push(FILTER_SELLABLE_ITEMS)
+      toast.success('Nenhuma alteração realizada.')
+      return
+    }
+    if (priceToSave < 0.01) {
+      return setPriceError('O valor é obrigatório')
+    }
+    setPriceError('')
+    showMessage(ConfirmPriceChange, { sellableItemsData, priceToSave, plan })
+  }
+
+  const onCancel = () => {
+    if (fieldWasChanged > 2) {
+      return showMessage(CancelSaving)
+    }
+    history.push(FILTER_SELLABLE_ITEMS)
+  }
+
+  const toDeleteSellableItem = async () => {
+    try {
+      Loading.turnOn()
+
+      showMessage(DeleteModal, {
+        plan,
+      })
+    } catch (err) {
+      console.log(err)
+    } finally {
+      Loading.turnOff()
+    }
+  }
 
   return (
     <>
@@ -166,7 +203,6 @@ export const SellableItemsDisabled: React.FC = () => {
           <p>
             Plano Base <span />
           </p>
-
           <FormItem
             label="Código - Nome:"
             value={`${sellableItemsData.code} - ${sellableItemsData.name}`}
@@ -187,20 +223,23 @@ export const SellableItemsDisabled: React.FC = () => {
           <PlaceOfSale places={sellableItemsData.placeOfSale} />
 
           <div id="containerInput">
-            <InputText
+            <InputCurrency
               label="Valor:"
-              value={formatPrice(sellableItemsData.price)}
-              disabled
+              required
+              defaultValue={plan.amount}
+              setValue={setPriceToSave}
+              messageError={priceError}
+              hasError={!!priceError}
             />
           </div>
         </main>
-        {canEditSellableItems && (
-          <footer>
-            <ButtonPrimary onClick={() => history.push(EDIT_SELLABLE_ITEMS)}>
-              Editar
-            </ButtonPrimary>
-          </footer>
-        )}
+        <footer>
+          <OutilineButton onClick={onCancel}>Cancelar</OutilineButton>
+          <OutilineButton variation={'red'} onClick={toDeleteSellableItem}>
+            Excluir
+          </OutilineButton>
+          <ButtonPrimary onClick={onSave}>Salvar</ButtonPrimary>
+        </footer>
       </Container>
     </>
   )

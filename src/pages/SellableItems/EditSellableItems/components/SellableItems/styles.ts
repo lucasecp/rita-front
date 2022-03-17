@@ -65,6 +65,8 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 
+    gap: 25px;
+
     button {
       padding: 10px 32px;
     }

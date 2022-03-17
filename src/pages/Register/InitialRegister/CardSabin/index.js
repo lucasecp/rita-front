@@ -106,7 +106,7 @@ function RegisterCardSabin() {
             <InputMask
               label="Digite Seu CPF:"
               mask="999.999.999-99"
-              placeholder="cpf:___.___.___-__"
+              placeholder="___.___.___-__"
               value={cpf}
               setValue={setCpf}
             />

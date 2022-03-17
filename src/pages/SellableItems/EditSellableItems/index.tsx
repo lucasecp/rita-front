@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import { SellableItemsDisabled } from './components/SellableItemsDisabled'
+import { SellableItems } from './components/SellableItems'
 
 export const EditSellableItems: React.FC = () => {
   useEffect(() => {
@@ -10,7 +10,7 @@ export const EditSellableItems: React.FC = () => {
 
   return (
     <DefaultLayout title="Itens Vendáveis - Visualização">
-      <SellableItemsDisabled />
+      <SellableItems />
     </DefaultLayout>
   )
 }

@@ -70,7 +70,6 @@ export const BillingStatement: React.FC = () => {
         />
         <BillingPreview
           previewBillings={previewBillings}
-          // reportCanBeGenerated={reportCanBeGenerated}
           pdfHasBeenDisabledBy={pdfHasBeenDisabledBy}
         />
       </Container>
