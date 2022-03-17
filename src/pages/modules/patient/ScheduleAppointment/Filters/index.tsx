@@ -35,7 +35,7 @@ const Filters = () => {
   const [wasSubmited, setWasSubmited] = useState(false)
 
   const [queryApiPagination, setQueryApiPagination] =
-    useState('?limit=10&skip=0')
+    useState('?limit=9&skip=0')
 
   const history = useHistory()
   const { Loading } = useLoading()
