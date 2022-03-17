@@ -38,6 +38,7 @@ import {
   SPECIALIST_PROFILE,
   FILTER_USERS,
   OPERATOR_SEE_All_SPECIALTYS_TYPES,
+  CLINIC_SEE_ALL_SPECIALIST,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -162,5 +163,11 @@ export const menuItens = [
     icon: <SpecialtysTypesIcon />,
     name: 'Tipos de Especialidade',
     permission: permissionList.LISTAR_TIPO_ESPECIALIDADE,
+  },
+  {
+    path: CLINIC_SEE_ALL_SPECIALIST,
+    icon: <StethoscopeIcon />,
+    name: 'Especialistas',
+    // permission: permissionList.LISTAR_ESPECIALIDADES,
   },
 ]
