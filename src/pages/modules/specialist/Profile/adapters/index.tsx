@@ -19,7 +19,7 @@ export const fromApi = (doctorInfo: any) => {
       takerate: doctorInfo.takeRate ? doctorInfo.takeRate + '%' : '',
     },
 
-    specialtys: mapSpecialtys(doctorInfo.especialidade),
+    specialtys: mapSpecialtys(doctorInfo.especialidades),
     clinics: mapClinics(doctorInfo.clinica),
   }
 }
