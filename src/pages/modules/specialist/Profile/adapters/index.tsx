@@ -29,7 +29,6 @@ export const toApi = (doctorInfo: any) => {
     nome: doctorInfo.specialistInfo?.name,
     nomeProfissional: doctorInfo.specialistInfo?.profissionalName,
     email: doctorInfo.specialistInfo?.email,
-    cpf: clearSpecialCaracter(doctorInfo.specialistInfo?.cpf),
     receberAgendamentos: doctorInfo.specialistInfo?.receiveService,
     celular: clearSpecialCaracter(doctorInfo.specialistInfo?.phone),
     ufOrgaoEmissor: doctorInfo.specialistInfo?.ufProfissionaRegister,
