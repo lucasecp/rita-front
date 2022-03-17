@@ -17,7 +17,7 @@ import {
   OPERATOR_EDIT_SPRECIALTY,
   OPERATOR_SEE_ALL_SPECIALISTS,
   OPERATOR_SEE_ONE_SPECIALIST,
-  OPERATOR_SEE_All_SPECIALTYS_TYPES
+  OPERATOR_SEE_All_SPECIALTYS_TYPES,
 } from '../../constants/namedRoutes/routes'
 
 import { SeeOnePatient } from '@/pages/modules/operator/Patients/SeeOnePatient'
@@ -103,7 +103,7 @@ const operatorRoutes = [
     component: SeeOneSpecialist,
   },
   {
-    path:  OPERATOR_SEE_All_SPECIALTYS_TYPES,
+    path: OPERATOR_SEE_All_SPECIALTYS_TYPES,
     component: SpecialtysTypes,
   },
 ]

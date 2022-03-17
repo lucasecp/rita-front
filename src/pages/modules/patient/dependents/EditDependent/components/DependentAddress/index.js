@@ -47,8 +47,6 @@ export const DependentAddress = ({
     })
   }, [cep, uf, city, addressDep, number, district])
 
-
-
   useEffect(() => {
     setAddressToSave({
       cep,
