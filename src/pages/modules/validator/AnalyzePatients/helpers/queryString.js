@@ -17,7 +17,6 @@ export const queryFilterString = (array) => {
   }
 
   const hasStatus = array.find((item) => item.name === 'status')
-  console.log('hasStatus: ', hasStatus)
 
   if (!hasStatus) {
     valueString += `&status=P&status=EA`
