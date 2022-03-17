@@ -36,7 +36,7 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({ plan }) => {
   const [error, setError] = useState('')
 
   const onConfirm = async () => {
-    if (description.length > 20) {
+    if (description.length > 19) {
       Loading.turnOn()
       try {
         await apiAdmin.delete(`/itens-vendaveis/${plan.id}`, {

@@ -79,31 +79,33 @@ export const ConfirmPriceChange: React.FC<ConfirmPriceChangeProps> = ({
     <Container>
       <div>
         <img src={warning} />
-        <h1>O item abaixo:</h1>
+        <h6>O item abaixo:</h6>
+        <div>
+          <PlanName>{plan.name}</PlanName>
+          <p>{plan.rangeOfUse}</p>
+          <Price>{plan.amount}</Price>
 
-        <PlanName>{plan.name}</PlanName>
-        <p>{plan.rangeOfUse}</p>
-        <Price>{plan.amount}</Price>
+          <h6>teve seu valor alterado para</h6>
+          <Price>
+            R$
+            {priceToSave.slice(0, priceToSave.length - 2) +
+              ',' +
+              priceToSave.slice(-2)}
+          </Price>
 
-        <h2>teve seu valor alterado para</h2>
-        <Price>
-          R$ {' '}
-          {priceToSave.slice(0, priceToSave.length - 2) +
-            ',' +
-            priceToSave.slice(-2)}
-        </Price>
-
-        <h3>Deseja prosseguir?</h3>
-        <h4>Esta ação não afeta contratos ativos!</h4>
-
-        <Textarea
-          limit="200"
-          showCaractersInformation
-          setValue={setDescription}
-          value={description}
-          hasError={!!error}
-          messageError={error}
-        />
+          <h6>Deseja prosseguir?</h6>
+          <span>Esta ação não afeta contratos ativos!</span>
+        </div>
+        <section>
+          <Textarea
+            limit="200"
+            showCaractersInformation
+            setValue={setDescription}
+            value={description}
+            hasError={!!error}
+            messageError={error}
+          />
+        </section>
       </div>
       <ButtonGroup>
         <OutlineButton onClick={onDoNotProceed}>Não</OutlineButton>

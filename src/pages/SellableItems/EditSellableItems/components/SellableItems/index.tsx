@@ -6,18 +6,20 @@ import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 
-import mapDataToMultSelect from './helpers/mapDataToMultSelect'
+import { sellableItemsFromApi } from './adapters/fromApi'
 import { FILTER_SELLABLE_ITEMS } from '@/routes/constants/namedRoutes/routes'
 
 import OutilineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import CustomMultSelect from '@/components/Form/MultSelect'
-import InputCurrency from '../InputCurrency'
+import CustomMultSelect, {
+  MultiSelectOption,
+} from '@/components/Form/MultSelect'
+import InputCurrency from './components/InputCurrency'
 import { DeleteModal } from './messages/DeleteModal'
 import { CancelSaving } from './messages/CancelSaving'
 import { ConfirmPriceChange } from './messages/ConfirmPriceChange'
-import { FormItem } from './FormItem'
-import { PlaceOfSale } from '../PlaceOfSale'
+import { FormItem } from './components/FormItem'
+import { PlaceOfSale } from './components/PlaceOfSale'
 import { toast } from 'react-toastify'
 
 interface Plan {
@@ -34,51 +36,33 @@ interface ResponseLocation {
   plan: Plan
 }
 
-interface ResponseAPISellableItem {
-  locaisVenda: PlaceOfSaleData[]
-  valor: number
-}
-
-interface ResponseAPIPlan {
-  codigo: string
-  nome: string
-  status: string
-  descricao: string
-  servicos: ServicesData[]
-}
-
-interface ServicesData {
-  id: string
-  nome: string
-}
-
 interface PlaceOfSaleData {
   city?: {
     id: number
-    nome: string
+    name: string
   }[]
   uf?: {
     id: number
-    sigla: string
-    nome: string
+    acronym: string
+    name: string
   }
   regional: {
     id: number
-    nome: string
+    name: string
   }
 }
 
-interface SellableItemsData {
+export interface SellableItemsData {
   code: string
   name: string
   status: string
   description: string
-  services: ServicesData[]
+  services: MultiSelectOption[]
   placeOfSale: PlaceOfSaleData[]
   price: number
 }
 
-export const SellableItems: React.FC<Plan> = () => {
+export const SellableItems: React.FC = () => {
   const history = useHistory()
   const { showMessage } = useModal()
   const { Loading } = useLoading()
@@ -104,42 +88,24 @@ export const SellableItems: React.FC<Plan> = () => {
       try {
         Loading.turnOn()
 
-        const responseSellableItem =
-          await apiAdmin.get<ResponseAPISellableItem>(
-            `/itens-vendaveis/${plan.id}`,
-            {
-              params: {
-                idPlano: plan.idPlan,
-                tipo: plan.type === 'city' ? 'municipio' : plan.type,
-              },
+        const { data: dataSellableItems } = await apiAdmin.get(
+          `/itens-vendaveis/${plan.id}`,
+          {
+            params: {
+              idPlano: plan.idPlan,
+              tipo: plan.type === 'city' ? 'municipio' : plan.type,
             },
-          )
-
-        const responsePlan = await apiAdmin.get<ResponseAPIPlan>(
-          `/plano/${plan.idPlan}`,
+          },
         )
 
-        const { locaisVenda, valor } = responseSellableItem.data
-        const { codigo, nome, status, descricao, servicos } = responsePlan.data
+        const { data: dataPlan } = await apiAdmin.get(`/plano/${plan.idPlan}`)
 
-        const setStatus: { [x: string]: string } = {
-          I: 'Inativo',
-          P: 'Em Digitação',
-          A: 'Ativo',
-          S: 'Suspenso',
-        }
+        const sellableItemsMapped = sellableItemsFromApi(
+          dataSellableItems,
+          dataPlan,
+        )
 
-        const ajustedData = {
-          code: codigo,
-          name: nome,
-          status: setStatus[status],
-          description: descricao,
-          services: servicos,
-          placeOfSale: locaisVenda,
-          price: valor,
-        }
-
-        setSellableItemsData(ajustedData)
+        setSellableItemsData(sellableItemsMapped)
       } catch (error) {
         console.log(error)
       } finally {
@@ -159,9 +125,9 @@ export const SellableItems: React.FC<Plan> = () => {
   }, [priceToSave])
 
   const onSave = async () => {
-    if (fieldWasChanged < 2) {
-      history.push(FILTER_SELLABLE_ITEMS)
+    if (fieldWasChanged < 3) {
       toast.success('Nenhuma alteração realizada.')
+      history.push(FILTER_SELLABLE_ITEMS)
       return
     }
     if (priceToSave < 0.01) {
@@ -213,7 +179,7 @@ export const SellableItems: React.FC<Plan> = () => {
             disabled
             label="Serviços:"
             variation="secondary"
-            value={mapDataToMultSelect(sellableItemsData.services)}
+            value={sellableItemsData.services}
           />
 
           <p>
