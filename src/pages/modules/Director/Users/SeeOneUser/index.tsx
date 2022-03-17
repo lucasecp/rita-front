@@ -66,7 +66,7 @@ export const SeeOneUser: React.FC = () => {
   }
 
   const onEditUser = () => {
-    history.push(EDIT_USER, { user })
+    history.push(EDIT_USER, { user: { ...user, id } })
   }
 
   return (

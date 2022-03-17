@@ -1,11 +1,11 @@
-import React, { ButtonHTMLAttributes }  from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 
 import { Container } from './styles'
 
 interface IButtonOutline extends ButtonHTMLAttributes<HTMLButtonElement> {
   small?: boolean
   medium?: boolean
-  variation?:string
+  variation?: string
 }
 
 const OutlineButton: React.FC<IButtonOutline> = ({

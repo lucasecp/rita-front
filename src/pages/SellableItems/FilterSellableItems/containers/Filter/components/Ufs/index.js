@@ -34,8 +34,9 @@ export const Ufs = ({ setUf, uf, regional }) => {
           }
           return [{ name: 'Todos', id: 0 }, ...dataMapped]
         })
-      } catch ({ response }) {
+      } catch (error) {
         toast.error('Erro ao carregar ufs!')
+        console.log(error)
       } finally {
         Loading.turnOff()
       }

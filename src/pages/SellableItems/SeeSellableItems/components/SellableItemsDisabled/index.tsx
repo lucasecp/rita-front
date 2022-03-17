@@ -196,7 +196,9 @@ export const SellableItemsDisabled: React.FC = () => {
         </main>
         {canEditSellableItems && (
           <footer>
-            <ButtonPrimary onClick={() => history.push(EDIT_SELLABLE_ITEMS)}>
+            <ButtonPrimary
+              onClick={() => history.push(EDIT_SELLABLE_ITEMS, { plan })}
+            >
               Editar
             </ButtonPrimary>
           </footer>

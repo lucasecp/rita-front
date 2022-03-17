@@ -31,6 +31,11 @@ export const Container = styled.div`
       width: 100%;
       font-weight: 500;
       line-height: 22px;
+      font-size: 14px;
+
+      ::placeholder {
+        color: #afafaf;
+      }
 
       :disabled {
         background: #eeeeee;
