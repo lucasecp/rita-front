@@ -112,8 +112,6 @@ export const ButtonGroup = styled.div`
   margin-top: 24px;
   display: flex;
   align-items: center;
-  }
-
   > button + button {
     margin-left: 20px;
   }
