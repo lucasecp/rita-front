@@ -32,8 +32,8 @@ export const toApi = (doctorInfo: any) => {
     cpf: clearSpecialCaracter(doctorInfo.specialistInfo?.cpf),
     receberAgendamentos: doctorInfo.specialistInfo?.receiveService,
     celular: clearSpecialCaracter(doctorInfo.specialistInfo?.phone),
-    crmuf: doctorInfo.specialistInfo?.ufProfissionaRegister,
-    CRM: doctorInfo.specialistInfo?.classCouncil,
+    ufOrgaoEmissor: doctorInfo.specialistInfo?.ufProfissionaRegister,
+    registroProfissional: doctorInfo.specialistInfo?.classCouncil,
     clinica: mapClinicsToApi(doctorInfo.clinic),
     especialidade: mapSpecialtysToApi(doctorInfo.specialtys),
   }
