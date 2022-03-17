@@ -34,6 +34,6 @@ export const toApi = (doctorInfo: any) => {
     ufOrgaoEmissor: doctorInfo.specialistInfo?.ufProfissionaRegister,
     registroProfissional: doctorInfo.specialistInfo?.classCouncil,
     clinica: mapClinicsToApi(doctorInfo.clinic),
-    especialidade: mapSpecialtysToApi(doctorInfo.specialtys),
+    especialidades: mapSpecialtysToApi(doctorInfo.specialtys),
   }
 }
