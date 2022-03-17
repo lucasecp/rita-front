@@ -76,6 +76,7 @@ const Filter = () => {
     setErrors(newErrors)
     return newErrors
   }
+
   const setInitialStates = () => {
     setName('')
     setCpf('')
@@ -85,7 +86,7 @@ const Filter = () => {
     setErrors({})
     setOrders([])
     setFilters([])
-    history.push('?page=1&limit=10')
+    history.push('?page=1&limit=10&status=P&status=EA')
     setSubmited(false)
   }
 
