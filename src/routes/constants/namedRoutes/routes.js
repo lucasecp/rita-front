@@ -29,7 +29,7 @@ export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 export const OPERATOR_ADD_DEPENDENT = '/dependentes/associar'
 export const OPERATOR_SEE_ALL_SPECIALISTS = '/operador-especialistas'
 export const OPERATOR_SEE_ONE_SPECIALIST = '/especialistas/ver-especialista'
-export const OPERATOR_SEE_All_SPECIALTYS_TYPES = '/tipos-especialidades'
+export const OPERATOR_SEE_All_ISSUING_AGENCY = '/orgao-emissor'
 
 export const CLINIC_SEE_ALL_SPECIALIST = '/clinica-especialista'
 export const CLINIC_SEE_ONE_SPECIALIST = '/clinica-especialista/visualizar'

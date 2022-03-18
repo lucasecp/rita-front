@@ -10,51 +10,48 @@ import apiAdmin from '@/services/apiAdmin'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 import { fromApi } from './adapters'
-import { SpecialtyI } from './types'
+import { IssuingAgencyI } from './types'
 import ButtonHeader from './Components/ButtonHeader'
 
-const SpecialtysTypes: React.FC = () => {
+const IssuingAgency: React.FC = () => {
   const [filters, setFilters] = useState<any[]>([])
   const [order, setOrder] = useState({})
-  const [specialtys, setSpecialtys] = useState({} as SpecialtyI)
+  const [issuingAgency, setIssuingAgency] = useState<IssuingAgencyI[]>([])
   const { Loading } = useLoading()
 
   useEffect(() => {
-  document.title = 'Rita Saúde | Tipos de Especialidades'
-  },[])
+    document.title = 'Rita Saúde | Órgão Emissor'
+  }, [])
 
   useEffect(() => {
-    const getSpecialtys = async () => {
+    const getAgency = async () => {
       try {
         Loading.turnOn()
         const { data } = await apiAdmin(
-          `/tipo-especialidade?${
+          `/orgao-emissor?${
             queryFilterString(filters) + queryOrderString(order)
           }`,
         )
-        setSpecialtys({
-          total: data.total,
-          data: fromApi(data.tiposEspecialidade),
-        })
+        setIssuingAgency(fromApi(data))
       } catch (error) {
       } finally {
         Loading.turnOff()
       }
     }
-    getSpecialtys()
+    getAgency()
   }, [filters, order])
 
   return (
     <Container>
       <DefaultLayout
-        title="Gestão de Tipo de Especialidade"
+        title="Gestão de Orgão Emissor"
         headerChildren={<ButtonHeader />}
       >
         <Content>
           <Filter setFilters={setFilters} />
-          <Table 
-            specialtys={specialtys}
-            setSpecialtys={setSpecialtys}
+          <Table
+            issuingAgency={issuingAgency}
+            setIssuingAgency={setIssuingAgency}
             setOrder={setOrder}
             order={order}
           />
@@ -64,4 +61,4 @@ const SpecialtysTypes: React.FC = () => {
   )
 }
 
-export default SpecialtysTypes
+export default IssuingAgency

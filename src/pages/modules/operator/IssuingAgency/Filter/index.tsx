@@ -6,6 +6,8 @@ import { BtnGroup, Container } from './styles'
 import { verifyTypedFields } from '../helpers/verifyTypedFields'
 import { fieldsApi } from '../static/fieldsApi'
 import useQueryParams from './useQueryParams'
+import { Select } from '@/components/Form/Select'
+
 
 interface FilterProps {
   setFilters: React.Dispatch<React.SetStateAction<any[]>>
@@ -14,8 +16,9 @@ interface FilterProps {
 const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   const local = useQueryParams()
 
-  const [type, setType] = useState(local.type || '')
-  const [code, setCode] = useState(local.code || '')
+  const [status, setStatus] = useState(local.status || '')
+  const [issuingAgency, setIssuingAgency] = useState(local.issuingAgency || '')
+  const [specialist, setSpecialist] = useState(local.specialist || '')
   const [errors, setErrors] = useState({
     type: '',
   })
@@ -26,18 +29,23 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
 
   const arrayQuery = [
     {
-      name: fieldsApi.CODIGO,
-      value: code,
+      name: fieldsApi.ORGAOEMISSOR,
+      value: issuingAgency,
     },
     {
-      name: fieldsApi.TIPO,
-      value: type,
+      name: fieldsApi.ESPECIALISTA,
+      value: specialist,
+    },
+    {
+      name: fieldsApi.STATUS,
+      value: status,
     },
   ]
 
   const clearFields = () => {
-    setType('')
-    setCode('')
+    setIssuingAgency('')
+    setSpecialist('')
+    setStatus('')
     setFilters([])
     setErrors({ type: '' })
     window.localStorage.removeItem('@Rita/specialtys-types-filter')
@@ -47,7 +55,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     let newErrors = false
     setErrors({ type: '' })
 
-    if (type.length < 3 && type) {
+    if (issuingAgency.length < 3 && issuingAgency) {
       setErrors({ type: 'Informe 3 letras ou mais' })
       newErrors = true
     }
@@ -61,8 +69,9 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     window.localStorage.setItem(
       '@Rita/specialtys-types-filter',
       JSON.stringify({
-        type,
-        code,
+        issuingAgency,
+        specialist,
+        status,
       }),
     )
     setFilters(verifyTypedFields(arrayQuery))
@@ -73,19 +82,32 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
       <div>
         <InputText
           variation="secondary"
-          label="Código:"
-          value={code}
-          setValue={setCode}
+          label="Órgão Emissor:"
+          value={issuingAgency}
+          setValue={setIssuingAgency}
           maxLength={20}
         />
 
         <InputText
           variation="secondary"
-          label="Tipo de Especialidade:"
-          value={type}
-          setValue={setType}
-          maxLength={200}
+          label="Especialista:"
+          value={specialist}
+          setValue={setSpecialist}
+          maxLength={20}
           // onlyLetter
+          hasError={!!errors.type}
+          msgError={errors.type}
+        />
+        <Select
+          variation="secondary"
+          labelDefaultOption="Selecione"
+          label="Status:"
+          value={status}
+          setValue={setStatus}
+          options={[
+            { label: 'Ativo', value: 'A' },
+            { label: 'Inativo', value: 'I'},
+          ]}
           hasError={!!errors.type}
           msgError={errors.type}
         />

@@ -36,6 +36,7 @@ export const Content = styled.div`
     }
   }
   h5 {
+    display: flex;
     color: ${({ theme }) => theme.darkness};
     font-size: 16px;
     font-weight: 700;

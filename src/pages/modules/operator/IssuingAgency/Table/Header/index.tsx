@@ -31,16 +31,20 @@ const Header: React.FC<HeaderProps> = ({ order, setOrder }) => {
       <div>
         {orderly.map((order) => (
           <Content key={order.name}>
-            <h5> {order.label} </h5>
-            <div onClick={() => toggleOrder(order.name)}>
-              <ArrowUp order={hasAscOrder(order.name) ? 1 : 0} />
-              <ArrowDown order={hasDescOrder(order.name) ? 1 : 0} />
-            </div>
+            {order.name === 'EspecialidadesAssociadas' ||
+            order.name === 'EspecialistasAssociados' ? (
+              <h5> {order.label} </h5>
+            ) : (
+              <>
+                <h5> {order.label} </h5>
+                <div onClick={() => toggleOrder(order.name)}>
+                  <ArrowUp order={hasAscOrder(order.name) ? 1 : 0} />
+                  <ArrowDown order={hasDescOrder(order.name) ? 1 : 0} />
+                </div>
+              </>
+            )}
           </Content>
         ))}
-        <Content>
-          <h5> Quant. de Especialidade </h5>
-        </Content>
         <Content>
           <h5> Ações </h5>
         </Content>
