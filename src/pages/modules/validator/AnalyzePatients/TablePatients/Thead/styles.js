@@ -13,16 +13,14 @@ export const Content = styled.div`
   margin-top: -2px;
   margin-bottom: -2px;
   justify-content: space-between;
-  padding-right: 24px;
   align-items: center;
+  padding: 16px;
 
   > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     cursor: pointer;
-    margin-left: 55px;
-    padding: 20px;
     height: 100%;
   }
 `
