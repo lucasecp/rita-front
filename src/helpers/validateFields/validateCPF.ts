@@ -1,12 +1,13 @@
-import clearSpecialCaracter from '../clear/SpecialCaracteres'
-import validateCpf from '../validateCpf'
+import validateCpf from '@/helpers/validateCpf'
 
-export const validateCPF = (value: string): string => {
-  const newValue = clearSpecialCaracter(value)
-  
-  if (!newValue) return 'CPF Obrigatório.'
+export const validateCPF = (cpf: string): string => {
+  if (!cpf.trim()) {
+    return 'CPF Obrigatório.'
+  }
 
-  else if (!validateCpf(newValue)) return 'CPF Inválido.'
+  if (!validateCpf(cpf)) {
+    return 'CPF inválido'
+  }
 
   return ''
 }

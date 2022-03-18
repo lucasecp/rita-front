@@ -4,19 +4,23 @@ import { useHistory } from 'react-router'
 import { Select } from '../Form/Select'
 import { Container, Prev, Next } from './style'
 import { PaginationProps } from './types'
+import useLocalStorage from 'use-local-storage';
 
 const Pagination: React.FC<PaginationProps> = ({
   total,
   restQuery,
   range,
   setQuery,
+  perPage,
 }) => {
   const history = useHistory()
   const query = useQuery()
+  const [perPageValue, setPerPageValue] = useState(perPage || 10)
   const [limit, setLimit] = useState<number | string>(
-    Number(query.get('limit')) || 10,
+    Number(query.get('limit')) || perPageValue,
   )
   const [currentPage, setCurrentPage] = useState(Number(query.get('page')) || 1)
+
 
   const skipedPages = (currentPage - 1) * Number(limit)
 
@@ -57,10 +61,10 @@ const Pagination: React.FC<PaginationProps> = ({
         <Select
           options={
             range || [
-              { label: 10, value: 10 },
-              { label: 25, value: 25 },
-              { label: 50, value: 50 },
-              { label: 100, value: 100 },
+              { label: perPageValue, value: perPageValue },
+              { label: perPageValue * 3, value: perPageValue * 3 },
+              { label: perPageValue * 5, value: perPageValue * 5 },
+              { label: perPageValue * 10, value: perPageValue * 10 },
             ]
           }
           value={limit}

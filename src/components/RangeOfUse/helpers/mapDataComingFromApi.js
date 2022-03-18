@@ -1,8 +1,6 @@
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 
 export const mapDataComingFromApi = (ranges) => {
-  // console.log('ranges: ', ranges)
-
   return ranges?.map((range) => ({
     regional: range.regional
       ? { label: range.regional?.nome, value: range.regional?.id }

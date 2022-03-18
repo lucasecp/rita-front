@@ -17,8 +17,8 @@ export const Container = styled.div`
     > label {
       color: ${colors.gray.middle};
       font-weight: 400;
-      font-size: 16px;
-      line-height: 20px;
+      font-size: 14px;
+      line-height: 16px;
     }
 
     > p.error {
@@ -53,7 +53,7 @@ export const BtnGroup = styled.div`
   }
 `
 export const ContentFile = styled.div`
-  margin-top: 5px;
+  margin-top: 6px;
 
   display: grid;
   grid-template-columns: 0.7fr 0.3fr;

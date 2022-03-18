@@ -17,6 +17,9 @@ export const OPERATOR_SEE_ONE_PATIENT = '/pacientes/ver-paciente'
 export const OPERATOR_CONSULT_ELIGIBILITY = '/elegibilidade/consultar'
 export const OPERATOR_REPORTS = '/relatorios'
 export const OPERATOR_REPORTS_AUTHORIZATION = '/relatorios/autorizacoes'
+export const OPERATOR_REPORTS_BILLING_STATEMENT =
+  '/relatorios/demonstrativo-de-faturamento'
+
 export const OPERATOR_SEE_ALL_CLINICS = '/clinicas'
 export const OPERATOR_SEE_ONE_CLINIC = '/clinicas/ver-clinica'
 export const OPERATOR_SEE_ALL_SPECIALTYS = '/especialidades'
@@ -24,9 +27,12 @@ export const OPERATOR_CREATE_SPRECIALTY = '/especialidades/criar'
 export const OPERATOR_EDIT_SPRECIALTY = '/especialidades/editar'
 export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 export const OPERATOR_ADD_DEPENDENT = '/dependentes/associar'
-export const OPERATOR_SEE_ALL_SPECIALISTS = '/especialistas'
+export const OPERATOR_SEE_ALL_SPECIALISTS = '/operador-especialistas'
 export const OPERATOR_SEE_ONE_SPECIALIST = '/especialistas/ver-especialista'
-export const OPERATOR_SEE_All_SPECIALTYS_TYPES = '/tipos-especialidades'
+export const OPERATOR_SEE_All_ISSUING_AGENCY = '/orgao-emissor'
+
+export const CLINIC_SEE_ALL_SPECIALIST = '/clinica-especialista'
+export const CLINIC_SEE_ONE_SPECIALIST = '/clinica-especialista/visualizar'
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
@@ -41,7 +47,6 @@ export const DIRECTOR_SEE_PLAN_MANAGMENT = '/gestao/planos/visualizar'
 export const DIRECTOR_CREATE_PLAN_MANAGMENT = '/gestao/planos/criar'
 export const DIRECTOR_IMPORT = '/importacao'
 export const DIRECTOR_IMPORT_REPORT = '/importacao/relatorio'
-export const DIRECTOR_FILTER_USERS = '/usuarios'
 
 export const DIRECTOR_SEE_ALL_PROFILES = '/perfis'
 export const DIRECTOR_SEE_ONE_PROFILE = '/perfis/visualizar'
@@ -52,6 +57,11 @@ export const FILTER_SELLABLE_ITEMS = '/itens-vendaveis/'
 export const CREATE_SELLABLE_ITEMS = '/itens-vendaveis/criar'
 export const SEE_SELLABLE_ITEMS = '/itens-vendaveis/visualizar'
 export const EDIT_SELLABLE_ITEMS = '/itens-vendaveis/editar'
+
+export const FILTER_USERS = '/usuarios'
+export const SEE_ONE_USER = '/usuarios/visualizar'
+export const EDIT_USER = '/usuarios/editar'
+export const CREATE_USER = '/usuarios/criar'
 
 export const PATIENT_SCHEDULE_APPOINTMENT = '/agendar-consulta'
 
@@ -77,11 +87,6 @@ export const REGISTER_PATIENT = '/cadastro/paciente/'
 export const REGISTER_SPECIALIST = '/cadastro/especialista/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
-export const SEE_ONE_USER = '/usuarios/visualizar'
-export const EDIT_USER = '/usuarios/editar'
-
 export const TESTE = '/teste'
 
 export const NOT_FOUND = '*'
-
-

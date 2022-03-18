@@ -43,6 +43,14 @@ export const InputEmail: React.FC<InputEmailProps> = ({
 
   useEffect(() => {
     onGetEmail(email)
+
+    setEmailError('')
+
+    if (!email.trim()) {
+      setEmailError('Email Obrigatório')
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError('Email inválido.')
+    }
   }, [email])
 
   useEffect(() => {

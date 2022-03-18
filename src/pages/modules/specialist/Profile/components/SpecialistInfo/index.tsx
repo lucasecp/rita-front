@@ -154,7 +154,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
             cpf: validateCPF(cpf),
           })
         }
-        disabled={!isEditing}
+        disabled
         name="cpf"
       />
 

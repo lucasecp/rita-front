@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import { Select } from '@/components/Form/Select'
 
 import { Container } from './styles'
-import { UF } from '../../constants/UFs'
 
 import { PatientAddress } from '../../types/index'
+import SelectUf from '@/components/smarts/SelectUf'
+import SelectCity from '@/components/smarts/SelectCity'
 
 interface AddressSeeOnePatientProps {
   address: PatientAddress
@@ -19,6 +19,7 @@ const AddressSeeOnePatient: React.FC<AddressSeeOnePatientProps> = ({
   setAddress,
 }) => {
   const [cep, setCep] = useState(address.cep || '')
+  const [ufToApi, setUfToApi] = useState(address.uf || '')
   const [uf, setUf] = useState(address.uf || '')
   const [city, setCity] = useState(address.city || '')
   const [addressPatient, setAddressPatient] = useState(address.address || '')
@@ -29,7 +30,7 @@ const AddressSeeOnePatient: React.FC<AddressSeeOnePatientProps> = ({
   useEffect(() => {
     setAddress({
       cep,
-      uf,
+      uf: ufToApi,
       city,
       address: addressPatient,
       number,
@@ -41,53 +42,50 @@ const AddressSeeOnePatient: React.FC<AddressSeeOnePatientProps> = ({
   return (
     <Container>
       <h2>Endereço</h2>
-      <div>
-        <InputText
-          label="Endereço:"
-          value={addressPatient}
-          setValue={setAddressPatient}
-          name="address"
-        />
-        <section>
-          <InputText
-            label="Número:"
-            value={number}
-            setValue={setNumber}
-            name="number"
-          />
-          <InputText
-            label="Complemento:"
-            value={complement}
-            setValue={setComplement}
-            name="complement"
-          />
-        </section>
+      <section>
         <InputMask
           label="CEP:"
           mask="99.999-999"
           value={cep}
           setValue={setCep}
           name="cep"
+          // onBlur={() => setErrors({ ...errors, ...validateCep(cep) })}
+          // onKeyUp={() => setErrors({ ...errors, ...validateCep(cep) })}
+          // msgError={errors.cep}
+          // hasError={!!errors.cep}
+        />
+        <SelectUf setUf={setUf} uf={uf} setUfToApi={setUfToApi} />
+        <SelectCity setCity={setCity} uf={uf} city={city} />
+
+        <InputText
+          label="Endereço:"
+          value={addressPatient}
+          setValue={setAddressPatient}
+          name="address"
+          maxLength={100}
+        />
+        <InputText
+          label="Número:"
+          value={number}
+          setValue={setNumber}
+          name="number"
+          maxLength={20}
+        />
+      </section>
+      <div>
+        <InputText
+          label="Complemento:"
+          value={complement}
+          setValue={setComplement}
+          name="complement"
+          maxLength={50}
         />
         <InputText
           label="Bairro:"
           value={district}
           setValue={setDistrict}
           name="district"
-        />
-        <InputText
-          label="Cidade:"
-          value={city}
-          setValue={setCity}
-          name="city"
-        />
-        <Select
-          label="UF:"
-          labelDefaultOption="Selecione:"
-          options={UF}
-          setValue={setUf}
-          value={uf}
-          name="uf"
+          maxLength={100}
         />
       </div>
     </Container>

@@ -42,6 +42,7 @@ function RegisterCardSabin() {
       const { data: responseApi } = await apiPatient.get(
         `/paciente/status?cpf=${cpf}`,
       )
+      console.log(responseApi)
 
       company = responseApi.empresa && responseApi.empresa[0]
 
@@ -105,7 +106,7 @@ function RegisterCardSabin() {
             <InputMask
               label="Digite Seu CPF:"
               mask="999.999.999-99"
-              placeholder="000.000.000-00"
+              placeholder="___.___.___-__"
               value={cpf}
               setValue={setCpf}
             />

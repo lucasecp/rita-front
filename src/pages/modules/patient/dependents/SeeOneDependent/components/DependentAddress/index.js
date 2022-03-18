@@ -7,7 +7,6 @@ import { Select } from '@/components/Form/Select'
 import { Container } from './styles'
 import { UF } from '@/constants/ufs'
 
-
 export const DependentAddress = ({ address }) => {
   console.log(address)
 

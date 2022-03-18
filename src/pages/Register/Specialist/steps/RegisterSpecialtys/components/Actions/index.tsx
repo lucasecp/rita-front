@@ -7,20 +7,27 @@ import ImagePreview from '../../messages/ImagePreview'
 import { useMediaPredicate } from 'react-media-hook'
 import downloadFile from '@/helpers/downloadFile'
 import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
+import { SpecialtysAndDocsType } from '../../../../types/index';
 
 interface ActionsProps {
   file: any
   setPhoto: (x: string) => void
+  nameField:string
 }
 
-const Actions: React.FC<ActionsProps> = ({ file, setPhoto }) => {
+const Actions: React.FC<ActionsProps> = ({ file, setPhoto,nameField }) => {
   const { showMessage } = useModal()
   const isMobile = useMediaPredicate('(max-width: 767px)')
   const { setSpecialtysAndDocs } = useRegisterSpecialist()
 
 
   const removeDocument = () => {
-    
+    setPhoto('')
+    setSpecialtysAndDocs((specialtysAndDocs: SpecialtysAndDocsType)=>{
+      const updatedValues = []
+      if(nameField !== specialtysAndDocs.name) {updatedValues.push(specialtysAndDocs)}
+      return updatedValues
+    })
   }
   const previewForPdf = () => {
     if (isMobile) {
@@ -45,7 +52,7 @@ const Actions: React.FC<ActionsProps> = ({ file, setPhoto }) => {
           <img src={zoomIcon} />
           Ver
         </button>
-        <button onClick={() => setPhoto('')}>
+        <button onClick={removeDocument}>
           <img src={trashIcon} />
           Remover
         </button>

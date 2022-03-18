@@ -1,21 +1,13 @@
 import React from 'react'
 import Route from '../../custom.routes'
 
-import { SeeOnePatient } from '@/pages/modules/operator/Patients/SeeOnePatient'
-import AnalyzePatients from '@/pages/modules/operator/Patients/AnalyzePatients'
-import Reports from '@/pages/modules/operator/Reports'
-import { ConsultEligibility } from '@/pages/modules/operator/ConsultEligibility'
-
-import Authorization from '@/pages/modules/operator/Reports/Authorization'
-import SeeAllClinics from '@/pages/modules/operator/clinic/SeeAllClinics'
-import SeeOneClinic from '@/pages/modules/operator/clinic/SeeOneClinic'
-
 import {
   OPERATOR_ANALYZE_PATIENT,
   OPERATOR_CONSULT_ELIGIBILITY,
   OPERATOR_SEE_ONE_PATIENT,
   OPERATOR_REPORTS,
   OPERATOR_REPORTS_AUTHORIZATION,
+  OPERATOR_REPORTS_BILLING_STATEMENT,
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ONE_CLINIC,
   OPERATOR_SEE_ALL_SPECIALTYS,
@@ -25,8 +17,19 @@ import {
   OPERATOR_EDIT_SPRECIALTY,
   OPERATOR_SEE_ALL_SPECIALISTS,
   OPERATOR_SEE_ONE_SPECIALIST,
-  OPERATOR_SEE_All_SPECIALTYS_TYPES
+  OPERATOR_SEE_All_ISSUING_AGENCY,
 } from '../../constants/namedRoutes/routes'
+
+import { SeeOnePatient } from '@/pages/modules/operator/Patients/SeeOnePatient'
+import AnalyzePatients from '@/pages/modules/operator/Patients/AnalyzePatients'
+import { ConsultEligibility } from '@/pages/modules/operator/ConsultEligibility'
+
+import { Reports } from '@/pages/modules/operator/Reports'
+import Authorization from '@/pages/modules/operator/Reports/containers/Authorization'
+import { BillingStatement } from '@/pages/modules/operator/Reports/containers/BillingStatement'
+
+import SeeAllClinics from '@/pages/modules/operator/clinic/SeeAllClinics'
+import SeeOneClinic from '@/pages/modules/operator/clinic/SeeOneClinic'
 
 import SeeAllSpecialtys from '@/pages/modules/operator/Specialtys/SeeAllSpecialtys'
 import Managment from '@/pages/modules/operator/dependent/Managment'
@@ -35,7 +38,7 @@ import CreateSpecialty from '@/pages/modules/operator/Specialtys/CreateSpecialty
 import EditSpecialty from '@/pages/modules/operator/Specialtys/EditSpecialty'
 import SeeAllSpecialists from '@/pages/modules/operator/specialists/SeeAllSpecialists'
 import SeeOneSpecialist from '@/pages/modules/operator/specialists/SeeOneSpecialist'
-import SpecialtysTypes from '@/pages/modules/operator/Specialtys/SpecialtytsTypes'
+import IssuingAgency from '@/pages/modules/operator/IssuingAgency'
 
 const operatorRoutes = [
   {
@@ -54,6 +57,11 @@ const operatorRoutes = [
     path: OPERATOR_REPORTS_AUTHORIZATION,
     component: Authorization,
   },
+  {
+    path: OPERATOR_REPORTS_BILLING_STATEMENT,
+    component: BillingStatement,
+  },
+
   {
     path: OPERATOR_CONSULT_ELIGIBILITY,
     component: ConsultEligibility,
@@ -95,8 +103,8 @@ const operatorRoutes = [
     component: SeeOneSpecialist,
   },
   {
-    path:  OPERATOR_SEE_All_SPECIALTYS_TYPES,
-    component: SpecialtysTypes,
+    path: OPERATOR_SEE_All_ISSUING_AGENCY,
+    component: IssuingAgency,
   },
 ]
 

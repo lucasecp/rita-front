@@ -24,7 +24,7 @@ export const Container = styled.header`
     align-items: center;
     margin-left: 24px;
 
-    > a {
+    > p {
       display: flex;
       align-items: center;
       color: ${colors.gray.dark};

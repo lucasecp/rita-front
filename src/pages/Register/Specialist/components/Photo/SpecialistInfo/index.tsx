@@ -16,7 +16,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({ data }) => {
         Registro Profissional: <span>{data?.profissionalRegister}</span>
       </h5>
       <h5>
-        Órgão Emissor: <span>{data?.ufIssuingAgency}</span>
+        Órgão Emissor: <span>{data?.issuingAgency}</span>
       </h5>
       <h5>
         UF Órgão Emissor: <span>{data?.ufIssuingAgency}</span>

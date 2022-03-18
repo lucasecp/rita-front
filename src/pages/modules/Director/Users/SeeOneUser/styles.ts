@@ -7,7 +7,7 @@ export const Container = styled.div`
   border-radius: 8px 8px 0 0;
 
   > h2 {
-    padding: 24px 32px;
+    padding: 26px 32px;
 
     font-weight: 500;
     font-size: 24px;
@@ -17,7 +17,7 @@ export const Container = styled.div`
   }
 
   > footer {
-    padding: 24px 32px;
+    padding: 26px 32px;
     border-radius: 0 0 8px 8px;
     background-color: ${colors.gray.light};
 
