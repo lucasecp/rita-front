@@ -37,7 +37,8 @@ import {
   DIRECTOR_IMPORT,
   SPECIALIST_PROFILE,
   FILTER_USERS,
-  OPERATOR_SEE_All_SPECIALTYS_TYPES,
+  OPERATOR_SEE_All_ISSUING_AGENCY,
+  CLINIC_SEE_ALL_SPECIALIST,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -158,9 +159,15 @@ export const menuItens = [
     permission: permissionList.LISTAR_USUARIOS,
   },
   {
-    path: OPERATOR_SEE_All_SPECIALTYS_TYPES,
+    path: OPERATOR_SEE_All_ISSUING_AGENCY,
     icon: <SpecialtysTypesIcon />,
-    name: 'Tipos de Especialidade',
-    permission: permissionList.LISTAR_TIPO_ESPECIALIDADE,
+    name: 'Orgão Emissor',
+    permission: permissionList.GERENCIAR_ORGAO_EMISSOR,
+  },
+  {
+    path: CLINIC_SEE_ALL_SPECIALIST,
+    icon: <StethoscopeIcon />,
+    name: 'Especialistas',
+    permission: permissionList.VER_DADOS_CLINICA,
   },
 ]

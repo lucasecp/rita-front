@@ -19,7 +19,7 @@ export const fromApi = (doctorInfo: any) => {
       takerate: doctorInfo.takeRate ? doctorInfo.takeRate + '%' : '',
     },
 
-    specialtys: mapSpecialtys(doctorInfo.especialidade),
+    specialtys: mapSpecialtys(doctorInfo.especialidades),
     clinics: mapClinics(doctorInfo.clinica),
   }
 }
@@ -29,12 +29,11 @@ export const toApi = (doctorInfo: any) => {
     nome: doctorInfo.specialistInfo?.name,
     nomeProfissional: doctorInfo.specialistInfo?.profissionalName,
     email: doctorInfo.specialistInfo?.email,
-    cpf: clearSpecialCaracter(doctorInfo.specialistInfo?.cpf),
     receberAgendamentos: doctorInfo.specialistInfo?.receiveService,
     celular: clearSpecialCaracter(doctorInfo.specialistInfo?.phone),
-    crmuf: doctorInfo.specialistInfo?.ufProfissionaRegister,
-    CRM: doctorInfo.specialistInfo?.classCouncil,
+    ufOrgaoEmissor: doctorInfo.specialistInfo?.ufProfissionaRegister,
+    registroProfissional: doctorInfo.specialistInfo?.classCouncil,
     clinica: mapClinicsToApi(doctorInfo.clinic),
-    especialidade: mapSpecialtysToApi(doctorInfo.specialtys),
+    especialidades: mapSpecialtysToApi(doctorInfo.specialtys),
   }
 }

@@ -13,6 +13,7 @@ export const ContainerRadio = styled.div`
 
   .MuiRadio-colorSecondary.Mui-disabled {
     color: ${colors.gray.middle};
+    opacity: 0.5;
   }
 
   .MuiRadio-root {
@@ -40,6 +41,6 @@ export const ContainerLabel = styled.div`
     margin-left: ${({ label }) => (label ? 2 : 0)}px;
   }
   .MuiTypography-body1.Mui-disabled {
-    color: ${colors.gray.dark};
+    color: ${colors.gray.middleLight};
   }
 `

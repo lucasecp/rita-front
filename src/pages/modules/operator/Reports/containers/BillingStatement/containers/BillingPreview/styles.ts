@@ -33,20 +33,22 @@ export const Container = styled.div`
     width: 100%;
 
     > div {
-      background: ${colors.white};
-      width: fit-content;
+      width: 100%;
 
       > ul {
+        background: ${colors.white};
         padding: 24px 32px;
 
         display: flex;
-        width: fit-content;
+
+        min-width: -webkit-fill-available;
+        width: max-content;
 
         gap: 24px;
         border: solid 1px ${colors.gray.middleLight};
 
         > li {
-          width: 100px;
+          width: 120px;
 
           font-weight: 500;
           font-size: 14px;

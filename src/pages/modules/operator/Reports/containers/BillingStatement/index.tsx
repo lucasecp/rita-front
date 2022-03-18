@@ -21,7 +21,6 @@ export interface PreviewBillingsState {
     gender: string
     plan: string
     amountPlan: string
-    ddd: string
     phone: string
     status: string
   }[]
