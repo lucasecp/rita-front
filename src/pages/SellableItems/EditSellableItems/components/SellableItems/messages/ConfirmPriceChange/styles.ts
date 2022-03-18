@@ -6,42 +6,37 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   > div {
+    h6 {
+      color: ${colors.gray.dark};
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 150%;
+      text-align: center;
+    }
     > img {
+      width: 64px;
+      height: 64px;
       margin: 24px auto;
       color: ${colors.purple.main.dark};
     }
-    > h1,
-    h2,
-    h3 {
-      color: ${colors.gray.dark};
-      text-align: center;
-    }
 
-    h1 {
-      margin: 24px auto;
-    }
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 16px;
+      > span {
+        color: ${colors.gray.dark};
+        text-align: center;
+      }
 
-    h2 {
-      margin: 16px auto;
-    }
-
-    h3 {
-      margin-top: 16px;
-    }
-
-    h4 {
-      color: ${colors.gray.middle};
-    }
-
-    > button {
-      margin-top: 24px;
-    }
-    > p {
-      max-width: 455px;
-      word-wrap: break-word;
-      text-align: center;
-      line-height: 24px;
-      color: ${colors.gray.dark};
+      > p {
+        max-width: 455px;
+        word-wrap: break-word;
+        text-align: center;
+        line-height: 24px;
+        color: ${colors.gray.dark};
+      }
     }
   }
 `

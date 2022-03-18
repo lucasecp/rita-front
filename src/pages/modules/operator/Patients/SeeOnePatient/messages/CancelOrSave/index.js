@@ -25,7 +25,10 @@ export const CancelOrSave = ({ setConfirmSave }) => {
     <Container>
       <img src={warningIcon} />
       <p>
-        Ao alterar o status para “Pendente” ou “Inativo”, todas as informações de filiação de plano e tabela de preços serão removidas e, caso haja dependentes associados a esse paciente, eles perderão acesso à plataforma até que o paciente seja validado novamente.
+        Ao alterar o status para “Pendente” ou “Inativo”, todas as informações
+        de filiação de plano e tabela de preços serão removidas e, caso haja
+        dependentes associados a esse paciente, eles perderão acesso à
+        plataforma até que o paciente seja validado novamente.
         <br />
         Confirma a alteração?
       </p>

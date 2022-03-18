@@ -88,7 +88,7 @@ const TableReport = ({
                 !ColumnIsActive(COLUMNS_NAME.REASON_FOR_NEGATIVE, columns)
               }
             >
-              {formatTextWithLimit(patient.reasonForNegative,200) || '-'}
+              {formatTextWithLimit(patient.reasonForNegative, 200) || '-'}
             </li>
           </ul>
         ))}
