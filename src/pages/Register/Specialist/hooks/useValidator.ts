@@ -2,13 +2,13 @@ import { ErrorsRegisterI } from '../types/index'
 import { useRegisterSpecialist } from './index'
 
 export const useValidator = (): {
-  hasErrors: (x: ErrorsRegisterI) => boolean
+  hasErrors: (x: any) => boolean
 } => {
   const { errors, setErrors } = useRegisterSpecialist()
 
   const hasErrors = (fields: ErrorsRegisterI) => {
     let error = false
-    setErrors({})
+    setErrors({} as ErrorsRegisterI)
     const hasSpecificError = Object.values(errors)
 
     error = !!hasSpecificError[0]

@@ -13,6 +13,8 @@ import { useRegisterSpecialist } from '../../hooks'
 import { genericValidate } from '../../helpers/validatorFields'
 import { useValidator } from '../../hooks/useValidator'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
+import { validatePhone } from '@/helpers/validateFields/validatePhone';
+import { validateCPF } from '@/helpers/validateFields/validateCPF';
 
 const ProfissionalInformation: React.FC = () => {
   const [name, setName] = useState('')
@@ -23,13 +25,15 @@ const ProfissionalInformation: React.FC = () => {
   const [phone, setPhone] = useState('')
   const [specialtys, setSpecialtys] = useState([])
   const [clinics, setClinics] = useState([])
+  const [toggleClick, setToggleClick] = useState(0)
 
-  const [errorMessage] = useMessage()
+  const [errorMessage, sendErrorMessage] = useMessage()
   const { step, nextStep, setProfissionalInfo, errors, setErrors } =
     useRegisterSpecialist()
   const { hasErrors } = useValidator()
 
   const onNextStep = () => {
+    sendErrorMessage()
     if (
       hasErrors({
         name,
@@ -42,7 +46,7 @@ const ProfissionalInformation: React.FC = () => {
         clinics,
       })
     ) {
-      return scrollOntoFieldError(errors)
+      return setToggleClick(Math.random() * (10 - 3) + 3)
     }
     nextStep()
   }
@@ -69,7 +73,13 @@ const ProfissionalInformation: React.FC = () => {
     clinics,
   ])
 
-  console.log(setProfissionalInfo)
+
+  useEffect(() => {
+    if (toggleClick !== 0) {
+      scrollOntoFieldError(errors)
+    }
+  }, [toggleClick])
+
 
   return (
     <Container hidden={step !== 2}>
@@ -134,18 +144,19 @@ const ProfissionalInformation: React.FC = () => {
           onBlur={() =>
             setErrors({
               ...errors,
-              cpf: genericValidate(cpf, 'nome'),
+              cpf: validateCPF(cpf),
             })
           }
           onKeyUp={() =>
             setErrors({
               ...errors,
-              cpf: genericValidate(cpf, 'nome'),
+              cpf: validateCPF(cpf),
             })
           }
         />
         <Select
           label="Receber Agendamentos:"
+          labelDefaultOption="Selecione"
           value={receiveService}
           setValue={setReceiveService}
           name="receiveService"
@@ -153,7 +164,8 @@ const ProfissionalInformation: React.FC = () => {
             { label: 'Sim', value: 'yes' },
             { label: 'Não', value: 'no' },
           ]}
-          labelDefaultOption="Selecione"
+          hasError={!!errors.receiveService}
+          msgError={errors.receiveService}
         />
 
         <InputEmail
@@ -161,6 +173,8 @@ const ProfissionalInformation: React.FC = () => {
           onGetEmail={setEmail}
           hasError={(hasError) => setErrors({ ...errors, email: hasError })}
           checkHasError={errorMessage}
+          onKeyUp={sendErrorMessage}
+          onBlur={sendErrorMessage}
         />
 
         <InputMask
@@ -174,13 +188,13 @@ const ProfissionalInformation: React.FC = () => {
           onBlur={() =>
             setErrors({
               ...errors,
-              phone: genericValidate(phone, 'nome'),
+              phone: validatePhone(phone),
             })
           }
           onKeyUp={() =>
             setErrors({
               ...errors,
-              phone: genericValidate(phone, 'nome'),
+              phone: validatePhone(phone),
             })
           }
         />

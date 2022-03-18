@@ -10,6 +10,7 @@ import { isValidTypeFile } from '@/helpers/file/isValidTypeFile'
 import { isValidSizeFile } from '@/helpers/file/isValidSizeFile'
 import warningCircleRed from '@/assets/icons/warning-circle-red.svg'
 import { useRegisterSpecialist } from '../../../hooks'
+import { SpecialtysAndDocsType } from '../../../types'
 
 interface SpecialtyItemProps {
   data: MultiSelectOption
@@ -19,29 +20,59 @@ interface SpecialtyItemProps {
 const SpecialtyItem: React.FC<SpecialtyItemProps> = ({ data, current }) => {
   const [photo, setPhoto] = useState('')
 
-  const { errors, setErrors } = useRegisterSpecialist()
+  const { errors, setSpecialtysAndDocs, setErrors } = useRegisterSpecialist()
+
+  const removePhoto = () => setPhoto('')
+
+  const nameField = 'specialtysAndDocs' + current
+
+  const errorSpecialtysAndDocs = errors.specialtysAndDocs || {}
+
+  const hasKeyInSpecialtyErrors = (key: string) => {
+    return key in errorSpecialtysAndDocs
+  }
 
   useEffect(() => {
-    if (!isValidTypeFile(photo) && photo) {
+    if (!photo) return
+
+    if (!isValidTypeFile(photo)) {
+      removePhoto()
+
       return setErrors({
         ...errors,
-        specialtysAndDocs:
-          'Formato do Arquivo inválido. Por favor, selecione outro arquivo.',
+        specialtysAndDocs: {
+          ...errorSpecialtysAndDocs,
+          [nameField]:
+            'Formato do Arquivo inválido. Por favor, selecione outro arquivo.',
+        },
       })
     }
 
-    if (!isValidSizeFile(photo) && photo) {
+    if (!isValidSizeFile(photo)) {
+      removePhoto()
+
       return setErrors({
         ...errors,
-        specialtysAndDocs:
-          'O tamanho máximo do arquivo deve ser 10MB. Por favor, selecione outro arquivo.',
+        specialtysAndDocs: {
+          ...errorSpecialtysAndDocs,
+          [nameField]:
+            'O tamanho máximo do arquivo deve ser 10MB. Por favor, selecione outro arquivo.',
+        },
       })
     }
 
     setErrors({
       ...errors,
-      specialtysAndDocs: '',
+      specialtysAndDocs: {
+        ...errorSpecialtysAndDocs,
+        [nameField]: '',
+      },
     })
+
+    setSpecialtysAndDocs((specialtysAndDocs: SpecialtysAndDocsType[]) => ([
+      ...specialtysAndDocs,
+      { name: [nameField], idSpecialty: data.id, document: photo },
+    ]))
   }, [photo])
 
   return (
@@ -49,8 +80,10 @@ const SpecialtyItem: React.FC<SpecialtyItemProps> = ({ data, current }) => {
       <h2>Especialidade {current}</h2>
       <InputText value={data.name} disabled />
 
-      {photo && !errors.specialtysAndDocs ? (
-        <Actions file={photo} setPhoto={setPhoto} />
+      {photo &&
+      hasKeyInSpecialtyErrors(nameField) &&
+      !errors.specialtysAndDocs[nameField] ? (
+        <Actions file={photo} setPhoto={setPhoto} nameField={nameField}/>
       ) : (
         <Instructios />
       )}
@@ -59,16 +92,23 @@ const SpecialtyItem: React.FC<SpecialtyItemProps> = ({ data, current }) => {
         <InputFile setValue={setPhoto}>
           <OutlineButton
             small
-            variation={errors.specialtysAndDocs ? 'red' : 'green'}
+            variation={
+              hasKeyInSpecialtyErrors(nameField) &&
+              errors.specialtysAndDocs[nameField]
+                ? 'red'
+                : 'green'
+            }
           >
             Selecionar Arquivo
           </OutlineButton>
         </InputFile>
-        {errors.specialtysAndDocs && (
-          <>
-            <img src={warningCircleRed} /> <p>{errors.specialtysAndDocs}</p>{' '}
-          </>
-        )}
+        {hasKeyInSpecialtyErrors(nameField) &&
+          errors.specialtysAndDocs[nameField] && (
+            <>
+              <img src={warningCircleRed} />{' '}
+              <p>{errors.specialtysAndDocs[nameField]}</p>{' '}
+            </>
+          )}
       </span>
     </Container>
   )

@@ -8,6 +8,7 @@ import {
   RegisterSpecialistContextData,
   ProfissionalInfoI,
   BasicInformationI,
+  SpecialtysAndDocsType,
   ErrorsRegisterI,
 } from '../types/index'
 
@@ -20,13 +21,21 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   const { Loading } = useLoading()
 
   const [step, setStep] = useState(1)
+  const stepAmount = 3
+
   const [profissionalInfo, setProfissionalInfo] = useState<ProfissionalInfoI>(
     {} as ProfissionalInfoI,
   )
+
   const [basicInformation, setbasicInformation] = useState<BasicInformationI>(
     {} as BasicInformationI,
   )
-  const [specialtysAndDocs, setSpecialtysAndDocs] = useState<any>({})
+
+  const [specialtysAndDocs, setSpecialtysAndDocs] = useState<
+    SpecialtysAndDocsType[]
+  >([] as SpecialtysAndDocsType[])
+
+  const [photo, setPhoto] = useState<File | null>(null)
 
   const [errors, setErrors] = useState<ErrorsRegisterI>({} as ErrorsRegisterI)
 
@@ -49,6 +58,10 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   }
 
   const resetData = () => {}
+  console.log(profissionalInfo, basicInformation, specialtysAndDocs,errors)
+
+  const registerSpecialist = async () => {
+  }
 
   return (
     <RegisterSpecialistContext.Provider
@@ -57,11 +70,15 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
         previousStep,
         nextStep,
         resetData,
+        registerSpecialist,
         step,
         basicInformation,
         profissionalInfo,
         specialtysAndDocs,
+        photo,
         errors,
+        stepAmount,
+        setPhoto,
         setErrors,
         setProfissionalInfo,
         setbasicInformation,

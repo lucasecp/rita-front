@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { ReactComponent as PenIcon } from '@/assets/icons/pen-green.svg'
 import { ReactComponent as ProfileIcon } from '@/assets/icons/profile-green.svg'
 
@@ -8,11 +8,31 @@ import { Container } from './styles'
 import OutlineButton from '@/components/Button/Outline/index'
 import SpecialistInfo from './SpecialistInfo'
 import { useRegisterSpecialist } from '../../hooks'
+import { isValidTypeFile } from '@/helpers/file/isValidTypeFile'
+import { isValidSizeFile } from '@/helpers/file/isValidSizeFile'
+import { useModal } from '@/hooks/useModal'
 
 const Photo: React.FC = ({}) => {
-  const [photo, setPhoto] = useState('')
+  const { basicInformation, step, photo, setPhoto } = useRegisterSpecialist()
+  const { showSimple } = useModal()
 
-  const { profissionalInfo, step } = useRegisterSpecialist()
+  const removePhoto = () => setPhoto(null)
+
+  useEffect(() => {
+    if (photo && !isValidTypeFile(photo)) {
+      removePhoto()
+      showSimple.error(
+        'O tamanho máximo do arquivo deve ser 10MB. Por favor, selecione outro arquivo.',
+      )
+    }
+
+    if (photo && !isValidSizeFile(photo)) {
+      removePhoto()
+      showSimple.error(
+        'Formato do Arquivo inválido. Por favor, selecione outro arquivo.',
+      )
+    }
+  }, [photo])
 
   return (
     <Container>
@@ -30,8 +50,8 @@ const Photo: React.FC = ({}) => {
       </div>
 
       <div>
-        {step > 2 && photo && <SpecialistInfo data={profissionalInfo} />}
-        {!photo  && (
+        {step > 2 && photo && <SpecialistInfo data={basicInformation} />}
+        {!photo && (
           <>
             <Instructions />
             <InputFile setValue={setPhoto}>

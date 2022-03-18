@@ -1,11 +1,10 @@
 import React from 'react'
-import { useRegisterSpecialist } from '../../../hooks'
-import { ProfissionalInfoI } from '../../../types'
+import { BasicInformationI } from '../../../types'
 
 import { Container } from './styles'
 
 interface SpecialistInfoProps {
-  data: ProfissionalInfoI
+  data: BasicInformationI
 }
 
 const SpecialistInfo: React.FC<SpecialistInfoProps> = ({ data }) => {

@@ -9,7 +9,7 @@ interface FooterNexStepProps {
 }
 
 const FooterNextStep: React.FC<FooterNexStepProps> = ({ onClickNextStep }) => {
-  const { step, previousStep } = useRegisterSpecialist()
+  const { step, previousStep, stepAmount, registerSpecialist } = useRegisterSpecialist()
 
   return (
     <Container>
@@ -19,9 +19,15 @@ const FooterNextStep: React.FC<FooterNexStepProps> = ({ onClickNextStep }) => {
         </OutlineButton>
       )}
 
-      <ButtonPrimary variation="green" onClick={onClickNextStep}>
-        Próxima Etapa
-      </ButtonPrimary>
+      {step === stepAmount ? (
+        <ButtonPrimary variation="green" onClick={() => registerSpecialist()}>
+          Finalizar
+        </ButtonPrimary>
+      ) : (
+        <ButtonPrimary variation="green" onClick={onClickNextStep}>
+          Próxima Etapa
+        </ButtonPrimary>
+      )}
     </Container>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRegisterSpecialist } from '../../hooks'
 
 import { Container } from './styles'
@@ -14,12 +14,18 @@ import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 interface BasicInformationProps {}
 
 const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
-  const { step, nextStep, errors, setErrors } = useRegisterSpecialist()
+  const { step, nextStep, errors, setErrors, setbasicInformation } =
+    useRegisterSpecialist()
+
   const { hasErrors } = useValidator()
 
   const [profissionalRegister, setProfissionalRegister] = useState('')
+
   const [issuingAgency, setIssuingAgency] = useState('')
+
   const [ufProfissionalRegister, setufProfissionalRegister] = useState('')
+
+  const [toggleClick, setToggleClick] = useState(0)
 
   const onNextStep = () => {
     if (
@@ -29,10 +35,23 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
         ufProfissionalRegister,
       })
     ) {
-      return scrollOntoFieldError(errors)
+      return setToggleClick(Math.random() * (10 - 3) + 3)
     }
     nextStep()
   }
+  useEffect(() => {
+    setbasicInformation({
+      profissionalRegister,
+      issuingAgency,
+      ufProfissionalRegister,
+    })
+  }, [profissionalRegister, issuingAgency, ufProfissionalRegister])
+
+  useEffect(() => {
+    if (toggleClick !== 0) {
+      scrollOntoFieldError(errors)
+    }
+  }, [toggleClick])
 
   return (
     <Container hidden={step !== 1}>

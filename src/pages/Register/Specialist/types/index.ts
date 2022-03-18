@@ -14,23 +14,31 @@ export interface ProfissionalInfoI {
 export interface BasicInformationI {
   profissionalRegister: string
   issuingAgency: string
-  ufIssuingAgency: string
+  ufProfissionalRegister: string
 }
 
+type SpecialtysAndDocsErrors = { [x: string]: string }
+
 export interface ErrorsRegisterI {
-  profissionalRegister?: string
-  issuingAgency?: string
-  ufIssuingAgency?: string
-  name?: string
-  profissionalName?: string
-  cpf?: string
-  receiveService?: string
-  email?: boolean | string
-  phone?: string
-  specialtys?: MultiSelectOption[]
-  clinics?: MultiSelectOption[]
-  specialtysAndDocs?: string
-  [x:string]: any
+  profissionalRegister: string
+  issuingAgency: string
+  ufIssuingAgency: string
+  name: string
+  profissionalName: string
+  cpf: string
+  receiveService: string
+  email: boolean | string
+  phone: string
+  specialtys: MultiSelectOption[]
+  clinics: MultiSelectOption[]
+  specialtysAndDocs: SpecialtysAndDocsErrors
+  [x: string]: any
+}
+
+export type SpecialtysAndDocsType = {
+  name: string
+  idSpecialty: string
+  document: File
 }
 
 export interface RegisterSpecialistContextData {
@@ -39,11 +47,15 @@ export interface RegisterSpecialistContextData {
   previousStep: () => void
   nextStep: () => void
   resetData: () => void
+  registerSpecialist: () => Promise<void>
+  photo: File | null
   profissionalInfo: ProfissionalInfoI
   basicInformation: BasicInformationI
-  specialtysAndDocs: any
+  specialtysAndDocs: SpecialtysAndDocsType[]
+  stepAmount: number
   errors: ErrorsRegisterI
   setErrors: React.Dispatch<React.SetStateAction<ErrorsRegisterI>>
+  setPhoto: React.Dispatch<React.SetStateAction<File | null>>
   setProfissionalInfo: React.Dispatch<React.SetStateAction<ProfissionalInfoI>>
   setbasicInformation: React.Dispatch<React.SetStateAction<BasicInformationI>>
   setSpecialtysAndDocs: React.Dispatch<React.SetStateAction<any>>

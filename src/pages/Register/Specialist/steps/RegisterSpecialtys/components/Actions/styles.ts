@@ -16,6 +16,7 @@ margin-right: 24px;
    >div{
   display: flex;
     align-items: center;
+    justify-content: space-between;
 
     > button {
       // click area in right

@@ -3,7 +3,7 @@ import zoomIcon from '@/assets/icons/zoom.svg'
 import trashIcon from '@/assets/icons/trash.svg'
 import { Container } from './styles'
 import { useModal } from '@/hooks/useModal'
-import ImagePreview from '../../messages/ImagePreview/index'
+import ImagePreview from '../../messages/ImagePreview'
 import { useMediaPredicate } from 'react-media-hook'
 import downloadFile from '@/helpers/downloadFile'
 import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
@@ -16,7 +16,12 @@ interface ActionsProps {
 const Actions: React.FC<ActionsProps> = ({ file, setPhoto }) => {
   const { showMessage } = useModal()
   const isMobile = useMediaPredicate('(max-width: 767px)')
+  const { setSpecialtysAndDocs } = useRegisterSpecialist()
 
+
+  const removeDocument = () => {
+    
+  }
   const previewForPdf = () => {
     if (isMobile) {
       return downloadFile(file, '', 'pdf')
