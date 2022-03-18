@@ -74,6 +74,7 @@ export const DEFAULT_REGISTER = '/cadastro-inicial'
 export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'
 
 export const REGISTER_PATIENT = '/cadastro/paciente/'
+export const REGISTER_SPECIALIST = '/cadastro/especialista/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const SEE_ONE_USER = '/usuarios/visualizar'

@@ -14,7 +14,7 @@ const ButtonPrimary: React.FC<IButtonPrimary> = ({
   small = false,
   disabledWithEvents = false,
   medium = false,
-  // variation = 'none',
+  variation,
   ...rest
 }) => {
   return (
@@ -23,6 +23,7 @@ const ButtonPrimary: React.FC<IButtonPrimary> = ({
       small={small}
       medium={medium}
       disabledWithEvents={disabledWithEvents}
+      variation={variation}
     >
       {children}
     </Container>
@@ -30,3 +31,5 @@ const ButtonPrimary: React.FC<IButtonPrimary> = ({
 }
 
 export default ButtonPrimary
+
+

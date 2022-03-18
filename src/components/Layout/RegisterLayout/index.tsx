@@ -7,7 +7,7 @@ import expandedLogo from '@/assets/logo/expanded-logo.svg'
 import { Container } from './styles'
 import { useMediaPredicate } from 'react-media-hook'
 
-export const RegisterLayout = ({ children }) => {
+export const RegisterLayout: React.FC = ({ children }) => {
   const isMobile = useMediaPredicate('(max-width: 767px)')
 
   return (

@@ -28,6 +28,7 @@ const Results: React.FC<ResultsProps> = ({
         setQuery={setQueryPagination}
         total={data.total}
         restQuery={restQuery}
+        
       />
     </Container>
   )
