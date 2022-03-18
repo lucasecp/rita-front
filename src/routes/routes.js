@@ -22,6 +22,7 @@ import {
   validatorRoutes,
   patientRoutes,
   specialistRotes,
+  clinicRotes,
 } from './modules'
 
 import registerRoutesComponent from './grouping/register.routes'
@@ -59,6 +60,8 @@ function Routes() {
       {patientRoutes}
 
       {specialistRotes}
+
+      {clinicRotes}
 
       <Route
         path={FILTER_SELLABLE_ITEMS}

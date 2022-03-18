@@ -38,9 +38,6 @@ const Header: React.FC<HeaderProps> = ({ order, setOrder }) => {
             </div>
           </Content>
         ))}
-        <Content>
-          <h5> Ações </h5>
-        </Content>
       </div>
     </Container>
   )
