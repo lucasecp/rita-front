@@ -63,9 +63,6 @@ export const BillingPreview: React.FC<BillingPreviewProps> = ({
                     {patient.amountPlan || '-'}
                   </li>
                   <li hidden={!isActiveColumn('phone')}>
-                    {patient.ddd || '-'}
-                  </li>
-                  <li hidden={!isActiveColumn('phone')}>
                     {patient.phone || '-'}
                   </li>
                   <li hidden={!isActiveColumn('status')}>

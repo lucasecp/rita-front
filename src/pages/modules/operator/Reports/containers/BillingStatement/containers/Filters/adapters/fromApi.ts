@@ -1,6 +1,7 @@
 import { formatPrice } from '@/helpers/formatPrice'
 import { formatCpf } from '@/helpers/formatCpf'
 import { PreviewBillingsState } from './../../../index'
+import { formatPhone } from '@/helpers/formatPhone'
 
 interface PreviewBillingsFromApi {
   dados: {
@@ -48,11 +49,8 @@ export const previewBillingsFromApi = (
       gender: patient.sexo === 'M' ? 'Masculino' : 'Feminino',
       plan: patient.plano.nome,
       amountPlan: formatPrice(patient.plano.mensalidade),
-      ddd: patient.telefone.substring(0, 2),
-      phone: `${patient.telefone.substring(2, 7)}-${patient.telefone.substring(
-        7,
-        11,
-      )}`,
+
+      phone: formatPhone(patient.telefone),
       status: statusFromApi(patient.status),
     })),
     total: data.total,

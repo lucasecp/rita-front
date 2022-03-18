@@ -3,6 +3,7 @@ import colors from '@/styles/colors'
 
 interface ListSuggestionsProps {
   fieldError: boolean
+  listSuggestionsHeight?: number
 }
 
 export const Container = styled.div<{ variation: string }>`
@@ -44,6 +45,10 @@ export const Container = styled.div<{ variation: string }>`
 `
 
 export const ListSuggestions = styled.ul<ListSuggestionsProps>`
+  /* transition: 0.3s;
+  height: ${({ listSuggestionsHeight = 0 }) =>
+    listSuggestionsHeight > 260 ? 260 : listSuggestionsHeight}px; */
+
   @keyframes fadein {
     from {
       opacity: 0;
