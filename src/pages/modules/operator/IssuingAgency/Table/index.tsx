@@ -5,11 +5,19 @@ import Header from './Header'
 import Content from './Content'
 import { TableProps } from '../types'
 
-const Table: React.FC<TableProps> = ({ specialtys, order, setOrder,setSpecialtys }) => {
+const Table: React.FC<TableProps> = ({
+  issuingAgency,
+  order,
+  setOrder,
+  setIssuingAgency,
+}) => {
   return (
     <Container>
       <Header order={order} setOrder={setOrder} />
-      <Content specialtys={specialtys} setSpecialtys={setSpecialtys}/>
+      <Content
+        issuingAgency={issuingAgency}
+        setIssuingAgency={setIssuingAgency}
+      />
     </Container>
   )
 }

@@ -17,7 +17,7 @@ import {
   OPERATOR_EDIT_SPRECIALTY,
   OPERATOR_SEE_ALL_SPECIALISTS,
   OPERATOR_SEE_ONE_SPECIALIST,
-  OPERATOR_SEE_All_SPECIALTYS_TYPES,
+  OPERATOR_SEE_All_ISSUING_AGENCY,
 } from '../../constants/namedRoutes/routes'
 
 import { SeeOnePatient } from '@/pages/modules/operator/Patients/SeeOnePatient'
@@ -38,7 +38,7 @@ import CreateSpecialty from '@/pages/modules/operator/Specialtys/CreateSpecialty
 import EditSpecialty from '@/pages/modules/operator/Specialtys/EditSpecialty'
 import SeeAllSpecialists from '@/pages/modules/operator/specialists/SeeAllSpecialists'
 import SeeOneSpecialist from '@/pages/modules/operator/specialists/SeeOneSpecialist'
-import SpecialtysTypes from '@/pages/modules/operator/Specialtys/SpecialtytsTypes'
+import IssuingAgency from '@/pages/modules/operator/IssuingAgency'
 
 const operatorRoutes = [
   {
@@ -103,8 +103,8 @@ const operatorRoutes = [
     component: SeeOneSpecialist,
   },
   {
-    path: OPERATOR_SEE_All_SPECIALTYS_TYPES,
-    component: SpecialtysTypes,
+    path: OPERATOR_SEE_All_ISSUING_AGENCY,
+    component: IssuingAgency,
   },
 ]
 

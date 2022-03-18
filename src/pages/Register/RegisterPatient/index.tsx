@@ -1,4 +1,4 @@
-import React, { useEffect,useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 import { useLocation, useParams } from 'react-router'
 import { ExitAndSteps } from './components/ExitAndSteps'
@@ -76,7 +76,7 @@ export const RegisterPatient: React.FC = () => {
       }
 
       loadPatientDataFromTokenParams()
-    } 
+    }
   }, [setInitialRegisterData])
 
   return (
