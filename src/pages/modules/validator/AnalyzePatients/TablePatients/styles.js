@@ -76,8 +76,8 @@ export const Td = styled.td`
 
   ${({ size }) =>
     css`
-      min-width: ${size}px;
-      max-width: ${size}px;
+      min-width: ${size || 100}px;
+      max-width: ${size || 100}px;
     `}
 
   ${({ center }) =>
