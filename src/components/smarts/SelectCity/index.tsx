@@ -1,4 +1,4 @@
-import { Select } from '@/components/Form/Select'
+import { Select, SelectOption } from '@/components/Form/Select'
 import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 
@@ -7,7 +7,6 @@ interface SelectCityProps {
   city: string
   uf: string
   disabled?: boolean
-  [x: string]: any
 }
 
 const initialLabel = 'Selecione:'
@@ -19,11 +18,11 @@ const SelectCity: React.FC<SelectCityProps> = ({
   disabled,
   ...rest
 }) => {
-  const [cityOptions, setCityOptions] = useState<any[]>([])
+  const [cityOptions, setCityOptions] = useState<SelectOption[]>([])
 
   const [defaultLabel, setDefaultLabel] = useState(initialLabel)
 
-  const mapCity = (array: any[]) => {
+  const mapCity = (array: { descricao: string }[]) => {
     if (!array) return []
     return array.map((obj) => ({
       value: obj.descricao,
@@ -46,7 +45,9 @@ const SelectCity: React.FC<SelectCityProps> = ({
 
         setCityOptions(dataMapped)
 
-        setCity('')
+        if (!city) {
+          setCity('')
+        }
       } catch ({ response }) {
       } finally {
         setDefaultLabel(initialLabel)
@@ -63,8 +64,8 @@ const SelectCity: React.FC<SelectCityProps> = ({
       labelDefaultOption={defaultLabel}
       value={city}
       setValue={setCity}
-      {...rest}
       disabled={disabled}
+      {...rest}
     />
   )
 }
