@@ -168,6 +168,6 @@ export const menuItens = [
     path: CLINIC_SEE_ALL_SPECIALIST,
     icon: <StethoscopeIcon />,
     name: 'Especialistas',
-    // permission: permissionList.LISTAR_ESPECIALIDADES,
+    permission: permissionList.VER_DADOS_CLINICA,
   },
 ]
