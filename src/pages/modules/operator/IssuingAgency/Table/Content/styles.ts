@@ -2,7 +2,7 @@ import colors from '@/styles/colors'
 import styled, { css } from 'styled-components'
 
 interface StatusTypeProps {
-  type: number
+  type?: string
 }
 
 export const Container = styled.div`
@@ -59,6 +59,7 @@ export const Container = styled.div`
   }
 `
 
+
 export const Status = styled.li<StatusTypeProps>`
   > span {
     font-size: 16px;
@@ -69,17 +70,35 @@ export const Status = styled.li<StatusTypeProps>`
   }
 
   ${({ type }) =>
-    type
-      ? css`
-          > span {
-            background: ${colors.green.light};
-            color: ${colors.green.dark};
-          }
-        `
-      : css`
-          > span {
-            background: ${colors.orange.middleDark};
-            color: ${colors.purple.background.light};
-          }
-        `}}
+    type === 'Ativo' &&
+    css`
+      > span {
+        background: ${colors.green.light};
+        color: ${colors.green.dark};
+      }
+    `}
+  ${({ type }) =>
+    type === 'Negado' &&
+    css`
+      > span {
+        background: ${colors.orange.middleDark};
+        color: ${colors.purple.background.light};
+      }
+    `}
+  ${({ type }) =>
+    type === 'Pendente' &&
+    css`
+      > span {
+        background: ${colors.pink.middle};
+        color: #fff;
+      }
+    `}
+  ${({ type }) =>
+    type === 'Inativo' &&
+    css`
+      > span {
+        background: ${colors.gray.middleLight};
+        color: #fff;
+      }
+    `}
 `

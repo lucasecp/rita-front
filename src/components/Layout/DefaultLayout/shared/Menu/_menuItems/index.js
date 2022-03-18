@@ -37,7 +37,7 @@ import {
   DIRECTOR_IMPORT,
   SPECIALIST_PROFILE,
   FILTER_USERS,
-  OPERATOR_SEE_All_SPECIALTYS_TYPES,
+  OPERATOR_SEE_All_ISSUING_AGENCY,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -158,9 +158,9 @@ export const menuItens = [
     permission: permissionList.LISTAR_USUARIOS,
   },
   {
-    path: OPERATOR_SEE_All_SPECIALTYS_TYPES,
+    path: OPERATOR_SEE_All_ISSUING_AGENCY,
     icon: <SpecialtysTypesIcon />,
-    name: 'Tipos de Especialidade',
+    name: 'Orgão Emissor',
     permission: permissionList.LISTAR_TIPO_ESPECIALIDADE,
   },
 ]

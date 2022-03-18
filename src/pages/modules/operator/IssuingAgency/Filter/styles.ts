@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   > div:first-child {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 24px;
     align-items: start;
     @media (max-width: 767px) {

@@ -2,24 +2,24 @@ import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 
-interface useDeleteSpecialtyProps {
-  deleteSpecialty: (id?: number) => Promise<void>
+interface useDeleteIssuingAgencyProps {
+  deleteIssuingAgency: (id?: number) => Promise<void>
 }
 
-export const useDeleteSpecialty = (): useDeleteSpecialtyProps => {
+export const useDeleteIssuingAgency = (): useDeleteIssuingAgencyProps => {
   const { showSimple } = useModal()
   const { Loading } = useLoading()
 
-  const deleteSpecialty = async (id?: number) => {
+  const deleteIssuingAgency = async (id?: number) => {
     try {
       Loading.turnOn()
 
-      await apiAdmin.delete(`tipo-especialidade/${id}`)
+      await apiAdmin.delete(`orgao-emissor/${id}`)
     } catch (error) {
       throw new Error('Erro')
     } finally {
       Loading.turnOff()
     }
   }
-  return { deleteSpecialty }
+  return { deleteIssuingAgency }
 }

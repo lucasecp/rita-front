@@ -22,7 +22,7 @@ export const Content = styled.div`
   overflow-x: hidden;
   padding: 32px 32px 0 32px;
   background: ${colors.purple.background.light};
- 
+
   @media (max-width: 767px) {
     padding: 25px 24px 0;
   }

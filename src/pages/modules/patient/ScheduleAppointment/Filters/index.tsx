@@ -67,6 +67,7 @@ const Filters = () => {
   }
   const filterResults = async () => {
     try {
+      setQueryApiPagination('?limit=9&skip=0')
       Loading.turnOn()
       const { data } = await apiPatient.get(
         `/paciente/agenda-consulta${queryApiPagination}${queryFilterString(
