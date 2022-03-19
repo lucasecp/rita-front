@@ -9,9 +9,6 @@ export const useValidator = (): {
   const hasErrors = (fields: ErrorsRegisterI) => {
     let error = false
     setErrors({} as ErrorsRegisterI)
-    const hasSpecificError = Object.values(errors)
-
-    error = !!hasSpecificError[0]
 
     for (const field in fields) {
       if (!fields[field] || !fields[field].length) {

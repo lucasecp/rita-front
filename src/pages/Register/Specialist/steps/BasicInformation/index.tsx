@@ -23,16 +23,17 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
 
   const [issuingAgency, setIssuingAgency] = useState('')
 
-  const [ufProfissionalRegister, setufProfissionalRegister] = useState('')
+  const [ufIssuingAgency, setufProfissionalRegister] = useState('')
 
   const [toggleClick, setToggleClick] = useState(0)
 
   const onNextStep = () => {
+   
     if (
       hasErrors({
         profissionalRegister,
         issuingAgency,
-        ufProfissionalRegister,
+        ufIssuingAgency,
       })
     ) {
       return setToggleClick(Math.random() * (10 - 3) + 3)
@@ -43,9 +44,9 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
     setbasicInformation({
       profissionalRegister,
       issuingAgency,
-      ufProfissionalRegister,
+      ufIssuingAgency,
     })
-  }, [profissionalRegister, issuingAgency, ufProfissionalRegister])
+  }, [profissionalRegister, issuingAgency, ufIssuingAgency])
 
   useEffect(() => {
     if (toggleClick !== 0) {
@@ -92,13 +93,13 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
 
         <Select
           label="UF Órgão Emissor:"
-          value={ufProfissionalRegister}
+          value={ufIssuingAgency}
           setValue={setufProfissionalRegister}
-          name="ufProfissionalRegister"
+          name="ufIssuingAgency"
           options={UF}
           labelDefaultOption="Selecione"
-          hasError={!!errors.ufProfissionalRegister}
-          msgError={errors.ufProfissionalRegister}
+          hasError={!!errors.ufIssuingAgency}
+          msgError={errors.ufIssuingAgency}
         />
       </div>
       <FooterNextStep onClickNextStep={onNextStep} />

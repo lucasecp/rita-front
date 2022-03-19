@@ -20,7 +20,7 @@ const FooterNextStep: React.FC<FooterNexStepProps> = ({ onClickNextStep }) => {
       )}
 
       {step === stepAmount ? (
-        <ButtonPrimary variation="green" onClick={() => registerSpecialist()}>
+        <ButtonPrimary variation="green" onClick={onClickNextStep}>
           Finalizar
         </ButtonPrimary>
       ) : (

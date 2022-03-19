@@ -12,5 +12,9 @@ export const Container = styled.footer`
   }
   @media (max-width: 539px) {
     flex-direction: column;
+    > *:last-child {
+      margin: 0px 0px 0 0;
+  
+    }
   }
 `

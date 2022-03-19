@@ -4,6 +4,7 @@ import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 
 import apiPatient from '@/services/apiPatient'
+import { RegisterSuccess } from './messages/RegisterSuccess/index';
 import {
   RegisterSpecialistContextData,
   ProfissionalInfoI,
@@ -31,9 +32,8 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
     {} as BasicInformationI,
   )
 
-  const [specialtysAndDocs, setSpecialtysAndDocs] = useState<
-    SpecialtysAndDocsType[]
-  >([] as SpecialtysAndDocsType[])
+  const [specialtysAndDocs, setSpecialtysAndDocs] =
+    useState<SpecialtysAndDocsType>({} as SpecialtysAndDocsType)
 
   const [photo, setPhoto] = useState<File | null>(null)
 
@@ -58,9 +58,10 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   }
 
   const resetData = () => {}
-  console.log(profissionalInfo, basicInformation, specialtysAndDocs,errors)
+ 
 
   const registerSpecialist = async () => {
+    showMessage(RegisterSuccess)
   }
 
   return (

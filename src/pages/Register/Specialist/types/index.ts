@@ -36,9 +36,7 @@ export interface ErrorsRegisterI {
 }
 
 export type SpecialtysAndDocsType = {
-  name: string
-  idSpecialty: string
-  document: File
+  [x: string]: { name: string; idSpecialty: string; document: File | null }
 }
 
 export interface RegisterSpecialistContextData {
@@ -51,7 +49,7 @@ export interface RegisterSpecialistContextData {
   photo: File | null
   profissionalInfo: ProfissionalInfoI
   basicInformation: BasicInformationI
-  specialtysAndDocs: SpecialtysAndDocsType[]
+  specialtysAndDocs: SpecialtysAndDocsType
   stepAmount: number
   errors: ErrorsRegisterI
   setErrors: React.Dispatch<React.SetStateAction<ErrorsRegisterI>>

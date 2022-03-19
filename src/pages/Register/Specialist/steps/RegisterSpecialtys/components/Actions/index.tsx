@@ -7,28 +7,19 @@ import ImagePreview from '../../messages/ImagePreview'
 import { useMediaPredicate } from 'react-media-hook'
 import downloadFile from '@/helpers/downloadFile'
 import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
-import { SpecialtysAndDocsType } from '../../../../types/index';
+import { SpecialtysAndDocsType } from '../../../../types/index'
+import { useRegisterSpecialist } from '@/pages/Register/Specialist/hooks'
 
 interface ActionsProps {
   file: any
   setPhoto: (x: string) => void
-  nameField:string
+  removePhoto: () => void
 }
 
-const Actions: React.FC<ActionsProps> = ({ file, setPhoto,nameField }) => {
+const Actions: React.FC<ActionsProps> = ({ file, setPhoto, removePhoto }) => {
   const { showMessage } = useModal()
   const isMobile = useMediaPredicate('(max-width: 767px)')
-  const { setSpecialtysAndDocs } = useRegisterSpecialist()
 
-
-  const removeDocument = () => {
-    setPhoto('')
-    setSpecialtysAndDocs((specialtysAndDocs: SpecialtysAndDocsType)=>{
-      const updatedValues = []
-      if(nameField !== specialtysAndDocs.name) {updatedValues.push(specialtysAndDocs)}
-      return updatedValues
-    })
-  }
   const previewForPdf = () => {
     if (isMobile) {
       return downloadFile(file, '', 'pdf')
@@ -52,7 +43,7 @@ const Actions: React.FC<ActionsProps> = ({ file, setPhoto,nameField }) => {
           <img src={zoomIcon} />
           Ver
         </button>
-        <button onClick={removeDocument}>
+        <button onClick={removePhoto}>
           <img src={trashIcon} />
           Remover
         </button>

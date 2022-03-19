@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.div<{ name: string }>`
   > h2 {
     font-size: 24px;
     font-weight: 700;

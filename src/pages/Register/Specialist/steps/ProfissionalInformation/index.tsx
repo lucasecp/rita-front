@@ -171,7 +171,7 @@ const ProfissionalInformation: React.FC = () => {
         <InputEmail
           initialEmail={email}
           onGetEmail={setEmail}
-          hasError={(hasError) => setErrors({ ...errors, email: hasError })}
+          hasError={(hasError) => toggleClick !== 0 && setErrors({ ...errors, email: hasError })}
           checkHasError={errorMessage}
           onKeyUp={sendErrorMessage}
           onBlur={sendErrorMessage}

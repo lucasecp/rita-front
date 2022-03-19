@@ -5,11 +5,37 @@ import FooterNextStep from '../../components/FooterNextStep'
 import { useMessage } from '@/hooks/useMessage'
 import { useRegisterSpecialist } from '../../hooks'
 import SpecialtyItem from './SpecialtyItem/index'
+import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 
 const RegisterSpecialtys: React.FC = ({}) => {
-  const { profissionalInfo, step, errors, setErrors } = useRegisterSpecialist()
+  const { profissionalInfo, setErrors, specialtysAndDocs, step,registerSpecialist } =
+    useRegisterSpecialist()
 
-  const onNextStep = () => {}
+  const hasError = () => {
+    let error = false
+    for (const field in specialtysAndDocs) {
+      if (!specialtysAndDocs[field].document) {
+        const message = 'Documentação Obrigatória'
+
+        scrollOntoFieldError({ [field]: message })
+
+        setErrors((errors) => ({
+          ...errors,
+          specialtysAndDocs: {
+            ...errors.specialtysAndDocs,
+            [field]: message,
+          },
+        }))
+        error = true
+      }
+    }
+    return error
+  }
+
+  const onNextStep = () => {
+    if(hasError()) return
+    registerSpecialist()
+  }
 
   return (
     <Container hidden={step !== 3}>

@@ -22,14 +22,14 @@ const Photo: React.FC = ({}) => {
     if (photo && !isValidTypeFile(photo)) {
       removePhoto()
       showSimple.error(
-        'O tamanho máximo do arquivo deve ser 10MB. Por favor, selecione outro arquivo.',
+        'Formato do Arquivo inválido. Por favor, selecione outro arquivo.',
       )
     }
 
     if (photo && !isValidSizeFile(photo)) {
       removePhoto()
       showSimple.error(
-        'Formato do Arquivo inválido. Por favor, selecione outro arquivo.',
+        'O tamanho máximo do arquivo deve ser 10MB. Por favor, selecione outro arquivo.',
       )
     }
   }, [photo])
