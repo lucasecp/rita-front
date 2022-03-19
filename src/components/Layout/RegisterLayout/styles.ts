@@ -1,12 +1,12 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import shape from '@/assets/img/element3.png'
 import colors from '@/styles/colors'
-
 
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
   min-height: 100vh;
+
   background-image: url(${shape});
   background-repeat: no-repeat;
   background-color: ${colors.gray.extraLight};
@@ -23,6 +23,13 @@ export const Container = styled.div`
     > div {
       width: 100%;
       height: 100%;
+      background: linear-gradient(
+        148.19deg,
+        #9146ff -15.68%,
+        #8f46fe -3.23%,
+        rgba(136, 70, 252, 0.992703) 43.97%,
+        #1c23bd 119.58%
+      );
       opacity: 0.9;
       mix-blend-mode: multiply;
       filter: contrast(0.8);
