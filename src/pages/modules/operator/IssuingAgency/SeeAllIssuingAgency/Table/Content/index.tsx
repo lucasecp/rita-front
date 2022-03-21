@@ -1,14 +1,15 @@
 import React from 'react'
 import { Container, Status } from './styles'
 import CustomTooltip from '@/components/Tooltip'
-import { ContentProps } from '../../types'
+import { ContentProps } from '../../SeeAllIssuingAgency/types'
 import { useHistory } from 'react-router-dom'
-import { OPERATOR_EDIT_SPRECIALTY } from '@/routes/constants/namedRoutes/routes'
+import { OPERATOR_EDIT_ISSUING_AGENCY } from '@/routes/constants/namedRoutes/routes'
 import editIcon from '@/assets/icons/edit.svg'
 import trashIcon from '@/assets/icons/trash.svg'
 import { useModal } from '@/hooks/useModal'
 import { useDeleteIssuingAgency } from './useDeleteIssuingAgency'
 import { toast } from '@/styles/components/toastify'
+import { specialCharacters } from '@/components/smarts/InputEmail/constants/specialCharacters'
 
 const Content: React.FC<ContentProps> = ({
   issuingAgency,
@@ -73,11 +74,11 @@ const Content: React.FC<ContentProps> = ({
           <li>
             <CustomTooltip label="Editar">
               <button
-              // onClick={() =>
-              //   history.push(OPERATOR_EDIT_SPRECIALTY, {
-              //     specialtyInfo: specialtys,
-              //   })
-              // }
+                onClick={() =>
+                  history.push(OPERATOR_EDIT_ISSUING_AGENCY, {
+                    id: issuingAgency.id,
+                  })
+                }
               >
                 <img src={editIcon} />
               </button>
