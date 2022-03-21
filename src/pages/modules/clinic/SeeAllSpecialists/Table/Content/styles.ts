@@ -14,7 +14,6 @@ export const Container = styled.div`
     padding: 25px 0;
     justify-content: space-between;
     position: relative;
-    cursor: pointer;
     &::after {
       content: '';
       height: 1px;

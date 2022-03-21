@@ -70,4 +70,15 @@ export const Container = styled.button<ContainerProps>`
         color: ${colors.purple.background.middle};
       }
     `}
+
+    ${(props) =>
+    props.variation === 'green' &&
+    css`
+      border: solid 2px #46a86e;
+      background: #46a86e;
+      :hover {
+        background: #316153 !important;
+        border: solid 2px #316153;
+      }
+    `}
 `

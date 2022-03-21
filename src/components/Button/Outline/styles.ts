@@ -30,7 +30,7 @@ export const Container = styled.button<ContainerProps>`
     css`
       padding: 10px 32px;
     `}
-    
+
   ${(props) =>
     props.variation === 'white' &&
     css`
@@ -45,11 +45,12 @@ export const Container = styled.button<ContainerProps>`
   ${(props) =>
     props.variation === 'green' &&
     css`
-      color: ${colors.green.light};
-      border: solid 2px ${colors.green.light};
+      color: #46a86e;
+      border: solid 2px #46a86e;
       :hover {
-        color: ${colors.green.dark} !important;
-        background: ${colors.green.light} !important;
+        color: #fff !important;
+        background-color: #316153 !important;
+        border-color: #316153 !important;
       }
     `}
 
