@@ -29,7 +29,8 @@ export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 export const OPERATOR_ADD_DEPENDENT = '/dependentes/associar'
 export const OPERATOR_SEE_ALL_SPECIALISTS = '/operador-especialistas'
 export const OPERATOR_SEE_ONE_SPECIALIST = '/especialistas/ver-especialista'
-export const OPERATOR_SEE_All_ISSUING_AGENCY = '/orgao-emissor'
+export const OPERATOR_CREATE_ISSUING_AGENCY = '/orgao-emissor/criar'
+export const OPERATOR_SEE_ALL_ISSUING_AGENCY = '/orgao-emissor'
 
 export const CLINIC_SEE_ALL_SPECIALIST = '/clinica-especialista'
 export const CLINIC_SEE_ONE_SPECIALIST = '/clinica-especialista/visualizar'
@@ -84,6 +85,7 @@ export const DEFAULT_REGISTER = '/cadastro-inicial'
 export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'
 
 export const REGISTER_PATIENT = '/cadastro/paciente/'
+export const REGISTER_SPECIALIST = '/cadastro/especialista/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const TESTE = '/teste'

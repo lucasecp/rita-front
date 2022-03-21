@@ -8,7 +8,6 @@ import { fieldsApi } from '../static/fieldsApi'
 import useQueryParams from './useQueryParams'
 import { Select } from '@/components/Form/Select'
 
-
 interface FilterProps {
   setFilters: React.Dispatch<React.SetStateAction<any[]>>
 }
@@ -55,7 +54,22 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     let newErrors = false
     setErrors({ type: '' })
 
+    // if (issuingAgency.length >= 3 && issuingAgency) {
+    //   setErrors({ type: '' })
+    //   newErrors = false
+    // }
+
+    // if (specialist.length >= 3 && specialist) {
+    //   setErrors({ type: '' })
+    //   newErrors = false
+    // }
+
     if (issuingAgency.length < 3 && issuingAgency) {
+      setErrors({ type: 'Informe 3 letras ou mais' })
+      newErrors = true
+    }
+
+    if (specialist.length < 3 && specialist) {
       setErrors({ type: 'Informe 3 letras ou mais' })
       newErrors = true
     }
@@ -86,6 +100,12 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           value={issuingAgency}
           setValue={setIssuingAgency}
           maxLength={20}
+          hasError={
+            issuingAgency.length < 3 && issuingAgency ? !!errors.type : false
+          }
+          msgError={
+            issuingAgency.length < 3 && issuingAgency ? errors.type : ''
+          }
         />
 
         <InputText
@@ -95,8 +115,8 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           setValue={setSpecialist}
           maxLength={20}
           // onlyLetter
-          hasError={!!errors.type}
-          msgError={errors.type}
+          hasError={specialist.length < 3 && specialist ? !!errors.type : false}
+          msgError={specialist.length < 3 && specialist ? errors.type : ''}
         />
         <Select
           variation="secondary"
@@ -106,10 +126,8 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           setValue={setStatus}
           options={[
             { label: 'Ativo', value: 'A' },
-            { label: 'Inativo', value: 'I'},
+            { label: 'Inativo', value: 'I' },
           ]}
-          hasError={!!errors.type}
-          msgError={errors.type}
         />
       </div>
       <BtnGroup>
