@@ -2,13 +2,13 @@ import CustomMultiSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
 import apiAdmin from '@/services/apiAdmin'
-import React, { useEffect, useState } from 'react'
+import React, { SetStateAction, useEffect, useState } from 'react'
 
 import { Container } from './styles'
 
 interface ClinicsProps {
-  clinic?: MultiSelectOption[]
-  setClinic: (value: any) => void
+  clinic: MultiSelectOption[]
+  setClinic: React.Dispatch<SetStateAction<MultiSelectOption[]>>
   errors: any
   setErrors: (error: any) => any
   [x: string]: any
@@ -22,7 +22,6 @@ export const MultSelectClinics: React.FC<ClinicsProps> = ({
   ...rest
 }) => {
 
-  const [clinics, setClinics] = useState<MultiSelectOption[]>([])
 
   const [clinicOptions, setClinicOptions] = useState<MultiSelectOption[]>([])
 
@@ -58,12 +57,7 @@ export const MultSelectClinics: React.FC<ClinicsProps> = ({
   //   setClinics(clinic || [])
   // }, [clinic])
 
-  useEffect(() => {
-    setClinic(
-      clinics
-    )
-    setErrors((error: any) => ({ ...error, clinics: '' }))
-  }, [clinics])
+
 
   // const onChangingSelect = (values: MultiSelectOption[]) => {
   //   const hasAllOption = values.some((val) => val.id === 'All')
@@ -79,13 +73,14 @@ export const MultSelectClinics: React.FC<ClinicsProps> = ({
       <h1>Clínicas</h1>
       <section>
         <CustomMultiSelect
-          value={clinics}
-          setValue={setClinics}
+          value={clinic}
+          setValue={setClinic}
           variation="secondary"
           options={clinicOptions}
           hasError={!!errors.clinics}
           messageError={errors?.clinics}
           name="clinics"
+
           {...rest}
         />
       </section>
