@@ -2,28 +2,25 @@ import CustomMultiSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
 import apiAdmin from '@/services/apiAdmin'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,SetStateAction } from 'react'
 
 import { Container } from './styles'
 
 interface SpecialtysProps {
-  specialtysProps: MultiSelectOption[]
-  setSpecialtysProps: (value: any) => void
+  specialtys: MultiSelectOption[]
+  setSpecialtys: React.Dispatch<SetStateAction<MultiSelectOption[]>>
   errors: any
   setErrors: (error: any) => any
   [x: string]: any
 }
 
 export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
-  specialtysProps,
-  setSpecialtysProps,
+  specialtys,
+  setSpecialtys,
   errors,
   setErrors,
   ...rest
 }) => {
-  const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>(
-    specialtysProps || [],
-  )
 
   const [specialtysOptions, setSpecialtysOptions] = useState<
     MultiSelectOption[]
@@ -61,10 +58,6 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
   //   setSpecialtys(specialtysProps || [])
   // }, [specialtysProps])
 
-  useEffect(() => {
-    setSpecialtysProps(specialtys)
-    setErrors((error: any) => ({ ...error, specialtys: '' }))
-  }, [specialtys])
 
   // const onChangingSelect = (values: MultiSelectOption[]) => {
   //   const hasAllOption = values.some((val) => val.id === 'All')

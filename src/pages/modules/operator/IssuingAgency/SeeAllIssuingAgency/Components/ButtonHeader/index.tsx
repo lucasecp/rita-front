@@ -1,5 +1,5 @@
 import ButtonPrimary from '@/components/Button/Primary'
-import { OPERATOR_CREATE_SPRECIALTY } from '@/routes/constants/namedRoutes/routes'
+import { OPERATOR_CREATE_ISSUING_AGENCY } from '@/routes/constants/namedRoutes/routes'
 import React from 'react'
 import { useHistory } from 'react-router'
 
@@ -8,8 +8,7 @@ const ButtonHeader = () => {
   return (
     <ButtonPrimary
       medium
-      onClick={() => history.push(OPERATOR_CREATE_SPRECIALTY)}
-      disabled
+      onClick={() => history.push(OPERATOR_CREATE_ISSUING_AGENCY)}
     >
       Incluir
     </ButtonPrimary>

@@ -37,7 +37,7 @@ import {
   DIRECTOR_IMPORT,
   SPECIALIST_PROFILE,
   FILTER_USERS,
-  OPERATOR_SEE_All_ISSUING_AGENCY,
+  OPERATOR_SEE_ALL_ISSUING_AGENCY,
   CLINIC_SEE_ALL_SPECIALIST,
 } from '@/routes/constants/namedRoutes/routes'
 
@@ -159,7 +159,7 @@ export const menuItens = [
     permission: permissionList.LISTAR_USUARIOS,
   },
   {
-    path: OPERATOR_SEE_All_ISSUING_AGENCY,
+    path: OPERATOR_SEE_ALL_ISSUING_AGENCY,
     icon: <SpecialtysTypesIcon />,
     name: 'Orgão Emissor',
     permission: permissionList.GERENCIAR_ORGAO_EMISSOR,

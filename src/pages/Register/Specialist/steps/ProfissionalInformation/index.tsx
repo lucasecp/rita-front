@@ -13,8 +13,9 @@ import { useRegisterSpecialist } from '../../hooks'
 import { genericValidate } from '../../helpers/validatorFields'
 import { useValidator } from '../../hooks/useValidator'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
-import { validatePhone } from '@/helpers/validateFields/validatePhone';
-import { validateCPF } from '@/helpers/validateFields/validateCPF';
+import { validatePhone } from '@/helpers/validateFields/validatePhone'
+import { validateCPF } from '@/helpers/validateFields/validateCPF'
+import { MultiSelectOption } from '../../../../../components/Form/MultSelect/index';
 
 const ProfissionalInformation: React.FC = () => {
   const [name, setName] = useState('')
@@ -23,8 +24,8 @@ const ProfissionalInformation: React.FC = () => {
   const [receiveService, setReceiveService] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [specialtys, setSpecialtys] = useState([])
-  const [clinics, setClinics] = useState([])
+  const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>([])
+  const [clinics, setClinics] = useState<MultiSelectOption[]>([])
   const [toggleClick, setToggleClick] = useState(0)
 
   const [errorMessage, sendErrorMessage] = useMessage()
@@ -72,7 +73,6 @@ const ProfissionalInformation: React.FC = () => {
     specialtys,
     clinics,
   ])
-
 
   useEffect(() => {
     if (toggleClick !== 0) {
@@ -171,7 +171,9 @@ const ProfissionalInformation: React.FC = () => {
         <InputEmail
           initialEmail={email}
           onGetEmail={setEmail}
-          hasError={(hasError) => toggleClick !== 0 && setErrors({ ...errors, email: hasError })}
+          hasError={(hasError) =>
+            toggleClick !== 0 && setErrors({ ...errors, email: hasError })
+          }
           checkHasError={errorMessage}
           onKeyUp={sendErrorMessage}
           onBlur={sendErrorMessage}
@@ -200,8 +202,8 @@ const ProfissionalInformation: React.FC = () => {
         />
 
         <MultSelectSpecialty
-          specialtysProps={specialtys}
-          setSpecialtysProps={setSpecialtys}
+          specialtys={specialtys}
+          setSpecialtys={setSpecialtys}
           errors={errors}
           setErrors={setErrors}
         />
