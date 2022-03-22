@@ -1,19 +1,19 @@
-import OutlineButton from '@/components/Button/Outline';
-import ButtonPrimary from '@/components/Button/Primary';
-import { DefaultLayout } from '@/components/Layout/DefaultLayout';
-import { useLoading } from '@/hooks/useLoading';
-import { useModal } from '@/hooks/useModal';
-import { OPERATOR_SEE_ALL_ISSUING_AGENCY } from '@/routes/constants/namedRoutes/routes';
-import apiAdmin from '@/services/apiAdmin';
-import { toast } from '@/styles/components/toastify';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import OutlineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
+import { DefaultLayout } from '@/components/Layout/DefaultLayout'
+import { useLoading } from '@/hooks/useLoading'
+import { useModal } from '@/hooks/useModal'
+import { OPERATOR_SEE_ALL_ISSUING_AGENCY } from '@/routes/constants/namedRoutes/routes'
+import apiAdmin from '@/services/apiAdmin'
+import { toast } from '@/styles/components/toastify'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router'
 
-import { toApi } from './adapters';
-import Form from './Form';
-import CancelCreating from './messages/CancelCreating';
-import { Content } from './styles';
-import { DataReceivedI, ErrorsI } from './types';
+import { toApi } from './adapters'
+import Form from './Form'
+import CancelCreating from './messages/CancelCreating'
+import { Content } from './styles'
+import { DataReceivedI, ErrorsI } from './types'
 
 const CreateIssuingAgency: React.FC = () => {
   const [errors, setErrors] = useState<ErrorsI>({})
@@ -27,11 +27,26 @@ const CreateIssuingAgency: React.FC = () => {
     setErrors({})
 
     for (const field in dataToApi) {
+      if (dataToApi.issuingAgency) {
+        if (dataToApi.issuingAgency.length < 3) {
+          setErrors({ type: 'Informe 3 letras ou mais' })
+          error = true
+        }
+      }
+
+      if (dataToApi.specialist) {
+        if (dataToApi.specialist.length < 3) {
+          setErrors({ type: 'Informe 3 letras ou mais' })
+          error = true
+        }
+      }
+
       if (!dataToApi[field]) {
         setErrors((errors) => ({ ...errors, [field]: 'Campo Obrigatório.' }))
         error = true
       }
     }
+
     return error
   }
 
@@ -74,7 +89,6 @@ const CreateIssuingAgency: React.FC = () => {
     history.push(OPERATOR_SEE_ALL_ISSUING_AGENCY)
   }
 
-
   return (
     <DefaultLayout title="Orgão Emissor - Inclusão">
       <Content>
@@ -83,7 +97,7 @@ const CreateIssuingAgency: React.FC = () => {
           <OutlineButton onClick={onCancel}>Cancelar</OutlineButton>
           <ButtonPrimary
             onClick={onSave}
-            disabled={Object.values(dataToApi).some((field)=> !field)}
+            disabled={Object.values(dataToApi).some((field) => !field)}
           >
             Salvar
           </ButtonPrimary>
