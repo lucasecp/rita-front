@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import colors from '@/styles/colors'
 
 export const Container = styled.div`
   margin: 0 -32px;
@@ -8,11 +9,6 @@ export const Container = styled.div`
   table {
     width: 100%;
     border-collapse: collapse;
-  }
-  th,
-  td {
-    min-width: 150px;
-    max-width: 150px;
   }
 
   th:last-child > div > div {
@@ -70,8 +66,26 @@ export const Container = styled.div`
 `
 export const Td = styled.td`
   padding: 25.5px 0;
-  cursor: pointer;
   text-transform: capitalize;
+
+  > svg {
+    width: 22px;
+    color: ${colors.purple.main.dark};
+    fill: currentColor;
+  }
+
+  ${({ size }) =>
+    css`
+      min-width: ${size || 100}px;
+      max-width: ${size || 100}px;
+    `}
+
+  ${({ center }) =>
+    center &&
+    css`
+      text-align: center;
+      cursor: pointer;
+    `}
 
   div {
     margin: -25.5px 0;

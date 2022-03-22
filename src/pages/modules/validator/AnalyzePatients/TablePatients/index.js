@@ -11,6 +11,7 @@ import { queryOrderString, queryFilterString } from '../helpers/queryString'
 import RecordAlreadyAnalized from './messages/error/RecordAlreadyAnalyzed'
 import { Container, NotFound, Td } from './styles'
 import Thead from './Thead'
+import { ReactComponent as AuthorizationIcon } from '@/assets/icons/to-do.svg'
 
 import {
   LOGIN,
@@ -103,14 +104,11 @@ const TablePatients = ({ orders, setOrders, filters }) => {
           <tbody>
             {patients?.dados?.length !== 0 &&
               patients?.dados?.map((patient) => (
-                <tr
-                  key={patient.idPaciente}
-                  onClick={() => handleClick(patient.idPaciente, patient.cpf)}
-                >
-                  <Td soft>
+                <tr key={patient.idPaciente}>
+                  <Td soft size={100}>
                     {formateDateAndHour(patient.dataFiliacao, ' - ') || '-'}
                   </Td>
-                  <Td strong id="patient-name">
+                  <Td strong size={240} id="patient-name">
                     <CustomTooltip
                       label={everyFirstLetterCapitalize(patient.nome) || '-'}
                     >
@@ -121,15 +119,27 @@ const TablePatients = ({ orders, setOrders, filters }) => {
                       </div>
                     </CustomTooltip>
                   </Td>
-                  <Td strong>{formatCpf(patient.cpf) || '-'}</Td>
-                  <Td soft>
+                  <Td strong size={140}>
+                    {formatCpf(patient.cpf) || '-'}
+                  </Td>
+                  <Td soft size={120}>
                     {formatFirstLastName(patient.validador?.nome) || '-'}
                   </Td>
-                  <Td soft>
+                  <Td soft size={100}>
                     {formateDateAndHour(patient.dataValidacao, ' - ') || '-'}
                   </Td>
-                  <Td status={showStatus(patient.status)}>
+                  <Td status={showStatus(patient.status)} size={120}>
                     <span>{showStatus(patient.status) || '-'}</span>
+                  </Td>
+                  <Td
+                    soft
+                    center
+                    size={80}
+                    onClick={() => handleClick(patient.idPaciente, patient.cpf)}
+                  >
+                    <CustomTooltip label="Validar">
+                      <AuthorizationIcon />
+                    </CustomTooltip>
                   </Td>
                 </tr>
               ))}
