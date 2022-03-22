@@ -53,7 +53,9 @@ export const SeeOnePatient: React.FC = () => {
     [] as PatientData[],
   )
   const [patientAddress, setPatientAddress] = useState({} as PatientAddress)
-  const [dependent, setDependent] = useState({} as PatientData | undefined)
+  const [dependent, setDependent] = useState(
+    {} as (PatientData & PatientDataHolder) | undefined,
+  )
 
   const [incomeType, setIncomeType] = useState('')
 
@@ -210,6 +212,17 @@ export const SeeOnePatient: React.FC = () => {
     }
   }
 
+  const isPatientLinkedCompany = useMemo(() => {
+    const isDependent = !!dependent?.id
+
+    if (isDependent) {
+      return !!dependent?.company?.corporateName
+    } else {
+      console.log(patientData?.company)
+      return !!patientData?.company?.corporateName
+    }
+  }, [dependent, patientData])
+
   return (
     <DefaultLayout title="Autorizações">
       <Container>
@@ -242,8 +255,9 @@ export const SeeOnePatient: React.FC = () => {
           patientId={dependent ? dependent.id : patientData.id}
           validations={validations}
           onChangeValidations={setValidations}
-          isPatientLinkedPlan={!!patientData.plan}
+          isPatientLinkedCompany={isPatientLinkedCompany}
         />
+
         <footer>
           <ButtonLink onClick={onComeBack}>Voltar</ButtonLink>
           <OutlineButton onClick={onSaveValidations}>Salvar</OutlineButton>

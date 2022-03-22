@@ -65,7 +65,7 @@ const SpecialtyItem: React.FC<SpecialtyItemProps> = ({ data, current }) => {
   useEffect(() => {
     addSpeciatyAndDocs()
 
-    if(!photo) return
+    if (!photo) return
 
     addError('')
 
@@ -81,7 +81,7 @@ const SpecialtyItem: React.FC<SpecialtyItemProps> = ({ data, current }) => {
       addError(
         'O tamanho máximo do arquivo deve ser 10MB. Por favor, selecione outro arquivo.',
       )
-    } 
+    }
   }, [photo])
 
   useEffect(() => {
@@ -110,7 +110,8 @@ const SpecialtyItem: React.FC<SpecialtyItemProps> = ({ data, current }) => {
             small
             variation={
               hasKeyInSpecialtyErrors(nameField) &&
-              errors.specialtysAndDocs[nameField] && !photo
+              errors.specialtysAndDocs[nameField] &&
+              !photo
                 ? 'red'
                 : 'green'
             }
@@ -119,7 +120,8 @@ const SpecialtyItem: React.FC<SpecialtyItemProps> = ({ data, current }) => {
           </OutlineButton>
         </InputFile>
         {hasKeyInSpecialtyErrors(nameField) &&
-          errors.specialtysAndDocs[nameField] && !photo && (
+          errors.specialtysAndDocs[nameField] &&
+          !photo && (
             <>
               <img src={warningCircleRed} />{' '}
               <p>{errors.specialtysAndDocs[nameField]}</p>{' '}
