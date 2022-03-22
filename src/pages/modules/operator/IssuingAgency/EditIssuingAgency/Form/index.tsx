@@ -1,5 +1,6 @@
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
+import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectIssuingAgency'
 import React, { useEffect, useState } from 'react'
 import { ErrorsI, DataReceivedI } from '../types'
 import { Container } from './style'
@@ -13,51 +14,51 @@ interface FormProps {
 const Form: React.FC<FormProps> = ({ errors, setDataToApi, dataFromApi }) => {
   const [specialistName, setSpecialistName] = useState('')
   const [issuingAgency, setIssuingAgency] = useState('')
-  const [description, setDescription] = useState('')
+  const [status, setStatus] = useState('')
+
+  console.log(dataFromApi)
 
   useEffect(() => {
     setSpecialistName(dataFromApi?.specialistName || '')
     setIssuingAgency(dataFromApi?.issuingAgency || '')
-    setDescription(dataFromApi?.description || '')
+    setStatus(dataFromApi?.status || '')
   }, [dataFromApi])
 
   useEffect(() => {
     setDataToApi({
       specialistName,
       issuingAgency,
-      description,
+      status,
     })
-  }, [specialistName, issuingAgency, description])
+  }, [specialistName, issuingAgency, status])
 
   return (
     <Container>
+      <SelectIssuingAgency
+        issuingAgency={issuingAgency}
+        setIssuingAgency={setIssuingAgency}
+        error={errors.issuingAgency}
+      />
       <InputText
-        label="Nome do especialista:"
+        label="Especialista:"
         value={specialistName}
         setValue={setSpecialistName}
-        maxLength={200}
+        maxLength={100}
         hasError={!!errors.specialistName}
         msgError={errors.specialistName}
       />
-      <InputText
-        label="Especialidade:"
-        value={description}
-        setValue={setDescription}
-        maxLength={200}
-        hasError={!!errors.description}
-        msgError={errors.description}
-      />
-      <SelectIssuingAgency
-        labelDefaultOption="Selecione"
-        label="Órgão Emissor:"
-        value={issuingAgency}
-        setValue={setIssuingAgency}
+      <Select
         options={[
-          { label: 'Sim', value: 1 },
-          { label: 'Não', value: 0 },
+          { label: 'Ativo', value: 'A' },
+          { label: 'Inativo', value: 'I' },
         ]}
-        hasError={!!errors.issuingAgency}
-        msgError={errors.issuingAgency}
+        label="Status:"
+        labelDefaultOption="Selecione:"
+        value={status}
+        setValue={setStatus}
+        hasError={!!errors.status}
+        msgError={errors.status}
+        name="Status"
       />
     </Container>
   )

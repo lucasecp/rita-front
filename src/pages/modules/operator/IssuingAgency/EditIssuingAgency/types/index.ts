@@ -1,20 +1,19 @@
 export interface ErrorsI {
-  code?: string
-  description?: string
-  requireSubscription?: string
+  specialistName: string
+  issuingAgency: string
+  status: string
 }
 
 export interface DataReceivedI {
-  code?: string
-  description?: string
-  requireSubscription?: boolean | string | number
+  specialistName: string
+  issuingAgency: string
+  status: string
   id?: string
   [x: string]: any
 }
 
 export interface DataToApiI {
-  idOrgaoEmissor: string
-  nomeEspecialista: string
   descricao: string
+  nomeEspecialista: string
   status: string
 }

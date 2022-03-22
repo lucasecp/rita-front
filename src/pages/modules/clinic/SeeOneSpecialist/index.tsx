@@ -5,7 +5,7 @@ import { fromApi } from './adapters'
 import { useLoading } from '@/hooks/useLoading'
 import apiAdmin from '@/services/apiAdmin'
 import { useHistory, useLocation } from 'react-router'
-import { OPERATOR_SEE_ALL_SPECIALISTS } from '@/routes/constants/namedRoutes/routes'
+import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 
 const SeeOneSpecialist = () => {
   const [specialist, setSpecialist] = useState({})
@@ -15,7 +15,7 @@ const SeeOneSpecialist = () => {
 
   useEffect(() => {
     if (!location.state) {
-      return history.push(OPERATOR_SEE_ALL_SPECIALISTS)
+      return history.push(CLINIC_SEE_ALL_SPECIALIST)
     }
     console.log(location.state.idDoctor)
 

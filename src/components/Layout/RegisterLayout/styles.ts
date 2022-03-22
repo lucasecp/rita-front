@@ -4,7 +4,7 @@ import colors from '@/styles/colors'
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 3fr;
   min-height: 100vh;
 
   background-image: url(${shape});

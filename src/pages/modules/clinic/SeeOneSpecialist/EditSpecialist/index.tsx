@@ -6,7 +6,7 @@ import { ProfissionalDatas } from '../components/ProfissionalDatas'
 import { Specialty } from '../components/Specialty'
 import { useModal } from '@/hooks/useModal'
 import { useHistory } from 'react-router'
-import { OPERATOR_SEE_ALL_SPECIALISTS } from '@/routes/constants/namedRoutes/routes'
+import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 import CancelEdting from '../messages/CancelEdting'
 import { ErrorsI } from '../Types'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
@@ -168,7 +168,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
 
       toast.success('Alteração realizada com sucesso.')
 
-      history.push(OPERATOR_SEE_ALL_SPECIALISTS)
+      history.push(CLINIC_SEE_ALL_SPECIALIST)
     } catch (error) {
       toast.error('Erro ao editar.')
     } finally {
@@ -186,7 +186,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
     if (someFieldChanged()) {
       return showMessage(CancelEdting)
     }
-    history.push(OPERATOR_SEE_ALL_SPECIALISTS)
+    history.push(CLINIC_SEE_ALL_SPECIALIST)
   }
 
   return (

@@ -16,25 +16,27 @@ import { toApi } from './adapters'
 import { useLocation } from 'react-router-dom'
 
 const EditIssuingAengcy: React.FC = () => {
-  const [errors, setErrors] = useState<ErrorsI>({})
+  const [errors, setErrors] = useState<ErrorsI>({} as ErrorsI)
   const [dataFromApi, setDataFromApi] = useState<any>({})
   const [someFieldsWasChanged, setSomeFieldsWasChanged] = useState(false)
-  const [dataToApi, setSetDataToApi] = useState<DataReceivedI>({})
+  const [dataToApi, setSetDataToApi] = useState<DataReceivedI>(
+    {} as DataReceivedI,
+  )
   const { Loading } = useLoading()
   const history = useHistory()
   const { showMessage } = useModal()
   const location = useLocation()
 
-  const issuingInfo = location.state?.id
+  const issuingInfo = location.state
 
   useEffect(() => {
     if (!issuingInfo) {
       return history.push(OPERATOR_SEE_ALL_ISSUING_AGENCY)
     }
     setDataFromApi({
-      code: issuingInfo.code,
-      requireSubscription: issuingInfo.subscriptionRequired ? 1 : 0,
-      description: issuingInfo.name,
+      specialistName: issuingInfo.specialistName,
+      issuingAgency: issuingInfo.issuingAgency,
+      status: issuingInfo.status,
     })
   }, [])
 
@@ -51,11 +53,17 @@ const EditIssuingAengcy: React.FC = () => {
 
   const hasError = () => {
     let error = false
-    setErrors({})
-
+    setErrors({} as ErrorsI)
     for (const field in dataToApi) {
-      if (!dataToApi[field] && dataToApi[field] !== 0) {
+      if (!dataToApi[field]) {
         setErrors((errors) => ({ ...errors, [field]: 'Campo Obrigatório.' }))
+        error = true
+      }
+      if (field === 'specialistName' && dataToApi[field].length < 3) {
+        setErrors((errors) => ({
+          ...errors,
+          [field]: 'Informe 3 letras ou mais.',
+        }))
         error = true
       }
     }
@@ -69,15 +77,15 @@ const EditIssuingAengcy: React.FC = () => {
 
     const data = toApi({
       id: issuingInfo?.id,
-      code: dataToApi.code,
-      requireSubscription: !!Number(dataToApi.requireSubscription),
-      description: dataToApi.description,
+      specialistName: dataToApi?.specialistName,
+      issuingAgency: dataToApi?.issuingAgency,
+      status: dataToApi?.status,
     })
 
     try {
       Loading.turnOn()
 
-      await apiAdmin.put(`/especialidade/${issuingInfo?.id}`, data)
+      await apiAdmin.put(`/orgao-emissor/${issuingInfo?.id}`, data)
 
       toast.success('Cadastro realizado com sucesso.')
       history.push(OPERATOR_SEE_ALL_ISSUING_AGENCY)
@@ -112,7 +120,7 @@ const EditIssuingAengcy: React.FC = () => {
           <OutlineButton onClick={onCancel}>Cancelar</OutlineButton>
           <ButtonPrimary
             onClick={onSave}
-            disabled={Object.values(dataToApi).some((field) => !field)}
+            //disabled={Object.values(dataToApi).some((field) => !field)}
           >
             Salvar
           </ButtonPrimary>

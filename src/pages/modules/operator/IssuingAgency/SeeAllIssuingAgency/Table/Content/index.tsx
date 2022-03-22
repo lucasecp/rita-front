@@ -77,6 +77,9 @@ const Content: React.FC<ContentProps> = ({
                 onClick={() =>
                   history.push(OPERATOR_EDIT_ISSUING_AGENCY, {
                     id: issuingAgency.id,
+                    specialistName: issuingAgency.specialist,
+                    issuingAgency: issuingAgency.issuingAgency,
+                    status: issuingAgency.status,
                   })
                 }
               >

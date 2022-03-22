@@ -23,8 +23,11 @@ const Pagination: React.FC<PaginationProps> = ({
 
 
   const skipedPages = (currentPage - 1) * Number(limit)
+
   const totalPages = Math.ceil(total / Number(limit)) || 0
+
   const queryString = `?page=${currentPage}&limit=${limit}${restQuery || ''}`
+  
   const queryApiString = `?limit=${limit}&skip=${skipedPages}`
 
   const currentTotal =

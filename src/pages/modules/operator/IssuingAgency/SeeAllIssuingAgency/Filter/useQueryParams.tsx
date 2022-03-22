@@ -1,5 +1,5 @@
-import useQuery from '@/hooks/useQuery'
-import { fieldsApi } from '../../SeeAllSpecialtys/static/fieldsApi'
+// import useQuery from '@/hooks/useQuery'
+// import { fieldsApi } from '../../SeeAllSpecialtys/static/fieldsApi'
 
 interface UseQueryParamsProps {
   issuingAgency: string | null
