@@ -73,6 +73,7 @@ const ProfissionalInformation: React.FC = () => {
     specialtys,
     clinics,
   ])
+  
 
   useEffect(() => {
     if (toggleClick !== 0) {
@@ -104,6 +105,8 @@ const ProfissionalInformation: React.FC = () => {
             })
           }
           name="name"
+          maxLength={200}
+
         />
 
         <InputText
@@ -131,6 +134,8 @@ const ProfissionalInformation: React.FC = () => {
               ),
             })
           }
+          maxLength={200}
+
         />
 
         <InputMask
