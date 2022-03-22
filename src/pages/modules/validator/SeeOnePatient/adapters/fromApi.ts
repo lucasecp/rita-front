@@ -51,7 +51,7 @@ export const fromApi = (data: FromApiResponse): FromApi => {
       name: data.titular.nome,
       cpf: formatCpf(data.titular.cpf),
       birthDate: data.titular.dataNascimento,
-      gender: genderFromApi(data.titular.sexo),
+      gender: genderFromApi(data.titular.genero),
       phone: formatPhone(data.titular.telefone),
       email: data.titular.email,
       plan: data.titular.plano?.nome,
@@ -69,6 +69,12 @@ export const fromApi = (data: FromApiResponse): FromApi => {
       gender: genderFromApi(data.sexo),
       phone: formatPhone(data.telefone),
       email: data.email,
+      plan: data.titular.plano?.nome,
+      table: data.titular.tabela?.nome,
+      company: data.empresa[0] && {
+        corporateName: data.empresa[0].razaoSocial,
+        cnpj: formatCnpj(data.empresa[0].cnpj),
+      },
     }
   }
 

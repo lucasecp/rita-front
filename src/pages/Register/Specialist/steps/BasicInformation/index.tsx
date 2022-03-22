@@ -28,7 +28,7 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
   const [toggleClick, setToggleClick] = useState(0)
 
   const onNextStep = () => {
-   
+
     if (
       hasErrors({
         profissionalRegister,
@@ -83,6 +83,8 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
           }
           hasError={!!errors.profissionalRegister}
           msgError={errors.profissionalRegister}
+          onlyNumber
+          maxLength={10}
         />
 
         <SelectIssuingAgency

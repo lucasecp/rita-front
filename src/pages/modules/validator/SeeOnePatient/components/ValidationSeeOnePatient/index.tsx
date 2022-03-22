@@ -14,13 +14,18 @@ import { PatientValidation } from '../../@types'
 interface ValidationSeeOnePatientProps {
   patientId: number
   validations: PatientValidation
-  isPatientLinkedPlan?: boolean
+  isPatientLinkedCompany?: boolean
   onChangeValidations: React.Dispatch<React.SetStateAction<PatientValidation>>
 }
 
 export const ValidationSeeOnePatient: React.FC<
   ValidationSeeOnePatientProps
-> = ({ patientId, validations, isPatientLinkedPlan, onChangeValidations }) => {
+> = ({
+  patientId,
+  validations,
+  isPatientLinkedCompany,
+  onChangeValidations,
+}) => {
   const [documentOk, setDocumentOk] = useState(validations.documentOk || '')
 
   const [resonDocumentNotOk, setResonDocumentNotOk] = useState(
@@ -43,7 +48,7 @@ export const ValidationSeeOnePatient: React.FC<
       setCheckAllData(validationsStored.allDataVerified)
     }
 
-    if (isPatientLinkedPlan) {
+    if (isPatientLinkedCompany) {
       setIncomeOk('yes')
     }
   }, [patientId])
@@ -105,13 +110,13 @@ export const ValidationSeeOnePatient: React.FC<
           value="yes"
           label="Sim"
           checked={incomeOk === 'yes'}
-          disabled={isPatientLinkedPlan}
+          disabled={isPatientLinkedCompany}
         />
         <RadioButton
           value="no"
           label="Não"
           checked={incomeOk === 'no'}
-          disabled={isPatientLinkedPlan}
+          disabled={isPatientLinkedCompany}
         />
       </RadioGroup>
       {documentOk === 'yes' && (

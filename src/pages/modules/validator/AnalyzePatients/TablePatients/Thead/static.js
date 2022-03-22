@@ -5,6 +5,7 @@ export default [
   { name: 'validador', label: 'Validador' },
   { name: 'dataValidacao', label: 'Validação' },
   { name: 'status', label: 'Status' },
+  { name: 'acoes', label: 'Ações' },
   // 'Cadastro',
   // 'Nome',
   // 'CPF',
