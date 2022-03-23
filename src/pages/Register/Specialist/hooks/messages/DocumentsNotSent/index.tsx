@@ -3,13 +3,12 @@ import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { Container } from './styles'
-import { useRegisterPatient } from '../..'
 
-export const DocumentsNotSended: React.FC = () => {
-  const { onFinishRegister } = useRegisterPatient()
+
+export const DocumentsNotSent: React.FC = () => {
 
   const onTryAgain = () => {
-    onFinishRegister()
+    
   }
 
   return (

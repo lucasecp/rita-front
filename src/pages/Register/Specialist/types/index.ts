@@ -50,14 +50,14 @@ export interface RegisterSpecialistContextData {
   nextStep: () => void
   resetData: () => void
   registerSpecialist: () => Promise<void>
-  photo: File | null
+  photo: Blob | string
   profissionalInfo: ProfissionalInfoI
   basicInformation: BasicInformationI
   specialtysAndDocs: SpecialtysAndDocsType
   stepAmount: number
   errors: ErrorsRegisterI
   setErrors: React.Dispatch<React.SetStateAction<ErrorsRegisterI>>
-  setPhoto: React.Dispatch<React.SetStateAction<File | null>>
+  setPhoto: React.Dispatch<React.SetStateAction<Blob | string>>
   setProfissionalInfo: React.Dispatch<React.SetStateAction<ProfissionalInfoI>>
   setbasicInformation: React.Dispatch<React.SetStateAction<BasicInformationI>>
   setSpecialtysAndDocs: React.Dispatch<React.SetStateAction<any>>

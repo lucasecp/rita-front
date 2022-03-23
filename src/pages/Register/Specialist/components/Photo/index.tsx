@@ -16,7 +16,7 @@ const Photo: React.FC = () => {
   const { basicInformation, step, photo, setPhoto } = useRegisterSpecialist()
   const { showSimple } = useModal()
 
-  const removePhoto = () => setPhoto(null)
+  const removePhoto = () => setPhoto('')
   const someFieldIsEmpty = Object.values(basicInformation).some(
     (value) => !value,
   )

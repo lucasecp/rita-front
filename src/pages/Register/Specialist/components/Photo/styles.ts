@@ -33,6 +33,9 @@ export const Container = styled.header`
       align-items: stretch;
       justify-content: center;
       overflow: hidden;
+      >svg{
+        align-self: end
+      }
     }
     > span {
       background: #084C4F;
