@@ -8,6 +8,7 @@ import {
   PATIENT_DEPENDENTS,
   PATIENT_ADD_DOCUMENT_DEPENDENT,
   PATIENT_EDIT_DEPENDENT,
+  PATIENT_ADD_DEPENDENT,
 } from '../../constants/namedRoutes/routes'
 import ScheduleAppointment from '@/pages/modules/patient/ScheduleAppointment'
 import ClinicInformation from '@/pages/modules/patient/ClinicInformation'
@@ -15,6 +16,7 @@ import DoctorInformation from '@/pages/modules/patient/DoctorInformation'
 import SeeDependents from '@/pages/modules/patient/dependents/SeeOneDependent'
 import { SeeAllDependents } from '@/pages/modules/patient/dependents/SeeAllDependents'
 import { EditDependent } from '@/pages/modules/patient/dependents/EditDependent'
+import { CreateDependent } from '@/pages/modules/patient/dependents/CreateDependent'
 import { AddDependentDocument } from '@/pages/modules/patient/dependents/AddDependentDocument'
 
 const patientRoutes = [
@@ -34,12 +36,14 @@ const patientRoutes = [
     path: PATIENT_SEE_DEPENDENT,
     component: SeeDependents,
   },
-
   {
     path: PATIENT_EDIT_DEPENDENT,
     component: EditDependent,
   },
-
+  {
+    path: PATIENT_ADD_DEPENDENT,
+    component: CreateDependent,
+  },
   {
     path: PATIENT_ADD_DOCUMENT_DEPENDENT,
     component: AddDependentDocument,

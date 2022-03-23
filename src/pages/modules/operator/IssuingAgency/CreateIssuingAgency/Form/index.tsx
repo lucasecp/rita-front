@@ -1,9 +1,8 @@
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
-import { ErrorsI } from '../types'
+import { ErrorsI, DataReceivedI } from '../types'
 import { Container } from './style'
-import { DataReceivedI } from '../types';
 
 interface FormProps {
   setDataToApi: React.Dispatch<React.SetStateAction<DataReceivedI>>
@@ -29,17 +28,19 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi }) => {
         label="Orgão Emissor:"
         value={issuingAgency}
         setValue={setIssuingAgency}
-        maxLength={20}
-        hasError={!!errors.issuingAgency}
-        msgError={errors.issuingAgency}
+        maxLength={10}
+        hasError={
+          issuingAgency.length < 3 && issuingAgency ? !!errors.type : false
+        }
+        msgError={issuingAgency.length < 3 && issuingAgency ? errors.type : ''}
       />
       <InputText
         label="Especialista:"
         value={specialist}
         setValue={setSpecialist}
-        maxLength={200}
-        hasError={!!errors.specialist}
-        msgError={errors.specialist}
+        maxLength={100}
+        hasError={specialist.length < 3 && specialist ? !!errors.type : false}
+        msgError={specialist.length < 3 && specialist ? errors.type : ''}
       />
       <Select
         labelDefaultOption="Selecione"

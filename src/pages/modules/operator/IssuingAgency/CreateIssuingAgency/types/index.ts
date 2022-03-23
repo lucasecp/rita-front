@@ -2,6 +2,7 @@ export interface ErrorsI {
   issuingAgency?: string
   specialist?: string
   status?: string
+  type?: string
 }
 
 export interface DataReceivedI {

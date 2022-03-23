@@ -35,7 +35,6 @@ export const SeeAllDependents: React.FC = () => {
         const { companyMapped, dependentsMapped } = fromApi(data)
 
         setCompany(companyMapped)
-
         setDependents(dependentsMapped)
       } catch ({ response }) {
       } finally {
@@ -49,12 +48,12 @@ export const SeeAllDependents: React.FC = () => {
     <Container>
       <DefaultLayout
         title="Dependentes"
-        // headerChildren={
-        //   <AddDependentButton
-        //     company={company}
-        //     currentDependent={dependents.length}
-        //   />
-        // }
+        headerChildren={
+          <AddDependentButton
+            company={company}
+            currentDependent={dependents.length}
+          />
+        }
       >
         <Content>
           <Table dependents={dependents} order={order} setOrder={setOrder} />

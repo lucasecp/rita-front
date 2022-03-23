@@ -54,16 +54,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     let newErrors = false
     setErrors({ type: '' })
 
-    // if (issuingAgency.length >= 3 && issuingAgency) {
-    //   setErrors({ type: '' })
-    //   newErrors = false
-    // }
-
-    // if (specialist.length >= 3 && specialist) {
-    //   setErrors({ type: '' })
-    //   newErrors = false
-    // }
-
     if (issuingAgency.length < 3 && issuingAgency) {
       setErrors({ type: 'Informe 3 letras ou mais' })
       newErrors = true

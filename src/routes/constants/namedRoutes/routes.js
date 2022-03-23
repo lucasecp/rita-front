@@ -29,8 +29,9 @@ export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 export const OPERATOR_ADD_DEPENDENT = '/dependentes/associar'
 export const OPERATOR_SEE_ALL_SPECIALISTS = '/operador-especialistas'
 export const OPERATOR_SEE_ONE_SPECIALIST = '/especialistas/ver-especialista'
-export const OPERATOR_CREATE_ISSUING_AGENCY = '/orgao-emissor/criar'
 export const OPERATOR_SEE_ALL_ISSUING_AGENCY = '/orgao-emissor'
+export const OPERATOR_EDIT_ISSUING_AGENCY = '/orgao-emissor/editar'
+export const OPERATOR_CREATE_ISSUING_AGENCY = '/orgao-emissor/criar'
 
 export const CLINIC_SEE_ALL_SPECIALIST = '/clinica-especialista'
 export const CLINIC_SEE_ONE_SPECIALIST = '/clinica-especialista/visualizar'
@@ -75,6 +76,7 @@ export const PATIENT_DOCTOR_INFORMATION =
 export const PATIENT_SEE_DEPENDENT = '/paciente/dependentes/ver-dependente'
 export const PATIENT_EDIT_DEPENDENT = '/paciente/dependentes/editar'
 export const PATIENT_DEPENDENTS = '/paciente/dependentes'
+export const PATIENT_ADD_DEPENDENT = '/paciente/dependentes/criar'
 export const PATIENT_ADD_DOCUMENT_DEPENDENT =
   '/paciente/dependentes/incluir-documentos'
 

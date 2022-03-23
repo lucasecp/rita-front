@@ -27,7 +27,13 @@ export const DependentData = ({ personalDatas }) => {
       <h1>Dados Gerais</h1>
       <section>
         <InputText label="Nome:" value={name} name="name" disabled />
-        <InputMask label="CPF:" value={cpf} name="cpf" disabled />
+        <InputMask
+          label="CPF:"
+          mask="999.999.999-99"
+          value={cpf}
+          name="cpf"
+          disabled
+        />
         <InputMask
           label="Data de Nascimento:"
           mask="99/99/9999"
