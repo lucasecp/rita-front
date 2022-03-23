@@ -3,19 +3,21 @@ import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/hooks/useModal'
 import { LimitDependent } from './messages/LimitDependent'
+import { useHistory } from 'react-router-dom'
+import { PATIENT_ADD_DEPENDENT } from '@/routes/constants/namedRoutes/routes'
 // import { useAuth } from '@/hooks/login'
 
 interface AddDependentButtonProps {
-  company: string
+  company?: string
   currentDependent: number
 }
 
 export const AddDependentButton: React.FC<AddDependentButtonProps> = ({
-  company,
+  company = '',
   currentDependent,
 }) => {
   const { showMessage } = useModal()
-  // const { user } = useAuth()
+  const history = useHistory()
 
   const limitOfDependents = 2
   const isPatientLinkedCompany = !!company
@@ -25,7 +27,7 @@ export const AddDependentButton: React.FC<AddDependentButtonProps> = ({
       return showMessage(LimitDependent)
     }
 
-    console.log('Redirecionar para pagina de adicionar um novo dependente')
+    history.push(PATIENT_ADD_DEPENDENT)
   }
 
   return (
