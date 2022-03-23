@@ -1,23 +1,23 @@
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import {
   BasicInformationI,
-  ProfissionalInfoI,
-  SpecialtysAndDocsType,
+  ProfissionalInfoI
 } from '../types'
 import { clinicaToApi } from './mapClinics'
 import { specialtysToApi } from './mapSpecialtys'
 
 export const toApi = (
-  data: ProfissionalInfoI & BasicInformationI & SpecialtysAndDocsType,
+  data: ProfissionalInfoI & BasicInformationI ,
 ) => {
   return {
     nome: data.name,
     nomeProfissional: data.profissionalName,
-    cpf: data.cpf,
+    cpf: clearSpecialCaracter(data.cpf),
     idOrgaoEmissor: data.issuingAgency,
     ufOrgaoEmissor: data.ufIssuingAgency,
     registroProfissional: data.profissionalRegister,
     email: data.email,
-    celular: data.phone,
+    celular: clearSpecialCaracter(data.phone),
     especialidades: specialtysToApi(data.specialtys),
     clinica: clinicaToApi(data.clinics),
   }

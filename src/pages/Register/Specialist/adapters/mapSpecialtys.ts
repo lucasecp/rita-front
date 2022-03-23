@@ -6,7 +6,7 @@ export const specialtysToApi = (
   specialtys: MultiSelectOption[],
 ): SpecialtysToApiType[] => {
   return specialtys.map((spec) => ({
-    RQE: spec.req,
+    RQE: spec.rqe,
     idEspecialidade: spec.id,
   }))
 }

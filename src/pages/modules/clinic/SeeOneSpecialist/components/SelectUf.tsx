@@ -53,6 +53,7 @@ const SelectUf: React.FC<SelectUfProps> = ({ setUf, setUfToApi,uf,error }) => {
       name="uf"
       hasError={!!error}
       msgError={error}
+      disabled
     />
   )
 }

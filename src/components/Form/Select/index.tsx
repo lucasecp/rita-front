@@ -1,10 +1,13 @@
 import React, { SelectHTMLAttributes } from 'react'
 // import MsgError from '../../MsgError'
 import { Container } from './styles'
+
 export interface SelectOption {
   value: string | number
   label: string | number
+  disabled?: boolean
 }
+
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options?: SelectOption[]
   label?: string

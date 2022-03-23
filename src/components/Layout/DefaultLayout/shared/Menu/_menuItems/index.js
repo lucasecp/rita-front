@@ -118,7 +118,7 @@ export const menuItens = [
   },
   {
     path: OPERATOR_SEE_ALL_CLINICS,
-    icon: <AuthorizationIcon />,
+    icon: <ClinicsIcon />,
     name: 'Clínicas',
     permission: permissionList.LISTAR_CLINICAS,
   },

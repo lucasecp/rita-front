@@ -14,15 +14,15 @@ export const fromApi = (specialistInfo: any) => {
 
     profissionalData: {
       profissionalName: specialistInfo.nomeProfissional || '',
-      registerNumber: specialistInfo.CRM || '',
-      issuingAgency: specialistInfo.orgaoEmissor?.idOrgaoEmissor || '',
-      uf: specialistInfo.ufRegistroProfissional || '',
+      registerNumber: specialistInfo.registroProfissional || '',
+      issuingAgency: specialistInfo.idOrgaoEmissor || '',
+      uf: specialistInfo.ufOrgaoEmissor || '',
       cashback: specialistInfo.cashBack ? specialistInfo.cashBack + '%' : '',
       takerate: specialistInfo.takeRate ? specialistInfo.takeRate + '%' : '',
     },
 
-    specialtys: mapSpecialtys(specialistInfo.especialidade),
-    clinics: mapClinics(specialistInfo.clinica),
+    specialtys: mapSpecialtys(specialistInfo.especialidades),
+    clinics: mapClinics(specialistInfo.clinicas),
   }
 }
 
