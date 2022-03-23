@@ -6,9 +6,19 @@ import InputMask from '@/components/Form/InputMask'
 import SelectUf from '@/components/smarts/SelectUf'
 import SelectCity from '@/components/smarts/SelectCity'
 
+import { DependentAddress } from '../../types/index'
+
 import { Container, InputsArea } from './styles'
 
-export const UserAddress: React.FC = () => {
+interface UserAddressProps {
+  onGetAnyFieldsHasChanged: React.Dispatch<React.SetStateAction<boolean>>
+  setAddress: React.Dispatch<React.SetStateAction<DependentAddress>>
+}
+
+export const UserAddress: React.FC<UserAddressProps> = ({
+  onGetAnyFieldsHasChanged,
+  setAddress,
+}) => {
   const [addressIsEqualHolder, setAddressIsEqualHolder] = useState(false)
 
   const [cep, setCep] = useState('')

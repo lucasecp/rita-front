@@ -263,7 +263,6 @@ export const Container = styled.div.attrs(
   (props: {
     disabled: boolean
     variation: '' | 'secondary'
-    name?: string
   }) => ({
     disabled: props.disabled,
     variation: props.variation,

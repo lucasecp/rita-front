@@ -12,6 +12,8 @@ import { validatePhone } from '@/helpers/validateFields/validatePhone'
 import { validateCPF } from '@/helpers/validateFields/validateCPF'
 import { validateBirthDate } from '@/helpers/validateFields/validateBirthDate'
 
+import { DependentData } from '../../types/index'
+
 import { Container, InputsArea } from './styles'
 
 interface ErrorsState {
@@ -23,12 +25,16 @@ interface ErrorsState {
   phone: string
 }
 
-interface UserDataProps {
+interface UserInformationsProps {
   onGetAnyFieldsHasChanged: React.Dispatch<React.SetStateAction<boolean>>
+  setDependentData: React.Dispatch<React.SetStateAction<DependentData>>
+  saveDependent: number
 }
 
-export const UserData: React.FC<UserDataProps> = ({
+export const UserInformations: React.FC<UserInformationsProps> = ({
   onGetAnyFieldsHasChanged,
+  setDependentData,
+  saveDependent,
 }) => {
   const [errorMessage, sendErrorMessage] = useMessage()
 
@@ -52,26 +58,35 @@ export const UserData: React.FC<UserDataProps> = ({
   }, [name, cpf, gender, birthDate, email, phone])
 
   useEffect(() => {
-    sendErrorMessage()
+    if (saveDependent) {
+      sendErrorMessage()
 
-    const errorsTemporary = {
-      ...errors,
-      cpf: validateCPF(cpf),
-      name: validateFullName(name, 3),
-      phone: validatePhone(phone, true),
-      birthDate: validateBirthDate(birthDate),
+      const errorsTemporary = {
+        ...errors,
+        cpf: validateCPF(cpf),
+        name: validateFullName(name, 3),
+        phone: validatePhone(phone, true),
+        birthDate: validateBirthDate(birthDate),
+      }
+
+      setErrors(errorsTemporary)
+
+      const hasErrors = Object.values(errorsTemporary).some((value) => value)
+
+      if (hasErrors) {
+        return
+      }
+
+      setDependentData({
+        name,
+        cpf,
+        gender,
+        birthDate,
+        email,
+        phone,
+      })
     }
-
-    setErrors(errorsTemporary)
-
-    const hasErrors = Object.values(errorsTemporary).some((value) => value)
-
-    if (hasErrors) {
-      return
-    }
-
-    console.log('Sem erros')
-  }, [])
+  }, [saveDependent])
 
   return (
     <Container>
