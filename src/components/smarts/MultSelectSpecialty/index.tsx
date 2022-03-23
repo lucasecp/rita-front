@@ -2,9 +2,13 @@ import CustomMultiSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
 import apiAdmin from '@/services/apiAdmin'
-import React, { useEffect, useState,SetStateAction } from 'react'
+import React, { useEffect, useState, SetStateAction } from 'react'
 
 import { Container } from './styles'
+import { useModal } from '@/hooks/useModal'
+import InsertRqeNumber from './messages/insertRqeNumber/index'
+
+//Será mostrado uma modal caso a especialidade requerer inscrição
 
 interface SpecialtysProps {
   specialtys: MultiSelectOption[]
@@ -21,10 +25,11 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
   setErrors,
   ...rest
 }) => {
-
   const [specialtysOptions, setSpecialtysOptions] = useState<
     MultiSelectOption[]
   >([])
+
+  const { showMessage } = useModal()
 
   const mapSpecialtys = (array: any[]) => {
     if (!array) return []
@@ -33,6 +38,7 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
       .map((obj) => ({
         id: obj.idEspecialidade,
         name: obj.descricao,
+        rqeRequired: obj.requerInscricao,
       }))
       .filter((specialty) => specialty.id && specialty.name)
   }
@@ -53,20 +59,16 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
 
     getSpecialtys()
   }, [])
-
-  // useEffect(() => {
-  //   setSpecialtys(specialtysProps || [])
-  // }, [specialtysProps])
-
-
-  // const onChangingSelect = (values: MultiSelectOption[]) => {
-  //   const hasAllOption = values.some((val) => val.id === 'All')
-
-  //   if (hasAllOption) {
-  //     return setSpecialtys(specialtysOptions)
-  //   }
-  //   return setSpecialtys(values)
-  // }
+  
+  const onChange = (values: MultiSelectOption[], value?: MultiSelectOption) => {
+    if (value?.rqeRequired) {
+      return showMessage(InsertRqeNumber, {
+        setSpecialtys,
+        currentSpecialty: value,
+      })
+    }
+    setSpecialtys(values)
+  }
 
   return (
     <Container>
@@ -80,6 +82,9 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
           hasError={!!errors?.specialtys}
           messageError={errors?.specialtys}
           name="specialtys"
+          onSelect={(value: MultiSelectOption[], v?: MultiSelectOption) =>
+            onChange(value, v)
+          }
           {...rest}
         />
       </section>

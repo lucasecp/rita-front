@@ -4,7 +4,7 @@ import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 
 import apiPatient from '@/services/apiPatient'
-import { RegisterSuccess } from './messages/RegisterSuccess/index';
+import { RegisterSuccess } from './messages/RegisterSuccess/index'
 import {
   RegisterSpecialistContextData,
   ProfissionalInfoI,
@@ -58,7 +58,6 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   }
 
   const resetData = () => {}
- 
 
   const registerSpecialist = async () => {
     showMessage(RegisterSuccess)

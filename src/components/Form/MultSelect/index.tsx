@@ -8,6 +8,7 @@ import generateRandomString from '@/helpers/generateRandomString'
 export interface MultiSelectOption {
   id: string | number
   name: string
+  [x: string]: any
 }
 
 interface MultiSelectCustomProps {
@@ -19,8 +20,8 @@ interface MultiSelectCustomProps {
   hasError?: boolean
   disabled?: boolean
   variation?: 'secondary'
-  onSelect?: (value: MultiSelectOption[]) => void
-  onRemove?: (value: MultiSelectOption[]) => void
+  onSelect?: (values: MultiSelectOption[], value?: MultiSelectOption) => void
+  onRemove?: (values: MultiSelectOption[], value?: MultiSelectOption) => void
   closeOnSelect?: boolean
   [x: string]: any
   name?: string
