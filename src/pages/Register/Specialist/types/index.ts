@@ -36,7 +36,11 @@ export interface ErrorsRegisterI {
 }
 
 export type SpecialtysAndDocsType = {
-  [x: string]: { name: string; idSpecialty: string; document: File | null }
+  [x: string]: {
+    name: string
+    idSpecialty: string
+    document: Blob  | string
+  }
 }
 
 export interface RegisterSpecialistContextData {

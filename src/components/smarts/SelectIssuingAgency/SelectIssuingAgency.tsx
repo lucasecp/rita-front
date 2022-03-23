@@ -6,19 +6,21 @@ interface SelectIssuingAgencyProps {
   issuingAgency: string
   setIssuingAgency: (value: string) => void
   error?: string
+  [x: string]: any
 }
 
 const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
   issuingAgency,
   setIssuingAgency,
   error,
+  ...rest
 }) => {
   const [issuingAgencyOptions, setIssuingAgencyOptions] = useState<any[]>([])
 
   const mapIssuingAgency = (array: any[]) => {
     if (!array) return []
     return array.map((obj) => ({
-      value: obj.idOrgaoEmissor,
+      value: obj.id,
       label: obj.descricao,
     }))
   }
@@ -46,6 +48,7 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
       hasError={!!error}
       msgError={error}
       name="issuingAgency"
+      {...rest}
     />
   )
 }

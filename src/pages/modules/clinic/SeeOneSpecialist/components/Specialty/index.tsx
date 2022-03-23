@@ -10,16 +10,10 @@ import { Container } from './styles'
 
 interface ClinicSpecialtysProps {
   specialistSpecialtys: MultiSelectOption[]
-  setSpecialistSpecialtys: (value: any) => void
-  errors: ErrorsI
-  setErrors: (error: any) => any
 }
 
 export const Specialty: React.FC<ClinicSpecialtysProps> = ({
   specialistSpecialtys,
-  setSpecialistSpecialtys,
-  errors,
-  setErrors,
 }) => {
   const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>(
     specialistSpecialtys || [],
@@ -49,22 +43,6 @@ export const Specialty: React.FC<ClinicSpecialtysProps> = ({
     setSpecialtys(specialistSpecialtys || [])
   }, [specialistSpecialtys])
 
-  useEffect(() => {
-    setSpecialistSpecialtys({
-      specialtys,
-    })
-    setErrors((error: ErrorsI) => ({ ...error, specialtys: '' }))
-  }, [specialtys])
-
-  const onChangingSelect = (values: MultiSelectOption[]) => {
-    const hasAllOption = values.some((val) => val.id === 'All')
-
-    if (hasAllOption) {
-      return setSpecialtys(specialtysOptions)
-    }
-    return setSpecialtys(values)
-  }
-
   return (
     <Container>
       <h1>Especialidades</h1>
@@ -74,11 +52,7 @@ export const Specialty: React.FC<ClinicSpecialtysProps> = ({
           setValue={setSpecialtys}
           variation="secondary"
           options={specialtysOptions}
-          hasError={!!errors.specialtys}
-          messageError={errors?.specialtys}
-          name="specialtys"
-          // onSelect={onChangingSelect}
-          // onRemove={onChangingSelect}
+          disabled
         />
       </section>
     </Container>
