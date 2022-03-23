@@ -28,7 +28,7 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi }) => {
         label="Orgão Emissor:"
         value={issuingAgency}
         setValue={setIssuingAgency}
-        maxLength={20}
+        maxLength={10}
         hasError={
           issuingAgency.length < 3 && issuingAgency ? !!errors.type : false
         }
@@ -38,7 +38,7 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi }) => {
         label="Especialista:"
         value={specialist}
         setValue={setSpecialist}
-        maxLength={200}
+        maxLength={100}
         hasError={specialist.length < 3 && specialist ? !!errors.type : false}
         msgError={specialist.length < 3 && specialist ? errors.type : ''}
       />
