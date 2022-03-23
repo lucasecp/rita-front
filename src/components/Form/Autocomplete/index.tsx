@@ -15,9 +15,9 @@ interface AutocompleteProps {
   setOptions: React.Dispatch<React.SetStateAction<AutocompleteOptions[]>>
   mask?: string
   error: string
-  variation: string
-  placeholder: string
-  hasError: boolean
+  variation?: string
+  placeholder?: string
+  hasError?: boolean
 }
 
 export const Autocomplete: React.FC<AutocompleteProps> = ({
@@ -28,7 +28,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
   setOptions,
   mask,
   error,
-  variation,
+  variation = '',
   ...rest
 }) => {
   const [showList, setShowList] = useState(false)

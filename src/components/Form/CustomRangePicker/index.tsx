@@ -35,7 +35,7 @@ const CustomRangePicker: React.FC<CustomRangePickerProps> = ({
     start.toISOString()
     end.toISOString()
 
-    setValue([start, end])
+    setValue && setValue([start, end])
   }
   return (
     <Container hasError={hasError}>
