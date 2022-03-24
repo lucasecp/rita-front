@@ -28,6 +28,7 @@ export const arrayOfCheckedPermissions = (
 ): ArrayToBeSetOnInitialCheckedPermissions => {
   const arrayToBeSetOnInitialCheckedPermissions: ArrayToBeSetOnInitialCheckedPermissions =
     []
+  // @ts-ignore
   profilesAndPermissions.map((profile: profile) => {
     return profile.subChild.map((subChild) => {
       if (subChild.isChecked) {
@@ -44,6 +45,7 @@ export const arrayOfCheckedPermissions = (
 export const profileAndPermissionsFromApi = (
   profilesAndPermissions: profilesAndPermissions,
 ): profilesAndPermissions => {
+  // @ts-ignore
   return profilesAndPermissions.dados.map((profileAndPermissions) => ({
     id: profileAndPermissions.id,
     name: profileAndPermissions.nome,

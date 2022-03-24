@@ -20,6 +20,7 @@ import {
   OPERATOR_SEE_ALL_ISSUING_AGENCY,
   OPERATOR_EDIT_ISSUING_AGENCY,
   OPERATOR_CREATE_ISSUING_AGENCY,
+  OPERATOR_WALLET_SETTINGS,
 } from '../../constants/namedRoutes/routes'
 
 import { SeeOnePatient } from '@/pages/modules/operator/Patients/SeeOnePatient'
@@ -40,10 +41,10 @@ import CreateSpecialty from '@/pages/modules/operator/Specialtys/CreateSpecialty
 import EditSpecialty from '@/pages/modules/operator/Specialtys/EditSpecialty'
 import SeeAllSpecialists from '@/pages/modules/operator/specialists/SeeAllSpecialists'
 import SeeOneSpecialist from '@/pages/modules/operator/specialists/SeeOneSpecialist'
-import IssuingAgency from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency'
 import EditIssuingAgency from '@/pages/modules/operator/IssuingAgency/EditIssuingAgency'
 import SeeAllIssuingAgency from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency'
 import CreateIssuingAgency from '@/pages/modules/operator/IssuingAgency/CreateIssuingAgency'
+import WalletSettings from '@/pages/modules/operator/WalletSettings'
 
 const operatorRoutes = [
   {
@@ -109,7 +110,6 @@ const operatorRoutes = [
   },
   {
     path: OPERATOR_SEE_ALL_ISSUING_AGENCY,
-    component: IssuingAgency,
     component: SeeAllIssuingAgency,
   },
   {
@@ -119,6 +119,10 @@ const operatorRoutes = [
   {
     path: OPERATOR_EDIT_ISSUING_AGENCY,
     component: EditIssuingAgency,
+  },
+  {
+    path: OPERATOR_WALLET_SETTINGS,
+    component: WalletSettings,
   },
 ]
 

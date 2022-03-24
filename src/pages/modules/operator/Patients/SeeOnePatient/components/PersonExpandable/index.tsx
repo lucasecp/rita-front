@@ -66,7 +66,9 @@ const PersonExpandable: React.FC<PersonExpandableProps> = ({
       email,
       planName: personData.planName,
       tableName: personData.tableName,
+      // @ts-ignore
       status: personData.status,
+      // @ts-ignore
       limitTry: personData.limitTry,
       company: {
         corporateName: personData.company

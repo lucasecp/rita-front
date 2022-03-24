@@ -36,6 +36,7 @@ export const CreateSellableItem: React.FC = () => {
   const { Loading } = useLoading()
   const { showMessage } = useModal()
 
+  // @ts-ignore
   const [plan, setPlan] = useState<PlanOptions>({})
 
   const [fieldWasChanged, setFieldWasChanged] = useState<number>(0)
@@ -172,6 +173,7 @@ export const CreateSellableItem: React.FC = () => {
 
     if (
       // !listRangeOfUseToSaveAndToCreateTable.length ||
+      // @ts-ignore
       priceToSave.length < 4 ||
       !plan.value
     )
@@ -183,8 +185,10 @@ export const CreateSellableItem: React.FC = () => {
       await apiAdmin.post('itens-vendaveis', {
         idPlano: plan.value,
         preco:
+          // @ts-ignore
           priceToSave.slice(0, priceToSave.length - 2) +
           ',' +
+          // @ts-ignore
           priceToSave.slice(-2),
         locaisVenda: [
           {
@@ -252,6 +256,7 @@ export const CreateSellableItem: React.FC = () => {
               // setListRangeOfUseToSaveAndToCreateTable={
               //   setListRangeOfUseToSaveAndToCreateTable
               // }
+              // @ts-ignore
               disabled
             />
             <div id="containerInput">
