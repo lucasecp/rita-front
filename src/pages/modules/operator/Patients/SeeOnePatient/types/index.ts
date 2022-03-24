@@ -7,6 +7,8 @@ export interface PatientData {
   phone: string
   email: string
   planName?: string
+  limitTry?: number,
+  status?: string
   tableName?: string
   company?: {
     corporateName: string

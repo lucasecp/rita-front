@@ -1,5 +1,5 @@
-import clear from '@/helpers/clear/SpecialCaracteres'
 import moment from 'moment'
+import clear from '@/helpers/clear/SpecialCaracteres'
 
 export const validateName = (value) => {
   if (!value.trim()) {

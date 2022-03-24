@@ -1,5 +1,5 @@
 export const isValidTypeFile = (
-  file: File | string,
+  file: File | string ,
   options?: any,
 ): boolean => {
   if (typeof file === 'object') {

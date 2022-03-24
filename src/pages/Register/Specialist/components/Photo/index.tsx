@@ -12,15 +12,23 @@ import { isValidTypeFile } from '@/helpers/file/isValidTypeFile'
 import { isValidSizeFile } from '@/helpers/file/isValidSizeFile'
 import { useModal } from '@/hooks/useModal'
 
-const Photo: React.FC = ({}) => {
+const Photo: React.FC = () => {
   const { basicInformation, step, photo, setPhoto } = useRegisterSpecialist()
   const { showSimple } = useModal()
 
-  const removePhoto = () => setPhoto(null)
+  const removePhoto = () => setPhoto('')
+
+  const someFieldIsEmpty = Object.values(basicInformation).some(
+    (value) => !value,
+  )
+
+  const imgSource =
+    typeof photo === 'object' ? window.URL.createObjectURL(photo) : ''
 
   useEffect(() => {
-    if (photo && !isValidTypeFile(photo)) {
+    if (photo && !isValidTypeFile(photo, { onlyImage: true })) {
       removePhoto()
+
       showSimple.error(
         'Formato do Arquivo inválido. Por favor, selecione outro arquivo.',
       )
@@ -28,6 +36,7 @@ const Photo: React.FC = ({}) => {
 
     if (photo && !isValidSizeFile(photo)) {
       removePhoto()
+
       showSimple.error(
         'O tamanho máximo do arquivo deve ser 10MB. Por favor, selecione outro arquivo.',
       )
@@ -37,9 +46,7 @@ const Photo: React.FC = ({}) => {
   return (
     <Container>
       <div>
-        <div>
-          <ProfileIcon />
-        </div>
+        <div>{photo ? <img src={imgSource} alt="" /> : <ProfileIcon />}</div>
         {photo && (
           <span>
             <InputFile setValue={setPhoto}>
@@ -50,7 +57,9 @@ const Photo: React.FC = ({}) => {
       </div>
 
       <div>
-        {step > 2 && photo && <SpecialistInfo data={basicInformation} />}
+        {photo && !someFieldIsEmpty && step >= 2 && (
+          <SpecialistInfo data={basicInformation} />
+        )}
         {!photo && (
           <>
             <Instructions />

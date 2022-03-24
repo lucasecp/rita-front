@@ -15,7 +15,7 @@ import { useValidator } from '../../hooks/useValidator'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 import { validatePhone } from '@/helpers/validateFields/validatePhone'
 import { validateCPF } from '@/helpers/validateFields/validateCPF'
-import { MultiSelectOption } from '../../../../../components/Form/MultSelect/index';
+import { MultiSelectOption } from '../../../../../components/Form/MultSelect/index'
 
 const ProfissionalInformation: React.FC = () => {
   const [name, setName] = useState('')
@@ -73,14 +73,12 @@ const ProfissionalInformation: React.FC = () => {
     specialtys,
     clinics,
   ])
-  
 
   useEffect(() => {
     if (toggleClick !== 0) {
       scrollOntoFieldError(errors)
     }
   }, [toggleClick])
-
 
   return (
     <Container hidden={step !== 2}>
@@ -106,7 +104,7 @@ const ProfissionalInformation: React.FC = () => {
           }
           name="name"
           maxLength={200}
-
+          onlyLetter
         />
 
         <InputText
@@ -135,7 +133,7 @@ const ProfissionalInformation: React.FC = () => {
             })
           }
           maxLength={200}
-
+          onlyLetter
         />
 
         <InputMask

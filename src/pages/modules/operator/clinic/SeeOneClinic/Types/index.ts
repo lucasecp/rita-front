@@ -40,4 +40,5 @@ export interface ErrorsI {
   status?: string
   specialtys?: ''
   uf?: string
+  [x: string]: any
 }

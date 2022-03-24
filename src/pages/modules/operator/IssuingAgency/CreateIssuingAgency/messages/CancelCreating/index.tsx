@@ -6,7 +6,7 @@ import { Container, ButtonGroup } from './styles'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router';
-import { OPERATOR_SEE_ALL_SPECIALTYS } from '@/routes/constants/namedRoutes/routes'
+import { OPERATOR_SEE_ALL_ISSUING_AGENCY } from '@/routes/constants/namedRoutes/routes'
 
 const CancelCreating: React.FC = () => {
   const { closeModal } = useModal()
@@ -14,7 +14,7 @@ const CancelCreating: React.FC = () => {
 
   const onCancel = () => {
     closeModal()
-    history.push(OPERATOR_SEE_ALL_SPECIALTYS)
+    history.push(OPERATOR_SEE_ALL_ISSUING_AGENCY)
   }
 
   return (

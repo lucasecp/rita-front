@@ -2,6 +2,7 @@ import MsgError from '@/components/MsgError'
 import React, { InputHTMLAttributes } from 'react'
 
 import ReactInputMask from 'react-input-mask'
+import { IMaskInput } from 'react-imask'
 
 import { Container } from './styles'
 
@@ -15,6 +16,7 @@ interface InputMaskProps extends InputHTMLAttributes<HTMLInputElement> {
   mask: string
   value?: string
   disabled?: boolean
+  useIMask?: boolean
   onBlur?: () => void
   onKeyUp?: () => void
   [x: string]: any
@@ -29,19 +31,32 @@ const InputMask: React.FC<InputMaskProps> = ({
   mask,
   value,
   disabled,
+  useIMask,
   ...rest
 }) => {
   return (
     <Container hasError={msgError || hasError} variation={variation} {...rest}>
       {label && <label htmlFor={label}>{label}</label>}
-      <ReactInputMask
-        value={value}
-        mask={mask}
-        id={label}
-        onChange={(event) => setValue && setValue(event.target.value)}
-        disabled={disabled}
-        {...rest}
-      />
+      {useIMask ? (
+        <IMaskInput
+          id={label}
+          value={value}
+          mask={mask}
+          unmask={true}
+          disabled={disabled}
+          onAccept={(value: any) => setValue && setValue(value)}
+          {...rest}
+        />
+      ) : (
+        <ReactInputMask
+          value={value}
+          mask={mask}
+          id={label}
+          disabled={disabled}
+          onChange={(event) => setValue && setValue(event.target.value)}
+          {...rest}
+        />
+      )}
       {msgError && <MsgError>{msgError}</MsgError>}
     </Container>
   )

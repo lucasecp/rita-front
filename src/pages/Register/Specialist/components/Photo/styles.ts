@@ -30,9 +30,12 @@ export const Container = styled.header`
       border: solid #4B8864 2px;
       background: #fff;
       display: flex;
-      align-items: flex-end;
+      align-items: stretch;
       justify-content: center;
       overflow: hidden;
+      >svg{
+        align-self: end
+      }
     }
     > span {
       background: #084C4F;
