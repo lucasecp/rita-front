@@ -17,7 +17,7 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi, dataFromApi }) => {
 
   useEffect(() => {
     setCode(dataFromApi?.code || '')
-    setRequireSubscription(dataFromApi?.requireSubscription || '')
+    setRequireSubscription(String(dataFromApi?.requireSubscription || ''))
     setDescription(dataFromApi?.description || '')
   }, [dataFromApi])
 

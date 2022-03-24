@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+
 import { Container } from './styles'
 
 import { useLoading } from '@/hooks/useLoading'
@@ -30,7 +32,7 @@ export const EditProfile: React.FC = () => {
   const [oneProfileName, setOneProfileName] = useState(oneProfile.name)
   const [oneProfileNameError, setOneProfileNameError] = useState('')
 
-  const [checkedPermissions, setCheckedPermissions] = useState([])
+  const [checkedPermissions, setCheckedPermissions] = useState<any>([])
 
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(0)
 
@@ -50,6 +52,7 @@ export const EditProfile: React.FC = () => {
   }, [])
 
   const nodeChecked = function () {
+    // @ts-ignore
     setCheckedPermissions([...this.checkedNodes])
   }
 
@@ -83,8 +86,16 @@ export const EditProfile: React.FC = () => {
       await apiUser.put(`/perfil/${id}`, profilePermissionsAndNamesMApped)
       toast.success('Edição realizada com sucesso.')
       history.push(DIRECTOR_SEE_ALL_PROFILES)
-    } catch ({ response }) {
-      toast.error(response.data.message)
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(error.response.data.message)
+      } else {
+        if (error instanceof Error) {
+          toast.error(error.message)
+        }
+
+        console.error(error)
+      }
     } finally {
       Loading.turnOff()
     }

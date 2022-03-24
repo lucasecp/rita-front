@@ -90,6 +90,7 @@ export const SeeOneProfile: React.FC = () => {
   return (
     <DefaultLayout title="Perfis - Visualização">
       <Container>
+        {/* @ts-ignore */}
         <InputText value={oneProfile.name} label="Nome do Perfil" disabled />
         <label htmlFor="categorias">Categoria</label>
         {profilesAndPermissions.length && (

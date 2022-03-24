@@ -37,7 +37,7 @@ export const ResetStatusOnePatient: React.FC<PersonStatusProps> = ({
         options={[
           { label: 'Pendente', value: 'P' },
           { label: 'Inativo', value: 'I' },
-          { label: 'Em Analise', value: 'EA', disabled: true},
+          { label: 'Em Analise', value: 'EA', disabled: true },
           { label: 'Aprovado', value: 'A', disabled: true },
           { label: 'Negado', value: 'N', disabled: true },
         ]}

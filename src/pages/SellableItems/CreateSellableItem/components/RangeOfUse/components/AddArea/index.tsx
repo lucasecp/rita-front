@@ -12,7 +12,24 @@ import { mapRangesToSendApi } from '../../helpers/mapDataToSendApi'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 import apiAdmin from '@/services/apiAdmin'
 
-export const AddArea: React.FC = ({
+type RangeOfUseProps = {
+  onGetArea: any
+  rangesOfUse: any
+  ufs: any
+  setUfs: any
+  setRegionalSelected: any
+  regionalSelected: any
+  regionals: any
+  setUfSelected: any
+  ufSelected: any
+  city: any
+  setCity: any
+  onGetUfs: any
+  citiesSelected: any
+  setCitiesSelected: any
+}
+
+export const AddArea: React.FC<RangeOfUseProps> = ({
   onGetArea,
   rangesOfUse,
   ufs,
@@ -32,10 +49,10 @@ export const AddArea: React.FC = ({
 
   const addArea = () => {
     const findRegional = regionals.find(
-      (regional) => regional.value === +regionalSelected,
+      (regional: any) => regional.value === +regionalSelected,
     )
 
-    const findUf = ufs.find((uf) => uf.value === +ufSelected)
+    const findUf = ufs.find((uf: any) => uf.value === +ufSelected)
 
     onGetArea({
       regional: findRegional

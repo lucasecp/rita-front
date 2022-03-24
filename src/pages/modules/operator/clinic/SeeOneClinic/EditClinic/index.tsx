@@ -123,7 +123,7 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
   }
   useEffect(() => {
     if (clickOnSave) {
-      scrollOntoFieldError(errors)
+      scrollOntoFieldError(errors as any)
     }
   }, [clickOnSave])
 

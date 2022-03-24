@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
-import { AddressProfile } from './components/AddressProfile'
 import { GeneralDatas } from './components/GeneralDatasProfile'
+import { AddressProfile } from './components/AddressProfile'
+import { SupplementaryData } from './components/SupplementaryData'
 
 import { Container } from './styles'
 import { useToggle } from '@/hooks/useToggle'
@@ -12,7 +13,6 @@ import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 import { SuccessUpdateProfile } from './messages/SuccessUpdateProfile'
-import { SupplementaryData } from './components/SupplementaryData'
 
 interface EditPersonalDataProps {
   personalDatas: {

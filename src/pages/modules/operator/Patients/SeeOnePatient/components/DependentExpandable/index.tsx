@@ -123,7 +123,7 @@ export const DependentExpandable: React.FC<DependentExpandableProps> = ({
           ]}
           value={gender}
           setValue={setGender}
-          onKeyUp={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onKeyUp={(e: any) => {
             setErrors({ ...errors, ...validateGender(e.target.value) })
           }}
           msgError={errors.gender}

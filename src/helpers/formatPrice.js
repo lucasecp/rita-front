@@ -13,3 +13,5 @@ export const formatPrice = (price) => {
 
   return priceFormatted
 }
+
+export default formatPrice

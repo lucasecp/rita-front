@@ -32,6 +32,7 @@ export const Container = styled.div<ContainerProps>`
     color: ${colors.gray.dark};
     border-radius: 8px;
     padding: 14px 16px;
+    padding-right: 40px;
     position: relative;
     border: 1px solid ${colors.gray.light};
     box-shadow: 0px 2px 4px 0px #e5e5e5;
@@ -94,6 +95,10 @@ export const Container = styled.div<ContainerProps>`
         border-radius: 0;
         box-shadow: none;
         background-color: transparent;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 5px;
+
         :focus,
         ::after {
           border: none;
@@ -101,8 +106,32 @@ export const Container = styled.div<ContainerProps>`
           border-color: ${({ hasError }) =>
             hasError ? colors.orange.light : colors.purple.main.dark};
         }
-        padding: 5px;
       `}
+
+  }
+
+  ${({ variation }) =>
+    variation === 'highlight' &&
+    css`
+      background: linear-gradient(88.69deg, #4D22AA 3.78%, #7437DA 48.21%, #823EEE 95.7%);
+      border-radius: 8px;
+
+      > select {
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
+        color: #fff;
+
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 16px;
+
+        :focus,
+        ::after {
+          border: none;
+        }
+      }
+    `
   }
 
   > small {

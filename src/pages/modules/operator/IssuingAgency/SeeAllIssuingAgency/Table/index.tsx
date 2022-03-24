@@ -3,7 +3,7 @@ import React from 'react'
 import { Container } from './styles'
 import Header from './Header'
 import Content from './Content'
-import { TableProps } from '../SeeAllIssuingAgency/types'
+import { TableProps } from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency/types'
 
 const Table: React.FC<TableProps> = ({
   issuingAgency,

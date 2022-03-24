@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Status } from './styles'
 import CustomTooltip from '@/components/Tooltip'
-import { ContentProps } from '../../SeeAllIssuingAgency/types'
+import { ContentProps } from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency/types'
 import { useHistory } from 'react-router-dom'
 import { OPERATOR_EDIT_ISSUING_AGENCY } from '@/routes/constants/namedRoutes/routes'
 import editIcon from '@/assets/icons/edit.svg'
