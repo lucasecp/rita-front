@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react'
 
-import { Container } from './styles'
-import { Select } from '@/components/Form/Select'
-
+import apiWallet from '@/services/apiWallet'
 import formatPrice from '@/helpers/formatPrice'
+
+import { Select } from '@/components/Form/Select'
+import { Container } from './styles'
+
+function formatConsumptionType(type: string): string {
+  return {
+    EXAM: 'Exames',
+    APPOINTMENT: 'Consultas',
+  }[type] || type
+}
 
 export const Consumption: React.FC = () => {
   const periodOptions = [
@@ -20,35 +28,33 @@ export const Consumption: React.FC = () => {
       value: 3,
     },
   ]
-  const [items, setItems] = useState<any[]>([])
+  const [items, setItems] = useState<RitaWallet.DashboardConsumption>([])
+  const [itemsTotalAmount, setItemsTotalAmount] = useState(0)
+  const [itemsTotalSavedAmount, setItemsTotalSavedAmount] = useState(0)
   const [selectedPeriod, setSelectedPeriod] = useState(2)
 
   useEffect(() => {
-    // @TODO: api.get consumo
-    const loadedItems = [
-      {
-        value: 352,
-        text: 'Consultas',
-        percent: 30,
-      },
-      {
-        value: 532,
-        text: 'Exames',
-        percent: 50,
-      },
-      {
-        value: 235,
-        text: 'Vacinas',
-        percent: 10,
-      },
-      {
-        value: 145,
-        text: 'Remédios',
-        percent: 5,
-      },
-    ]
+    async function fetchData() {
+      const { data } = await apiWallet.get<RitaWallet.DashboardConsumption>('/payment/consumption/type')
 
-    setItems(loadedItems)
+      if (!data || !Array.isArray(data)) {
+        throw new Error('Resposta vazia ou inválida')
+      }
+
+      let newItemsTotalAmount = 0
+      let newItemsTotalSavedAmount = 0
+
+      for (const row of data) {
+        newItemsTotalAmount += row.discountPriceAmount
+        newItemsTotalSavedAmount += row.savedAmount
+      }
+
+      setItems(data)
+      setItemsTotalAmount(newItemsTotalAmount)
+      setItemsTotalSavedAmount(newItemsTotalSavedAmount)
+    }
+
+    fetchData().catch(console.error)
   }, [])
 
   useEffect(() => {
@@ -67,20 +73,33 @@ export const Consumption: React.FC = () => {
           setValue={setSelectedPeriod}
         />
       </div>
+
       <section>
         {items.map((item, index) => {
           return (
             <div key={index}>
-              <strong>{formatPrice(item.value)}</strong>
-              <span>{item.text}</span>
+              <strong>{formatPrice(item.discountPriceAmount)}</strong>
+              <span>{formatConsumptionType(item.type)}</span>
 
               <div>
-                <div style={{ width: `${item.percent}%` }}></div>
+                <div
+                  style={{
+                    width: `${item.discountPriceAmount * 100 / itemsTotalAmount}%`,
+                  }}
+                ></div>
               </div>
             </div>
           )
         })}
       </section>
+
+      <p>
+        Parabéns! Você já economizou
+        {' '}
+        <strong>{formatPrice(itemsTotalSavedAmount)}</strong>
+        {' '}
+        utilizando o Rita Saúde.
+      </p>
     </Container>
   )
 }

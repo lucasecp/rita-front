@@ -50,4 +50,12 @@ export const Container = styled.section`
       }
     }
   }
+
+  > p {
+    flex: 1 0 100%;
+
+    color: ${({ theme }) => theme.main};
+    font-size: 18px;
+    text-align: center;
+  }
 `
