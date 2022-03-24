@@ -6,6 +6,7 @@ interface SelectIssuingAgencyProps {
   issuingAgency: string
   setIssuingAgency: (value: string) => void
   error?: string
+  variation?: string
   [x: string]: any
 }
 
@@ -13,6 +14,7 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
   issuingAgency,
   setIssuingAgency,
   error,
+  variation,
   ...rest
 }) => {
   const [issuingAgencyOptions, setIssuingAgencyOptions] = useState<any[]>([])
@@ -48,6 +50,7 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
       hasError={!!error}
       msgError={error}
       name="issuingAgency"
+      variation={variation}
       {...rest}
     />
   )
