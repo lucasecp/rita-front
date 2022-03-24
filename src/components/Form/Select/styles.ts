@@ -113,7 +113,12 @@ export const Container = styled.div<ContainerProps>`
   ${({ variation }) =>
     variation === 'highlight' &&
     css`
-      background: linear-gradient(88.69deg, #4D22AA 3.78%, #7437DA 48.21%, #823EEE 95.7%);
+      background: linear-gradient(
+        88.69deg,
+        #4D22AA 3.78%,
+        #7437DA 48.21%,
+        #823EEE 95.7%
+      );
       border-radius: 8px;
 
       > select {
@@ -131,8 +136,7 @@ export const Container = styled.div<ContainerProps>`
           border: none;
         }
       }
-    `
-  }
+    `}
 
   > small {
     margin-top: 6px;

@@ -29,7 +29,6 @@ const Menu = ({ expanded }) => {
     closeMenu()
   }
 
-
   return (
     <Container expanded={expanded}>
       {menuToShow.map((item) =>

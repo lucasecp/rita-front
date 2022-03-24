@@ -66,7 +66,7 @@ const patientRoutes = [
   },
   {
     path: PATIENT_WALLET_BUY_COIN,
-    component: WalletBuyCoin
+    component: WalletBuyCoin,
   },
   {
     path: PATIENT_WALLET_PAYMENTS,

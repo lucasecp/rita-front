@@ -6,7 +6,6 @@ export const Container = styled.section`
     font-style: normal;
     font-weight: 700;
     line-height: 30px;
-    
 
     color: #6a6a6a;
 

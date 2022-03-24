@@ -56,6 +56,6 @@ module.exports = () => {
         agency: '0000-0',
         number: '00000-0',
       },
-    ]
+    ],
   }
 }

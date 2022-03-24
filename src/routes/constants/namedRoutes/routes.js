@@ -61,9 +61,9 @@ export const DIRECTOR_EDIT_PROFILE = '/perfis/editar'
 export const DIRECTOR_CREATE_PROFILE = '/perfis/criar'
 export const DIRECTOR_WALLET_DASHBOARD = '/diretor/carteira-digital'
 export const DIRECTOR_WALLET_PAYMENTS = '/diretor/carteira-digital/pagamentos'
-export const DIRECTOR_WALLET_STATEMENTS =
-  '/diretor/carteira-digital/extratos'
-export const DIRECTOR_WALLET_SETTINGS = '/diretor/carteira-digital/configuracoes'
+export const DIRECTOR_WALLET_STATEMENTS = '/diretor/carteira-digital/extratos'
+export const DIRECTOR_WALLET_SETTINGS =
+  '/diretor/carteira-digital/configuracoes'
 
 export const FILTER_SELLABLE_ITEMS = '/itens-vendaveis/'
 export const CREATE_SELLABLE_ITEMS = '/itens-vendaveis/criar'

@@ -41,7 +41,6 @@ import CreateSpecialty from '@/pages/modules/operator/Specialtys/CreateSpecialty
 import EditSpecialty from '@/pages/modules/operator/Specialtys/EditSpecialty'
 import SeeAllSpecialists from '@/pages/modules/operator/specialists/SeeAllSpecialists'
 import SeeOneSpecialist from '@/pages/modules/operator/specialists/SeeOneSpecialist'
-import IssuingAgency from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency'
 import EditIssuingAgency from '@/pages/modules/operator/IssuingAgency/EditIssuingAgency'
 import SeeAllIssuingAgency from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency'
 import CreateIssuingAgency from '@/pages/modules/operator/IssuingAgency/CreateIssuingAgency'
@@ -111,7 +110,6 @@ const operatorRoutes = [
   },
   {
     path: OPERATOR_SEE_ALL_ISSUING_AGENCY,
-    component: IssuingAgency,
     component: SeeAllIssuingAgency,
   },
   {

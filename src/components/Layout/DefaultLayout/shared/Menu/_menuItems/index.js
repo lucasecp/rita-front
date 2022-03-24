@@ -116,15 +116,15 @@ export const menuItens = [
       },
       {
         path: PATIENT_WALLET_PAYMENTS,
-        name: 'Pagamentos'
+        name: 'Pagamentos',
       },
       {
         path: PATIENT_WALLET_STATEMENTS,
-        name: 'Extrato'
+        name: 'Extrato',
       },
       {
         path: PATIENT_WALLET_SETTINGS,
-        name: 'Configurações'
+        name: 'Configurações',
       },
     ],
   },
