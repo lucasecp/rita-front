@@ -21,7 +21,7 @@ const RegisterSpecialistContext = createContext<RegisterSpecialistContextData>(
 )
 
 const RegisterSpecialistProvider: React.FC = ({ children }) => {
-  const { showMessage, closeModal, showSimple } = useModal()
+  const { showMessage, showSimple } = useModal()
   const { Loading } = useLoading()
 
   const [step, setStep] = useState(1)
@@ -38,7 +38,7 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   const [specialtysAndDocs, setSpecialtysAndDocs] =
     useState<SpecialtysAndDocsType>({} as SpecialtysAndDocsType)
 
-  const [photo, setPhoto] = useState<Blob | string>('')
+  const [photo, setPhoto] = useState<File | string>('')
 
   const [errors, setErrors] = useState<ErrorsRegisterI>({} as ErrorsRegisterI)
 

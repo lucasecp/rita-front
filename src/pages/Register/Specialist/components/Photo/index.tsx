@@ -22,6 +22,9 @@ const Photo: React.FC = () => {
     (value) => !value,
   )
 
+  const imgSource =
+    typeof photo === 'object' ? window.URL.createObjectURL(photo) : ''
+
   useEffect(() => {
     if (photo && !isValidTypeFile(photo, { onlyImage: true })) {
       removePhoto()
@@ -43,13 +46,7 @@ const Photo: React.FC = () => {
   return (
     <Container>
       <div>
-        <div>
-          {photo ? (
-            <img src={URL.createObjectURL(photo)} alt="" />
-          ) : (
-            <ProfileIcon />
-          )}
-        </div>
+        <div>{photo ? <img src={imgSource} alt="" /> : <ProfileIcon />}</div>
         {photo && (
           <span>
             <InputFile setValue={setPhoto}>
