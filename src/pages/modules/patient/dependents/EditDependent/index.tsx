@@ -151,8 +151,8 @@ export const EditDependent: React.FC = () => {
 
         toast.success('Edição Realizada com Sucesso.')
         history.push(PATIENT_DEPENDENTS)
-      } catch ({ response }) {
-        toast.error(response.data.message)
+      } catch (error: any) {
+        toast.error(error.response.data.message)
       } finally {
         Loading.turnOff()
       }

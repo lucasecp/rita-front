@@ -17,6 +17,7 @@ const Photo: React.FC = () => {
   const { showSimple } = useModal()
 
   const removePhoto = () => setPhoto('')
+
   const someFieldIsEmpty = Object.values(basicInformation).some(
     (value) => !value,
   )
@@ -24,6 +25,7 @@ const Photo: React.FC = () => {
   useEffect(() => {
     if (photo && !isValidTypeFile(photo, { onlyImage: true })) {
       removePhoto()
+
       showSimple.error(
         'Formato do Arquivo inválido. Por favor, selecione outro arquivo.',
       )
@@ -31,6 +33,7 @@ const Photo: React.FC = () => {
 
     if (photo && !isValidSizeFile(photo)) {
       removePhoto()
+
       showSimple.error(
         'O tamanho máximo do arquivo deve ser 10MB. Por favor, selecione outro arquivo.',
       )

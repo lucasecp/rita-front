@@ -75,7 +75,7 @@ export const PaginationSimple: React.FC<PaginationSimpleProps> = ({
             { label: 100, value: 100 },
           ]}
           value={limit}
-          onChange={({ target }) => setLimit(target.value)}
+          onChange={({ target }) => setLimit(Number(target.value))}
           variation="secondary"
         />
       </div>

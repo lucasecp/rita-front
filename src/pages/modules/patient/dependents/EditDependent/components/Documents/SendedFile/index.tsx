@@ -17,8 +17,9 @@ import { useMediaPredicate } from 'react-media-hook'
 import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
 
 interface SendedFileProps {
-  file: File | string
+  file: File 
   onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+  dependentDocumentName: string
 }
 
 export const SendedFile: React.FC<SendedFileProps> = ({
