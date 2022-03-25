@@ -58,13 +58,20 @@ export const UserInformations: React.FC<UserInformationsProps> = ({
     const clearedCPF = clearSpecialCaracter(cpf)
 
     if (clearedCPF.length === 11) {
-      apiPatient.get(`/paciente/status?cpf=${cpf}`).then((response) => {
-        if (response.status === 404 || response.data.status === 'CS') {
-          setAlreadyExists(false)
-        } else {
-          setAlreadyExists(true)
-        }
-      })
+      apiPatient
+        .get(`/paciente/status?cpf=${cpf}`)
+        .then((response) => {
+          if (response.data.status === 'CS') {
+            setAlreadyExists(false)
+          } else {
+            setAlreadyExists(true)
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            setAlreadyExists(false)
+          }
+        })
     }
   }, [cpf])
 
@@ -83,7 +90,7 @@ export const UserInformations: React.FC<UserInformationsProps> = ({
       setErrors(errorsTemporary)
     }
 
-    return hasErrors
+    onGetHasError(hasErrors)
   }
 
   useEffect(() => {
@@ -93,9 +100,7 @@ export const UserInformations: React.FC<UserInformationsProps> = ({
 
     setChangeTimes(changeTimes + 1)
 
-    const hasError = hasErrorFunction()
-
-    onGetHasError(hasError)
+    hasErrorFunction()
 
     setDependentData({
       name,
@@ -105,7 +110,7 @@ export const UserInformations: React.FC<UserInformationsProps> = ({
       email,
       phone,
     })
-  }, [name, cpf, gender, birthDate, email, phone])
+  }, [name, cpf, gender, birthDate, email, phone, alreadyExists])
 
   useEffect(() => {
     if (checkHasError) {

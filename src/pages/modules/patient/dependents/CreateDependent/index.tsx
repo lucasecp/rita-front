@@ -49,9 +49,6 @@ export const CreateDependent: React.FC = () => {
     sendErrorMessageInformations()
     sendErrorMessageAddress()
 
-    console.log('hasErrorInformations: ', hasErrorInformations)
-    console.log('hasErrorAddress: ', hasErrorAddress)
-
     if (hasErrorInformations || hasErrorAddress) {
       showMessage(InformationsIncorrect)
     } else {

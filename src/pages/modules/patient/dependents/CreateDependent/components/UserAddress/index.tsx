@@ -62,6 +62,19 @@ export const UserAddress: React.FC<UserAddressProps> = ({
     }
 
     setChangeTimesCheckbox(changeTimesCheckbox + 1)
+
+    if (addressIsEqualHolder) {
+      setAddress({
+        cep: '',
+        uf: '',
+        city: '',
+        address: '',
+        number: '',
+        district: '',
+        complement: '',
+      })
+      onGetHasError(false)
+    }
   }, [addressIsEqualHolder])
 
   const hasErrorFunction = (canSetError = false) => {
@@ -81,7 +94,9 @@ export const UserAddress: React.FC<UserAddressProps> = ({
       setErrors(errorsTemporary)
     }
 
-    return hasErrors
+    if (!addressIsEqualHolder) {
+      onGetHasError(hasErrors)
+    }
   }
 
   useEffect(() => {
@@ -91,30 +106,17 @@ export const UserAddress: React.FC<UserAddressProps> = ({
 
     setChangeTimes(changeTimes + 1)
 
-    const hasError = hasErrorFunction()
-    onGetHasError(hasError)
+    hasErrorFunction()
 
-    if (addressIsEqualHolder) {
-      setAddress({
-        cep: '',
-        uf: '',
-        city: '',
-        address: '',
-        number: '',
-        district: '',
-        complement: '',
-      })
-    } else {
-      setAddress({
-        cep,
-        uf,
-        city,
-        address: addressDep,
-        number,
-        district,
-        complement,
-      })
-    }
+    setAddress({
+      cep,
+      uf,
+      city,
+      address: addressDep,
+      number,
+      district,
+      complement,
+    })
   }, [cep, uf, city, addressDep, number, district, complement])
 
   useEffect(() => {
