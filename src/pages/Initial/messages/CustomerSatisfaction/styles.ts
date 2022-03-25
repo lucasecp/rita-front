@@ -51,7 +51,6 @@ export const Container = styled.div`
         font-size: 12px;
       }
     }
-
   }
 
   > footer {

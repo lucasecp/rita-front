@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Container = styled.section`
-  
   > h4 {
     font-size: 16px;
     font-weight: 400;

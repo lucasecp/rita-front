@@ -4,7 +4,7 @@ import { useRegisterSpecialist } from './index'
 export const useValidator = (): {
   hasErrors: (x: any) => boolean
 } => {
-  const { errors, setErrors } = useRegisterSpecialist()
+  const { setErrors } = useRegisterSpecialist()
 
   const hasErrors = (fields: ErrorsRegisterI) => {
     let error = false
@@ -19,7 +19,9 @@ export const useValidator = (): {
         error = true
       }
     }
+
     return error
   }
+
   return { hasErrors }
 }

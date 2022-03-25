@@ -16,7 +16,7 @@ export const Container = styled.div`
     }
   }
   @media (max-width: 768px) {
-    padding:  24px 24px 0 24px;
+    padding: 24px 24px 0 24px;
   }
 `
 export const ButtonGroup = styled.footer`

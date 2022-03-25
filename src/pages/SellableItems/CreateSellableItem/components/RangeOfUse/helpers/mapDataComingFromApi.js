@@ -1,5 +1,3 @@
-import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-
 export const mapRegionalDataComingFromApi = (options) => {
   return options?.map((option) => {
     return { label: option.nome, index: option.id }

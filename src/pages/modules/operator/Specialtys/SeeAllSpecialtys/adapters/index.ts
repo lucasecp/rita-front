@@ -6,6 +6,6 @@ export const fromApi = (specialtyInfo: any[]): DataSpecialtyI[] => {
     id: specialty.idEspecialidade,
     name: formatTextWithLimit(specialty.descricao, 50) || '-',
     code: specialty.codigo || '-',
-    subscriptionRequired: specialty.requerInscricao ,
+    subscriptionRequired: specialty.requerInscricao,
   }))
 }

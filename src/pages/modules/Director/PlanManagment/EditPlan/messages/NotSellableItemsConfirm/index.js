@@ -16,7 +16,7 @@ import { statusOptions, statusOptionsWithoutInTyping } from './helpers/status'
 import mapDataToMultSelect from './helpers/mapDataToMultSelect'
 import mapToRangeOfUse from './helpers/mapToRangeOfUse'
 import apiAdmin from '@/services/apiAdmin'
-import { useLoading } from '@/hooks/useLoading'
+// import { useLoading } from '@/hooks/useLoading'
 import {
   DIRECTOR_PLAN_MANAGMENT,
   DIRECTOR_SEE_PLAN_MANAGMENT,
@@ -25,7 +25,7 @@ import {
 import { CancelAndExit } from './messages/CancelAndExit'
 import { useModal } from '@/hooks/useModal'
 import { toast } from '@/styles/components/toastify'
-import { twoObjectsAreTheSame } from '@/helpers/twoObjectsAreTheSame'
+// import { twoObjectsAreTheSame } from '@/helpers/twoObjectsAreTheSame'
 import { planToApi } from './adapters/toApi'
 import { NotSellableItems } from './messages/NotSellableItems'
 
@@ -33,8 +33,8 @@ export const EditPlan = () => {
   const { plan } = useLocation().state
   const initialPlan = plan
 
-  const { Loading } = useLoading()
-  const { showMessage, showSimple } = useModal()
+  // const { Loading } = useLoading()
+  const { showMessage } = useModal()
   const history = useHistory()
 
   const [code, setCode] = useState(initialPlan?.codigo || '')
@@ -201,12 +201,9 @@ export const EditPlan = () => {
     const planMapped = planToApi(planObject)
 
     try {
-      const response = await apiAdmin.put(
-        `/plano/${initialPlan.idPlano}`,
-        planMapped,
-        { params: { confirmado: false } },
-      )
-      // console.log(response)
+      await apiAdmin.put(`/plano/${initialPlan.idPlano}`, planMapped, {
+        params: { confirmado: false }
+      })
 
       // sellableItems = [
       //   { id: 1, nome: 'Centro Oeste - Goiás (Estadual)', preco: 'R$ 39,90' },

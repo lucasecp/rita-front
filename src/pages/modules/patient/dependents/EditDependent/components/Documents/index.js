@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { Container, AccordionContainer } from './styles'
-import { AccordionDetails, AccordionSummary } from '@material-ui/core'
-import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
+import { Container } from './styles'
 import { SendedFile } from './SendedFile'
 
 export const Documents = ({

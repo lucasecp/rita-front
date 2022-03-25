@@ -1,7 +1,4 @@
-import styled, { css } from 'styled-components'
-
-import ButtonPrimary from '@/components/Button/Primary'
-
+import styled from 'styled-components'
 import colors from '@/styles/colors'
 
 export const Container = styled.div`
@@ -14,7 +11,6 @@ export const Container = styled.div`
   margin: 20px 0px 100px 0;
   border-radius: 8px;
   position: relative;
-
 `
 
 // export const BtnGroup = styled.div`

@@ -43,7 +43,7 @@ export const useAccordionStyles = makeStyles((theme) => ({
     borderRadius: '8px',
     '& > .MuiTreeItem-content': {
       flexDirection: 'row-reverse',
-      fontSize: '32px'
+      fontSize: '32px',
     },
     '& > .MuiTreeItem-content > .MuiTreeItem-label': {
       display: 'flex',

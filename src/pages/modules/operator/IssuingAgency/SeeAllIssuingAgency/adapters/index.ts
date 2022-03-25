@@ -7,7 +7,11 @@ export const fromApi = (specialtyInfo: any[]): IssuingAgencyI[] => {
     issuingAgency: formatTextWithLimit(issuingAgency.descricao, 50) || '-',
     specialist: issuingAgency.nomeEspecialista || '-',
     status: issuingAgency.status,
-    countSpecialist: issuingAgency.medicosAssociados ? issuingAgency.medicosAssociados : 0,
-    countSpecialty: issuingAgency.especialidadesAssociadas ? issuingAgency.especialidadesAssociadas : 0,
+    countSpecialist: issuingAgency.medicosAssociados
+      ? issuingAgency.medicosAssociados
+      : 0,
+    countSpecialty: issuingAgency.especialidadesAssociadas
+      ? issuingAgency.especialidadesAssociadas
+      : 0,
   }))
 }
