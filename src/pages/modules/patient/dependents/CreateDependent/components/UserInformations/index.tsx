@@ -15,6 +15,8 @@ import { validateBirthDate } from '@/helpers/validateFields/validateBirthDate'
 import { DependentData } from '../../types/index'
 
 import { Container, InputsArea } from './styles'
+import apiPatient from '@/services/apiPatient'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 
 interface ErrorsState {
   name: string
@@ -28,13 +30,15 @@ interface ErrorsState {
 interface UserInformationsProps {
   onGetAnyFieldsHasChanged: React.Dispatch<React.SetStateAction<boolean>>
   setDependentData: React.Dispatch<React.SetStateAction<DependentData>>
-  saveDependent: number
+  checkHasError: number
+  onGetHasError: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const UserInformations: React.FC<UserInformationsProps> = ({
   onGetAnyFieldsHasChanged,
   setDependentData,
-  saveDependent,
+  checkHasError,
+  onGetHasError,
 }) => {
   const [errorMessage, sendErrorMessage] = useMessage()
 
@@ -48,6 +52,39 @@ export const UserInformations: React.FC<UserInformationsProps> = ({
   const [errors, setErrors] = useState({} as ErrorsState)
 
   const [changeTimes, setChangeTimes] = useState(0)
+  const [alreadyExists, setAlreadyExists] = useState(false)
+
+  useEffect(() => {
+    const clearedCPF = clearSpecialCaracter(cpf)
+
+    if (clearedCPF.length === 11) {
+      apiPatient.get(`/paciente/status?cpf=${cpf}`).then((response) => {
+        if (response.status === 404 || response.data.status === 'CS') {
+          setAlreadyExists(false)
+        } else {
+          setAlreadyExists(true)
+        }
+      })
+    }
+  }, [cpf])
+
+  const hasErrorFunction = (canSetError = false) => {
+    const errorsTemporary = {
+      ...errors,
+      cpf: validateCPF(cpf, alreadyExists),
+      name: validateFullName(name, 3),
+      phone: validatePhone(phone, true),
+      birthDate: validateBirthDate(birthDate),
+    }
+
+    const hasErrors = Object.values(errorsTemporary).some((value) => value)
+
+    if (canSetError) {
+      setErrors(errorsTemporary)
+    }
+
+    return hasErrors
+  }
 
   useEffect(() => {
     if (changeTimes >= 3) {
@@ -55,38 +92,27 @@ export const UserInformations: React.FC<UserInformationsProps> = ({
     }
 
     setChangeTimes(changeTimes + 1)
+
+    const hasError = hasErrorFunction()
+
+    onGetHasError(hasError)
+
+    setDependentData({
+      name,
+      cpf,
+      gender,
+      birthDate,
+      email,
+      phone,
+    })
   }, [name, cpf, gender, birthDate, email, phone])
 
   useEffect(() => {
-    if (saveDependent) {
+    if (checkHasError) {
       sendErrorMessage()
-
-      const errorsTemporary = {
-        ...errors,
-        cpf: validateCPF(cpf),
-        name: validateFullName(name, 3),
-        phone: validatePhone(phone, true),
-        birthDate: validateBirthDate(birthDate),
-      }
-
-      setErrors(errorsTemporary)
-
-      const hasErrors = Object.values(errorsTemporary).some((value) => value)
-
-      if (hasErrors) {
-        return
-      }
-
-      setDependentData({
-        name,
-        cpf,
-        gender,
-        birthDate,
-        email,
-        phone,
-      })
+      hasErrorFunction(true)
     }
-  }, [saveDependent])
+  }, [checkHasError])
 
   return (
     <Container>

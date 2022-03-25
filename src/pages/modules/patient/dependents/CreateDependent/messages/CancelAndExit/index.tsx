@@ -9,7 +9,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { useModal } from '@/hooks/useModal'
 
 import { Container } from './styles'
-import { FILTER_USERS } from '@/routes/constants/namedRoutes/routes'
+import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 
 export const CancelAndExit: React.FC = () => {
   const { closeModal } = useModal()
@@ -20,7 +20,7 @@ export const CancelAndExit: React.FC = () => {
   }
 
   const onConfirmExit = async () => {
-    history.push(FILTER_USERS)
+    history.push(PATIENT_DEPENDENTS)
     closeModal()
   }
 
