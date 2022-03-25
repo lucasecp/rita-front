@@ -11,7 +11,10 @@ export const useValidator = (): {
     setErrors({} as ErrorsRegisterI)
 
     for (const field in fields) {
-      if (!fields[field] || !fields[field].length) {
+      if (
+        !fields[field] ||
+        (Array.isArray(fields[field]) && !fields[field].length)
+      ) {
         setErrors((errors: ErrorsRegisterI) => ({
           ...errors,
           [field]: 'Campo obrigatório',

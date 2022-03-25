@@ -53,13 +53,13 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
         data.label === issuingAgency || data.value === Number(issuingAgency),
     )
 
-    if (!issuingAgencyOpt?.value) {
+    if (!issuingAgencyOpt?.value || !issuingAgencyOpt?.label) {
       return
     }
 
-    setIssuingAgency(issuingAgencyOpt.label)
+    setIssuingAgency(issuingAgencyOpt.value)
 
-    setIssuingAgencyToApi(issuingAgencyOpt.value)
+    setIssuingAgencyToApi(issuingAgencyOpt.label)
   }, [issuingAgency, issuingAgencyOptions])
 
   return (

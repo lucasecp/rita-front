@@ -8,7 +8,7 @@ export const toApi = (data: ProfissionalInfoI & BasicInformationI) => {
     nome: data.name,
     nomeProfissional: data.profissionalName,
     cpf: clearSpecialCaracter(data.cpf),
-    idOrgaoEmissor: data.issuingAgencyToApi,
+    idOrgaoEmissor: data.issuingAgency,
     ufOrgaoEmissor: data.ufIssuingAgency,
     registroProfissional: data.profissionalRegister,
     email: data.email,

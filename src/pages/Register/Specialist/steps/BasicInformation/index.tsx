@@ -52,6 +52,9 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
   }, [profissionalRegister, issuingAgency, ufIssuingAgency])
 
 
+  console.log(issuingAgency,
+    issuingAgencyToApi,)
+
 
   useEffect(() => {
     if (toggleClick !== 0) {
