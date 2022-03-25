@@ -1,10 +1,9 @@
-import { AccordionDetails, AccordionSummary } from '@material-ui/core'
+// import { AccordionDetails } from '@material-ui/core'
 
-import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
-
-import { Container, AccordionContainer } from '../styles'
 // import InstructionsIncome from './Instructions'
-import { SendedFile } from '../../SendedFile'
+import { SendedFile } from '@/pages/modules/patient/dependents/EditDependent/components/Documents/SendedFile'
+
+import { Container } from '../styles'
 
 const ProofOfIncome = ({
   proofOfIncomeFile,

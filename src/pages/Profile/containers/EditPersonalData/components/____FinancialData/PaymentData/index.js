@@ -55,10 +55,7 @@ export const PaymentData = () => {
       ...items,
       {
         title: getCreditCardNameByNumber(model.number).toUpperCase(),
-        data: [
-          `****.****.****.${model.number.slice(-4)}`,
-          model.expireAt,
-        ],
+        data: [`****.****.****.${model.number.slice(-4)}`, model.expireAt],
         active: true,
       },
     ])

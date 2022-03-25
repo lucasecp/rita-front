@@ -1,6 +1,4 @@
 import clear from '@/helpers/clear/SpecialCaracteres'
-import isEmail from '@/helpers/isEmail'
-import moment from 'moment'
 
 export const validateGender = (value) => {
   if (!value) {

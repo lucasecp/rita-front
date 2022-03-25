@@ -30,7 +30,8 @@ export const profilesAndPermissionsWithCheckedFromApi = (
       return {
         ...permission,
         isChecked: oneProfileAndItsPermissions.permissoes.some(
-          (oneProfilePermission: any) => oneProfilePermission.id === permission.id,
+          (oneProfilePermission: any) =>
+            oneProfilePermission.id === permission.id,
         ),
       }
     }),

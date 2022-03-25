@@ -27,6 +27,13 @@ namespace RitaWallet {
     paymentRequest?: RitaWallet.PaymentRequest
   }
 
+  type DashboardConsumption = {
+    type: string
+    originalPriceAmount: number
+    discountPriceAmount: number
+    savedAmount: number
+  }[]
+
   type PaymentRequestItem = {
     id: string
     description: string
@@ -88,15 +95,18 @@ namespace RitaWallet {
 
   type Wallet = {
     id: string
-    createdAt: string
-    openedAt: string
     balance: number
     provisionedBalance: number
     crownBalance: number
     provisionedCrownBalance: number
     cashbackBalance: number
     provisionedCashbackBalance: number
+    createdAt: string
+    openedAt: string
     situation: string
+
+    totalCrownBalance: number
+    totalProvisionedCrownBalance: number
 
     userWallet?: RitaWallet.UserWallet
   }

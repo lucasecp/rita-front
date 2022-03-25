@@ -20,7 +20,6 @@ export const Container = styled.section`
     > *:nth-child(1) {
       grid-column: span 3;
     }
-   
 
     margin-top: 24px;
   }
@@ -30,7 +29,7 @@ export const Container = styled.section`
       > *:nth-child(1) {
         grid-column: span 1;
       }
-      
+
       grid-template-columns: 100%;
 
       gap: 16px;

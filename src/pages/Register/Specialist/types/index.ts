@@ -39,7 +39,7 @@ export type SpecialtysAndDocsType = {
   [x: string]: {
     name: string
     idSpecialty: string
-    document: Blob  | string
+    document: Blob | string
   }
 }
 

@@ -1,9 +1,11 @@
+import React, { useEffect, useState } from 'react'
+import moment from 'moment'
+
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import InputText from '@/components/Form/InputText'
 import CustomRangePicker from '@/components/Form/CustomRangePicker'
 import CustomMultSelect from '@/components/Form/MultSelect'
-import React, { useEffect, useState } from 'react'
 import MultSelectCity from '../Components/MultSelectCity'
 import MultSelectRegional from '../Components/MultSelectRegional'
 import MultSelectServices from '../Components/MultSelectServices'
@@ -14,7 +16,6 @@ import formatMultSelectValue from '@/helpers/formatMultSelectValue'
 import convertDateToIso from '@/helpers/convertDateToIso'
 import { verifyTypedFields } from '../helpers/verifyTypedFields'
 import useQuery from '@/hooks/useQuery'
-import moment from 'moment'
 
 const Filter = ({ setFilters }) => {
   const query = useQuery()
@@ -35,10 +36,6 @@ const Filter = ({ setFilters }) => {
   const [uf, setUf] = useState([])
   const [city, setCity] = useState([])
   const [validityDate, setValidityDate] = useState(VALIDITY_DATE)
-
-  useEffect(() => {
-    setFilters(verifyTypedFields(arrayQuery))
-  }, [])
 
   const arrayQuery = [
     { name: 'nome', value: name },
@@ -67,6 +64,10 @@ const Filter = ({ setFilters }) => {
   const onFilter = () => {
     setFilters(verifyTypedFields(arrayQuery))
   }
+
+  useEffect(() => {
+    setFilters(verifyTypedFields(arrayQuery))
+  }, [])
 
   return (
     <Container>
