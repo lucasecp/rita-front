@@ -45,10 +45,12 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
   useEffect(() => {
     setbasicInformation({
       profissionalRegister,
-      issuingAgency: issuingAgencyToApi,
+      issuingAgency,
+       issuingAgencyToApi,
       ufIssuingAgency,
     })
   }, [profissionalRegister, issuingAgency, ufIssuingAgency])
+
 
 
   useEffect(() => {

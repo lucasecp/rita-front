@@ -15,6 +15,7 @@ export interface BasicInformationI {
   profissionalRegister: string
   issuingAgency: string
   ufIssuingAgency: string
+  issuingAgencyToApi: string
 }
 
 type SpecialtysAndDocsErrors = { [x: string]: string }
