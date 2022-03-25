@@ -15,6 +15,7 @@ import {
 import axios from 'axios'
 import apiAdmin from '@/services/apiAdmin'
 import { toApi } from '../adapters'
+import { AxiosError, AxiosResponse } from 'axios'
 
 const RegisterSpecialistContext = createContext<RegisterSpecialistContextData>(
   {} as RegisterSpecialistContextData,
@@ -99,8 +100,10 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
       const data = toApi({ ...profissionalInfo, ...basicInformation })
 
       await apiAdmin.post('/medico', data)
-    } catch (error: any) {
-      if (error?.response?.status === 409) {
+    } catch (error) {
+      const { response } = (error as AxiosError) || {}
+
+      if (response?.status === 409) {
         throw new Error('Especialista já cadastrado')
       }
       throw new Error(errorRequest)
@@ -117,7 +120,7 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
         `medico/arquivo?cpf=${profissionalInfo.cpf}&tipoDocumento=FotoPerfil`,
         formFile,
       )
-    } catch (error: any) {
+    } catch (error) {
       throw new Error('Foto não enviada')
     }
   }
@@ -133,8 +136,10 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
       await registerPhoto()
 
       showMessage(RegisterSuccess)
-    } catch (error: any) {
-      showSimple.error(error?.message || errorRequest)
+    } catch (error) {
+      if (error instanceof Error) {
+        showSimple.error(error?.message || errorRequest)
+      }
     } finally {
       Loading.turnOff()
     }

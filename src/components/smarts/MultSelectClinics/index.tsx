@@ -10,6 +10,7 @@ interface ClinicsProps {
   clinic: MultiSelectOption[]
   setClinic: React.Dispatch<SetStateAction<MultiSelectOption[]>>
   errors: any
+  color?: string
   setErrors: (error: any) => any
   [x: string]: any
 }
@@ -19,6 +20,7 @@ export const MultSelectClinics: React.FC<ClinicsProps> = ({
   setClinic,
   errors,
   setErrors,
+  color,
   ...rest
 }) => {
 
@@ -80,7 +82,7 @@ export const MultSelectClinics: React.FC<ClinicsProps> = ({
           hasError={!!errors.clinics}
           messageError={errors?.clinics}
           name="clinics"
-
+          color={color}
           {...rest}
         />
       </section>

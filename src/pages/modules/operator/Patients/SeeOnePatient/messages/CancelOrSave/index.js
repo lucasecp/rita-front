@@ -31,7 +31,7 @@ export const CancelOrSave = ({ setConfirmSave }) => {
         plataforma até que o paciente seja validado novamente.
         <br />
         Confirma a alteração?
-      </p>
+      </p> 
       <footer>
         <OutlineButton onClick={onDoNotConfirmExit}>Cancelar</OutlineButton>
         <ButtonPrimary onClick={onConfirmExit}>Salvar</ButtonPrimary>

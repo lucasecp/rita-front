@@ -23,6 +23,8 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
 
   const [issuingAgency, setIssuingAgency] = useState('')
 
+  const [issuingAgencyToApi, setIssuingAgencyToApi] = useState('')
+
   const [ufIssuingAgency, setufProfissionalRegister] = useState('')
 
   const [toggleClick, setToggleClick] = useState(0)
@@ -43,10 +45,11 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
   useEffect(() => {
     setbasicInformation({
       profissionalRegister,
-      issuingAgency,
+      issuingAgency: issuingAgencyToApi,
       ufIssuingAgency,
     })
   }, [profissionalRegister, issuingAgency, ufIssuingAgency])
+
 
   useEffect(() => {
     if (toggleClick !== 0) {
@@ -90,6 +93,7 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
         <SelectIssuingAgency
           issuingAgency={issuingAgency}
           setIssuingAgency={setIssuingAgency}
+          setIssuingAgencyToApi={setIssuingAgencyToApi}
           error={errors.issuingAgency}
         />
 
