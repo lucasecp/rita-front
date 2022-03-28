@@ -50,13 +50,9 @@ export const InputCurrency: React.FC<InputCurrencyProps> = ({
     element.value = value
     if (value === 'NaN' || !value) element.value = ''
 
-<<<<<<< HEAD
     if (setValue) {
       setValue(value.replace(',', '').replace('.', ''))
     }
-=======
-    setValue && setValue(value.replace(',', '').replace('.', ''))
->>>>>>> 064432139f5c357df10524c8b8c9bcf531d6d9fe
   }
 
   return (
