@@ -31,8 +31,14 @@ export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 export const OPERATOR_ADD_DEPENDENT = '/dependentes/associar'
 export const OPERATOR_SEE_ALL_SPECIALISTS = '/operador-especialistas'
 export const OPERATOR_SEE_ONE_SPECIALIST = '/especialistas/ver-especialista'
-export const OPERATOR_CREATE_ISSUING_AGENCY = '/orgao-emissor/criar'
 export const OPERATOR_SEE_ALL_ISSUING_AGENCY = '/orgao-emissor'
+export const OPERATOR_EDIT_ISSUING_AGENCY = '/orgao-emissor/editar'
+export const OPERATOR_CREATE_ISSUING_AGENCY = '/orgao-emissor/criar'
+export const OPERATOR_WALLET_DASHBOARD = '/operador/carteira-digital'
+export const OPERATOR_WALLET_PAYMENTS = '/operador/carteira-digital/pagamentos'
+export const OPERATOR_WALLET_STATEMENTS = '/operador/carteira-digital/extratos'
+export const OPERATOR_WALLET_SETTINGS =
+  '/operador/carteira-digital/configuracoes'
 
 export const CLINIC_SEE_ALL_SPECIALIST = '/clinica-especialista'
 export const CLINIC_SEE_ONE_SPECIALIST = '/clinica-especialista/visualizar'
@@ -55,6 +61,11 @@ export const DIRECTOR_SEE_ALL_PROFILES = '/perfis'
 export const DIRECTOR_SEE_ONE_PROFILE = '/perfis/visualizar'
 export const DIRECTOR_EDIT_PROFILE = '/perfis/editar'
 export const DIRECTOR_CREATE_PROFILE = '/perfis/criar'
+export const DIRECTOR_WALLET_DASHBOARD = '/diretor/carteira-digital'
+export const DIRECTOR_WALLET_PAYMENTS = '/diretor/carteira-digital/pagamentos'
+export const DIRECTOR_WALLET_STATEMENTS = '/diretor/carteira-digital/extratos'
+export const DIRECTOR_WALLET_SETTINGS =
+  '/diretor/carteira-digital/configuracoes'
 
 export const FILTER_SELLABLE_ITEMS = '/itens-vendaveis/'
 export const CREATE_SELLABLE_ITEMS = '/itens-vendaveis/criar'
@@ -77,8 +88,16 @@ export const PATIENT_DOCTOR_INFORMATION =
 export const PATIENT_SEE_DEPENDENT = '/paciente/dependentes/ver-dependente'
 export const PATIENT_EDIT_DEPENDENT = '/paciente/dependentes/editar'
 export const PATIENT_DEPENDENTS = '/paciente/dependentes'
+export const PATIENT_ADD_DEPENDENT = '/paciente/dependentes/criar'
 export const PATIENT_ADD_DOCUMENT_DEPENDENT =
   '/paciente/dependentes/incluir-documentos'
+export const PATIENT_WALLET_DASHBOARD = '/paciente/carteira-digital'
+export const PATIENT_WALLET_BUY_COIN =
+  '/paciente/carteira-digital/comprar-moeda'
+export const PATIENT_WALLET_PAYMENTS = '/paciente/carteira-digital/pagamentos'
+export const PATIENT_WALLET_STATEMENTS = '/paciente/carteira-digital/extrato'
+export const PATIENT_WALLET_SETTINGS =
+  '/paciente/carteira-digital/configuracoes'
 
 export const SPECIALIST_PROFILE = '/especialista/perfil'
 

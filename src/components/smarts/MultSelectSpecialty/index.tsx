@@ -2,15 +2,20 @@ import CustomMultiSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
 import apiAdmin from '@/services/apiAdmin'
-import React, { useEffect, useState,SetStateAction } from 'react'
+import React, { useEffect, useState, SetStateAction } from 'react'
 
 import { Container } from './styles'
+import { useModal } from '@/hooks/useModal'
+import InsertRqeNumber from './messages/insertRqeNumber/index'
+
+//Será mostrado uma modal caso a especialidade requerer inscrição
 
 interface SpecialtysProps {
   specialtys: MultiSelectOption[]
   setSpecialtys: React.Dispatch<SetStateAction<MultiSelectOption[]>>
   errors: any
   setErrors: (error: any) => any
+  color?: string
   [x: string]: any
 }
 
@@ -19,20 +24,29 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
   setSpecialtys,
   errors,
   setErrors,
+  color,
   ...rest
 }) => {
-
   const [specialtysOptions, setSpecialtysOptions] = useState<
     MultiSelectOption[]
   >([])
 
-  const mapSpecialtys = (array: any[]) => {
+  const { showMessage } = useModal()
+
+  const mapSpecialtys = (
+    array: {
+      idEspecialidade: string
+      descricao: string
+      requerInscricao: string
+    }[],
+  ) => {
     if (!array) return []
 
     return array
       .map((obj) => ({
         id: obj.idEspecialidade,
         name: obj.descricao,
+        rqeRequired: obj.requerInscricao,
       }))
       .filter((specialty) => specialty.id && specialty.name)
   }
@@ -54,19 +68,15 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
     getSpecialtys()
   }, [])
 
-  // useEffect(() => {
-  //   setSpecialtys(specialtysProps || [])
-  // }, [specialtysProps])
-
-
-  // const onChangingSelect = (values: MultiSelectOption[]) => {
-  //   const hasAllOption = values.some((val) => val.id === 'All')
-
-  //   if (hasAllOption) {
-  //     return setSpecialtys(specialtysOptions)
-  //   }
-  //   return setSpecialtys(values)
-  // }
+  const onChange = (values: MultiSelectOption[], value?: MultiSelectOption) => {
+    if (value?.rqeRequired) {
+      return showMessage(InsertRqeNumber, {
+        setSpecialtys,
+        currentSpecialty: value,
+      })
+    }
+    setSpecialtys(values)
+  }
 
   return (
     <Container>
@@ -76,10 +86,14 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
           value={specialtys}
           setValue={setSpecialtys}
           variation="secondary"
+          color={color}
           options={specialtysOptions}
           hasError={!!errors?.specialtys}
           messageError={errors?.specialtys}
           name="specialtys"
+          onSelect={(values: MultiSelectOption[], v?: MultiSelectOption) =>
+            onChange(values, v)
+          }
           {...rest}
         />
       </section>

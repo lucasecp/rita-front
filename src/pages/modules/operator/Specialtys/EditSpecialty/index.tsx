@@ -33,7 +33,7 @@ const EditSpecialty: React.FC = () => {
     }
     setDataFromApi({
       code: specialtyInfo.code,
-      requireSubscription: specialtyInfo.subscriptionRequired ? 1 : 0,
+      requireSubscription: specialtyInfo.subscriptionRequired ? 'yes' : 'no',
       description: specialtyInfo.name,
     })
   }, [])

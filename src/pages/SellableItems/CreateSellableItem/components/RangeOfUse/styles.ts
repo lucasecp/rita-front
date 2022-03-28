@@ -1,7 +1,11 @@
 import colors from '@/styles/colors'
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
+type ContainerProps = {
+  viewMode?: any
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
 

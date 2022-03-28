@@ -19,7 +19,8 @@ type arrayToBeSetOnInitialCheckedPermissions = number[]
 export const arrayOfCheckedPermissions = (
   profilesAndPermissions: profilesAndPermissions,
 ): arrayToBeSetOnInitialCheckedPermissions => {
-  const arrayToBeSetOnInitialCheckedPermissions = []
+  const arrayToBeSetOnInitialCheckedPermissions: any[] = []
+  // @ts-ignore
   profilesAndPermissions.map((profile: profile) => {
     return profile.subChild.map((subChild) => {
       if (subChild.isChecked) {

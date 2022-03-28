@@ -14,7 +14,30 @@ import {
 import apiAdmin from '@/services/apiAdmin'
 import { mapDataComingFromApi } from '@/components/RangeOfUse/helpers/mapDataComingFromApi'
 
-export const RangeOfUse: React.FC = ({
+type RangeOfUseProps = {
+  rangesOfUse: any
+  setRangesOfUse: any
+  viewMode: any
+  label: any
+  id: any
+  messageError: any
+  regionals: any
+  setRegionals: any
+  city: any
+  setCity: any
+  ufs: any
+  setUfs: any
+  regionalSelected: any
+  setRegionalSelected: any
+  ufSelected: any
+  setUfSelected: any
+  citiesSelected: any
+  setCitiesSelected: any
+  listRangeOfUseToSaveAndToCreateTable: any
+  setListRangeOfUseToSaveAndToCreateTable: any
+}
+
+export const RangeOfUse: React.FC<RangeOfUseProps> = ({
   rangesOfUse,
   setRangesOfUse = () => {},
   viewMode,
@@ -38,16 +61,16 @@ export const RangeOfUse: React.FC = ({
 }) => {
   const { Loading } = useLoading()
 
-  const onGetArea = async (area) => {
+  const onGetArea = async (area: any) => {
     const regional = regionals.filter(
-      (item) => item.label === regionalSelected,
+      (item: any) => item.label === regionalSelected,
     )[0].index
 
     const uf = ufSelected.length
-      ? ufs.filter((item) => item.label === ufSelected)[0].index
+      ? ufs.filter((item: any) => item.label === ufSelected)[0].index
       : null
 
-    const cities = area.cities.map((city) => `${city.id}`)
+    const cities = area.cities.map((city: any) => `${city.id}`)
 
     const dataToSend = mapDataToSendApi({
       id,
@@ -80,7 +103,7 @@ export const RangeOfUse: React.FC = ({
     }
   }
 
-  const removeRegional = async (id) => {
+  const removeRegional = async (id: any) => {
     try {
       const { data } = await apiAdmin.delete(`/plano/abrangencia/${id}`, {
         params: { tipo: 'regional' },
@@ -96,7 +119,7 @@ export const RangeOfUse: React.FC = ({
     }
   }
 
-  const removeUf = async (id) => {
+  const removeUf = async (id: any) => {
     try {
       const { data } = await apiAdmin.delete(`/plano/abrangencia/${id}`, {
         params: { tipo: 'uf' },
@@ -112,7 +135,7 @@ export const RangeOfUse: React.FC = ({
     }
   }
 
-  const removeCity = async (id) => {
+  const removeCity = async (id: any) => {
     try {
       const { data } = await apiAdmin.delete(`/plano/abrangencia/${id}`, {
         params: { tipo: 'municipio' },
@@ -140,6 +163,7 @@ export const RangeOfUse: React.FC = ({
         <AddArea
           onGetArea={onGetArea}
           regionals={regionals}
+          // @ts-ignore
           setRegionals={setRegionals}
           setRegionalSelected={setRegionalSelected}
           regionalSelected={regionalSelected}

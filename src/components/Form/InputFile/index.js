@@ -17,10 +17,10 @@ export const InputFile = ({
         ref={inpFile}
         hidden
         onChange={({ target }) => {
-          setValue(target.files[0])
+          setValue && setValue(target.files[0])
         }}
         onClick={({ target }) => {
-          clearOnClick && setValue((target.value = null))
+          clearOnClick && setValue && setValue((target.value = null))
         }}
         {...rest}
       />

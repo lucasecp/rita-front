@@ -5,6 +5,6 @@ export const Container = styled.li`
   margin: -10px;
   > * {
     margin: 10px;
-    cursor:pointer ;
+    cursor: pointer;
   }
 `

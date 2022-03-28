@@ -27,4 +27,5 @@ export interface ErrorsI {
   clinics?: string
   cashBack?: string
   takeRate?: string
+  [x: string]: any
 }

@@ -178,7 +178,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
 
   useEffect(() => {
     if (clickOnSave !== 0) {
-      scrollOntoFieldError(errors)
+      scrollOntoFieldError(errors as any)
     }
   }, [clickOnSave])
 

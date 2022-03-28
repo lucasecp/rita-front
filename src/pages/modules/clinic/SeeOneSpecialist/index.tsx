@@ -37,8 +37,8 @@ const SeeOneSpecialist = () => {
   }, [])
 
   return (
-    <DefaultLayout title="Especialista - Visualizar e Editar">
-      <EditClinic specialistData={specialist} id={location.state?.idDoctor} />
+    <DefaultLayout title="Especialista - Visualizar">
+      <EditClinic specialistData={specialist} />
     </DefaultLayout>
   )
 }

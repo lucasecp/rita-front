@@ -6,7 +6,7 @@ export const Container = styled.div`
   border-radius: 8px;
 
   select {
-    min-width: 400px;
+    min-width: 400px;  
   }
 
   > h2 {

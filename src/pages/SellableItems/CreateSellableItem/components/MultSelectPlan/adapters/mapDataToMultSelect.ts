@@ -4,6 +4,7 @@ interface Services {
 }
 
 export default (services: Services) => {
+  // @ts-ignore
   return services.map((service) => {
     return {
       value: service.id,

@@ -8,6 +8,7 @@ import generateRandomString from '@/helpers/generateRandomString'
 export interface MultiSelectOption {
   id: string | number
   name: string
+  [x: string]: any
 }
 
 interface MultiSelectCustomProps {
@@ -19,11 +20,12 @@ interface MultiSelectCustomProps {
   hasError?: boolean
   disabled?: boolean
   variation?: 'secondary'
-  onSelect?: (value: MultiSelectOption[]) => void
-  onRemove?: (value: MultiSelectOption[]) => void
+  onSelect?: (values: MultiSelectOption[], value?: MultiSelectOption) => void
+  onRemove?: (values: MultiSelectOption[], value?: MultiSelectOption) => void
   closeOnSelect?: boolean
-  [x: string]: any
   name?: string
+  color?: string
+  [x: string]: any
 }
 
 const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
@@ -35,6 +37,7 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
   hasError,
   disabled,
   variation,
+  color,
   name,
   ...rest
 }) => {
@@ -47,7 +50,7 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
   window.onresize = () => adjustSelectOptions(containerDiv?.current)
 
   return (
-    <Container disabled={disabled} variation={variation} name={name}>
+    <Container disabled={disabled} variation={variation} >
       {label && <label>{label}</label>}
       <Content
         disabled={disabled}
@@ -56,6 +59,7 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
         id={generateRandomString(7)}
         onClick={() => adjustSelectOptions(containerDiv?.current)}
         variation={variation}
+        color={color}
       >
         <Multiselect
           options={options || []}

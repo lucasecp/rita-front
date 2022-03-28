@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Container = styled.div<{ name: string }>`
   > h2 {
@@ -8,17 +8,21 @@ export const Container = styled.div<{ name: string }>`
     color: #6a6a6a;
     margin-bottom: 24px;
   }
+
   > section {
     margin: 24px 0;
   }
+
   > span {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     margin: -5px;
+
     > * {
       margin: 5.5px;
     }
+
     > p {
       font-size: 14px;
       font-weight: 400;

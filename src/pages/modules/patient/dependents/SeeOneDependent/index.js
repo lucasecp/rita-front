@@ -17,8 +17,7 @@ import { Documents } from './components/Documents'
 import { Situation } from './components/Situation'
 import { useModal } from '@/hooks/useModal'
 import { PendingWarning } from './messages/PendingWarning'
-import { BlockingWarning } from './messages/BlockingWarning'
-import convertImageFromApiToBase64 from '@/helpers/convertImageFromApiToBase64'
+// import { BlockingWarning } from './messages/BlockingWarning'
 
 const SeeDependents = () => {
   const [dependent, setDependent] = useState({})

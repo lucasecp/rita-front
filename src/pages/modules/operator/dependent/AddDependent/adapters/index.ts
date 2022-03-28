@@ -1,7 +1,6 @@
 import { formatCpf } from '@/helpers/formatCpf'
 import { DependentI } from '../types/index'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-import formatFirstLastName from '@/helpers/formatFirstLastName'
 
 const showStatus = (status: 'I' | 'P' | 'N' | 'D' | 'A') => {
   const formatedStatus = {
@@ -11,6 +10,7 @@ const showStatus = (status: 'I' | 'P' | 'N' | 'D' | 'A') => {
     D: 'Dependente',
     A: 'Aprovado',
   }
+
   return formatedStatus[status] || ''
 }
 

@@ -1,4 +1,3 @@
-import messageError from '@/components/messageError'
 import React, { InputHTMLAttributes } from 'react'
 
 import { Container } from './styles'
@@ -48,7 +47,7 @@ const InputCurrency: React.FC<InputMaskProps> = ({
     element.value = value
     if (value == 'NaN' || value == 0) element.value = ''
 
-    setValue(value.replace(',', '').replace('.', ''))
+    setValue && setValue(value.replace(',', '').replace('.', ''))
   }
 
   return (

@@ -33,7 +33,6 @@ export const Container = styled.div`
     font-weight: 500;
     line-height: 25px;
     text-align: center;
-    
 
     + p {
       margin-top: 24px;

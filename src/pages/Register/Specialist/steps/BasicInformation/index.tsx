@@ -23,12 +23,14 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
 
   const [issuingAgency, setIssuingAgency] = useState('')
 
+  const [issuingAgencyToApi, setIssuingAgencyToApi] = useState('')
+
   const [ufIssuingAgency, setufProfissionalRegister] = useState('')
 
   const [toggleClick, setToggleClick] = useState(0)
 
   const onNextStep = () => {
-   
+
     if (
       hasErrors({
         profissionalRegister,
@@ -44,9 +46,15 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
     setbasicInformation({
       profissionalRegister,
       issuingAgency,
+       issuingAgencyToApi,
       ufIssuingAgency,
     })
   }, [profissionalRegister, issuingAgency, ufIssuingAgency])
+
+
+  console.log(issuingAgency,
+    issuingAgencyToApi,)
+
 
   useEffect(() => {
     if (toggleClick !== 0) {
@@ -83,11 +91,14 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
           }
           hasError={!!errors.profissionalRegister}
           msgError={errors.profissionalRegister}
+          onlyNumber
+          maxLength={10}
         />
 
         <SelectIssuingAgency
           issuingAgency={issuingAgency}
           setIssuingAgency={setIssuingAgency}
+          setIssuingAgencyToApi={setIssuingAgencyToApi}
           error={errors.issuingAgency}
         />
 

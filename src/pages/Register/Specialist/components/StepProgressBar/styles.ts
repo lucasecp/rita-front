@@ -9,10 +9,9 @@ interface StepsProps {
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  background: #F5F5F5;
+  background: #f5f5f5;
   justify-content: center;
-  padding: 24px 0
-
+  padding: 24px 0;
 `
 
 export const Step = styled.span<StepsProps>`
@@ -25,19 +24,19 @@ export const Step = styled.span<StepsProps>`
   ${({ waiting }) =>
     waiting &&
     css`
-      background:#EEEEEE;
+      background: #eeeeee;
     `}
 
   ${({ finish }) =>
     finish &&
     css`
-      background: #EEEEEE;
+      background: #eeeeee;
     `}
 
   ${({ active }) =>
     active &&
     css`
-      background: #ACFFC5;
+      background: #acffc5;
     `}
 
   +span {
@@ -49,7 +48,7 @@ export const Step = styled.span<StepsProps>`
       width: 24px;
       border-radius: 2px;
       display: block;
-      background-color: #F5F5F5;
+      background-color: #f5f5f5;
       position: relative;
       left: -150%;
       top: 50%;

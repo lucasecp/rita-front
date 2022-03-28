@@ -1,4 +1,3 @@
-import colors from '@/styles/colors'
 import styled from 'styled-components'
 
 export const Container = styled.header`
@@ -40,7 +39,7 @@ export const Container = styled.header`
     display: block;
     background: #f89bff;
     border-radius: 28px;
-    text-align: center
+    text-align: center;
   }
   ::before {
     content: '';

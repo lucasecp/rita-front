@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, readdir } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 
 const myArgs = process.argv.slice(2)
 const build = myArgs[0]
@@ -13,7 +13,7 @@ let data = readFileSync(
 const indexOfVersion = data.indexOf('<CustomTooltip label="v') + 23
 
 let indexOfEndOfVersion = indexOfVersion
-while (data.substr(indexOfEndOfVersion, 1) != '"') {
+while (data.substr(indexOfEndOfVersion, 1) !== '"') {
   indexOfEndOfVersion++
 }
 

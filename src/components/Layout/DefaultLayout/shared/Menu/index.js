@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 
+import { ReactComponent as ChevronDownIcon } from '@/assets/icons/chevron-down.svg'
+import { ReactComponent as ChevronUpIcon } from '@/assets/icons/chevron-up.svg'
 import { Container } from './styles'
-import { useAuth } from '@/hooks/login'
-
 import { menuItens } from './_menuItems'
+
+import { useAuth } from '@/hooks/login'
 import { useMenu } from '@/hooks/useMenu'
 
-function Menu({ expanded }) {
+const Menu = ({ expanded }) => {
+  const { pathname: routePathname } = useLocation()
   const { user } = useAuth()
   const { closeMenu } = useMenu()
-
   const [menuToShow, setMenuToShow] = useState([])
 
   useEffect(() => {
@@ -23,21 +25,63 @@ function Menu({ expanded }) {
     })
   }, [])
 
-  const onClickInMenuItem = () => {
+  function handleMenuItemClick() {
     closeMenu()
   }
 
   return (
     <Container expanded={expanded}>
-      {menuToShow.map((item) => (
-        <NavLink key={item.path} to={item.path} onClick={onClickInMenuItem}>
-          <span />
-          <div>
-            {item.icon}
-            {expanded && <span>{item.name}</span>}
+      {menuToShow.map((item) =>
+        item.children ? (
+          <div key={item.path}>
+            <NavLink
+              activeClassName="active"
+              key={item.path}
+              to={item.path}
+              onClick={() => handleMenuItemClick()}
+            >
+              <span />
+              <div>
+                {item.icon}
+                {expanded && <span>{item.name}</span>}
+              </div>
+              {routePathname.startsWith(item.path) ? (
+                <ChevronUpIcon />
+              ) : (
+                <ChevronDownIcon />
+              )}
+            </NavLink>
+
+            {routePathname.startsWith(item.path) && (
+              <div>
+                {item.children.map((child) => (
+                  <NavLink
+                    activeClassName="active"
+                    key={child.path}
+                    to={child.path}
+                    onClick={() => handleMenuItemClick()}
+                  >
+                    {child.name}
+                  </NavLink>
+                ))}
+              </div>
+            )}
           </div>
-        </NavLink>
-      ))}
+        ) : (
+          <NavLink
+            activeClassName="active"
+            key={item.path}
+            to={item.path}
+            onClick={() => handleMenuItemClick()}
+          >
+            <span />
+            <div>
+              {item.icon}
+              {expanded && <span>{item.name}</span>}
+            </div>
+          </NavLink>
+        ),
+      )}
     </Container>
   )
 }
