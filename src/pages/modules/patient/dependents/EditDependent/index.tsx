@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Container, ButtonGroup } from './styles'
 import { useLoading } from '@/hooks/useLoading'
@@ -151,8 +153,16 @@ export const EditDependent: React.FC = () => {
 
         toast.success('Edição Realizada com Sucesso.')
         history.push(PATIENT_DEPENDENTS)
-      } catch ({ response }) {
-        toast.error(response.data.message)
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          toast.error(error.response.data.message)
+        } else {
+          if (error instanceof Error) {
+            toast.error(error.message)
+          }
+
+          console.error(error)
+        }
       } finally {
         Loading.turnOff()
       }

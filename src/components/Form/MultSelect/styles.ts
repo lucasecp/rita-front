@@ -8,10 +8,12 @@ export const Content = styled.div.attrs(
     hasError: boolean
     disabled: boolean
     variation: '' | 'secondary'
+    color: string
   }) => ({
     hasError: props.hasError,
     disabled: props.disabled,
     variation: props.variation,
+    color: props.color,
   }),
 )`
   display: grid;
@@ -258,13 +260,39 @@ export const Content = styled.div.attrs(
         display: none;
       }
     `}
+    ${({ color }) =>
+    color === 'green' &&
+    css`
+      .chip {
+        border: 1px solid #4b8864;
+        color: #4b8864;
+
+        path {
+          fill: #4b8864;
+        }
+      }
+      .optionContainer {
+        > li,
+        .highlightOption {
+          :hover {
+            background-color: #4b8864;
+          }
+        }
+      }
+      input[type='checkbox'] {
+        :after {
+          border: 2px solid #4b8864;
+        }
+      }
+      input[type='checkbox']:checked {
+        :after {
+          background-color: #4b8864;
+        }
+      }
+    `}
 `
 export const Container = styled.div.attrs(
-  (props: {
-    disabled: boolean
-    variation: '' | 'secondary'
-    name?: string
-  }) => ({
+  (props: { disabled: boolean; variation: '' | 'secondary' }) => ({
     disabled: props.disabled,
     variation: props.variation,
   }),

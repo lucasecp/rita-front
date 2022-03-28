@@ -1,4 +1,4 @@
-import { ButtonOneBorder  } from '@/components/Button/OneBorder'
+import { ButtonOneBorder } from '@/components/Button/OneBorder'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import CustomRangePicker from '@/components/Form/CustomRangePicker'

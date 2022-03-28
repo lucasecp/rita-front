@@ -35,7 +35,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
   )
   const [clinics, setClinics] = useState(specialistData?.clinics || [])
   const [specialtys, setSpecialtys] = useState(specialistData?.specialtys || [])
-  const [clickOnSave, setClickOnSave] = useState(false)
+  const [clickOnSave, setClickOnSave] = useState(0)
   const [errors, setErrors] = useState<ErrorsI>({})
   const { Loading } = useLoading()
 
@@ -138,7 +138,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
   }
 
   const onSave = async () => {
-    setClickOnSave(!clickOnSave)
+    setClickOnSave(Math.random() * (10 - 3) + 3)
     setErrors({})
     if (
       hasErrorOnFields({
@@ -177,8 +177,8 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
   }
 
   useEffect(() => {
-    if (clickOnSave) {
-      scrollOntoFieldError(errors)
+    if (clickOnSave !== 0) {
+      scrollOntoFieldError(errors as any)
     }
   }, [clickOnSave])
 

@@ -23,7 +23,11 @@ interface FormProps {
   setMakeNewRequest: (v: boolean) => void
 }
 
-const Form: React.FC<FormProps> = ({ data, profilePhoto,setMakeNewRequest }) => {
+const Form: React.FC<FormProps> = ({
+  data,
+  profilePhoto,
+  setMakeNewRequest,
+}) => {
   const [isEditing, setIsEditing] = useState(false)
   const [fieldWasChanged, setFieldWasChanged] = useState(false)
   const [errors, setErrors] = useState<ErrorsI>({})
@@ -44,8 +48,7 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto,setMakeNewRequest }) => 
   useEffect(() => {
     if (isEditing) {
       setFieldWasChanged(true)
-    }
-    else {
+    } else {
       setFieldWasChanged(false)
     }
   }, [specialistInfo, specialistClinics, specialistSpecialitys, profilePhoto])
@@ -105,7 +108,7 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto,setMakeNewRequest }) => 
       return showMessage(CancelEdting, {
         setEdting: setIsEditing,
         setFieldWasChanged,
-        setFormWasSubmited
+        setFormWasSubmited,
       })
     }
     setIsEditing(false)
@@ -135,7 +138,6 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto,setMakeNewRequest }) => 
         errors={errors}
         setErrors={setErrors}
         formWasSubmited={formWasSubmited}
-
       />
       <Clinics
         specialistClinic={data?.clinics}
@@ -145,7 +147,6 @@ const Form: React.FC<FormProps> = ({ data, profilePhoto,setMakeNewRequest }) => 
         errors={errors}
         setErrors={setErrors}
         formWasSubmited={formWasSubmited}
-
       />
       <footer>
         {!isEditing ? (

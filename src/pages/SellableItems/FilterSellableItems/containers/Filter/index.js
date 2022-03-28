@@ -10,14 +10,15 @@ import ButtonPrimary from '@/components/Button/Primary'
 import InputText from '@/components/Form/InputText'
 import CustomMultSelect from '@/components/Form/MultSelect'
 import { Container } from './styles'
-import { SellableItemsFilters } from '../../@types'
+// import { SellableItemsFilters } from '../../@types'
 import useLocalStorage from 'use-local-storage'
 
-interface FilterProps {
-  onGetFilters: React.Dispatch<React.SetStateAction<SellableItemsFilters>>;
-}
+// interface FilterProps {
+//   onGetFilters: React.Dispatch<React.SetStateAction<SellableItemsFilters>>;
+// }
 
-export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
+// export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
+export const Filter = ({ onGetFilters }) => {
   const [filters, setFilters] = useLocalStorage(
     '@Rita/SellableItems/Filters',
     {},

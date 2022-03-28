@@ -54,14 +54,23 @@ export const InputEmail: React.FC<InputEmailProps> = ({
   }, [email])
 
   useEffect(() => {
-    setShowEmailError(emailError)
-  }, [checkHasError])
-
-  useEffect(() => {
     if (hasError) {
       hasError(!!emailError)
     }
   }, [emailError])
+
+  const validateEmailError = (email: string) => {
+    if (!email.trim()) {
+      setEmailError('Email Obrigatório')
+    } else if (!isEmail(email)) {
+      setEmailError('Email inválido.')
+    }
+  }
+
+  useEffect(() => {
+    validateEmailError(email)
+    setShowEmailError(emailError)
+  }, [checkHasError])
 
   const onGetValue = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
@@ -83,8 +92,10 @@ export const InputEmail: React.FC<InputEmailProps> = ({
     const emailUpdated = valueWithNoSymbols
 
     setEmail(emailUpdated)
-  }
+    setEmailError('')
 
+    validateEmailError(emailUpdated)
+  }
   return (
     <InputText
       label={label || 'Email:'}

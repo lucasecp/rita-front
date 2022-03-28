@@ -4,7 +4,7 @@ import apiAdmin from '@/services/apiAdmin'
 
 interface SelectUfProps {
   setUf: (value: string) => void
-  setUfToApi: (value: string) => void
+  setUfToApi?: (value: string) => void
   uf: string
   disabled?: boolean
   [x: string]: any
@@ -45,9 +45,10 @@ const SelectUf: React.FC<SelectUfProps> = ({
     if (!ufFromApi?.value) {
       return
     }
-    setUfToApi(ufFromApi.label)
 
     setUf(ufFromApi.value)
+
+    setUfToApi && setUfToApi(ufFromApi.label)
   }, [uf, ufOptions])
 
   return (

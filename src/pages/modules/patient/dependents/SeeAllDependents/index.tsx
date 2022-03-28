@@ -35,7 +35,6 @@ export const SeeAllDependents: React.FC = () => {
         const { companyMapped, dependentsMapped } = fromApi(data)
 
         setCompany(companyMapped)
-
         setDependents(dependentsMapped)
       } catch ({ response }) {
       } finally {

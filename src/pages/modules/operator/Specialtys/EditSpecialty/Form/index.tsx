@@ -12,12 +12,12 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({ errors, setDataToApi, dataFromApi }) => {
   const [code, setCode] = useState('')
-  const [requireSubscription, setRequireSubscription] = useState('')
+  const [requireSubscription, setRequireSubscription] = useState<string >('')
   const [description, setDescription] = useState('')
 
   useEffect(() => {
     setCode(dataFromApi?.code || '')
-    setRequireSubscription(dataFromApi?.requireSubscription || '')
+    setRequireSubscription(String(dataFromApi?.requireSubscription || ''))
     setDescription(dataFromApi?.description || '')
   }, [dataFromApi])
 
@@ -53,8 +53,8 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi, dataFromApi }) => {
         value={requireSubscription}
         setValue={setRequireSubscription}
         options={[
-          { label: 'Sim', value: 1 },
-          { label: 'Não', value: 0 },
+          { label: 'Sim', value: 'yes' },
+          { label: 'Não', value: 'no' },
         ]}
         hasError={!!errors.requireSubscription}
         msgError={errors.requireSubscription}

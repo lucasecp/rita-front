@@ -1,9 +1,8 @@
+import type { DataDependentI } from '../types/index'
+import { intervalToDuration, parse } from 'date-fns'
 import { formatCpf } from '@/helpers/formatCpf'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
-import { DataDependentI } from '../types/index'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-import formatFirstLastName from '@/helpers/formatFirstLastName'
-import { intervalToDuration, parse } from 'date-fns'
 
 export const fromApi = (dataDependent: any): DataDependentI => {
   const holder = {
@@ -28,5 +27,6 @@ export const fromApi = (dataDependent: any): DataDependentI => {
       isAMinor: years ? years < 18 : false,
     }
   })
+
   return { holder, dependents }
 }

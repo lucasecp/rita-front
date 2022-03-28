@@ -54,7 +54,7 @@ export const Filters: React.FC<FiltersProps> = ({
   onGetPdfHasBeenDisabledBy,
   generateReport,
 }) => {
-  const initialStatus = [{ id: 'all', name: 'Todas' }]
+  const initialStatus = [{ id: 'all', name: 'Todos' }]
   const initialColumns = [
     { id: 'id', name: 'ID' },
     { id: 'beneficiaryType', name: 'Tipo de Beneficiário' },
@@ -215,7 +215,7 @@ export const Filters: React.FC<FiltersProps> = ({
         }
       }
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   }
 

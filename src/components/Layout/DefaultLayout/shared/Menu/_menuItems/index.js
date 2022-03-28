@@ -9,6 +9,7 @@ import { ReactComponent as PadLockIcon } from '@/assets/icons/pad-lock.svg'
 import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 import { ReactComponent as ManagmentIcon } from '@/assets/icons/managment.svg'
 import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
+import { ReactComponent as WalletIcon } from '@/assets/icons/wallet.svg'
 import { ReactComponent as SellableItemsIcon } from '@/assets/icons/salable-items.svg'
 import { ReactComponent as ProfilesIcon } from '@/assets/icons/profiles.svg'
 import { ReactComponent as ClinicsIcon } from '@/assets/icons/clinic.svg'
@@ -28,6 +29,11 @@ import {
   VALIDATOR_ANALYZE_PATIENTS,
   DIRECTOR_PLAN_MANAGMENT,
   PATIENT_DEPENDENTS,
+  PATIENT_WALLET_DASHBOARD,
+  PATIENT_WALLET_BUY_COIN,
+  PATIENT_WALLET_PAYMENTS,
+  PATIENT_WALLET_STATEMENTS,
+  PATIENT_WALLET_SETTINGS,
   FILTER_SELLABLE_ITEMS,
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ALL_SPECIALTYS,
@@ -37,7 +43,8 @@ import {
   DIRECTOR_IMPORT,
   SPECIALIST_PROFILE,
   FILTER_USERS,
-  OPERATOR_SEE_All_SPECIALTYS_TYPES,
+  OPERATOR_SEE_ALL_ISSUING_AGENCY,
+  CLINIC_SEE_ALL_SPECIALIST,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -98,6 +105,30 @@ export const menuItens = [
     permission: permissionList.VER_MEUS_DEPENDENTES,
   },
   {
+    path: PATIENT_WALLET_DASHBOARD,
+    icon: <WalletIcon />,
+    name: 'Carteira Digital',
+    permission: permissionList.VER_CARTEIRA_DIGITAL_PACIENTE,
+    children: [
+      {
+        path: PATIENT_WALLET_BUY_COIN,
+        name: 'Comprar Moeda',
+      },
+      {
+        path: PATIENT_WALLET_PAYMENTS,
+        name: 'Pagamentos',
+      },
+      {
+        path: PATIENT_WALLET_STATEMENTS,
+        name: 'Extrato',
+      },
+      {
+        path: PATIENT_WALLET_SETTINGS,
+        name: 'Configurações',
+      },
+    ],
+  },
+  {
     path: DIRECTOR_PLAN_MANAGMENT,
     icon: <ManagmentIcon />,
     name: 'Gestão de Planos',
@@ -117,7 +148,7 @@ export const menuItens = [
   },
   {
     path: OPERATOR_SEE_ALL_CLINICS,
-    icon: <AuthorizationIcon />,
+    icon: <ClinicsIcon />,
     name: 'Clínicas',
     permission: permissionList.LISTAR_CLINICAS,
   },
@@ -158,9 +189,15 @@ export const menuItens = [
     permission: permissionList.LISTAR_USUARIOS,
   },
   {
-    path: OPERATOR_SEE_All_SPECIALTYS_TYPES,
+    path: OPERATOR_SEE_ALL_ISSUING_AGENCY,
     icon: <SpecialtysTypesIcon />,
-    name: 'Tipos de Especialidade',
-    permission: permissionList.LISTAR_TIPO_ESPECIALIDADE,
+    name: 'Orgão Emissor',
+    permission: permissionList.GERENCIAR_ORGAO_EMISSOR,
+  },
+  {
+    path: CLINIC_SEE_ALL_SPECIALIST,
+    icon: <StethoscopeIcon />,
+    name: 'Especialistas',
+    permission: permissionList.VER_DADOS_CLINICA,
   },
 ]

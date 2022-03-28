@@ -53,14 +53,6 @@ export const Clinics: React.FC<ClinicsProps> = ({
     setErrors((error: ErrorsI) => ({ ...error, clinics: '' }))
   }, [clinics])
 
-  const onChangingSelect = (values: MultiSelectOption[]) => {
-    const hasAllOption = values.some((val) => val.id === 'All')
-
-    if (hasAllOption) {
-      return setClinics(clinicOptions)
-    }
-    return setClinics(values)
-  }
 
   return (
     <Container>
@@ -74,8 +66,6 @@ export const Clinics: React.FC<ClinicsProps> = ({
           hasError={!!errors.clinics}
           messageError={errors?.clinics}
           name="clinics"
-          // onSelect={onChangingSelect}
-          // onRemove={onChangingSelect}
         />
       </section>
     </Container>

@@ -26,7 +26,7 @@ const Textarea: React.FC<TextareaProps> = ({
     const { value } = event.target
 
     if (value.length <= limit) {
-      setValue(value)
+      setValue && setValue(value)
     }
   }
 

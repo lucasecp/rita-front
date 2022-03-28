@@ -7,7 +7,8 @@ import mapDataFromApiToMultSelect from '../../helpers/mapDataFromApiToMultSelect
 
 // interface RegionalProps {}
 
-export const Regionals: React.FC = ({ setRegional, regional }) => {
+// export const Regionals: React.FC = ({ setRegional, regional }) => {
+export const Regionals = ({ setRegional, regional }) => {
   const [regionalOptions, setRegionalOptions] = useState([])
   const { Loading } = useLoading()
 

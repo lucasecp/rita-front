@@ -1,10 +1,8 @@
 import React from 'react'
 
 import { Container } from './styles'
-import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
-import { ReactComponent as ZoomIcon } from '@/assets/icons/zoom.svg'
 import { SeeDocumentFile } from './SeeDocumentFile'
-import { Select } from '@/components/Form/Select'
+// import { Select } from '@/components/Form/Select'
 import InputText from '@/components/Form/InputText'
 
 export const Documents = ({

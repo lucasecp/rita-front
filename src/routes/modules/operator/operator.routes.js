@@ -17,7 +17,11 @@ import {
   OPERATOR_EDIT_SPRECIALTY,
   OPERATOR_SEE_ALL_SPECIALISTS,
   OPERATOR_SEE_ONE_SPECIALIST,
-  OPERATOR_SEE_All_SPECIALTYS_TYPES
+  OPERATOR_SEE_ALL_ISSUING_AGENCY,
+  OPERATOR_EDIT_ISSUING_AGENCY,
+  OPERATOR_CREATE_ISSUING_AGENCY,
+  OPERATOR_REPORTS_PATIENT_ANALYTIC,
+  OPERATOR_WALLET_SETTINGS,
 } from '../../constants/namedRoutes/routes'
 
 import { SeeOnePatient } from '@/pages/modules/operator/Patients/SeeOnePatient'
@@ -38,7 +42,11 @@ import CreateSpecialty from '@/pages/modules/operator/Specialtys/CreateSpecialty
 import EditSpecialty from '@/pages/modules/operator/Specialtys/EditSpecialty'
 import SeeAllSpecialists from '@/pages/modules/operator/specialists/SeeAllSpecialists'
 import SeeOneSpecialist from '@/pages/modules/operator/specialists/SeeOneSpecialist'
-import SpecialtysTypes from '@/pages/modules/operator/Specialtys/SpecialtytsTypes'
+import EditIssuingAgency from '@/pages/modules/operator/IssuingAgency/EditIssuingAgency'
+import SeeAllIssuingAgency from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency'
+import CreateIssuingAgency from '@/pages/modules/operator/IssuingAgency/CreateIssuingAgency'
+import { PatientAnalytic } from '@/pages/modules/operator/Reports/containers/PatientAnalytic'
+import WalletSettings from '@/pages/modules/operator/WalletSettings'
 
 const operatorRoutes = [
   {
@@ -61,7 +69,10 @@ const operatorRoutes = [
     path: OPERATOR_REPORTS_BILLING_STATEMENT,
     component: BillingStatement,
   },
-
+  {
+    path: OPERATOR_REPORTS_PATIENT_ANALYTIC,
+    component: PatientAnalytic,
+  },
   {
     path: OPERATOR_CONSULT_ELIGIBILITY,
     component: ConsultEligibility,
@@ -103,8 +114,20 @@ const operatorRoutes = [
     component: SeeOneSpecialist,
   },
   {
-    path:  OPERATOR_SEE_All_SPECIALTYS_TYPES,
-    component: SpecialtysTypes,
+    path: OPERATOR_SEE_ALL_ISSUING_AGENCY,
+    component: SeeAllIssuingAgency,
+  },
+  {
+    path: OPERATOR_CREATE_ISSUING_AGENCY,
+    component: CreateIssuingAgency,
+  },
+  {
+    path: OPERATOR_EDIT_ISSUING_AGENCY,
+    component: EditIssuingAgency,
+  },
+  {
+    path: OPERATOR_WALLET_SETTINGS,
+    component: WalletSettings,
   },
 ]
 

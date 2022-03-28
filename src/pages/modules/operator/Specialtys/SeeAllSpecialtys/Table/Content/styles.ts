@@ -34,9 +34,9 @@ export const Container = styled.div`
     margin-right: 24px;
     min-width: 217px;
     max-width: 217px;
-    ::marker{
+    ::marker {
       display: none;
-      color: transparent
+      color: transparent;
     }
     > div {
       width: fit-content;

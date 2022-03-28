@@ -1,12 +1,15 @@
 import React, { SelectHTMLAttributes } from 'react'
 // import MsgError from '../../MsgError'
 import { Container } from './styles'
-export interface SelectOptions {
+
+export interface SelectOption {
   value: string | number
   label: string | number
+  disabled?: boolean
 }
+
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
-  options?: SelectOptions[]
+  options?: SelectOption[]
   label?: string
   setValue?: (value: any) => void
   // value: string | number | boolean
@@ -16,7 +19,7 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   hasError?: string | boolean
   // onChange?: (props: ChangeEvent<HTMLInputElement>) => void | undefined
   disabled?: boolean
-  onBlur?: () => void
+  onBlur?: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 export const Select: React.FC<SelectProps> = ({

@@ -1,6 +1,5 @@
-import ButtonPrimary from '@/components/Button/Primary'
-import colors from '@/styles/colors'
 import styled, { css } from 'styled-components'
+import colors from '@/styles/colors'
 
 interface RegistrationDataStylesProps {
   active: boolean

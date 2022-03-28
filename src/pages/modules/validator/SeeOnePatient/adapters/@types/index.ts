@@ -47,7 +47,7 @@ export interface FromApiResponse {
     nome: string
     cpf: string
     dataNascimento: string
-    sexo: string
+    genero: string
     telefone: string
     email: string
     plano: {
@@ -67,6 +67,6 @@ export interface FromApi {
   patientData: PatientData & PatientDataHolder
   patientDependents: PatientData[]
   patientAddress: PatientAddress
-  dependent: PatientData | undefined
+  dependent: (PatientData & PatientDataHolder) | undefined
   incomeType: string
 }

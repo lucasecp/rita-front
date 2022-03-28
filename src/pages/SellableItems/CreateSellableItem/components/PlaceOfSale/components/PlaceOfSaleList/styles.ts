@@ -1,7 +1,19 @@
 import styled from 'styled-components'
 import colors from '@/styles/colors'
 
+<<<<<<< HEAD:src/pages/SellableItems/CreateSellableItem/components/PlaceOfSale/components/PlaceOfSaleList/styles.ts
 export const Table = styled.table`
+=======
+type ContainerProps = {
+  viewMode?: any
+}
+
+export const Container = styled.div<ContainerProps>`
+  display: flex;
+  flex-direction: column;
+
+  > header {
+>>>>>>> 064432139f5c357df10524c8b8c9bcf531d6d9fe:src/pages/SellableItems/CreateSellableItem/components/RangeOfUse/styles.ts
     display: flex;
     flex-direction: column;
     overflow: auto;

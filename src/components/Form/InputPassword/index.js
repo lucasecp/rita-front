@@ -6,7 +6,7 @@ import eyeClosedIcon from '@/assets/icons/eye-closed.svg'
 import { Container } from './styles'
 
 export const InputPassword = ({
-  setValue = () => {},
+  setValue,
   label = '',
   hasError = false,
   messageError = '',
@@ -15,6 +15,8 @@ export const InputPassword = ({
   const [showPassword, setShowPassword] = useState(false)
 
   const onInputChange = (e) => {
+    if (!setValue) return
+
     setValue(e.target.value)
   }
 

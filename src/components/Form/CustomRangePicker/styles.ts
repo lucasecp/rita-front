@@ -12,7 +12,7 @@ export const Container = styled.div<{ hasError?: boolean }>`
   height: fit-content;
 
   label {
-    margin-bottom: 10px;
+    margin-bottom: 7px;
     color: #909090;
     font-size: 14px;
     line-height: 16px;

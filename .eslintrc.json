@@ -60,8 +60,13 @@
   "overrides": [
     {
       // enable the rule specifically for TypeScript files
-      "files": ["*.ts", "*.tsx"],
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "**/*.stories.*"
+      ],
       "rules": {
+        "import/no-anonymous-default-export": "off",
         "@typescript-eslint/explicit-module-boundary-types": "error",
         "@typescript-eslint/no-unused-vars": ["error"]
       }
