@@ -50,7 +50,7 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
   window.onresize = () => adjustSelectOptions(containerDiv?.current)
 
   return (
-    <Container disabled={disabled} variation={variation} >
+    <Container disabled={disabled} variation={variation}>
       {label && <label>{label}</label>}
       <Content
         disabled={disabled}

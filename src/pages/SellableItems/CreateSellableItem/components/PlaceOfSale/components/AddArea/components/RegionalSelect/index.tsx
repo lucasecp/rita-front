@@ -8,7 +8,6 @@ import { PlaceOfSale } from '../../../..'
 import { placeOfSaleToApi } from '../../../../../../adapters/toApi'
 import { everyFirstLetterCapitalize } from '@/helpers/everyFirstLetterCapitalize'
 
-
 interface RegionalSelectProps {
   idPlan: number
   onGetRegional: (regional: string | number) => void

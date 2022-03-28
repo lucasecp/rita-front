@@ -50,7 +50,7 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
-    "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
     "lint": "tsc --noEmit && eslint --ext .ts,.js src",
     "lint:fix": "tsc --noEmit && eslint --ext .ts,.js --fix src",
     "lint:eslint": "eslint --ext .ts,.js src",

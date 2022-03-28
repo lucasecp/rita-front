@@ -7,9 +7,9 @@ export default {
   component: PaginationComponent,
 } as ComponentMeta<typeof PaginationComponent>
 
-export const Pagination: ComponentStory<typeof PaginationComponent> = (args) => (
-  <PaginationComponent {...args} />
-)
+export const Pagination: ComponentStory<typeof PaginationComponent> = (
+  args,
+) => <PaginationComponent {...args} />
 
 Pagination.args = {
   total: 10,

@@ -11,9 +11,8 @@ interface SelectIssuingAgencyProps {
 const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
   issuingAgency,
   setIssuingAgency,
-  error
+  error,
 }) => {
-
   const [issuingAgencyOptions, setIssuingAgencyOptions] = useState<any[]>([])
 
   const mapIssuingAgency = (array: any[]) => {

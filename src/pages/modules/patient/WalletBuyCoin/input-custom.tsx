@@ -21,10 +21,9 @@ function validateRequired(value?: string | null) {
   return [null, undefined, ''].includes(value) ? 'Campo obrigatório.' : ''
 }
 
-export const WalletBuyCoinInputCustom: React.FC<WalletBuyCoinInputCustomProps> = ({
-  walletBalance,
-  initialValue = 0,
-}) => {
+export const WalletBuyCoinInputCustom: React.FC<
+  WalletBuyCoinInputCustomProps
+> = ({ walletBalance, initialValue = 0 }) => {
   const { showMessage } = useModal()
 
   const [value, setValue] = useState(String(initialValue))
@@ -54,9 +53,13 @@ export const WalletBuyCoinInputCustom: React.FC<WalletBuyCoinInputCustomProps> =
     setErrors(newErrors)
 
     if (!hasErrors) {
-      showMessage(WalletBuyCoinSelectPayment, {
-        value: Number(value)
-      }, true)
+      showMessage(
+        WalletBuyCoinSelectPayment,
+        {
+          value: Number(value),
+        },
+        true,
+      )
     }
   }
 
@@ -70,9 +73,8 @@ export const WalletBuyCoinInputCustom: React.FC<WalletBuyCoinInputCustomProps> =
             {formatPrice(walletBalance)}{' '}
             <small>
               (
-                <CrownIcon height="12" style={{ verticalAlign: 'text-top' }} />
-                {walletBalance * 100}
-              )
+              <CrownIcon height="12" style={{ verticalAlign: 'text-top' }} />
+              {walletBalance * 100})
             </small>
           </strong>
         </p>
@@ -88,7 +90,16 @@ export const WalletBuyCoinInputCustom: React.FC<WalletBuyCoinInputCustomProps> =
               useIMask={true}
               mask="R$ num\,\0\0"
               eager={true}
-              blocks={{ num: { mask: Number, thousandsSeparator: '', scale: 0, signed: false, min: 1, max: 99999 } }}
+              blocks={{
+                num: {
+                  mask: Number,
+                  thousandsSeparator: '',
+                  scale: 0,
+                  signed: false,
+                  min: 1,
+                  max: 99999,
+                },
+              }}
               hasError={Boolean(errors.value)}
               msgError={errors.value}
               onBlur={() =>
@@ -107,7 +118,10 @@ export const WalletBuyCoinInputCustom: React.FC<WalletBuyCoinInputCustomProps> =
 
             {crownValue > 0 && (
               <p>
-                Equivalentes a <strong><CrownIcon /> {crownValue}</strong>
+                Equivalentes a{' '}
+                <strong>
+                  <CrownIcon /> {crownValue}
+                </strong>
               </p>
             )}
           </section>
@@ -133,12 +147,8 @@ export const WalletBuyCoinInputCustom: React.FC<WalletBuyCoinInputCustomProps> =
       </section>
 
       <footer>
-        <OutlineButton onClick={handleBackClick}>
-          Voltar
-        </OutlineButton>
-        <ButtonPrimary onClick={handleForwardClick}>
-          Avançar
-        </ButtonPrimary>
+        <OutlineButton onClick={handleBackClick}>Voltar</OutlineButton>
+        <ButtonPrimary onClick={handleForwardClick}>Avançar</ButtonPrimary>
       </footer>
     </MessageContainer>
   )

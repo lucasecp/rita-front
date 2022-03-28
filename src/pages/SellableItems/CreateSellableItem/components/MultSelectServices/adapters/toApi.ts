@@ -1,5 +1,4 @@
-import { MultiSelectOption } from '@/components/Form/MultSelect';
-
+import { MultiSelectOption } from '@/components/Form/MultSelect'
 
 interface Services {
   id: number

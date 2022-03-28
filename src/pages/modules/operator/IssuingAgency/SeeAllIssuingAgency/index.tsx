@@ -17,7 +17,7 @@ const IssuingAgency: React.FC = () => {
   const [filters, setFilters] = useState<any[]>([])
   const [order, setOrder] = useState({})
   const [issuingAgency, setIssuingAgency] = useState<IssuingAgencyI[]>([])
-  
+
   const { Loading } = useLoading()
 
   useEffect(() => {
