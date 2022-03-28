@@ -33,4 +33,9 @@ export interface IPersonalDatasState {
     channel: string
     company: string
   }
+  ownerOfTheAccount: {
+    name?: string
+    email?: string
+    phone?: string
+  }
 }

@@ -31,6 +31,11 @@ interface IPersonalDataFromApi {
     razaoSocial: string
     cnpj: string
   }[]
+  titular: {
+    nome: string
+    email?: string
+    telefone?: string
+  }
 }
 
 interface IPersonalDataAddressFromApi {
@@ -66,6 +71,11 @@ interface FromApiPersonalDatas {
     price: string
     channel: string
     company: string
+  }
+  ownerOfTheAccount: {
+    name: string
+    email?: string
+    phone?: string
   }
 }
 
@@ -115,5 +125,10 @@ export const fromApiPersonalDatas = (
       channel: data.canal,
       company: data.empresa[0]?.nome,
     },
+    ownerOfTheAccount: {
+      name: data.titular?.nome,
+      email: data.titular?.email,
+      phone: data.titular?.telefone
+    }
   }
 }
