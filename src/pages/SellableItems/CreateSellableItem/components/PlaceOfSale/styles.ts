@@ -1,7 +1,55 @@
-import styled from 'styled-components'
 import colors from '@/styles/colors'
+import styled from 'styled-components'
 
-export const Table = styled.table`
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > header {
+    display: flex;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+
+    color: ${colors.gray.middle};
+
+    > span {
+      flex: 1;
+      border-bottom: 1px solid ${colors.gray.middle};
+      margin-bottom: 5.5px;
+      margin-left: 4px;
+    }
+  }
+
+  /* > div {
+    margin-top: 16px;
+    display: flex;
+
+    > section {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    > button {
+      margin-left: 40px;
+      margin-top: 22px;
+    }
+  } */
+
+  > small {
+    margin-top: 8px;
+
+    font-size: 10px;
+    line-height: 12px;
+
+    color: ${colors.orange.middleDark};
+  }
+
+  > table {
+    margin-top: 32px;
     display: flex;
     flex-direction: column;
     overflow: auto;
@@ -44,7 +92,7 @@ export const Table = styled.table`
             align-items: center;
 
             border-radius: 16px;
-            border: 1px solid ${colors.gray.dark};
+            border: 1px solid ${colors.purple.main.darkness};
 
             + div {
               margin-top: 8px;
@@ -54,20 +102,20 @@ export const Table = styled.table`
               font-weight: 500;
               font-size: 16px;
               line-height: 20px;
-              color: ${colors.gray.dark};
+              color: ${colors.purple.main.darkness};
               padding: 4px 0px;
             }
 
             > svg {
               cursor: pointer;
-              fill: ${colors.gray.dark};
+              fill: ${colors.purple.main.darkness};
               padding: 10px 0px 10px 8px;
               box-sizing: content-box;
             }
           }
 
           > button {
-            color: ${colors.gray.dark};
+            color: ${colors.purple.main.darkness};
 
             font-weight: 500;
             font-size: 16px;
@@ -80,5 +128,22 @@ export const Table = styled.table`
         }
       }
     }
+  }
+
+  @media (max-width: 767px) {
+    /* > div {
+      flex-direction: column;
+
+      > section {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      > button {
+        margin-left: 0px;
+        margin-top: 40px;
+        width: 100%;
+      }
+    } */
   }
 `
