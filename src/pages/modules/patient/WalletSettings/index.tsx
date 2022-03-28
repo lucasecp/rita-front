@@ -50,10 +50,10 @@ export const WalletSettings: React.FC = () => {
   const [creditCardItems, setCreditCardItems] = useState<CreditCardItem[]>([])
 
   useEffect(() => {
-    async function fetchData () {
+    async function fetchData() {
       const { data } = await apiWallet.get('/credit-card')
 
-      if (data && Array.isArray(data))  {
+      if (data && Array.isArray(data)) {
         const loadedItems = []
 
         for (const row of data) {
@@ -86,7 +86,7 @@ export const WalletSettings: React.FC = () => {
     await apiWallet.post('/credit-card', {
       number: model.number,
       name: model.name,
-      expireAt: model.expireAt
+      expireAt: model.expireAt,
     })
 
     setCreditCardItems([
@@ -107,7 +107,8 @@ export const WalletSettings: React.FC = () => {
         {creditCardItems.length === 0 ? (
           <section className="empty">
             <p>
-              Você ainda não tem uma forma de pagamento cadastrada. <a href="#form">Cadastre abaixo.</a>
+              Você ainda não tem uma forma de pagamento cadastrada.{' '}
+              <a href="#form">Cadastre abaixo.</a>
             </p>
           </section>
         ) : (

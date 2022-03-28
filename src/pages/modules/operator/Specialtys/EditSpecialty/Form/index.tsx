@@ -12,7 +12,7 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({ errors, setDataToApi, dataFromApi }) => {
   const [code, setCode] = useState('')
-  const [requireSubscription, setRequireSubscription] = useState<string >('')
+  const [requireSubscription, setRequireSubscription] = useState<string>('')
   const [description, setDescription] = useState('')
 
   useEffect(() => {

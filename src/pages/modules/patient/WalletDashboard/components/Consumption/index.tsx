@@ -7,10 +7,12 @@ import { Select } from '@/components/Form/Select'
 import { Container } from './styles'
 
 function formatConsumptionType(type: string): string {
-  return {
-    EXAM: 'Exames',
-    APPOINTMENT: 'Consultas',
-  }[type] || type
+  return (
+    {
+      EXAM: 'Exames',
+      APPOINTMENT: 'Consultas',
+    }[type] || type
+  )
 }
 
 export const Consumption: React.FC = () => {
@@ -35,7 +37,9 @@ export const Consumption: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await apiWallet.get<RitaWallet.DashboardConsumption>('/payment/consumption/type')
+      const { data } = await apiWallet.get<RitaWallet.DashboardConsumption>(
+        '/payment/consumption/type',
+      )
 
       if (!data || !Array.isArray(data)) {
         throw new Error('Resposta vazia ou inválida')
@@ -84,7 +88,9 @@ export const Consumption: React.FC = () => {
               <div>
                 <div
                   style={{
-                    width: `${item.discountPriceAmount * 100 / itemsTotalAmount}%`,
+                    width: `${
+                      (item.discountPriceAmount * 100) / itemsTotalAmount
+                    }%`,
                   }}
                 ></div>
               </div>
@@ -94,11 +100,9 @@ export const Consumption: React.FC = () => {
       </section>
 
       <p>
-        Parabéns! Você já economizou
-        {' '}
-        <strong>{formatPrice(itemsTotalSavedAmount)}</strong>
-        {' '}
-        utilizando o Rita Saúde.
+        Parabéns! Você já economizou{' '}
+        <strong>{formatPrice(itemsTotalSavedAmount)}</strong> utilizando o Rita
+        Saúde.
       </p>
     </Container>
   )

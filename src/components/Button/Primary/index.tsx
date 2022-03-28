@@ -31,5 +31,3 @@ const ButtonPrimary: React.FC<IButtonPrimary> = ({
 }
 
 export default ButtonPrimary
-
-

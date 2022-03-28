@@ -1,7 +1,6 @@
 import apiAdmin from '@/services/apiAdmin'
 import { useEffect, useState } from 'react'
-import { Container, ListSuggestions } from './styles'
-import { plansFromApi } from './adapters/plansFromApi'
+import { plansFromApi } from './adapters/fromApi'
 import { useLoading } from '@/hooks/useLoading'
 import {
   Autocomplete,
@@ -27,31 +26,28 @@ export const AutocompletePlan: React.FC<AutocompletePlanProps> = ({
 
   useEffect(() => {
     const listOfPlans = async () => {
+      Loading.turnOn()
       try {
-        const plansResponse = await apiAdmin.get(
+        const { data } = await apiAdmin.get(
           `/plano?limit=999&skip=0&nome=${plan.label}&status=P&status=A&status=S`,
         )
 
-        const mappedResponse = plansFromApi(plansResponse.data.dados)
+        const planMapped = plansFromApi(data.dados)
 
-        setPlanOptions(mappedResponse)
-        // setListRangeOfUseToSaveAndToCreateTable([])
-        // setRegionalSelected('')
-        // setUfs([])
-        // setUfSelected('')
-        // setCitiesSelected([])
+        setPlanOptions(planMapped)
       } catch (error) {
         console.log(error)
+      } finally {
+        Loading.turnOff()
       }
     }
+
     listOfPlans()
   }, [plan.label])
 
   useEffect(() => {
     onGetPlan(plan)
   }, [plan.value])
-
-  console.log(plan)
 
   return (
     <Autocomplete

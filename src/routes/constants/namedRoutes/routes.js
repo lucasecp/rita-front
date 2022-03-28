@@ -19,6 +19,8 @@ export const OPERATOR_REPORTS = '/relatorios'
 export const OPERATOR_REPORTS_AUTHORIZATION = '/relatorios/autorizacoes'
 export const OPERATOR_REPORTS_BILLING_STATEMENT =
   '/relatorios/demonstrativo-de-faturamento'
+export const OPERATOR_REPORTS_PATIENT_ANALYTIC =
+  '/relatorios/analitico-de-paciente'
 
 export const OPERATOR_SEE_ALL_CLINICS = '/clinicas'
 export const OPERATOR_SEE_ONE_CLINIC = '/clinicas/ver-clinica'

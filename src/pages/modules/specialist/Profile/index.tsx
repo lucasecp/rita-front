@@ -33,7 +33,11 @@ const SpecialistProfile: React.FC = () => {
     <DefaultLayout title="Perfil - Visualizar">
       <Content>
         <Header data={data} setValue={setPhoto} />
-        <Form data={data} profilePhoto={photo} setMakeNewRequest={setMakeNewRequest} />
+        <Form
+          data={data}
+          profilePhoto={photo}
+          setMakeNewRequest={setMakeNewRequest}
+        />
       </Content>
     </DefaultLayout>
   )

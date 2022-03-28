@@ -63,7 +63,7 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
       return setValue('')
     }
 
-    setValue(formatedValue.join('') + '%') 
+    setValue(formatedValue.join('') + '%')
   }
 
   useEffect(() => {

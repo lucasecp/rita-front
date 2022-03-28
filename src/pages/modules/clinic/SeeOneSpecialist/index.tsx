@@ -7,10 +7,10 @@ import apiAdmin from '@/services/apiAdmin'
 import { useHistory, useLocation } from 'react-router'
 import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 
-const SeeOneSpecialist = () => {
+const SeeOneSpecialist: React.FC = () => {
   const [specialist, setSpecialist] = useState({})
   const { Loading } = useLoading()
-  const location = useLocation()
+  const location = useLocation<{ idDoctor: number }>()
   const history = useHistory()
 
   useEffect(() => {

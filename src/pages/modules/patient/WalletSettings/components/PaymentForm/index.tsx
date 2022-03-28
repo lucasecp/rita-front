@@ -96,7 +96,10 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
 
   return (
     <Container>
-      <h5>Cadastre seu cartão de crédito ou débito para realizar transações financeiras</h5>
+      <h5>
+        Cadastre seu cartão de crédito ou débito para realizar transações
+        financeiras
+      </h5>
       <form onSubmit={handleSubmit} onReset={handleReset}>
         <section>
           <InputText

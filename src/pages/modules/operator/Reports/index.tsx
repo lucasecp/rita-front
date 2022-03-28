@@ -46,4 +46,3 @@ export const Reports: React.FC = () => {
     </DefaultLayout>
   )
 }
-

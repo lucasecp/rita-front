@@ -11,7 +11,8 @@ export const Balances: React.FC = () => {
   const [crownBalance, setCrownBalance] = useState(0)
   const [provisionedCrownBalance, setProvisionedCrownBalance] = useState(0)
   const [cashbackBalance, setCashbackBalance] = useState(0)
-  const [provisionedCashbackBalance, setProvisionedCashbackBalance] = useState(0)
+  const [provisionedCashbackBalance, setProvisionedCashbackBalance] =
+    useState(0)
 
   useEffect(() => {
     async function fetchData() {
@@ -42,28 +43,32 @@ export const Balances: React.FC = () => {
           <h3>Saldo Total</h3>
           <span>{formatPrice(totalBalance)}</span>
           <p>
-            Valor reservado: <strong>{formatPrice(totalProvisionedBalance)}</strong>
+            Valor reservado:{' '}
+            <strong>{formatPrice(totalProvisionedBalance)}</strong>
           </p>
         </div>
         <div>
           <h3>Saldo em Reais</h3>
           <span>{formatPrice(totalBalance)}</span>
           <p>
-            Valor reservado: <strong>{formatPrice(totalProvisionedBalance)}</strong>
+            Valor reservado:{' '}
+            <strong>{formatPrice(totalProvisionedBalance)}</strong>
           </p>
         </div>
         <div>
           <h3>Saldo em Moeda</h3>
           <span>{formatPrice(crownBalance)}</span>
           <p>
-            Valor reservado: <strong>{formatPrice(provisionedCrownBalance)}</strong>
+            Valor reservado:{' '}
+            <strong>{formatPrice(provisionedCrownBalance)}</strong>
           </p>
         </div>
         <div>
           <h3>Saldo de Cashback</h3>
           <span>{formatPrice(cashbackBalance)}</span>
           <p>
-            Valor reservado: <strong>{formatPrice(provisionedCashbackBalance)}</strong>
+            Valor reservado:{' '}
+            <strong>{formatPrice(provisionedCashbackBalance)}</strong>
           </p>
         </div>
       </section>

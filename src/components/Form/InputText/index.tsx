@@ -28,7 +28,6 @@ const InputText: React.FC<InputTextProps> = ({
   onlyNumber = false,
   ...rest
 }) => {
-  
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     if (!setValue) return
 
