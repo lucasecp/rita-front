@@ -19,7 +19,7 @@ import {
   OPERATOR_SEE_ONE_SPECIALIST,
   OPERATOR_SEE_ALL_ISSUING_AGENCY,
   OPERATOR_CREATE_ISSUING_AGENCY,
-
+  OPERATOR_REPORTS_PATIENT_ANALYTIC,
 } from '../../constants/namedRoutes/routes'
 
 import { SeeOnePatient } from '@/pages/modules/operator/Patients/SeeOnePatient'
@@ -42,6 +42,7 @@ import SeeAllSpecialists from '@/pages/modules/operator/specialists/SeeAllSpecia
 import SeeOneSpecialist from '@/pages/modules/operator/specialists/SeeOneSpecialist'
 import SeeAllIssuingAgency from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency'
 import CreateIssuingAgency from '@/pages/modules/operator/IssuingAgency/CreateIssuingAgency'
+import { PatientAnalytic } from '@/pages/modules/operator/Reports/containers/PatientAnalytic'
 
 const operatorRoutes = [
   {
@@ -64,7 +65,10 @@ const operatorRoutes = [
     path: OPERATOR_REPORTS_BILLING_STATEMENT,
     component: BillingStatement,
   },
-
+  {
+    path: OPERATOR_REPORTS_PATIENT_ANALYTIC,
+    component: PatientAnalytic,
+  },
   {
     path: OPERATOR_CONSULT_ELIGIBILITY,
     component: ConsultEligibility,
