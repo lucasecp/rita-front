@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
-import mapDataToMultSelect from './adapters/toApi'
 
 import CustomMultSelect, {
   MultiSelectOption,
@@ -29,10 +28,12 @@ export const MultSelectServices: React.FC<MultiSelectServicesProps> = ({
 
         const { data } = await apiAdmin.get(`/plano/${plan.value}`)
 
-        const servicesMapped = data.servicos.map((service) => ({
-          id: service.id,
-          name: service.nome,
-        }))
+        const servicesMapped = data.servicos.map(
+          (service: { id: number; nome: string }) => ({
+            id: service.id,
+            name: service.nome,
+          }),
+        )
 
         setServices(servicesMapped)
       } catch ({ error }) {

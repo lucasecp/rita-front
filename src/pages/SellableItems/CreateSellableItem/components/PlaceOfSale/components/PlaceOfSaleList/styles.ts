@@ -1,19 +1,7 @@
 import styled from 'styled-components'
 import colors from '@/styles/colors'
 
-<<<<<<< HEAD:src/pages/SellableItems/CreateSellableItem/components/PlaceOfSale/components/PlaceOfSaleList/styles.ts
 export const Table = styled.table`
-=======
-type ContainerProps = {
-  viewMode?: any
-}
-
-export const Container = styled.div<ContainerProps>`
-  display: flex;
-  flex-direction: column;
-
-  > header {
->>>>>>> 064432139f5c357df10524c8b8c9bcf531d6d9fe:src/pages/SellableItems/CreateSellableItem/components/RangeOfUse/styles.ts
     display: flex;
     flex-direction: column;
     overflow: auto;
@@ -64,14 +52,6 @@ export const Container = styled.div<ContainerProps>`
             border-radius: 16px;
             border: 1px solid ${colors.purple.main.darkness};
 
-            ${({ viewMode }) =>
-              viewMode &&
-              css`
-                padding: 0px 12px;
-                border: 1px solid ${colors.gray.dark};
-                ?: ;
-              `};
-
             + div {
               margin-top: 8px;
             }
@@ -83,11 +63,7 @@ export const Container = styled.div<ContainerProps>`
               color: ${colors.purple.main.darkness};
               padding: 4px 0px;
 
-              ${({ viewMode }) =>
-                viewMode &&
-                css`
-                  color: ${colors.gray.dark};
-                `};
+
             }
 
             > svg {
