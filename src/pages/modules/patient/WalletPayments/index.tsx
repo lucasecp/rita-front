@@ -5,9 +5,6 @@ import apiWallet from '@/services/apiWallet'
 import formatPrice from '@/helpers/formatPrice'
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
-// import { ReactComponent as FileIcon } from '@/assets/icons/file.svg'
-// import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down3.svg'
-// import { ReactComponent as ArrowUpIcon } from '@/assets/icons/arrow-up.svg'
 import { ReactComponent as EyeOpenedIcon } from '@/assets/icons/eye-opened.svg'
 import { ReactComponent as EyeClosedIcon } from '@/assets/icons/eye-closed.svg'
 import { ReactComponent as CrownIcon } from '@/assets/icons/crown.svg'
@@ -23,17 +20,18 @@ import ButtonPrimary from '@/components/Button/Primary'
 import PaymentRequest from '@/pages/Initial/messages/PaymentRequest'
 import { Table } from '@/components/Table'
 
+const periodOptions = [
+  { label: '7 dias', value: 1 },
+  { label: '15 dias', value: 2 },
+  { label: '30 dias', value: 3 },
+]
+
 function convertPriceToCrownValue(amount: number, currency?: string) {
   // @TODO: implement currency
   return amount * 100
 }
 
 export const WalletPayments: React.FC = () => {
-  const periodOptions = [
-    { label: '7 dias', value: 1 },
-    { label: '15 dias', value: 2 },
-    { label: '30 dias', value: 3 },
-  ]
   const tablePaymentsNew = useRef<any>()
   const tablePaymentsAll = useRef<any>()
   const [paymentsNew, setPaymentsNew] = useState<RitaWallet.PaymentRequest[]>([])
