@@ -73,7 +73,6 @@ const CreateSpecialty: React.FC = () => {
     history.push(OPERATOR_SEE_ALL_SPECIALTYS)
   }
 
-
   return (
     <DefaultLayout title="Especialidades - Inclusão">
       <Content>
@@ -82,7 +81,7 @@ const CreateSpecialty: React.FC = () => {
           <OutlineButton onClick={onCancel}>Cancelar</OutlineButton>
           <ButtonPrimary
             onClick={onSave}
-            disabled={Object.values(dataToApi).some((field)=> !field)}
+            disabled={Object.values(dataToApi).some((field) => !field)}
           >
             Salvar
           </ButtonPrimary>

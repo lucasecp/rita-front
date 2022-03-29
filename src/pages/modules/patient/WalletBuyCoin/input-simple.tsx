@@ -30,9 +30,13 @@ export const WalletBuyCoinInputSimple: React.FC = () => {
 
   function handleForwardClick() {
     if (selectedOption) {
-      showMessage(WalletBuyCoinSelectPayment, {
-        value: selectedOption
-      }, true)
+      showMessage(
+        WalletBuyCoinSelectPayment,
+        {
+          value: selectedOption,
+        },
+        true,
+      )
     } else {
       setHasError(true)
     }
@@ -50,9 +54,11 @@ export const WalletBuyCoinInputSimple: React.FC = () => {
     }
 
     Loading.turnOn()
-    fetchData().catch(console.error).finally(() => {
-      Loading.turnOff()
-    })
+    fetchData()
+      .catch(console.error)
+      .finally(() => {
+        Loading.turnOff()
+      })
   }, [])
 
   return (
@@ -65,9 +71,8 @@ export const WalletBuyCoinInputSimple: React.FC = () => {
             {formatPrice(walletBalance)}{' '}
             <small>
               (
-                <CrownIcon height="12" style={{ verticalAlign: 'text-top' }} />
-                {walletBalance * 100}
-              )
+              <CrownIcon height="12" style={{ verticalAlign: 'text-top' }} />
+              {walletBalance * 100})
             </small>
           </strong>
         </p>
@@ -99,9 +104,7 @@ export const WalletBuyCoinInputSimple: React.FC = () => {
       </Values>
 
       <footer>
-        <ButtonPrimary onClick={handleForwardClick}>
-          Avançar
-        </ButtonPrimary>
+        <ButtonPrimary onClick={handleForwardClick}>Avançar</ButtonPrimary>
       </footer>
     </MessageContainer>
   )

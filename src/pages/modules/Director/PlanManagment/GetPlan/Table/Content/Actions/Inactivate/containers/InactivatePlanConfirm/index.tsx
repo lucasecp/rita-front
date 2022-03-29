@@ -1,13 +1,13 @@
-import OutilineButton from '@/components/Button/Outline';
-import ButtonPrimary from '@/components/Button/Primary';
-import { DefaultLayout } from '@/components/Layout/DefaultLayout';
-import { useModal } from '@/hooks/useModal';
-import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes';
-import { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import OutilineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
+import { DefaultLayout } from '@/components/Layout/DefaultLayout'
+import { useModal } from '@/hooks/useModal'
+import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
+import { useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 
-import { ReasonInactivate } from '../../messages/ReasonInactivate';
-import { Container } from './styles';
+import { ReasonInactivate } from '../../messages/ReasonInactivate'
+import { Container } from './styles'
 
 interface SellableItem {
   id: number

@@ -14,7 +14,7 @@ interface CancelEdtingProps {
 const CancelEdting: React.FC<CancelEdtingProps> = ({
   setEdting,
   setFieldWasChanged,
-  setFormWasSubmited
+  setFormWasSubmited,
 }) => {
   const { closeModal } = useModal()
 

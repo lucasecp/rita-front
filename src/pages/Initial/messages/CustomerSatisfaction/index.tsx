@@ -46,7 +46,7 @@ export const CustomerSatisfaction: React.FC<CustomerSatisfactionProps> = ({
     if (scoreSelected) {
       await apiWallet.put('/csat', {
         id: data.id,
-        score: scoreSelected
+        score: scoreSelected,
       })
       closeModal()
       toast.success('Obrigado por sua resposta.')
@@ -59,7 +59,7 @@ export const CustomerSatisfaction: React.FC<CustomerSatisfactionProps> = ({
     setScoreText(
       ['', 'Muito ruim', 'Ruim', 'Bom', 'Muito bom', 'Excelente'][
         scoreHovered || scoreSelected
-      ]
+      ],
     )
   }, [scoreSelected, scoreHovered])
 
@@ -78,8 +78,12 @@ export const CustomerSatisfaction: React.FC<CustomerSatisfactionProps> = ({
               key={index}
               className={
                 scoreHovered
-                  ? (scoreHovered > index ? 'active' : '')
-                  : (scoreSelected > index ? 'active' : '')
+                  ? scoreHovered > index
+                    ? 'active'
+                    : ''
+                  : scoreSelected > index
+                  ? 'active'
+                  : ''
               }
               onMouseEnter={() => handleRatingMouseEnter(index)}
               onMouseLeave={() => handleRatingMouseLeave()}
@@ -98,9 +102,7 @@ export const CustomerSatisfaction: React.FC<CustomerSatisfactionProps> = ({
         <OutlineButton onClick={handleRejectClick}>
           Não reconheço esse atendimento
         </OutlineButton>
-        <ButtonPrimary onClick={handleSendClick}>
-          Enviar
-        </ButtonPrimary>
+        <ButtonPrimary onClick={handleSendClick}>Enviar</ButtonPrimary>
       </footer>
     </Container>
   )

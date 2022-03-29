@@ -19,11 +19,9 @@ export const RegisterSuccess: React.FC = () => {
   return (
     <Container>
       <img src={success} />
-      <p>
-        Cadastro realizado com sucesso
-      </p>
+      <p>Cadastro realizado com sucesso</p>
       <footer>
-        <ButtonPrimary onClick={handleCloseModal} variation='green'>
+        <ButtonPrimary onClick={handleCloseModal} variation="green">
           Voltar a página inicial
         </ButtonPrimary>
       </footer>

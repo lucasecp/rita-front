@@ -30,7 +30,6 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
   const [toggleClick, setToggleClick] = useState(0)
 
   const onNextStep = () => {
-
     if (
       hasErrors({
         profissionalRegister,
@@ -46,15 +45,12 @@ const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
     setbasicInformation({
       profissionalRegister,
       issuingAgency,
-       issuingAgencyToApi,
+      issuingAgencyToApi,
       ufIssuingAgency,
     })
   }, [profissionalRegister, issuingAgency, ufIssuingAgency])
 
-
-  console.log(issuingAgency,
-    issuingAgencyToApi,)
-
+  console.log(issuingAgency, issuingAgencyToApi)
 
   useEffect(() => {
     if (toggleClick !== 0) {

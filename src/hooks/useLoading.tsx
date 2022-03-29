@@ -8,7 +8,9 @@ interface LoadingContextData {
   }
 }
 
-const LoadingContext = createContext<LoadingContextData>({} as LoadingContextData)
+const LoadingContext = createContext<LoadingContextData>(
+  {} as LoadingContextData,
+)
 
 const LoadingProvider: React.FC = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)

@@ -52,14 +52,6 @@ export const Table = styled.table`
             border-radius: 16px;
             border: 1px solid ${colors.purple.main.darkness};
 
-            ${({ viewMode }) =>
-              viewMode &&
-              css`
-                padding: 0px 12px;
-                border: 1px solid ${colors.gray.dark};
-                ?: ;
-              `};
-
             + div {
               margin-top: 8px;
             }
@@ -71,11 +63,7 @@ export const Table = styled.table`
               color: ${colors.purple.main.darkness};
               padding: 4px 0px;
 
-              ${({ viewMode }) =>
-                viewMode &&
-                css`
-                  color: ${colors.gray.dark};
-                `};
+
             }
 
             > svg {

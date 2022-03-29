@@ -56,15 +56,13 @@ export const InputCurrency: React.FC<InputCurrencyProps> = ({
   }
 
   return (
-    <>
-      <Container hasError={messageError || hasError} {...rest}>
-        {label && <label htmlFor={label}>{label}</label>}
-        <div>
-          <span>R$ </span>
-          <input onChange={onChange} defaultValue={'0,00'} />
-        </div>
-        {messageError && <small>{messageError}</small>}
-      </Container>
-    </>
+    <Container hasError={messageError || hasError} {...rest}>
+      {label && <label htmlFor={label}>{label}</label>}
+      <div>
+        <span>R$ </span>
+        <input onChange={onChange} defaultValue={'0,00'} />
+      </div>
+      {messageError && <small>{messageError}</small>}
+    </Container>
   )
 }

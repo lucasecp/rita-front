@@ -8,8 +8,13 @@ import SpecialtyItem from './SpecialtyItem/index'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 
 const RegisterSpecialtys: React.FC = ({}) => {
-  const { profissionalInfo, setErrors, specialtysAndDocs, step,registerSpecialist } =
-    useRegisterSpecialist()
+  const {
+    profissionalInfo,
+    setErrors,
+    specialtysAndDocs,
+    step,
+    registerSpecialist,
+  } = useRegisterSpecialist()
 
   const hasError = () => {
     let error = false
@@ -33,7 +38,7 @@ const RegisterSpecialtys: React.FC = ({}) => {
   }
 
   const onNextStep = () => {
-    if(hasError()) return
+    if (hasError()) return
     registerSpecialist()
   }
 

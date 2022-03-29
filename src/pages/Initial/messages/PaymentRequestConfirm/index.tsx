@@ -26,9 +26,9 @@ type PaymentRequestAccessBlockedProps = {
   phoneNumber?: string
 }
 
-const PaymentRequestAccessBlocked: React.FC<PaymentRequestAccessBlockedProps> = ({
-  phoneNumber,
-}) => {
+const PaymentRequestAccessBlocked: React.FC<
+  PaymentRequestAccessBlockedProps
+> = ({ phoneNumber }) => {
   const { logout } = useAuth()
   const { closeModal } = useModal()
   const [phoneLink, setPhoneLink] = useState('')
@@ -37,7 +37,7 @@ const PaymentRequestAccessBlocked: React.FC<PaymentRequestAccessBlockedProps> = 
   useEffect(() => {
     const url = new URL(`https://wa.me/${onlyNumbers(phoneNumber)}`)
     url.search = new URLSearchParams({
-      text: 'Meu acesso foi bloqueado no Rita Saúde'
+      text: 'Meu acesso foi bloqueado no Rita Saúde',
     }).toString()
 
     setPhoneLink(`tel:${onlyNumbers(phoneNumber)}`)
@@ -59,14 +59,12 @@ const PaymentRequestAccessBlocked: React.FC<PaymentRequestAccessBlockedProps> = 
         <p>
           Seu acesso foi bloqueado devido à excesso de tentativas.
           <br />
-          Pedimos que entre em contato com a central de atendimento.
-          {' '}
+          Pedimos que entre em contato com a central de atendimento.{' '}
           {phoneNumber && (
             <>
               <a href={phoneLink} target="_blank">
                 {phoneNumber}
-              </a>
-              {' '}
+              </a>{' '}
               <a href={whatsappLink} target="_blank">
                 <WhatsappIcon />
               </a>
@@ -87,10 +85,9 @@ type PaymentRequestAccessAttemptProps = {
   counter?: number
 }
 
-const PaymentRequestAccessAttempt: React.FC<PaymentRequestAccessAttemptProps> = ({
-  data,
-  counter = 0,
-}) => {
+const PaymentRequestAccessAttempt: React.FC<
+  PaymentRequestAccessAttemptProps
+> = ({ data, counter = 0 }) => {
   const { showMessage } = useModal()
 
   function handlerTryAgainClick() {
@@ -139,7 +136,7 @@ const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
     defaultMaximumAttempts,
   )
 
-  async function handleConfirmClick () {
+  async function handleConfirmClick() {
     const newErrors = {
       password: validateRequired(password),
     }
@@ -164,8 +161,8 @@ const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
           if (remaingAttempts === 0) {
             const { data } = await apiWallet.get('/wallet-configuration', {
               params: {
-                where: JSON.stringify({ key: 'numberCelBlocked' })
-              }
+                where: JSON.stringify({ key: 'numberCelBlocked' }),
+              },
             })
             let phoneNumber
 
@@ -177,7 +174,7 @@ const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
           } else {
             showMessage(PaymentRequestAccessAttempt, {
               data: paymentRequest,
-              counter: remaingAttempts
+              counter: remaingAttempts,
             })
           }
         } else {
@@ -191,7 +188,9 @@ const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
 
       if (isAuthenticated) {
         try {
-          const { data } = await apiWallet.get(`/payment/pay/${paymentRequest.id}`)
+          const { data } = await apiWallet.get(
+            `/payment/pay/${paymentRequest.id}`,
+          )
 
           // if (!data) {
           //   throw new Error('Resposta vazia')
@@ -201,7 +200,9 @@ const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
           data.scheduled = Math.random() < 0.5
 
           toast.success(
-            `Pagamento ${data.scheduled ? 'agendado' : 'realizado'} com sucesso.`
+            `Pagamento ${
+              data.scheduled ? 'agendado' : 'realizado'
+            } com sucesso.`,
           )
           closeModal()
         } catch (error) {
@@ -209,16 +210,22 @@ const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
             axios.isAxiosError(error) &&
             error.response?.data?.errorMessage === 'Insufficient balance'
           ) {
-            const { data } = await apiWallet.get<RitaWallet.Wallet>('/wallet-balance')
+            const { data } = await apiWallet.get<RitaWallet.Wallet>(
+              '/wallet-balance',
+            )
 
             if (!data) {
               throw new Error('Resposta vazia')
             }
 
-            showMessage(InsufficientBalance, {
-              walletBalance: data.crownBalance + data.cashbackBalance,
-              debitAmount: paymentRequest.debitAmount,
-            }, true)
+            showMessage(
+              InsufficientBalance,
+              {
+                walletBalance: data.crownBalance + data.cashbackBalance,
+                debitAmount: paymentRequest.debitAmount,
+              },
+              true,
+            )
           } else {
             if (error instanceof Error) {
               toast.error(error.message)
@@ -261,12 +268,8 @@ const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
       </section>
 
       <footer>
-        <OutlineButton onClick={closeModal}>
-          Cancelar
-        </OutlineButton>
-        <ButtonPrimary onClick={handleConfirmClick}>
-          Confirmar
-        </ButtonPrimary>
+        <OutlineButton onClick={closeModal}>Cancelar</OutlineButton>
+        <ButtonPrimary onClick={handleConfirmClick}>Confirmar</ButtonPrimary>
       </footer>
     </Container>
   )

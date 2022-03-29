@@ -10,7 +10,7 @@ import axios from 'axios'
 import { registerPatientToApi } from './adapters/toApi'
 
 import { RegisterSuccess } from './messages/RegisterSuccess'
-import { DocumentsNotSended } from './messages/DocumentsNotSended' 
+import { DocumentsNotSended } from './messages/DocumentsNotSended'
 
 import {
   RegistrationDataState,
@@ -43,7 +43,7 @@ const RegisterPatientProvider: React.FC = ({ children }) => {
   )
 
   const [address, setAddress] = useState({} as AddressState | undefined)
- 
+
   const [documentsFile, setDocumentsFile] = useState({} as DocumentsState)
 
   const [dependents, setDependents] = useState(

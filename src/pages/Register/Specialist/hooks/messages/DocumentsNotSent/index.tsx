@@ -4,12 +4,8 @@ import ButtonPrimary from '@/components/Button/Primary'
 
 import { Container } from './styles'
 
-
 export const DocumentsNotSent: React.FC = () => {
-
-  const onTryAgain = () => {
-    
-  }
+  const onTryAgain = () => {}
 
   return (
     <Container>

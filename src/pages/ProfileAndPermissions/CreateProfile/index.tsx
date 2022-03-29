@@ -134,7 +134,9 @@ export const CreateProfile: React.FC = () => {
           nodeChecked={nodeChecked}
         />
         <footer>
-          <OutilineButton onClick={onBackCreateProfile}>Cancelar</OutilineButton>
+          <OutilineButton onClick={onBackCreateProfile}>
+            Cancelar
+          </OutilineButton>
           <ButtonPrimary onClick={onSaveProfile}>Salvar</ButtonPrimary>
         </footer>
       </Container>

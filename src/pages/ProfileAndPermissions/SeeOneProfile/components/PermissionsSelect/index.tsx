@@ -35,7 +35,7 @@ export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
 
   return (
     <Container>
-      <TreeViewComponent fields={fields} showCheckBox/>
+      <TreeViewComponent fields={fields} showCheckBox />
     </Container>
   )
 }
