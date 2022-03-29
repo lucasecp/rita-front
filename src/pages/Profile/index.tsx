@@ -28,7 +28,7 @@ export const Profile: React.FC = () => {
 
         const {
           data,
-          data: { endereco },
+          data: { endereco }
         } = await apiPatient.get('/paciente/meu-perfil')
 
         setDataToDisplay(fromApiDataToDisplay(data))
