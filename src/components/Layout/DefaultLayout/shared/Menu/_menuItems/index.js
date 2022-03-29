@@ -9,7 +9,7 @@ import { ReactComponent as PadLockIcon } from '@/assets/icons/pad-lock.svg'
 import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 import { ReactComponent as ManagmentIcon } from '@/assets/icons/managment.svg'
 import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
-import { ReactComponent as WalletIcon } from '@/assets/icons/wallet.svg'
+// import { ReactComponent as WalletIcon } from '@/assets/icons/wallet.svg'
 import { ReactComponent as SellableItemsIcon } from '@/assets/icons/salable-items.svg'
 import { ReactComponent as ProfilesIcon } from '@/assets/icons/profiles.svg'
 import { ReactComponent as ClinicsIcon } from '@/assets/icons/clinic.svg'
@@ -29,11 +29,11 @@ import {
   VALIDATOR_ANALYZE_PATIENTS,
   DIRECTOR_PLAN_MANAGMENT,
   PATIENT_DEPENDENTS,
-  PATIENT_WALLET_DASHBOARD,
-  PATIENT_WALLET_BUY_COIN,
-  PATIENT_WALLET_PAYMENTS,
-  PATIENT_WALLET_STATEMENTS,
-  PATIENT_WALLET_SETTINGS,
+  // PATIENT_WALLET_DASHBOARD,
+  // PATIENT_WALLET_BUY_COIN,
+  // PATIENT_WALLET_PAYMENTS,
+  // PATIENT_WALLET_STATEMENTS,
+  // PATIENT_WALLET_SETTINGS,
   FILTER_SELLABLE_ITEMS,
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ALL_SPECIALTYS,
@@ -104,30 +104,30 @@ export const menuItens = [
     name: 'Dependentes',
     permission: permissionList.VER_MEUS_DEPENDENTES,
   },
-  {
-    path: PATIENT_WALLET_DASHBOARD,
-    icon: <WalletIcon />,
-    name: 'Carteira Digital',
-    permission: permissionList.VER_CARTEIRA_DIGITAL_PACIENTE,
-    children: [
-      {
-        path: PATIENT_WALLET_BUY_COIN,
-        name: 'Comprar Moeda',
-      },
-      {
-        path: PATIENT_WALLET_PAYMENTS,
-        name: 'Pagamentos',
-      },
-      {
-        path: PATIENT_WALLET_STATEMENTS,
-        name: 'Extrato',
-      },
-      {
-        path: PATIENT_WALLET_SETTINGS,
-        name: 'Configurações',
-      },
-    ],
-  },
+  // {
+  //   path: PATIENT_WALLET_DASHBOARD,
+  //   icon: <WalletIcon />,
+  //   name: 'Carteira Digital',
+  //   permission: permissionList.VER_CARTEIRA_DIGITAL_PACIENTE,
+  //   children: [
+  //     {
+  //       path: PATIENT_WALLET_BUY_COIN,
+  //       name: 'Comprar Moeda',
+  //     },
+  //     {
+  //       path: PATIENT_WALLET_PAYMENTS,
+  //       name: 'Pagamentos',
+  //     },
+  //     {
+  //       path: PATIENT_WALLET_STATEMENTS,
+  //       name: 'Extrato',
+  //     },
+  //     {
+  //       path: PATIENT_WALLET_SETTINGS,
+  //       name: 'Configurações',
+  //     },
+  //   ],
+  // },
   {
     path: DIRECTOR_PLAN_MANAGMENT,
     icon: <ManagmentIcon />,
