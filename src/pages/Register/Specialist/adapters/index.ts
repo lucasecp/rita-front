@@ -1,14 +1,9 @@
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
-import {
-  BasicInformationI,
-  ProfissionalInfoI
-} from '../types'
+import { BasicInformationI, ProfissionalInfoI } from '../types'
 import { clinicaToApi } from './mapClinics'
 import { specialtysToApi } from './mapSpecialtys'
 
-export const toApi = (
-  data: ProfissionalInfoI & BasicInformationI ,
-) => {
+export const toApi = (data: ProfissionalInfoI & BasicInformationI) => {
   return {
     nome: data.name,
     nomeProfissional: data.profissionalName,

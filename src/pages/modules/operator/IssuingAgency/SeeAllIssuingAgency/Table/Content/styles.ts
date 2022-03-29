@@ -34,7 +34,7 @@ export const Container = styled.div`
     margin-right: 24px;
     min-width: 250px;
 
-    > *  {
+    > * {
       margin-right: 24px;
       cursor: pointer;
     }
@@ -58,7 +58,6 @@ export const Container = styled.div`
     padding: 32px 0;
   }
 `
-
 
 export const Status = styled.li<StatusTypeProps>`
   > span {

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import { Select } from '../Form/Select'
 import { Container, Prev, Next } from './style'
 import { PaginationProps } from './types'
-import useLocalStorage from 'use-local-storage';
+import useLocalStorage from 'use-local-storage'
 
 const Pagination: React.FC<PaginationProps> = ({
   total,
@@ -21,13 +21,12 @@ const Pagination: React.FC<PaginationProps> = ({
   )
   const [currentPage, setCurrentPage] = useState(Number(query.get('page')) || 1)
 
-
   const skipedPages = (currentPage - 1) * Number(limit)
 
   const totalPages = Math.ceil(total / Number(limit)) || 0
 
   const queryString = `?page=${currentPage}&limit=${limit}${restQuery || ''}`
-  
+
   const queryApiString = `?limit=${limit}&skip=${skipedPages}`
 
   const currentTotal =

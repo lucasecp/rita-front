@@ -54,12 +54,16 @@ const PaymentRequestSummary: React.FC<PaymentRequestSummaryProps> = ({
                 <td className="price">
                   <small>{formatPrice(row.originalPrice)}</small>
                   {formatPrice(row.discountPrice)}
-                  <small>(<CrownIcon /> {row.discountPrice * 100})</small>
+                  <small>
+                    (<CrownIcon /> {row.discountPrice * 100})
+                  </small>
                 </td>
                 <td className="price total">
                   <small>{formatPrice(row.originalPrice)}</small>
                   {formatPrice(row.discountPrice)}
-                  <small>(<CrownIcon /> {row.discountPrice * 100})</small>
+                  <small>
+                    (<CrownIcon /> {row.discountPrice * 100})
+                  </small>
                 </td>
               </tr>
             ))}

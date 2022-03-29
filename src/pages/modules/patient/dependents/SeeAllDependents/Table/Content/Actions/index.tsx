@@ -56,8 +56,6 @@ const Actions: React.FC<ActionsProps> = ({
         />
       </CustomTooltip>
 
-
-
       <CustomTooltip label="Visualizar">
         <EyePurpleIconStyled
           hidden={status === 'inativo' || status === 'Excluido'}

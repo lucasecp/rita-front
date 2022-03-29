@@ -25,9 +25,7 @@ interface ResponseProps {
   id: number
 }
 
-export const ReasonToDeleteModal: React.FC<ResponseProps> = ({
-  id,
-}) => {
+export const ReasonToDeleteModal: React.FC<ResponseProps> = ({ id }) => {
   const { closeModal } = useModal()
   const { Loading } = useLoading()
   const history = useHistory()

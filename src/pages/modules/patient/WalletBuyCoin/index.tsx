@@ -15,9 +15,7 @@ export const WalletBuyCoin: React.FC = () => {
 
   return (
     <DefaultLayout title="Carteira Digital">
-      <ButtonPrimary onClick={handleBuyCoinClick}>
-        Comprar moeda
-      </ButtonPrimary>
+      <ButtonPrimary onClick={handleBuyCoinClick}>Comprar moeda</ButtonPrimary>
     </DefaultLayout>
   )
 }

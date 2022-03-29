@@ -24,7 +24,9 @@ type PaymentRequestProps = {
   data: RitaWallet.PaymentRequest
 }
 
-const PaymentRequest: React.FC<PaymentRequestProps> = ({ data: paymentRequest }) => {
+const PaymentRequest: React.FC<PaymentRequestProps> = ({
+  data: paymentRequest,
+}) => {
   const { showMessage } = useModal()
   const [, setRemaingAttempts] = useLocalStorage(
     '@Rita/PaymentRequest/RemaingAttempts',
@@ -40,14 +42,18 @@ const PaymentRequest: React.FC<PaymentRequestProps> = ({ data: paymentRequest })
 
   async function handlePayClick() {
     const { data } = await apiWallet.get<RitaWallet.PaymentRequestItem[]>(
-      `/payment/id/${paymentRequest.id}/items`
+      `/payment/id/${paymentRequest.id}/items`,
     )
 
     if (!Array.isArray(data)) {
       throw new Error('Data is invalid')
     }
 
-    showMessage(PaymentRequestSummary, { data: paymentRequest, items: data }, true)
+    showMessage(
+      PaymentRequestSummary,
+      { data: paymentRequest, items: data },
+      true,
+    )
   }
 
   return (
@@ -63,13 +69,11 @@ const PaymentRequest: React.FC<PaymentRequestProps> = ({ data: paymentRequest })
         <BodyAmountToPay>
           {/* <small>De <del><strong>{formatPrice(280)}</strong></del> por</small> */}
           <span>
-            <strong>{formatPrice(paymentRequest.debitAmount)}</strong>
-            {' '}
+            <strong>{formatPrice(paymentRequest.debitAmount)}</strong>{' '}
             <small>
               (
-                <CrownIcon />
-                {convertPriceToCrownValue(paymentRequest.debitAmount)}
-              )
+              <CrownIcon />
+              {convertPriceToCrownValue(paymentRequest.debitAmount)})
             </small>
             <br />
             pagando com Rita Saúde
@@ -81,9 +85,7 @@ const PaymentRequest: React.FC<PaymentRequestProps> = ({ data: paymentRequest })
         <OutlineButton onClick={handleRejectClick}>
           Não reconheço essa compra
         </OutlineButton>
-        <ButtonPrimary onClick={handlePayClick}>
-          Pagar
-        </ButtonPrimary>
+        <ButtonPrimary onClick={handlePayClick}>Pagar</ButtonPrimary>
       </footer>
     </Container>
   )

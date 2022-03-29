@@ -27,11 +27,12 @@ const WalletSettings: React.FC = () => {
   const [visibleFormId, setVisibleFormId] = useState<'none' | 'pix' | 'bank'>()
 
   useEffect(() => {
-    async function fetchData () {
-      const [{ data: dataPixKeys }, { data: dataBankAccounts }] = await Promise.all([
-        apiWallet.get('/pix'),
-        apiWallet.get('/bank-account')
-      ])
+    async function fetchData() {
+      const [{ data: dataPixKeys }, { data: dataBankAccounts }] =
+        await Promise.all([
+          apiWallet.get('/pix'),
+          apiWallet.get('/bank-account'),
+        ])
 
       if (dataPixKeys && Array.isArray(dataPixKeys)) {
         const loadedItems: FinancialListItemModel[] = []
@@ -71,7 +72,9 @@ const WalletSettings: React.FC = () => {
     fetchData().catch(console.error)
   }, [])
 
-  async function handlePixKeyActivatedRemove(itemRemoved: FinancialListItemModel) {
+  async function handlePixKeyActivatedRemove(
+    itemRemoved: FinancialListItemModel,
+  ) {
     console.log('handlePixKeyActivatedRemove', itemRemoved)
     await apiWallet.delete(`/pix/${itemRemoved.id}`)
 

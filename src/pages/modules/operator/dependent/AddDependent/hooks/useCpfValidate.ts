@@ -1,32 +1,32 @@
 import clear from '@/helpers/clear/SpecialCaracteres'
-import apiPatient from '@/services/apiPatient'
+// import apiPatient from '@/services/apiPatient'
 import validateCpf from '@/helpers/validateCpf'
-import { useLoading } from '@/hooks/useLoading'
+// import { useLoading } from '@/hooks/useLoading'
 
 export const useCpfValidate = (): any => {
-  const { Loading } = useLoading()
-  let msgApi = ''
+  // const { Loading } = useLoading()
+  // let msgApi = ''
 
-  const alreadyExist = async (cpf: string) => {
-    let error = false
+  // const alreadyExist = async (cpf: string) => {
+  //   let error = false
 
-    try {
-      Loading.turnOn()
-      const { data } = await apiPatient.get(`/paciente/cpf?cpf=${cpf}`)
-      if (data.titular?.nome) {
-        error = true
-      } else {
-        error = false
-      }
-    } catch (error: any) {
-      if (error.response.status === 404) {
-        msgApi = 'CPF não localizado'
-      }
-    } finally {
-      Loading.turnOff()
-    }
-    return msgApi ? true : error
-  }
+  //   try {
+  //     Loading.turnOn()
+  //     const { data } = await apiPatient.get(`/paciente/cpf?cpf=${cpf}`)
+  //     if (data.titular?.nome) {
+  //       error = true
+  //     } else {
+  //       error = false
+  //     }
+  //   } catch (error: any) {
+  //     if (error.response.status === 404) {
+  //       msgApi = 'CPF não localizado'
+  //     }
+  //   } finally {
+  //     Loading.turnOff()
+  //   }
+  //   return msgApi ? true : error
+  // }
 
   const validatorCpf = (value: string) => {
     const newValue = clear(value)

@@ -1,14 +1,14 @@
 import React from 'react'
 
-import warning from '@/assets/icons/alerts/warning.svg'
-
+import apiPatient from '@/services/apiPatient'
+import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
-import { Container, ButtonGroup } from './style'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import { useLoading } from '@/hooks/useLoading'
-import apiPatient from '@/services/apiPatient'
-import { useAuth } from '@/hooks/login'
+// import { useAuth } from '@/hooks/login'
+
+import warning from '@/assets/icons/alerts/warning.svg'
+import { Container, ButtonGroup } from './style'
 
 const VidaPlanLife = () => {
   const { closeModal, showSimple } = useModal()

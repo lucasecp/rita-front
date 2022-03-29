@@ -1,7 +1,5 @@
-import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import { formatCpf } from '@/helpers/formatCpf'
 import { DataSpecialist } from '../types'
-import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 
 export const fromApi = (specialistInfo: any[]): DataSpecialist[] => {
   return specialistInfo.map((spec) => ({

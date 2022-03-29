@@ -24,6 +24,7 @@ interface MultiSelectCustomProps {
   onRemove?: (values: MultiSelectOption[], value?: MultiSelectOption) => void
   closeOnSelect?: boolean
   name?: string
+  color?: string
   [x: string]: any
 }
 
@@ -36,6 +37,7 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
   hasError,
   disabled,
   variation,
+  color,
   name,
   ...rest
 }) => {
@@ -57,6 +59,7 @@ const CustomMultSelect: React.FC<MultiSelectCustomProps> = ({
         id={generateRandomString(7)}
         onClick={() => adjustSelectOptions(containerDiv?.current)}
         variation={variation}
+        color={color}
       >
         <Multiselect
           options={options || []}

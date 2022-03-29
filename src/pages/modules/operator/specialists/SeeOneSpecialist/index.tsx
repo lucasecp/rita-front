@@ -34,7 +34,6 @@ const SeeOneSpecialist = () => {
       }
     }
     getSpecialist()
-
   }, [])
 
   return (

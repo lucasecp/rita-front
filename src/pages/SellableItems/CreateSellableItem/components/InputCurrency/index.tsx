@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from 'react'
 
 import { Container } from './styles'
 
-interface InputMaskProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputCurrencyProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
   setValue?: (value: string) => void
   hasError?: boolean
@@ -10,20 +10,23 @@ interface InputMaskProps extends InputHTMLAttributes<HTMLInputElement> {
   messageError?: string
   variation?: 'secondary'
   value?: string | number
-  disabled?: boolean
-  onBlur?: () => void
-  onKeyUp?: () => void
-  [x: string]: any
+  // [x: string]: any
 }
 
-const InputCurrency: React.FC<InputMaskProps> = ({
+interface Response {
+  target: {
+    value: string | number
+  }
+}
+
+export const InputCurrency: React.FC<InputCurrencyProps> = ({
   setValue,
   label,
   hasError,
   messageError,
   ...rest
 }) => {
-  const onChange = (response: any) => {
+  const onChange = (response: Response) => {
     const element = response.target
     let value = element.value
 
@@ -45,23 +48,21 @@ const InputCurrency: React.FC<InputMaskProps> = ({
     }
 
     element.value = value
-    if (value == 'NaN' || value == 0) element.value = ''
+    if (value === 'NaN' || !value) element.value = ''
 
-    setValue && setValue(value.replace(',', '').replace('.', ''))
+    if (setValue) {
+      setValue(value.replace(',', '').replace('.', ''))
+    }
   }
 
   return (
-    <>
-      <Container hasError={messageError || hasError} {...rest}>
-        {label && <label htmlFor={label}>{label}</label>}
-        <div>
-          <span>R$ </span>
-          <input onChange={onChange} defaultValue={'0,00'} />
-        </div>
-        {messageError && <small>{messageError}</small>}
-      </Container>
-    </>
+    <Container hasError={messageError || hasError} {...rest}>
+      {label && <label htmlFor={label}>{label}</label>}
+      <div>
+        <span>R$ </span>
+        <input onChange={onChange} defaultValue={'0,00'} />
+      </div>
+      {messageError && <small>{messageError}</small>}
+    </Container>
   )
 }
-
-export default InputCurrency

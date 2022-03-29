@@ -64,6 +64,6 @@ export interface RegisterPatientContextData {
   setDocumentsFile: React.Dispatch<React.SetStateAction<DocumentsState>>
   setDependents: React.Dispatch<
     React.SetStateAction<DependentsState[] | undefined>
-  > 
+  >
   resetData: () => void
 }

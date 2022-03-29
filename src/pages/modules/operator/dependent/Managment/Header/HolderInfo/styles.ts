@@ -12,7 +12,7 @@ export const Container = styled.header`
   flex-wrap: wrap;
   > div {
     > div {
-      margin-bottom: 11px; 
+      margin-bottom: 11px;
       > h6 {
         margin-bottom: 4px;
         font-size: 14px;
@@ -39,7 +39,7 @@ export const Container = styled.header`
     display: block;
     background: #f89bff;
     border-radius: 28px;
-    text-align: center
+    text-align: center;
   }
   ::before {
     content: '';
@@ -51,6 +51,5 @@ export const Container = styled.header`
     left: 0;
     top: 0;
     border-radius: 8px 0px 0px 8px;
-
   }
 `

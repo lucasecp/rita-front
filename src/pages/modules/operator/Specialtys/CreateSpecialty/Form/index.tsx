@@ -3,7 +3,7 @@ import { Select } from '@/components/Form/Select'
 import React, { useEffect, useState } from 'react'
 import { ErrorsI } from '../types'
 import { Container } from './style'
-import { DataReceivedI } from '../types';
+import { DataReceivedI } from '../types'
 
 interface FormProps {
   setDataToApi: React.Dispatch<React.SetStateAction<DataReceivedI>>

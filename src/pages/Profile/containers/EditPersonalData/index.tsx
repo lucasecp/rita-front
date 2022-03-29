@@ -6,6 +6,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { GeneralDatas } from './components/GeneralDatasProfile'
 import { AddressProfile } from './components/AddressProfile'
 import { SupplementaryData } from './components/SupplementaryData'
+import { OwnerOfTheAccount } from './components/OwnerAccount'
 
 import { Container } from './styles'
 import { useToggle } from '@/hooks/useToggle'
@@ -42,6 +43,11 @@ interface EditPersonalDataProps {
       company: string
       hasError?: boolean
     }
+    ownerOfTheAccount: {
+      name?: string
+      email?: string
+      phone?: string
+    }
   }
 }
 
@@ -60,6 +66,7 @@ export const EditPersonalData: React.FC<EditPersonalDataProps> = ({
     personalDatas?.personalDatas,
   )
   const [address, setAddress] = useState(personalDatas?.address)
+  const [ ownerOfTheAccount ] = useState(personalDatas?.ownerOfTheAccount)
 
   useEffect(() => {
     setIsSaveButtonDisabled(mainPersonalDatas?.hasError || address?.hasError)
@@ -113,6 +120,7 @@ export const EditPersonalData: React.FC<EditPersonalDataProps> = ({
           Editar Informações
         </OutlineButton>
       )}
+      {ownerOfTheAccount.name && <OwnerOfTheAccount ownerOfTheAccount={ownerOfTheAccount}/>}
       <GeneralDatas
         isEditing={isEditing}
         personalDatas={mainPersonalDatas}

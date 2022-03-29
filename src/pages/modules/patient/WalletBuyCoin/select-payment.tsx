@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 
 import { useModal } from '@/hooks/useModal'
@@ -15,9 +14,9 @@ type WalletBuyCoinSelectPaymentProps = {
   value: number
 }
 
-export const WalletBuyCoinSelectPayment: React.FC<WalletBuyCoinSelectPaymentProps> = ({
-  value,
-}) => {
+export const WalletBuyCoinSelectPayment: React.FC<
+  WalletBuyCoinSelectPaymentProps
+> = ({ value }) => {
   const { showMessage } = useModal()
   const [selectedOption, setSelectedOption] = useState('')
   const [hasError, setHasError] = useState(false)
@@ -70,12 +69,8 @@ export const WalletBuyCoinSelectPayment: React.FC<WalletBuyCoinSelectPaymentProp
       </section>
 
       <footer>
-        <OutlineButton onClick={handleBackClick}>
-          Voltar
-        </OutlineButton>
-        <ButtonPrimary onClick={handleForwardClick}>
-          Avançar
-        </ButtonPrimary>
+        <OutlineButton onClick={handleBackClick}>Voltar</OutlineButton>
+        <ButtonPrimary onClick={handleForwardClick}>Avançar</ButtonPrimary>
       </footer>
     </MessageContainer>
   )

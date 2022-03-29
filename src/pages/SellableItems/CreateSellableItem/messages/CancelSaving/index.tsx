@@ -1,12 +1,12 @@
 import React from 'react'
-
-import ButtonPrimary from '@/components/Button/Primary'
+import { useHistory } from 'react-router-dom'
+import { useModal } from '@/hooks/useModal'
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 import { Container, ButtonGroup } from './styles'
-import { useModal } from '@/hooks/useModal'
-import OutlineButton from '@/components/Button/Outline'
-import { useHistory } from 'react-router-dom'
 import { FILTER_SELLABLE_ITEMS } from '@/routes/constants/namedRoutes/routes'
+
+import ButtonPrimary from '@/components/Button/Primary'
+import OutlineButton from '@/components/Button/Outline'
 
 export const CancelSaving: React.FC = () => {
   const { closeModal } = useModal()

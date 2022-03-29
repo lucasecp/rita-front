@@ -40,14 +40,22 @@ export const Container = styled.section`
         > div {
           background: linear-gradient(
             88.69deg,
-            #4D22AA 3.78%,
-            #7437DA 48.21%,
-            #823EEE 95.7%
+            #4d22aa 3.78%,
+            #7437da 48.21%,
+            #823eee 95.7%
           );
           border-radius: 3px;
           height: 10px;
         }
       }
     }
+  }
+
+  > p {
+    flex: 1 0 100%;
+
+    color: ${({ theme }) => theme.main};
+    font-size: 18px;
+    text-align: center;
   }
 `

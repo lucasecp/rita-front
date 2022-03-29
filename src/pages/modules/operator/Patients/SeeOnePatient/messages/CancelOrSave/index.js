@@ -33,8 +33,8 @@ export const CancelOrSave = ({ setConfirmSave }) => {
         Confirma a alteração?
       </p>
       <footer>
-        <ButtonPrimary onClick={onConfirmExit}>Não</ButtonPrimary>
-        <OutlineButton onClick={onDoNotConfirmExit}>Sim</OutlineButton>
+        <ButtonPrimary onClick={onDoNotConfirmExit}>Não</ButtonPrimary>
+        <OutlineButton onClick={onConfirmExit}>Sim</OutlineButton>
       </footer>
     </Container>
   )

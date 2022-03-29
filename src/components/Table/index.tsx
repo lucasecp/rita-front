@@ -80,8 +80,12 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
                       {header.label}
                       {header.sortable && (
                         <div onClick={() => toggleOrder(header.path)}>
-                          <HeaderArrowUp order={isSortOrderAsc(header.path) ? 1 : 0} />
-                          <HeaderArrowDown order={isSortOrderDesc(header.path) ? 1 : 0} />
+                          <HeaderArrowUp
+                            order={isSortOrderAsc(header.path) ? 1 : 0}
+                          />
+                          <HeaderArrowDown
+                            order={isSortOrderDesc(header.path) ? 1 : 0}
+                          />
                         </div>
                       )}
                     </h5>
@@ -97,16 +101,18 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
                   {columns.map((column, columnIndex) => (
                     <BodyCell key={columnIndex} fit={column.fit}>
                       {column.custom
-                        ? column.custom(row, rowIndex, expandedRowIndex === rowIndex)
+                        ? column.custom(
+                            row,
+                            rowIndex,
+                            expandedRowIndex === rowIndex,
+                          )
                         : getRowColumnValue(row, column.path)}
                     </BodyCell>
                   ))}
                 </tr>
                 {childRow && expandedRowIndex === rowIndex && (
                   <tr className="child">
-                    <td colSpan={columns.length}>
-                      {childRow(row)}
-                    </td>
+                    <td colSpan={columns.length}>{childRow(row)}</td>
                   </tr>
                 )}
               </React.Fragment>

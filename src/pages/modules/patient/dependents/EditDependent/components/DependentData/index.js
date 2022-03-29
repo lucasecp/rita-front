@@ -4,7 +4,6 @@ import { InputEmail } from '@/components/smarts/InputEmail'
 import { validateEmail, validateGender } from '../../helpers/validatorFields'
 
 import { Container } from './styles'
-import isEmail from '@/helpers/isEmail'
 import { formatPhone } from '@/helpers/formatPhone'
 import { formatCpf } from '@/helpers/formatCpf'
 

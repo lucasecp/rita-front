@@ -53,7 +53,6 @@ export const Clinics: React.FC<ClinicsProps> = ({
     setErrors((error: ErrorsI) => ({ ...error, clinics: '' }))
   }, [clinics])
 
-
   return (
     <Container>
       <h1>Clínicas</h1>

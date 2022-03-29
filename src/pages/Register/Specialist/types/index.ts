@@ -15,6 +15,7 @@ export interface BasicInformationI {
   profissionalRegister: string
   issuingAgency: string
   ufIssuingAgency: string
+  issuingAgencyToApi: string
 }
 
 type SpecialtysAndDocsErrors = { [x: string]: string }
@@ -39,7 +40,7 @@ export type SpecialtysAndDocsType = {
   [x: string]: {
     name: string
     idSpecialty: string
-    document: Blob  | string
+    document: Blob | string
   }
 }
 

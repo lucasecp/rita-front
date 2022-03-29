@@ -21,7 +21,7 @@ export const Container = styled.div`
     > * + * {
       margin-top: 32px;
     }
-    >*:last-child{
+    > *:last-child {
       margin-bottom: 32px;
     }
   }

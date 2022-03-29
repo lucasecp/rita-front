@@ -5,6 +5,7 @@ import { validateCNPJ } from '@/helpers/validateCNPJ'
 export const useCnpjValidate = (): any => {
   const alreadyExist = async (cnpj: string) => {
     let error = false
+
     try {
       const { data } = await apiAdmin(`/clinica?limit=10&skip=0&cnpj=${cnpj}`)
       if (data.total === 0) {
@@ -12,9 +13,8 @@ export const useCnpjValidate = (): any => {
       } else {
         error = true
       }
-    } catch (error) {
-    } finally {
-    }
+    } catch (error) {}
+
     return error
   }
 
@@ -31,6 +31,7 @@ export const useCnpjValidate = (): any => {
     else if (await alreadyExist(newValue)) {
       return 'O CNPJ já consta no sistema, por favor verifique os dados e preencha novamente.'
     }
+
     return ''
   }
 

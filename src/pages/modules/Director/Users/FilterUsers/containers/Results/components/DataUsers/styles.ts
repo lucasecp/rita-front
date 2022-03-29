@@ -1,7 +1,6 @@
-import { StatusSellableItems } from '@/pages/SellableItems/FilterSellableItems/@types'
-import colors from '@/styles/colors'
 import { LiHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
+import colors from '@/styles/colors'
 
 interface DataSellableItemsStylesProps extends LiHTMLAttributes<HTMLLIElement> {
   type: string

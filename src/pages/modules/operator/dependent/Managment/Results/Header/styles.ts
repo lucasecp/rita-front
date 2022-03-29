@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 import arrowDown from '@/assets/icons/arrow-down-order.svg'
 import arrowUp from '@/assets/icons/arrow-up-order.svg'
-import colors from '@/styles/colors'
 
 interface ArrowProps {
   order: number

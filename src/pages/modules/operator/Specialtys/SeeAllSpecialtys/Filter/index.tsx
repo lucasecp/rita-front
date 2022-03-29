@@ -36,7 +36,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     },
     {
       name: fieldsApi.REQUER_INSCRICAO,
-      value: subscriptionRequired ,
+      value: subscriptionRequired,
     },
   ]
 
