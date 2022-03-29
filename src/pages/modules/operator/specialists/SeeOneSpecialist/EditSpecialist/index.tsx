@@ -5,7 +5,7 @@ import { Clinics } from '../components/Clinics'
 import { ProfissionalDatas } from '../components/ProfissionalDatas'
 import { Specialty } from '../components/Specialty'
 import { useModal } from '@/hooks/useModal'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { OPERATOR_SEE_ALL_SPECIALISTS } from '@/routes/constants/namedRoutes/routes'
 import CancelEdting from '../messages/CancelEdting'
 import { ErrorsI } from '../Types'
@@ -178,7 +178,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
 
   useEffect(() => {
     if (clickOnSave !== 0) {
-      scrollOntoFieldError(errors)
+      scrollOntoFieldError(errors as any)
     }
   }, [clickOnSave])
 

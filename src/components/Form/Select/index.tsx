@@ -19,7 +19,7 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   hasError?: string | boolean
   // onChange?: (props: ChangeEvent<HTMLInputElement>) => void | undefined
   disabled?: boolean
-  onBlur?: () => void
+  onBlur?: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 export const Select: React.FC<SelectProps> = ({

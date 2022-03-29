@@ -12,7 +12,7 @@ import React, { createContext, useState, useContext } from 'react'
 import { useLoading } from '../useLoading'
 import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { LOGIN, INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes'
 import apiPatient from '@/services/apiPatient'
 import AnalyzingData from './messages/AnalzingData'
@@ -69,6 +69,7 @@ export default function AuthProvider({ children }) {
       } catch (error) {
         // console.log(error)
         // Futuro tratamento caso exista um usuário sem paciente
+
         showMessage(InvalidCredences)
       } finally {
         Loading.turnOff()
@@ -91,6 +92,8 @@ export default function AuthProvider({ children }) {
 
         pushToUrl(prevPath)
       } catch (error) {
+        console.log(error)
+
         showMessage(InvalidCredences)
       } finally {
         Loading.turnOff()

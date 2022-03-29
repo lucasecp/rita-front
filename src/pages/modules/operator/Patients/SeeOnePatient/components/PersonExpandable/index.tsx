@@ -66,7 +66,9 @@ const PersonExpandable: React.FC<PersonExpandableProps> = ({
       email,
       planName: personData.planName,
       tableName: personData.tableName,
+      // @ts-ignore
       status: personData.status,
+      // @ts-ignore
       limitTry: personData.limitTry,
       company: {
         corporateName: personData.company
@@ -149,7 +151,7 @@ const PersonExpandable: React.FC<PersonExpandableProps> = ({
               ]}
               value={gender}
               setValue={setGender}
-              onKeyUp={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onBlur={(e: React.ChangeEvent<HTMLSelectElement>) => {
                 setErrors({ ...errors, ...validateGender(e.target.value) })
               }}
               msgError={errors.gender}

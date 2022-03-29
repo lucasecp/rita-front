@@ -14,8 +14,8 @@ import InputMask from '@/components/Form/InputMask'
 import { fieldsApi } from '../static/fieldsApi'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import useQueryParams from './useQueryParams'
-import SelectIssuingAgency from '../Components/SelectIssuingAgencyf'
 import validateCpf from '@/helpers/validateCpf'
+import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectIssuingAgency'
 
 interface FilterProps {
   setFilters: React.Dispatch<React.SetStateAction<any[]>>
@@ -120,6 +120,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
         <SelectIssuingAgency
           issuingAgency={issuingAgency}
           setIssuingAgency={setIssuingAgency}
+          variation="secondary"
         />
 
         <InputText

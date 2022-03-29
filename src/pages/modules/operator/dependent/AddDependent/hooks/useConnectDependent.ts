@@ -12,7 +12,6 @@ export const useConnectDependent = (): any => {
     holder: { id: ''; cpf: '' },
     dependentId: number,
   ) => {
-
     try {
       Loading.turnOn()
       await apiPatient.post(
@@ -22,7 +21,6 @@ export const useConnectDependent = (): any => {
 
       history.push(OPERATOR_DEPENDENT_MANAGMENT, { cpf: holder.cpf })
     } catch (error: any) {
-
       toast.error(error?.response?.data?.message || 'Erro ao associar.')
     } finally {
       Loading.turnOff()

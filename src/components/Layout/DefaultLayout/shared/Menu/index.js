@@ -31,8 +31,43 @@ const Menu = ({ expanded }) => {
 
   return (
     <Container expanded={expanded}>
-      {menuToShow.map((item) => item.children ? (
-        <div key={item.path}>
+      {menuToShow.map((item) =>
+        item.children ? (
+          <div key={item.path}>
+            <NavLink
+              activeClassName="active"
+              key={item.path}
+              to={item.path}
+              onClick={() => handleMenuItemClick()}
+            >
+              <span />
+              <div>
+                {item.icon}
+                {expanded && <span>{item.name}</span>}
+              </div>
+              {routePathname.startsWith(item.path) ? (
+                <ChevronUpIcon />
+              ) : (
+                <ChevronDownIcon />
+              )}
+            </NavLink>
+
+            {routePathname.startsWith(item.path) && (
+              <div>
+                {item.children.map((child) => (
+                  <NavLink
+                    activeClassName="active"
+                    key={child.path}
+                    to={child.path}
+                    onClick={() => handleMenuItemClick()}
+                  >
+                    {child.name}
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
           <NavLink
             activeClassName="active"
             key={item.path}
@@ -44,42 +79,9 @@ const Menu = ({ expanded }) => {
               {item.icon}
               {expanded && <span>{item.name}</span>}
             </div>
-            {routePathname.startsWith(item.path) ? (
-              <ChevronUpIcon />
-            ) : (
-              <ChevronDownIcon />
-            )}
           </NavLink>
-
-          {routePathname.startsWith(item.path) && (
-            <div>
-              {item.children.map((child) => (
-                <NavLink
-                  activeClassName="active"
-                  key={child.path}
-                  to={child.path}
-                  onClick={() => handleMenuItemClick()}
-                >
-                  {child.name}
-                </NavLink>
-              ))}
-            </div>
-          )}
-        </div>
-      ) : (
-        <NavLink
-          activeClassName="active"
-          key={item.path}
-          to={item.path}
-          onClick={() => handleMenuItemClick()}
-        >
-          <span />
-          <div>
-            {item.icon}
-            {expanded && <span>{item.name}</span>}
-          </div>
-        </NavLink>
-      ))}
+        ),
+      )}
     </Container>
   )
 }

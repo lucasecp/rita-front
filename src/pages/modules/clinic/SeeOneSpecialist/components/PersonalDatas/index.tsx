@@ -24,7 +24,6 @@ export const PersonalDatas: React.FC<PersonalDatasProps> = ({
     setPhone(personalDatas?.phone || '')
   }, [personalDatas])
 
-
   return (
     <Container>
       <h1>Dados Pessoais do Especialista</h1>

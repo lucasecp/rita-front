@@ -7,13 +7,12 @@ import OutlineButton from '@/components/Button/Outline'
 import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { OPERATOR_SEE_ALL_SPECIALTYS } from '@/routes/constants/namedRoutes/routes'
-import { useHistory } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 import { toast } from '@/styles/components/toastify'
 import { useModal } from '@/hooks/useModal'
 import CancelCreating from './messages/CancelCreating'
 import { Content } from './styles'
 import { toApi } from './adapters'
-import { useLocation } from 'react-router-dom'
 
 const EditSpecialty: React.FC = () => {
   const [errors, setErrors] = useState<ErrorsI>({})
@@ -33,7 +32,7 @@ const EditSpecialty: React.FC = () => {
     }
     setDataFromApi({
       code: specialtyInfo.code,
-      requireSubscription: specialtyInfo.subscriptionRequired ? 1 : 0,
+      requireSubscription: specialtyInfo.subscriptionRequired ? 'yes' : 'no',
       description: specialtyInfo.name,
     })
   }, [])

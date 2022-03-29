@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 import OutlineButton from '@/components/Button/Outline'
@@ -7,7 +8,7 @@ import Textarea from '@/components/Form/Textarea'
 
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import { Container } from './styles'
 import apiUser from '@/services/apiUser'
@@ -24,9 +25,7 @@ interface ResponseProps {
   id: number
 }
 
-export const ReasonToDeleteModal: React.FC<ResponseProps> = ({
-  id,
-}) => {
+export const ReasonToDeleteModal: React.FC<ResponseProps> = ({ id }) => {
   const { closeModal } = useModal()
   const { Loading } = useLoading()
   const history = useHistory()
@@ -43,9 +42,16 @@ export const ReasonToDeleteModal: React.FC<ResponseProps> = ({
       history.push(INITIAL_PAGE)
       history.push(DIRECTOR_SEE_ALL_PROFILES)
       toast.success('Perfil Excluído com sucesso')
-    } catch ({ response }) {
-      console.log(response.data)
-      return toast.error(response.data.message)
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(error.response.data)
+      } else {
+        if (error instanceof Error) {
+          toast.error(error.message)
+        }
+
+        console.error(error)
+      }
     } finally {
       Loading.turnOff()
     }

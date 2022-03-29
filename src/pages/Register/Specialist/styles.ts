@@ -19,7 +19,7 @@ export const Content = styled.div`
   > div:first-child {
     margin: 0 -32px 24px -32px;
   }
-  @media(max-width: 767px){
+  @media (max-width: 767px) {
     padding: 0 24px;
     > div:first-child {
       margin: 0 -24px 24px -24px;

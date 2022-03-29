@@ -10,7 +10,6 @@ export const mapClinics = (array: any[]) => {
 }
 
 export const mapClinicsToAPi = (array: any[]) => {
-
   if (!array) return []
 
   return array

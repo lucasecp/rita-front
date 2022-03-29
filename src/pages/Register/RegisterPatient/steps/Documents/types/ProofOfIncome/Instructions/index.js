@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { ReactComponent as WarningIcon } from '@/assets/icons/alerts/warning.svg'
 
@@ -13,7 +13,13 @@ function InstructionsIncome({
   onGetSelectIncome,
   onGetFile,
   error,
+  file,
 }) {
+  useEffect(() => {
+    if (file) {
+      onGetFile('')
+    }
+  }, [selectIncome])
   return (
     <Container>
       <header>
@@ -44,7 +50,7 @@ function InstructionsIncome({
         </p>
       )}
       {selectIncome !== '' && selectIncome !== incomeType.MORE_ONE_HALF && (
-        <BoxSendIncome onGetFile={onGetFile} />
+        <BoxSendIncome file={file} onGetFile={onGetFile} />
       )}
     </Container>
   )

@@ -5,6 +5,8 @@ COPY package-lock.json ./
 RUN npm install
 ENV REACT_APP_PATIENT_API_HOST https://patient-qa.cloudsabin.com
 ENV REACT_APP_USER_API_HOST https://user-qa.cloudsabin.com
+ENV REACT_APP_ADMIN_API_HOST https://rita-admin-server-qa.cloudsabin.com
+ENV REACT_APP_WALLET_API_URL https://rita-wallet-server-qa.cloudsabin.com/v1
 COPY . ./
 RUN npm run build
 FROM ECR_NGINX_BASE:latest

@@ -11,6 +11,7 @@ export const checkedPermissionsWithoutFathersId = (
   checkedPermissions: checkedPermissions,
 ): checkedPermissions => {
   const checkedPermissionsToSave = checkedPermissions.filter(
+    // @ts-ignore
     (id) => id.toString().charAt(id.length - 1) !== 'F',
   )
 

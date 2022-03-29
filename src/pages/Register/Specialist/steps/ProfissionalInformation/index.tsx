@@ -209,6 +209,7 @@ const ProfissionalInformation: React.FC = () => {
           setSpecialtys={setSpecialtys}
           errors={errors}
           setErrors={setErrors}
+          color="green"
         />
 
         <MultSelectClinics
@@ -216,6 +217,7 @@ const ProfissionalInformation: React.FC = () => {
           setClinic={setClinics}
           errors={errors}
           setErrors={setErrors}
+          color="green"
         />
       </div>
       <FooterNextStep onClickNextStep={onNextStep} />

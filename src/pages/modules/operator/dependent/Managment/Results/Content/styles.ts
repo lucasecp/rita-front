@@ -39,7 +39,7 @@ export const Container = styled.div`
     justify-content: center;
     > div {
       width: fit-content;
-      text-align:center
+      text-align: center;
     }
   }
   > h2 {

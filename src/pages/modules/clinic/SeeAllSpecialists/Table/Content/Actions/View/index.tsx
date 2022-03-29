@@ -1,6 +1,6 @@
 import React from 'react'
 import { ReactComponent as ViewIcon } from '@/assets/icons/eye-purple.svg'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { CLINIC_SEE_ONE_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 
 const View: React.FC<{ id: string }> = ({ id }) => {

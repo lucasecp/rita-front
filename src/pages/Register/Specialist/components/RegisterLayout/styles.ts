@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import shape from '@/assets/img/element3.png'
 import colors from '@/styles/colors'
 
@@ -10,7 +10,7 @@ export const Container = styled.div<ContainerProps>`
   display: grid;
   grid-template-columns: 1fr 3fr;
   min-height: 100vh;
-  background: #F5F5F5;
+  background: #f5f5f5;
 
   > aside {
     background-image: url(${shape});
@@ -30,7 +30,7 @@ export const Container = styled.div<ContainerProps>`
       height: 100%;
       opacity: 0.9;
       mix-blend-mode: multiply;
-      background: #46A86E;
+      background: #46a86e;
       filter: contrast(0.8);
     }
 

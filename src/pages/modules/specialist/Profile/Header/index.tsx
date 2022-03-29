@@ -1,13 +1,13 @@
-import { ReactComponent as PenIcon } from '@/assets/icons/pen-green.svg';
-import { ReactComponent as ProfileIcon } from '@/assets/icons/profile-green.svg';
-import { InputFile } from '@/components/Form/InputFile';
-import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize';
-import { formatCpf } from '@/helpers/formatCpf';
-import formatTextWithLimit from '@/helpers/formatTextWithLimit';
-import React from 'react';
+import { ReactComponent as PenIcon } from '@/assets/icons/pen-green.svg'
+import { ReactComponent as ProfileIcon } from '@/assets/icons/profile-green.svg'
+import { InputFile } from '@/components/Form/InputFile'
+import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
+import { formatCpf } from '@/helpers/formatCpf'
+import formatTextWithLimit from '@/helpers/formatTextWithLimit'
+import React from 'react'
 
-import { DataSpecialistI } from '../Types';
-import { Container } from './styles';
+import { DataSpecialistI } from '../Types'
+import { Container } from './styles'
 
 interface HeaderProps {
   data: DataSpecialistI
@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ data, setValue }) => {
         </div>
         <span>
           {/* <InputFile setValue={setValue}> */}
-            <PenIcon />
+          <PenIcon />
           {/* </InputFile> */}
         </span>
       </div>

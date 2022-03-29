@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import { Container } from './styles'
 
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { PermissionsSelect } from './components/PermissionsSelect'
@@ -28,9 +29,9 @@ export const CreateProfile: React.FC = () => {
   const [oneProfileName, setOneProfileName] = useState('')
   const [oneProfileNameError, setOneProfileNameError] = useState('')
 
-  const [profilesAndPermissions, setProfilesAndPermissions] = useState([])
+  const [profilesAndPermissions, setProfilesAndPermissions] = useState<any>([])
 
-  const [checkedPermissions, setCheckedPermissions] = useState([])
+  const [checkedPermissions, setCheckedPermissions] = useState<any[]>([])
 
   useEffect(() => {
     const loadProfiles = async () => {
@@ -62,6 +63,7 @@ export const CreateProfile: React.FC = () => {
   }, [])
 
   const nodeChecked = function () {
+    // @ts-ignore
     setCheckedPermissions([...this.checkedNodes])
   }
 
@@ -94,8 +96,16 @@ export const CreateProfile: React.FC = () => {
       await apiUser.post(`/perfil`, profilePermissionsAndNamesMApped)
       toast.success('Cadastro realizado com sucesso.')
       history.push(DIRECTOR_SEE_ALL_PROFILES)
-    } catch ({ response }) {
-      toast.error(response.data.message)
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(error.response.data.message)
+      } else {
+        if (error instanceof Error) {
+          toast.error(error.message)
+        }
+
+        console.error(error)
+      }
     } finally {
       Loading.turnOff()
     }
@@ -124,7 +134,9 @@ export const CreateProfile: React.FC = () => {
           nodeChecked={nodeChecked}
         />
         <footer>
-          <OutilineButton onClick={onBackCreateProfile}>Cancelar</OutilineButton>
+          <OutilineButton onClick={onBackCreateProfile}>
+            Cancelar
+          </OutilineButton>
           <ButtonPrimary onClick={onSaveProfile}>Salvar</ButtonPrimary>
         </footer>
       </Container>

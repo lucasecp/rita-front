@@ -18,7 +18,6 @@ const InsertRqeNumber: React.FC<InsertRqeNumberProps> = ({
 }) => {
   const { closeModal } = useModal()
 
-
   const [rqe, setRqe] = useState('')
   const [error, setError] = useState('')
 

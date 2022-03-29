@@ -53,7 +53,7 @@ export const validatePhone = (value: string): string => {
 export const validateTwoPhone = (value: string): string => {
   const phone = clear(value)
 
-  if (phone.length === 10 && (phone[0] === 0 || phone[2] === '9')) {
+  if (phone.length === 10 && (phone[0] === '0' || phone[2] === '9')) {
     return 'Telefone inválido.'
   }
 

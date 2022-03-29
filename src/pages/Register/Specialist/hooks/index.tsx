@@ -15,13 +15,14 @@ import {
 import axios from 'axios'
 import apiAdmin from '@/services/apiAdmin'
 import { toApi } from '../adapters'
+import { AxiosError, AxiosResponse } from 'axios'
 
 const RegisterSpecialistContext = createContext<RegisterSpecialistContextData>(
   {} as RegisterSpecialistContextData,
 )
 
 const RegisterSpecialistProvider: React.FC = ({ children }) => {
-  const { showMessage, closeModal, showSimple } = useModal()
+  const { showMessage, showSimple } = useModal()
   const { Loading } = useLoading()
 
   const [step, setStep] = useState(1)
@@ -38,7 +39,7 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   const [specialtysAndDocs, setSpecialtysAndDocs] =
     useState<SpecialtysAndDocsType>({} as SpecialtysAndDocsType)
 
-  const [photo, setPhoto] = useState<File | null>(null)
+  const [photo, setPhoto] = useState<File | string>('')
 
   const [errors, setErrors] = useState<ErrorsRegisterI>({} as ErrorsRegisterI)
 
@@ -81,12 +82,10 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
     const listDocs = createListFormDataOfSpecialtys()
 
     try {
-      Loading.turnOn()
-
       await axios.all(
         listDocs.map((data) =>
           apiAdmin.post(
-            `medico/documento?cpf=${profissionalInfo.cpf}&tipoDocumento=ComprovanteEspecialidade&idEspecialidade=${data.id}`,
+            `medico/arquivo?cpf=${profissionalInfo.cpf}&tipoDocumento=ComprovanteEspecialidade&idEspecialidade=${data.id}`,
             data.formFile,
           ),
         ),
@@ -98,16 +97,31 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
 
   const registerData = async () => {
     try {
-      Loading.turnOn()
-
       const data = toApi({ ...profissionalInfo, ...basicInformation })
 
       await apiAdmin.post('/medico', data)
-    } catch (error: any) {
-      if (error?.response?.status === 409) {
+    } catch (error) {
+      const { response } = (error as AxiosError) || {}
+
+      if (response?.status === 409) {
         throw new Error('Especialista já cadastrado')
       }
       throw new Error(errorRequest)
+    }
+  }
+
+  const registerPhoto = async () => {
+    try {
+      const formFile = new FormData()
+
+      formFile.append('file', photo)
+
+      await apiAdmin.post(
+        `medico/arquivo?cpf=${profissionalInfo.cpf}&tipoDocumento=FotoPerfil`,
+        formFile,
+      )
+    } catch (error) {
+      throw new Error('Foto não enviada')
     }
   }
 
@@ -119,9 +133,13 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
 
       await registerData()
 
+      await registerPhoto()
+
       showMessage(RegisterSuccess)
-    } catch (error: any) {
-      showSimple.error(error?.message || errorRequest)
+    } catch (error) {
+      if (error instanceof Error) {
+        showSimple.error(error?.message || errorRequest)
+      }
     } finally {
       Loading.turnOff()
     }

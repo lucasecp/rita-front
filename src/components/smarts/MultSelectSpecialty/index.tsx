@@ -15,6 +15,7 @@ interface SpecialtysProps {
   setSpecialtys: React.Dispatch<SetStateAction<MultiSelectOption[]>>
   errors: any
   setErrors: (error: any) => any
+  color?: string
   [x: string]: any
 }
 
@@ -23,6 +24,7 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
   setSpecialtys,
   errors,
   setErrors,
+  color,
   ...rest
 }) => {
   const [specialtysOptions, setSpecialtysOptions] = useState<
@@ -31,7 +33,13 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
 
   const { showMessage } = useModal()
 
-  const mapSpecialtys = (array: any[]) => {
+  const mapSpecialtys = (
+    array: {
+      idEspecialidade: string
+      descricao: string
+      requerInscricao: string
+    }[],
+  ) => {
     if (!array) return []
 
     return array
@@ -59,7 +67,7 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
 
     getSpecialtys()
   }, [])
-  
+
   const onChange = (values: MultiSelectOption[], value?: MultiSelectOption) => {
     if (value?.rqeRequired) {
       return showMessage(InsertRqeNumber, {
@@ -78,12 +86,13 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
           value={specialtys}
           setValue={setSpecialtys}
           variation="secondary"
+          color={color}
           options={specialtysOptions}
           hasError={!!errors?.specialtys}
           messageError={errors?.specialtys}
           name="specialtys"
-          onSelect={(value: MultiSelectOption[], v?: MultiSelectOption) =>
-            onChange(value, v)
+          onSelect={(values: MultiSelectOption[], v?: MultiSelectOption) =>
+            onChange(values, v)
           }
           {...rest}
         />

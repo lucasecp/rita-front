@@ -7,7 +7,7 @@ import OutlineButton from '@/components/Button/Outline'
 import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { OPERATOR_SEE_ALL_SPECIALTYS } from '@/routes/constants/namedRoutes/routes'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { toast } from '@/styles/components/toastify'
 import { useModal } from '@/hooks/useModal'
 import CancelCreating from './messages/CancelCreating'
@@ -73,7 +73,6 @@ const CreateSpecialty: React.FC = () => {
     history.push(OPERATOR_SEE_ALL_SPECIALTYS)
   }
 
-
   return (
     <DefaultLayout title="Especialidades - Inclusão">
       <Content>
@@ -82,7 +81,7 @@ const CreateSpecialty: React.FC = () => {
           <OutlineButton onClick={onCancel}>Cancelar</OutlineButton>
           <ButtonPrimary
             onClick={onSave}
-            disabled={Object.values(dataToApi).some((field)=> !field)}
+            disabled={Object.values(dataToApi).some((field) => !field)}
           >
             Salvar
           </ButtonPrimary>

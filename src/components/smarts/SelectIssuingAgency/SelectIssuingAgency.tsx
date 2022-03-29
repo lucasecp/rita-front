@@ -5,20 +5,25 @@ import apiAdmin from '@/services/apiAdmin'
 interface SelectIssuingAgencyProps {
   issuingAgency: string
   setIssuingAgency: (value: string) => void
+  setIssuingAgencyToApi?: (value: string) => void
   error?: string
+  variation?: string
   [x: string]: any
 }
 
 const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
   issuingAgency,
   setIssuingAgency,
+  setIssuingAgencyToApi,
   error,
+  variation,
   ...rest
 }) => {
   const [issuingAgencyOptions, setIssuingAgencyOptions] = useState<any[]>([])
 
   const mapIssuingAgency = (array: any[]) => {
     if (!array) return []
+
     return array.map((obj) => ({
       value: obj.id,
       label: obj.descricao,
@@ -38,6 +43,25 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
     getIssuingAgency()
   }, [])
 
+  useEffect(() => {
+    if (!setIssuingAgencyToApi) {
+      return
+    }
+
+    const issuingAgencyOpt = issuingAgencyOptions.find(
+      (data) =>
+        data.label === issuingAgency || data.value === Number(issuingAgency),
+    )
+
+    if (!issuingAgencyOpt?.value || !issuingAgencyOpt?.label) {
+      return
+    }
+
+    setIssuingAgency(issuingAgencyOpt.value)
+
+    setIssuingAgencyToApi(issuingAgencyOpt.label)
+  }, [issuingAgency, issuingAgencyOptions])
+
   return (
     <Select
       options={issuingAgencyOptions}
@@ -48,6 +72,7 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
       hasError={!!error}
       msgError={error}
       name="issuingAgency"
+      variation={variation}
       {...rest}
     />
   )

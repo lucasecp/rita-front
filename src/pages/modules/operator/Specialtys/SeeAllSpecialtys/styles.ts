@@ -31,7 +31,7 @@ export const Content = styled.div`
     padding: 25px 24px 0;
     > *:last-child {
       margin: 0 -24px;
-    padding: 35px 24px;
+      padding: 35px 24px;
     }
   }
 `

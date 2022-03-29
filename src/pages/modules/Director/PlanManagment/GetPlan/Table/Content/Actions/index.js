@@ -1,14 +1,14 @@
 import React from 'react'
-import { Container } from './styles'
-import { ReactComponent as InactiveIcon } from '@/assets/icons/inactive.svg'
-import { ReactComponent as EyePurpleIcon } from '@/assets/icons/eye-purple.svg'
-import { ReactComponent as ActiveIcon } from '@/assets/icons/active.svg'
+import { useHistory } from 'react-router-dom'
+
 import CustomTooltip from '@/components/Tooltip'
-import { useHistory } from 'react-router'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 import { Inactivate } from './Inactivate'
 import { Suspend } from './Suspend'
 import { Activate } from './Activate'
+
+import { ReactComponent as EyePurpleIcon } from '@/assets/icons/eye-purple.svg'
+import { Container } from './styles'
 
 const Actions = ({ status, planInformations }) => {
   const history = useHistory()

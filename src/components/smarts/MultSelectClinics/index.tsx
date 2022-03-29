@@ -10,6 +10,7 @@ interface ClinicsProps {
   clinic: MultiSelectOption[]
   setClinic: React.Dispatch<SetStateAction<MultiSelectOption[]>>
   errors: any
+  color?: string
   setErrors: (error: any) => any
   [x: string]: any
 }
@@ -19,10 +20,9 @@ export const MultSelectClinics: React.FC<ClinicsProps> = ({
   setClinic,
   errors,
   setErrors,
+  color,
   ...rest
 }) => {
-
-
   const [clinicOptions, setClinicOptions] = useState<MultiSelectOption[]>([])
 
   const mapClinics = (array: any[]) => {
@@ -57,8 +57,6 @@ export const MultSelectClinics: React.FC<ClinicsProps> = ({
   //   setClinics(clinic || [])
   // }, [clinic])
 
-
-
   // const onChangingSelect = (values: MultiSelectOption[]) => {
   //   const hasAllOption = values.some((val) => val.id === 'All')
 
@@ -80,7 +78,7 @@ export const MultSelectClinics: React.FC<ClinicsProps> = ({
           hasError={!!errors.clinics}
           messageError={errors?.clinics}
           name="clinics"
-
+          color={color}
           {...rest}
         />
       </section>

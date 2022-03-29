@@ -1,6 +1,6 @@
 // import useQuery from '@/hooks/useQuery'
 import React, { useEffect, useState } from 'react'
-// import { useHistory } from 'react-router'
+// import { useHistory } from 'react-router-dom'
 import { Select } from '@/components/Form/Select'
 import { Container, Prev, Next } from './styles'
 
@@ -75,7 +75,7 @@ export const PaginationSimple: React.FC<PaginationSimpleProps> = ({
             { label: 100, value: 100 },
           ]}
           value={limit}
-          onChange={({ target }) => setLimit(target.value)}
+          onChange={({ target }) => setLimit(Number(target.value))}
           variation="secondary"
         />
       </div>

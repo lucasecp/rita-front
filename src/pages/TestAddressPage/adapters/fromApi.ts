@@ -1,4 +1,4 @@
-export const AddressfromApi = (data) => {
+export const AddressfromApi = (data: any) => {
   return {
     address: data.logradouro,
     district: data.bairro,

@@ -1,15 +1,13 @@
 import React, { useEffect, useMemo } from 'react'
-import { Link } from 'react-router-dom'
+
+import { useAuth } from '@/hooks/login'
+import useProfilePhoto from '@/components/Layout/DefaultLayout/hooks/useProfilePhoto'
+import formatFirstLastName from '@/helpers/formatFirstLastName'
+import { getInitialLetterName } from '@/components/Layout/DefaultLayout/helpers/getInitialLetterName'
 
 // import { ReactComponent as LetterIcon } from '@/assets/icons/letter.svg'
 import { ReactComponent as ExitIcon } from '@/assets/icons/exit.svg'
-
-import { useAuth } from '@/hooks/login'
-
 import { Container } from './styles'
-import useProfilePhoto from '../../hooks/useProfilePhoto'
-import formatFirstLastName from '@/helpers/formatFirstLastName'
-import { getInitialLetterName } from '../../helpers/getInitialLetterName'
 
 export const Header = ({ title, children }) => {
   const { clearDataLogout, user } = useAuth()
