@@ -30,6 +30,9 @@ function SendedFile({ file, onGetFile }) {
   }
 
   useEffect(() => {
+    if (!file) {
+      return
+    }
     if (!isValidTypeFile(file)) {
       showMessage(InvalidFormat)
       return removeFile()
@@ -57,27 +60,35 @@ function SendedFile({ file, onGetFile }) {
     showMessage(ImagePreview, { file }, true)
   }
 
+  console.log(file)
+
   return (
     <>
       <Container>
         <section>
-          <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
+          <InputFile
+            clearOnClick
+            accept=".png, .jpg, .jpeg, .pdf"
+            setValue={onGetFile}
+          >
             <OutlineButton small variation="blue">
               Selecionar Arquivo
             </OutlineButton>
           </InputFile>
-          <h6>{file.name}</h6>
+          <h6>{file?.name}</h6>
         </section>
-        <aside>
-          <button onClick={showPreview}>
-            <img src={zoomIcon} />
-            Ver
-          </button>
-          <button onClick={removeFile}>
-            <img src={trashIcon} />
-            Remover
-          </button>
-        </aside>
+        {file && (
+          <aside>
+            <button onClick={showPreview}>
+              <img src={zoomIcon} />
+              Ver
+            </button>
+            <button onClick={removeFile}>
+              <img src={trashIcon} />
+              Remover
+            </button>
+          </aside>
+        )}
       </Container>
     </>
   )

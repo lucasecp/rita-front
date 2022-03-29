@@ -32,17 +32,14 @@ const ProofOfIncome = ({
           </h2>
         </AccordionSummary>
         <AccordionDetails>
-          {proofOfIncomeFile && (
-            <SendedFile file={proofOfIncomeFile} onGetFile={onGetFile} />
-          )}
-          {!proofOfIncomeFile && (
-            <InstructionsIncome
-              selectIncome={selectIncome}
-              onGetSelectIncome={onSelectIncome}
-              onGetFile={onGetFile}
-              error={error}
-            />
-          )}
+          {/* <SendedFile file={proofOfIncomeFile} onGetFile={onGetFile} /> */}
+          <InstructionsIncome
+            selectIncome={selectIncome}
+            onGetSelectIncome={onSelectIncome}
+            onGetFile={onGetFile}
+            error={error}
+            file={proofOfIncomeFile}
+          />
         </AccordionDetails>
       </AccordionContainer>
     </Container>
