@@ -33,15 +33,25 @@ export const WalletStatements: React.FC = () => {
   const tableItems = useRef<any>()
   const [items, setItems] = useState<RitaWallet.PaymentRequest[]>([])
   const [selectedPeriod, setSelectedPeriod] = useState(1)
-  const [tableItemsSort, setTableItemsSort] = useState({})
+  const [tableItemsSort, setTableItemsSort] = useState<RitaComponents.TableSort>({
+    path: 'createdAt',
+    order: 'DESC',
+  })
+  const [tableItemsPaging, setTableItemsPaging] = useState({
+    take: 10,
+    skip: 0,
+  })
+  const [tableItemsCount, setTableItemsCount] = useState(0)
   const { Loading } = useLoading()
 
   async function fetchData() {
     const { data } = await apiWallet.get<RitaWallet.PaymentRequest[]>('/payment', {
       params: {
-        take: 10,
+        take: tableItemsPaging.take,
+        skip: tableItemsPaging.skip,
+        orderBy: tableItemsSort.path,
+        orderType: tableItemsSort.order,
         period: selectedPeriod,
-        sort: tableItemsSort,
       },
     })
 
@@ -50,6 +60,7 @@ export const WalletStatements: React.FC = () => {
     }
 
     setItems(data)
+    setTableItemsCount(50)
   }
 
   function handleItemsShowDetailsClick(index: number) {
@@ -72,7 +83,7 @@ export const WalletStatements: React.FC = () => {
       .finally(() => {
         Loading.turnOff()
       })
-  }, [selectedPeriod, tableItemsSort])
+  }, [selectedPeriod, tableItemsSort, tableItemsPaging])
 
   return (
     <DefaultLayout title="Carteira Digital">
@@ -91,7 +102,6 @@ export const WalletStatements: React.FC = () => {
           columns={[
             {
               path: 'id',
-              fit: true,
               custom: (_, index, isExpanded) => (
                 <TableColumnDetails
                   onClick={() => handleItemsShowDetailsClick(index)}
@@ -147,7 +157,9 @@ export const WalletStatements: React.FC = () => {
           childRow={(row) => <div>{row.description}</div>}
           data={items}
           sort={tableItemsSort}
+          count={tableItemsCount}
           onSort={setTableItemsSort}
+          onPaginate={setTableItemsPaging}
         />
       </Container>
     </DefaultLayout>

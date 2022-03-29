@@ -37,7 +37,15 @@ export const WalletPayments: React.FC = () => {
   const [paymentsNew, setPaymentsNew] = useState<RitaWallet.PaymentRequest[]>([])
   const [paymentsAll, setPaymentsAll] = useState<RitaWallet.PaymentRequest[]>([])
   const [selectedPeriod, setSelectedPeriod] = useState(1)
-  const [tablePaymentsAllSort, setTablePaymentsAllSort] = useState({})
+  const [tablePaymentsAllSort, setTablePaymentsAllSort] = useState<RitaComponents.TableSort>({
+    path: 'createdAt',
+    order: 'DESC',
+  })
+  const [tablePaymentsAllPaging, setTablePaymentsAllPaging] = useState({
+    take: 10,
+    skip: 0,
+  })
+  const [paymentsAllCount, setPaymentsAllCount] = useState(0)
   const { showMessage } = useModal()
   const { Loading } = useLoading()
 
@@ -52,7 +60,11 @@ export const WalletPayments: React.FC = () => {
         }),
         apiWallet.get<RitaWallet.PaymentRequest[]>('/payment', {
           params: {
-            take: 10,
+            take: tablePaymentsAllPaging.take,
+            skip: tablePaymentsAllPaging.skip,
+            orderBy: tablePaymentsAllSort.path,
+            orderType: tablePaymentsAllSort.order,
+            period: selectedPeriod,
           },
         }),
       ])
@@ -63,6 +75,7 @@ export const WalletPayments: React.FC = () => {
 
     if (Array.isArray(loadedPaymentsAll)) {
       setPaymentsAll(loadedPaymentsAll)
+      setPaymentsAllCount(100)
     }
   }
 
@@ -88,14 +101,13 @@ export const WalletPayments: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    console.log('effect selectedPeriod', selectedPeriod)
-    // @TODO: api.get payments
-  }, [selectedPeriod])
-
-  useEffect(() => {
-    console.log('effect tablePaymentsAllSort', tablePaymentsAllSort)
-    // @TODO: api.get payments
-  }, [tablePaymentsAllSort])
+    Loading.turnOn()
+    fetchData()
+      .catch(console.error)
+      .finally(() => {
+        Loading.turnOff()
+      })
+  }, [selectedPeriod, tablePaymentsAllSort, tablePaymentsAllPaging])
 
   return (
     <DefaultLayout title="Carteira Digital">
@@ -110,7 +122,6 @@ export const WalletPayments: React.FC = () => {
             columns={[
               {
                 path: 'id',
-                fit: true,
                 custom: (_, index, isExpanded) => (
                   <TableColumnDetails
                     onClick={() => handlePaymentsNewShowDetailsClick(index)}
@@ -157,6 +168,7 @@ export const WalletPayments: React.FC = () => {
             ]}
             childRow={(row) => <div>{row.description}</div>}
             data={paymentsNew}
+            hidePagination={true}
           />
         </section>
 
@@ -175,7 +187,6 @@ export const WalletPayments: React.FC = () => {
             columns={[
               {
                 path: 'id',
-                fit: true,
                 custom: (_, index, isExpanded) => (
                   <TableColumnDetails
                     onClick={() => handlePaymentsAllShowDetailsClick(index)}
@@ -234,7 +245,9 @@ export const WalletPayments: React.FC = () => {
             childRow={(row) => <div>{row.description}</div>}
             data={paymentsAll}
             sort={tablePaymentsAllSort}
+            count={paymentsAllCount}
             onSort={setTablePaymentsAllSort}
+            onPaginate={setTablePaymentsAllPaging}
           />
         </section>
       </Container>

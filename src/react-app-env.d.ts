@@ -1,5 +1,12 @@
 /// <reference types="react-scripts" />
 
+namespace RitaComponents {
+  type TableSort = {
+    path?: string
+    order?: 'ASC' | 'DESC'
+  }
+}
+
 namespace RitaWallet {
   type Caller = {
     id: string

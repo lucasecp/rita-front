@@ -72,23 +72,14 @@ export const Container = styled.div`
   }
 
   > footer {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     justify-content: space-between;
 
     color: ${colors.gray.middle};
     font-size: 16px;
-
-    > div {
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      gap: 10px;
-
-      svg {
-        height: 18px;
-      }
-    }
+    text-align: center;
   }
 `
 
@@ -153,4 +144,24 @@ export const BodyCell = styled.td<{ fit?: boolean }>`
       width: 1%;
       white-space: nowrap;
     `}
+`
+
+export const FooterRowsPerPage = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+`
+
+export const FooterPrevNext = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: end;
+  gap: 30px;
+
+  svg {
+    height: 18px;
+  }
 `

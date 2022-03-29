@@ -3,9 +3,16 @@ import React, { forwardRef, useState, useImperativeHandle } from 'react'
 // import { get as lodashGet, sortBy as lodashSortBy } from 'lodash-es'
 import { get as lodashGet } from 'lodash-es'
 
-import { ReactComponent as ChevronLeft } from '@/assets/icons/chevron-circle-left.svg'
-import { ReactComponent as ChevronRight } from '@/assets/icons/chevron-circle-right.svg'
-import { Container, HeaderArrowUp, HeaderArrowDown, BodyCell } from './styles'
+import { ReactComponent as ChevronLeft } from '@/assets/icons/chevron-left.svg'
+import { ReactComponent as ChevronRight } from '@/assets/icons/chevron-right.svg'
+import {
+  Container,
+  HeaderArrowUp,
+  HeaderArrowDown,
+  BodyCell,
+  FooterRowsPerPage,
+  FooterPrevNext,
+} from './styles'
 import { Select } from '@/components/Form/Select'
 
 type TablePropsHeader = {
@@ -20,27 +27,23 @@ type TablePropsColumn<T = any> = {
   custom?: (row: T, index: number, isExpanded: boolean) => ReactNode
 }
 
-type TablePropsSort = {
-  path?: string
-  order?: 'ASC' | 'DESC'
-}
-
 type TableProps<T = any> = {
   columns: TablePropsColumn<T>[]
   headers?: TablePropsHeader[]
   childRow?: (row: T) => ReactNode
   data?: T[]
-  sort?: TablePropsSort
+  sort?: RitaComponents.TableSort
+  count?: number
   hidePagination?: boolean
-  onSort?: (sort: TablePropsSort) => void
+  onSort?: (sort: RitaComponents.TableSort) => void
   onPaginate?: (paging: any) => void
 }
 
 const rowsPerPageOptions = [
   { label: '10', value: 10 },
-  { label: '20', value: 10 },
-  { label: '50', value: 10 },
-  { label: '100', value: 10 },
+  { label: '20', value: 20 },
+  { label: '50', value: 50 },
+  { label: '100', value: 100 },
 ]
 
 export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
@@ -51,6 +54,7 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
       childRow,
       data = [],
       sort = {},
+      count = 0,
       hidePagination = false,
       onSort,
       onPaginate
@@ -58,8 +62,8 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
     ref,
   ) {
     const [expandedRowIndex, setExpandedRowIndex] = useState(-1)
-    const [rowsPerPageSelected, setRowsPerPageSelected] = useState(10)
-    const [currentPage, setCurrentPage] = useState(1)
+    const [take, setTake] = useState(10)
+    const [skip, setSkip] = useState(0)
 
     function isSortOrderAsc(path: string) {
       return path === sort.path && sort.order === 'ASC'
@@ -85,14 +89,28 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
       return String(lodashGet(row, path, ''))
     }
 
-    function handleSelectRowsPerPage(value: any) {
-      setRowsPerPageSelected(value)
-      onPaginate && onPaginate({ size: rowsPerPageSelected, page: 1 })
+    function handleSelectRowsPerPage(value: string) {
+      setTake(Number(value) || 10)
+      setSkip(0)
+      onPaginate && onPaginate({ take, skip })
     }
 
-    function handleChangePage(page: number) {
-      setCurrentPage(page)
-      onPaginate && onPaginate({ size: rowsPerPageSelected, page })
+    function handleSkipPrevious() {
+      const newSkip = skip - take
+
+      if (newSkip >= 0) {
+        setSkip(newSkip)
+        onPaginate && onPaginate({ take, skip })
+      }
+    }
+
+    function handleSkipNext() {
+      const newSkip = skip + take
+
+      if (newSkip < count) {
+        setSkip(newSkip)
+        onPaginate && onPaginate({ take, skip })
+      }
     }
 
     useImperativeHandle(ref, () => ({
@@ -149,25 +167,29 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
 
         {!hidePagination && (
           <footer>
-            <div>
+            <FooterRowsPerPage>
               Linhas por página:
               {' '}
               <Select
                 variation="secondary"
                 options={rowsPerPageOptions}
-                value={rowsPerPageSelected}
+                value={take}
                 setValue={handleSelectRowsPerPage}
               />
-            </div>
+            </FooterRowsPerPage>
 
             <div>
-              1-10 de 100
+              {skip + 1}-{skip + take > count ? count : skip + take} de {count}
             </div>
 
-            <div>
-              <ChevronLeft onClick={() => handleChangePage(currentPage - 1)} />
-              <ChevronRight onClick={() => handleChangePage(currentPage + 1)} />
-            </div>
+            <FooterPrevNext>
+              <button type="button" onClick={handleSkipPrevious}>
+                <ChevronLeft />
+              </button>
+              <button type="button" onClick={handleSkipNext}>
+                <ChevronRight />
+              </button>
+            </FooterPrevNext>
           </footer>
         )}
       </Container>
