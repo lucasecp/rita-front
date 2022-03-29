@@ -8,7 +8,7 @@ import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes'
 import apiAdmin from '@/services/apiAdmin'
 import { toast } from '@/styles/components/toastify'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import { toApi } from '../adapters'
 import { ClinicAcessData } from '../components/ClinicAcessData'

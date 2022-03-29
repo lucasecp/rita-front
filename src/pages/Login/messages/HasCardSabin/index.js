@@ -6,7 +6,7 @@ import warning from '@/assets/icons/alerts/warning.svg'
 import { ButtonGroup, Container } from '../style'
 
 import { useModal } from '@/hooks/useModal'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import OutlineButton from '@/components/Button/Outline'
 import {
   DEFAULT_REGISTER,
