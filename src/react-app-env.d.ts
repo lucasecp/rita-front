@@ -62,10 +62,12 @@ namespace RitaWallet {
     typeTransaction?: RitaWallet.TypeTransaction
   }
 
+  type TypeTransactionMode = 'DEBIT' | 'CREDIT' | 'CASHBACK'
+
   type TypeTransaction = {
     id: string
     name: string
-    mode: string
+    mode: TypeTransactionMode
     createdAt: string
     situation: string
 

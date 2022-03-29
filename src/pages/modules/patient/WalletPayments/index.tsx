@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import moment from 'moment'
 
-import apiWallet from '@/services/apiWallet'
+import apiWallet, { getPaymentRequestSituation } from '@/services/apiWallet'
 import formatPrice from '@/helpers/formatPrice'
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
@@ -203,11 +203,7 @@ export const WalletPayments: React.FC = () => {
                 path: 'situation',
                 custom: (row) => (
                   <TableColumnStatus name={row.situation}>
-                    {String(row.situation).toUpperCase() === 'NEW'
-                      ? 'Aberto'
-                      : String(row.situation).toUpperCase() === 'OK'
-                      ? 'Realizado'
-                      : row.situation}
+                    {getPaymentRequestSituation(row.situation)}
                   </TableColumnStatus>
                 ),
               },

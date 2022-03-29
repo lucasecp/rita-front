@@ -4,6 +4,10 @@ import ArrowDownIcon from '@/assets/icons/arrow-down-order.svg'
 import ArrowUpIcon from '@/assets/icons/arrow-up-order.svg'
 
 export const Container = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 24px;
+
   > table {
     width: 100%;
 
@@ -63,6 +67,26 @@ export const Container = styled.div`
           background-color: ${colors.gray.extraLight};
           border-top: none;
         }
+      }
+    }
+  }
+
+  > footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: ${colors.gray.middle};
+    font-size: 16px;
+
+    > div {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      gap: 10px;
+
+      svg {
+        height: 18px;
       }
     }
   }

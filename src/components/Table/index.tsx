@@ -3,7 +3,10 @@ import React, { forwardRef, useState, useImperativeHandle } from 'react'
 // import { get as lodashGet, sortBy as lodashSortBy } from 'lodash-es'
 import { get as lodashGet } from 'lodash-es'
 
+import { ReactComponent as ChevronLeft } from '@/assets/icons/chevron-circle-left.svg'
+import { ReactComponent as ChevronRight } from '@/assets/icons/chevron-circle-right.svg'
 import { Container, HeaderArrowUp, HeaderArrowDown, BodyCell } from './styles'
+import { Select } from '@/components/Form/Select'
 
 type TablePropsHeader = {
   path: string
@@ -28,15 +31,35 @@ type TableProps<T = any> = {
   childRow?: (row: T) => ReactNode
   data?: T[]
   sort?: TablePropsSort
+  hidePagination?: boolean
   onSort?: (sort: TablePropsSort) => void
+  onPaginate?: (paging: any) => void
 }
+
+const rowsPerPageOptions = [
+  { label: '10', value: 10 },
+  { label: '20', value: 10 },
+  { label: '50', value: 10 },
+  { label: '100', value: 10 },
+]
 
 export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
   function Table(
-    { columns, headers = [], childRow, data = [], sort = {}, onSort },
+    {
+      columns,
+      headers = [],
+      childRow,
+      data = [],
+      sort = {},
+      hidePagination = false,
+      onSort,
+      onPaginate
+    },
     ref,
   ) {
     const [expandedRowIndex, setExpandedRowIndex] = useState(-1)
+    const [rowsPerPageSelected, setRowsPerPageSelected] = useState(10)
+    const [currentPage, setCurrentPage] = useState(1)
 
     function isSortOrderAsc(path: string) {
       return path === sort.path && sort.order === 'ASC'
@@ -60,6 +83,16 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
 
     function getRowColumnValue(row: any, path: string) {
       return String(lodashGet(row, path, ''))
+    }
+
+    function handleSelectRowsPerPage(value: any) {
+      setRowsPerPageSelected(value)
+      onPaginate && onPaginate({ size: rowsPerPageSelected, page: 1 })
+    }
+
+    function handleChangePage(page: number) {
+      setCurrentPage(page)
+      onPaginate && onPaginate({ size: rowsPerPageSelected, page })
     }
 
     useImperativeHandle(ref, () => ({
@@ -113,6 +146,30 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
             ))}
           </tbody>
         </table>
+
+        {!hidePagination && (
+          <footer>
+            <div>
+              Linhas por página:
+              {' '}
+              <Select
+                variation="secondary"
+                options={rowsPerPageOptions}
+                value={rowsPerPageSelected}
+                setValue={handleSelectRowsPerPage}
+              />
+            </div>
+
+            <div>
+              1-10 de 100
+            </div>
+
+            <div>
+              <ChevronLeft onClick={() => handleChangePage(currentPage - 1)} />
+              <ChevronRight onClick={() => handleChangePage(currentPage + 1)} />
+            </div>
+          </footer>
+        )}
       </Container>
     )
   },

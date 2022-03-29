@@ -7,10 +7,11 @@ import { useLoading } from '@/hooks/useLoading'
 import { ReactComponent as EyeOpenedIcon } from '@/assets/icons/eye-opened.svg'
 import { ReactComponent as EyeClosedIcon } from '@/assets/icons/eye-closed.svg'
 import { ReactComponent as CrownIcon } from '@/assets/icons/crown.svg'
+import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down3.svg'
+import { ReactComponent as ArrowUpIcon } from '@/assets/icons/arrow-up.svg'
 import {
   Container,
   TableColumnDetails,
-  TableColumnStatus,
   TableColumnAmount,
 } from './styles'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
@@ -39,6 +40,8 @@ export const WalletStatements: React.FC = () => {
     const { data } = await apiWallet.get<RitaWallet.PaymentRequest[]>('/payment', {
       params: {
         take: 10,
+        period: selectedPeriod,
+        sort: tableItemsSort,
       },
     })
 
@@ -63,14 +66,13 @@ export const WalletStatements: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    console.log('effect selectedPeriod', selectedPeriod)
-    // @TODO: api.get payments
-  }, [selectedPeriod])
-
-  useEffect(() => {
-    console.log('effect tableItemsSort', tableItemsSort)
-    // @TODO: api.get payments
-  }, [tableItemsSort])
+    Loading.turnOn()
+    fetchData()
+      .catch(console.error)
+      .finally(() => {
+        Loading.turnOff()
+      })
+  }, [selectedPeriod, tableItemsSort])
 
   return (
     <DefaultLayout title="Carteira Digital">
@@ -114,29 +116,23 @@ export const WalletStatements: React.FC = () => {
             },
             { path: 'typeTransaction.name' },
             {
-              path: 'situation',
-              custom: (row) => (
-                <TableColumnStatus name={row.situation}>
-                  {String(row.situation).toUpperCase() === 'NEW'
-                    ? 'Aberto'
-                    : String(row.situation).toUpperCase() === 'OK'
-                    ? 'Realizado'
-                    : row.situation}
-                </TableColumnStatus>
-              ),
-            },
-            {
               path: 'debitAmount',
               fit: true,
               custom: (row) => (
                 <TableColumnAmount>
-                  {formatPrice(row.debitAmount)}
+                  <span>{formatPrice(row.debitAmount)}</span>
                   <small>
                     <CrownIcon /> {convertPriceToCrownValue(row.debitAmount)}
                   </small>
+                  {String(row.typeTransaction.mode).toUpperCase() === 'DEBIT' &&
+                    <ArrowUpIcon className="debit" />}
+                  {String(row.typeTransaction.mode).toUpperCase() === 'CREDIT' &&
+                    <ArrowDownIcon className="credit" />}
+                  {String(row.typeTransaction.mode).toUpperCase() === 'CASHBACK' &&
+                    <ArrowDownIcon />}
                 </TableColumnAmount>
               ),
-            },
+            }
           ]}
           headers={[
             { path: 'id', label: 'Detalhes', sortable: false },
@@ -146,7 +142,6 @@ export const WalletStatements: React.FC = () => {
               label: 'Operação',
               sortable: true,
             },
-            { path: 'situation', label: 'Status', sortable: true },
             { path: 'debitAmount', label: 'Valor', sortable: true },
           ]}
           childRow={(row) => <div>{row.description}</div>}

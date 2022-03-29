@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import colors from '@/styles/colors'
 
 export const Container = styled.div`
@@ -38,41 +38,40 @@ export const TableColumnDetails = styled.button`
   }
 `
 
-export const TableColumnStatus = styled.span<{ name?: string }>`
-  display: inline-block;
-  background-color: ${colors.gray.middleLight};
-  border-radius: 16px;
-  color: #fff;
-  font-size: 16px;
-  line-height: 20px;
-
-  padding: 0 10px;
-
-  ${({ name }) =>
-    String(name).toUpperCase() === 'NEW' &&
-    css`
-      background-color: ${colors.pink.middle};
-    `}
-
-  ${({ name }) =>
-    String(name).toUpperCase() === 'OK' &&
-    css`
-      background-color: ${colors.green.light};
-      color: ${colors.green.dark};
-    `}
-`
-
 export const TableColumnAmount = styled.div`
+  display: grid;
+  grid-template-areas:
+    ". arrow"
+    ". arrow";
+  gap: 0 10px;
+  align-items: center;
+  justify-content: end;
+
   text-align: right;
 
-  svg {
-    height: 10px;
-    vertical-align: text-top;
-  }
-
-  small {
-    display: block;
+  > small {
     color: ${colors.gray.middle};
     font-size: 0.75em;
+
+    > svg {
+      height: 10px;
+      vertical-align: text-top;
+    }
+  }
+
+  > svg {
+    grid-area: arrow;
+
+    height: 14px;
+    vertical-align: text-top;
+    float: right;
+
+    &.debit {
+      color: ${colors.orange.middle};
+    }
+
+    &.credit {
+      color: ${colors.green.light};
+    }
   }
 `
