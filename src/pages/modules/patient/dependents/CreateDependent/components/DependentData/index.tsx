@@ -6,17 +6,18 @@ import { Select } from '@/components/Form/Select'
 import { InputEmail } from '@/components/smarts/InputEmail'
 
 import { useMessage } from '@/hooks/useMessage'
+import apiPatient from '@/services/apiPatient'
 
 import { validateFullName } from '@/helpers/validateFields/validateFullName'
 import { validatePhone } from '@/helpers/validateFields/validatePhone'
 import { validateCPF } from '@/helpers/validateFields/validateCPF'
 import { validateBirthDate } from '@/helpers/validateFields/validateBirthDate'
+import { validateGender } from '@/helpers/validateFields/validateGender'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 
-import { DependentData } from '../../types/index'
+import { DependentDataType } from '../../types/index'
 
 import { Container, InputsArea } from './styles'
-import apiPatient from '@/services/apiPatient'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 
 interface ErrorsState {
   name: string
@@ -27,14 +28,14 @@ interface ErrorsState {
   phone: string
 }
 
-interface UserInformationsProps {
+interface DependentDataProps {
   onGetAnyFieldsHasChanged: React.Dispatch<React.SetStateAction<boolean>>
-  setDependentData: React.Dispatch<React.SetStateAction<DependentData>>
+  setDependentData: React.Dispatch<React.SetStateAction<DependentDataType>>
   checkHasError: number
   onGetHasError: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const UserInformations: React.FC<UserInformationsProps> = ({
+export const DependentData: React.FC<DependentDataProps> = ({
   onGetAnyFieldsHasChanged,
   setDependentData,
   checkHasError,
@@ -48,38 +49,39 @@ export const UserInformations: React.FC<UserInformationsProps> = ({
   const [birthDate, setBirthDate] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-
   const [errors, setErrors] = useState({} as ErrorsState)
 
   const [changeTimes, setChangeTimes] = useState(0)
-  const [alreadyExists, setAlreadyExists] = useState(false)
+  const [alreadyExistsCPF, setAlreadyExistsCPF] = useState(false)
 
   useEffect(() => {
-    const clearedCPF = clearSpecialCaracter(cpf)
+    const verifyIfAlreadyExistsCPF = async () => {
+      const clearedCPF = clearSpecialCaracter(cpf)
 
-    if (clearedCPF.length === 11) {
-      apiPatient
-        .get(`/paciente/status?cpf=${cpf}`)
-        .then((response) => {
-          if (response.data.status === 'CS') {
-            setAlreadyExists(false)
-          } else {
-            setAlreadyExists(true)
-          }
-        })
-        .catch((err) => {
-          if (err.response.status === 404) {
-            setAlreadyExists(false)
-          }
-        })
+      if (clearedCPF.length === 11) {
+        const response = await apiPatient.get(`/paciente/status?cpf=${cpf}`)
+
+        if (response.data.status === 'CS') {
+          setAlreadyExistsCPF(false)
+        } else {
+          setAlreadyExistsCPF(true)
+        }
+
+        if (response.status === 404) {
+          setAlreadyExistsCPF(false)
+        }
+      }
     }
+
+    verifyIfAlreadyExistsCPF()
   }, [cpf])
 
-  const hasErrorFunction = (canSetError = false) => {
+  const verifyErrorsInFields = (canSetError = false) => {
     const errorsTemporary = {
       ...errors,
-      cpf: validateCPF(cpf, alreadyExists),
+      cpf: validateCPF(cpf, alreadyExistsCPF),
       name: validateFullName(name, 3),
+      gender: validateGender(gender),
       phone: validatePhone(phone, true),
       birthDate: validateBirthDate(birthDate),
     }
@@ -100,7 +102,7 @@ export const UserInformations: React.FC<UserInformationsProps> = ({
 
     setChangeTimes(changeTimes + 1)
 
-    hasErrorFunction()
+    verifyErrorsInFields()
 
     setDependentData({
       name,
@@ -110,12 +112,12 @@ export const UserInformations: React.FC<UserInformationsProps> = ({
       email,
       phone,
     })
-  }, [name, cpf, gender, birthDate, email, phone, alreadyExists])
+  }, [name, cpf, gender, birthDate, email, phone, alreadyExistsCPF])
 
   useEffect(() => {
     if (checkHasError) {
       sendErrorMessage()
-      hasErrorFunction(true)
+      verifyErrorsInFields(true)
     }
   }, [checkHasError])
 
@@ -153,6 +155,8 @@ export const UserInformations: React.FC<UserInformationsProps> = ({
             ]}
             value={gender}
             setValue={setGender}
+            hasError={!!errors.gender}
+            msgError={errors.gender}
           />
           <InputMask
             label="Data de Nascimento:"

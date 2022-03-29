@@ -76,26 +76,30 @@ export const FormAddress = styled.div<FormAddressProps>`
     overflow: hidden;
   }
 
-  .section1 {
+  section:nth-child(1) {
     grid-template-columns: repeat(3, 1fr);
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
   }
 
-  .section2 {
+  section:nth-child(2) {
     grid-template-columns: repeat(3, 1fr);
 
     div:nth-child(1) {
       grid-column: 1 / 3;
     }
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
   }
 
-  .section3 {
+  section:nth-child(3) {
     grid-template-columns: repeat(2, 1fr);
-  }
 
-  @media (max-width: 767px) {
-    .section1,
-    .section2,
-    .section3 {
+    @media (max-width: 767px) {
       grid-template-columns: 1fr;
     }
   }

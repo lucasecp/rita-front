@@ -11,26 +11,37 @@ import { InformationsIncorrect } from './messages/InformationsIncorrect'
 import { useModal } from '@/hooks/useModal'
 import { useMessage } from '@/hooks/useMessage'
 
-import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
+import {
+  PATIENT_ADD_DOCUMENT_DEPENDENT,
+  PATIENT_DEPENDENTS,
+} from '@/routes/constants/namedRoutes/routes'
 
-import { UserInformations } from './components/UserInformations'
-import { UserAddress } from './components/UserAddress'
+import { DependentData } from './components/DependentData'
+import { DependentAddress } from './components/DependentAddress'
 
-import { DependentData, DependentAddress } from './types/index'
+import { DependentDataType, DependentAddressType } from './types/index'
+
+import apiPatient from '@/services/apiPatient'
+import { dependentToApi } from './adapters/dependentToApi'
+import { dependentFromApi } from './adapters/dependentFromApi'
+import { ResponseCreateDependent } from './adapters/types'
+import { useLoading } from '@/hooks/useLoading'
+import { toast } from '@/styles/components/toastify'
 
 import { Container } from './styles'
 
 export const CreateDependent: React.FC = () => {
   const history = useHistory()
   const { showMessage } = useModal()
+  const { Loading } = useLoading()
   const [errorMessageInformations, sendErrorMessageInformations] = useMessage()
   const [errorMessageAddress, sendErrorMessageAddress] = useMessage()
 
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(false)
 
-  const [dependentData, setDependentData] = useState({} as DependentData)
+  const [dependentData, setDependentData] = useState({} as DependentDataType)
   const [dependentAddress, setDependentAddress] = useState(
-    {} as DependentAddress,
+    {} as DependentAddressType,
   )
 
   const [hasErrorInformations, setHasErrorInformations] = useState(false)
@@ -45,29 +56,75 @@ export const CreateDependent: React.FC = () => {
     history.push(PATIENT_DEPENDENTS)
   }
 
-  const onCreateDependent = () => {
+  const onCreateDependent = async () => {
     sendErrorMessageInformations()
     sendErrorMessageAddress()
 
     if (hasErrorInformations || hasErrorAddress) {
       showMessage(InformationsIncorrect)
     } else {
-      alert('Chama API')
-      console.log('dependentData: ', dependentData)
-      console.log('dependentAddress: ', dependentAddress)
+      try {
+        Loading.turnOn()
+        const dependentMapped = dependentToApi(dependentData, dependentAddress)
+
+        const response = await apiPatient.post<ResponseCreateDependent>(
+          '/paciente/dependente',
+          dependentMapped,
+        )
+
+        const dataToAddDependentDocuments = {
+          id: response.data.idPaciente,
+          birthdate: dependentMapped.dataNascimento,
+          cpf: dependentMapped.cpf,
+        }
+
+        const dataToAddDocumentDependent = {
+          dependent: dataToAddDependentDocuments,
+        }
+
+        history.push(PATIENT_ADD_DOCUMENT_DEPENDENT, dataToAddDocumentDependent)
+
+        // const responseRegisterDependent =
+        //   await apiPatient.post<ResponseCreateDependent>(
+        //     '/paciente/dependente',
+        //     dependentMapped,
+        //   )
+
+        // const dependentMappedFromApi = dependentFromApi(
+        //   responseRegisterDependent.data,
+        // )
+
+        // await apiPatient.post(
+        //   `/paciente/dependente/${dependentMappedFromApi.id}?forcarAssociacao=true`,
+        // )
+
+        // const dataToAddDocumentDependent = {
+        //   dependent: {
+        //     id: dependentMappedFromApi.id,
+        //     birthdate: dependentMappedFromApi.birthDate,
+        //     cpf: dependentMappedFromApi.cpf,
+        //   },
+        // }
+
+        // history.push(PATIENT_ADD_DOCUMENT_DEPENDENT, dataToAddDocumentDependent)
+      } catch {
+        toast.error('Erro ao incluir dependente')
+      } finally {
+        Loading.turnOff()
+      }
     }
   }
 
   return (
     <DefaultLayout title="Inclusão de Dependente">
       <Container>
-        <UserInformations
+        <DependentData
           onGetAnyFieldsHasChanged={setAnyFieldsHasChanged}
           setDependentData={setDependentData}
           checkHasError={errorMessageInformations}
           onGetHasError={setHasErrorInformations}
         />
-        <UserAddress
+        <DependentAddress
           onGetAnyFieldsHasChanged={setAnyFieldsHasChanged}
           setAddress={setDependentAddress}
           checkHasError={errorMessageAddress}

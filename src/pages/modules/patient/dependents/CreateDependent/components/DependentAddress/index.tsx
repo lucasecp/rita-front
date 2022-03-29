@@ -6,7 +6,7 @@ import InputMask from '@/components/Form/InputMask'
 import SelectUf from '@/components/smarts/SelectUf'
 import SelectCity from '@/components/smarts/SelectCity'
 
-import { DependentAddress, DependentData } from '../../types/index'
+import { DependentAddressType } from '../../types/index'
 
 import { validateCep } from '@/helpers/validateFields/validateCep'
 import { validateUf } from '@/helpers/validateFields/validateUf'
@@ -27,14 +27,14 @@ interface ErrorsState {
   complement: string
 }
 
-interface UserAddressProps {
+interface DependentAddressProps {
   onGetAnyFieldsHasChanged: React.Dispatch<React.SetStateAction<boolean>>
-  setAddress: React.Dispatch<React.SetStateAction<DependentAddress>>
+  setAddress: React.Dispatch<React.SetStateAction<DependentAddressType>>
   checkHasError: number
   onGetHasError: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const UserAddress: React.FC<UserAddressProps> = ({
+export const DependentAddress: React.FC<DependentAddressProps> = ({
   onGetAnyFieldsHasChanged,
   setAddress,
   checkHasError,
@@ -77,7 +77,7 @@ export const UserAddress: React.FC<UserAddressProps> = ({
     }
   }, [addressIsEqualHolder])
 
-  const hasErrorFunction = (canSetError = false) => {
+  const verifyErrorsInFields = (canSetError = false) => {
     const errorsTemporary = {
       ...errors,
       cep: validateCep(cep),
@@ -106,7 +106,7 @@ export const UserAddress: React.FC<UserAddressProps> = ({
 
     setChangeTimes(changeTimes + 1)
 
-    hasErrorFunction()
+    verifyErrorsInFields()
 
     setAddress({
       cep,
@@ -121,7 +121,7 @@ export const UserAddress: React.FC<UserAddressProps> = ({
 
   useEffect(() => {
     if (checkHasError) {
-      hasErrorFunction(true)
+      verifyErrorsInFields(true)
     }
   }, [checkHasError])
 
@@ -137,7 +137,7 @@ export const UserAddress: React.FC<UserAddressProps> = ({
         />
 
         <FormAddress showFields={!addressIsEqualHolder}>
-          <section className="section1">
+          <section>
             <InputMask
               label="CEP:"
               mask="99.999-999"
@@ -162,7 +162,7 @@ export const UserAddress: React.FC<UserAddressProps> = ({
               msgError={errors.city}
             />
           </section>
-          <section className="section2">
+          <section>
             <InputText
               label="Endereço:"
               value={addressDep}
@@ -179,7 +179,7 @@ export const UserAddress: React.FC<UserAddressProps> = ({
               type="number"
             />
           </section>
-          <section className="section3">
+          <section>
             <InputText
               label="Bairro:"
               value={district}
