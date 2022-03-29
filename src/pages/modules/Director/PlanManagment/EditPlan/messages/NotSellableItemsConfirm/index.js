@@ -202,7 +202,7 @@ export const EditPlan = () => {
 
     try {
       await apiAdmin.put(`/plano/${initialPlan.idPlano}`, planMapped, {
-        params: { confirmado: false }
+        params: { confirmado: false },
       })
 
       // sellableItems = [

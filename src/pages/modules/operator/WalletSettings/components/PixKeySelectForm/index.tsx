@@ -21,14 +21,14 @@ const PixKeyAvailableList: React.FC<PixKeyAvailableListProps> = ({
 }) => {
   const [items, setItems] = useState<FinancialListItemModel[]>([])
   const [selectedItems, setSelectedItems] = useState<FinancialListItemModel[]>(
-    selectedItemsFromProps
+    selectedItemsFromProps,
   )
 
   useEffect(() => {
-    async function fetchData () {
+    async function fetchData() {
       const { data } = await apiWallet.get('/pix-available')
 
-      if (data && Array.isArray(data))  {
+      if (data && Array.isArray(data)) {
         const loadedItems = []
 
         for (const row of data) {

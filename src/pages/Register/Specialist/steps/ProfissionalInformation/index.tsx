@@ -210,7 +210,7 @@ const ProfissionalInformation: React.FC = () => {
           errors={errors}
           setErrors={setErrors}
           color="green"
-          />
+        />
 
         <MultSelectClinics
           clinic={clinics}

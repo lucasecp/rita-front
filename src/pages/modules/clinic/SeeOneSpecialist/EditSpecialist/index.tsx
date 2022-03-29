@@ -4,7 +4,7 @@ import { PersonalDatas } from '../components/PersonalDatas'
 import { Clinics } from '../components/Clinics'
 import { ProfissionalDatas } from '../components/ProfissionalDatas'
 import { Specialty } from '../components/Specialty'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 import OutlineButton from '@/components/Button/Outline'
 

@@ -23,8 +23,6 @@ export const MultSelectClinics: React.FC<ClinicsProps> = ({
   color,
   ...rest
 }) => {
-
-
   const [clinicOptions, setClinicOptions] = useState<MultiSelectOption[]>([])
 
   const mapClinics = (array: any[]) => {
@@ -58,8 +56,6 @@ export const MultSelectClinics: React.FC<ClinicsProps> = ({
   // useEffect(() => {
   //   setClinics(clinic || [])
   // }, [clinic])
-
-
 
   // const onChangingSelect = (values: MultiSelectOption[]) => {
   //   const hasAllOption = values.some((val) => val.id === 'All')

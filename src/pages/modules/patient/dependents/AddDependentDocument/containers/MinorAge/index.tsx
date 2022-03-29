@@ -10,7 +10,7 @@ import apiPatient from '@/services/apiPatient'
 import axios from 'axios'
 import { toast } from '@/styles/components/toastify'
 import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
 import { CancelAndExit } from './documents/messages/CancelAndExit'
 

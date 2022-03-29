@@ -48,7 +48,9 @@ export const LastStatementList: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await apiWallet.get<RitaWallet.PaymentRequest>('/payment/statement')
+      const { data } = await apiWallet.get<RitaWallet.PaymentRequest>(
+        '/payment/statement',
+      )
 
       if (!data || !Array.isArray(data)) {
         throw new Error('Resposta vazia ou inválida')

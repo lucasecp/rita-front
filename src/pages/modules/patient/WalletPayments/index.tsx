@@ -34,8 +34,12 @@ function convertPriceToCrownValue(amount: number, currency?: string) {
 export const WalletPayments: React.FC = () => {
   const tablePaymentsNew = useRef<any>()
   const tablePaymentsAll = useRef<any>()
-  const [paymentsNew, setPaymentsNew] = useState<RitaWallet.PaymentRequest[]>([])
-  const [paymentsAll, setPaymentsAll] = useState<RitaWallet.PaymentRequest[]>([])
+  const [paymentsNew, setPaymentsNew] = useState<RitaWallet.PaymentRequest[]>(
+    [],
+  )
+  const [paymentsAll, setPaymentsAll] = useState<RitaWallet.PaymentRequest[]>(
+    [],
+  )
   const [selectedPeriod, setSelectedPeriod] = useState(1)
   const [tablePaymentsAllSort, setTablePaymentsAllSort] = useState<RitaComponents.TableSort>({
     path: 'createdAt',

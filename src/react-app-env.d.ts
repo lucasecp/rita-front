@@ -51,7 +51,12 @@ namespace RitaWallet {
     payment?: RitaWallet.PaymentRequest
   }
 
-  type PaymentRequestSituation = 'NEW' | 'OK' | 'EXPIRED' | 'REJECTED' | 'WAITING'
+  type PaymentRequestSituation =
+    | 'NEW'
+    | 'OK'
+    | 'EXPIRED'
+    | 'REJECTED'
+    | 'WAITING'
 
   type PaymentRequest = {
     id: string

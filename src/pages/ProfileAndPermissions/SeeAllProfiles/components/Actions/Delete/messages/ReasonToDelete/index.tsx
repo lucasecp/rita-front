@@ -8,7 +8,7 @@ import Textarea from '@/components/Form/Textarea'
 
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import { Container } from './styles'
 import apiUser from '@/services/apiUser'
@@ -25,9 +25,7 @@ interface ResponseProps {
   id: number
 }
 
-export const ReasonToDeleteModal: React.FC<ResponseProps> = ({
-  id,
-}) => {
+export const ReasonToDeleteModal: React.FC<ResponseProps> = ({ id }) => {
   const { closeModal } = useModal()
   const { Loading } = useLoading()
   const history = useHistory()

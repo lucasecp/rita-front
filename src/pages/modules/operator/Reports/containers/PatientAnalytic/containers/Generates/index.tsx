@@ -10,7 +10,7 @@ import { RadioGroup } from '@material-ui/core'
 import { Container } from './styles'
 
 import { OPERATOR_REPORTS } from '@/routes/constants/namedRoutes/routes'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { GenerateReportState, PdfHasBeenDisabledByState } from '../..'
 
 interface GeneratesProps {

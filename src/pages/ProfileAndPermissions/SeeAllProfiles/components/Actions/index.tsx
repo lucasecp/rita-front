@@ -5,7 +5,7 @@ import { ReactComponent as EyePurpleIcon } from '@/assets/icons/eye-purple.svg'
 import CustomTooltip from '@/components/Tooltip'
 import { DIRECTOR_SEE_ONE_PROFILE } from '@/routes/constants/namedRoutes/routes'
 
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { ActionDelete } from './Delete'
 
 interface ActionsProps {

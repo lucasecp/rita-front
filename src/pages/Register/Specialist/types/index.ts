@@ -16,7 +16,6 @@ export interface BasicInformationI {
   issuingAgency: string
   ufIssuingAgency: string
   issuingAgencyToApi: string
-  
 }
 
 type SpecialtysAndDocsErrors = { [x: string]: string }

@@ -28,7 +28,6 @@ export const ResetStatusOnePatient: React.FC<PersonStatusProps> = ({
     setlimitTry(patientStatus.limitTry)
   }, [patientStatus])
 
-
   return (
     <Container>
       <Select

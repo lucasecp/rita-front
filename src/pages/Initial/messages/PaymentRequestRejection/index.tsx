@@ -18,7 +18,9 @@ type PaymentRequestRejectionProps = {
   data: RitaWallet.PaymentRequest
 }
 
-const PaymentRequestRejection: React.FC<PaymentRequestRejectionProps> = ({ data }) => {
+const PaymentRequestRejection: React.FC<PaymentRequestRejectionProps> = ({
+  data,
+}) => {
   const [reason, setReason] = useState('')
   const { closeModal } = useModal()
   const { Loading } = useLoading()
@@ -93,9 +95,7 @@ const PaymentRequestRejection: React.FC<PaymentRequestRejectionProps> = ({ data 
       </section>
 
       <footer>
-        <ButtonPrimary onClick={onSubmit}>
-          Enviar
-        </ButtonPrimary>
+        <ButtonPrimary onClick={onSubmit}>Enviar</ButtonPrimary>
       </footer>
     </Container>
   )

@@ -32,10 +32,14 @@ const InsufficientBalance: React.FC<InsufficientBalanceProps> = ({
   }
 
   function handleBuyCoinClick() {
-    showMessage(WalletBuyCoinInputCustom, {
-      walletBalance,
-      initialValue: remaningAmount
-    }, true)
+    showMessage(
+      WalletBuyCoinInputCustom,
+      {
+        walletBalance,
+        initialValue: remaningAmount,
+      },
+      true,
+    )
   }
 
   return (
@@ -43,23 +47,19 @@ const InsufficientBalance: React.FC<InsufficientBalanceProps> = ({
       <TimesCircleIcon />
       <h3>Saldo insuficiente.</h3>
       <p>
-        Você ainda precisa de
-        {' '}
+        Você ainda precisa de{' '}
         <strong>
-          {formatPrice(remaningAmount)}
-          {' '}
+          {formatPrice(remaningAmount)}{' '}
           <small>
-            (<CrownIcon />{convertPriceToCrownValue(remaningAmount)})
+            (<CrownIcon />
+            {convertPriceToCrownValue(remaningAmount)})
           </small>
-        </strong>
-        {' '}
+        </strong>{' '}
         para realizar essa compra.
       </p>
 
       <ButtonGroup>
-        <OutlineButton onClick={handleCancelClick}>
-          Cancelar
-        </OutlineButton>
+        <OutlineButton onClick={handleCancelClick}>Cancelar</OutlineButton>
         <ButtonPrimary onClick={handleBuyCoinClick}>
           Comprar Moedas
         </ButtonPrimary>

@@ -1,7 +1,7 @@
 import React from 'react'
 import success from '@/assets/icons/alerts/success.svg'
 
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
 
 import ButtonPrimary from '@/components/Button/Primary'
@@ -19,11 +19,9 @@ export const RegisterSuccess: React.FC = () => {
   return (
     <Container>
       <img src={success} />
-      <p>
-        Cadastro realizado com sucesso
-      </p>
+      <p>Cadastro realizado com sucesso</p>
       <footer>
-        <ButtonPrimary onClick={handleCloseModal} variation='green'>
+        <ButtonPrimary onClick={handleCloseModal} variation="green">
           Voltar a página inicial
         </ButtonPrimary>
       </footer>

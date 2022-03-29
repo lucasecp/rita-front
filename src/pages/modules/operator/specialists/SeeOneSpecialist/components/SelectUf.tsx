@@ -9,7 +9,12 @@ interface SelectUfProps {
   error?: string
 }
 
-const SelectUf: React.FC<SelectUfProps> = ({ setUf, setUfToApi,uf,error }) => {
+const SelectUf: React.FC<SelectUfProps> = ({
+  setUf,
+  setUfToApi,
+  uf,
+  error,
+}) => {
   const [ufOptions, setUfOptions] = useState<any[]>([])
 
   const mapUf = (array: any[]) => {

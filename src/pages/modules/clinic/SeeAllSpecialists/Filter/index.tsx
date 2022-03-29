@@ -15,7 +15,7 @@ import { fieldsApi } from '../static/fieldsApi'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import useQueryParams from './useQueryParams'
 import validateCpf from '@/helpers/validateCpf'
-import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectIssuingAgency';
+import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectIssuingAgency'
 
 interface FilterProps {
   setFilters: React.Dispatch<React.SetStateAction<any[]>>
