@@ -9,7 +9,7 @@ import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { VALIDATOR_SEE_ONE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 
 function RecordAlreadyAnalized(data) {

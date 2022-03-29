@@ -1,6 +1,6 @@
 import useQuery from '@/hooks/useQuery'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { Select } from '../Form/Select'
 import { Container, Prev, Next } from './style'
 import { PaginationProps } from './types'

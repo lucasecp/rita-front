@@ -1,5 +1,5 @@
 import CustomTooltip from '@/components/Tooltip'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import apiAdmin from '@/services/apiAdmin'
 
 import { ActivateIcon } from './styles'

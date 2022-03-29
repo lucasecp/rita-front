@@ -1,7 +1,7 @@
 import React from 'react'
 import success from '@/assets/icons/alerts/success.svg'
 
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
 
 import ButtonPrimary from '@/components/Button/Primary'

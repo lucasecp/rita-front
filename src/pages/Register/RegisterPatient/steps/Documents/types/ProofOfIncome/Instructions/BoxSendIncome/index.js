@@ -4,8 +4,9 @@ import OutlineButton from '@/components/Button/Outline'
 import { InputFile } from '@/components/Form/InputFile'
 
 import { Container } from './styles'
+import SendedFile from '../../../../components/SendedFile'
 
-function BoxSendIncome({ onGetFile }) {
+function BoxSendIncome({ onGetFile, file }) {
   return (
     <Container>
       <div id="box-information">
@@ -38,11 +39,15 @@ function BoxSendIncome({ onGetFile }) {
         </ul>
       </div>
 
-      <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
-        <OutlineButton small variation="blue">
-          Selecionar Arquivo
-        </OutlineButton>
-      </InputFile>
+      {file ? (
+        <SendedFile file={file} onGetFile={onGetFile} />
+      ) : (
+        <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
+          <OutlineButton small variation="blue">
+            Selecionar Arquivo
+          </OutlineButton>
+        </InputFile>
+      )}
 
       <section>
         <span>Permitido apenas o envio de 1 arquivo</span>

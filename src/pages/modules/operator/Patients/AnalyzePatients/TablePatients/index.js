@@ -5,7 +5,7 @@ import { everyFirstLetterCapitalize } from '@/helpers/everyFirstLetterCapitalize
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { queryOrderString, queryFilterString } from '../helpers/queryString'
 import { Content, Td, Container } from './styles'
 import Thead from './Thead'
