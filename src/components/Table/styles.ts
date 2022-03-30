@@ -4,6 +4,10 @@ import ArrowDownIcon from '@/assets/icons/arrow-down-order.svg'
 import ArrowUpIcon from '@/assets/icons/arrow-up-order.svg'
 
 export const Container = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 24px;
+
   > table {
     width: 100%;
 
@@ -65,6 +69,17 @@ export const Container = styled.div`
         }
       }
     }
+  }
+
+  > footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+
+    color: ${colors.gray.middle};
+    font-size: 16px;
+    text-align: center;
   }
 `
 
@@ -129,4 +144,24 @@ export const BodyCell = styled.td<{ fit?: boolean }>`
       width: 1%;
       white-space: nowrap;
     `}
+`
+
+export const FooterRowsPerPage = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+`
+
+export const FooterPrevNext = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: end;
+  gap: 30px;
+
+  svg {
+    height: 18px;
+  }
 `
