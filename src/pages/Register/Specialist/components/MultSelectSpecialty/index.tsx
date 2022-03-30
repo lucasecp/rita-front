@@ -5,6 +5,8 @@ import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState, SetStateAction } from 'react'
 
 import { Container } from './styles'
+import { useModal } from '@/hooks/useModal'
+import InsertRqeNumber from './messages/insertRqeNumber/index'
 
 //Será mostrado uma modal caso a especialidade requerer inscrição
 
@@ -12,6 +14,7 @@ interface SpecialtysProps {
   specialtys: MultiSelectOption[]
   setSpecialtys: React.Dispatch<SetStateAction<MultiSelectOption[]>>
   errors: any
+  setErrors: (error: any) => any
   color?: string
   [x: string]: any
 }
@@ -20,6 +23,7 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
   specialtys,
   setSpecialtys,
   errors,
+  setErrors,
   color,
   ...rest
 }) => {
@@ -27,6 +31,7 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
     MultiSelectOption[]
   >([])
 
+  const { showMessage } = useModal()
 
   const mapSpecialtys = (
     array: {
@@ -63,7 +68,15 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
     getSpecialtys()
   }, [])
 
-
+  const onChange = (values: MultiSelectOption[], value?: MultiSelectOption) => {
+    if (value?.rqeRequired) {
+      return showMessage(InsertRqeNumber, {
+        setSpecialtys,
+        currentSpecialty: value,
+      })
+    }
+    setSpecialtys(values)
+  }
 
   return (
     <Container>
@@ -78,6 +91,9 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
           hasError={!!errors?.specialtys}
           messageError={errors?.specialtys}
           name="specialtys"
+          onSelect={(values: MultiSelectOption[], v?: MultiSelectOption) =>
+            onChange(values, v)
+          }
           {...rest}
         />
       </section>
