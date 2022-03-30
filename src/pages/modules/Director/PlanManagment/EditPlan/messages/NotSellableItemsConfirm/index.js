@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { RangeOfUse } from '@/components/RangeOfUse'

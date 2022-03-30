@@ -31,6 +31,10 @@ import { previewPatientsFromApi } from './adapters/fromApi'
 import { previewFiltersToApi } from './adapters/previewFiltersToApi'
 import { reportFiltersToApi } from './adapters/reportFiltersToApi'
 
+interface Test {
+  test: string
+}
+
 interface FiltersProps {
   generatePreview: number
   onGetReportCanBeGenerated: (can: boolean) => void
@@ -91,7 +95,7 @@ export const Filters: React.FC<FiltersProps> = ({
     } else {
       setColumns(selectedColumns)
     }
-  } // OCP and MultiSelect Limited
+  }
 
   useEffect(() => {
     onGetReportCanBeGenerated(false)
@@ -140,7 +144,6 @@ export const Filters: React.FC<FiltersProps> = ({
           registrationPeriod,
           validationPeriod,
           status,
-          // columns,
         })
 
         try {
@@ -214,23 +217,24 @@ export const Filters: React.FC<FiltersProps> = ({
           error: 'Erro ao gerar relatório',
         },
       )
-      if (response.status === 200) {
-        if (generateReport.fileTypeReport === 'xlsx') {
-          const blobReportXlsx = new Blob([response.data], {
-            type: 'application/vnd.ms-excel;charset=utf-8',
-          })
-          downloadFile(blobReportXlsx, '_Beneficiario', 'xls')
-        }
 
-        if (generateReport.fileTypeReport === 'pdf') {
-          const blobReportPdf = new Blob([response.data], {
-            type: 'application/pdf',
-          })
-          downloadFile(blobReportPdf, '_Beneficiario', 'pdf')
-        }
+      if (generateReport.fileTypeReport === 'xlsx') {
+        const blobReportXlsx = new Blob([response.data], {
+          type: 'application/vnd.ms-excel;charset=utf-8',
+        })
+
+        downloadFile(blobReportXlsx, '_Beneficiario', 'xls')
+      }
+
+      if (generateReport.fileTypeReport === 'pdf') {
+        const blobReportPdf = new Blob([response.data], {
+          type: 'application/pdf',
+        })
+
+        downloadFile(blobReportPdf, '_Beneficiario', 'pdf')
       }
     } catch (error) {
-      toast.error('Erro ao emitir relatório!')
+      // toast.error('Erro ao emitir relatório!')
     }
   }
 
