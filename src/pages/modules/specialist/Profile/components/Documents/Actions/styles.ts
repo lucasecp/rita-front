@@ -4,6 +4,7 @@ export const Container = styled.section`
 display: flex;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: space-between;
   ::after{
     content: '';
     display: block;

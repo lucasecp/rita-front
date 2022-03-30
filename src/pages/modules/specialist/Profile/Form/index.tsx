@@ -14,8 +14,17 @@ import { toApi } from '../adapters'
 import { Clinics } from '../components/Clinics'
 import SpecialistInfo from '../components/SpecialistInfo'
 import { Specialtys } from '../components/Specialtys'
-import { DataSpecialistI, ErrorsI, SpecialistInfoI } from '../Types'
+import {
+  DataSpecialistI,
+  ErrorsI,
+  SpecialistInfoI,
+  SpecialtysAndDocsType,
+  RqeAndSpecialtysType,
+  SpecialtysType,
+  ClinicErrorsType,
+} from '../Types'
 import { Container } from './styles'
+import Documents from '../components/Documents/index'
 
 interface FormProps {
   data: DataSpecialistI
@@ -29,21 +38,37 @@ const Form: React.FC<FormProps> = ({
   setMakeNewRequest,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
+
   const [fieldWasChanged, setFieldWasChanged] = useState(false)
-  const [errors, setErrors] = useState<ErrorsI>({})
+
+  const [errors, setErrors] = useState<ErrorsI>({} as ErrorsI)
+
   const [specialistInfo, setSpecialistInfo] = useState<SpecialistInfoI>(
     data.specialistInfo || {},
   )
-  const [specialistSpecialitys, setSpecialistSpecialitys] = useState<
-    MultiSelectOption[]
-  >([])
-  const [specialistClinics, setSpecialistClinic] = useState<
-    MultiSelectOption[]
-  >([])
+
+  const [specialistSpecialitys, setSpecialistSpecialitys] =
+    useState<SpecialtysType>({} as SpecialtysType)
+
+  const [specialistClinics, setSpecialistClinic] = useState<ClinicErrorsType>(
+    {} as ClinicErrorsType,
+  )
+
+  const [specialtysAndDocs, setSpecialtysAndDocs] =
+    useState<SpecialtysAndDocsType>({})
+
+  const [rqeAndSpeciality, setRqeAndSpeciality] =
+    useState<RqeAndSpecialtysType>({} as RqeAndSpecialtysType)
+
   const [clickOnSave, setClickOnSave] = useState(false)
+
   const [formWasSubmited, setFormWasSubmited] = useState(false)
+
   const { showMessage } = useModal()
+
   const { Loading } = useLoading()
+
+  console.log({ specialistInfo, specialistClinics, specialistSpecialitys }, errors)
 
   useEffect(() => {
     if (isEditing) {
@@ -59,6 +84,19 @@ const Form: React.FC<FormProps> = ({
     error = !!hasSpecificError[0]
 
     for (const field in fields) {
+      if (
+        typeof fields[field] === 'object' &&
+        'document' in fields[field] &&
+        !fields[field].document
+      ) {
+        setErrors((errors) => ({
+          ...errors,
+          [field]: 'Campo obrigatório',
+        }))
+        error = true
+      }
+      console.log('teste')
+
       if (!fields[field] || !fields[field].length) {
         setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
         error = true
@@ -74,11 +112,13 @@ const Form: React.FC<FormProps> = ({
         ...specialistInfo,
         ...specialistClinics,
         ...specialistSpecialitys,
+        ...specialtysAndDocs,
+        ...rqeAndSpeciality,
       })
     ) {
       return
     }
-    setErrors({})
+    setErrors({} as ErrorsI)
 
     try {
       Loading.turnOn()
@@ -139,6 +179,18 @@ const Form: React.FC<FormProps> = ({
         setErrors={setErrors}
         formWasSubmited={formWasSubmited}
       />
+
+      {specialistSpecialitys.specialtys?.map((spec) => (
+        <Documents
+          key={spec.id}
+          setSpecialtysAndDocs={setSpecialtysAndDocs}
+          errors={errors}
+          setErrors={setErrors}
+          data={spec}
+          setRqeAndSpeciality={setRqeAndSpeciality}
+        />
+      ))}
+
       <Clinics
         specialistClinic={data?.clinics}
         setSpecialistClinic={setSpecialistClinic}

@@ -10,7 +10,6 @@ import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
 
 interface ActionsProps {
   file: any
-
   removePhoto: () => void
 }
 

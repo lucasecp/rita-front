@@ -39,17 +39,8 @@ export const Specialtys: React.FC<ClinicSpecialtysProps> = ({
         const { data } = await apiAdmin.get('/especialidade')
         const dataMapped = mapSpecialtys(data?.especialidade)
 
-        if (!dataMapped.length) {
-          return setSpecialtysOptions([])
-        }
-
-        setSpecialtysOptions(() => {
-          if (dataMapped.length === 1) {
-            return dataMapped
-          }
-          return [{ name: 'Todas', id: 'All' }, ...dataMapped]
-        })
-      } catch ({ response }) {}
+        setSpecialtysOptions(dataMapped)
+      } catch (error) {}
     }
 
     getSpecialtys()
@@ -75,14 +66,14 @@ export const Specialtys: React.FC<ClinicSpecialtysProps> = ({
     }
   }, [formWasSubmited])
 
-  const onChangingSelect = (values: MultiSelectOption[]) => {
-    const hasAllOption = values.some((val) => val.id === 'All')
+  // const onChangingSelect = (values: MultiSelectOption[]) => {
+  //   const hasAllOption = values.some((val) => val.id === 'All')
 
-    if (hasAllOption) {
-      return setSpecialtys(specialtysOptions)
-    }
-    return setSpecialtys(values)
-  }
+  //   if (hasAllOption) {
+  //     return setSpecialtys(specialtysOptions)
+  //   }
+  //   return setSpecialtys(values)
+  // }
 
   return (
     <Container>
@@ -97,10 +88,11 @@ export const Specialtys: React.FC<ClinicSpecialtysProps> = ({
           hasError={!!errors.specialtys}
           messageError={errors?.specialtys}
           name="specialtys"
-          onSelect={onChangingSelect}
-          onRemove={onChangingSelect}
+          // onSelect={onChangingSelect}
+          // onRemove={onChangingSelect}
         />
       </section>
+     
     </Container>
   )
 }

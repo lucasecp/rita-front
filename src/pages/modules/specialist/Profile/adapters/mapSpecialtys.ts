@@ -5,6 +5,7 @@ export const mapSpecialtys = (array: any[]) => {
     .map((obj) => ({
       id: obj.idEspecialidade,
       name: obj.descricao,
+      rqeRequired: obj.requerInscricao,
     }))
     .filter((specialty) => specialty.id && specialty.name)
 }

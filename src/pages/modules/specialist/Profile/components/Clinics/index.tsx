@@ -93,7 +93,7 @@ export const Clinics: React.FC<SpecialistClinicsProps> = ({
           disabled={!isEditing}
           hasError={!!errors.clinics}
           messageError={errors?.clinics}
-          name="clinics"
+          name="clinic"
           onSelect={onChangingSelect}
           onRemove={onChangingSelect}
         />

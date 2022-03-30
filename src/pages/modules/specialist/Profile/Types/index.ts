@@ -32,5 +32,24 @@ export interface ErrorsI {
   specialtys?: string
   clinics?: string
   crm?: string
+  specialtysAndDocsType?: string
+  rqe?: string
   [x: string]: any
 }
+
+export type SpecialtysAndDocsType = {
+  [x: string]: {
+    idSpecialty: string | number
+    document: string
+  }
+}
+
+export type RqeAndSpecialtysType = {
+  [x: string]: {
+    idSpecialty: string | number
+    rqe?: string
+  }
+}
+
+export type SpecialtysType = { specialtys: MultiSelectOption[] }
+export type ClinicErrorsType = { clinic: MultiSelectOption[] }
