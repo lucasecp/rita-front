@@ -4,18 +4,21 @@ import { columnsOptions } from '../constants/columnsOptions'
 import { MultiSelectOption } from '@/components/Form/MultSelect'
 import { AutocompleteOptions } from '@/components/Form/Autocomplete'
 
-interface BillingsFilters {
+interface PatientAnalyticFilters {
   cnpj: AutocompleteOptions
-  period: string
+  registrationPeriod: string
+  validationPeriod: string
   status: MultiSelectOption[]
   columns: MultiSelectOption[]
   fileTypeReport: string
 }
 
-interface BillingsFiltersToApi {
+interface ReportFiltersToApi {
   idEmpresa: number
   dataInicio: string | undefined
   dataFim: string | undefined
+  dataValidacaoInicio: string | undefined
+  dataValidacaoFim: string | undefined
   status: (string | number)[]
   campos: (string | number)[]
   tipoRelatorio: string
@@ -37,50 +40,73 @@ export const statusToApi = (status: string): string => {
 export const columnsToApi = (columns: string): string => {
   const columnsObject: { [x: string]: string } = {
     id: 'id',
-    contractNumber: 'nContrato',
     beneficiaryType: 'tipoBeneficiario',
+    contractNumber: 'nContrato',
     name: 'nome',
     cpf: 'cpf',
     birthDate: 'nascimento',
+    email: 'email',
     gender: 'sexo',
     plan: 'plano',
-    amountPlan: 'valorPlano',
+    table: 'tabela',
     phone: 'telefone',
+    address: 'logradouro',
+    number: 'numero',
+    complement: 'complemento',
+    district: 'bairro',
+    city: 'cidade',
+    uf: 'uf',
+    cep: 'cep',
     status: 'status',
+    registerDate: 'cadastro',
+    exclusionDate: 'exclusao',
+    validationDate: 'validacao',
   }
 
   return columnsObject[columns] || ''
 }
 
 export const reportFiltersToApi = (
-  billingsFilters: BillingsFilters,
-): BillingsFiltersToApi => {
-  const periodStartToApi = billingsFilters.period[0]
-    ? new Date(billingsFilters.period[0]).toISOString()
+  patientAnalyticFilters: PatientAnalyticFilters,
+): ReportFiltersToApi => {
+  const registrationPeriodStartToApi = patientAnalyticFilters
+    .registrationPeriod[0]
+    ? new Date(patientAnalyticFilters.registrationPeriod[0]).toISOString()
     : undefined
 
-  const periodEndToApi = billingsFilters.period[1]
-    ? new Date(billingsFilters.period[1]).toISOString()
+  const registrationPeriodEndToApi = patientAnalyticFilters
+    .registrationPeriod[1]
+    ? new Date(patientAnalyticFilters.registrationPeriod[1]).toISOString()
+    : undefined
+
+  const validationPeriodStartToApi = patientAnalyticFilters.validationPeriod[0]
+    ? new Date(patientAnalyticFilters.validationPeriod[0]).toISOString()
+    : undefined
+
+  const validationPeriodEndToApi = patientAnalyticFilters.validationPeriod[1]
+    ? new Date(patientAnalyticFilters.validationPeriod[1]).toISOString()
     : undefined
 
   const statusToApiFiltered = optionsFilteredWithAll(
-    billingsFilters.status,
+    patientAnalyticFilters.status,
     statusOptions,
   )
 
   const columnsToApiFiltered = optionsFilteredWithAll(
-    billingsFilters.columns,
+    patientAnalyticFilters.columns,
     columnsOptions,
   )
 
   return {
-    idEmpresa: billingsFilters.cnpj.value,
-    dataInicio: periodStartToApi,
-    dataFim: periodEndToApi,
+    idEmpresa: patientAnalyticFilters.cnpj.value,
+    dataInicio: registrationPeriodStartToApi,
+    dataFim: registrationPeriodEndToApi,
+    dataValidacaoInicio: validationPeriodStartToApi,
+    dataValidacaoFim: validationPeriodEndToApi,
     status: statusToApiFiltered.map((status) => statusToApi(String(status.id))),
     campos: columnsToApiFiltered.map((column) =>
       columnsToApi(String(column.id)),
     ),
-    tipoRelatorio: billingsFilters.fileTypeReport,
+    tipoRelatorio: patientAnalyticFilters.fileTypeReport,
   }
 }

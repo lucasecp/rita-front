@@ -24,17 +24,17 @@ export const Filter = ({ onGetFilters }) => {
     {},
   )
 
-  const hasNoFilterSelected = useMemo(() => {
-    return (
-      filters.code === '' &&
-      filters.plan === '' &&
-      !filters.services.length &&
-      !filters.status.length &&
-      !filters.regionals.length &&
-      !filters.ufs.length &&
-      !filters.cities.length
-    )
-  }, [filters])
+  // const hasNoFilterSelected = useMemo(() => {
+  //   return (
+  //     filters.code === '' &&
+  //     filters.plan === '' &&
+  //     !filters.services.length &&
+  //     !filters.status.length &&
+  //     !filters.regionals.length &&
+  //     !filters.ufs.length &&
+  //     !filters.cities.length
+  //   )
+  // }, [filters])
 
   const onClearFields = () => {
     setFilters({
@@ -119,14 +119,14 @@ export const Filter = ({ onGetFilters }) => {
           small
           variation="red"
           onClick={onClearFields}
-          disabled={hasNoFilterSelected}
+          // disabled={hasNoFilterSelected}
         >
           Limpar Filtro
         </OutlineButton>
         <ButtonPrimary
           medium
           onClick={onFilterResults}
-          disabled={hasNoFilterSelected}
+          // disabled={hasNoFilterSelected}
         >
           Filtrar Resultados
         </ButtonPrimary>

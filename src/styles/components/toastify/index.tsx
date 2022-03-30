@@ -1,45 +1,50 @@
 import React from 'react'
 import { toast as toastify } from 'react-toastify'
 
+import { AxiosResponse } from 'axios'
+
 import { ReactComponent as ErrorIcon } from '@/assets/icons/alerts/error.svg'
 import { ReactComponent as SuccessIcon } from '@/assets/icons/alerts/success.svg'
 import { ReactComponent as WarningIcon } from '@/assets/icons/alerts/warning.svg'
+
 import Spinner from '@/components/Loading/Spinner'
 
-const error = (message) => {
+const error = (message: string): React.ReactText => {
   return toastify.error(message, { icon: <ErrorIcon /> })
 }
 
-const success = (message) => {
+const success = (message: string): React.ReactText => {
   return toastify.success(message, { icon: <SuccessIcon /> })
 }
 
-const warning = (message) => {
+const warning = (message: string): React.ReactText => {
   return toastify.warning(message, { icon: <WarningIcon /> })
 }
 
-const promise = (promisseReturn, message) => {
+const promise = (
+  promise: Promise<AxiosResponse<any>>,
+  messages: { pending: string; error: string; success: string },
+): Promise<AxiosResponse<any>> => {
   return toastify.promise(
-    promisseReturn,
+    promise,
     {
-      pending: message.pending,
+      pending: messages.pending,
 
       error: {
         render() {
-          return message.error
+          return messages.error
         },
         icon: <ErrorIcon />,
       },
 
       success: {
         render() {
-          return message.success
+          return messages.success
         },
 
         icon: <SuccessIcon />,
       },
     },
-
     { icon: <Spinner /> },
   )
 }

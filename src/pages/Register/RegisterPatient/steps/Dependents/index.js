@@ -28,6 +28,10 @@ export const Dependents = ({ isActive }) => {
     setAllDependents(initialRegisterData?.dependents || [])
   }, [initialRegisterData])
 
+  useEffect(() => {
+    setDependents(allDependents)
+  }, [allDependents])
+
   const handleUpdate = (infoDep, id) => {
     showMessage(Form, {
       editDep: infoDep,
@@ -62,8 +66,6 @@ export const Dependents = ({ isActive }) => {
   }
 
   const onFinishRegisterInDependent = () => {
-    setDependents(allDependents)
-
     onFinishRegister()
   }
 

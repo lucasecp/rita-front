@@ -7,12 +7,9 @@ import {
 } from '../../helpers/validatorFields'
 
 import { Container } from './styles'
-import { useMessage } from '@/hooks/useMessage'
 import SelectUf from '../SelectUf'
-import SelectIssuingAgency from '../SelectIssuingAgency'
-import InputMask from '@/components/Form/InputMask'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
-import { specialCharacters } from './specialCharacters'
+import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectIssuingAgency'
+
 import hasSpecialCaracter from '@/helpers/hasSpecialCaracter'
 
 interface ProfissionalDatasProps {

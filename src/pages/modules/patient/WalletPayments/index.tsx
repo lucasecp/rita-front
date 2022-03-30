@@ -1,13 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
 import moment from 'moment'
 
-import apiWallet from '@/services/apiWallet'
+import apiWallet, { getPaymentRequestSituation } from '@/services/apiWallet'
 import formatPrice from '@/helpers/formatPrice'
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
-// import { ReactComponent as FileIcon } from '@/assets/icons/file.svg'
-// import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down3.svg'
-// import { ReactComponent as ArrowUpIcon } from '@/assets/icons/arrow-up.svg'
 import { ReactComponent as EyeOpenedIcon } from '@/assets/icons/eye-opened.svg'
 import { ReactComponent as EyeClosedIcon } from '@/assets/icons/eye-closed.svg'
 import { ReactComponent as CrownIcon } from '@/assets/icons/crown.svg'
@@ -23,17 +20,18 @@ import ButtonPrimary from '@/components/Button/Primary'
 import PaymentRequest from '@/pages/Initial/messages/PaymentRequest'
 import { Table } from '@/components/Table'
 
+const periodOptions = [
+  { label: '7 dias', value: 1 },
+  { label: '15 dias', value: 2 },
+  { label: '30 dias', value: 3 },
+]
+
 function convertPriceToCrownValue(amount: number, currency?: string) {
   // @TODO: implement currency
   return amount * 100
 }
 
 export const WalletPayments: React.FC = () => {
-  const periodOptions = [
-    { label: '7 dias', value: 1 },
-    { label: '15 dias', value: 2 },
-    { label: '30 dias', value: 3 },
-  ]
   const tablePaymentsNew = useRef<any>()
   const tablePaymentsAll = useRef<any>()
   const [paymentsNew, setPaymentsNew] = useState<RitaWallet.PaymentRequest[]>(
@@ -43,7 +41,15 @@ export const WalletPayments: React.FC = () => {
     [],
   )
   const [selectedPeriod, setSelectedPeriod] = useState(1)
-  const [tablePaymentsAllSort, setTablePaymentsAllSort] = useState({})
+  const [tablePaymentsAllSort, setTablePaymentsAllSort] = useState<RitaComponents.TableSort>({
+    path: 'createdAt',
+    order: 'DESC',
+  })
+  const [tablePaymentsAllPaging, setTablePaymentsAllPaging] = useState({
+    take: 10,
+    skip: 0,
+  })
+  const [paymentsAllCount, setPaymentsAllCount] = useState(0)
   const { showMessage } = useModal()
   const { Loading } = useLoading()
 
@@ -58,7 +64,11 @@ export const WalletPayments: React.FC = () => {
         }),
         apiWallet.get<RitaWallet.PaymentRequest[]>('/payment', {
           params: {
-            take: 10,
+            take: tablePaymentsAllPaging.take,
+            skip: tablePaymentsAllPaging.skip,
+            orderBy: tablePaymentsAllSort.path,
+            orderType: tablePaymentsAllSort.order,
+            period: selectedPeriod,
           },
         }),
       ])
@@ -69,6 +79,7 @@ export const WalletPayments: React.FC = () => {
 
     if (Array.isArray(loadedPaymentsAll)) {
       setPaymentsAll(loadedPaymentsAll)
+      setPaymentsAllCount(100)
     }
   }
 
@@ -94,14 +105,13 @@ export const WalletPayments: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    console.log('effect selectedPeriod', selectedPeriod)
-    // @TODO: api.get payments
-  }, [selectedPeriod])
-
-  useEffect(() => {
-    console.log('effect tablePaymentsAllSort', tablePaymentsAllSort)
-    // @TODO: api.get payments
-  }, [tablePaymentsAllSort])
+    Loading.turnOn()
+    fetchData()
+      .catch(console.error)
+      .finally(() => {
+        Loading.turnOff()
+      })
+  }, [selectedPeriod, tablePaymentsAllSort, tablePaymentsAllPaging])
 
   return (
     <DefaultLayout title="Carteira Digital">
@@ -116,7 +126,6 @@ export const WalletPayments: React.FC = () => {
             columns={[
               {
                 path: 'id',
-                fit: true,
                 custom: (_, index, isExpanded) => (
                   <TableColumnDetails
                     onClick={() => handlePaymentsNewShowDetailsClick(index)}
@@ -163,6 +172,7 @@ export const WalletPayments: React.FC = () => {
             ]}
             childRow={(row) => <div>{row.description}</div>}
             data={paymentsNew}
+            hidePagination={true}
           />
         </section>
 
@@ -181,7 +191,6 @@ export const WalletPayments: React.FC = () => {
             columns={[
               {
                 path: 'id',
-                fit: true,
                 custom: (_, index, isExpanded) => (
                   <TableColumnDetails
                     onClick={() => handlePaymentsAllShowDetailsClick(index)}
@@ -209,11 +218,7 @@ export const WalletPayments: React.FC = () => {
                 path: 'situation',
                 custom: (row) => (
                   <TableColumnStatus name={row.situation}>
-                    {String(row.situation).toUpperCase() === 'NEW'
-                      ? 'Aberto'
-                      : String(row.situation).toUpperCase() === 'OK'
-                      ? 'Realizado'
-                      : row.situation}
+                    {getPaymentRequestSituation(row.situation)}
                   </TableColumnStatus>
                 ),
               },
@@ -244,7 +249,9 @@ export const WalletPayments: React.FC = () => {
             childRow={(row) => <div>{row.description}</div>}
             data={paymentsAll}
             sort={tablePaymentsAllSort}
+            count={paymentsAllCount}
             onSort={setTablePaymentsAllSort}
+            onPaginate={setTablePaymentsAllPaging}
           />
         </section>
       </Container>

@@ -1,5 +1,12 @@
 /// <reference types="react-scripts" />
 
+namespace RitaComponents {
+  type TableSort = {
+    path?: string
+    order?: 'ASC' | 'DESC'
+  }
+}
+
 namespace RitaWallet {
   type Caller = {
     id: string
@@ -67,10 +74,12 @@ namespace RitaWallet {
     typeTransaction?: RitaWallet.TypeTransaction
   }
 
+  type TypeTransactionMode = 'DEBIT' | 'CREDIT' | 'CASHBACK'
+
   type TypeTransaction = {
     id: string
     name: string
-    mode: string
+    mode: TypeTransactionMode
     createdAt: string
     situation: string
 
