@@ -86,12 +86,11 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
     }
     return true
   }
+  console.log(errors)
 
   const hasErrorOnFields = (fields: any) => {
-    console.log(fields)
     let error = false
-    const hasSpecificError = Object.values(errors)
-    error = !!hasSpecificError[0]
+    setErrors({})
 
     const cashBackIsValid = cashRateValidate(fields.cashBack, fields.takeRate)
     if (!cashBackIsValid) {
@@ -139,7 +138,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
 
   const onSave = async () => {
     setClickOnSave(Math.random() * (10 - 3) + 3)
-    setErrors({})
+
     if (
       hasErrorOnFields({
         ...personalDatas,
