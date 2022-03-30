@@ -37,6 +37,7 @@ const colors = {
     middle: '#326BF6',
     dark: '#1C23BD',
   },
+
   gray: {
     extraLight: '#F5F5F5',
     light: '#EEEEEE',

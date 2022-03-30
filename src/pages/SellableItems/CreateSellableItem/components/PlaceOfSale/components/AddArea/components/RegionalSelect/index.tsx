@@ -6,7 +6,6 @@ import apiAdmin from '@/services/apiAdmin'
 import { toast } from '@/styles/components/toastify'
 import { PlaceOfSale } from '../../../..'
 import { placeOfSaleToApi } from '../../../../../../adapters/toApi'
-import { everyFirstLetterCapitalize } from '@/helpers/everyFirstLetterCapitalize'
 
 interface RegionalSelectProps {
   idPlan: number
