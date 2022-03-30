@@ -68,7 +68,10 @@ const Form: React.FC<FormProps> = ({
 
   const { Loading } = useLoading()
 
-  console.log({ specialistInfo, specialistClinics, specialistSpecialitys }, errors)
+  console.log(
+    { specialistInfo, specialistClinics, specialistSpecialitys },
+    errors,
+  )
 
   useEffect(() => {
     if (isEditing) {
@@ -86,8 +89,8 @@ const Form: React.FC<FormProps> = ({
     for (const field in fields) {
       if (
         typeof fields[field] === 'object' &&
-        'document' in fields[field] &&
-        !fields[field].document
+        (('document' in fields[field] && !fields[field].document) ||
+          ('rqe' in fields[field] && !fields[field].rqe))
       ) {
         setErrors((errors) => ({
           ...errors,
