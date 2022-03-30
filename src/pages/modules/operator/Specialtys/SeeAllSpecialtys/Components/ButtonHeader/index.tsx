@@ -1,7 +1,7 @@
 import ButtonPrimary from '@/components/Button/Primary'
 import { OPERATOR_CREATE_SPRECIALTY } from '@/routes/constants/namedRoutes/routes'
 import React from 'react'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 const ButtonHeader = () => {
   const history = useHistory()

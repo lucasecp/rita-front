@@ -14,7 +14,7 @@ import {
   DIRECTOR_EDIT_PLAN,
   DIRECTOR_PLAN_MANAGMENT,
 } from '@/routes/constants/namedRoutes/routes'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 const PlanInformationsDisabled = ({ data }) => {
   const history = useHistory()

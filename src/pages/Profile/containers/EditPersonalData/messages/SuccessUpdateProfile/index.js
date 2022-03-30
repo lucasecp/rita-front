@@ -7,7 +7,7 @@ import { Container } from './styles'
 
 import { useModal } from '@/hooks/useModal'
 import { INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 export const SuccessUpdateProfile = () => {
   const { closeModal } = useModal()

@@ -8,7 +8,7 @@ import Textarea from '@/components/Form/Textarea'
 
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import { Container } from './styles'
 import apiUser from '@/services/apiUser'

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import warning from '@/assets/icons/alerts/warning.svg'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
 
 import OutlineButton from '@/components/Button/Outline'

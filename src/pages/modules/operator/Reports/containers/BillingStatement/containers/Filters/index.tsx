@@ -184,7 +184,7 @@ export const Filters: React.FC<FiltersProps> = ({
 
     try {
       const response = await toast.promise(
-        apiPatient.get('/faturamento-relatorio/documento', {
+        apiPatient.get('/relatorio/faturamento', {
           responseType: 'arraybuffer',
           params: filtersReportMapped,
           paramsSerializer: (params) => {

@@ -58,7 +58,7 @@ export const AddArea: React.FC<AddAreaProps> = ({
   }
 
   useEffect(() => {
-    setRegional('')
+    sendClearRegional()
     setUf('')
     setCities([])
   }, [idPlan])

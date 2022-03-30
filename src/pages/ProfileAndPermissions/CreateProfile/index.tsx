@@ -4,7 +4,7 @@ import { Container } from './styles'
 
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { PermissionsSelect } from './components/PermissionsSelect'

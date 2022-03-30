@@ -7,7 +7,7 @@ import { OPERATOR_SEE_ALL_ISSUING_AGENCY } from '@/routes/constants/namedRoutes/
 import apiAdmin from '@/services/apiAdmin'
 import { toast } from '@/styles/components/toastify'
 import React, { useState } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import { toApi } from './adapters'
 import Form from './Form'
