@@ -4,7 +4,7 @@ import EditClinic from './EditSpecialist'
 import { fromApi } from './adapters'
 import { useLoading } from '@/hooks/useLoading'
 import apiAdmin from '@/services/apiAdmin'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 
 const SeeOneSpecialist: React.FC = () => {

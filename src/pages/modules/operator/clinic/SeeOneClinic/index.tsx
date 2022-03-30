@@ -4,7 +4,7 @@ import EditClinic from './EditClinic'
 import { fromApi } from './adapters'
 import { useLoading } from '@/hooks/useLoading'
 import apiAdmin from '@/services/apiAdmin'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes'
 
 const SeeOneClinic = () => {

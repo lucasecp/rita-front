@@ -5,7 +5,7 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { useModal } from '@/hooks/useModal'
 import { useToggle } from '@/hooks/useToggle'
 import { ReasonSuspend } from '../../messages/ReasonSuspend'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { Container } from './styles'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
