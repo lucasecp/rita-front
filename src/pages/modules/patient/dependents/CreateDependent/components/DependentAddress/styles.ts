@@ -20,6 +20,7 @@ export const InputsArea = styled.main`
   display: flex;
   flex-direction: column;
   margin-top: 24px;
+  overflow: hidden;
 
   > div {
     margin-bottom: 24px;
@@ -73,7 +74,6 @@ export const FormAddress = styled.div<FormAddressProps>`
   section {
     display: grid;
     gap: 24px;
-    overflow: hidden;
   }
 
   section:nth-child(1) {

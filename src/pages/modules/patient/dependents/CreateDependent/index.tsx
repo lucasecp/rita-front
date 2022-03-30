@@ -23,11 +23,14 @@ import { DependentDataType, DependentAddressType } from './types/index'
 
 import apiPatient from '@/services/apiPatient'
 import { dependentToApi } from './adapters/dependentToApi'
-import { ResponseCreateDependent } from './adapters/types'
 import { useLoading } from '@/hooks/useLoading'
 import { toast } from '@/styles/components/toastify'
 
 import { Container } from './styles'
+
+interface ResponseCreateDependent {
+  idPaciente: number
+}
 
 export const CreateDependent: React.FC = () => {
   const history = useHistory()
@@ -73,8 +76,8 @@ export const CreateDependent: React.FC = () => {
 
         const dataToAddDependentDocuments = {
           id: response.data.idPaciente,
-          birthdate: dependentMapped.dataNascimento,
-          cpf: dependentMapped.cpf,
+          birthdate: dependentData.birthDate,
+          cpf: dependentData.cpf,
         }
 
         const dataToAddDocumentDependent = {

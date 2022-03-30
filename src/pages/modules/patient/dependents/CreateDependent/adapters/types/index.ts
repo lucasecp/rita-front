@@ -1,6 +1,4 @@
-import { DependentDataType, DependentAddressType } from '../../types'
-
-export interface DependentToApiReturn {
+export interface DependentToApi {
   nome: string
   cpf: string
   sexo: string
@@ -14,8 +12,4 @@ export interface DependentToApiReturn {
   bairro: string
   cidade: string
   uf: string
-}
-
-export interface ResponseCreateDependent extends DependentToApiReturn {
-  idPaciente: number
 }

@@ -18,6 +18,7 @@ import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import { DependentDataType } from '../../types/index'
 
 import { Container, InputsArea } from './styles'
+import { AxiosError } from 'axios'
 
 interface ErrorsState {
   name: string
@@ -59,16 +60,18 @@ export const DependentData: React.FC<DependentDataProps> = ({
       const clearedCPF = clearSpecialCaracter(cpf)
 
       if (clearedCPF.length === 11) {
-        const response = await apiPatient.get(`/paciente/status?cpf=${cpf}`)
+        try {
+          const response = await apiPatient.get(`/paciente/status?cpf=${cpf}`)
 
-        if (response.data.status === 'CS') {
-          setAlreadyExistsCPF(false)
-        } else {
-          setAlreadyExistsCPF(true)
-        }
-
-        if (response.status === 404) {
-          setAlreadyExistsCPF(false)
+          if (response.data.status === 'CS') {
+            setAlreadyExistsCPF(false)
+          } else {
+            setAlreadyExistsCPF(true)
+          }
+        } catch ({ response }) {
+          if (response) {
+            setAlreadyExistsCPF(false)
+          }
         }
       }
     }

@@ -1,10 +1,10 @@
 import { DependentDataType, DependentAddressType } from '../types/index'
-import { DependentToApiReturn } from './types'
+import { DependentToApi } from './types'
 
 export const dependentToApi = (
   dependentData: DependentDataType,
   dependentAddress: DependentAddressType,
-): DependentToApiReturn => {
+): DependentToApi => {
   const { name, cpf, gender, birthDate, email, phone } = dependentData
   const { cep, uf, city, address, number, district, complement } =
     dependentAddress

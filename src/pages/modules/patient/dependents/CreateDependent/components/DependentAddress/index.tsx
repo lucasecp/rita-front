@@ -44,7 +44,6 @@ export const DependentAddress: React.FC<DependentAddressProps> = ({
 
   const [cep, setCep] = useState('')
   const [uf, setUf] = useState('')
-  const [ufToApi, setUfToApi] = useState('')
   const [city, setCity] = useState('')
   const [addressDep, setAddressDep] = useState('')
   const [number, setNumber] = useState('')
@@ -150,7 +149,6 @@ export const DependentAddress: React.FC<DependentAddressProps> = ({
             <SelectUf
               setUf={setUf}
               uf={uf}
-              setUfToApi={setUfToApi}
               hasError={!!errors.uf}
               msgError={errors.uf}
             />
