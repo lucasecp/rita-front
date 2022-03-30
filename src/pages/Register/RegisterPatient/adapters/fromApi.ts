@@ -1,3 +1,4 @@
+import formatDate from '@/helpers/formatDate'
 import { RegisterDataState } from '../hooks/types'
 import { formatCpf } from '@/helpers/formatCpf'
 
@@ -63,7 +64,7 @@ export const initialRegisterPatientFromApi = (
       cpf: formatCpf(dependent.cpf),
       email: dependent.email,
       gender: dependent.sexo,
-      birthdate: dependent.dataNascimento,
+      birthdate: formatDate(dependent.dataNascimento),
       phone: dependent.telefone,
     })),
   }

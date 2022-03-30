@@ -22,9 +22,9 @@ const warning = (message: string): React.ReactText => {
 }
 
 const promise = (
-  promise: Promise<AxiosResponse<T>>,
+  promise: Promise<AxiosResponse<any>>,
   messages: { pending: string; error: string; success: string },
-): Promise<AxiosResponse<T>> => {
+): Promise<AxiosResponse<any>> => {
   return toastify.promise(
     promise,
     {
