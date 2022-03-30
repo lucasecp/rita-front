@@ -23,7 +23,6 @@ import { DependentDataType, DependentAddressType } from './types/index'
 
 import apiPatient from '@/services/apiPatient'
 import { dependentToApi } from './adapters/dependentToApi'
-import { dependentFromApi } from './adapters/dependentFromApi'
 import { ResponseCreateDependent } from './adapters/types'
 import { useLoading } from '@/hooks/useLoading'
 import { toast } from '@/styles/components/toastify'
@@ -83,30 +82,6 @@ export const CreateDependent: React.FC = () => {
         }
 
         history.push(PATIENT_ADD_DOCUMENT_DEPENDENT, dataToAddDocumentDependent)
-
-        // const responseRegisterDependent =
-        //   await apiPatient.post<ResponseCreateDependent>(
-        //     '/paciente/dependente',
-        //     dependentMapped,
-        //   )
-
-        // const dependentMappedFromApi = dependentFromApi(
-        //   responseRegisterDependent.data,
-        // )
-
-        // await apiPatient.post(
-        //   `/paciente/dependente/${dependentMappedFromApi.id}?forcarAssociacao=true`,
-        // )
-
-        // const dataToAddDocumentDependent = {
-        //   dependent: {
-        //     id: dependentMappedFromApi.id,
-        //     birthdate: dependentMappedFromApi.birthDate,
-        //     cpf: dependentMappedFromApi.cpf,
-        //   },
-        // }
-
-        // history.push(PATIENT_ADD_DOCUMENT_DEPENDENT, dataToAddDocumentDependent)
       } catch {
         toast.error('Erro ao incluir dependente')
       } finally {

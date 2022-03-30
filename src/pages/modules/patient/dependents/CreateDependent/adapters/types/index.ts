@@ -19,9 +19,3 @@ export interface DependentToApiReturn {
 export interface ResponseCreateDependent extends DependentToApiReturn {
   idPaciente: number
 }
-
-export interface DependentCreatedFromApi
-  extends DependentDataType,
-    DependentAddressType {
-  id: number
-}
