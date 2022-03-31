@@ -45,10 +45,12 @@ const SeeDependents = () => {
         )
 
         if (data.documentosCadastrados.length > 0) {
-          setDependentDocumentName(
-            data.documentosCadastrados[data.documentosCadastrados.length - 1]
-              .nomeOriginal,
+          const documentIncome = data.documentosCadastrados.filter(
+            (document) => document.tipoArquivo === 'Renda',
           )
+
+          documentIncome.length > 0 &&
+            setDependentDocumentName('Comprovante de Renda')
         }
 
         setDependent(fromApi(data))
@@ -75,8 +77,6 @@ const SeeDependents = () => {
     }
     getDependentIncomeDocument()
   }, [])
-
-  console.log(dependent?.personalDatas)
 
   const onEditPatient = () => {
     if (dependent.personalDatas.status === 'PENDING') {
