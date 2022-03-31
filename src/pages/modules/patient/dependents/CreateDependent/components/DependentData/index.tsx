@@ -136,6 +136,9 @@ export const DependentData: React.FC<DependentDataProps> = ({
           maxLength={100}
           hasError={!!errors.name}
           msgError={errors.name}
+          onBlur={() =>
+            setErrors({ ...errors, name: validateFullName(name, 3) })
+          }
         />
 
         <section>
@@ -147,6 +150,9 @@ export const DependentData: React.FC<DependentDataProps> = ({
             mask="999.999.999-99"
             hasError={!!errors.cpf}
             msgError={errors.cpf}
+            onBlur={() =>
+              setErrors({ ...errors, cpf: validateCPF(cpf, alreadyExistsCPF) })
+            }
           />
           <Select
             label="Gênero:"
@@ -168,6 +174,9 @@ export const DependentData: React.FC<DependentDataProps> = ({
             setValue={setBirthDate}
             hasError={!!errors.birthDate}
             msgError={errors.birthDate}
+            onBlur={() =>
+              setErrors({ ...errors, birthDate: validateBirthDate(birthDate) })
+            }
           />
         </section>
         <section>
@@ -175,6 +184,7 @@ export const DependentData: React.FC<DependentDataProps> = ({
             onGetEmail={setEmail}
             hasError={(hasError) => setErrors({ ...errors, email: hasError })}
             checkHasError={errorMessage}
+            onBlur={sendErrorMessage}
           />
           <InputMask
             label="Celular:"
@@ -183,6 +193,7 @@ export const DependentData: React.FC<DependentDataProps> = ({
             setValue={setPhone}
             hasError={!!errors.phone}
             msgError={errors.phone}
+            onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           />
         </section>
       </InputsArea>
