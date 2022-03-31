@@ -99,6 +99,8 @@ export const SeeOnePatient: React.FC = () => {
           setIsDependentMinorAge(false)
         }
         const patientStatusMapped = fromApiPatientStatusLimit(data)
+        console.log('333333--------->', data)
+
         const patientDataMapped = fromApiPatientData(data)
         const patientDependentsMapped = fromApiDependents(data)
         const patientAddressMapped = fromApiPatientAddress(data)
