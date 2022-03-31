@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
@@ -6,31 +6,48 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { CancelAndExit } from './messages/CancelAndExit'
+import { InformationsIncorrect } from './messages/InformationsIncorrect'
 
 import { useModal } from '@/hooks/useModal'
-
-import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
-
-import { UserInformations } from './components/UserInformations'
-import { UserAddress } from './components/UserAddress'
-
-import { DependentData, DependentAddress } from './types/index'
-
 import { useMessage } from '@/hooks/useMessage'
 
+import {
+  PATIENT_ADD_DOCUMENT_DEPENDENT,
+  PATIENT_DEPENDENTS,
+} from '@/routes/constants/namedRoutes/routes'
+
+import { DependentData } from './components/DependentData'
+import { DependentAddress } from './components/DependentAddress'
+
+import { DependentDataType, DependentAddressType } from './types/index'
+
+import apiPatient from '@/services/apiPatient'
+import { dependentToApi } from './adapters/dependentToApi'
+import { useLoading } from '@/hooks/useLoading'
+import { toast } from '@/styles/components/toastify'
+
 import { Container } from './styles'
+
+interface ResponseCreateDependent {
+  idPaciente: number
+}
 
 export const CreateDependent: React.FC = () => {
   const history = useHistory()
   const { showMessage } = useModal()
-  const [saveMessage, sendSaveMessage] = useMessage()
+  const { Loading } = useLoading()
+  const [errorMessageInformations, sendErrorMessageInformations] = useMessage()
+  const [errorMessageAddress, sendErrorMessageAddress] = useMessage()
 
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(false)
 
-  const [dependentData, setDependentData] = useState({} as DependentData)
+  const [dependentData, setDependentData] = useState({} as DependentDataType)
   const [dependentAddress, setDependentAddress] = useState(
-    {} as DependentAddress,
+    {} as DependentAddressType,
   )
+
+  const [hasErrorInformations, setHasErrorInformations] = useState(false)
+  const [hasErrorAddress, setHasErrorAddress] = useState(false)
 
   const onCancelCreateDependent = () => {
     if (anyFieldsHasChanged) {
@@ -41,37 +58,63 @@ export const CreateDependent: React.FC = () => {
     history.push(PATIENT_DEPENDENTS)
   }
 
-  const onCreateDependent = useCallback(() => {
-    sendSaveMessage()
-    console.log('------------------------')
-    console.log('CLICOU SALVAR')
+  const onCreateDependent = async () => {
+    sendErrorMessageInformations()
+    sendErrorMessageAddress()
 
-    if (saveMessage) {
-      console.log('Salvar')
-      console.log('Data: ', dependentData)
-      console.log('Address: ', dependentAddress)
+    if (hasErrorInformations || hasErrorAddress) {
+      showMessage(InformationsIncorrect)
+    } else {
+      try {
+        Loading.turnOn()
+        const dependentMapped = dependentToApi(dependentData, dependentAddress)
+
+        const response = await apiPatient.post<ResponseCreateDependent>(
+          '/paciente/dependente',
+          dependentMapped,
+        )
+
+        const dataToAddDependentDocuments = {
+          id: response.data.idPaciente,
+          birthdate: dependentData.birthDate,
+          cpf: dependentData.cpf,
+        }
+
+        const dataToAddDocumentDependent = {
+          dependent: dataToAddDependentDocuments,
+        }
+
+        history.push(PATIENT_ADD_DOCUMENT_DEPENDENT, dataToAddDocumentDependent)
+      } catch {
+        toast.error('Erro ao incluir dependente')
+      } finally {
+        Loading.turnOff()
+      }
     }
-  }, [saveMessage])
-
-  console.log(dependentData)
+  }
 
   return (
     <DefaultLayout title="Inclusão de Dependente">
       <Container>
-        <UserInformations
+        <DependentData
           onGetAnyFieldsHasChanged={setAnyFieldsHasChanged}
           setDependentData={setDependentData}
-          saveDependent={saveMessage}
+          checkHasError={errorMessageInformations}
+          onGetHasError={setHasErrorInformations}
         />
-        <UserAddress
+        <DependentAddress
           onGetAnyFieldsHasChanged={setAnyFieldsHasChanged}
           setAddress={setDependentAddress}
+          checkHasError={errorMessageAddress}
+          onGetHasError={setHasErrorAddress}
         />
         <footer>
           <OutlineButton onClick={onCancelCreateDependent}>
             Cancelar
           </OutlineButton>
-          <ButtonPrimary onClick={onCreateDependent}>Salvar</ButtonPrimary>
+          <ButtonPrimary onClick={onCreateDependent}>
+            Próxima Etapa
+          </ButtonPrimary>
         </footer>
       </Container>
     </DefaultLayout>

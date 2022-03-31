@@ -1,6 +1,6 @@
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import React, { useEffect } from 'react'
-// import { useHistory } from 'react-router'
+// import { useHistory } from 'react-router-dom'
 import Filter from './Filter'
 
 // import { DefaultLayout }from '@/components/Layout/DefaultLayout'

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react'
 
-import { useLocation, useParams } from 'react-router'
+import { useLocation, useParams } from 'react-router-dom'
 import { ExitAndSteps } from './components/ExitAndSteps'
 
 import { RegistrationData } from './steps/RegistrationData'

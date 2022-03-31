@@ -1,26 +1,23 @@
 import { optionsFilteredWithAll } from '@/components/Form/MultSelect/helpers/OptionsFilteredWithAll'
 import { statusOptions } from '../constants/statusOptions'
-import { columnsOptions } from '../constants/columnsOptions'
 import { MultiSelectOption } from '@/components/Form/MultSelect'
 import { AutocompleteOptions } from '@/components/Form/Autocomplete'
 
-interface BillingsFilters {
+interface PatientAnalyticFilters {
   cnpj: AutocompleteOptions
   registrationPeriod: string
   validationPeriod: string
   status: MultiSelectOption[]
-  columns: MultiSelectOption[]
 }
 
-interface BillingsFiltersToApi {
+interface PatientAnalyticFiltersToApi {
   idEmpresa: number
   limit: number
   dataCadastroInicio: string | undefined
   dataCadastroFim: string | undefined
   dataValidacaoInicio: string | undefined
   dataValidacaoFim: string | undefined
-  // status: (string | number)[]
-  // colunas: (string | number)[]
+  status: (string | number)[]
 }
 
 export const statusToApi = (status: string): string => {
@@ -36,63 +33,39 @@ export const statusToApi = (status: string): string => {
   return statusObject[status] || ''
 }
 
-export const columnsToApi = (columns: string): string => {
-  const columnsObject: { [x: string]: string } = {
-    id: 'id',
-    contractNumber: 'titulares.cpf',
-    beneficiaryType: 'beneficiario',
-    name: 'paciente.nome',
-    cpf: 'paciente.cpf',
-    birthDate: 'paciente.dataNascimento',
-    gender: 'paciente.sexo',
-    plan: 'plano.nome',
-    amountPlan: 'plano.mensalidade',
-    phone: 'paciente.telefone',
-    status: 'paciente.status',
-  }
-
-  return columnsObject[columns] || ''
-}
-
 export const previewFiltersToApi = (
-  billingsFilters: BillingsFilters,
-): BillingsFiltersToApi => {
-  const registrationPeriodStartToApi = billingsFilters.registrationPeriod[0]
-    ? new Date(billingsFilters.registrationPeriod[0]).toISOString()
+  patientAnalyticFilters: PatientAnalyticFilters,
+): PatientAnalyticFiltersToApi => {
+  const registrationPeriodStartToApi = patientAnalyticFilters
+    .registrationPeriod[0]
+    ? new Date(patientAnalyticFilters.registrationPeriod[0]).toISOString()
     : undefined
 
-  const registrationPeriodEndToApi = billingsFilters.registrationPeriod[1]
-    ? new Date(billingsFilters.registrationPeriod[1]).toISOString()
+  const registrationPeriodEndToApi = patientAnalyticFilters
+    .registrationPeriod[1]
+    ? new Date(patientAnalyticFilters.registrationPeriod[1]).toISOString()
     : undefined
 
-  const validationPeriodStartToApi = billingsFilters.validationPeriod[0]
-    ? new Date(billingsFilters.validationPeriod[0]).toISOString()
+  const validationPeriodStartToApi = patientAnalyticFilters.validationPeriod[0]
+    ? new Date(patientAnalyticFilters.validationPeriod[0]).toISOString()
     : undefined
 
-  const validationPeriodEndToApi = billingsFilters.validationPeriod[1]
-    ? new Date(billingsFilters.validationPeriod[1]).toISOString()
+  const validationPeriodEndToApi = patientAnalyticFilters.validationPeriod[1]
+    ? new Date(patientAnalyticFilters.validationPeriod[1]).toISOString()
     : undefined
 
-  // const statusToApiFiltered = optionsFilteredWithAll(
-  //   billingsFilters.status,
-  //   statusOptions,
-  // )
-
-  // const columnsToApiFiltered = optionsFilteredWithAll(
-  //   billingsFilters.columns,
-  //   columnsOptions,
-  // )
+  const statusToApiFiltered = optionsFilteredWithAll(
+    patientAnalyticFilters.status,
+    statusOptions,
+  )
 
   return {
-    idEmpresa: billingsFilters.cnpj.value,
+    idEmpresa: patientAnalyticFilters.cnpj.value,
     limit: 10,
     dataCadastroInicio: registrationPeriodStartToApi,
     dataCadastroFim: registrationPeriodEndToApi,
     dataValidacaoInicio: validationPeriodStartToApi,
     dataValidacaoFim: validationPeriodEndToApi,
-    // status: statusToApiFiltered.map((status) => statusToApi(String(status.id))),
-    // colunas: columnsToApiFiltered.map((column) =>
-    //   columnsToApi(String(column.id)),
-    // ),
+    status: statusToApiFiltered.map((status) => statusToApi(String(status.id))),
   }
 }

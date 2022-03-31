@@ -19,7 +19,7 @@ import { useLoading } from '@/hooks/useLoading'
 import apiUser from '@/services/apiUser'
 import { toast } from '@/styles/components/toastify'
 import { userToApi } from './adapters/toApi'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { FILTER_USERS } from '@/routes/constants/namedRoutes/routes'
 
 interface ErrorsState {

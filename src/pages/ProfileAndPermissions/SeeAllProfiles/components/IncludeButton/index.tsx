@@ -1,7 +1,7 @@
 import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
 import { DIRECTOR_CREATE_PROFILE } from '@/routes/constants/namedRoutes/routes'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 export const IncludeButton: React.FC = () => {
   const history = useHistory()

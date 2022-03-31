@@ -16,7 +16,7 @@ import apiUser from '@/services/apiUser'
 import { setHeaderToken } from '@/storage/user'
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 import AlreadyExists from './messages/Error'
 import DefinePasswordSuccess from './messages/Success'
 

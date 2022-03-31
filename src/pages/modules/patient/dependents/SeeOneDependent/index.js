@@ -3,7 +3,7 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { fromApi } from './adapters'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   PATIENT_DEPENDENTS,
   PATIENT_EDIT_DEPENDENT,
