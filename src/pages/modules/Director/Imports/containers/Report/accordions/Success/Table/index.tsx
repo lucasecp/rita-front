@@ -27,6 +27,7 @@ export const Table: React.FC<TableProps> = ({ listSucessRegister }) => {
               <p>{pacient.line}</p>
               <p>{pacient.name}</p>
               <p>{pacient.cpf}</p>
+              {console.log(pacient.obs)}
               <p>{pacient.obs}</p>
             </div>
           )
