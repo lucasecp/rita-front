@@ -74,9 +74,9 @@ const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
   return (
     <Container>
       <Autocomplete
-        mask={isCnpj ? '***.***.***/** **-**' : ''}
+        mask={isCnpj ? '**.***.***/****-**' : ''}
         label="CNPJ/Razão Social: "
-        placeholder="000.000.000/0000-00"
+        placeholder="00.000.000/0000-00"
         value={company}
         setValue={setCompany}
         options={companiesOptions}

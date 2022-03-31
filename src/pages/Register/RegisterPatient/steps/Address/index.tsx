@@ -14,6 +14,7 @@ import { useRegisterPatient } from '../../hooks'
 import { validateCep } from '../shared/helpers/validator'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import { addressFromApi } from './adapters/fromApi'
+import { toast } from '@/styles/components/toastify'
 
 interface AddressProps {
   isActive: boolean
@@ -94,6 +95,10 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             'Content-Type': 'application/json',
           },
         })
+
+        if (data.error) {
+          toast.error('Error ao carregar endereço')
+        }
 
         const addressMapped = addressFromApi(data)
 
