@@ -28,13 +28,13 @@ export const ComeBack: React.FC = () => {
     <Container>
       <img src={warningIcon} />
       <p>
-        Suas últimas alterações não foram salvas.
+        Necessário incluir os documentos.
         <br />
-        Confirma a saída?
+        Deseja inclui-los depois?
       </p>
       <footer>
-        <OutlineButton onClick={onDoNotConfirmExit}>Não</OutlineButton>
-        <ButtonPrimary onClick={onConfirmExit}>Sim</ButtonPrimary>
+        <ButtonPrimary onClick={onDoNotConfirmExit}>Não</ButtonPrimary>
+        <OutlineButton onClick={onConfirmExit}>Sim</OutlineButton>
       </footer>
     </Container>
   )
