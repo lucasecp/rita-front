@@ -24,7 +24,7 @@ interface LocationData {
   }
 }
 
-export const ActivatePlanConfirm: React.FC<SellableItem> = () => {
+export const ActivatePlanConfirm: React.FC = () => {
   const history = useHistory()
   const { showMessage } = useModal()
   const { sellableItems, plan } = useLocation<LocationData>().state
@@ -47,15 +47,15 @@ export const ActivatePlanConfirm: React.FC<SellableItem> = () => {
             abaixo serão disponibilizados para venda, deseja prosseguir?
           </h1>
 
-          {sellableItems.map((sellableItem2, index) =>
+          {sellableItems.map((sellableItem: any, index) =>
             isSellableItemsExpanded ? (
               <p key={index}>
-                {sellableItem2.name} - {sellableItem2.price}
+                {sellableItem.name} - {sellableItem.price}
               </p>
             ) : (
               index < 4 && (
                 <p key={index}>
-                  {sellableItem2.name} - {sellableItem2.price}
+                  {sellableItem.name} - {sellableItem.price}
                 </p>
               )
             ),
