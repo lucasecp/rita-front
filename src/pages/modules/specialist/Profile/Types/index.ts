@@ -13,6 +13,7 @@ export interface SpecialistInfoI {
   photo?: string
   cashback?: string
   takerate?: string
+  issuingAgency?: string
 }
 export interface DataSpecialistI {
   specialistInfo?: SpecialistInfoI
@@ -33,4 +34,5 @@ export interface ErrorsI {
   clinics?: string
   crm?: string
   [x: string]: any
+  issuingAgency?: string
 }

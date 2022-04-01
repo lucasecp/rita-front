@@ -1,3 +1,4 @@
+import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectIssuingAgency'
 import React, { useEffect, useState } from 'react'
 
 import InputMask from '../../../../../../components/Form/InputMask'
@@ -40,6 +41,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
   const [classCouncil, setClassCouncil] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+  const [issuingAgency, setIssuingAgency] = useState('')
 
   useEffect(() => {
     setSpecialistInfo({
@@ -51,6 +53,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
       profissionalName,
       ufProfissionaRegister,
       receiveService,
+      issuingAgency,
     })
   }, [
     classCouncil,
@@ -61,6 +64,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
     profissionalName,
     ufProfissionaRegister,
     receiveService,
+    issuingAgency,
   ])
 
   useEffect(() => {
@@ -72,6 +76,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
     setEmail(data?.email || '')
     setPhone(data?.phone || '')
     setCpf(data?.cpf || '')
+    setIssuingAgency(data?.issuingAgency || '')
   }, [data])
 
   useEffect(() => {
@@ -84,6 +89,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
       setEmail(data?.email || '')
       setPhone(data?.phone || '')
       setCpf(data?.cpf || '')
+      setIssuingAgency(data?.issuingAgency || '')
     } else {
       setName(name || '')
       setProfissionalName(profissionalName || '')
@@ -93,6 +99,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
       setEmail(email || '')
       setPhone(phone || '')
       setCpf(cpf || '')
+      setIssuingAgency(issuingAgency || '')
     }
   }, [formWasSubmited])
 
@@ -178,13 +185,20 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
         hasError={!!errors?.receiveService}
         msgError={errors?.receiveService}
       />
+      <SelectIssuingAgency
+        issuingAgency={issuingAgency}
+        setIssuingAgency={setIssuingAgency}
+        error={errors?.issuingAgency}
+        disabled={!isEditing}
+      />
+
       <SelectUf
         ufProfissionaRegister={ufProfissionaRegister}
         setUfProfissionaRegister={setUfProfissionaRegister}
         disabled={!isEditing}
       />
       <InputText
-        label="Conselho de classe:"
+        label="Registro Profissional:"
         value={classCouncil}
         setValue={setClassCouncil}
         hasError={!!errors?.classCouncil}

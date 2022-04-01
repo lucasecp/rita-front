@@ -1,5 +1,3 @@
-import { User } from '../../../../../../@types'
-
 import { SeeUser } from './components/SeeUser'
 import { UnlockUser } from './components/UnlockUser'
 import { InactivateUser } from './components/InactivateUser'
@@ -7,30 +5,51 @@ import { ActivateUser } from './components/ActivateUser'
 
 import { Container } from './styles'
 
-interface ActionProps {
-  userData: User
+export interface User {
+  id: number
+  name: string
+  login: string
+  blocked: string
+  profile: string
+  status: string
 }
 
-export const Actions: React.FC<ActionProps> = ({ userData }) => {
+interface ActionProps {
+  userData: User
+  onGetChangeStatusMessage: () => void
+}
+
+export const Actions: React.FC<ActionProps> = ({
+  userData,
+  onGetChangeStatusMessage,
+}) => {
   return (
     <Container>
-      <SeeUser userId={userData.id} />
+      <SeeUser userData={userData} />
       {userData.status === 'Ativo' && userData.blocked === 'Sim' && (
-        <UnlockUser userId={userData.id} />
+        <UnlockUser
+          userData={userData}
+          onGetChangeStatusMessage={onGetChangeStatusMessage}
+        />
       )}
       {userData.status === 'Ativo' && userData.blocked === 'Não' && (
-        <InactivateUser userId={userData.id} />
+        <InactivateUser
+          userData={userData}
+          onGetChangeStatusMessage={onGetChangeStatusMessage}
+        />
       )}
       {userData.status === 'Inativo' && userData.blocked === 'Não' && (
-        <ActivateUser userId={userData.id} />
-      )}
-      {/* <CustomTooltip label="Resetar Senha">
-        <ResetIcon
-          onClick={() => {
-            console.log('Ação')
-          }}
+        <ActivateUser
+          userData={userData}
+          onGetChangeStatusMessage={onGetChangeStatusMessage}
         />
-      </CustomTooltip> */}
+      )}
+      {userData.status === 'Inativo' && userData.blocked === 'Sim' && (
+        <UnlockUser
+          userData={userData}
+          onGetChangeStatusMessage={onGetChangeStatusMessage}
+        />
+      )}
     </Container>
   )
 }

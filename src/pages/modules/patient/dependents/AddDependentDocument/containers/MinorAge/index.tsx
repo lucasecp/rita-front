@@ -100,11 +100,8 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
   //   loadDocuments()
   // }, [])
 
-  const cancel = () => {
-    if (ownDocumentFile || birthdayCertificateFile)
-      return showMessage(CancelAndExit)
-
-    history.push(PATIENT_DEPENDENTS)
+  const OnCancelAddDependentDocuments = () => {
+    showMessage(CancelAndExit)
   }
 
   const onSaveDocumentDependent = async () => {
@@ -265,7 +262,9 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
         )}
       </Container>
       <Footer>
-        <OutilineButton onClick={cancel}>Cancelar</OutilineButton>
+        <OutilineButton onClick={OnCancelAddDependentDocuments}>
+          Cancelar
+        </OutilineButton>
         <CustomBtn onClick={onSaveDocumentDependent}>Salvar</CustomBtn>
       </Footer>
     </>

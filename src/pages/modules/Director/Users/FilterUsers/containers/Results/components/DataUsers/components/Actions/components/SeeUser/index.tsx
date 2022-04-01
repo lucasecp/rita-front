@@ -7,16 +7,18 @@ import { ReactComponent as EyePurpleIcon } from '@/assets/icons/eye-purple.svg'
 
 import { SEE_ONE_USER } from '@/routes/constants/namedRoutes/routes'
 
+import { User } from '../../index'
+
 interface SeeUserProps {
-  userId: number
+  userData: User
 }
 
-export const SeeUser: React.FC<SeeUserProps> = ({ userId }) => {
+export const SeeUser: React.FC<SeeUserProps> = ({ userData }) => {
   const history = useHistory()
 
   const onSeeUser = () => {
     history.push(SEE_ONE_USER, {
-      id: userId,
+      id: userData.id,
     })
   }
 

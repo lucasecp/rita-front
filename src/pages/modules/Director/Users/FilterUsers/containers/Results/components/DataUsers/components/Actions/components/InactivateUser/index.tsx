@@ -4,29 +4,37 @@ import CustomTooltip from '@/components/Tooltip'
 import { useLoading } from '@/hooks/useLoading'
 
 import { ReactComponent as InactivateIcon } from '@/assets/icons/inactivate-grid.svg'
+import { toast } from '@/styles/components/toastify'
 
 import apiUser from '@/services/apiUser'
 
+import { User } from '../../index'
+
 interface InactivateUserProps {
-  userId: number
+  userData: User
+  onGetChangeStatusMessage: () => void
 }
 
-export const InactivateUser: React.FC<InactivateUserProps> = ({ userId }) => {
+export const InactivateUser: React.FC<InactivateUserProps> = ({
+  userData,
+  onGetChangeStatusMessage,
+}) => {
   const { Loading } = useLoading()
 
   const onInactivateUser = async () => {
     try {
       Loading.turnOn()
 
-      const response = await apiUser.patch(`/usuario/${userId}/inativar`)
+      await apiUser.patch(`/usuario/${userData.id}/inativar`)
 
-      console.log('response: ', response.data)
+      toast.success(`Usuário ${userData.name} inativado com sucesso`)
+
+      onGetChangeStatusMessage()
     } catch {
-      console.log('Erro na Ação Inativar')
+      toast.error('Erro ao inativar usuário.')
     } finally {
       Loading.turnOff()
     }
-    console.log('Inativar: ', userId)
   }
 
   return (
