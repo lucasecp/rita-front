@@ -28,7 +28,7 @@ export const AddArea: React.FC<AddAreaProps> = ({
   onGetPlaceOfSale,
 }) => {
   const [regional, setRegional] = useState<string | number>('')
-  const [clearRegional, sendClearRegional] = useMessage()
+  const [clearFields, sendClearFields] = useMessage()
 
   const [uf, setUf] = useState<string | number>('')
 
@@ -47,8 +47,7 @@ export const AddArea: React.FC<AddAreaProps> = ({
 
       onGetPlaceOfSale(placeOfSaleMapped)
 
-      sendClearRegional()
-      setUf('')
+      sendClearFields()
       setCities([])
     } catch ({ response }) {
       return toast.error('Seleção fora da abrangência do plano')
@@ -58,8 +57,7 @@ export const AddArea: React.FC<AddAreaProps> = ({
   }
 
   useEffect(() => {
-    sendClearRegional()
-    setUf('')
+    sendClearFields()
     setCities([])
   }, [idPlan])
 
@@ -69,13 +67,14 @@ export const AddArea: React.FC<AddAreaProps> = ({
         <RegionalSelect
           idPlan={idPlan}
           placeOfSale={placeOfSale}
-          clearRegional={clearRegional}
+          clearRegional={clearFields}
           onGetRegional={setRegional}
         />
         <UfSelect
           idPlan={idPlan}
           placeOfSale={placeOfSale}
           regional={regional}
+          clearRegional={clearFields}
           onGetUf={setUf}
         />
         <CitiesMultiSelect
