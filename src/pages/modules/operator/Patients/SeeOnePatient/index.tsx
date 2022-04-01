@@ -7,7 +7,7 @@ import { Container } from './styles'
 import PersonExpandable from './components/PersonExpandable'
 import { DependentExpandable } from './components/DependentExpandable'
 import AddressSeeOnePatient from './components/AddressSeeOnePatient'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
 import DocumentsSeeOnePatient from './components/DocumentsSeeOnePatient'
@@ -99,6 +99,8 @@ export const SeeOnePatient: React.FC = () => {
           setIsDependentMinorAge(false)
         }
         const patientStatusMapped = fromApiPatientStatusLimit(data)
+        console.log('333333--------->', data)
+
         const patientDataMapped = fromApiPatientData(data)
         const patientDependentsMapped = fromApiDependents(data)
         const patientAddressMapped = fromApiPatientAddress(data)

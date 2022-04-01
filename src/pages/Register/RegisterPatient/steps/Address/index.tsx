@@ -1,14 +1,20 @@
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import axios from 'axios'
+import QueryString from 'qs'
+
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import SelectUf from '@/components/smarts/SelectUf'
 import SelectCity from '@/components/smarts/SelectCity'
-import React, { useEffect, useState } from 'react'
-
-import { Container } from './styles'
-import { validateCep } from '../shared/helpers/validator'
-import { useRegisterPatient } from '../../hooks'
 import ButtonLink from '@/components/Button/Link'
 import ButtonPrimary from '@/components/Button/Primary'
+
+import { Container } from './styles'
+import { useRegisterPatient } from '../../hooks'
+import { validateCep } from '../shared/helpers/validator'
+import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import { addressFromApi } from './adapters/fromApi'
+import { toast } from '@/styles/components/toastify'
 
 interface AddressProps {
   isActive: boolean
@@ -26,7 +32,10 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
   const [numberHome, setNumberHome] = useState('')
   const [district, setDistrict] = useState('')
   const [complement, setComplement] = useState('')
+
   const [errors, setErrors] = useState({} as { cep: string })
+
+  const [addressLoaded, setAddressLoaded] = useState(false)
 
   useEffect(() => {
     setCep(initialRegisterData?.address?.cep || '')
@@ -50,6 +59,60 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
     })
   }, [address, cep, numberHome, city, complement, uf, district])
 
+  const onCepChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const cepValue = event.target.value
+
+    setErrors({ ...errors, ...validateCep(cepValue) })
+
+    setCep(cepValue)
+
+    const cepCleared = clearSpecialCaracter(cepValue)
+
+    if (cepCleared.length === 8) {
+      try {
+        const responseToken = await axios.post(
+          '/oauth2/token',
+          QueryString.stringify({
+            grant_type: 'client_credentials',
+            scope: 'customer_info_nv1',
+            client_id: process.env.REACT_APP_CEP_ID,
+            client_secret: process.env.REACT_APP_CEP_SECRET,
+          }),
+          {
+            baseURL: process.env.REACT_APP_CEP_OAUTH2_HOST || '',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+          },
+        )
+
+        const token = responseToken.data.access_token
+
+        const { data } = await axios.get(`/resource/v1/cep/${cepCleared}`, {
+          baseURL: process.env.REACT_APP_CEP_HOST,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+
+        if (data.error) {
+          toast.error('Error ao carregar endereço')
+        }
+
+        const addressMapped = addressFromApi(data)
+
+        setAdress(`${addressMapped.type} ${addressMapped.address}`)
+
+        // disabled fields
+        setAddressLoaded(true)
+      } catch (error) {
+        setAddressLoaded(false)
+        console.log(error)
+      }
+    }
+  }
+
   const onNextStep = () => {
     const hasErrors = Object.values(errors).some((value) => value !== '')
 
@@ -68,14 +131,25 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             mask="99.999-999"
             value={cep}
             setValue={setCep}
+            onChange={onCepChange}
             name="cep"
             onBlur={() => setErrors({ ...errors, ...validateCep(cep) })}
             onKeyUp={() => setErrors({ ...errors, ...validateCep(cep) })}
             msgError={errors.cep}
             hasError={!!errors.cep}
           />
-          <SelectUf setUf={setUf} uf={uf} setUfToApi={setUfToApi} />
-          <SelectCity setCity={setCity} uf={uf} city={city} />
+          <SelectUf
+            setUf={setUf}
+            uf={uf}
+            setUfToApi={setUfToApi}
+            disabled={addressLoaded}
+          />
+          <SelectCity
+            setCity={setCity}
+            uf={uf}
+            city={city}
+            disabled={addressLoaded}
+          />
 
           <InputText
             label="Endereço:"
@@ -83,6 +157,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             setValue={setAdress}
             name="address"
             maxLength={100}
+            disabled={addressLoaded}
           />
           <InputText
             label="Número:"
@@ -106,6 +181,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             setValue={setDistrict}
             name="district"
             maxLength={100}
+            disabled={addressLoaded}
           />
         </div>
       </div>

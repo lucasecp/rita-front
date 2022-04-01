@@ -13,6 +13,7 @@ export interface SpecialistInfoI {
   photo?: string
   cashback?: string
   takerate?: string
+  issuingAgency?: string
 }
 
 export interface DataSpecialistI {
@@ -36,6 +37,7 @@ export interface ErrorsI {
   specialtysAndDocsType?: string
   rqe?: string
   [x: string]: any
+  issuingAgency?: string
 }
 
 export type SpecialtysAndDocsType = {

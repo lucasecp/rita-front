@@ -3,7 +3,7 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { fromApi } from './adapters'
 import { useLoading } from '@/hooks/useLoading'
 import apiPatient from '@/services/apiPatient'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   PATIENT_DEPENDENTS,
   PATIENT_EDIT_DEPENDENT,
@@ -28,7 +28,6 @@ const SeeDependents = () => {
   const { showMessage } = useModal()
 
   const [dependentDocument, setDependentDocument] = useState('')
-  const [dependentDocumentName, setDependentDocumentName] = useState('')
 
   useEffect(() => {
     if (!location.state) {
@@ -43,13 +42,6 @@ const SeeDependents = () => {
         const { data } = await apiPatient.get(
           `/paciente/dependente?id=${location.state.idDependent}`,
         )
-
-        if (data.documentosCadastrados.length > 0) {
-          setDependentDocumentName(
-            data.documentosCadastrados[data.documentosCadastrados.length - 1]
-              .nomeOriginal,
-          )
-        }
 
         setDependent(fromApi(data))
       } catch (error) {
@@ -76,8 +68,6 @@ const SeeDependents = () => {
     getDependentIncomeDocument()
   }, [])
 
-  console.log(dependent?.personalDatas)
-
   const onEditPatient = () => {
     if (dependent.personalDatas.status === 'PENDING') {
       return showMessage(PendingWarning)
@@ -89,7 +79,6 @@ const SeeDependents = () => {
     history.push(PATIENT_EDIT_DEPENDENT, {
       dependent,
       id,
-      dependentDocumentName,
     })
   }
 
@@ -101,7 +90,6 @@ const SeeDependents = () => {
         <Documents
           data={dependent.personalDatas}
           dependentDocument={dependentDocument}
-          dependentDocumentName={dependentDocumentName}
         />
         <Situation data={dependent.personalDatas} />
 

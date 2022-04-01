@@ -7,6 +7,7 @@ interface SelectCityProps {
   city: string
   uf: string
   disabled?: boolean
+  [x: string]: any
 }
 
 const initialLabel = 'Selecione:'

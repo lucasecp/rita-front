@@ -28,18 +28,43 @@ export const ResetStatusOnePatient: React.FC<PersonStatusProps> = ({
     setlimitTry(patientStatus.limitTry)
   }, [patientStatus])
 
+  const statusOptions = () => {
+    if (status === 'A') {
+      return [
+        { label: 'Aprovado', value: 'A' },
+        { label: 'Pendente', value: 'P' },
+        { label: 'Inativo', value: 'I' },
+      ]
+    }
+    if (status === 'N') {
+      return [
+        { label: 'Negado', value: 'N' },
+        { label: 'Pendente', value: 'P' },
+        { label: 'Inativo', value: 'I' },
+      ]
+    }
+    if (status === 'P') {
+      return [
+        { label: 'Pendente', value: 'P' },
+        { label: 'Inativo', value: 'I' },
+      ]
+    }
+    if (status === 'I') {
+      return [
+        { label: 'Inativo', value: 'I' },
+        { label: 'Pendente', value: 'P' },
+      ]
+    } else {
+      return []
+    }
+  }
+
   return (
     <Container>
       <Select
         label="Atualizar Status:"
         labelDefaultOption="Selecione:"
-        options={[
-          { label: 'Pendente', value: 'P' },
-          { label: 'Inativo', value: 'I' },
-          { label: 'Em Analise', value: 'EA', disabled: true },
-          { label: 'Aprovado', value: 'A', disabled: true },
-          { label: 'Negado', value: 'N', disabled: true },
-        ]}
+        options={statusOptions()}
         setValue={setStatus}
         value={status}
         name="status"

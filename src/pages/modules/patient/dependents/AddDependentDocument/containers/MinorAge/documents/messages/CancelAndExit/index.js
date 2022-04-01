@@ -28,9 +28,9 @@ export const CancelAndExit = () => {
     <Container>
       <img src={warningIcon} />
       <p>
-        As informações não serão salvas.
+        Necessário incluir os documentos.
         <br />
-        Confirma a saída?
+        Deseja inclui-los depois?
       </p>
       <footer>
         <ButtonPrimary onClick={onDoNotConfirmExit}>Não</ButtonPrimary>

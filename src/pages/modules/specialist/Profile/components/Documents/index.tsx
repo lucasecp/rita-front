@@ -37,8 +37,9 @@ const Documents: React.FC<DocumentsProps> = ({
   isEditing,
   formWasSubmited,
 }) => {
-  const initialPhoto =
-    !!initialData[data.name] && initialData[data.name].document
+  const initialPhoto = initialData[data.name]
+    ? initialData[data.name].document
+    : ''
 
   const [photo, setPhoto] = useState(initialPhoto || '')
 
@@ -91,7 +92,7 @@ const Documents: React.FC<DocumentsProps> = ({
 
   useEffect(() => {
     addSpeciatyAndDocs()
-
+    console.log(photo)
     if (!photo) return
 
     addError('')
@@ -135,9 +136,12 @@ const Documents: React.FC<DocumentsProps> = ({
 
   useEffect(() => {
     if (!formWasSubmited && !isEditing) {
-      setPhoto(initialPhoto || ({} as File))
+      setPhoto(initialPhoto || '')
       setRqe(data.rqe || '')
-    } 
+    } else {
+      setPhoto(photo || '')
+      setRqe(rqe || '')
+    }
   }, [formWasSubmited, isEditing])
 
   return (

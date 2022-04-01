@@ -1,6 +1,5 @@
 import { optionsFilteredWithAll } from '@/components/Form/MultSelect/helpers/OptionsFilteredWithAll'
 import { statusOptions } from '../constants/statusOptions'
-// import { columnsOptions } from '../constants/columnsOptions'
 import { MultiSelectOption } from '@/components/Form/MultSelect'
 import { AutocompleteOptions } from '@/components/Form/Autocomplete'
 
@@ -9,7 +8,6 @@ interface PatientAnalyticFilters {
   registrationPeriod: string
   validationPeriod: string
   status: MultiSelectOption[]
-  // columns: MultiSelectOption[]
 }
 
 interface PatientAnalyticFiltersToApi {
@@ -20,7 +18,6 @@ interface PatientAnalyticFiltersToApi {
   dataValidacaoInicio: string | undefined
   dataValidacaoFim: string | undefined
   status: (string | number)[]
-  // colunas: (string | number)[]
 }
 
 export const statusToApi = (status: string): string => {
@@ -35,24 +32,6 @@ export const statusToApi = (status: string): string => {
 
   return statusObject[status] || ''
 }
-
-// export const columnsToApi = (columns: string): string => {
-//   const columnsObject: { [x: string]: string } = {
-//     id: 'id',
-//     contractNumber: 'titulares.cpf',
-//     beneficiaryType: 'beneficiario',
-//     name: 'paciente.nome',
-//     cpf: 'paciente.cpf',
-//     birthDate: 'paciente.dataNascimento',
-//     gender: 'paciente.sexo',
-//     plan: 'plano.nome',
-//     amountPlan: 'plano.mensalidade',
-//     phone: 'paciente.telefone',
-//     status: 'paciente.status',
-//   }
-
-//   return columnsObject[columns] || ''
-// }
 
 export const previewFiltersToApi = (
   patientAnalyticFilters: PatientAnalyticFilters,
@@ -80,11 +59,6 @@ export const previewFiltersToApi = (
     statusOptions,
   )
 
-  // const columnsToApiFiltered = optionsFilteredWithAll(
-  //   patientAnalyticFilters.columns,
-  //   columnsOptions,
-  // )
-
   return {
     idEmpresa: patientAnalyticFilters.cnpj.value,
     limit: 10,
@@ -93,8 +67,5 @@ export const previewFiltersToApi = (
     dataValidacaoInicio: validationPeriodStartToApi,
     dataValidacaoFim: validationPeriodEndToApi,
     status: statusToApiFiltered.map((status) => statusToApi(String(status.id))),
-    // colunas: columnsToApiFiltered.map((column) =>
-    //   columnsToApi(String(column.id)),
-    // ),
   }
 }

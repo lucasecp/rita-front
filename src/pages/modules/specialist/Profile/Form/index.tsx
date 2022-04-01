@@ -94,16 +94,6 @@ const Form: React.FC<FormProps> = ({
     specialtysAndDocs,
   ])
 
-  console.log(
-    toApi({
-      specialistInfo,
-      ...specialistClinics,
-      ...specialistSpecialitys,
-      rqe: rqeAndSpeciality,
-    }),
-    errors,
-  )
-
   const onSave = async () => {
     setClickOnSave(randomValues)
 

@@ -17,12 +17,16 @@ export const Documents = ({
         <h1>Documentos Cadastrados</h1>
       </div>
       <section>
-        <InputText label="Renda:" value={data?.income} disabled />
+        <InputText
+          label="Comprovante de Renda:"
+          value={data?.income}
+          disabled
+        />
 
         {/* <Select labelDefaultOption={data?.income} /> */}
 
         <SeeDocumentFile
-          title={dependentDocumentName}
+          title={'Comprovante de Renda'}
           document={dependentDocument}
         />
       </section>

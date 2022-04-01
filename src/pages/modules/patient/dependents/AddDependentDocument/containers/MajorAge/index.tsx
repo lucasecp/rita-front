@@ -17,6 +17,7 @@ import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
 import { toast } from '@/styles/components/toastify'
+import { DocumentsNotSended } from './messages/DocumentsNotSended'
 
 interface MajorAgeProps {
   dependent: {
@@ -35,7 +36,7 @@ interface ErrorState {
 export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
   const history = useHistory()
   const { Loading } = useLoading()
-  const { showMessage } = useModal()
+  const { showMessage, closeModal } = useModal()
 
   const [holdingDocumentFile, setHoldingDocumentFile] = useState<File | string>(
     '',
@@ -53,18 +54,7 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
   const [errors, setErrors] = useState({} as ErrorState)
 
   const onCancelAddDependentDocuments = () => {
-    if (
-      holdingDocumentFile ||
-      ownFrontDocumentFile ||
-      ownBackDocumentFile ||
-      proofOfIncomeFile ||
-      proofOfAddressFile ||
-      selectIncome
-    ) {
-      return showMessage(ComeBack)
-    }
-
-    history.push(PATIENT_DEPENDENTS)
+    showMessage(ComeBack)
   }
 
   const onSaveDocumentDependent = async () => {
@@ -163,9 +153,12 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
       })
 
       toast.success('Cadastro atualizado com sucesso.')
+      closeModal()
       history.push(PATIENT_DEPENDENTS)
     } catch ({ response }) {
-      toast.error('Erro ao enviar os documentos!')
+      return showMessage(DocumentsNotSended, {
+        onSaveDocumentDependent,
+      })
     } finally {
       Loading.turnOff()
     }

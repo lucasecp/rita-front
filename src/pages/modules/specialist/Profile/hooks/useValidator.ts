@@ -63,7 +63,11 @@ export const useValidator = (): {
         error = true
       }
 
-      if (Array.isArray(fields[field]) && !fields[field].length) {
+      if (
+        Array.isArray(fields[field]) &&
+        !fields[field].length &&
+        typeof fields[field] !== 'number'
+      ) {
         setErrors((errors) => ({
           ...errors,
           [field]: 'Campo obrigatório',

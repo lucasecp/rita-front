@@ -79,6 +79,7 @@ export const AddArea: React.FC<AddAreaProps> = ({
           onGetUf={setUf}
         />
         <CitiesMultiSelect
+          idPlan={idPlan}
           uf={uf}
           placeOfSale={placeOfSale}
           onGetCities={setCities}

@@ -13,6 +13,7 @@ import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
 import { CancelAndExit } from './documents/messages/CancelAndExit'
+import { DocumentsNotSended } from './messages/DocumentsNotSended'
 
 interface MinorAgeProps {
   dependent: {
@@ -46,7 +47,7 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
   // }, [documentTypeSelected])
 
   const { Loading } = useLoading()
-  const { showMessage } = useModal()
+  const { showMessage, closeModal } = useModal()
 
   // useEffect(() => {
   //   const loadDocuments = async () => {
@@ -99,18 +100,11 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
   //   loadDocuments()
   // }, [])
 
-  const backToList = () => {
-    history.push(PATIENT_DEPENDENTS)
+  const OnCancelAddDependentDocuments = () => {
+    showMessage(CancelAndExit)
   }
 
-  const cancel = () => {
-    if (ownDocumentFile || birthdayCertificateFile)
-      return showMessage(CancelAndExit)
-
-    backToList()
-  }
-
-  const VerifyFilesAndCallAPI = async () => {
+  const onSaveDocumentDependent = async () => {
     if (
       (!ownDocumentFile || !ownBackDocumentFile) &&
       documentTypeSelected === 'identidade'
@@ -139,8 +133,6 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
       })
 
     if (documentTypeSelected === 'identidade') {
-      Loading.turnOn()
-
       const formFile1 = new FormData()
       formFile1.append('file', ownDocumentFile)
 
@@ -148,6 +140,8 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
       formFile2.append('file', ownBackDocumentFile)
 
       try {
+        Loading.turnOn()
+
         await axios.all([
           apiPatient.post(
             `/paciente/documento?cpf=${dependent.cpf}&tipoDocumento=Cpf`,
@@ -170,12 +164,14 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
             params: { cpf: dependent.cpf },
           },
         )
-      } catch ({ response }) {
-        toast.error('Erro ao enviar os documentos!')
-      } finally {
-        toast.success('Cadastro realizado com sucesso')
 
-        backToList()
+        closeModal()
+        history.push(PATIENT_DEPENDENTS)
+      } catch {
+        return showMessage(DocumentsNotSended, {
+          onSaveDocumentDependent,
+        })
+      } finally {
         Loading.turnOff()
       }
     }
@@ -198,15 +194,16 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
             params: { cpf: dependent.cpf },
           },
         )
-      } catch (error) {
-        toast.error('Erro ao enviar os documentos!')
-      } finally {
-        toast.success('Cadastro realizado com sucesso')
 
-        backToList()
+        closeModal()
+        history.push(PATIENT_DEPENDENTS)
+      } catch {
+        return showMessage(DocumentsNotSended, {
+          onSaveDocumentDependent,
+        })
+      } finally {
         Loading.turnOff()
       }
-      Loading.turnOff()
     }
   }
 
@@ -265,8 +262,10 @@ export const MinorAge: React.FC<MinorAgeProps> = ({ dependent }) => {
         )}
       </Container>
       <Footer>
-        <OutilineButton onClick={cancel}>Cancelar</OutilineButton>
-        <CustomBtn onClick={VerifyFilesAndCallAPI}>Salvar</CustomBtn>
+        <OutilineButton onClick={OnCancelAddDependentDocuments}>
+          Cancelar
+        </OutilineButton>
+        <CustomBtn onClick={onSaveDocumentDependent}>Salvar</CustomBtn>
       </Footer>
     </>
   )
