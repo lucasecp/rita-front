@@ -28,13 +28,13 @@ const PaymentRequest: React.FC<PaymentRequestProps> = ({
   data: paymentRequest,
 }) => {
   const { showMessage } = useModal()
-  const [remaingAttempts, setRemaingAttempts] = useLocalStorage(
-    '@Rita/PaymentRequest/RemaingAttempts',
-  )
+  // const [, setRemaingAttempts] = useLocalStorage(
+  //   '@Rita/PaymentRequest/RemaingAttempts',
+  // )
 
-  useEffect(() => {
-    setRemaingAttempts(defaultMaximumAttempts)
-  }, [])
+  // useEffect(() => {
+  // setRemaingAttempts(defaultMaximumAttempts)
+  // }, [])
 
   function handleRejectClick() {
     showMessage(PaymentRequestRejection, { data: paymentRequest }, true)
