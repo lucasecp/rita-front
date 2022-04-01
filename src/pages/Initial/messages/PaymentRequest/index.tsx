@@ -28,7 +28,7 @@ const PaymentRequest: React.FC<PaymentRequestProps> = ({
   data: paymentRequest,
 }) => {
   const { showMessage } = useModal()
-  const [, setRemaingAttempts] = useLocalStorage(
+  const [remaingAttempts, setRemaingAttempts] = useLocalStorage(
     '@Rita/PaymentRequest/RemaingAttempts',
   )
 
