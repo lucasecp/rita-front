@@ -10,13 +10,12 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": false,
+    "strict": true,
     "skipLibCheck": true,
     "target": "es5",
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "baseUrl": ".",
-    "noImplicitAny": false
+    "baseUrl": "."
   },
   "exclude": ["node_modules", "**/*.spec.ts"],
   "include": [
