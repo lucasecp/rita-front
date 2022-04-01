@@ -64,27 +64,27 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
     })
   }, [address, cep, numberHome, city, complement, uf, district])
 
-  useEffect(() => {
-    const loadCities = async () => {
-      console.log(uf)
-      if (typeof uf === 'number' && !addressLoaded) {
-        try {
-          const { data } = await apiAdmin.get(`/municipio?idUF=${uf}`)
+  // useEffect(() => {
+  //   const loadCities = async () => {
+  //     console.log(uf)
+  //     if (typeof uf === 'number' && !addressLoaded) {
+  //       try {
+  //         const { data } = await apiAdmin.get(`/municipio?idUF=${uf}`)
 
-          const citiesMapped = data.map((city: { descricao: string }) => ({
-            label: city.descricao,
-            value: city.descricao,
-          }))
+  //         const citiesMapped = data.map((city: { descricao: string }) => ({
+  //           label: city.descricao,
+  //           value: city.descricao,
+  //         }))
 
-          setCitiesOptions(citiesMapped)
-        } catch (error) {
-          console.log(error)
-        }
-      }
-    }
+  //         setCitiesOptions(citiesMapped)
+  //       } catch (error) {
+  //         console.log(error)
+  //       }
+  //     }
+  //   }
 
-    loadCities()
-  }, [uf])
+  //   loadCities()
+  // }, [uf])
 
   const onCepChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const cepValue = event.target.value
@@ -93,74 +93,74 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
 
     setCep(cepValue)
 
-    const cepCleared = clearSpecialCaracter(cepValue)
+    // const cepCleared = clearSpecialCaracter(cepValue)
 
-    if (cepCleared.length === 8) {
-      try {
-        const responseToken = await axios.post(
-          '/oauth2/token',
-          QueryString.stringify({
-            grant_type: 'client_credentials',
-            scope: 'customer_info_nv1',
-            client_id: process.env.REACT_APP_CEP_ID,
-            client_secret: process.env.REACT_APP_CEP_SECRET,
-          }),
-          {
-            baseURL: process.env.REACT_APP_CEP_OAUTH2_HOST || '',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-          },
-        )
+    // if (cepCleared.length === 8) {
+    //   try {
+    //     const responseToken = await axios.post(
+    //       '/oauth2/token',
+    //       QueryString.stringify({
+    //         grant_type: 'client_credentials',
+    //         scope: 'customer_info_nv1',
+    //         client_id: process.env.REACT_APP_CEP_ID,
+    //         client_secret: process.env.REACT_APP_CEP_SECRET,
+    //       }),
+    //       {
+    //         baseURL: process.env.REACT_APP_CEP_OAUTH2_HOST || '',
+    //         headers: {
+    //           'Content-Type': 'application/x-www-form-urlencoded',
+    //         },
+    //       },
+    //     )
 
-        const token = responseToken.data.access_token
+    //     const token = responseToken.data.access_token
 
-        const { data } = await axios.get(`/resource/v1/cep/${cepCleared}`, {
-          baseURL: process.env.REACT_APP_CEP_HOST,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            // 'Content-Type': 'application/json',
-          },
-        })
+    //     const { data } = await axios.get(`/resource/v1/cep/${cepCleared}`, {
+    //       baseURL: process.env.REACT_APP_CEP_HOST,
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //         // 'Content-Type': 'application/json',
+    //       },
+    //     })
 
-        if (data.error) {
-          return toast.error('Error ao carregar endereço')
-        }
+    //     if (data.error) {
+    //       return toast.error('Error ao carregar endereço')
+    //     }
 
-        const addressMapped = addressFromApi(data)
-        setAdress(`${addressMapped.type} ${addressMapped.address}`)
-        setDistrict(addressMapped.district)
-        setCity(addressMapped.city)
-        setUf(addressMapped.uf)
+    //     const addressMapped = addressFromApi(data)
+    //     setAdress(`${addressMapped.type} ${addressMapped.address}`)
+    //     setDistrict(addressMapped.district)
+    //     setCity(addressMapped.city)
+    //     setUf(addressMapped.uf)
 
-        // disabled fields
-        setAddressLoaded(true)
-      } catch (error) {
-        setAddressLoaded(false)
-        console.log(error)
-      }
+    //     // disabled fields
+    //     setAddressLoaded(true)
+    //   } catch (error) {
+    //     setAddressLoaded(false)
+    //     console.log(error)
+    //   }
 
-      // API DA VIACEP
-      // try {
-      //   const { data } = await axios.get(
-      //     `https://viacep.com.br/ws/${cepCleared}/json`,
-      //   )
-      //   if (data.erro) {
-      //     console.log(data.erro)
-      //     return toast.error('Error ao carregar endereço')
-      //   }
-      //   const addressMapped = addressFromApi(data)
-      //   setAdress(addressMapped.address)
-      //   setDistrict(addressMapped.district)
-      //   setCity(addressMapped.city)
-      //   setUf(addressMapped.uf)
-      //   setAddressLoaded(true)
-      // } catch (error) {
-      //   setAddressLoaded(false)
-      //   toast.error('Error ao carregar endereço')
-      //   console.log(error)
-      // }
-    }
+    // API DA VIACEP
+    // try {
+    //   const { data } = await axios.get(
+    //     `https://viacep.com.br/ws/${cepCleared}/json`,
+    //   )
+    //   if (data.erro) {
+    //     console.log(data.erro)
+    //     return toast.error('Error ao carregar endereço')
+    //   }
+    //   const addressMapped = addressFromApi(data)
+    //   setAdress(addressMapped.address)
+    //   setDistrict(addressMapped.district)
+    //   setCity(addressMapped.city)
+    //   setUf(addressMapped.uf)
+    //   setAddressLoaded(true)
+    // } catch (error) {
+    //   setAddressLoaded(false)
+    //   toast.error('Error ao carregar endereço')
+    //   console.log(error)
+    // }
+    // }
   }
 
   const onNextStep = () => {
@@ -195,14 +195,21 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             disabled={addressLoaded}
           />
 
-          <Select
+          <SelectCity
+            setCity={setCity}
+            uf={uf}
+            city={city}
+            disabled={addressLoaded}
+          />
+
+          {/* <Select
             options={citiesOptions}
             label="Cidade:"
             labelDefaultOption="Selecione:"
             value={city}
             setValue={setCity}
-            // disabled={addressLoaded}
-          />
+            disabled={addressLoaded}
+          /> */}
 
           <InputText
             label="Endereço:"
