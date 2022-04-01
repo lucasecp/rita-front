@@ -54,18 +54,7 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
   const [errors, setErrors] = useState({} as ErrorState)
 
   const onCancelAddDependentDocuments = () => {
-    if (
-      holdingDocumentFile ||
-      ownFrontDocumentFile ||
-      ownBackDocumentFile ||
-      proofOfIncomeFile ||
-      proofOfAddressFile ||
-      selectIncome
-    ) {
-      return showMessage(ComeBack)
-    }
-
-    history.push(PATIENT_DEPENDENTS)
+    showMessage(ComeBack)
   }
 
   const onSaveDocumentDependent = async () => {
