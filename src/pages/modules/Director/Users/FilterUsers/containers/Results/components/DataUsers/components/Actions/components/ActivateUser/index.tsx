@@ -4,29 +4,37 @@ import CustomTooltip from '@/components/Tooltip'
 import { useLoading } from '@/hooks/useLoading'
 
 import { ReactComponent as ActivateIcon } from '@/assets/icons/activate-grid.svg'
+import { toast } from '@/styles/components/toastify'
 
 import apiUser from '@/services/apiUser'
 
+import { User } from '../../index'
+
 interface ActivateUserProps {
-  userId: number
+  userData: User
+  onGetMessage: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const ActivateUser: React.FC<ActivateUserProps> = ({ userId }) => {
+export const ActivateUser: React.FC<ActivateUserProps> = ({
+  userData,
+  onGetMessage,
+}) => {
   const { Loading } = useLoading()
 
   const onActivateUser = async () => {
     try {
       Loading.turnOn()
 
-      const response = await apiUser.patch(`/usuario/${userId}/ativar`)
+      await apiUser.patch(`/usuario/${userData.id}/ativar`)
 
-      console.log('response: ', response.data)
+      toast.success(`Usuário ${userData.name} ativado com sucesso`)
+
+      onGetMessage(Math.random())
     } catch {
-      console.log('Erro na Ação Ativar')
+      toast.error('Erro ao ativar usuário.')
     } finally {
       Loading.turnOff()
     }
-    console.log('Ativar: ', userId)
   }
 
   return (

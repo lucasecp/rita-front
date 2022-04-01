@@ -4,31 +4,39 @@ import CustomTooltip from '@/components/Tooltip'
 import { useLoading } from '@/hooks/useLoading'
 
 import { ReactComponent as UnlockIcon } from '@/assets/icons/unlock.svg'
+import { toast } from '@/styles/components/toastify'
 
 import apiUser from '@/services/apiUser'
 
+import { User } from '../../index'
+
 interface UnlockUserProps {
-  userId: number
+  userData: User
+  onGetMessage: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const UnlockUser: React.FC<UnlockUserProps> = ({ userId }) => {
+export const UnlockUser: React.FC<UnlockUserProps> = ({
+  userData,
+  onGetMessage,
+}) => {
   const { Loading } = useLoading()
 
   const onUnlockUser = async () => {
     try {
       Loading.turnOn()
 
-      const response = await apiUser.patch(`/usuario/${userId}`, {
+      await apiUser.patch(`/usuario/${userData.id}`, {
         bloqueado: 'N',
       })
 
-      console.log('response: ', response.data)
+      toast.success(`Usuário ${userData.name} desbloqueado com sucesso`)
+
+      onGetMessage(Math.random())
     } catch {
-      console.log('Erro na Ação Desbloquear')
+      toast.error('Erro ao desbloquear usuário.')
     } finally {
       Loading.turnOff()
     }
-    console.log('Desbloquear: ', userId)
   }
 
   return (

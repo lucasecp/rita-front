@@ -8,6 +8,7 @@ import { PaginationSimple } from './components/PaginationSimple'
 import { Container, Status } from './styles'
 import qs from 'qs'
 import { useLoading } from '@/hooks/useLoading'
+import { useMessage } from '@/hooks/useMessage'
 import { toast } from '@/styles/components/toastify'
 
 interface DataUsersProps {
@@ -22,6 +23,7 @@ interface PaginationState {
 
 export const DataUsers: React.FC<DataUsersProps> = ({ filters, order }) => {
   const { Loading } = useLoading()
+  const [message, sendMessage] = useMessage(0)
 
   const [usersData, setUsersData] = useState<User[]>([])
 
@@ -60,7 +62,7 @@ export const DataUsers: React.FC<DataUsersProps> = ({ filters, order }) => {
     }
 
     loadUsers()
-  }, [pagination, order, filters])
+  }, [pagination, order, filters, message])
 
   return (
     <Container>
@@ -73,7 +75,7 @@ export const DataUsers: React.FC<DataUsersProps> = ({ filters, order }) => {
             <span>{user.status || '-'}</span>
           </Status>
           <li>{user.blocked || '-'}</li>
-          <Actions userData={user} />
+          <Actions userData={user} onGetMessage={sendMessage} />
         </ul>
       ))}
       {!usersData?.length && <h2>Nenhum resultado encontrado</h2>}

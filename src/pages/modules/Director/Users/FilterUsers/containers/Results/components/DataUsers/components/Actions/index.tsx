@@ -1,5 +1,3 @@
-import { User } from '../../../../../../@types'
-
 import { SeeUser } from './components/SeeUser'
 import { UnlockUser } from './components/UnlockUser'
 import { InactivateUser } from './components/InactivateUser'
@@ -7,30 +5,36 @@ import { ActivateUser } from './components/ActivateUser'
 
 import { Container } from './styles'
 
-interface ActionProps {
-  userData: User
+export interface User {
+  id: number
+  name: string
+  login: string
+  blocked: string
+  profile: string
+  status: string
 }
 
-export const Actions: React.FC<ActionProps> = ({ userData }) => {
+interface ActionProps {
+  userData: User
+  onGetMessage: React.Dispatch<React.SetStateAction<number>>
+}
+
+export const Actions: React.FC<ActionProps> = ({ userData, onGetMessage }) => {
   return (
     <Container>
-      <SeeUser userId={userData.id} />
+      <SeeUser userData={userData} />
       {userData.status === 'Ativo' && userData.blocked === 'Sim' && (
-        <UnlockUser userId={userData.id} />
+        <UnlockUser userData={userData} onGetMessage={onGetMessage} />
       )}
       {userData.status === 'Ativo' && userData.blocked === 'Não' && (
-        <InactivateUser userId={userData.id} />
+        <InactivateUser userData={userData} onGetMessage={onGetMessage} />
       )}
       {userData.status === 'Inativo' && userData.blocked === 'Não' && (
-        <ActivateUser userId={userData.id} />
+        <ActivateUser userData={userData} onGetMessage={onGetMessage} />
       )}
-      {/* <CustomTooltip label="Resetar Senha">
-        <ResetIcon
-          onClick={() => {
-            console.log('Ação')
-          }}
-        />
-      </CustomTooltip> */}
+      {userData.status === 'Inativo' && userData.blocked === 'Sim' && (
+        <UnlockUser userData={userData} onGetMessage={onGetMessage} />
+      )}
     </Container>
   )
 }
