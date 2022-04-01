@@ -47,15 +47,15 @@ export const ActivatePlanConfirm: React.FC<SellableItem> = () => {
             abaixo serão disponibilizados para venda, deseja prosseguir?
           </h1>
 
-          {sellableItems.map((sellableItem, index) =>
+          {sellableItems.map((sellableItem2, index) =>
             isSellableItemsExpanded ? (
               <p key={index}>
-                {sellableItem.name} - {sellableItem.price}
+                {sellableItem2.name} - {sellableItem2.price}
               </p>
             ) : (
               index < 4 && (
                 <p key={index}>
-                  {sellableItem.name} - {sellableItem.price}
+                  {sellableItem2.name} - {sellableItem2.price}
                 </p>
               )
             ),
