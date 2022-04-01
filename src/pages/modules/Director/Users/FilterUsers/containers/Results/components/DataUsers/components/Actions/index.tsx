@@ -16,24 +16,39 @@ export interface User {
 
 interface ActionProps {
   userData: User
-  onGetMessage: React.Dispatch<React.SetStateAction<number>>
+  onGetChangeStatusMessage: () => void
 }
 
-export const Actions: React.FC<ActionProps> = ({ userData, onGetMessage }) => {
+export const Actions: React.FC<ActionProps> = ({
+  userData,
+  onGetChangeStatusMessage,
+}) => {
   return (
     <Container>
       <SeeUser userData={userData} />
       {userData.status === 'Ativo' && userData.blocked === 'Sim' && (
-        <UnlockUser userData={userData} onGetMessage={onGetMessage} />
+        <UnlockUser
+          userData={userData}
+          onGetChangeStatusMessage={onGetChangeStatusMessage}
+        />
       )}
       {userData.status === 'Ativo' && userData.blocked === 'Não' && (
-        <InactivateUser userData={userData} onGetMessage={onGetMessage} />
+        <InactivateUser
+          userData={userData}
+          onGetChangeStatusMessage={onGetChangeStatusMessage}
+        />
       )}
       {userData.status === 'Inativo' && userData.blocked === 'Não' && (
-        <ActivateUser userData={userData} onGetMessage={onGetMessage} />
+        <ActivateUser
+          userData={userData}
+          onGetChangeStatusMessage={onGetChangeStatusMessage}
+        />
       )}
       {userData.status === 'Inativo' && userData.blocked === 'Sim' && (
-        <UnlockUser userData={userData} onGetMessage={onGetMessage} />
+        <UnlockUser
+          userData={userData}
+          onGetChangeStatusMessage={onGetChangeStatusMessage}
+        />
       )}
     </Container>
   )

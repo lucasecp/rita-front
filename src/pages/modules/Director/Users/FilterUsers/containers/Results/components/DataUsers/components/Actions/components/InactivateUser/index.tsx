@@ -12,12 +12,12 @@ import { User } from '../../index'
 
 interface InactivateUserProps {
   userData: User
-  onGetMessage: React.Dispatch<React.SetStateAction<number>>
+  onGetChangeStatusMessage: () => void
 }
 
 export const InactivateUser: React.FC<InactivateUserProps> = ({
   userData,
-  onGetMessage,
+  onGetChangeStatusMessage,
 }) => {
   const { Loading } = useLoading()
 
@@ -29,7 +29,7 @@ export const InactivateUser: React.FC<InactivateUserProps> = ({
 
       toast.success(`Usuário ${userData.name} inativado com sucesso`)
 
-      onGetMessage(Math.random())
+      onGetChangeStatusMessage()
     } catch {
       toast.error('Erro ao inativar usuário.')
     } finally {

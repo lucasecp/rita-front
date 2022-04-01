@@ -12,12 +12,12 @@ import { User } from '../../index'
 
 interface UnlockUserProps {
   userData: User
-  onGetMessage: React.Dispatch<React.SetStateAction<number>>
+  onGetChangeStatusMessage: () => void
 }
 
 export const UnlockUser: React.FC<UnlockUserProps> = ({
   userData,
-  onGetMessage,
+  onGetChangeStatusMessage,
 }) => {
   const { Loading } = useLoading()
 
@@ -31,7 +31,7 @@ export const UnlockUser: React.FC<UnlockUserProps> = ({
 
       toast.success(`Usuário ${userData.name} desbloqueado com sucesso`)
 
-      onGetMessage(Math.random())
+      onGetChangeStatusMessage()
     } catch {
       toast.error('Erro ao desbloquear usuário.')
     } finally {

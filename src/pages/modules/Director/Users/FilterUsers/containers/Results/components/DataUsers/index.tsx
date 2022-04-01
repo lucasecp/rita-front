@@ -23,7 +23,7 @@ interface PaginationState {
 
 export const DataUsers: React.FC<DataUsersProps> = ({ filters, order }) => {
   const { Loading } = useLoading()
-  const [message, sendMessage] = useMessage(0)
+  const [changeStatusMessage, sendChangeStatusMessage] = useMessage(0)
 
   const [usersData, setUsersData] = useState<User[]>([])
 
@@ -62,7 +62,7 @@ export const DataUsers: React.FC<DataUsersProps> = ({ filters, order }) => {
     }
 
     loadUsers()
-  }, [pagination, order, filters, message])
+  }, [pagination, order, filters, changeStatusMessage])
 
   return (
     <Container>
@@ -75,7 +75,10 @@ export const DataUsers: React.FC<DataUsersProps> = ({ filters, order }) => {
             <span>{user.status || '-'}</span>
           </Status>
           <li>{user.blocked || '-'}</li>
-          <Actions userData={user} onGetMessage={sendMessage} />
+          <Actions
+            userData={user}
+            onGetChangeStatusMessage={sendChangeStatusMessage}
+          />
         </ul>
       ))}
       {!usersData?.length && <h2>Nenhum resultado encontrado</h2>}
