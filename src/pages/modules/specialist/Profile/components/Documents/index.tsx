@@ -22,6 +22,9 @@ interface DocumentsProps {
   setRqeAndSpeciality: React.Dispatch<
     React.SetStateAction<RqeAndSpecialtysType>
   >
+  initialData: SpecialtysAndDocsType
+  isEditing: boolean
+  formWasSubmited: boolean
 }
 
 const Documents: React.FC<DocumentsProps> = ({
@@ -30,10 +33,16 @@ const Documents: React.FC<DocumentsProps> = ({
   setErrors,
   errors,
   setRqeAndSpeciality,
+  initialData,
+  isEditing,
+  formWasSubmited,
 }) => {
-  const [photo, setPhoto] = useState('')
+  const initialPhoto =
+    !!initialData[data.name] && initialData[data.name].document
 
-  const [rqe, setRqe] = useState('')
+  const [photo, setPhoto] = useState(initialPhoto || '')
+
+  const [rqe, setRqe] = useState(data.rqe || '')
 
   const removePhoto = () => {
     setPhoto('')
@@ -124,6 +133,13 @@ const Documents: React.FC<DocumentsProps> = ({
     }))
   }, [rqe])
 
+  useEffect(() => {
+    if (!formWasSubmited && !isEditing) {
+      setPhoto(initialPhoto || ({} as File))
+      setRqe(data.rqe || '')
+    } 
+  }, [formWasSubmited, isEditing])
+
   return (
     <Container>
       <div>
@@ -133,6 +149,8 @@ const Documents: React.FC<DocumentsProps> = ({
           color="green"
           hasError={!!errors[data.name]}
           msgError={errors[data.name]}
+          disabled={!isEditing}
+          name={data.name}
         />
         {data.rqeRequired && (
           <InputText
@@ -144,10 +162,13 @@ const Documents: React.FC<DocumentsProps> = ({
             hasError={!!errors['rqe-' + data.name]}
             msgError={errors['rqe-' + data.name]}
             name={'rqe-' + data.name}
+            disabled={!isEditing}
           />
         )}
       </div>
-      {photo && <Actions removePhoto={removePhoto} file={photo} />}
+      {photo && (
+        <Actions removePhoto={removePhoto} file={photo} disabled={!isEditing} />
+      )}
     </Container>
   )
 }

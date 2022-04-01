@@ -64,13 +64,13 @@ export const Clinics: React.FC<SpecialistClinicsProps> = ({
   }, [clinic, errors])
 
   useEffect(() => {
-    if (!formWasSubmited) {
+    if (!formWasSubmited && !isEditing) {
       setClinic(initialData || [])
       setErrors({})
     } else {
       setClinic(clinic || [])
     }
-  }, [formWasSubmited])
+  }, [formWasSubmited,isEditing])
 
   const onChangingSelect = (values: MultiSelectOption[]) => {
     const hasAllOption = values.some((val) => val.id === 'All')

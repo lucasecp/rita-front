@@ -8,7 +8,6 @@ import { toast } from '@/styles/components/toastify'
 import React, { useEffect, useState } from 'react'
 
 import ButtonPrimary from '../../../../../components/Button/Primary'
-import { MultiSelectOption } from '../../../../../components/Form/MultSelect'
 import { ButtonGroup } from '../../../operator/clinic/SeeOneClinic/EditClinic/styles'
 import { toApi } from '../adapters'
 import { Clinics } from '../components/Clinics'
@@ -25,10 +24,13 @@ import {
 } from '../Types'
 import { Container } from './styles'
 import Documents from '../components/Documents/index'
+import { useDocsSpecialtys } from '../hooks/useDocsSpecialty'
+import { useValidator } from '../hooks/useValidator'
 
 interface FormProps {
   data: DataSpecialistI
   profilePhoto: any
+  specialtysDocs: SpecialtysAndDocsType
   setMakeNewRequest: (v: boolean) => void
 }
 
@@ -36,6 +38,7 @@ const Form: React.FC<FormProps> = ({
   data,
   profilePhoto,
   setMakeNewRequest,
+  specialtysDocs,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
 
@@ -60,18 +63,21 @@ const Form: React.FC<FormProps> = ({
   const [rqeAndSpeciality, setRqeAndSpeciality] =
     useState<RqeAndSpecialtysType>({} as RqeAndSpecialtysType)
 
-  const [clickOnSave, setClickOnSave] = useState(false)
+  const [clickOnSave, setClickOnSave] = useState(0)
 
   const [formWasSubmited, setFormWasSubmited] = useState(false)
 
   const { showMessage } = useModal()
 
   const { Loading } = useLoading()
+  const { hasErrorOnFields } = useValidator()
 
-  console.log(
-    { specialistInfo, specialistClinics, specialistSpecialitys },
-    errors,
+  const { registerDocsSpecialtys } = useDocsSpecialtys(
+    specialtysAndDocs,
+    specialistInfo.cpf,
   )
+
+  const randomValues = Math.random() * (10 - 3) + 3
 
   useEffect(() => {
     if (isEditing) {
@@ -79,45 +85,39 @@ const Form: React.FC<FormProps> = ({
     } else {
       setFieldWasChanged(false)
     }
-  }, [specialistInfo, specialistClinics, specialistSpecialitys, profilePhoto])
+  }, [
+    specialistInfo,
+    specialistClinics,
+    specialistSpecialitys,
+    profilePhoto,
+    rqeAndSpeciality,
+    specialtysAndDocs,
+  ])
 
-  const hasErrorOnFields = (fields: any) => {
-    let error = false
-    const hasSpecificError = Object.values(errors)
-    error = !!hasSpecificError[0]
-
-    for (const field in fields) {
-      if (
-        typeof fields[field] === 'object' &&
-        (('document' in fields[field] && !fields[field].document) ||
-          ('rqe' in fields[field] && !fields[field].rqe))
-      ) {
-        setErrors((errors) => ({
-          ...errors,
-          [field]: 'Campo obrigatório',
-        }))
-        error = true
-      }
-      console.log('teste')
-
-      if (!fields[field] || !fields[field].length) {
-        setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
-        error = true
-      }
-    }
-    return error
-  }
+  console.log(
+    toApi({
+      specialistInfo,
+      ...specialistClinics,
+      ...specialistSpecialitys,
+      rqe: rqeAndSpeciality,
+    }),
+    errors,
+  )
 
   const onSave = async () => {
-    setClickOnSave(!clickOnSave)
+    setClickOnSave(randomValues)
+
     if (
-      hasErrorOnFields({
-        ...specialistInfo,
-        ...specialistClinics,
-        ...specialistSpecialitys,
-        ...specialtysAndDocs,
-        ...rqeAndSpeciality,
-      })
+      hasErrorOnFields(
+        {
+          ...specialistInfo,
+          ...specialistClinics,
+          ...specialistSpecialitys,
+          ...specialtysAndDocs,
+          ...rqeAndSpeciality,
+        },
+        setErrors,
+      )
     ) {
       return
     }
@@ -132,15 +132,20 @@ const Form: React.FC<FormProps> = ({
           specialistInfo,
           ...specialistClinics,
           ...specialistSpecialitys,
+          rqe: rqeAndSpeciality,
         }),
       )
+      await registerDocsSpecialtys()
 
       toast.success('Alteração realizada com sucesso.')
+
       setIsEditing(false)
+
       setFormWasSubmited(true)
+
       setMakeNewRequest(!clickOnSave)
     } catch (error: any) {
-      toast.error(error.message)
+      toast.error('Erro ao editar')
     } finally {
       Loading.turnOff()
     }
@@ -155,12 +160,16 @@ const Form: React.FC<FormProps> = ({
       })
     }
     setIsEditing(false)
+
     setFormWasSubmited(false)
-    setClickOnSave(false)
+
+    setClickOnSave(randomValues)
   }
 
   useEffect(() => {
-    scrollOntoFieldError(errors)
+    if (clickOnSave !== 0) {
+      scrollOntoFieldError(errors)
+    }
   }, [clickOnSave])
 
   return (
@@ -187,17 +196,20 @@ const Form: React.FC<FormProps> = ({
         <Documents
           key={spec.id}
           setSpecialtysAndDocs={setSpecialtysAndDocs}
+          initialData={specialtysDocs}
           errors={errors}
           setErrors={setErrors}
           data={spec}
           setRqeAndSpeciality={setRqeAndSpeciality}
+          isEditing={isEditing}
+          formWasSubmited={formWasSubmited}
         />
       ))}
 
       <Clinics
-        specialistClinic={data?.clinics}
+        specialistClinic={data?.clinic}
         setSpecialistClinic={setSpecialistClinic}
-        initialData={data?.clinics}
+        initialData={data?.clinic}
         isEditing={isEditing}
         errors={errors}
         setErrors={setErrors}

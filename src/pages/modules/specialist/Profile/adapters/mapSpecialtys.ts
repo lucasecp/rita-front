@@ -1,3 +1,6 @@
+import { MultiSelectOption } from '@/components/Form/MultSelect'
+import { RqeAndSpecialtysType } from '../Types'
+
 export const mapSpecialtys = (array: any[]) => {
   if (!array) return []
 
@@ -6,16 +9,32 @@ export const mapSpecialtys = (array: any[]) => {
       id: obj.idEspecialidade,
       name: obj.descricao,
       rqeRequired: obj.requerInscricao,
+      rqe: obj.RQE,
     }))
     .filter((specialty) => specialty.id && specialty.name)
 }
 
-export const mapSpecialtysToApi = (array?: any[]) => {
-  if (!array) return []
+type MapSpecialtysToApiType = {
+  idEspecialidade: string | number
+  RQE?: string | undefined
+}[]
 
-  return array
+export const mapSpecialtysToApi = (
+  multSelectOption?: MultiSelectOption[],
+  rqe?: RqeAndSpecialtysType,
+): MapSpecialtysToApiType => {
+  if (!multSelectOption) {
+    return []
+  }
+  const rqeValues = Object.values(rqe || {})
+
+  return multSelectOption
     .filter((obj) => obj.id !== 'All')
-    .map((obj) => ({
-      idEspecialidade: obj.id,
-    }))
+    .reduce((ac: MapSpecialtysToApiType, obj) => {
+      const matchValue = rqeValues.find((value) => value.idSpecialty === obj.id)
+      const rqeObj = matchValue && matchValue.rqe ? { RQE: matchValue.rqe } : {}
+
+      ac.push({ idEspecialidade: obj.id, ...rqeObj })
+      return ac
+    }, [])
 }

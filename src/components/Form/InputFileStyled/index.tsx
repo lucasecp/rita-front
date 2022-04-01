@@ -9,6 +9,8 @@ interface InputDocumentProps {
   color?: string
   msgError?: string
   hasError?: boolean
+  disabled?:boolean
+  name?: string
 }
 
 const InputFileStyled: React.FC<InputDocumentProps> = ({
@@ -16,14 +18,17 @@ const InputFileStyled: React.FC<InputDocumentProps> = ({
   label,
   color,
   msgError,
+  disabled,
+  name
+
 }) => {
   return (
-    <Container>
+    <Container name={name}>
       {label && <label>{label}</label>}
 
       <InputFile setValue={setValue} clearOnClick>
         <span />
-        <Button color={color}>Inserir arquivo</Button>
+        <Button color={color} disabled={disabled}>Inserir arquivo</Button>
       </InputFile>
       {msgError && <MsgError>{msgError}</MsgError>}
     </Container>

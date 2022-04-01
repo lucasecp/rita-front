@@ -50,6 +50,7 @@ export const validatePhone = (value: string): string => {
 
   return ''
 }
+
 export const validateTwoPhone = (value: string): string => {
   const phone = clear(value)
 

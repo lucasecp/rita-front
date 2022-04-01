@@ -1,10 +1,15 @@
 import styled, { css } from 'styled-components'
 
-interface InputStyledI {
+interface ButtonProps {
   color?: string
+  disabled?: boolean
 } 
 
-export const Container = styled.div`
+interface ContainerProps {
+  name?:string
+} 
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   > label {
@@ -33,7 +38,7 @@ export const Container = styled.div`
 }
 `
 
-export const Button = styled.button<InputStyledI>`
+export const Button = styled.button<ButtonProps>`
   background: ${({ theme }) => theme.extraLight};
   color: ${({ theme }) => theme.medium};
   display: block;
@@ -46,9 +51,17 @@ export const Button = styled.button<InputStyledI>`
   border-radius: 0px 8px 8px 0px;
   max-width: 164px;
   min-width: 164px;
+
   ${({ color }) =>
     color === 'green' &&
     css`
       color: #4b8864;
+    `}
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      background: #EEEEEE;
+      color:  #919191
     `}
 `

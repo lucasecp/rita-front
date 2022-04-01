@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.section`
+export const Container = styled.section<{ disabled: boolean }>`
 display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -15,7 +15,7 @@ display: flex;
   }
 
 >h3{
-  color: #46A86E;
+  color: ${({ disabled }) => (disabled ? '#909090' : '#46A86E')};
 font-size: 16px;
 font-weight: 700;
 line-height: 24px;
