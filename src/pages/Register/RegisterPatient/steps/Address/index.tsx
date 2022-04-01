@@ -15,6 +15,8 @@ import { validateCep } from '../shared/helpers/validator'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import { addressFromApi } from './adapters/fromApi'
 import { toast } from '@/styles/components/toastify'
+import { Select, SelectOption } from '@/components/Form/Select'
+import apiAdmin from '@/services/apiAdmin'
 
 interface AddressProps {
   isActive: boolean
@@ -27,7 +29,10 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
   const [cep, setCep] = useState('')
   const [uf, setUf] = useState('')
   const [ufToApi, setUfToApi] = useState('')
+
   const [city, setCity] = useState('')
+  const [citiesOptions, setCitiesOptions] = useState([] as SelectOption[])
+
   const [address, setAdress] = useState('')
   const [numberHome, setNumberHome] = useState('')
   const [district, setDistrict] = useState('')
@@ -58,6 +63,28 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
       complement,
     })
   }, [address, cep, numberHome, city, complement, uf, district])
+
+  useEffect(() => {
+    const loadCities = async () => {
+      console.log(uf)
+      if (typeof uf === 'number' && !addressLoaded) {
+        try {
+          const { data } = await apiAdmin.get(`/municipio?idUF=${uf}`)
+
+          const citiesMapped = data.map((city: { descricao: string }) => ({
+            label: city.descricao,
+            value: city.descricao,
+          }))
+
+          setCitiesOptions(citiesMapped)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+
+    loadCities()
+  }, [uf])
 
   const onCepChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const cepValue = event.target.value
@@ -92,17 +119,19 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
           baseURL: process.env.REACT_APP_CEP_HOST,
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/json',
           },
         })
 
         if (data.error) {
-          toast.error('Error ao carregar endereço')
+          return toast.error('Error ao carregar endereço')
         }
 
         const addressMapped = addressFromApi(data)
-
         setAdress(`${addressMapped.type} ${addressMapped.address}`)
+        setDistrict(addressMapped.district)
+        setCity(addressMapped.city)
+        setUf(addressMapped.uf)
 
         // disabled fields
         setAddressLoaded(true)
@@ -110,6 +139,27 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
         setAddressLoaded(false)
         console.log(error)
       }
+
+      // API DA VIACEP
+      // try {
+      //   const { data } = await axios.get(
+      //     `https://viacep.com.br/ws/${cepCleared}/json`,
+      //   )
+      //   if (data.erro) {
+      //     console.log(data.erro)
+      //     return toast.error('Error ao carregar endereço')
+      //   }
+      //   const addressMapped = addressFromApi(data)
+      //   setAdress(addressMapped.address)
+      //   setDistrict(addressMapped.district)
+      //   setCity(addressMapped.city)
+      //   setUf(addressMapped.uf)
+      //   setAddressLoaded(true)
+      // } catch (error) {
+      //   setAddressLoaded(false)
+      //   toast.error('Error ao carregar endereço')
+      //   console.log(error)
+      // }
     }
   }
 
@@ -144,11 +194,14 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             setUfToApi={setUfToApi}
             disabled={addressLoaded}
           />
-          <SelectCity
-            setCity={setCity}
-            uf={uf}
-            city={city}
-            disabled={addressLoaded}
+
+          <Select
+            options={citiesOptions}
+            label="Cidade:"
+            labelDefaultOption="Selecione:"
+            value={city}
+            setValue={setCity}
+            // disabled={addressLoaded}
           />
 
           <InputText
