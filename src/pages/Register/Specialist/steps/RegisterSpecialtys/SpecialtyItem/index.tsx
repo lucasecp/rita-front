@@ -99,7 +99,7 @@ const SpecialtyItem: React.FC<SpecialtyItemProps> = ({ data, current }) => {
       {photo &&
       hasKeyInSpecialtyErrors(nameField) &&
       !errors.specialtysAndDocs[nameField] ? (
-        <Actions file={photo} setPhoto={setPhoto} removePhoto={removePhoto} />
+        <Actions file={photo} removePhoto={removePhoto} />
       ) : (
         <Instructios />
       )}
