@@ -9,12 +9,14 @@ import { PlaceOfSale } from '../../../..'
 import { placeOfSaleToApi } from '../../../../../../adapters/toApi'
 
 interface CitiesMultiSelectProps {
+  idPlan: number
   uf: string | number
   placeOfSale: PlaceOfSale[]
   onGetCities: (cities: MultiSelectOption[]) => void
 }
 
 export const CitiesMultiSelect: React.FC<CitiesMultiSelectProps> = ({
+  idPlan,
   uf,
   placeOfSale,
   onGetCities,
@@ -31,7 +33,7 @@ export const CitiesMultiSelect: React.FC<CitiesMultiSelectProps> = ({
           Loading.turnOn()
 
           const { data } = await apiAdmin.post(
-            `/itens-vendaveis/municipio?uf=${uf}`,
+            `/itens-vendaveis/municipio?idPlano=${idPlan}&uf=${uf}`,
             placeOfSaleToApi(placeOfSale),
           )
 
