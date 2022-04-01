@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import axios from 'axios'
-import QueryString from 'qs'
+// import axios from 'axios'
+// import QueryString from 'qs'
 
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
@@ -12,11 +12,11 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { Container } from './styles'
 import { useRegisterPatient } from '../../hooks'
 import { validateCep } from '../shared/helpers/validator'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
-import { addressFromApi } from './adapters/fromApi'
-import { toast } from '@/styles/components/toastify'
-import { Select, SelectOption } from '@/components/Form/Select'
-import apiAdmin from '@/services/apiAdmin'
+// import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+// import { addressFromApi } from './adapters/fromApi'
+// import { toast } from '@/styles/components/toastify'
+// import { Select, SelectOption } from '@/components/Form/Select'
+// import apiAdmin from '@/services/apiAdmin'
 
 interface AddressProps {
   isActive: boolean
@@ -31,7 +31,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
   const [ufToApi, setUfToApi] = useState('')
 
   const [city, setCity] = useState('')
-  const [citiesOptions, setCitiesOptions] = useState([] as SelectOption[])
+  // const [citiesOptions, setCitiesOptions] = useState([] as SelectOption[])
 
   const [address, setAdress] = useState('')
   const [numberHome, setNumberHome] = useState('')
@@ -40,7 +40,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
 
   const [errors, setErrors] = useState({} as { cep: string })
 
-  const [addressLoaded, setAddressLoaded] = useState(false)
+  // const [addressLoaded, setAddressLoaded] = useState(false)
 
   useEffect(() => {
     setCep(initialRegisterData?.address?.cep || '')
@@ -192,14 +192,14 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             setUf={setUf}
             uf={uf}
             setUfToApi={setUfToApi}
-            disabled={addressLoaded}
+            // disabled={addressLoaded}
           />
 
           <SelectCity
             setCity={setCity}
             uf={uf}
             city={city}
-            disabled={addressLoaded}
+            // disabled={addressLoaded}
           />
 
           {/* <Select
@@ -217,7 +217,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             setValue={setAdress}
             name="address"
             maxLength={100}
-            disabled={addressLoaded}
+            // disabled={addressLoaded}
           />
           <InputText
             label="Número:"
@@ -241,7 +241,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             setValue={setDistrict}
             name="district"
             maxLength={100}
-            disabled={addressLoaded}
+            // disabled={addressLoaded}
           />
         </div>
       </div>
