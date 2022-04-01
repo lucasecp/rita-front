@@ -17,6 +17,7 @@ export const fromApi = (doctorInfo: any) => {
       photo: doctorInfo.avatar,
       cashback: doctorInfo.cashBack ? doctorInfo.cashBack + '%' : '',
       takerate: doctorInfo.takeRate ? doctorInfo.takeRate + '%' : '',
+      issuingAgency: doctorInfo.orgaoEmissor?.idOrgaoEmissor,
     },
 
     specialtys: mapSpecialtys(doctorInfo.especialidades),
@@ -35,5 +36,6 @@ export const toApi = (doctorInfo: any) => {
     registroProfissional: doctorInfo.specialistInfo?.classCouncil,
     clinica: mapClinicsToApi(doctorInfo.clinic),
     especialidades: mapSpecialtysToApi(doctorInfo.specialtys),
+    idOrgaoEmissor: doctorInfo.specialistInfo.issuingAgency,
   }
 }

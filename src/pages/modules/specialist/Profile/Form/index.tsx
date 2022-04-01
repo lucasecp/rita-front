@@ -59,7 +59,10 @@ const Form: React.FC<FormProps> = ({
     error = !!hasSpecificError[0]
 
     for (const field in fields) {
-      if (!fields[field] || !fields[field].length) {
+      if (
+        !fields[field] ||
+        (!fields[field].length && typeof fields[field] !== 'number')
+      ) {
         setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
         error = true
       }

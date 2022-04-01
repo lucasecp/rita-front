@@ -52,7 +52,7 @@ const SelectUf: React.FC<SelectUfProps> = ({
   return (
     <Select
       options={ufOptions}
-      label="UF:"
+      label="UF de Órgão Emissor:"
       labelDefaultOption="Selecione"
       value={ufProfissionaRegister}
       setValue={setUfProfissionaRegister}
