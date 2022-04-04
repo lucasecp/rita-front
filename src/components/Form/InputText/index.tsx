@@ -14,6 +14,7 @@ interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   variation?: 'secondary'
   onlyLetter?: boolean
   onlyNumber?: boolean
+  noSpecialCaracter?: boolean
   [x: string]: any
 }
 
@@ -26,6 +27,7 @@ const InputText: React.FC<InputTextProps> = ({
   variation = '',
   onlyLetter = false,
   onlyNumber = false,
+  noSpecialCaracter,
   ...rest
 }) => {
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +43,10 @@ const InputText: React.FC<InputTextProps> = ({
       (onlyNumber && hasSpecialCaracter(target.value)) ||
       (onlyNumber && hasLetter(target.value))
     ) {
+      return
+    }
+
+    if (noSpecialCaracter && hasSpecialCaracter(target.value)) {
       return
     }
 
