@@ -6,7 +6,7 @@ export interface SpecialistInfoI {
   profissionalName?: string
   cpf?: string
   receiveService?: string
-  ufProfissionaRegister?: string
+  ufProfissionaRegister?: string 
   classCouncil?: string
   email?: string
   phone?: string
@@ -15,10 +15,11 @@ export interface SpecialistInfoI {
   takerate?: string
   issuingAgency?: string
 }
+
 export interface DataSpecialistI {
-  specialistInfo?: SpecialistInfoI
-  specialtys?: MultiSelectOption[]
-  clinics?: MultiSelectOption[]
+  specialistInfo: SpecialistInfoI
+  specialtys: MultiSelectOption[]
+  clinic: MultiSelectOption[]
 }
 
 export interface ErrorsI {
@@ -33,6 +34,25 @@ export interface ErrorsI {
   specialtys?: string
   clinics?: string
   crm?: string
+  specialtysAndDocsType?: string
+  rqe?: string
   [x: string]: any
   issuingAgency?: string
 }
+
+export type SpecialtysAndDocsType = {
+  [x: string]: {
+    idSpecialty: string | number
+    document: string | File 
+  }
+}
+
+export type RqeAndSpecialtysType = {
+  [x: string]: {
+    idSpecialty: string | number
+    rqe?: string
+  }
+}
+
+export type SpecialtysType = { specialtys: MultiSelectOption[] }
+export type ClinicErrorsType = { clinic: MultiSelectOption[] }

@@ -14,6 +14,7 @@ interface UfSelectProps {
   placeOfSale: PlaceOfSale[]
   regional: string | number
   onGetUf: (ufSelected: string) => void
+  clearRegional: number
 }
 
 export const UfSelect: React.FC<UfSelectProps> = ({
@@ -21,6 +22,7 @@ export const UfSelect: React.FC<UfSelectProps> = ({
   placeOfSale,
   regional,
   onGetUf,
+  clearRegional,
 }) => {
   // const { showSimple } = useModal()
   const { Loading } = useLoading()
@@ -59,7 +61,7 @@ export const UfSelect: React.FC<UfSelectProps> = ({
 
   useEffect(() => {
     setUf('')
-  }, [regional])
+  }, [clearRegional])
 
   useEffect(() => {
     onGetUf(uf)

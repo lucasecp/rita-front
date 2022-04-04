@@ -80,7 +80,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
   }, [data])
 
   useEffect(() => {
-    if (!formWasSubmited) {
+    if (!formWasSubmited && !isEditing) {
       setName(data?.name || '')
       setProfissionalName(data?.profissionalName || '')
       setReceiveService(data?.receiveService || '')
@@ -101,7 +101,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
       setCpf(cpf || '')
       setIssuingAgency(issuingAgency || '')
     }
-  }, [formWasSubmited])
+  }, [formWasSubmited,isEditing])
 
   return (
     <Container>

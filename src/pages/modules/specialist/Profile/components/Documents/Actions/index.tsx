@@ -10,11 +10,11 @@ import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
 
 interface ActionsProps {
   file: any
-
   removePhoto: () => void
+  disabled: boolean
 }
 
-const Actions: React.FC<ActionsProps> = ({ file, removePhoto }) => {
+const Actions: React.FC<ActionsProps> = ({ file, removePhoto, disabled }) => {
   const { showMessage } = useModal()
   const isMobile = useMediaPredicate('(max-width: 767px)')
 
@@ -33,18 +33,21 @@ const Actions: React.FC<ActionsProps> = ({ file, removePhoto }) => {
 
     showMessage(ImagePreview, { file }, true)
   }
+
   return (
-    <Container>
+    <Container disabled={disabled}>
       <h3>{file.name}</h3>
       <div>
         <button onClick={showPreview}>
           <img src={zoomIcon} />
           Ver
         </button>
-        <button onClick={removePhoto}>
-          <img src={trashIcon} />
-          Remover
-        </button>
+        {!disabled && (
+          <button onClick={removePhoto}>
+            <img src={trashIcon} />
+            Remover
+          </button>
+        )}
       </div>
     </Container>
   )

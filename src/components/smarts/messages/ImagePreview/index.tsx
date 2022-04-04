@@ -4,6 +4,7 @@ import { Container } from './styles'
 
 const ImagePreview: React.FC<{ file: any }> = ({ file }) => {
   const sourceFile = URL.createObjectURL(file)
+  console.log(sourceFile)
 
   return (
     <Container>

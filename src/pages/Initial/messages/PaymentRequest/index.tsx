@@ -30,6 +30,7 @@ const PaymentRequest: React.FC<PaymentRequestProps> = ({
   const { showMessage } = useModal()
   const [, setRemaingAttempts] = useLocalStorage(
     '@Rita/PaymentRequest/RemaingAttempts',
+    {},
   )
 
   useEffect(() => {
