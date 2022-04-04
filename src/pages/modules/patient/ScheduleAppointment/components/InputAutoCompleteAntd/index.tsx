@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import 'antd/dist/antd.css'
+import 'antd/dist/antd.min.css'
 import { Input, AutoComplete } from 'antd'
 import useSearch from './useSearch'
 import { Container } from './styles'

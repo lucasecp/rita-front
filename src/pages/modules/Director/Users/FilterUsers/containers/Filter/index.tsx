@@ -72,6 +72,7 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
     field: string,
     value: string | MultiSelectOption[],
   ) => {
+    // @ts-ignore
     setFilters((prevState) => ({
       ...prevState,
       [field]: value,
