@@ -13,6 +13,7 @@ import { UsersFilters } from '../../@types'
 
 import { Container } from './styles'
 import apiUser from '@/services/apiUser'
+
 interface FilterProps {
   onGetFilters: React.Dispatch<React.SetStateAction<UsersFilters>>
 }
@@ -72,6 +73,7 @@ export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
     field: string,
     value: string | MultiSelectOption[],
   ) => {
+    // @ts-ignore
     setFilters((prevState) => ({
       ...prevState,
       [field]: value,
