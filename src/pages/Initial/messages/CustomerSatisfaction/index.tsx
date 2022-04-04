@@ -6,7 +6,7 @@ import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { toast } from '@/styles/components/toastify'
-import PaymentRequestRejection from '@/pages/Initial/messages/PaymentRequestRejection'
+import { PaymentRequestRejection } from '@/pages/Initial/messages/PaymentRequestRejection'
 
 import { ReactComponent as StarIcon } from '@/assets/icons/star.svg'
 import { Container } from './styles'

@@ -17,7 +17,7 @@ import {
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Select } from '@/components/Form/Select'
 import ButtonPrimary from '@/components/Button/Primary'
-import PaymentRequest from '@/pages/Initial/messages/PaymentRequest'
+import { PaymentRequest } from '@/pages/Initial/messages/PaymentRequest'
 import { Table } from '@/components/Table'
 
 const periodOptions = [
