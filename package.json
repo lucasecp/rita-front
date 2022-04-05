@@ -15,7 +15,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/user-event": "^12.8.3",
     "@types/react-router": "^5.1.17",
-    "@types/styled-components": "^5.1.24",
+    "@types/styled-components": "^5.1.9",
     "antd": "^4.19.5",
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
