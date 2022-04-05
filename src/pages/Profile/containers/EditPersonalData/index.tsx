@@ -66,7 +66,7 @@ export const EditPersonalData: React.FC<EditPersonalDataProps> = ({
     personalDatas?.personalDatas,
   )
   const [address, setAddress] = useState(personalDatas?.address)
-  const [ ownerOfTheAccount ] = useState(personalDatas?.ownerOfTheAccount)
+  const [ownerOfTheAccount] = useState(personalDatas?.ownerOfTheAccount)
 
   useEffect(() => {
     setIsSaveButtonDisabled(mainPersonalDatas?.hasError || address?.hasError)
@@ -120,7 +120,9 @@ export const EditPersonalData: React.FC<EditPersonalDataProps> = ({
           Editar Informações
         </OutlineButton>
       )}
-      {ownerOfTheAccount.name && <OwnerOfTheAccount ownerOfTheAccount={ownerOfTheAccount}/>}
+      {ownerOfTheAccount.name && (
+        <OwnerOfTheAccount ownerOfTheAccount={ownerOfTheAccount} />
+      )}
       <GeneralDatas
         isEditing={isEditing}
         personalDatas={mainPersonalDatas}

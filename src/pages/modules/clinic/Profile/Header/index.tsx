@@ -12,7 +12,6 @@ import { useModal } from '@/hooks/useModal'
 import { ClinicEditContext } from '../Context/ClinicEditContext'
 
 const Header: React.FC = () => {
-
   const { data, setPhoto: setFotoClinica } = React.useContext(ClinicEditContext)
   /** States */
   const [imgBlob, setImgBlob] = React.useState('')
@@ -28,10 +27,12 @@ const Header: React.FC = () => {
   const onFileInput = async () => {
     if (photo && photo.size !== 0 && !isValidSizeFile(photo)) {
       removePhoto()
-      showSimple.error('Arquivo não suportado, O tamanho máximo do arquivo deve ser 10MB, nas extensões JPG, JPEG e PNG.')
-    }else {
-      if(photo && photo.size !== 0){
-        const _imgBlob =URL.createObjectURL(photo)
+      showSimple.error(
+        'Arquivo não suportado, O tamanho máximo do arquivo deve ser 10MB, nas extensões JPG, JPEG e PNG.',
+      )
+    } else {
+      if (photo && photo.size !== 0) {
+        const _imgBlob = URL.createObjectURL(photo)
         setImgBlob(_imgBlob)
         setFotoClinica(photo)
       }
@@ -45,7 +46,11 @@ const Header: React.FC = () => {
           {data?.avatar ? (
             <div>
               <img
-                src={imgBlob === '' ? `data:image/png;base64,${data?.avatar}` : imgBlob}
+                src={
+                  imgBlob === ''
+                    ? `data:image/png;base64,${data?.avatar}`
+                    : imgBlob
+                }
                 alt="Imagem da clinica"
               />
             </div>
@@ -54,7 +59,11 @@ const Header: React.FC = () => {
           )}
         </div>
         <span>
-          <InputFile setValue={setPhoto} clearOnClick accept='.jpg, .jpeg, .png'>
+          <InputFile
+            setValue={setPhoto}
+            clearOnClick
+            accept=".jpg, .jpeg, .png"
+          >
             <PenIcon />
           </InputFile>
         </span>

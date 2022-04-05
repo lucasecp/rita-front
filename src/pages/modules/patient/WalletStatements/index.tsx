@@ -9,11 +9,7 @@ import { ReactComponent as EyeClosedIcon } from '@/assets/icons/eye-closed.svg'
 import { ReactComponent as CrownIcon } from '@/assets/icons/crown.svg'
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down3.svg'
 import { ReactComponent as ArrowUpIcon } from '@/assets/icons/arrow-up.svg'
-import {
-  Container,
-  TableColumnDetails,
-  TableColumnAmount,
-} from './styles'
+import { Container, TableColumnDetails, TableColumnAmount } from './styles'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Select } from '@/components/Form/Select'
 import { Table } from '@/components/Table'
@@ -33,10 +29,11 @@ export const WalletStatements: React.FC = () => {
   const tableItems = useRef<any>()
   const [items, setItems] = useState<RitaWallet.PaymentRequest[]>([])
   const [selectedPeriod, setSelectedPeriod] = useState(1)
-  const [tableItemsSort, setTableItemsSort] = useState<RitaComponents.TableSort>({
-    path: 'createdAt',
-    order: 'DESC',
-  })
+  const [tableItemsSort, setTableItemsSort] =
+    useState<RitaComponents.TableSort>({
+      path: 'createdAt',
+      order: 'DESC',
+    })
   const [tableItemsPaging, setTableItemsPaging] = useState({
     take: 10,
     skip: 0,
@@ -45,15 +42,18 @@ export const WalletStatements: React.FC = () => {
   const { Loading } = useLoading()
 
   async function fetchData() {
-    const { data } = await apiWallet.get<RitaWallet.PaymentRequest[]>('/payment', {
-      params: {
-        take: tableItemsPaging.take,
-        skip: tableItemsPaging.skip,
-        orderBy: tableItemsSort.path,
-        orderType: tableItemsSort.order,
-        period: selectedPeriod,
+    const { data } = await apiWallet.get<RitaWallet.PaymentRequest[]>(
+      '/payment',
+      {
+        params: {
+          take: tableItemsPaging.take,
+          skip: tableItemsPaging.skip,
+          orderBy: tableItemsSort.path,
+          orderType: tableItemsSort.order,
+          period: selectedPeriod,
+        },
       },
-    })
+    )
 
     if (!data || !Array.isArray(data)) {
       throw new Error('Resposta inválida')
@@ -134,15 +134,15 @@ export const WalletStatements: React.FC = () => {
                   <small>
                     <CrownIcon /> {convertPriceToCrownValue(row.debitAmount)}
                   </small>
-                  {String(row.typeTransaction.mode).toUpperCase() === 'DEBIT' &&
-                    <ArrowUpIcon className="debit" />}
-                  {String(row.typeTransaction.mode).toUpperCase() === 'CREDIT' &&
-                    <ArrowDownIcon className="credit" />}
-                  {String(row.typeTransaction.mode).toUpperCase() === 'CASHBACK' &&
-                    <ArrowDownIcon />}
+                  {String(row.typeTransaction.mode).toUpperCase() ===
+                    'DEBIT' && <ArrowUpIcon className="debit" />}
+                  {String(row.typeTransaction.mode).toUpperCase() ===
+                    'CREDIT' && <ArrowDownIcon className="credit" />}
+                  {String(row.typeTransaction.mode).toUpperCase() ===
+                    'CASHBACK' && <ArrowDownIcon />}
                 </TableColumnAmount>
               ),
-            }
+            },
           ]}
           headers={[
             { path: 'id', label: 'Detalhes', sortable: false },

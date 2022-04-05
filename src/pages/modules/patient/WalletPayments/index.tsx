@@ -41,10 +41,11 @@ export const WalletPayments: React.FC = () => {
     [],
   )
   const [selectedPeriod, setSelectedPeriod] = useState(1)
-  const [tablePaymentsAllSort, setTablePaymentsAllSort] = useState<RitaComponents.TableSort>({
-    path: 'createdAt',
-    order: 'DESC',
-  })
+  const [tablePaymentsAllSort, setTablePaymentsAllSort] =
+    useState<RitaComponents.TableSort>({
+      path: 'createdAt',
+      order: 'DESC',
+    })
   const [tablePaymentsAllPaging, setTablePaymentsAllPaging] = useState({
     take: 10,
     skip: 0,

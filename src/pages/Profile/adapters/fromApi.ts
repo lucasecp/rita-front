@@ -128,7 +128,7 @@ export const fromApiPersonalDatas = (
     ownerOfTheAccount: {
       name: data.titular?.nome,
       email: data.titular?.email,
-      phone: data.titular?.telefone
-    }
+      phone: data.titular?.telefone,
+    },
   }
 }

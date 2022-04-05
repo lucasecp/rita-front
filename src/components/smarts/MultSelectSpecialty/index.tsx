@@ -27,7 +27,6 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
     MultiSelectOption[]
   >([])
 
-
   const mapSpecialtys = (
     array: {
       idEspecialidade: string
@@ -62,8 +61,6 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
 
     getSpecialtys()
   }, [])
-
-
 
   return (
     <Container>

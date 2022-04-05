@@ -45,7 +45,7 @@ import {
   FILTER_USERS,
   OPERATOR_SEE_ALL_ISSUING_AGENCY,
   CLINIC_SEE_ALL_SPECIALIST,
-  CLINIC_PROFILE
+  CLINIC_PROFILE,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissionList } from './permissionList'
@@ -187,7 +187,7 @@ export const menuItens = [
     path: CLINIC_PROFILE,
     icon: <UserIcon />,
     name: 'Perfil',
-    permission: permissionList.VER_DADOS_CLINICA
+    permission: permissionList.VER_DADOS_CLINICA,
   },
   {
     path: FILTER_USERS,
