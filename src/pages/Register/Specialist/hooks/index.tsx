@@ -63,7 +63,6 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
     }
   }
  
-  const resetData = () => {}
 
   const createListFormDataOfSpecialtys = () => {
     const list = []
@@ -151,7 +150,6 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
         isActiveStep,
         previousStep,
         nextStep,
-        resetData,
         registerSpecialist,
         step,
         basicInformation,

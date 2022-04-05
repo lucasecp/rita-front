@@ -31,7 +31,6 @@ const SpecialistProfile: React.FC = () => {
             ),
           ),
         )
-        console.log(response)
         setSpecialtysDocs(specialysDocsFromApi(response, dataMapped.specialtys))
       } catch (error) {
         console.log(error)

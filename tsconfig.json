@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "jsx": "react-jsx",
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -18,7 +22,10 @@
     "baseUrl": ".",
     "noImplicitAny": false
   },
-  "exclude": ["node_modules", "**/*.spec.ts"],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
   "include": [
     "src",
     "src/pages/modules/operator/Reports/containers/BillingStatement/containers/Filters/constants/columnsOptions.ts"
