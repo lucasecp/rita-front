@@ -20,7 +20,7 @@ function convertPriceToCrownValue(amount: number, currency?: string) {
   return amount * 100
 }
 
-const InsufficientBalance: React.FC<InsufficientBalanceProps> = ({
+export const InsufficientBalance: React.FC<InsufficientBalanceProps> = ({
   walletBalance,
   debitAmount,
 }) => {
@@ -67,5 +67,3 @@ const InsufficientBalance: React.FC<InsufficientBalanceProps> = ({
     </Container>
   )
 }
-
-export default InsufficientBalance

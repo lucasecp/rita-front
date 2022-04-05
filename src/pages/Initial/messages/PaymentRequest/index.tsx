@@ -6,8 +6,8 @@ import formatPrice from '@/helpers/formatPrice'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import PaymentRequestSummary from '@/pages/Initial/messages/PaymentRequestSummary'
-import PaymentRequestRejection from '@/pages/Initial/messages/PaymentRequestRejection'
+import { PaymentRequestSummary } from '@/pages/Initial/messages/PaymentRequestSummary'
+import { PaymentRequestRejection } from '@/pages/Initial/messages/PaymentRequestRejection'
 
 import warning from '@/assets/icons/alert-circle.svg'
 import { ReactComponent as CrownIcon } from '@/assets/icons/crown.svg'
@@ -24,17 +24,18 @@ type PaymentRequestProps = {
   data: RitaWallet.PaymentRequest
 }
 
-const PaymentRequest: React.FC<PaymentRequestProps> = ({
+export const PaymentRequest: React.FC<PaymentRequestProps> = ({
   data: paymentRequest,
 }) => {
   const { showMessage } = useModal()
-  // const [, setRemaingAttempts] = useLocalStorage(
-  //   '@Rita/PaymentRequest/RemaingAttempts',
-  // )
+  const [, setRemaingAttempts] = useLocalStorage(
+    '@Rita/PaymentRequest/RemaingAttempts',
+    {},
+  )
 
-  // useEffect(() => {
-  // setRemaingAttempts(defaultMaximumAttempts)
-  // }, [])
+  useEffect(() => {
+    setRemaingAttempts(defaultMaximumAttempts)
+  }, [])
 
   function handleRejectClick() {
     showMessage(PaymentRequestRejection, { data: paymentRequest }, true)
@@ -90,5 +91,3 @@ const PaymentRequest: React.FC<PaymentRequestProps> = ({
     </Container>
   )
 }
-
-export default PaymentRequest

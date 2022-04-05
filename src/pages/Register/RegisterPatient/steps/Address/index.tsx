@@ -218,6 +218,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             name="address"
             maxLength={100}
             // disabled={addressLoaded}
+            noSpecialCaracter
           />
           <InputText
             label="Número:"
@@ -225,6 +226,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             setValue={setNumberHome}
             name="numberHome"
             maxLength={20}
+            noSpecialCaracter
           />
         </section>
         <div>
@@ -234,6 +236,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             setValue={setComplement}
             name="complement"
             maxLength={50}
+            noSpecialCaracter
           />
           <InputText
             label="Bairro:"
@@ -242,6 +245,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             name="district"
             maxLength={100}
             // disabled={addressLoaded}
+            noSpecialCaracter
           />
         </div>
       </div>

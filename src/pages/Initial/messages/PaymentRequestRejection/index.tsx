@@ -18,7 +18,7 @@ type PaymentRequestRejectionProps = {
   data: RitaWallet.PaymentRequest
 }
 
-const PaymentRequestRejection: React.FC<PaymentRequestRejectionProps> = ({
+export const PaymentRequestRejection: React.FC<PaymentRequestRejectionProps> = ({
   data,
 }) => {
   const [reason, setReason] = useState('')
@@ -42,7 +42,6 @@ const PaymentRequestRejection: React.FC<PaymentRequestRejectionProps> = ({
           reason,
           type_event: 'string',
           event_id: 'string',
-          user_wallet_id: data.ritaId,
           payment_request_id: data.id,
         })
 
@@ -100,5 +99,3 @@ const PaymentRequestRejection: React.FC<PaymentRequestRejectionProps> = ({
     </Container>
   )
 }
-
-export default PaymentRequestRejection

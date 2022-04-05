@@ -15,7 +15,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { useLoading } from '@/hooks/useLoading'
 import { useAuth } from '@/hooks/login'
 import { InputPassword } from '@/components/Form/InputPassword'
-import InsufficientBalance from '@/pages/Initial/messages/InsufficientBalance'
+import { InsufficientBalance } from '@/pages/Initial/messages/InsufficientBalance'
 import { toast } from '@/styles/components/toastify'
 
 function validateRequired(value?: string | null) {
@@ -123,7 +123,7 @@ type PaymentRequestConfirmProps = {
   data: RitaWallet.PaymentRequest
 }
 
-const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
+export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
   data: paymentRequest,
 }) => {
   const { closeModal, showMessage } = useModal()
@@ -150,7 +150,7 @@ const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
       try {
         const { data } = await apiWallet.post('/authentication/rita', {
           cpf: user.cpf,
-          password: password,
+          password,
         })
 
         isAuthenticated = true
@@ -274,5 +274,3 @@ const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
     </Container>
   )
 }
-
-export default PaymentRequestConfirm

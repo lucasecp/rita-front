@@ -54,7 +54,7 @@ export const SuspendPlanConfirm: React.FC = () => {
             deixam de ser disponibilizados para venda, deseja prosseguir?
           </h1>
 
-          {sellableItems.map((sellableItem, index) =>
+          {(sellableItems as any[]).map((sellableItem, index) =>
             isSellableItemsExpanded ? (
               <p key={sellableItem.id}>
                 {sellableItem.name} - {sellableItem.price}

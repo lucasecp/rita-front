@@ -48,7 +48,7 @@ export const InactivatePlanConfirm: React.FC = () => {
             desativados, deseja prosseguir ?
           </h1>
 
-          {sellableItems.map((sellableItem, index) =>
+          {(sellableItems as any[]).map((sellableItem, index) =>
             expandPlan ? (
               <p key={sellableItem.id}>
                 {sellableItem.name} - {sellableItem.price}
