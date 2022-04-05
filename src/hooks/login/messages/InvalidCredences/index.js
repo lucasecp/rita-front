@@ -14,7 +14,7 @@ function InvalidCredences() {
     <Container>
       <img src={errorIcon} />
       <p>
-        Não foi possível realizar o login. Verifique os dados e tente novamente.
+        Não foi possível realizar o login. Verifique os dados e tente <strong>novamente</strong>.
       </p>
       <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
