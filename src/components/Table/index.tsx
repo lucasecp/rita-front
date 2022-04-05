@@ -57,7 +57,7 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
       count = 0,
       hidePagination = false,
       onSort,
-      onPaginate
+      onPaginate,
     },
     ref,
   ) {
@@ -174,8 +174,7 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
         {!hidePagination && (
           <footer>
             <FooterRowsPerPage>
-              Linhas por página:
-              {' '}
+              Linhas por página:{' '}
               <Select
                 variation="secondary"
                 options={rowsPerPageOptions}

@@ -41,8 +41,8 @@ export const TableColumnDetails = styled.button`
 export const TableColumnAmount = styled.div`
   display: grid;
   grid-template-areas:
-    ". arrow"
-    ". arrow";
+    '. arrow'
+    '. arrow';
   gap: 0 10px;
   align-items: center;
   justify-content: end;

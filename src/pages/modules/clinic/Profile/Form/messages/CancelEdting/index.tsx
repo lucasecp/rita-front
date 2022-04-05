@@ -9,12 +9,16 @@ import { ClinicEditContext } from '../../../Context/ClinicEditContext'
 import { ErrorsI } from '../../../types'
 
 interface CancelEdtingProps {
-  setIsDisabled: (value: boolean) => void,
-  setError: (data: ErrorsI) => void,
+  setIsDisabled: (value: boolean) => void
+  setError: (data: ErrorsI) => void
   setIsHashModificationField: (data: boolean) => void
 }
 
-const CancelEdting: React.FC<CancelEdtingProps> = ({ setIsDisabled, setError, setIsHashModificationField }) => {
+const CancelEdting: React.FC<CancelEdtingProps> = ({
+  setIsDisabled,
+  setError,
+  setIsHashModificationField,
+}) => {
   const { closeModal } = useModal()
 
   const onCancelEdting = () => {
@@ -23,7 +27,6 @@ const CancelEdting: React.FC<CancelEdtingProps> = ({ setIsDisabled, setError, se
     setError({} as ErrorsI)
     closeModal()
   }
-
 
   return (
     <Container>

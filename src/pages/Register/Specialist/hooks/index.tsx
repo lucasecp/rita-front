@@ -62,7 +62,7 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
       scrollTo(0, 0)
     }
   }
- 
+
 
   const createListFormDataOfSpecialtys = () => {
     const list = []

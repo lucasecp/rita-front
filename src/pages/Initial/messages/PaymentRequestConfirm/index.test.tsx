@@ -16,6 +16,6 @@ it('renders without crashing', () => {
     <AuthProvider>
       <PaymentRequestConfirm data={data} />
     </AuthProvider>,
-    div
+    div,
   )
 })

@@ -7,18 +7,17 @@ import Form from './Form'
 import { ClinicEditContextProvider } from './Context/ClinicEditContext'
 
 const ClinicProfile: React.FC = () => {
-
   const title = 'Rita Saúde | Perfil'
   document.title = title
 
   return (
     <DefaultLayout title={title}>
       <ClinicEditContextProvider>
-        <Header/>
-        <Form/>
+        <Header />
+        <Form />
       </ClinicEditContextProvider>
     </DefaultLayout>
-  );
-};
+  )
+}
 
-export default ClinicProfile;
+export default ClinicProfile

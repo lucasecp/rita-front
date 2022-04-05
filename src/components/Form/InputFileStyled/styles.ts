@@ -3,11 +3,11 @@ import styled, { css } from 'styled-components'
 interface ButtonProps {
   color?: string
   disabled?: boolean
-} 
+}
 
 interface ContainerProps {
-  name?:string
-} 
+  name?: string
+}
 
 export const Container = styled.div<ContainerProps>`
   display: flex;
@@ -61,7 +61,7 @@ export const Button = styled.button<ButtonProps>`
   ${({ disabled }) =>
     disabled &&
     css`
-      background: #EEEEEE;
-      color:  #919191
+      background: #eeeeee;
+      color: #919191;
     `}
 `

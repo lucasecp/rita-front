@@ -27,7 +27,7 @@ const SpecialistProfile: React.FC = () => {
           dataMapped.specialtys.map((spec) =>
             apiAdmin.get(
               `/medico/documento/visualizar?cpf=${dataMapped.specialistInfo.cpf}&tipoDocumento=ComprovanteEspecialidade&idEspecialidade=${spec.id}`,
-              { responseType: 'arraybuffer'}
+              { responseType: 'arraybuffer' },
             ),
           ),
         )
@@ -61,10 +61,7 @@ const SpecialistProfile: React.FC = () => {
   return (
     <DefaultLayout title="Perfil - Visualizar">
       <Content>
-        <Header
-          data={data}
-          setValue={setPhoto}
-          />
+        <Header data={data} setValue={setPhoto} />
         <Form
           data={data}
           profilePhoto={photo}

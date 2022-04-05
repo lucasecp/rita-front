@@ -92,7 +92,6 @@ export const Specialtys: React.FC<ClinicSpecialtysProps> = ({
           // onRemove={onChangingSelect}
         />
       </section>
-     
     </Container>
   )
 }
