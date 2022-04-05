@@ -49,7 +49,6 @@ export interface RegisterSpecialistContextData {
   step: number
   previousStep: () => void
   nextStep: () => void
-  resetData: () => void
   registerSpecialist: () => Promise<void>
   photo: File | string
   profissionalInfo: ProfissionalInfoI
