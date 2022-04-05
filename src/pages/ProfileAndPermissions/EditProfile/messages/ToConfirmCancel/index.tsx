@@ -6,7 +6,7 @@ import { useModal } from '@/hooks/useModal'
 import { Container } from './styles'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import { DIRECTOR_SEE_ALL_PROFILES } from '@/routes/constants/namedRoutes/routes'
 

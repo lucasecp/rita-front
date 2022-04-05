@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 
@@ -28,9 +28,9 @@ export const CancelAndExit = () => {
     <Container>
       <img src={warningIcon} />
       <p>
-        As informações não serão salvas.
+        Necessário incluir os documentos.
         <br />
-        Confirma a saída?
+        Deseja inclui-los depois?
       </p>
       <footer>
         <ButtonPrimary onClick={onDoNotConfirmExit}>Não</ButtonPrimary>

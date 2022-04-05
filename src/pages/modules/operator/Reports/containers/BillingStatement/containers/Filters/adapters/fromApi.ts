@@ -17,7 +17,7 @@ interface PreviewBillingsFromApi {
       nome: string
       mensalidade: number
     }
-    titulares: []
+    titulares: { idPaciente: number; cpf: string }[]
   }[]
   total: number
 }
@@ -41,7 +41,8 @@ export const previewBillingsFromApi = (
   return {
     patients: data.dados.map((patient, index) => ({
       id: String(index + 1),
-      contractNumber: formatCpf(patient.cpf),
+      contractNumber:
+        formatCpf(patient.titulares[0]?.cpf) || formatCpf(patient.cpf),
       beneficiaryType: patient.titulares.length ? 'Dependente' : 'Titular',
       name: patient.nome,
       cpf: formatCpf(patient.cpf),

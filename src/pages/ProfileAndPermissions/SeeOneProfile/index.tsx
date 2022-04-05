@@ -17,7 +17,7 @@ import OutilineButton from '@/components/Button/Outline'
 import ButtonLink from '@/components/Button/Link'
 import { PermissionsSelect } from './components/PermissionsSelect'
 
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 import { id } from 'date-fns/locale'
 
 export const SeeOneProfile: React.FC = () => {

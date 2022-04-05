@@ -3,20 +3,17 @@ import zoomIcon from '@/assets/icons/zoom.svg'
 import trashIcon from '@/assets/icons/trash.svg'
 import { Container } from './styles'
 import { useModal } from '@/hooks/useModal'
-import ImagePreview from '../../messages/ImagePreview'
+import ImagePreview from '@/components/smarts/messages/ImagePreview'
 import { useMediaPredicate } from 'react-media-hook'
 import downloadFile from '@/helpers/downloadFile'
 import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
-import { SpecialtysAndDocsType } from '../../../../types/index'
-import { useRegisterSpecialist } from '@/pages/Register/Specialist/hooks'
 
 interface ActionsProps {
   file: any
-  setPhoto: (x: string) => void
   removePhoto: () => void
 }
 
-const Actions: React.FC<ActionsProps> = ({ file, setPhoto, removePhoto }) => {
+const Actions: React.FC<ActionsProps> = ({ file, removePhoto }) => {
   const { showMessage } = useModal()
   const isMobile = useMediaPredicate('(max-width: 767px)')
 

@@ -11,7 +11,7 @@ import { PATIENT_SCHEDULE_APPOINTMENT } from '@/routes/constants/namedRoutes/rou
 import apiPatient from '@/services/apiPatient'
 import React, { useEffect, useState } from 'react'
 import { Row } from 'react-bootstrap'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import DifferentPlanLife from './messages/DifferentPlanLife'
 import VidaPlanLife from './messages/VidaPlanLife'

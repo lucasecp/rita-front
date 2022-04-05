@@ -20,7 +20,7 @@ interface OnePlaceOfSaleToApi {
   regional: number
   idPlano: number
   uf: number
-  municipios: string[]
+  municipios: number[]
   locaisVenda: PlaceOfSaleToApi[]
 }
 interface SellableItem {
@@ -65,7 +65,7 @@ export const onePlaceOfSaleToApi = (
     regional: Number(regional),
     idPlano: idPlan,
     uf: Number(uf),
-    municipios: cities.map((city) => `${city.id}`),
+    municipios: cities.map((city) => Number(`${city.id}`)),
     locaisVenda: placeOfSaleToApi(placeOfSale),
   }
 }

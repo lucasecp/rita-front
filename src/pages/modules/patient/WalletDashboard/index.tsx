@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import apiWallet from '@/services/apiWallet'
 import { useModal } from '@/hooks/useModal'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import PaymentRequest from '@/pages/Initial/messages/PaymentRequest'
+import { PaymentRequest } from '@/pages/Initial/messages/PaymentRequest'
 import { CustomerSatisfaction } from '@/pages/Initial/messages/CustomerSatisfaction'
 
 import { Balances } from './components/Balances'

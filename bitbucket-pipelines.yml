@@ -1,5 +1,5 @@
 image: 'atlassian/default-image:2'
-definitions: 
+definitions:
   steps:
     - step: &codecommit_mirror
         name: Default mirror
@@ -13,7 +13,7 @@ definitions:
           - git pull
           - npx ts-node --skip-project ./src/updateVersion.ts ${BITBUCKET_BUILD_NUMBER}
           - git add .
-          - git commit -m "Versão atualizada [skip ci]"
+          - git commit -m "Versao atualizada [skip ci]"
           - git push
           - echo "Host git-codecommit.*.amazonaws.com" >> ~/.ssh/config
           - echo "User $SSHKEY" >> ~/.ssh/config
@@ -29,6 +29,6 @@ pipelines:
       - step: *codecommit_mirror
   tags:
     v*:
-      - step: 
+      - step:
           <<: *codecommit_mirror
           name: Tag mirror

@@ -6,7 +6,7 @@ import {
   WarningIconStyled,
 } from './styles'
 import CustomTooltip from '@/components/Tooltip'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { ActionsProps } from '../../../types'
 import {
   PATIENT_SEE_DEPENDENT,

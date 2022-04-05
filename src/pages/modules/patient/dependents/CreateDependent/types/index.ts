@@ -1,4 +1,4 @@
-export interface DependentData {
+export interface DependentDataType {
   name: string
   cpf: string
   gender: string
@@ -7,7 +7,7 @@ export interface DependentData {
   phone: string
 }
 
-export interface DependentAddress {
+export interface DependentAddressType {
   cep: string
   uf: string
   city: string

@@ -3,7 +3,7 @@ import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 import PlanInformationsDisabled from './components/PlanInformationsDisabled'
 import { useLoading } from '@/hooks/useLoading'
-import { useLocation, useHistory } from 'react-router'
+import { useLocation, useHistory } from 'react-router-dom'
 import { DIRECTOR_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
 
 const SeePlan = () => {

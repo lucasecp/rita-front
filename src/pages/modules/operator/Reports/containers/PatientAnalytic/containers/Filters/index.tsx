@@ -31,6 +31,10 @@ import { previewPatientsFromApi } from './adapters/fromApi'
 import { previewFiltersToApi } from './adapters/previewFiltersToApi'
 import { reportFiltersToApi } from './adapters/reportFiltersToApi'
 
+interface Test {
+  test: string
+}
+
 interface FiltersProps {
   generatePreview: number
   onGetReportCanBeGenerated: (can: boolean) => void
@@ -91,7 +95,7 @@ export const Filters: React.FC<FiltersProps> = ({
     } else {
       setColumns(selectedColumns)
     }
-  } // OCP and MultiSelect Limited
+  }
 
   useEffect(() => {
     onGetReportCanBeGenerated(false)
@@ -140,7 +144,6 @@ export const Filters: React.FC<FiltersProps> = ({
           registrationPeriod,
           validationPeriod,
           status,
-          columns,
         })
 
         try {
@@ -190,52 +193,49 @@ export const Filters: React.FC<FiltersProps> = ({
   }, [generatePreview])
 
   const generatePatientAnalyticReport = async () => {
-    console.log('gerar relatorio')
+    const filtersReportMapped = reportFiltersToApi({
+      cnpj,
+      registrationPeriod,
+      validationPeriod,
+      status,
+      columns,
+      fileTypeReport: generateReport.fileTypeReport,
+    })
 
-    //   const filtersReportMapped = reportFiltersToApi({
-    //     cnpj,
-    //     registrationPeriod,
-    //     validationPeriod,
-    //     status,
-    //     columns,
-    //     fileTypeReport: generateReport.fileTypeReport,
-    //   })
+    try {
+      const response = await toast.promise(
+        apiPatient.get('/relatorio/beneficiario', {
+          responseType: 'arraybuffer',
+          params: filtersReportMapped,
+          paramsSerializer: (params) => {
+            return QueryString.stringify(params, { arrayFormat: 'repeat' })
+          },
+        }),
+        {
+          pending: 'Gerando arquivo...',
+          success: 'Relatório Emitido com sucesso',
+          error: 'Erro ao gerar relatório',
+        },
+      )
 
-    //   try {
-    //     const response = await toast.promise(
-    //       apiPatient.get('/faturamento-relatorio/documento', {
-    //         responseType: 'arraybuffer',
-    //         params: filtersReportMapped,
-    //         paramsSerializer: (params) => {
-    //           return QueryString.stringify(params, { arrayFormat: 'repeat' })
-    //         },
-    //       }),
-    //       {
-    //         pending: 'Gerando arquivo...',
-    //         success: 'Relatório Emitido com sucesso',
-    //         error: 'Erro ao gerar relatório',
-    //       },
-    //     )
+      if (generateReport.fileTypeReport === 'xlsx') {
+        const blobReportXlsx = new Blob([response.data], {
+          type: 'application/vnd.ms-excel;charset=utf-8',
+        })
 
-    //     if (response.status === 200) {
-    //       if (generateReport.fileTypeReport === 'xlsx') {
-    //         const blobReportXlsx = new Blob([response.data], {
-    //           type: 'application/vnd.ms-excel;charset=utf-8',
-    //         })
+        downloadFile(blobReportXlsx, '_Beneficiario', 'xls')
+      }
 
-    //         downloadFile(blobReportXlsx, '_Faturamento', 'xls')
-    //       }
+      if (generateReport.fileTypeReport === 'pdf') {
+        const blobReportPdf = new Blob([response.data], {
+          type: 'application/pdf',
+        })
 
-    //       if (generateReport.fileTypeReport === 'pdf') {
-    //         const blobReportPdf = new Blob([response.data], {
-    //           type: 'application/pdf',
-    //         })
-    //         downloadFile(blobReportPdf, '_Faturamento', 'pdf')
-    //       }
-    //     }
-    //   } catch (error) {
-    //     // console.log(error)
-    //   }
+        downloadFile(blobReportPdf, '_Beneficiario', 'pdf')
+      }
+    } catch (error) {
+      // toast.error('Erro ao emitir relatório!')
+    }
   }
 
   useEffect(() => {

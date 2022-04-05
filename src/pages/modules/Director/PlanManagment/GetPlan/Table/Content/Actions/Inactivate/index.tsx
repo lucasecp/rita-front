@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
 import CustomTooltip from '@/components/Tooltip'
 import { NotHasSellableItems } from './messages/NotHasSellableItems'

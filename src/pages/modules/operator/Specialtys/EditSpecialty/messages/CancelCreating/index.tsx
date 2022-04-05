@@ -5,7 +5,7 @@ import warningIcon from '@/assets/icons/alerts/warning.svg'
 import { Container, ButtonGroup } from './styles'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { OPERATOR_SEE_ALL_SPECIALTYS } from '@/routes/constants/namedRoutes/routes'
 
 const CancelCreating: React.FC = () => {

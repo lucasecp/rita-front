@@ -1,5 +1,6 @@
 import { Select, SelectOption } from '@/components/Form/Select'
 import apiAdmin from '@/services/apiAdmin'
+import { toast } from '@/styles/components/toastify'
 import React, { useEffect, useState } from 'react'
 
 interface SelectCityProps {
@@ -7,6 +8,7 @@ interface SelectCityProps {
   city: string
   uf: string
   disabled?: boolean
+  [x: string]: any
 }
 
 const initialLabel = 'Selecione:'
@@ -41,16 +43,16 @@ const SelectCity: React.FC<SelectCityProps> = ({
 
         const { data } = await apiAdmin.get(`/municipio?idUF=${uf}`)
 
-        const dataMapped = mapCity(data)
+        const citiesMapped = mapCity(data)
 
-        setCityOptions(dataMapped)
+        setCityOptions(citiesMapped)
 
         if (!city) {
           setCity('')
+          setDefaultLabel(initialLabel)
         }
       } catch ({ response }) {
-      } finally {
-        setDefaultLabel(initialLabel)
+        toast.error('Erro ao carregar cidades')
       }
     }
 

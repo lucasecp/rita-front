@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import { useHistory } from 'react-router'
+// import { useHistory } from 'react-router-dom'
 
 import { useModal } from '@/hooks/useModal'
 import { Container, ButtonGroup, PlanName, Price } from './styles'

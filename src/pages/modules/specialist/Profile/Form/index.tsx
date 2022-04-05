@@ -8,18 +8,29 @@ import { toast } from '@/styles/components/toastify'
 import React, { useEffect, useState } from 'react'
 
 import ButtonPrimary from '../../../../../components/Button/Primary'
-import { MultiSelectOption } from '../../../../../components/Form/MultSelect'
 import { ButtonGroup } from '../../../operator/clinic/SeeOneClinic/EditClinic/styles'
 import { toApi } from '../adapters'
 import { Clinics } from '../components/Clinics'
 import SpecialistInfo from '../components/SpecialistInfo'
 import { Specialtys } from '../components/Specialtys'
-import { DataSpecialistI, ErrorsI, SpecialistInfoI } from '../Types'
+import {
+  DataSpecialistI,
+  ErrorsI,
+  SpecialistInfoI,
+  SpecialtysAndDocsType,
+  RqeAndSpecialtysType,
+  SpecialtysType,
+  ClinicErrorsType,
+} from '../Types'
 import { Container } from './styles'
+import Documents from '../components/Documents/index'
+import { useDocsSpecialtys } from '../hooks/useDocsSpecialty'
+import { useValidator } from '../hooks/useValidator'
 
 interface FormProps {
   data: DataSpecialistI
   profilePhoto: any
+  specialtysDocs: SpecialtysAndDocsType
   setMakeNewRequest: (v: boolean) => void
 }
 
@@ -27,23 +38,46 @@ const Form: React.FC<FormProps> = ({
   data,
   profilePhoto,
   setMakeNewRequest,
+  specialtysDocs,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
+
   const [fieldWasChanged, setFieldWasChanged] = useState(false)
-  const [errors, setErrors] = useState<ErrorsI>({})
+
+  const [errors, setErrors] = useState<ErrorsI>({} as ErrorsI)
+
   const [specialistInfo, setSpecialistInfo] = useState<SpecialistInfoI>(
     data.specialistInfo || {},
   )
-  const [specialistSpecialitys, setSpecialistSpecialitys] = useState<
-    MultiSelectOption[]
-  >([])
-  const [specialistClinics, setSpecialistClinic] = useState<
-    MultiSelectOption[]
-  >([])
-  const [clickOnSave, setClickOnSave] = useState(false)
+
+  const [specialistSpecialitys, setSpecialistSpecialitys] =
+    useState<SpecialtysType>({} as SpecialtysType)
+
+  const [specialistClinics, setSpecialistClinic] = useState<ClinicErrorsType>(
+    {} as ClinicErrorsType,
+  )
+
+  const [specialtysAndDocs, setSpecialtysAndDocs] =
+    useState<SpecialtysAndDocsType>({})
+
+  const [rqeAndSpeciality, setRqeAndSpeciality] =
+    useState<RqeAndSpecialtysType>({} as RqeAndSpecialtysType)
+
+  const [clickOnSave, setClickOnSave] = useState(0)
+
   const [formWasSubmited, setFormWasSubmited] = useState(false)
+
   const { showMessage } = useModal()
+
   const { Loading } = useLoading()
+  const { hasErrorOnFields } = useValidator()
+
+  const { registerDocsSpecialtys } = useDocsSpecialtys(
+    specialtysAndDocs,
+    specialistInfo.cpf,
+  )
+
+  const randomValues = Math.random() * (10 - 3) + 3
 
   useEffect(() => {
     if (isEditing) {
@@ -51,34 +85,33 @@ const Form: React.FC<FormProps> = ({
     } else {
       setFieldWasChanged(false)
     }
-  }, [specialistInfo, specialistClinics, specialistSpecialitys, profilePhoto])
-
-  const hasErrorOnFields = (fields: any) => {
-    let error = false
-    const hasSpecificError = Object.values(errors)
-    error = !!hasSpecificError[0]
-
-    for (const field in fields) {
-      if (!fields[field] || !fields[field].length) {
-        setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
-        error = true
-      }
-    }
-    return error
-  }
+  }, [
+    specialistInfo,
+    specialistClinics,
+    specialistSpecialitys,
+    profilePhoto,
+    rqeAndSpeciality,
+    specialtysAndDocs,
+  ])
 
   const onSave = async () => {
-    setClickOnSave(!clickOnSave)
+    setClickOnSave(randomValues)
+
     if (
-      hasErrorOnFields({
-        ...specialistInfo,
-        ...specialistClinics,
-        ...specialistSpecialitys,
-      })
+      hasErrorOnFields(
+        {
+          ...specialistInfo,
+          ...specialistClinics,
+          ...specialistSpecialitys,
+          ...specialtysAndDocs,
+          ...rqeAndSpeciality,
+        },
+        setErrors,
+      )
     ) {
       return
     }
-    setErrors({})
+    setErrors({} as ErrorsI)
 
     try {
       Loading.turnOn()
@@ -89,15 +122,20 @@ const Form: React.FC<FormProps> = ({
           specialistInfo,
           ...specialistClinics,
           ...specialistSpecialitys,
+          rqe: rqeAndSpeciality,
         }),
       )
+      await registerDocsSpecialtys()
 
       toast.success('Alteração realizada com sucesso.')
+
       setIsEditing(false)
+
       setFormWasSubmited(true)
+
       setMakeNewRequest(!clickOnSave)
     } catch (error: any) {
-      toast.error(error.message)
+      toast.error('Erro ao editar')
     } finally {
       Loading.turnOff()
     }
@@ -112,12 +150,16 @@ const Form: React.FC<FormProps> = ({
       })
     }
     setIsEditing(false)
+
     setFormWasSubmited(false)
-    setClickOnSave(false)
+
+    setClickOnSave(randomValues)
   }
 
   useEffect(() => {
-    scrollOntoFieldError(errors)
+    if (clickOnSave !== 0) {
+      scrollOntoFieldError(errors)
+    }
   }, [clickOnSave])
 
   return (
@@ -139,10 +181,25 @@ const Form: React.FC<FormProps> = ({
         setErrors={setErrors}
         formWasSubmited={formWasSubmited}
       />
+
+      {specialistSpecialitys.specialtys?.map((spec) => (
+        <Documents
+          key={spec.id}
+          setSpecialtysAndDocs={setSpecialtysAndDocs}
+          initialData={specialtysDocs}
+          errors={errors}
+          setErrors={setErrors}
+          data={spec}
+          setRqeAndSpeciality={setRqeAndSpeciality}
+          isEditing={isEditing}
+          formWasSubmited={formWasSubmited}
+        />
+      ))}
+
       <Clinics
-        specialistClinic={data?.clinics}
+        specialistClinic={data?.clinic}
         setSpecialistClinic={setSpecialistClinic}
-        initialData={data?.clinics}
+        initialData={data?.clinic}
         isEditing={isEditing}
         errors={errors}
         setErrors={setErrors}

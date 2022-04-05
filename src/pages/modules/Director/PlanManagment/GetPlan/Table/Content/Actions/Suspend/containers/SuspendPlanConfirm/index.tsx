@@ -5,7 +5,7 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { useModal } from '@/hooks/useModal'
 import { useToggle } from '@/hooks/useToggle'
 import { ReasonSuspend } from '../../messages/ReasonSuspend'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { Container } from './styles'
 import { DIRECTOR_SEE_PLAN_MANAGMENT } from '@/routes/constants/namedRoutes/routes'
@@ -54,7 +54,7 @@ export const SuspendPlanConfirm: React.FC = () => {
             deixam de ser disponibilizados para venda, deseja prosseguir?
           </h1>
 
-          {sellableItems.map((sellableItem, index) =>
+          {(sellableItems as any[]).map((sellableItem, index) =>
             isSellableItemsExpanded ? (
               <p key={sellableItem.id}>
                 {sellableItem.name} - {sellableItem.price}

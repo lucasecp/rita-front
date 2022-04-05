@@ -1,9 +1,10 @@
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import { DataSpecialistI, RqeAndSpecialtysType } from '../Types'
 
 import { mapClinics, mapClinicsToApi } from './mapClinic'
 import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys'
 
-export const fromApi = (doctorInfo: any) => {
+export const fromApi = (doctorInfo: any): DataSpecialistI => {
   return {
     specialistInfo: {
       name: doctorInfo.nome,
@@ -17,23 +18,27 @@ export const fromApi = (doctorInfo: any) => {
       photo: doctorInfo.avatar,
       cashback: doctorInfo.cashBack ? doctorInfo.cashBack + '%' : '',
       takerate: doctorInfo.takeRate ? doctorInfo.takeRate + '%' : '',
+      issuingAgency: doctorInfo.orgaoEmissor?.idOrgaoEmissor,
     },
 
     specialtys: mapSpecialtys(doctorInfo.especialidades),
-    clinics: mapClinics(doctorInfo.clinica),
+    clinic: mapClinics(doctorInfo.clinica),
   }
 }
 
-export const toApi = (doctorInfo: any) => {
+export const toApi = (
+  doctorInfo: DataSpecialistI & { rqe: RqeAndSpecialtysType },
+): any => {
   return {
     nome: doctorInfo.specialistInfo?.name,
     nomeProfissional: doctorInfo.specialistInfo?.profissionalName,
     email: doctorInfo.specialistInfo?.email,
     receberAgendamentos: doctorInfo.specialistInfo?.receiveService,
-    celular: clearSpecialCaracter(doctorInfo.specialistInfo?.phone),
+    celular: clearSpecialCaracter(doctorInfo.specialistInfo?.phone || ''),
     ufOrgaoEmissor: doctorInfo.specialistInfo?.ufProfissionaRegister,
     registroProfissional: doctorInfo.specialistInfo?.classCouncil,
     clinica: mapClinicsToApi(doctorInfo.clinic),
-    especialidades: mapSpecialtysToApi(doctorInfo.specialtys),
+    especialidades: mapSpecialtysToApi(doctorInfo.specialtys, doctorInfo.rqe),
+    idOrgaoEmissor: doctorInfo.specialistInfo.issuingAgency,
   }
 }

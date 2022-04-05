@@ -31,7 +31,7 @@ interface PreviewPatientAnalyticFromApi {
       id: number
       nome: string
     }
-    titulares: unknown[]
+    titulares: { idPaciente: number; cpf: string }[]
     usuario: {
       dataCadastro: string
       bloqueado: string
@@ -61,7 +61,8 @@ export const previewPatientsFromApi = (
     patients: data.dados.map((patient, index) => ({
       id: String(index + 1),
       beneficiaryType: patient.titulares.length ? 'Dependente' : 'Titular',
-      contractNumber: formatCpf(patient.cpf),
+      contractNumber:
+        formatCpf(patient.titulares[0]?.cpf) || formatCpf(patient.cpf),
       name: patient.nome,
       cpf: formatCpf(patient.cpf),
       birthDate: new Date(patient.dataNascimento).toLocaleDateString('pt-br'),

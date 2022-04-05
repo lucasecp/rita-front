@@ -10,16 +10,16 @@ import { useModal } from '@/hooks/useModal'
 import { Container, ButtonsArea } from './styles'
 
 interface LengthyReportProps {
-  generateBillingReport: () => void
+  generatePatientAnalyticReport: () => void
 }
 
 export const LengthyReport: React.FC<LengthyReportProps> = ({
-  generateBillingReport,
+  generatePatientAnalyticReport,
 }) => {
   const { closeModal } = useModal()
 
   const onConfirmLengthyReportGeneration = async () => {
-    generateBillingReport()
+    generatePatientAnalyticReport()
     closeModal()
   }
 

@@ -5,7 +5,7 @@ import warningIcon from '@/assets/icons/alerts/warning.svg'
 import { Container } from './styles'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 
 export const FieldsHasChangedWarning: React.FC = () => {

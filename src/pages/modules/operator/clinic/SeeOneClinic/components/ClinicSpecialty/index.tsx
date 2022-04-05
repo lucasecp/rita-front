@@ -51,7 +51,7 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
   }, [])
 
   useEffect(() => {
-    setSpecialtys(clinicSpecialtys || '')
+    setSpecialtys(clinicSpecialtys || [])
   }, [clinicSpecialtys])
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
 
   useEffect(() => {
     if (!isEditing) {
-      setSpecialtys(initialData || '')
+      setSpecialtys(initialData || [])
       setErrors({})
     }
   }, [isEditing, initialData])

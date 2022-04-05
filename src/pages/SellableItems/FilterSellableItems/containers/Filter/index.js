@@ -10,31 +10,13 @@ import ButtonPrimary from '@/components/Button/Primary'
 import InputText from '@/components/Form/InputText'
 import CustomMultSelect from '@/components/Form/MultSelect'
 import { Container } from './styles'
-// import { SellableItemsFilters } from '../../@types'
 import useLocalStorage from 'use-local-storage'
 
-// interface FilterProps {
-//   onGetFilters: React.Dispatch<React.SetStateAction<SellableItemsFilters>>;
-// }
-
-// export const Filter: React.FC<FilterProps> = ({ onGetFilters }) => {
 export const Filter = ({ onGetFilters }) => {
   const [filters, setFilters] = useLocalStorage(
     '@Rita/SellableItems/Filters',
     {},
   )
-
-  const hasNoFilterSelected = useMemo(() => {
-    return (
-      filters.code === '' &&
-      filters.plan === '' &&
-      !filters.services.length &&
-      !filters.status.length &&
-      !filters.regionals.length &&
-      !filters.ufs.length &&
-      !filters.cities.length
-    )
-  }, [filters])
 
   const onClearFields = () => {
     setFilters({
@@ -115,19 +97,10 @@ export const Filter = ({ onGetFilters }) => {
       </div>
 
       <footer>
-        <OutlineButton
-          small
-          variation="red"
-          onClick={onClearFields}
-          disabled={hasNoFilterSelected}
-        >
+        <OutlineButton small variation="red" onClick={onClearFields}>
           Limpar Filtro
         </OutlineButton>
-        <ButtonPrimary
-          medium
-          onClick={onFilterResults}
-          disabled={hasNoFilterSelected}
-        >
+        <ButtonPrimary medium onClick={onFilterResults}>
           Filtrar Resultados
         </ButtonPrimary>
       </footer>

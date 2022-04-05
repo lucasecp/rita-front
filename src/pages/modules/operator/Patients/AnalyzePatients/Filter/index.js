@@ -9,7 +9,7 @@ import convertDate from '@/helpers/convertDateToIso'
 import useQuery from '@/hooks/useQuery'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import TablePatients from '../TablePatients'
 import SelectValidator from './SelectValidator'
 import { Container, BtnGroup } from './styles'
@@ -63,6 +63,7 @@ const Filter = () => {
   }
 
   useEffect(() => {
+    console.log('0000000000000 >>', status)
     setFilters(verifyTypedFields(objQuery))
   }, [])
 

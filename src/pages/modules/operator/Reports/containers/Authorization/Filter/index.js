@@ -10,7 +10,7 @@ import convertDate from '@/helpers/convertDateToIso'
 import RadioButton from '@/styles/components/RadioButton'
 import { RadioGroup } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { toast } from '@/styles/components/toastify'
 import {
   columns as staticColumns,
