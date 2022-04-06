@@ -11,6 +11,7 @@ interface InputDocumentProps {
   hasError?: boolean
   disabled?: boolean
   name?: string
+
 }
 
 const InputFileStyled: React.FC<InputDocumentProps> = ({
@@ -25,7 +26,7 @@ const InputFileStyled: React.FC<InputDocumentProps> = ({
     <Container name={name}>
       {label && <label>{label}</label>}
 
-      <InputFile setValue={setValue} clearOnClick>
+      <InputFile setValue={setValue}>
         <span />
         <Button color={color} disabled={disabled}>
           Inserir arquivo
