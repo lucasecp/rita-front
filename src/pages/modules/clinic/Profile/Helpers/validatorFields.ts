@@ -1,5 +1,6 @@
 /** Helpers */
 import isEmail from '@/helpers/isEmail'
+import isPhone from '@/helpers/isPhone'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 
 export const validateField = (
@@ -20,6 +21,15 @@ export const validateEmail = (email: string, errors: { [x: string]: string | und
   }else {
     scrollOntoFieldError(errors)
     return 'E-mail inválido!'
+  }
+}
+export const validatePhone = (phone: string, fieldName, errors: { [x: string]: string | undefined }) => {
+  phone = phone.replace(/[^a-zA-Z0-9 ]/g, '').replace(/\s/g,'')
+  if(Number(phone.length) === 11) {
+    return ''
+  }else {
+    scrollOntoFieldError(errors)
+    return `${fieldName} inválido.`
   }
 }
 

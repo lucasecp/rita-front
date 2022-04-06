@@ -24,7 +24,7 @@ import {
 /** Context */
 import { ClinicEditContext } from '../Context/ClinicEditContext'
 /** Helpers */
-import { validateField, validateEmail } from '../Helpers/validatorFields'
+import { validateField, validateEmail, validatePhone } from '../Helpers/validatorFields'
 import { toast } from '@/styles/components/toastify'
 /** API */
 import apiAdmin from '@/services/apiAdmin'
@@ -181,7 +181,7 @@ const FormClinicProfile: React.FC = () => {
       'Responsável Técnico',
       { responsible: 'responsible' },
     )
-    const phoneResponsibleTecnic = validateField(
+    const phoneResponsibleTecnic = validatePhone(
       responsibleTecnic.phoneResponsibleTecnic,
       'Celular',
       { phoneResponsible: 'phoneResponsible' },
@@ -196,7 +196,7 @@ const FormClinicProfile: React.FC = () => {
       'Responsável Administrativo',
       { responsibleAdministrative: 'responsibleAdministrative' },
     )
-    const phoneResponsibleAdministrative = validateField(
+    const phoneResponsibleAdministrative = validatePhone(
       responsibleAdministrative.phoneResponsibleAdministrative,
       'Celular',
       { phoneResponsible: 'phoneResponsible' },
