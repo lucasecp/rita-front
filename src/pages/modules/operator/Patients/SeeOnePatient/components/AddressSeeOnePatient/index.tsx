@@ -30,7 +30,7 @@ const AddressSeeOnePatient: React.FC<AddressSeeOnePatientProps> = ({
   useEffect(() => {
     setAddress({
       cep,
-      uf: ufToApi,
+      uf,
       city,
       address: addressPatient,
       number,
