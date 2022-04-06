@@ -8,7 +8,7 @@ import { ReactComponent as PhoneIcon } from '@/assets/icons/phone.svg'
 import ServiceSchedule from '../../../components/ServiceSchedule'
 
 const ClinicItemDetails = ({ clinicDetails }) => {
-  console.log(clinicDetails)
+  //console.log(clinicDetails)
   return (
     <Container>
       <ul>
