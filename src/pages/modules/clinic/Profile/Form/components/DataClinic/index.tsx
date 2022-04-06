@@ -77,6 +77,9 @@ const DataClinic: React.FC<FormClinicProfileI> = (
           name="description"
           hasError={!!error?.description}
           msgError={error?.description}
+          onlyLetter
+          noSpecialCaracter
+          maxLength={200}
         />
 
         <InputText
@@ -88,6 +91,9 @@ const DataClinic: React.FC<FormClinicProfileI> = (
           setValue={setRazaoSocial}
           hasError={!!error?.razaoSocial}
           msgError={error?.razaoSocial}
+          onlyLetter
+          noSpecialCaracter
+          maxLength={100}
         />
 
         <section>

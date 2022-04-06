@@ -52,6 +52,7 @@ export const toApi = (
   address: AddressClinicI,
   specialty: MultiSelectOption[],
 ) => {
+
   return {
     idClinica: 59,
     descricao: dataClinic.description,
@@ -70,8 +71,8 @@ export const toApi = (
       responsibleTecnic.responsibleTecnic ||
       responsibleAdministrative.responsibleAdministrative,
     emailResponsavel:
-      responsibleTecnic.cpfResponsibleTecnic ||
-      responsibleAdministrative.cpfResponsibleAdministrative,
+      responsibleTecnic.emailTecnic ||
+      responsibleAdministrative.emailAdministrative,
     telefoneResponsavel:
       responsibleTecnic.phoneResponsibleTecnic ||
       responsibleAdministrative.phoneResponsibleAdministrative,

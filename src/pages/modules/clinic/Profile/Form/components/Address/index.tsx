@@ -29,7 +29,7 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
   const [district, setDistrict] = React.useState('')
   const [complement, setComplement] = React.useState('')
   /** Context */
-  const { error, isDisabled, setIsHashModificationField } =
+  const { error, setError, isDisabled, setIsHashModificationField, isHashModificationSelectAndMultSelect} =
     React.useContext(ClinicEditContext)
 
   /** @description Atualiza os dados digitados nos states */
@@ -43,7 +43,23 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
       district,
       complement,
     })
-  }, [cep, ufId, city, address, number, district, complement])
+  }, [cep, address, number, district, complement])
+
+  /** @description Atualiza os dados digitados nos states, aqui verifica apenas UF e City */
+  React.useEffect(() => {
+    props.setAddress({
+      cep,
+      uf: ufLabel,
+      city,
+      address,
+      number,
+      district,
+      complement,
+    })
+    if(isHashModificationSelectAndMultSelect){
+      setIsHashModificationField(true)
+    }
+  }, [ufId, city])
 
   /** @description Seta os dados nos campos quando esse componente é montado na tela. */
   React.useEffect(() => {
@@ -109,6 +125,7 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
           setValue={setAddress}
           hasError={!!error.address}
           msgError={error.address}
+          maxLength={100}
         />
         <InputText
           label="Número*:"
@@ -119,6 +136,7 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
           setValue={setNumber}
           hasError={!!error.number}
           msgError={error.number}
+          maxLength={100}
         />
       </section>
       <section>
@@ -131,6 +149,7 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
           setValue={setDistrict}
           hasError={!!error.district}
           msgError={error.district}
+          maxLength={100}
         />
         <InputText
           label="Complemento*:"
@@ -141,6 +160,7 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
           setValue={setComplement}
           hasError={!!error.complement}
           msgError={error.complement}
+          maxLength={100}
         />
       </section>
     </Container>

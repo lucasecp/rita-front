@@ -24,7 +24,7 @@ import {
 /** Context */
 import { ClinicEditContext } from '../Context/ClinicEditContext'
 /** Helpers */
-import { validateField } from '../Helpers/validatorFields'
+import { validateField, validateEmail } from '../Helpers/validatorFields'
 import { toast } from '@/styles/components/toastify'
 /** API */
 import apiAdmin from '@/services/apiAdmin'
@@ -58,6 +58,7 @@ const FormClinicProfile: React.FC = () => {
     data,
     setData,
     setIsHashModificationField,
+    setIsHashModificationSelectAndMultSelect,
     photo,
   } = React.useContext(ClinicEditContext)
 
@@ -131,6 +132,7 @@ const FormClinicProfile: React.FC = () => {
         setIsDisabled,
         setError,
         setIsHashModificationField,
+        setIsHashModificationSelectAndMultSelect,
       })
     } else {
       setIsDisabled(true)
@@ -184,9 +186,8 @@ const FormClinicProfile: React.FC = () => {
       'Celular',
       { phoneResponsible: 'phoneResponsible' },
     )
-    const emailResponsibleTecnic = validateField(
+    const emailResponsibleTecnic = validateEmail(
       responsibleTecnic.emailTecnic,
-      'E-mail do Responsável Técnico',
       { emailTecnic: 'emailTecnic' },
     )
     // /** Responsável Administrativo */
@@ -200,11 +201,9 @@ const FormClinicProfile: React.FC = () => {
       'Celular',
       { phoneResponsible: 'phoneResponsible' },
     )
-    const emailResponsibleAdministrative = validateField(
+    const emailResponsibleAdministrative = validateEmail(
       responsibleAdministrative.emailAdministrative,
-      'E-mail do Responsável Administrativo',
-      { emailAdministrative: 'emailAdministrative' },
-    )
+      { emailAdministrative: 'emailAdministrative' })
     // /** Endereço */
     const cep = validateField(address.cep, 'CEP', { cep: 'cep' })
     const _address = validateField(address.address, 'Endereço', {

@@ -1,4 +1,5 @@
 /** Helpers */
+import isEmail from '@/helpers/isEmail'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 
 export const validateField = (
@@ -12,3 +13,13 @@ export const validateField = (
   }
   return ''
 }
+
+export const validateEmail = (email: string, errors: { [x: string]: string | undefined }) => {
+  if(isEmail(email)) {
+    return ''
+  }else {
+    scrollOntoFieldError(errors)
+    return 'E-mail inválido!'
+  }
+}
+
