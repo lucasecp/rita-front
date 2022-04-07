@@ -19,17 +19,10 @@ import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
 interface SendedFileProps {
   file: File
   onGetFile: React.Dispatch<React.SetStateAction<File | string>>
-  dependentDocumentName?: string
 }
 
-export const SendedFile: React.FC<SendedFileProps> = ({
-  file,
-  onGetFile,
-  dependentDocumentName,
-}) => {
+export const SendedFile: React.FC<SendedFileProps> = ({ file, onGetFile }) => {
   const { showMessage } = useModal()
-
-  const isMobile = useMediaPredicate('(max-width: 800px)')
 
   const removeFile = () => {
     onGetFile('')
@@ -51,36 +44,14 @@ export const SendedFile: React.FC<SendedFileProps> = ({
     }
   }, [file])
 
-  const previewForPdf = () => {
-    if (isMobile) {
-      return downloadFile(file, '', 'pdf')
-    }
-
-    return previewFileInNewBlank(file)
-  }
-
-  const showPreview = () => {
-    if (typeof file === 'object' && file.type === 'application/pdf') {
-      return previewForPdf()
-    }
-
-    showMessage(ImagePreview, { file }, true)
-  }
-
   return (
     <Container>
-      <section>
-        <h6>
-          {typeof file !== 'string'
-            ? file.name
-            : dependentDocumentName || 'Não possui arquivo'}
-        </h6>
-        <aside>
-          <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
-            <button>Alterar</button>
-          </InputFile>
-        </aside>
-      </section>
+      <h4>{file ? 'Comprovante de Renda' : 'Não possui arquivo'}</h4>
+      <aside>
+        <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
+          <button>Alterar</button>
+        </InputFile>
+      </aside>
     </Container>
   )
 }

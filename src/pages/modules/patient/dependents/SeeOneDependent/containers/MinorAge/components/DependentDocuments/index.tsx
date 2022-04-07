@@ -60,10 +60,12 @@ export const DependentDocuments: React.FC<DependentDocumentsProps> = ({
         title="Foto do documento de identificação frente"
         document={frontDocument}
       />
-      <SeeDocumentFile
-        title="Foto do documento de identificação verso"
-        document={backDocument}
-      />
+      {backDocument && (
+        <SeeDocumentFile
+          title="Foto do documento de identificação verso"
+          document={backDocument}
+        />
+      )}
     </Container>
   )
 }

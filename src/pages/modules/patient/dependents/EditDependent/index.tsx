@@ -20,17 +20,19 @@ import apiPatient from '@/services/apiPatient'
 interface PersonalDatas {
   name: string
   cpf: string
-  birthDate: string
   gender: string
-  email: string
+  birthdate: string
   phone: string
+  email: string
+  status: string
+  income: string
 }
 
 interface Address {
   cep: string
   uf: string
   city: string
-  addressDep: string
+  address: string
   number: string
   district: string
   complement: string
@@ -45,11 +47,14 @@ interface SituationType {
   table: string
 }
 
-interface Dependent {
-  personalDatas: PersonalDatas
-  address: Address
-  documents: any
-  situation: SituationType
+interface DependentLocation {
+  dependent: {
+    personalDatas: PersonalDatas
+    address: Address
+    documents: any
+    situation: SituationType
+  }
+  dependentId: number
 }
 
 interface PersonalDatasError {
@@ -68,14 +73,13 @@ interface AddressError {
 
 export const EditDependent: React.FC = () => {
   const { Loading } = useLoading()
-  const location = useLocation()
+  const location = useLocation<DependentLocation>()
   const history = useHistory()
   const { showMessage } = useModal()
 
-  const dependent: Dependent = location.state.dependent
-  const id: number = location.state.id
-  const dependentDocumentName: string = location.state.dependentDocumentName
-  const dependentDocument = location.state.dependentDocument
+  const { personalDatas, address, documents, situation } =
+    location.state.dependent
+  const id = location.state.dependentId
 
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState<number>(0)
 
@@ -123,17 +127,15 @@ export const EditDependent: React.FC = () => {
       formFile1.append('file', documentToSave)
       try {
         await apiPatient.post(
-          `/paciente/documento?cpf=${dependent.personalDatas.cpf}&tipoDocumento=Renda`,
+          `/paciente/documento?cpf=${personalDatas.cpf}&tipoDocumento=Renda`,
           formFile1,
         )
-
-        console.log(dependent.personalDatas.cpf)
 
         await apiPatient.patch(
           `/paciente/dependente/documento/confirmar`,
           null,
           {
-            params: { cpf: dependent.personalDatas.cpf },
+            params: { cpf: personalDatas.cpf },
           },
         )
       } catch (error) {
@@ -188,11 +190,13 @@ export const EditDependent: React.FC = () => {
     history.push(PATIENT_DEPENDENTS)
   }
 
+  console.log('Location: ', location)
+
   return (
     <DefaultLayout title="Visualizar informações de dependente">
       <Container>
         <DependentData
-          personalDatas={dependent.personalDatas}
+          personalDatas={personalDatas}
           setAnyFieldsHasChanged={setAnyFieldsHasChanged}
           anyFieldsHasChanged={anyFieldsHasChanged}
           personalDatasError={personalDatasError}
@@ -201,7 +205,7 @@ export const EditDependent: React.FC = () => {
           showErrors={showErrors}
         />
         <DependentAddress
-          address={dependent.address}
+          address={address}
           setAnyFieldsHasChanged={setAnyFieldsHasChanged}
           anyFieldsHasChanged={anyFieldsHasChanged}
           addressError={addressError}
@@ -210,16 +214,11 @@ export const EditDependent: React.FC = () => {
           showErrors={showErrors}
         />
         <Documents
-          data={dependent.personalDatas}
-          setAnyFieldsHasChanged={setAnyFieldsHasChanged}
-          dependentDocumentName={dependentDocumentName}
-          dependentDocument={dependentDocument}
-          // setDocumentError={setDocumentError}
-          showErrors={showErrors}
+          incomeValue={personalDatas?.income}
           documentToSave={documentToSave}
           setDocumentToSave={setDocumentToSave}
         />
-        <Situation data={dependent.situation} />
+        <Situation data={situation} />
 
         <ButtonGroup>
           <ButtonLink onClick={onCancel}>Cancelar</ButtonLink>

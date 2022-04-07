@@ -4,14 +4,9 @@ import { Container } from './styles'
 import { SendedFile } from './SendedFile'
 
 export const Documents = ({
-  data,
+  incomeValue,
   documentToSave,
   setDocumentToSave,
-  setAnyFieldsHasChanged,
-  dependentDocumentName,
-  dependentDocument,
-  // setDocumentError,
-  showErrors,
 }) => {
   return (
     <Container>
@@ -21,14 +16,10 @@ export const Documents = ({
         <div>
           <div>
             <div>
-              <h4>{data?.income} </h4>
+              <h4>{incomeValue} </h4>
             </div>
           </div>
-          <SendedFile
-            file={documentToSave}
-            onGetFile={setDocumentToSave}
-            dependentDocumentName={dependentDocumentName}
-          />
+          <SendedFile file={documentToSave} onGetFile={setDocumentToSave} />
         </div>
       </section>
     </Container>
