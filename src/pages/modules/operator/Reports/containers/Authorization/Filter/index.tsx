@@ -46,6 +46,11 @@ export interface DataPatients {
   validatorName?: string
 }
 
+export interface Filter {
+  name: string
+  value: string | string[]
+}
+
 export interface Patients {
   total: number
   dataPatients: DataPatients[]
@@ -59,7 +64,7 @@ interface Error {
   columns: string
 }
 
-const Filter: React.FC = () => {
+const FilterAuthorization: React.FC = () => {
   const [registerDates, setRegisterDates] = useState([])
   const [validationDates, setValidationDates] = useState([])
   const [cpf, setCpf] = useState('')
@@ -73,8 +78,8 @@ const Filter: React.FC = () => {
     cpf: '',
     columns: '',
   })
-  const [orders, setOrders] = useState<MultiSelectOption[]>([])
-  const [filters, setFilters] = useState<MultiSelectOption[]>([])
+  const [orders, setOrders] = useState<Filter[]>([])
+  const [filters, setFilters] = useState<Filter[]>([])
   const [submitGeneratePreview, setSubmitGeneratePreview] = useState(false)
   const [fileType, setFileType] = useState('')
   const [columns, setColumns] = useState<MultiSelectOption[]>(staticColumns)
@@ -196,16 +201,8 @@ const Filter: React.FC = () => {
     return hasError
   }
 
-  const verifyTypedFields = (
-    fields: {
-      name: string
-      value: string
-    }[],
-  ): any => {
-    console.log(fields.filter((field) => field.value))
-
-    return fields.filter((field) => field.value)
-  }
+  const verifyTypedFields = (fields: Filter[]): Filter[] =>
+    fields.filter((field) => field.value)
 
   const onPreview = async () => {
     if (hasFieldErrors()) return
@@ -383,6 +380,7 @@ const Filter: React.FC = () => {
           </span>
         </Controls>
       </Container>
+      {console.log(columns)}
       {submitGeneratePreview && (
         <TableReport
           patients={patients}
@@ -397,4 +395,4 @@ const Filter: React.FC = () => {
   )
 }
 
-export default Filter
+export default FilterAuthorization

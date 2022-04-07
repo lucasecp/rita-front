@@ -1,6 +1,6 @@
-import { MultiSelectOption } from '@/components/Form/MultSelect'
+import { Filter } from '../Filter'
 
-export const queryOrderString = (array: MultiSelectOption[]): string => {
+export const queryOrderString = (array: Filter[]): string => {
   let valueString = ''
 
   if (!array.length) return '&orderBy=dataValidacao&order=DESC'
@@ -11,7 +11,7 @@ export const queryOrderString = (array: MultiSelectOption[]): string => {
   return valueString
 }
 
-export const queryFilterString = (array: MultiSelectOption[]): string => {
+export const queryFilterString = (array: any): string => {
   let valueString = ''
 
   if (!array.length) return ''

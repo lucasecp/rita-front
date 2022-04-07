@@ -9,13 +9,13 @@ import { COLUMNS_NAME } from '../static/columns'
 import { formatObjectFromApi } from '../helpers/formatObjectFromApi'
 import ColumnIsActive from '../helpers/ColumnIsActive'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
-import { Patients } from '../Filter'
+import { Filter, Patients } from '../Filter'
 import { MultiSelectOption } from '@/components/Form/MultSelect'
 
 interface TableReportProps {
-  orders: MultiSelectOption[]
-  setOrders: (orders: MultiSelectOption[]) => void
-  filters: MultiSelectOption[]
+  orders: Filter[]
+  setOrders: (orders: Filter[]) => void
+  filters: Filter[]
   setPatients: (mappedObjectFromApi: Patients) => void
   patients: Patients
   columns: MultiSelectOption[]
