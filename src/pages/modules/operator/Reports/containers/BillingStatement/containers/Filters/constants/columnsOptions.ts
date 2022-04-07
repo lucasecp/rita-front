@@ -5,6 +5,7 @@ export const columnsOptions = [
   { id: 'contractNumber', name: 'Nº do contrato' },
   { id: 'name', name: 'Nome' },
   { id: 'cpf', name: 'CPF' },
+  { id: 'email', name: 'Email' },
   { id: 'birthDate', name: 'Data de Nascimento' },
   { id: 'gender', name: 'Sexo' },
   { id: 'plan', name: 'Plano' },

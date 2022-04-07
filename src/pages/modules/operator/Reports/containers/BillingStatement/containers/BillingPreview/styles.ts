@@ -48,8 +48,8 @@ export const Container = styled.div`
         border: solid 1px ${colors.gray.middleLight};
 
         > li {
+          overflow-wrap: break-word;
           width: 120px;
-
           font-weight: 500;
           font-size: 14px;
           line-height: 17px;

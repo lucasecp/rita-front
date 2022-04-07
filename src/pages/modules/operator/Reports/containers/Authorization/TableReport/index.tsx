@@ -6,11 +6,22 @@ import { Container, NotFound, ResultsFounds } from './styles'
 import Header from './Header'
 
 import { COLUMNS_NAME } from '../static/columns'
-import formatObjectFromApi from '../helpers/formatObjectFromApi'
+import { formatObjectFromApi } from '../helpers/formatObjectFromApi'
 import ColumnIsActive from '../helpers/ColumnIsActive'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
+import { Filter, Patients } from '../Filter'
+import { MultiSelectOption } from '@/components/Form/MultSelect'
 
-const TableReport = ({
+interface TableReportProps {
+  orders: Filter[]
+  setOrders: (orders: Filter[]) => void
+  filters: Filter[]
+  setPatients: (mappedObjectFromApi: Patients) => void
+  patients: Patients
+  columns: MultiSelectOption[]
+}
+
+const TableReport: React.FC<TableReportProps> = ({
   orders,
   setOrders,
   filters,
@@ -31,7 +42,9 @@ const TableReport = ({
         )
 
         if (response.status === 200) {
-          setPatients(formatObjectFromApi(response.data))
+          const mappedObjectFromApi = formatObjectFromApi(response.data)
+
+          setPatients(mappedObjectFromApi)
         }
       } catch ({ response }) {
       } finally {
@@ -61,6 +74,10 @@ const TableReport = ({
 
             <li hidden={!ColumnIsActive(COLUMNS_NAME.CPF, columns)}>
               {patient.cpf || '-'}
+            </li>
+
+            <li hidden={!ColumnIsActive(COLUMNS_NAME.EMAIL, columns)}>
+              {patient.email || '-'}
             </li>
 
             <li hidden={!ColumnIsActive(COLUMNS_NAME.STATUS, columns)}>
