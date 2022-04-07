@@ -2,6 +2,7 @@ import React from 'react'
 import { Container } from './styles'
 
 const ServiceSchedule = ({ dataSchedule = [] }) => {
+  console.log({ dataSchedule })
   const hasDayInSchedule = (day) => {
     return dataSchedule.some(
       (schedule) => schedule[day] && schedule[day].length,
@@ -18,10 +19,18 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Segunda</h6>
             {dataSchedule.map((schedule) =>
-              schedule.monday.reduce((ac, hour) => {
-                ac = `${hour.start} às ${hour.end}`
-                return <li>{ac}</li>
-              }, ''),
+              /**
+               * @description Esse bloco está comentado por conta que o reduce retorna apenas um registro
+               * e existiu casos que o especialista pode ter mais de um horário no mesmo dia, então utilizando
+               * o reduce não estava retornando todos os horários do dia.
+               */
+              // schedule.monday.reduce((ac, hour) => {
+              //   ac = `${hour.start} às ${hour.end}`
+              //   return <li>{ac}</li>
+              // }, ''),
+              schedule.monday.map(time => {
+                return <li>{`${time.start} às ${time.end}`}</li>
+              })
             )}
           </ul>
         )}
@@ -29,10 +38,18 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Terça</h6>
             {dataSchedule.map((schedule) =>
-              schedule.tuesday.reduce((ac, hour) => {
-                ac = `${hour.start} às ${hour.end}`
-                return <li>{ac}</li>
-              }, ''),
+              /**
+               * @description Esse bloco está comentado por conta que o reduce retorna apenas um registro
+               * e existiu casos que o especialista pode ter mais de um horário no mesmo dia, então utilizando
+               * o reduce não estava retornando todos os horários do dia.
+               */
+              // schedule.tuesday.reduce((ac, hour) => {
+              //   ac = `${hour.start} às ${hour.end}`
+              //   return <li>{ac}</li>
+              // }, ''),
+              schedule.tuesday.map(time => {
+                return <li>{`${time.start} às ${time.end}`}</li>
+              })
             )}
           </ul>
         )}
@@ -40,10 +57,18 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Quarta</h6>
             {dataSchedule.map((schedule) =>
-              schedule.wednesday.reduce((ac, hour) => {
-                ac = `${hour.start} às ${hour.end}`
-                return <li>{ac}</li>
-              }, ''),
+              /**
+               * @description Esse bloco está comentado por conta que o reduce retorna apenas um registro
+               * e existiu casos que o especialista pode ter mais de um horário no mesmo dia, então utilizando
+               * o reduce não estava retornando todos os horários do dia.
+               */
+              // schedule.wednesday.reduce((ac, hour) => {
+              //   ac = `${hour.start} às ${hour.end}`
+              //   return <li>{ac}</li>
+              // }, ''),
+              schedule.wednesday.map(time => {
+                return <li>{`${time.start} às ${time.end}`}</li>
+              })
             )}
           </ul>
         )}
@@ -51,10 +76,18 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Quinta</h6>
             {dataSchedule.map((schedule) =>
-              schedule.thursday.reduce((ac, hour) => {
-                ac = `${hour.start} às ${hour.end}`
-                return <li>{ac}</li>
-              }, ''),
+              /**
+               * @description Esse bloco está comentado por conta que o reduce retorna apenas um registro
+               * e existiu casos que o especialista pode ter mais de um horário no mesmo dia, então utilizando
+               * o reduce não estava retornando todos os horários do dia.
+               */
+              // schedule.thursday.reduce((ac, hour) => {
+              //   ac = `${hour.start} às ${hour.end}`
+              //   return <li>{ac}</li>
+              // }, ''),
+              schedule.thursday.map(time => {
+                return <li>{`${time.start} às ${time.end}`}</li>
+              })
             )}
           </ul>
         )}
@@ -62,10 +95,18 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Sexta</h6>
             {dataSchedule.map((schedule) =>
-              schedule.friday.reduce((ac, hour) => {
-                ac = `${hour.start} às ${hour.end}`
-                return <li>{ac}</li>
-              }, ''),
+              /**
+               * @description Esse bloco está comentado por conta que o reduce retorna apenas um registro
+               * e existiu casos que o especialista pode ter mais de um horário no mesmo dia, então utilizando
+               * o reduce não estava retornando todos os horários do dia.
+               */
+              // schedule.friday.reduce((ac, hour) => {
+              //   ac = `${hour.start} às ${hour.end}`
+              //   return <li>{ac}</li>
+              // }, ''),
+              schedule.friday.map(time => {
+                return <li>{`${time.start} às ${time.end}`}</li>
+              })
             )}
           </ul>
         )}
@@ -73,10 +114,18 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Sábado</h6>
             {dataSchedule.map((schedule) =>
-              schedule.saturday.reduce((ac, hour) => {
-                ac = `${hour.start} às ${hour.end}`
-                return <li>{ac}</li>
-              }, ''),
+              /**
+               * @description Esse bloco está comentado por conta que o reduce retorna apenas um registro
+               * e existiu casos que o especialista pode ter mais de um horário no mesmo dia, então utilizando
+               * o reduce não estava retornando todos os horários do dia.
+               */
+              // schedule.saturday.reduce((ac, hour) => {
+              //   ac = `${hour.start} às ${hour.end}`
+              //   return <li>{ac}</li>
+              // }, ''),
+              schedule.saturday.map(time => {
+                return <li>{`${time.start} às ${time.end}`}</li>
+              })
             )}
           </ul>
         )}
@@ -84,10 +133,18 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
           <ul>
             <h6>Domingo</h6>
             {dataSchedule.map((schedule) =>
-              schedule.sunday.reduce((ac, hour) => {
-                ac = `${hour.start} às ${hour.end}`
-                return <li>{ac}</li>
-              }, ''),
+              /**
+               * @description Esse bloco está comentado por conta que o reduce retorna apenas um registro
+               * e existiu casos que o especialista pode ter mais de um horário no mesmo dia, então utilizando
+               * o reduce não estava retornando todos os horários do dia.
+               */
+              // schedule.sunday.reduce((ac, hour) => {
+              //   ac = `${hour.start} às ${hour.end}`
+              //   return <li>{ac}</li>
+              // }, ''),
+              schedule.sunday.map(time => {
+                return <li>{`${time.start} às ${time.end}`}</li>
+              })
             )}
           </ul>
         )}

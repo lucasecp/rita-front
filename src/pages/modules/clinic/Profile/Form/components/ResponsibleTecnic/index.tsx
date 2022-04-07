@@ -8,6 +8,9 @@ import InputText from '@/components/Form/InputText'
 /** Context */
 import { ClinicEditContext } from '../../../Context/ClinicEditContext'
 import InputMask from '@/components/Form/InputMask'
+/** Helpers */
+import isEmail from '@/helpers/isEmail'
+import { validateEmail } from '../../../Helpers/validatorFields'
 
 interface FormClinicProfileI {
   data: ClinicProfileI
@@ -17,15 +20,13 @@ interface FormClinicProfileI {
 const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
   props: FormClinicProfileI,
 ) => {
-  const { isDisabled } = React.useContext(ClinicEditContext)
   /** States */
   const [responsible, setResponsible] = React.useState('')
   const [cpfResponsible, setCpfResponsible] = React.useState('')
   const [phoneResponsible, setPhoneResponsible] = React.useState('')
   const [email, setEmail] = React.useState('')
   /** Context */
-  const { error, setIsHashModificationField } =
-    React.useContext(ClinicEditContext)
+  const { error, setIsHashModificationField, setError, isDisabled } = React.useContext(ClinicEditContext)
 
   /** @description Atualiza os dados digitados nos states */
   React.useEffect(() => {
@@ -69,6 +70,8 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
           setValue={setResponsible}
           hasError={!!error.responsibleTecnic}
           msgError={error.responsibleTecnic}
+          maxLength={70}
+          onlyLetter
         />
         <section>
           <InputMask
@@ -102,6 +105,12 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
             setValue={setEmail}
             hasError={!!error.emailResponsibleTecnic}
             msgError={error.emailResponsibleTecnic}
+            onBlur={() => {
+              setError({
+                ...error,
+                emailResponsibleTecnic: validateEmail(email, { emailTecnic: 'emailTecnic' })
+              })
+            }}
           />
         </section>
       </section>

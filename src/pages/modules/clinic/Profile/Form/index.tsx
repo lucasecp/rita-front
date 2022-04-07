@@ -24,7 +24,7 @@ import {
 /** Context */
 import { ClinicEditContext } from '../Context/ClinicEditContext'
 /** Helpers */
-import { validateField } from '../Helpers/validatorFields'
+import { validateField, validateEmail, validatePhone } from '../Helpers/validatorFields'
 import { toast } from '@/styles/components/toastify'
 /** API */
 import apiAdmin from '@/services/apiAdmin'
@@ -58,6 +58,7 @@ const FormClinicProfile: React.FC = () => {
     data,
     setData,
     setIsHashModificationField,
+    setIsHashModificationSelectAndMultSelect,
     photo,
   } = React.useContext(ClinicEditContext)
 
@@ -131,6 +132,7 @@ const FormClinicProfile: React.FC = () => {
         setIsDisabled,
         setError,
         setIsHashModificationField,
+        setIsHashModificationSelectAndMultSelect,
       })
     } else {
       setIsDisabled(true)
@@ -179,14 +181,13 @@ const FormClinicProfile: React.FC = () => {
       'Responsável Técnico',
       { responsible: 'responsible' },
     )
-    const phoneResponsibleTecnic = validateField(
+    const phoneResponsibleTecnic = validatePhone(
       responsibleTecnic.phoneResponsibleTecnic,
       'Celular',
       { phoneResponsible: 'phoneResponsible' },
     )
-    const emailResponsibleTecnic = validateField(
+    const emailResponsibleTecnic = validateEmail(
       responsibleTecnic.emailTecnic,
-      'E-mail do Responsável Técnico',
       { emailTecnic: 'emailTecnic' },
     )
     // /** Responsável Administrativo */
@@ -195,16 +196,14 @@ const FormClinicProfile: React.FC = () => {
       'Responsável Administrativo',
       { responsibleAdministrative: 'responsibleAdministrative' },
     )
-    const phoneResponsibleAdministrative = validateField(
+    const phoneResponsibleAdministrative = validatePhone(
       responsibleAdministrative.phoneResponsibleAdministrative,
       'Celular',
       { phoneResponsible: 'phoneResponsible' },
     )
-    const emailResponsibleAdministrative = validateField(
+    const emailResponsibleAdministrative = validateEmail(
       responsibleAdministrative.emailAdministrative,
-      'E-mail do Responsável Administrativo',
-      { emailAdministrative: 'emailAdministrative' },
-    )
+      { emailAdministrative: 'emailAdministrative' })
     // /** Endereço */
     const cep = validateField(address.cep, 'CEP', { cep: 'cep' })
     const _address = validateField(address.address, 'Endereço', {
