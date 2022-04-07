@@ -20,7 +20,7 @@ import ComeBack from './messages/ComeBack'
 import { OPERATOR_ANALYZE_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import { getDataMapped, getDependentMapped } from './helpers/getDataMapped'
 import { toast } from '@/styles/components/toastify'
-import formateDateAndHour from '@/helpers/formateDateAndHour'
+// import formateDateAndHour from '@/helpers/formateDateAndHour'
 import { differenceInYears, parse } from 'date-fns'
 
 import {
@@ -99,7 +99,6 @@ export const SeeOnePatient: React.FC = () => {
           setIsDependentMinorAge(false)
         }
         const patientStatusMapped = fromApiPatientStatusLimit(data)
-        console.log('333333--------->', data)
 
         const patientDataMapped = fromApiPatientData(data)
         const patientDependentsMapped = fromApiDependents(data)

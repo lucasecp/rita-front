@@ -38,6 +38,7 @@ const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
           })
 
           const companyOptions = fromApiCompanies(response.data.dados)
+
           setCompaniesOptions(companyOptions)
         } catch (error) {
           toast.error('Erro ao carregar empresas')
