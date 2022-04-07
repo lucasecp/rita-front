@@ -8,6 +8,7 @@ interface PreviewBillingsFromApi {
     idPaciente: number
     nome: string
     cpf: string
+    email: string
     dataNascimento: string
     status: string
     sexo: string
@@ -38,6 +39,8 @@ export const statusFromApi = (status: string): string => {
 export const previewBillingsFromApi = (
   data: PreviewBillingsFromApi,
 ): PreviewBillingsState => {
+  console.log(data)
+
   return {
     patients: data.dados.map((patient, index) => ({
       id: String(index + 1),
@@ -46,11 +49,11 @@ export const previewBillingsFromApi = (
       beneficiaryType: patient.titulares.length ? 'Dependente' : 'Titular',
       name: patient.nome,
       cpf: formatCpf(patient.cpf),
+      email: patient.email,
       birthDate: new Date(patient.dataNascimento).toLocaleDateString('pt-br'),
       gender: patient.sexo === 'M' ? 'Masculino' : 'Feminino',
       plan: patient.plano.nome,
       amountPlan: formatPrice(patient.plano.mensalidade),
-
       phone: formatPhone(patient.telefone),
       status: statusFromApi(patient.status),
     })),

@@ -1,4 +1,5 @@
-import formatMultSelectArray from './formatMultSelectArray'
+import { MultiSelectOption } from '@/components/Form/MultSelect'
+import { formatMultSelectArray } from './formatMultSelectArray'
 
 const order = [
   'cadastro',
@@ -10,12 +11,13 @@ const order = [
   'dadosValidados',
   'renda',
   'motivoNegativa',
+  'email',
 ]
 
-export default (value) => {
+export default (value: MultiSelectOption[]): string[] => {
   const newValue = formatMultSelectArray(value)
 
-  return order.reduce((acumulator, el) => {
+  return order.reduce((acumulator: string[], el: string) => {
     if (newValue.includes(el)) {
       acumulator.push(el)
     }
