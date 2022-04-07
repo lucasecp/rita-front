@@ -4,11 +4,14 @@ import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 
+import { DependentDataType } from '../../types'
 import { Container } from './styles'
 
-export const DependentAddress = ({ address }) => {
-  console.log(address)
+type DependentAddressProps = Pick<DependentDataType, 'address'>
 
+export const DependentAddress: React.FC<DependentAddressProps> = ({
+  address,
+}) => {
   const [cep, setCep] = useState(address?.cep || '')
   const [uf, setUf] = useState(address?.uf || '')
   const [city, setCity] = useState(address?.city || '')
@@ -54,7 +57,7 @@ export const DependentAddress = ({ address }) => {
         />
         <InputText label="Número:" value={number} name="number" disabled />
 
-        <InputMask label="Bairro:" value={district} name="district" disabled />
+        <InputText label="Bairro:" value={district} name="district" disabled />
         <InputText
           label="Complemento:"
           value={complement}

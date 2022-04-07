@@ -24,7 +24,6 @@ interface PersonalDatas {
   gender: string
   email: string
   phone: string
-  documents: any
 }
 
 interface Address {
@@ -37,9 +36,20 @@ interface Address {
   complement: string
 }
 
+interface SituationType {
+  plan: {
+    name: string
+    startDate: string
+    endDate: string
+  }
+  table: string
+}
+
 interface Dependent {
   personalDatas: PersonalDatas
   address: Address
+  documents: any
+  situation: SituationType
 }
 
 interface PersonalDatasError {
@@ -209,7 +219,7 @@ export const EditDependent: React.FC = () => {
           documentToSave={documentToSave}
           setDocumentToSave={setDocumentToSave}
         />
-        <Situation data={dependent.personalDatas} />
+        <Situation data={dependent.situation} />
 
         <ButtonGroup>
           <ButtonLink onClick={onCancel}>Cancelar</ButtonLink>

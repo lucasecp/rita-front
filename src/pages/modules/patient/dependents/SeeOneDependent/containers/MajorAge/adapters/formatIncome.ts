@@ -1,4 +1,4 @@
-export default (income) => {
+export const formatIncome = (income: string): string => {
   const incomes = {
     NaopossuoRenda: 'Não possui renda',
     AteUmSalarioMinimoEMeio: 'Até um salário mínimo e meio',

@@ -1,7 +1,11 @@
 import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 
-export const TableInfo = styled.p`
+interface TableInfoProps {
+  isDefeated: boolean
+}
+
+export const TableInfo = styled.p<TableInfoProps>`
   ${({ isDefeated }) =>
     isDefeated &&
     css`

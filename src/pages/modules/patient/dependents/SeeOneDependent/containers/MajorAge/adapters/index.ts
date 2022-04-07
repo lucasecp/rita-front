@@ -1,9 +1,12 @@
 import formatDate from '@/helpers/formatDate'
-import formatIncome from './formatIncome'
+import { formatIncome } from './formatIncome'
 import { statusFromApi } from './showStatus'
 
-export const fromApi = (dependentInfo) => {
-  console.log(dependentInfo)
+import { DependentResponseApi, DependentDataType } from '../types'
+
+export const fromApi = (
+  dependentInfo: DependentResponseApi,
+): DependentDataType => {
   return {
     personalDatas: {
       name: dependentInfo.nome,
@@ -13,18 +16,13 @@ export const fromApi = (dependentInfo) => {
       phone: dependentInfo.celular,
       email: dependentInfo.email,
       status: statusFromApi(dependentInfo.status),
-      table: dependentInfo.tabela?.nome,
       income: formatIncome(dependentInfo.renda),
-      plan: {
-        name: dependentInfo.plano?.nome,
-        startDate: formatDate(dependentInfo.plano?.dataAtivacao),
-        endDate: formatDate(dependentInfo.tabela?.dataVencimentoTabela),
-      },
-      documents: dependentInfo.documentosCadastrados?.reduce((ac, doc) => {
-        ac[doc?.tipoArquivo] = true
-        return ac
-      }, {}),
     },
+
+    documents: dependentInfo.documentosCadastrados?.reduce((ac, doc) => {
+      ac[doc?.tipoArquivo] = true
+      return ac
+    }, {}),
 
     address: {
       cep: dependentInfo.cep,
@@ -35,15 +33,14 @@ export const fromApi = (dependentInfo) => {
       district: dependentInfo.bairro,
       complement: dependentInfo.complemento,
     },
+
+    situation: {
+      plan: {
+        name: dependentInfo.plano?.nome,
+        startDate: formatDate(dependentInfo.plano?.dataAtivacao),
+        endDate: formatDate(dependentInfo.tabela?.dataVencimentoTabela),
+      },
+      table: dependentInfo.tabela?.nome,
+    },
   }
 }
-
-// {
-//   "idPaciente": 4880811,
-//   "nome": "Hiago Alves ",
-//   "cpf": "09872058032",
-//   "sexo": "M",
-//   "dataNascimento": "01/02/1985",
-//   "telefone": "(61) 98498-4848",
-//   "email": "teste@teste.com"
-// }

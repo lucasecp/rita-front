@@ -1,4 +1,4 @@
-export const statusFromApi = (statusFromApi) => {
+export const statusFromApi = (statusFromApi: string): string => {
   const status = {
     P: 'PENDING',
     aVerificar: 'VERIFICATION',

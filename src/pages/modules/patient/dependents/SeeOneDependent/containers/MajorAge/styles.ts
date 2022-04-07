@@ -5,6 +5,7 @@ export const Container = styled.div`
   background: #fff;
   box-shadow: 0px 2px 8px 0px #dfd2ff26;
   border-radius: 8px;
+
   > *:not(:last-child):after {
     content: '';
     display: block;
@@ -13,6 +14,7 @@ export const Container = styled.div`
     background: #eeeeee;
     margin: 32px 0;
   }
+
   @media (max-width: 768px) {
     padding: 24px;
   }

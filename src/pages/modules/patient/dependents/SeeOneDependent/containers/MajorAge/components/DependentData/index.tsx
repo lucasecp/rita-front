@@ -3,9 +3,14 @@ import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
 
+import { DependentDataType } from '../../types'
 import { Container } from './styles'
 
-export const DependentData = ({ personalDatas }) => {
+type DependentDataProps = Pick<DependentDataType, 'personalDatas'>
+
+export const DependentData: React.FC<DependentDataProps> = ({
+  personalDatas,
+}) => {
   const [name, setName] = useState(personalDatas?.name || '')
   const [cpf, setCpf] = useState(personalDatas?.cpf || '')
   const [birthDate, setBirthDate] = useState(personalDatas?.birthdate || '')
