@@ -14,6 +14,7 @@ import { ReactComponent as VerifiedIcon } from '@/assets/icons/verified.svg'
 
 import ServiceSchedule from '../../../components/ServiceSchedule'
 import CustomTooltip from '@/components/Tooltip'
+import { formatPhone } from '@/helpers/formatPhone'
 
 const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
   return (
@@ -62,7 +63,7 @@ const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
         {dataSpecialtyDetails?.phone && (
           <Phone>
             <PhoneIcon /> <h6>Telefone de Agendamento:</h6>
-            <span>{dataSpecialtyDetails?.phone}</span>
+            <span>{formatPhone(dataSpecialtyDetails?.phone)}</span>
           </Phone>
         )}
       </ul>

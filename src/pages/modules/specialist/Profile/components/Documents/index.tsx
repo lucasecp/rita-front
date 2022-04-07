@@ -92,7 +92,6 @@ const Documents: React.FC<DocumentsProps> = ({
 
   useEffect(() => {
     addSpeciatyAndDocs()
-    console.log(photo)
     if (!photo) return
 
     addError('')

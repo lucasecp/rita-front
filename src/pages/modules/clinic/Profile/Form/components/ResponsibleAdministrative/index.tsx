@@ -1,28 +1,31 @@
-import React from 'react';
+import React from 'react'
 /** Types */
 import { ClinicProfileI, ResponsibleAdministrativeI } from '../../../types'
 /** Stypes */
 import { Container } from './styles'
 /** Components */
-import InputText from '@/components/Form/InputText';
+import InputText from '@/components/Form/InputText'
 /** Context */
 import { ClinicEditContext } from '../../../Context/ClinicEditContext'
-import InputMask from '@/components/Form/InputMask';
+import InputMask from '@/components/Form/InputMask'
+import { validateEmail } from '../../../Helpers/validatorFields'
 
 interface FormClinicProfileI {
   data: ClinicProfileI
   setResponsibleAdministrative: (data: ResponsibleAdministrativeI) => void
 }
 
-const ResponsibleTecnic: React.FC<FormClinicProfileI> = (props: FormClinicProfileI) => {
-
+const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
+  props: FormClinicProfileI,
+) => {
   /** States */
   const [responsible, setResponsible] = React.useState('')
   const [cpfResponsible, setCpfResponsible] = React.useState('')
   const [phoneResponsible, setPhoneResponsible] = React.useState('')
   const [email, setEmail] = React.useState('')
   /** Context */
-  const { error, isDisabled, setIsHashModificationField } = React.useContext(ClinicEditContext)
+  const { error, isDisabled, setIsHashModificationField, setError } =
+    React.useContext(ClinicEditContext)
 
   /** @description Atualiza os dados digitados nos states */
   React.useEffect(() => {
@@ -30,7 +33,7 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (props: FormClinicProfil
       responsibleAdministrative: responsible,
       cpfResponsibleAdministrative: cpfResponsible,
       phoneResponsibleAdministrative: phoneResponsible,
-      emailAdministrative: email
+      emailAdministrative: email,
     })
   }, [responsible, cpfResponsible, phoneResponsible, email])
 
@@ -57,45 +60,62 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (props: FormClinicProfil
     <Container>
       <h1>Responsável Administrativo</h1>
       <section>
-        <InputText label='Administrador*'
+        <InputText
+          label="Administrador*"
           disabled={isDisabled}
           onChange={onChangeField}
-          name='responsibleAdministrative'
+          name="responsibleAdministrative"
           value={responsible}
           setValue={setResponsible}
           hasError={!!error.responsibleAdministrativee}
-          msgError={error.responsibleAdministrative} />
+          msgError={error.responsibleAdministrative}
+          onlyLetter
+          noSpecialCaracter
+          maxLength={70}
+        />
         <section>
-          <InputMask label='CPF*:'
-            mask='999.999.999-99'
+          <InputMask
+            label="CPF*:"
+            mask="999.999.999-99"
             disabled
             onChange={onChangeField}
-            name='cpfResponsible'
+            name="cpfResponsible"
             value={cpfResponsible}
             setValue={setCpfResponsible}
             hasError={!!error.cpfResponsibleAdministrative}
-            msgError={error.cpfResponsibleAdministrative} />
-          <InputMask label='Celular*:'
-            mask='(99) 99999-9999'
+            msgError={error.cpfResponsibleAdministrative}
+          />
+          <InputMask
+            label="Celular*:"
+            mask="(99) 99999-9999"
             disabled={isDisabled}
             onChange={onChangeField}
-            name='phoneResponsible'
+            name="phoneResponsible"
             value={phoneResponsible}
             setValue={setPhoneResponsible}
             hasError={!!error.phoneResponsibleAdministrative}
-            msgError={error.phoneResponsibleAdministrative} />
-          <InputText label='E-mail*:'
+            msgError={error.phoneResponsibleAdministrative}
+          />
+          <InputText
+            label="E-mail*:"
             disabled={isDisabled}
             onChange={onChangeField}
-            name='emailAdministrative'
+            name="emailAdministrative"
             value={email}
             setValue={setEmail}
             hasError={!!error.emailResponsibleAdministrative}
-            msgError={error.emailResponsibleAdministrative} />
+            msgError={error.emailResponsibleAdministrative}
+            onBlur={() => {
+              setError({
+                ...error,
+                emailResponsibleAdministrative: validateEmail(email, { emailAdministrative: 'emailAdministrative' })
+              })
+            }}
+          />
         </section>
       </section>
     </Container>
-  );
-};
+  )
+}
 
-export default ResponsibleTecnic;
+export default ResponsibleTecnic

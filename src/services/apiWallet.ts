@@ -5,7 +5,7 @@ enum PaymentRequestSituation {
   OK = 'Realizado',
   EXPIRED = 'Expirado',
   REJECTED = 'Rejeitado',
-  WAITING = 'Pendente'
+  WAITING = 'Pendente',
 }
 
 const apiWallet = axios.create({
@@ -22,6 +22,8 @@ if (lsUser) {
 export default apiWallet
 
 export function getPaymentRequestSituation(id: string): string {
-  const formattedID = String(id).toUpperCase() as RitaWallet.PaymentRequestSituation
+  const formattedID = String(
+    id,
+  ).toUpperCase() as RitaWallet.PaymentRequestSituation
   return PaymentRequestSituation[formattedID] || formattedID
 }

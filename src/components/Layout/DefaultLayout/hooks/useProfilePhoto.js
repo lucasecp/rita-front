@@ -1,4 +1,4 @@
-import convertImageFromApiToBase64 from '@/helpers/convertImageFromApiToBase64'
+import { convertImageFromApiToBase64}  from '@/helpers/convertImageFromApiToBase64'
 import apiPatient from '@/services/apiPatient'
 import { useState } from 'react'
 

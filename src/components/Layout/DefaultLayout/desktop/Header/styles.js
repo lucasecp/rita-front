@@ -31,7 +31,7 @@ export const Container = styled.header`
       font-size: 14px;
       font-weight: 500;
 
-      > div {
+      > span {
         display: flex;
         align-items: center;
         justify-content: center;

@@ -134,8 +134,12 @@ const Form: React.FC<FormProps> = ({
       setFormWasSubmited(true)
 
       setMakeNewRequest(!clickOnSave)
-    } catch (error: any) {
+    } catch (error) {
+      if (error instanceof Error) {
+
       toast.error('Erro ao editar')
+      }
+
     } finally {
       Loading.turnOff()
     }

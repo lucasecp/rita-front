@@ -1,3 +1,4 @@
+/* eslint-env node, jest */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import AuthProvider from '@/hooks/login'
@@ -16,6 +17,6 @@ it('renders without crashing', () => {
     <AuthProvider>
       <PaymentRequestConfirm data={data} />
     </AuthProvider>,
-    div
+    div,
   )
 })

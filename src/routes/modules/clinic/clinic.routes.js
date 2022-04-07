@@ -7,7 +7,7 @@ import ClinicProfile from '@/pages/modules/clinic/Profile'
 import {
   CLINIC_SEE_ALL_SPECIALIST,
   CLINIC_SEE_ONE_SPECIALIST,
-  CLINIC_PROFILE
+  CLINIC_PROFILE,
 } from '../../constants/namedRoutes/routes'
 
 const clinicRoutes = [
@@ -21,8 +21,8 @@ const clinicRoutes = [
   },
   {
     path: CLINIC_PROFILE,
-    component: ClinicProfile
-  }
+    component: ClinicProfile,
+  },
 ]
 
 const clinicRoutesComponents = clinicRoutes.map((props, index) => (

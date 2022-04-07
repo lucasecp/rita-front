@@ -18,9 +18,9 @@ type PaymentRequestRejectionProps = {
   data: RitaWallet.PaymentRequest
 }
 
-export const PaymentRequestRejection: React.FC<PaymentRequestRejectionProps> = ({
-  data,
-}) => {
+export const PaymentRequestRejection: React.FC<
+  PaymentRequestRejectionProps
+> = ({ data }) => {
   const [reason, setReason] = useState('')
   const { closeModal } = useModal()
   const { Loading } = useLoading()

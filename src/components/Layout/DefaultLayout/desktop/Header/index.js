@@ -36,13 +36,13 @@ export const Header = ({ title, children }) => {
       <nav>
         <p>
           Olá, {nameFormated}
-          <div>
+          <span>
             {photo ? (
               <img src={photo} alt="perfil" />
             ) : (
               <span>{initialName}</span>
             )}
-          </div>
+          </span>
         </p>
         {/* <LetterIcon /> */}
         <ExitIcon onClick={clearDataLogout} />

@@ -25,7 +25,7 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
     if (!array) return []
 
     return array.map((obj) => ({
-      value: obj.id, 
+      value: obj.id,
       label: obj.descricao,
     }))
   }

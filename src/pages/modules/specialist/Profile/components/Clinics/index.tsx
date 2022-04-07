@@ -70,7 +70,7 @@ export const Clinics: React.FC<SpecialistClinicsProps> = ({
     } else {
       setClinic(clinic || [])
     }
-  }, [formWasSubmited,isEditing])
+  }, [formWasSubmited, isEditing])
 
   const onChangingSelect = (values: MultiSelectOption[]) => {
     const hasAllOption = values.some((val) => val.id === 'All')

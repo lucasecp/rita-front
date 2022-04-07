@@ -38,21 +38,22 @@ const SelectCity: React.FC<SelectCityProps> = ({
     }
 
     const getCity = async () => {
-      try {
-        setDefaultLabel('Carregando')
+      if (typeof uf !== 'string') {
+        try {
+          setDefaultLabel('Carregando')
+          const { data } = await apiAdmin.get(`/municipio?idUF=${uf}`)
 
-        const { data } = await apiAdmin.get(`/municipio?idUF=${uf}`)
+          const citiesMapped = mapCity(data)
 
-        const citiesMapped = mapCity(data)
+          setCityOptions(citiesMapped)
 
-        setCityOptions(citiesMapped)
-
-        if (!city) {
-          setCity('')
-          setDefaultLabel(initialLabel)
+          if (!city) {
+            setCity('')
+            setDefaultLabel(initialLabel)
+          }
+        } catch ({ response }) {
+          toast.error('Erro ao carregar cidades')
         }
-      } catch ({ response }) {
-        toast.error('Erro ao carregar cidades')
       }
     }
 

@@ -1,3 +1,4 @@
+/* eslint-env node, jest */
 import moment from 'moment'
 import validateCreditCardExpirationDate from './validateCreditCardExpirationDate'
 

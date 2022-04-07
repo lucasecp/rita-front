@@ -1,3 +1,4 @@
+/* eslint-env node, jest */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { CustomerSatisfaction } from '.'

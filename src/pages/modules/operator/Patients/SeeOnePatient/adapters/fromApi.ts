@@ -101,7 +101,6 @@ export const fromApiPatientAddress = (data: ResponseApi): PatientAddress => {
 export const fromApiPatientStatusLimit = (
   data: ResponseApi,
 ): PatientStatusLimit => {
-  console.log('--------->', data)
   return {
     status: data.status,
     limitTry: data.limiteTentativas,

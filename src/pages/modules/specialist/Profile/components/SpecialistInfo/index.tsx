@@ -101,7 +101,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
       setCpf(cpf || '')
       setIssuingAgency(issuingAgency || '')
     }
-  }, [formWasSubmited,isEditing])
+  }, [formWasSubmited, isEditing])
 
   return (
     <Container>
