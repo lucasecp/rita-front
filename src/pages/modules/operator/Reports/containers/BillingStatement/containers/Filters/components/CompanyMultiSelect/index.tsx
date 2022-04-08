@@ -9,18 +9,24 @@ import {
   Autocomplete,
   AutocompleteOptions,
 } from '@/components/Form/Autocomplete'
+
 import apiAdmin from '@/services/apiAdmin'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import { useAuth } from '@/hooks/login'
+import { permissions } from '@/constants/permissions'
+import apiUser from '@/services/apiUser'
 
 interface CompanyMultiSelectProps {
   onGetCompany: (company: AutocompleteOptions) => void
   companyError: string | undefined
 }
 
-const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
+export const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
   onGetCompany,
   companyError,
 }) => {
+  const { user } = useAuth()
+
   const [company, setCompany] = useState({} as AutocompleteOptions)
 
   const [companiesOptions, setCompaniesOptions] = useState(
@@ -29,9 +35,17 @@ const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
 
   useEffect(() => {
     const loadCompanies = async () => {
+      const hasPermissionToSeeAllCompanies = user.permissoes.find(
+        (permission: string) => permission === permissions.LISTAR_EMPRESAS,
+      )
+
+      console.log(hasPermissionToSeeAllCompanies)
+
+      const api = hasPermissionToSeeAllCompanies ? apiAdmin : apiUser
+
       if (company.label?.length > 0) {
         try {
-          const response = await apiAdmin.get('/empresa', {
+          const response = await api.get('/empresa', {
             params: {
               busca: company.label,
             },
@@ -47,7 +61,7 @@ const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
 
       if (company.label?.length === 0) {
         try {
-          const response = await apiAdmin.get('/empresa')
+          const response = await api.get('/empresa')
           const companyOptions = fromApiCompanies(response.data.dados)
           setCompaniesOptions(companyOptions)
         } catch (error) {
@@ -89,4 +103,3 @@ const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
     </Container>
   )
 }
-export default CompanyMultiSelect

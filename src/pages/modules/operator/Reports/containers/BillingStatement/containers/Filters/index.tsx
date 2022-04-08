@@ -7,7 +7,7 @@ import CustomMultSelect, {
 } from '@/components/Form/MultSelect'
 import { optionsFilteredWithAll } from '@/components/Form/MultSelect/helpers/OptionsFilteredWithAll'
 import { AutocompleteOptions } from '@/components/Form/Autocomplete'
-import CompanyMultiSelect from './components/CompanyMultiSelect'
+import { CompanyMultiSelect } from './components/CompanyMultiSelect'
 import { toast } from '@/styles/components/toastify'
 import { LengthyReport } from './messages/LengthyReport'
 

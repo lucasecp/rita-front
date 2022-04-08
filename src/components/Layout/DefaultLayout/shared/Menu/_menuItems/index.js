@@ -48,68 +48,68 @@ import {
   CLINIC_PROFILE,
 } from '@/routes/constants/namedRoutes/routes'
 
-import { permissionList } from './permissionList'
+import { permissions } from '@/constants/permissions'
 
 export const menuItens = [
   {
     path: INITIAL_PAGE,
     icon: <HomeIcon />,
     name: 'Início',
-    // permission: permissionList.
+    // permission: permissions.
   },
   // {
   //   path: PATIENT_START,
   //   icon: <HomeIcon />,
   //   name: 'Início',
-  //   // permission: permissionList.
+  //   // permission: permissions.
   // },
   {
     path: PROFILE,
     icon: <UserIcon />,
     name: 'Perfil',
-    permission: permissionList.VER_MEUS_DADOS_PACIENTE,
+    permission: permissions.VER_MEUS_DADOS_PACIENTE,
   },
   {
     path: CHANGE_PASSWORD,
     icon: <PadLockIcon />,
     name: 'Trocar Senha',
-    permission: permissionList.TROCAR_MINHA_SENHA,
+    permission: permissions.TROCAR_MINHA_SENHA,
   },
   {
     path: VALIDATOR_ANALYZE_PATIENTS,
     icon: <AuthorizationIcon />,
     name: 'Autorizações',
-    permission: permissionList.LISTAR_PACIENTES_VALIDACAO,
+    permission: permissions.LISTAR_PACIENTES_VALIDACAO,
   },
   {
     path: OPERATOR_ANALYZE_PATIENT,
     icon: <PatientIcon />,
     name: 'Pacientes',
-    permission: permissionList.PERMITIR_TODOS_STATUS_PACIENTE,
+    permission: permissions.PERMITIR_TODOS_STATUS_PACIENTE,
   },
   {
     path: OPERATOR_REPORTS,
     icon: <ReportsIcon />,
     name: 'Relatórios',
-    permission: permissionList.LISTAR_LOG_VALIDACOES,
+    permission: permissions.LISTAR_LOG_VALIDACOES,
   },
   {
     path: OPERATOR_CONSULT_ELIGIBILITY,
     icon: <EligibilityIcon />,
     name: 'Elegibilidade',
-    permission: permissionList.VER_ELEGIBILIDADE_PACIENTE,
+    permission: permissions.VER_ELEGIBILIDADE_PACIENTE,
   },
   {
     path: PATIENT_DEPENDENTS,
     icon: <GroupUserIcon />,
     name: 'Dependentes',
-    permission: permissionList.VER_MEUS_DEPENDENTES,
+    permission: permissions.VER_MEUS_DEPENDENTES,
   },
   // {
   //   path: PATIENT_WALLET_DASHBOARD,
   //   icon: <WalletIcon />,
   //   name: 'Carteira Digital',
-  //   permission: permissionList.VER_CARTEIRA_DIGITAL_PACIENTE,
+  //   permission: permissions.VER_CARTEIRA_DIGITAL_PACIENTE,
   //   children: [
   //     {
   //       path: PATIENT_WALLET_BUY_COIN,
@@ -133,78 +133,78 @@ export const menuItens = [
     path: DIRECTOR_PLAN_MANAGMENT,
     icon: <ManagmentIcon />,
     name: 'Gestão de Planos',
-    permission: permissionList.LISTAR_PLANO_DIRETOR,
+    permission: permissions.LISTAR_PLANO_DIRETOR,
   },
   {
     path: FILTER_SELLABLE_ITEMS,
     icon: <SellableItemsIcon />,
     name: 'Itens Vendáveis',
-    permission: permissionList.LISTAR_ITENS_VENDAVEIS,
+    permission: permissions.LISTAR_ITENS_VENDAVEIS,
   },
   {
     path: DIRECTOR_SEE_ALL_PROFILES,
     icon: <ProfilesIcon />,
     name: 'Perfis',
-    permission: permissionList.LISTAR_PERFIS,
+    permission: permissions.LISTAR_PERFIS,
   },
   {
     path: OPERATOR_SEE_ALL_CLINICS,
     icon: <ClinicsIcon />,
     name: 'Clínicas',
-    permission: permissionList.LISTAR_CLINICAS,
+    permission: permissions.LISTAR_CLINICAS,
   },
   {
     path: OPERATOR_SEE_ALL_SPECIALTYS,
     icon: <AuthorizationIcon />,
     name: 'Especialidades',
-    permission: permissionList.LISTAR_ESPECIALIDADES,
+    permission: permissions.LISTAR_ESPECIALIDADES,
   },
   {
     path: OPERATOR_DEPENDENT_MANAGMENT,
     icon: <GroupUserIcon />,
     name: 'Gestão de Dependentes',
-    permission: permissionList.ALTERAR_DADOS_PACIENTE,
+    permission: permissions.ALTERAR_DADOS_PACIENTE,
   },
   {
     path: DIRECTOR_IMPORT,
     icon: <ImportIcon />,
     name: 'Importação',
-    permission: permissionList.IMPORTAR_PACIENTES,
+    permission: permissions.IMPORTAR_PACIENTES,
   },
   {
     path: OPERATOR_SEE_ALL_SPECIALISTS,
     icon: <StethoscopeIcon />,
     name: 'Especialistas',
-    permission: permissionList.LISTAR_MEDICOS,
+    permission: permissions.LISTAR_MEDICOS,
   },
   {
     path: SPECIALIST_PROFILE,
     icon: <UserIcon />,
     name: 'Perfil',
-    permission: permissionList.ALTERAR_MEUS_DADOS_ESPECIALISTA,
+    permission: permissions.ALTERAR_MEUS_DADOS_ESPECIALISTA,
   },
   {
     path: CLINIC_PROFILE,
     icon: <UserIcon />,
     name: 'Perfil',
-    permission: permissionList.VER_DADOS_CLINICA,
+    permission: permissions.VER_DADOS_CLINICA,
   },
   {
     path: FILTER_USERS,
     icon: <UsersIcon />,
     name: 'Gestão de Usuários',
-    permission: permissionList.LISTAR_USUARIOS,
+    permission: permissions.LISTAR_USUARIOS,
   },
   {
     path: OPERATOR_SEE_ALL_ISSUING_AGENCY,
     icon: <SpecialtysTypesIcon />,
     name: 'Orgão Emissor',
-    permission: permissionList.GERENCIAR_ORGAO_EMISSOR,
+    permission: permissions.GERENCIAR_ORGAO_EMISSOR,
   },
   {
     path: CLINIC_SEE_ALL_SPECIALIST,
     icon: <StethoscopeIcon />,
     name: 'Especialistas',
-    permission: permissionList.VER_DADOS_CLINICA,
+    permission: permissions.VER_DADOS_CLINICA,
   },
 ]

@@ -6,10 +6,25 @@ import { Select } from '@/components/Form/Select'
 import { Container, Content } from './styles'
 import ButtonPrimary from '@/components/Button/Primary'
 import { reportOptions } from './constants/reportOptions'
+import { useAuth } from '@/hooks/login'
 
 export const Reports: React.FC = () => {
   const history = useHistory()
+  const { user } = useAuth()
+
+  const [allowedReports, setAllowedReports] = useState(reportOptions)
+
   const [reportChoosen, setReportChoosen] = useState('')
+
+  useEffect(() => {
+    const allowedReportsTemporary = reportOptions.filter((report) =>
+      user?.permissoes.some(
+        (permission: string) => report.permission === permission,
+      ),
+    )
+
+    setAllowedReports(allowedReportsTemporary)
+  }, [])
 
   const onUserConfirmReportChoice = () => {
     const report = reportOptions.find(
@@ -35,7 +50,7 @@ export const Reports: React.FC = () => {
           <Select
             value={reportChoosen}
             setValue={setReportChoosen}
-            options={reportOptions}
+            options={allowedReports}
             labelDefaultOption="Selecione"
           />
           <ButtonPrimary onClick={onUserConfirmReportChoice}>
