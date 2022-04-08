@@ -41,6 +41,7 @@ export const columnsToApi = (columns: string): string => {
     beneficiaryType: 'tipoBeneficiario',
     name: 'nome',
     cpf: 'cpf',
+    email: 'email',
     birthDate: 'nascimento',
     gender: 'sexo',
     plan: 'plano',

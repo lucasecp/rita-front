@@ -4,6 +4,7 @@ export const allColumns = [
   { id: 'beneficiaryType', name: 'Tipo de Beneficiário' },
   { id: 'name', name: 'Nome' },
   { id: 'cpf', name: 'CPF' },
+  { id: 'email', name: 'Email' },
   { id: 'birthDate', name: 'Data de Nascimento' },
   { id: 'gender', name: 'Sexo' },
   { id: 'plan', name: 'Plano' },

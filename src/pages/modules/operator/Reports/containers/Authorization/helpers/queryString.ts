@@ -1,4 +1,6 @@
-export const queryOrderString = (array) => {
+import { Filter } from '../Filter'
+
+export const queryOrderString = (array: Filter[]): string => {
   let valueString = ''
 
   if (!array.length) return '&orderBy=dataValidacao&order=DESC'
@@ -9,14 +11,14 @@ export const queryOrderString = (array) => {
   return valueString
 }
 
-export const queryFilterString = (array) => {
+export const queryFilterString = (array: any): string => {
   let valueString = ''
 
   if (!array.length) return ''
 
   for (let i = 0; i < array.length; i++) {
     if (Array.isArray(array[i].value)) {
-      array[i].value.forEach((el) => {
+      array[i].value.forEach((el: string) => {
         valueString += `&${array[i].name}=${el}`
       })
       continue

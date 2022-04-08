@@ -4,7 +4,7 @@ import Filter from './Filter'
 
 import { Container } from './styles'
 
-const Authorization = () => {
+const Authorization: React.FC = () => {
   useEffect(() => {
     document.title = 'Rita Saúde | Relatórios'
   }, [])

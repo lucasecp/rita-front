@@ -4,7 +4,9 @@ import ButtonPrimary from '@/components/Button/Primary'
 import CustomRangePicker from '@/components/Form/CustomRangePicker'
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
-import CustomMultSelect from '@/components/Form/MultSelect'
+import CustomMultSelect, {
+  MultiSelectOption,
+} from '@/components/Form/MultSelect'
 import clearFormat from '@/helpers/clear/SpecialCaracteres'
 import convertDate from '@/helpers/convertDateToIso'
 import RadioButton from '@/styles/components/RadioButton'
@@ -16,8 +18,8 @@ import {
   columns as staticColumns,
   status as staticStatus,
 } from '../static/columns'
-import TableReport from '../TableReport'
-import formatArray from '../helpers/formatMultSelectArray'
+import TableReport from '../TableReport/index'
+import { formatMultSelectArray } from '../helpers/formatMultSelectArray'
 
 import MultSelectValidator from './MultSelectValidator'
 import { BtnGroup, Container, Controls } from './styles'
@@ -28,22 +30,63 @@ import { useLoading } from '@/hooks/useLoading'
 import { queryFilterString, queryOrderString } from '../helpers/queryString'
 import downloadFile from '@/helpers/downloadFile'
 import orderColumnsToApi from '../helpers/orderColumnsToApi'
-import formatObjectFromApi from '../helpers/formatObjectFromApi'
+import { formatObjectFromApi } from '../helpers/formatObjectFromApi'
 
-const Filter = () => {
+export interface DataPatients {
+  id?: string
+  cpf?: string
+  documentOk?: boolean
+  email?: string
+  income?: boolean
+  name?: string
+  reasonForNegative?: string
+  registerDate?: string
+  status?: string
+  validationDate?: string
+  validatorName?: string
+}
+
+export interface Filter {
+  name: string
+  value: string | string[]
+}
+
+export interface Patients {
+  total: number
+  dataPatients: DataPatients[]
+}
+
+interface Error {
+  registerDate: string
+  validationDate: string
+  name: string
+  cpf: string
+  columns: string
+}
+
+const FilterAuthorization: React.FC = () => {
   const [registerDates, setRegisterDates] = useState([])
   const [validationDates, setValidationDates] = useState([])
   const [cpf, setCpf] = useState('')
   const [name, setName] = useState('')
   const [validators, setvalidators] = useState([])
-  const [status, setStatus] = useState([])
-  const [errors, setErrors] = useState({})
-  const [orders, setOrders] = useState([])
-  const [filters, setFilters] = useState([])
+  const [status, setStatus] = useState<MultiSelectOption[]>([])
+  const [errors, setErrors] = useState<Error>({
+    registerDate: '',
+    validationDate: '',
+    name: '',
+    cpf: '',
+    columns: '',
+  })
+  const [orders, setOrders] = useState<Filter[]>([])
+  const [filters, setFilters] = useState<Filter[]>([])
   const [submitGeneratePreview, setSubmitGeneratePreview] = useState(false)
   const [fileType, setFileType] = useState('')
-  const [columns, setColumns] = useState(staticColumns)
-  const [patients, setPatients] = useState({})
+  const [columns, setColumns] = useState<MultiSelectOption[]>(staticColumns)
+  const [patients, setPatients] = useState<Patients>({
+    total: 0,
+    dataPatients: [],
+  })
   const [submitGenerateReport, setSubmitGenerateReport] = useState(false)
   const [someFieldWasTyped, setSomeFieldWasTyped] = useState(false)
 
@@ -90,12 +133,12 @@ const Filter = () => {
   const objQuery = [
     { name: 'nome', value: name },
     { name: 'cpf', value: clearFormat(cpf) },
-    { name: 'status', value: formatArray(status) },
+    { name: 'status', value: formatMultSelectArray(status) },
     { name: 'dataCadastroInicio', value: convertDate(registerDates[0]) },
     { name: 'dataCadastroFim', value: convertDate(registerDates[1]) },
     { name: 'dataValidacaoInicio', value: convertDate(validationDates[0]) },
     { name: 'dataValidacaoFim', value: convertDate(validationDates[1]) },
-    { name: 'idValidador', value: formatArray(validators) },
+    { name: 'idValidador', value: formatMultSelectArray(validators) },
     { name: 'campos', value: orderColumnsToApi(columns) },
   ]
 
@@ -103,7 +146,13 @@ const Filter = () => {
     const cpfClear = String(clearFormat(cpf)).trim()
     const nameClear = String(name).trim()
     let hasError = false
-    setErrors({})
+    setErrors({
+      registerDate: '',
+      validationDate: '',
+      name: '',
+      cpf: '',
+      columns: '',
+    })
 
     if (!someFieldWasTyped) {
       toast.warning('Informe pelo menos um filtro')
@@ -152,9 +201,8 @@ const Filter = () => {
     return hasError
   }
 
-  const verifyTypedFields = (fields) => {
-    return fields.filter((field) => field.value)
-  }
+  const verifyTypedFields = (fields: Filter[]): Filter[] =>
+    fields.filter((field) => field.value)
 
   const onPreview = async () => {
     if (hasFieldErrors()) return
@@ -233,16 +281,16 @@ const Filter = () => {
             label="Período do Cadastro: "
             value={registerDates}
             setValue={setRegisterDates}
-            inputReadOnly={true}
-            hasError={errors.registerDate}
+            // inputReadOnly={true}
+            hasError={!!errors.registerDate}
             msgError={errors.registerDate}
           />
           <CustomRangePicker
             label="Período de Validação: "
             value={validationDates}
             setValue={setValidationDates}
-            inputReadOnly={true}
-            hasError={errors.validationDate}
+            // inputReadOnly={true}
+            hasError={!!errors.validationDate}
             msgError={errors.validationDate}
           />
           <InputMask
@@ -251,7 +299,7 @@ const Filter = () => {
             mask="999.999.999-99"
             value={cpf}
             setValue={setCpf}
-            hasError={errors.cpf}
+            hasError={!!errors.cpf}
             msgError={errors.cpf}
           />
           <InputText
@@ -259,10 +307,10 @@ const Filter = () => {
             label="Nome:"
             value={name}
             setValue={setName}
-            hasError={errors.name}
+            hasError={!!errors.name}
             msgError={errors.name}
             onlyLetter
-            maxLength="100"
+            maxLength={100}
           />
           <MultSelectValidator
             setValidators={setvalidators}
@@ -281,11 +329,10 @@ const Filter = () => {
             options={staticColumns}
             label="Colunas"
             span="2"
-            hasError={errors.columns}
+            hasError={!!errors.columns}
             messageError={errors.columns}
           />
         </div>
-
         <Controls>
           <BtnGroup>
             <ButtonOneBorder
@@ -333,6 +380,7 @@ const Filter = () => {
           </span>
         </Controls>
       </Container>
+      {console.log(columns)}
       {submitGeneratePreview && (
         <TableReport
           patients={patients}
@@ -347,4 +395,4 @@ const Filter = () => {
   )
 }
 
-export default Filter
+export default FilterAuthorization

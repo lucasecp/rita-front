@@ -17,6 +17,7 @@ export interface PreviewBillingsState {
     beneficiaryType: string
     name: string
     cpf: string
+    email: string
     birthDate: string
     gender: string
     plan: string

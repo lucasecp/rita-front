@@ -50,6 +50,9 @@ export const BillingPreview: React.FC<BillingPreviewProps> = ({
                     {patient.name || '-'}
                   </li>
                   <li hidden={!isActiveColumn('cpf')}>{patient.cpf || '-'}</li>
+                  <li hidden={!isActiveColumn('email')}>
+                    {patient.email || '-'}
+                  </li>
                   <li hidden={!isActiveColumn('birthDate')}>
                     {patient.birthDate || '-'}
                   </li>
