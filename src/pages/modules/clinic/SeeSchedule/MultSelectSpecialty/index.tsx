@@ -6,7 +6,6 @@ import React, { useEffect, useState, SetStateAction } from 'react'
 
 import { Container } from './styles'
 
-
 interface SpecialtysProps {
   specialtys: MultiSelectOption[]
   setSpecialtys: React.Dispatch<SetStateAction<MultiSelectOption[]>>
@@ -14,6 +13,8 @@ interface SpecialtysProps {
   color?: string
   label?: string
   [x: string]: any
+  idClinic: number
+  idDoctor: number
 }
 
 export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
@@ -22,35 +23,45 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
   errors,
   color,
   label,
+  idClinic,
+  idDoctor,
   ...rest
 }) => {
   const [specialtysOptions, setSpecialtysOptions] = useState<
     MultiSelectOption[]
   >([])
 
-  const mapSpecialtys = (
-    array: {
-      idEspecialidade: string
-      descricao: string
-      requerInscricao: string
-    }[],
-  ) => {
-    if (!array) return []
+  const mapSpecialtys = (arrayDoctor: any[], arrayClinic: any[]) => {
+    if (!arrayDoctor && !arrayClinic) return []
 
-    return array
+    return arrayClinic
       .map((obj) => ({
         id: obj.idEspecialidade,
         name: obj.descricao,
         rqeRequired: obj.requerInscricao,
       }))
-      .filter((specialty) => specialty.id && specialty.name)
+      .filter(
+        (specialty) =>
+          specialty.id &&
+          specialty.name &&
+          arrayDoctor.some((doc) => doc.descricao === specialty.name),
+      )
   }
 
   useEffect(() => {
     const getSpecialtys = async () => {
       try {
-        const { data } = await apiAdmin.get('/especialidade')
-        const dataMapped = mapSpecialtys(data?.especialidade)
+        const { data } = await apiAdmin.get(
+          `/clinica/${idClinic}/medico/${idDoctor}`,
+        )
+        const { data: dataClinic } = await apiAdmin.get(
+          `clinica/minha-clinica/${idClinic}`,
+        )
+
+        const dataMapped = mapSpecialtys(
+          data?.especialidades,
+          dataClinic.especialidade,
+        )
 
         if (!dataMapped.length) {
           return setSpecialtysOptions([])
@@ -61,7 +72,7 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
     }
 
     getSpecialtys()
-  }, [])
+  }, [idDoctor, idClinic])
 
   return (
     <Container>
