@@ -38,7 +38,7 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependentData }) => {
   const [dependent, setDependent] = useState({} as DependentDataType)
 
   useEffect(() => {
-    if (!dependentData.id) {
+    if (!dependentId) {
       return history.push(PATIENT_DEPENDENTS)
     }
 
@@ -48,7 +48,7 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependentData }) => {
       try {
         Loading.turnOn()
         const response = await apiPatient.get<DependentResponseApi>(
-          `/paciente/dependente?id=${dependentData.id}`,
+          `/paciente/dependente?id=${dependentId}`,
         )
 
         const dependentFromApi = fromApi(response.data)

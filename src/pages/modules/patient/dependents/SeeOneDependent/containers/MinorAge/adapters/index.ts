@@ -7,6 +7,7 @@ import { DependentResponseApi, DependentDataType } from '../types'
 export const fromApi = (
   dependentInfo: DependentResponseApi,
 ): DependentDataType => {
+  console.log(dependentInfo)
   return {
     personalDatas: {
       name: dependentInfo.nome,
@@ -18,11 +19,6 @@ export const fromApi = (
       status: statusFromApi(dependentInfo.status),
       income: formatIncome(dependentInfo.renda),
     },
-
-    documents: dependentInfo.documentosCadastrados?.reduce((ac, doc) => {
-      ac[doc?.tipoArquivo] = true
-      return ac
-    }, {}),
 
     address: {
       cep: dependentInfo.cep,

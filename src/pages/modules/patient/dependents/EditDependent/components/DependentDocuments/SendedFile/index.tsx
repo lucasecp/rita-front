@@ -17,11 +17,16 @@ import { useMediaPredicate } from 'react-media-hook'
 import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
 
 interface SendedFileProps {
-  file: File
-  onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+  file: any
+  onGetFile: React.Dispatch<React.SetStateAction<any | string>>
+  title: string
 }
 
-export const SendedFile: React.FC<SendedFileProps> = ({ file, onGetFile }) => {
+export const SendedFile: React.FC<SendedFileProps> = ({
+  file,
+  onGetFile,
+  title,
+}) => {
   const { showMessage } = useModal()
 
   const removeFile = () => {
@@ -46,12 +51,10 @@ export const SendedFile: React.FC<SendedFileProps> = ({ file, onGetFile }) => {
 
   return (
     <Container>
-      <h4>{file ? 'Comprovante de Renda' : 'Não possui arquivo'}</h4>
-      <aside>
-        <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
-          <button>Alterar</button>
-        </InputFile>
-      </aside>
+      <h4>{title}</h4>
+      <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
+        <button>Alterar</button>
+      </InputFile>
     </Container>
   )
 }

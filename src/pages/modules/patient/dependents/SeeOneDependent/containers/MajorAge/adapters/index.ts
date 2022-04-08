@@ -19,11 +19,6 @@ export const fromApi = (
       income: formatIncome(dependentInfo.renda),
     },
 
-    documents: dependentInfo.documentosCadastrados?.reduce((ac, doc) => {
-      ac[doc?.tipoArquivo] = true
-      return ac
-    }, {}),
-
     address: {
       cep: dependentInfo.cep,
       uf: dependentInfo.uf,

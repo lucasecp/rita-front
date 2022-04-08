@@ -5,53 +5,25 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Container, ButtonGroup } from './styles'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
+import { useMessage } from '@/hooks/useMessage'
 import { useHistory, useLocation } from 'react-router-dom'
 import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 import { DependentAddress } from './components/DependentAddress'
 import { DependentData } from './components/DependentData'
-import { Documents } from './components/Documents'
+import { DependentDocuments } from './components/DependentDocuments'
 import { Situation } from './components/Situation'
 import ButtonLink from '@/components/Button/Link'
 import OutlineButton from '@/components/Button/Outline'
 import { FieldsHasChangedWarning } from './messages/FieldsHasChangedWarning'
 import { toast } from '@/styles/components/toastify'
 import apiPatient from '@/services/apiPatient'
-
-interface PersonalDatas {
-  name: string
-  cpf: string
-  gender: string
-  birthdate: string
-  phone: string
-  email: string
-  status: string
-  income: string
-}
-
-interface Address {
-  cep: string
-  uf: string
-  city: string
-  address: string
-  number: string
-  district: string
-  complement: string
-}
-
-interface SituationType {
-  plan: {
-    name: string
-    startDate: string
-    endDate: string
-  }
-  table: string
-}
+import { toApi } from './adapters/toApi'
+import { PersonalDatas, Address, SituationType } from './types'
 
 interface DependentLocation {
   dependent: {
     personalDatas: PersonalDatas
     address: Address
-    documents: any
     situation: SituationType
   }
   dependentId: number
@@ -76,9 +48,9 @@ export const EditDependent: React.FC = () => {
   const location = useLocation<DependentLocation>()
   const history = useHistory()
   const { showMessage } = useModal()
+  const [messageToUpdateDocuments, sendMessageToUpdateDocuments] = useMessage()
 
-  const { personalDatas, address, documents, situation } =
-    location.state.dependent
+  const { personalDatas, address, situation } = location.state.dependent
   const id = location.state.dependentId
 
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState<number>(0)
@@ -97,22 +69,19 @@ export const EditDependent: React.FC = () => {
     district: '',
   })
 
-  // const [documentError, setDocumentError] = useState(false)
-
   const [showErrors, setShowErrors] = useState<boolean>(false)
 
   const [personalDatasToSave, setPersonalDatasToSave] = useState<any>({})
   const [addressToSave, setAddressToSave] = useState<any>({})
-  const [documentToSave, setDocumentToSave] = useState<File | string>('')
 
   useEffect(() => {
+    document.title = 'Rita Saúde | Edição de Dependentes'
+
     if (!location.state) {
       return history.push(PATIENT_DEPENDENTS)
     }
     scrollTo(0, 0)
   }, [])
-
-  document.title = 'Rita Saúde | Edição de Dependentes'
 
   const onSave = async () => {
     setShowErrors(true)
@@ -122,59 +91,19 @@ export const EditDependent: React.FC = () => {
     )
     const hasErrorsAddress = Object.values(addressError).some((value) => value)
 
-    if (documentToSave) {
-      const formFile1 = new FormData()
-      formFile1.append('file', documentToSave)
-      try {
-        await apiPatient.post(
-          `/paciente/documento?cpf=${personalDatas.cpf}&tipoDocumento=Renda`,
-          formFile1,
-        )
-
-        await apiPatient.patch(
-          `/paciente/dependente/documento/confirmar`,
-          null,
-          {
-            params: { cpf: personalDatas.cpf },
-          },
-        )
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
     if (!hasErrorsPersonalDatas && !hasErrorsAddress) {
       try {
         Loading.turnOn()
 
-        const dependentData = {
-          sexo: personalDatasToSave.gender,
-          email: personalDatasToSave.email,
-          endereco: {
-            cep: addressToSave.cep,
-            logradouro: addressToSave.addressDep,
-            numero: addressToSave.number,
-            complemento: addressToSave.complement,
-            bairro: addressToSave.district,
-            cidade: addressToSave.city,
-            uf: addressToSave.uf,
-          },
-        }
+        const dependentToApi = toApi(personalDatasToSave, addressToSave)
 
-        await apiPatient.put(`/paciente/dependente/${id}`, dependentData)
+        await apiPatient.put(`/paciente/dependente/${id}`, dependentToApi)
+        sendMessageToUpdateDocuments()
 
         toast.success('Edição Realizada com Sucesso.')
         history.push(PATIENT_DEPENDENTS)
       } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          toast.error(error.response.data.message)
-        } else {
-          if (error instanceof Error) {
-            toast.error(error.message)
-          }
-
-          console.error(error)
-        }
+        console.error(error)
       } finally {
         Loading.turnOff()
       }
@@ -189,8 +118,6 @@ export const EditDependent: React.FC = () => {
     }
     history.push(PATIENT_DEPENDENTS)
   }
-
-  console.log('Location: ', location)
 
   return (
     <DefaultLayout title="Visualizar informações de dependente">
@@ -213,10 +140,11 @@ export const EditDependent: React.FC = () => {
           setAddressToSave={setAddressToSave}
           showErrors={showErrors}
         />
-        <Documents
+        <DependentDocuments
           incomeValue={personalDatas?.income}
-          documentToSave={documentToSave}
-          setDocumentToSave={setDocumentToSave}
+          pacientCpf={personalDatas.cpf}
+          pacientId={id}
+          messageToUpdateDocuments={messageToUpdateDocuments}
         />
         <Situation data={situation} />
 

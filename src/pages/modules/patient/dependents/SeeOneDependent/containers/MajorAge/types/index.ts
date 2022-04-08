@@ -41,7 +41,6 @@ export interface DependentDataType {
     status: string
     income: string
   }
-  documents: any
   address: {
     cep: string
     uf: string

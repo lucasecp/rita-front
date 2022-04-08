@@ -18,7 +18,6 @@ export const Container = styled.section`
     gap: 24px;
     align-items: flex-end;
 
-    input,
     select {
       height: 56px;
     }

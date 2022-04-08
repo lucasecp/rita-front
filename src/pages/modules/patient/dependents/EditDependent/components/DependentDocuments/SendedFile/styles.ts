@@ -6,28 +6,21 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #eeeeee;
 
-  > aside {
-    div {
-      margin-left: auto;
-    }
-  }
-
-  > button {
-    width: 100%;
-  }
+  border-radius: 8px;
+  padding: 14px 16px;
+  border: 1px solid ${colors.gray.light};
+  font-weight: 500;
+  outline: none;
+  width: 100%;
+  line-height: 1.25;
+  height: 56px;
 
   > h4 {
-    max-width: 187px;
-
-    margin-left: 12px;
-    margin-right: 12px;
-
     font-weight: bold;
     font-size: 16px;
-    line-height: 150%;
 
     color: ${colors.purple.main.dark};
-    word-break: break-all;
   }
 `

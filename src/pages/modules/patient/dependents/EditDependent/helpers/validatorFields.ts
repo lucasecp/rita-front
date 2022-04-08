@@ -1,6 +1,6 @@
 import clear from '@/helpers/clear/SpecialCaracteres'
 
-export const validateGender = (value) => {
+export const validateGender = (value: string): string => {
   if (!value) {
     return 'Campo Obrigatório.'
   }
@@ -8,7 +8,7 @@ export const validateGender = (value) => {
   return ''
 }
 
-export const validateEmail = (value) => {
+export const validateEmail = (value: string): string => {
   const regexToValidateEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 
   if (!clear(value).length) {
@@ -22,7 +22,7 @@ export const validateEmail = (value) => {
   return ''
 }
 
-export const validateCep = (value) => {
+export const validateCep = (value: string): string => {
   if (clear(value.replace(/\D/g, '')).length !== 8) {
     return 'Cep Inválido.'
   }
@@ -30,7 +30,7 @@ export const validateCep = (value) => {
   return ''
 }
 
-export const validateUF = (value) => {
+export const validateUF = (value: string): string => {
   if (!clear(value).length) {
     return 'UF Inválido.'
   }
@@ -38,7 +38,7 @@ export const validateUF = (value) => {
   return ''
 }
 
-export const validateCity = (value) => {
+export const validateCity = (value: string): string => {
   if (!clear(value).length) {
     return 'Cidade Inválido.'
   }
@@ -46,7 +46,7 @@ export const validateCity = (value) => {
   return ''
 }
 
-export const validateAddress = (value) => {
+export const validateAddress = (value: string): string => {
   if (!clear(value).length) {
     return 'Endereço Inválido.'
   }
@@ -54,7 +54,7 @@ export const validateAddress = (value) => {
   return ''
 }
 
-export const validateNumber = (value) => {
+export const validateNumber = (value: string): string => {
   if (!clear(value).length) {
     return 'Número Inválido.'
   }
@@ -62,7 +62,7 @@ export const validateNumber = (value) => {
   return ''
 }
 
-export const validateDistrict = (value) => {
+export const validateDistrict = (value: string): string => {
   if (!clear(value).length) {
     return 'Bairro Inválido.'
   }
