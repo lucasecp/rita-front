@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import colors from '@/styles/colors'
 
-export const Container = styled.ul`
+export const Container = styled.ul<{ expanded: boolean }>`
   display: flex;
   flex-direction: column;
 
@@ -53,7 +53,6 @@ export const Container = styled.ul`
 
     :hover {
       background: ${colors.purple.main.middle};
-      /* background: ${({ theme }) => theme.primary}; */
 
       > span {
         background: ${colors.purple.main.light};

@@ -55,6 +55,7 @@ export const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
 
           setCompaniesOptions(companyOptions)
         } catch (error) {
+          console.log(error)
           toast.error('Erro ao carregar empresas')
         }
       }
@@ -62,9 +63,12 @@ export const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
       if (company.label?.length === 0) {
         try {
           const response = await api.get('/empresa')
+
           const companyOptions = fromApiCompanies(response.data.dados)
+
           setCompaniesOptions(companyOptions)
         } catch (error) {
+          console.log(error)
           toast.error('Erro ao carregar empresas')
         }
       }

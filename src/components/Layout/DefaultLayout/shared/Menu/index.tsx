@@ -9,20 +9,47 @@ import { menuItens } from './_menuItems'
 import { useAuth } from '@/hooks/login'
 import { useMenu } from '@/hooks/useMenu'
 
-const Menu = ({ expanded }) => {
+interface MenuProps {
+  expanded: boolean
+}
+
+export const Menu: React.FC<MenuProps> = ({ expanded }) => {
   const { pathname: routePathname } = useLocation()
   const { user } = useAuth()
   const { closeMenu } = useMenu()
   const [menuToShow, setMenuToShow] = useState([])
 
   useEffect(() => {
-    setMenuToShow([])
+    const menuToShowTemporary = menuItens.filter((menuItem) =>
+      menuItem.permissions?.some((permissionMenuItem) =>
+        user?.permissoes.some(
+          (permissionUser: string) => permissionUser === permissionMenuItem,
+        ),
+      ),
+    )
 
-    menuItens.forEach((item) => {
-      if (!item.permission || user?.permissoes.includes(item.permission)) {
-        setMenuToShow((before) => [...before, item])
-      }
-    })
+    setMenuToShow(menuToShowTemporary)
+
+    // setMenuToShow((before) => [...before, item])
+
+    // if (!item.permission || user?.permissoes.includes(item.permission)) {
+    //   setMenuToShow((before) => [...before, item])
+    // } else {
+
+    // if (typeof item.permission !== 'string') {
+    //   const allowedReports = item.permission.filter((permissionMenuItem) =>
+    //     user?.permissoes.some(
+    //       (permissionUser: string) => permissionUser === permissionMenuItem,
+    //     ),
+    //   )
+
+    //   if (allowedReports) {
+    //     setMenuToShow((beforeMenuToShow) => [
+    //       ...beforeMenuToShow,
+    //       item.permission,
+    //     ])
+    //   }
+    // }
   }, [])
 
   function handleMenuItemClick() {
@@ -38,7 +65,7 @@ const Menu = ({ expanded }) => {
               activeClassName="active"
               key={item.path}
               to={item.path}
-              onClick={() => handleMenuItemClick()}
+              onClick={handleMenuItemClick}
             >
               <span />
               <div>
@@ -85,5 +112,3 @@ const Menu = ({ expanded }) => {
     </Container>
   )
 }
-
-export default Menu
