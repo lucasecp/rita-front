@@ -3,7 +3,7 @@ import { ReactComponent as ProfileIcon } from '@/assets/icons/profile-green.svg'
 import { InputFile } from '@/components/Form/InputFile'
 import { isValidSizeFile } from '@/helpers/file/isValidSizeFile'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-import { formatCpf } from '@/helpers/formatCpf'
+import formatCnpj from '@/helpers/formatCnpj'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import React from 'react'
 import { Container } from './styles'
@@ -23,6 +23,7 @@ const Header: React.FC = () => {
   React.useEffect(() => {
     onFileInput()
   }, [photo])
+
 
   const onFileInput = async () => {
     if (photo && photo.size !== 0 && !isValidSizeFile(photo)) {
@@ -50,9 +51,9 @@ const Header: React.FC = () => {
                   imgBlob === ''
                     ? `data:image/png;base64,${data?.avatar}`
                     : imgBlob
-                }
-                alt="Imagem da clinica"
-              />
+                  }
+                  alt="Imagem da clinica"
+                  />
             </div>
           ) : (
             <ProfileIcon />
@@ -78,7 +79,7 @@ const Header: React.FC = () => {
           </h2>
           <p>
             <h6>CNPJ:</h6>
-            <span>{formatCpf(data?.cnpj) || ''}</span>
+            <span>{' '}{formatCnpj(data?.cnpj) || ''}</span>
           </p>
         </div>
       </div>

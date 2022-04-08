@@ -11,8 +11,6 @@ import { ClinicEditContext } from '../../../Context/ClinicEditContext'
 /** Constants */
 import { status } from '../../../Constants'
 import InputMask from '@/components/Form/InputMask'
-/** Helper */
-import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 
 interface FormClinicProfileI {
   data: ClinicProfileI
@@ -50,8 +48,6 @@ const DataClinic: React.FC<FormClinicProfileI> = (
     setPhone(props.data.phone)
   }, [props.data])
 
-  console.log(error)
-
   /**
    * @description Função responsável por verificar se houve modificação nos campos e setar true em 'setIsHashModificationField' */
   const onChangeField = (event: any) => {
@@ -77,6 +73,9 @@ const DataClinic: React.FC<FormClinicProfileI> = (
           name="description"
           hasError={!!error?.description}
           msgError={error?.description}
+          onlyLetter
+          noSpecialCaracter
+          maxLength={200}
         />
 
         <InputText
@@ -88,6 +87,9 @@ const DataClinic: React.FC<FormClinicProfileI> = (
           setValue={setRazaoSocial}
           hasError={!!error?.razaoSocial}
           msgError={error?.razaoSocial}
+          onlyLetter
+          noSpecialCaracter
+          maxLength={100}
         />
 
         <section>

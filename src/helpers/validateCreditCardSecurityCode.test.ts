@@ -1,3 +1,4 @@
+/* eslint-env node, jest */
 import validateCreditCardSecurityCode from './validateCreditCardSecurityCode'
 
 it('should validate as truthy', () => {

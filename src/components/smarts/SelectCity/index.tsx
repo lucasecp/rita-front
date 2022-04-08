@@ -24,8 +24,6 @@ const SelectCity: React.FC<SelectCityProps> = ({
 
   const [defaultLabel, setDefaultLabel] = useState(initialLabel)
 
-  console.log(city)
-
   const mapCity = (array: { descricao: string }[]) => {
     if (!array) return []
     return array.map((obj) => ({

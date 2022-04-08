@@ -13,9 +13,10 @@ interface GroupButtonsI {
 }
 
 const GroupButtons: React.FC<GroupButtonsI> = ({ onUpdate, onCancel }) => {
-  const { setIsDisabled, isDisabled } = React.useContext(ClinicEditContext)
+  const { setIsDisabled, isDisabled, setIsHashModificationSelectAndMultSelect } = React.useContext(ClinicEditContext)
   const onDisableFields = () => {
     setIsDisabled(false)
+    setIsHashModificationSelectAndMultSelect(true)
   }
 
   return (

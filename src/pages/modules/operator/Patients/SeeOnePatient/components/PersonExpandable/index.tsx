@@ -6,8 +6,6 @@ import InputText from '@/components/Form/InputText'
 import InputMask from '@/components/Form/InputMask'
 import { Select } from '@/components/Form/Select'
 
-import { formatCpf } from '@/helpers/formatCpf'
-
 import { Container } from './styles'
 
 import {
@@ -126,7 +124,7 @@ const PersonExpandable: React.FC<PersonExpandableProps> = ({
             />
             <div className="static-field">
               <label>CPF:</label>
-              <p>{formatCpf(cpf)}</p>
+              <p>{cpf}</p>
             </div>
             <InputMask
               label="Data de Nascimento:"

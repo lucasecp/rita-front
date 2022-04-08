@@ -28,9 +28,10 @@ import { SeeOnePatient } from '@/pages/modules/operator/Patients/SeeOnePatient'
 import AnalyzePatients from '@/pages/modules/operator/Patients/AnalyzePatients'
 import { ConsultEligibility } from '@/pages/modules/operator/ConsultEligibility'
 
-import { Reports } from '@/pages/modules/operator/Reports'
-import Authorization from '@/pages/modules/operator/Reports/containers/Authorization'
-import { BillingStatement } from '@/pages/modules/operator/Reports/containers/BillingStatement'
+import { Reports } from '@/pages/Reports'
+import Authorization from '@/pages/Reports/containers/Authorization'
+import { BillingStatement } from '@/pages/Reports/containers/BillingStatement'
+import { PatientAnalytic } from '@/pages/Reports/containers/PatientAnalytic'
 
 import SeeAllClinics from '@/pages/modules/operator/clinic/SeeAllClinics'
 import SeeOneClinic from '@/pages/modules/operator/clinic/SeeOneClinic'
@@ -45,7 +46,6 @@ import SeeOneSpecialist from '@/pages/modules/operator/specialists/SeeOneSpecial
 import EditIssuingAgency from '@/pages/modules/operator/IssuingAgency/EditIssuingAgency'
 import SeeAllIssuingAgency from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency'
 import CreateIssuingAgency from '@/pages/modules/operator/IssuingAgency/CreateIssuingAgency'
-import { PatientAnalytic } from '@/pages/modules/operator/Reports/containers/PatientAnalytic'
 import WalletSettings from '@/pages/modules/operator/WalletSettings'
 
 const operatorRoutes = [
