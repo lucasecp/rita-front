@@ -11,13 +11,13 @@ interface DaysButtonsI {
 }
 
 const arrayDays = [
+  { name: daysWeek.SUNDAY, label: 'D' },
   { name: daysWeek.MONDAY, label: 'S' },
   { name: daysWeek.TUESDAY, label: 'T' },
   { name: daysWeek.WEDNESDAY, label: 'Q' },
   { name: daysWeek.THRUSDAY, label: 'Q' },
   { name: daysWeek.FRIDAY, label: 'S' },
   { name: daysWeek.SATURDAY, label: 'S' },
-  { name: daysWeek.SUNDAY, label: 'D' },
 ]
 
 const DaysButtons: React.FC<DaysButtonsI> = ({ setDays, days, error }) => {
