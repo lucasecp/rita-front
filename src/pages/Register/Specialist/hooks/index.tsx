@@ -62,8 +62,7 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
       scrollTo(0, 0)
     }
   }
- 
-  const resetData = () => {}
+
 
   const createListFormDataOfSpecialtys = () => {
     const list = []
@@ -151,7 +150,6 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
         isActiveStep,
         previousStep,
         nextStep,
-        resetData,
         registerSpecialist,
         step,
         basicInformation,

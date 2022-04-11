@@ -12,11 +12,11 @@ const HolderInfo: React.FC<HolderInfoProps> = ({ data, hidden }) => {
     <Container hidden={hidden}>
       <div>
         <div>
-          <h6>Titular:</h6>
+          <h6>Clínica:</h6>
           <h5>{data.name}</h5>
         </div>
         <div>
-          <h6>CPF:</h6>
+          <h6>Especialista:</h6>
           <h5>{data.cpf}</h5>
         </div>
       </div>

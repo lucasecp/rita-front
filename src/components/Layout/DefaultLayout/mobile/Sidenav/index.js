@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import Menu from '../../shared/Menu'
+import { Menu } from '../../shared/Menu'
 
 import { useMenu } from '@/hooks/useMenu'
 import { Container } from './style'

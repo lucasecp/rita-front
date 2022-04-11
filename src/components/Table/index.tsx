@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react'
 import React, { forwardRef, useState, useImperativeHandle } from 'react'
-// import { get as lodashGet, sortBy as lodashSortBy } from 'lodash-es'
-import { get as lodashGet } from 'lodash-es'
+import lodashGet from 'lodash.get'
 
 import { ReactComponent as ChevronLeft } from '@/assets/icons/chevron-left.svg'
 import { ReactComponent as ChevronRight } from '@/assets/icons/chevron-right.svg'
@@ -57,7 +56,7 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
       count = 0,
       hidePagination = false,
       onSort,
-      onPaginate
+      onPaginate,
     },
     ref,
   ) {
@@ -174,8 +173,7 @@ export const Table = forwardRef<{ toggleExpand: any }, TableProps>(
         {!hidePagination && (
           <footer>
             <FooterRowsPerPage>
-              Linhas por página:
-              {' '}
+              Linhas por página:{' '}
               <Select
                 variation="secondary"
                 options={rowsPerPageOptions}

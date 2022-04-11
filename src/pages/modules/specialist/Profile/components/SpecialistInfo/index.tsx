@@ -101,7 +101,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
       setCpf(cpf || '')
       setIssuingAgency(issuingAgency || '')
     }
-  }, [formWasSubmited,isEditing])
+  }, [formWasSubmited, isEditing])
 
   return (
     <Container>
@@ -117,6 +117,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
         onKeyUp={() => setErrors({ ...errors, name: validateName(name) })}
         disabled={!isEditing}
         name="name"
+        noSpecialCaracter
       />
 
       <InputText

@@ -218,6 +218,10 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             name="address"
             maxLength={100}
             // disabled={addressLoaded}
+<<<<<<< HEAD
+=======
+            noSpecialCaracter
+>>>>>>> f73fc04fa0334e97e33d371d030c998a02c40e08
           />
           <InputText
             label="Número:"

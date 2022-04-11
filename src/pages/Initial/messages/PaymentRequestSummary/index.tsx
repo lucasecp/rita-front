@@ -5,8 +5,8 @@ import formatPrice from '@/helpers/formatPrice'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import PaymentRequestConfirm from '@/pages/Initial/messages/PaymentRequestConfirm'
-import PaymentRequestRejection from '@/pages/Initial/messages/PaymentRequestRejection'
+import { PaymentRequestConfirm } from '@/pages/Initial/messages/PaymentRequestConfirm'
+import { PaymentRequestRejection } from '@/pages/Initial/messages/PaymentRequestRejection'
 
 import { ReactComponent as CrownIcon } from '@/assets/icons/crown.svg'
 import { Container } from './styles'
@@ -16,7 +16,7 @@ type PaymentRequestSummaryProps = {
   items: RitaWallet.PaymentRequestItem[]
 }
 
-const PaymentRequestSummary: React.FC<PaymentRequestSummaryProps> = ({
+export const PaymentRequestSummary: React.FC<PaymentRequestSummaryProps> = ({
   data,
   items,
 }) => {
@@ -82,5 +82,3 @@ const PaymentRequestSummary: React.FC<PaymentRequestSummaryProps> = ({
     </Container>
   )
 }
-
-export default PaymentRequestSummary

@@ -13,7 +13,7 @@ const RegisterSpecialist: React.FC = () => {
   return (
     <RegisterLayout>
       <RegisterSpecialistProvider>
-        <Content>
+        <Content>    
           <StepProgressBar />
           <h1>Especialista - Cadastre-se</h1>
           <Photo />

@@ -17,7 +17,7 @@ import {
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Select } from '@/components/Form/Select'
 import ButtonPrimary from '@/components/Button/Primary'
-import PaymentRequest from '@/pages/Initial/messages/PaymentRequest'
+import { PaymentRequest } from '@/pages/Initial/messages/PaymentRequest'
 import { Table } from '@/components/Table'
 
 const periodOptions = [
@@ -41,10 +41,11 @@ export const WalletPayments: React.FC = () => {
     [],
   )
   const [selectedPeriod, setSelectedPeriod] = useState(1)
-  const [tablePaymentsAllSort, setTablePaymentsAllSort] = useState<RitaComponents.TableSort>({
-    path: 'createdAt',
-    order: 'DESC',
-  })
+  const [tablePaymentsAllSort, setTablePaymentsAllSort] =
+    useState<RitaComponents.TableSort>({
+      path: 'createdAt',
+      order: 'DESC',
+    })
   const [tablePaymentsAllPaging, setTablePaymentsAllPaging] = useState({
     take: 10,
     skip: 0,

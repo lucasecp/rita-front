@@ -6,7 +6,7 @@ export interface SpecialistInfoI {
   profissionalName?: string
   cpf?: string
   receiveService?: string
-  ufProfissionaRegister?: string 
+  ufProfissionaRegister?: string
   classCouncil?: string
   email?: string
   phone?: string
@@ -43,7 +43,7 @@ export interface ErrorsI {
 export type SpecialtysAndDocsType = {
   [x: string]: {
     idSpecialty: string | number
-    document: string | File 
+    document: string | File
   }
 }
 
