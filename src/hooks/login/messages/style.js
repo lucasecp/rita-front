@@ -25,6 +25,7 @@ export const Container = styled.div`
       display: inline-flex;
       align-items: center;
       color: #1c23bd;
+      margin-left: 6px;
     }
     img {
       margin-left: 6px;
