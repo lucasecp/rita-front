@@ -6,13 +6,13 @@ import React, { useEffect, useState, SetStateAction } from 'react'
 
 import { Container } from './styles'
 
-//Será mostrado uma modal caso a especialidade requerer inscrição
 
 interface SpecialtysProps {
   specialtys: MultiSelectOption[]
   setSpecialtys: React.Dispatch<SetStateAction<MultiSelectOption[]>>
   errors: any
   color?: string
+  label?: string
   [x: string]: any
 }
 
@@ -21,6 +21,7 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
   setSpecialtys,
   errors,
   color,
+  label,
   ...rest
 }) => {
   const [specialtysOptions, setSpecialtysOptions] = useState<
@@ -64,17 +65,17 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
 
   return (
     <Container>
-      <h1>Especialidades</h1>
+      {!label && <h1>Especialidades</h1>}
       <section>
         <CustomMultiSelect
           value={specialtys}
           setValue={setSpecialtys}
-          variation="secondary"
           color={color}
           options={specialtysOptions}
           hasError={!!errors?.specialtys}
           messageError={errors?.specialtys}
           name="specialtys"
+          label={label}
           {...rest}
         />
       </section>

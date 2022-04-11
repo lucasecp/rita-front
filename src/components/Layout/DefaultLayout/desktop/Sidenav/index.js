@@ -5,7 +5,7 @@ import { ReactComponent as IconLogo } from '@/assets/logo/icon-logo.svg'
 
 import arrowImg from '@/assets/icons/arrow-left.svg'
 
-import Menu from '../../shared/Menu'
+import { Menu } from '../../shared/Menu'
 
 import { Container } from './style'
 import { useExpanded } from './useExpanded'

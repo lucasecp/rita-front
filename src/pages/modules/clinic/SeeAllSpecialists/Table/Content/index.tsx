@@ -30,7 +30,7 @@ const Content: React.FC<ContentProps> = ({ specialists, setMakeRequest }) => {
           <Status type={showStatus(spec.status)}>
             <span>{showStatus(spec.status)}</span>
           </Status>
-          <Actions id={spec.id} setMakeRequest={setMakeRequest} />
+          <Actions data={spec} setMakeRequest={setMakeRequest} />
         </ul>
       ))}
 

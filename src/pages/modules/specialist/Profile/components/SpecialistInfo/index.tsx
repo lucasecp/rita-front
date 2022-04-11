@@ -117,6 +117,7 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
         onKeyUp={() => setErrors({ ...errors, name: validateName(name) })}
         disabled={!isEditing}
         name="name"
+        noSpecialCaracter
       />
 
       <InputText
