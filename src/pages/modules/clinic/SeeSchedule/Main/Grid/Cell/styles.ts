@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  min-width: 166px;
+  min-width: 170px;
+  max-width: 170px;
   min-height: 166px;
   padding: 4px;
   border: ${({ theme }) => theme.mediumLight} solid 0.5px;
   display: flex;
   align-items: center;
+  background: #fff;
 
   > div {
     position: relative;
@@ -17,34 +19,42 @@ export const Container = styled.div`
     > svg {
       align-self: end;
       min-width: 15px;
-      cursor: pointer
+      cursor: pointer;
     }
     > div {
-      >*{
+      > * {
         word-break: break-word;
       }
       > h5 {
         font-size: 14px;
         font-weight: 700;
         line-height: 20px;
-        color: #303030;
+        color: #000;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 15px;
+        &:first-child{
+          margin-bottom: 8px ;
+        }
       }
 
       > span {
         font-size: 14px;
         font-weight: 400;
         line-height: 20px;
-        color: #6a6a6a;
+        color: #afafaf;
+        margin-top: 4px
       }
       > p {
         margin-bottom: 0;
         dispaly: flex;
-      flex-direction: column;
+        flex-direction: column;
         > span {
-          font-size: 12px;
-          font-weight: 400;
-          line-height: 20px;
-          color: #6a6a6a;
+          font-size: 10px;
+          font-weight: 500;
+          line-height: 12px;
+          color: #303030;
+          margin-top: 4px
         }
       }
     }

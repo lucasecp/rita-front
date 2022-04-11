@@ -2,10 +2,9 @@ import styled from 'styled-components'
 
 export const Container = styled.header`
   background: ${({ theme }) => theme.light};
-  min-width: fit-content;
+  width: fit-content;
   padding: 16px 0;
   display: flex;
-  justify-content: space-between;
   
 `
 
@@ -16,7 +15,7 @@ export const Content = styled.div`
   line-height: 20px;
   align-items: center;
   justify-content: center;
-  min-width: 166px;
+  min-width: 170px;
 
   h5 {
     color: ${({ theme }) => theme.darkness};
