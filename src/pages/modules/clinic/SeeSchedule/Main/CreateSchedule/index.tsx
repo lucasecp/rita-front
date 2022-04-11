@@ -26,7 +26,7 @@ const CreateSchedule: React.FC = ({}) => {
 
   const [days, setDays] = useState<DaysI>({} as DaysI)
 
-  const { schedule, setSchedule, currentDataClinicAndDoctor, setGetSchedules } =
+  const {  currentDataClinicAndDoctor, setGetSchedules } =
     useScheduleSpecialist()
 
   const { hasError } = useValidator(setErrors)
