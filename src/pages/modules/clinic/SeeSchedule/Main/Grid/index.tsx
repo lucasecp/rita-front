@@ -36,7 +36,6 @@ const Grid: React.FC<{ nameDoctor: string }> = ({ nameDoctor }) => {
     for (let i = 0; i < resyCells; i++) {
       list.push(i)
     }
-    // console.log(theMostScheduleDayAmount,resyCells)
     return list
   }
 

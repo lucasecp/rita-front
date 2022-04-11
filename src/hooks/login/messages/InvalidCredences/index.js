@@ -1,6 +1,7 @@
 import React from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
+
 import errorIcon from '@/assets/icons/alerts/error.svg'
 
 import { Container } from '../style'
@@ -13,9 +14,11 @@ function InvalidCredences() {
   return (
     <Container>
       <img src={errorIcon} />
+
       <p>
-        Não foi possível realizar o login. Verifique os dados e tente <strong>novamente</strong>.
+        Não foi possível realizar o login. Verifique os dados e tente novamente.
       </p>
+
       <ButtonPrimary onClick={closeModal}>OK</ButtonPrimary>
     </Container>
   )
