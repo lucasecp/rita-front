@@ -126,7 +126,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
 
         <InputText
           variation="secondary"
-          label="Número do Registro:"
+          label="Registro Profissional:"
           value={registerNumber}
           setValue={setRegisterNumber}
           maxLength={40}

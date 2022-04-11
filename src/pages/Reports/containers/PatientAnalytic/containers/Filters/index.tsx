@@ -7,7 +7,7 @@ import CustomMultSelect, {
 } from '@/components/Form/MultSelect'
 import { optionsFilteredWithAll } from '@/components/Form/MultSelect/helpers/OptionsFilteredWithAll'
 import { AutocompleteOptions } from '@/components/Form/Autocomplete'
-import CompanyMultiSelect from './components/CompanyMultiSelect'
+import { CompanyMultiSelect } from './components/CompanyMultiSelect'
 import { toast } from '@/styles/components/toastify'
 import { LengthyReport } from './messages/LengthyReport'
 
@@ -30,10 +30,6 @@ import downloadFile from '@/helpers/downloadFile'
 import { previewPatientsFromApi } from './adapters/fromApi'
 import { previewFiltersToApi } from './adapters/previewFiltersToApi'
 import { reportFiltersToApi } from './adapters/reportFiltersToApi'
-
-interface Test {
-  test: string
-}
 
 interface FiltersProps {
   generatePreview: number

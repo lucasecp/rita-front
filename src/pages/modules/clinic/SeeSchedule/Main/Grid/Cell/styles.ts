@@ -3,9 +3,8 @@ import styled from 'styled-components'
 export const Container = styled.div`
   min-width: 166px;
   min-height: 166px;
-  max-width: 182px;
   padding: 4px;
-  border: #6a6a6a solid 0.5px;
+  border: ${({ theme }) => theme.mediumLight} solid 0.5px;
   display: flex;
   align-items: center;
 

@@ -1,221 +1,72 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useMemo } from 'react'
+import { parse, differenceInYears } from 'date-fns'
 
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import { Container, ButtonGroup } from './styles'
-import { useLoading } from '@/hooks/useLoading'
-import { useModal } from '@/hooks/useModal'
-import { useHistory, useLocation } from 'react-router-dom'
-import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
-import { DependentAddress } from './components/DependentAddress'
-import { DependentData } from './components/DependentData'
-import { Documents } from './components/Documents'
-import { Situation } from './components/Situation'
-import ButtonLink from '@/components/Button/Link'
-import OutlineButton from '@/components/Button/Outline'
-import { FieldsHasChangedWarning } from './messages/FieldsHasChangedWarning'
-import { toast } from '@/styles/components/toastify'
-import apiPatient from '@/services/apiPatient'
+import { MajorAge } from './containers/MajorAge'
+import { MinorAge } from './containers/MinorAge'
+
+import { useLocation } from 'react-router-dom'
 
 interface PersonalDatas {
   name: string
   cpf: string
-  birthDate: string
   gender: string
-  email: string
+  birthdate: string
   phone: string
-  documents: any
+  email: string
+  status: string
+  income: string
 }
 
 interface Address {
   cep: string
   uf: string
   city: string
-  addressDep: string
+  address: string
   number: string
   district: string
   complement: string
 }
 
-interface Dependent {
-  personalDatas: PersonalDatas
-  address: Address
+interface SituationType {
+  plan: {
+    name: string
+    startDate: string
+    endDate: string
+  }
+  table: string
 }
 
-interface PersonalDatasError {
-  gender: string
-  email: string
-}
-
-interface AddressError {
-  cep: string
-  uf: string
-  city: string
-  address: string
-  number: string
-  district: string
+interface DependentLocation {
+  dependent: {
+    personalDatas: PersonalDatas
+    address: Address
+    situation: SituationType
+  }
+  dependentId: number
 }
 
 export const EditDependent: React.FC = () => {
-  const { Loading } = useLoading()
-  const location = useLocation()
-  const history = useHistory()
-  const { showMessage } = useModal()
+  const location = useLocation<DependentLocation>()
 
-  const dependent: Dependent = location.state.dependent
-  const id: number = location.state.id
-  const dependentDocumentName: string = location.state.dependentDocumentName
-  const dependentDocument = location.state.dependentDocument
+  const { dependent, dependentId } = location.state
 
-  const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState<number>(0)
+  const dependentBirthdate = dependent.personalDatas.birthdate
 
-  const [personalDatasError, setPersonalDatasError] =
-    useState<PersonalDatasError>({
-      gender: '',
-      email: '',
-    })
-  const [addressError, setAddressError] = useState<AddressError>({
-    cep: '',
-    uf: '',
-    city: '',
-    address: '',
-    number: '',
-    district: '',
-  })
+  const isMinorAge = useMemo(() => {
+    const dateParsed = parse(dependentBirthdate, 'dd/MM/yyyy', new Date())
+    const age = differenceInYears(new Date(), dateParsed)
 
-  // const [documentError, setDocumentError] = useState(false)
-
-  const [showErrors, setShowErrors] = useState<boolean>(false)
-
-  const [personalDatasToSave, setPersonalDatasToSave] = useState<any>({})
-  const [addressToSave, setAddressToSave] = useState<any>({})
-  const [documentToSave, setDocumentToSave] = useState<File | string>('')
-
-  useEffect(() => {
-    if (!location.state) {
-      return history.push(PATIENT_DEPENDENTS)
-    }
-    scrollTo(0, 0)
-  }, [])
-
-  document.title = 'Rita Saúde | Edição de Dependentes'
-
-  const onSave = async () => {
-    setShowErrors(true)
-
-    const hasErrorsPersonalDatas = Object.values(personalDatasError).some(
-      (value) => value,
-    )
-    const hasErrorsAddress = Object.values(addressError).some((value) => value)
-
-    if (documentToSave) {
-      const formFile1 = new FormData()
-      formFile1.append('file', documentToSave)
-      try {
-        await apiPatient.post(
-          `/paciente/documento?cpf=${dependent.personalDatas.cpf}&tipoDocumento=Renda`,
-          formFile1,
-        )
-
-        console.log(dependent.personalDatas.cpf)
-
-        await apiPatient.patch(
-          `/paciente/dependente/documento/confirmar`,
-          null,
-          {
-            params: { cpf: dependent.personalDatas.cpf },
-          },
-        )
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    if (!hasErrorsPersonalDatas && !hasErrorsAddress) {
-      try {
-        Loading.turnOn()
-
-        const dependentData = {
-          sexo: personalDatasToSave.gender,
-          email: personalDatasToSave.email,
-          endereco: {
-            cep: addressToSave.cep,
-            logradouro: addressToSave.addressDep,
-            numero: addressToSave.number,
-            complemento: addressToSave.complement,
-            bairro: addressToSave.district,
-            cidade: addressToSave.city,
-            uf: addressToSave.uf,
-          },
-        }
-
-        await apiPatient.put(`/paciente/dependente/${id}`, dependentData)
-
-        toast.success('Edição Realizada com Sucesso.')
-        history.push(PATIENT_DEPENDENTS)
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          toast.error(error.response.data.message)
-        } else {
-          if (error instanceof Error) {
-            toast.error(error.message)
-          }
-
-          console.error(error)
-        }
-      } finally {
-        Loading.turnOff()
-      }
-    } else {
-      scrollTo(0, 0)
-    }
-  }
-
-  const onCancel = () => {
-    if (anyFieldsHasChanged > 1) {
-      return showMessage(FieldsHasChangedWarning)
-    }
-    history.push(PATIENT_DEPENDENTS)
-  }
+    return age < 18
+  }, [dependentBirthdate])
 
   return (
-    <DefaultLayout title="Visualizar informações de dependente">
-      <Container>
-        <DependentData
-          personalDatas={dependent.personalDatas}
-          setAnyFieldsHasChanged={setAnyFieldsHasChanged}
-          anyFieldsHasChanged={anyFieldsHasChanged}
-          personalDatasError={personalDatasError}
-          setPersonalDatasError={setPersonalDatasError}
-          setPersonalDatasToSave={setPersonalDatasToSave}
-          showErrors={showErrors}
-        />
-        <DependentAddress
-          address={dependent.address}
-          setAnyFieldsHasChanged={setAnyFieldsHasChanged}
-          anyFieldsHasChanged={anyFieldsHasChanged}
-          addressError={addressError}
-          setAddressError={setAddressError}
-          setAddressToSave={setAddressToSave}
-          showErrors={showErrors}
-        />
-        <Documents
-          data={dependent.personalDatas}
-          setAnyFieldsHasChanged={setAnyFieldsHasChanged}
-          dependentDocumentName={dependentDocumentName}
-          dependentDocument={dependentDocument}
-          // setDocumentError={setDocumentError}
-          showErrors={showErrors}
-          documentToSave={documentToSave}
-          setDocumentToSave={setDocumentToSave}
-        />
-        <Situation data={dependent.personalDatas} />
-
-        <ButtonGroup>
-          <ButtonLink onClick={onCancel}>Cancelar</ButtonLink>
-          <OutlineButton onClick={onSave}>Salvar</OutlineButton>
-        </ButtonGroup>
-      </Container>
+    <DefaultLayout title="Editar informações de dependente">
+      {isMinorAge ? (
+        <MinorAge dependent={dependent} dependentId={dependentId} />
+      ) : (
+        <MajorAge dependent={dependent} dependentId={dependentId} />
+      )}
     </DefaultLayout>
   )
 }

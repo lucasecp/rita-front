@@ -14,6 +14,7 @@ import axios from 'axios'
 import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
+import { toast } from '../../../../../../styles/components/toastify/index';
 
 const CreateSchedule: React.FC = ({}) => {
   const [startTime, setStartTime] = useState('')
@@ -67,6 +68,7 @@ const CreateSchedule: React.FC = ({}) => {
         ),
       )
       setGetSchedules()
+      toast.success('Evento criado com sucesso.')
     } catch (error) {
       showSimple.error(
         'Erro ao adicionar evento, verifique os dados e tente novamente.',

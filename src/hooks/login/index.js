@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom'
 import { LOGIN, INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes'
 import apiPatient from '@/services/apiPatient'
 import AnalyzingData from './messages/AnalzingData'
+import UserBlocked from './messages/userBlocked'
 
 const UserContext = createContext()
 
@@ -93,6 +94,10 @@ export default function AuthProvider({ children }) {
         pushToUrl(prevPath)
       } catch (error) {
         console.log(error)
+
+        if (error.response.status === 403) {
+          return showMessage(UserBlocked)
+        }
 
         showMessage(InvalidCredences)
       } finally {
