@@ -10,7 +10,7 @@ export interface AutocompleteOptions {
 interface AutocompleteProps {
   label: string
   value: AutocompleteOptions
-  setValue: React.Dispatch<React.SetStateAction<AutocompleteOptions>>
+  setValue?: React.Dispatch<React.SetStateAction<AutocompleteOptions>>
   options: AutocompleteOptions[]
   setOptions: React.Dispatch<React.SetStateAction<AutocompleteOptions[]>>
   mask?: string
@@ -18,6 +18,7 @@ interface AutocompleteProps {
   variation?: string
   placeholder?: string
   hasError?: boolean
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const Autocomplete: React.FC<AutocompleteProps> = ({

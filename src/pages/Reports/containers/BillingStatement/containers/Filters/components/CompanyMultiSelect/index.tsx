@@ -10,10 +10,10 @@ import {
   AutocompleteOptions,
 } from '@/components/Form/Autocomplete'
 
-import apiAdmin from '@/services/apiAdmin'
 import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
 import { useAuth } from '@/hooks/login'
 import { permissions } from '@/constants/permissions'
+import apiAdmin from '@/services/apiAdmin'
 import apiUser from '@/services/apiUser'
 
 interface CompanyMultiSelectProps {
@@ -39,19 +39,17 @@ export const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
         (permission: string) => permission === permissions.LISTAR_EMPRESAS,
       )
 
-      console.log(hasPermissionToSeeAllCompanies)
-
       const api = hasPermissionToSeeAllCompanies ? apiAdmin : apiUser
 
       if (company.label?.length > 0) {
         try {
-          const response = await api.get('/empresa', {
+          const { data } = await api.get('/empresa', {
             params: {
               busca: company.label,
             },
           })
 
-          const companyOptions = fromApiCompanies(response.data.dados)
+          const companyOptions = fromApiCompanies(data)
 
           setCompaniesOptions(companyOptions)
         } catch (error) {
@@ -62,9 +60,9 @@ export const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
 
       if (company.label?.length === 0) {
         try {
-          const response = await api.get('/empresa')
+          const { data } = await api.get('/empresa')
 
-          const companyOptions = fromApiCompanies(response.data.dados)
+          const companyOptions = fromApiCompanies(data)
 
           setCompaniesOptions(companyOptions)
         } catch (error) {
