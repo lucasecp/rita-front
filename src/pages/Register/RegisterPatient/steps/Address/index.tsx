@@ -246,6 +246,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             maxLength={100}
             // disabled={addressLoaded}
             noSpecialCaracter
+            // disabled={addressLoaded}
           />
         </div>
       </div>
