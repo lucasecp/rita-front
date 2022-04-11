@@ -7,7 +7,7 @@ import { Select } from '@/components/Form/Select'
 import { SeeDocumentFile } from './SeeDocumentFile'
 
 import { Container } from './styles'
-import formatIncome from '../../helpers/formatIncome'
+import { formatIncome } from '../../helpers/formatIncome'
 
 interface DocumentsSeeOnePatientProps {
   incomeDocumentType: string
