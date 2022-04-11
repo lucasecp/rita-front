@@ -20,12 +20,14 @@ export const Menu: React.FC<MenuProps> = ({ expanded }) => {
   const [menuToShow, setMenuToShow] = useState([])
 
   useEffect(() => {
-    const menuToShowTemporary = menuItens.filter((menuItem) =>
-      menuItem.permissions?.some((permissionMenuItem) =>
-        user?.permissoes.some(
-          (permissionUser: string) => permissionUser === permissionMenuItem,
+    const menuToShowTemporary = menuItens.filter(
+      (menuItem) =>
+        !menuItem.permissions ||
+        menuItem.permissions?.some((permissionMenuItem) =>
+          user?.permissoes.some(
+            (permissionUser: string) => permissionUser === permissionMenuItem,
+          ),
         ),
-      ),
     )
 
     setMenuToShow(menuToShowTemporary)
