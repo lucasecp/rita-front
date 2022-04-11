@@ -47,7 +47,7 @@ const SeeAllSpecialists: React.FC = () => {
 
   return (
     <Container>
-      <DefaultLayout title="Especialistas - Filtragem">
+      <DefaultLayout title="Especialistas">
         <Content>
           <Filter setFilters={setFilters} />
           <Table specialists={specialists} setOrder={setOrder} order={order} />

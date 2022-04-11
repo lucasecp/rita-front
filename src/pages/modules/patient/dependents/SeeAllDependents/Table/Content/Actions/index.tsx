@@ -59,9 +59,7 @@ const Actions: React.FC<ActionsProps> = ({
       <CustomTooltip label="Visualizar">
         <EyePurpleIconStyled
           hidden={status === 'inativo' || status === 'Excluido'}
-          onClick={() =>
-            history.push(PATIENT_SEE_DEPENDENT, { idDependent: dependent.id })
-          }
+          onClick={() => history.push(PATIENT_SEE_DEPENDENT, { dependent })}
         />
       </CustomTooltip>
 

@@ -4,29 +4,29 @@ import DesassociateIcon from './Desassociate'
 import View from './View'
 import CustomTooltip from '@/components/Tooltip'
 import Schedule from './Schedule'
-import { SpecialistI } from '../../../types'
+import { DataSpecialist } from '../../../types'
 
 interface ActionsProps {
-  id: string
+  data: DataSpecialist
   setMakeRequest: (x: number) => void
 }
 
-const Actions: React.FC<ActionsProps> = ({ id, setMakeRequest }) => {
+const Actions: React.FC<ActionsProps> = ({ data, setMakeRequest }) => {
   return (
     <Container>
       <CustomTooltip label="Desassociar">
         <div>
-          <DesassociateIcon id={id} setMakeRequest={setMakeRequest} />
+          <DesassociateIcon id={data.id} setMakeRequest={setMakeRequest} />
         </div>
       </CustomTooltip>
       <CustomTooltip label="Visualizar">
         <div>
-          <View id={id} />
+          <View id={data.id} />
         </div>
       </CustomTooltip>
       <CustomTooltip label="Agenda">
         <div>
-          <Schedule />
+          <Schedule data={data}/>
         </div>
       </CustomTooltip>
     </Container>
