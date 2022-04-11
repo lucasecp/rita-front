@@ -149,7 +149,7 @@ export const MajorAge: React.FC<MajorAgeProps> = ({ dependent }) => {
       ])
 
       await apiPatient.patch(`/paciente/dependente/documento/confirmar`, null, {
-        params: { cpf: dependent.cpf },
+        params: { cpf: dependent.cpf, renda: selectIncome },
       })
 
       toast.success('Cadastro atualizado com sucesso.')

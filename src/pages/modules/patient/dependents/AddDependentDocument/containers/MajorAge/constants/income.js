@@ -1,7 +1,7 @@
 const incomeType = {
-  NO_INCOME: 'no_income',
-  ONE_HALF: 'one_half',
-  MORE_ONE_HALF: 'more_one_half',
+  NO_INCOME: 'NaopossuoRenda',
+  ONE_HALF: 'AteUmSalarioMinimoEMeio',
+  MORE_ONE_HALF: 'AcimaDeUmSalarioMinimoEMeio',
 }
 
 const incomeOptions = [
