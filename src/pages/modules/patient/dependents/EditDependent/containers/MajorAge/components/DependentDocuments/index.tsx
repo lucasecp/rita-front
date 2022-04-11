@@ -12,14 +12,14 @@ interface DependentDocumentsProps {
   incomeValue: string
   pacientCpf: string
   pacientId: number
-  messageToUpdateDocuments: number
+  updateDocumentsMessage: number
 }
 
 export const DependentDocuments: React.FC<DependentDocumentsProps> = ({
   incomeValue,
   pacientCpf,
   pacientId,
-  messageToUpdateDocuments,
+  updateDocumentsMessage,
 }) => {
   const { Loading } = useLoading()
 
@@ -69,7 +69,7 @@ export const DependentDocuments: React.FC<DependentDocumentsProps> = ({
     }
 
     updateFiles()
-  }, [messageToUpdateDocuments])
+  }, [updateDocumentsMessage])
 
   return (
     <Container>

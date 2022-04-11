@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Container, ButtonGroup } from './styles'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
-import { useMessage } from '@/hooks/useMessage'
 import { useHistory } from 'react-router-dom'
 import { PATIENT_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
 import { DependentAddress } from './components/DependentAddress'
@@ -47,7 +46,6 @@ export const MinorAge: React.FC<MinorAgeProps> = ({
   const { Loading } = useLoading()
   const history = useHistory()
   const { showMessage } = useModal()
-  const [messageToUpdateDocuments, sendMessageToUpdateDocuments] = useMessage()
 
   const { personalDatas, address, situation } = dependent
 
@@ -99,7 +97,6 @@ export const MinorAge: React.FC<MinorAgeProps> = ({
           `/paciente/dependente/${dependentId}`,
           dependentToApi,
         )
-        sendMessageToUpdateDocuments()
 
         toast.success('Edição Realizada com Sucesso.')
         history.push(PATIENT_DEPENDENTS)
@@ -140,12 +137,7 @@ export const MinorAge: React.FC<MinorAgeProps> = ({
         setAddressToSave={setAddressToSave}
         showErrors={showErrors}
       />
-      <DependentDocuments
-        incomeValue={personalDatas?.income}
-        pacientCpf={personalDatas.cpf}
-        pacientId={dependentId}
-        messageToUpdateDocuments={messageToUpdateDocuments}
-      />
+      <DependentDocuments pacientId={dependentId} />
       <Situation data={situation} />
 
       <ButtonGroup>

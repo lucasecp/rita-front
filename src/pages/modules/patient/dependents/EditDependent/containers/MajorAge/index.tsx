@@ -47,7 +47,7 @@ export const MajorAge: React.FC<MajorAgeProps> = ({
   const { Loading } = useLoading()
   const history = useHistory()
   const { showMessage } = useModal()
-  const [messageToUpdateDocuments, sendMessageToUpdateDocuments] = useMessage()
+  const [updateDocumentsMessage, sendUpdateDocumentsMessage] = useMessage()
 
   const { personalDatas, address, situation } = dependent
 
@@ -99,7 +99,7 @@ export const MajorAge: React.FC<MajorAgeProps> = ({
           `/paciente/dependente/${dependentId}`,
           dependentToApi,
         )
-        sendMessageToUpdateDocuments()
+        sendUpdateDocumentsMessage()
 
         toast.success('Edição Realizada com Sucesso.')
         history.push(PATIENT_DEPENDENTS)
@@ -144,7 +144,7 @@ export const MajorAge: React.FC<MajorAgeProps> = ({
         incomeValue={personalDatas?.income}
         pacientCpf={personalDatas.cpf}
         pacientId={dependentId}
-        messageToUpdateDocuments={messageToUpdateDocuments}
+        updateDocumentsMessage={updateDocumentsMessage}
       />
       <Situation data={situation} />
 

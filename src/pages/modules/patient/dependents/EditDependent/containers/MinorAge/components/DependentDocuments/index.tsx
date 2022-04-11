@@ -6,10 +6,7 @@ import apiPatient from '@/services/apiPatient'
 import { useLoading } from '@/hooks/useLoading'
 
 interface DependentDocumentsProps {
-  incomeValue: string
-  pacientCpf: string
   pacientId: number
-  messageToUpdateDocuments: number
 }
 
 export const DependentDocuments: React.FC<DependentDocumentsProps> = ({
