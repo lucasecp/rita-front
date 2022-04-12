@@ -63,18 +63,13 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
 
         if (axios.isAxiosError(error) && error.response) {
           if (remaingAttempts === 0) {
-            const { data } = await apiWallet.get('/wallet-configuration', {
-              params: {
-                where: JSON.stringify({ key: 'numberCelBlocked' }),
-              },
+            const { data } = await apiWallet.get<RitaWallet.WalletConfiguration>(
+              '/data/configuration/numberCelBlocked'
+            )
+
+            showMessage(PaymentRequestAccessBlocked, {
+              phoneNumber: data && data.value ? data.value : ''
             })
-            let phoneNumber
-
-            if (data && Array.isArray(data) && data.length && data[0].value) {
-              phoneNumber = data[0].value
-            }
-
-            showMessage(PaymentRequestAccessBlocked, { phoneNumber })
           } else {
             showMessage(PaymentRequestAccessAttempt, {
               data: paymentRequest,

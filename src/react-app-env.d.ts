@@ -124,4 +124,9 @@ namespace RitaWallet {
 
     userWallet?: RitaWallet.UserWallet
   }
+
+  type WalletConfiguration = {
+    key: string
+    value: string
+  }
 }
