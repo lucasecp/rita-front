@@ -2,12 +2,10 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   min-width: 170px;
-  max-width: 170px;
   min-height: 166px;
   padding: 4px;
   border: ${({ theme }) => theme.mediumLight} solid 0.5px;
   display: flex;
-  align-items: center;
   background: #fff;
 
   > div {
@@ -16,12 +14,16 @@ export const Container = styled.div`
     padding: 12px 4px;
     align-items: center;
     background: ${({ theme }) => theme.light};
+    min-height: 95%;
+    justify-content: space-between;
+    width: 100%;
     > svg {
       align-self: end;
       min-width: 15px;
       cursor: pointer;
     }
     > div {
+      margin-left: 4px;
       > * {
         word-break: break-word;
       }
@@ -63,7 +65,7 @@ export const Container = styled.div`
       height: 100%;
       display: block;
       background: ${({ theme }) => theme.main};
-      width: 2px;
+      width: 4px;
       position: absolute;
       left: 0;
       border-radius: 1px;

@@ -35,7 +35,6 @@ export const useValidator = (
     const daysChoosen = schedule.filter((schedule) => fields.days[schedule.day])
 
     const hasNoScheduleHours = daysChoosen.filter((day) => {
-
       const startChoosen = new Date().setHours(
         getHour(fields.startTime),
         getMinutes(fields.startTime),
@@ -55,13 +54,20 @@ export const useValidator = (
         getHour(day.end),
         getMinutes(day.end),
       )
-     
 
       return (
-        startChoosen >= startExisting &&
-        endChoose <= endExisting
-       )
-     
+        (startChoosen <= endExisting &&
+          startChoosen >= startExisting &&
+          endChoose >= endExisting) ||
+        (endChoose <= endExisting &&
+          endChoose >= startExisting &&
+          startChoosen <= startExisting) ||
+        (endChoose <= endExisting &&
+          endChoose >= startExisting &&
+          startChoosen <= startExisting) ||
+        (startChoosen >= startExisting && endChoose <= endExisting) ||
+        (startChoosen <= startExisting && endChoose >= endExisting)
+      )
     })
 
     if (hasNoScheduleHours.length > 0) {

@@ -10,7 +10,9 @@ import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes
 
 const Grid: React.FC<{ nameDoctor: string }> = ({ nameDoctor }) => {
   const { schedule } = useScheduleSpecialist()
+
   const history = useHistory()
+  console.log(schedule)
 
   const scheduleOnSpecificDay = (name: string) =>
     schedule.filter((data) => data.day === name)
