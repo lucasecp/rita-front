@@ -32,7 +32,9 @@ const Main: React.FC = () => {
     const getSchedule = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiAdmin.get(`clinica/59/medico/217/agenda`)
+        const { data } = await apiAdmin.get(
+          `clinica/59/medico/${location.state?.dataDoctor?.id}/agenda`,
+        )
 
         setSchedule(fromApi(data, 59))
         setCurrentDataClinicAndDoctor({
