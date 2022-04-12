@@ -31,27 +31,6 @@ export const Menu: React.FC<MenuProps> = ({ expanded }) => {
     )
 
     setMenuToShow(menuToShowTemporary)
-
-    // setMenuToShow((before) => [...before, item])
-
-    // if (!item.permission || user?.permissoes.includes(item.permission)) {
-    //   setMenuToShow((before) => [...before, item])
-    // } else {
-
-    // if (typeof item.permission !== 'string') {
-    //   const allowedReports = item.permission.filter((permissionMenuItem) =>
-    //     user?.permissoes.some(
-    //       (permissionUser: string) => permissionUser === permissionMenuItem,
-    //     ),
-    //   )
-
-    //   if (allowedReports) {
-    //     setMenuToShow((beforeMenuToShow) => [
-    //       ...beforeMenuToShow,
-    //       item.permission,
-    //     ])
-    //   }
-    // }
   }, [])
 
   function handleMenuItemClick() {
