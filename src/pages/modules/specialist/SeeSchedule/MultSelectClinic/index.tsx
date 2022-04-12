@@ -5,6 +5,9 @@ import React, { useEffect, useState, SetStateAction } from 'react'
 import { Container } from './styles'
 /** Helpers */
 import { mapClinics } from '../Helpers/TransformData'
+/** Hooks */
+import { useScheduleSpecialist } from '../hooks'
+
 interface ClinicsProps {
   clinics: string
   setClinics: React.Dispatch<SetStateAction<string>>
@@ -12,7 +15,6 @@ interface ClinicsProps {
   color?: string
   label?: string
   [x: string]: any
-  specialistName: string
 }
 
 export const SelectClinic: React.FC<ClinicsProps> = ({
@@ -21,34 +23,31 @@ export const SelectClinic: React.FC<ClinicsProps> = ({
   errors,
   color,
   label,
-  specialistName,
   ...rest
 }) => {
+
   const [clinicsOptions, setClinicsOptions] = useState<SelectOption[]>([])
+  const { setCurrentDataClinicAndDoctor, currentDataClinicAndDoctor, clinics: clinicas } = useScheduleSpecialist()
 
   useEffect(() => {
     const getSpecialtys = async () => {
       try {
-        const { data } = await apiAdmin.get(
-          `/clinica?limit=100&skip=0&status=A&especialista=${specialistName}`,
-        )
-
-        console.log({data})
-
-        const dataMapped = mapClinics(data?.clinicas)
+        const dataMapped = mapClinics(clinicas)
 
         if (!dataMapped.length) {
-          return setClinicsOptions([])
+          return setClinicsOptions([{ label: 'Nenhuma clínica encontrada.', value: '' }])
         }
 
         setClinicsOptions(dataMapped)
-      } catch (error) {
-        console.error(error)
-      }
+      } catch (error) {}
     }
 
     getSpecialtys()
-  }, [specialistName])
+  }, [clinicas])
+
+  useEffect(() => {
+    setCurrentDataClinicAndDoctor({...currentDataClinicAndDoctor, idClinic: Number(clinics)})
+  }, [clinics])
 
   return (
     <Container>

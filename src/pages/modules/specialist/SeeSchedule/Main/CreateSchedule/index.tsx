@@ -16,26 +16,24 @@ import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 import { SelectSpecialty } from '../../MultSelectSpecialty'
 import { SelectClinic } from '../../MultSelectClinic'
+import { toApi } from '../../adapters'
 
-interface CreateScheduleI {
-  specialistName: string
-}
 
-const CreateSchedule: React.FC<CreateScheduleI> = ({specialistName}) => {
+const CreateSchedule: React.FC = () => {
+
   const [startTime, setStartTime] = useState('')
 
   const [endTime, setEndTime] = useState('')
 
   const [errors, setErrors] = useState<ErrorsI>({} as ErrorsI)
 
-  const [specialtys, setSpecialtys] = useState<string>()
+  const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>()
 
   const [clinics, setClinics] = useState<string>()
 
   const [days, setDays] = useState<DaysI>({} as DaysI)
 
-  const {  currentDataClinicAndDoctor, setGetSchedules } =
-    useScheduleSpecialist()
+  const {  currentDataClinicAndDoctor, setGetSchedules } = useScheduleSpecialist()
 
   const { hasError } = useValidator(setErrors)
 
@@ -44,6 +42,7 @@ const CreateSchedule: React.FC<CreateScheduleI> = ({specialistName}) => {
   const { showSimple } = useModal()
 
   const onCreateSchedule = async () => {
+    //console.log({ startTime, endTime, specialtys, days })
     if (hasError({ startTime, endTime, specialtys, days })) {
       return
     }
@@ -59,21 +58,29 @@ const CreateSchedule: React.FC<CreateScheduleI> = ({specialistName}) => {
 
     try {
       Loading.turnOn()
-      // await axios.all(
-      //   daysChoosen.map((data) =>
-      //     apiAdmin.post(
-      //       `/clinica/medico/217/agenda`,
-      //       toApi({
-      //         start: startTime,
-      //         end: endTime,
-      //         specialtys,
-      //         day: data,
-      //         idClinic: currentDataClinicAndDoctor.idClinic,
-      //         idDoctor: currentDataClinicAndDoctor.idDoctor,
-      //       }),
-      //     ),
-      //   ),
-      // )
+
+        daysChoosen.map((data) =>
+          // apiAdmin.post(
+          //   `/clinica/medico/217/agenda`,
+          //   toApi({
+          //     start: startTime,
+          //     end: endTime,
+          //     specialtys,
+          //     day: data,
+          //     idClinic: currentDataClinicAndDoctor.idClinic,
+          //     idDoctor: currentDataClinicAndDoctor.idDoctor,
+          //   }),
+          // ),
+          console.log(toApi({
+            start: startTime,
+            end: endTime,
+            specialtys,
+            day: data,
+            idClinic: currentDataClinicAndDoctor.idClinic,
+          }))
+        ),
+
+
       setGetSchedules()
     } catch (error) {
       showSimple.error(
@@ -115,7 +122,6 @@ const CreateSchedule: React.FC<CreateScheduleI> = ({specialistName}) => {
           setClinics={setClinics}
           errors={errors}
           label="Clinicas:"
-          specialistName={specialistName}
         />
 
         <SelectSpecialty

@@ -1,11 +1,12 @@
 import React from 'react'
+import { useScheduleSpecialist } from '../hooks'
 import { Container } from './styles'
 
-interface Header {
-  specialistName: string
-}
 
-const Header: React.FC<Header> = ({ specialistName }) => {
+const Header: React.FC = () => {
+
+  const { specialistName } = useScheduleSpecialist()
+
   return (
     <Container>
       <div>

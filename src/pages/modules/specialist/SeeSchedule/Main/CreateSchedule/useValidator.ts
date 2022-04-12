@@ -7,13 +7,11 @@ import { useModal } from '@/hooks/useModal'
 interface fields {
   startTime: string
   endTime: string
-  specialtys: string
+  specialtys: MultiSelectOption[]
   days: DaysI
 }
 
-export const useValidator = (
-  setErrors: React.Dispatch<React.SetStateAction<ErrorsI>>,
-): { hasError: (fields: fields) => boolean } => {
+export const useValidator = (setErrors: React.Dispatch<React.SetStateAction<ErrorsI>>): { hasError: (fields: fields) => boolean } => {
   const { schedule } = useScheduleSpecialist()
 
   const { showSimple } = useModal()
@@ -35,7 +33,6 @@ export const useValidator = (
     const daysChoosen = schedule.filter((schedule) => fields.days[schedule.day])
 
     const hasNoScheduleHours = daysChoosen.filter((day) => {
-
       const startChoosen = new Date().setHours(
         getHour(fields.startTime),
         getMinutes(fields.startTime),
@@ -56,12 +53,19 @@ export const useValidator = (
         getMinutes(day.end),
       )
 
-
       return (
-        startChoosen >= startExisting &&
-        endChoose <= endExisting
-       )
-
+        (startChoosen <= endExisting &&
+          startChoosen >= startExisting &&
+          endChoose >= endExisting) ||
+        (endChoose <= endExisting &&
+          endChoose >= startExisting &&
+          startChoosen <= startExisting) ||
+        (endChoose <= endExisting &&
+          endChoose >= startExisting &&
+          startChoosen <= startExisting) ||
+        (startChoosen >= startExisting && endChoose <= endExisting) ||
+        (startChoosen <= startExisting && endChoose >= endExisting)
+      )
     })
 
     if (hasNoScheduleHours.length > 0) {
@@ -75,12 +79,18 @@ export const useValidator = (
 
       error = true
     }
-    if (fields.specialtys.length === 0) {
+    if (!fields.specialtys || fields.specialtys.length === 0) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         specialtys: 'Especialidade Obrigatória.',
       }))
-
+      error = true
+    }
+    if (fields.specialtys && fields.specialtys.length > 1) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        specialtys: 'Somente 1 especialidade por horário de trabalho.',
+      }))
       error = true
     }
     if (!someDayWasSelected) {
@@ -108,6 +118,44 @@ export const useValidator = (
 
       error = true
     }
+
+    if(fields.startTime){
+      const startTime = getHour(fields.startTime)
+      if(startTime > 23){
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          startTime: 'A hora não pode ser maior do que 23:00',
+        }))
+
+        error = true
+      }
+    }
+
+    if(fields.endTime){
+      const endTime = getHour(fields.endTime)
+      if(endTime > 23){
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          endTime: 'A hora não pode ser maior do que 23:00',
+        }))
+
+        error = true
+      }
+    }
+
+    if(fields.endTime && fields.startTime){
+      const startTime = getHour(fields.startTime)
+      const endTime = getHour(fields.endTime)
+      if(startTime > endTime){
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          startTime: 'A hora inicial não pode ser maior do que a hora final.',
+        }))
+
+        error = true
+      }
+    }
+
     return error
   }
   return { hasError }

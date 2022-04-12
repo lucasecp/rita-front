@@ -1,4 +1,5 @@
 import { MultiSelectOption } from '@/components/Form/MultSelect/index'
+import React, { SetStateAction } from 'react'
 
 export interface ScheduleI {
   idClinic?: number
@@ -54,6 +55,15 @@ export interface ScheduleSpecialistContextDataI {
   setCurrentDataClinicAndDoctor: React.Dispatch<
     React.SetStateAction<CurrentDataClinicAndDoctorI>
   >
+  clinics: ClinicsI[]
+  specialistName: string,
+  setSpecialistName: React.Dispatch<SetStateAction<string>>
+  setClinics: React.Dispatch<SetStateAction<ClinicsI[]>>
   setGetSchedules: () => void
   getSchedules: boolean
+}
+
+export interface ClinicsI {
+  descricao: string,
+  idClinica: number
 }

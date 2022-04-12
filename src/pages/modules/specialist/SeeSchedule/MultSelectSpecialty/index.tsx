@@ -1,12 +1,12 @@
-import { Select, SelectOption } from '@/components/Form/Select'
+import MultSelect, { MultiSelectOption } from '@/components/Form/MultSelect'
 import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState, SetStateAction } from 'react'
 
 import { Container } from './styles'
 
 interface SpecialtysProps {
-  specialtys: string
-  setSpecialtys: React.Dispatch<SetStateAction<string>>
+  specialtys: MultiSelectOption[]
+  setSpecialtys: React.Dispatch<SetStateAction<MultiSelectOption[]>>
   errors: any
   color?: string
   label?: string
@@ -25,59 +25,48 @@ export const SelectSpecialty: React.FC<SpecialtysProps> = ({
   idDoctor,
   ...rest
 }) => {
-  const [specialtysOptions, setSpecialtysOptions] = useState<SelectOption[]>([])
+  const [specialtysOptions, setSpecialtysOptions] = useState<MultiSelectOption[]>([])
 
-  const mapSpecialtys = (arrayDoctor: any[], arrayClinic: any[]) => {
-    if (!arrayDoctor && !arrayClinic) return []
-
-    return arrayClinic
-      .map((obj) => ({
-        id: obj.idEspecialidade,
-        label: obj.descricao,
-        value: obj.idEspecialidade,
-      }))
+  const mapSpecialtys = (arrayDoctor: any[]) => {
+    if (!arrayDoctor) return []
+    return arrayDoctor.map((obj) => ({
+      id: obj.idEspecialidade,
+      name: obj.descricao,
+    }))
   }
 
   useEffect(() => {
-    const getSpecialtys = async () => {
-      try {
-        const { data } = await apiAdmin.get(
-          `/clinica/${idClinic}/medico/${idDoctor}`,
-        )
-        const { data: dataClinic } = await apiAdmin.get(
-          `clinica/minha-clinica/${idClinic}`,
-        )
-
-        const dataMapped = mapSpecialtys(
-          data?.especialidades,
-          dataClinic.especialidade,
-        )
-
-        if (!dataMapped.length) {
-          return setSpecialtysOptions([])
-        }
-
-        setSpecialtysOptions(dataMapped)
-      } catch ({ response }) {}
-    }
-
     getSpecialtys()
   }, [idDoctor, idClinic])
+
+  const getSpecialtys = async () => {
+    try {
+      const { data } = await apiAdmin.get(
+        `/medico/${idDoctor}/clinica/${idClinic}`,
+      )
+      console.log({data})
+      const dataMapped = mapSpecialtys(data?.clinica?.especialidades)
+      if (!dataMapped.length) {
+        return setSpecialtysOptions([])
+      }
+      setSpecialtysOptions(dataMapped)
+    } catch (error) {}
+  }
+
 
   return (
     <Container>
       {!label && <h1>Especialidades</h1>}
       <section>
-        <Select
+        <MultSelect
           value={specialtys}
           setValue={setSpecialtys}
           color={color}
           options={specialtysOptions}
-          hasError={!!errors?.specialtys}
-          msgError={errors?.specialtys}
+          hasError={!!errors.specialtys}
+          messageError={errors.specialtys}
           name="specialtys"
           label={label}
-          variation='secondary'
           {...rest}
         />
       </section>
