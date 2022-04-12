@@ -1,15 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from './styles'
 
 const ServiceSchedule = ({ dataSchedule = [] }) => {
+  const [daysEmpty, setDaysEmpty] = useState([])
   console.log({ dataSchedule })
   const hasDayInSchedule = (day) => {
     return dataSchedule.some(
       (schedule) => schedule[day] && schedule[day].length,
     )
   }
+  // const isEmpty = dataSchedule[0] && dataSchedule[0].filter((day) => !day)
 
-  return dataSchedule.length ? (
+  useEffect(() => {
+    for (const i in dataSchedule[0]) {
+      if (!dataSchedule[0][i]) {
+        setDaysEmpty((days) => [...days, i])
+      }
+    }
+  }, [dataSchedule])
+
+  console.log(daysEmpty.length, dataSchedule)
+
+  return daysEmpty.length < 7 ? (
     <Container>
       <header>
         <h5>Agenda de atendimento</h5>
@@ -28,9 +40,9 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   ac = `${hour.start} às ${hour.end}`
               //   return <li>{ac}</li>
               // }, ''),
-              schedule.monday.map(time => {
+              schedule.monday.map((time) => {
                 return <li>{`${time.start} às ${time.end}`}</li>
-              })
+              }),
             )}
           </ul>
         )}
@@ -47,9 +59,9 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   ac = `${hour.start} às ${hour.end}`
               //   return <li>{ac}</li>
               // }, ''),
-              schedule.tuesday.map(time => {
+              schedule.tuesday.map((time) => {
                 return <li>{`${time.start} às ${time.end}`}</li>
-              })
+              }),
             )}
           </ul>
         )}
@@ -66,9 +78,9 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   ac = `${hour.start} às ${hour.end}`
               //   return <li>{ac}</li>
               // }, ''),
-              schedule.wednesday.map(time => {
+              schedule.wednesday.map((time) => {
                 return <li>{`${time.start} às ${time.end}`}</li>
-              })
+              }),
             )}
           </ul>
         )}
@@ -85,9 +97,9 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   ac = `${hour.start} às ${hour.end}`
               //   return <li>{ac}</li>
               // }, ''),
-              schedule.thursday.map(time => {
+              schedule.thursday.map((time) => {
                 return <li>{`${time.start} às ${time.end}`}</li>
-              })
+              }),
             )}
           </ul>
         )}
@@ -104,9 +116,9 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   ac = `${hour.start} às ${hour.end}`
               //   return <li>{ac}</li>
               // }, ''),
-              schedule.friday.map(time => {
+              schedule.friday.map((time) => {
                 return <li>{`${time.start} às ${time.end}`}</li>
-              })
+              }),
             )}
           </ul>
         )}
@@ -123,9 +135,9 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   ac = `${hour.start} às ${hour.end}`
               //   return <li>{ac}</li>
               // }, ''),
-              schedule.saturday.map(time => {
+              schedule.saturday.map((time) => {
                 return <li>{`${time.start} às ${time.end}`}</li>
-              })
+              }),
             )}
           </ul>
         )}
@@ -142,9 +154,9 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   ac = `${hour.start} às ${hour.end}`
               //   return <li>{ac}</li>
               // }, ''),
-              schedule.sunday.map(time => {
+              schedule.sunday.map((time) => {
                 return <li>{`${time.start} às ${time.end}`}</li>
-              })
+              }),
             )}
           </ul>
         )}
