@@ -3,7 +3,6 @@ import { Container } from './styles'
 
 const ServiceSchedule = ({ dataSchedule = [] }) => {
   const [daysEmpty, setDaysEmpty] = useState([])
-  console.log({ dataSchedule })
   const hasDayInSchedule = (day) => {
     return dataSchedule.some(
       (schedule) => schedule[day] && schedule[day].length,
@@ -18,8 +17,6 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
       }
     }
   }, [dataSchedule])
-
-  console.log(daysEmpty.length, dataSchedule)
 
   return daysEmpty.length < 7 ? (
     <Container>
