@@ -1,7 +1,7 @@
 import { ScheduleI, ScheduleApiI } from '../types'
 import { mapDays, mapDaysToApi } from './mapDays'
 import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys'
-
+// mapSpecialtys(schedule.especialidades)
 export const fromApi = (
   data: ScheduleApiI[],
   currentClinic: number,
