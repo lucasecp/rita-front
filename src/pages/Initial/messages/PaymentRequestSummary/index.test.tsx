@@ -10,7 +10,7 @@ it('renders without crashing', () => {
     description: 'Lorem ipsum dolor sit amet',
     debitAmount: 500,
     situation: 'WAITING',
-  } as RitaWallet.PaymentRequest
+  } as RitaWallet.Model.PaymentRequest
   const items = [
     {
       description: 'Item 1',
@@ -18,7 +18,7 @@ it('renders without crashing', () => {
       discountPrice: 100,
       quantity: 1,
     },
-  ] as RitaWallet.PaymentRequestItem[]
+  ] as RitaWallet.Model.PaymentRequestItem[]
 
   ReactDOM.render(<PaymentRequestSummary data={data} items={items} />, div)
 })

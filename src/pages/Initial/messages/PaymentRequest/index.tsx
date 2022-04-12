@@ -21,7 +21,7 @@ function convertPriceToCrownValue(amount: number, currency?: string) {
 const defaultMaximumAttempts = 3
 
 type PaymentRequestProps = {
-  data: RitaWallet.PaymentRequest
+  data: RitaWallet.Model.PaymentRequest
 }
 
 export const PaymentRequest: React.FC<PaymentRequestProps> = ({
@@ -41,8 +41,8 @@ export const PaymentRequest: React.FC<PaymentRequestProps> = ({
   }
 
   async function handlePayClick() {
-    const { data } = await apiWallet.get<RitaWallet.PaymentRequestItem[]>(
-      `/payment/id/${paymentRequest.id}/items`,
+    const { data } = await apiWallet.get<RitaWallet.Model.PaymentRequestItem[]>(
+      `/payment/id/${paymentRequest.id}/item`,
     )
 
     if (!Array.isArray(data)) {

@@ -8,7 +8,7 @@ import { ReactComponent as TimesCircleIcon } from '@/assets/icons/times-circle.s
 import { Container } from './styles'
 
 export const PaymentRequestAccessAttempt: React.FC<{
-  data: RitaWallet.PaymentRequest
+  data: RitaWallet.Model.PaymentRequest
   counter?: number
 }> = ({ data, counter = 0 }) => {
   const { showMessage } = useModal()

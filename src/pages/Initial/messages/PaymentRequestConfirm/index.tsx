@@ -24,7 +24,7 @@ function validateRequired(value?: string | null) {
 const defaultMaximumAttempts = 3
 
 type PaymentRequestConfirmProps = {
-  data: RitaWallet.PaymentRequest
+  data: RitaWallet.Model.PaymentRequest
 }
 
 export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
@@ -63,7 +63,7 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
 
         if (axios.isAxiosError(error) && error.response) {
           if (remaingAttempts === 0) {
-            const { data } = await apiWallet.get<RitaWallet.WalletConfiguration>(
+            const { data } = await apiWallet.get<RitaWallet.Model.WalletConfiguration>(
               '/data/configuration/numberCelBlocked'
             )
 
@@ -109,8 +109,8 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
             axios.isAxiosError(error) &&
             error.response?.data?.errorMessage === 'Insufficient balance'
           ) {
-            const { data } = await apiWallet.get<RitaWallet.Wallet>(
-              '/wallet-balance',
+            const { data } = await apiWallet.get<RitaWallet.API.Get.Wallet>(
+              '/wallet',
             )
 
             if (!data) {
@@ -120,7 +120,7 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
             showMessage(
               InsufficientBalance,
               {
-                walletBalance: data.crownBalance + data.cashbackBalance,
+                walletBalance: data.totalBalanceAmount,
                 debitAmount: paymentRequest.debitAmount,
               },
               true,

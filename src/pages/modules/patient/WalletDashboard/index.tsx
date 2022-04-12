@@ -17,7 +17,7 @@ export const WalletDashboard: React.FC = () => {
   useEffect(() => {
     async function fetchData() {
       const { data: dataPaymentRequests } = await apiWallet.get<
-        RitaWallet.PaymentRequest[]
+        RitaWallet.Model.PaymentRequest[]
       >('/payment', {
         params: {
           take: 1,
@@ -28,10 +28,10 @@ export const WalletDashboard: React.FC = () => {
       if (Array.isArray(dataPaymentRequests) && dataPaymentRequests.length) {
         showMessage(PaymentRequest, { data: dataPaymentRequests[0] }, true)
       } else {
-        const { data } = await apiWallet.get<RitaWallet.CSAT[]>('/csat')
+        const { data } = await apiWallet.get<RitaWallet.API.Get.PaymentCSAT>('/payment/csat')
 
-        if (data && Array.isArray(data) && data.length) {
-          showMessage(CustomerSatisfaction, { data: data[0] }, true)
+        if (data) {
+          showMessage(CustomerSatisfaction, { data: data }, true)
         }
       }
     }
