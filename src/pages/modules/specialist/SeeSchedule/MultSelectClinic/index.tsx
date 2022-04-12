@@ -1,14 +1,13 @@
-import CustomMultiSelect, {
-  MultiSelectOption,
-} from '@/components/Form/MultSelect'
+import {Select ,SelectOption} from '@/components/Form/Select'
 import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState, SetStateAction } from 'react'
-
+/** Styles */
 import { Container } from './styles'
-
+/** Helpers */
+import { mapClinics } from '../Helpers/TransformData'
 interface ClinicsProps {
-  clinics: MultiSelectOption[]
-  setClinics: React.Dispatch<SetStateAction<MultiSelectOption[]>>
+  clinics: string
+  setClinics: React.Dispatch<SetStateAction<string>>
   errors: any
   color?: string
   label?: string
@@ -16,7 +15,7 @@ interface ClinicsProps {
   specialistName: string
 }
 
-export const MultSelectClinic: React.FC<ClinicsProps> = ({
+export const SelectClinic: React.FC<ClinicsProps> = ({
   clinics,
   setClinics,
   errors,
@@ -25,24 +24,7 @@ export const MultSelectClinic: React.FC<ClinicsProps> = ({
   specialistName,
   ...rest
 }) => {
-  const [clinicsOptions, setClinicsOptions] = useState<MultiSelectOption[]>([])
-
-  const mapClinics = (arrayDoctor: any[], arrayClinic: any[]) => {
-    if (!arrayDoctor && !arrayClinic) return []
-
-    return arrayClinic
-      .map((obj) => ({
-        id: obj.idEspecialidade,
-        name: obj.descricao,
-        rqeRequired: obj.requerInscricao,
-      }))
-      .filter(
-        (specialty) =>
-          specialty.id &&
-          specialty.name &&
-          arrayDoctor.some((doc) => doc.descricao === specialty.name),
-      )
-  }
+  const [clinicsOptions, setClinicsOptions] = useState<SelectOption[]>([])
 
   useEffect(() => {
     const getSpecialtys = async () => {
@@ -50,23 +32,18 @@ export const MultSelectClinic: React.FC<ClinicsProps> = ({
         const { data } = await apiAdmin.get(
           `/clinica?limit=100&skip=0&status=A&especialista=${specialistName}`,
         )
+
         console.log({data})
-        // const { data: dataClinic } = await apiAdmin.get(
-        //   `clinica/minha-clinica/${idClinic}`,
-        // )
 
-        // const dataMapped = mapClinics(
-        //   data?.especialidades,
-        //   dataClinic.especialidade,
-        // )
+        const dataMapped = mapClinics(data?.clinicas)
 
-        // if (!dataMapped.length) {
-        //   return setClinicsOptions([])
-        // }
+        if (!dataMapped.length) {
+          return setClinicsOptions([])
+        }
 
-        //setClinicsOptions(dataMapped)
+        setClinicsOptions(dataMapped)
       } catch (error) {
-        console.error({error})
+        console.error(error)
       }
     }
 
@@ -77,15 +54,16 @@ export const MultSelectClinic: React.FC<ClinicsProps> = ({
     <Container>
       {!label && <h1>Clinicas</h1>}
       <section>
-        <CustomMultiSelect
+        <Select
           value={clinics}
           setValue={setClinics}
           color={color}
           options={clinicsOptions}
           hasError={!!errors?.clinics}
-          messageError={errors?.clinics}
+          msgError={errors?.clinics}
           name="clinics"
           label={label}
+          variation='secondary'
           {...rest}
         />
       </section>

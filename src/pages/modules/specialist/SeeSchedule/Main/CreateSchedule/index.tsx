@@ -14,8 +14,8 @@ import axios from 'axios'
 import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
-import { MultSelectSpecialty } from '../../MultSelectSpecialty'
-import { MultSelectClinic } from '../../MultSelectClinic'
+import { SelectSpecialty } from '../../MultSelectSpecialty'
+import { SelectClinic } from '../../MultSelectClinic'
 
 interface CreateScheduleI {
   specialistName: string
@@ -28,9 +28,9 @@ const CreateSchedule: React.FC<CreateScheduleI> = ({specialistName}) => {
 
   const [errors, setErrors] = useState<ErrorsI>({} as ErrorsI)
 
-  const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>([])
+  const [specialtys, setSpecialtys] = useState<string>()
 
-  const [clinics, setClinics] = useState<MultiSelectOption[]>([])
+  const [clinics, setClinics] = useState<string>()
 
   const [days, setDays] = useState<DaysI>({} as DaysI)
 
@@ -110,7 +110,7 @@ const CreateSchedule: React.FC<CreateScheduleI> = ({specialistName}) => {
         />
       </section>
       <section>
-        <MultSelectClinic
+        <SelectClinic
           clinics={clinics}
           setClinics={setClinics}
           errors={errors}
@@ -118,7 +118,7 @@ const CreateSchedule: React.FC<CreateScheduleI> = ({specialistName}) => {
           specialistName={specialistName}
         />
 
-        <MultSelectSpecialty
+        <SelectSpecialty
           specialtys={specialtys}
           setSpecialtys={setSpecialtys}
           errors={errors}

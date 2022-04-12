@@ -11,6 +11,15 @@ export const Container = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr) 1fr auto auto;
     gap: 24px;
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    > button {
+      position: relative;
+      top: 7px;
+    }
   }
   //grid-template-columns: repeat(2, 150px) 1fr auto auto;
   /* align-items: start;

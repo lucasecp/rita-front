@@ -7,7 +7,7 @@ import { useModal } from '@/hooks/useModal'
 interface fields {
   startTime: string
   endTime: string
-  specialtys: MultiSelectOption[]
+  specialtys: string
   days: DaysI
 }
 
@@ -55,13 +55,13 @@ export const useValidator = (
         getHour(day.end),
         getMinutes(day.end),
       )
-     
+
 
       return (
         startChoosen >= startExisting &&
         endChoose <= endExisting
        )
-     
+
     })
 
     if (hasNoScheduleHours.length > 0) {

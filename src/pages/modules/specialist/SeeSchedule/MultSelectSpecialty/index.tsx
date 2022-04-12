@@ -1,14 +1,12 @@
-import CustomMultiSelect, {
-  MultiSelectOption,
-} from '@/components/Form/MultSelect'
+import { Select, SelectOption } from '@/components/Form/Select'
 import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState, SetStateAction } from 'react'
 
 import { Container } from './styles'
 
 interface SpecialtysProps {
-  specialtys: MultiSelectOption[]
-  setSpecialtys: React.Dispatch<SetStateAction<MultiSelectOption[]>>
+  specialtys: string
+  setSpecialtys: React.Dispatch<SetStateAction<string>>
   errors: any
   color?: string
   label?: string
@@ -17,7 +15,7 @@ interface SpecialtysProps {
   idDoctor: number
 }
 
-export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
+export const SelectSpecialty: React.FC<SpecialtysProps> = ({
   specialtys,
   setSpecialtys,
   errors,
@@ -27,9 +25,7 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
   idDoctor,
   ...rest
 }) => {
-  const [specialtysOptions, setSpecialtysOptions] = useState<
-    MultiSelectOption[]
-  >([])
+  const [specialtysOptions, setSpecialtysOptions] = useState<SelectOption[]>([])
 
   const mapSpecialtys = (arrayDoctor: any[], arrayClinic: any[]) => {
     if (!arrayDoctor && !arrayClinic) return []
@@ -37,15 +33,9 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
     return arrayClinic
       .map((obj) => ({
         id: obj.idEspecialidade,
-        name: obj.descricao,
-        rqeRequired: obj.requerInscricao,
+        label: obj.descricao,
+        value: obj.idEspecialidade,
       }))
-      .filter(
-        (specialty) =>
-          specialty.id &&
-          specialty.name &&
-          arrayDoctor.some((doc) => doc.descricao === specialty.name),
-      )
   }
 
   useEffect(() => {
@@ -78,15 +68,16 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
     <Container>
       {!label && <h1>Especialidades</h1>}
       <section>
-        <CustomMultiSelect
+        <Select
           value={specialtys}
           setValue={setSpecialtys}
           color={color}
           options={specialtysOptions}
           hasError={!!errors?.specialtys}
-          messageError={errors?.specialtys}
+          msgError={errors?.specialtys}
           name="specialtys"
           label={label}
+          variation='secondary'
           {...rest}
         />
       </section>
