@@ -18,6 +18,7 @@ export const validateCpf = (value) => {
 
 export const validatePhone = (value) => {
   const phone = clear(value)
+  console.log(phone)
   const phoneIsValid = phone[0] !== '0' && phone[2] === '9'
 
   if (phone.length < 11 || !phoneIsValid) return { phone: 'Celular inválido.' }
