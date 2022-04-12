@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background: #fff;
+    background: ${({ theme }) => theme.extraLight};
   overflow-x: auto;
   border-radius: 8px;
 
@@ -10,6 +10,7 @@ export const Container = styled.div`
     > div {
       display: flex;
       flex-direction: column;
+      flex: 0 0 14.28%
     }
   }
 

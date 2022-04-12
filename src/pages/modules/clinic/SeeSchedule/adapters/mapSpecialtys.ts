@@ -1,8 +1,8 @@
 export const mapSpecialtys = (array: any[]) => {
   if (!array) return []
+
   return array
-    .map((obj) => ({ id: obj.idEspecialidade, name: obj.descricao }))
-    .filter((specialty) => specialty.id && specialty.name)
+    .map((obj) => ({ id: obj.id, name: obj.descricao }))
 }
 
 export const mapSpecialtysToApi = (array: any[]) => {

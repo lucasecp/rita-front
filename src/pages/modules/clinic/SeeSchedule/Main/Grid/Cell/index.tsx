@@ -3,6 +3,7 @@ import { useScheduleSpecialist } from '../../../hooks'
 import { Container } from './styles'
 import { ScheduleI } from '../../../types'
 import { ReactComponent as DeleteIcon } from '@/assets/icons/trash.svg'
+import { ReactComponent as PadLockIcon } from '@/assets/icons/pad-lock2.svg'
 import { useModal } from '@/hooks/useModal'
 import DeleteEvent from '../messages/DeleteEvent/index'
 
@@ -13,7 +14,8 @@ interface CellProps {
 }
 
 const Cell: React.FC<CellProps> = ({ data, nameDoctor, empty }) => {
-  const { currentDataClinicAndDoctor, setGetSchedules } = useScheduleSpecialist()
+  const { currentDataClinicAndDoctor, setGetSchedules } =
+    useScheduleSpecialist()
   const { showMessage } = useModal()
 
   return (
@@ -32,16 +34,20 @@ const Cell: React.FC<CellProps> = ({ data, nameDoctor, empty }) => {
               ))}
             </p>
           </div>
-          <DeleteIcon
-            onClick={() =>
-              showMessage(DeleteEvent, {
-                idClinic: currentDataClinicAndDoctor.idClinic,
-                idDoctor: currentDataClinicAndDoctor.idDoctor,
-                idSchedule: data.idSchedule,
-                setMakeNewRequest: setGetSchedules
-              })
-            }
-          />
+          {nameDoctor === 'Ocupado' ? (
+            <PadLockIcon />
+          ) : (
+            <DeleteIcon
+              onClick={() =>
+                showMessage(DeleteEvent, {
+                  idClinic: currentDataClinicAndDoctor.idClinic,
+                  idDoctor: currentDataClinicAndDoctor.idDoctor,
+                  idSchedule: data.idSchedule,
+                  setMakeNewRequest: setGetSchedules,
+                })
+              }
+            />
+          )}
         </div>
       )}
     </Container>

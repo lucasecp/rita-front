@@ -1,16 +1,18 @@
 import React from 'react'
 import { useScheduleSpecialist } from '../../hooks'
-import { Container,Footer } from './styles'
+import { Container, Footer } from './styles'
 import Cell from './Cell'
 import { daysWeek } from '../../constants/days'
 import Header from './Header'
-import OutlineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
 import { useHistory } from 'react-router'
 import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 
 const Grid: React.FC<{ nameDoctor: string }> = ({ nameDoctor }) => {
   const { schedule } = useScheduleSpecialist()
+
   const history = useHistory()
+  console.log(schedule)
 
   const scheduleOnSpecificDay = (name: string) =>
     schedule.filter((data) => data.day === name)
@@ -116,10 +118,10 @@ const Grid: React.FC<{ nameDoctor: string }> = ({ nameDoctor }) => {
         </section>
       </Container>
       <Footer>
-        <OutlineButton onClick={() => history.push(CLINIC_SEE_ALL_SPECIALIST)}>
+        <ButtonPrimary onClick={() => history.push(CLINIC_SEE_ALL_SPECIALIST)}>
           Voltar
-        </OutlineButton>
-      </Footer>  
+        </ButtonPrimary>
+      </Footer>
     </>
   )
 }

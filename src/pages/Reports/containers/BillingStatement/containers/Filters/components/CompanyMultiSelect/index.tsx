@@ -39,11 +39,13 @@ export const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
         (permission: string) => permission === permissions.LISTAR_EMPRESAS,
       )
 
-      const api = hasPermissionToSeeAllCompanies ? apiAdmin : apiUser
+      const apiConfig = hasPermissionToSeeAllCompanies
+        ? { address: apiAdmin, url: '/empresa' }
+        : { address: apiUser, url: '/usuario/empresa' }
 
       if (company.label?.length > 0) {
         try {
-          const { data } = await api.get('/empresa', {
+          const { data } = await apiConfig.address.get(apiConfig.url, {
             params: {
               busca: company.label,
             },
@@ -60,7 +62,7 @@ export const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
 
       if (company.label?.length === 0) {
         try {
-          const { data } = await api.get('/empresa')
+          const { data } = await apiConfig.address.get(apiConfig.url)
 
           const companyOptions = fromApiCompanies(data)
 

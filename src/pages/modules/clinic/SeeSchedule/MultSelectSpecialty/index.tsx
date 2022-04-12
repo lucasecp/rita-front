@@ -66,6 +66,10 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
         if (!dataMapped.length) {
           return setSpecialtysOptions([])
         }
+        
+        if (dataMapped.length === 1) {
+          return setSpecialtys(dataMapped)
+        }
 
         setSpecialtysOptions(dataMapped)
       } catch ({ response }) {}

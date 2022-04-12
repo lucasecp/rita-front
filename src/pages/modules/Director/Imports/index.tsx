@@ -52,13 +52,14 @@ export const Import: React.FC = () => {
     const loadCompanies = async () => {
       if (company.label.length > 0) {
         try {
-          const response = await apiAdmin.get('/empresa', {
+          const { data } = await apiAdmin.get('/empresa', {
             params: {
               busca: company.label,
             },
           })
 
-          const companyOptions = fromApiCompanies(response.data.dados)
+          const companyOptions = fromApiCompanies(data)
+
           setAutocompleteOptions(companyOptions)
         } catch (error) {
           toast.error('Erro ao carregar empresas')
@@ -67,8 +68,9 @@ export const Import: React.FC = () => {
 
       if (company.label.length === 0) {
         try {
-          const response = await apiAdmin.get('/empresa')
-          const companyOptions = fromApiCompanies(response.data.dados)
+          const { data } = await apiAdmin.get('/empresa')
+
+          const companyOptions = fromApiCompanies(data)
           setAutocompleteOptions(companyOptions)
         } catch (error) {
           toast.error('Erro ao carregar empresas')
