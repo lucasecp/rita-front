@@ -22,7 +22,7 @@ const incomeFromApi = (income: string) => {
     AteUmSalarioMinimoEMeio: 'Até um salário mínimo e meio',
   }
 
-  return incomeObject[income] || 'Não definido'
+  return incomeObject[income] || 'Não Informado'
 }
 
 export const fromApi = (data: FromApiResponse): FromApi => {
