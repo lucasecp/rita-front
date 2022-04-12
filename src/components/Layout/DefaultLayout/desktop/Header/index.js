@@ -8,6 +8,7 @@ import { getInitialLetterName } from '@/components/Layout/DefaultLayout/helpers/
 // import { ReactComponent as LetterIcon } from '@/assets/icons/letter.svg'
 import { ReactComponent as ExitIcon } from '@/assets/icons/exit.svg'
 import { Container } from './styles'
+import CustomTooltip from '@/components/Tooltip'
 
 export const Header = ({ title, children }) => {
   const { clearDataLogout, user } = useAuth()
@@ -45,7 +46,9 @@ export const Header = ({ title, children }) => {
           </span>
         </p>
         {/* <LetterIcon /> */}
-        <ExitIcon onClick={clearDataLogout} />
+        <CustomTooltip label={'Sair'}>
+          <ExitIcon onClick={clearDataLogout} />
+        </CustomTooltip>
       </nav>
     </Container>
   )
