@@ -34,10 +34,10 @@ function convertPriceToCrownValue(amount: number, currency?: string) {
 export const WalletPayments: React.FC = () => {
   const tablePaymentsNew = useRef<any>()
   const tablePaymentsAll = useRef<any>()
-  const [paymentsNew, setPaymentsNew] = useState<RitaWallet.PaymentRequest[]>(
+  const [paymentsNew, setPaymentsNew] = useState<RitaWallet.Model.PaymentRequest[]>(
     [],
   )
-  const [paymentsAll, setPaymentsAll] = useState<RitaWallet.PaymentRequest[]>(
+  const [paymentsAll, setPaymentsAll] = useState<RitaWallet.Model.PaymentRequest[]>(
     [],
   )
   const [selectedPeriod, setSelectedPeriod] = useState(1)
@@ -57,13 +57,13 @@ export const WalletPayments: React.FC = () => {
   async function fetchData() {
     const [{ data: loadedPaymentsNew }, { data: loadedPaymentsAll }] =
       await Promise.all([
-        apiWallet.get<RitaWallet.PaymentRequest[]>('/payment', {
+        apiWallet.get<RitaWallet.Model.PaymentRequest[]>('/payment', {
           params: {
             take: 2,
-            situation: 'NEW',
+            activeOnly: true,
           },
         }),
-        apiWallet.get<RitaWallet.PaymentRequest[]>('/payment', {
+        apiWallet.get<RitaWallet.Model.PaymentRequest[]>('/payment', {
           params: {
             take: tablePaymentsAllPaging.take,
             skip: tablePaymentsAllPaging.skip,
@@ -84,7 +84,7 @@ export const WalletPayments: React.FC = () => {
     }
   }
 
-  function handlePayNowClick(data: RitaWallet.PaymentRequest) {
+  function handlePayNowClick(data: RitaWallet.Model.PaymentRequest) {
     showMessage(PaymentRequest, { data }, true)
   }
 
@@ -149,7 +149,7 @@ export const WalletPayments: React.FC = () => {
                   <>{moment(row.createdAt).format('DD/MM/YYYY')}</>
                 ),
               },
-              { path: 'typeTransaction.name' },
+              { path: 'transactionType' },
               {
                 path: 'debitAmount',
                 custom: (row) => (
@@ -214,7 +214,7 @@ export const WalletPayments: React.FC = () => {
                   <>{moment(row.createdAt).format('DD/MM/YYYY')}</>
                 ),
               },
-              { path: 'typeTransaction.name' },
+              { path: 'transactionType' },
               {
                 path: 'situation',
                 custom: (row) => (
@@ -240,7 +240,7 @@ export const WalletPayments: React.FC = () => {
               { path: 'id', label: 'Detalhes', sortable: false },
               { path: 'createdAt', label: 'Data', sortable: true },
               {
-                path: 'typeTransaction.name',
+                path: 'transactionType',
                 label: 'Pagamento',
                 sortable: true,
               },

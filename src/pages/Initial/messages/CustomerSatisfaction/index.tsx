@@ -12,7 +12,7 @@ import { ReactComponent as StarIcon } from '@/assets/icons/star.svg'
 import { Container } from './styles'
 
 type CustomerSatisfactionProps = {
-  data: RitaWallet.CSAT
+  data: RitaWallet.API.Get.PaymentCSAT
 }
 
 export const CustomerSatisfaction: React.FC<CustomerSatisfactionProps> = ({
@@ -44,7 +44,7 @@ export const CustomerSatisfaction: React.FC<CustomerSatisfactionProps> = ({
 
   async function handleSendClick() {
     if (scoreSelected) {
-      await apiWallet.put('/csat', {
+      await apiWallet.post('/payment/csat', {
         id: data.id,
         score: scoreSelected,
       })
@@ -67,7 +67,7 @@ export const CustomerSatisfaction: React.FC<CustomerSatisfactionProps> = ({
     <Container>
       <header>
         <p>
-          Como você avalia <strong>{data.paymentRequest?.description}</strong>?
+          Como você avalia <strong>{data.description}</strong>?
         </p>
       </header>
 

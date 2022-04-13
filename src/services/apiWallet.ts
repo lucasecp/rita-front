@@ -16,7 +16,7 @@ const lsUser = localStorage.getItem('user')
 
 if (lsUser) {
   const user = JSON.parse(lsUser) as { token?: string }
-  apiWallet.defaults.headers.token = user.token
+  apiWallet.defaults.headers['x-access-token'] = user.token
 }
 
 export default apiWallet
@@ -24,6 +24,6 @@ export default apiWallet
 export function getPaymentRequestSituation(id: string): string {
   const formattedID = String(
     id,
-  ).toUpperCase() as RitaWallet.PaymentRequestSituation
+  ).toUpperCase() as RitaWallet.Enum.PaymentRequestSituation
   return PaymentRequestSituation[formattedID] || formattedID
 }

@@ -11,7 +11,7 @@ it('renders without crashing', () => {
     description: 'Lorem ipsum dolor sit amet',
     debitAmount: 500,
     situation: 'WAITING',
-  } as RitaWallet.PaymentRequest
+  } as RitaWallet.Model.PaymentRequest
 
   ReactDOM.render(
     <AuthProvider>
