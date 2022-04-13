@@ -38,7 +38,7 @@ function InstructionsIncome({
           <small>
             Você que não tem comprovante de renda,{' '}
             <a
-              href="https://meucadunico.cidadania.gov.br/meu_cadunico/"
+              href="https://cadunico.dataprev.gov.br/#/consultaSimples"
               target="_blank"
               rel="noreferrer"
             >
