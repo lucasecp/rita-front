@@ -9,7 +9,7 @@ import {
   CLINIC_SEE_ALL_SPECIALIST,
   CLINIC_SEE_ONE_SPECIALIST,
   CLINIC_PROFILE,
-  CLINIC_SEE_SPECIALIST_SCHEDULE
+  CLINIC_SEE_SPECIALIST_SCHEDULE,
 } from '../../constants/namedRoutes/routes'
 
 const clinicRoutes = [
