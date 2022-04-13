@@ -40,6 +40,8 @@ namespace RitaWallet {
         }[]
       }
 
+      type UserCreditCard = RitaWallet.Model.CreditCard[]
+
       type Wallet = {
         id: string
         balance: number
@@ -58,6 +60,11 @@ namespace RitaWallet {
         id: string
         updatedAt: string
       }
+
+      type UserCreditCard = Pick<
+        RitaWallet.Model.CreditCard,
+        'number' | 'name' | 'expirationDate' | 'cvv' | 'alias'
+      >
     }
   }
 
@@ -74,6 +81,20 @@ namespace RitaWallet {
       situation: string
 
       payment?: RitaWallet.Model.PaymentRequest[]
+    }
+
+    type CreditCard = {
+      id: string
+      situation: 'ACTIVE' | 'DISABLED' | 'EXPIRED'
+      createdAt: string
+      updatedAt: string
+      number: string
+      name: string
+      expirationDate: string
+      cvv: string
+      alias: string
+
+      userWallet?: RitaWallet.Model.UserWallet
     }
 
     type CSAT = {
