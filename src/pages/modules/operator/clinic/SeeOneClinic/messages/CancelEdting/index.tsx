@@ -33,7 +33,11 @@ const CancelEdting: React.FC<CancelEdtingProps> = ({
   return (
     <Container>
       <img src={warningIcon} />
-      <p>As informações não serão salvas. Confirma a saída?</p>
+      <p>
+        As informações não serão salvas.
+        <br />
+        Confirma a saída?
+      </p>
 
       <ButtonGroup>
         <ButtonPrimary onClick={onContinueEdting}>Não</ButtonPrimary>
