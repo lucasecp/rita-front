@@ -26,7 +26,7 @@ const Content: React.FC<ContentProps> = ({ specialists, setMakeRequest }) => {
           </li>
           <li>{spec.cpf}</li>
           <li>{spec.registerNumber}</li>
-          <li>{spec.issuingAgency}</li>
+          <li>{spec.issuingAgency?.name}</li>
           <Status type={showStatus(spec.status)}>
             <span>{showStatus(spec.status)}</span>
           </Status>

@@ -11,7 +11,11 @@ const Schedule: React.FC<{ data: DataSpecialist }> = ({ data }) => {
     <ScheduleIcon
       onClick={() =>
         history.push(CLINIC_SEE_SPECIALIST_SCHEDULE, {
-          dataDoctor: { id: data.id, name: data.name },
+          dataDoctor: {
+            id: data.id,
+            name: data.name,
+            issuingAgency: data.issuingAgency,
+          },
         })
       }
     />

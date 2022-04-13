@@ -20,7 +20,14 @@ const Main: React.FC = () => {
   const { setSchedule, getSchedules, setCurrentDataClinicAndDoctor } =
     useScheduleSpecialist()
 
-  const doctorName = location.state?.dataDoctor?.name
+  const doctorInfo = {
+    name: location.state?.dataDoctor?.name,
+    issuingAgency: {
+      name: location.state?.dataDoctor?.issuingAgency?.name,
+      profissionalRegister:
+        location.state?.dataDoctor?.issuingAgency?.profissionalRegister,
+    },
+  }
 
   useEffect(() => {
     if (!location.state) {
@@ -51,10 +58,10 @@ const Main: React.FC = () => {
 
   return (
     <Container>
-      <Header nameDoctor={doctorName} />
+      <Header doctorInfo={doctorInfo} />
       <Content>
         <CreateSchedule />
-        <Grid nameDoctor={doctorName} />
+        <Grid nameDoctor={doctorInfo.name} />
       </Content>
     </Container>
   )
