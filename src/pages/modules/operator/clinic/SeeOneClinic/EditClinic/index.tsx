@@ -1,5 +1,6 @@
 import ButtonLink from '@/components/Button/Link'
 import OutilineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
 import CancelEdting from '../messages/CancelEdting'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 import { useLoading } from '@/hooks/useLoading'
@@ -172,7 +173,7 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
       ) : (
         <ButtonGroup>
           <ButtonLink onClick={onCancel}>Cancelar</ButtonLink>
-          <OutilineButton onClick={onSave}>Salvar</OutilineButton>
+          <ButtonPrimary onClick={onSave}>Salvar</ButtonPrimary>
         </ButtonGroup>
       )}
     </Container>

@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom'
 
 import { DIRECTOR_SEE_ALL_PROFILES } from '@/routes/constants/namedRoutes/routes'
 
-const toConfirmCancel: React.FC = () => {
+const ToConfirmCancel: React.FC = () => {
   const { closeModal } = useModal()
   const history = useHistory()
 
@@ -22,13 +22,17 @@ const toConfirmCancel: React.FC = () => {
   return (
     <Container>
       <img src={warning} />
-      <p>As alterações não serão salvas. Confirma a saída?</p>
+      <p>
+        As alterações não serão salvas.
+        <br />
+        Confirma a saída?
+      </p>
       <footer>
-        <OutlineButton onClick={closeModal}>Não</OutlineButton>
-        <ButtonPrimary onClick={cancel}>Sim</ButtonPrimary>
+        <ButtonPrimary onClick={closeModal}>Não</ButtonPrimary>
+        <OutlineButton onClick={cancel}>Sim</OutlineButton>
       </footer>
     </Container>
   )
 }
 
-export default toConfirmCancel
+export default ToConfirmCancel
