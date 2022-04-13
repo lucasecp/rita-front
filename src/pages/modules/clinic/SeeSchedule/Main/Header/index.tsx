@@ -19,10 +19,10 @@ const Header: React.FC<HeaderProps> = ({ doctorInfo }) => {
           <h5>{doctorInfo.name}</h5>
         </div>
         <div>
-          <h6>Órgão Emissor:</h6>
-          <h5>
-            {doctorInfo.issuingAgency.name} - {doctorInfo.issuingAgency.profissionalRegister}
-          </h5>
+          <h6>
+            Órgão Emissor:{doctorInfo.issuingAgency.name} -{' '}
+            {doctorInfo.issuingAgency.profissionalRegister}
+          </h6>
         </div>
       </div>
     </Container>

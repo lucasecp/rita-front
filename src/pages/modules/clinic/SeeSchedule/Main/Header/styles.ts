@@ -15,16 +15,17 @@ export const Container = styled.header`
       margin-bottom: 11px;
       > h6 {
         margin-bottom: 4px;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 17px;
-        color: #6a6a6a;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 25px;
+        text-align: left;
+        color: #909090;
       }
       > h5 {
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 25px;
+        font-size: 25px;
+        font-weight: 500;
+        line-height: 31px;
+
         color: #6a6a6a;
       }
     }
