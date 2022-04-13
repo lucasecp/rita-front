@@ -17,10 +17,17 @@ const Main: React.FC = () => {
 
   const { Loading } = useLoading()
 
-  const { setSchedule, getSchedules, setCurrentDataClinicAndDoctor } =
+  const { schedule,setSchedule, getSchedules, setCurrentDataClinicAndDoctor } =
     useScheduleSpecialist()
 
-  const doctorName = location.state?.dataDoctor?.name
+  const doctorInfo = {
+    name: location.state?.dataDoctor?.name,
+    issuingAgency: {
+      name: location.state?.dataDoctor?.issuingAgency?.name,
+      profissionalRegister:
+        location.state?.dataDoctor?.issuingAgency?.profissionalRegister,
+    },
+  }
 
   useEffect(() => {
     if (!location.state) {
@@ -32,7 +39,9 @@ const Main: React.FC = () => {
     const getSchedule = async () => {
       try {
         Loading.turnOn()
-        const { data } = await apiAdmin.get(`clinica/59/medico/217/agenda`)
+        const { data } = await apiAdmin.get(
+          `clinica/59/medico/${location.state?.dataDoctor?.id}/agenda`,
+        )
 
         setSchedule(fromApi(data, 59))
         setCurrentDataClinicAndDoctor({
@@ -45,14 +54,14 @@ const Main: React.FC = () => {
       }
     }
     getSchedule()
-  }, [getSchedules])
+  }, [getSchedules]) 
 
   return (
     <Container>
-      <Header nameDoctor={doctorName} />
+      <Header doctorInfo={doctorInfo} />
       <Content>
         <CreateSchedule />
-        <Grid nameDoctor={doctorName} />
+       {schedule.length > 0 && <Grid nameDoctor={doctorInfo.name} />}
       </Content>
     </Container>
   )

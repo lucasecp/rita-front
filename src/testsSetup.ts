@@ -1,4 +1,4 @@
-
+/* eslint-env node, jest */
 jest.mock('react-router-dom', () => ({
   __esModule: true,
   useLocation: jest.fn().mockReturnValue({

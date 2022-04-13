@@ -9,7 +9,10 @@ export interface DataSpecialist {
   id: string
   name: string
   cpf: string
-  issuingAgency: string
+  issuingAgency: {
+    name: string
+    profissionalRegister: string
+  }
   registerNumber: string
   status: StatusFromApi
 }

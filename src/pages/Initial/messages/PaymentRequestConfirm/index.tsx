@@ -3,124 +3,28 @@ import axios from 'axios'
 import useLocalStorage from 'use-local-storage'
 
 import apiWallet from '@/services/apiWallet'
-import { ReactComponent as WhatsappIcon } from '@/assets/icons/whatsapp.svg'
-import { ReactComponent as ExclamationCircleIcon } from '@/assets/icons/exclamation-circle.svg'
-import { ReactComponent as TimesCircleIcon } from '@/assets/icons/times-circle.svg'
-
-import onlyNumbers from '@/helpers/clear/onlyNumbers'
 import { useModal } from '@/hooks/useModal'
-import { Container } from './styles'
-import OutlineButton from '@/components/Button/Outline'
-import ButtonPrimary from '@/components/Button/Primary'
 import { useLoading } from '@/hooks/useLoading'
 import { useAuth } from '@/hooks/login'
+import OutlineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
 import { InputPassword } from '@/components/Form/InputPassword'
 import { InsufficientBalance } from '@/pages/Initial/messages/InsufficientBalance'
 import { toast } from '@/styles/components/toastify'
+import { PaymentRequestAccessBlocked } from './blocked'
+import { PaymentRequestAccessAttempt } from './attempt'
+
+import { ReactComponent as ExclamationCircleIcon } from '@/assets/icons/exclamation-circle.svg'
+import { Container } from './styles'
 
 function validateRequired(value?: string | null) {
   return [null, undefined, ''].includes(value) ? 'Campo obrigatório.' : ''
 }
 
-type PaymentRequestAccessBlockedProps = {
-  phoneNumber?: string
-}
-
-const PaymentRequestAccessBlocked: React.FC<
-  PaymentRequestAccessBlockedProps
-> = ({ phoneNumber }) => {
-  const { logout } = useAuth()
-  const { closeModal } = useModal()
-  const [phoneLink, setPhoneLink] = useState('')
-  const [whatsappLink, setWhatsappLink] = useState('')
-
-  useEffect(() => {
-    const url = new URL(`https://wa.me/${onlyNumbers(phoneNumber)}`)
-    url.search = new URLSearchParams({
-      text: 'Meu acesso foi bloqueado no Rita Saúde',
-    }).toString()
-
-    setPhoneLink(`tel:${onlyNumbers(phoneNumber)}`)
-    setWhatsappLink(url.toString())
-  }, [phoneNumber])
-
-  function handleOkClick() {
-    closeModal()
-    logout()
-  }
-
-  return (
-    <Container variant="danger">
-      <header>
-        <TimesCircleIcon />
-      </header>
-
-      <section>
-        <p>
-          Seu acesso foi bloqueado devido à excesso de tentativas.
-          <br />
-          Pedimos que entre em contato com a central de atendimento.{' '}
-          {phoneNumber && (
-            <>
-              <a href={phoneLink} target="_blank">
-                {phoneNumber}
-              </a>{' '}
-              <a href={whatsappLink} target="_blank">
-                <WhatsappIcon />
-              </a>
-            </>
-          )}
-        </p>
-      </section>
-
-      <footer>
-        <ButtonPrimary onClick={handleOkClick}>OK</ButtonPrimary>
-      </footer>
-    </Container>
-  )
-}
-
-type PaymentRequestAccessAttemptProps = {
-  data: RitaWallet.PaymentRequest
-  counter?: number
-}
-
-const PaymentRequestAccessAttempt: React.FC<
-  PaymentRequestAccessAttemptProps
-> = ({ data, counter = 0 }) => {
-  const { showMessage } = useModal()
-
-  function handlerTryAgainClick() {
-    showMessage(PaymentRequestConfirm, { data })
-  }
-
-  return (
-    <Container variant="danger">
-      <header>
-        <TimesCircleIcon />
-      </header>
-
-      <section>
-        <p>
-          A senha digitada é inválida.
-          <br />
-          Você tem ainda {counter} tentativa{counter > 1 ? 's' : ''}.
-        </p>
-      </section>
-
-      <footer>
-        <ButtonPrimary onClick={handlerTryAgainClick}>
-          Tente Novamente
-        </ButtonPrimary>
-      </footer>
-    </Container>
-  )
-}
-
 const defaultMaximumAttempts = 3
 
 type PaymentRequestConfirmProps = {
-  data: RitaWallet.PaymentRequest
+  data: RitaWallet.Model.PaymentRequest
 }
 
 export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
@@ -159,18 +63,13 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
 
         if (axios.isAxiosError(error) && error.response) {
           if (remaingAttempts === 0) {
-            const { data } = await apiWallet.get('/wallet-configuration', {
-              params: {
-                where: JSON.stringify({ key: 'numberCelBlocked' }),
-              },
+            const { data } = await apiWallet.get<RitaWallet.Model.WalletConfiguration>(
+              '/data/configuration/numberCelBlocked'
+            )
+
+            showMessage(PaymentRequestAccessBlocked, {
+              phoneNumber: data && data.value ? data.value : ''
             })
-            let phoneNumber
-
-            if (data && Array.isArray(data) && data.length && data[0].value) {
-              phoneNumber = data[0].value
-            }
-
-            showMessage(PaymentRequestAccessBlocked, { phoneNumber })
           } else {
             showMessage(PaymentRequestAccessAttempt, {
               data: paymentRequest,
@@ -210,8 +109,8 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
             axios.isAxiosError(error) &&
             error.response?.data?.errorMessage === 'Insufficient balance'
           ) {
-            const { data } = await apiWallet.get<RitaWallet.Wallet>(
-              '/wallet-balance',
+            const { data } = await apiWallet.get<RitaWallet.API.Get.Wallet>(
+              '/wallet',
             )
 
             if (!data) {
@@ -221,7 +120,7 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
             showMessage(
               InsufficientBalance,
               {
-                walletBalance: data.crownBalance + data.cashbackBalance,
+                walletBalance: data.totalBalanceAmount,
                 debitAmount: paymentRequest.debitAmount,
               },
               true,

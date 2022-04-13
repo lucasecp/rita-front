@@ -55,7 +55,7 @@ const CreateSchedule: React.FC = ({}) => {
       await axios.all(
         daysChoosen.map((data) =>
           apiAdmin.post(
-            `/clinica/medico/217/agenda`,
+            `/clinica/medico/${currentDataClinicAndDoctor.idDoctor}/agenda`,
             toApi({
               start: startTime,
               end: endTime,

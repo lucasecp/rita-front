@@ -44,13 +44,13 @@ export const WalletBuyCoinInputSimple: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await apiWallet.get<RitaWallet.Wallet>('/wallet-balance')
+      const { data } = await apiWallet.get<RitaWallet.API.Get.Wallet>('/wallet')
 
       if (!data) {
         throw new Error('Resposta vazia')
       }
 
-      setWalletBalance(data.crownBalance + data.cashbackBalance)
+      setWalletBalance(data.totalBalanceAmount)
     }
 
     Loading.turnOn()
