@@ -16,20 +16,18 @@ export const Balances: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await apiWallet.get<RitaWallet.Wallet>('/wallet-balance')
+      const { data } = await apiWallet.get<RitaWallet.API.Get.Wallet>('/wallet')
 
-      if (!data) {
-        throw new Error('Resposta vazia')
+      if (data) {
+        setTotalBalance(data.totalBalanceAmount)
+        setTotalProvisionedBalance(data.totalProvisionedBalanceAmount)
+
+        setCrownBalance(data.crownBalance)
+        setProvisionedCrownBalance(data.provisionedCrownBalance)
+
+        setCashbackBalance(data.cashbackBalance)
+        setProvisionedCashbackBalance(data.provisionedCashbackBalance)
       }
-
-      setTotalBalance(data.totalCrownBalance)
-      setTotalProvisionedBalance(data.totalProvisionedCrownBalance)
-
-      setCrownBalance(data.crownBalance)
-      setProvisionedCrownBalance(data.provisionedCrownBalance)
-
-      setCashbackBalance(data.cashbackBalance)
-      setProvisionedCashbackBalance(data.provisionedCashbackBalance)
     }
 
     fetchData().catch(console.error)

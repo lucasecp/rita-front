@@ -65,8 +65,8 @@ export const ComeBack: React.FC<ComeBackProps> = ({ idPatient }) => {
         Confirma a saída?
       </p>
       <footer>
-        <OutlineButton onClick={onDoNotConfirmExit}>Não</OutlineButton>
-        <ButtonPrimary onClick={onConfirmExit}>Sim</ButtonPrimary>
+        <ButtonPrimary onClick={onDoNotConfirmExit}>Não</ButtonPrimary>
+        <OutlineButton onClick={onConfirmExit}>Sim</OutlineButton>
       </footer>
     </Container>
   )

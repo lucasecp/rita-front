@@ -9,7 +9,7 @@ import { ReactComponent as PadLockIcon } from '@/assets/icons/pad-lock.svg'
 import { ReactComponent as UserIcon } from '@/assets/icons/user.svg'
 import { ReactComponent as ManagmentIcon } from '@/assets/icons/managment.svg'
 import { ReactComponent as GroupUserIcon } from '@/assets/icons/people.svg'
-// import { ReactComponent as WalletIcon } from '@/assets/icons/wallet.svg'
+import { ReactComponent as WalletIcon } from '@/assets/icons/wallet.svg'
 import { ReactComponent as SellableItemsIcon } from '@/assets/icons/salable-items.svg'
 import { ReactComponent as ProfilesIcon } from '@/assets/icons/profiles.svg'
 import { ReactComponent as ClinicsIcon } from '@/assets/icons/clinic.svg'
@@ -30,11 +30,15 @@ import {
   VALIDATOR_ANALYZE_PATIENTS,
   DIRECTOR_PLAN_MANAGMENT,
   PATIENT_DEPENDENTS,
-  // PATIENT_WALLET_DASHBOARD,
-  // PATIENT_WALLET_BUY_COIN,
-  // PATIENT_WALLET_PAYMENTS,
-  // PATIENT_WALLET_STATEMENTS,
-  // PATIENT_WALLET_SETTINGS,
+  PATIENT_WALLET_DASHBOARD,
+  PATIENT_WALLET_BUY_COIN,
+  PATIENT_WALLET_PAYMENTS,
+  PATIENT_WALLET_STATEMENTS,
+  PATIENT_WALLET_SETTINGS,
+  OPERATOR_WALLET_DASHBOARD,
+  OPERATOR_WALLET_PAYMENTS,
+  OPERATOR_WALLET_STATEMENTS,
+  OPERATOR_WALLET_SETTINGS,
   FILTER_SELLABLE_ITEMS,
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ALL_SPECIALTYS,
@@ -111,30 +115,50 @@ export const menuItens = [
     name: 'Dependentes',
     permissions: [permissions.VER_MEUS_DEPENDENTES],
   },
-  // {
-  //   path: PATIENT_WALLET_DASHBOARD,
-  //   icon: <WalletIcon />,
-  //   name: 'Carteira Digital',
-  //   permissions: [permissions.VER_CARTEIRA_DIGITAL_PACIENTE],
-  //   children: [
-  //     {
-  //       path: PATIENT_WALLET_BUY_COIN,
-  //       name: 'Comprar Moeda',
-  //     },
-  //     {
-  //       path: PATIENT_WALLET_PAYMENTS,
-  //       name: 'Pagamentos',
-  //     },
-  //     {
-  //       path: PATIENT_WALLET_STATEMENTS,
-  //       name: 'Extrato',
-  //     },
-  //     {
-  //       path: PATIENT_WALLET_SETTINGS,
-  //       name: 'Configurações',
-  //     },
-  //   ],
-  // },
+  {
+    path: PATIENT_WALLET_DASHBOARD,
+    icon: <WalletIcon />,
+    name: 'Carteira Digital',
+    permissions: [permissions.VER_CARTEIRA_DIGITAL_PACIENTE],
+    children: [
+      {
+        path: PATIENT_WALLET_BUY_COIN,
+        name: 'Comprar Moeda',
+      },
+      {
+        path: PATIENT_WALLET_PAYMENTS,
+        name: 'Pagamentos',
+      },
+      {
+        path: PATIENT_WALLET_STATEMENTS,
+        name: 'Extrato',
+      },
+      {
+        path: PATIENT_WALLET_SETTINGS,
+        name: 'Configurações',
+      },
+    ],
+  },
+  {
+    path: OPERATOR_WALLET_DASHBOARD,
+    icon: <WalletIcon />,
+    name: 'Carteira Digital',
+    permissions: [permissions.VER_CARTEIRA_DIGITAL_OPERADOR],
+    children: [
+      {
+        path: OPERATOR_WALLET_PAYMENTS,
+        name: 'Pagamentos',
+      },
+      {
+        path: OPERATOR_WALLET_STATEMENTS,
+        name: 'Extrato',
+      },
+      {
+        path: OPERATOR_WALLET_SETTINGS,
+        name: 'Configurações',
+      },
+    ],
+  },
   {
     path: DIRECTOR_PLAN_MANAGMENT,
     icon: <ManagmentIcon />,
@@ -210,7 +234,7 @@ export const menuItens = [
   {
     path: OPERATOR_SEE_ALL_ISSUING_AGENCY,
     icon: <SpecialtysTypesIcon />,
-    name: 'Orgão Emissor',
+    name: 'Gestão de Órgão Emissor',
     permissions: [permissions.GERENCIAR_ORGAO_EMISSOR],
   },
   {

@@ -100,7 +100,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
 
         <InputText
           variation="secondary"
-          label="Especialista:"
+          label="Tipo de especialista:"
           value={specialist}
           setValue={setSpecialist}
           maxLength={20}

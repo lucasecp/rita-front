@@ -12,8 +12,8 @@ import { ReactComponent as CrownIcon } from '@/assets/icons/crown.svg'
 import { Container } from './styles'
 
 type PaymentRequestSummaryProps = {
-  data: RitaWallet.PaymentRequest
-  items: RitaWallet.PaymentRequestItem[]
+  data: RitaWallet.Model.PaymentRequest
+  items: RitaWallet.Model.PaymentRequestItem[]
 }
 
 export const PaymentRequestSummary: React.FC<PaymentRequestSummaryProps> = ({

@@ -10,9 +10,13 @@ import { ReactComponent as ExitIcon } from '@/assets/icons/exit.svg'
 import { Container } from './styles'
 import CustomTooltip from '@/components/Tooltip'
 
-export const Header = ({ title, children }) => {
+interface HeaderDesktopProps {
+  title?: string
+}
+
+export const Header: React.FC<HeaderDesktopProps> = ({ title, children }) => {
   const { clearDataLogout, user } = useAuth()
-  const [photo, getProfilePhoto] = useProfilePhoto()
+  const { photo, getProfilePhoto } = useProfilePhoto()
 
   useEffect(() => {
     getProfilePhoto()
@@ -31,7 +35,7 @@ export const Header = ({ title, children }) => {
   return (
     <Container>
       <div>
-        <h1>{title || 'Como você precisa cuidar da sua saúde hoje?'}</h1>
+        <h1>{title || ''}</h1>
         {children}
       </div>
       <nav>

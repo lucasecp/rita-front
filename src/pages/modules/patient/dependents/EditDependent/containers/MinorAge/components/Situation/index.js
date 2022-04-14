@@ -15,7 +15,9 @@ export const Situation = ({ data }) => {
 
       <div>
         {data?.plan.startDate && (
-          <h4>Plano Vida - Paciente desde {data?.plan.startDate} </h4>
+          <h4>
+            Plano {data?.plan.name} - Paciente desde {data?.plan.startDate}{' '}
+          </h4>
         )}
       </div>
 

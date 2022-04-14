@@ -20,11 +20,15 @@ const CancelCreating: React.FC = () => {
   return (
     <Container>
       <img src={warningIcon} />
-      <p>As informações não serão salvas. Confirma a saída?</p>
+      <p>
+        As informações não serão salvas.
+        <br />
+        Confirma a saída?
+      </p>
 
       <ButtonGroup>
-        <OutlineButton onClick={closeModal}>Não</OutlineButton>
-        <ButtonPrimary onClick={onCancel}>Sim</ButtonPrimary>
+        <ButtonPrimary onClick={closeModal}>Não</ButtonPrimary>
+        <OutlineButton onClick={onCancel}>Sim</OutlineButton>
       </ButtonGroup>
     </Container>
   )

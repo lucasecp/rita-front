@@ -12,7 +12,11 @@ export const FieldsHasChangedWarning: React.FC = () => {
   const { closeModal } = useModal()
   const history = useHistory()
 
-  const onCancel = () => {
+  const onNotExit = () => {
+    closeModal()
+  }
+
+  const onExit = () => {
     closeModal()
     history.push(PATIENT_DEPENDENTS)
   }
@@ -22,8 +26,8 @@ export const FieldsHasChangedWarning: React.FC = () => {
       <img src={warningIcon} />
       <p>As informações não serão salvas. Confirma a saída?</p>
       <footer>
-        <OutlineButton onClick={closeModal}>Não</OutlineButton>
-        <ButtonPrimary onClick={onCancel}>Sim</ButtonPrimary>
+        <ButtonPrimary onClick={onNotExit}>Não</ButtonPrimary>
+        <OutlineButton onClick={onExit}>Sim</OutlineButton>
       </footer>
     </Container>
   )

@@ -15,7 +15,7 @@ function validateRequired(value?: string | null) {
 }
 
 type PaymentRequestRejectionProps = {
-  data: RitaWallet.PaymentRequest
+  data: RitaWallet.Model.PaymentRequest
 }
 
 export const PaymentRequestRejection: React.FC<

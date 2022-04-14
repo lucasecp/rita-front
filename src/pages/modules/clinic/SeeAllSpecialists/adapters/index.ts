@@ -11,6 +11,9 @@ export const fromApi = (specialistInfo: any[]): DataSpecialist[] => {
     // issuingAgency: spec.orgaoEmissor?.descricao
     //   ? spec.orgaoEmissor?.descricao + ' ' + spec.ufOrgaoEmissor.toUpperCase()
     //   : '-',
-    issuingAgency: spec.orgaoEmissor?.descricao || '-',
+    issuingAgency: {
+      name: spec.orgaoEmissor?.descricao || '',
+      profissionalRegister: spec.registroProfissional || '',
+    },
   }))
 }

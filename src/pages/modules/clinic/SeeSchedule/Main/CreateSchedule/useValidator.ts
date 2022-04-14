@@ -34,16 +34,17 @@ export const useValidator = (
 
     const daysChoosen = schedule.filter((schedule) => fields.days[schedule.day])
 
-    const hasNoScheduleHours = daysChoosen.filter((day) => {
-      const startChoosen = new Date().setHours(
-        getHour(fields.startTime),
-        getMinutes(fields.startTime),
-      )
+    const startChosen = new Date().setHours(
+      getHour(fields.startTime),
+      getMinutes(fields.startTime),
+    )
 
-      const endChoose = new Date().setHours(
-        getHour(fields.endTime),
-        getMinutes(fields.endTime),
-      )
+    const endChosen = new Date().setHours(
+      getHour(fields.endTime),
+      getMinutes(fields.endTime),
+    )
+
+    const hasNoScheduleHours = daysChoosen.filter((day) => {
 
       const startExisting = new Date().setHours(
         getHour(day.start),
@@ -56,17 +57,17 @@ export const useValidator = (
       )
 
       return (
-        (startChoosen <= endExisting &&
-          startChoosen >= startExisting &&
-          endChoose >= endExisting) ||
-        (endChoose <= endExisting &&
-          endChoose >= startExisting &&
-          startChoosen <= startExisting) ||
-        (endChoose <= endExisting &&
-          endChoose >= startExisting &&
-          startChoosen <= startExisting) ||
-        (startChoosen >= startExisting && endChoose <= endExisting) ||
-        (startChoosen <= startExisting && endChoose >= endExisting)
+        (startChosen <= endExisting &&
+          startChosen >= startExisting &&
+          endChosen >= endExisting) ||
+        (endChosen <= endExisting &&
+          endChosen >= startExisting &&
+          startChosen <= startExisting) ||
+        (endChosen <= endExisting &&
+          endChosen >= startExisting &&
+          startChosen <= startExisting) ||
+        (startChosen >= startExisting && endChosen <= endExisting) ||
+        (startChosen <= startExisting && endChosen >= endExisting)
       )
     })
 
@@ -81,6 +82,18 @@ export const useValidator = (
 
       error = true
     }
+
+    if (startChosen > endChosen) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        startTime: 'Revise esse campo.',
+        endTime: 'Revise esse campo.',
+      }))
+
+      showSimple.error('Hora início não pode ser maior do que a Hora Fim')
+      error = true
+    }
+
     if (fields.specialtys.length === 0) {
       setErrors((prevErrors) => ({
         ...prevErrors,
