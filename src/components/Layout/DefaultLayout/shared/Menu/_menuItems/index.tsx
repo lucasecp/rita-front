@@ -226,7 +226,7 @@ export const menuItens = [
   {
     path: OPERATOR_SEE_ALL_ISSUING_AGENCY,
     icon: <SpecialtysTypesIcon />,
-    name: 'Orgão Emissor',
+    name: 'Gestão de Órgão Emissor',
     permissions: [permissions.GERENCIAR_ORGAO_EMISSOR],
   },
   {

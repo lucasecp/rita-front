@@ -13,7 +13,7 @@ const Complete: React.FC<CompleteProps> = ({ setValue, value }) => {
 
   return (
     <Container>
-      <label>Especialista, Especialidade ou Clínica:</label>
+      <label> Nome do especialista, Especialidade ou Clínica:</label>
       <AutoComplete
         dropdownClassName="certain-category-search-dropdown"
         options={options}

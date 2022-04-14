@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Container } from './styles'
 import { SeeDocumentFile } from './SeeDocumentFile'
-// import { Select } from '@/components/Form/Select'
-import InputText from '@/components/Form/InputText'
+import { DocumentFile } from './DocumentFile'
 import { useLoading } from '@/hooks/useLoading'
 
 import { AxiosResponse } from 'axios'
@@ -106,15 +105,15 @@ export const DependentDocuments: React.FC<DependentDocumentsProps> = ({
   return (
     <Container>
       <h1>Documentos Cadastrados</h1>
-      <SeeDocumentFile
+      <DocumentFile
         title="Foto segurando o documento de identificação"
         document={holdingDocument}
       />
-      <SeeDocumentFile
+      <DocumentFile
         title="Foto do documento de identificação frente"
         document={frontDocument}
       />
-      <SeeDocumentFile
+      <DocumentFile
         title="Foto do documento de identificação verso"
         document={backDocument}
       />

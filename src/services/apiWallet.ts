@@ -12,6 +12,29 @@ const apiWallet = axios.create({
   baseURL: process.env.REACT_APP_WALLET_API_URL,
 })
 
+apiWallet.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    let output = new Error('Ocorreu um erro na requisição.')
+
+    if (axios.isAxiosError(error) && error.response?.data) {
+      const { data, status } = error.response
+
+      switch (status) {
+        case 404: {
+          if (data && data.message) {
+            output = data.message
+          }
+        }
+      }
+    }
+
+    return output instanceof Error
+      ? Promise.reject(output)
+      : output
+  }
+)
+
 const lsUser = localStorage.getItem('user')
 
 if (lsUser) {

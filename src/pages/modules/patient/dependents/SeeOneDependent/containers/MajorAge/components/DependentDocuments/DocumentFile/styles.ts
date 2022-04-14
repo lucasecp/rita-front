@@ -9,15 +9,15 @@ export const Container = styled.div.attrs((props: { disabled: boolean }) => ({
   align-items: center;
   justify-content: space-between;
 
-  padding-left: 16px;
+  padding: 0 16px;
 
   border: 2px solid ${colors.gray.light};
   box-sizing: border-box;
   border-radius: 8px;
 
-  cursor: pointer;
-
-  margin-top: 24px;
+  & + & {
+    margin-top: 24px;
+  }
 
   > h4 {
     font-weight: 700;
@@ -29,21 +29,8 @@ export const Container = styled.div.attrs((props: { disabled: boolean }) => ({
     padding: 14px 0;
   }
 
-  > button {
-    display: flex;
-    align-items: center;
-
-    padding: 14px 16px;
-
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 150%;
-
-    color: ${colors.gray.middle};
-
-    > svg {
-      margin-right: 8px;
-    }
+  > svg {
+    max-width: 32px;
   }
 
   ${({ disabled }) =>
