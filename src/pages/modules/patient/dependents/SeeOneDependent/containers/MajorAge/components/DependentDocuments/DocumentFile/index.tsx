@@ -5,12 +5,12 @@ import { ReactComponent as Verified } from '@/assets/icons/import-success.svg'
 import { ReactComponent as Error } from '@/assets/icons/import-error.svg'
 import { AxiosResponse } from 'axios'
 
-interface SeeDocumentFileProps {
+interface DocumentFileProps {
   title: string
   document: AxiosResponse | undefined
 }
 
-export const SeeDocumentFile: React.FC<SeeDocumentFileProps> = ({
+export const DocumentFile: React.FC<DocumentFileProps> = ({
   title,
   document,
 }) => {
