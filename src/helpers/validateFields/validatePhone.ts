@@ -1,4 +1,4 @@
-import clearSpecialCharacters from '@/helpers/clear/SpecialCaracteres'
+import clearSpecialCharacters from '@/helpers/clearSpecialCharacters'
 
 export const validatePhone = (phone: string, isRequired = false): string => {
   if (isRequired && !phone.trim()) {

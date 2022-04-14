@@ -1,4 +1,4 @@
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 import { BasicInformationI, ProfissionalInfoI } from '../types'
 import { clinicaToApi } from './mapClinics'
 import { specialtysToApi } from './mapSpecialtys'

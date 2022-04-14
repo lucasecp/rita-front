@@ -7,7 +7,7 @@ import InputText from '@/components/Form/InputText'
 import CustomMultSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
-import clearFormat from '@/helpers/clear/SpecialCaracteres'
+import clearFormat from '@/helpers/clearSpecialCharacters'
 import convertDate from '@/helpers/convertDateToIso'
 import RadioButton from '@/styles/components/RadioButton'
 import { RadioGroup } from '@material-ui/core'
