@@ -45,7 +45,7 @@ const IssuingAgency: React.FC = () => {
   return (
     <Container>
       <DefaultLayout
-        title="Gestão de Orgão Emissor"
+        title="Gestão de Órgão Emissor"
         headerChildren={<ButtonHeader />}
       >
         <Content>

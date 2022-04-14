@@ -75,8 +75,8 @@ const DeleteModal = ({ plan }) => {
         />
       </div>
       <ButtonGroup>
-        <OutlineButton onClick={closeModal}>Não</OutlineButton>
-        <ButtonPrimary onClick={onConfirm}>Sim</ButtonPrimary>
+        <ButtonPrimary onClick={closeModal}>Não</ButtonPrimary>
+        <OutlineButton onClick={onConfirm}>Sim</OutlineButton>
       </ButtonGroup>
     </Container>
   )

@@ -20,7 +20,7 @@ export const Content = styled.div.attrs(
   align-items: start;
   border-bottom: 2px solid ${colors.purple.main.middle};
   max-height: 54px;
-  > div{
+  > div {
     overflow-x: hidden;
     grid-area: 2/1;
   }

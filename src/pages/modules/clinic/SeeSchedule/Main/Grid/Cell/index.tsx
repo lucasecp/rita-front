@@ -14,7 +14,7 @@ interface CellProps {
 }
 
 const Cell: React.FC<CellProps> = ({ data, nameDoctor, empty }) => {
-  const { currentDataClinicAndDoctor, setGetSchedules } =
+  const { currentDataClinicAndDoctor, setGetSchedules, schedule } =
     useScheduleSpecialist()
   const { showMessage } = useModal()
 
@@ -29,7 +29,7 @@ const Cell: React.FC<CellProps> = ({ data, nameDoctor, empty }) => {
               {data.start} - {data.end}
             </span>
             <p>
-              {data.specialtys.map((spec) => (
+              {data.specialtys?.map((spec) => (
                 <span key={spec.id}>{spec.name}</span>
               ))}
             </p>
@@ -44,6 +44,7 @@ const Cell: React.FC<CellProps> = ({ data, nameDoctor, empty }) => {
                   idDoctor: currentDataClinicAndDoctor.idDoctor,
                   idSchedule: data.idSchedule,
                   setMakeNewRequest: setGetSchedules,
+                  schedule: data
                 })
               }
             />

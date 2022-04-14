@@ -32,8 +32,8 @@ export const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ id }) => {
       <img src={warningIcon} />
       <h6>Deseja realmente excluir esse perfil?</h6>
       <footer>
-        <OutlineButton onClick={onCancelDelete}>Não</OutlineButton>
-        <ButtonPrimary onClick={onConfirmDelete}>Sim</ButtonPrimary>
+        <ButtonPrimary onClick={onCancelDelete}>Não</ButtonPrimary>
+        <OutlineButton onClick={onConfirmDelete}>Sim</OutlineButton>
       </footer>
     </Container>
   )

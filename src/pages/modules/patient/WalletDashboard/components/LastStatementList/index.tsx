@@ -44,19 +44,17 @@ import { Container, ListNav, ListItem } from './styles'
 
 export const LastStatementList: React.FC = () => {
   const scrollRef = useRef<HTMLElement>(null)
-  const [items, setItems] = useState<RitaWallet.PaymentRequest[]>([])
+  const [items, setItems] = useState<RitaWallet.Model.PaymentRequest[]>([])
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await apiWallet.get<RitaWallet.PaymentRequest>(
+      const { data } = await apiWallet.get<RitaWallet.Model.PaymentRequest>(
         '/payment/statement',
       )
 
-      if (!data || !Array.isArray(data)) {
-        throw new Error('Resposta vazia ou inválida')
+      if (data && Array.isArray(data)) {
+        setItems(data)
       }
-
-      setItems(data)
     }
 
     fetchData().catch(console.error)
@@ -83,12 +81,12 @@ export const LastStatementList: React.FC = () => {
             </button>
           </ListNav>
           {items.map((item, index) => {
-            let title = item.typeTransaction?.name
+            let title = item.transactionType
 
-            if (item.typeTransaction?.mode === 'DEBIT') {
-              if (item.typeTransaction.name === 'EXAM') {
+            if (item.transactionMode === 'DEBIT') {
+              if (item.transactionType === 'EXAM') {
                 title = 'Pagamento de Exames'
-              } else if (item.typeTransaction.name === 'APPOINTMENT') {
+              } else if (item.transactionType === 'APPOINTMENT') {
                 title = 'Pagamento de Exames'
               }
             }

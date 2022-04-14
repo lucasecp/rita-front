@@ -1,9 +1,14 @@
-import { convertImageFromApiToBase64}  from '@/helpers/convertImageFromApiToBase64'
+import { convertImageFromApiToBase64 } from '@/helpers/convertImageFromApiToBase64'
 import apiPatient from '@/services/apiPatient'
 import { useState } from 'react'
 
-export default () => {
-  const [photo, setPhotoApi] = useState(
+interface useProfilePhotoProps {
+  photo: string
+  getProfilePhoto: () => Promise<void>
+}
+
+export default (): useProfilePhotoProps => {
+  const [photo, setPhotoApi] = useState<string>(
     window.localStorage.getItem('@Rita/Photo/Profile'),
   )
 
@@ -26,5 +31,5 @@ export default () => {
       }
     }
   }
-  return [photo, getProfilePhoto]
+  return { photo, getProfilePhoto }
 }

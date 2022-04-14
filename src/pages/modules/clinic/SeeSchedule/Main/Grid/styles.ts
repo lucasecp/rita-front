@@ -10,6 +10,7 @@ export const Container = styled.div`
     > div {
       display: flex;
       flex-direction: column;
+      flex: 0 0 14.28%
     }
   }
 

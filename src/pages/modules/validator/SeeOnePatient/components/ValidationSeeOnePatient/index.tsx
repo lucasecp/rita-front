@@ -91,7 +91,7 @@ export const ValidationSeeOnePatient: React.FC<
         <Textarea
           label="Descreva o motivo*:"
           rows={3}
-          limit="2000"
+          limit="1000"
           value={resonDocumentNotOk}
           setValue={setResonDocumentNotOk}
         />

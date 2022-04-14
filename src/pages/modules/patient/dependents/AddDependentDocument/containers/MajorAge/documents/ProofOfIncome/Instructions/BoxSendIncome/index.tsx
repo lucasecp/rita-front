@@ -28,7 +28,7 @@ export const BoxSendIncome: React.FC<BoxSendIncomeProps> = ({ onGetFile }) => {
             <h5>Enviar comprovação que não tem renda</h5>
             <p>
               <a
-                href="https://meucadunico.cidadania.gov.br/meu_cadunico/"
+                href="https://cadunico.dataprev.gov.br/#/consultaSimples"
                 target="_blank"
                 rel="noreferrer"
               >

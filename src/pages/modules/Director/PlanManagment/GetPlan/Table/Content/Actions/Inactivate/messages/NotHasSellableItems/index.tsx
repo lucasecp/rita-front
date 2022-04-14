@@ -40,8 +40,8 @@ export const NotHasSellableItems: React.FC<NotHasSellableItemsProps> = ({
       </h6>
       <p>Deseja inativar ?</p>
       <footer>
-        <OutlineButton onClick={onDoNotProceed}>Não</OutlineButton>
-        <ButtonPrimary onClick={onProceed}>Sim</ButtonPrimary>
+        <ButtonPrimary onClick={onDoNotProceed}>Não</ButtonPrimary>
+        <OutlineButton onClick={onProceed}>Sim</OutlineButton>
       </footer>
     </Container>
   )

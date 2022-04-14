@@ -17,9 +17,7 @@ export const Container = styled.div.attrs((props: { disabled: boolean }) => ({
 
   cursor: pointer;
 
-  & + & {
-    margin-top: 24px;
-  }
+  margin-top: 24px;
 
   > h4 {
     font-weight: 700;

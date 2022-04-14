@@ -15,9 +15,9 @@ import { Select } from '@/components/Form/Select'
 import { Table } from '@/components/Table'
 
 const periodOptions = [
-  { label: '7 dias', value: 1 },
-  { label: '15 dias', value: 2 },
-  { label: '30 dias', value: 3 },
+  { label: '7 dias', value: 7 },
+  { label: '15 dias', value: 15 },
+  { label: '30 dias', value: 30 },
 ]
 
 function convertPriceToCrownValue(amount: number, currency?: string) {
@@ -27,8 +27,8 @@ function convertPriceToCrownValue(amount: number, currency?: string) {
 
 export const WalletStatements: React.FC = () => {
   const tableItems = useRef<any>()
-  const [items, setItems] = useState<RitaWallet.PaymentRequest[]>([])
-  const [selectedPeriod, setSelectedPeriod] = useState(1)
+  const [items, setItems] = useState<RitaWallet.Model.PaymentRequest[]>([])
+  const [selectedPeriod, setSelectedPeriod] = useState(periodOptions[0].value)
   const [tableItemsSort, setTableItemsSort] =
     useState<RitaComponents.TableSort>({
       path: 'createdAt',
@@ -42,25 +42,28 @@ export const WalletStatements: React.FC = () => {
   const { Loading } = useLoading()
 
   async function fetchData() {
-    const { data } = await apiWallet.get<RitaWallet.PaymentRequest[]>(
-      '/payment',
+    const { data } = await apiWallet.get<{
+      count: number
+      paymentRequests: RitaWallet.Model.PaymentRequest[]
+    }>(
+      '/payment/statement',
       {
         params: {
           take: tableItemsPaging.take,
           skip: tableItemsPaging.skip,
           orderBy: tableItemsSort.path,
           orderType: tableItemsSort.order,
-          period: selectedPeriod,
+          daysBefore: selectedPeriod,
         },
       },
     )
 
-    if (!data || !Array.isArray(data)) {
-      throw new Error('Resposta inválida')
+    if (!data || !data.paymentRequests || !Array.isArray(data.paymentRequests)) {
+      throw new Error('Resposta vazia ou inválida')
     }
 
-    setItems(data)
-    setTableItemsCount(50)
+    setTableItemsCount(data.count || 0)
+    setItems(data.paymentRequests)
   }
 
   function handleItemsShowDetailsClick(index: number) {
@@ -124,7 +127,7 @@ export const WalletStatements: React.FC = () => {
                 <>{moment(row.createdAt).format('DD/MM/YYYY')}</>
               ),
             },
-            { path: 'typeTransaction.name' },
+            { path: 'transactionType' },
             {
               path: 'debitAmount',
               fit: true,
@@ -134,11 +137,11 @@ export const WalletStatements: React.FC = () => {
                   <small>
                     <CrownIcon /> {convertPriceToCrownValue(row.debitAmount)}
                   </small>
-                  {String(row.typeTransaction.mode).toUpperCase() ===
+                  {String(row.transactionMode).toUpperCase() ===
                     'DEBIT' && <ArrowUpIcon className="debit" />}
-                  {String(row.typeTransaction.mode).toUpperCase() ===
+                  {String(row.transactionMode).toUpperCase() ===
                     'CREDIT' && <ArrowDownIcon className="credit" />}
-                  {String(row.typeTransaction.mode).toUpperCase() ===
+                  {String(row.transactionMode).toUpperCase() ===
                     'CASHBACK' && <ArrowDownIcon />}
                 </TableColumnAmount>
               ),
@@ -148,7 +151,7 @@ export const WalletStatements: React.FC = () => {
             { path: 'id', label: 'Detalhes', sortable: false },
             { path: 'createdAt', label: 'Data', sortable: true },
             {
-              path: 'typeTransaction.name',
+              path: 'transactionType',
               label: 'Operação',
               sortable: true,
             },

@@ -36,3 +36,16 @@ export const mapDaysToApi = (day: DaysType): number => {
 
   return daysFormated[day] || null
 }
+export const mapDaysToPortuguese = (day: DaysType): number => {
+  const daysFormated = {
+    [daysWeek.SUNDAY]: 1,
+    [daysWeek.MONDAY]: 2,
+    [daysWeek.TUESDAY]: 3,
+    [daysWeek.WEDNESDAY]: 4,
+    [daysWeek.THRUSDAY]: 5,
+    [daysWeek.FRIDAY]: 6,
+    [daysWeek.SATURDAY]: 7,
+  }
+
+  return daysFormated[day] || null
+}
