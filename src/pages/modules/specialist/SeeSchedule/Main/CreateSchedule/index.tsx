@@ -33,7 +33,7 @@ const CreateSchedule: React.FC = () => {
 
   const [days, setDays] = useState<DaysI>({} as DaysI)
 
-  const {  currentDataClinicAndDoctor, setGetSchedules } = useScheduleSpecialist()
+  const { currentDataClinicAndDoctor, setGetSchedules } = useScheduleSpecialist()
 
   const { hasError } = useValidator(setErrors)
 
@@ -42,7 +42,6 @@ const CreateSchedule: React.FC = () => {
   const { showSimple } = useModal()
 
   const onCreateSchedule = async () => {
-    //console.log({ startTime, endTime, specialtys, days })
     if (hasError({ startTime, endTime, specialtys, days })) {
       return
     }
@@ -58,36 +57,28 @@ const CreateSchedule: React.FC = () => {
 
     try {
       Loading.turnOn()
-
-        daysChoosen.map((data) =>
-          // apiAdmin.post(
-          //   `/clinica/medico/217/agenda`,
-          //   toApi({
-          //     start: startTime,
-          //     end: endTime,
-          //     specialtys,
-          //     day: data,
-          //     idClinic: currentDataClinicAndDoctor.idClinic,
-          //     idDoctor: currentDataClinicAndDoctor.idDoctor,
-          //   }),
-          // ),
-          console.log(toApi({
+      axios.all(daysChoosen.map((data) =>
+        apiAdmin.post(
+          `/medico/agenda`,
+          toApi({
             start: startTime,
             end: endTime,
             specialtys,
             day: data,
             idClinic: currentDataClinicAndDoctor.idClinic,
-          }))
+          }),
         ),
-
-
-      setGetSchedules()
+      ))
     } catch (error) {
       showSimple.error(
-        'Erro ao adicionar evento, verifique os dados e tente novamente.',
+        'Aconteceu um erro ao adicionar o evento, verifique os dados e tente novamente.',
       )
     } finally {
-      Loading.turnOff()
+      /** Colocar comentáriop aqui */
+      setTimeout(() => {
+        setGetSchedules()
+        Loading.turnOff()
+      }, 3000)
     }
   }
 
@@ -103,6 +94,7 @@ const CreateSchedule: React.FC = () => {
           hasError={!!errors.startTime}
           msgError={errors.startTime}
           variation="secondary"
+          placeholder='00:00'
         />
 
         <InputMask
@@ -114,9 +106,8 @@ const CreateSchedule: React.FC = () => {
           hasError={!!errors.endTime}
           msgError={errors.endTime}
           variation="secondary"
+          placeholder='00:00'
         />
-      </section>
-      <section>
         <SelectClinic
           clinics={clinics}
           setClinics={setClinics}
@@ -132,10 +123,12 @@ const CreateSchedule: React.FC = () => {
           idDoctor={currentDataClinicAndDoctor?.idDoctor}
           idClinic={currentDataClinicAndDoctor?.idClinic}
         />
+      </section>
 
+      <section>
         <DaysButtons days={days} setDays={setDays} error={errors.days} />
-        <ButtonPrimary small onClick={onCreateSchedule}>
-          Criar evento
+        <ButtonPrimary onClick={onCreateSchedule}>
+          Adicionar
         </ButtonPrimary>
       </section>
     </Container>

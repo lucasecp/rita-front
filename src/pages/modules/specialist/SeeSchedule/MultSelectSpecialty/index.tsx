@@ -42,9 +42,8 @@ export const SelectSpecialty: React.FC<SpecialtysProps> = ({
   const getSpecialtys = async () => {
     try {
       const { data } = await apiAdmin.get(
-        `/medico/${idDoctor}/clinica/${idClinic}`,
+        `/medico/${idDoctor}/clinica/${idClinic}/especialidade`,
       )
-      console.log({data})
       const dataMapped = mapSpecialtys(data?.clinica?.especialidades)
       if (!dataMapped.length) {
         return setSpecialtysOptions([])

@@ -5,8 +5,8 @@ import { Content } from '../styles'
 /** Helpers */
 import { getUserStorage } from '../../../../../storage/user'
 /** Components */
-import Header from '../Header'
 import CreateSchedule from './CreateSchedule';
+import Grid from './Grid'
 /** Hooks */
 import { useScheduleSpecialist } from '../hooks'
 /** API */
@@ -14,9 +14,10 @@ import apiAdmin from '../../../../../services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading';
 import { fromApi } from '../adapters';
 
+
 const Main: React.FC = () => {
 
-  const {setSchedule, getSchedules, currentDataClinicAndDoctor, setCurrentDataClinicAndDoctor, setClinics, setSpecialistName } = useScheduleSpecialist()
+  const { setSchedule, getSchedules, currentDataClinicAndDoctor, setCurrentDataClinicAndDoctor, setClinics, setSpecialistName } = useScheduleSpecialist()
   const { Loading } = useLoading()
 
   React.useEffect(() => {
@@ -40,8 +41,7 @@ const Main: React.FC = () => {
     try {
       Loading.turnOn()
       const { data } = await apiAdmin.get(`/medico/agenda`)
-      console.log({ agenda: data})
-      //setSchedule(fromApi(data, 59))
+      setSchedule(fromApi(data))
     } catch (error) {
     } finally {
       Loading.turnOff()
@@ -49,11 +49,12 @@ const Main: React.FC = () => {
   }
 
 
+
   return (
     <Container>
-      <Header />
       <Content>
         <CreateSchedule />
+        <Grid />
       </Content>
     </Container>
   );

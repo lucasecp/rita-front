@@ -1,22 +1,18 @@
 import { ScheduleI, ScheduleApiI } from '../types'
 import { mapDays, mapDaysToApi } from './mapDays'
 import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys'
-// mapSpecialtys(schedule.especialidades)
 
-export const fromApi = (data: ScheduleApiI[], currentClinic: number): ScheduleI[] => {
+export const fromApi = (data: ScheduleApiI[]): ScheduleI[] => {
 
   return data.map((schedule: any) => ({
-    idClinic: schedule.idClinica,
+    idClinic: schedule.clinica.idClinica,
     idSchedule: schedule.id,
     idDoctor: schedule.idMedico,
     day: mapDays(schedule.diaSemana),
     start: schedule.horaInicio.slice(0, 5),
     end: schedule.horaFim.slice(0, 5),
     specialtys: mapSpecialtys(schedule.especialidades),
-    clinicName:
-      currentClinic === schedule.clinica.idClinica
-        ? schedule.clinica.nome
-        : 'Ocupado',
+    clinicName: schedule.clinica.nome
   }))
 }
 
@@ -30,13 +26,3 @@ export const toApi = (data: ScheduleI) => {
   }
 }
 
-// ;[
-//   {
-//     id: 19,
-//     idClinica: 59,
-//     diaSemana: 2,
-//     horaInicio: '08:00:00',
-//     horaFim: '12:00:00',
-//     especialidades: [],
-//   },
-// ]

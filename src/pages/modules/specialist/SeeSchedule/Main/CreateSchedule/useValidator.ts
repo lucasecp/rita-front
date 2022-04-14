@@ -75,7 +75,7 @@ export const useValidator = (setErrors: React.Dispatch<React.SetStateAction<Erro
         endTime: 'Revise esse campo.',
       }))
 
-      showSimple.error('Já existe um compromisso com o horário informado.')
+      showSimple.error('Existe um horário de atendimento marcado neste dia e horário. Remova o horário de atendimento já existente para adicionar o novo.')
 
       error = true
     }
