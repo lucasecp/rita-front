@@ -1,105 +1,98 @@
-import type { ReactNode } from 'react'
+// import type { ReactNode } from 'react'
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
 
-import apiWallet from '@/services/apiWalletMock'
-import { ReactComponent as AlipayLogo } from '@/assets/logo/credit-cards/alipay.svg'
-import { ReactComponent as AmexLogo } from '@/assets/logo/credit-cards/amex.svg'
-import { ReactComponent as DinersLogo } from '@/assets/logo/credit-cards/diners.svg'
-import { ReactComponent as DiscoverLogo } from '@/assets/logo/credit-cards/discover.svg'
-import { ReactComponent as EloLogo } from '@/assets/logo/credit-cards/elo.svg'
-import { ReactComponent as HiperLogo } from '@/assets/logo/credit-cards/hiper.svg'
-import { ReactComponent as HipercardLogo } from '@/assets/logo/credit-cards/hipercard.svg'
-import { ReactComponent as JCBLogo } from '@/assets/logo/credit-cards/jcb.svg'
-import { ReactComponent as MaestroLogo } from '@/assets/logo/credit-cards/maestro.svg'
-import { ReactComponent as MastercardLogo } from '@/assets/logo/credit-cards/mastercard.svg'
-import { ReactComponent as MirLogo } from '@/assets/logo/credit-cards/mir.svg'
-import { ReactComponent as PaypalLogo } from '@/assets/logo/credit-cards/paypal.svg'
-import { ReactComponent as UnionPayLogo } from '@/assets/logo/credit-cards/unionpay.svg'
-import { ReactComponent as VisaLogo } from '@/assets/logo/credit-cards/visa.svg'
-import { ReactComponent as TimesCircleIcon } from '@/assets/icons/times-circle.svg'
-import { Container } from './styles'
+import apiWallet from '@/services/apiWallet'
+import { useAuth } from '@/hooks/login'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { PaymentForm } from '@/pages/modules/patient/WalletSettings/components/PaymentForm'
 
-const creditCardLogos: Record<string, ReactNode> = {
-  alipay: <AlipayLogo />,
-  amex: <AmexLogo />,
-  diners: <DinersLogo />,
-  discover: <DiscoverLogo />,
-  elo: <EloLogo />,
-  hiper: <HiperLogo />,
-  hipercard: <HipercardLogo />,
-  jcb: <JCBLogo />,
-  maestro: <MaestroLogo />,
-  mastercard: <MastercardLogo />,
-  mir: <MirLogo />,
-  paypal: <PaypalLogo />,
-  unionpay: <UnionPayLogo />,
-  visa: <VisaLogo />,
-}
+// import { ReactComponent as AlipayLogo } from '@/assets/logo/credit-cards/alipay.svg'
+// import { ReactComponent as AmexLogo } from '@/assets/logo/credit-cards/amex.svg'
+// import { ReactComponent as DinersLogo } from '@/assets/logo/credit-cards/diners.svg'
+// import { ReactComponent as DiscoverLogo } from '@/assets/logo/credit-cards/discover.svg'
+// import { ReactComponent as EloLogo } from '@/assets/logo/credit-cards/elo.svg'
+// import { ReactComponent as HiperLogo } from '@/assets/logo/credit-cards/hiper.svg'
+// import { ReactComponent as HipercardLogo } from '@/assets/logo/credit-cards/hipercard.svg'
+// import { ReactComponent as JCBLogo } from '@/assets/logo/credit-cards/jcb.svg'
+// import { ReactComponent as MaestroLogo } from '@/assets/logo/credit-cards/maestro.svg'
+// import { ReactComponent as MastercardLogo } from '@/assets/logo/credit-cards/mastercard.svg'
+// import { ReactComponent as MirLogo } from '@/assets/logo/credit-cards/mir.svg'
+// import { ReactComponent as PaypalLogo } from '@/assets/logo/credit-cards/paypal.svg'
+// import { ReactComponent as UnionPayLogo } from '@/assets/logo/credit-cards/unionpay.svg'
+// import { ReactComponent as VisaLogo } from '@/assets/logo/credit-cards/visa.svg'
+import { ReactComponent as TimesCircleIcon } from '@/assets/icons/times-circle.svg'
+import { Container } from './styles'
 
-type CreditCardItem = {
-  id: number
-  number: string
-  name: string
-  expireAt: string
-  brandImage: ReactNode
-}
+// const creditCardLogos: Record<string, ReactNode> = {
+//   alipay: <AlipayLogo />,
+//   amex: <AmexLogo />,
+//   diners: <DinersLogo />,
+//   discover: <DiscoverLogo />,
+//   elo: <EloLogo />,
+//   hiper: <HiperLogo />,
+//   hipercard: <HipercardLogo />,
+//   jcb: <JCBLogo />,
+//   maestro: <MaestroLogo />,
+//   mastercard: <MastercardLogo />,
+//   mir: <MirLogo />,
+//   paypal: <PaypalLogo />,
+//   unionpay: <UnionPayLogo />,
+//   visa: <VisaLogo />,
+// }
 
 export const WalletSettings: React.FC = () => {
-  const [creditCardItems, setCreditCardItems] = useState<CreditCardItem[]>([])
+  const { user } = useAuth()
+  const [creditCardItems, setCreditCardItems] = useState<RitaWallet.Model.CreditCard[]>([])
 
-  useEffect(() => {
-    async function fetchData() {
-      const { data } = await apiWallet.get('/credit-card')
+  async function fetchData() {
+    const { data } = await apiWallet.get<RitaWallet.API.Get.UserCreditCard>('/user/credit-card')
 
-      if (data && Array.isArray(data)) {
-        const loadedItems = []
-
-        for (const row of data) {
-          loadedItems.push({
-            id: row.id,
-            number: row.number,
-            name: row.name,
-            expireAt: row.expireAt,
-            brandImage: creditCardLogos[row.brandId],
-          })
-        }
-
-        setCreditCardItems(loadedItems)
-      }
+    if (!data || !Array.isArray(data)) {
+      throw new Error('Resposta vazia ou inválida')
     }
 
-    fetchData().catch(console.error)
-  }, [])
+    setCreditCardItems(data)
+  }
 
   async function handleItemRemove(itemRemoved: any) {
-    console.log('handleItemRemove credit card itemRemoved', itemRemoved)
-    await apiWallet.delete(`/credit-card/${itemRemoved.id}`)
+    await apiWallet.delete('/user/credit-card', {
+      data: {
+        id: itemRemoved.id,
+        user: {
+          ritaId: String(user.id),
+          token: user.token,
+        },
+      },
+    })
 
-    const newItems = creditCardItems.filter((item) => item !== itemRemoved)
-    setCreditCardItems(newItems)
+    fetchData().catch(console.error)
   }
 
   async function handleFormSubmit(model: any) {
-    console.log('handleFormSubmit credit card model', model)
-    await apiWallet.post('/credit-card', {
+    const [month, year] = model.expireAt.split('/')
+
+    await apiWallet.post('/user/credit-card', {
       number: model.number,
       name: model.name,
-      expireAt: model.expireAt,
+      expirationDate: moment().set({
+        year: 2000 + Number(year),
+        month: Number(month) - 1,
+      }).toISOString(),
+      cvv: model.securityCode,
+      alias: 'abc-123',
+      user: {
+        ritaId: String(user.id),
+        token: user.token,
+      },
     })
 
-    setCreditCardItems([
-      ...creditCardItems,
-      {
-        id: new Date().getTime(),
-        number: `**** **** **** ${model.number.slice(-4)}`,
-        name: model.name,
-        expireAt: model.expireAt,
-        brandImage: <VisaLogo />, // @TODO: load logo dynamically
-      },
-    ])
+    fetchData().catch(console.error)
   }
+
+  useEffect(() => {
+    fetchData().catch(console.error)
+  }, [])
 
   return (
     <DefaultLayout title="Carteira Digital">
@@ -122,8 +115,8 @@ export const WalletSettings: React.FC = () => {
                     <h5>{item.name}</h5>
                   </div>
                   <div>
-                    <span>{item.expireAt}</span>
-                    {item.brandImage}
+                    <span>{item.expirationDate}</span>
+                    {item.alias}
                   </div>
                   <button type="button" onClick={() => handleItemRemove(item)}>
                     <TimesCircleIcon />

@@ -22,7 +22,10 @@ export const DependentSituation: React.FC<DependentSituationProps> = ({
 
       <div>
         {situation?.plan.startDate && (
-          <h4>Plano Vida - Paciente desde {situation?.plan.startDate} </h4>
+          <h4>
+            Plano {situation?.plan.name} - Paciente desde
+            {situation?.plan.startDate}
+          </h4>
         )}
       </div>
 

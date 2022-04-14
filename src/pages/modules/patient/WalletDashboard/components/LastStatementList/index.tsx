@@ -52,11 +52,9 @@ export const LastStatementList: React.FC = () => {
         '/payment/statement',
       )
 
-      if (!data || !Array.isArray(data)) {
-        throw new Error('Resposta vazia ou inválida')
+      if (data && Array.isArray(data)) {
+        setItems(data)
       }
-
-      setItems(data)
     }
 
     fetchData().catch(console.error)

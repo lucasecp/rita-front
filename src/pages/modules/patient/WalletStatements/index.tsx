@@ -15,9 +15,9 @@ import { Select } from '@/components/Form/Select'
 import { Table } from '@/components/Table'
 
 const periodOptions = [
-  { label: '7 dias', value: 1 },
-  { label: '15 dias', value: 2 },
-  { label: '30 dias', value: 3 },
+  { label: '7 dias', value: 7 },
+  { label: '15 dias', value: 15 },
+  { label: '30 dias', value: 30 },
 ]
 
 function convertPriceToCrownValue(amount: number, currency?: string) {
@@ -28,7 +28,7 @@ function convertPriceToCrownValue(amount: number, currency?: string) {
 export const WalletStatements: React.FC = () => {
   const tableItems = useRef<any>()
   const [items, setItems] = useState<RitaWallet.Model.PaymentRequest[]>([])
-  const [selectedPeriod, setSelectedPeriod] = useState(1)
+  const [selectedPeriod, setSelectedPeriod] = useState(periodOptions[0].value)
   const [tableItemsSort, setTableItemsSort] =
     useState<RitaComponents.TableSort>({
       path: 'createdAt',

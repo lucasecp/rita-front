@@ -60,7 +60,7 @@ export interface RegisterPatientContextData {
   setRegistrationData: React.Dispatch<
     React.SetStateAction<RegistrationDataState | undefined>
   >
-  setAddress: React.Dispatch<React.SetStateAction<AddressState | undefined>>
+  onGetAddress: React.Dispatch<React.SetStateAction<AddressState | undefined>>
   setDocumentsFile: React.Dispatch<React.SetStateAction<DocumentsState>>
   setDependents: React.Dispatch<
     React.SetStateAction<DependentsState[] | undefined>

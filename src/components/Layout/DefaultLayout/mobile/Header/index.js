@@ -16,7 +16,7 @@ import { getInitialLetterName } from '../../helpers/getInitialLetterName'
 export const Header = () => {
   const { openMenu } = useMenu()
   const { clearDataLogout, user } = useAuth()
-  const [photo, getProfilePhoto] = useProfilePhoto()
+  const {photo, getProfilePhoto} = useProfilePhoto()
 
   useEffect(() => {
     getProfilePhoto()

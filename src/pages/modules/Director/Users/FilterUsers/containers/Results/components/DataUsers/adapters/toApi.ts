@@ -1,5 +1,5 @@
 import { OrderUsers, UsersFilters } from '../../../../../@types'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 
 const orderToApi = (order: OrderUsers) => {
   const orderColumns = {

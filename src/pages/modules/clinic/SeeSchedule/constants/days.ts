@@ -9,11 +9,11 @@ export const daysWeek = {
 }
 
 export const daysLabel = {
-  SUNDAY: 'Domingo',
-  MONDAY: 'Segunda',
-  TUESDAY: 'Terça',
-  WEDNESDAY: 'Quarta',
-  THRUSDAY: 'Quinta',
-  FRIDAY: 'Sexta',
-  SATURDAY: 'Sábado',
+  sunday: 'Domingo',
+  monday: 'Segunda',
+  tuesday: 'Terça',
+  wednesday: 'Quarta',
+  thrusday: 'Quinta',
+  friday: 'Sexta',
+  sartuday: 'Sábado',
 }

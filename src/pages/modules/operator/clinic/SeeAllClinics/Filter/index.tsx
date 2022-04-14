@@ -14,7 +14,7 @@ import formatMultSelectValue from '@/helpers/formatMultSelectValue'
 import { verifyTypedFields } from '../helpers/verifyTypedFields'
 import InputMask from '@/components/Form/InputMask'
 import { fieldsApi } from '../static/fieldsApi'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 import useQueryParams from './useQueryParams'
 
 interface FilterProps {

@@ -17,6 +17,7 @@ import { ReactComponent as ImportIcon } from '@/assets/icons/import.svg'
 import { ReactComponent as StethoscopeIcon } from '@/assets/icons/stethoscope.svg'
 import { ReactComponent as UsersIcon } from '@/assets/icons/users.svg'
 import { ReactComponent as SpecialtysTypesIcon } from '@/assets/icons/specialtys-types.svg'
+import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
 
 import {
   INITIAL_PAGE,
@@ -46,6 +47,7 @@ import {
   OPERATOR_DEPENDENT_MANAGMENT,
   DIRECTOR_IMPORT,
   SPECIALIST_PROFILE,
+  SPECIALIST_SEE_SCHEDULE,
   FILTER_USERS,
   OPERATOR_SEE_ALL_ISSUING_AGENCY,
   CLINIC_SEE_ALL_SPECIALIST,
@@ -210,6 +212,12 @@ export const menuItens = [
     icon: <UserIcon />,
     name: 'Perfil',
     permissions: [permissions.ALTERAR_MEUS_DADOS_ESPECIALISTA],
+  },
+  {
+    path: SPECIALIST_SEE_SCHEDULE,
+    icon: <Calendar />,
+    name: 'Agenda Profissional',
+    permissions: [permissions.GERENCIAR_MINHA_AGENDA_ESPECIALISTA],
   },
   {
     path: CLINIC_PROFILE,

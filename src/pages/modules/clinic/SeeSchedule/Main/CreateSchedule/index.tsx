@@ -68,10 +68,10 @@ const CreateSchedule: React.FC = ({}) => {
         ),
       )
       setGetSchedules()
-      toast.success('Evento criado com sucesso.')
+      toast.success('Horário criado com sucesso.')
     } catch (error) {
       showSimple.error(
-        'Erro ao adicionar evento, verifique os dados e tente novamente.',
+        error.response?.message || 'Erro ao adicionar horário, verifique os dados e tente novamente.',
       )
     } finally {
       Loading.turnOff()
@@ -113,7 +113,7 @@ const CreateSchedule: React.FC = ({}) => {
 
       <DaysButtons days={days} setDays={setDays} error={errors.days} />
       <ButtonPrimary small onClick={onCreateSchedule}>
-        Criar evento
+        Adicionar
       </ButtonPrimary>
     </Container>
   )

@@ -21,9 +21,9 @@ import { PaymentRequest } from '@/pages/Initial/messages/PaymentRequest'
 import { Table } from '@/components/Table'
 
 const periodOptions = [
-  { label: '7 dias', value: 1 },
-  { label: '15 dias', value: 2 },
-  { label: '30 dias', value: 3 },
+  { label: '7 dias', value: 7 },
+  { label: '15 dias', value: 15 },
+  { label: '30 dias', value: 30 },
 ]
 
 function convertPriceToCrownValue(amount: number, currency?: string) {
@@ -40,7 +40,7 @@ export const WalletPayments: React.FC = () => {
   const [paymentsAll, setPaymentsAll] = useState<RitaWallet.Model.PaymentRequest[]>(
     [],
   )
-  const [selectedPeriod, setSelectedPeriod] = useState(1)
+  const [selectedPeriod, setSelectedPeriod] = useState(periodOptions[0].value)
   const [tablePaymentsAllSort, setTablePaymentsAllSort] =
     useState<RitaComponents.TableSort>({
       path: 'createdAt',
@@ -69,7 +69,7 @@ export const WalletPayments: React.FC = () => {
             skip: tablePaymentsAllPaging.skip,
             orderBy: tablePaymentsAllSort.path,
             orderType: tablePaymentsAllSort.order,
-            period: selectedPeriod,
+            daysBefore: selectedPeriod,
           },
         }),
       ])
