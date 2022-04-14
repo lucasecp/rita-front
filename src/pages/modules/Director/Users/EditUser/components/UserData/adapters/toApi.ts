@@ -1,5 +1,5 @@
 import { User } from '../../../index'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 
 interface UserToApi {
   nome: string

@@ -1,4 +1,4 @@
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 import { DataSpecialistI, RqeAndSpecialtysType } from '../Types'
 
 import { mapClinics, mapClinicsToApi } from './mapClinic'

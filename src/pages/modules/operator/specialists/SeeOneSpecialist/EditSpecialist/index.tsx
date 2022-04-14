@@ -16,7 +16,7 @@ import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
 import OutlineButton from '../../../../../../components/Button/Outline/index'
 import ButtonPrimary from '../../../../../../components/Button/Primary/index'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 
 interface EditSpecialistProps {
   specialistData: any
