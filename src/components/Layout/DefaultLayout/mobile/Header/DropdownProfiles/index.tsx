@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Container, Button } from './styles'
 import { useAuth } from '@/hooks/login'
-import { profilesColors, profilesLabel } from '../../../static/profiles'
+import { profilesColors, profilesLabel,profiles } from '../../../static/profiles'
 
 interface DropdownProfilesProps {
   show: boolean
@@ -10,7 +10,7 @@ interface DropdownProfilesProps {
 
 const DropdownProfiles: React.FC<DropdownProfilesProps> = ({ show, setShow }) => {
   const { user, setDataLogin } = useAuth()
-  
+
   const containerRef = useRef(null)
 
   const [heightContainer, setHeightContainer] = useState(0)
@@ -43,7 +43,7 @@ const DropdownProfiles: React.FC<DropdownProfilesProps> = ({ show, setShow }) =>
             onChangeProfile(val.permissoes, profilesLabel[val.grupoPerfil])
           }
         >
-          Trocar para Perfil {profilesLabel[val.grupoPerfil]}
+          Trocar para Perfil {profiles[val.grupoPerfil]}
         </Button>
       ))}
     </Container>

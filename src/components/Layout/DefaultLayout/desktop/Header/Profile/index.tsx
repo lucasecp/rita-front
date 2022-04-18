@@ -8,7 +8,7 @@ import { getInitialLetterName } from '@/components/Layout/DefaultLayout/helpers/
 import { ButtonProfile, Container } from './styles'
 import DropdownProfiles from '../DropdownProfiles'
 import { useToggle } from '../../../../../../hooks/useToggle'
-import { profilesColors, profilesLabel } from '../../../static/profiles'
+import { profilesColors, profiles } from '../../../static/profiles'
 import { ReactComponent as ArrowDown } from '@/assets/icons/arrow-down-select.svg'
 
 export const Profile: React.FC = () => {
@@ -36,7 +36,7 @@ export const Profile: React.FC = () => {
 
   useEffect(() => {
     setCurrentProfile(
-      user.profileChosen || profilesLabel[user?.area[0]?.grupoPerfil] || '',
+      user.profileChosen || profiles[user?.area[0]?.grupoPerfil] || '',
     )
   }, [user])
 
