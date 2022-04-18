@@ -13,7 +13,7 @@ import { validatePhone } from '@/helpers/validateFields/validatePhone'
 import { validateCPF } from '@/helpers/validateFields/validateCPF'
 import { validateBirthDate } from '@/helpers/validateFields/validateBirthDate'
 import { validateGender } from '@/helpers/validateFields/validateGender'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 
 import { DependentDataType } from '../../types/index'
 

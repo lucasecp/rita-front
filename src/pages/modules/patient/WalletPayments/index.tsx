@@ -54,36 +54,6 @@ export const WalletPayments: React.FC = () => {
   const { showMessage } = useModal()
   const { Loading } = useLoading()
 
-  async function fetchData() {
-    const [{ data: loadedPaymentsNew }, { data: loadedPaymentsAll }] =
-      await Promise.all([
-        apiWallet.get<RitaWallet.Model.PaymentRequest[]>('/payment', {
-          params: {
-            take: 2,
-            activeOnly: true,
-          },
-        }),
-        apiWallet.get<RitaWallet.Model.PaymentRequest[]>('/payment', {
-          params: {
-            take: tablePaymentsAllPaging.take,
-            skip: tablePaymentsAllPaging.skip,
-            orderBy: tablePaymentsAllSort.path,
-            orderType: tablePaymentsAllSort.order,
-            daysBefore: selectedPeriod,
-          },
-        }),
-      ])
-
-    if (Array.isArray(loadedPaymentsNew)) {
-      setPaymentsNew(loadedPaymentsNew)
-    }
-
-    if (Array.isArray(loadedPaymentsAll)) {
-      setPaymentsAll(loadedPaymentsAll)
-      setPaymentsAllCount(100)
-    }
-  }
-
   function handlePayNowClick(data: RitaWallet.Model.PaymentRequest) {
     showMessage(PaymentRequest, { data }, true)
   }
@@ -97,8 +67,21 @@ export const WalletPayments: React.FC = () => {
   }
 
   useEffect(() => {
+    async function fetchDataActive() {
+      const { data } = await apiWallet.get<RitaWallet.Model.PaymentRequest[]>('/payment', {
+        params: {
+          take: 2,
+          activeOnly: true,
+        },
+      })
+
+      if (Array.isArray(data)) {
+        setPaymentsNew(data)
+      }
+    }
+
     Loading.turnOn()
-    fetchData()
+    fetchDataActive()
       .catch(console.error)
       .finally(() => {
         Loading.turnOff()
@@ -106,8 +89,25 @@ export const WalletPayments: React.FC = () => {
   }, [])
 
   useEffect(() => {
+    async function fetchDataAll() {
+      const { data } = await apiWallet.get<RitaWallet.Model.PaymentRequest[]>('/payment', {
+        params: {
+          take: tablePaymentsAllPaging.take,
+          skip: tablePaymentsAllPaging.skip,
+          orderBy: tablePaymentsAllSort.path,
+          orderType: tablePaymentsAllSort.order,
+          daysBefore: selectedPeriod,
+        },
+      })
+
+      if (Array.isArray(data)) {
+        setPaymentsAll(data)
+        setPaymentsAllCount(100)
+      }
+    }
+
     Loading.turnOn()
-    fetchData()
+    fetchDataAll()
       .catch(console.error)
       .finally(() => {
         Loading.turnOff()

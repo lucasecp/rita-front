@@ -89,7 +89,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           label="Órgão Emissor:"
           value={issuingAgency}
           setValue={setIssuingAgency}
-          maxLength={20}
+          maxLength={10}
           hasError={
             issuingAgency.length < 3 && issuingAgency ? !!errors.type : false
           }
@@ -103,7 +103,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           label="Tipo de especialista:"
           value={specialist}
           setValue={setSpecialist}
-          maxLength={20}
+          maxLength={100}
           // onlyLetter
           hasError={specialist.length < 3 && specialist ? !!errors.type : false}
           msgError={specialist.length < 3 && specialist ? errors.type : ''}

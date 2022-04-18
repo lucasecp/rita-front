@@ -5,6 +5,14 @@ namespace RitaComponents {
     path?: string
     order?: 'ASC' | 'DESC'
   }
+
+  type ModalConfirmationProps = {
+    message: string
+    cancelText?: string
+    confirmText?: string
+    onTruthy?: () => void
+    onFalsy?: () => void
+  }
 }
 
 namespace RitaWallet {
@@ -40,7 +48,11 @@ namespace RitaWallet {
         }[]
       }
 
-      type UserCreditCard = RitaWallet.Model.CreditCard[]
+      type UserCreditCard = {
+        id: string
+        alias: string
+        lastFourDigits: string
+      }[]
 
       type Wallet = {
         id: string

@@ -1,4 +1,4 @@
-import clearCpf from '@/helpers/clear/SpecialCaracteres'
+import clearCpf from '@/helpers/clearSpecialCharacters'
 import cpfValidate from '@/helpers/validateCpf'
 
 export const validateDepCpf = (value, allDeps, clientCpf, action) => {

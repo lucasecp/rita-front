@@ -1,5 +1,5 @@
 import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 import { mapClinics, mapClinicsToAPi } from './mapClinic'
 
 export const fromApi = (specialistInfo: any) => {

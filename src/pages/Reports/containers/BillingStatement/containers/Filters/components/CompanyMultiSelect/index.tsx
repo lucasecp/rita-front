@@ -10,7 +10,7 @@ import {
   AutocompleteOptions,
 } from '@/components/Form/Autocomplete'
 
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 import { useAuth } from '@/hooks/login'
 import { permissions } from '@/constants/permissions'
 import apiAdmin from '@/services/apiAdmin'

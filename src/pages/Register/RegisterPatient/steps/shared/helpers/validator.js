@@ -1,4 +1,4 @@
-import clear from '@/helpers/clear/SpecialCaracteres'
+import clear from '@/helpers/clearSpecialCharacters'
 import cpfValidate from '@/helpers/validateCpf'
 import moment from 'moment'
 import { parse, intervalToDuration, isValid } from 'date-fns'
@@ -56,14 +56,6 @@ export const validateBirthdate = (value) => {
   }
 
   return { birthdate: '' }
-}
-
-export const validateCep = (value) => {
-  if (clear(value).length > 0 && clear(value).length < 8) {
-    return { cep: 'Cep Inválido.' }
-  }
-
-  return { cep: '' }
 }
 
 export const validateCity = (value) => {

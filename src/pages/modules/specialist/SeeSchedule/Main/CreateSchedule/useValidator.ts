@@ -1,5 +1,5 @@
 import { DaysI, ErrorsI } from '../../types/index'
-import clearSpecialCaracter from '@/helpers/clear/SpecialCaracteres'
+import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 import { MultiSelectOption } from '@/components/Form/MultSelect/index'
 import { useScheduleSpecialist } from '../../hooks'
 import { useModal } from '@/hooks/useModal'

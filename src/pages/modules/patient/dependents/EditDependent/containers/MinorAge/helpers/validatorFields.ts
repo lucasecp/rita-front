@@ -1,4 +1,4 @@
-import clear from '@/helpers/clear/SpecialCaracteres'
+import clear from '@/helpers/clearSpecialCharacters'
 
 export const validateGender = (value: string): string => {
   if (!value) {

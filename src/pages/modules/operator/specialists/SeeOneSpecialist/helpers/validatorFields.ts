@@ -1,4 +1,4 @@
-import clear from '@/helpers/clear/SpecialCaracteres'
+import clear from '@/helpers/clearSpecialCharacters'
 import validateCpf from '@/helpers/validateCpf'
 
 export const validateName = (value: string): string => {
