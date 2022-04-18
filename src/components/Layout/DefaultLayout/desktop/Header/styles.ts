@@ -24,47 +24,7 @@ export const Container = styled.header`
     align-items: center;
     margin-left: 24px;
 
-    > p {
-      display: flex;
-      align-items: center;
-      color: ${colors.gray.dark};
-      font-size: 14px;
-      font-weight: 500;
-
-      > span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        min-width: 40px;
-        min-height: 40px;
-        max-width: 40px;
-        max-height: 40px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-left: 16px;
-
-        > img {
-          min-height: 100%;
-          border: solid 2px ${colors.purple.main.dark};
-          border-radius: 50px;
-        }
-
-        > span {
-          background-color: ${colors.purple.main.dark};
-          border-radius: 50%;
-          color: #fff;
-          width: 100%;
-          height: 40px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          border: none;
-        }
-      }
-    }
+   
 
     > svg {
       margin-left: 16px;
