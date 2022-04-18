@@ -38,6 +38,10 @@ const Pagination: React.FC<PaginationProps> = ({
   }, [limit, currentPage, restQuery])
 
   useEffect(() => {
+    setCurrentPage(1)
+  }, [restQuery])
+
+  useEffect(() => {
     if (currentPage > totalPages && total > 0) {
       setCurrentPage(1)
     }
