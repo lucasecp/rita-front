@@ -6,6 +6,7 @@ export const Container = styled.div<{ show: boolean; height: number }>`
   width: 100%;
   background: #fff;
   border-radius: 0 0 20px 20px;
+  z-index: 1;
   > button + button {
     border-top: solid 1px #eaf0fa;
   }
@@ -53,7 +54,7 @@ export const Button = styled.button<{ color: string }>`
     content: '';
     display: block;
     background-color: ${({ color }) => color};
-    width: 18px;
+    min-width: 18px;
     height: 18px;
     border-radius: 50%;
   }

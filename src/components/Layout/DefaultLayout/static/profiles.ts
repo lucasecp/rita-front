@@ -1,13 +1,20 @@
+export const profiles = {
+  Paciente: 'Paciente',
+  Funcionario: 'Funcionario',
+  'Clinica/Especialista': 'Clinica/Especialista',
+  Empresa: 'Empresa',
+}
+
 export const profilesLabel = {
   Paciente: 'Paciente',
-  Funcionário: 'Funcionário',
-  'Especialista/Clínica': 'Especialista/Clínica',
+  Funcionario: 'Funcionário',
+  'Clinica/Especialista': 'Clínica/Especialista',
   Empresa: 'Empresa',
 }
 
 export const profilesColors = {
   Paciente: '#9146FF',
-  Funcionário: '#000CEC',
-  'Especialista/Clínica': '#4B8864',
+  Funcionario: '#000CEC',
+  'Clinica/Especialista': '#4B8864',
   Empresa: '#DF644B',
 }

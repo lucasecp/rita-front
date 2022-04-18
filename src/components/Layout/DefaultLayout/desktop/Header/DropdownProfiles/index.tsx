@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Container, Button } from './styles'
 import { useAuth } from '@/hooks/login'
-import { profilesColors, profilesLabel } from '../../../static/profiles'
+import { profilesColors, profilesLabel,profiles } from '../../../static/profiles'
 
 interface DropdownProfilesProps {
-  show: boolean 
+  show: boolean
   setShow: (x: boolean) => void
 }
 
@@ -39,7 +39,7 @@ const DropdownProfiles: React.FC<DropdownProfilesProps> = ({ show, setShow }) =>
           key={index}
           color={profilesColors[val.grupoPerfil]}
           onClick={() =>
-            onChangeProfile(val.permissoes, profilesLabel[val.grupoPerfil])
+            onChangeProfile(val.permissoes, profiles[val.grupoPerfil])
           }
         >
           Trocar para Perfil {profilesLabel[val.grupoPerfil]}

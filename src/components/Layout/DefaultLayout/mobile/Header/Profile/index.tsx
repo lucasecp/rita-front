@@ -2,14 +2,12 @@ import React, { useEffect, useMemo, useState, useRef } from 'react'
 
 import { useAuth } from '@/hooks/login'
 import useProfilePhoto from '@/components/Layout/DefaultLayout/hooks/useProfilePhoto'
-import formatFirstLastName from '@/helpers/formatFirstLastName'
 import { getInitialLetterName } from '@/components/Layout/DefaultLayout/helpers/getInitialLetterName'
 
 import { Container } from './styles'
 import DropdownProfiles from '../DropdownProfiles'
 import { useToggle } from '../../../../../../hooks/useToggle'
-import { profilesColors, profilesLabel } from '../../../static/profiles'
-import { ReactComponent as ArrowDown } from '@/assets/icons/arrow-down-select.svg'
+import { profilesColors, profiles } from '../../../static/profiles'
 
 export const Profile: React.FC = () => {
   const [currentProfile, setCurrentProfile] = useState('')
@@ -31,7 +29,7 @@ export const Profile: React.FC = () => {
 
   useEffect(() => {
     setCurrentProfile(
-      user.profileChosen || profilesLabel[user?.area[0]?.grupoPerfil] || '',
+      user.profileChosen || profiles[user?.area[0]?.grupoPerfil] || '',
     )
   }, [user])
 
