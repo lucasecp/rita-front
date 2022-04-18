@@ -21,8 +21,7 @@ const Pagination: React.FC<PaginationProps> = ({
   )
   const [currentPage, setCurrentPage] = useState(Number(query.get('page')) || 1)
 
-  //const skipedPages = (currentPage - 1) * Number(limit)
-  const [skipedPages, setSkipedPages] = useState(0)
+  const skipedPages = (currentPage - 1) * Number(limit)
 
   const totalPages = Math.ceil(total / Number(limit)) || 0
 
@@ -30,23 +29,16 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const queryApiString = `?limit=${limit}&skip=${skipedPages}`
 
-  //const currentTotal = currentPage === totalPages ? total : skipedPages + Number(limit)
-  const [currentTotal, setCurrentTotal] = useState(0)
+  const currentTotal =
+    currentPage === totalPages ? total : skipedPages + Number(limit)
 
   useEffect(() => {
     history.push(queryString)
     setQuery(queryApiString)
-    setCurrentTotal(currentPage === totalPages ? total : skipedPages + Number(limit))
-    setSkipedPages((currentPage - 1) * Number(limit))
-  }, [limit, currentPage])
+  }, [limit, currentPage, restQuery])
 
   useEffect(() => {
-    const queryString = `?page=${1}&limit=${limit}${restQuery || ''}`
-    setSkipedPages((1 - 1) * Number(limit))
-    setCurrentTotal(1 === totalPages ? total : skipedPages + Number(limit))
-    console.log({currentTotal, skipedPages})
-    history.push(queryString)
-    setQuery(queryApiString)
+    setCurrentPage(1)
   }, [restQuery])
 
   useEffect(() => {
@@ -58,15 +50,11 @@ const Pagination: React.FC<PaginationProps> = ({
   const prevPage = () => {
     if (currentPage === 1) return
     setCurrentPage(currentPage - 1)
-    setCurrentTotal(currentPage === totalPages ? total : skipedPages + Number(limit))
-    setSkipedPages((currentPage - 1) * Number(limit))
   }
 
   const nextPage = () => {
     if (currentPage === totalPages || !totalPages) return
     setCurrentPage(currentPage + 1)
-    setCurrentTotal(currentPage === totalPages ? total : skipedPages + Number(limit))
-    setSkipedPages((currentPage - 1) * Number(limit))
   }
 
   return (
