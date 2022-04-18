@@ -45,7 +45,7 @@ export default function AuthProvider({ children }) {
     try {
       Loading.turnOn()
 
-      await apiUser.get(`/status`, {
+      await apiUser.get(`/usuario/status`, {
         params: { cpf: payload.cpf },
       })
 
@@ -81,7 +81,7 @@ export default function AuthProvider({ children }) {
       try {
         Loading.turnOn()
 
-        const { data } = await apiUser.post('/login', payload)
+        const { data } = await apiUser.post('/usuario/login', payload)
 
         const dataUser = jwt(data.jwtToken)
 
@@ -133,6 +133,7 @@ export default function AuthProvider({ children }) {
         logout,
         clearDataLogout,
         isAuthorization,
+        setDataLogin
       }}
     >
       {children}
