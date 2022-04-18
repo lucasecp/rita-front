@@ -7,6 +7,7 @@ export const Container = styled.div<{ show: boolean; height: number }>`
   background: #fff;
   border-radius: 0 0 20px 20px;
   z-index: 1;
+  box-shadow: rgb(0 0 0 / 10%) 2px 2px 5px;
   > button + button {
     border-top: solid 1px #eaf0fa;
   }
