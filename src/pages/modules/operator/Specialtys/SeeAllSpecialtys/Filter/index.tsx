@@ -54,7 +54,10 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     setErrors({ name: '' })
 
     if (name.length < 3 && name) {
-      setErrors((errors) => ({ ...errors, name: 'Informe 3 letras ou mais' }))
+      setErrors((errors) => ({
+        ...errors,
+        name: 'Informe 3 caracteres ou mais',
+      }))
       newErrors = true
     }
     return newErrors
