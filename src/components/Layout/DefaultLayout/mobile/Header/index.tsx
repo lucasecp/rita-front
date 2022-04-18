@@ -12,11 +12,18 @@ import { useAuth } from '@/hooks/login'
 import { Container, HamburgerButton } from './styles'
 import useProfilePhoto from '../../hooks/useProfilePhoto'
 import { getInitialLetterName } from '../../helpers/getInitialLetterName'
+import DropdownProfiles from './DropdownProfiles'
+import { useToggle } from '../../../../../hooks/useToggle'
+import { Profile } from './Profile'
 
-export const Header = () => {
+export const Header: React.FC = () => {
   const { openMenu } = useMenu()
+
   const { clearDataLogout, user } = useAuth()
-  const {photo, getProfilePhoto} = useProfilePhoto()
+
+  const { photo, getProfilePhoto } = useProfilePhoto()
+
+  const [show, toggleShow] = useToggle(false)
 
   useEffect(() => {
     getProfilePhoto()
@@ -34,15 +41,7 @@ export const Header = () => {
       </Link>
 
       <nav>
-        <Link to="/perfil">
-          <div>
-            {photo ? (
-              <img src={photo} alt="perfil" />
-            ) : (
-              <span>{initialName}</span>
-            )}
-          </div>
-        </Link>
+        <Profile />
         {/* <LetterIcon /> */}
         <ExitIcon onClick={clearDataLogout} />
         <HamburgerButton onClick={openMenu}>

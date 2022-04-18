@@ -23,7 +23,7 @@ const SelectValidator = ({ setValidator, validator }) => {
   }, [])
 
   const formatObjectApi = () => {
-    return validators.map((validator) => {
+    return validators?.map((validator) => {
       return {
         label: formatFirstLastName(validator.nome),
         value: validator.idUsuario,

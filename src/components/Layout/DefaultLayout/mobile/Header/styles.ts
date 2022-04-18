@@ -17,45 +17,14 @@ export const Container = styled.header`
     display: flex;
     align-items: center;
     position: relative;
+    display: flex;
+    align-items: center;
+    color: ${colors.gray.dark};
+    font-size: 14px;
+    font-weight: 500;
 
-    > a {
-      display: flex;
-      align-items: center;
-      color: ${colors.gray.dark};
-      font-size: 14px;
-      font-weight: 500;
-
-      > div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-
-        overflow: hidden;
-        margin-left: 16px;
-
-        > img {
-          min-height: 100%;
-          border: solid 2px ${colors.purple.main.dark};
-          border-radius: 50px;
-        }
-        > span {
-          background-color: ${colors.purple.main.dark};
-          border-radius: 50%;
-          color: #fff;
-          width: 100%;
-          height: 40px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          border: none;
-        }
-      }
+    > div {
+     
     }
 
     > svg {
