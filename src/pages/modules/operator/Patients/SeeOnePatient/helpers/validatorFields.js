@@ -1,4 +1,4 @@
-import clear from '@/helpers/clear/SpecialCaracteres'
+import clear from '@/helpers/clearSpecialCharacters'
 import cpfValidate from '@/helpers/validateCpf'
 import moment from 'moment'
 

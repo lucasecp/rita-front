@@ -41,45 +41,36 @@ export const WalletStatements: React.FC = () => {
   const [tableItemsCount, setTableItemsCount] = useState(0)
   const { Loading } = useLoading()
 
-  async function fetchData() {
-    const { data } = await apiWallet.get<{
-      count: number
-      paymentRequests: RitaWallet.Model.PaymentRequest[]
-    }>(
-      '/payment/statement',
-      {
-        params: {
-          take: tableItemsPaging.take,
-          skip: tableItemsPaging.skip,
-          orderBy: tableItemsSort.path,
-          orderType: tableItemsSort.order,
-          daysBefore: selectedPeriod,
-        },
-      },
-    )
-
-    if (!data || !data.paymentRequests || !Array.isArray(data.paymentRequests)) {
-      throw new Error('Resposta vazia ou inválida')
-    }
-
-    setTableItemsCount(data.count || 0)
-    setItems(data.paymentRequests)
-  }
-
   function handleItemsShowDetailsClick(index: number) {
     tableItems.current?.toggleExpand(index)
   }
 
   useEffect(() => {
-    Loading.turnOn()
-    fetchData()
-      .catch(console.error)
-      .finally(() => {
-        Loading.turnOff()
-      })
-  }, [])
+    async function fetchData() {
+      const { data } = await apiWallet.get<{
+        count: number
+        paymentRequests: RitaWallet.Model.PaymentRequest[]
+      }>(
+        '/payment/statement',
+        {
+          params: {
+            take: tableItemsPaging.take,
+            skip: tableItemsPaging.skip,
+            orderBy: tableItemsSort.path,
+            orderType: tableItemsSort.order,
+            daysBefore: selectedPeriod,
+          },
+        },
+      )
 
-  useEffect(() => {
+      if (!data || !data.paymentRequests || !Array.isArray(data.paymentRequests)) {
+        throw new Error('Resposta vazia ou inválida')
+      }
+
+      setTableItemsCount(data.count || 0)
+      setItems(data.paymentRequests)
+    }
+
     Loading.turnOn()
     fetchData()
       .catch(console.error)

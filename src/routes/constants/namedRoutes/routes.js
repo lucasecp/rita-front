@@ -103,6 +103,7 @@ export const PATIENT_WALLET_SETTINGS =
   '/paciente/carteira-digital/configuracoes'
 
 export const SPECIALIST_PROFILE = '/especialista/perfil'
+export const SPECIALIST_SEE_SCHEDULE = '/especialista/agenda'
 
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'

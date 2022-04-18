@@ -1,4 +1,4 @@
-import clear from '@/helpers/clear/SpecialCaracteres'
+import clear from '@/helpers/clearSpecialCharacters'
 import apiPatient from '@/services/apiPatient'
 import validateCpf from '@/helpers/validateCpf'
 import { useLoading } from '@/hooks/useLoading'

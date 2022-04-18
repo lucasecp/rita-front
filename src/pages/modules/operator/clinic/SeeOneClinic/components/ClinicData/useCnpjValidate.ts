@@ -1,4 +1,4 @@
-import clear from '@/helpers/clear/SpecialCaracteres'
+import clear from '@/helpers/clearSpecialCharacters'
 import apiAdmin from '@/services/apiAdmin'
 import { validateCNPJ } from '@/helpers/validateCNPJ'
 
