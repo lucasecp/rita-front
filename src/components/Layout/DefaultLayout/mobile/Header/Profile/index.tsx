@@ -8,11 +8,12 @@ import { Container } from './styles'
 import DropdownProfiles from '../DropdownProfiles'
 import { useToggle } from '../../../../../../hooks/useToggle'
 import { profilesColors, profiles } from '../../../static/profiles'
+import { ReactComponent as ArrowDown } from '@/assets/icons/arrow-down-select.svg'
 
 export const Profile: React.FC = () => {
   const [currentProfile, setCurrentProfile] = useState('')
 
-  const { user } = useAuth()
+  const { user, setDataLogin } = useAuth()
 
   const { photo, getProfilePhoto } = useProfilePhoto()
 
@@ -33,13 +34,23 @@ export const Profile: React.FC = () => {
     )
   }, [user])
 
+  useEffect(() => {
+    setDataLogin({
+      ...user,
+      permissoes: user?.area[0]?.permissoes,
+      profileChosen: currentProfile,
+    })
+  }, [])
+
   return (
     <Container
       onClick={toggleShow}
       isActive={show}
       color={profilesColors[currentProfile]}
+      onlyOneProfile={user?.area.length === 1}
     >
       {photo ? <img src={photo} alt="perfil" /> : <span>{initialName}</span>}
+      <ArrowDown />
       <DropdownProfiles show={show} setShow={toggleShow} />
     </Container>
   )

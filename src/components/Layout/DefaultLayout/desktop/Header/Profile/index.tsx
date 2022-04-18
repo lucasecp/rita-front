@@ -14,7 +14,7 @@ import { ReactComponent as ArrowDown } from '@/assets/icons/arrow-down-select.sv
 export const Profile: React.FC = () => {
   const [currentProfile, setCurrentProfile] = useState('')
 
-  const { user } = useAuth()
+  const { user, setDataLogin } = useAuth()
 
   const { photo, getProfilePhoto } = useProfilePhoto()
 
@@ -40,12 +40,22 @@ export const Profile: React.FC = () => {
     )
   }, [user])
 
+  useEffect(() => {
+    setDataLogin({
+      ...user,
+      permissoes: user?.area[0]?.permissoes,
+      profileChosen: currentProfile,
+    })
+  }, [])
+
   return (
     <Container>
       <ButtonProfile
         onClick={toggleShow}
         isActive={show}
         color={profilesColors[currentProfile]}
+        onlyOneProfile={user?.area.length === 1}
+
       >
         <div>
           <div>
