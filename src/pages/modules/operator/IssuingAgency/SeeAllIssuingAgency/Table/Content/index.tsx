@@ -10,6 +10,7 @@ import { useModal } from '@/hooks/useModal'
 import { useDeleteIssuingAgency } from './useDeleteIssuingAgency'
 import { toast } from '@/styles/components/toastify'
 import { specialCharacters } from '@/components/smarts/InputEmail/constants/specialCharacters'
+import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 
 const Content: React.FC<ContentProps> = ({
   issuingAgency,
@@ -63,7 +64,7 @@ const Content: React.FC<ContentProps> = ({
           <li>{issuingAgency.issuingAgency}</li>
           <li>
             <CustomTooltip label={issuingAgency.specialist}>
-              <div>{issuingAgency.specialist}</div>
+              <div>{formatTextWithLimit(issuingAgency.specialist, 38)}</div>
             </CustomTooltip>
           </li>
           <li>{issuingAgency.countSpecialty}</li>

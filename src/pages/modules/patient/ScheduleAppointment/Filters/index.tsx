@@ -106,7 +106,6 @@ const Filters = () => {
           <ButtonPrimary onClick={onFilter}>Filtrar Resultados</ButtonPrimary>
         </BtnGroup>
       </Container>
-
       {wasSubmited && (
         <Results
           data={results}
