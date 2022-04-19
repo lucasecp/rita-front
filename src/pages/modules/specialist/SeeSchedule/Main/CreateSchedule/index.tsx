@@ -121,7 +121,7 @@ const CreateSchedule: React.FC = () => {
           errors={errors}
           label="Especialidades:"
           idDoctor={currentDataClinicAndDoctor?.idDoctor}
-          idClinic={currentDataClinicAndDoctor?.idClinic}
+          idClinic={currentDataClinicAndDoctor.idClinic}
         />
       </section>
 
