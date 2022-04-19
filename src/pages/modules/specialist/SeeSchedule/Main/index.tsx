@@ -32,7 +32,7 @@ const Main: React.FC = () => {
   const getEspecialisty = async () => {
     const result = await apiAdmin.get('/medico/meu-perfil')
     const { id, nomeProfissional: specialistName, clinica: clinics } = result.data
-    setCurrentDataClinicAndDoctor({ ...currentDataClinicAndDoctor, idDoctor: id })
+    setCurrentDataClinicAndDoctor({ ...currentDataClinicAndDoctor, idDoctor: id, idClinic: clinics[0].idClinica })
     setClinics(clinics)
     setSpecialistName(specialistName)
   }

@@ -9,6 +9,7 @@ export const Container = styled.div`
 
 export const ButtonProfile = styled.button<{
   isActive: boolean
+  onlyOneProfile: boolean
   color: string
 }>`
   display: flex;
@@ -112,4 +113,24 @@ export const ButtonProfile = styled.button<{
       : css`
           border-radius: 20px;
         `}
+
+  ${({ onlyOneProfile,color }) =>
+    onlyOneProfile &&
+    css`
+      border: none;
+      background: transparent !important;
+      color: ${colors.gray.dark};
+      > div {
+        > div {
+          >p{
+            color: ${color};
+          }
+          > div {
+            > svg {
+              display: none;
+            }
+          }
+        }
+      }
+    `}
 `

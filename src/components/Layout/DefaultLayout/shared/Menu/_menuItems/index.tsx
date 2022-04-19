@@ -18,6 +18,7 @@ import { ReactComponent as StethoscopeIcon } from '@/assets/icons/stethoscope.sv
 import { ReactComponent as UsersIcon } from '@/assets/icons/users.svg'
 import { ReactComponent as SpecialtysTypesIcon } from '@/assets/icons/specialtys-types.svg'
 import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
+import { ReactComponent as AppointmentTableIcon } from '@/assets/icons/appointment-table.svg'
 
 import {
   INITIAL_PAGE,
@@ -52,6 +53,7 @@ import {
   OPERATOR_SEE_ALL_ISSUING_AGENCY,
   CLINIC_SEE_ALL_SPECIALIST,
   CLINIC_PROFILE,
+  CLINIC_APPOINTMENT_TABLE,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissions } from '@/constants/permissions'
@@ -242,5 +244,11 @@ export const menuItens = [
     icon: <StethoscopeIcon />,
     name: 'Especialistas',
     permissions: [permissions.VER_DADOS_CLINICA],
+  },
+  {
+    path: CLINIC_APPOINTMENT_TABLE,
+    icon: <AppointmentTableIcon />,
+    name: 'Tabela de consulta',
+    // permissions: [permissions.GERENCIAR_TABELA_CONSULTA],
   },
 ]

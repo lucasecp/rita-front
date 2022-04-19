@@ -4,6 +4,8 @@ export const Container = styled.div`
   > div {
     display: flex;
     flex-wrap: wrap;
+    position: relative;
+    right: 8px;
   }
   label {
     margin-bottom: 6px;
@@ -34,6 +36,6 @@ export const Buttons = styled.button<{ active: boolean }>`
     css`
       background: ${({ theme }) => theme.darkness};
       color: #fff;
-      border-radius: 5px;
+      border-radius: 50%;
     `}
 `
