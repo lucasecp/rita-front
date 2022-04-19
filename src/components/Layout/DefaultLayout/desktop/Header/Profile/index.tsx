@@ -8,7 +8,7 @@ import { getInitialLetterName } from '@/components/Layout/DefaultLayout/helpers/
 import { ButtonProfile, Container } from './styles'
 import DropdownProfiles from '../DropdownProfiles'
 import { useToggle } from '../../../../../../hooks/useToggle'
-import { profilesColors, profiles } from '../../../static/profiles'
+import { profilesColors, profiles, profilesLabel } from '../../../static/profiles'
 import { ReactComponent as ArrowDown } from '@/assets/icons/arrow-down-select.svg'
 
 export const Profile: React.FC = () => {
@@ -62,7 +62,7 @@ export const Profile: React.FC = () => {
               <ArrowDown />
             </div>
 
-            <p>Perfil {user.profileChosen}</p>
+            <p>Perfil {profilesLabel[user.profileChosen]}</p>
           </div>
 
           <span>
