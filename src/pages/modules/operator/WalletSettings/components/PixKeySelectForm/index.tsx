@@ -1,7 +1,7 @@
 import type { FinancialListItemModel } from '../FinancialListItem'
 import React, { useState, useEffect } from 'react'
 
-import apiWallet from '@/services/apiWalletMock'
+import apiWallet from '@/services/apiWallet'
 import { ReactComponent as KeyIcon } from '@/assets/icons/key.svg'
 import { Container } from './styles'
 import OutlineButton from '@/components/Button/Outline'
@@ -26,7 +26,11 @@ const PixKeyAvailableList: React.FC<PixKeyAvailableListProps> = ({
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await apiWallet.get('/pix-available')
+      const { data } = await apiWallet.get<RitaWallet.API.Get.UserPixKey>('/user/pix-key', {
+        params: {
+          activeOnly: false
+        }
+      })
 
       if (data && Array.isArray(data)) {
         const loadedItems = []
@@ -34,17 +38,9 @@ const PixKeyAvailableList: React.FC<PixKeyAvailableListProps> = ({
         for (const row of data) {
           loadedItems.push({
             id: row.id,
-            title:
-              {
-                cpf: 'CPF',
-                phone: 'TELEFONE CELULAR',
-                email: 'E-MAIL',
-                random: 'CHAVE ALEATÓRIA',
-              }[row.type as string] || row.type,
-            data: [`Chave: ${row.value}`],
-            active: selectedItems.some((selected) => {
-              return selected.id === row.id
-            }),
+            title: row.alias,
+            data: [`Chave: ${row.key}`],
+            active: selectedItems.some((selected) => selected.id === row.id),
           })
         }
 

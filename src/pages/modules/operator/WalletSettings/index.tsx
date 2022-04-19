@@ -1,7 +1,7 @@
 import type { FinancialListItemModel } from '@/pages/modules/operator/WalletSettings/components/FinancialListItem'
 import React, { useState, useEffect } from 'react'
 
-import apiWallet from '@/services/apiWalletMock'
+import apiWallet from '@/services/apiWallet'
 import { ReactComponent as KeyIcon } from '@/assets/icons/key.svg'
 import { ReactComponent as BankIcon } from '@/assets/icons/bank.svg'
 import { Container } from './styles'
@@ -10,12 +10,6 @@ import FinancialList from '@/pages/modules/operator/WalletSettings/components/Fi
 import FinancialListItem from '@/pages/modules/operator/WalletSettings/components/FinancialListItem'
 import PixKeySelectForm from '@/pages/modules/operator/WalletSettings/components/PixKeySelectForm'
 import BankAccountForm from '@/pages/modules/operator/WalletSettings/components/BankAccountForm'
-
-type BankAccountFormModel = {
-  bankName: string
-  agency: string
-  number: string
-}
 
 const WalletSettings: React.FC = () => {
   const [pixKeysActivatedItems, setPixKeysActivatedItems] = useState<
@@ -26,57 +20,56 @@ const WalletSettings: React.FC = () => {
   >([])
   const [visibleFormId, setVisibleFormId] = useState<'none' | 'pix' | 'bank'>()
 
-  useEffect(() => {
-    async function fetchData() {
-      const [{ data: dataPixKeys }, { data: dataBankAccounts }] =
-        await Promise.all([
-          apiWallet.get('/pix'),
-          apiWallet.get('/bank-account'),
-        ])
+  async function fetchData() {
+    const [{ data: dataPixKeys }, { data: dataBankAccounts }] =
+      await Promise.all([
+        apiWallet.get<RitaWallet.API.Get.UserPixKey>('/user/pix-key', {
+          params: {
+            activeOnly: true
+          }
+        }),
+        apiWallet.get<RitaWallet.API.Get.UserBankAccount>('/user/bank-account', {
+          params: {
+            activeOnly: true
+          }
+        }),
+      ])
 
-      if (dataPixKeys && Array.isArray(dataPixKeys)) {
-        const loadedItems: FinancialListItemModel[] = []
+    if (dataPixKeys && Array.isArray(dataPixKeys)) {
+      const loadedItems: FinancialListItemModel[] = []
 
-        for (const row of dataPixKeys) {
-          loadedItems.push({
-            id: row.id,
-            title:
-              {
-                cpf: 'CPF',
-                phone: 'TELEFONE CELULAR',
-                email: 'E-MAIL',
-              }[row.type as string] || row.type,
-            data: [`Chave: ${row.value}`],
-            active: true,
-          })
-        }
-
-        setPixKeysActivatedItems(loadedItems)
+      for (const row of dataPixKeys) {
+        loadedItems.push({
+          id: row.id,
+          title: row.alias,
+          data: [`Chave: ${row.key}`],
+          active: true,
+        })
       }
 
-      if (dataBankAccounts && Array.isArray(dataBankAccounts)) {
-        const loadedItems: FinancialListItemModel[] = []
-
-        for (const row of dataBankAccounts) {
-          loadedItems.push({
-            title: row.bankName.toUpperCase(),
-            data: [`Agência: ${row.agency}`, `Conta: ${row.number}`],
-            active: true,
-          })
-        }
-
-        setBankAccountItems(loadedItems)
-      }
+      setPixKeysActivatedItems(loadedItems)
     }
 
-    fetchData().catch(console.error)
-  }, [])
+    if (dataBankAccounts && Array.isArray(dataBankAccounts)) {
+      const loadedItems: FinancialListItemModel[] = []
+
+      for (const row of dataBankAccounts) {
+        loadedItems.push({
+          id: row.id,
+          title: row.bank.name.toUpperCase(),
+          data: [`Agência: ${row.agencyNumber}`, `Conta: ${row.accountNumber}`],
+          active: true,
+        })
+      }
+
+      setBankAccountItems(loadedItems)
+    }
+  }
 
   async function handlePixKeyActivatedRemove(
     itemRemoved: FinancialListItemModel,
   ) {
-    console.log('handlePixKeyActivatedRemove', itemRemoved)
-    await apiWallet.delete(`/pix/${itemRemoved.id}`)
+    await apiWallet.delete(`/user/pix-key/${itemRemoved.id}`)
 
     const newItems = pixKeysActivatedItems.filter((item) => {
       return item.id !== itemRemoved.id
@@ -86,44 +79,34 @@ const WalletSettings: React.FC = () => {
   }
 
   async function handleBankAccountRemove(itemRemoved: FinancialListItemModel) {
-    console.log('handleBankAccountRemove', itemRemoved)
-    await apiWallet.delete(`/bank-account/${itemRemoved.id}`)
+    await apiWallet.delete(`/user/bank-account/${itemRemoved.id}`)
 
-    const newItems = bankAccountItems.filter((item) => {
-      return item.id !== itemRemoved.id
-    })
-
-    setBankAccountItems(newItems)
+    fetchData().catch(console.error)
   }
 
   async function handlePixKeySelectFormSubmit(items: FinancialListItemModel[]) {
-    console.log('handlePixKeySelectFormSubmit', items)
-    await apiWallet.post('/pix', {
+    await apiWallet.post('/user/pix-key', {
       ids: items.map((item) => item.id),
     })
 
     setVisibleFormId('none')
-    setPixKeysActivatedItems(items)
+    fetchData().catch(console.error)
   }
 
-  async function handleBankAccountFormSubmit(item: BankAccountFormModel) {
-    console.log('handleBankAccountFormSubmit', item)
-    await apiWallet.post('/bank-account', {
+  async function handleBankAccountFormSubmit(item: FinancialListItemModel) {
+    await apiWallet.post('/user/bank-account', {
       bankName: item.bankName,
       agency: item.agency,
       number: item.number,
     })
 
     setVisibleFormId('none')
-    setBankAccountItems([
-      ...bankAccountItems,
-      {
-        title: item.bankName,
-        data: [`Agência: ${item.agency}`, `Conta: ${item.number}`],
-        active: true,
-      },
-    ])
+    fetchData().catch(console.error)
   }
+
+  useEffect(() => {
+    fetchData().catch(console.error)
+  }, [])
 
   return (
     <DefaultLayout title="Carteira Digital">
