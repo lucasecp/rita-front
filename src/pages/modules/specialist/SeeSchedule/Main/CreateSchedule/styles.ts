@@ -22,22 +22,11 @@ export const Container = styled.div`
       top: 7px;
     }
   }
-  //grid-template-columns: repeat(2, 150px) 1fr auto auto;
-  /* align-items: start;
-  padding: 32px;
-  justify-content: start; */
-  /* >*:nth-child(1),>*:nth-child(1){
 
-      grid-column: repeat(5, 1fr);
-    } */
   @media (max-width: 991px) {
-    grid-template-columns: repeat(2, 100px) 1fr;
-    > *:nth-child(4) {
-      grid-column: span 2;
-    }
-    > *:nth-child(5) {
-      grid-column: 3;
-      max-width: auto;
+    > section:nth-child(1) {
+      display: flex;
+      flex-direction: column;
     }
   }
 
