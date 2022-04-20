@@ -258,6 +258,6 @@ export const menuItens = [
     path: CLINIC_APPOINTMENT_TABLE,
     icon: <AppointmentTableIcon />,
     name: 'Tabela de consulta',
-    // permissions: [permissions.GERENCIAR_TABELA_CONSULTA],
+    permissions: [permissions.GERENCIAR_TABELA_PRECOS_CLINICA],
   }
 ]
