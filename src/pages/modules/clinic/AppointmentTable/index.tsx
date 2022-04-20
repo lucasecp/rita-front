@@ -20,6 +20,7 @@ const AppointmentTable: React.FC = () => {
   const [specialtysToApi, setSpecialtysTopApi] = useState<SpecialtysToApiI>(
     {} as SpecialtysToApiI,
   )
+  console.log(fieldWasChanged)
 
   const { Loading } = useLoading()
   const { showMessage, showSimple } = useModal()
@@ -58,6 +59,7 @@ const AppointmentTable: React.FC = () => {
 
       toast.success('Preços cadastrados com sucesso')
       setEdting(false)
+      setFieldWasChanged(false)
     } catch (error) {
       toast.error('Erro ao adicionar os preços')
     } finally {

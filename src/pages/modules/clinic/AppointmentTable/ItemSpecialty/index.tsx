@@ -18,7 +18,7 @@ const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
   isEdting,
   setSpecialtysTopApi,
   setFieldWasChanged,
-  formWasSubmited
+  formWasSubmited,
 }) => {
   const [ritaPrice, setRitaPrice] = useState<valuePriceType>(
     {} as valuePriceType,
@@ -32,7 +32,6 @@ const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
     initialRitaPrice?: number | string,
     initialNormalPrice?: string | number,
   ) => {
-
     setSpecialtysTopApi((prevState) => ({
       ...prevState,
 
@@ -47,12 +46,13 @@ const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
 
   useEffect(() => {
     setPrice()
-
     if (
       data.price.normalPrice !== normalPrice.clean ||
       data.price.ritaPrice !== ritaPrice.clean
     ) {
       setFieldWasChanged(true)
+    } else {
+      setFieldWasChanged(false)
     }
   }, [ritaPrice, normalPrice])
 
@@ -63,7 +63,7 @@ const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
         formated: formatPrice(data.price.ritaPrice),
         clean: data.price.ritaPrice,
       })
-      
+
       setNormalPrice({
         formated: formatPrice(data.price.normalPrice),
         clean: data.price.normalPrice,
