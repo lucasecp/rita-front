@@ -43,7 +43,7 @@ export const ButtonProfile = styled.button<{
         }
       }
       > p {
-        font-size: 8px;
+        font-size: 12px;
         font-weight: 500;
         line-height: 12px;
         color: ${({ color }) => color};
@@ -114,16 +114,17 @@ export const ButtonProfile = styled.button<{
           border-radius: 20px;
         `}
 
-  ${({ onlyOneProfile,color }) =>
+  ${({ onlyOneProfile }) =>
     onlyOneProfile &&
     css`
       border: none;
       background: transparent !important;
       color: ${colors.gray.dark};
+      cursor: default !important;
       > div {
         > div {
           >p{
-            color: ${color};
+            display: none
           }
           > div {
             > svg {

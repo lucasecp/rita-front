@@ -62,7 +62,7 @@ export const Profile: React.FC = () => {
               <ArrowDown />
             </div>
 
-            <p>Perfil {profilesLabel[user.profileChosen]}</p>
+            <p>Área {profilesLabel[user.profileChosen]}</p>
           </div>
 
           <span>

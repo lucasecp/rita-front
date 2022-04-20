@@ -1,11 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Container, Button } from './styles'
 import { useAuth } from '@/hooks/login'
+import { useHistory } from 'react-router-dom';
 import {
   profilesColors,
   profilesLabel,
   profiles,
 } from '../../../static/profiles'
+import { INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes';
 
 interface DropdownProfilesProps {
   show: boolean
@@ -17,6 +19,7 @@ const DropdownProfiles: React.FC<DropdownProfilesProps> = ({ show }) => {
   const containerRef = useRef(null)
 
   const [heightContainer, setHeightContainer] = useState(0)
+  const history = useHistory()
 
   const onChangeProfile = (permission: string[], profileChosen: string) => {
     setDataLogin({
@@ -24,6 +27,8 @@ const DropdownProfiles: React.FC<DropdownProfilesProps> = ({ show }) => {
       permissoes: permission,
       profileChosen,
     })
+    history.push(INITIAL_PAGE)
+
   }
 
   useEffect(() => {
@@ -51,7 +56,7 @@ const DropdownProfiles: React.FC<DropdownProfilesProps> = ({ show }) => {
               onChangeProfile(val.permissoes, profiles[val.grupoPerfil])
             }
           >
-            Trocar para Perfil {profilesLabel[val.grupoPerfil]}
+            Trocar para Área {profilesLabel[val.grupoPerfil]}
           </Button>
         ))}
     </Container>
