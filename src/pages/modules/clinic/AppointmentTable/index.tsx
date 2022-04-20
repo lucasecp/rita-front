@@ -16,10 +16,11 @@ const AppointmentTable: React.FC = () => {
   const [specialtys, setSpecialtys] = useState<SpecialtysI[]>([])
   const [isEdting, setEdting] = useState(false)
   const [fieldWasChanged, setFieldWasChanged] = useState(false)
+  const [formWasSubmited, setFormWasSubmited] = useState(false)
   const [specialtysToApi, setSpecialtysTopApi] = useState<SpecialtysToApiI>(
     {} as SpecialtysToApiI,
   )
-  console.log(specialtysToApi)
+  
 
   const { Loading } = useLoading()
   const { showMessage } = useModal()
@@ -36,6 +37,7 @@ const AppointmentTable: React.FC = () => {
   }
 
   const updatePrices = async () => {
+    setFormWasSubmited(true)
     try {
       Loading.turnOn()
       await apiAdmin.post(`/clinica/59/tabela-precos`, toApi(specialtysToApi))
@@ -43,6 +45,7 @@ const AppointmentTable: React.FC = () => {
       getSpecialtys()
 
       toast.success('Preços cadastrados com sucesso')
+      setEdting(false)
     } catch (error) {
       toast.error('Erro ao adicionar os preços')
     } finally {
@@ -58,8 +61,10 @@ const AppointmentTable: React.FC = () => {
 
   const onCancel = () => {
     if (fieldWasChanged) {
+      setFormWasSubmited(false)
       return showMessage(CancelEdting, { setEdting, setFieldWasChanged })
     }
+    setFormWasSubmited(false)
     setEdting(false)
   }
 
@@ -74,6 +79,7 @@ const AppointmentTable: React.FC = () => {
             isEdting={isEdting}
             setSpecialtysTopApi={setSpecialtysTopApi}
             setFieldWasChanged={setFieldWasChanged}
+            formWasSubmited={formWasSubmited}
           />
         ))}
         <footer>

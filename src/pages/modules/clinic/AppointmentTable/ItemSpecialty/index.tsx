@@ -10,6 +10,7 @@ interface ItemSpecialtyProps {
   setSpecialtysTopApi: React.Dispatch<React.SetStateAction<SpecialtysToApiI>>
   setFieldWasChanged: React.Dispatch<React.SetStateAction<boolean>>
   isEdting: boolean
+  formWasSubmited: boolean
 }
 
 const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
@@ -17,6 +18,7 @@ const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
   isEdting,
   setSpecialtysTopApi,
   setFieldWasChanged,
+  formWasSubmited
 }) => {
   const [ritaPrice, setRitaPrice] = useState<valuePriceType>(
     {} as valuePriceType,
@@ -61,9 +63,9 @@ const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
   }, [ritaPrice, normalPrice])
 
   useEffect(() => {
-    if (!isEdting) {
+    console.log(formWasSubmited)
+    if (!isEdting && !formWasSubmited) {
       setPrice(data.price.ritaPrice, data.price.normalPrice)
-
       setRitaPrice({
         formated: formatPrice(data.price.ritaPrice),
         clean: data.price.ritaPrice,
@@ -73,7 +75,7 @@ const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
         clean: data.price.normalPrice,
       })
     }
-  }, [isEdting])
+  }, [isEdting, formWasSubmited])
 
   return (
     <Container>
