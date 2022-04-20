@@ -41,6 +41,7 @@ export const OPERATOR_WALLET_SETTINGS =
   '/operador/carteira-digital/configuracoes'
 
 export const CLINIC_SEE_ALL_SPECIALIST = '/clinica-especialista'
+export const CLINIC_SEE_ALL_USERS = '/clinica-usuarios'
 export const CLINIC_SEE_ONE_SPECIALIST = '/clinica-especialista/visualizar'
 export const CLINIC_PROFILE = '/clinica/perfil'
 export const CLINIC_SEE_SPECIALIST_SCHEDULE =

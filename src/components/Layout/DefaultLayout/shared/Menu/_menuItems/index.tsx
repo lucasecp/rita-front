@@ -16,6 +16,7 @@ import { ReactComponent as ClinicsIcon } from '@/assets/icons/clinic.svg'
 import { ReactComponent as ImportIcon } from '@/assets/icons/import.svg'
 import { ReactComponent as StethoscopeIcon } from '@/assets/icons/stethoscope.svg'
 import { ReactComponent as UsersIcon } from '@/assets/icons/users.svg'
+import { ReactComponent as UsersGroupIcon } from '@/assets/icons/users-group.svg'
 import { ReactComponent as SpecialtysTypesIcon } from '@/assets/icons/specialtys-types.svg'
 import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
 import { ReactComponent as AppointmentTableIcon } from '@/assets/icons/appointment-table.svg'
@@ -53,6 +54,7 @@ import {
   OPERATOR_SEE_ALL_ISSUING_AGENCY,
   CLINIC_SEE_ALL_SPECIALIST,
   CLINIC_PROFILE,
+  CLINIC_SEE_ALL_USERS,
   CLINIC_APPOINTMENT_TABLE,
 } from '@/routes/constants/namedRoutes/routes'
 
@@ -222,12 +224,6 @@ export const menuItens = [
     permissions: [permissions.GERENCIAR_MINHA_AGENDA_ESPECIALISTA],
   },
   {
-    path: CLINIC_PROFILE,
-    icon: <UserIcon />,
-    name: 'Perfil',
-    permissions: [permissions.VER_DADOS_CLINICA],
-  },
-  {
     path: FILTER_USERS,
     icon: <UsersIcon />,
     name: 'Gestão de Usuários',
@@ -246,9 +242,22 @@ export const menuItens = [
     permissions: [permissions.VER_DADOS_CLINICA],
   },
   {
+    path: CLINIC_SEE_ALL_USERS,
+    icon: <UsersGroupIcon />,
+    name: 'Usuários',
+    permissions: [permissions.LISTAR_USUARIO_CLINICA],
+  },
+  {
+    path: CLINIC_PROFILE,
+    icon: <UserIcon />,
+    name: 'Perfil',
+    permissions: [permissions.VER_DADOS_CLINICA],
+
+  },
+  {
     path: CLINIC_APPOINTMENT_TABLE,
     icon: <AppointmentTableIcon />,
     name: 'Tabela de consulta',
     // permissions: [permissions.GERENCIAR_TABELA_CONSULTA],
-  },
+  }
 ]
