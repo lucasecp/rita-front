@@ -33,10 +33,14 @@ export const Container = styled.div`
     line-height: 20px;
     margin-right: 24px;
     min-width: 250px;
+    max-width: 250px;
+    word-break: break-word;
 
     > * {
       margin-right: 24px;
       cursor: pointer;
+      max-width: 250px;
+      word-break: break-word;
     }
     ::marker {
       display: none;

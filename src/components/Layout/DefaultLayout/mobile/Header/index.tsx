@@ -29,10 +29,6 @@ export const Header: React.FC = () => {
     getProfilePhoto()
   }, [])
 
-  const initialName = useMemo(
-    () => getInitialLetterName(user?.nome),
-    [user?.nome],
-  )
 
   return (
     <Container>

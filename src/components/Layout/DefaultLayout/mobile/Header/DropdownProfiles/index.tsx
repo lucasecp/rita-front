@@ -9,13 +9,9 @@ import {
 
 interface DropdownProfilesProps {
   show: boolean
-  setShow: (x: boolean) => void
 }
 
-const DropdownProfiles: React.FC<DropdownProfilesProps> = ({
-  show,
-  setShow,
-}) => {
+const DropdownProfiles: React.FC<DropdownProfilesProps> = ({ show }) => {
   const { user, setDataLogin } = useAuth()
 
   const containerRef = useRef(null)
@@ -45,7 +41,6 @@ const DropdownProfiles: React.FC<DropdownProfilesProps> = ({
       ref={containerRef}
       height={heightContainer}
       onlyOneProfile={user?.area.length === 1}
-      
     >
       {user?.area.length > 1 &&
         user?.area.map((val, index) => (
@@ -53,10 +48,10 @@ const DropdownProfiles: React.FC<DropdownProfilesProps> = ({
             key={index}
             color={profilesColors[val.grupoPerfil]}
             onClick={() =>
-              onChangeProfile(val.permissoes, profilesLabel[val.grupoPerfil])
+              onChangeProfile(val.permissoes, profiles[val.grupoPerfil])
             }
           >
-            Trocar para Perfil {profiles[val.grupoPerfil]}
+            Trocar para Perfil {profilesLabel[val.grupoPerfil]}
           </Button>
         ))}
     </Container>

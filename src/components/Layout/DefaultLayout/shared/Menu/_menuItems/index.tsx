@@ -19,6 +19,7 @@ import { ReactComponent as UsersIcon } from '@/assets/icons/users.svg'
 import { ReactComponent as UsersGroupIcon } from '@/assets/icons/users-group.svg'
 import { ReactComponent as SpecialtysTypesIcon } from '@/assets/icons/specialtys-types.svg'
 import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
+import { ReactComponent as AppointmentTableIcon } from '@/assets/icons/appointment-table.svg'
 
 import {
   INITIAL_PAGE,
@@ -53,7 +54,11 @@ import {
   OPERATOR_SEE_ALL_ISSUING_AGENCY,
   CLINIC_SEE_ALL_SPECIALIST,
   CLINIC_PROFILE,
+<<<<<<< HEAD
   CLINIC_SEE_ALL_USERS
+=======
+  CLINIC_APPOINTMENT_TABLE,
+>>>>>>> 3e9c42f98575a6983ffb51a2c2de11d8b86cf520
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissions } from '@/constants/permissions'
@@ -240,6 +245,7 @@ export const menuItens = [
     permissions: [permissions.VER_DADOS_CLINICA],
   },
   {
+<<<<<<< HEAD
     path: CLINIC_SEE_ALL_USERS,
     icon: <UsersGroupIcon />,
     name: 'Usuários',
@@ -250,5 +256,11 @@ export const menuItens = [
     icon: <UserIcon />,
     name: 'Perfil',
     permissions: [permissions.VER_DADOS_CLINICA],
+=======
+    path: CLINIC_APPOINTMENT_TABLE,
+    icon: <AppointmentTableIcon />,
+    name: 'Tabela de consulta',
+    // permissions: [permissions.GERENCIAR_TABELA_CONSULTA],
+>>>>>>> 3e9c42f98575a6983ffb51a2c2de11d8b86cf520
   },
 ]

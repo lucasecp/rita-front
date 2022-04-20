@@ -11,8 +11,10 @@ import {
   CLINIC_SEE_ONE_SPECIALIST,
   CLINIC_PROFILE,
   CLINIC_SEE_SPECIALIST_SCHEDULE,
-  CLINIC_SEE_ALL_USERS
+  CLINIC_SEE_ALL_USERS,
+  CLINIC_APPOINTMENT_TABLE,
 } from '../../constants/namedRoutes/routes'
+import AppointmentTable from '@/pages/modules/clinic/AppointmentTable'
 
 const clinicRoutes = [
   {
@@ -32,9 +34,13 @@ const clinicRoutes = [
     component: SeeSchedule,
   },
   {
+    path: CLINIC_APPOINTMENT_TABLE,
+    component: AppointmentTable,
+  },
+  {
     path: CLINIC_SEE_ALL_USERS,
     component: SeeAllUsers,
-  },
+  }
 ]
 
 const clinicRoutesComponents = clinicRoutes.map((props, index) => (
