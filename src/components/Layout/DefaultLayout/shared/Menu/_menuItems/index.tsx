@@ -54,11 +54,8 @@ import {
   OPERATOR_SEE_ALL_ISSUING_AGENCY,
   CLINIC_SEE_ALL_SPECIALIST,
   CLINIC_PROFILE,
-<<<<<<< HEAD
-  CLINIC_SEE_ALL_USERS
-=======
+  CLINIC_SEE_ALL_USERS,
   CLINIC_APPOINTMENT_TABLE,
->>>>>>> 3e9c42f98575a6983ffb51a2c2de11d8b86cf520
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissions } from '@/constants/permissions'
@@ -245,7 +242,6 @@ export const menuItens = [
     permissions: [permissions.VER_DADOS_CLINICA],
   },
   {
-<<<<<<< HEAD
     path: CLINIC_SEE_ALL_USERS,
     icon: <UsersGroupIcon />,
     name: 'Usuários',
@@ -256,11 +252,12 @@ export const menuItens = [
     icon: <UserIcon />,
     name: 'Perfil',
     permissions: [permissions.VER_DADOS_CLINICA],
-=======
+
+  },
+  {
     path: CLINIC_APPOINTMENT_TABLE,
     icon: <AppointmentTableIcon />,
     name: 'Tabela de consulta',
     // permissions: [permissions.GERENCIAR_TABELA_CONSULTA],
->>>>>>> 3e9c42f98575a6983ffb51a2c2de11d8b86cf520
-  },
+  }
 ]
