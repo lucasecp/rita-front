@@ -4,12 +4,14 @@ import SeeAllSpecialists from '@/pages/modules/clinic/SeeAllSpecialists'
 import SeeOneSpecialists from '@/pages/modules/clinic/SeeOneSpecialist'
 import ClinicProfile from '@/pages/modules/clinic/Profile'
 import SeeSchedule from '@/pages/modules/clinic/SeeSchedule'
+import SeeAllUsers from '@/pages/modules/clinic/SeeAllUsers'
 
 import {
   CLINIC_SEE_ALL_SPECIALIST,
   CLINIC_SEE_ONE_SPECIALIST,
   CLINIC_PROFILE,
   CLINIC_SEE_SPECIALIST_SCHEDULE,
+  CLINIC_SEE_ALL_USERS
 } from '../../constants/namedRoutes/routes'
 
 const clinicRoutes = [
@@ -28,6 +30,10 @@ const clinicRoutes = [
   {
     path: CLINIC_SEE_SPECIALIST_SCHEDULE,
     component: SeeSchedule,
+  },
+  {
+    path: CLINIC_SEE_ALL_USERS,
+    component: SeeAllUsers,
   },
 ]
 
