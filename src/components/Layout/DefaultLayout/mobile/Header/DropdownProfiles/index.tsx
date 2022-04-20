@@ -6,7 +6,7 @@ import {
   profilesColors,
   profilesLabel,
   profiles,
-} from '../../../static/profiles'
+} from '../../../../../../constants/profiles'
 import { INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes';
 
 interface DropdownProfilesProps {

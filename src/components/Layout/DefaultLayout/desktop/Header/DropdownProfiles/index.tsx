@@ -7,7 +7,7 @@ import {
   profilesColors,
   profilesLabel,
   profiles,
-} from '../../../static/profiles'
+} from '../../../../../../constants/profiles'
 
 interface DropdownProfilesProps {
   show: boolean

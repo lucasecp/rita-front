@@ -4,14 +4,19 @@ import { SpecialtysI, SpecialtysToApiI } from '../types'
 import InputPrice, {
   valuePriceType,
 } from '@/components/smarts/InputPrice/index'
+import formatPrice from '@/helpers/formatPrice'
 interface ItemSpecialtyProps {
   data: SpecialtysI
   setSpecialtysTopApi: React.Dispatch<React.SetStateAction<SpecialtysToApiI>>
+  setFieldWasChanged: React.Dispatch<React.SetStateAction<boolean>>
+  isEdting: boolean
 }
 
 const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
   data,
+  isEdting,
   setSpecialtysTopApi,
+  setFieldWasChanged,
 }) => {
   const [ritaPrice, setRitaPrice] = useState<valuePriceType>(
     {} as valuePriceType,
@@ -21,8 +26,14 @@ const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
     {} as valuePriceType,
   )
 
-  const setPrice = () => {
-    if (!ritaPrice.clean && !normalPrice.clean) {
+  const setPrice = (
+    initialRitaPrice?: number | string,
+    initialNormalPrice?: string | number,
+  ) => {
+    if (
+      (!ritaPrice.clean && !normalPrice.clean) ||
+      (!data.price.ritaPrice && !data.price.normalPrice)
+    ) {
       return
     }
 
@@ -32,15 +43,37 @@ const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
       [data.name]: {
         id: data.id,
         name: data.name,
-        ritaPrice: ritaPrice.clean,
-        normalPrice: normalPrice.clean,
+        ritaPrice: initialRitaPrice || ritaPrice.clean,
+        normalPrice: initialNormalPrice || normalPrice.clean,
       },
     }))
   }
 
   useEffect(() => {
     setPrice()
+
+    if (
+      data.price.normalPrice !== normalPrice.clean ||
+      data.price.ritaPrice !== ritaPrice.clean
+    ) {
+      setFieldWasChanged(true)
+    }
   }, [ritaPrice, normalPrice])
+
+  useEffect(() => {
+    if (!isEdting) {
+      setPrice(data.price.ritaPrice, data.price.normalPrice)
+
+      setRitaPrice({
+        formated: formatPrice(data.price.ritaPrice),
+        clean: data.price.ritaPrice,
+      })
+      setNormalPrice({
+        formated: formatPrice(data.price.normalPrice),
+        clean: data.price.normalPrice,
+      })
+    }
+  }, [isEdting])
 
   return (
     <Container>
@@ -52,6 +85,7 @@ const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
           value={ritaPrice.formated}
           initialValue={data.price.ritaPrice}
           maxLength={100}
+          disabled={!isEdting}
         />
         <InputPrice
           label="Preço Normal:"
@@ -59,6 +93,7 @@ const ItemSpecialty: React.FC<ItemSpecialtyProps> = ({
           value={normalPrice.formated}
           maxLength={100}
           initialValue={data.price.normalPrice}
+          disabled={!isEdting}
         />
       </div>
     </Container>
