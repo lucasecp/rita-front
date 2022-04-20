@@ -20,15 +20,16 @@ const AppointmentTable: React.FC = () => {
   const [specialtysToApi, setSpecialtysTopApi] = useState<SpecialtysToApiI>(
     {} as SpecialtysToApiI,
   )
-  
 
   const { Loading } = useLoading()
-  const { showMessage } = useModal()
+  const { showMessage, showSimple } = useModal()
 
   const getSpecialtys = async () => {
     try {
       Loading.turnOn()
+
       const { data } = await apiAdmin.get(`clinica/59/tabela-precos`)
+
       setSpecialtys(fromApi(data.especialidades))
     } catch (error) {
     } finally {
@@ -36,8 +37,19 @@ const AppointmentTable: React.FC = () => {
     }
   }
 
+  const hasError = () => {
+    const arraySpecilatys = Object.values(specialtysToApi)
+
+    return arraySpecilatys.some((spec) => !spec.ritaPrice || !spec.normalPrice)
+  }
+
   const updatePrices = async () => {
+    if (hasError()) {
+      return showSimple.error('Todos os campos são obrigatórios.')
+    }
+
     setFormWasSubmited(true)
+
     try {
       Loading.turnOn()
       await apiAdmin.post(`/clinica/59/tabela-precos`, toApi(specialtysToApi))
