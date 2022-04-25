@@ -26,8 +26,11 @@ const CreateSpecialty: React.FC = () => {
     setErrors({})
 
     for (const field in dataToApi) {
-      if (!dataToApi[field]) {
-        setErrors((errors) => ({ ...errors, [field]: 'Campo Obrigatório.' }))
+      if (dataToApi[field].length < 3 && field === 'description') {
+        setErrors((errors) => ({
+          ...errors,
+          [field]: 'Informe 3 caracteres ou mais.',
+        }))
         error = true
       }
     }

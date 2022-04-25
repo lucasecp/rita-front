@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div<{ show: boolean; height: number }>`
+export const Container = styled.div<{
+  show: boolean
+  height: number
+  onlyOneProfile: boolean
+}>`
   position: absolute;
   top: 56px;
   min-width: 200px;

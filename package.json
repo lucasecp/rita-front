@@ -57,7 +57,6 @@
     "lint:fix": "tsc --noEmit && eslint --ext .ts,.js --fix src",
     "lint:eslint": "eslint --ext .ts,.js src",
     "lint:eslint:fix": "eslint --ext .ts,.js --fix src",
-    "mock-server": "json-server --watch src/mock-server.js --port 3080",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -110,7 +109,6 @@
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.4.0",
-    "json-server": "^0.17.0",
     "prettier": "^2.5.1",
     "react-app-rewire-alias": "^1.1.7",
     "react-test-renderer": "^17.0.2",

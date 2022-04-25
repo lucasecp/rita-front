@@ -10,7 +10,25 @@ enum PaymentRequestSituation {
 
 const apiWallet = axios.create({
   baseURL: process.env.REACT_APP_WALLET_API_URL,
+  timeout: 30000,
 })
+
+apiWallet.interceptors.request.use((config) => {
+  const lsUser = localStorage.getItem('user')
+  const { headers = {} } = config
+
+  if (lsUser) {
+    const user = JSON.parse(lsUser) as { token?: string }
+
+    if (user.token) {
+      headers.Authorization = `Bearer ${user.token}`
+      headers.token = user.token
+      headers['x-access-token'] = user.token
+    }
+  }
+
+  return config
+}, (error) => Promise.reject(error))
 
 apiWallet.interceptors.response.use(
   (response) => response,
@@ -34,13 +52,6 @@ apiWallet.interceptors.response.use(
       : output
   }
 )
-
-const lsUser = localStorage.getItem('user')
-
-if (lsUser) {
-  const user = JSON.parse(lsUser) as { token?: string }
-  apiWallet.defaults.headers['x-access-token'] = user.token
-}
 
 export default apiWallet
 

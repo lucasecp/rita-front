@@ -26,6 +26,7 @@ export const SelectSpecialty: React.FC<SpecialtysProps> = ({
   ...rest
 }) => {
   const [specialtysOptions, setSpecialtysOptions] = useState<MultiSelectOption[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const mapSpecialtys = (arrayDoctor: any[]) => {
     if (!arrayDoctor) return []
@@ -36,20 +37,29 @@ export const SelectSpecialty: React.FC<SpecialtysProps> = ({
   }
 
   useEffect(() => {
-    getSpecialtys()
+    if(idDoctor && idClinic){
+      getSpecialtys()
+    }
   }, [idDoctor, idClinic])
 
   const getSpecialtys = async () => {
     try {
-      const { data } = await apiAdmin.get(
-        `/medico/${idDoctor}/clinica/${idClinic}/especialidade`,
-      )
-      const dataMapped = mapSpecialtys(data?.clinica?.especialidades)
-      if (!dataMapped.length) {
-        return setSpecialtysOptions([])
-      }
-      setSpecialtysOptions(dataMapped)
-    } catch (error) {}
+      apiAdmin.get(`/medico/${idDoctor}/clinica/${idClinic}/especialidade`).then(response => {
+        const dataMapped = mapSpecialtys(response.data?.clinica?.especialidades)
+        if (!dataMapped.length) {
+          setIsLoading(false)
+          return setSpecialtysOptions([])
+        }
+        setSpecialtysOptions(dataMapped)
+        setIsLoading(false)
+        if(dataMapped.length === 1){
+          setSpecialtys(dataMapped)
+        }
+      })
+    } catch (error) {} finally {
+      setIsLoading(true)
+    }
+
   }
 
 
@@ -58,10 +68,10 @@ export const SelectSpecialty: React.FC<SpecialtysProps> = ({
       {!label && <h1>Especialidades</h1>}
       <section>
         <MultSelect
-          value={specialtys}
+          value={specialtysOptions.length === 1 ? specialtysOptions : specialtys}
           setValue={setSpecialtys}
           color={color}
-          options={specialtysOptions}
+          options={isLoading ? [{ id: '', name: 'Carregando...' }] : specialtysOptions}
           hasError={!!errors.specialtys}
           messageError={errors.specialtys}
           name="specialtys"
