@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch } from 'react-router-dom'
 
-import Route from './custom.routes'
+import { Route } from './custom.routes'
 
 import { Initial } from '@/pages/Initial'
 import Login from '@/pages/Login'
@@ -26,6 +26,7 @@ import {
 } from './modules'
 
 import registerRoutesComponent from './grouping/register.routes'
+import { newRegisterPatientRoutes } from './grouping/newRegisterPatient.routes'
 import passwordRoutesComponent from './grouping/password.routes'
 
 import {
@@ -44,10 +45,12 @@ import {
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
 
-function Routes() {
+export const Routes: React.FC = () => {
   return (
     <Switch>
       {registerRoutesComponent}
+
+      {newRegisterPatientRoutes}
 
       {passwordRoutesComponent}
 
@@ -67,14 +70,12 @@ function Routes() {
         path={FILTER_SELLABLE_ITEMS}
         isPrivate
         component={FilterSellableItems}
-        exact
       />
 
       <Route
         path={DIRECTOR_SEE_ALL_PROFILES}
         isPrivate
         component={SeeAllProfiles}
-        exact
       />
 
       <Route
@@ -109,9 +110,9 @@ function Routes() {
 
       <Route path={INITIAL_PAGE} isPrivate component={Initial} />
 
-      <Route path={LOGIN} exact component={Login} />
+      <Route path={LOGIN} component={Login} />
 
-      <Route path="/teste-de-endereco" exact component={TestAddressPage} />
+      <Route path="/teste-de-endereco" component={TestAddressPage} />
 
       {/* <Route
         path="/gestao/planos/editar"
@@ -123,5 +124,3 @@ function Routes() {
     </Switch>
   )
 }
-
-export default Routes

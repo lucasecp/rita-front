@@ -1,5 +1,5 @@
 import React from 'react'
-import CustomRoutes from '../custom.routes'
+import { Route } from '../custom.routes'
 
 import Initial from '@/pages/password/ForgotPassword/IdentifyPerson'
 import ConfirmData from '@/pages/password/ForgotPassword/ConfirmPhoneOrEmail'
@@ -34,7 +34,7 @@ const passwordRoutes = [
 ]
 
 const passwordRoutesComponent = passwordRoutes.map((props, key) => (
-  <CustomRoutes {...props} key={key} />
+  <Route {...props} key={key} />
 ))
 
 export default passwordRoutesComponent

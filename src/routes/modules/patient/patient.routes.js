@@ -1,5 +1,5 @@
 import React from 'react'
-import Route from '../../custom.routes'
+import { Route } from '../../custom.routes'
 import {
   PATIENT_CLINIC_INFORMATION,
   PATIENT_SEE_DEPENDENT,
