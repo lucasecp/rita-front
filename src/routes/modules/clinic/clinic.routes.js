@@ -1,5 +1,5 @@
 import React from 'react'
-import Route from '../../custom.routes'
+import { Route } from '../../custom.routes'
 import SeeAllSpecialists from '@/pages/modules/clinic/SeeAllSpecialists'
 import SeeOneSpecialists from '@/pages/modules/clinic/SeeOneSpecialist'
 import ClinicProfile from '@/pages/modules/clinic/Profile'

@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import { Modal } from './components/Modal'
 
-import Routes from './routes/routes'
+import { Routes } from './routes/routes'
 import GlobalStyle from './styles/global'
 
 import MenuProvider from './hooks/useMenu'
@@ -17,7 +17,7 @@ import { RitaLoading } from './components/Loading/RitaLoading'
 import { ToastContainer } from 'react-toastify'
 import { RegisterPatientProvider } from './pages/Register/RegisterPatient/hooks'
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ModalProvider>
@@ -40,5 +40,3 @@ const App: React.FC = () => {
     </BrowserRouter>
   )
 }
-
-export default App
