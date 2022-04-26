@@ -54,6 +54,7 @@ const CreateSpecialty: React.FC = () => {
       await apiAdmin.post('/especialidade', data)
 
       toast.success('Cadastro realizado com sucesso.')
+      window.localStorage.removeItem('@Rita/specialty-filter')
       history.push(OPERATOR_SEE_ALL_SPECIALTYS)
     } catch (error: any) {
       if (error?.response?.status === 409) {

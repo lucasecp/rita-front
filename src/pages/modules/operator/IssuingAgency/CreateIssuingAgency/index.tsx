@@ -67,6 +67,7 @@ const CreateIssuingAgency: React.FC = () => {
       await apiAdmin.post('/orgao-emissor', data)
 
       toast.success('Cadastro realizado com sucesso.')
+      window.localStorage.removeItem('@Rita/specialtys-types-filter')
       history.push(OPERATOR_SEE_ALL_ISSUING_AGENCY)
     } catch (error: any) {
       if (error?.response?.status === 409) {
