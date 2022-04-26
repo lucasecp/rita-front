@@ -16,7 +16,10 @@ import { ReactComponent as ClinicsIcon } from '@/assets/icons/clinic.svg'
 import { ReactComponent as ImportIcon } from '@/assets/icons/import.svg'
 import { ReactComponent as StethoscopeIcon } from '@/assets/icons/stethoscope.svg'
 import { ReactComponent as UsersIcon } from '@/assets/icons/users.svg'
+import { ReactComponent as UsersGroupIcon } from '@/assets/icons/users-group.svg'
 import { ReactComponent as SpecialtysTypesIcon } from '@/assets/icons/specialtys-types.svg'
+import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
+import { ReactComponent as AppointmentTableIcon } from '@/assets/icons/appointment-table.svg'
 
 import {
   INITIAL_PAGE,
@@ -46,10 +49,13 @@ import {
   OPERATOR_DEPENDENT_MANAGMENT,
   DIRECTOR_IMPORT,
   SPECIALIST_PROFILE,
+  SPECIALIST_SEE_SCHEDULE,
   FILTER_USERS,
   OPERATOR_SEE_ALL_ISSUING_AGENCY,
   CLINIC_SEE_ALL_SPECIALIST,
   CLINIC_PROFILE,
+  CLINIC_SEE_ALL_USERS,
+  CLINIC_APPOINTMENT_TABLE,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissions } from '@/constants/permissions'
@@ -212,10 +218,10 @@ export const menuItens = [
     permissions: [permissions.ALTERAR_MEUS_DADOS_ESPECIALISTA],
   },
   {
-    path: CLINIC_PROFILE,
-    icon: <UserIcon />,
-    name: 'Perfil',
-    permissions: [permissions.VER_DADOS_CLINICA],
+    path: SPECIALIST_SEE_SCHEDULE,
+    icon: <Calendar />,
+    name: 'Agenda Profissional',
+    permissions: [permissions.GERENCIAR_MINHA_AGENDA_ESPECIALISTA],
   },
   {
     path: FILTER_USERS,
@@ -235,4 +241,23 @@ export const menuItens = [
     name: 'Especialistas',
     permissions: [permissions.VER_DADOS_CLINICA],
   },
+  {
+    path: CLINIC_SEE_ALL_USERS,
+    icon: <UsersGroupIcon />,
+    name: 'Usuários',
+    permissions: [permissions.LISTAR_USUARIO_CLINICA],
+  },
+  {
+    path: CLINIC_PROFILE,
+    icon: <UserIcon />,
+    name: 'Perfil',
+    permissions: [permissions.VER_DADOS_CLINICA],
+
+  },
+  {
+    path: CLINIC_APPOINTMENT_TABLE,
+    icon: <AppointmentTableIcon />,
+    name: 'Tabela de consulta',
+    permissions: [permissions.GERENCIAR_TABELA_PRECOS_CLINICA],
+  }
 ]

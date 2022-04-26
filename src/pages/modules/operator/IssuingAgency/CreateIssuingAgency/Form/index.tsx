@@ -25,7 +25,7 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi }) => {
   return (
     <Container>
       <InputText
-        label="Orgão Emissor:"
+        label="Órgão Emissor:"
         value={issuingAgency}
         setValue={setIssuingAgency}
         maxLength={10}
@@ -35,7 +35,7 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi }) => {
         msgError={issuingAgency.length < 3 && issuingAgency ? errors.type : ''}
       />
       <InputText
-        label="Especialista:"
+        label="Tipo de especialista:"
         value={specialist}
         setValue={setSpecialist}
         maxLength={100}

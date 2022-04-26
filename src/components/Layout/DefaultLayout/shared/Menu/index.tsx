@@ -31,7 +31,7 @@ export const Menu: React.FC<MenuProps> = ({ expanded }) => {
     )
 
     setMenuToShow(menuToShowTemporary)
-  }, [])
+  }, [user])
 
   function handleMenuItemClick() {
     closeMenu()

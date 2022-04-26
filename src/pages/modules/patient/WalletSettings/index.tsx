@@ -4,6 +4,7 @@ import moment from 'moment'
 
 import apiWallet from '@/services/apiWallet'
 import { useAuth } from '@/hooks/login'
+import { useModal } from '@/hooks/useModal'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { PaymentForm } from '@/pages/modules/patient/WalletSettings/components/PaymentForm'
 
@@ -43,7 +44,8 @@ import { Container } from './styles'
 
 export const WalletSettings: React.FC = () => {
   const { user } = useAuth()
-  const [creditCardItems, setCreditCardItems] = useState<RitaWallet.Model.CreditCard[]>([])
+  const { showConfirmation } = useModal()
+  const [creditCardItems, setCreditCardItems] = useState<RitaWallet.API.Get.UserCreditCard>([])
 
   async function fetchData() {
     const { data } = await apiWallet.get<RitaWallet.API.Get.UserCreditCard>('/user/credit-card')
@@ -56,14 +58,23 @@ export const WalletSettings: React.FC = () => {
   }
 
   async function handleItemRemove(itemRemoved: any) {
-    await apiWallet.delete('/user/credit-card', {
-      data: {
-        id: itemRemoved.id,
-        user: {
-          ritaId: String(user.id),
-          token: user.token,
-        },
+    showConfirmation({
+      message: 'Tem certeza que deseja excluir este cartão?',
+      onTruthy: async () => {
+        console.log('truthy')
+        // await apiWallet.delete('/user/credit-card', {
+        //   data: {
+        //     id: itemRemoved.id,
+        //     user: {
+        //       ritaId: String(user.id),
+        //       token: user.token,
+        //     },
+        //   },
+        // })
       },
+      onFalsy: async () => {
+        console.log('falsy')
+      }
     })
 
     fetchData().catch(console.error)
@@ -111,11 +122,11 @@ export const WalletSettings: React.FC = () => {
               {creditCardItems.map((item, index) => (
                 <div key={index}>
                   <div>
-                    <h4>{item.number}</h4>
-                    <h5>{item.name}</h5>
+                    <h4>****.****.****.{item.lastFourDigits}</h4>
+                    <h5>{item.alias}</h5>
                   </div>
                   <div>
-                    <span>{item.expirationDate}</span>
+                    <span>{item.alias}</span>
                     {item.alias}
                   </div>
                   <button type="button" onClick={() => handleItemRemove(item)}>

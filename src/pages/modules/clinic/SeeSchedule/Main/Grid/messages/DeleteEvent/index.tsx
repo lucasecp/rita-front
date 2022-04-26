@@ -8,12 +8,15 @@ import OutlineButton from '@/components/Button/Outline'
 import apiAdmin from '@/services/apiAdmin'
 import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
+import { ScheduleI } from '../../../../types/index'
+import { daysLabel } from '../../../../constants/days'
 
 interface DesassociateProps {
   idDoctor: string
   idClinic: string
   idSchedule: string
   setMakeNewRequest: () => void
+  schedule: ScheduleI
 }
 
 const DeleteEvent: React.FC<DesassociateProps> = ({
@@ -21,6 +24,7 @@ const DeleteEvent: React.FC<DesassociateProps> = ({
   idClinic,
   idSchedule,
   setMakeNewRequest,
+  schedule,
 }) => {
   const { closeModal } = useModal()
   const { Loading } = useLoading()
@@ -34,9 +38,9 @@ const DeleteEvent: React.FC<DesassociateProps> = ({
       )
       setMakeNewRequest()
 
-      toast.success('Evento excluído com sucesso!')
+      toast.success('Horário excluído com sucesso!')
     } catch (error) {
-      toast.error('Erro ao excluir evento.')
+      toast.error(error.response?.message || 'Erro ao excluir horário.')
     } finally {
       Loading.turnOff()
     }
@@ -46,11 +50,16 @@ const DeleteEvent: React.FC<DesassociateProps> = ({
   return (
     <Container>
       <img src={warningIcon} />
-      <p>Confirma a exclusão desse evento ?</p>
+      <p>Confirma a exclusão desse horário ?</p>
+      <p>{`${daysLabel[schedule.day]}, das ${schedule.start} às ${
+        schedule.end
+      }`}</p>
+      <p>Clínica: {schedule.clinicName}</p>
+      <p>Especialidade: {schedule.specialtys?.map((val) => ` ${val.name} `)}</p>
 
       <ButtonGroup>
-        <OutlineButton onClick={closeModal}>Não</OutlineButton>
-        <ButtonPrimary onClick={onDeleteEvent}>Sim</ButtonPrimary>
+        <ButtonPrimary onClick={closeModal}>Não</ButtonPrimary>
+        <OutlineButton onClick={onDeleteEvent}>Sim</OutlineButton>
       </ButtonGroup>
     </Container>
   )

@@ -5,6 +5,14 @@ namespace RitaComponents {
     path?: string
     order?: 'ASC' | 'DESC'
   }
+
+  type ModalConfirmationProps = {
+    message: string
+    cancelText?: string
+    confirmText?: string
+    onTruthy?: () => void
+    onFalsy?: () => void
+  }
 }
 
 namespace RitaWallet {
@@ -40,7 +48,15 @@ namespace RitaWallet {
         }[]
       }
 
-      type UserCreditCard = RitaWallet.Model.CreditCard[]
+      type UserBankAccount = RitaWallet.Model.BankAccount[]
+
+      type UserCreditCard = {
+        id: string
+        alias: string
+        lastFourDigits: string
+      }[]
+
+      type UserPixKey = RitaWallet.Model.PixKey[]
 
       type Wallet = {
         id: string
@@ -68,7 +84,27 @@ namespace RitaWallet {
     }
   }
 
+  type DefaultEntity<S = 'ACTIVE' | 'DISABLED'> = {
+    id: string
+    situation: S
+    createdAt: string
+    updatedAt: string
+  }
+
   namespace Model {
+    type Bank = RitaWallet.DefaultEntity & {
+      code: string
+      name: string
+    }
+
+    type BankAccount = RitaWallet.DefaultEntity & {
+      agencyNumber: string
+      accountNumber: string
+
+      bank?: RitaWallet.Model.Bank
+      userWallet?: RitaWallet.Model.UserVallet
+    }
+
     type Caller = {
       id: string
       name: string
@@ -135,6 +171,14 @@ namespace RitaWallet {
       // transactionType?: RitaWallet.Model.TypeTransaction
     }
 
+    type PixKey = RitaWallet.DefaultEntity & {
+      key: string
+      alias: string
+
+      bankAccount?: RitaWallet.Model.BankAccount
+      userWallet?: RitaWallet.Model.UserVallet
+    }
+
     type TypeTransaction = {
       id: string
       name: string
@@ -145,17 +189,14 @@ namespace RitaWallet {
       payment?: RitaWallet.Model.PaymentRequest[]
     }
 
-    type UserType = {
-      id: string
+    type UserType = RitaWallet.DefaultEntity & {
       name: string
-      situation: string
-      createdAt: string
+
+      userWallet?: RitaWallet.Model.UserWallet[]
     }
 
-    type UserWallet = {
-      id: string
+    type UserWallet = RitaWallet.DefaultEntity & {
       ritaId: string
-      situation: string
 
       userType?: RitaWallet.Model.UserType
     }

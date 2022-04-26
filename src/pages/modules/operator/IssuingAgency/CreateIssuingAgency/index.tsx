@@ -29,14 +29,14 @@ const CreateIssuingAgency: React.FC = () => {
     for (const field in dataToApi) {
       if (dataToApi.issuingAgency) {
         if (dataToApi.issuingAgency.length < 3) {
-          setErrors({ type: 'Informe 3 letras ou mais' })
+          setErrors({ type: 'Informe 3 caracteres ou mais' })
           error = true
         }
       }
 
       if (dataToApi.specialist) {
         if (dataToApi.specialist.length < 3) {
-          setErrors({ type: 'Informe 3 letras ou mais' })
+          setErrors({ type: 'Informe 3 caracteres ou mais' })
           error = true
         }
       }
@@ -67,11 +67,12 @@ const CreateIssuingAgency: React.FC = () => {
       await apiAdmin.post('/orgao-emissor', data)
 
       toast.success('Cadastro realizado com sucesso.')
+      window.localStorage.removeItem('@Rita/specialtys-types-filter')
       history.push(OPERATOR_SEE_ALL_ISSUING_AGENCY)
     } catch (error: any) {
       if (error?.response?.status === 409) {
         toast.error(
-          error?.response?.data?.message || 'Erro ao incluir um orgão emissor.',
+          error?.response?.data?.message || 'Erro ao incluir um órgão emissor.',
         )
       }
     } finally {
@@ -90,7 +91,7 @@ const CreateIssuingAgency: React.FC = () => {
   }
 
   return (
-    <DefaultLayout title="Orgão Emissor - Inclusão">
+    <DefaultLayout title="Órgão Emissor - Inclusão">
       <Content>
         <Form errors={errors} setDataToApi={setSetDataToApi} />
         <footer>
