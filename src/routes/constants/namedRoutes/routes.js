@@ -29,7 +29,7 @@ export const OPERATOR_CREATE_SPRECIALTY = '/especialidades/criar'
 export const OPERATOR_EDIT_SPRECIALTY = '/especialidades/editar'
 export const OPERATOR_DEPENDENT_MANAGMENT = '/dependentes/gestao'
 export const OPERATOR_ADD_DEPENDENT = '/dependentes/associar'
-export const OPERATOR_SEE_ALL_SPECIALISTS = '/operador-especialistas'
+export const OPERATOR_SEE_ALL_SPECIALISTS = '/especialistas'
 export const OPERATOR_SEE_ONE_SPECIALIST = '/especialistas/ver-especialista'
 export const OPERATOR_SEE_ALL_ISSUING_AGENCY = '/orgao-emissor'
 export const OPERATOR_EDIT_ISSUING_AGENCY = '/orgao-emissor/editar'
@@ -45,8 +45,7 @@ export const CLINIC_SEE_ONE_SPECIALIST = '/clinica-especialista/visualizar'
 export const CLINIC_PROFILE = '/clinica/perfil'
 export const CLINIC_SEE_SPECIALIST_SCHEDULE =
   '/clinica-especialista/agenda-especialista'
-export const CLINIC_APPOINTMENT_TABLE =
-  '/clinica/tabela-consulta'
+export const CLINIC_APPOINTMENT_TABLE = '/clinica/tabela-consulta'
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
