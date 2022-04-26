@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { Services } from './containers/Services'
 import { LogoPage } from './containers/LogoPage'
+import { useAuth } from '@/hooks/login'
+import {profiles} from '@/constants/profiles'
 
 export const Initial = () => {
-  const getUserFromStorage = () => JSON.parse(localStorage.getItem('user'))
-
-  const hasPatientProfile = getUserFromStorage().perfis.includes('Paciente')
+  const {user} = useAuth()
 
   useEffect(() => {
     document.title = 'Rita Saúde | Início'
   }, [])
 
-  return hasPatientProfile ? <Services /> : <LogoPage />
+  return user.profileChosen === profiles.Paciente ? <Services /> : <LogoPage />
 }

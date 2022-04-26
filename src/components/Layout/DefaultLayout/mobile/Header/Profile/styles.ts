@@ -19,7 +19,7 @@ export const Container = styled.button<{
   margin-left: 16px;
   > svg {
     transition: 0.2s;
-    min-width:8px;
+    min-width: 8px;
     > path {
       fill: ${({ color }) => color};
     }
@@ -36,6 +36,8 @@ export const Container = styled.button<{
   ${({ onlyOneProfile }) =>
     onlyOneProfile &&
     css`
+      cursor: default !important;
+
       > svg {
         display: none;
       }
