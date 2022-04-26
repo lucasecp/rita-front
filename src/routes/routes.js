@@ -41,8 +41,10 @@ import {
   DIRECTOR_EDIT_PROFILE,
   DIRECTOR_CREATE_PROFILE,
   CREATE_SELLABLE_ITEMS,
+  REASON_TO_LEAVE,
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
+import { ReasonToLeave } from '@/pages/ReasonToLeave'
 
 function Routes() {
   return (
@@ -118,6 +120,8 @@ function Routes() {
         exact
         component={() => (<DefaultLayout title="teste">teste</DefaultLayout>)}
       /> */}
+
+      <Route path={REASON_TO_LEAVE} exact component={ReasonToLeave} />
 
       <Route path={NOT_FOUND} component={NotFound} />
     </Switch>
