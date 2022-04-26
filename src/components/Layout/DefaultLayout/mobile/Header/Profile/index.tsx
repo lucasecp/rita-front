@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useRef } from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 import { useAuth } from '@/hooks/login'
 import useProfilePhoto from '@/components/Layout/DefaultLayout/hooks/useProfilePhoto'
@@ -7,7 +7,7 @@ import { getInitialLetterName } from '@/components/Layout/DefaultLayout/helpers/
 import { Container } from './styles'
 import DropdownProfiles from '../DropdownProfiles'
 import { useToggle } from '../../../../../../hooks/useToggle'
-import { profilesColors, profiles } from '../../../static/profiles'
+import { profilesColors, profiles } from '../../../../../../constants/profiles'
 import { ReactComponent as ArrowDown } from '@/assets/icons/arrow-down-select.svg'
 
 export const Profile: React.FC = () => {
@@ -29,12 +29,11 @@ export const Profile: React.FC = () => {
   useEffect(() => {
     const profilePermissions = user?.area.find(
       (profile) => profile.grupoPerfil === user.profileChosen,
-      )
-      const hasProfileChosen = user.profileChosen
+    )
+    const hasProfileChosen = user.profileChosen
       ? {}
       : { profileChosen: profiles[user?.area[0]?.grupoPerfil] || '' }
-      
-      console.log(profilePermissions?.permissoes || user?.area[0]?.permissoes)
+
     setDataLogin({
       ...user,
       ...hasProfileChosen,
