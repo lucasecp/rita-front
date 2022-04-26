@@ -9,6 +9,7 @@ export const Container = styled.div`
 
 export const ButtonProfile = styled.button<{
   isActive: boolean
+  onlyOneProfile: boolean
   color: string
 }>`
   display: flex;
@@ -42,7 +43,7 @@ export const ButtonProfile = styled.button<{
         }
       }
       > p {
-        font-size: 8px;
+        font-size: 12px;
         font-weight: 500;
         line-height: 12px;
         color: ${({ color }) => color};
@@ -112,4 +113,25 @@ export const ButtonProfile = styled.button<{
       : css`
           border-radius: 20px;
         `}
+
+  ${({ onlyOneProfile }) =>
+    onlyOneProfile &&
+    css`
+      border: none;
+      background: transparent !important;
+      color: ${colors.gray.dark};
+      cursor: default !important;
+      > div {
+        > div {
+          >p{
+            display: none
+          }
+          > div {
+            > svg {
+              display: none;
+            }
+          }
+        }
+      }
+    `}
 `

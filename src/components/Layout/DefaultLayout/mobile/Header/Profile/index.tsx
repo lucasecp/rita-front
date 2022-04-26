@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useRef } from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 import { useAuth } from '@/hooks/login'
 import useProfilePhoto from '@/components/Layout/DefaultLayout/hooks/useProfilePhoto'
@@ -7,12 +7,11 @@ import { getInitialLetterName } from '@/components/Layout/DefaultLayout/helpers/
 import { Container } from './styles'
 import DropdownProfiles from '../DropdownProfiles'
 import { useToggle } from '../../../../../../hooks/useToggle'
-import { profilesColors, profiles } from '../../../static/profiles'
+import { profilesColors, profiles } from '../../../../../../constants/profiles'
+import { ReactComponent as ArrowDown } from '@/assets/icons/arrow-down-select.svg'
 
 export const Profile: React.FC = () => {
-  const [currentProfile, setCurrentProfile] = useState('')
-
-  const { user } = useAuth()
+  const { user, setDataLogin } = useAuth()
 
   const { photo, getProfilePhoto } = useProfilePhoto()
 
@@ -28,19 +27,30 @@ export const Profile: React.FC = () => {
   )
 
   useEffect(() => {
-    setCurrentProfile(
-      user.profileChosen || profiles[user?.area[0]?.grupoPerfil] || '',
+    const profilePermissions = user?.area.find(
+      (profile) => profile.grupoPerfil === user.profileChosen,
     )
-  }, [user])
+    const hasProfileChosen = user.profileChosen
+      ? {}
+      : { profileChosen: profiles[user?.area[0]?.grupoPerfil] || '' }
+
+    setDataLogin({
+      ...user,
+      ...hasProfileChosen,
+      permissoes: profilePermissions?.permissoes || user?.area[0]?.permissoes,
+    })
+  }, [])
 
   return (
     <Container
       onClick={toggleShow}
       isActive={show}
-      color={profilesColors[currentProfile]}
+      color={profilesColors[user.profileChosen]}
+      onlyOneProfile={user?.area.length === 1}
     >
       {photo ? <img src={photo} alt="perfil" /> : <span>{initialName}</span>}
-      <DropdownProfiles show={show} setShow={toggleShow} />
+      <ArrowDown />
+      <DropdownProfiles show={show} />
     </Container>
   )
 }

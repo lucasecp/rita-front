@@ -1,20 +1,47 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.button<{
   isActive: boolean
+  onlyOneProfile: boolean
   color: string
 }>`
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 4px;
 
-  width: 40px;
+  min-width: 40px;
   height: 40px;
   border-radius: 50%;
 
   overflow: hidden;
   margin-left: 16px;
+  > svg {
+    transition: 0.2s;
+    min-width: 8px;
+    > path {
+      fill: ${({ color }) => color};
+    }
+  }
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      > svg {
+        transform: rotate(180deg);
+      }
+    `}
+
+  ${({ onlyOneProfile }) =>
+    onlyOneProfile &&
+    css`
+      cursor: default !important;
+
+      > svg {
+        display: none;
+      }
+    `}
 
   > img {
     min-height: 100%;
@@ -25,7 +52,7 @@ export const Container = styled.button<{
     background-color: ${({ color }) => color};
     border-radius: 50%;
     color: #fff;
-    width: 100%;
+    min-width: 40px;
     height: 40px;
     display: flex;
     flex-direction: column;
