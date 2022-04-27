@@ -122,7 +122,7 @@ export const Routes: React.FC = () => {
         component={() => (<DefaultLayout title="teste">teste</DefaultLayout>)}
       /> */}
 
-      <Route path={REASON_TO_LEAVE} exact component={ReasonToLeave} />
+      <Route path={REASON_TO_LEAVE} component={ReasonToLeave} />
 
       <Route path={NOT_FOUND} component={NotFound} />
     </Switch>
