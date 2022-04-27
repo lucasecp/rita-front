@@ -69,15 +69,15 @@ export const Routes: React.FC = () => {
       {clinicRotes}
 
       <Route
-        path={FILTER_SELLABLE_ITEMS}
+        path={DIRECTOR_CREATE_PROFILE}
         isPrivate
-        component={FilterSellableItems}
+        component={CreateProfile}
       />
 
       <Route
-        path={DIRECTOR_SEE_ALL_PROFILES}
+        path={FILTER_SELLABLE_ITEMS}
         isPrivate
-        component={SeeAllProfiles}
+        component={FilterSellableItems}
       />
 
       <Route
@@ -86,13 +86,13 @@ export const Routes: React.FC = () => {
         component={SeeOneProfile}
       />
 
-      <Route path={DIRECTOR_EDIT_PROFILE} isPrivate component={EditProfile} />
-
       <Route
-        path={DIRECTOR_CREATE_PROFILE}
+        path={DIRECTOR_SEE_ALL_PROFILES}
         isPrivate
-        component={CreateProfile}
+        component={SeeAllProfiles}
       />
+
+      <Route path={DIRECTOR_EDIT_PROFILE} isPrivate component={EditProfile} />
 
       <Route
         path={CREATE_SELLABLE_ITEMS}
@@ -112,7 +112,6 @@ export const Routes: React.FC = () => {
 
       <Route path={INITIAL_PAGE} isPrivate component={Initial} />
 
-      <Route path={LOGIN} exact component={Login} />
       <Route path={REASON_TO_LEAVE} component={ReasonToLeave} />
 
       <Route path="/teste-de-endereco" component={TestAddressPage} />
@@ -124,6 +123,8 @@ export const Routes: React.FC = () => {
       /> */}
 
       <Route path={NOT_FOUND} component={NotFound} />
+
+      <Route path={LOGIN} exact component={Login} />
     </Switch>
   )
 }
