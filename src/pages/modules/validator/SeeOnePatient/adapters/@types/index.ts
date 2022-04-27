@@ -2,6 +2,7 @@ import {
   PatientDataHolder,
   PatientAddress,
   PatientData,
+  PatientValidation,
 } from './../../@types/index'
 
 export interface FromApiResponse {
@@ -62,6 +63,9 @@ export interface FromApiResponse {
       cnpj: string
     }[]
   }
+  validacao: {
+    rendaBaixa?: boolean
+  }[]
 }
 export interface FromApi {
   patientData: PatientData & PatientDataHolder
@@ -69,4 +73,5 @@ export interface FromApi {
   patientAddress: PatientAddress
   dependent: (PatientData & PatientDataHolder) | undefined
   incomeType: string
+  lowIncome?: string
 }
