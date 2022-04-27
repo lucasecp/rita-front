@@ -7,6 +7,7 @@ interface CustomRouteProps {
   component: ComponentType
   isPrivate?: boolean
   path: string
+  exact?: boolean
 }
 
 export const Route: React.FC<CustomRouteProps> = ({
@@ -22,5 +23,5 @@ export const Route: React.FC<CustomRouteProps> = ({
     return <Redirect to={{ pathname: LOGIN, state: { from: path } }} />
   }
 
-  return <ReactRoute component={Component} {...rest} exact />
+  return <ReactRoute component={Component} exact {...rest} />
 }
