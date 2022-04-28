@@ -153,6 +153,7 @@ export const RegistrationData: React.FC<RegistrationDataProps> = ({
         <section>
           <InputEmail
             initialEmail={email}
+            label="E-mail*:"
             onGetEmail={setEmail}
             hasError={(hasError) => setErrors({ ...errors, email: hasError })}
             checkHasError={errorMessage}

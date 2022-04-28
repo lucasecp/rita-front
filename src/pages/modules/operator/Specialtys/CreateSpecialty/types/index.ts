@@ -15,4 +15,5 @@ export interface DataToApiI {
   codigo?: string
   descricao?: string
   requerInscricao?: boolean
+  idOrgaoEmissor: number
 }

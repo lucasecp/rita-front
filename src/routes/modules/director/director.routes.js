@@ -1,5 +1,5 @@
 import React from 'react'
-import Route from '../../custom.routes'
+import { Route } from '../../custom.routes'
 
 import {
   DIRECTOR_EDIT_PLAN,

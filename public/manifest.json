@@ -1,21 +1,21 @@
 {
-  "short_name": "Rita",
+  "short_name": "Rita Saúde",
   "name": "Rita Saúde",
   "icons": [
     {
       "src": "/favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "48x48",
       "type": "image/x-icon"
     },
     {
       "src": "/icon-logo.svg",
-      "sizes": "192x192",
+      "sizes": "54x52",
       "type": "image/svg+xml"
     }
   ],
   "start_url": "/",
-  "theme_color": "#F4BD42",
-  "background_color": "#2B2929",
+  "theme_color": "#7338CB",
+  "background_color": "#FFF",
   "display": "standalone",
   "scope": "/"
  }
