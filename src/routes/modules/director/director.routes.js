@@ -99,8 +99,7 @@ const directorRoutes = [
 ]
 
 const directorRoutesComponents = directorRoutes.map((props, index) => (
-  // <Route {...props} exact key={index} />
-  <Route {...props} exact isPrivate key={index} />
+  <Route key={index} isPrivate {...props} />
 ))
 
 export default directorRoutesComponents
