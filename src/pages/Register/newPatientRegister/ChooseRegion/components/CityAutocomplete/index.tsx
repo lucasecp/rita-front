@@ -11,13 +11,11 @@ import { citiesFromApi } from './adapters/fromApi'
 import { RegionState } from '../..'
 
 interface CityAutocompleteProps {
-  region: RegionState
-  onGetCity: (city: AutocompleteOptions) => void
+  onGetRegion: (region: RegionState) => void
 }
 
 export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
-  region,
-  onGetCity,
+  onGetRegion,
 }) => {
   const [city, setCity] = useState({} as AutocompleteOptions)
   const [cities, setCities] = useState([] as AutocompleteOptions[])
@@ -33,10 +31,6 @@ export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
 
         const citiesMapped = citiesFromApi(data)
 
-        if (citiesMapped.length === 1) {
-          setCity(citiesMapped[0])
-        }
-
         setCities(citiesMapped)
       } catch (error) {
         console.log(error)
@@ -47,12 +41,12 @@ export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
       loadCities()
     }
 
-    onGetCity(city)
-  }, [city])
+    if (city?.value !== 0) {
+      const [citySelected, ufSelected] = city?.label?.split(' - ') || []
 
-  useEffect(() => {
-    setCity({ label: region.city, value: 0 })
-  }, [region])
+      onGetRegion({ city: citySelected, uf: ufSelected })
+    }
+  }, [city])
 
   return (
     <Container>

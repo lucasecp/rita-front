@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { Container } from './styles'
-import { AutocompleteOptions } from '@/components/Form/Autocomplete'
 
 import { useModal } from '@/hooks/useModal'
 
 import { CityAutocomplete } from './components/CityAutocomplete'
 import InputCep from './components/InputCep'
+
 import { LOGIN } from '@/routes/constants/namedRoutes/routes'
-import { useHistory } from 'react-router-dom'
 import { AddUserOnWaitList } from './messages/AddUserOnWaitList'
 
 export interface RegionState {
@@ -25,12 +25,11 @@ export const ChooseRegion: React.FC = () => {
 
   const [region, setRegion] = useState({} as RegionState)
 
-  const [city, setCity] = useState({} as AutocompleteOptions)
-
   const onComeBack = () => {
     history.push(LOGIN)
   }
 
+  console.log(region)
   const onProcedure = async () => {
     // return showMessage(AddUserOnWaitList)
     try {
@@ -56,7 +55,15 @@ export const ChooseRegion: React.FC = () => {
             <h3>Ou</h3>
             <hr />
           </section>
-          <CityAutocomplete onGetCity={setCity} region={region} />
+          <CityAutocomplete onGetRegion={setRegion} />
+          {!!region.city && (
+            <h5>
+              Cidade Selecionada:{' '}
+              <span>
+                {region.city} - {region.uf}
+              </span>
+            </h5>
+          )}
         </div>
         <footer>
           <OutlineButton data-test="comeBack" onClick={onComeBack}>
@@ -65,7 +72,7 @@ export const ChooseRegion: React.FC = () => {
           <ButtonPrimary
             onClick={onProcedure}
             data-test="nextStep"
-            disabled={city.value === 0}
+            disabled={!region.city}
           >
             Próxima Etapa
           </ButtonPrimary>
