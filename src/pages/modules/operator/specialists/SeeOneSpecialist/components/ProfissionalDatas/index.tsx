@@ -93,7 +93,7 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
 
   return (
     <Container>
-      <h1>Dados Profissionais do Especialista</h1>
+      <h1>Dados Profissionais</h1>
       <section>
         <InputText
           label="Nome Profissional:"
@@ -118,7 +118,7 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
           onlyLetter
         />
         <InputText
-          label="Número de Registro:"
+          label="Registro Profissional:"
           value={registerNumber}
           setValue={setRegisterNumber}
           hasError={!!errors?.registerNumber}
