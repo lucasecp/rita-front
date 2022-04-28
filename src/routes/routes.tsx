@@ -112,6 +112,8 @@ export const Routes: React.FC = () => {
 
       <Route path={INITIAL_PAGE} isPrivate component={Initial} />
 
+      <Route path={LOGIN} exact component={Login} />
+
       <Route path={REASON_TO_LEAVE} component={ReasonToLeave} />
 
       <Route path="/teste-de-endereco" component={TestAddressPage} />
@@ -123,8 +125,6 @@ export const Routes: React.FC = () => {
       /> */}
 
       <Route path={NOT_FOUND} component={NotFound} />
-
-      <Route path={LOGIN} exact component={Login} />
     </Switch>
   )
 }
