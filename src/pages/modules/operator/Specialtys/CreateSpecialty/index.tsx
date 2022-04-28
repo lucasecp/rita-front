@@ -46,6 +46,7 @@ const CreateSpecialty: React.FC = () => {
       code: dataToApi.code,
       requireSubscription: !!Number(dataToApi.requireSubscription),
       description: dataToApi.description,
+      issuingAgency: dataToApi.issuingAgency,
     })
 
     try {
