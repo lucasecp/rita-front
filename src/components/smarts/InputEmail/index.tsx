@@ -25,6 +25,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
   hasError,
   label,
   ...rest
+  
 }) => {
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState('')
@@ -98,7 +99,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
   }
   return (
     <InputText
-      label={label || 'Email:'}
+      label={label? 'Email:' : ''}
       name="email"
       value={email}
       onChange={onGetValue}

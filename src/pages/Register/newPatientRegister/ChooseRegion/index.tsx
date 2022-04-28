@@ -6,10 +6,13 @@ import ButtonPrimary from '@/components/Button/Primary'
 
 import { Container } from './styles'
 
+import { useModal } from '@/hooks/useModal'
+
 import { CityAutocomplete } from './components/CityAutocomplete'
 import InputCep from './components/InputCep'
 
 import { LOGIN } from '@/routes/constants/namedRoutes/routes'
+import { AddUserOnWaitList } from './messages/AddUserOnWaitList'
 
 export interface RegionState {
   uf: string
@@ -18,6 +21,7 @@ export interface RegionState {
 
 export const ChooseRegion: React.FC = () => {
   const history = useHistory()
+  const { showMessage } = useModal()
 
   const [region, setRegion] = useState({} as RegionState)
 
@@ -26,6 +30,18 @@ export const ChooseRegion: React.FC = () => {
   }
 
   console.log(region)
+  const onProcedure = async () => {
+    // return showMessage(AddUserOnWaitList)
+    try {
+      // const { data } = await apiAdmin.get('/clinica') API
+      // const dataMapped = mapClinics(data?.clinicas)
+      const test = []
+      if (!test.length) {
+        return showMessage(AddUserOnWaitList)
+      }
+      // to next page
+    } catch ({ response }) {}
+  }
 
   return (
     <Container>
@@ -53,7 +69,11 @@ export const ChooseRegion: React.FC = () => {
           <OutlineButton data-test="comeBack" onClick={onComeBack}>
             Voltar
           </OutlineButton>
-          <ButtonPrimary data-test="nextStep" disabled={!region.city}>
+          <ButtonPrimary
+            onClick={onProcedure}
+            data-test="nextStep"
+            disabled={!region.city}
+          >
             Próxima Etapa
           </ButtonPrimary>
         </footer>

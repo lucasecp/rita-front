@@ -22,6 +22,7 @@ import { useModal } from '@/hooks/useModal'
 import LastTry from './messages/error/LastTry'
 import ContactUs from './messages/error/ContactUs'
 import { LOGIN } from '@/routes/constants/namedRoutes/routes'
+import { InputEmail } from '@/components/smarts/InputEmail'
 
 const MESSAGEAPI = {
   LAST_TRY: 'Ultima tentativa antes de ser bloqueado definitivamente',
@@ -188,13 +189,7 @@ function ConfirmPhoneOrEmail() {
                   label={`E-mail: ${userData.email}`}
                   checked={choice === 'email'}
                 />
-                {choice === 'email' && (
-                  <InputText
-                    placeholder="Informe seu e-mail."
-                    value={email}
-                    setValue={setEmail}
-                  />
-                )}
+                {choice === 'email' && <InputEmail onGetEmail={setEmail} />}
               </section>
             )}
           </RadioGroup>
