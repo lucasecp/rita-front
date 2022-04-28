@@ -24,7 +24,6 @@ export const Container = styled.header`
     font-weight: 500;
 
     > div {
-     
     }
 
     > svg {
@@ -32,7 +31,7 @@ export const Container = styled.header`
       cursor: pointer;
       width: 32px;
 
-      fill: ${colors.purple.main.dark};
+      fill: ${({ theme }) => theme.main};
     }
   }
 `
@@ -44,7 +43,7 @@ export const HamburgerButton = styled.button`
   height: 40px;
 
   span {
-    background-color: #9146ff;
+    background-color${({ theme }) => theme.main};
     width: 24px;
     margin: 7px 0;
     height: 2px;
@@ -56,7 +55,7 @@ export const HamburgerButton = styled.button`
   ::before {
     content: '';
     display: block;
-    background-color: #9146ff;
+    background-color${({ theme }) => theme.main};
     width: 24px;
     height: 2px;
     border-radius: 8px;

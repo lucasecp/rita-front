@@ -8,7 +8,7 @@ export const Container = styled.div`
     font-weight: 500;
     font-size: 24px;
     line-height: 30px;
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
   }
 `
 

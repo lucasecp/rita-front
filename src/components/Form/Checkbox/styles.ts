@@ -18,7 +18,7 @@ export const Container = styled.div<ContainerProps>`
     ${({ checked }) =>
       checked &&
       css`
-        color: ${colors.purple.main.dark};
+        color: ${({ theme }) => theme.main};
       `}
   }
 
@@ -33,7 +33,7 @@ export const Container = styled.div<ContainerProps>`
   }
 
   .MuiCheckbox-colorPrimary.Mui-checked {
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
   }
 
   .MuiCheckbox-colorPrimary.Mui-disabled {

@@ -14,7 +14,7 @@ export const Container = styled.div`
       font-weight: 500;
       line-height: 20px;
 
-      color: ${colors.purple.main.dark};
+      color: ${({ theme }) => theme.main};
     }
     > ul {
       margin-top: 16px;
@@ -55,7 +55,7 @@ export const Container = styled.div`
       > div {
         margin: 8px 0;
         font-family: Athletics;
-        color: ${colors.purple.main.dark};
+        color: ${({ theme }) => theme.main};
         font-size: 16px;
         font-weight: 400;
         line-height: 19px;

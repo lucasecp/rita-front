@@ -23,7 +23,7 @@ export const ListItem = styled.ul<ListItemProps>`
     display: block;
     bottom: 0;
     left: -32px;
-    background: ${colors.purple.background.light};
+    background: ${({ theme }) => theme.extraLight};
   }
   ${({ warning }) =>
     warning &&
@@ -88,7 +88,7 @@ export const Status = styled.li<StatusProps>`
     css`
       > span {
         background: ${colors.orange.middleDark};
-        color: ${colors.purple.background.light};
+        color: ${({ theme }) => theme.extraLight};
       }
     `}
   ${({ type }) =>

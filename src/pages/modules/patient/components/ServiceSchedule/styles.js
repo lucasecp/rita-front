@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   padding: 0 24px 24px;
-  border: solid 1px #efeafa;
+  border: solid 1px ${({ theme }) => theme.light};
   border-radius: 8px;
   max-width: 1000px;
 
@@ -11,7 +11,7 @@ export const Container = styled.div`
     flex-direction: column;
     margin: 0 -24px 16px -24px;
     > h5 {
-      background: #efeafa;
+      background: ${({ theme }) => theme.light};
       color: #7338cb;
       font-size: 16px;
       font-weight: 700;

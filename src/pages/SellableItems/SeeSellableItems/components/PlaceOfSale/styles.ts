@@ -32,7 +32,7 @@ export const Table = styled.table`
         > td {
           min-width: 220px;
           padding: 16px;
-          border: 1px solid ${colors.purple.background.middle};
+          border: 1px solid ${({ theme }) => theme.light};
 
           display: flex;
           flex-direction: column;

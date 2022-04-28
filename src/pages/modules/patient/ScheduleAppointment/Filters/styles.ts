@@ -8,11 +8,11 @@ export const Container = styled.div`
   gap: 26px;
   border-radius: 8px;
   > header {
-    background: #f8f5ff;
+    background: ${({ theme }) => theme.extraLight};
     padding: 30px 32px;
     grid-column: span 3;
     margin: 0 -32px;
-    box-shadow: 0px 2px 8px 0px #dfd2ff26;
+    box-shadow: 0px 2px 8px 0px ${({ theme }) => theme.mediumLight}26;
     border-radius: 8px 8px 0px 0px;
     @media (max-width: 767px) {
       margin: 0 -24px;
@@ -22,7 +22,7 @@ export const Container = styled.div`
       font-size: 18px;
       font-weight: 700;
       line-height: 22px;
-      color: #9146ff;
+      color${({ theme }) => theme.main};
     }
   }
   @media (max-width: 1200px) {

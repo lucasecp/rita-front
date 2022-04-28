@@ -128,30 +128,30 @@ export const ButtonGroup = styled.div`
 `
 
 export const Content = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    > p:nth-child(1) {
-      font-size: 20px;
-      color: ${colors.purple.main.dark};
-      margin-top: 20px;
-    }
-    > p:nth-child(2) {
-      font-size: 20px;
-      color: ${colors.gray.dark};
-      position: relative;
-      bottom: 10px;
-    }
-    > p:nth-child(3) {
-      font-size: 20px;
-      margin-top: 8px;
-      color: #6A6A6A;
-    }
-    > p:nth-child(4) {
-      font-size: 16px;
-      color: #6A6A6A;
-      position: relative;
-      bottom: 9px;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  > p:nth-child(1) {
+    font-size: 20px;
+    color: ${({ theme }) => theme.main};
+    margin-top: 20px;
+  }
+  > p:nth-child(2) {
+    font-size: 20px;
+    color: ${colors.gray.dark};
+    position: relative;
+    bottom: 10px;
+  }
+  > p:nth-child(3) {
+    font-size: 20px;
+    margin-top: 8px;
+    color: #6a6a6a;
+  }
+  > p:nth-child(4) {
+    font-size: 16px;
+    color: #6a6a6a;
+    position: relative;
+    bottom: 9px;
+  }
 `

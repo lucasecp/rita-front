@@ -6,6 +6,7 @@ import {
 } from 'styled-components'
 
 import { themes } from '@/styles/themes'
+import { profiles } from '@/constants/profiles'
 
 interface ThemeContextData {
   theme: DefaultTheme
@@ -18,24 +19,14 @@ const ThemeProvider: React.FC = ({ children }) => {
   const [theme, setTheme] = useState({} as DefaultTheme)
 
   useEffect(() => {
-    switch (user?.perfis[0]) {
-      case 'Paciente':
-        setTheme(themes.purple)
-        break
-      case 'Conveniado':
-        setTheme(themes.orange)
-        break
-      case 'Validador':
-      case 'Operador':
-      case 'Diretor':
-      case 'Gerente Comercial':
-      case 'Gestor de Contas':
-      case 'Gestor da Plataforma':
-        setTheme(themes.blue)
-        break
-
-      default:
-        setTheme(themes.green)
+    if (user?.profileChosen === profiles['Clinica/Especialista']) {
+      setTheme(themes.green)
+    } else if (user?.profileChosen === profiles.Funcionario) {
+      setTheme(themes.blue)
+    } else if (user?.profileChosen === profiles.Empresa) {
+      setTheme(themes.orange)
+    } else {
+      setTheme(themes.purple)
     }
   }, [user])
 

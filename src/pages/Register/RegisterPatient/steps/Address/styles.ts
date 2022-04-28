@@ -98,7 +98,7 @@ export const Container = styled.div<RegistrationDataStylesProps>`
 //   font-weight: 500;
 //   line-height: 20px;
 //   text-align: center;
-//   color: #9146ff;
+//   color${({ theme }) => theme.main};
 //   background-color: transparent;
 //   border: none;
 //   text-decoration: underline;

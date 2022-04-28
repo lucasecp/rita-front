@@ -24,15 +24,13 @@ export const Container = styled.header`
     align-items: center;
     margin-left: 24px;
 
-   
-
     > svg {
       margin-left: 16px;
       cursor: pointer;
       min-width: 32px;
       max-width: 32px;
 
-      fill: ${colors.purple.main.dark};
+      fill: ${({ theme }) => theme.main};
     }
   }
 `

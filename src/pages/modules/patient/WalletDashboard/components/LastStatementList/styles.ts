@@ -33,7 +33,7 @@ export const ListNav = styled.aside<{ position: 'start' | 'end' }>`
   align-items: center;
 
   > button {
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
     width: 35px;
     height: 35px;
   }
@@ -62,7 +62,7 @@ export const ListNav = styled.aside<{ position: 'start' | 'end' }>`
 export const ListItem = styled.div<{ active: boolean }>`
   flex: 1 0 260px;
 
-  background-color: ${colors.purple.background.light};
+  background-color: ${({ theme }) => theme.extraLight};
   border-radius: 8px;
   padding: 15px;
 
@@ -73,7 +73,7 @@ export const ListItem = styled.div<{ active: boolean }>`
   gap: 10px;
 
   > em {
-    background-color: ${colors.purple.main.light};
+    background-color: ${({ theme }) => theme.mediumLight};
     border-radius: 100%;
     grid-row: span 2;
     align-self: start;
@@ -111,12 +111,12 @@ export const ListItem = styled.div<{ active: boolean }>`
     active &&
     css`
       > em {
-        background-color: ${colors.purple.main.dark};
+        background-color: ${({ theme }) => theme.main};
         opacity: 1;
       }
 
       h3 {
-        color: ${colors.purple.main.dark};
+        color: ${({ theme }) => theme.main};
       }
     `}
 `

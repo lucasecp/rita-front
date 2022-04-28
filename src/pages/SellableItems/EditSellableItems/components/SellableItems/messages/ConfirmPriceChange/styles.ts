@@ -17,7 +17,7 @@ export const Container = styled.div`
       width: 64px;
       height: 64px;
       margin: 24px auto;
-      color: ${colors.purple.main.dark};
+      color: ${({ theme }) => theme.main};
     }
 
     > div {
@@ -42,11 +42,11 @@ export const Container = styled.div`
 `
 
 export const PlanName = styled.p`
-  color: ${colors.purple.main.dark}!important;
+  color: ${({ theme }) => theme.main}!important;
 `
 
 export const Price = styled.p`
-  background-color: ${colors.purple.main.dark}!important;
+  background-color: ${({ theme }) => theme.main}!important;
   color: white !important;
   border-radius: 16px;
   padding: 4px 8px;
@@ -68,16 +68,16 @@ export const ButtonGroup = styled.div`
     font-weight: 400;
     color: ${colors.white};
     font-size: 16px;
-    background: ${colors.purple.main.dark};
+    background: ${({ theme }) => theme.main};
     transition: 0.3s;
     border-radius: 8px;
     line-height: 20px;
-    border: 2px solid ${colors.purple.main.dark};
+    border: 2px solid ${({ theme }) => theme.main};
     height: fit-content;
     :hover {
-      background-color: ${colors.purple.main.darkness};
+      background-color: ${({ theme }) => theme.darkness};
       color: #fff;
-      border-color: ${colors.purple.main.darkness};
+      border-color: ${({ theme }) => theme.darkness};
     }
   }
 

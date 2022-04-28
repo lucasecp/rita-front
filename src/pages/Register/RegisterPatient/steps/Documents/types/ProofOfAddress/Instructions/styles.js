@@ -32,7 +32,7 @@ export const Container = styled.div`
           font-size: 20px;
           line-height: 25px;
 
-          color: ${colors.purple.main.dark};
+          color: ${({ theme }) => theme.main};
         }
 
         > ul {

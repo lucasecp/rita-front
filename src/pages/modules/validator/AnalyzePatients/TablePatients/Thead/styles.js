@@ -8,8 +8,8 @@ export const Content = styled.div`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: #9146ff;
-  background-color: ${colors.purple.main.light};
+  color${({ theme }) => theme.main};
+  background-color: ${({ theme }) => theme.mediumLight};
   margin-top: -2px;
   margin-bottom: -2px;
   justify-content: space-between;

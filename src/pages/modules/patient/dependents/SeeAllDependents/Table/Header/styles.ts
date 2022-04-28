@@ -12,7 +12,7 @@ export const Content = styled.div`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: #9146ff;
+  color${({ theme }) => theme.main};
   align-items: center;
   justify-content: flex-start;
   min-width: 150px;
@@ -35,14 +35,14 @@ export const Content = styled.div`
     }
   }
   h5 {
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
   }
 `
 export const Container = styled.header`
-  background: ${colors.purple.background.middle};
+  background: ${({ theme }) => theme.light};
   min-width: fit-content;
   padding: 0 32px;
   > div {
