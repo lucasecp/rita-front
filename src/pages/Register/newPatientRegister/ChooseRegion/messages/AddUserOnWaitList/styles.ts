@@ -15,10 +15,8 @@ export const Container = styled.div`
   }
 
   > footer {
-    padding: 26px 32px;
+    padding: 24px 0 0 0;
     border-radius: 0 0 8px 8px;
-    background-color: ${colors.gray.light};
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,7 +37,7 @@ export const TitleAndLogo = styled.div`
   display: flex;
   grid-template-columns: '80px 1fr';
   align-items: left;
-  margin: 24px;
+  margin: 16px 0;
   h1 {
     font-weight: 500;
     font-size: 32px;
@@ -67,3 +65,20 @@ export const TitleAndLogo = styled.div`
     }
   }
 `
+
+export const Message = styled.div`
+  margin: 32px 0;
+
+  > h2 {
+    color: ${colors.gray.dark};
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+  }
+`
+
+export const InputFields = styled.div`
+  display: grid;
+  gap: 24px;
+`
+

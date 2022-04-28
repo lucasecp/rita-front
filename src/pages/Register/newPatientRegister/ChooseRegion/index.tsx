@@ -21,7 +21,7 @@ export interface RegionState {
 
 export const ChooseRegion: React.FC = () => {
   const history = useHistory()
-  const { showMessage } = useModal()
+  const { showMessage, closeable } = useModal()
 
   const [region, setRegion] = useState({} as RegionState)
 
@@ -29,15 +29,14 @@ export const ChooseRegion: React.FC = () => {
     history.push(LOGIN)
   }
 
-  console.log(region)
   const onProcedure = async () => {
-    // return showMessage(AddUserOnWaitList)
     try {
       // const { data } = await apiAdmin.get('/clinica') API
       // const dataMapped = mapClinics(data?.clinicas)
+
       const test = []
       if (!test.length) {
-        return showMessage(AddUserOnWaitList)
+        return showMessage(AddUserOnWaitList, {}, true)
       }
       // to next page
     } catch ({ response }) {}
@@ -72,7 +71,7 @@ export const ChooseRegion: React.FC = () => {
           <ButtonPrimary
             onClick={onProcedure}
             data-test="nextStep"
-            disabled={!region.city}
+            // disabled={!region.city}
           >
             Próxima Etapa
           </ButtonPrimary>
