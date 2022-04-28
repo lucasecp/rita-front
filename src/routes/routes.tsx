@@ -75,12 +75,6 @@ export const Routes: React.FC = () => {
       />
 
       <Route
-        path={FILTER_SELLABLE_ITEMS}
-        isPrivate
-        component={FilterSellableItems}
-      />
-
-      <Route
         path={DIRECTOR_SEE_ONE_PROFILE}
         isPrivate
         component={SeeOneProfile}
@@ -106,6 +100,12 @@ export const Routes: React.FC = () => {
         path={EDIT_SELLABLE_ITEMS}
         isPrivate
         component={EditSellableItems}
+      />
+
+      <Route
+        path={FILTER_SELLABLE_ITEMS}
+        isPrivate
+        component={FilterSellableItems}
       />
 
       <Route path={PROFILE} isPrivate component={Profile} />

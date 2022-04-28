@@ -44,10 +44,7 @@ const directorRoutes = [
     path: DIRECTOR_EDIT_PLAN_CONFIRM,
     component: EditPlanConfirm,
   },
-  {
-    path: DIRECTOR_PLAN_MANAGMENT,
-    component: DirectorGetPlan,
-  },
+
   {
     path: DIRECTOR_ACTIVATE_PLAN,
     component: ActivatePlanConfirm,
@@ -67,6 +64,10 @@ const directorRoutes = [
   {
     path: DIRECTOR_CREATE_PLAN_MANAGMENT,
     component: CreatePlan,
+  },
+  {
+    path: DIRECTOR_PLAN_MANAGMENT,
+    component: DirectorGetPlan,
   },
   {
     path: DIRECTOR_IMPORT,
