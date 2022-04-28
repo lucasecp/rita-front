@@ -15,10 +15,10 @@ import { Content } from './styles'
 import { toApi } from './adapters'
 
 const EditSpecialty: React.FC = () => {
-  const [errors, setErrors] = useState<ErrorsI>({})
+  const [errors, setErrors] = useState<ErrorsI>({} as ErrorsI)
   const [dataFromApi, setDataFromApi] = useState<any>({})
   const [someFieldsWasChanged, setSomeFieldsWasChanged] = useState(false)
-  const [dataToApi, setSetDataToApi] = useState<DataReceivedI>({})
+  const [dataToApi, setSetDataToApi] = useState<DataReceivedI>({} as DataReceivedI)
   const { Loading } = useLoading()
   const history = useHistory()
   const { showMessage } = useModal()
@@ -34,6 +34,7 @@ const EditSpecialty: React.FC = () => {
       code: specialtyInfo.code,
       requireSubscription: specialtyInfo.subscriptionRequired ? 'yes' : 'no',
       description: specialtyInfo.name,
+      issuingAgency: specialtyInfo.issuingAgency,
     })
   }, [])
 
@@ -50,7 +51,7 @@ const EditSpecialty: React.FC = () => {
 
   const hasError = () => {
     let error = false
-    setErrors({})
+    setErrors({} as ErrorsI)
 
     for (const field in dataToApi) {
       if (!dataToApi[field] && dataToApi[field] !== 0) {
@@ -71,6 +72,7 @@ const EditSpecialty: React.FC = () => {
       code: dataToApi.code,
       requireSubscription: !!Number(dataToApi.requireSubscription),
       description: dataToApi.description,
+      issuingAgency: dataToApi.issuingAgency,
     })
 
     try {
