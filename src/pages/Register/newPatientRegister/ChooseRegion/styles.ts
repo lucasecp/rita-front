@@ -18,7 +18,7 @@ export const Container = styled.div`
     margin: 32px 16px;
 
     > div {
-      padding: 32px 32px 64px;
+      padding: 32px;
 
       display: flex;
       flex-direction: column;
@@ -67,6 +67,18 @@ export const Container = styled.div`
           color: ${colors.gray.dark};
 
           padding: 0 16px;
+        }
+      }
+
+      > h5 {
+        font-size: 20px;
+        margin-top: 40px;
+
+        color: ${colors.gray.middle};
+
+        > span {
+          color: ${colors.green.light};
+          font-weight: 900;
         }
       }
     }
