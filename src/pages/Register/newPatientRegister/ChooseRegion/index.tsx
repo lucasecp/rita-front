@@ -49,13 +49,13 @@ export const ChooseRegion: React.FC = () => {
         <div>
           <h2>Onde você está?</h2>
           <h3>Desta forma você terá acesso aos planos da sua regiãos</h3>
-          <InputCep onGetRegion={setRegion} region={region} />
+          <InputCep onGetRegion={setRegion} />
           <section>
             <hr />
             <h3>Ou</h3>
             <hr />
           </section>
-          <CityAutocomplete onGetRegion={setRegion} region={region} />
+          <CityAutocomplete onGetRegion={setRegion} />
           {!!region.city && (
             <h5>
               Cidade Selecionada:{' '}

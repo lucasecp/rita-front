@@ -12,10 +12,9 @@ import { RegionState } from '../..'
 
 interface InputCepProps {
   onGetRegion: (region: RegionState) => void
-  region: RegionState
 }
 
-const InputCep: React.FC<InputCepProps> = ({ onGetRegion, region }) => {
+const InputCep: React.FC<InputCepProps> = ({ onGetRegion }) => {
   const [cep, setCep] = useState('')
 
   useEffect(() => {

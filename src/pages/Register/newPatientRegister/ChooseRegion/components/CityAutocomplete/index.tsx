@@ -12,7 +12,6 @@ import { RegionState } from '../..'
 
 interface CityAutocompleteProps {
   onGetRegion: (region: RegionState) => void
-  region: RegionState
 }
 
 export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
