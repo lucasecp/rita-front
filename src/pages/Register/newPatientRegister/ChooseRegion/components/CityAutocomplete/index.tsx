@@ -41,10 +41,13 @@ export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
       loadCities()
     }
 
-    if (city?.value !== 0) {
+    if (city?.value) {
       const [citySelected, ufSelected] = city?.label?.split(' - ') || []
 
       onGetRegion({ city: citySelected, uf: ufSelected })
+
+      setCity({ value: 0, label: '' } as AutocompleteOptions)
+      setCities([])
     }
   }, [city])
 

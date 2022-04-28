@@ -38,6 +38,8 @@ const InputCep: React.FC<InputCepProps> = ({ onGetRegion }) => {
           city: addressMapped.city,
           uf: addressMapped.uf,
         })
+
+        setCep('')
       } catch (error) {
         // onGetRegion({} as RegionState)
 
