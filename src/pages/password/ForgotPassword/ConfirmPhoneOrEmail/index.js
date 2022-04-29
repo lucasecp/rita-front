@@ -190,7 +190,7 @@ function ConfirmPhoneOrEmail() {
                   checked={choice === 'email'}
                 />
                 {choice === 'email' && (
-                  <InputEmail label=" " onGetEmail={setEmail} />
+                  <InputEmail noLabel onGetEmail={setEmail} />
                 )}
               </section>
             )}
