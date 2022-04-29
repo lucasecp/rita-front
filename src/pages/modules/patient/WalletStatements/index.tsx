@@ -50,20 +50,21 @@ export const WalletStatements: React.FC = () => {
       const { data } = await apiWallet.get<{
         count: number
         paymentRequests: RitaWallet.Model.PaymentRequest[]
-      }>(
-        '/payment/statement',
-        {
-          params: {
-            take: tableItemsPaging.take,
-            skip: tableItemsPaging.skip,
-            orderBy: tableItemsSort.path,
-            orderType: tableItemsSort.order,
-            daysBefore: selectedPeriod,
-          },
+      }>('/payment/statement', {
+        params: {
+          take: tableItemsPaging.take,
+          skip: tableItemsPaging.skip,
+          orderBy: tableItemsSort.path,
+          orderType: tableItemsSort.order,
+          daysBefore: selectedPeriod,
         },
-      )
+      })
 
-      if (!data || !data.paymentRequests || !Array.isArray(data.paymentRequests)) {
+      if (
+        !data ||
+        !data.paymentRequests ||
+        !Array.isArray(data.paymentRequests)
+      ) {
         throw new Error('Resposta vazia ou inválida')
       }
 
@@ -128,12 +129,15 @@ export const WalletStatements: React.FC = () => {
                   <small>
                     <CrownIcon /> {convertPriceToCrownValue(row.debitAmount)}
                   </small>
-                  {String(row.transactionMode).toUpperCase() ===
-                    'DEBIT' && <ArrowUpIcon className="debit" />}
-                  {String(row.transactionMode).toUpperCase() ===
-                    'CREDIT' && <ArrowDownIcon className="credit" />}
-                  {String(row.transactionMode).toUpperCase() ===
-                    'CASHBACK' && <ArrowDownIcon />}
+                  {String(row.transactionMode).toUpperCase() === 'DEBIT' && (
+                    <ArrowUpIcon className="debit" />
+                  )}
+                  {String(row.transactionMode).toUpperCase() === 'CREDIT' && (
+                    <ArrowDownIcon className="credit" />
+                  )}
+                  {String(row.transactionMode).toUpperCase() === 'CASHBACK' && (
+                    <ArrowDownIcon />
+                  )}
                 </TableColumnAmount>
               ),
             },

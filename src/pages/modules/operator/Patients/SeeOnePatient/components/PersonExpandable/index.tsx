@@ -38,7 +38,7 @@ const PersonExpandable: React.FC<PersonExpandableProps> = ({
   const [expanded, toggleExpanded] = useToggle(defaultExpanded)
 
   const [name, setName] = useState(personData.name)
-  const [cpf, setCpf] = useState(personData.cpf)
+  const [cpf] = useState(personData.cpf)
   const [birthDate, setBirthDate] = useState(personData?.birthDate || '')
   const [gender, setGender] = useState(personData.gender)
   const [phone, setPhone] = useState(personData.phone)

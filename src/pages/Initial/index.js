@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { Services } from './containers/Services'
 import { LogoPage } from './containers/LogoPage'
 import { useAuth } from '@/hooks/login'
-import {profiles} from '@/constants/profiles'
+import { profiles } from '@/constants/profiles'
 
 export const Initial = () => {
-  const {user} = useAuth()
+  const { user } = useAuth()
 
   useEffect(() => {
     document.title = 'Rita Saúde | Início'

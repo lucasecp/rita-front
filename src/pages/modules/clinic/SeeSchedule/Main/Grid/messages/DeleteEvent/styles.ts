@@ -23,8 +23,8 @@ export const Container = styled.div`
     text-align: center;
 
     color: ${colors.gray.dark};
-    +p{
-      margin-top: 4px
+    + p {
+      margin-top: 4px;
     }
   }
 

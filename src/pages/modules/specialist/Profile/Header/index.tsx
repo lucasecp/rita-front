@@ -1,6 +1,5 @@
 import { ReactComponent as PenIcon } from '@/assets/icons/pen-green.svg'
 import { ReactComponent as ProfileIcon } from '@/assets/icons/profile-green.svg'
-import { InputFile } from '@/components/Form/InputFile'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 import { formatCpf } from '@/helpers/formatCpf'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
@@ -11,10 +10,9 @@ import { Container } from './styles'
 
 interface HeaderProps {
   data: DataSpecialistI
-  setValue: React.Dispatch<React.SetStateAction<any>>
 }
 
-const Header: React.FC<HeaderProps> = ({ data, setValue }) => {
+const Header: React.FC<HeaderProps> = ({ data }) => {
   return (
     <Container>
       <div>

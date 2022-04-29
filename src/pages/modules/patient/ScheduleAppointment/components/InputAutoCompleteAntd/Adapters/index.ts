@@ -2,7 +2,7 @@ import ItemClinic from '../iItemClinic'
 import ItemDoctor from '../iItemDoctor'
 import ItemSpecialty from '../itemSpecialty'
 
-export const fromApi = (data: any[]) => {
+export const fromApi = (data: any[]): any[] => {
   const specialtyMapped: any[] = data.filter((info) => info.idEspecialidade)
   const doctorMapped: any[] = data.filter((info) => info.idMedico)
   const clinicMapped: any[] = data.filter((info) => info.idClinica)

@@ -10,7 +10,7 @@ it('renders without crashing', () => {
     id: 'abc-123',
     description: 'Lorem ipsum dolor sit amet',
     transactionType: 'CONSULTA',
-    paymentReturnedAt: moment.utc().format()
+    paymentReturnedAt: moment.utc().format(),
   } as RitaWallet.API.Get.PaymentCSAT
 
   ReactDOM.render(<CustomerSatisfaction data={data} />, div)

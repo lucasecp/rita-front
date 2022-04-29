@@ -1,4 +1,4 @@
-export const mapSpecialtys = (array: any[]) => {
+export const mapSpecialtys = (array: any[]): any[] => {
   if (!array) return []
   return array
     .map((obj) => ({ id: obj.idEspecialidade, name: obj.descricao }))

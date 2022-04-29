@@ -49,7 +49,7 @@ export const Container = styled.div`
     height: 1px;
     width: 64px;
     position: absolute;
-    background: #efeafa;
+    background: ${({ theme }) => theme.light};
     left: -32px;
     bottom: 0;
   }
@@ -58,7 +58,7 @@ export const Container = styled.div`
     height: 1px;
     width: 100%;
     position: absolute;
-    background: #efeafa;
+    background: ${({ theme }) => theme.light};
     right: -32px;
     bottom: 0;
     margin-left: -32px;
@@ -70,7 +70,7 @@ export const Td = styled.td`
 
   > svg {
     width: 22px;
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
     fill: currentColor;
   }
 
@@ -105,7 +105,7 @@ export const Td = styled.td`
     css`
       span {
         background: #df644b;
-        color: #f8f5ff;
+        color: ${({ theme }) => theme.extraLight};
       }
     `}
   ${({ status }) =>

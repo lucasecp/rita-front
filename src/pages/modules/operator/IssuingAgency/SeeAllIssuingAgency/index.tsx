@@ -4,7 +4,6 @@ import Filter from './Filter'
 import Table from './Table'
 import { Container, Content } from './styles'
 
-import Pagination from '@/components/Pagination'
 import { useLoading } from '@/hooks/useLoading'
 import apiAdmin from '@/services/apiAdmin'
 import { queryFilterString } from '@/helpers/queryString/filter'

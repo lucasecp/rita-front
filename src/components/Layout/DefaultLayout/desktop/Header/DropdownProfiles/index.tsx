@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Container, Button } from './styles'
 import { useAuth } from '@/hooks/login'
-import { useHistory } from 'react-router-dom';
-import { INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes';
+import { useHistory } from 'react-router-dom'
+import { INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes'
 import {
   profilesColors,
   profilesLabel,
@@ -30,7 +30,6 @@ const DropdownProfiles: React.FC<DropdownProfilesProps> = ({
       profileChosen,
     })
     history.push(INITIAL_PAGE)
-
 
     setShow(false)
   }

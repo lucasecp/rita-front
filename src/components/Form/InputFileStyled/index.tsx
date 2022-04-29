@@ -11,7 +11,6 @@ interface InputDocumentProps {
   hasError?: boolean
   disabled?: boolean
   name?: string
-
 }
 
 const InputFileStyled: React.FC<InputDocumentProps> = ({

@@ -25,7 +25,6 @@ export const InputEmail: React.FC<InputEmailProps> = ({
   hasError,
   label,
   ...rest
-  
 }) => {
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState('')

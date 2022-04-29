@@ -37,81 +37,92 @@ const Grid: React.FC = () => {
 
   return (
     <>
-      {schedule.length ?
-      <Container>
-        <Header />
-        <section>
-          <div>
-            {scheduleOnSpecificDay(daysWeek.SUNDAY).map((sched, index) => (
-              <Cell key={index} data={sched} nameDoctor={nameDoctor} />
-            ))}
-            {cellsEmptys(scheduleOnSpecificDay(daysWeek.SUNDAY)).map((val) => (
-              <Cell empty key={val} />
-            ))}
-          </div>
+      {schedule.length ? (
+        <Container>
+          <Header />
+          <section>
+            <div>
+              {scheduleOnSpecificDay(daysWeek.SUNDAY).map((sched, index) => (
+                <Cell key={index} data={sched} nameDoctor={nameDoctor} />
+              ))}
+              {cellsEmptys(scheduleOnSpecificDay(daysWeek.SUNDAY)).map(
+                (val) => (
+                  <Cell empty key={val} />
+                ),
+              )}
+            </div>
 
-          <div>
-            {scheduleOnSpecificDay(daysWeek.MONDAY).map((sched, index) => (
-              <Cell key={index} data={sched} nameDoctor={nameDoctor} />
-            ))}
-            {cellsEmptys(scheduleOnSpecificDay(daysWeek.MONDAY)).map((val) => (
-              <Cell empty key={val} />
-            ))}
-          </div>
+            <div>
+              {scheduleOnSpecificDay(daysWeek.MONDAY).map((sched, index) => (
+                <Cell key={index} data={sched} nameDoctor={nameDoctor} />
+              ))}
+              {cellsEmptys(scheduleOnSpecificDay(daysWeek.MONDAY)).map(
+                (val) => (
+                  <Cell empty key={val} />
+                ),
+              )}
+            </div>
 
-          <div>
-            {scheduleOnSpecificDay(daysWeek.TUESDAY).map((sched, index) => (
-              <Cell key={index} data={sched} nameDoctor={nameDoctor} />
-            ))}
-            {cellsEmptys(scheduleOnSpecificDay(daysWeek.TUESDAY)).map((val) => (
-              <Cell empty key={val} />
-            ))}
-          </div>
+            <div>
+              {scheduleOnSpecificDay(daysWeek.TUESDAY).map((sched, index) => (
+                <Cell key={index} data={sched} nameDoctor={nameDoctor} />
+              ))}
+              {cellsEmptys(scheduleOnSpecificDay(daysWeek.TUESDAY)).map(
+                (val) => (
+                  <Cell empty key={val} />
+                ),
+              )}
+            </div>
 
-          <div>
-            {scheduleOnSpecificDay(daysWeek.WEDNESDAY).map((sched, index) => (
-              <Cell key={index} data={sched} nameDoctor={nameDoctor} />
-            ))}
-            {cellsEmptys(scheduleOnSpecificDay(daysWeek.WEDNESDAY)).map(
-              (val) => (
-                <Cell empty key={val} />
-              ),
-            )}
-          </div>
+            <div>
+              {scheduleOnSpecificDay(daysWeek.WEDNESDAY).map((sched, index) => (
+                <Cell key={index} data={sched} nameDoctor={nameDoctor} />
+              ))}
+              {cellsEmptys(scheduleOnSpecificDay(daysWeek.WEDNESDAY)).map(
+                (val) => (
+                  <Cell empty key={val} />
+                ),
+              )}
+            </div>
 
-          <div>
-            {scheduleOnSpecificDay(daysWeek.THRUSDAY).map((sched, index) => (
-              <Cell key={index} data={sched} nameDoctor={nameDoctor} />
-            ))}
-            {cellsEmptys(scheduleOnSpecificDay(daysWeek.THRUSDAY)).map(
-              (val) => (
-                <Cell empty key={val} />
-              ),
-            )}
-          </div>
+            <div>
+              {scheduleOnSpecificDay(daysWeek.THRUSDAY).map((sched, index) => (
+                <Cell key={index} data={sched} nameDoctor={nameDoctor} />
+              ))}
+              {cellsEmptys(scheduleOnSpecificDay(daysWeek.THRUSDAY)).map(
+                (val) => (
+                  <Cell empty key={val} />
+                ),
+              )}
+            </div>
 
-          <div>
-            {scheduleOnSpecificDay(daysWeek.FRIDAY).map((sched, index) => (
-              <Cell key={index} data={sched} nameDoctor={nameDoctor} />
-            ))}
+            <div>
+              {scheduleOnSpecificDay(daysWeek.FRIDAY).map((sched, index) => (
+                <Cell key={index} data={sched} nameDoctor={nameDoctor} />
+              ))}
 
-            {cellsEmptys(scheduleOnSpecificDay(daysWeek.FRIDAY)).map((val) => (
-              <Cell empty key={val} />
-            ))}
-          </div>
+              {cellsEmptys(scheduleOnSpecificDay(daysWeek.FRIDAY)).map(
+                (val) => (
+                  <Cell empty key={val} />
+                ),
+              )}
+            </div>
 
-          <div>
-            {scheduleOnSpecificDay(daysWeek.SATURDAY).map((sched, index) => (
-              <Cell key={index} data={sched} nameDoctor={nameDoctor} />
-            ))}
-            {cellsEmptys(scheduleOnSpecificDay(daysWeek.SATURDAY)).map(
-              (val) => (
-                <Cell empty key={val} />
-              ),
-            )}
-          </div>
-        </section>
-      </Container> : <div></div>}
+            <div>
+              {scheduleOnSpecificDay(daysWeek.SATURDAY).map((sched, index) => (
+                <Cell key={index} data={sched} nameDoctor={nameDoctor} />
+              ))}
+              {cellsEmptys(scheduleOnSpecificDay(daysWeek.SATURDAY)).map(
+                (val) => (
+                  <Cell empty key={val} />
+                ),
+              )}
+            </div>
+          </section>
+        </Container>
+      ) : (
+        <div></div>
+      )}
     </>
   )
 }

@@ -3,7 +3,6 @@ import React, { createContext, useContext, useState } from 'react'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 
-import apiPatient from '@/services/apiPatient'
 import { RegisterSuccess } from './messages/RegisterSuccess/index'
 import {
   RegisterSpecialistContextData,
@@ -15,7 +14,7 @@ import {
 import axios from 'axios'
 import apiAdmin from '@/services/apiAdmin'
 import { toApi } from '../adapters'
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosError } from 'axios'
 
 const RegisterSpecialistContext = createContext<RegisterSpecialistContextData>(
   {} as RegisterSpecialistContextData,
@@ -62,7 +61,6 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
       scrollTo(0, 0)
     }
   }
-
 
   const createListFormDataOfSpecialtys = () => {
     const list = []

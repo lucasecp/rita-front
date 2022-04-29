@@ -10,6 +10,11 @@ interface SelectUfProps {
 const SelectUf: React.FC<SelectUfProps> = ({ setUf, uf }) => {
   const [ufOptions, setUfOptions] = useState<any[]>([])
 
+  const mapUf = (array: any[]) => {
+    if (!array) return []
+    return array.map((obj) => ({ value: obj.uf, label: obj.uf }))
+  }
+  
   useEffect(() => {
     const getUf = async () => {
       try {
@@ -28,10 +33,6 @@ const SelectUf: React.FC<SelectUfProps> = ({ setUf, uf }) => {
     getUf()
   }, [])
 
-  const mapUf = (array: any[]) => {
-    if (!array) return []
-    return array.map((obj) => ({ value: obj.uf, label: obj.uf }))
-  }
 
   return (
     <Select

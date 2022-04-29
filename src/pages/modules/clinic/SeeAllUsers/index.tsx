@@ -17,12 +17,44 @@ const SeeAllSpecialists: React.FC = () => {
   const [queryApi, setQueryApi] = useState('')
   const [filters, setFilters] = useState<any[]>([])
   const [order, setOrder] = useState({})
-  const filterName = JSON.parse(window.localStorage.getItem('@Rita/clinic-users-filter'))
+  const filterName = JSON.parse(
+    window.localStorage.getItem('@Rita/clinic-users-filter'),
+  )
   const [usersClinic, setUsersClinic] = useState<UsersI>({
     total: 0,
     data: [],
   })
   const { Loading } = useLoading()
+
+  const getClinics = async (filter?: string) => {
+    try {
+      Loading.turnOn()
+
+      const { data } = await apiAdmin(
+        `/clinica/${59}/usuario${queryApi}${
+          queryFilterString(filters) + queryOrderString(order)
+        }`,
+      )
+
+      const result = fromApi(
+        filter
+          ? data.users.filter((item) =>
+              String(item.nome)
+                .toLocaleLowerCase()
+                .includes(filter.toLocaleLowerCase()),
+            )
+          : data.users,
+      )
+
+      setUsersClinic({
+        total: result.length ? data.total : null,
+        data: result,
+      })
+    } catch (error) {
+    } finally {
+      Loading.turnOff()
+    }
+  }
 
   useEffect(() => {
     document.title = 'Rita Saúde | Usuários'
@@ -32,40 +64,20 @@ const SeeAllSpecialists: React.FC = () => {
     getClinics()
   }, [queryApi, filters, order])
 
-  const getClinics = async (filter?: string) => {
-    try {
-      Loading.turnOn()
-
-      const { data } = await apiAdmin(`/clinica/${59}/usuario${queryApi}${
-        queryFilterString(filters) + queryOrderString(order)
-      }`)
-
-      const result = fromApi(filter ? data.users.filter(item => String(item.nome).toLocaleLowerCase().includes(filter.toLocaleLowerCase())) : data.users)
-
-      setUsersClinic({
-          total: result.length ? data.total : null,
-          data: result })
-    } catch (error) {
-    } finally {
-      Loading.turnOff()
-    }
-  }
-
   useEffect(() => {
-    if(!filterName) getClinics()
-    if(filterName) getClinics(filterName?.nome)
+    if (!filterName) getClinics()
+    if (filterName) getClinics(filterName?.nome)
   }, [filterName?.nome])
 
   return (
     <Container>
-      <DefaultLayout title="Clínica - Usuários" headerChildren={<ButtonHeader />}>
+      <DefaultLayout
+        title="Clínica - Usuários"
+        headerChildren={<ButtonHeader />}
+      >
         <Content>
           <Filter setFilters={setFilters} />
-          <Table
-            setOrder={setOrder}
-            order={order}
-            users={usersClinic}
-          />
+          <Table setOrder={setOrder} order={order} users={usersClinic} />
           <Pagination total={usersClinic?.total} setQuery={setQueryApi} />
         </Content>
       </DefaultLayout>

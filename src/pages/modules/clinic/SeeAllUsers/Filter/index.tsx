@@ -16,13 +16,11 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   const [nome, setNome] = useState(local.nome || '')
   const [errors, setErrors] = useState({ nome: '' })
 
+  const arrayQuery = [{ nome: fieldsApi.NOME, value: nome }]
+
   useEffect(() => {
     setFilters(verifyTypedFields(arrayQuery))
   }, [])
-
-  const arrayQuery = [
-    { nome: fieldsApi.NOME, value: nome }
-  ]
 
   const clearFields = () => {
     setNome('')
@@ -45,7 +43,10 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     if (hasErrors()) {
       return
     }
-    window.localStorage.setItem('@Rita/clinic-users-filter', JSON.stringify({ nome }))
+    window.localStorage.setItem(
+      '@Rita/clinic-users-filter',
+      JSON.stringify({ nome }),
+    )
     setFilters(verifyTypedFields(arrayQuery))
   }
 
@@ -61,16 +62,15 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           hasError={!!errors.nome}
           msgError={errors.nome}
         />
-      <BtnGroup>
-        <OutlineButton small onClick={() => clearFields()}>
-          Limpar Filtro
-        </OutlineButton>
-        <ButtonPrimary medium onClick={onFilter}>
-          Filtrar Resultados
-        </ButtonPrimary>
-      </BtnGroup>
+        <BtnGroup>
+          <OutlineButton small onClick={() => clearFields()}>
+            Limpar Filtro
+          </OutlineButton>
+          <ButtonPrimary medium onClick={onFilter}>
+            Filtrar Resultados
+          </ButtonPrimary>
+        </BtnGroup>
       </div>
-
     </Container>
   )
 }

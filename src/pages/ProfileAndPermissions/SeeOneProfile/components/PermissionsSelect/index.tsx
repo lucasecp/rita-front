@@ -1,5 +1,3 @@
-import React, { useEffect, useMemo, useState } from 'react'
-
 import { enableRipple } from '@syncfusion/ej2-base'
 import { TreeViewComponent } from '@syncfusion/ej2-react-navigations'
 
@@ -24,7 +22,6 @@ interface PermissionsSelectProps {
 
 export const PermissionsSelect: React.FC<PermissionsSelectProps> = ({
   permissions = [],
-  disabled,
 }) => {
   const fields = {
     dataSource: permissions,

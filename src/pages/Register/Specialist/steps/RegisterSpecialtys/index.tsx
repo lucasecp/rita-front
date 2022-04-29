@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Container } from './styles'
 import FooterNextStep from '../../components/FooterNextStep'
 
-import { useMessage } from '@/hooks/useMessage'
 import { useRegisterSpecialist } from '../../hooks'
 import SpecialtyItem from './SpecialtyItem/index'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 
-const RegisterSpecialtys: React.FC = ({}) => {
+const RegisterSpecialtys: React.FC = () => {
   const {
     profissionalInfo,
     setErrors,

@@ -17,6 +17,14 @@ const SelectCity: React.FC<SelectCityProps> = ({ setCity, city, uf }) => {
       return setCityOptions([])
     }
 
+    const mapCity = (array: any[]) => {
+      if (!array) return []
+      return array.map((obj) => ({
+        value: obj.cidade,
+        label: obj.cidade,
+      }))
+    }
+
     const getCity = async () => {
       try {
         const { data } = await apiAdmin.get(`/clinica/municipios?uf=${uf}`)
@@ -33,14 +41,6 @@ const SelectCity: React.FC<SelectCityProps> = ({ setCity, city, uf }) => {
 
     getCity()
   }, [uf])
-
-  const mapCity = (array: any[]) => {
-    if (!array) return []
-    return array.map((obj) => ({
-      value: obj.cidade,
-      label: obj.cidade,
-    }))
-  }
 
   const labelDefaultOption = () => {
     if (!uf) {

@@ -56,11 +56,10 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi }) => {
         hasError={!!errors.requireSubscription}
         msgError={errors.requireSubscription}
       />
-      <SelectIssuingAgency 
-      issuingAgency={issuingAgency}
-      setIssuingAgency={setIssuingAgency}
+      <SelectIssuingAgency
+        issuingAgency={issuingAgency}
+        setIssuingAgency={setIssuingAgency}
       />
-
     </Container>
   )
 }

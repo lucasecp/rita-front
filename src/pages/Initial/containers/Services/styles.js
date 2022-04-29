@@ -29,7 +29,7 @@ export const Card = styled.div`
   h3 {
     font-size: 24px;
     line-height: 29px;
-    color: #f8f5ff;
+    color: ${({ theme }) => theme.extraLight};
     font-weight: 700;
   }
   p {
@@ -39,7 +39,7 @@ export const Card = styled.div`
     line-height: 17px;
     font-weight: 400;
     margin-top: 14px;
-    color: #f8f5ff;
+    color: ${({ theme }) => theme.extraLight};
   }
   button {
     margin-top: 20px;

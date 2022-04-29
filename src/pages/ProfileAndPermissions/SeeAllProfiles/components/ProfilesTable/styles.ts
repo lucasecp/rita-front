@@ -21,7 +21,7 @@ export const Container = styled.div`
       bottom: 0;
       left: -32px;
 
-      background: ${colors.purple.background.light};
+      background: ${({ theme }) => theme.extraLight};
     }
   }
   > ul li {

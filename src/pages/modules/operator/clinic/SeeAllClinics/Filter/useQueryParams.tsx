@@ -1,5 +1,3 @@
-import useQuery from '@/hooks/useQuery'
-import { fieldsApi } from '../static/fieldsApi'
 
 interface UseQueryParamsProps {
   uf: any[]

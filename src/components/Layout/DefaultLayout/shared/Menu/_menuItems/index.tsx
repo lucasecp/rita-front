@@ -252,12 +252,11 @@ export const menuItens = [
     icon: <UserIcon />,
     name: 'Perfil',
     permissions: [permissions.VER_DADOS_CLINICA],
-
   },
   {
     path: CLINIC_APPOINTMENT_TABLE,
     icon: <AppointmentTableIcon />,
     name: 'Tabela de consulta',
     permissions: [permissions.GERENCIAR_TABELA_PRECOS_CLINICA],
-  }
+  },
 ]

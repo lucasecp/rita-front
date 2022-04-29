@@ -29,7 +29,6 @@ export const Header: React.FC = () => {
     getProfilePhoto()
   }, [])
 
-
   return (
     <Container>
       <Link to="/inicio">

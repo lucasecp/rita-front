@@ -70,12 +70,12 @@ const directorRoutes = [
     component: DirectorGetPlan,
   },
   {
-    path: DIRECTOR_IMPORT,
-    component: Import,
-  },
-  {
     path: DIRECTOR_IMPORT_REPORT,
     component: ImportReport,
+  },
+  {
+    path: DIRECTOR_IMPORT,
+    component: Import,
   },
   {
     path: FILTER_USERS,

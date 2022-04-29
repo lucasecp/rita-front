@@ -4,7 +4,6 @@ import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
 import { Container, AccordionContainer } from '../styles'
 import InstructionsIncome from './Instructions'
-import SendedFile from '../../components/SendedFile'
 
 const ProofOfIncome = ({
   proofOfIncomeFile,

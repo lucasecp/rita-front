@@ -80,8 +80,9 @@ export const WalletBuyCoinInputSimple: React.FC = () => {
 
       <Values>
         <div>
-          {crownAvailableValues.map((value) => (
+          {crownAvailableValues.map((value, index) => (
             <div
+              key={index}
               className={selectedOption === value ? 'active' : ''}
               onClick={() => handleSelectPaymentOptionClick(value)}
             >

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   padding: 0 32px 32px;
-  background: #f8f5ff;
+  background: ${({ theme }) => theme.extraLight};
   > h2 {
     padding: 16px 0 32px 0;
     font-size: 20px;

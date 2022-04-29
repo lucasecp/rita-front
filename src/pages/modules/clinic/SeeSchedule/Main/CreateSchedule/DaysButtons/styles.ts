@@ -28,7 +28,7 @@ export const Buttons = styled.button<{ active: boolean }>`
   border: none;
   border-radius: 50%;
   width: 25px;
-  height: 25px ;
+  height: 25px;
   :hover {
     color: ${({ theme }) => theme.darkness};
   }

@@ -47,7 +47,6 @@ export const ValidationSeeOnePatient: React.FC<
           rows={3}
           limit="1000"
           value={validations.resonDocumentNotOk}
-          setValue={() => {}}
           disabled
         />
       )}

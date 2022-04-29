@@ -9,7 +9,6 @@ import InputText from '@/components/Form/InputText'
 import { ClinicEditContext } from '../../../Context/ClinicEditContext'
 import InputMask from '@/components/Form/InputMask'
 /** Helpers */
-import isEmail from '@/helpers/isEmail'
 import { validateEmail } from '../../../Helpers/validatorFields'
 
 interface FormClinicProfileI {
@@ -26,7 +25,8 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
   const [phoneResponsible, setPhoneResponsible] = React.useState('')
   const [email, setEmail] = React.useState('')
   /** Context */
-  const { error, setIsHashModificationField, setError, isDisabled } = React.useContext(ClinicEditContext)
+  const { error, setIsHashModificationField, setError, isDisabled } =
+    React.useContext(ClinicEditContext)
 
   /** @description Atualiza os dados digitados nos states */
   React.useEffect(() => {
@@ -49,7 +49,7 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
   /**
    * @description Função responsável por verificar se houve modificação nos campos e setar true em 'setIsHashModificationField' */
   const onChangeField = (event: any) => {
-    let name = event.target.name
+    const name = event.target.name
     if (name === 'responsible') setResponsible(event.target.value)
     if (name === 'cpfResponsible') setCpfResponsible(event.target.value)
     if (name === 'phoneResponsible') setPhoneResponsible(event.target.value)
@@ -108,7 +108,9 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
             onBlur={() => {
               setError({
                 ...error,
-                emailResponsibleTecnic: validateEmail(email, { emailTecnic: 'emailTecnic' })
+                emailResponsibleTecnic: validateEmail(email, {
+                  emailTecnic: 'emailTecnic',
+                }),
               })
             }}
           />

@@ -1,8 +1,7 @@
 import styled from 'styled-components'
-import colors from '@/styles/colors'
 
 export const Container = styled.section`
-  background-color: ${colors.purple.background.light};
+  background-color: ${({ theme }) => theme.extraLight};
   padding: 56px 86px;
 
   display: flex;
@@ -34,7 +33,7 @@ export const Container = styled.section`
 
       > div {
         flex: 1 0 100%;
-        background-color: ${colors.purple.main.light};
+        background-color: ${({ theme }) => theme.mediumLight};
         border-radius: 3px;
 
         > div {

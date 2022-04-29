@@ -25,7 +25,9 @@ export const SelectSpecialty: React.FC<SpecialtysProps> = ({
   idDoctor,
   ...rest
 }) => {
-  const [specialtysOptions, setSpecialtysOptions] = useState<MultiSelectOption[]>([])
+  const [specialtysOptions, setSpecialtysOptions] = useState<
+    MultiSelectOption[]
+  >([])
   const [isLoading, setIsLoading] = useState(true)
 
   const mapSpecialtys = (arrayDoctor: any[]) => {
@@ -37,41 +39,48 @@ export const SelectSpecialty: React.FC<SpecialtysProps> = ({
   }
 
   useEffect(() => {
-    if(idDoctor && idClinic){
+    if (idDoctor && idClinic) {
       getSpecialtys()
     }
   }, [idDoctor, idClinic])
 
   const getSpecialtys = async () => {
     try {
-      apiAdmin.get(`/medico/${idDoctor}/clinica/${idClinic}/especialidade`).then(response => {
-        const dataMapped = mapSpecialtys(response.data?.clinica?.especialidades)
-        if (!dataMapped.length) {
+      apiAdmin
+        .get(`/medico/${idDoctor}/clinica/${idClinic}/especialidade`)
+        .then((response) => {
+          const dataMapped = mapSpecialtys(
+            response.data?.clinica?.especialidades,
+          )
+          if (!dataMapped.length) {
+            setIsLoading(false)
+            return setSpecialtysOptions([])
+          }
+          setSpecialtysOptions(dataMapped)
           setIsLoading(false)
-          return setSpecialtysOptions([])
-        }
-        setSpecialtysOptions(dataMapped)
-        setIsLoading(false)
-        if(dataMapped.length === 1){
-          setSpecialtys(dataMapped)
-        }
-      })
-    } catch (error) {} finally {
+          if (dataMapped.length === 1) {
+            setSpecialtys(dataMapped)
+          }
+        })
+    } catch (error) {
+    } finally {
       setIsLoading(true)
     }
-
   }
-
 
   return (
     <Container>
       {!label && <h1>Especialidades</h1>}
       <section>
         <MultSelect
-          value={specialtysOptions.length === 1 ? specialtysOptions : specialtys}
+          value={
+            specialtysOptions.length === 1 ? specialtysOptions : specialtys
+          }
           setValue={setSpecialtys}
           color={color}
-          options={isLoading ? [{ id: '', name: 'Carregando...' }] : specialtysOptions}
+          options={
+            isLoading ? [{ id: '', name: 'Carregando...' }] : specialtysOptions
+          }
           hasError={!!errors.specialtys}
           messageError={errors.specialtys}
           name="specialtys"

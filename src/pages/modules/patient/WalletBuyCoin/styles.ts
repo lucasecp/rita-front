@@ -290,13 +290,13 @@ export const PixInfo = styled.section`
   > button {
     svg {
       height: 18px;
-      fill: ${colors.purple.main.dark};
+      fill: ${({ theme }) => theme.main};
       margin-left: 10px;
     }
 
     &:hover {
       svg {
-        fill: ${colors.purple.main.darkness};
+        fill: ${({ theme }) => theme.darkness};
       }
     }
   }

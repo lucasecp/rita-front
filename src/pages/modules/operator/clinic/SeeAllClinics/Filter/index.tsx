@@ -43,10 +43,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   })
   const cnpjFormated = clearSpecialCaracter(cnpj)
 
-  useEffect(() => {
-    setFilters(verifyTypedFields(arrayQuery))
-  }, [])
-
   const arrayQuery = [
     { name: fieldsApi.NOME_FANTASIA, value: name },
     { name: fieldsApi.CNPJ, value: cnpjFormated },
@@ -63,6 +59,10 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     { name: fieldsApi.UF, value: formatMultSelectValue(uf) },
     { name: fieldsApi.CIDADES, value: formatMultSelectValue(city) },
   ]
+
+  useEffect(() => {
+    setFilters(verifyTypedFields(arrayQuery))
+  }, [])
 
   const clearFields = () => {
     setName('')

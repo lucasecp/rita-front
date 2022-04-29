@@ -1,11 +1,10 @@
-import colors from '@/styles/colors'
 import styled from 'styled-components'
 
 export const Content = styled.div`
   margin: 106px 0 0 0;
   overflow-x: hidden;
   padding: 0 32px 0 32px;
-  background: ${colors.purple.background.light};
+  background: ${({ theme }) => theme.extraLight};
 
   @media (max-width: 767px) {
     padding: 0 24px 0;

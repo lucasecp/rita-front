@@ -56,7 +56,7 @@ export interface ScheduleSpecialistContextDataI {
     React.SetStateAction<CurrentDataClinicAndDoctorI>
   >
   clinics: ClinicsI[]
-  specialistName: string,
+  specialistName: string
   setSpecialistName: React.Dispatch<SetStateAction<string>>
   setClinics: React.Dispatch<SetStateAction<ClinicsI[]>>
   setGetSchedules: () => void
@@ -64,6 +64,6 @@ export interface ScheduleSpecialistContextDataI {
 }
 
 export interface ClinicsI {
-  descricao: string,
+  descricao: string
   idClinica: number
 }

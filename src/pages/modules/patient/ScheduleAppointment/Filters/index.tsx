@@ -17,7 +17,7 @@ import { DataI } from '../types/index'
 import { queryOrderString } from '@/helpers/queryString/order'
 import useQueryParams from './useQueryParams'
 
-const Filters = () => {
+const Filters: React.FC = () => {
   const params = useQueryParams()
   const [researchDoctor, setResearchDoctor] = useState(
     params.researchDoctor || '',

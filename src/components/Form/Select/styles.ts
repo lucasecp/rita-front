@@ -90,8 +90,8 @@ export const Container = styled.div<ContainerProps>`
       css<ContainerProps>`
         border: none;
         border-bottom: 2px solid
-          ${({ hasError }) =>
-            hasError ? colors.orange.light : colors.purple.main.middle};
+          ${({ hasError, theme }) =>
+            hasError ? colors.orange.light : theme.medium};
         border-radius: 0;
         box-shadow: none;
         background-color: transparent;

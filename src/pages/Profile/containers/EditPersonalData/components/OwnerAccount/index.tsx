@@ -10,12 +10,12 @@ type OwnerOfTheAccountType = {
   email?: string
   phone?: string
 }
-interface OwnerOfTheAccount {
+interface OwnerOfTheAccountProps {
   ownerOfTheAccount: OwnerOfTheAccountType
 }
 
-export const OwnerOfTheAccount: React.FC<OwnerOfTheAccount> = (
-  data: OwnerOfTheAccount,
+export const OwnerOfTheAccount: React.FC<OwnerOfTheAccountProps> = (
+  data: OwnerOfTheAccountProps,
 ) => {
   return (
     <Container>

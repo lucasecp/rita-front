@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
-import arrowDown from '@/assets/icons/arrow-down-order.svg'
-import arrowUp from '@/assets/icons/arrow-up-order.svg'
-import colors from '@/styles/colors'
+import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down-order.svg'
+import { ReactComponent as ArrowUpIcon } from '@/assets/icons/arrow-up-order.svg'
 
 interface ArrowProps {
   order: number
@@ -12,7 +11,7 @@ export const Content = styled.div`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: #9146ff;
+  color${({ theme }) => theme.main};
   align-items: center;
   justify-content: flex-start;
   min-width: 150px;
@@ -35,14 +34,14 @@ export const Content = styled.div`
     }
   }
   h5 {
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
   }
 `
 export const Container = styled.header`
-  background: ${colors.purple.background.middle};
+  background: ${({ theme }) => theme.light};
   min-width: fit-content;
   padding: 0 32px;
   > div {
@@ -51,48 +50,36 @@ export const Container = styled.header`
   }
 `
 
-export const ArrowUp = styled.button<ArrowProps>`
+export const ArrowUp = styled(ArrowUpIcon)<ArrowProps>`
   border: none;
   background-color: transparent;
   padding: 0;
   margin-bottom: 1.5px;
-  &:after {
-    content: '';
-    width: 9px;
-    height: 5px;
-    background-image: url(${arrowUp});
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: block;
-    ${({ order }) =>
-      order &&
-      css`
-        filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
-          brightness(100%) contrast(103%);
-      `}
-  }
-`
-
-export const ArrowDown = styled.button<ArrowProps>`
-  border: none;
-  background-color: transparent;
-  padding: 0;
-  margin-top: 1.5px;
-  &:after {
-    content: '';
-    width: 9px;
-    height: 5px;
-    background-image: url(${arrowDown});
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: block;
+  > path {
+    stroke: ${({ theme }) => theme.mediumLight};
   }
   ${({ order }) =>
     order &&
     css`
       filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
         brightness(100%) contrast(103%);
+    `}
+`
+
+export const ArrowDown = styled(ArrowDownIcon)<ArrowProps>`
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin-top: 1.5px;
+  > path {
+    stroke: ${({ theme }) => theme.mediumLight};
+  }
+
+  ${({ order }) =>
+    order &&
+    css`
+      > path {
+        stroke: ${({ theme }) => theme.medium};
+      }
     `}
 `

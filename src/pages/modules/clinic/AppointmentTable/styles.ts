@@ -28,14 +28,13 @@ export const Content = styled.div`
     display: flex;
     justify-content: center;
     padding: 40px;
-    gap: 24px
+    gap: 24px;
   }
   @media (max-width: 767px) {
     padding: 29px 24px 0 24px;
-    >footer{
+    > footer {
       padding: 24px;
       flex-direction: column;
     }
-
   }
 `

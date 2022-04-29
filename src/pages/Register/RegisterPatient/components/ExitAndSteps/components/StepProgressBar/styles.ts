@@ -22,7 +22,7 @@ export const Step = styled.span<StepsProps>`
   ${({ waiting }) =>
     waiting &&
     css`
-      background: #dfd2ff;
+      background: ${({ theme }) => theme.mediumLight};
     `}
 
   ${({ finish }) =>
@@ -34,7 +34,7 @@ export const Step = styled.span<StepsProps>`
   ${({ active }) =>
     active &&
     css`
-      background: #9146ff;
+      background${({ theme }) => theme.main};
     `}
 
   +span {
@@ -46,7 +46,7 @@ export const Step = styled.span<StepsProps>`
       width: 24px;
       border-radius: 2px;
       display: block;
-      background-color: #efeafa;
+      background-color: ${({ theme }) => theme.light};
       position: relative;
       left: -150%;
       top: 50%;

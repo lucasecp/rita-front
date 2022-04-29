@@ -11,7 +11,9 @@ interface fields {
   days: DaysI
 }
 
-export const useValidator = (setErrors: React.Dispatch<React.SetStateAction<ErrorsI>>): { hasError: (fields: fields) => boolean } => {
+export const useValidator = (
+  setErrors: React.Dispatch<React.SetStateAction<ErrorsI>>,
+): { hasError: (fields: fields) => boolean } => {
   const { schedule } = useScheduleSpecialist()
 
   const { showSimple } = useModal()
@@ -75,7 +77,9 @@ export const useValidator = (setErrors: React.Dispatch<React.SetStateAction<Erro
         endTime: 'Revise esse campo.',
       }))
 
-      showSimple.error('Existe um horário de atendimento marcado neste dia e horário. Remova o horário de atendimento já existente para adicionar o novo.')
+      showSimple.error(
+        'Existe um horário de atendimento marcado neste dia e horário. Remova o horário de atendimento já existente para adicionar o novo.',
+      )
 
       error = true
     }
@@ -119,9 +123,9 @@ export const useValidator = (setErrors: React.Dispatch<React.SetStateAction<Erro
       error = true
     }
 
-    if(fields.startTime){
+    if (fields.startTime) {
       const startTime = getHour(fields.startTime)
-      if(startTime > 23){
+      if (startTime > 23) {
         setErrors((prevErrors) => ({
           ...prevErrors,
           startTime: 'A hora não pode ser maior do que 23:00',
@@ -131,9 +135,9 @@ export const useValidator = (setErrors: React.Dispatch<React.SetStateAction<Erro
       }
     }
 
-    if(fields.endTime){
+    if (fields.endTime) {
       const endTime = getHour(fields.endTime)
-      if(endTime > 23){
+      if (endTime > 23) {
         setErrors((prevErrors) => ({
           ...prevErrors,
           endTime: 'A hora não pode ser maior do que 23:00',
@@ -143,10 +147,10 @@ export const useValidator = (setErrors: React.Dispatch<React.SetStateAction<Erro
       }
     }
 
-    if(fields.endTime && fields.startTime){
+    if (fields.endTime && fields.startTime) {
       const startTime = getHour(fields.startTime)
       const endTime = getHour(fields.endTime)
-      if(startTime > endTime){
+      if (startTime > endTime) {
         setErrors((prevErrors) => ({
           ...prevErrors,
           startTime: 'A hora inicial não pode ser maior do que a hora final.',

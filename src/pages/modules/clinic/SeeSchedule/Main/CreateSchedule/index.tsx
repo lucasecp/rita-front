@@ -14,9 +14,9 @@ import axios from 'axios'
 import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
-import { toast } from '../../../../../../styles/components/toastify/index';
+import { toast } from '../../../../../../styles/components/toastify/index'
 
-const CreateSchedule: React.FC = ({}) => {
+const CreateSchedule: React.FC = () => {
   const [startTime, setStartTime] = useState('')
 
   const [endTime, setEndTime] = useState('')
@@ -27,7 +27,7 @@ const CreateSchedule: React.FC = ({}) => {
 
   const [days, setDays] = useState<DaysI>({} as DaysI)
 
-  const {  currentDataClinicAndDoctor, setGetSchedules } =
+  const { currentDataClinicAndDoctor, setGetSchedules } =
     useScheduleSpecialist()
 
   const { hasError } = useValidator(setErrors)
@@ -71,7 +71,8 @@ const CreateSchedule: React.FC = ({}) => {
       toast.success('Horário criado com sucesso.')
     } catch (error) {
       showSimple.error(
-        error.response?.message || 'Erro ao adicionar horário, verifique os dados e tente novamente.',
+        error.response?.message ||
+          'Erro ao adicionar horário, verifique os dados e tente novamente.',
       )
     } finally {
       Loading.turnOff()

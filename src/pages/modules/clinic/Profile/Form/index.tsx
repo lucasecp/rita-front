@@ -24,7 +24,11 @@ import {
 /** Context */
 import { ClinicEditContext } from '../Context/ClinicEditContext'
 /** Helpers */
-import { validateField, validateEmail, validatePhone } from '../Helpers/validatorFields'
+import {
+  validateField,
+  validateEmail,
+  validatePhone,
+} from '../Helpers/validatorFields'
 import { toast } from '@/styles/components/toastify'
 /** API */
 import apiAdmin from '@/services/apiAdmin'
@@ -62,6 +66,22 @@ const FormClinicProfile: React.FC = () => {
     photo,
   } = React.useContext(ClinicEditContext)
 
+  /** @description Retorna todas as especialidades cadastradas no sistema */
+  const getAllSpecialtys = async () => {
+    const result = await apiAdmin.get(`/especialidade?limit=${1000}&skip=${0}`)
+    return result.data.especialidade
+  }
+
+  /** @description Retorna os dados da clinica como o usuário clínica */
+  const getClinicProfile = async () => {
+    Loading.turnOn()
+    const result = await apiAdmin.get(`/clinica/minha-clinica/${59}`)
+    const specialtys = await getAllSpecialtys()
+    const data = await fromApi(result.data, specialtys)
+    setData(data)
+    Loading.turnOff()
+  }
+
   React.useEffect(() => {
     getClinicProfile()
   }, [])
@@ -70,45 +90,6 @@ const FormClinicProfile: React.FC = () => {
     if (isDisabled) getClinicProfile()
   }, [isDisabled])
 
-  /** @description Faz a validação dos dados e prepara para enviar os dados modificados para o backend */
-  const onUpdate = async () => {
-    await validadeFieldsIfExistsErrors(
-      dataClinic,
-      responsibleTecnic,
-      responsibleAdministrative,
-      address,
-      specialty,
-    )
-    const isFieldRequired: any = window.localStorage.getItem(
-      '@Rita/Clinic/Perfil/edit',
-    )
-    const { fieldRequired } = JSON.parse(isFieldRequired)
-    if (!fieldRequired) {
-      try {
-        let data = toApi(
-          dataClinic,
-          responsibleTecnic,
-          responsibleAdministrative,
-          address,
-          specialty,
-        )
-        Loading.turnOn()
-        await save(photo, data)
-        await getClinicProfile()
-        Loading.turnOff()
-        toast.success('Alterações salvas com sucesso.')
-      } catch (error) {
-        toast.error(
-          'Não foi possível realizar a alteração dos dados, entre em contato com o suporte técnico.',
-        )
-      } finally {
-        setIsDisabled(true)
-        window.localStorage.removeItem('@Rita/Clinic/Perfil/edit')
-      }
-    }
-  }
-
-  /** @description Envia os dados modificados para o backend */
   const save = async (photo: File, data: any) => {
     const formData = new FormData()
     const keys = Object.keys(data)
@@ -121,6 +102,8 @@ const FormClinicProfile: React.FC = () => {
     formData.append('file', photo)
     await apiAdmin.put(`/clinica/minha-clinica/${59}`, formData)
   }
+
+  /** @description Envia os dados modificados para o backend */
 
   /**
    * @description Verifica se possui modificações realizadas pelo usuário nos campos,
@@ -138,22 +121,6 @@ const FormClinicProfile: React.FC = () => {
       setIsDisabled(true)
       setIsHashModificationField(false)
     }
-  }
-
-  /** @description Retorna os dados da clinica como o usuário clínica */
-  const getClinicProfile = async () => {
-    Loading.turnOn()
-    const result = await apiAdmin.get(`/clinica/minha-clinica/${59}`)
-    const specialtys = await getAllSpecialtys()
-    const data = await fromApi(result.data, specialtys)
-    setData(data)
-    Loading.turnOff()
-  }
-
-  /** @description Retorna todas as especialidades cadastradas no sistema */
-  const getAllSpecialtys = async () => {
-    const result = await apiAdmin.get(`/especialidade?limit=${1000}&skip=${0}`)
-    return result.data.especialidade
   }
 
   /**
@@ -203,7 +170,8 @@ const FormClinicProfile: React.FC = () => {
     )
     const emailResponsibleAdministrative = validateEmail(
       responsibleAdministrative.emailAdministrative,
-      { emailAdministrative: 'emailAdministrative' })
+      { emailAdministrative: 'emailAdministrative' },
+    )
     // /** Endereço */
     const cep = validateField(address.cep, 'CEP', { cep: 'cep' })
     const _address = validateField(address.address, 'Endereço', {
@@ -272,6 +240,44 @@ const FormClinicProfile: React.FC = () => {
       /** Especialidades */
       specialty: specialtys,
     })
+  }
+
+  /** @description Faz a validação dos dados e prepara para enviar os dados modificados para o backend */
+  const onUpdate = async () => {
+    await validadeFieldsIfExistsErrors(
+      dataClinic,
+      responsibleTecnic,
+      responsibleAdministrative,
+      address,
+      specialty,
+    )
+    const isFieldRequired: any = window.localStorage.getItem(
+      '@Rita/Clinic/Perfil/edit',
+    )
+    const { fieldRequired } = JSON.parse(isFieldRequired)
+    if (!fieldRequired) {
+      try {
+        const data = toApi(
+          dataClinic,
+          responsibleTecnic,
+          responsibleAdministrative,
+          address,
+          specialty,
+        )
+        Loading.turnOn()
+        await save(photo, data)
+        await getClinicProfile()
+        Loading.turnOff()
+        toast.success('Alterações salvas com sucesso.')
+      } catch (error) {
+        toast.error(
+          'Não foi possível realizar a alteração dos dados, entre em contato com o suporte técnico.',
+        )
+      } finally {
+        setIsDisabled(true)
+        window.localStorage.removeItem('@Rita/Clinic/Perfil/edit')
+      }
+    }
   }
 
   return (

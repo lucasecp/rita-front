@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Container, Button } from './styles'
 import { useAuth } from '@/hooks/login'
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
 import {
   profilesColors,
   profilesLabel,
   profiles,
 } from '../../../../../../constants/profiles'
-import { INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes';
+import { INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes'
 
 interface DropdownProfilesProps {
   show: boolean
@@ -28,7 +28,6 @@ const DropdownProfiles: React.FC<DropdownProfilesProps> = ({ show }) => {
       profileChosen,
     })
     history.push(INITIAL_PAGE)
-
   }
 
   useEffect(() => {
