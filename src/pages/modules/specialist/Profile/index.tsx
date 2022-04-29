@@ -16,7 +16,7 @@ const SpecialistProfile: React.FC = () => {
   const [specialtysDocs, setSpecialtysDocs] = useState<SpecialtysAndDocsType>(
     {} as SpecialtysAndDocsType,
   )
-  const [photo, setPhoto] = useState<File>()
+  const [photo] = useState<File>()
   const [makeNewRequest, setMakeNewRequest] = useState(false)
   const { Loading } = useLoading()
 
@@ -61,7 +61,7 @@ const SpecialistProfile: React.FC = () => {
   return (
     <DefaultLayout title="Perfil - Visualizar">
       <Content>
-        <Header data={data} setValue={setPhoto} />
+        <Header data={data} />
         <Form
           data={data}
           profilePhoto={photo}

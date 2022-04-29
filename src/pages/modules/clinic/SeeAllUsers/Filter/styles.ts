@@ -6,7 +6,7 @@ export const Container = styled.div`
     grid-template-columns: 2fr 1fr;
     gap: 24px;
     align-items: start;
-    > div:nth-child(1){
+    > div:nth-child(1) {
       position: relative;
       top: 14px;
     }

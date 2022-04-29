@@ -29,8 +29,13 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
   const [district, setDistrict] = React.useState('')
   const [complement, setComplement] = React.useState('')
   /** Context */
-  const { error, setError, isDisabled, setIsHashModificationField, isHashModificationSelectAndMultSelect} =
-    React.useContext(ClinicEditContext)
+  const {
+    error,
+    setError,
+    isDisabled,
+    setIsHashModificationField,
+    isHashModificationSelectAndMultSelect,
+  } = React.useContext(ClinicEditContext)
 
   /** @description Atualiza os dados digitados nos states */
   React.useEffect(() => {
@@ -56,7 +61,7 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
       district,
       complement,
     })
-    if(isHashModificationSelectAndMultSelect){
+    if (isHashModificationSelectAndMultSelect) {
       setIsHashModificationField(true)
     }
   }, [ufId, city])

@@ -5,7 +5,7 @@ export const fromApi = (clinicInfo: any[]): DataUsersClinic[] => {
     idClinica: user.idClinica,
     idUsuario: user.idUsuario,
     nome: user.nome,
-    email: user.email,
-    perfil: user.perfil
+    email: user.email, 
+    perfil: user.perfil,
   }))
 }

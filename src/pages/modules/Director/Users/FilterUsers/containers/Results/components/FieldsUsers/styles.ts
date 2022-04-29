@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import arrowDown from '@/assets/icons/arrow-down-order.svg'
-import arrowUp from '@/assets/icons/arrow-up-order.svg'
+import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down-order.svg'
+import { ReactComponent as ArrowUpIcon } from '@/assets/icons/arrow-up-order.svg'
 
 export const Container = styled.header`
   background: ${({ theme }) => theme.light};
@@ -52,55 +52,46 @@ export const Content = styled.div`
   }
 `
 
-export const ArrowUp = styled.button.attrs((props: { order: number }) => ({
-  order: props.order,
-}))`
+export const ArrowUp = styled(ArrowUpIcon).attrs(
+  (props: { order: number }) => ({
+    order: props.order,
+  }),
+)`
   border: none;
   background-color: transparent;
   padding: 0;
   margin-bottom: 1.5px;
-
-  &:after {
-    content: '';
-    width: 9px;
-    height: 5px;
-    background-image: url(${arrowUp});
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: block;
-    ${({ order }) =>
-      order &&
-      css`
-        filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
-          brightness(100%) contrast(103%);
-      `}
-  }
-`
-
-export const ArrowDown = styled.button.attrs((props: { order: number }) => ({
-  order: props.order,
-}))`
-  border: none;
-  background-color: transparent;
-  padding: 0;
-  margin-top: 1.5px;
-
-  &:after {
-    content: '';
-    width: 9px;
-    height: 5px;
-    background-image: url(${arrowDown});
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: block;
+  > path {
+    stroke: ${({ theme }) => theme.mediumLight};
   }
 
   ${({ order }) =>
     order &&
     css`
-      filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
-        brightness(100%) contrast(103%);
+      > path {
+        stroke: ${({ theme }) => theme.medium};
+      }
+    `}
+`
+
+export const ArrowDown = styled(ArrowDownIcon).attrs(
+  (props: { order: number }) => ({
+    order: props.order,
+  }),
+)`
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin-top: 1.5px;
+  > path {
+    stroke: ${({ theme }) => theme.mediumLight};
+  }
+
+  ${({ order }) =>
+    order &&
+    css`
+      > path {
+        stroke: ${({ theme }) => theme.medium};
+      }
     `}
 `

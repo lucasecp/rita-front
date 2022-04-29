@@ -6,7 +6,6 @@ import React, { useEffect, useState, SetStateAction } from 'react'
 
 import { Container } from './styles'
 
-
 interface SpecialtysProps {
   specialtys: MultiSelectOption[]
   setSpecialtys: React.Dispatch<SetStateAction<MultiSelectOption[]>>

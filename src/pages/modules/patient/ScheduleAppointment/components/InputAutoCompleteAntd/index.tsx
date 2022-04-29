@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import 'antd/dist/antd.min.css'
 import { Input, AutoComplete } from 'antd'
 import useSearch from './useSearch'

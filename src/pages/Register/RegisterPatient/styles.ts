@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 26px 0 0;
-  box-shadow: 0px 2px 8px 0px #dfd2ff26;
+  box-shadow: 0px 2px 8px 0px ${({ theme }) => theme.mediumLight}26;
   background: ${colors.gray.extraLight};
   margin: 20px 0px 100px 0;
   border-radius: 8px;
@@ -38,7 +38,7 @@ export const Container = styled.div`
 //   font-weight: 500;
 //   line-height: 20px;
 //   text-align: center;
-//   color: #9146ff;
+//   color${({ theme }) => theme.main};
 //   background-color: transparent;
 //   border: none;
 //   text-decoration: underline;

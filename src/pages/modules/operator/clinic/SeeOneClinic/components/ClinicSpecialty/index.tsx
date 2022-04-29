@@ -68,15 +68,6 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
     }
   }, [isEditing, initialData])
 
-  const onChangingSelect = (values: MultiSelectOption[]) => {
-    const hasAllOption = values.some((val) => val.id === 'All')
-
-    if (hasAllOption) {
-      return setSpecialtys(specialtysOptions)
-    }
-    return setSpecialtys(values)
-  }
-
   return (
     <Container>
       <h1>Especialidades</h1>
@@ -90,8 +81,6 @@ export const ClinicSpecialty: React.FC<ClinicSpecialtysProps> = ({
           hasError={!!errors.specialtys}
           messageError={errors?.specialtys}
           name="specialtys"
-          // onSelect={onChangingSelect}
-          //onRemove={onChangingSelect}
         />
       </section>
     </Container>

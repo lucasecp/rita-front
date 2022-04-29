@@ -20,11 +20,6 @@ const Header: React.FC = () => {
   const { showSimple } = useModal()
   const removePhoto = () => setPhoto({} as File)
 
-  React.useEffect(() => {
-    onFileInput()
-  }, [photo])
-
-
   const onFileInput = async () => {
     if (photo && photo.size !== 0 && !isValidSizeFile(photo)) {
       removePhoto()
@@ -40,6 +35,10 @@ const Header: React.FC = () => {
     }
   }
 
+  React.useEffect(() => {
+    onFileInput()
+  }, [photo])
+
   return (
     <Container>
       <div>
@@ -51,9 +50,9 @@ const Header: React.FC = () => {
                   imgBlob === ''
                     ? `data:image/png;base64,${data?.avatar}`
                     : imgBlob
-                  }
-                  alt="Imagem da clinica"
-                  />
+                }
+                alt="Imagem da clinica"
+              />
             </div>
           ) : (
             <ProfileIcon />
@@ -79,7 +78,7 @@ const Header: React.FC = () => {
           </h2>
           <p>
             <h6>CNPJ:</h6>
-            <span>{' '}{formatCnpj(data?.cnpj) || ''}</span>
+            <span> {formatCnpj(data?.cnpj) || ''}</span>
           </p>
         </div>
       </div>

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   padding: 32px;
   background: #fff;
-  box-shadow: 0px 2px 8px 0px #dfd2ff26;
+  box-shadow: 0px 2px 8px 0px ${({ theme }) => theme.mediumLight}26;
   border-radius: 8px;
 
   > *:not(:last-child):after {

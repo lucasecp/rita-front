@@ -9,13 +9,16 @@ import {
 
 import { useToggle } from '@/hooks/useToggle'
 
-const ScheduleSpecialistContext = createContext<ScheduleSpecialistContextDataI>({} as ScheduleSpecialistContextDataI)
+const ScheduleSpecialistContext = createContext<ScheduleSpecialistContextDataI>(
+  {} as ScheduleSpecialistContextDataI,
+)
 
 const ScheduleSpecialistProvider: React.FC = ({ children }) => {
   const [clinics, setClinics] = useState<ClinicsI[]>([])
   const [schedule, setSchedule] = useState<ScheduleI[]>([])
   const [specialistName, setSpecialistName] = useState<string>()
-  const [currentDataClinicAndDoctor, setCurrentDataClinicAndDoctor] = useState<CurrentDataClinicAndDoctorI>({} as CurrentDataClinicAndDoctorI)
+  const [currentDataClinicAndDoctor, setCurrentDataClinicAndDoctor] =
+    useState<CurrentDataClinicAndDoctorI>({} as CurrentDataClinicAndDoctorI)
   const [getSchedules, setGetSchedules] = useToggle()
 
   return (

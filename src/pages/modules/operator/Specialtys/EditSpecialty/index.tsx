@@ -18,7 +18,9 @@ const EditSpecialty: React.FC = () => {
   const [errors, setErrors] = useState<ErrorsI>({} as ErrorsI)
   const [dataFromApi, setDataFromApi] = useState<any>({})
   const [someFieldsWasChanged, setSomeFieldsWasChanged] = useState(false)
-  const [dataToApi, setSetDataToApi] = useState<DataReceivedI>({} as DataReceivedI)
+  const [dataToApi, setSetDataToApi] = useState<DataReceivedI>(
+    {} as DataReceivedI,
+  )
   const { Loading } = useLoading()
   const history = useHistory()
   const { showMessage } = useModal()

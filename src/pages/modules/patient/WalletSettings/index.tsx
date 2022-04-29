@@ -45,10 +45,13 @@ import { Container } from './styles'
 export const WalletSettings: React.FC = () => {
   const { user } = useAuth()
   const { showConfirmation } = useModal()
-  const [creditCardItems, setCreditCardItems] = useState<RitaWallet.API.Get.UserCreditCard>([])
+  const [creditCardItems, setCreditCardItems] =
+    useState<RitaWallet.API.Get.UserCreditCard>([])
 
   async function fetchData() {
-    const { data } = await apiWallet.get<RitaWallet.API.Get.UserCreditCard>('/user/credit-card')
+    const { data } = await apiWallet.get<RitaWallet.API.Get.UserCreditCard>(
+      '/user/credit-card',
+    )
 
     if (!data || !Array.isArray(data)) {
       throw new Error('Resposta vazia ou inválida')
@@ -74,7 +77,7 @@ export const WalletSettings: React.FC = () => {
       },
       onFalsy: async () => {
         console.log('falsy')
-      }
+      },
     })
 
     fetchData().catch(console.error)
@@ -86,10 +89,12 @@ export const WalletSettings: React.FC = () => {
     await apiWallet.post('/user/credit-card', {
       number: model.number,
       name: model.name,
-      expirationDate: moment().set({
-        year: 2000 + Number(year),
-        month: Number(month) - 1,
-      }).toISOString(),
+      expirationDate: moment()
+        .set({
+          year: 2000 + Number(year),
+          month: Number(month) - 1,
+        })
+        .toISOString(),
       cvv: model.securityCode,
       alias: 'abc-123',
       user: {

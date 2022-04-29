@@ -123,8 +123,8 @@ export const ButtonProfile = styled.button<{
       cursor: default !important;
       > div {
         > div {
-          >p{
-            display: none
+          > p {
+            display: none;
           }
           > div {
             > svg {

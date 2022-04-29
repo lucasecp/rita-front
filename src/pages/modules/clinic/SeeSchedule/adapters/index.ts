@@ -21,7 +21,7 @@ export const fromApi = (
   }))
 }
 
-export const toApi = (data: ScheduleI) => {
+export const toApi = (data: ScheduleI): any => {
   return {
     idClinica: data.idClinic,
     diaSemana: mapDaysToApi(data.day),

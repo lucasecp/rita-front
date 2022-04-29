@@ -4,7 +4,7 @@ import apiPatient from '@/services/apiPatient'
 import { fromApi } from './Adapters'
 import { setOptionsType } from './types'
 
-export default (inputValue: string, setOptions: setOptionsType) => {
+export default (inputValue: string, setOptions: setOptionsType): void => {
   useEffect(() => {
     let cancel: any
 

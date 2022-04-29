@@ -17,14 +17,18 @@ const Specilty: React.FC<FormClinicProfileI> = (props: FormClinicProfileI) => {
   /** State */
   const [specialty, setSpecialty] = React.useState<MultiSelectOption[]>([])
   /** Context */
-  const { error, isDisabled, setIsHashModificationField, isHashModificationSelectAndMultSelect } =
-    React.useContext(ClinicEditContext)
+  const {
+    error,
+    isDisabled,
+    setIsHashModificationField,
+    isHashModificationSelectAndMultSelect,
+  } = React.useContext(ClinicEditContext)
 
   /** @description Atualiza os dados digitados nos states */
   React.useEffect(() => {
     setAll(specialty, props.data.allSpecialtys)
     props.setSpecialty(specialty)
-    if(isHashModificationSelectAndMultSelect){
+    if (isHashModificationSelectAndMultSelect) {
       setIsHashModificationField(true)
     }
   }, [specialty])
@@ -40,7 +44,7 @@ const Specilty: React.FC<FormClinicProfileI> = (props: FormClinicProfileI) => {
     allSpecialtys: MultiSelectOption[],
   ) => {
     if (_specialty) {
-      let filter = _specialty.filter((item) => item.name === 'Todos')
+      const filter = _specialty.filter((item) => item.name === 'Todos')
       if (filter.length) {
         const all = allSpecialtys.filter((item) => item.name !== 'Todos')
         setSpecialty(all)

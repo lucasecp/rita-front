@@ -6,10 +6,11 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { DIRECTOR_IMPORT } from '@/routes/constants/namedRoutes/routes'
 import { AutocompleteOptions } from '@/components/Form/Autocomplete'
 
-import { FromApiResponse } from '@/pages/modules/Director/Imports/adapters/fromApiImport'
+import { StatusDataFromImport } from '@/pages/modules/Director/Imports/adapters/fromApiImport'
 
-import { Error as AccordionError } from './accordions/Error'
 import { Success as AccordionSuccess } from './accordions/Success'
+import { Error as AccordionError } from './accordions/Error'
+import { Inactive as AccordionInactive } from './accordions/Inactive'
 
 import { Container, BtnGroup } from './styles'
 
@@ -19,7 +20,7 @@ interface useLocationState {
     hour: string
     company: AutocompleteOptions
   }
-  importedDataMapped: FromApiResponse
+  importedDataMapped: StatusDataFromImport
 }
 
 export const Report: React.FC = () => {
@@ -38,14 +39,9 @@ export const Report: React.FC = () => {
           Importação realizada - {reportDetails.data} - {reportDetails.hour} -
           Empresa {reportDetails.company.label}
         </h1>
-        <AccordionSuccess
-          listSucessRegister={importedDataMapped.listSucessRegister}
-          countSucessRegisters={importedDataMapped.countSucessRegisters}
-        />
-        <AccordionError
-          listErrorsRegister={importedDataMapped.listErrorsRegister}
-          countErrorsRegister={importedDataMapped.countErrorsRegister}
-        />
+        <AccordionSuccess success={importedDataMapped.success} />
+        <AccordionError error={importedDataMapped.error} />
+        <AccordionInactive inactivate={importedDataMapped.inactivate} />
       </Container>
       <BtnGroup>
         <ButtonOutline onClick={onBack}>Voltar</ButtonOutline>

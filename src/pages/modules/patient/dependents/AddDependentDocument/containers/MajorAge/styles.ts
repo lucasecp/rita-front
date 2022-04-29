@@ -57,7 +57,7 @@ export const Container = styled.div`
       color: ${colors.gray.dark};
 
       > span {
-        color: ${colors.purple.main.dark};
+        color: ${({ theme }) => theme.main};
       }
     }
 
@@ -100,7 +100,7 @@ export const Container = styled.div`
 
     &.Mui-expanded {
       span svg {
-        fill: ${colors.purple.main.light};
+        fill: ${({ theme }) => theme.mediumLight};
       }
     }
   }

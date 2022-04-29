@@ -40,7 +40,7 @@ const clinicRoutes = [
   {
     path: CLINIC_SEE_ALL_USERS,
     component: SeeAllUsers,
-  }
+  },
 ]
 
 const clinicRoutesComponents = clinicRoutes.map((props, index) => (

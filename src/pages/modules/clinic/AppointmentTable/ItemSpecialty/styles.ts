@@ -15,7 +15,7 @@ export const Container = styled.div`
     font-weight: 500;
     line-height: 30px;
     color: #6a6a6a;
-    word-break: break-word
+    word-break: break-word;
   }
   > div {
     width: 100%;
@@ -34,10 +34,10 @@ export const Container = styled.div`
     left: 0;
     display: block;
     background: ${({ theme }) => theme.mediumLight};
-    top:0;
+    top: 0;
   }
   @media (max-width: 767px) {
     grid-template-columns: 100%;
-    gap: 32px
+    gap: 32px;
   }
 `

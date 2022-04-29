@@ -1,7 +1,7 @@
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 import { DoctorI, ClinicI } from '../types'
 
-export const fromApi = (dataResults: any[]) => {
+export const fromApi = (dataResults: any[]): any => {
   const doctor: DoctorI[] = dataResults
     .filter((result) => result.tipo === 'medico')
     .map((docInfo) => ({

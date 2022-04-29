@@ -26,11 +26,14 @@ const PixKeyAvailableList: React.FC<PixKeyAvailableListProps> = ({
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await apiWallet.get<RitaWallet.API.Get.UserPixKey>('/user/pix-key', {
-        params: {
-          activeOnly: false
-        }
-      })
+      const { data } = await apiWallet.get<RitaWallet.API.Get.UserPixKey>(
+        '/user/pix-key',
+        {
+          params: {
+            activeOnly: false,
+          },
+        },
+      )
 
       if (data && Array.isArray(data)) {
         const loadedItems = []

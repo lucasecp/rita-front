@@ -8,17 +8,14 @@ import OutlineButton from '@/components/Button/Outline'
 import apiAdmin from '@/services/apiAdmin'
 import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
-import { SpecialistI } from '../../types'
 
 interface DesassociateProps {
   idDoctor: string
-  idClinic: string
   setMakeRequest: (x: number) => void
 }
 
 const Desassociate: React.FC<DesassociateProps> = ({
   idDoctor,
-  idClinic,
   setMakeRequest,
 }) => {
   const { closeModal } = useModal()

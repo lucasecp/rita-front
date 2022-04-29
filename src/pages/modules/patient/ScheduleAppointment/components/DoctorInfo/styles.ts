@@ -4,7 +4,7 @@ export const DefaultImg = styled.div`
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  background: #f8f5ff;
+  background: ${({ theme }) => theme.extraLight};
   margin-bottom: 21px;
 `
 export const Profile = styled.div`
@@ -76,7 +76,7 @@ export const Container = styled.div`
     font-size: 14px;
     font-weight: 700;
     line-height: 17px;
-    color: #9146ff;
+    color${({ theme }) => theme.main};
     margin-top: auto;
     align-self: flex-end;
     background: transparent;

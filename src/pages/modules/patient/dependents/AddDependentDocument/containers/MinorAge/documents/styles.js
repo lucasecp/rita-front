@@ -20,7 +20,7 @@ export const AccordionContainer = styled(Accordion)`
     font-weight: 500;
     line-height: 25px;
     letter-spacing: 0em;
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
     margin-bottom: 15px;
   }
 `
@@ -98,6 +98,6 @@ export const ContentFile = styled.div`
     line-height: 24px;
     letter-spacing: 0em;
     text-align: left;
-    color: #9146ff;
+    color${({ theme }) => theme.main};
   }
 `

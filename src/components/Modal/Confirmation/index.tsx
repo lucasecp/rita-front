@@ -6,7 +6,9 @@ import ButtonPrimary from '@/components/Button/Primary'
 
 import { Container } from './styles'
 
-export const ConfirmationModal: React.FC<RitaComponents.ModalConfirmationProps> = ({
+export const ConfirmationModal: React.FC<
+  RitaComponents.ModalConfirmationProps
+> = ({
   message,
   cancelText = 'Cancelar',
   confirmText = 'Confirmar',

@@ -9,11 +9,11 @@ interface ContainerProps {
 }
 
 export const Container = styled.button<ContainerProps>`
-  border: 2px solid ${colors.purple.main.dark};
+  border: 2px solid ${({ theme }) => theme.main};
   border-radius: 8px;
   cursor: pointer;
   background: transparent;
-  color: ${colors.purple.main.dark};
+  color: ${({ theme }) => theme.main};
   padding: 14px 32px;
   font-size: 16px;
   font-weight: 400;
@@ -85,7 +85,7 @@ export const Container = styled.button<ContainerProps>`
       background: #afafaf;
       border-color: #afafaf;
       cursor: default !important;
-      color: ${colors.purple.main.light} !important;
+      color: ${({ theme }) => theme.mediumLight} !important;
 
       :hover {
         background: #afafaf;

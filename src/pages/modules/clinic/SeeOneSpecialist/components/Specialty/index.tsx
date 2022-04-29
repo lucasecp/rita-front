@@ -4,7 +4,6 @@ import CustomMultiSelect, {
 import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 import { mapSpecialtys } from '../../adapters/mapSpecialtys'
-import { ErrorsI } from '../../Types'
 
 import { Container } from './styles'
 

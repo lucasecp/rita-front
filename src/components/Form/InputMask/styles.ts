@@ -60,13 +60,13 @@ export const Container = styled.div<ContainerProps>`
         hasError ? colors.orange.light : '#419eff'};
     }
   }
-  ${({ variation, hasError }) =>
+  ${({ variation, hasError, theme }) =>
     variation === 'secondary' &&
     css`
       > input {
         border: none;
         border-bottom: 2px solid
-          ${() => (hasError ? colors.orange.light : colors.purple.main.middle)};
+          ${() => (hasError ? colors.orange.light : theme.medium)};
         border-radius: 0;
         box-shadow: none;
         background-color: transparent;

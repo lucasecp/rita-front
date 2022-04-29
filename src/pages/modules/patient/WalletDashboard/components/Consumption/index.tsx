@@ -30,16 +30,19 @@ export const Consumption: React.FC = () => {
       value: 3,
     },
   ]
-  const [items, setItems] = useState<RitaWallet.API.Get.PaymentConsumption['transactions']>([])
+  const [items, setItems] = useState<
+    RitaWallet.API.Get.PaymentConsumption['transactions']
+  >([])
   const [itemsTotalDiscountAmount, setItemsTotalDiscountAmount] = useState(0)
   const [itemsTotalSavedAmount, setItemsTotalSavedAmount] = useState(0)
   const [selectedPeriod, setSelectedPeriod] = useState(2)
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await apiWallet.get<RitaWallet.API.Get.PaymentConsumption>(
-        '/payment/consumption',
-      )
+      const { data } =
+        await apiWallet.get<RitaWallet.API.Get.PaymentConsumption>(
+          '/payment/consumption',
+        )
 
       if (!data || !data.transactions || !Array.isArray(data.transactions)) {
         throw new Error('Resposta vazia ou inválida')
@@ -49,7 +52,7 @@ export const Consumption: React.FC = () => {
       setItemsTotalDiscountAmount(
         data.transactions.reduce((carry, current) => {
           return carry + current.discountPriceAmount
-        }, 0)
+        }, 0),
       )
       setItemsTotalSavedAmount(data.totalSavedAmount)
     }
@@ -85,7 +88,8 @@ export const Consumption: React.FC = () => {
                 <div
                   style={{
                     width: `${
-                      (item.discountPriceAmount * 100) / itemsTotalDiscountAmount
+                      (item.discountPriceAmount * 100) /
+                      itemsTotalDiscountAmount
                     }%`,
                   }}
                 ></div>

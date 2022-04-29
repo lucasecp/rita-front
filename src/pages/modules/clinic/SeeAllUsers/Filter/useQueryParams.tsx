@@ -1,4 +1,3 @@
-
 interface UseQueryParamsProps {
   nome: string | null
 }

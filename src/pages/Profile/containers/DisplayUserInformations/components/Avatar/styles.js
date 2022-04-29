@@ -12,7 +12,7 @@ export const Container = styled.div`
     :first-child {
       overflow: hidden;
 
-      border: 3px solid ${colors.purple.main.dark};
+      border: 3px solid ${({ theme }) => theme.main};
       border-radius: 50%;
 
       background-image: ${({ source }) => `url(${source})`};

@@ -4,10 +4,10 @@ import styled from 'styled-components'
 
 export const ContainerRadio = styled.div`
   .MuiRadio-colorSecondary.Mui-checked {
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
 
     :hover {
-      background: ${colors.purple.main.light};
+      background: ${({ theme }) => theme.mediumLight};
     }
   }
 
@@ -20,11 +20,11 @@ export const ContainerRadio = styled.div`
     color: #979797;
 
     .Mui-checked {
-      color: ${colors.purple.main.dark};
+      color: ${({ theme }) => theme.main};
     }
 
     :hover {
-      background: ${colors.purple.main.light};
+      background: ${({ theme }) => theme.mediumLight};
     }
   }
 `

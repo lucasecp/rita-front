@@ -51,7 +51,7 @@ const DataClinic: React.FC<FormClinicProfileI> = (
   /**
    * @description Função responsável por verificar se houve modificação nos campos e setar true em 'setIsHashModificationField' */
   const onChangeField = (event: any) => {
-    let name = event.target.name
+    const name = event.target.name
     if (name === 'description') setDescription(event.target.value)
     if (name === 'razaoSocial') setRazaoSocial(event.target.value)
     if (name === 'cnpj') setCnpj(event.target.value)

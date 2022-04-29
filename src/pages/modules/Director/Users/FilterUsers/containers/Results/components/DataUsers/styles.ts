@@ -57,7 +57,7 @@ export const Status = styled.li<DataSellableItemsStylesProps>`
     css`
       > span {
         background: ${colors.orange.middleDark};
-        color: ${colors.purple.background.light};
+        color: ${({ theme }) => theme.extraLight};
       }
     `}
   ${({ type }) =>

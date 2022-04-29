@@ -7,10 +7,10 @@ interface ButtonOneBorderStyledProps {
 }
 
 export const Container = styled.button<ButtonOneBorderStyledProps>`
-  border-bottom: 2px solid ${colors.purple.main.dark};
+  border-bottom: 2px solid ${({ theme }) => theme.main};
   cursor: pointer;
   background: transparent;
-  color: ${colors.purple.main.dark};
+  color: ${({ theme }) => theme.main};
   padding: ${({ small }) => (small ? '10px 16px' : '14px 32px')};
   font-size: 16px;
   font-weight: 400;
@@ -66,13 +66,13 @@ export const Container = styled.button<ButtonOneBorderStyledProps>`
   /* ${({ disabled }) =>
     disabled &&
     css`
-      color: ${colors.purple.main.light} !important;
-      border-color: ${colors.purple.main.light} !important;
+      color: ${({ theme }) => theme.mediumLight} !important;
+      border-color: ${({ theme }) => theme.mediumLight} !important;
       cursor: default;
 
       :hover {
-        color: ${colors.purple.main.light} !important;
-        border-color: ${colors.purple.main.light} !important;
+        color: ${({ theme }) => theme.mediumLight} !important;
+        border-color: ${({ theme }) => theme.mediumLight} !important;
         background-color: transparent !important;
       }
     `} */

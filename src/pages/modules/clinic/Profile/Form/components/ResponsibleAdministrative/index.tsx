@@ -48,7 +48,7 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
   /**
    * @description Função responsável por verificar se houve modificação nos campos e setar true em 'setIsHashModificationField' */
   const onChangeField = (event: any) => {
-    let name = event.target.name
+    const name = event.target.name
     if (name === 'responsibleAdministrative') setResponsible(event.target.value)
     if (name === 'cpfResponsible') setCpfResponsible(event.target.value)
     if (name === 'phoneResponsible') setPhoneResponsible(event.target.value)
@@ -108,7 +108,9 @@ const ResponsibleTecnic: React.FC<FormClinicProfileI> = (
             onBlur={() => {
               setError({
                 ...error,
-                emailResponsibleAdministrative: validateEmail(email, { emailAdministrative: 'emailAdministrative' })
+                emailResponsibleAdministrative: validateEmail(email, {
+                  emailAdministrative: 'emailAdministrative',
+                }),
               })
             }}
           />

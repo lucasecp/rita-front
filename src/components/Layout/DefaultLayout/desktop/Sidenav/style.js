@@ -41,7 +41,7 @@ export const Container = styled.aside`
     top: 0;
     right: -1px;
 
-    background: #efeafa;
+    background: ${({ theme }) => theme.light};
     height: inherit;
   }
 
@@ -79,9 +79,9 @@ export const Container = styled.aside`
     > header {
       padding: 40px 32px 52px;
 
-      /* > svg {
-        fill: red;
-      } */
+      > svg {
+        fill: ${({ theme }) => theme.main};
+      }
 
       /* > div {
         background-position: left center;

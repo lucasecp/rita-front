@@ -1,6 +1,3 @@
-import useQuery from '@/hooks/useQuery'
-import { fieldsApi } from '../static/fieldsApi'
-
 interface UseQueryParamsProps {
   name: string | null
   cpf: string | null

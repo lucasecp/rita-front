@@ -92,6 +92,9 @@ export const HeaderArrowUp = styled.button<ArrowProps>`
   background-color: transparent;
   padding: 0;
   margin-bottom: 1.5px;
+  > path {
+    stroke: ${({ theme }) => theme.mediumLight};
+  }
 
   &:after {
     content: '';
@@ -132,8 +135,9 @@ export const HeaderArrowDown = styled.button<ArrowProps>`
   ${({ order }) =>
     order &&
     css`
-      filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
-        brightness(100%) contrast(103%);
+      > path {
+        stroke: ${({ theme }) => theme.medium};
+      }
     `}
 `
 

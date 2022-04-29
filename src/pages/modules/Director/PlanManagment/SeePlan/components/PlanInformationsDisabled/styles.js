@@ -30,7 +30,7 @@ export const ButtonGroup = styled.div`
   display: flex;
   justify-content: center;
   padding: 25.5px 0;
-  background: #efeafa;
+  background: ${({ theme }) => theme.light};
   border-radius: 0px 0px 8px 8px;
   > *:first-child {
     margin-right: 24px;

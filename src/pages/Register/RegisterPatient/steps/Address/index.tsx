@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText'
