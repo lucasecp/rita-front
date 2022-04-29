@@ -4,7 +4,8 @@ import SeeAllSpecialists from '@/pages/modules/clinic/SeeAllSpecialists'
 import SeeOneSpecialists from '@/pages/modules/clinic/SeeOneSpecialist'
 import ClinicProfile from '@/pages/modules/clinic/Profile'
 import SeeSchedule from '@/pages/modules/clinic/SeeSchedule'
-import SeeAllUsers from '@/pages/modules/clinic/SeeAllUsers'
+import SeeAllUsers from '@/pages/modules/clinic/UsersClinic/SeeAllUsers'
+import CreateUsersClinic from '@/pages/modules/clinic/UsersClinic/CreateUsersClinic'
 
 import {
   CLINIC_SEE_ALL_SPECIALIST,
@@ -12,6 +13,7 @@ import {
   CLINIC_PROFILE,
   CLINIC_SEE_SPECIALIST_SCHEDULE,
   CLINIC_SEE_ALL_USERS,
+  CLINIC_CREATE_USERS,
   CLINIC_APPOINTMENT_TABLE,
 } from '../../constants/namedRoutes/routes'
 import AppointmentTable from '@/pages/modules/clinic/AppointmentTable'
@@ -40,7 +42,11 @@ const clinicRoutes = [
   {
     path: CLINIC_SEE_ALL_USERS,
     component: SeeAllUsers,
-  }
+  },
+  {
+    path: CLINIC_CREATE_USERS,
+    component: CreateUsersClinic,
+  },
 ]
 
 const clinicRoutesComponents = clinicRoutes.map((props, index) => (
