@@ -7,13 +7,11 @@ export const Container = styled.div`
   border-radius: 8px 8px 0 0;
 
   > h2 {
-    padding: 26px 32px;
-
     font-weight: 500;
     font-size: 24px;
     line-height: 30px;
-
     color: ${colors.gray.dark};
+    margin: 24px none;
   }
 
   > footer {
@@ -39,19 +37,28 @@ export const Container = styled.div`
 
 export const TitleAndLogo = styled.div`
   display: flex;
-  grid-template-columns: '100px 1fr';
-  gap: 95px;
-  h6 {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 33px;
+  grid-template-columns: '80px 1fr';
+  align-items: left;
+  margin: 24px;
+  h1 {
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 40px;
     color: ${colors.purple.main.dark};
-    margin-bottom: 48px;
+    margin: auto 0;
+    text-align: left;
   }
+
+  h2 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+  }
+
   @media (min-width: 767px) {
     > img {
-      width: 100px;
-      height: 69.66px;
+      width: 80px;
+      height: 55.73px;
     }
   }
   @media (max-width: 767px) {

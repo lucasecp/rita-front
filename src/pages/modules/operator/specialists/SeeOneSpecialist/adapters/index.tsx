@@ -17,8 +17,8 @@ export const fromApi = (specialistInfo: any): any => {
       registerNumber: specialistInfo.registroProfissional || '',
       issuingAgency: specialistInfo.orgaoEmissor?.idOrgaoEmissor || '',
       uf: specialistInfo.ufOrgaoEmissor || '',
-      cashback: specialistInfo.cashBack ? specialistInfo.cashBack + '%' : '',
-      takerate: specialistInfo.takeRate ? specialistInfo.takeRate + '%' : '',
+      cashback: specialistInfo.cashBack ? specialistInfo.cashBack : '',
+      takerate: specialistInfo.takeRate ? specialistInfo.takeRate : '',
     },
 
     specialtys: mapSpecialtys(specialistInfo.especialidade),

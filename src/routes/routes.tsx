@@ -75,12 +75,6 @@ export const Routes: React.FC = () => {
       />
 
       <Route
-        path={FILTER_SELLABLE_ITEMS}
-        isPrivate
-        component={FilterSellableItems}
-      />
-
-      <Route
         path={DIRECTOR_SEE_ONE_PROFILE}
         isPrivate
         component={SeeOneProfile}
@@ -108,9 +102,17 @@ export const Routes: React.FC = () => {
         component={EditSellableItems}
       />
 
+      <Route
+        path={FILTER_SELLABLE_ITEMS}
+        isPrivate
+        component={FilterSellableItems}
+      />
+
       <Route path={PROFILE} isPrivate component={Profile} />
 
       <Route path={INITIAL_PAGE} isPrivate component={Initial} />
+
+      <Route path={LOGIN} exact component={Login} />
 
       <Route path={REASON_TO_LEAVE} component={ReasonToLeave} />
 
@@ -123,8 +125,6 @@ export const Routes: React.FC = () => {
       /> */}
 
       <Route path={NOT_FOUND} component={NotFound} />
-
-      <Route path={LOGIN} exact component={Login} />
     </Switch>
   )
 }

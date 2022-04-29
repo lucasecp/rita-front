@@ -79,13 +79,12 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
 
   const cashRateValidate = (cash: number, rate: number) => {
     const values = cash + rate
-    console.log(values)
     if (values > 100) {
       return false
     }
     return true
   }
-  console.log(errors)
+  
 
   const hasErrorOnFields = (fields: any): boolean => {
     let error = false

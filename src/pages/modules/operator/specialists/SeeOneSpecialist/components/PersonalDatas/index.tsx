@@ -45,7 +45,7 @@ export const PersonalDatas: React.FC<PersonalDatasProps> = ({
 
   return (
     <Container>
-      <h1>Dados Pessoais do Especialista</h1>
+      <h1>Dados Pessoais</h1>
       <section>
         <InputText
           label="Nome Completo:"

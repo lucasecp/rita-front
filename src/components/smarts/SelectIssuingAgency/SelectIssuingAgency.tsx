@@ -47,7 +47,7 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
 
     getIssuingAgency()
   }, [])
-  console.log(issuingAgency)
+ 
 
   useEffect(() => {
     if (!setIssuingAgencyToApi) {
