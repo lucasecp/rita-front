@@ -5,12 +5,9 @@ import { PersonalDatasI, ErrorsI } from '../../Types'
 import {
   validatePhone,
   validateName,
-  validateCPF,
   validateEmail,
 } from '../../helpers/validatorFields'
 import { Container } from './styles'
-import { InputEmail } from '../../../../../../../components/smarts/InputEmail/index'
-import { useMessage } from '../../../../../../../hooks/useMessage'
 
 interface PersonalDatasProps {
   personalDatas: PersonalDatasI
@@ -30,8 +27,6 @@ export const PersonalDatas: React.FC<PersonalDatasProps> = ({
   const [cpf, setCpf] = useState(personalDatas?.cpf || '')
   const [phone, setPhone] = useState(personalDatas?.phone || '')
 
-  const [errorMessage, sendErrorMessage] = useMessage()
-
   useEffect(() => {
     setName(personalDatas?.name || '')
     setEmail(personalDatas?.email || '')
@@ -50,7 +45,7 @@ export const PersonalDatas: React.FC<PersonalDatasProps> = ({
 
   return (
     <Container>
-      <h1>Dados Pessoais do Especialista</h1>
+      <h1>Dados Pessoais</h1>
       <section>
         <InputText
           label="Nome Completo:"

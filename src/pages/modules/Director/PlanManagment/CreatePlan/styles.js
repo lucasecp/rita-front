@@ -40,7 +40,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
 
-    background: ${colors.purple.background.middle};
+    background: ${({ theme }) => theme.light};
 
     > button + button {
       margin-left: 24px;

@@ -1,4 +1,4 @@
-export const mapClinics = (array: any[]) => {
+export const mapClinics = (array: any[]): any[] => {
   if (!array) return []
 
   return array
@@ -9,7 +9,7 @@ export const mapClinics = (array: any[]) => {
     .filter((specialty) => specialty.id && specialty.name)
 }
 
-export const mapClinicsToAPi = (array: any[]) => {
+export const mapClinicsToAPi = (array: any[]): any[] => {
   if (!array) return []
 
   return array

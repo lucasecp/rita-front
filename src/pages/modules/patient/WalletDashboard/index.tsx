@@ -16,16 +16,14 @@ export const WalletDashboard: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const { data: dataPaymentRequest } = await apiWallet.get<
-        RitaWallet.Model.PaymentRequest
-      >('/payment/new')
+      const { data: dataPaymentRequest } =
+        await apiWallet.get<RitaWallet.Model.PaymentRequest>('/payment/new')
 
       if (dataPaymentRequest) {
         showMessage(PaymentRequest, { data: dataPaymentRequest }, true)
       } else {
-        const { data: dataCSAT } = await apiWallet.get<
-          RitaWallet.API.Get.PaymentCSAT
-        >('/payment/csat')
+        const { data: dataCSAT } =
+          await apiWallet.get<RitaWallet.API.Get.PaymentCSAT>('/payment/csat')
 
         if (dataCSAT) {
           showMessage(CustomerSatisfaction, { data: dataCSAT }, true)

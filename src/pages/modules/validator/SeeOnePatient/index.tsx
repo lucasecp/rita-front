@@ -60,6 +60,7 @@ export const SeeOnePatient: React.FC = () => {
   const [incomeType, setIncomeType] = useState('')
 
   const [validations, setValidations] = useState({} as PatientValidation)
+  const [lowIncome, setLowIncome] = useState('')
 
   useEffect(() => {
     document.title = 'Rita Saúde | Autorizações'
@@ -76,6 +77,7 @@ export const SeeOnePatient: React.FC = () => {
         setPatientAddress(patientMapped.patientAddress)
         setDependent(patientMapped?.dependent)
         setIncomeType(patientMapped.incomeType)
+        setLowIncome(patientMapped?.lowIncome)
       } catch (error) {
         console.log(error)
       } finally {
@@ -218,7 +220,6 @@ export const SeeOnePatient: React.FC = () => {
     if (isDependent) {
       return !!dependent?.company?.corporateName
     } else {
-      console.log(patientData?.company)
       return !!patientData?.company?.corporateName
     }
   }, [dependent, patientData])
@@ -256,6 +257,7 @@ export const SeeOnePatient: React.FC = () => {
           validations={validations}
           onChangeValidations={setValidations}
           isPatientLinkedCompany={isPatientLinkedCompany}
+          lowIncome={lowIncome}
         />
 
         <footer>

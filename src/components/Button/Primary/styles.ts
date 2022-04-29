@@ -15,17 +15,17 @@ export const Container = styled.button<ContainerProps>`
   font-weight: 400;
   color: ${colors.white};
   font-size: 16px;
-  background: ${colors.purple.main.dark};
+  background: ${({ theme }) => theme.main};
   transition: 0.3s;
   border-radius: 8px;
   line-height: 20px;
-  border: 2px solid ${colors.purple.main.dark};
+  border: 2px solid ${({ theme }) => theme.main};
   height: fit-content;
 
   :hover {
-    background-color: ${colors.purple.main.darkness};
+    background-color: ${({ theme }) => theme.darkness};
     color: #fff;
-    border-color: ${colors.purple.main.darkness};
+    border-color: ${({ theme }) => theme.darkness};
   }
   ${({ small }) =>
     small &&
@@ -47,12 +47,12 @@ export const Container = styled.button<ContainerProps>`
       background: #afafaf;
       border-color: #afafaf;
       cursor: default !important;
-      color: ${colors.purple.background.middle};
+      color: ${({ theme }) => theme.light};
 
       :hover {
         background: #afafaf;
         border-color: #afafaf;
-        color: ${colors.purple.background.middle};
+        color: ${({ theme }) => theme.light};
       }
     `}
 
@@ -62,12 +62,12 @@ export const Container = styled.button<ContainerProps>`
       background: ${colors.gray.middleLight};
       cursor: default !important;
       border-color: ${colors.gray.middleLight};
-      color: ${colors.purple.background.middle} !important;
+      color: ${({ theme }) => theme.light} !important;
 
       :hover {
         background: ${colors.gray.middleLight};
         border-color: ${colors.gray.middleLight};
-        color: ${colors.purple.background.middle};
+        color: ${({ theme }) => theme.light};
       }
     `}
 

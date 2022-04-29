@@ -60,7 +60,8 @@ export const Container = styled.div<{ hasError?: boolean }>`
   .ant-picker {
     border: none;
     border-bottom: 2px solid
-      ${({ hasError }) => (hasError ? colors.orange.light : '#c0a6ff')} !important;
+      ${({ hasError, theme }) =>
+        hasError ? colors.orange.light : theme.medium} !important;
     border-radius: 0;
     padding: 0px 5px 0 5px;
     cursor: pointer;
@@ -96,7 +97,7 @@ export const Container = styled.div<{ hasError?: boolean }>`
   .ant-picker-range .ant-picker-active-bar {
     margin-left: 0;
     width: 68px !important;
-    background: ${colors.purple.main.dark};
+    background: ${({ theme }) => theme.main};
   }
   .ant-picker-input-active + .ant-picker-active-bar {
     left: calc() !important;

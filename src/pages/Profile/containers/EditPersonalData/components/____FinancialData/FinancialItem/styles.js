@@ -6,7 +6,7 @@ export const Container = styled.div`
   gap: 10px;
   align-items: center;
 
-  border: 2px solid ${colors.purple.main.dark};
+  border: 2px solid ${({ theme }) => theme.main};
   border-radius: 8px;
   padding: 8px 10px;
   min-height: 60px;
@@ -17,7 +17,7 @@ export const Container = styled.div`
   > svg {
     fill: currentColor;
     width: 24px;
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
 
     grid-row: 1 / 3;
   }
@@ -33,13 +33,13 @@ export const Container = styled.div`
       font-size: 14px;
       font-weight: 400;
       line-height: 16px;
-      color: ${colors.purple.main.dark};
+      color: ${({ theme }) => theme.main};
     }
 
     > p {
       font-size: 11px;
       line-height: 16px;
-      color: ${colors.purple.main.dark};
+      color: ${({ theme }) => theme.main};
       text-transform: uppercase;
 
       display: flex;
@@ -60,7 +60,7 @@ export const Container = styled.div`
     svg {
       fill: currentColor;
       color: #fff;
-      stroke: ${colors.purple.main.dark};
+      stroke: ${({ theme }) => theme.main};
       width: 100%;
 
       transition-property: color, stroke;
@@ -68,7 +68,7 @@ export const Container = styled.div`
     }
 
     &:hover svg {
-      color: ${colors.purple.main.dark};
+      color: ${({ theme }) => theme.main};
       stroke: #fff;
     }
   }
@@ -80,7 +80,7 @@ export const Container = styled.div`
       cursor: pointer;
 
       &:hover {
-        background-color: ${colors.purple.main.dark};
+        background-color: ${({ theme }) => theme.main};
 
         > svg {
           color: #fff;
@@ -126,20 +126,20 @@ export const Container = styled.div`
   ${({ disabled }) =>
     disabled &&
     css`
-      background: ${colors.purple.background.middle};
+      background: ${({ theme }) => theme.light};
       border-color: transparent;
 
       > svg {
-        color: ${colors.purple.main.middle};
+        color: ${({ theme }) => theme.medium};
       }
 
       > div {
         > h5,
         > p {
-          color: ${colors.purple.main.middle};
+          color: ${({ theme }) => theme.medium};
 
           strong {
-            color: ${colors.purple.main.dark};
+            color: ${({ theme }) => theme.main};
           }
         }
       }

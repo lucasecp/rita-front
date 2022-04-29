@@ -36,7 +36,7 @@ export const Content = styled.div`
       bottom: 0;
       left: -32px;
 
-      background: ${colors.purple.background.light};
+      background: ${({ theme }) => theme.extraLight};
     }
   }
   > ul li {
@@ -75,7 +75,7 @@ export const Td = styled.li`
     css`
       span {
         background: #df644b;
-        color: #f8f5ff;
+        color: ${({ theme }) => theme.extraLight};
       }
     `}
   ${({ status }) =>

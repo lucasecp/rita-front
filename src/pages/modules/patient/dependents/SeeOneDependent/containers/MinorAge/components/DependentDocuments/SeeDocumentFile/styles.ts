@@ -26,7 +26,7 @@ export const Container = styled.div.attrs((props: { disabled: boolean }) => ({
     font-size: 16px;
     line-height: 150%;
 
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
     /* word-break: break-all; */
     padding: 14px 0;
   }

@@ -26,7 +26,7 @@ export const Container = styled.div`
       font-size: 16px;
       line-height: 150%;
 
-      color: ${colors.purple.main.dark};
+      color: ${({ theme }) => theme.main};
       word-break: break-all;
     }
   }

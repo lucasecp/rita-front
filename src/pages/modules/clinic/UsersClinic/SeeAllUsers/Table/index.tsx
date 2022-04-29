@@ -4,11 +4,7 @@ import Header from './Header'
 import Content from './Content'
 import { TableProps } from '../types/index'
 
-const Table: React.FC<TableProps> = ({
-  users,
-  order,
-  setOrder
-}) => {
+const Table: React.FC<TableProps> = ({ users, order, setOrder }) => {
   return (
     <Container>
       <Header order={order} setOrder={setOrder} />

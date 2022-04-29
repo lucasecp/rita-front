@@ -24,10 +24,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     name: '',
   })
 
-  useEffect(() => {
-    setFilters(verifyTypedFields(arrayQuery))
-  }, [])
-
   const arrayQuery = [
     { name: fieldsApi.DESCRICAO, value: name },
     {
@@ -39,6 +35,10 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
       value: subscriptionRequired,
     },
   ]
+
+  useEffect(() => {
+    setFilters(verifyTypedFields(arrayQuery))
+  }, [])
 
   const clearFields = () => {
     setName('')

@@ -1,5 +1,5 @@
 import React from 'react'
-import Route from '../../custom.routes'
+import { Route } from '../../custom.routes'
 
 import {
   DIRECTOR_EDIT_PLAN,
@@ -44,10 +44,7 @@ const directorRoutes = [
     path: DIRECTOR_EDIT_PLAN_CONFIRM,
     component: EditPlanConfirm,
   },
-  {
-    path: DIRECTOR_PLAN_MANAGMENT,
-    component: DirectorGetPlan,
-  },
+
   {
     path: DIRECTOR_ACTIVATE_PLAN,
     component: ActivatePlanConfirm,
@@ -67,6 +64,10 @@ const directorRoutes = [
   {
     path: DIRECTOR_CREATE_PLAN_MANAGMENT,
     component: CreatePlan,
+  },
+  {
+    path: DIRECTOR_PLAN_MANAGMENT,
+    component: DirectorGetPlan,
   },
   {
     path: DIRECTOR_IMPORT,
@@ -99,8 +100,7 @@ const directorRoutes = [
 ]
 
 const directorRoutesComponents = directorRoutes.map((props, index) => (
-  // <Route {...props} exact key={index} />
-  <Route {...props} exact isPrivate key={index} />
+  <Route key={index} isPrivate {...props} />
 ))
 
 export default directorRoutesComponents

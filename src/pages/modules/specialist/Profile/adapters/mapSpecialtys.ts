@@ -1,7 +1,7 @@
 import { MultiSelectOption } from '@/components/Form/MultSelect'
 import { RqeAndSpecialtysType } from '../Types'
 
-export const mapSpecialtys = (array: any[]) => {
+export const mapSpecialtys = (array: any[]): any[] => {
   if (!array) return []
 
   return array

@@ -21,6 +21,6 @@ export const Container = styled.div`
     font-weight: bold;
     font-size: 16px;
 
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
   }
 `

@@ -19,7 +19,7 @@ const AddressSeeOnePatient: React.FC<AddressSeeOnePatientProps> = ({
   setAddress,
 }) => {
   const [cep, setCep] = useState(address.cep || '')
-  const [ufToApi, setUfToApi] = useState(address.uf || '')
+  const [, setUfToApi] = useState(address.uf || '')
   const [uf, setUf] = useState(address.uf || '')
   const [city, setCity] = useState(address.city || '')
   const [addressPatient, setAddressPatient] = useState(address.address || '')

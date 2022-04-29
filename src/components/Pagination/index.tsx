@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { Select } from '../Form/Select'
 import { Container, Prev, Next } from './style'
 import { PaginationProps } from './types'
-import useLocalStorage from 'use-local-storage'
 
 const Pagination: React.FC<PaginationProps> = ({
   total,

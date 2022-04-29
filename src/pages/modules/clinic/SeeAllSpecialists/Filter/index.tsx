@@ -41,10 +41,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   })
   const cpfFormated = clearSpecialCaracter(cpf)
 
-  useEffect(() => {
-    setFilters(verifyTypedFields(arrayQuery))
-  }, [])
-
   const arrayQuery = [
     { name: fieldsApi.NOME, value: name },
     { name: fieldsApi.CPF, value: cpfFormated },
@@ -59,6 +55,10 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     },
     { name: fieldsApi.NUMERO_REGISTRO, value: registerNumber },
   ]
+
+  useEffect(() => {
+    setFilters(verifyTypedFields(arrayQuery))
+  }, [])
 
   const clearFields = () => {
     setName('')

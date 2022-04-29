@@ -1,5 +1,5 @@
 import React from 'react'
-import Route from '../../custom.routes'
+import { Route } from '../../custom.routes'
 import SeeAllSpecialists from '@/pages/modules/clinic/SeeAllSpecialists'
 import SeeOneSpecialists from '@/pages/modules/clinic/SeeOneSpecialist'
 import ClinicProfile from '@/pages/modules/clinic/Profile'
@@ -43,10 +43,13 @@ const clinicRoutes = [
     path: CLINIC_SEE_ALL_USERS,
     component: SeeAllUsers,
   },
+<<<<<<< HEAD
   {
     path: CLINIC_CREATE_USERS,
     component: CreateUsersClinic,
   },
+=======
+>>>>>>> 5abfa6a601c69bf925b10d78c8842afe21054dfe
 ]
 
 const clinicRoutesComponents = clinicRoutes.map((props, index) => (

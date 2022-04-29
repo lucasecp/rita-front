@@ -4,7 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { PATIENT_DOCTOR_INFORMATION } from '@/routes/constants/namedRoutes/routes'
 
-const ItemDoctor = (id: number, name: string, group: string) => {
+const ItemDoctor = (id: number, name: string, group: string): any => {
   return {
     value: name,
     label: (

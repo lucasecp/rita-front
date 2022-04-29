@@ -3,7 +3,7 @@ import { Container, Status } from './styles'
 import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../../SeeAllSpecialtys/types'
 import { useHistory } from 'react-router-dom'
-import { OPERATOR_EDIT_SPRECIALTY } from '@/routes/constants/namedRoutes/routes'
+import { OPERATOR_EDIT_SPECIALTYS } from '@/routes/constants/namedRoutes/routes'
 import edit from '@/assets/icons/edit.svg'
 
 const Content: React.FC<ContentProps> = ({ specialtys }) => {
@@ -31,7 +31,7 @@ const Content: React.FC<ContentProps> = ({ specialtys }) => {
             <CustomTooltip label="Editar">
               <button
                 onClick={() =>
-                  history.push(OPERATOR_EDIT_SPRECIALTY, {
+                  history.push(OPERATOR_EDIT_SPECIALTYS, {
                     specialtyInfo: specialtys,
                   })
                 }

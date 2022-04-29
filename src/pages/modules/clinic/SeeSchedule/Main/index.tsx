@@ -17,7 +17,7 @@ const Main: React.FC = () => {
 
   const { Loading } = useLoading()
 
-  const { schedule,setSchedule, getSchedules, setCurrentDataClinicAndDoctor } =
+  const { schedule, setSchedule, getSchedules, setCurrentDataClinicAndDoctor } =
     useScheduleSpecialist()
 
   const doctorInfo = {
@@ -54,14 +54,14 @@ const Main: React.FC = () => {
       }
     }
     getSchedule()
-  }, [getSchedules]) 
+  }, [getSchedules])
 
   return (
     <Container>
       <Header doctorInfo={doctorInfo} />
       <Content>
         <CreateSchedule />
-       {schedule.length > 0 && <Grid nameDoctor={doctorInfo.name} />}
+        {schedule.length > 0 && <Grid nameDoctor={doctorInfo.name} />}
       </Content>
     </Container>
   )

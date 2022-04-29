@@ -38,7 +38,7 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   return <li>{ac}</li>
               // }, ''),
               schedule.monday.map((time) => {
-                return <li>{`${time.start} às ${time.end}`}</li>
+                return <li key={time}>{`${time.start} às ${time.end}`}</li>
               }),
             )}
           </ul>
@@ -57,7 +57,7 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   return <li>{ac}</li>
               // }, ''),
               schedule.tuesday.map((time) => {
-                return <li>{`${time.start} às ${time.end}`}</li>
+                return <li key={time}>{`${time.start} às ${time.end}`}</li>
               }),
             )}
           </ul>
@@ -76,7 +76,7 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   return <li>{ac}</li>
               // }, ''),
               schedule.wednesday.map((time) => {
-                return <li>{`${time.start} às ${time.end}`}</li>
+                return <li key={time}>{`${time.start} às ${time.end}`}</li>
               }),
             )}
           </ul>
@@ -95,7 +95,7 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   return <li>{ac}</li>
               // }, ''),
               schedule.thursday.map((time) => {
-                return <li>{`${time.start} às ${time.end}`}</li>
+                return <li key={time}>{`${time.start} às ${time.end}`}</li>
               }),
             )}
           </ul>
@@ -114,7 +114,7 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   return <li>{ac}</li>
               // }, ''),
               schedule.friday.map((time) => {
-                return <li>{`${time.start} às ${time.end}`}</li>
+                return <li key={time}>{`${time.start} às ${time.end}`}</li>
               }),
             )}
           </ul>
@@ -133,7 +133,7 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   return <li>{ac}</li>
               // }, ''),
               schedule.saturday.map((time) => {
-                return <li>{`${time.start} às ${time.end}`}</li>
+                return <li key={time}>{`${time.start} às ${time.end}`}</li>
               }),
             )}
           </ul>
@@ -152,7 +152,7 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
               //   return <li>{ac}</li>
               // }, ''),
               schedule.sunday.map((time) => {
-                return <li>{`${time.start} às ${time.end}`}</li>
+                return <li key={time}>{`${time.start} às ${time.end}`}</li>
               }),
             )}
           </ul>

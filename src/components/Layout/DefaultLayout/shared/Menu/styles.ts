@@ -31,7 +31,7 @@ export const Container = styled.ul<{ expanded: boolean }>`
       > svg {
         width: 30px;
 
-        color: ${colors.purple.main.dark};
+        color: ${({ theme }) => theme.main};
 
         fill: currentColor;
       }
@@ -47,20 +47,20 @@ export const Container = styled.ul<{ expanded: boolean }>`
 
     > svg {
       width: 10px;
-      color: ${colors.purple.main.middle};
+      color: ${({ theme }) => theme.medium};
       margin: 0 20px 0 -20px;
     }
 
     :hover {
-      background: ${colors.purple.main.middle};
+      background: ${({ theme }) => theme.medium};
 
       > span {
-        background: ${colors.purple.main.light};
+        background: ${({ theme }) => theme.mediumLight};
       }
 
       > div {
         > svg {
-          color: ${colors.purple.main.light};
+          color: ${({ theme }) => theme.mediumLight};
         }
 
         > span {
@@ -69,12 +69,12 @@ export const Container = styled.ul<{ expanded: boolean }>`
       }
 
       > svg {
-        color: ${colors.purple.main.light};
+        color: ${({ theme }) => theme.mediumLight};
       }
     }
 
     :active {
-      background: ${colors.purple.main.dark};
+      background: ${({ theme }) => theme.main};
 
       > span {
         background: ${colors.green.light};
@@ -89,7 +89,7 @@ export const Container = styled.ul<{ expanded: boolean }>`
 
     &.active {
       /* pointer-events: none; */
-      background: ${colors.purple.main.dark};
+      background: ${({ theme }) => theme.main};
 
       > span {
         background: ${colors.green.light};
@@ -109,7 +109,7 @@ export const Container = styled.ul<{ expanded: boolean }>`
 
   > div {
     > div {
-      background-color: ${colors.purple.background.light};
+      background-color: ${({ theme }) => theme.extraLight};
       padding: 16px 0;
 
       > a {
@@ -123,8 +123,8 @@ export const Container = styled.ul<{ expanded: boolean }>`
 
         &:hover,
         &.active {
-          box-shadow: 4px 0 0 0 ${colors.purple.main.darkness} inset;
-          color: ${colors.purple.main.darkness};
+          box-shadow: 4px 0 0 0 ${({ theme }) => theme.darkness} inset;
+          color: ${({ theme }) => theme.darkness};
         }
       }
     }

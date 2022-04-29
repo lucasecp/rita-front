@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background: #f8f5ff;
+  background: ${({ theme }) => theme.extraLight};
   padding: 32px 32px 0;
   border-radius: 8px;
   position: relative;

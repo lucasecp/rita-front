@@ -100,6 +100,12 @@ export const fromApi = (data: FromApiResponse): FromApi => {
     },
     dependent: dependentFromApi,
     incomeType: incomeFromApi(data.renda),
+    lowIncome:
+      data.validacao.length > 0
+        ? data.validacao[0].rendaBaixa
+          ? 'yes'
+          : 'no'
+        : null,
   }
 
   return patientMapped

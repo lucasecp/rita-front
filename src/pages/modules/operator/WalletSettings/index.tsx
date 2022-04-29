@@ -25,14 +25,17 @@ const WalletSettings: React.FC = () => {
       await Promise.all([
         apiWallet.get<RitaWallet.API.Get.UserPixKey>('/user/pix-key', {
           params: {
-            activeOnly: true
-          }
+            activeOnly: true,
+          },
         }),
-        apiWallet.get<RitaWallet.API.Get.UserBankAccount>('/user/bank-account', {
-          params: {
-            activeOnly: true
-          }
-        }),
+        apiWallet.get<RitaWallet.API.Get.UserBankAccount>(
+          '/user/bank-account',
+          {
+            params: {
+              activeOnly: true,
+            },
+          },
+        ),
       ])
 
     if (dataPixKeys && Array.isArray(dataPixKeys)) {

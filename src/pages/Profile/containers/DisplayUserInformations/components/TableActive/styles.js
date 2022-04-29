@@ -35,7 +35,7 @@ export const Container = styled.div`
     line-height: 20px;
     font-weight: 700;
 
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
     text-align: left;
 
     > p {
@@ -48,7 +48,7 @@ export const Container = styled.div`
       color: ${colors.gray.dark};
 
       > span {
-        color: ${colors.purple.main.dark};
+        color: ${({ theme }) => theme.main};
       }
     }
   }

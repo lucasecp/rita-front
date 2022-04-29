@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch } from 'react-router-dom'
 
-import Route from './custom.routes'
+import { Route } from './custom.routes'
 
 import { Initial } from '@/pages/Initial'
 import Login from '@/pages/Login'
@@ -26,6 +26,7 @@ import {
 } from './modules'
 
 import registerRoutesComponent from './grouping/register.routes'
+import { newRegisterPatientRoutes } from './grouping/newRegisterPatient.routes'
 import passwordRoutesComponent from './grouping/password.routes'
 
 import {
@@ -41,13 +42,17 @@ import {
   DIRECTOR_EDIT_PROFILE,
   DIRECTOR_CREATE_PROFILE,
   CREATE_SELLABLE_ITEMS,
+  REASON_TO_LEAVE,
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
+import { ReasonToLeave } from '@/pages/ReasonToLeave'
 
-function Routes() {
+export const Routes: React.FC = () => {
   return (
     <Switch>
       {registerRoutesComponent}
+
+      {newRegisterPatientRoutes}
 
       {passwordRoutesComponent}
 
@@ -64,17 +69,9 @@ function Routes() {
       {clinicRotes}
 
       <Route
-        path={FILTER_SELLABLE_ITEMS}
+        path={DIRECTOR_CREATE_PROFILE}
         isPrivate
-        component={FilterSellableItems}
-        exact
-      />
-
-      <Route
-        path={DIRECTOR_SEE_ALL_PROFILES}
-        isPrivate
-        component={SeeAllProfiles}
-        exact
+        component={CreateProfile}
       />
 
       <Route
@@ -83,13 +80,13 @@ function Routes() {
         component={SeeOneProfile}
       />
 
-      <Route path={DIRECTOR_EDIT_PROFILE} isPrivate component={EditProfile} />
-
       <Route
-        path={DIRECTOR_CREATE_PROFILE}
+        path={DIRECTOR_SEE_ALL_PROFILES}
         isPrivate
-        component={CreateProfile}
+        component={SeeAllProfiles}
       />
+
+      <Route path={DIRECTOR_EDIT_PROFILE} isPrivate component={EditProfile} />
 
       <Route
         path={CREATE_SELLABLE_ITEMS}
@@ -105,13 +102,21 @@ function Routes() {
         component={EditSellableItems}
       />
 
+      <Route
+        path={FILTER_SELLABLE_ITEMS}
+        isPrivate
+        component={FilterSellableItems}
+      />
+
       <Route path={PROFILE} isPrivate component={Profile} />
 
       <Route path={INITIAL_PAGE} isPrivate component={Initial} />
 
       <Route path={LOGIN} exact component={Login} />
 
-      <Route path="/teste-de-endereco" exact component={TestAddressPage} />
+      <Route path={REASON_TO_LEAVE} component={ReasonToLeave} />
+
+      <Route path="/teste-de-endereco" component={TestAddressPage} />
 
       {/* <Route
         path="/gestao/planos/editar"
@@ -123,5 +128,3 @@ function Routes() {
     </Switch>
   )
 }
-
-export default Routes

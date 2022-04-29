@@ -2,9 +2,7 @@ import React from 'react'
 import { useScheduleSpecialist } from '../hooks'
 import { Container } from './styles'
 
-
 const Header: React.FC = () => {
-
   const { specialistName } = useScheduleSpecialist()
 
   return (

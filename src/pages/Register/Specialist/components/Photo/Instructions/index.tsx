@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Container } from './styles'
 
-const Instructios: React.FC = ({}) => {
+const Instructios: React.FC = () => {
   return (
     <Container>
       <h3>Adicionar Foto</h3>

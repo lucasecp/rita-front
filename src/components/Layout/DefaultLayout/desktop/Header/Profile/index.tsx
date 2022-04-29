@@ -8,7 +8,11 @@ import { getInitialLetterName } from '@/components/Layout/DefaultLayout/helpers/
 import { ButtonProfile, Container } from './styles'
 import DropdownProfiles from '../DropdownProfiles'
 import { useToggle } from '../../../../../../hooks/useToggle'
-import { profilesColors, profiles, profilesLabel } from '../../../../../../constants/profiles'
+import {
+  profilesColors,
+  profiles,
+  profilesLabel,
+} from '../../../../../../constants/profiles'
 import { ReactComponent as ArrowDown } from '@/assets/icons/arrow-down-select.svg'
 
 export const Profile: React.FC = () => {
@@ -43,7 +47,7 @@ export const Profile: React.FC = () => {
     setDataLogin({
       ...user,
       ...hasProfileChosen,
-      permissoes: profilePermissions?.permissoes || user?.area[0]?.permissoes ,
+      permissoes: profilePermissions?.permissoes || user?.area[0]?.permissoes,
     })
   }, [])
 

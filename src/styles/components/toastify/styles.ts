@@ -11,7 +11,7 @@ export const toastifyStyles = css`
     --toastify-color-success: ${colors.green.light} !important;
     --toastify-color-warning: ${colors.blueViola.light} !important;
     --toastify-color-error: ${colors.orange.middle} !important;
-    --toastify-color-loading: ${colors.purple.main.dark} !important;
+    --toastify-color-loading: ${({ theme }) => theme.main} !important;
     --toastify-color-transparent: rgba(255, 255, 255, 0.7);
 
     --toastify-icon-color-info: var(--toastify-color-info);
@@ -34,7 +34,7 @@ export const toastifyStyles = css`
     --toastify-text-color-success: #fff;
     --toastify-text-color-warning: #fff;
     --toastify-text-color-error: #fff;
-    --toastify-text-color-loading: ${colors.purple.main.dark} !important;
+    --toastify-text-color-loading: ${({ theme }) => theme.main} !important;
 
     --toastify-spinner-color: #616161;
     --toastify-spinner-color-empty-area: #e0e0e0;

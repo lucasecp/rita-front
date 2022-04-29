@@ -3,7 +3,7 @@ import { OPERATOR_CREATE_ISSUING_AGENCY } from '@/routes/constants/namedRoutes/r
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
-const ButtonHeader = () => {
+const ButtonHeader: React.FC = () => {
   const history = useHistory()
   return (
     <ButtonPrimary

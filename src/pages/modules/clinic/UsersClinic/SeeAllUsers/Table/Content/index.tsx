@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container} from './styles'
+import { Container } from './styles'
 import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../types'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
@@ -7,7 +7,6 @@ import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 import Actions from './Actions'
 
 const Content: React.FC<ContentProps> = ({ users }) => {
-
   return (
     <Container>
       {users?.data?.map((spec, index) => (
@@ -22,7 +21,7 @@ const Content: React.FC<ContentProps> = ({ users }) => {
           </li>
           <li>{spec.email}</li>
           <li>{spec.perfil[0]?.nome}</li>
-          <Actions data={spec} />
+          <Actions />
         </ul>
       ))}
 

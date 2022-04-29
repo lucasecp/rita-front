@@ -18,7 +18,7 @@ export const Content = styled.div.attrs(
 )`
   display: grid;
   align-items: start;
-  border-bottom: 2px solid ${colors.purple.main.middle};
+  border-bottom: 2px solid ${({ theme }) => theme.medium};
   max-height: 54px;
   > div {
     overflow-x: hidden;
@@ -109,7 +109,7 @@ export const Content = styled.div.attrs(
       line-height: 20px;
 
       :hover {
-        background-color: ${colors.purple.main.dark};
+        background-color: ${({ theme }) => theme.main};
         color: #fff;
         input[type='checkbox']:after {
           border-color: #fff;
@@ -133,13 +133,13 @@ export const Content = styled.div.attrs(
       height: 20px;
       width: 20px;
       display: block;
-      border: 2px solid ${colors.purple.main.dark};
+      border: 2px solid ${({ theme }) => theme.main};
       border-radius: 4px;
     }
   }
   input[type='checkbox']:checked {
     :after {
-      background-color: ${colors.purple.main.dark};
+      background-color: ${({ theme }) => theme.main};
       background-image: url(${checkedIcon});
       background-size: contain;
       background-position: center;

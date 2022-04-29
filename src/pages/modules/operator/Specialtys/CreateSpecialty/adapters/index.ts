@@ -5,5 +5,6 @@ export const toApi = (dataToApi: any): DataToApiI => {
     codigo: dataToApi.code,
     descricao: dataToApi.description,
     requerInscricao: dataToApi.requireSubscription,
+    idOrgaoEmissor: Number(dataToApi.issuingAgency),
   }
 }

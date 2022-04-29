@@ -1,5 +1,5 @@
 import React from 'react'
-import { RegisterSpecialistProvider, useRegisterSpecialist } from './hooks'
+import { RegisterSpecialistProvider } from './hooks'
 import { RegisterLayout } from './components/RegisterLayout'
 import { StepProgressBar } from './components/StepProgressBar'
 import BasicInformation from './steps/BasicInformation'
@@ -13,7 +13,7 @@ const RegisterSpecialist: React.FC = () => {
   return (
     <RegisterLayout>
       <RegisterSpecialistProvider>
-        <Content>    
+        <Content>
           <StepProgressBar />
           <h1>Especialista - Cadastre-se</h1>
           <Photo />

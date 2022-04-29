@@ -35,8 +35,8 @@ export const Container = styled.div`
         font-size: 12px;
         font-weight: 500;
         line-height: 15px;
-        &:first-child{
-          margin-bottom: 8px ;
+        &:first-child {
+          margin-bottom: 8px;
         }
       }
 
@@ -45,7 +45,7 @@ export const Container = styled.div`
         font-weight: 400;
         line-height: 20px;
         color: #afafaf;
-        margin-top: 4px
+        margin-top: 4px;
       }
       > p {
         margin-bottom: 0;
@@ -56,7 +56,7 @@ export const Container = styled.div`
           font-weight: 500;
           line-height: 12px;
           color: #303030;
-          margin-top: 4px
+          margin-top: 4px;
         }
       }
     }

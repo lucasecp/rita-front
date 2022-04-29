@@ -7,7 +7,7 @@ import apiAdmin from '@/services/apiAdmin'
 import { useHistory, useLocation } from 'react-router-dom'
 import { OPERATOR_SEE_ALL_CLINICS } from '@/routes/constants/namedRoutes/routes'
 
-const SeeOneClinic = () => {
+const SeeOneClinic: React.FC = () => {
   const [clinic, setClinic] = useState({})
   const { Loading } = useLoading()
   const location = useLocation()

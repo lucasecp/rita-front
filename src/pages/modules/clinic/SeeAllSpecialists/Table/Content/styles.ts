@@ -23,7 +23,7 @@ export const Container = styled.div`
       bottom: 0;
       left: -32px;
 
-      background: ${colors.purple.background.light};
+      background: ${({ theme }) => theme.extraLight};
     }
   }
   > ul li {
@@ -76,7 +76,7 @@ export const Status = styled.li<StatusTypeProps>`
     css`
       > span {
         background: ${colors.orange.middleDark};
-        color: ${colors.purple.background.light};
+        color: ${({ theme }) => theme.extraLight};
       }
     `}
   ${({ type }) =>

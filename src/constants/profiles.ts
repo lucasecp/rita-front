@@ -1,3 +1,5 @@
+import { themes } from '@/styles/themes'
+
 export const profiles = {
   Paciente: 'Paciente',
   Funcionario: 'Funcionario',
@@ -7,14 +9,14 @@ export const profiles = {
 
 export const profilesLabel = {
   Paciente: 'Paciente',
-  Funcionario: 'Funcionário', 
+  Funcionario: 'Funcionário',
   'Clinica/Especialista': 'Clínica/Especialista',
   Empresa: 'Empresa',
 }
 
 export const profilesColors = {
-  Paciente: '#9146FF',
-  Funcionario: '#000CEC',
-  'Clinica/Especialista': '#4B8864',
-  Empresa: '#DF644B',
+  Paciente: themes.purple.main,
+  Funcionario: themes.blue.main,
+  'Clinica/Especialista': themes.green.main,
+  Empresa: themes.orange.main,
 }

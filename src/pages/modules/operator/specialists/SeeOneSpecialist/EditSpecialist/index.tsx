@@ -16,7 +16,6 @@ import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
 import OutlineButton from '../../../../../../components/Button/Outline/index'
 import ButtonPrimary from '../../../../../../components/Button/Primary/index'
-import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 
 interface EditSpecialistProps {
   specialistData: any
@@ -80,15 +79,14 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({
 
   const cashRateValidate = (cash: number, rate: number) => {
     const values = cash + rate
-    console.log(values)
     if (values > 100) {
       return false
     }
     return true
   }
-  console.log(errors)
+  
 
-  const hasErrorOnFields = (fields: any) => {
+  const hasErrorOnFields = (fields: any): boolean => {
     let error = false
     setErrors({})
 

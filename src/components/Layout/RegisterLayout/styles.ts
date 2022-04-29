@@ -25,7 +25,7 @@ export const Container = styled.div`
       height: 100%;
       background: linear-gradient(
         148.19deg,
-        #9146ff -15.68%,
+        ${({ theme }) => theme.main} -15.68%,
         #8f46fe -3.23%,
         rgba(136, 70, 252, 0.992703) 43.97%,
         #1c23bd 119.58%

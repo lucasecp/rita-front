@@ -14,7 +14,6 @@ interface SpecialtysProps {
   specialtys: MultiSelectOption[]
   setSpecialtys: React.Dispatch<SetStateAction<MultiSelectOption[]>>
   errors: any
-  setErrors: (error: any) => any
   color?: string
   [x: string]: any
 }
@@ -23,7 +22,6 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
   specialtys,
   setSpecialtys,
   errors,
-  setErrors,
   color,
   ...rest
 }) => {

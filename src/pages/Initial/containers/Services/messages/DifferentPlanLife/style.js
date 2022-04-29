@@ -43,16 +43,16 @@ export const ButtonGroup = styled.div`
     font-weight: 400;
     color: ${colors.white};
     font-size: 16px;
-    background: ${colors.purple.main.dark};
+    background: ${({ theme }) => theme.main};
     transition: 0.3s;
     border-radius: 8px;
     line-height: 20px;
-    border: 2px solid ${colors.purple.main.dark};
+    border: 2px solid ${({ theme }) => theme.main};
     height: fit-content;
     :hover {
-      background-color: ${colors.purple.main.darkness};
+      background-color: ${({ theme }) => theme.darkness};
       color: #fff;
-      border-color: ${colors.purple.main.darkness};
+      border-color: ${({ theme }) => theme.darkness};
     }
   }
 

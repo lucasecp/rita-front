@@ -38,7 +38,7 @@ export const Table = styled.table`
         > td {
           min-width: 220px;
           padding: 16px;
-          border: 1px solid ${colors.purple.background.middle};
+          border: 1px solid ${({ theme }) => theme.light};
 
           display: flex;
           flex-direction: column;
@@ -50,7 +50,7 @@ export const Table = styled.table`
             align-items: center;
 
             border-radius: 16px;
-            border: 1px solid ${colors.purple.main.darkness};
+            border: 1px solid ${({ theme }) => theme.darkness};
 
             + div {
               margin-top: 8px;
@@ -60,7 +60,7 @@ export const Table = styled.table`
               font-weight: 500;
               font-size: 16px;
               line-height: 20px;
-              color: ${colors.purple.main.darkness};
+              color: ${({ theme }) => theme.darkness};
               padding: 4px 0px;
 
 
@@ -68,14 +68,14 @@ export const Table = styled.table`
 
             > svg {
               cursor: pointer;
-              fill: ${colors.purple.main.darkness};
+              fill: ${({ theme }) => theme.darkness};
               padding: 10px 0px 10px 8px;
               box-sizing: content-box;
             }
           }
 
           > button {
-            color: ${colors.purple.main.darkness};
+            color: ${({ theme }) => theme.darkness};
 
             font-weight: 500;
             font-size: 16px;
@@ -116,7 +116,7 @@ export const Table = styled.table`
         > td {
           min-width: 220px;
           padding: 16px;
-          border: 1px solid ${colors.purple.background.middle};
+          border: 1px solid ${({ theme }) => theme.light};
 
           display: flex;
           flex-direction: column;

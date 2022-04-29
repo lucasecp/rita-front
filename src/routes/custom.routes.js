@@ -1,14 +1,14 @@
 import { useAuth } from '@/hooks/login'
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route as ReactRoute, Redirect } from 'react-router-dom'
 import { LOGIN } from './constants/namedRoutes/routes'
 
-export default function CustomRoute({
+export const Route = ({
   component: Component,
-  isPrivate,
+  isPrivate = false,
   path,
-  ...rest
-}) {
+  exact = true,
+}) => {
   const { isAuthorization, logout } = useAuth()
 
   if (!isAuthorization() && isPrivate) {
@@ -16,5 +16,5 @@ export default function CustomRoute({
     return <Redirect to={{ pathname: LOGIN, state: { from: path } }} />
   }
 
-  return <Route {...rest} component={Component} />
+  return <ReactRoute component={Component} exact={exact} />
 }

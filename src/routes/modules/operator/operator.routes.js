@@ -1,5 +1,5 @@
 import React from 'react'
-import Route from '../../custom.routes'
+import { Route } from '../../custom.routes'
 
 import {
   OPERATOR_ANALYZE_PATIENT,
@@ -13,8 +13,8 @@ import {
   OPERATOR_SEE_ALL_SPECIALTYS,
   OPERATOR_DEPENDENT_MANAGMENT,
   OPERATOR_ADD_DEPENDENT,
-  OPERATOR_CREATE_SPRECIALTY,
-  OPERATOR_EDIT_SPRECIALTY,
+  OPERATOR_CREATE_SPECIALTYS,
+  OPERATOR_EDIT_SPECIALTYS,
   OPERATOR_SEE_ALL_SPECIALISTS,
   OPERATOR_SEE_ONE_SPECIALIST,
   OPERATOR_SEE_ALL_ISSUING_AGENCY,
@@ -100,11 +100,11 @@ const operatorRoutes = [
     component: AddDependent,
   },
   {
-    path: OPERATOR_CREATE_SPRECIALTY,
+    path: OPERATOR_CREATE_SPECIALTYS,
     component: CreateSpecialty,
   },
   {
-    path: OPERATOR_EDIT_SPRECIALTY,
+    path: OPERATOR_EDIT_SPECIALTYS,
     component: EditSpecialty,
   },
   {

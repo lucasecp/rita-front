@@ -1,4 +1,4 @@
-import {Select ,SelectOption} from '@/components/Form/Select'
+import { Select, SelectOption } from '@/components/Form/Select'
 import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState, SetStateAction } from 'react'
 /** Styles */
@@ -25,9 +25,12 @@ export const SelectClinic: React.FC<ClinicsProps> = ({
   label,
   ...rest
 }) => {
-
   const [clinicsOptions, setClinicsOptions] = useState<SelectOption[]>([])
-  const { setCurrentDataClinicAndDoctor, currentDataClinicAndDoctor, clinics: clinicas } = useScheduleSpecialist()
+  const {
+    setCurrentDataClinicAndDoctor,
+    currentDataClinicAndDoctor,
+    clinics: clinicas,
+  } = useScheduleSpecialist()
 
   useEffect(() => {
     const getSpecialtys = async () => {
@@ -35,7 +38,9 @@ export const SelectClinic: React.FC<ClinicsProps> = ({
         const dataMapped = mapClinics(clinicas)
 
         if (!dataMapped.length) {
-          return setClinicsOptions([{ label: 'Nenhuma clínica encontrada.', value: '' }])
+          return setClinicsOptions([
+            { label: 'Nenhuma clínica encontrada.', value: '' },
+          ])
         }
 
         setClinicsOptions(dataMapped)
@@ -46,7 +51,10 @@ export const SelectClinic: React.FC<ClinicsProps> = ({
   }, [clinicas])
 
   useEffect(() => {
-    setCurrentDataClinicAndDoctor({...currentDataClinicAndDoctor, idClinic: Number(clinics)})
+    setCurrentDataClinicAndDoctor({
+      ...currentDataClinicAndDoctor,
+      idClinic: Number(clinics),
+    })
   }, [clinics])
 
   return (
@@ -62,7 +70,7 @@ export const SelectClinic: React.FC<ClinicsProps> = ({
           msgError={errors?.clinics}
           name="clinics"
           label={label}
-          variation='secondary'
+          variation="secondary"
           {...rest}
         />
       </section>

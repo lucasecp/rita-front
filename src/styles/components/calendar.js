@@ -38,15 +38,15 @@ export default css`
   }
   .ant-picker-cell-in-view.ant-picker-cell-today
     .ant-picker-cell-inner::before {
-    border-color: ${colors.purple.main.light};
+    border-color: ${({ theme }) => theme.mediumLight};
   }
   .ant-picker-content thead th {
-    color: #c0a6ff;
+    color: ${({ theme }) => theme.medium};
   }
   .ant-picker-header span::before,
   .ant-picker-super-next-icon::after,
   .ant-picker-super-prev-icon::after {
-    border-color: ${colors.purple.main.dark} !important;
+    border-color: ${({ theme }) => theme.main} !important;
     border-width: 2px 0 0 2px !important;
     border-radius: 2px !important;
   }
@@ -54,12 +54,12 @@ export default css`
     transition: all.3s;
   }
   .ant-picker-header button:hover {
-    color: ${colors.purple.main.dark};
+    color: ${({ theme }) => theme.main};
   }
   .ant-picker-cell-in-range,
   .ant-picker-cell-range-hover,
   .ant-picker-cell-range-hover-end {
-    background: ${colors.purple.main.dark};
+    background: ${({ theme }) => theme.main};
     div {
       color: #fff;
     }
@@ -78,7 +78,7 @@ export default css`
   .ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single)::before,
   .ant-picker-cell-range-start,
   .ant-picker-cell-range-end {
-    background: ${colors.purple.main.dark} !important;
+    background: ${({ theme }) => theme.main} !important;
   }
   .ant-picker-cell-end {
   }
@@ -88,7 +88,7 @@ export default css`
   }
 
   .ant-picker-cell-range-hover::before {
-    background: ${colors.purple.main.dark} !important;
+    background: ${({ theme }) => theme.main} !important;
     border: none !important;
     box-shadow: none !important;
   }
