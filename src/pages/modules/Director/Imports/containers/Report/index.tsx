@@ -8,8 +8,9 @@ import { AutocompleteOptions } from '@/components/Form/Autocomplete'
 
 import { FromApiResponse } from '@/pages/modules/Director/Imports/adapters/fromApiImport'
 
-import { Error as AccordionError } from './accordions/Error'
 import { Success as AccordionSuccess } from './accordions/Success'
+import { Error as AccordionError } from './accordions/Error'
+import { Inactive as AccordionInactive } from './accordions/Inactive'
 
 import { Container, BtnGroup } from './styles'
 
@@ -38,14 +39,9 @@ export const Report: React.FC = () => {
           Importação realizada - {reportDetails.data} - {reportDetails.hour} -
           Empresa {reportDetails.company.label}
         </h1>
-        <AccordionSuccess
-          listSucessRegister={importedDataMapped.listSucessRegister}
-          countSucessRegisters={importedDataMapped.countSucessRegisters}
-        />
-        <AccordionError
-          listErrorsRegister={importedDataMapped.listErrorsRegister}
-          countErrorsRegister={importedDataMapped.countErrorsRegister}
-        />
+        <AccordionSuccess success={importedDataMapped.success} />
+        <AccordionError error={importedDataMapped.error} />
+        <AccordionInactive inactivate={importedDataMapped.inactivate} />
       </Container>
       <BtnGroup>
         <ButtonOutline onClick={onBack}>Voltar</ButtonOutline>
