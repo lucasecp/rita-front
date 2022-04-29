@@ -20,7 +20,7 @@ interface ApiResponse {
   }[]
 }
 
-export interface FromApiResponse {
+export interface StatusDataFromImport {
   success: {
     countSucessRegisters: number
     listSucessRegister: {
@@ -48,7 +48,7 @@ export interface FromApiResponse {
   }
 }
 
-export const fromApiImport = (data: ApiResponse): FromApiResponse => {
+export const fromApiImport = (data: ApiResponse): StatusDataFromImport => {
   return {
     success: {
       countSucessRegisters: data.registrosComSucesso,

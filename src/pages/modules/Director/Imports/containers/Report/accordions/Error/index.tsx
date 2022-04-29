@@ -3,14 +3,14 @@ import React from 'react'
 import { ReactComponent as ErrorImportIcon } from '@/assets/icons/import-error.svg'
 import { ReactComponent as OpenCloseAccordionIcon } from '@/assets/icons/open-close-accordion.svg'
 
-import { FromApiResponse } from '@/pages/modules/Director/Imports/adapters/fromApiImport'
+import { StatusDataFromImport } from '@/pages/modules/Director/Imports/adapters/fromApiImport'
 
 import { Table } from './Table'
 
 import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 import { AccordionContainer } from './styles'
 
-type ErrorProps = Omit<FromApiResponse, 'success' | 'inactivate'>
+type ErrorProps = Omit<StatusDataFromImport, 'success' | 'inactivate'>
 
 export const Error: React.FC<ErrorProps> = ({ error }) => {
   return (

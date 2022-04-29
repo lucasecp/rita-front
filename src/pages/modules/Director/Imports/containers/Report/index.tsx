@@ -6,7 +6,7 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { DIRECTOR_IMPORT } from '@/routes/constants/namedRoutes/routes'
 import { AutocompleteOptions } from '@/components/Form/Autocomplete'
 
-import { FromApiResponse } from '@/pages/modules/Director/Imports/adapters/fromApiImport'
+import { StatusDataFromImport } from '@/pages/modules/Director/Imports/adapters/fromApiImport'
 
 import { Success as AccordionSuccess } from './accordions/Success'
 import { Error as AccordionError } from './accordions/Error'
@@ -20,7 +20,7 @@ interface useLocationState {
     hour: string
     company: AutocompleteOptions
   }
-  importedDataMapped: FromApiResponse
+  importedDataMapped: StatusDataFromImport
 }
 
 export const Report: React.FC = () => {
