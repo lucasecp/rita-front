@@ -3,7 +3,6 @@ import { ReactComponent as SuspenseIcon } from '@/assets/icons/suspense.svg'
 import { useModal } from '@/hooks/useModal'
 import Desassociate from '../../../../messages/Desassociate'
 import { useAuth } from '@/hooks/login'
-import { SpecialistI } from '../../../../types'
 
 interface DesassociateProps {
   id: string

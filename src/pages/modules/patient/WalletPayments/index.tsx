@@ -34,12 +34,12 @@ function convertPriceToCrownValue(amount: number, currency?: string) {
 export const WalletPayments: React.FC = () => {
   const tablePaymentsNew = useRef<any>()
   const tablePaymentsAll = useRef<any>()
-  const [paymentsNew, setPaymentsNew] = useState<RitaWallet.Model.PaymentRequest[]>(
-    [],
-  )
-  const [paymentsAll, setPaymentsAll] = useState<RitaWallet.Model.PaymentRequest[]>(
-    [],
-  )
+  const [paymentsNew, setPaymentsNew] = useState<
+    RitaWallet.Model.PaymentRequest[]
+  >([])
+  const [paymentsAll, setPaymentsAll] = useState<
+    RitaWallet.Model.PaymentRequest[]
+  >([])
   const [selectedPeriod, setSelectedPeriod] = useState(periodOptions[0].value)
   const [tablePaymentsAllSort, setTablePaymentsAllSort] =
     useState<RitaComponents.TableSort>({
@@ -68,12 +68,15 @@ export const WalletPayments: React.FC = () => {
 
   useEffect(() => {
     async function fetchDataActive() {
-      const { data } = await apiWallet.get<RitaWallet.Model.PaymentRequest[]>('/payment', {
-        params: {
-          take: 2,
-          activeOnly: true,
+      const { data } = await apiWallet.get<RitaWallet.Model.PaymentRequest[]>(
+        '/payment',
+        {
+          params: {
+            take: 2,
+            activeOnly: true,
+          },
         },
-      })
+      )
 
       if (Array.isArray(data)) {
         setPaymentsNew(data)
@@ -90,15 +93,18 @@ export const WalletPayments: React.FC = () => {
 
   useEffect(() => {
     async function fetchDataAll() {
-      const { data } = await apiWallet.get<RitaWallet.Model.PaymentRequest[]>('/payment', {
-        params: {
-          take: tablePaymentsAllPaging.take,
-          skip: tablePaymentsAllPaging.skip,
-          orderBy: tablePaymentsAllSort.path,
-          orderType: tablePaymentsAllSort.order,
-          daysBefore: selectedPeriod,
+      const { data } = await apiWallet.get<RitaWallet.Model.PaymentRequest[]>(
+        '/payment',
+        {
+          params: {
+            take: tablePaymentsAllPaging.take,
+            skip: tablePaymentsAllPaging.skip,
+            orderBy: tablePaymentsAllSort.path,
+            orderType: tablePaymentsAllSort.order,
+            daysBefore: selectedPeriod,
+          },
         },
-      })
+      )
 
       if (Array.isArray(data)) {
         setPaymentsAll(data)

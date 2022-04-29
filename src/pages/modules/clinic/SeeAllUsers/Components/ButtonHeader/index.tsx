@@ -1,10 +1,6 @@
-import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary'
-//import { CLINIC_SEE_ONE_USER } from '@/routes/constants/namedRoutes/routes'
-//import { useHistory } from 'react-router-dom'
 
-const ButtonHeader = () => {
-  //const history = useHistory()
+const ButtonHeader: React.FC = () => {
   return (
     <ButtonPrimary
       medium

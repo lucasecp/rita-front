@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 
 import { Container } from './styles'
 import SelectUf from '../SelectUf'
-import hasSpecialCaracter from '@/helpers/hasSpecialCaracter'
 import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectIssuingAgency'
 
 interface ProfissionalDatasProps {
@@ -22,7 +21,7 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
   )
   const [issuingAgency, setIssuingAgency] = useState(data?.issuingAgency || '')
   const [uf, setUf] = useState(data?.uf || '')
-  const [ufToApi, setUfToApi] = useState('')
+  const [, setUfToApi] = useState('')
   const [cashBack, setCashBack] = useState(data?.cashback || '')
   const [takeRate, setTakeRate] = useState(data?.takerate || '')
 

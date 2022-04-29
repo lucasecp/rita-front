@@ -39,10 +39,11 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
         const { data } = await apiAdmin.get(`/orgao-emissor`)
         const dataMapped = mapIssuingAgency(data)
         setIssuingAgencyOptions(dataMapped)
-      } catch (error) {}
-      finally{setLabelLoading('Selecione:')}
+      } catch (error) {
+      } finally {
+        setLabelLoading('Selecione:')
+      }
     }
-     
 
     getIssuingAgency()
   }, [])

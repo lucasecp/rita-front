@@ -5,7 +5,7 @@ import { Container } from './styles'
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string
   value: string
-  setValue: React.Dispatch<React.SetStateAction<string>>
+  setValue?: React.Dispatch<React.SetStateAction<string>>
   limit?: number | string
   showCaractersInformation?: boolean
   hasError?: boolean

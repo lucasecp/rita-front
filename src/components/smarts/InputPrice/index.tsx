@@ -20,7 +20,7 @@ interface InputPriceProps extends InputHTMLAttributes<HTMLInputElement> {
   [x: string]: any
 }
 
-const InputPrice: React.FC<InputPriceProps> = ({ 
+const InputPrice: React.FC<InputPriceProps> = ({
   label = '',
   setValue,
   hasError = false,

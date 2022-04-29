@@ -1,17 +1,17 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background: #EEEEEE;
+  background: #eeeeee;
   border-radius: 8px 8px 0px 0px;
   padding: 24px;
 
-  > section:nth-child(1){
+  > section:nth-child(1) {
     display: grid;
     //grid-template-columns: repeat(2, 100px) 1fr auto auto;
     grid-template-columns: 1fr 1fr 2fr 2fr;
     gap: 24px;
   }
-  > section:nth-child(2){
+  > section:nth-child(2) {
     margin-top: 15px;
     display: flex;
     justify-content: space-between;

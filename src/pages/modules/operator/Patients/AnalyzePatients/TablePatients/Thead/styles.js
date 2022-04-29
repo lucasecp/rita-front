@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
-import arrowDown from '@/assets/icons/arrow-down-order.svg'
-import arrowUp from '@/assets/icons/arrow-up-order.svg'
-import colors from '@/styles/colors'
+import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down-order.svg'
+import { ReactComponent as ArrowUpIcon } from '@/assets/icons/arrow-up-order.svg'
 
 export const Content = styled.div`
   display: flex;
@@ -32,7 +31,7 @@ export const Content = styled.div`
     }
   }
   h5 {
-    color: ${({ theme }) => theme.main};
+    color: ${({ theme }) => theme.darkness};
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
@@ -53,48 +52,38 @@ export const Container = styled.header`
   }
 `
 
-export const ArrowUp = styled.button`
+export const ArrowUp = styled(ArrowUpIcon)`
   border: none;
   background-color: transparent;
   padding: 0;
   margin-bottom: 1.5px;
-  &:after {
-    content: '';
-    width: 9px;
-    height: 5px;
-    background-image: url(${arrowUp});
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: block;
-    ${({ order }) =>
-      order &&
-      css`
-        filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
-          brightness(100%) contrast(103%);
-      `}
+  > path {
+    stroke: ${({ theme }) => theme.mediumLight};
   }
+
+  ${({ order }) =>
+    order &&
+    css`
+      > path {
+        stroke: ${({ theme }) => theme.medium};
+      }
+    `}
 `
 
-export const ArrowDown = styled.button`
+export const ArrowDown = styled(ArrowDownIcon)`
   border: none;
   background-color: transparent;
   padding: 0;
   margin-top: 1.5px;
-  &:after {
-    content: '';
-    width: 9px;
-    height: 5px;
-    background-image: url(${arrowDown});
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: block;
+  > path {
+    stroke: ${({ theme }) => theme.mediumLight};
   }
+
   ${({ order }) =>
     order &&
     css`
-      filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
-        brightness(100%) contrast(103%);
+      > path {
+        stroke: ${({ theme }) => theme.medium};
+      }
     `}
 `

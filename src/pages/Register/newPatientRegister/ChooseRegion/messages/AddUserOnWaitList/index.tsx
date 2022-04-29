@@ -2,9 +2,6 @@ import React from 'react'
 
 import logo from '@/assets/logo/logo-animated-without-background.gif'
 
-import OutlineButton from '@/components/Button/Outline'
-import ButtonPrimary from '@/components/Button/Primary'
-
 import { Container, TitleAndLogo } from './styles'
 
 export const AddUserOnWaitList: React.FC = () => {

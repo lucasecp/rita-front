@@ -12,12 +12,16 @@ import { ScheduleI } from '../../../../types'
 import { mapDaysPortugues } from '../../../../adapters/mapDays'
 
 interface DesassociateProps {
-  idSchedule: string,
-  data?: ScheduleI,
+  idSchedule: string
+  data?: ScheduleI
   setMakeNewRequest: () => void
 }
 
-const DeleteEvent: React.FC<DesassociateProps> = ({ idSchedule, setMakeNewRequest, data }) => {
+const DeleteEvent: React.FC<DesassociateProps> = ({
+  idSchedule,
+  setMakeNewRequest,
+  data,
+}) => {
   const { closeModal } = useModal()
   const { Loading } = useLoading()
 
@@ -29,7 +33,9 @@ const DeleteEvent: React.FC<DesassociateProps> = ({ idSchedule, setMakeNewReques
 
       toast.success('Horário de atendimento removido com sucesso!')
     } catch (error) {
-      toast.error('Erro ao excluir o horário de atendimento, tente novamente, se o problema persistir, entre em contato com o suporte técnico do sistema.')
+      toast.error(
+        'Erro ao excluir o horário de atendimento, tente novamente, se o problema persistir, entre em contato com o suporte técnico do sistema.',
+      )
     } finally {
       Loading.turnOff()
     }
@@ -44,7 +50,9 @@ const DeleteEvent: React.FC<DesassociateProps> = ({ idSchedule, setMakeNewReques
         <p>{data.clinicName}</p>
         <p>{data.specialtys[0].name}</p>
         <p>{mapDaysPortugues(data.day)}</p>
-        <p>{data.start} as {data.end}</p>
+        <p>
+          {data.start} as {data.end}
+        </p>
       </Content>
 
       <ButtonGroup>

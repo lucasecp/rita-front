@@ -18,9 +18,7 @@ import { SelectSpecialty } from '../../MultSelectSpecialty'
 import { SelectClinic } from '../../MultSelectClinic'
 import { toApi } from '../../adapters'
 
-
 const CreateSchedule: React.FC = () => {
-
   const [startTime, setStartTime] = useState('')
 
   const [endTime, setEndTime] = useState('')
@@ -33,7 +31,8 @@ const CreateSchedule: React.FC = () => {
 
   const [days, setDays] = useState<DaysI>({} as DaysI)
 
-  const { currentDataClinicAndDoctor, setGetSchedules } = useScheduleSpecialist()
+  const { currentDataClinicAndDoctor, setGetSchedules } =
+    useScheduleSpecialist()
 
   const { hasError } = useValidator(setErrors)
 
@@ -57,18 +56,20 @@ const CreateSchedule: React.FC = () => {
 
     try {
       Loading.turnOn()
-      axios.all(daysChoosen.map((data) =>
-        apiAdmin.post(
-          `/medico/agenda`,
-          toApi({
-            start: startTime,
-            end: endTime,
-            specialtys,
-            day: data,
-            idClinic: currentDataClinicAndDoctor.idClinic,
-          }),
+      axios.all(
+        daysChoosen.map((data) =>
+          apiAdmin.post(
+            `/medico/agenda`,
+            toApi({
+              start: startTime,
+              end: endTime,
+              specialtys,
+              day: data,
+              idClinic: currentDataClinicAndDoctor.idClinic,
+            }),
+          ),
         ),
-      ))
+      )
     } catch (error) {
       showSimple.error(
         'Aconteceu um erro ao adicionar o evento, verifique os dados e tente novamente.',
@@ -94,7 +95,7 @@ const CreateSchedule: React.FC = () => {
           hasError={!!errors.startTime}
           msgError={errors.startTime}
           variation="secondary"
-          placeholder='00:00'
+          placeholder="00:00"
         />
 
         <InputMask
@@ -106,7 +107,7 @@ const CreateSchedule: React.FC = () => {
           hasError={!!errors.endTime}
           msgError={errors.endTime}
           variation="secondary"
-          placeholder='00:00'
+          placeholder="00:00"
         />
         <SelectClinic
           clinics={clinics}
@@ -127,9 +128,7 @@ const CreateSchedule: React.FC = () => {
 
       <section>
         <DaysButtons days={days} setDays={setDays} error={errors.days} />
-        <ButtonPrimary onClick={onCreateSchedule}>
-          Adicionar
-        </ButtonPrimary>
+        <ButtonPrimary onClick={onCreateSchedule}>Adicionar</ButtonPrimary>
       </section>
     </Container>
   )

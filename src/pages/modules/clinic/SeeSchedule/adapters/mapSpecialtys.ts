@@ -1,11 +1,10 @@
-export const mapSpecialtys = (array: any[]) => {
+export const mapSpecialtys = (array: any[]): any[] => {
   if (!array) return []
 
-  return array
-    .map((obj) => ({ id: obj.id, name: obj.descricao }))
+  return array.map((obj) => ({ id: obj.id, name: obj.descricao }))
 }
 
-export const mapSpecialtysToApi = (array: any[]) => {
+export const mapSpecialtysToApi = (array: any[]): any[] => {
   if (!array) return []
 
   return array

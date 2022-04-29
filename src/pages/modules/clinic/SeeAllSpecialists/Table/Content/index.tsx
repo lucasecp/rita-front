@@ -3,15 +3,11 @@ import { Container, Status } from './styles'
 import { showStatus } from '../../helpers/showStatus'
 import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../types'
-import { useHistory } from 'react-router-dom'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-import { CLINIC_SEE_ONE_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 import Actions from './Actions'
 
 const Content: React.FC<ContentProps> = ({ specialists, setMakeRequest }) => {
-  const history = useHistory()
-
   return (
     <Container>
       {specialists?.data?.map((spec, index) => (

@@ -9,7 +9,6 @@ import trashIcon from '@/assets/icons/trash.svg'
 import { useModal } from '@/hooks/useModal'
 import { useDeleteIssuingAgency } from './useDeleteIssuingAgency'
 import { toast } from '@/styles/components/toastify'
-import { specialCharacters } from '@/components/smarts/InputEmail/constants/specialCharacters'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 
 const Content: React.FC<ContentProps> = ({

@@ -11,9 +11,7 @@ import { genericValidate } from '../../helpers/validatorFields'
 import { useValidator } from '../../hooks/useValidator'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 
-interface BasicInformationProps {}
-
-const BasicInformation: React.FC<BasicInformationProps> = ({}) => {
+const BasicInformation: React.FC = () => {
   const { step, nextStep, errors, setErrors, setbasicInformation } =
     useRegisterSpecialist()
 

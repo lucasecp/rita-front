@@ -39,8 +39,6 @@ export const CompanyMultiSelect: React.FC<CompanyMultiSelectProps> = ({
         (permission: string) => permission === permissions.LISTAR_EMPRESAS,
       )
 
-      const api = hasPermissionToSeeAllCompanies ? apiAdmin : apiUser
-
       const apiConfig = hasPermissionToSeeAllCompanies
         ? { address: apiAdmin, url: '/empresa' }
         : { address: apiUser, url: '/usuario/empresa' }

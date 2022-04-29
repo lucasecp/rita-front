@@ -18,7 +18,7 @@ const CancelEdting: React.FC<CancelEdtingProps> = ({
   setIsDisabled,
   setError,
   setIsHashModificationField,
-  setIsHashModificationSelectAndMultSelect
+  setIsHashModificationSelectAndMultSelect,
 }) => {
   const { closeModal } = useModal()
 

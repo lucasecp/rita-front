@@ -18,7 +18,6 @@ import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 import { DependentDataType } from '../../types/index'
 
 import { Container, InputsArea } from './styles'
-import { AxiosError } from 'axios'
 
 interface ErrorsState {
   name: string

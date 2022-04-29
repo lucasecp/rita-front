@@ -18,7 +18,6 @@ import ButtonLink from '@/components/Button/Link'
 import { PermissionsSelect } from './components/PermissionsSelect'
 
 import { useHistory, useLocation } from 'react-router-dom'
-import { id } from 'date-fns/locale'
 
 export const SeeOneProfile: React.FC = () => {
   useEffect(() => {
@@ -29,7 +28,7 @@ export const SeeOneProfile: React.FC = () => {
   const history = useHistory()
   const { id } = useLocation().state || {}
 
-  const [disabled, setDisabled] = useState(true)
+  const [disabled] = useState(true)
   const [profilesAndPermissions, setProfilesAndPermissions] = useState([])
   const [oneProfile, setOneProfile] = useState({})
 

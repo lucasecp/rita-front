@@ -133,7 +133,7 @@ export default function AuthProvider({ children }) {
         logout,
         clearDataLogout,
         isAuthorization,
-        setDataLogin
+        setDataLogin,
       }}
     >
       {children}

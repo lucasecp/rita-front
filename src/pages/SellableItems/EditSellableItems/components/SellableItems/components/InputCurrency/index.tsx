@@ -40,11 +40,11 @@ const InputCurrency: React.FC<InputMaskProps> = ({
     }
 
     element.value = value
-    if (value == 'NaN' || value == 0) element.value = '0,00'
+    if (value === 'NaN' || Number(value) === 0) element.value = '0,00'
 
     setValue &&
       setValue(
-        value == 'NaN' || value == 0
+        value === 'NaN' || Number(value) === 0
           ? 0.0
           : value.replace(',', '').replace('.', ''),
       )

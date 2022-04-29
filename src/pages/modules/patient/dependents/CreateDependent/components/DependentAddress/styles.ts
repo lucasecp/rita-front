@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import colors from '@/styles/colors'
 
 interface FormAddressProps {
   showFields: boolean

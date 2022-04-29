@@ -73,13 +73,12 @@ export const Container = styled.div<ContainerProps>`
         border-color: ${colors.orange.light};
       `}
 
-    ${({ variation, hasError }) =>
+    ${({ variation, hasError, theme }) =>
       variation === 'secondary' &&
       css`
         border: none;
         padding: 5px;
-        border-bottom: 2px solid
-          ${hasError ? colors.orange.light : colors.purple.main.middle};
+        border-bottom: 2px solid ${hasError ? colors.orange.light : theme.medium};
         border-radius: 0;
         box-shadow: none;
         background-color: transparent;

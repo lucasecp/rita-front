@@ -13,22 +13,25 @@ const apiWallet = axios.create({
   timeout: 30000,
 })
 
-apiWallet.interceptors.request.use((config) => {
-  const lsUser = localStorage.getItem('user')
-  const { headers = {} } = config
+apiWallet.interceptors.request.use(
+  (config) => {
+    const lsUser = localStorage.getItem('user')
+    const { headers = {} } = config
 
-  if (lsUser) {
-    const user = JSON.parse(lsUser) as { token?: string }
+    if (lsUser) {
+      const user = JSON.parse(lsUser) as { token?: string }
 
-    if (user.token) {
-      headers.Authorization = `Bearer ${user.token}`
-      headers.token = user.token
-      headers['x-access-token'] = user.token
+      if (user.token) {
+        headers.Authorization = `Bearer ${user.token}`
+        headers.token = user.token
+        headers['x-access-token'] = user.token
+      }
     }
-  }
 
-  return config
-}, (error) => Promise.reject(error))
+    return config
+  },
+  (error) => Promise.reject(error),
+)
 
 apiWallet.interceptors.response.use(
   (response) => response,
@@ -47,10 +50,8 @@ apiWallet.interceptors.response.use(
       }
     }
 
-    return output instanceof Error
-      ? Promise.reject(output)
-      : output
-  }
+    return output instanceof Error ? Promise.reject(output) : output
+  },
 )
 
 export default apiWallet

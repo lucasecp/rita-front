@@ -41,7 +41,7 @@ const Cell: React.FC<CellProps> = ({ data, nameDoctor, empty }) => {
                 showMessage(DeleteEvent, {
                   idSchedule: data.idSchedule,
                   setMakeNewRequest: setGetSchedules,
-                  data
+                  data,
                 })
               }
             />

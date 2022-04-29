@@ -22,10 +22,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     type: '',
   })
 
-  useEffect(() => {
-    setFilters(verifyTypedFields(arrayQuery))
-  }, [])
-
   const arrayQuery = [
     {
       name: fieldsApi.ORGAOEMISSOR,
@@ -40,6 +36,10 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
       value: status,
     },
   ]
+
+  useEffect(() => {
+    setFilters(verifyTypedFields(arrayQuery))
+  }, [])
 
   const clearFields = () => {
     setIssuingAgency('')
