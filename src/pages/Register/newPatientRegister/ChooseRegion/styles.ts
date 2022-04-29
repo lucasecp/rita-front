@@ -11,9 +11,10 @@ export const Container = styled.div`
   background: ${colors.gray.light};
 
   > div {
+    border-radius: 8px;
     background: ${colors.white};
     height: fit-content;
-    border-radius: 8px;
+    overflow: hidden;
 
     margin: 32px 16px;
 
@@ -143,6 +144,7 @@ export const Container = styled.div`
       > footer {
         padding: 32px 16px 42px;
         flex-direction: column;
+        background: ${colors.purple.main.light};
       }
     }
   }
