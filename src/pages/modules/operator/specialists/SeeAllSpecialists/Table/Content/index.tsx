@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 import { OPERATOR_SEE_ONE_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
+import edit from '@/assets/icons/edit.svg'
 
 const Content: React.FC<ContentProps> = ({ specialists }) => {
   const history = useHistory()
@@ -14,12 +15,7 @@ const Content: React.FC<ContentProps> = ({ specialists }) => {
   return (
     <Container>
       {specialists?.data?.map((spec, index) => (
-        <ul
-          key={index}
-          onClick={() =>
-            history.push(OPERATOR_SEE_ONE_SPECIALIST, { idDoctor: spec.id })
-          }
-        >
+        <ul key={index}>
           <li>
             <CustomTooltip label={firstLetterCapitalize(spec.name)}>
               <div>
@@ -34,6 +30,19 @@ const Content: React.FC<ContentProps> = ({ specialists }) => {
           <Status type={showStatus(spec.status)}>
             <span>{showStatus(spec.status)}</span>
           </Status>
+          <li>
+            <CustomTooltip label="Editar">
+              <button
+                onClick={() =>
+                  history.push(OPERATOR_SEE_ONE_SPECIALIST, {
+                    idDoctor: spec.id,
+                  })
+                }
+              >
+                <img src={edit} />
+              </button>
+            </CustomTooltip>
+          </li>
         </ul>
       ))}
 

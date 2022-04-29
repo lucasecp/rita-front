@@ -189,7 +189,9 @@ function ConfirmPhoneOrEmail() {
                   label={`E-mail: ${userData.email}`}
                   checked={choice === 'email'}
                 />
-                {choice === 'email' && <InputEmail onGetEmail={setEmail} />}
+                {choice === 'email' && (
+                  <InputEmail label=" " onGetEmail={setEmail} />
+                )}
               </section>
             )}
           </RadioGroup>
