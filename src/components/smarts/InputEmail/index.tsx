@@ -62,7 +62,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
 
   const validateEmailError = (email: string) => {
     if (!email.trim()) {
-      setEmailError('Email Obrigatório')
+      setEmailError('Email Obrigatório.')
     } else if (!isEmail(email)) {
       setEmailError('Email inválido.')
     }
@@ -99,7 +99,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
   }
   return (
     <InputText
-      label={label? 'Email:' : ''}
+      label="Email*:"
       name="email"
       value={email}
       onChange={onGetValue}

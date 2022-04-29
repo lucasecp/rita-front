@@ -6,14 +6,22 @@ import InputText from '@/components/Form/InputText'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
-import { Container, InputFields, Message, TitleAndLogo } from './styles'
+import { Container, InputFields, TitleAndLogo } from './styles'
 import InputMask from '@/components/Form/InputMask'
 
-import { INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes'
 import { useLoading } from '@/hooks/useLoading'
-import { useHistory } from 'react-router'
 import { useModal } from '@/hooks/useModal'
-import apiAdmin from '@/services/apiAdmin'
+import { ThankUser } from './messages/ThankUser'
+import apiPatient from '@/services/apiPatient'
+import { RegionState } from '../..'
+import { validatePhone } from '@/helpers/validateFields/validatePhone'
+import { InputEmail } from '@/components/smarts/InputEmail'
+import { useMessage } from '@/hooks/useMessage'
+import { validateFullName } from '@/helpers/validateFields/validateFullName'
+
+interface AddUserOnWaitListProps {
+  region: RegionState
+}
 
 interface ErrorsState {
   name: string
@@ -21,49 +29,51 @@ interface ErrorsState {
   phone: string
 }
 
-export const AddUserOnWaitList: React.FC = () => {
+export const AddUserOnWaitList: React.FC<AddUserOnWaitListProps> = ({
+  region,
+}) => {
   const { Loading } = useLoading()
-  const history = useHistory()
-  const { closeModal } = useModal()
+  const { closeModal, showMessage } = useModal()
 
   const [name, setName] = useState('')
+
   const [email, setEmail] = useState('')
+  const [errorMessage, sendErrorMessage] = useMessage()
+
   const [phone, setPhone] = useState('')
 
-  const [errors, setErrors] = useState({
-    name: '',
-    email: '',
-    phone: '',
-  })
+  const [errors, setErrors] = useState({} as ErrorsState)
 
-  const onConfirm = async () => {
-    // if (!name.length) {
-    //   setErrors({ ...errors, name: 'tefdste' })
-    // } else {
-    //   setErrors({ ...errors, name: '' })
-    // }
-    // if (!email.length) {
-    //   setErrors({ ...errors, email: 'teste' })
-    // } else {
-    //   setErrors({ ...errors, email: '' })
-    // }
-    // if (!phone.length) {
-    //   setErrors({ ...errors, phone: 'teste' })
-    // } else {
-    //   setErrors({ ...errors, phone: '' })
-    // }
+  const onSendWaitList = async () => {
+    sendErrorMessage()
 
-    // if (!errors.name.length || !errors.email.length || !errors.phone.length) {
-    //   return
-    // }
+    const errorsTemporary = {
+      ...errors,
+      name: validateFullName(name),
+      phone: validatePhone(phone),
+    }
+
+    setErrors(errorsTemporary)
+
+    const hasError = Object.values(errorsTemporary).some((error) => !!error)
+
+    if (hasError) {
+      return
+    }
 
     try {
       Loading.turnOn()
 
-      const { data } = await apiAdmin.get('/plano/regiao')
+      await apiPatient.post('paciente/lista-espera', {
+        id: '0',
+        name,
+        email,
+        phone,
+        uf: region.uf,
+        cidade: region.city,
+      })
 
-      history.push(INITIAL_PAGE)
-      closeModal()
+      showMessage(ThankUser)
     } catch (error) {
       console.log(error)
     } finally {
@@ -77,12 +87,10 @@ export const AddUserOnWaitList: React.FC = () => {
         <img src={logo} />
         <h1>Rita Saúde</h1>
       </TitleAndLogo>
-      <Message>
-        <h2>
-          No momento não possuímos planos para a sua região. <br />
-          Por favor, deixe o seu contato.
-        </h2>
-      </Message>
+      <h2>
+        No momento não possuímos planos para a sua região. <br />
+        Por favor, deixe o seu contato.
+      </h2>
       <InputFields>
         <InputText
           label="Nome Completo:"
@@ -91,12 +99,10 @@ export const AddUserOnWaitList: React.FC = () => {
           hasError={!!errors.name}
           msgError={errors.name}
         />
-        <InputText
-          label="E-mail*:"
-          value={email}
-          setValue={setEmail}
-          hasError={!!errors.email}
-          msgError={errors.email}
+        <InputEmail
+          onGetEmail={setEmail}
+          hasError={(hasError) => setErrors({ ...errors, email: hasError })}
+          checkHasError={errorMessage}
         />
         <InputMask
           label="Telefone/Celular*:"
@@ -110,7 +116,7 @@ export const AddUserOnWaitList: React.FC = () => {
 
       <footer>
         <OutlineButton onClick={closeModal}>Cancelar</OutlineButton>
-        <ButtonPrimary onClick={onConfirm}>Enviar</ButtonPrimary>
+        <ButtonPrimary onClick={onSendWaitList}>Enviar</ButtonPrimary>
       </footer>
     </Container>
   )

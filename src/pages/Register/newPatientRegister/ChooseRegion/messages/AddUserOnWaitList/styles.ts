@@ -5,13 +5,12 @@ import colors from '@/styles/colors'
 export const Container = styled.div`
   background-color: ${colors.white};
   border-radius: 8px 8px 0 0;
-
   > h2 {
+    margin: 32px 0;
+    color: ${colors.gray.dark};
     font-weight: 500;
     font-size: 24px;
     line-height: 30px;
-    color: ${colors.gray.dark};
-    margin: 24px none;
   }
 
   > footer {
@@ -66,19 +65,7 @@ export const TitleAndLogo = styled.div`
   }
 `
 
-export const Message = styled.div`
-  margin: 32px 0;
-
-  > h2 {
-    color: ${colors.gray.dark};
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 30px;
-  }
-`
-
 export const InputFields = styled.div`
   display: grid;
   gap: 24px;
 `
-
