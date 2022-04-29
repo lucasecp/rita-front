@@ -49,8 +49,10 @@ export const ConfirmImport: React.FC<ConfirmImportProps> = ({
 
       if (response.status === 200) {
         const importedDataMapped = fromApiImport(response.data)
+
         toast.success('Importação realizada com sucesso')
         closeModal()
+
         history.push(DIRECTOR_IMPORT_REPORT, {
           reportDetails: {
             data: dateNow.toLocaleDateString(),
@@ -62,7 +64,6 @@ export const ConfirmImport: React.FC<ConfirmImportProps> = ({
       }
     } catch {
       toast.error('Houve algum erro durante a importação')
-      closeModal()
     } finally {
       closeModal()
     }
