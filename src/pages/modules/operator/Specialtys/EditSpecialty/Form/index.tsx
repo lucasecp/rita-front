@@ -1,5 +1,6 @@
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
+import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectIssuingAgency'
 import React, { useEffect, useState } from 'react'
 import { ErrorsI, DataReceivedI } from '../types'
 import { Container } from './style'
@@ -14,11 +15,13 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi, dataFromApi }) => {
   const [code, setCode] = useState('')
   const [requireSubscription, setRequireSubscription] = useState<string>('')
   const [description, setDescription] = useState('')
+  const [issuingAgency, setIssuingAgency] = useState('')
 
   useEffect(() => {
     setCode(dataFromApi?.code || '')
     setRequireSubscription(String(dataFromApi?.requireSubscription || ''))
     setDescription(dataFromApi?.description || '')
+    setIssuingAgency(dataFromApi?.issuingAgency || '')
   }, [dataFromApi])
 
   useEffect(() => {
@@ -26,8 +29,9 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi, dataFromApi }) => {
       code,
       requireSubscription,
       description,
+      issuingAgency,
     })
-  }, [code, requireSubscription, description])
+  }, [code, requireSubscription, description, issuingAgency])
 
   return (
     <Container>
@@ -58,6 +62,12 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi, dataFromApi }) => {
         ]}
         hasError={!!errors.requireSubscription}
         msgError={errors.requireSubscription}
+      />
+       <SelectIssuingAgency 
+      issuingAgency={issuingAgency}
+      setIssuingAgency={setIssuingAgency}
+      hasError={!!errors.issuingAgency}
+        msgError={errors.issuingAgency}
       />
     </Container>
   )

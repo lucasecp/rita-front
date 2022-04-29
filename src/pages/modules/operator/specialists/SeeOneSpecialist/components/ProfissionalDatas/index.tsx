@@ -10,7 +10,7 @@ import { Container } from './styles'
 import SelectUf from '../SelectUf'
 import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectIssuingAgency'
 
-import hasSpecialCaracter from '@/helpers/hasSpecialCaracter'
+import onlyNumbers from '@/helpers/clear/onlyNumbers'
 
 interface ProfissionalDatasProps {
   data: ProfissionalDatasI
@@ -37,30 +37,22 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
   const [cashBack, setCashBack] = useState(data?.cashback || '')
   const [takeRate, setTakeRate] = useState(data?.takerate || '')
 
-  const formatCashRate = (e: any, setValue: (x: string) => void) => {
-    const value = e.target.value.split('')
+  const convertMaskPercent = (
+    value: string,
+    setValue: React.Dispatch<React.SetStateAction<string>>,
+  ) => {
+    let newValue: number | string = onlyNumbers(value)
+    newValue = newValue.replace(/([0-9]{2})$/g, ',$1')
 
-    const formatedValue = value.reduce((ac: string[], val: string) => {
-      const hasTwoSymbols = ac.includes(',') && val === ','
-
-      if (hasTwoSymbols || (hasSpecialCaracter(val) && val !== ',')) {
-        return ac
-      }
-      ac.push(val)
-      return ac
-    }, [])
-
-    // if the last value is a comma
-    if (formatedValue[formatedValue.length - 1] === ',') {
-      return setValue(formatedValue.slice(0, -1) + '%')
+    if (newValue.length > 6) {
+      newValue = newValue.replace(/([0-9]{3}),([0-9]{2}$)/g, '.$1,$2')
     }
 
-    // if the first value is a comma
-    if (formatedValue[0] === ',') {
-      return setValue('')
-    }
+    setValue(newValue)
 
-    setValue(formatedValue.join('') + '%')
+    if (newValue === 'NaN') {
+      setValue('')
+    }
   }
 
   useEffect(() => {
@@ -78,8 +70,8 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
       registerNumber,
       issuingAgency,
       uf: ufToApi,
-      cashBack: Number(cashBack.slice(0, -1).replace(',', '.')),
-      takeRate: Number(takeRate.slice(0, -1).replace(',', '.')),
+      cashBack: Number(cashBack.replace(',', '.')),
+      takeRate: Number(takeRate.replace(',', '.')),
     })
   }, [
     profissionalName,
@@ -93,7 +85,7 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
 
   return (
     <Container>
-      <h1>Dados Profissionais do Especialista</h1>
+      <h1>Dados Profissionais</h1>
       <section>
         <InputText
           label="Nome Profissional:"
@@ -118,7 +110,7 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
           onlyLetter
         />
         <InputText
-          label="Número de Registro:"
+          label="Registro Profissional:"
           value={registerNumber}
           setValue={setRegisterNumber}
           hasError={!!errors?.registerNumber}
@@ -156,20 +148,20 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
         <InputText
           label="CashBack %:"
           value={cashBack}
-          setValue={setCashBack}
-          onBlur={(e) => formatCashRate(e, setCashBack)}
+          onChange={(e) => convertMaskPercent(e.target.value, setCashBack)}
           hasError={!!errors?.cashBack}
           msgError={errors?.cashBack}
           name="cashBack"
+          maxLength={6}
         />
         <InputText
           label="TakeRate %:"
           value={takeRate}
-          setValue={setTakeRate}
-          onBlur={(e) => formatCashRate(e, setTakeRate)}
+          onChange={(e) => convertMaskPercent(e.target.value, setTakeRate)}
           hasError={!!errors?.takeRate}
           msgError={errors?.takeRate}
           name="takeRate"
+          maxLength={6}
         />
       </div>
     </Container>

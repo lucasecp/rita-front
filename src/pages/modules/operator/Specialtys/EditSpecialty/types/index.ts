@@ -2,6 +2,7 @@ export interface ErrorsI {
   code?: string
   description?: string
   requireSubscription?: string
+  issuingAgency: string
 }
 
 export interface DataReceivedI {
@@ -10,6 +11,7 @@ export interface DataReceivedI {
   requireSubscription?: string
   id?: string
   [x: string]: any
+  issuingAgency: string
 }
 
 export interface DataToApiI {
@@ -17,4 +19,5 @@ export interface DataToApiI {
   codigo?: string
   descricao?: string
   requerInscricao?: boolean
+  idOrgaoEmissor: number
 }

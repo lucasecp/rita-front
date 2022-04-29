@@ -20,6 +20,7 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
   ...rest
 }) => {
   const [issuingAgencyOptions, setIssuingAgencyOptions] = useState<any[]>([])
+  const [labelLoading, setLabelLoading] = useState('Selecione:')
 
   const mapIssuingAgency = (array: any[]) => {
     if (!array) return []
@@ -33,15 +34,19 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
   useEffect(() => {
     const getIssuingAgency = async () => {
       try {
+        setLabelLoading('Carregando...')
+
         const { data } = await apiAdmin.get(`/orgao-emissor`)
         const dataMapped = mapIssuingAgency(data)
-
         setIssuingAgencyOptions(dataMapped)
       } catch (error) {}
+      finally{setLabelLoading('Selecione:')}
     }
+     
 
     getIssuingAgency()
   }, [])
+ 
 
   useEffect(() => {
     if (!setIssuingAgencyToApi) {
@@ -66,7 +71,7 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
     <Select
       options={issuingAgencyOptions}
       label="Órgão Emissor:"
-      labelDefaultOption="Selecione:"
+      labelDefaultOption={labelLoading}
       value={issuingAgency}
       setValue={setIssuingAgency}
       hasError={!!error}

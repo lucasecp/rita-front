@@ -27,6 +27,8 @@ const InputCep: React.FC<InputCepProps> = ({ onGetRegion }) => {
         if (data.error === '1') {
           toast.error('Cep não encontrado!')
 
+          // onGetRegion({} as RegionState)
+
           return
         }
 
@@ -36,7 +38,11 @@ const InputCep: React.FC<InputCepProps> = ({ onGetRegion }) => {
           city: addressMapped.city,
           uf: addressMapped.uf,
         })
+
+        setCep('')
       } catch (error) {
+        // onGetRegion({} as RegionState)
+
         toast.error('Error ao carregar endereço!')
       }
     }

@@ -30,7 +30,7 @@ const DoctorInformation = () => {
       try {
         Loading.turnOn()
         const { data } = await apiAdmin.get(
-          `/medico/${location.state.idDoctor}/clinicas/especialidades`,
+          `/medico/${location.state.idDoctor}/clinica/especialidade`,
         )
         setDoctorInfo(fromApi(data))
       } catch (error) {
