@@ -98,11 +98,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
   }
   return (
     <InputText
-<<<<<<< HEAD
-      label={label || 'Email:'}
-=======
       label="Email*:"
->>>>>>> e86b4b672e22bfdd90593d7c42da0721e743407b
       name="email"
       value={email}
       onChange={onGetValue}
