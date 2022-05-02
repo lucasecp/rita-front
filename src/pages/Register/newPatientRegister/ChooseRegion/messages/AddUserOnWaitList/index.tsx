@@ -42,7 +42,7 @@ export const AddUserOnWaitList: React.FC<AddUserOnWaitListProps> = ({
 
   const [phone, setPhone] = useState('')
 
-  const [errors] = useState({} as ErrorsState)
+  const [errors, setErrors] = useState({} as ErrorsState)
 
   const onSendWaitList = async () => {
     sendErrorMessage()
