@@ -55,14 +55,14 @@ export const ArrowUp = styled(ArrowUpIcon)`
   padding: 0;
   margin-bottom: 1.5px;
   > path {
-    stroke: ${({ theme }) => theme.mediumLight};
+    fill: ${({ theme }) => theme.mediumLight};
   }
 
   ${({ order }) =>
     order &&
     css`
       > path {
-        stroke: ${({ theme }) => theme.medium};
+        fill: ${({ theme }) => theme.medium};
       }
     `}
 `
@@ -77,7 +77,7 @@ export const ArrowDown = styled(ArrowDownIcon)`
     order &&
     css`
       > path {
-        stroke: ${({ theme }) => theme.medium};
+        fill: ${({ theme }) => theme.medium};
       }
     `}
 `

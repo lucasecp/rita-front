@@ -78,17 +78,16 @@ export const Container = styled.div<ContainerProps>`
       css`
         border: none;
         padding: 5px;
-        border-bottom: 2px solid ${hasError ? colors.orange.light : theme.medium};
+        border-bottom: 2px solid
+          ${hasError ? colors.orange.light : theme.medium};
         border-radius: 0;
         box-shadow: none;
         background-color: transparent;
         :focus,
         ::after {
           border: none;
-          border-bottom: 2px solid #419eff;
-          border-color: ${hasError
-            ? colors.orange.light
-            : colors.purple.main.dark};
+          border-bottom: 2px solid ${theme.main};
+          border-color: ${hasError ? colors.orange.light : theme.main};
         }
       `}
 `

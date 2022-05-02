@@ -2,8 +2,6 @@ import React from 'react'
 /** Styles */
 import { Container } from './styles'
 import { Content } from '../styles'
-/** Helpers */
-import { getUserStorage } from '../../../../../storage/user'
 /** Components */
 import CreateSchedule from './CreateSchedule'
 import Grid from './Grid'
@@ -25,15 +23,6 @@ const Main: React.FC = () => {
   } = useScheduleSpecialist()
   const { Loading } = useLoading()
 
-  React.useEffect(() => {
-    document.title = 'Rita Saúde | Agenda Profissional'
-    getEspecialisty()
-  }, [])
-
-  React.useEffect(() => {
-    getSchedule()
-  }, [getSchedules])
-
   const getEspecialisty = async () => {
     const result = await apiAdmin.get('/medico/meu-perfil')
     const {
@@ -50,6 +39,11 @@ const Main: React.FC = () => {
     setSpecialistName(specialistName)
   }
 
+  React.useEffect(() => {
+    document.title = 'Rita Saúde | Agenda Profissional'
+    getEspecialisty()
+  }, [])
+
   const getSchedule = async () => {
     try {
       Loading.turnOn()
@@ -60,6 +54,10 @@ const Main: React.FC = () => {
       Loading.turnOff()
     }
   }
+
+  React.useEffect(() => {
+    getSchedule()
+  }, [getSchedules])
 
   return (
     <Container>

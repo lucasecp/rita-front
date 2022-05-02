@@ -7,4 +7,9 @@ export const Container = styled.li`
     margin: 10px;
     cursor: pointer;
   }
+  > div > svg {
+    > path {
+      fill: ${({ theme }) => theme.main};
+    }
+  }
 `

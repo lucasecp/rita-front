@@ -1,5 +1,5 @@
 import MsgError from '@/components/MsgError'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { DaysI } from '../../../types'
 import { daysWeek } from '../../../contants/days'
 import { Container, Buttons } from './styles'

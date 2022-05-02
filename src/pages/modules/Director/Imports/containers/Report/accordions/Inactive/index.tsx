@@ -10,21 +10,24 @@ import { Table } from './Table'
 import { AccordionDetails, AccordionSummary } from '@material-ui/core'
 import { AccordionContainer } from './styles'
 
-type ErrorProps = Omit<StatusDataFromImport, 'success' | 'inactivate'>
+type InactiveProps = Omit<StatusDataFromImport, 'success' | 'error'>
 
-export const Error: React.FC<ErrorProps> = ({ error }) => {
+export const Inactive: React.FC<InactiveProps> = ({ inactivate }) => {
   return (
     <AccordionContainer square={true} defaultExpanded={false}>
       <AccordionSummary
-        aria-controls="error-content"
-        id="error-header"
+        aria-controls="inactive-content"
+        id="inactive-header"
         expandIcon={<OpenCloseAccordionIcon />}
       >
         <ErrorImportIcon />
-        <h2>{error.countErrorsRegisters} registros com erros na importação</h2>
+        <h2>
+          {inactivate.countInactivatesRegisters} funcionários desvinculados do
+          benefício
+        </h2>
       </AccordionSummary>
       <AccordionDetails>
-        <Table listErrorsRegister={error.listErrorsRegister} />
+        <Table listInactivateRegister={inactivate.listInactivatesRegister} />
       </AccordionDetails>
     </AccordionContainer>
   )

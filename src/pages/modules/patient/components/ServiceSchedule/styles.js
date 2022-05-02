@@ -12,7 +12,7 @@ export const Container = styled.div`
     margin: 0 -24px 16px -24px;
     > h5 {
       background: ${({ theme }) => theme.light};
-      color: #7338cb;
+      color: ${({ theme }) => theme.darkness};
       font-size: 16px;
       font-weight: 700;
       line-height: 20px;

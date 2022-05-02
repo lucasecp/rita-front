@@ -85,7 +85,7 @@ export const Container = styled.div<ContainerProps>`
         border-color: ${colors.orange.light};
       `}
 
-    ${({ variation }) =>
+    ${({ variation, theme }) =>
       variation === 'secondary' &&
       css<ContainerProps>`
         border: none;
@@ -102,9 +102,9 @@ export const Container = styled.div<ContainerProps>`
         :focus,
         ::after {
           border: none;
-          border-bottom: 2px solid #419eff;
-          border-color: ${({ hasError }) =>
-            hasError ? colors.orange.light : colors.purple.main.dark};
+          border-bottom: 2px solid ${theme.main};
+          border-color: ${({ hasError, theme }) =>
+            hasError ? colors.orange.light : theme.main};
         }
       `}
   }

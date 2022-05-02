@@ -23,7 +23,10 @@ export const Container = styled.aside`
 
     cursor: pointer;
 
-    > img {
+    > svg {
+      > path {
+        stroke: ${({ theme }) => theme.main};
+      }
       transition: 0.3s;
 
       ${({ isExpanded }) =>
@@ -81,6 +84,9 @@ export const Container = styled.aside`
 
       > svg {
         fill: ${({ theme }) => theme.main};
+        > path {
+          fill: ${({ theme }) => theme.main};
+        }
       }
 
       /* > div {
