@@ -4,6 +4,7 @@ import colors from '@/styles/colors'
 interface ContainerProps {
   small?: boolean
   medium?: boolean
+  block?: boolean
   disabledWithEvents?: boolean
   variation?: string
 }
@@ -27,6 +28,7 @@ export const Container = styled.button<ContainerProps>`
     color: #fff;
     border-color: ${({ theme }) => theme.darkness};
   }
+
   ${({ small }) =>
     small &&
     css`
@@ -39,7 +41,12 @@ export const Container = styled.button<ContainerProps>`
       padding: 10px 32px;
     `}
 
-
+  ${({ block }) =>
+    block &&
+    css`
+      width: 100%;
+    `
+  }
 
   ${({ disabledWithEvents }) =>
     disabledWithEvents &&
