@@ -55,8 +55,8 @@ export const Menu: React.FC<MenuProps> = ({ expanded }) => {
               </div>
               {routePathname.startsWith(item.path) ? (
                 <ChevronUpIcon />
-              ) : (
-                <ChevronDownIcon />
+                ) : (
+                  <ChevronDownIcon />
               )}
             </NavLink>
 
@@ -77,10 +77,10 @@ export const Menu: React.FC<MenuProps> = ({ expanded }) => {
           </div>
         ) : (
           <NavLink
-            activeClassName="active"
-            key={item.path}
-            to={item.path}
-            onClick={() => handleMenuItemClick()}
+          activeClassName="active"
+          key={item.path}
+          to={item.path}
+          onClick={() => handleMenuItemClick()}
           >
             <span />
             <div>

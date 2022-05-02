@@ -9,19 +9,19 @@ import Actions from './Actions'
 const Content: React.FC<ContentProps> = ({ users }) => {
   return (
     <Container>
-      {users?.data?.map((spec, index) => (
+      {users?.data?.map((user, index) => (
         <ul key={index}>
           <li>
-            <CustomTooltip label={firstLetterCapitalize(spec.nome)}>
+            <CustomTooltip label={firstLetterCapitalize(user.nome)}>
               <div>
-                {formatTextWithLimit(firstLetterCapitalize(spec.nome), 33) ||
+                {formatTextWithLimit(firstLetterCapitalize(user.nome), 33) ||
                   '-'}
               </div>
             </CustomTooltip>
           </li>
-          <li>{spec.email}</li>
-          <li>{spec.perfil[0]?.nome}</li>
-          <Actions />
+          <li>{user.email}</li>
+          <li>{user.perfil[0]?.nome}</li>
+          <Actions {...user}/>
         </ul>
       ))}
 
