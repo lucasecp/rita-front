@@ -93,7 +93,7 @@ export const HeaderArrowUp = styled.button<ArrowProps>`
   padding: 0;
   margin-bottom: 1.5px;
   > path {
-    stroke: ${({ theme }) => theme.mediumLight};
+    fill: ${({ theme }) => theme.mediumLight};
   }
 
   &:after {
@@ -136,7 +136,7 @@ export const HeaderArrowDown = styled.button<ArrowProps>`
     order &&
     css`
       > path {
-        stroke: ${({ theme }) => theme.medium};
+        fill: ${({ theme }) => theme.medium};
       }
     `}
 `

@@ -13,6 +13,9 @@ import InputCep from './components/InputCep'
 
 import { LOGIN } from '@/routes/constants/namedRoutes/routes'
 import { AddUserOnWaitList } from './messages/AddUserOnWaitList'
+import apiAdmin from '@/services/apiAdmin'
+import { useLoading } from '@/hooks/useLoading'
+import { toast } from 'react-toastify'
 
 export interface RegionState {
   uf: string
@@ -21,6 +24,7 @@ export interface RegionState {
 
 export const ChooseRegion: React.FC = () => {
   const history = useHistory()
+  const { Loading } = useLoading()
   const { showMessage } = useModal()
 
   const [region, setRegion] = useState({} as RegionState)
@@ -29,18 +33,23 @@ export const ChooseRegion: React.FC = () => {
     history.push(LOGIN)
   }
 
-  console.log(region)
-  const onProcedure = async () => {
-    // return showMessage(AddUserOnWaitList)
+  const onNextStep = async () => {
     try {
-      // const { data } = await apiAdmin.get('/clinica') API
-      // const dataMapped = mapClinics(data?.clinicas)
-      const test = []
-      if (!test.length) {
-        return showMessage(AddUserOnWaitList)
+      Loading.turnOn()
+
+      const { data } = await apiAdmin.get('/plano/regiao', {
+        params: { municipio: region.city, uf: region.uf },
+      })
+
+      if (!data.length) {
+        return showMessage(AddUserOnWaitList, { region }, true)
       }
       // to next page
-    } catch ({ response }) {}
+    } catch ({ response }) {
+      toast.error('Erro ao Buscar Planos')
+    } finally {
+      Loading.turnOff()
+    }
   }
 
   return (
@@ -70,7 +79,7 @@ export const ChooseRegion: React.FC = () => {
             Voltar
           </OutlineButton>
           <ButtonPrimary
-            onClick={onProcedure}
+            onClick={onNextStep}
             data-test="nextStep"
             disabled={!region.city}
           >

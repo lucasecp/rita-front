@@ -14,7 +14,7 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const history = useHistory()
   const query = useQuery()
-  const [perPageValue, setPerPageValue] = useState(perPage || 10)
+  const [perPageValue] = useState(perPage || 10)
   const [limit, setLimit] = useState<number | string>(
     Number(query.get('limit')) || perPageValue,
   )

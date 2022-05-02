@@ -74,9 +74,9 @@ export const Container = styled.button<ContainerProps>`
     `}
 
   :hover {
-    background-color: #7338cb;
+    background-color: ${({ theme }) => theme.darkness};
     color: #fff;
-    border-color: #7338cb;
+    border-color: ${({ theme }) => theme.darkness};
   }
 
   ${({ disabledWithEvents }) =>

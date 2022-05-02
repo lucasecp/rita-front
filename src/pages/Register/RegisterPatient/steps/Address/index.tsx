@@ -18,6 +18,13 @@ interface AddressProps {
   isActive: boolean
 }
 
+interface AddressLoadedState {
+  address?: string
+  district?: string
+  city?: string
+  uf?: string
+}
+
 export const Address: React.FC<AddressProps> = ({ isActive }) => {
   const { initialRegisterData, onGetAddress, previousStep, nextStep } =
     useRegisterPatient()
@@ -34,7 +41,7 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
 
   const [errors, setErrors] = useState({} as { cep: string })
 
-  const [addressLoaded, setAddressLoaded] = useState(false)
+  const [addressLoaded, setAddressLoaded] = useState({} as AddressLoadedState)
 
   useEffect(() => {
     setCep(initialRegisterData?.address?.cep || '')
@@ -67,7 +74,6 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
           const { data } = await apiAdmin.get(`/cep/${cepCleared}`)
 
           if (data.error === '1') {
-            setAddressLoaded(false)
             toast.error('Cep não encontrado!')
 
             setAddress('')
@@ -83,12 +89,12 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             ? `${addressMapped.type} ${addressMapped.address}`
             : ''
 
+          setAddressLoaded({ ...addressMapped, address: addressComplete })
+
           setAddress(addressComplete)
           setDistrict(addressMapped.district)
           setCity(addressMapped.city)
           setUf(addressMapped.uf)
-
-          setAddressLoaded(true)
         } catch (error) {
           toast.error('Error ao carregar endereço!')
         }
@@ -130,7 +136,10 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             setValue={setAddress}
             name="address"
             maxLength={100}
-            disabled={!addressLoaded || !!address}
+            disabled={
+              !Object.values(addressLoaded).some((value) => value) ||
+              !!addressLoaded.address
+            }
             noSpecialCaracter
           />
           <InputText
@@ -157,7 +166,10 @@ export const Address: React.FC<AddressProps> = ({ isActive }) => {
             setValue={setDistrict}
             name="district"
             maxLength={100}
-            disabled={!addressLoaded || !!district}
+            disabled={
+              !Object.values(addressLoaded).some((value) => value) ||
+              !!addressLoaded.district
+            }
             noSpecialCaracter
           />
         </div>

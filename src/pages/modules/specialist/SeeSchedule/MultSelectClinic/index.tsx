@@ -1,5 +1,4 @@
 import { Select, SelectOption } from '@/components/Form/Select'
-import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState, SetStateAction } from 'react'
 /** Styles */
 import { Container } from './styles'

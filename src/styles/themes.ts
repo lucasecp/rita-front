@@ -25,7 +25,6 @@ const purple: ThemeProps = {
 //   extraLight: '#F8F5FF',
 // }
 
-
 // const green: ThemeProps = {
 //   darkness: '#5C1CBD' ,
 //   main: '#9146FF',

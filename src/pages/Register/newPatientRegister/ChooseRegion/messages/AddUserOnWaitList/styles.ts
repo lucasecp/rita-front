@@ -5,20 +5,17 @@ import colors from '@/styles/colors'
 export const Container = styled.div`
   background-color: ${colors.white};
   border-radius: 8px 8px 0 0;
-
   > h2 {
+    margin: 32px 0;
+    color: ${colors.gray.dark};
     font-weight: 500;
     font-size: 24px;
     line-height: 30px;
-    color: ${colors.gray.dark};
-    margin: 24px none;
   }
 
   > footer {
-    padding: 26px 32px;
+    padding: 24px 0 0 0;
     border-radius: 0 0 8px 8px;
-    background-color: ${colors.gray.light};
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,7 +36,7 @@ export const TitleAndLogo = styled.div`
   display: flex;
   grid-template-columns: '80px 1fr';
   align-items: left;
-  margin: 24px;
+  margin: 16px 0;
   h1 {
     font-weight: 500;
     font-size: 32px;
@@ -66,4 +63,9 @@ export const TitleAndLogo = styled.div`
       display: none;
     }
   }
+`
+
+export const InputFields = styled.div`
+  display: grid;
+  gap: 24px;
 `

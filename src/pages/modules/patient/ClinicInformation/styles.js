@@ -23,7 +23,7 @@ export const Content = styled.div`
     font-size: 20px;
     font-weight: 400;
     line-height: 25px;
-    color: #7338cb;
+    color: ${({ theme }) => theme.darkness};
     display: flex;
     align-items: center;
     white-space: nowrap;
@@ -34,7 +34,7 @@ export const Content = styled.div`
       height: 1px;
       width: 100%;
       margin-left: 16px;
-      background: #7338cb;
+      background: ${({ theme }) => theme.darkness};
       margin-top: 3px;
     }
   }

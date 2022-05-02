@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useRef } from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 import { useAuth } from '@/hooks/login'
 import useProfilePhoto from '@/components/Layout/DefaultLayout/hooks/useProfilePhoto'

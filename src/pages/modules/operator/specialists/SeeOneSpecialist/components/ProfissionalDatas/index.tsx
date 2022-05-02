@@ -63,15 +63,15 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
     setCashBack(data?.cashback || '')
     setTakeRate(data?.takerate || '')
   }, [data])
-
+  console.log(cashBack)
   useEffect(() => {
     setData({
       profissionalName,
       registerNumber,
       issuingAgency,
       uf: ufToApi,
-      cashBack: Number(cashBack.replace(',', '.')),
-      takeRate: Number(takeRate.replace(',', '.')),
+      cashBack: Number(String(cashBack).replace(',', '.')),
+      takeRate: Number(String(takeRate).replace(',', '.')),
     })
   }, [
     profissionalName,

@@ -49,7 +49,7 @@ export const Container = styled.div`
     }
     & + span + span {
       padding: 8px;
-      background: #9146ff;
+      background: ${({ theme }) => theme.main};
       color: #fff;
       font-size: 16px;
       font-weight: 700;

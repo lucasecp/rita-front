@@ -1,16 +1,6 @@
 import React from 'react'
 import { MultiSelectOption } from '@/components/Form/MultSelect'
-import {
-  SpecialistInfoI,
-  SpecialtysAndDocsType,
-  RqeAndSpecialtysType,
-  ErrorsI,
-} from '../Types'
-
-type FieldsType = MultiSelectOption[] &
-  SpecialistInfoI &
-  SpecialtysAndDocsType &
-  RqeAndSpecialtysType
+import { ErrorsI } from '../Types'
 
 export const useValidator = (): {
   hasErrorOnFields: (
