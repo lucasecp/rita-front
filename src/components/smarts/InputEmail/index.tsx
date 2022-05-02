@@ -16,6 +16,7 @@ interface InputEmailProps extends InputHTMLAttributes<HTMLInputElement> {
   checkHasError?: number
   hasError?: (hasError: boolean) => void
   label?: string
+  noLabel?: boolean
 }
 
 export const InputEmail: React.FC<InputEmailProps> = ({
@@ -24,6 +25,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
   checkHasError,
   hasError,
   label,
+  noLabel,
   ...rest
 }) => {
   const [email, setEmail] = useState('')
@@ -61,7 +63,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
 
   const validateEmailError = (email: string) => {
     if (!email.trim()) {
-      setEmailError('Email Obrigatório')
+      setEmailError('Email Obrigatório.')
     } else if (!isEmail(email)) {
       setEmailError('Email inválido.')
     }
@@ -98,7 +100,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
   }
   return (
     <InputText
-      label={label ? 'Email:' : ''}
+      label={noLabel ? '' : 'Email*:'}
       name="email"
       value={email}
       onChange={onGetValue}
