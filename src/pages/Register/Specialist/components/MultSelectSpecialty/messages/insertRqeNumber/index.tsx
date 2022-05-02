@@ -35,9 +35,7 @@ const InsertRqeNumber: React.FC<InsertRqeNumberProps> = ({
   return (
     <Container>
       <img src={warningIcon} />
-      <p>
-        Essa especialidade requer inscrição, por favor insira o número abaixo:
-      </p>
+      <p>Por favor, insira o número do RQE:</p>
       <FormGroup>
         <InputText
           label="RQE:"

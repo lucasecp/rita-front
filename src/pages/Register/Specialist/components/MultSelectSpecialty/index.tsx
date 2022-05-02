@@ -8,7 +8,7 @@ import { Container } from './styles'
 import { useModal } from '@/hooks/useModal'
 import InsertRqeNumber from './messages/insertRqeNumber/index'
 
-//Será mostrado uma modal caso a especialidade requerer inscrição
+// Será mostrado uma modal caso a especialidade requerer inscrição
 
 interface SpecialtysProps {
   specialtys: MultiSelectOption[]
@@ -68,10 +68,14 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
 
   const onChange = (values: MultiSelectOption[], value?: MultiSelectOption) => {
     if (value?.rqeRequired) {
-      return showMessage(InsertRqeNumber, {
-        setSpecialtys,
-        currentSpecialty: value,
-      })
+      return showMessage(
+        InsertRqeNumber,
+        {
+          setSpecialtys,
+          currentSpecialty: value,
+        },
+        true,
+      )
     }
     setSpecialtys(values)
   }

@@ -17,32 +17,32 @@ export const useValidator = (): {
     setErrors({})
 
     for (const field in fields) {
-      if (
-        typeof fields[field] === 'object' &&
-        'document' in fields[field] &&
-        !fields[field].document
-      ) {
-        setErrors((errors) => ({
-          ...errors,
-          [field]: 'Campo obrigatório',
-        }))
-        error = true
+      // if (
+      //   typeof fields[field] === 'object' &&
+      //   'document' in fields[field] &&
+      //   !fields[field].document
+      // ) {
+      //   setErrors((errors) => ({
+      //     ...errors,
+      //     [field]: 'Campo obrigatório',
+      //   }))
+      //   error = true
 
-        continue
-      }
-      if (
-        typeof fields[field] === 'object' &&
-        'rqe' in fields[field] &&
-        !fields[field].rqe
-      ) {
-        setErrors((errors) => ({
-          ...errors,
-          [field]: 'Campo obrigatório',
-        }))
-        error = true
+      //   continue
+      // }
+      // if (
+      //   typeof fields[field] === 'object' &&
+      //   'rqe' in fields[field] &&
+      //   !fields[field].rqe
+      // ) {
+      //   setErrors((errors) => ({
+      //     ...errors,
+      //     [field]: 'Campo obrigatório',
+      //   }))
+      //   error = true
 
-        continue
-      }
+      //   continue
+      // }
 
       if (typeof fields[field] !== 'object' && !fields[field]) {
         setErrors((errors) => ({
