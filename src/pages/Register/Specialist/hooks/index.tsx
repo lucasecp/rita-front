@@ -66,6 +66,10 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
     const list = []
 
     for (const specialty in specialtysAndDocs) {
+      if (!specialtysAndDocs[specialty].document) {
+        continue
+      }
+
       const formFile = new FormData()
 
       formFile.append('file', specialtysAndDocs[specialty].document)
@@ -77,6 +81,7 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
 
   const registerDocsSpecialtys = async () => {
     const listDocs = createListFormDataOfSpecialtys()
+    console.log(listDocs)
 
     try {
       await axios.all(
