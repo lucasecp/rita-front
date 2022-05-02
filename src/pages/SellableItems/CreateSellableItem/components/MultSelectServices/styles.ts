@@ -69,14 +69,14 @@ export const Content = styled.div.attrs(
     border-radius: 16px;
     padding: 2px 8px 2px 8px;
     background: transparent;
-    border: 1px solid #7338cb;
-    color: #7338cb;
+    border: 1px solid ${({ theme }) => theme.darkness};
+    color: ${({ theme }) => theme.darkness};
     font-family: Athletics;
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
     path {
-      fill: #7338cb;
+      fill: ${({ theme }) => theme.darkness};
     }
   }
   .custom-close {

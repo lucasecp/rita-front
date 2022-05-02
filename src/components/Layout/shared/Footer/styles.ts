@@ -1,7 +1,14 @@
 import styled from 'styled-components'
+
 export const Container = styled.footer`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+
+  > svg {
+    > path {
+      fill: ${({ theme }) => theme.main};
+    }
+  }
 
   h6 {
     font-size: 12px;

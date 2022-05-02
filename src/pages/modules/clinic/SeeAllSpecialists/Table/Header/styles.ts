@@ -60,16 +60,15 @@ export const ArrowUp = styled(ArrowUpIcon)<ArrowProps>`
   padding: 0;
   margin-bottom: 1.5px;
   > path {
-    stroke: ${({ theme }) => theme.mediumLight};
+    fill: ${({ theme }) => theme.mediumLight};
   }
-  &:after {
-    ${({ order }) =>
-      order &&
-      css`
-        filter: invert(31%) sepia(94%) saturate(2904%) hue-rotate(222deg)
-          brightness(100%) contrast(103%);
-      `}
-  }
+  ${({ order }) =>
+    order &&
+    css`
+      > path {
+        fill: ${({ theme }) => theme.medium};
+      }
+    `}
 `
 
 export const ArrowDown = styled(ArrowDownIcon)<ArrowProps>`
@@ -78,11 +77,14 @@ export const ArrowDown = styled(ArrowDownIcon)<ArrowProps>`
   padding: 0;
   margin-top: 1.5px;
 
+  > path {
+    fill: ${({ theme }) => theme.mediumLight};
+  }
   ${({ order }) =>
     order &&
     css`
       > path {
-        stroke: ${({ theme }) => theme.medium};
+        fill: ${({ theme }) => theme.medium};
       }
     `}
 `

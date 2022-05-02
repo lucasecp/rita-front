@@ -20,8 +20,12 @@ export const Content = styled.div.attrs(
   align-items: start;
   border-bottom: 2px solid ${({ theme }) => theme.medium};
   max-height: 54px;
+  &:active{
+  border-bottom: 2px solid ${({ theme }) => theme.main};
+
+  }
   > div {
-    overflow-x: hidden;
+    overflow-x: hidden;s
     grid-area: 2/1;
   }
 
@@ -75,14 +79,14 @@ export const Content = styled.div.attrs(
     border-radius: 16px;
     padding: 2px 8px 2px 8px;
     background: transparent;
-    border: 1px solid #7338cb;
-    color: #7338cb;
+    border: 1px solid ${({ theme }) => theme.darkness};
+    color: ${({ theme }) => theme.darkness};
     font-family: Athletics;
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
     path {
-      fill: #7338cb;
+      fill: ${({ theme }) => theme.darkness};
     }
   }
   .custom-close {
@@ -233,67 +237,67 @@ export const Content = styled.div.attrs(
     `}
 
         ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      .optionListContainer,
-      .multiSelectContainer input {
-        visibility: hidden;
-      }
-      .chip {
-        cursor: default !important;
-      }
-    `}
+          disabled &&
+          css`
+            opacity: 0.5;
+            .optionListContainer,
+            .multiSelectContainer input {
+              visibility: hidden;
+            }
+            .chip {
+              cursor: default !important;
+            }
+          `}
 
     ${({ disabled, variation }) =>
-    disabled &&
-    variation === 'secondary' &&
-    css`
-      opacity: 1;
-      background: ${colors.gray.light};
-      .optionListContainer,
-      .multiSelectContainer input {
-        visibility: hidden;
-      }
-      .chip {
-        color: #6a6a6a;
-        border-color: #6a6a6a;
-      }
-      .custom-close,
-      > button {
-        display: none;
-      }
-    `}
-    ${({ color }) =>
-    color === 'green' &&
-    css`
-      .chip {
-        border: 1px solid #4b8864;
-        color: #4b8864;
-
-        path {
-          fill: #4b8864;
+      disabled &&
+      variation === 'secondary' &&
+      css`
+        opacity: 1;
+        background: ${colors.gray.light};
+        .optionListContainer,
+        .multiSelectContainer input {
+          visibility: hidden;
         }
-      }
-      .optionContainer {
-        > li,
-        .highlightOption {
-          :hover {
+        .chip {
+          color: #6a6a6a;
+          border-color: #6a6a6a;
+        }
+        .custom-close,
+        > button {
+          display: none;
+        }
+      `}
+    ${({ color }) =>
+      color === 'green' &&
+      css`
+        .chip {
+          border: 1px solid #4b8864;
+          color: #4b8864;
+
+          path {
+            fill: #4b8864;
+          }
+        }
+        .optionContainer {
+          > li,
+          .highlightOption {
+            :hover {
+              background-color: #4b8864;
+            }
+          }
+        }
+        input[type='checkbox'] {
+          :after {
+            border: 2px solid #4b8864;
+          }
+        }
+        input[type='checkbox']:checked {
+          :after {
             background-color: #4b8864;
           }
         }
-      }
-      input[type='checkbox'] {
-        :after {
-          border: 2px solid #4b8864;
-        }
-      }
-      input[type='checkbox']:checked {
-        :after {
-          background-color: #4b8864;
-        }
-      }
-    `}
+      `}
 `
 export const Container = styled.div.attrs(
   (props: { disabled: boolean; variation: '' | 'secondary' }) => ({

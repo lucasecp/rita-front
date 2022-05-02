@@ -15,7 +15,7 @@ type InsufficientBalanceProps = {
   debitAmount: number
 }
 
-function convertPriceToCrownValue(amount: number, currency?: string) {
+function convertPriceToCrownValue(amount: number) {
   // @TODO: implement currency
   return amount * 100
 }

@@ -3,7 +3,6 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { RadioGroup } from '@material-ui/core'
 
 import { RegisterLayout } from '@/components/Layout/RegisterLayout'
-import InputText from '@/components/Form/InputText'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 

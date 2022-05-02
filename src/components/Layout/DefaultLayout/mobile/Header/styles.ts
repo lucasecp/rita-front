@@ -8,8 +8,10 @@ export const Container = styled.header`
   background: #fff;
 
   > a {
-    > img {
-      width: 30px;
+    > svg {
+      > path {
+        stroke: ${({ theme }) => theme.main};
+      }
     }
   }
 
@@ -43,7 +45,7 @@ export const HamburgerButton = styled.button`
   height: 40px;
 
   span {
-    background-color${({ theme }) => theme.main};
+    background-color: ${({ theme }) => theme.main};
     width: 24px;
     margin: 7px 0;
     height: 2px;
@@ -55,7 +57,7 @@ export const HamburgerButton = styled.button`
   ::before {
     content: '';
     display: block;
-    background-color${({ theme }) => theme.main};
+    background-color: ${({ theme }) => theme.main};
     width: 24px;
     height: 2px;
     border-radius: 8px;

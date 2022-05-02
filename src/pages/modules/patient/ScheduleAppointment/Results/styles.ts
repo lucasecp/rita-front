@@ -19,7 +19,7 @@ export const Container = styled.div`
       height: 1px;
       width: 100%;
       margin-left: 13px;
-      background: #7338cb;
+      background: ${({ theme }) => theme.darkness};
       margin-top: 3px;
     }
   }

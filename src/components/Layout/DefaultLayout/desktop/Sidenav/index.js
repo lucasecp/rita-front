@@ -3,7 +3,7 @@ import { useMediaPredicate } from 'react-media-hook'
 import { ReactComponent as ExpandedLogo } from '@/assets/logo/expanded-logo.svg'
 import { ReactComponent as IconLogo } from '@/assets/logo/icon-logo.svg'
 
-import arrowImg from '@/assets/icons/arrow-left.svg'
+import { ReactComponent as ArrowImgIcon } from '@/assets/icons/arrow-left.svg'
 
 import { Menu } from '../../shared/Menu'
 
@@ -27,7 +27,7 @@ export const Sidenav = () => {
   return (
     <Container isExpanded={isExpanded}>
       <div onClick={toogleExpanded}>
-        <img src={arrowImg} />
+        <ArrowImgIcon />
       </div>
       <nav>
         <header>

@@ -74,9 +74,8 @@ export const Container = styled.div<ContainerProps>`
         :focus,
         ::after {
           border: none;
-          border-bottom: 2px solid #419eff;
-          border-color: ${() =>
-            hasError ? colors.orange.light : colors.purple.main.dark};
+          border-bottom: 2px solid ${theme.main};
+          border-color: ${() => (hasError ? colors.orange.light : theme.main)};
         }
         padding: 5px;
 
