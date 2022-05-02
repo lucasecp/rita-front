@@ -3,7 +3,7 @@ import React from 'react'
 import Primary from '@/components/Button/Primary'
 import { toast } from '@/styles/components/toastify'
 /** Types */
-import { DataToApiI, ValidationErrorFieldsI } from '../../Types'
+import { DataToApiI } from '../../Types'
 /** Helpers */
 import clearSpecialCharacters from '@/helpers/clearSpecialCharacters'
 import { validateLengthField } from '../../Helpers'
@@ -16,16 +16,12 @@ import { CLINIC_SEE_ALL_USERS } from '@/routes/constants/namedRoutes/routes'
 
 interface ButtonCadastrarProps {
   dataToApi: DataToApiI
-  isEditing: boolean
-  setErrors: React.Dispatch<React.SetStateAction<ValidationErrorFieldsI>>
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
+  setErrors: React.Dispatch<React.SetStateAction<DataToApiI>>
 }
 
 const ButtonSave: React.FC<ButtonCadastrarProps> = ({
   dataToApi,
-  isEditing,
   setErrors,
-  setIsEditing
 }) => {
 
   const history = useHistory()
@@ -50,7 +46,7 @@ const ButtonSave: React.FC<ButtonCadastrarProps> = ({
 
   return (
     <Primary small onClick={onSave}>
-      {isEditing ? 'Salvar' : 'Editar'}
+      Salvar
     </Primary>
   )
 }
