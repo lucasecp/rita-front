@@ -62,14 +62,14 @@ export const ArrowUp = styled(ArrowUpIcon).attrs(
   padding: 0;
   margin-bottom: 1.5px;
   > path {
-    stroke: ${({ theme }) => theme.mediumLight};
+    fill: ${({ theme }) => theme.mediumLight};
   }
 
   ${({ order }) =>
     order &&
     css`
       > path {
-        stroke: ${({ theme }) => theme.medium};
+        fill: ${({ theme }) => theme.medium};
       }
     `}
 `
@@ -84,14 +84,14 @@ export const ArrowDown = styled(ArrowDownIcon).attrs(
   padding: 0;
   margin-top: 1.5px;
   > path {
-    stroke: ${({ theme }) => theme.mediumLight};
+    fill: ${({ theme }) => theme.mediumLight};
   }
 
   ${({ order }) =>
     order &&
     css`
       > path {
-        stroke: ${({ theme }) => theme.medium};
+        fill: ${({ theme }) => theme.medium};
       }
     `}
 `

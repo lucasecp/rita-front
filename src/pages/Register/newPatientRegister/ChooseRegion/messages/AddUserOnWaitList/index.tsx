@@ -17,7 +17,7 @@ export const AddUserOnWaitList: React.FC = () => {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
 
-  const [errors, setErrors] = useState({} as ErrorsState)
+  const [errors] = useState({} as ErrorsState)
 
   return (
     <Container>

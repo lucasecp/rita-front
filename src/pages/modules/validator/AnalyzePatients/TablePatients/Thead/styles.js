@@ -8,7 +8,7 @@ export const Content = styled.div`
   font-weight: 700;
   line-height: 20px;
   color${({ theme }) => theme.main};
-  background-color: ${({ theme }) => theme.mediumLight};
+  background-color: ${({ theme }) => theme.light};
   margin-top: -2px;
   margin-bottom: -2px;
   justify-content: space-between;
@@ -33,14 +33,14 @@ export const ArrowUp = styled(ArrowUpIcon)`
   padding: 0;
   margin-bottom: 1.5px;
   > path {
-    stroke: ${({ theme }) => theme.mediumLight};
+    fill: ${({ theme }) => theme.mediumLight};
   }
 
   ${({ order }) =>
     order &&
     css`
       > path {
-        stroke: ${({ theme }) => theme.medium};
+        fill: ${({ theme }) => theme.medium};
       }
     `}
 `
@@ -51,14 +51,14 @@ export const ArrowDown = styled(ArrowDownIcon)`
   padding: 0;
   margin-top: 1.5px;
   > path {
-    stroke: ${({ theme }) => theme.mediumLight};
+    fill: ${({ theme }) => theme.mediumLight};
   }
 
   ${({ order }) =>
     order &&
     css`
       > path {
-        stroke: ${({ theme }) => theme.medium};
+        fill: ${({ theme }) => theme.medium};
       }
     `}
 `
