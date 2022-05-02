@@ -6,10 +6,10 @@ import InputText from '@/components/Form/InputText'
 import InputMask from '@/components/Form/InputMask';
 /** Styles */
 import { Container } from './styles'
-import ButtonCadastrar from './Components/ButtonCadastrar';
-import ButtonVoltar from './Components/ButtonVoltar';
+import ButtonRegister from './Components/ButtonRegister';
+import ButtonBack from './Components/ButtonBack';
 /** Types */
-import { ValidationErrorFieldsI, DataToApiI } from './Types';
+import { DataToApiI } from './Types';
 /** Helpers */
 import { typeAssistants } from '../CreateUsersClinic/Contants'
 
@@ -21,7 +21,7 @@ const CreateUsersClinic: React.FC = () => {
   const [email, setEmail] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [dataToApi, setDataToApi] = React.useState<DataToApiI>()
-  const [erros, setError] = React.useState<ValidationErrorFieldsI>({} as ValidationErrorFieldsI)
+  const [erros, setError] = React.useState<DataToApiI>({} as DataToApiI)
 
   React.useEffect(() => {
     setDataToApi({
@@ -38,8 +38,8 @@ const CreateUsersClinic: React.FC = () => {
               value={typeAssistant}
               labelDefaultOption="Selecione"
               options={typeAssistants}
-              hasError={!!erros.hasError && erros.field === 'typeAssistant'}
-              msgError={erros.field === 'typeAssistant' && erros.msgError}
+              hasError={!!erros.typeAssistant}
+              msgError={erros.typeAssistant}
               setValue={setTypeAssistant} />
           </section>
           <section>
@@ -47,14 +47,14 @@ const CreateUsersClinic: React.FC = () => {
               label='CPF*:'
               mask={'999.999.999-99'}
               value={cpf}
-              hasError={!!erros.hasError && erros.field === 'cpf'}
-              msgError={erros.field === 'cpf' && erros.msgError}
+              hasError={!!erros.cpf}
+              msgError={erros.cpf}
               setValue={setCpf} />
             <InputText label='Nome completo*:'
               maxLength={100}
               value={name}
-              hasError={!!erros.hasError && erros.field === 'name'}
-              msgError={erros.field === 'name' && erros.msgError}
+              hasError={!!erros.name}
+              msgError={erros.name}
               setValue={setName} />
           </section>
           <section>
@@ -62,20 +62,20 @@ const CreateUsersClinic: React.FC = () => {
               mask={'(99) 99999-9999'}
               label='Celular*:'
               value={phone}
-              hasError={!!erros.hasError && erros.field === 'phone'}
-              msgError={erros.field === 'phone' && erros.msgError}
+              hasError={!!erros.phone}
+              msgError={erros.phone}
               setValue={setPhone} />
             <InputText
               label='E-mail*:'
               maxLength={200}
               value={email}
               setValue={setEmail}
-              hasError={!!erros.hasError && erros.field === 'email'}
-              msgError={erros.field === 'email' && erros.msgError} />
+              hasError={!!erros.email}
+              msgError={erros.email} />
           </section>
           <section>
-            <ButtonVoltar dataToApi={dataToApi}>Voltar</ButtonVoltar>
-            <ButtonCadastrar dataToApi={dataToApi} setErrors={setError}>Cadastrar</ButtonCadastrar>
+            <ButtonBack dataToApi={dataToApi}/>
+            <ButtonRegister dataToApi={dataToApi} setErrors={setError}/>
           </section>
         </section>
       </Container>
