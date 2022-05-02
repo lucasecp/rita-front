@@ -31,6 +31,7 @@ import { queryFilterString, queryOrderString } from '../helpers/queryString'
 import downloadFile from '@/helpers/downloadFile'
 import orderColumnsToApi from '../helpers/orderColumnsToApi'
 import { formatObjectFromApi } from '../helpers/formatObjectFromApi'
+import { Select } from '@/components/Form/Select'
 
 export interface DataPatients {
   id?: string
@@ -194,7 +195,7 @@ const FilterAuthorization: React.FC = () => {
 
     if (nameClear.length < 3 && nameClear) {
       setErrors((errors) => {
-        return { ...errors, name: 'Informe 3 letras ou mais' }
+        return { ...errors, name: 'Informe 3 caracteres ou mais' }
       })
       hasError = true
     }
@@ -331,6 +332,14 @@ const FilterAuthorization: React.FC = () => {
             span="2"
             hasError={!!errors.columns}
             messageError={errors.columns}
+          />
+          <Select
+            label="Renda até 1,5 SM"
+            options={[
+              { label: 'Sim', value: 'yes' },
+              { label: 'Não', value: 'no' },
+            ]}
+            variation="secondary"
           />
         </div>
         <Controls>
