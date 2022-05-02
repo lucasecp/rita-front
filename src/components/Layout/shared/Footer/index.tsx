@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
     <Container>
 <<<<<<< HEAD
       <LogoIcon />
-      <CustomTooltip label="v0.18.8.945">
+      <CustomTooltip label="v0.18.9.956">
 =======
       <img src={logoFooter} />
       <CustomTooltip label="v0.18.16.954">
