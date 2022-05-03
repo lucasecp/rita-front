@@ -10,6 +10,10 @@ export const useDocsSpecialtys = (
     const list = []
 
     for (const specialty in specialtysAndDocs) {
+      if (!specialtysAndDocs[specialty].document) {
+        continue
+      }
+
       const formFile = new FormData()
 
       formFile.append('file', specialtysAndDocs[specialty].document)

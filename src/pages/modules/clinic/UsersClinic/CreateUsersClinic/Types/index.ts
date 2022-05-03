@@ -11,5 +11,6 @@ export interface DataToApiI {
   name: string,
   cpf: string
   email: string,
-  phone: string
+  phone: string,
+  phoneWithCaracters?: string,
 }

@@ -11,7 +11,7 @@ import { useModal } from '@/hooks/useModal'
 import { CityAutocomplete } from './components/CityAutocomplete'
 import InputCep from './components/InputCep'
 
-import { LOGIN } from '@/routes/constants/namedRoutes/routes'
+import { LOGIN, PLANS } from '@/routes/constants/namedRoutes/routes'
 import { AddUserOnWaitList } from './messages/AddUserOnWaitList'
 import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
@@ -37,14 +37,15 @@ export const ChooseRegion: React.FC = () => {
     try {
       Loading.turnOn()
 
-      const { data } = await apiAdmin.get('/plano/regiao', {
-        params: { municipio: region.city, uf: region.uf },
+      const { data } = await apiAdmin.get(`/plano/regiao`, {
+        params: { municipio: region.city, ufSigla: 'pr' },
       })
 
-      if (!data.length) {
+      if (!data.dados.length) {
         return showMessage(AddUserOnWaitList, { region }, true)
       }
-      // to next page
+
+      history.push(PLANS, { data, region })
     } catch ({ response }) {
       toast.error('Erro ao Buscar Planos')
     } finally {

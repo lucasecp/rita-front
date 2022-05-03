@@ -43,9 +43,11 @@ import {
   DIRECTOR_CREATE_PROFILE,
   CREATE_SELLABLE_ITEMS,
   REASON_TO_LEAVE,
+  PLANS,
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
 import { ReasonToLeave } from '@/pages/ReasonToLeave'
+import { Plans } from '@/pages/Register/Plans'
 
 export const Routes: React.FC = () => {
   return (
@@ -81,12 +83,18 @@ export const Routes: React.FC = () => {
       />
 
       <Route
-        path={DIRECTOR_SEE_ALL_PROFILES}
+        path={DIRECTOR_EDIT_PROFILE}
+        exact
         isPrivate
-        component={SeeAllProfiles}
+        component={EditProfile}
       />
 
-      <Route path={DIRECTOR_EDIT_PROFILE} isPrivate component={EditProfile} />
+      <Route
+        path={DIRECTOR_SEE_ALL_PROFILES}
+        isPrivate
+        exact
+        component={SeeAllProfiles}
+      />
 
       <Route
         path={CREATE_SELLABLE_ITEMS}
@@ -115,6 +123,8 @@ export const Routes: React.FC = () => {
       <Route path={LOGIN} exact component={Login} />
 
       <Route path={REASON_TO_LEAVE} component={ReasonToLeave} />
+
+      <Route path={PLANS} component={Plans} />
 
       <Route path="/teste-de-endereco" component={TestAddressPage} />
 

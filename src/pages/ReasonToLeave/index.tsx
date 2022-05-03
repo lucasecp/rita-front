@@ -33,6 +33,8 @@ export const ReasonToLeave: React.FC = () => {
 
   const { token } = useParams<{ token?: string }>()
 
+  console.log(token)
+
   const onSendReason = async () => {
     if (reason.length === 0) {
       return showMessage(ReasonError)
