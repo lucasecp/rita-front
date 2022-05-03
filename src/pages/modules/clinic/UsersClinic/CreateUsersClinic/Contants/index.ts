@@ -1,4 +1,4 @@
-const types = ['Administrador de Clinica','Assistente de Clinica']
+const types = ['Administrador de Clínica','Assistente de Clínica']
 
 export const typeAssistants = [
   {

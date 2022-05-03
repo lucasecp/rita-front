@@ -1,10 +1,9 @@
-import isEmail from '@/helpers/isEmail'
 import isValidateCpf from '@/helpers/validateCpf'
-import { DataToApiI } from '../Types'
+import { DataToApiI, ValidationErrorFieldsI } from '../Types'
 
 export const validateLengthField = (
   dataToApi: DataToApiI,
-  setErrors: React.Dispatch<React.SetStateAction<DataToApiI>>,
+  setErrors: React.Dispatch<React.SetStateAction<ValidationErrorFieldsI>>,
 ): boolean => {
 
   const errors = []
@@ -48,31 +47,31 @@ export const validateLengthField = (
     }))
   }
 
-  if (dataToApi.email === '') {
-    setErrors((errors => ({
-      ...errors,
-      email: 'E-mail obrigatório.',
-    })))
-    errors.push(true)
-  }else {
-    setErrors((errors) => ({
-      ...errors,
-      email: '',
-    }))
-  }
+  // if (dataToApi.email === '') {
+  //   setErrors((errors => ({
+  //     ...errors,
+  //     email: 'E-mail obrigatório.',
+  //   })))
+  //   errors.push(true)
+  // }else {
+  //   setErrors((errors) => ({
+  //     ...errors,
+  //     email: '',
+  //   }))
+  // }
 
-  if (!isEmail(dataToApi.email)) {
-    setErrors((errors => ({
-      ...errors,
-      email: 'E-mail inválido.',
-    })))
-    errors.push(true)
-  }else {
-    setErrors((errors) => ({
-      ...errors,
-      email: '',
-    }))
-  }
+  // if (!isEmail(dataToApi.email)) {
+  //   setErrors((errors => ({
+  //     ...errors,
+  //     email: 'E-mail inválido.',
+  //   })))
+  //   errors.push(true)
+  // }else {
+  //   setErrors((errors) => ({
+  //     ...errors,
+  //     email: '',
+  //   }))
+  // }
 
   if (dataToApi.phone === '') {
     setErrors((errors => ({

@@ -4,14 +4,16 @@ import React from 'react';
 import { Select } from '@/components/Form/Select'
 import InputText from '@/components/Form/InputText'
 import InputMask from '@/components/Form/InputMask';
+import { InputEmail } from '@/components/smarts/InputEmail';
 /** Styles */
 import { Container } from './styles'
 import ButtonEdit from './Components/ButtonEdit';
 import ButtonBack from './Components/ButtonBack';
 import ButtonSave from './Components/ButtonSave';
 import ButtonCancel from './Components/ButtonCancel';
+import { useMessage } from '@/hooks/useMessage'
 /** Types */
-import { DataToApiI } from './Types';
+import { DataToApiI, ValidationErrorFieldsI } from './Types';
 /** Helpers */
 import { typeAssistants } from '../EditUsersClinic/Contants'
 import { useHistory, useLocation } from 'react-router';
@@ -30,9 +32,9 @@ const EditUsersClinic: React.FC = () => {
   const [email, setEmail] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [dataToApi, setDataToApi] = React.useState<DataToApiI>()
-  const [erros, setError] = React.useState<DataToApiI>({} as DataToApiI)
+  const [erros, setError] = React.useState<ValidationErrorFieldsI>({} as ValidationErrorFieldsI)
   const [isEditing, setIsEditing] = React.useState(false)
-
+  const [errorMessage, sendErrorMessage] = useMessage()
 
   React.useEffect(() => {
     if (!location.state) {
@@ -97,25 +99,25 @@ const EditUsersClinic: React.FC = () => {
               hasError={!!erros.phone}
               msgError={erros.phone}
               setValue={setPhone} />
-            <InputText
+            <InputEmail
               label='E-mail*:'
               maxLength={200}
+              initialEmail={email}
               disabled={!isEditing}
-              value={email}
-              setValue={setEmail}
-              hasError={!!erros.email}
-              msgError={erros.email} />
+              hasError={(hasError) => setError({ ...erros, email: hasError })}
+              checkHasError={errorMessage}
+              onGetEmail={setEmail} />
           </section>
           <section>
             {!isEditing ?
-              <React.Fragment>
+              <>
                 <ButtonBack
                   dataToApi={dataToApi} />
                 <ButtonEdit
                   setIsEditing={setIsEditing} />
-              </React.Fragment> :
+              </> :
 
-              <React.Fragment>
+              <>
                 <ButtonCancel
                   dataToApi={dataToApi}
                   setErrors={setError}
@@ -123,8 +125,10 @@ const EditUsersClinic: React.FC = () => {
                   setIsEditing={setIsEditing} />
                 <ButtonSave
                   dataToApi={dataToApi}
+                  erros={erros}
+                  sendErrorMessage={sendErrorMessage}
                   setErrors={setError} />
-              </React.Fragment>
+              </>
             }
           </section>
         </section>

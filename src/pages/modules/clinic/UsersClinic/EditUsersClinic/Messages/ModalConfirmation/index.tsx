@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 import { useModal } from '@/hooks/useModal'
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 /** Styles */
 import { Container, ButtonGroup } from './styles'
-import OutlineButton from '@/components/Button/Outline';
-import ButtonPrimary from '@/components/Button/Primary';
+import OutlineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
 import { DataToApiI } from '../../Types';
 
 interface ModalConfirmationProps {

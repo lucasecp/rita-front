@@ -5,13 +5,13 @@ import { useHistory } from 'react-router'
 import { useModal } from '@/hooks/useModal'
 import ModalConfirmation from '../../Messages/ModalConfirmation'
 import { CLINIC_SEE_ALL_USERS } from '@/routes/constants/namedRoutes/routes'
-import { DataToApiI } from '../../Types'
+import { DataToApiI, ValidationErrorFieldsI } from '../../Types'
 
 interface ButtonCadastrarProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
   dataToApi: DataToApiI,
   getUserClinicById: () => void
-  setErrors: React.Dispatch<React.SetStateAction<DataToApiI>>
+  setErrors: React.Dispatch<React.SetStateAction<ValidationErrorFieldsI>>
 }
 
 const ButtonCancel: React.FC<ButtonCadastrarProps> = ({
