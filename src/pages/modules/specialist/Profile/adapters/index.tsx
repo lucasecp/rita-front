@@ -7,6 +7,7 @@ import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys'
 export const fromApi = (doctorInfo: any): DataSpecialistI => {
   return {
     specialistInfo: {
+      avatar: doctorInfo.avatar,
       name: doctorInfo.nome,
       profissionalName: doctorInfo.nomeProfissional,
       cpf: doctorInfo.cpf,

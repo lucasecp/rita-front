@@ -10,6 +10,7 @@ export interface SpecialistInfoI {
   classCouncil?: string
   email?: string
   phone?: string
+  avatar?: any,
   photo?: string
   cashback?: string
   takerate?: string
