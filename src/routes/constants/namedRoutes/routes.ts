@@ -118,6 +118,7 @@ export const REGISTER_SPECIALIST = '/cadastro/especialista/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const REASON_TO_LEAVE = '/motivo-para-sair/:token'
+export const PLANS = '/planos'
 export const NEW_REGISTER_PATIENT_CHOOSE_REGION =
   '/paciente/cadastro/escolher-regiao'
 
