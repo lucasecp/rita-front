@@ -35,6 +35,7 @@ const ButtonCadastrar: React.FC<ButtonCadastrarProps> = ({
       ...dataToApi,
       cpf: clearSpecialCharacters(dataToApi.cpf),
       phone: clearSpecialCharacters(dataToApi.phone),
+      phoneWithCaracters: dataToApi.phone
     }
   }
 

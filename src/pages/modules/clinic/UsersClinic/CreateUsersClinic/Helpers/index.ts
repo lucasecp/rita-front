@@ -1,4 +1,4 @@
-import isEmail from '@/helpers/isEmail'
+import { isValidatePhone } from '@/helpers/validatePhone'
 import isValidateCpf from '@/helpers/validateCpf'
 import { DataToApiI, ValidationErrorFieldsI } from '../Types'
 
@@ -21,6 +21,18 @@ export const validateLengthField = (
         ...errors,
         phone: '',
       }))
+    }
+  }
+
+  const checkIFPhoneIsValid = () => {
+    if(!isValidatePhone(dataToApi.phoneWithCaracters)){
+      setErrors((errors) => ({
+        ...errors,
+        phone: 'Celular inválido.',
+      }))
+      errors.push(true)
+    }else {
+      checkIFPhoneMoreThen11Caraters()
     }
   }
 
@@ -101,7 +113,7 @@ export const validateLengthField = (
     )))
     errors.push(true)
   }else {
-    checkIFPhoneMoreThen11Caraters()
+    checkIFPhoneIsValid()
   }
 
   if(!errors.length){

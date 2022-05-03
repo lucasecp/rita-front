@@ -92,7 +92,7 @@ const EditUsersClinic: React.FC = () => {
           </section>
           <section>
             <InputMask
-              mask={'(99) 99999-9999'}
+              mask={'(99)99999-9999'}
               label='Celular*:'
               value={phone}
               disabled={!isEditing}
