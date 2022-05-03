@@ -7,6 +7,7 @@ import { useLoading } from '@/hooks/useLoading'
 import { OPERATOR_WALLET_TABLE_IMPORT_CREATE } from '@/routes/constants/namedRoutes/routes'
 
 import { ReactComponent as ExclamationCircleIcon } from '@/assets/icons/exclamation-circle.svg'
+import { ReactComponent as EyeIcon } from '@/assets/icons/eye-opened.svg'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Table } from '@/components/Table'
 import ButtonPrimary from '@/components/Button/Primary'
@@ -98,7 +99,7 @@ export const WalletTableImportList: React.FC = () => {
                 custom: (row) => (
                   <>
                     <NavLink to={OPERATOR_WALLET_TABLE_IMPORT_CREATE}>
-                      View
+                      <EyeIcon title="Visualizar" />
                     </NavLink>
                   </>
                 ),
