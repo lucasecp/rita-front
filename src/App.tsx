@@ -29,9 +29,9 @@ export const App: React.FC = () => {
                 <RegisterPatientProvider>
                   <Routes />
                   <Modal />
+                  <RitaLoading />
+                  <ToastContainer />
                 </RegisterPatientProvider>
-                <RitaLoading />
-                <ToastContainer />
               </ThemeProvider>
             </MenuProvider>
           </AuthProvider>
