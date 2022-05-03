@@ -1,27 +1,32 @@
-import React from 'react';
+import React from 'react'
 import { useModal } from '@/hooks/useModal'
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 /** Styles */
 import { Container, ButtonGroup } from './styles'
-import OutlineButton from '@/components/Button/Outline';
-import ButtonPrimary from '@/components/Button/Primary';
-import { useHistory } from 'react-router-dom'
-/** Styles */
-import { CLINIC_SEE_ALL_USERS } from '@/routes/constants/namedRoutes/routes'
+import OutlineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
+import { DataToApiI } from '../../Types';
 
-const ModalConfirmation: React.FC = () => {
+interface ModalConfirmationProps {
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
+  getUserClinicById: () => void
+  setErrors: React.Dispatch<React.SetStateAction<DataToApiI>>
+}
+
+const ModalConfirmation: React.FC<ModalConfirmationProps> = ( { setIsEditing, getUserClinicById, setErrors }) => {
   const { closeModal } = useModal()
-  const history = useHistory()
 
   const onCancelInsert = () => {
-    history.push(CLINIC_SEE_ALL_USERS)
     closeModal()
+    setIsEditing(false)
+    getUserClinicById()
+    setErrors({} as DataToApiI)
   }
 
   return (
     <Container>
       <img src={warningIcon} />
-      <p>As informações não serão salvas. Confirma a saída?</p>
+      <p>As informações não serão salvas. Confirma?</p>
 
       <ButtonGroup>
         <OutlineButton onClick={closeModal}>Não</OutlineButton>

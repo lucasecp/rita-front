@@ -15,7 +15,6 @@ export const InputFile = ({
       <input
         type="file"
         ref={inpFile}
-        hidden
         onChange={({ target }) => {
           setValue && setValue(target.files[0])
         }}

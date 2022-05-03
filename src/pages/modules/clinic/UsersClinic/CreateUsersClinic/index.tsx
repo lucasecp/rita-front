@@ -4,14 +4,16 @@ import React from 'react';
 import { Select } from '@/components/Form/Select'
 import InputText from '@/components/Form/InputText'
 import InputMask from '@/components/Form/InputMask';
+import { InputEmail } from '@/components/smarts/InputEmail';
 /** Styles */
 import { Container } from './styles'
 import ButtonRegister from './Components/ButtonRegister';
 import ButtonBack from './Components/ButtonBack';
 /** Types */
-import { DataToApiI } from './Types';
+import { DataToApiI, ValidationErrorFieldsI } from './Types';
 /** Helpers */
 import { typeAssistants } from '../CreateUsersClinic/Contants'
+import { useMessage } from '@/hooks/useMessage';
 
 const CreateUsersClinic: React.FC = () => {
 
@@ -21,7 +23,8 @@ const CreateUsersClinic: React.FC = () => {
   const [email, setEmail] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [dataToApi, setDataToApi] = React.useState<DataToApiI>()
-  const [erros, setError] = React.useState<DataToApiI>({} as DataToApiI)
+  const [erros, setError] = React.useState<ValidationErrorFieldsI>({} as ValidationErrorFieldsI)
+  const [errorMessage, sendErrorMessage] = useMessage()
 
   React.useEffect(() => {
     setDataToApi({
@@ -59,23 +62,27 @@ const CreateUsersClinic: React.FC = () => {
           </section>
           <section>
             <InputMask
-              mask={'(99) 99999-9999'}
+              mask={'(99)99999-9999'}
               label='Celular*:'
               value={phone}
               hasError={!!erros.phone}
               msgError={erros.phone}
               setValue={setPhone} />
-            <InputText
+            <InputEmail
               label='E-mail*:'
               maxLength={200}
-              value={email}
-              setValue={setEmail}
-              hasError={!!erros.email}
-              msgError={erros.email} />
+              initialEmail={email}
+              hasError={(hasError) => setError({ ...erros, email: hasError })}
+              checkHasError={errorMessage}
+              onGetEmail={setEmail} />
           </section>
           <section>
             <ButtonBack dataToApi={dataToApi}/>
-            <ButtonRegister dataToApi={dataToApi} setErrors={setError}/>
+            <ButtonRegister
+              dataToApi={dataToApi}
+              erros={erros}
+              sendErrorMessage={sendErrorMessage}
+              setErrors={setError}/>
           </section>
         </section>
       </Container>

@@ -41,6 +41,11 @@ export const Container = styled.div`
       cursor: pointer;
       max-width: 250px;
       word-break: break-word;
+      &:not(:last-child) > svg {
+        > path {
+          fill: ${({ theme }) => theme.main};
+        }
+      }
     }
     ::marker {
       display: none;

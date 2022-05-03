@@ -4,8 +4,8 @@ import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../types'
 import { useHistory } from 'react-router-dom'
 import { OPERATOR_EDIT_ISSUING_AGENCY } from '@/routes/constants/namedRoutes/routes'
-import editIcon from '@/assets/icons/edit.svg'
-import trashIcon from '@/assets/icons/trash.svg'
+import { ReactComponent as EditIcon } from '@/assets/icons/edit.svg'
+import { ReactComponent as TrashIcon } from '@/assets/icons/trash.svg'
 import { useModal } from '@/hooks/useModal'
 import { useDeleteIssuingAgency } from './useDeleteIssuingAgency'
 import { toast } from '@/styles/components/toastify'
@@ -83,7 +83,7 @@ const Content: React.FC<ContentProps> = ({
                   })
                 }
               >
-                <img src={editIcon} />
+                <EditIcon />
               </button>
             </CustomTooltip>
 
@@ -97,7 +97,7 @@ const Content: React.FC<ContentProps> = ({
                   )
                 }
               >
-                <img src={trashIcon} />
+                <TrashIcon />
               </button>
             </CustomTooltip>
           </li>

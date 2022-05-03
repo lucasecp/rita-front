@@ -4,12 +4,16 @@ import React from 'react';
 import { Select } from '@/components/Form/Select'
 import InputText from '@/components/Form/InputText'
 import InputMask from '@/components/Form/InputMask';
+import { InputEmail } from '@/components/smarts/InputEmail';
 /** Styles */
 import { Container } from './styles'
 import ButtonEdit from './Components/ButtonEdit';
-import ButtonVoltar from './Components/ButtonVoltar';
+import ButtonBack from './Components/ButtonBack';
+import ButtonSave from './Components/ButtonSave';
+import ButtonCancel from './Components/ButtonCancel';
+import { useMessage } from '@/hooks/useMessage'
 /** Types */
-import { ValidationErrorFieldsI, DataToApiI } from './Types';
+import { DataToApiI, ValidationErrorFieldsI } from './Types';
 /** Helpers */
 import { typeAssistants } from '../EditUsersClinic/Contants'
 import { useHistory, useLocation } from 'react-router';
@@ -30,7 +34,7 @@ const EditUsersClinic: React.FC = () => {
   const [dataToApi, setDataToApi] = React.useState<DataToApiI>()
   const [erros, setError] = React.useState<ValidationErrorFieldsI>({} as ValidationErrorFieldsI)
   const [isEditing, setIsEditing] = React.useState(false)
-
+  const [errorMessage, sendErrorMessage] = useMessage()
 
   React.useEffect(() => {
     if (!location.state) {
@@ -64,8 +68,9 @@ const EditUsersClinic: React.FC = () => {
               value={typeAssistant}
               labelDefaultOption="Selecione"
               options={typeAssistants}
-              hasError={!!erros.hasError && erros.field === 'typeAssistant'}
-              msgError={erros.field === 'typeAssistant' && erros.msgError}
+              disabled={!isEditing}
+              hasError={!!erros.typeAssistant}
+              msgError={erros.typeAssistant}
               setValue={setTypeAssistant} />
           </section>
           <section>
@@ -74,40 +79,57 @@ const EditUsersClinic: React.FC = () => {
               mask={'999.999.999-99'}
               value={cpf}
               disabled
-              hasError={!!erros.hasError && erros.field === 'cpf'}
-              msgError={erros.field === 'cpf' && erros.msgError}
+              hasError={!!erros.cpf}
+              msgError={erros.cpf}
               setValue={setCpf} />
             <InputText label='Nome completo*:'
               maxLength={100}
               value={name}
-              hasError={!!erros.hasError && erros.field === 'name'}
-              msgError={erros.field === 'name' && erros.msgError}
+              disabled={!isEditing}
+              hasError={!!erros.name}
+              msgError={erros.name}
               setValue={setName} />
           </section>
           <section>
             <InputMask
-              mask={'(99) 99999-9999'}
+              mask={'(99)99999-9999'}
               label='Celular*:'
               value={phone}
-              hasError={!!erros.hasError && erros.field === 'phone'}
-              msgError={erros.field === 'phone' && erros.msgError}
+              disabled={!isEditing}
+              hasError={!!erros.phone}
+              msgError={erros.phone}
               setValue={setPhone} />
-            <InputText
+            <InputEmail
               label='E-mail*:'
               maxLength={200}
-              value={email}
-              setValue={setEmail}
-              hasError={!!erros.hasError && erros.field === 'email'}
-              msgError={erros.field === 'email' && erros.msgError} />
+              initialEmail={email}
+              disabled={!isEditing}
+              hasError={(hasError) => setError({ ...erros, email: hasError })}
+              checkHasError={errorMessage}
+              onGetEmail={setEmail} />
           </section>
           <section>
-            <ButtonVoltar
-              dataToApi={dataToApi}/>
-            <ButtonEdit
-              dataToApi={dataToApi}
-              isEditing={isEditing}
-              setIsEditing={setIsEditing}
-              setErrors={setError}/>
+            {!isEditing ?
+              <>
+                <ButtonBack
+                  dataToApi={dataToApi} />
+                <ButtonEdit
+                  setIsEditing={setIsEditing} />
+              </> :
+
+              <>
+                <ButtonCancel
+                  dataToApi={dataToApi}
+                  setErrors={setError}
+                  getUserClinicById={getUserClinicById}
+                  setIsEditing={setIsEditing} />
+                <ButtonSave
+                  dataToApi={dataToApi}
+                  erros={erros}
+                  sendErrorMessage={sendErrorMessage}
+                  setErrors={setError} />
+              </>
+            }
           </section>
         </section>
       </Container>

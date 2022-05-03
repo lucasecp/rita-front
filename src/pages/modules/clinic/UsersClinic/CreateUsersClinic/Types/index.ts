@@ -1,7 +1,9 @@
 export interface ValidationErrorFieldsI {
-   hasError: boolean,
-   msgError: string,
-   field: string
+  typeAssistant: string,
+  name: string,
+  cpf: string
+  email: boolean,
+  phone: string
 }
 
 export interface DataToApiI {
@@ -9,5 +11,6 @@ export interface DataToApiI {
   name: string,
   cpf: string
   email: string,
-  phone: string
+  phone: string,
+  phoneWithCaracters?: string,
 }
