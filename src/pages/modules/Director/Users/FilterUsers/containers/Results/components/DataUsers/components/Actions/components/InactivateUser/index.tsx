@@ -9,6 +9,7 @@ import { toast } from '@/styles/components/toastify'
 import apiUser from '@/services/apiUser'
 
 import { User } from '../../index'
+import {Container} from './styles'
 
 interface InactivateUserProps {
   userData: User
@@ -38,8 +39,10 @@ export const InactivateUser: React.FC<InactivateUserProps> = ({
   }
 
   return (
-    <CustomTooltip label="Inativar">
-      <InactivateIcon onClick={onInactivateUser} />
-    </CustomTooltip>
+    <Container>
+      <CustomTooltip label="Inativar">
+        <InactivateIcon onClick={onInactivateUser} />
+      </CustomTooltip>
+    </Container>
   )
 }

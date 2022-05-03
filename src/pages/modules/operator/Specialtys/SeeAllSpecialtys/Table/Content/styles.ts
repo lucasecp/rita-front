@@ -34,6 +34,11 @@ export const Container = styled.div`
     margin-right: 24px;
     min-width: 217px;
     max-width: 217px;
+    > svg {
+      > path {
+        fill: ${({ theme }) => theme.main};
+      }
+    }
     ::marker {
       display: none;
       color: transparent;

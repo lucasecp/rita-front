@@ -45,6 +45,11 @@ export const Container = styled.div`
     &:last-child {
       margin-right: 0;
     }
+    > svg {
+      > path {
+        fill: ${({ theme }) => theme.main};
+      }
+    }
   }
   > h2 {
     font-size: 20px;

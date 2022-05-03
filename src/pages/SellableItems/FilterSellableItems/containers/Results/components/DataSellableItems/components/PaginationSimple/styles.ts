@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import arrowLeft from '@/assets/icons/arrow-left.svg'
-import arrowRight from '@/assets/icons/arrow-right.svg'
+import { ReactComponent as PrevIcon } from '@/assets/icons/arrow-left.svg'
+import { ReactComponent as NextIcon } from '@/assets/icons/arrow-right.svg'
 // import { Link } from 'react-router-dom'
 
 interface PrevNextProps {
@@ -41,37 +41,40 @@ export const Container = styled.div`
     }
   }
 `
-export const Next = styled.button<PrevNextProps>`
-  background-image: url(${arrowRight});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
+export const Next = styled(NextIcon)<PrevNextProps>`
   width: 30px;
   height: 30px;
   cursor: default !important;
+
+  > path {
+    stroke: ${({ theme }) => theme.mediumLight};
+  }
 
   ${({ active }) =>
     active &&
     css`
       cursor: pointer !important;
-      filter: invert(31%) sepia(80%) saturate(3735%) hue-rotate(251deg)
-        brightness(101%) contrast(101%);
+      > path {
+        stroke: ${({ theme }) => theme.main};
+      }
     `}
 `
-export const Prev = styled.button<PrevNextProps>`
-  background-image: url(${arrowLeft});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
+
+export const Prev = styled(PrevIcon)<PrevNextProps>`
   width: 30px;
   height: 30px;
   cursor: default !important;
+
+  > path {
+    stroke: ${({ theme }) => theme.mediumLight};
+  }
 
   ${({ active }) =>
     active &&
     css`
       cursor: pointer !important;
-      filter: invert(31%) sepia(80%) saturate(3735%) hue-rotate(251deg)
-        brightness(101%) contrast(101%);
+      > path {
+        stroke: ${({ theme }) => theme.main};
+      }
     `}
 `
