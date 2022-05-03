@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import moment from 'moment'
 import { useHistory, NavLink } from 'react-router-dom'
+import moment from 'moment'
 
 // import apiWallet from '@/services/apiWallet'
 import { useLoading } from '@/hooks/useLoading'
@@ -10,7 +10,7 @@ import { ReactComponent as ExclamationCircleIcon } from '@/assets/icons/exclamat
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { Table } from '@/components/Table'
 import ButtonPrimary from '@/components/Button/Primary'
-import { Container } from './styles'
+import { Container, NoRecordsWarn } from './styles'
 
 export const WalletTableImportList: React.FC = () => {
   const [tableData, setTableData] = useState<any[]>([])
@@ -121,7 +121,7 @@ export const WalletTableImportList: React.FC = () => {
             onPaginate={setTablePaging}
           />
         ) : (
-          <section>
+          <NoRecordsWarn>
             <ExclamationCircleIcon />
             <p>Ainda não existem Tabelas Importadas no sistema.</p>
             <div>
@@ -129,7 +129,7 @@ export const WalletTableImportList: React.FC = () => {
                 Nova Tabela
               </ButtonPrimary>
             </div>
-          </section>
+          </NoRecordsWarn>
         )}
       </Container>
     </DefaultLayout>
