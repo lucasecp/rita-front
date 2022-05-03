@@ -97,6 +97,7 @@ export const WalletSettings: React.FC = () => {
         .toISOString(),
       cvv: model.securityCode,
       alias: 'abc-123',
+      asDefault: model.asDefault,
       user: {
         ritaId: String(user.id),
         token: user.token,
