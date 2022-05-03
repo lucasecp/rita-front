@@ -1,87 +1,136 @@
-import isEmail from '@/helpers/isEmail'
 import isValidateCpf from '@/helpers/validateCpf'
-import { DataToApiI } from '../Types'
+import { DataToApiI, ValidationErrorFieldsI } from '../Types'
 
 export const validateLengthField = (
   dataToApi: DataToApiI,
-  setErrors: any,
+  setErrors: React.Dispatch<React.SetStateAction<ValidationErrorFieldsI>>,
 ): boolean => {
+
+  const errors = []
+
   if (dataToApi.typeAssistant === '') {
-    setErrors({
-      hasError: true,
-      msgError: 'Tipo de assistente obrigatório.',
-      field: 'typeAssistant',
-    })
-    return true
+    setErrors((errors) => ({
+      ...errors,
+      typeAssistant: 'Tipo de assistente obrigatório.',
+    }))
+    errors.push(true)
+  }else {
+    setErrors((errors) => ({
+      ...errors,
+      typeAssistant: '',
+    }))
   }
+
   if (dataToApi.name === '') {
-    setErrors({
-      hasError: true,
-      msgError: 'Nome obrigatório.',
-      field: 'name',
-    })
-    return true
+    setErrors((errors => ({
+      ...errors,
+      name: 'Nome obrigatório.',
+    })))
+    errors.push(true)
+  }else {
+    setErrors((errors) => ({
+      ...errors,
+      name: '',
+    }))
   }
+
   if (dataToApi.cpf === '') {
-    setErrors({
-      hasError: true,
-      msgError: 'CPF obrigatório.',
-      field: 'cpf',
-    })
-    return true
+    setErrors((errors => ({
+      ...errors,
+      cpf: 'CPF obrigatório.',
+    })))
+    errors.push(true)
+  }else {
+    setErrors((errors) => ({
+      ...errors,
+      cpf: '',
+    }))
   }
-  if (dataToApi.email === '') {
-    setErrors({
-      hasError: true,
-      msgError: 'E-mail obrigatório.',
-      field: 'email',
-    })
-    return true
-  }
-  if (!isEmail(dataToApi.email)) {
-    setErrors({
-      hasError: true,
-      msgError: 'E-mail inválido.',
-      field: 'email',
-    })
-    return true
-  }
+
+  // if (dataToApi.email === '') {
+  //   setErrors((errors => ({
+  //     ...errors,
+  //     email: 'E-mail obrigatório.',
+  //   })))
+  //   errors.push(true)
+  // }else {
+  //   setErrors((errors) => ({
+  //     ...errors,
+  //     email: '',
+  //   }))
+  // }
+
+  // if (!isEmail(dataToApi.email)) {
+  //   setErrors((errors => ({
+  //     ...errors,
+  //     email: 'E-mail inválido.',
+  //   })))
+  //   errors.push(true)
+  // }else {
+  //   setErrors((errors) => ({
+  //     ...errors,
+  //     email: '',
+  //   }))
+  // }
+
   if (dataToApi.phone === '') {
-    setErrors({
-      hasError: true,
-      msgError: 'Celular obrigatório.',
-      field: 'phone',
-    })
-    return true
+    setErrors((errors => ({
+      ...errors,
+      phone: 'Celular obrigatório.',
+    }
+    )))
+    errors.push(true)
+  }else {
+    setErrors((errors) => ({
+      ...errors,
+      phone: '',
+    }))
   }
+
   if (Number(dataToApi.cpf.length) < 11) {
-    setErrors({
-      hasError: true,
-      msgError: 'CPF precisa ter 11 caracteres.',
-      field: 'cpf',
-    })
-    return true
+    setErrors((errors) => ({
+      ...errors,
+      cpf: 'CPF precisa ter 11 caracteres.',
+    }))
+    errors.push(true)
+  }else {
+    setErrors((errors) => ({
+      ...errors,
+      cpf: '',
+    }))
   }
+
   if (!isValidateCpf(dataToApi.cpf)) {
-    setErrors({
-      hasError: true,
-      msgError: 'CPF inválido.',
-      field: 'cpf',
-    })
-    return true
+    setErrors((errors) => ({
+      ...errors,
+      cpf: 'CPF inválido.',
+    }))
+    errors.push(true)
   }
+  else {
+    setErrors((errors) => ({
+      ...errors,
+      cpf: '',
+    }))
+  }
+
   if (Number(dataToApi.phone.length) < 11) {
-    setErrors({
-      hasError: true,
-      msgError: 'Celular precisa ter 11 caracteres.',
-      field: 'phone',
-    })
+    setErrors((errors) => ({
+      ...errors,
+      phone: 'Celular precisa ter 11 caracteres.',
+    }))
+    errors.push(true)
+  }else {
+    setErrors((errors) => ({
+      ...errors,
+      phone: '',
+    }))
+  }
+
+  if(!errors.length){
+    return false
+  }else{
     return true
   }
-  setErrors({
-    hasError: false,
-    msgError: '',
-    field: '',
-  })
-  return false
+
 }

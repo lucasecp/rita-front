@@ -29,7 +29,7 @@ const ButtonBack: React.FC<{ dataToApi: DataToApiI }> = ({ dataToApi }) => {
   }
 
   return (
-    <Outline small onClick={onBack}>Voltar</Outline>
+    <Outline onClick={onBack}>Voltar</Outline>
   );
 };
 
