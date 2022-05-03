@@ -1,4 +1,5 @@
 /** Types */
+import clearSpecialCharacters from '@/helpers/clearSpecialCharacters'
 import { DataToApiI } from '../Types'
 
 export const toApi = (dataToApi: DataToApiI) => {
