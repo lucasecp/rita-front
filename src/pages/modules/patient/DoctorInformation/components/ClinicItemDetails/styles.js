@@ -50,7 +50,7 @@ export const Container = styled.div`
     }
     & + span + span {
       padding: 8px;
-      background${({ theme }) => theme.main};
+      background: ${({ theme }) => theme.main};
       color: #fff;
       font-size: 16px;
       font-weight: 700;
