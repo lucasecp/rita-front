@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom'
 import formatTextWithLimit from '@/helpers/formatTextWithLimit'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
 import { OPERATOR_SEE_ONE_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
-import edit from '@/assets/icons/edit.svg'
+import { ReactComponent as EditIcon } from '@/assets/icons/edit.svg'
 
 const Content: React.FC<ContentProps> = ({ specialists }) => {
   const history = useHistory()
@@ -39,7 +39,7 @@ const Content: React.FC<ContentProps> = ({ specialists }) => {
                   })
                 }
               >
-                <img src={edit} />
+                <EditIcon />
               </button>
             </CustomTooltip>
           </li>

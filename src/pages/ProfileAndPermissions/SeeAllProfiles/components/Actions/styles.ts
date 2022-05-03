@@ -8,4 +8,9 @@ export const Container = styled.li`
   svg {
     cursor: pointer;
   }
+  > svg:not(:last-child) {
+    > path {
+      fill: ${({ theme }) => theme.main};
+    }
+  }
 `
