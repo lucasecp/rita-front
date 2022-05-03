@@ -75,7 +75,7 @@ export const WalletTableImportList: React.FC = () => {
       <Container>
         <h3>
           Importação de Tabelas
-          {tableData && tableData.length && (
+          {tableData && tableData.length > 0 && (
             <ButtonPrimary medium onClick={handleNewTableClick}>
               Nova Tabela
             </ButtonPrimary>
