@@ -40,9 +40,10 @@ const Header: React.FC<HeaderProps> = ({ data, setPhoto: setPhotoSpecialist }) =
       formData.append('file', photo)
       await apiAdmin.post(`/medico/arquivo?cpf=${data.specialistInfo.cpf}&tipoDocumento=FotoPerfil`, formData)
       toast.success('Foto atualizada com sucesso!')
-      Loading.turnOn()
     } catch (error) {
       toast.error('Ops! Houve um problema ao tentar adicionar uma foto no perfil, tente novamente.')
+    } finally {
+      Loading.turnOff()
     }
   }
 
