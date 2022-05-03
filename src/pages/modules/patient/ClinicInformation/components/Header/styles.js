@@ -66,7 +66,7 @@ export const Container = styled.div`
         font-size: 16px;
         font-weight: 700;
         line-height: 20px;
-        color${({ theme }) => theme.main};
+        color: ${({ theme }) => theme.main};
         text-decoration: underline;
       }
       > span {
