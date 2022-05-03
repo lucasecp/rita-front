@@ -50,7 +50,7 @@ export const WalletPayments: React.FC = () => {
     take: 10,
     skip: 0,
   })
-  const [paymentsAllCount, setPaymentsAllCount] = useState(0)
+  const [tablePaymentsAllCount, setTablePaymentsAllCount] = useState(0)
   const { showMessage } = useModal()
   const { Loading } = useLoading()
 
@@ -108,7 +108,7 @@ export const WalletPayments: React.FC = () => {
 
       if (Array.isArray(data)) {
         setPaymentsAll(data)
-        setPaymentsAllCount(100)
+        setTablePaymentsAllCount(100)
       }
     }
 
@@ -256,7 +256,7 @@ export const WalletPayments: React.FC = () => {
             childRow={(row) => <div>{row.description}</div>}
             data={paymentsAll}
             sort={tablePaymentsAllSort}
-            count={paymentsAllCount}
+            count={tablePaymentsAllCount}
             onSort={setTablePaymentsAllSort}
             onPaginate={setTablePaymentsAllPaging}
           />

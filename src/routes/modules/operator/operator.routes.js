@@ -23,6 +23,8 @@ import {
   OPERATOR_REPORTS_PATIENT_ANALYTIC,
   OPERATOR_WALLET_DASHBOARD,
   OPERATOR_WALLET_SETTINGS,
+  OPERATOR_WALLET_TABLE_IMPORT_LIST,
+  OPERATOR_WALLET_TABLE_IMPORT_CREATE,
 } from '../../constants/namedRoutes/routes'
 
 import { SeeOnePatient } from '@/pages/modules/operator/Patients/SeeOnePatient'
@@ -49,6 +51,10 @@ import SeeAllIssuingAgency from '@/pages/modules/operator/IssuingAgency/SeeAllIs
 import CreateIssuingAgency from '@/pages/modules/operator/IssuingAgency/CreateIssuingAgency'
 import { WalletDashboard } from '@/pages/modules/operator/WalletDashboard'
 import WalletSettings from '@/pages/modules/operator/WalletSettings'
+import {
+  WalletTableImportList,
+  WalletTableImportCreate
+} from '@/pages/modules/operator/WalletTableImport'
 
 const operatorRoutes = [
   {
@@ -134,6 +140,14 @@ const operatorRoutes = [
   {
     path: OPERATOR_WALLET_SETTINGS,
     component: WalletSettings,
+  },
+  {
+    path: OPERATOR_WALLET_TABLE_IMPORT_LIST,
+    component: WalletTableImportList,
+  },
+  {
+    path: OPERATOR_WALLET_TABLE_IMPORT_CREATE,
+    component: WalletTableImportCreate,
   },
 ]
 

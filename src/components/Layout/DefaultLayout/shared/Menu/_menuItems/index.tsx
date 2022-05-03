@@ -41,6 +41,7 @@ import {
   OPERATOR_WALLET_PAYMENTS,
   OPERATOR_WALLET_STATEMENTS,
   OPERATOR_WALLET_SETTINGS,
+  OPERATOR_WALLET_TABLE_IMPORT_LIST,
   FILTER_SELLABLE_ITEMS,
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ALL_SPECIALTYS,
@@ -160,6 +161,10 @@ export const menuItens = [
       {
         path: OPERATOR_WALLET_SETTINGS,
         name: 'Configurações',
+      },
+      {
+        path: OPERATOR_WALLET_TABLE_IMPORT_LIST,
+        name: 'Importação de Tabelas',
       },
     ],
   },

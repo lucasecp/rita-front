@@ -7,8 +7,9 @@ export const Route = ({
   component: Component,
   isPrivate = false,
   path,
-  exact = true,
+  ...rest
 }) => {
+  console.log({ ...rest })
   const { isAuthorization, logout } = useAuth()
 
   if (!isAuthorization() && isPrivate) {
@@ -16,5 +17,5 @@ export const Route = ({
     return <Redirect to={{ pathname: LOGIN, state: { from: path } }} />
   }
 
-  return <ReactRoute component={Component} exact={exact} />
+  return <ReactRoute component={Component} {...rest} />
 }
