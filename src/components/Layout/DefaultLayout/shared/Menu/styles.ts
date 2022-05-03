@@ -117,6 +117,7 @@ export const Container = styled.ul<{ expanded: boolean }>`
         padding: 10px 24px;
         font-size: 16px;
         color: ${colors.gray.dark};
+        word-break: break-word;
 
         transition-property: box-shadow, color;
         transition-duration: 300ms;

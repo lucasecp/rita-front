@@ -39,6 +39,10 @@ export const OPERATOR_WALLET_PAYMENTS = '/operador/carteira-digital/pagamentos'
 export const OPERATOR_WALLET_STATEMENTS = '/operador/carteira-digital/extratos'
 export const OPERATOR_WALLET_SETTINGS =
   '/operador/carteira-digital/configuracoes'
+export const OPERATOR_WALLET_TABLE_IMPORT_LIST =
+  '/operador/carteira-digital/importacao-de-tabelas'
+export const OPERATOR_WALLET_TABLE_IMPORT_CREATE =
+  '/operador/carteira-digital/importacao-de-tabelas/criar'
 
 export const CLINIC_SEE_ALL_SPECIALIST = '/clinica-especialista'
 export const CLINIC_SEE_ALL_USERS = '/clinica-usuarios'
@@ -118,8 +122,10 @@ export const REGISTER_SPECIALIST = '/cadastro/especialista/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const REASON_TO_LEAVE = '/motivo-para-sair/:token'
+export const PLANS = '/planos'
 export const NEW_REGISTER_PATIENT_CHOOSE_REGION =
   '/paciente/cadastro/escolher-regiao'
+export const NEW_REGISTER_PATIENT_DOCUMENTS = '/paciente/cadastro/documentos'
 
 export const TESTE = '/teste'
 

@@ -4,7 +4,7 @@ import CustomTooltip from '@/components/Tooltip'
 import { ContentProps } from '../../../SeeAllSpecialtys/types'
 import { useHistory } from 'react-router-dom'
 import { OPERATOR_EDIT_SPECIALTYS } from '@/routes/constants/namedRoutes/routes'
-import edit from '@/assets/icons/edit.svg'
+import { ReactComponent as EditIcon } from '@/assets/icons/edit.svg'
 
 const Content: React.FC<ContentProps> = ({ specialtys }) => {
   const history = useHistory()
@@ -36,7 +36,7 @@ const Content: React.FC<ContentProps> = ({ specialtys }) => {
                   })
                 }
               >
-                <img src={edit} />
+                <EditIcon />
               </button>
             </CustomTooltip>
           </li>
