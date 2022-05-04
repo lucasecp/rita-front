@@ -42,7 +42,6 @@ function RegisterCardSabin() {
       const { data: responseApi } = await apiPatient.get(
         `/paciente/status?cpf=${cpf}`,
       )
-      console.log(responseApi)
 
       company = responseApi.empresa && responseApi.empresa[0]
 

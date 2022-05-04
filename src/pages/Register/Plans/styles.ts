@@ -36,20 +36,14 @@ export const TitleAndLogo = styled.div`
     font-size: 24px;
     line-height: 33px;
     color: ${colors.purple.main.dark};
-    margin-bottom: 48px;
+    margin-bottom: 16px;
   }
   h2 {
-    font-family: Athletics;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-
-    color: ${colors.gray.dark};
-
-    /* .MuiTypography-body1.Mui-disabled {
-    color: ${colors.gray.middleLight};
-  } */
+    font-size: 22px;
+    color: ${colors.gray.middle};
   }
+
   @media (min-width: 767px) {
     > img {
       width: 100px;
@@ -83,6 +77,21 @@ export const TextAreaAndErrorMessage = styled.div`
       color: #afafaf;
     }
   }
+`
+
+export const CardArea = styled.div`
+  display: flex;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 20px;
+`
+
+export const Card = styled.div`
+  height: 200px;
+  width: 100px;
+  padding: 24px;
+  background-color: ${colors.purple.main.light};
 `
 
 export const ButtonArea = styled.div`

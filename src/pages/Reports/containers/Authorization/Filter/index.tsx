@@ -389,7 +389,6 @@ const FilterAuthorization: React.FC = () => {
           </span>
         </Controls>
       </Container>
-      {console.log(columns)}
       {submitGeneratePreview && (
         <TableReport
           patients={patients}

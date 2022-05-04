@@ -16,8 +16,6 @@ export const WalletBuyCoinPayPix: React.FC = () => {
   const timer = useRef<NodeJS.Timeout>()
 
   async function handleCopyClick() {
-    console.log('handleCopyClick')
-
     await navigator.clipboard.writeText(pixStringCode)
     setIsCopied(true)
 

@@ -81,7 +81,6 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
 
   const registerDocsSpecialtys = async () => {
     const listDocs = createListFormDataOfSpecialtys()
-    console.log(listDocs)
 
     try {
       await axios.all(

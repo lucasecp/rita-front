@@ -3,6 +3,7 @@ import moment from 'moment'
 
 import apiWallet from '@/services/apiWallet'
 import formatPrice from '@/helpers/formatPrice'
+import convertWalletMoneyToCrown from '@/helpers/convertWalletMoneyToCrown'
 import { useLoading } from '@/hooks/useLoading'
 import { ReactComponent as EyeOpenedIcon } from '@/assets/icons/eye-opened.svg'
 import { ReactComponent as EyeClosedIcon } from '@/assets/icons/eye-closed.svg'
@@ -19,11 +20,6 @@ const periodOptions = [
   { label: '15 dias', value: 15 },
   { label: '30 dias', value: 30 },
 ]
-
-function convertPriceToCrownValue(amount: number, currency?: string) {
-  // @TODO: implement currency
-  return amount * 100
-}
 
 export const WalletStatements: React.FC = () => {
   const tableItems = useRef<any>()
@@ -127,7 +123,7 @@ export const WalletStatements: React.FC = () => {
                 <TableColumnAmount>
                   <span>{formatPrice(row.debitAmount)}</span>
                   <small>
-                    <CrownIcon /> {convertPriceToCrownValue(row.debitAmount)}
+                    <CrownIcon /> {convertWalletMoneyToCrown(row.debitAmount)}
                   </small>
                   {String(row.transactionMode).toUpperCase() === 'DEBIT' && (
                     <ArrowUpIcon className="debit" />

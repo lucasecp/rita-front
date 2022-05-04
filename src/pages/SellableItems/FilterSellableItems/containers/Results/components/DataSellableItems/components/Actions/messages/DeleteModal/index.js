@@ -49,8 +49,6 @@ const DeleteModal = ({ plan }) => {
     }
   }
 
-  console.log(plan)
-
   return (
     <Container>
       <div>

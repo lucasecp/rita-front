@@ -7,7 +7,6 @@ import { DependentResponseApi, DependentDataType } from '../types'
 export const fromApi = (
   dependentInfo: DependentResponseApi,
 ): DependentDataType => {
-  console.log(dependentInfo)
   return {
     personalDatas: {
       name: dependentInfo.nome,

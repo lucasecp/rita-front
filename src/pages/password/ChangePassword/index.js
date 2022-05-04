@@ -107,7 +107,6 @@ export const ChangePassword = () => {
           return [typesResponses.PASSWORD_CHANGED_SUCCESSFULLY]
 
         default:
-          console.log(response)
           return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
       }
     } catch ({ response }) {
@@ -124,13 +123,11 @@ export const ChangePassword = () => {
             return
 
           default:
-            console.log(response)
             return [typesResponses.FRONTEND_COULD_NOT_HANDLE_ERROR]
         }
       }
 
       if (response.status.toString()[0] === '5') {
-        console.log(response)
         return [typesResponses.INTERNAL_SERVER_ERROR]
       }
     } finally {

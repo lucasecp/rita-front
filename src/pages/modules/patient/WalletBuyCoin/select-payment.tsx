@@ -34,7 +34,7 @@ export const WalletBuyCoinSelectPayment: React.FC<
     if (selectedOption) {
       // @TODO: switch modals between credit card and pix
       // @TODO: api.post buy coin
-      console.log('handleForwardClick', value, selectedOption)
+      // console.log('handleForwardClick', value, selectedOption)
       showMessage(WalletBuyCoinPayPix, {}, true)
     } else {
       setHasError(true)
