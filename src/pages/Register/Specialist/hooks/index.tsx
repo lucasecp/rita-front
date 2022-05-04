@@ -112,6 +112,9 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   }
 
   const registerPhoto = async () => {
+    if (!photo) {
+      return
+    }
     try {
       const formFile = new FormData()
 

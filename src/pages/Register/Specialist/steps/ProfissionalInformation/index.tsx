@@ -31,6 +31,7 @@ const ProfissionalInformation: React.FC = () => {
   const { step, nextStep, setProfissionalInfo, errors, setErrors } =
     useRegisterSpecialist()
   const { hasErrors } = useValidator()
+  console.log(specialtys)
 
   const onNextStep = () => {
     sendErrorMessage()

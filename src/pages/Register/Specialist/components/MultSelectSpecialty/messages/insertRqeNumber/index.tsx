@@ -6,6 +6,7 @@ import { Container, FormGroup } from './styles'
 import { useModal } from '@/hooks/useModal'
 import InputText from '@/components/Form/InputText/index'
 import { MultiSelectOption } from '@/components/Form/MultSelect/index'
+import OutlineButton from '@/components/Button/Outline'
 
 interface InsertRqeNumberProps {
   setSpecialtys: (option: any) => MultiSelectOption[]
@@ -32,6 +33,14 @@ const InsertRqeNumber: React.FC<InsertRqeNumberProps> = ({
     closeModal()
   }
 
+  const cancelRqe = () => {
+    setSpecialtys((specialtys: MultiSelectOption[]) => [
+      ...specialtys,
+      currentSpecialty,
+    ])
+    closeModal()
+  }
+
   return (
     <Container>
       <img src={warningIcon} />
@@ -46,7 +55,12 @@ const InsertRqeNumber: React.FC<InsertRqeNumberProps> = ({
           hasError={!!error}
           msgError={error}
         />
-        <ButtonPrimary onClick={onInsertRqe}>Enviar</ButtonPrimary>
+        <div>
+          <OutlineButton onClick={cancelRqe} variation="red">
+            Cancelar
+          </OutlineButton>
+          <ButtonPrimary onClick={onInsertRqe}>Enviar</ButtonPrimary>
+        </div>
       </FormGroup>
     </Container>
   )
