@@ -39,7 +39,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
     }
 
     if (initialEmail) {
-      setIsToLoadInitialEmail(false)
+      setIsToLoadInitialEmail(true)
     }
   }, [initialEmail])
 

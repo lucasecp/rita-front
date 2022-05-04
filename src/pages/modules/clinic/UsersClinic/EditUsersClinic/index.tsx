@@ -50,7 +50,6 @@ const EditUsersClinic: React.FC = () => {
     setPhone(result.data.celular)
     setName(result.data.nome)
     setTypeAssistant(result.data?.perfis[0]?.nome)
-    console.log({getUserClinicById: result.data})
   }
 
   React.useEffect(() => {
