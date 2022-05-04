@@ -16,7 +16,7 @@ const SpecialistProfile: React.FC = () => {
   const [specialtysDocs, setSpecialtysDocs] = useState<SpecialtysAndDocsType>(
     {} as SpecialtysAndDocsType,
   )
-  const [photo] = useState<File>()
+  const [photo, setPhoto] = useState<File>()
   const [makeNewRequest, setMakeNewRequest] = useState(false)
   const { Loading } = useLoading()
 
@@ -41,7 +41,6 @@ const SpecialistProfile: React.FC = () => {
       try {
         Loading.turnOn()
         const { data } = await apiAdmin.get('/medico/meu-perfil')
-
         const dataMapped = fromApi(data)
 
         if (dataMapped.specialtys.length) {
@@ -61,7 +60,7 @@ const SpecialistProfile: React.FC = () => {
   return (
     <DefaultLayout title="Perfil - Visualizar">
       <Content>
-        <Header data={data} />
+        <Header data={data} setPhoto={setPhoto}/>
         <Form
           data={data}
           profilePhoto={photo}
