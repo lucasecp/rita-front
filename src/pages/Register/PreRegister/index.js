@@ -33,7 +33,6 @@ function PreRegister() {
   const { showMessage } = useModal()
 
   const userData = location.state
-  console.log(userData)
 
   const [choice, setChoice] = useState('')
 

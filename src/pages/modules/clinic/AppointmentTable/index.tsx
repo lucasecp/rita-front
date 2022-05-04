@@ -20,7 +20,6 @@ const AppointmentTable: React.FC = () => {
   const [specialtysToApi, setSpecialtysTopApi] = useState<SpecialtysToApiI>(
     {} as SpecialtysToApiI,
   )
-  console.log(fieldWasChanged)
 
   const { Loading } = useLoading()
   const { showMessage, showSimple } = useModal()

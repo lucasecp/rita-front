@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 
 import formatPrice from '@/helpers/formatPrice'
+import convertWalletMoneyToCrown from '@/helpers/convertWalletMoneyToCrown'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
@@ -37,6 +38,36 @@ export const PaymentRequestSummary: React.FC<PaymentRequestSummaryProps> = ({
       </header>
 
       <section>
+        <ul>
+          <li>
+            Tipo:
+            <span>{data.transactionType}</span>
+          </li>
+          <li>
+            Atendimento:
+            <span>{data.description}</span>
+          </li>
+          <li>
+            Data e hora:
+            <span>{moment(data.createdAt).format('DD/MM/YYYY [às] HH[h]mm')}</span>
+          </li>
+          {/* <li>
+            Valor sem desconto:
+            <span>{data.debitAmount}</span>
+          </li> */}
+          <li>
+            Valor a ser pago com Rita Saúde:
+            <span>
+              {formatPrice(data.debitAmount)}
+              <small>
+                (
+                <CrownIcon />
+                {convertWalletMoneyToCrown(data.debitAmount)})
+              </small>
+            </span>
+          </li>
+        </ul>
+
         <table>
           <thead>
             <tr>

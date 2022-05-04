@@ -63,7 +63,7 @@ export const ProfissionalDatas: React.FC<ProfissionalDatasProps> = ({
     setCashBack(data?.cashback || '')
     setTakeRate(data?.takerate || '')
   }, [data])
-  console.log(cashBack)
+
   useEffect(() => {
     setData({
       profissionalName,

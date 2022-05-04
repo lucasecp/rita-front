@@ -91,8 +91,6 @@ export const CreateProfile: React.FC = () => {
         checkedPermissions,
       )
 
-      console.log(profilePermissionsAndNamesMApped)
-
       await apiUser.post(`/perfil`, profilePermissionsAndNamesMApped)
       toast.success('Cadastro realizado com sucesso.')
       history.push(DIRECTOR_SEE_ALL_PROFILES)

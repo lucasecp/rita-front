@@ -39,8 +39,6 @@ export const statusFromApi = (status: string): string => {
 export const previewBillingsFromApi = (
   data: PreviewBillingsFromApi,
 ): PreviewBillingsState => {
-  console.log(data)
-
   return {
     patients: data.dados.map((patient, index) => ({
       id: String(index + 1),

@@ -3,6 +3,7 @@ import useLocalStorage from 'use-local-storage'
 
 import apiWallet from '@/services/apiWallet'
 import formatPrice from '@/helpers/formatPrice'
+import convertWalletMoneyToCrown from '@/helpers/convertWalletMoneyToCrown'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
@@ -12,11 +13,6 @@ import { PaymentRequestRejection } from '@/pages/Initial/messages/PaymentRequest
 import warning from '@/assets/icons/alert-circle.svg'
 import { ReactComponent as CrownIcon } from '@/assets/icons/crown.svg'
 import { Container, BodyAmountToPay } from './styles'
-
-function convertPriceToCrownValue(amount: number, currency?: string) {
-  // @TODO: implement currency
-  return amount * 100
-}
 
 const defaultMaximumAttempts = 3
 
@@ -68,13 +64,13 @@ export const PaymentRequest: React.FC<PaymentRequestProps> = ({
         <p>{paymentRequest.description}</p>
 
         <BodyAmountToPay>
-          {/* <small>De <del><strong>{formatPrice(280)}</strong></del> por</small> */}
+          {/* <small>De <del><strong>{formatPrice(paymentRequest.debitAmount)}</strong></del> por</small> */}
           <span>
             <strong>{formatPrice(paymentRequest.debitAmount)}</strong>{' '}
             <small>
               (
               <CrownIcon />
-              {convertPriceToCrownValue(paymentRequest.debitAmount)})
+              {convertWalletMoneyToCrown(paymentRequest.debitAmount)})
             </small>
             <br />
             pagando com Rita Saúde

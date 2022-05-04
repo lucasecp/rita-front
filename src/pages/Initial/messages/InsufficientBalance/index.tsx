@@ -1,6 +1,7 @@
 import React from 'react'
 
 import formatPrice from '@/helpers/formatPrice'
+import convertWalletMoneyToCrown from '@/helpers/convertWalletMoneyToCrown'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
@@ -13,11 +14,6 @@ import { Container, ButtonGroup } from './styles'
 type InsufficientBalanceProps = {
   walletBalance: number
   debitAmount: number
-}
-
-function convertPriceToCrownValue(amount: number) {
-  // @TODO: implement currency
-  return amount * 100
 }
 
 export const InsufficientBalance: React.FC<InsufficientBalanceProps> = ({
@@ -52,7 +48,7 @@ export const InsufficientBalance: React.FC<InsufficientBalanceProps> = ({
           {formatPrice(remaningAmount)}{' '}
           <small>
             (<CrownIcon />
-            {convertPriceToCrownValue(remaningAmount)})
+            {convertWalletMoneyToCrown(remaningAmount)})
           </small>
         </strong>{' '}
         para realizar essa compra.

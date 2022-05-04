@@ -17,7 +17,6 @@ const SeeOneSpecialist: React.FC = () => {
     if (!location.state) {
       return history.push(CLINIC_SEE_ALL_SPECIALIST)
     }
-    console.log(location.state.idDoctor)
 
     document.title = 'Rita Saúde | Informações Especialista'
 
