@@ -79,14 +79,17 @@ const directorRoutes = [
   },
   {
     path: FILTER_USERS,
+    // exact: true,
     component: FilterUsers,
   },
   {
     path: SEE_ONE_USER,
+    exact: true,
     component: SeeOneUser,
   },
   {
     path: EDIT_USER,
+    exact: true,
     component: EditUser,
   },
   {
@@ -100,7 +103,7 @@ const directorRoutes = [
 ]
 
 const directorRoutesComponents = directorRoutes.map((props, index) => (
-  <Route key={index} isPrivate {...props} />
+  <Route key={index} isPrivate {...props} exact />
 ))
 
 export default directorRoutesComponents
