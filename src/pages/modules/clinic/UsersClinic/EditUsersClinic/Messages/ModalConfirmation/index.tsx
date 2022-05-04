@@ -29,8 +29,8 @@ const ModalConfirmation: React.FC<ModalConfirmationProps> = ( { setIsEditing, ge
       <p>As informações não serão salvas. Confirma?</p>
 
       <ButtonGroup>
-        <OutlineButton onClick={closeModal}>Não</OutlineButton>
-        <ButtonPrimary onClick={onCancelInsert}>Sim</ButtonPrimary>
+        <ButtonPrimary onClick={closeModal}>Não</ButtonPrimary>
+        <OutlineButton onClick={onCancelInsert}>Sim</OutlineButton>
       </ButtonGroup>
     </Container>
   );

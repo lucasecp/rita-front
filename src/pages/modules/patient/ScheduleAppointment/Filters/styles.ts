@@ -22,7 +22,7 @@ export const Container = styled.div`
       font-size: 18px;
       font-weight: 700;
       line-height: 22px;
-      color${({ theme }) => theme.main};
+      color: ${({ theme }) => theme.main};
     }
   }
   @media (max-width: 1200px) {

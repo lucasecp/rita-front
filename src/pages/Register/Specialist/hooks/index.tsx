@@ -123,7 +123,7 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
         formFile,
       )
     } catch (error) {
-      throw new Error('Foto não enviada')
+      throw new Error('Sua foto não foi salva!')
     }
   }
 

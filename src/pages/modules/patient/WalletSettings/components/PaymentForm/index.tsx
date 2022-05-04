@@ -5,6 +5,7 @@ import InputText from '@/components/Form/InputText'
 import InputMask from '@/components/Form/InputMask'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
+import { Checkbox } from '@/components/Form/Checkbox'
 
 import validateCreditCardNumberAsBoolean from '@/helpers/validateCreditCardNumber'
 import validateCreditCardExpirationDateAsBoolean from '@/helpers/validateCreditCardExpirationDate'
@@ -52,6 +53,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
   const [expireAt, setExpireAt] = useState('')
   const [securityCode, setSecurityCode] = useState('')
   const [name, setName] = useState('')
+  const [asDefault, setAsDefault] = useState(false)
   const [errors, setErrors] = useState<PaymentFormErrors>({})
 
   function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
@@ -74,6 +76,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
           expireAt,
           securityCode,
           name,
+          asDefault,
         })
 
       setErrors({})
@@ -117,6 +120,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
             }
           />
         </section>
+
         <InputMask
           mask="19/99"
           formatChars={{ 1: '[0-1]', 9: '[0-9]' }}
@@ -139,6 +143,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
             })
           }
         />
+
         <InputMask
           mask="999"
           label="CVC:"
@@ -166,6 +171,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
             })
           }
         />
+
         <section>
           <InputText
             label="Nome impresso no cartão:"
@@ -178,6 +184,15 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
             onKeyUp={() => setErrors({ ...errors, name: validateName(name) })}
           />
         </section>
+
+        <section>
+          <Checkbox
+            setValue={setAsDefault}
+            checked={asDefault}
+            label="Definir como padrão"
+          />
+        </section>
+
         <footer>
           <OutlineButton type="reset">Cancelar</OutlineButton>
           <ButtonPrimary type="submit">Cadastrar</ButtonPrimary>

@@ -7,7 +7,7 @@ export const Content = styled.div`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color${({ theme }) => theme.main};
+  color: ${({ theme }) => theme.main};
   align-items: center;
   min-height: 83px;
   max-height: 83px;
@@ -61,7 +61,7 @@ export const ArrowUp = styled(ArrowUpIcon)`
   > path {
     fill: ${({ theme }) => theme.mediumLight};
   }
-  
+
   ${({ order }) =>
     order &&
     css`
