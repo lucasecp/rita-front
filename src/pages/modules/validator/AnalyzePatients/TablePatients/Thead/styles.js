@@ -7,7 +7,7 @@ export const Content = styled.div`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color${({ theme }) => theme.main};
+  color: ${({ theme }) => theme.main};
   background-color: ${({ theme }) => theme.light};
   margin-top: -2px;
   margin-bottom: -2px;
@@ -22,8 +22,8 @@ export const Content = styled.div`
     cursor: pointer;
     height: 100%;
   }
-  >p{
-    color: ${({ theme }) => theme.darkeness}
+  > p {
+    color: ${({ theme }) => theme.darkeness};
   }
 `
 

@@ -37,7 +37,7 @@ export const SeeOneUser: React.FC = () => {
 
   useEffect(() => {
     if (!id) {
-      history.push('/usuarios/')
+      history.push(FILTER_USERS)
     }
 
     const loadUserData = async () => {

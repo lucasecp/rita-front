@@ -9,7 +9,7 @@ import { toast } from '@/styles/components/toastify'
 import apiUser from '@/services/apiUser'
 
 import { User } from '../../index'
-import {Container} from './styles'
+import { Container } from './styles'
 
 interface InactivateUserProps {
   userData: User

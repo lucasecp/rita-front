@@ -76,7 +76,7 @@ export const Container = styled.div`
     font-size: 14px;
     font-weight: 700;
     line-height: 17px;
-    color${({ theme }) => theme.main};
+    color: ${({ theme }) => theme.main};
     margin-top: auto;
     align-self: flex-end;
     background: transparent;

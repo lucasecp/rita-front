@@ -161,6 +161,6 @@ export const ContentFile = styled.div`
     line-height: 24px;
     letter-spacing: 0em;
     text-align: left;
-    color${({ theme }) => theme.main};
+    color: ${({ theme }) => theme.main};
   }
 `
