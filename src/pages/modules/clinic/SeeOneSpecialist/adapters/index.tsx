@@ -12,7 +12,6 @@ export const fromApi = (specialistInfo: any, status: string): any => {
     },
     status: status || '',
     id: specialistInfo.id || '',
-
     profissionalData: {
       profissionalName: specialistInfo.nomeProfissional || '',
       registerNumber: specialistInfo.registroProfissional || '',

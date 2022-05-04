@@ -48,6 +48,7 @@ const EditUsersClinic: React.FC = () => {
     const result = await apiAdmin.get(`/clinica/${location.state.idClinica}/usuario/${location.state.idUsuario}`)
     setCpf(result.data.usuario)
     setPhone(result.data.celular)
+    setEmail(result.data.email)
     setName(result.data.nome)
     setTypeAssistant(result.data?.perfis[0]?.nome)
     sendResetEmail()

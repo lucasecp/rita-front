@@ -23,7 +23,7 @@ const Denied: React.FC<DeniedProps> = ({ idDoctor, idClinic }) => {
   const onDenied = async () => {
     try {
       Loading.turnOn()
-      await apiAdmin.delete(
+      await apiAdmin.patch(
         `clinica/${idClinic}/medico/${idDoctor}?statusMedicoClinica=N`,
       )
       toast.success('Especialista negado com sucesso')
