@@ -10,7 +10,7 @@ import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes
 const SeeOneSpecialist: React.FC = () => {
   const [specialist, setSpecialist] = useState({})
   const { Loading } = useLoading()
-  const location = useLocation<{ idDoctor: number }>()
+  const location = useLocation<{ idDoctor: number, status: string }>()
   const history = useHistory()
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const SeeOneSpecialist: React.FC = () => {
         const { data } = await apiAdmin.get(
           `clinica/59/medico/${location.state.idDoctor}`,
         )
-        setSpecialist(fromApi(data))
+        setSpecialist(fromApi(data, location.state.status))
       } catch (error) {
       } finally {
         Loading.turnOff()

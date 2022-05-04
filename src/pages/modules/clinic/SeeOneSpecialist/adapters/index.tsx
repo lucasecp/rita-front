@@ -2,7 +2,7 @@ import { mapSpecialtys, mapSpecialtysToApi } from './mapSpecialtys'
 import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 import { mapClinics, mapClinicsToAPi } from './mapClinic'
 
-export const fromApi = (specialistInfo: any): any => {
+export const fromApi = (specialistInfo: any, status: string): any => {
   return {
     personalDatas: {
       name: specialistInfo.nome || '',
@@ -10,7 +10,7 @@ export const fromApi = (specialistInfo: any): any => {
       phone: specialistInfo.celular || '',
       email: specialistInfo.email || '',
     },
-    status: specialistInfo.status || '',
+    status: status || '',
 
     profissionalData: {
       profissionalName: specialistInfo.nomeProfissional || '',
