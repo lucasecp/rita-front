@@ -10,6 +10,7 @@ import OutlineButton from '@/components/Button/Outline'
 import PrimaryButton from '@/components/Button/Primary'
 import apiAdmin from '@/services/apiAdmin'
 import { useModal } from '@/hooks/useModal'
+import Denied from '../messages/Denied'
 
 interface EditSpecialistProps {
   specialistData: any
@@ -28,9 +29,7 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({ specialistData }) => {
     await apiAdmin.patch(`/clinica/${59}/medico/${12}?statusMedicoClinica=A`)
   }
 
-  const confirmAuthorizationSpecialist = () => {
-
-  }
+  const confirmAuthorizationSpecialist = () => {}
 
   return (
     <Container>
@@ -43,7 +42,19 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({ specialistData }) => {
 
       <ButtonGroup>
         <OutlineButton onClick={onCancel}>Voltar</OutlineButton>
-        {specialistData?.status === 'A' && <PrimaryButton onClick={onCancel}>Autorizar</PrimaryButton>}
+        {specialistData?.status === 'A' && (
+          <PrimaryButton
+            onClick={() =>
+              showMessage(Denied, { idDoctor: specialistData.id, idClinic: 59 })
+            }
+            variation="red"
+          >
+            Negar
+          </PrimaryButton>
+        )}
+        {specialistData?.status === 'A' && (
+          <PrimaryButton onClick={onCancel}>Autorizar</PrimaryButton>
+        )}
       </ButtonGroup>
     </Container>
   )
