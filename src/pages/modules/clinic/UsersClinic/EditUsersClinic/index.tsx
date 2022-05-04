@@ -35,6 +35,7 @@ const EditUsersClinic: React.FC = () => {
   const [erros, setError] = React.useState<ValidationErrorFieldsI>({} as ValidationErrorFieldsI)
   const [isEditing, setIsEditing] = React.useState(false)
   const [errorMessage, sendErrorMessage] = useMessage()
+  const [resetEmail, sendResetEmail] = useMessage()
 
   React.useEffect(() => {
     if (!location.state) {
@@ -46,10 +47,10 @@ const EditUsersClinic: React.FC = () => {
   const getUserClinicById = async () => {
     const result = await apiAdmin.get(`/clinica/${location.state.idClinica}/usuario/${location.state.idUsuario}`)
     setCpf(result.data.usuario)
-    setEmail(result.data.email)
     setPhone(result.data.celular)
     setName(result.data.nome)
     setTypeAssistant(result.data?.perfis[0]?.nome)
+    sendResetEmail()
   }
 
   React.useEffect(() => {
@@ -100,12 +101,11 @@ const EditUsersClinic: React.FC = () => {
               msgError={erros.phone}
               setValue={setPhone} />
             <InputEmail
-              label='E-mail*:'
-              maxLength={200}
               initialEmail={email}
               disabled={!isEditing}
               hasError={(hasError) => setError({ ...erros, email: hasError })}
               checkHasError={errorMessage}
+              resetEmail={resetEmail}
               onGetEmail={setEmail} />
           </section>
           <section>
