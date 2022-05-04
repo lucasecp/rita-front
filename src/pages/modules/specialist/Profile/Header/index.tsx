@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ data, setPhoto: setPhotoSpecialist }) =
   const { showSimple } = useModal()
   const { Loading } = useLoading()
 
-  const removePhoto = () => setPhoto({} as File)
+  //const removePhoto = () => setPhoto({} as File)
   const updateSpecialistPhoto = async () => {
     try {
       Loading.turnOn()
@@ -49,10 +49,10 @@ const Header: React.FC<HeaderProps> = ({ data, setPhoto: setPhotoSpecialist }) =
 
   const onFileInput = async () => {
     if (photo && !isValidSizeFile(photo)) {
-      removePhoto()
       showSimple.error(
         'Arquivo não suportado, O tamanho máximo do arquivo deve ser 10MB, nas extensões JPG, JPEG e PNG.',
       )
+      return
     } else if (photo) {
       const _imgBlob = URL.createObjectURL(photo)
       setImgBlob(_imgBlob)
