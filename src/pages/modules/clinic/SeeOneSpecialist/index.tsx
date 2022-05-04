@@ -6,9 +6,10 @@ import { useLoading } from '@/hooks/useLoading'
 import apiAdmin from '@/services/apiAdmin'
 import { useHistory, useLocation } from 'react-router-dom'
 import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
+import { SpecialistDataI } from './Types'
 
 const SeeOneSpecialist: React.FC = () => {
-  const [specialist, setSpecialist] = useState({})
+  const [specialist, setSpecialist] = useState<SpecialistDataI>({} as SpecialistDataI)
   const { Loading } = useLoading()
   const location = useLocation<{ idDoctor: number, status: string }>()
   const history = useHistory()

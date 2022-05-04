@@ -8,11 +8,12 @@ import { useHistory } from 'react-router-dom'
 import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 import OutlineButton from '@/components/Button/Outline'
 import PrimaryButton from '@/components/Button/Primary'
-import apiAdmin from '@/services/apiAdmin'
 import { useModal } from '@/hooks/useModal'
+import ConfirmAuthorizationStatus from '../messages/ConfirmAuthorizationStatus'
+import { SpecialistDataI } from '../Types'
 
 interface EditSpecialistProps {
-  specialistData: any
+  specialistData: SpecialistDataI
 }
 
 const EditSpecialist: React.FC<EditSpecialistProps> = ({ specialistData }) => {
@@ -23,13 +24,9 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({ specialistData }) => {
     history.push(CLINIC_SEE_ALL_SPECIALIST)
   }
 
-  /** @description Atualiza o status para 'A' */
-  const authorizeSpecialist = async () => {
-    await apiAdmin.patch(`/clinica/${59}/medico/${12}?statusMedicoClinica=A`)
-  }
-
+  /** @description Abre o modal de confirmação */
   const confirmAuthorizationSpecialist = () => {
-
+    showMessage(ConfirmAuthorizationStatus, { specialistData })
   }
 
   return (
@@ -43,7 +40,10 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({ specialistData }) => {
 
       <ButtonGroup>
         <OutlineButton onClick={onCancel}>Voltar</OutlineButton>
-        {specialistData?.status === 'A' && <PrimaryButton onClick={onCancel}>Autorizar</PrimaryButton>}
+        {specialistData?.status === 'P' &&
+          <PrimaryButton onClick={confirmAuthorizationSpecialist}>
+            Autorizar
+          </PrimaryButton>}
       </ButtonGroup>
     </Container>
   )
