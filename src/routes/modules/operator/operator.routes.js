@@ -49,12 +49,12 @@ import SeeOneSpecialist from '@/pages/modules/operator/specialists/SeeOneSpecial
 import EditIssuingAgency from '@/pages/modules/operator/IssuingAgency/EditIssuingAgency'
 import SeeAllIssuingAgency from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency'
 import CreateIssuingAgency from '@/pages/modules/operator/IssuingAgency/CreateIssuingAgency'
-import { WalletDashboard } from '@/pages/modules/operator/WalletDashboard'
-import WalletSettings from '@/pages/modules/operator/WalletSettings'
+import { WalletOperatorDashboard } from '@/pages/Wallet/OperatorDashboard'
+import { WalletOperatorSettings } from '@/pages/Wallet/OperatorSettings'
 import {
-  WalletTableImportList,
-  WalletTableImportCreate
-} from '@/pages/modules/operator/WalletTableImport'
+  WalletOperatorTableImportList,
+  WalletOperatorTableImportCreate,
+} from '@/pages/Wallet/OperatorTableImport'
 
 const operatorRoutes = [
   {
@@ -135,19 +135,19 @@ const operatorRoutes = [
   },
   {
     path: OPERATOR_WALLET_DASHBOARD,
-    component: WalletDashboard,
+    component: WalletOperatorDashboard,
   },
   {
     path: OPERATOR_WALLET_SETTINGS,
-    component: WalletSettings,
+    component: WalletOperatorSettings,
   },
   {
     path: OPERATOR_WALLET_TABLE_IMPORT_LIST,
-    component: WalletTableImportList,
+    component: WalletOperatorTableImportList,
   },
   {
     path: OPERATOR_WALLET_TABLE_IMPORT_CREATE,
-    component: WalletTableImportCreate,
+    component: WalletOperatorTableImportCreate,
   },
 ]
 

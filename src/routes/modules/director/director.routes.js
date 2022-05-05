@@ -16,7 +16,6 @@ import {
   SEE_ONE_USER,
   EDIT_USER,
   CREATE_USER,
-  DIRECTOR_WALLET_SETTINGS,
 } from '../../constants/namedRoutes/routes'
 
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
@@ -33,7 +32,6 @@ import { FilterUsers } from '@/pages/modules/Director/Users/FilterUsers'
 import { SeeOneUser } from '@/pages/modules/Director/Users/SeeOneUser'
 import { EditUser } from '@/pages/modules/Director/Users/EditUser'
 import { CreateUser } from '@/pages/modules/Director/Users/CreateUser'
-import WalletSettings from '@/pages/modules/operator/WalletSettings'
 
 const directorRoutes = [
   {
@@ -95,10 +93,6 @@ const directorRoutes = [
   {
     path: CREATE_USER,
     component: CreateUser,
-  },
-  {
-    path: DIRECTOR_WALLET_SETTINGS,
-    component: WalletSettings,
   },
 ]
 

@@ -10,7 +10,7 @@ export const Route = ({
   ...rest
 }) => {
   const { isAuthorization, logout } = useAuth()
-  
+
   useEffect(() => {
     if (!isPrivate) {
       console.log('no private')
