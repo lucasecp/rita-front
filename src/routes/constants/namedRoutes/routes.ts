@@ -105,6 +105,7 @@ export const PATIENT_ADD_DOCUMENT_DEPENDENT =
 export const PATIENT_WALLET_DASHBOARD = '/paciente/carteira-digital'
 export const PATIENT_WALLET_BUY_COIN =
   '/paciente/carteira-digital/comprar-moeda'
+export const PATIENT_WALLET_PURCHASES = '/paciente/carteira-digital/compras'
 export const PATIENT_WALLET_PAYMENTS = '/paciente/carteira-digital/pagamentos'
 export const PATIENT_WALLET_STATEMENTS = '/paciente/carteira-digital/extrato'
 export const PATIENT_WALLET_SETTINGS =

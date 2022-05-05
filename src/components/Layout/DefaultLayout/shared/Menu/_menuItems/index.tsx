@@ -34,6 +34,7 @@ import {
   PATIENT_DEPENDENTS,
   PATIENT_WALLET_DASHBOARD,
   PATIENT_WALLET_BUY_COIN,
+  PATIENT_WALLET_PURCHASES,
   PATIENT_WALLET_PAYMENTS,
   PATIENT_WALLET_STATEMENTS,
   PATIENT_WALLET_SETTINGS,
@@ -129,6 +130,10 @@ export const menuItens = [
       {
         path: PATIENT_WALLET_BUY_COIN,
         name: 'Comprar Moeda',
+      },
+      {
+        path: PATIENT_WALLET_PURCHASES,
+        name: 'Compras',
       },
       {
         path: PATIENT_WALLET_PAYMENTS,

@@ -27,7 +27,7 @@ const periodOptions = [
   { label: '30 dias', value: 30 },
 ]
 
-export const WalletPayments: React.FC = () => {
+export const WalletPurchases: React.FC = () => {
   const tableItemsNew = useRef<any>()
   const tableItemsAll = useRef<any>()
   const [itemsNew, setItemsNew] = useState<
@@ -122,7 +122,7 @@ export const WalletPayments: React.FC = () => {
         {itemsNew && itemsNew.length > 0 && (
           <section>
             <header>
-              <h3>Pagamentos em aberto</h3>
+              <h3>Compras em aberto</h3>
             </header>
 
             <Table
@@ -183,7 +183,7 @@ export const WalletPayments: React.FC = () => {
 
         <section>
           <header>
-            <h3>Todos os pagamentos</h3>
+            <h3>Todos as compras</h3>
             <Select
               options={periodOptions}
               value={selectedPeriod}
