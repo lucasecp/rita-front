@@ -34,11 +34,11 @@ import {
   PATIENT_DEPENDENTS,
   PATIENT_WALLET_DASHBOARD,
   PATIENT_WALLET_BUY_COIN,
-  PATIENT_WALLET_PURCHASES,
   PATIENT_WALLET_PAYMENTS,
   PATIENT_WALLET_STATEMENTS,
   PATIENT_WALLET_SETTINGS,
   OPERATOR_WALLET_DASHBOARD,
+  OPERATOR_WALLET_PURCHASES,
   OPERATOR_WALLET_PAYMENTS,
   OPERATOR_WALLET_STATEMENTS,
   OPERATOR_WALLET_SETTINGS,
@@ -132,10 +132,6 @@ export const menuItens = [
         name: 'Comprar Moeda',
       },
       {
-        path: PATIENT_WALLET_PURCHASES,
-        name: 'Compras',
-      },
-      {
         path: PATIENT_WALLET_PAYMENTS,
         name: 'Pagamentos',
       },
@@ -155,6 +151,10 @@ export const menuItens = [
     name: 'Carteira Digital',
     permissions: [permissions.VER_CARTEIRA_DIGITAL_OPERADOR],
     children: [
+      {
+        path: OPERATOR_WALLET_PURCHASES,
+        name: 'Compras',
+      },
       {
         path: OPERATOR_WALLET_PAYMENTS,
         name: 'Pagamentos',

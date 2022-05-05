@@ -35,6 +35,7 @@ export const OPERATOR_SEE_ALL_ISSUING_AGENCY = '/orgao-emissor'
 export const OPERATOR_EDIT_ISSUING_AGENCY = '/orgao-emissor/editar'
 export const OPERATOR_CREATE_ISSUING_AGENCY = '/orgao-emissor/criar'
 export const OPERATOR_WALLET_DASHBOARD = '/operador/carteira-digital'
+export const OPERATOR_WALLET_PURCHASES = '/operador/carteira-digital/compras'
 export const OPERATOR_WALLET_PAYMENTS = '/operador/carteira-digital/pagamentos'
 export const OPERATOR_WALLET_STATEMENTS = '/operador/carteira-digital/extratos'
 export const OPERATOR_WALLET_SETTINGS =
@@ -100,7 +101,6 @@ export const PATIENT_ADD_DOCUMENT_DEPENDENT =
 export const PATIENT_WALLET_DASHBOARD = '/paciente/carteira-digital'
 export const PATIENT_WALLET_BUY_COIN =
   '/paciente/carteira-digital/comprar-moeda'
-export const PATIENT_WALLET_PURCHASES = '/paciente/carteira-digital/compras'
 export const PATIENT_WALLET_PAYMENTS = '/paciente/carteira-digital/pagamentos'
 export const PATIENT_WALLET_STATEMENTS = '/paciente/carteira-digital/extrato'
 export const PATIENT_WALLET_SETTINGS =

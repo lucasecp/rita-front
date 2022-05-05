@@ -27,7 +27,7 @@ const periodOptions = [
   { label: '30 dias', value: 30 },
 ]
 
-export const WalletPatientPurchases: React.FC = () => {
+export const WalletOperatorPurchases: React.FC = () => {
   const tableItemsNew = useRef<any>()
   const tableItemsAll = useRef<any>()
   const [itemsNew, setItemsNew] = useState<
