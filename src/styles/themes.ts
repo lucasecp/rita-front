@@ -52,6 +52,7 @@ const blue: ThemeProps = {
   extraLight: '#F5F9FF',
 }
 
+
 const green: ThemeProps = {
   darkness: '#316153',
   main: '#4B8864',
@@ -60,7 +61,6 @@ const green: ThemeProps = {
   light: '#D8EADE',
   extraLight: '#F1F8F4',
 }
-
 const orange: ThemeProps = {
   // darkness: '#C2533D',
   // main: '#FD8163',

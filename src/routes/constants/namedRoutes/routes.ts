@@ -1,5 +1,6 @@
 export const LOGIN = '/'
 export const INITIAL_PAGE = '/inicio'
+export const CHOOSE_PROFILE = '/alternar-perfil'
 
 export const PROFILE = '/perfil/paciente'
 export const CHANGE_PASSWORD = '/trocar-senha'

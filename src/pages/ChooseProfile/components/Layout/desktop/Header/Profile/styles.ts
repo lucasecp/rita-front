@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import colors from '@/styles/colors'
-import { themes } from '@/styles/themes'
 
 export const Container = styled.div`
   border: none;
@@ -50,12 +49,12 @@ export const ButtonProfile = styled.button`
 
       > img {
         min-height: 100%;
-        border: solid 2px themes.purple;
+        border: solid 2px ${({ theme }) => theme.main};
         border-radius: 50px;
       }
 
       > span {
-        background-color: themes.purple;
+        background-color: ${({ theme }) => theme.main};
         border-radius: 50%;
         color: #fff;
         width: 100%;

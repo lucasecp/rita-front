@@ -11,7 +11,6 @@ import { Profile } from './Profile'
 import { ReactComponent as IconLogo } from '@/assets/logo/symbol.svg'
 
 export const Header: React.FC = () => {
-
   const { clearDataLogout } = useAuth()
 
   const { getProfilePhoto } = useProfilePhoto()

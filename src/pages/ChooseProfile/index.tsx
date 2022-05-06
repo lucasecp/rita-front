@@ -1,13 +1,32 @@
-import React from 'react'
-import { Layout } from './Layout'
-import { Content } from './Layout'
+import React, { useEffect, useState } from 'react'
+import { Layout } from './components/Layout'
+import { Content } from './styles'
+import { profileData } from './profileData'
+import Card from './components/Card'
+import { useAuth } from '@/hooks/login'
 
-interface ChooseProfileProps {}
+const ChooseProfile: React.FC = () => {
+  const { user } = useAuth()
 
-const ChooseProfile: React.FC<ChooseProfileProps> = () => {
-  return <Layout title="Ínicio">
-    <Content></Content>
-  </Layout>
+  const [allowedProfiles, setAllowedProfiles] = useState([])
+
+  useEffect(() => {
+    const allowedProfilesResults = profileData.filter((prof) =>
+      true,
+    )
+
+    setAllowedProfiles(allowedProfilesResults)
+  }, [])
+
+  return (
+    <Layout title="Ínicio">
+      <Content>
+        {allowedProfiles.map((profile) => (
+          <Card key={profile.title} infoUser={profile} />
+        ))}
+      </Content>
+    </Layout>
+  )
 }
 
 export default ChooseProfile

@@ -17,17 +17,17 @@ export const Container = styled.button`
     transition: 0.2s;
     min-width: 8px;
     > path {
-      fill: ${({ color }) => color};
+      fill: ${({ theme }) => theme.main};
     }
   }
 
   > img {
     min-height: 100%;
-    border: solid 2px ${({ color }) => color};
+    border: solid 2px ${({ theme }) => theme.main};
     border-radius: 50px;
   }
   > span {
-    background-color: ${({ color }) => color};
+    background-color: ${({ theme }) => theme.main};
     border-radius: 50%;
     color: #fff;
     min-width: 40px;

@@ -43,7 +43,7 @@ export const Container = styled.div`
       word-break: break-word;
       &:not(:last-child) > svg {
         > path {
-          fill: ${({ theme }) => theme.main};
+          stroke: ${({ theme }) => theme.main};
         }
       }
     }

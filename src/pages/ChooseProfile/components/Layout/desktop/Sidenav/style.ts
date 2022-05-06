@@ -1,7 +1,5 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import colors from '@/styles/colors'
-import expandedLogo from '@/assets/logo/expanded-logo.svg'
-import iconLogo from '@/assets/logo/icon-logo.svg'
 
 export const Container = styled.aside`
   position: sticky;
