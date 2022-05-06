@@ -12,7 +12,7 @@ const ChooseProfile: React.FC = () => {
 
   useEffect(() => {
     const allowedProfilesResults = profileData.filter((prof) =>
-      true,
+      user?.area.some((area) => area.grupoPerfil === prof.profile),
     )
 
     setAllowedProfiles(allowedProfilesResults)
