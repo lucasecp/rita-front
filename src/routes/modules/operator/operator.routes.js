@@ -22,6 +22,7 @@ import {
   OPERATOR_CREATE_ISSUING_AGENCY,
   OPERATOR_REPORTS_PATIENT_ANALYTIC,
   OPERATOR_WALLET_DASHBOARD,
+  OPERATOR_WALLET_PURCHASES,
   OPERATOR_WALLET_SETTINGS,
   OPERATOR_WALLET_TABLE_IMPORT_LIST,
   OPERATOR_WALLET_TABLE_IMPORT_CREATE,
@@ -50,6 +51,7 @@ import EditIssuingAgency from '@/pages/modules/operator/IssuingAgency/EditIssuin
 import SeeAllIssuingAgency from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency'
 import CreateIssuingAgency from '@/pages/modules/operator/IssuingAgency/CreateIssuingAgency'
 import { WalletOperatorDashboard } from '@/pages/Wallet/OperatorDashboard'
+import { WalletOperatorPurchases } from '@/pages/Wallet/OperatorPurchases'
 import { WalletOperatorSettings } from '@/pages/Wallet/OperatorSettings'
 import {
   WalletOperatorTableImportList,
@@ -136,6 +138,10 @@ const operatorRoutes = [
   {
     path: OPERATOR_WALLET_DASHBOARD,
     component: WalletOperatorDashboard,
+  },
+  {
+    path: OPERATOR_WALLET_PURCHASES,
+    component: WalletOperatorPurchases,
   },
   {
     path: OPERATOR_WALLET_SETTINGS,

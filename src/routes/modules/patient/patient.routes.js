@@ -11,7 +11,6 @@ import {
   PATIENT_ADD_DEPENDENT,
   PATIENT_WALLET_DASHBOARD,
   PATIENT_WALLET_BUY_COIN,
-  PATIENT_WALLET_PURCHASES,
   PATIENT_WALLET_PAYMENTS,
   PATIENT_WALLET_STATEMENTS,
   PATIENT_WALLET_SETTINGS,
@@ -26,7 +25,6 @@ import { CreateDependent } from '@/pages/modules/patient/dependents/CreateDepend
 import { AddDependentDocument } from '@/pages/modules/patient/dependents/AddDependentDocument'
 import { WalletPatientDashboard } from '@/pages/Wallet/PatientDashboard'
 import { WalletPatientBuyCoin } from '@/pages/Wallet/PatientBuyCoin'
-import { WalletPatientPurchases } from '@/pages/Wallet/PatientPurchases'
 import { WalletPatientPayments } from '@/pages/Wallet/PatientPayments'
 import { WalletPatientStatements } from '@/pages/Wallet/PatientStatements'
 import { WalletPatientSettings } from '@/pages/Wallet/PatientSettings'
@@ -71,10 +69,6 @@ const patientRoutes = [
   {
     path: PATIENT_WALLET_BUY_COIN,
     component: WalletPatientBuyCoin,
-  },
-  {
-    path: PATIENT_WALLET_PURCHASES,
-    component: WalletPatientPurchases,
   },
   {
     path: PATIENT_WALLET_PAYMENTS,
