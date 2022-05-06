@@ -23,11 +23,11 @@ import { SeeAllDependents } from '@/pages/modules/patient/dependents/SeeAllDepen
 import { EditDependent } from '@/pages/modules/patient/dependents/EditDependent'
 import { CreateDependent } from '@/pages/modules/patient/dependents/CreateDependent'
 import { AddDependentDocument } from '@/pages/modules/patient/dependents/AddDependentDocument'
-import { WalletDashboard } from '@/pages/modules/patient/WalletDashboard'
-import { WalletBuyCoin } from '@/pages/modules/patient/WalletBuyCoin'
-import { WalletPayments } from '@/pages/modules/patient/WalletPayments'
-import { WalletStatements } from '@/pages/modules/patient/WalletStatements'
-import { WalletSettings } from '@/pages/modules/patient/WalletSettings'
+import { WalletPatientDashboard } from '@/pages/Wallet/PatientDashboard'
+import { WalletPatientBuyCoin } from '@/pages/Wallet/PatientBuyCoin'
+import { WalletPatientPayments } from '@/pages/Wallet/PatientPayments'
+import { WalletPatientStatements } from '@/pages/Wallet/PatientStatements'
+import { WalletPatientSettings } from '@/pages/Wallet/PatientSettings'
 
 const patientRoutes = [
   {
@@ -64,23 +64,23 @@ const patientRoutes = [
   },
   {
     path: PATIENT_WALLET_DASHBOARD,
-    component: WalletDashboard,
+    component: WalletPatientDashboard,
   },
   {
     path: PATIENT_WALLET_BUY_COIN,
-    component: WalletBuyCoin,
+    component: WalletPatientBuyCoin,
   },
   {
     path: PATIENT_WALLET_PAYMENTS,
-    component: WalletPayments,
+    component: WalletPatientPayments,
   },
   {
     path: PATIENT_WALLET_STATEMENTS,
-    component: WalletStatements,
+    component: WalletPatientStatements,
   },
   {
     path: PATIENT_WALLET_SETTINGS,
-    component: WalletSettings,
+    component: WalletPatientSettings,
   },
 ]
 

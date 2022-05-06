@@ -21,7 +21,7 @@ const Actions: React.FC<ActionsProps> = ({ data, setMakeRequest }) => {
       </CustomTooltip>
       <CustomTooltip label="Visualizar">
         <div>
-          <View id={data.id} />
+          <View id={data.id} status={data.status}/>
         </div>
       </CustomTooltip>
       <CustomTooltip label="Agenda">

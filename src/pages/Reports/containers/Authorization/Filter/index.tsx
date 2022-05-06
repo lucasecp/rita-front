@@ -63,6 +63,7 @@ interface Error {
   name: string
   cpf: string
   columns: string
+  income: string
 }
 
 const FilterAuthorization: React.FC = () => {
@@ -78,6 +79,7 @@ const FilterAuthorization: React.FC = () => {
     name: '',
     cpf: '',
     columns: '',
+    income: '',
   })
   const [orders, setOrders] = useState<Filter[]>([])
   const [filters, setFilters] = useState<Filter[]>([])
@@ -90,6 +92,7 @@ const FilterAuthorization: React.FC = () => {
   })
   const [submitGenerateReport, setSubmitGenerateReport] = useState(false)
   const [someFieldWasTyped, setSomeFieldWasTyped] = useState(false)
+  const [income, setIncome] = useState('')
 
   const history = useHistory()
   const { Loading } = useLoading()
@@ -141,6 +144,7 @@ const FilterAuthorization: React.FC = () => {
     { name: 'dataValidacaoFim', value: convertDate(validationDates[1]) },
     { name: 'idValidador', value: formatMultSelectArray(validators) },
     { name: 'campos', value: orderColumnsToApi(columns) },
+    { name: 'rendaBaixa', value: income === 'yes' ? 1 : 0 },
   ]
 
   const hasFieldErrors = () => {
@@ -153,6 +157,7 @@ const FilterAuthorization: React.FC = () => {
       name: '',
       cpf: '',
       columns: '',
+      income: '',
     })
 
     if (!someFieldWasTyped) {
@@ -166,6 +171,7 @@ const FilterAuthorization: React.FC = () => {
       })
       hasError = true
     }
+
     if (!columns.length) {
       setErrors((errors) => {
         return { ...errors, columns: 'Informe pelo menos 1 coluna' }
@@ -203,7 +209,7 @@ const FilterAuthorization: React.FC = () => {
   }
 
   const verifyTypedFields = (fields: Filter[]): Filter[] =>
-    fields.filter((field) => field.value)
+    fields.filter((field) => field.value || typeof field.value === 'number')
 
   const onPreview = async () => {
     if (hasFieldErrors()) return
@@ -335,11 +341,14 @@ const FilterAuthorization: React.FC = () => {
           />
           <Select
             label="Renda até 1,5 SM"
+            labelDefaultOption="Selecione:"
             options={[
               { label: 'Sim', value: 'yes' },
               { label: 'Não', value: 'no' },
             ]}
             variation="secondary"
+            value={income}
+            setValue={setIncome}
           />
         </div>
         <Controls>
