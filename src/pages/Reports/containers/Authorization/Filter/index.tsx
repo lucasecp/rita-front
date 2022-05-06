@@ -165,13 +165,6 @@ const FilterAuthorization: React.FC = () => {
       return true
     }
 
-    if (!income) {
-      setErrors((errors) => {
-        return { ...errors, income: 'Campo obrigatório' }
-      })
-      hasError = true
-    }
-
     if (cpfClear.length < 3 && cpfClear) {
       setErrors((errors) => {
         return { ...errors, cpf: 'Informe 3 dígitos ou mais' }
@@ -356,8 +349,6 @@ const FilterAuthorization: React.FC = () => {
             variation="secondary"
             value={income}
             setValue={setIncome}
-            hasError={!!errors.income}
-            msgError={errors.income}
           />
         </div>
         <Controls>
