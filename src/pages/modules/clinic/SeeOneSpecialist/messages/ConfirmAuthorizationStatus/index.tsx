@@ -14,8 +14,9 @@ interface ConfirmAuthorizationStatusProps {
   specialistData: SpecialistDataI
 }
 
-const ConfirmAuthorizationStatus: React.FC<ConfirmAuthorizationStatusProps> = ({ specialistData }) => {
-
+const ConfirmAuthorizationStatus: React.FC<ConfirmAuthorizationStatusProps> = ({
+  specialistData,
+}) => {
   const { closeModal } = useModal()
   const { Loading } = useLoading()
 
@@ -23,11 +24,15 @@ const ConfirmAuthorizationStatus: React.FC<ConfirmAuthorizationStatusProps> = ({
   const onAuthorizeSpecialist = async () => {
     try {
       Loading.turnOn()
-      await apiAdmin.patch(`/clinica/${59}/medico/${specialistData.id}?statusMedicoClinica=A`)
+      await apiAdmin.patch(
+        `/clinica/${59}/medico/${specialistData.id}?statusMedicoClinica=A`,
+      )
       toast.success('Autorizado com sucesso!')
       closeModal()
     } catch (error) {
-      toast.error('Ops! Houve um erro ao tentar atualizar o status do especialista! Por favor, tente novamente.')
+      toast.error(
+        'Ops! Houve um erro ao tentar atualizar o status do especialista! Por favor, tente novamente.',
+      )
     } finally {
       Loading.turnOff()
     }
@@ -36,14 +41,16 @@ const ConfirmAuthorizationStatus: React.FC<ConfirmAuthorizationStatusProps> = ({
   return (
     <Container>
       <img src={warningIcon} />
-      <p>Deseja autorizar o especialista {specialistData.personalDatas.name} ?</p>
+      <p>
+        Deseja autorizar o especialista {specialistData.personalDatas.name} ?
+      </p>
 
       <ButtonGroup>
         <ButtonPrimary onClick={closeModal}>Não</ButtonPrimary>
         <OutlineButton onClick={onAuthorizeSpecialist}>Sim</OutlineButton>
       </ButtonGroup>
     </Container>
-  );
-};
+  )
+}
 
-export default ConfirmAuthorizationStatus;
+export default ConfirmAuthorizationStatus

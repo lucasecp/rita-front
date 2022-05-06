@@ -49,14 +49,20 @@ export const ResetStatusOnePatient: React.FC<PersonStatusProps> = ({
         { label: 'Inativo', value: 'I' },
       ]
     }
+    if (status === 'EA') {
+      return [
+        { label: 'Inativo', value: 'I' },
+        { label: 'Pendente', value: 'P' },
+        { label: 'Em análise', value: 'EA' },
+      ]
+    }
     if (status === 'I') {
       return [
         { label: 'Inativo', value: 'I' },
         { label: 'Pendente', value: 'P' },
       ]
-    } else {
-      return []
     }
+    return []
   }
 
   return (
