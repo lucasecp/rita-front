@@ -63,6 +63,7 @@ interface Error {
   name: string
   cpf: string
   columns: string
+  income: string
 }
 
 const FilterAuthorization: React.FC = () => {
@@ -78,6 +79,7 @@ const FilterAuthorization: React.FC = () => {
     name: '',
     cpf: '',
     columns: '',
+    income: '',
   })
   const [orders, setOrders] = useState<Filter[]>([])
   const [filters, setFilters] = useState<Filter[]>([])
@@ -155,11 +157,19 @@ const FilterAuthorization: React.FC = () => {
       name: '',
       cpf: '',
       columns: '',
+      income: '',
     })
 
     if (!someFieldWasTyped) {
       toast.warning('Informe pelo menos um filtro')
       return true
+    }
+
+    if (!income) {
+      setErrors((errors) => {
+        return { ...errors, income: 'Campo obrigatório' }
+      })
+      hasError = true
     }
 
     if (cpfClear.length < 3 && cpfClear) {
@@ -168,6 +178,7 @@ const FilterAuthorization: React.FC = () => {
       })
       hasError = true
     }
+
     if (!columns.length) {
       setErrors((errors) => {
         return { ...errors, columns: 'Informe pelo menos 1 coluna' }
@@ -345,6 +356,8 @@ const FilterAuthorization: React.FC = () => {
             variation="secondary"
             value={income}
             setValue={setIncome}
+            hasError={!!errors.income}
+            msgError={errors.income}
           />
         </div>
         <Controls>
