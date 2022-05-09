@@ -58,9 +58,9 @@ const SpecialistProfile: React.FC = () => {
   }, [makeNewRequest])
 
   return (
-    <DefaultLayout title="Perfil - Visualizar">
+    <DefaultLayout title="Perfil Especialista">
       <Content>
-        <Header data={data} setPhoto={setPhoto}/>
+        <Header data={data} setPhoto={setPhoto} />
         <Form
           data={data}
           profilePhoto={photo}

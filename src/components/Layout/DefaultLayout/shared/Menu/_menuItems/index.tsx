@@ -224,7 +224,7 @@ export const menuItens = [
   {
     path: SPECIALIST_PROFILE,
     icon: <UserIcon />,
-    name: 'Perfil',
+    name: 'Perfil Especialista',
     permissions: [permissions.ALTERAR_MEUS_DADOS_ESPECIALISTA],
   },
   {
@@ -260,7 +260,7 @@ export const menuItens = [
   {
     path: CLINIC_PROFILE,
     icon: <UserIcon />,
-    name: 'Perfil',
+    name: 'Perfil Clínica',
     permissions: [permissions.VER_DADOS_CLINICA],
   },
   {
