@@ -19,7 +19,10 @@ export const RegisterSuccess: React.FC = () => {
   return (
     <Container>
       <img src={success} />
-      <p>Cadastro realizado com sucesso</p>
+      <p>
+        Cadastro efetuado com sucesso, aguarde a aprovação da clínica para ter
+        acesso a plataforma
+      </p>
       <footer>
         <ButtonPrimary onClick={handleCloseModal} variation="green">
           Voltar a página inicial

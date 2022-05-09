@@ -48,8 +48,6 @@ const BasicInformation: React.FC = () => {
     })
   }, [profissionalRegister, issuingAgency, ufIssuingAgency])
 
-  console.log(issuingAgency, issuingAgencyToApi)
-
   useEffect(() => {
     if (toggleClick !== 0) {
       scrollOntoFieldError(errors)

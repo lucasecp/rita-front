@@ -63,7 +63,6 @@ const Filter = () => {
   }
 
   useEffect(() => {
-    console.log('0000000000000 >>', status)
     setFilters(verifyTypedFields(objQuery))
   }, [])
 

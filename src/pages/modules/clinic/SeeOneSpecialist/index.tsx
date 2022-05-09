@@ -6,18 +6,18 @@ import { useLoading } from '@/hooks/useLoading'
 import apiAdmin from '@/services/apiAdmin'
 import { useHistory, useLocation } from 'react-router-dom'
 import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
+import { SpecialistDataI } from './Types'
 
 const SeeOneSpecialist: React.FC = () => {
-  const [specialist, setSpecialist] = useState({})
+  const [specialist, setSpecialist] = useState<SpecialistDataI>({} as SpecialistDataI)
   const { Loading } = useLoading()
-  const location = useLocation<{ idDoctor: number }>()
+  const location = useLocation<{ idDoctor: number, status: string }>()
   const history = useHistory()
 
   useEffect(() => {
     if (!location.state) {
       return history.push(CLINIC_SEE_ALL_SPECIALIST)
     }
-    console.log(location.state.idDoctor)
 
     document.title = 'Rita Saúde | Informações Especialista'
 
@@ -27,7 +27,7 @@ const SeeOneSpecialist: React.FC = () => {
         const { data } = await apiAdmin.get(
           `clinica/59/medico/${location.state.idDoctor}`,
         )
-        setSpecialist(fromApi(data))
+        setSpecialist(fromApi(data, location.state.status))
       } catch (error) {
       } finally {
         Loading.turnOff()

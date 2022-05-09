@@ -45,9 +45,9 @@ export const Container = styled.div`
     &:last-child {
       margin-right: 0;
     }
-    > svg {
+    > button > svg {
       > path {
-        fill: ${({ theme }) => theme.main};
+        stroke: ${({ theme }) => theme.main};
       }
     }
   }

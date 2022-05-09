@@ -39,6 +39,7 @@ export const Container = styled.button<ContainerProps>`
       :hover {
         background: #fff !important;
         color: ${colors.gray.dark} !important;
+        border-color: #fff !important;
       }
     `}
 

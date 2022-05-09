@@ -52,7 +52,6 @@ export const ReasonUpdate = ({ plan, hasSellableItems }) => {
         params: { confirmado: true, motivo: reason },
       })
 
-      console.log(response)
       toast.success('Dados atualizados com sucesso.')
 
       closeModal()

@@ -81,7 +81,6 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
 
   const registerDocsSpecialtys = async () => {
     const listDocs = createListFormDataOfSpecialtys()
-    console.log(listDocs)
 
     try {
       await axios.all(
@@ -113,6 +112,9 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   }
 
   const registerPhoto = async () => {
+    if (!photo) {
+      return
+    }
     try {
       const formFile = new FormData()
 

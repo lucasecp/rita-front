@@ -10,7 +10,7 @@ export const Container = styled.header`
   > a {
     > svg {
       > path {
-        stroke: ${({ theme }) => theme.main};
+        fill: ${({ theme }) => theme.main};
       }
     }
   }

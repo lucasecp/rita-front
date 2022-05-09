@@ -36,8 +36,6 @@ export const SeeDocumentFile: React.FC<SeeDocumentFileProps> = ({
       return window.open(urlDocument)
     }
 
-    console.log(document)
-
     const source = convertImageFromApiToBase64(document)
 
     return showMessage(PreviewImage, { source }, true)

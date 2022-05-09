@@ -54,8 +54,6 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
     // if (listSuggestionsRef.current) {
     //   const listItems = [...listSuggestionsRef.current.childNodes]
 
-    //   // console.log(listItems)
-
     //   const sumListItemsOffset = listItems.reduce((acc, item) => {
     //     return acc + item.offsetHeight
     //   }, 0)

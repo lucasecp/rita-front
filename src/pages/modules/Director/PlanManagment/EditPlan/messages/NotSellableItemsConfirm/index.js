@@ -53,8 +53,6 @@ export const EditPlan = () => {
   const [anyFieldsHasChanged, setAnyFieldsHasChanged] = useState(0)
   const [anyFieldImpactingChanged, setAnyFieldImpactingChanged] = useState(0)
 
-  // console.log(initialPlan)
-
   const initialErrors = {
     code: '',
     name: '',
@@ -177,8 +175,6 @@ export const EditPlan = () => {
     // const rangesOfUseHasChanged = rangesOfUse.some((range, index) =>
     //   twoObjectsAreTheSame(range, initialPlan.abrangencia[index])
     // )
-
-    // console.log(rangesOfUseHasChanged)
 
     // if (
     //   anyFieldImpactingChanged > 1 ||

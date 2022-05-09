@@ -1,5 +1,6 @@
 export const LOGIN = '/'
 export const INITIAL_PAGE = '/inicio'
+export const CHOOSE_PROFILE = '/alternar-perfil'
 
 export const PROFILE = '/perfil/paciente'
 export const CHANGE_PASSWORD = '/trocar-senha'
@@ -35,6 +36,7 @@ export const OPERATOR_SEE_ALL_ISSUING_AGENCY = '/orgao-emissor'
 export const OPERATOR_EDIT_ISSUING_AGENCY = '/orgao-emissor/editar'
 export const OPERATOR_CREATE_ISSUING_AGENCY = '/orgao-emissor/criar'
 export const OPERATOR_WALLET_DASHBOARD = '/operador/carteira-digital'
+export const OPERATOR_WALLET_PURCHASES = '/operador/carteira-digital/compras'
 export const OPERATOR_WALLET_PAYMENTS = '/operador/carteira-digital/pagamentos'
 export const OPERATOR_WALLET_STATEMENTS = '/operador/carteira-digital/extratos'
 export const OPERATOR_WALLET_SETTINGS =
@@ -72,11 +74,6 @@ export const DIRECTOR_SEE_ALL_PROFILES = '/perfis'
 export const DIRECTOR_SEE_ONE_PROFILE = '/perfis/visualizar'
 export const DIRECTOR_EDIT_PROFILE = '/perfis/editar'
 export const DIRECTOR_CREATE_PROFILE = '/perfis/criar'
-export const DIRECTOR_WALLET_DASHBOARD = '/diretor/carteira-digital'
-export const DIRECTOR_WALLET_PAYMENTS = '/diretor/carteira-digital/pagamentos'
-export const DIRECTOR_WALLET_STATEMENTS = '/diretor/carteira-digital/extratos'
-export const DIRECTOR_WALLET_SETTINGS =
-  '/diretor/carteira-digital/configuracoes'
 
 export const FILTER_SELLABLE_ITEMS = '/itens-vendaveis/'
 export const CREATE_SELLABLE_ITEMS = '/itens-vendaveis/criar'
@@ -122,12 +119,20 @@ export const REGISTER_SPECIALIST = '/cadastro/especialista/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const REASON_TO_LEAVE = '/motivo-para-sair/:token'
+
+export const PHYSICAL_PERSON_REGISTER_CHOOSE_REGION =
+  '/paciente/cadastro/escolher-regiao'
+
 export const PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN =
   '/paciente/cadastro/escolher-plano'
-export const PLANS_DETAILS = '/planos/detalhes'
-export const NEW_REGISTER_PATIENT_CHOOSE_REGION =
-  '/paciente/cadastro/escolher-regiao'
-export const NEW_REGISTER_PATIENT_DOCUMENTS = '/paciente/cadastro/documentos'
+export const PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS =
+  '/paciente/cadastro/escolher-plano/detalhes'
+
+export const PHYSICAL_PERSON_REGISTER_DEPENDENTS =
+  '/paciente/cadastro/dependentes'
+export const PHYSICAL_PERSON_REGISTER_DOCUMENTS =
+  '/paciente/cadastro/documentos'
+export const PHYSICAL_PERSON_REGISTER_PAYMENT = '/paciente/cadastro/pagamento'
 
 export const TESTE = '/teste'
 

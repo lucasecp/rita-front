@@ -48,10 +48,17 @@ export const Container = styled.div`
 export const FormGroup = styled.div`
   margin-top: 24px;
   display: flex;
-  align-items: end;
+  flex-direction: column;
   gap: 24px;
+  > *:last-child {
+    gap: 24px;
+    display: flex;
+    justify-content: center;
+  }
   @media (max-width: 539px) {
-    flex-direction: column;
+    > *:last-child {
+      flex-direction: column;
+    }
     align-items: stretch;
     align-self: stretch;
   }

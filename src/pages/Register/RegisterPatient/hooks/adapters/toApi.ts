@@ -42,8 +42,6 @@ const incomeToApi = (income = '') => {
 export const registerPatientToApi = (
   registerPatient: RegisterDataState & { documentsFile?: DocumentsState },
 ): ToApi => {
-  console.log(registerPatient)
-
   return {
     idPaciente: registerPatient.registrationData?.id,
     nome: registerPatient.registrationData?.name,

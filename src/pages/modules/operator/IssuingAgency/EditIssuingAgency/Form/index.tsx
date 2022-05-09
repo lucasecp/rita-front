@@ -16,8 +16,6 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi, dataFromApi }) => {
   const [issuingAgency, setIssuingAgency] = useState('')
   const [status, setStatus] = useState('')
 
-  console.log(dataFromApi)
-
   useEffect(() => {
     setSpecialistName(dataFromApi?.specialistName || '')
     setIssuingAgency(dataFromApi?.issuingAgency || '')

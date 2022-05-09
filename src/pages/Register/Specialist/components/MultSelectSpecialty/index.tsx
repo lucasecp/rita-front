@@ -68,14 +68,10 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
 
   const onChange = (values: MultiSelectOption[], value?: MultiSelectOption) => {
     if (value?.rqeRequired) {
-      return showMessage(
-        InsertRqeNumber,
-        {
-          setSpecialtys,
-          currentSpecialty: value,
-        },
-        true,
-      )
+      return showMessage(InsertRqeNumber, {
+        setSpecialtys,
+        currentSpecialty: value,
+      })
     }
     setSpecialtys(values)
   }
