@@ -13,10 +13,11 @@ import { useMessage } from '@/hooks/useMessage'
 import { useLoading } from '@/hooks/useLoading'
 
 import { validateFullName } from '@/helpers/validateFields/validateFullName'
-import { validateBirthDate } from '@/helpers/validateFields/validateBirthDate'
 import { validateGender } from '@/helpers/validateFields/validateGender'
 import { validatePhone } from '@/helpers/validateFields/validatePhone'
 import { validateDepCpf } from '../helpers/validateDepCPF'
+import { validateDepBirthDate } from '../helpers/validateDepBirthDate'
+
 import formatBirthdate from '@/helpers/formatDate'
 
 import apiPatient from '@/services/apiPatient'
@@ -182,10 +183,16 @@ export const EditDependent: React.FC<EditDependentProps> = ({
           setValue={setBirthDate}
           hasError={!!errors.birthDate}
           onBlur={() =>
-            setErrors({ ...errors, birthDate: validateBirthDate(birthDate) })
+            setErrors({
+              ...errors,
+              birthDate: validateDepBirthDate(birthDate, !planAllowMajorAge),
+            })
           }
           onKeyUp={() =>
-            setErrors({ ...errors, birthDate: validateBirthDate(birthDate) })
+            setErrors({
+              ...errors,
+              birthDate: validateDepBirthDate(birthDate, !planAllowMajorAge),
+            })
           }
           msgError={errors.birthDate}
         />
