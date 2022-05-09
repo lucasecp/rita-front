@@ -14,6 +14,7 @@ import InputCep from './components/InputCep'
 import {
   LOGIN,
   PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN,
+  PHYSICAL_PERSON_REGISTER_DOCUMENTS,
 } from '@/routes/constants/namedRoutes/routes'
 import { AddUserOnWaitList } from './messages/AddUserOnWaitList'
 import apiAdmin from '@/services/apiAdmin'
@@ -56,15 +57,17 @@ export const ChooseRegion: React.FC = () => {
         params: { municipio: region.get.city, uf: region.get.uf },
       })
 
+      // REMOVE AFTER TEST
+      return history.push(PHYSICAL_PERSON_REGISTER_DOCUMENTS)
+
       if (!data.length) {
-        return showMessage(AddUserOnWaitList, { region }, true)
+        return showMessage(AddUserOnWaitList, {}, true)
       }
 
-      const mappedPlans: MappedPlan[] = fromApiPlans(data)
+      const mappedPlans = fromApiPlans(data)
 
       history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN, {
         plans: mappedPlans,
-        region,
       })
     } catch ({ response }) {
       toast.error('Erro ao Buscar Planos')
