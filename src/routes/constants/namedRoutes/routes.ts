@@ -120,6 +120,7 @@ export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const REASON_TO_LEAVE = '/motivo-para-sair/:token'
 export const PLANS = '/planos'
+
 export const PHYSICAL_PERSON_REGISTER_CHOOSE_REGION =
   '/paciente/cadastro/escolher-regiao'
 export const PHYSICAL_PERSON_REGISTER_DEPENDENTS =

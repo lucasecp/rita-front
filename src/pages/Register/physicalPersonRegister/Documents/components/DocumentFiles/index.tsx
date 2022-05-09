@@ -27,7 +27,6 @@ interface ErrorsState {
 export const DocumentFiles: React.FC<DocumentFilesProps> = ({
   saveDocuments,
 }) => {
-  const history = useHistory()
   const { showMessage } = useModal()
 
   const { setDocumentsFile } = usePhysicalPersonRegister()

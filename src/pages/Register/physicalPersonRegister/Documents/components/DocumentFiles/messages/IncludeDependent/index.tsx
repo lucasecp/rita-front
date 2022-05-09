@@ -7,7 +7,6 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { useModal } from '@/hooks/useModal'
-import { PHYSICAL_PERSON_REGISTER_PAYMENT } from '@/routes/constants/namedRoutes/routes'
 
 import { Container } from './styles'
 
@@ -15,32 +14,31 @@ import { NoPlansToAddDependents } from './messages/NoPlansToAddDependents'
 import { SelectedPlanDontAllowAddDependents } from './messages/SelectedPlanDontAllowAddDependents'
 import { usePhysicalPersonRegister } from '@/pages/Register/physicalPersonRegister/shared/hooks'
 
+import { PHYSICAL_PERSON_REGISTER_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
+
 export const IncludeDependent: React.FC = () => {
   const { closeModal, showMessage } = useModal()
   const history = useHistory()
   const { finishRegister } = usePhysicalPersonRegister()
 
   // remove static values
-  const planSelectedAllowsDependent = false
+  const planSelectedAllowsDependent = true
   const hasPlanTheAllowsDependentInRegion = true
 
   const onNotIncludeDependent = () => {
     finishRegister()
-
-    history.push(PHYSICAL_PERSON_REGISTER_PAYMENT)
-    closeModal()
   }
 
   const onIncludeDependent = async () => {
     if (planSelectedAllowsDependent) {
-      history.push('/paciente/cadastro/dependentes')
-      // history.push(PHYSICAL_PERSON_REGISTER_DEPENDENTS)
+      history.push(PHYSICAL_PERSON_REGISTER_DEPENDENTS)
 
       closeModal()
       return
     }
 
     // checkRangeRegion
+    // planos/itens-vendaveis
 
     if (hasPlanTheAllowsDependentInRegion) {
       showMessage(SelectedPlanDontAllowAddDependents)
