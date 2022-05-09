@@ -1,5 +1,5 @@
 import { ReactComponent as PenIcon } from '@/assets/icons/pen-green.svg'
-import { ReactComponent as ProfileIcon } from '@/assets/icons/profile-green.svg'
+import { ReactComponent as ProfileIcon } from '@/assets/icons/clinic-profile.svg'
 import { InputFile } from '@/components/Form/InputFile'
 import { isValidSizeFile } from '@/helpers/file/isValidSizeFile'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'

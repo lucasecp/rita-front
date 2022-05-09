@@ -24,9 +24,14 @@ const icons = {
 interface ISimpleModal {
   type: string
   message: string
+  styles: React.CSSProperties
 }
 
-export const SimpleModal: React.FC<ISimpleModal> = ({ type, message }) => {
+export const SimpleModal: React.FC<ISimpleModal> = ({
+  type,
+  message,
+  styles,
+}) => {
   const { closeModal } = useModal()
 
   const onOk = () => {
@@ -34,7 +39,7 @@ export const SimpleModal: React.FC<ISimpleModal> = ({ type, message }) => {
   }
 
   return (
-    <Container>
+    <Container style={styles}>
       <img src={icons[type]} />
       <p>{message}</p>
       <ButtonPrimary onClick={onOk}>OK</ButtonPrimary>

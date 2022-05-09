@@ -6,7 +6,7 @@ import { Route } from './custom.routes'
 import { Initial } from '@/pages/Initial'
 import Login from '@/pages/Login'
 import { Profile } from '@/pages/Profile'
-import NotFound from '@/pages/404'
+import { NotFound } from '@/pages/NotFound'
 import { FilterSellableItems } from '@/pages/SellableItems/FilterSellableItems'
 import { CreateSellableItem } from '@/pages/SellableItems/CreateSellableItem'
 import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
@@ -27,7 +27,7 @@ import {
 } from './modules'
 
 import registerRoutesComponent from './grouping/register.routes'
-import { newRegisterPatientRoutes } from './grouping/newRegisterPatient.routes'
+import { newRegisterPatientRoutes } from './grouping/physicalPersonRegister.routes'
 import passwordRoutesComponent from './grouping/password.routes'
 
 import {
@@ -44,12 +44,10 @@ import {
   DIRECTOR_CREATE_PROFILE,
   CREATE_SELLABLE_ITEMS,
   REASON_TO_LEAVE,
-  PLANS,
   CHOOSE_PROFILE,
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
 import { ReasonToLeave } from '@/pages/ReasonToLeave'
-import { Plans } from '@/pages/Register/Plans'
 
 export const Routes: React.FC = () => {
   return (
@@ -127,8 +125,6 @@ export const Routes: React.FC = () => {
       <Route path={CHOOSE_PROFILE} exact isPrivate component={ChooseProfile} />
 
       <Route path={REASON_TO_LEAVE} component={ReasonToLeave} />
-
-      <Route path={PLANS} component={Plans} />
 
       <Route path="/teste-de-endereco" component={TestAddressPage} />
 

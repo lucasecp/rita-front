@@ -119,10 +119,20 @@ export const REGISTER_SPECIALIST = '/cadastro/especialista/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const REASON_TO_LEAVE = '/motivo-para-sair/:token'
-export const PLANS = '/planos'
-export const NEW_REGISTER_PATIENT_CHOOSE_REGION =
+
+export const PHYSICAL_PERSON_REGISTER_CHOOSE_REGION =
   '/paciente/cadastro/escolher-regiao'
-export const NEW_REGISTER_PATIENT_DOCUMENTS = '/paciente/cadastro/documentos'
+
+export const PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN =
+  '/paciente/cadastro/escolher-plano'
+export const PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS =
+  '/paciente/cadastro/escolher-plano/detalhes'
+
+export const PHYSICAL_PERSON_REGISTER_DEPENDENTS =
+  '/paciente/cadastro/dependentes'
+export const PHYSICAL_PERSON_REGISTER_DOCUMENTS =
+  '/paciente/cadastro/documentos'
+export const PHYSICAL_PERSON_REGISTER_PAYMENT = '/paciente/cadastro/pagamento'
 
 export const TESTE = '/teste'
 
