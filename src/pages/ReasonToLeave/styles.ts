@@ -78,6 +78,7 @@ export const TextAreaAndErrorMessage = styled.div`
 
 export const ButtonArea = styled.div`
   display: flex;
+  background-color: ${colors.gray.dark};
 
   button {
     margin: auto;
