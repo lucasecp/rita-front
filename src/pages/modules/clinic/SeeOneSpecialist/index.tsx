@@ -9,9 +9,11 @@ import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes
 import { SpecialistDataI } from './Types'
 
 const SeeOneSpecialist: React.FC = () => {
-  const [specialist, setSpecialist] = useState<SpecialistDataI>({} as SpecialistDataI)
+  const [specialist, setSpecialist] = useState<SpecialistDataI>(
+    {} as SpecialistDataI,
+  )
   const { Loading } = useLoading()
-  const location = useLocation<{ idDoctor: number, status: string }>()
+  const location = useLocation<{ idDoctor: number; status: string }>()
   const history = useHistory()
 
   useEffect(() => {

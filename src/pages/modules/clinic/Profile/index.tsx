@@ -7,7 +7,7 @@ import Form from './Form'
 import { ClinicEditContextProvider } from './Context/ClinicEditContext'
 
 const ClinicProfile: React.FC = () => {
-  const title = 'Rita Saúde | Perfil'
+  const title = 'Perfil Clínica'
   document.title = title
 
   return (

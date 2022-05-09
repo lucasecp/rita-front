@@ -1,24 +1,17 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
 
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 
 import OutlineButton from '@/components/Button/Outline'
 
-import { useModal } from '@/hooks/useModal'
-
 import { Container } from './styles'
-import { PHYSICAL_PERSON_REGISTER_PAYMENT } from '@/routes/constants/namedRoutes/routes'
+import { usePhysicalPersonRegister } from '@/pages/Register/physicalPersonRegister/shared/hooks'
 
 export const NoPlansToAddDependents: React.FC = () => {
-  const { closeModal } = useModal()
-  const history = useHistory()
+  const { finishRegister } = usePhysicalPersonRegister()
 
   const onClose = () => {
-    // finish register
-
-    history.push(PHYSICAL_PERSON_REGISTER_PAYMENT)
-    closeModal()
+    finishRegister()
   }
 
   return (
