@@ -13,7 +13,11 @@ import { useLoading } from '../useLoading'
 import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
 import { useHistory } from 'react-router-dom'
-import { LOGIN, INITIAL_PAGE } from '@/routes/constants/namedRoutes/routes'
+import {
+  LOGIN,
+  INITIAL_PAGE,
+  CHOOSE_PROFILE,
+} from '@/routes/constants/namedRoutes/routes'
 import apiPatient from '@/services/apiPatient'
 import AnalyzingData from './messages/AnalzingData'
 import UserBlocked from './messages/userBlocked'
@@ -90,8 +94,11 @@ export default function AuthProvider({ children }) {
           cpf: payload.cpf,
           token: data.jwtToken,
         })
-
-        pushToUrl(prevPath)
+        if (dataUser?.area.length > 1) {
+          history.push(CHOOSE_PROFILE)
+        } else {
+          pushToUrl(prevPath)
+        }
       } catch (error) {
         console.log(error)
 

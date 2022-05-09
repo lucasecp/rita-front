@@ -38,7 +38,8 @@ export const Content = styled.div.attrs(
     border-radius: 0;
     display: flex;
     min-width: fit-content;
-    max-height: 32px;
+    padding: 0;
+    min-height: 27px;
     span {
       cursor: pointer;
     }
@@ -47,7 +48,6 @@ export const Content = styled.div.attrs(
     position: static;
     grid-area: 2/1;
     overflow: hidden;
-    max-height: 32px;
     max-width: calc(100% - 25px);
   }
   .optionListContainer {
@@ -85,6 +85,7 @@ export const Content = styled.div.attrs(
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
+    margin-bottom:2px;
     path {
       fill: ${({ theme }) => theme.main};
     }

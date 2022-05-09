@@ -1,3 +1,12 @@
+export interface SpecialistDataI {
+  personalDatas?: PersonalDatasI,
+  status?: string,
+  id?: number,
+  profissionalData?: ProfissionalDatasI,
+  specialtys?: [],
+  clinics?: []
+}
+
 export interface ProfissionalDatasI {
   profissionalName?: string
   registerNumber?: string

@@ -38,6 +38,7 @@ import {
   PATIENT_WALLET_STATEMENTS,
   PATIENT_WALLET_SETTINGS,
   OPERATOR_WALLET_DASHBOARD,
+  OPERATOR_WALLET_PURCHASES,
   OPERATOR_WALLET_PAYMENTS,
   OPERATOR_WALLET_STATEMENTS,
   OPERATOR_WALLET_SETTINGS,
@@ -150,6 +151,10 @@ export const menuItens = [
     name: 'Carteira Digital',
     permissions: [permissions.VER_CARTEIRA_DIGITAL_OPERADOR],
     children: [
+      {
+        path: OPERATOR_WALLET_PURCHASES,
+        name: 'Compras',
+      },
       {
         path: OPERATOR_WALLET_PAYMENTS,
         name: 'Pagamentos',

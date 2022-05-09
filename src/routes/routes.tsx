@@ -15,6 +15,7 @@ import { SeeAllProfiles } from '@/pages/ProfileAndPermissions/SeeAllProfiles'
 import { SeeOneProfile } from '@/pages/ProfileAndPermissions/SeeOneProfile'
 import { EditProfile } from '@/pages/ProfileAndPermissions/EditProfile'
 import { CreateProfile } from '@/pages/ProfileAndPermissions/CreateProfile'
+import ChooseProfile from '@/pages/ChooseProfile/'
 
 import {
   directorRoutes,
@@ -44,6 +45,7 @@ import {
   CREATE_SELLABLE_ITEMS,
   REASON_TO_LEAVE,
   PLANS,
+  CHOOSE_PROFILE,
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
 import { ReasonToLeave } from '@/pages/ReasonToLeave'
@@ -121,6 +123,8 @@ export const Routes: React.FC = () => {
       <Route path={INITIAL_PAGE} isPrivate component={Initial} />
 
       <Route path={LOGIN} exact component={Login} />
+
+      <Route path={CHOOSE_PROFILE} exact isPrivate component={ChooseProfile} />
 
       <Route path={REASON_TO_LEAVE} component={ReasonToLeave} />
 

@@ -9,7 +9,7 @@ export const profiles = {
 
 export const profilesLabel = {
   Paciente: 'Paciente',
-  Funcionario: 'Funcionário',
+  Funcionario: 'Administrador',
   'Clinica/Especialista': 'Clínica/Especialista',
   Empresa: 'Empresa',
 }
