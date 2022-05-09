@@ -126,6 +126,7 @@ export const PLANS = '/planos'
 export const NEW_REGISTER_PATIENT_CHOOSE_REGION =
   '/paciente/cadastro/escolher-regiao'
 export const NEW_REGISTER_PATIENT_DOCUMENTS = '/paciente/cadastro/documentos'
+export const PHYSICAL_PERSON_REGISTER_PAYMENT = '/paciente/cadastro/pagamento'
 
 export const TESTE = '/teste'
 

@@ -10,16 +10,14 @@ export const Route = ({
   ...rest
 }) => {
   const { isAuthorization, logout } = useAuth()
-  
+
   useEffect(() => {
     if (!isPrivate) {
-      console.log('no private')
       logout()
     }
   }, [])
 
   if (!isAuthorization() && isPrivate) {
-    console.log(' private')
     logout()
     return <Redirect to={{ pathname: LOGIN, state: { from: path } }} />
   }
