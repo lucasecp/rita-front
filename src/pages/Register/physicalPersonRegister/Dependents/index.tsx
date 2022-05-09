@@ -10,6 +10,8 @@ import { EditDependent } from './actions/EditDependent'
 import { UpgradePlan } from './messages/UpgradePlan'
 
 import { useModal } from '@/hooks/useModal'
+import { useLoading } from '@/hooks/useLoading'
+import apiAdmin from '@/services/apiAdmin'
 
 import trashIcon from '@/assets/icons/trash.svg'
 import editIcon from '@/assets/icons/edit.svg'
@@ -20,15 +22,44 @@ import { Container } from './styles'
 
 export const Dependents: React.FC = () => {
   const { showMessage } = useModal()
+  const { Loading } = useLoading()
   const [dependents, setDependents] = useState<DependentData[]>([])
 
   const limitDependentsPlan = 2
   const planAllowMajorAge = false
 
-  const onAddDependent = () => {
+  const verifyIfHasConverage = async (): Promise<boolean> => {
+    let hasCoverage: boolean
+
+    try {
+      Loading.turnOn()
+      const response = await apiAdmin.get('/plano/itens-vendaveis', {
+        params: {
+          municipio: 'Rio de Janeiro',
+          uf: 'RJ',
+          minimoDependente: 1,
+        },
+      })
+
+      if (response.data.length > 0) {
+        hasCoverage = true
+      } else {
+        hasCoverage = false
+      }
+    } catch {
+    } finally {
+      Loading.turnOff()
+    }
+
+    return hasCoverage
+  }
+
+  const onAddDependent = async () => {
     if (limitDependentsPlan <= dependents.length) {
+      const hasCoverage = await verifyIfHasConverage()
+
       showMessage(UpgradePlan, {
-        hasCoverage: false,
+        hasCoverage,
         limitDependentsPlan,
       })
     } else {
