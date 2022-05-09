@@ -8,10 +8,9 @@ import { useHistory } from 'react-router-dom'
 import ButtonLink from '@/components/Button/Link'
 import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.svg'
 import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS } from '@/routes/constants/namedRoutes/routes'
-import { MappedPlan, RegionState } from '../../../ChooseRegion'
+import { MappedPlan } from '../../../ChooseRegion'
 
 export interface DataProps {
-  region: RegionState
   data: MappedPlan
 }
 
@@ -27,7 +26,6 @@ interface CardProps {
 
 export const CardOfPlans: React.FC<CardProps> = ({
   plan,
-  region,
   colorThemeIndex,
   selectedPlan,
   setSelectedPlan,
@@ -35,7 +33,7 @@ export const CardOfPlans: React.FC<CardProps> = ({
   const history = useHistory()
 
   const ToDetails = (plan) => {
-    history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS, { plan, region })
+    history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS, { plan })
   }
 
   return (

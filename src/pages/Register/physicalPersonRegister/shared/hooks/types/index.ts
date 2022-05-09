@@ -50,12 +50,16 @@ export interface DocumentsState {
 // }
 
 export interface PhysicalPersonRegisterContextData {
+  region: {
+    get: RegionState
+    set: React.Dispatch<React.SetStateAction<RegionState>>
+  }
   setDocumentsFile: React.Dispatch<React.SetStateAction<DocumentsState>>
-  finishRegister: () => void
   patientWantsDependent: {
     get: boolean
     set: React.Dispatch<React.SetStateAction<boolean>>
   }
+  finishRegister: () => void
   // cpfHolder?: string
   // isPatientLinkedCompany: boolean
   // limitOfDependents: number

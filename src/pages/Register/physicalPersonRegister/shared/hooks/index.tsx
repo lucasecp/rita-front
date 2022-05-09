@@ -143,12 +143,16 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   return (
     <PhysicalPersonRegisterContext.Provider
       value={{
+        region: {
+          get: region,
+          set: setRegion,
+        },
         setDocumentsFile,
-        finishRegister,
         patientWantsDependent: {
           get: patientWantsDependent,
           set: setPatientWantsDependent,
         },
+        finishRegister,
         // cpfHolder: registrationData?.cpf,
         // isPatientLinkedCompany,
         // limitOfDependents,

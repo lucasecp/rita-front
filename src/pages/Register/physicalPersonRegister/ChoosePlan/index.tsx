@@ -8,15 +8,16 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { useLocation } from 'react-router-dom'
 import ButtonLink from '@/components/Button/Link'
 import { CardOfPlans } from './components/Card'
-import { MappedPlan, RegionState } from '../ChooseRegion'
+import { MappedPlan } from '../ChooseRegion'
+import { usePhysicalPersonRegister } from '../shared/hooks'
 
 export interface DataProps {
-  region: RegionState
   data: MappedPlan[]
 }
 
 export const ChoosePlans: React.FC = () => {
-  const { plans, region } = useLocation().state
+  const { plans } = useLocation().state
+  const { region } = usePhysicalPersonRegister()
   const [selectedPlan, setSelectedPlan] = useState({ idPlan: 0, name: '' })
 
   return (
@@ -25,7 +26,8 @@ export const ChoosePlans: React.FC = () => {
         <TitleAndLogo>
           <h6>Escolha seu Plano</h6>
           <h2>
-            Exibindo os planos para a sua região: {region.city}/{region.uf}
+            Exibindo os planos para a sua região: {region.get.city}/
+            {region.get.uf}
           </h2>
         </TitleAndLogo>
         <CardArea>
@@ -33,7 +35,6 @@ export const ChoosePlans: React.FC = () => {
             return (
               <div key={plan.idPlan}>
                 <CardOfPlans
-                  region={region}
                   selectedPlan={selectedPlan}
                   setSelectedPlan={setSelectedPlan}
                   plan={plan}

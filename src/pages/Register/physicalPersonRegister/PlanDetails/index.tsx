@@ -6,9 +6,11 @@ import { ButtonArea, Content, Price, Top } from './styles'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import { useHistory, useLocation } from 'react-router-dom'
+import { usePhysicalPersonRegister } from '../shared/hooks'
 
 export const PlanDetails: React.FC = () => {
-  const { plan, region } = useLocation().state
+  const { region } = usePhysicalPersonRegister()
+  const { plan } = useLocation().state
   const history = useHistory()
 
   return (
@@ -19,8 +21,8 @@ export const PlanDetails: React.FC = () => {
           <span>Experimente 7 dias grátis</span>
         </Top>
         <span>
-          O {plan.name} tem abrangência em toda parte {region.city}do Brasil,
-          conta com redes credenciadas e atendimento especial para você.
+          O {plan.name} tem abrangência em toda parte {region.get.city} do
+          Brasil, conta com redes credenciadas e atendimento especial para você.
         </span>
         <h3>inclusão de Dependentes</h3>
         <span>Sim</span>

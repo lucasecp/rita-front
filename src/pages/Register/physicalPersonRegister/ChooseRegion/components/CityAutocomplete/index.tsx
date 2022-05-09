@@ -8,15 +8,11 @@ import {
 import { Container } from './styles'
 import apiAdmin from '@/services/apiAdmin'
 import { citiesFromApi } from './adapters/fromApi'
-import { RegionState } from '../..'
+import { usePhysicalPersonRegister } from '../../../shared/hooks'
 
-interface CityAutocompleteProps {
-  onGetRegion: (region: RegionState) => void
-}
+export const CityAutocomplete: React.FC = () => {
+  const { region } = usePhysicalPersonRegister()
 
-export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
-  onGetRegion,
-}) => {
   const [city, setCity] = useState({} as AutocompleteOptions)
   const [cities, setCities] = useState([] as AutocompleteOptions[])
 
@@ -44,7 +40,7 @@ export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
     if (city?.value) {
       const [citySelected, ufSelected] = city?.label?.split(' - ') || []
 
-      onGetRegion({ city: citySelected, uf: ufSelected })
+      region.set({ city: citySelected, uf: ufSelected })
 
       setCity({ value: 0, label: '' } as AutocompleteOptions)
       setCities([])
