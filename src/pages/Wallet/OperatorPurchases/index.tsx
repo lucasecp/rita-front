@@ -30,12 +30,12 @@ const periodOptions = [
 export const WalletOperatorPurchases: React.FC = () => {
   const tableItemsNew = useRef<any>()
   const tableItemsAll = useRef<any>()
-  const [itemsNew, setItemsNew] = useState<
-    RitaWallet.Model.PaymentRequest[]
-  >([])
-  const [itemsAll, setItemsAll] = useState<
-    RitaWallet.Model.PaymentRequest[]
-  >([])
+  const [itemsNew, setItemsNew] = useState<RitaWallet.Model.PaymentRequest[]>(
+    [],
+  )
+  const [itemsAll, setItemsAll] = useState<RitaWallet.Model.PaymentRequest[]>(
+    [],
+  )
   const [selectedPeriod, setSelectedPeriod] = useState(periodOptions[0].value)
   const [tableItemsAllSort, setTableItemsAllSort] =
     useState<RitaComponents.TableSort>({
@@ -159,7 +159,8 @@ export const WalletOperatorPurchases: React.FC = () => {
                     <TableColumnAmount>
                       {formatPrice(row.debitAmount)}
                       <small>
-                        <CrownIcon /> {convertWalletMoneyToCrown(row.debitAmount)}
+                        <CrownIcon />{' '}
+                        {convertWalletMoneyToCrown(row.debitAmount)}
                       </small>
                     </TableColumnAmount>
                   ),

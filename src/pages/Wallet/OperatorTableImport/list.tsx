@@ -15,11 +15,10 @@ import { Container, NoRecordsWarn } from './styles'
 
 export const WalletOperatorTableImportList: React.FC = () => {
   const [tableData, setTableData] = useState<any[]>([])
-  const [tableSort, setTableSort] =
-    useState<RitaComponents.TableSort>({
-      path: 'createdAt',
-      order: 'DESC',
-    })
+  const [tableSort, setTableSort] = useState<RitaComponents.TableSort>({
+    path: 'createdAt',
+    order: 'DESC',
+  })
   const [tablePaging, setTablePaging] = useState({
     take: 10,
     skip: 0,
@@ -28,7 +27,7 @@ export const WalletOperatorTableImportList: React.FC = () => {
   const { Loading } = useLoading()
   const history = useHistory()
 
-  function handleNewTableClick () {
+  function handleNewTableClick() {
     history.push(OPERATOR_WALLET_TABLE_IMPORT_CREATE)
   }
 
@@ -85,7 +84,7 @@ export const WalletOperatorTableImportList: React.FC = () => {
         {tableData && tableData.length ? (
           <Table
             columns={[
-              { path: 'tableType', },
+              { path: 'tableType' },
               { path: 'regional' },
               {
                 path: 'createdAt',

@@ -1,5 +1,5 @@
 import { Select } from '@/components/Form/Select'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { PatientStatusLimit } from '../../types'
 
 import { Container } from './styles'
@@ -7,11 +7,13 @@ import { Container } from './styles'
 interface PersonStatusProps {
   patientStatus: PatientStatusLimit
   setpatientStatus: React.Dispatch<React.SetStateAction<PatientStatusLimit>>
+  initialStatus: string
 }
 
 export const ResetStatusOnePatient: React.FC<PersonStatusProps> = ({
   patientStatus,
   setpatientStatus,
+  initialStatus,
 }) => {
   const [status, setStatus] = useState(patientStatus.status)
   const [limitTry, setlimitTry] = useState(patientStatus.limitTry)
@@ -29,34 +31,34 @@ export const ResetStatusOnePatient: React.FC<PersonStatusProps> = ({
   }, [patientStatus])
 
   const statusOptions = () => {
-    if (status === 'A') {
+    if (initialStatus === 'A') {
       return [
         { label: 'Aprovado', value: 'A' },
         { label: 'Pendente', value: 'P' },
         { label: 'Inativo', value: 'I' },
       ]
     }
-    if (status === 'N') {
+    if (initialStatus === 'N') {
       return [
         { label: 'Negado', value: 'N' },
         { label: 'Pendente', value: 'P' },
         { label: 'Inativo', value: 'I' },
       ]
     }
-    if (status === 'P') {
+    if (initialStatus === 'P') {
       return [
         { label: 'Pendente', value: 'P' },
         { label: 'Inativo', value: 'I' },
       ]
     }
-    if (status === 'EA') {
+    if (initialStatus === 'EA') {
       return [
         { label: 'Inativo', value: 'I' },
         { label: 'Pendente', value: 'P' },
         { label: 'Em análise', value: 'EA' },
       ]
     }
-    if (status === 'I') {
+    if (initialStatus === 'I') {
       return [
         { label: 'Inativo', value: 'I' },
         { label: 'Pendente', value: 'P' },
@@ -64,13 +66,14 @@ export const ResetStatusOnePatient: React.FC<PersonStatusProps> = ({
     }
     return []
   }
+  const statusMemorized = useCallback(() => statusOptions(), [initialStatus])
 
   return (
     <Container>
       <Select
         label="Atualizar Status:"
         labelDefaultOption="Selecione:"
-        options={statusOptions()}
+        options={statusMemorized()}
         setValue={setStatus}
         value={status}
         name="status"

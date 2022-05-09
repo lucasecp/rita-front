@@ -317,6 +317,7 @@ export const SeeOnePatient: React.FC = () => {
 
         <ResetStatusOnePatient
           patientStatus={patientStatusLimit}
+          initialStatus={patientData.status}
           setpatientStatus={setPatientStatusLimit}
         />
         <footer>

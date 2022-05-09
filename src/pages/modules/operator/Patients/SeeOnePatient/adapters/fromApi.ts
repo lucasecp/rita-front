@@ -36,6 +36,8 @@ export const fromApiPatientData = (data: ResponseApi): fromApiResponse => {
     // É TITULAR
     patientDataFromApi = {
       id: data.idPaciente,
+      status: data.status,
+      limitTry: data.limiteTentativas,
       name: data.nome,
       cpf: formatCpf(data.cpf),
       birthDate: data.dataNascimento,
@@ -54,6 +56,8 @@ export const fromApiPatientData = (data: ResponseApi): fromApiResponse => {
     // É DEPENDENTE
     patientDataFromApi = {
       id: data.titular.idPaciente,
+      status: data.status,
+      limitTry: data.limiteTentativas,
       name: data.titular.nome,
       cpf: formatCpf(data.titular.cpf),
       birthDate: data.titular.dataNascimento,
