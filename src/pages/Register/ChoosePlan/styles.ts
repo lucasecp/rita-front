@@ -4,31 +4,8 @@ import styled from 'styled-components'
 export const Content = styled.div`
   background: #ffffff;
   box-shadow: 0px 2px 8px rgba(223, 210, 255, 0.15);
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
   padding: 40px 32px 48px;
-
-  @media (max-width: 767px) {
-    padding: 32px;
-    > div {
-      flex-direction: column;
-      align-items: center;
-      margin-top: 24px;
-      > div {
-        margin: 0 0 24px 0;
-        width: 100%;
-      }
-    }
-    > h6 {
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 28px;
-    }
-  }
-  @media (max-width: 539px) {
-    div > button {
-      width: 100%;
-    }
-  }
 `
 export const TitleAndLogo = styled.div`
   h6 {
@@ -80,24 +57,38 @@ export const TextAreaAndErrorMessage = styled.div`
 `
 
 export const CardArea = styled.div`
-  display: flex;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   justify-content: space-between;
   gap: 24px;
-  margin: 20px;
-`
+  margin: 32px 0;
 
-export const Card = styled.div`
-  height: 200px;
-  width: 100px;
-  padding: 24px;
-  background-color: ${colors.purple.main.light};
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const ButtonArea = styled.div`
   display: flex;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-between;
+  gap: auto;
+  background-color: ${colors.gray.extraLight};
+  border-radius: 0 0 8px 8px;
+  padding: 32px;
+  margin-bottom: 40px;
 
-  button {
+  @media (max-width: 950px) {
+    span {
+      display: none;
+    }
+  }
+
+  span {
     margin: auto;
+    text-align: center;
+    font-size: 22px;
+    color: ${colors.purple.main.dark};
+    font-weight: 500;
   }
 `

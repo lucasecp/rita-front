@@ -43,11 +43,13 @@ import {
   DIRECTOR_CREATE_PROFILE,
   CREATE_SELLABLE_ITEMS,
   REASON_TO_LEAVE,
-  PLANS,
+  PLANS_DETAILS,
+  PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN,
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
 import { ReasonToLeave } from '@/pages/ReasonToLeave'
-import { Plans } from '@/pages/Register/Plans'
+import { ChoosePlans } from '@/pages/Register/ChoosePlan'
+import { PlanDetails } from '@/pages/Register/PlanDetails'
 
 export const Routes: React.FC = () => {
   return (
@@ -124,7 +126,13 @@ export const Routes: React.FC = () => {
 
       <Route path={REASON_TO_LEAVE} component={ReasonToLeave} />
 
-      <Route path={PLANS} component={Plans} />
+      <Route
+        path={PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN}
+        exact
+        component={ChoosePlans}
+      />
+
+      <Route path={PLANS_DETAILS} exact component={PlanDetails} />
 
       <Route path="/teste-de-endereco" component={TestAddressPage} />
 

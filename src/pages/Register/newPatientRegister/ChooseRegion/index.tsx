@@ -11,11 +11,31 @@ import { useModal } from '@/hooks/useModal'
 import { CityAutocomplete } from './components/CityAutocomplete'
 import InputCep from './components/InputCep'
 
-import { LOGIN, PLANS } from '@/routes/constants/namedRoutes/routes'
+import {
+  LOGIN,
+  PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN,
+} from '@/routes/constants/namedRoutes/routes'
 import { AddUserOnWaitList } from './messages/AddUserOnWaitList'
 import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { toast } from 'react-toastify'
+import { fromApiPlans } from './adapters/fromApi'
+
+export interface Plans {
+  idPlano: number
+  maximoDependente: number
+  nome: string
+  permiteMaiores: boolean
+  preco: string
+}
+
+export interface MappedPlan {
+  idPlan: number
+  maximumDependentsQuantity: number
+  name: string
+  AllowedMajorAge: boolean
+  price: string
+}
 
 export interface RegionState {
   uf: string
@@ -37,15 +57,20 @@ export const ChooseRegion: React.FC = () => {
     try {
       Loading.turnOn()
 
-      const { data } = await apiAdmin.get(`/plano/regiao`, {
-        params: { municipio: region.city, ufSigla: 'pr' },
+      const { data } = await apiAdmin.get('/plano/itens-vendaveis', {
+        params: { municipio: region.city, uf: region.uf },
       })
 
-      if (!data.dados.length) {
+      if (!data.length) {
         return showMessage(AddUserOnWaitList, { region }, true)
       }
 
-      history.push(PLANS, { data, region })
+      const mappedPlans: MappedPlan[] = fromApiPlans(data)
+
+      history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN, {
+        plans: mappedPlans,
+        region,
+      })
     } catch ({ response }) {
       toast.error('Erro ao Buscar Planos')
     } finally {
