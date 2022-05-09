@@ -19,6 +19,11 @@
 //   complement?: string
 // }
 
+export interface RegionState {
+  uf: string
+  city: string
+}
+
 export interface DocumentsState {
   holdingDocumentFile: File | string
   ownFrontDocumentFile: File | string

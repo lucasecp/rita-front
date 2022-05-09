@@ -18,9 +18,11 @@ import {
   // AddressState,
   // DependentsState,
   // RegisterDataState,
+  RegionState,
   DocumentsState,
   PhysicalPersonRegisterContextData,
 } from './types'
+
 import { PHYSICAL_PERSON_REGISTER_PAYMENT } from '@/routes/constants/namedRoutes/routes'
 
 const PhysicalPersonRegisterContext =
@@ -42,6 +44,8 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   // )
 
   // const [address, setAddress] = useState({} as AddressState | undefined)
+
+  const [region, setRegion] = useState({} as RegionState)
 
   const [documentsFile, setDocumentsFile] = useState({} as DocumentsState)
 

@@ -17,17 +17,10 @@ import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { toast } from 'react-toastify'
 
-export interface RegionState {
-  uf: string
-  city: string
-}
-
 export const ChooseRegion: React.FC = () => {
   const history = useHistory()
   const { Loading } = useLoading()
   const { showMessage } = useModal()
-
-  const [region, setRegion] = useState({} as RegionState)
 
   const onComeBack = () => {
     history.push(LOGIN)
