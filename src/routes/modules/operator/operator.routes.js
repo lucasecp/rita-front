@@ -22,7 +22,10 @@ import {
   OPERATOR_CREATE_ISSUING_AGENCY,
   OPERATOR_REPORTS_PATIENT_ANALYTIC,
   OPERATOR_WALLET_DASHBOARD,
+  OPERATOR_WALLET_PURCHASES,
   OPERATOR_WALLET_SETTINGS,
+  OPERATOR_WALLET_TABLE_IMPORT_LIST,
+  OPERATOR_WALLET_TABLE_IMPORT_CREATE,
 } from '../../constants/namedRoutes/routes'
 
 import { SeeOnePatient } from '@/pages/modules/operator/Patients/SeeOnePatient'
@@ -47,8 +50,13 @@ import SeeOneSpecialist from '@/pages/modules/operator/specialists/SeeOneSpecial
 import EditIssuingAgency from '@/pages/modules/operator/IssuingAgency/EditIssuingAgency'
 import SeeAllIssuingAgency from '@/pages/modules/operator/IssuingAgency/SeeAllIssuingAgency'
 import CreateIssuingAgency from '@/pages/modules/operator/IssuingAgency/CreateIssuingAgency'
-import { WalletDashboard } from '@/pages/modules/operator/WalletDashboard'
-import WalletSettings from '@/pages/modules/operator/WalletSettings'
+import { WalletOperatorDashboard } from '@/pages/Wallet/OperatorDashboard'
+import { WalletOperatorPurchases } from '@/pages/Wallet/OperatorPurchases'
+import { WalletOperatorSettings } from '@/pages/Wallet/OperatorSettings'
+import {
+  WalletOperatorTableImportList,
+  WalletOperatorTableImportCreate,
+} from '@/pages/Wallet/OperatorTableImport'
 
 const operatorRoutes = [
   {
@@ -129,11 +137,23 @@ const operatorRoutes = [
   },
   {
     path: OPERATOR_WALLET_DASHBOARD,
-    component: WalletDashboard,
+    component: WalletOperatorDashboard,
+  },
+  {
+    path: OPERATOR_WALLET_PURCHASES,
+    component: WalletOperatorPurchases,
   },
   {
     path: OPERATOR_WALLET_SETTINGS,
-    component: WalletSettings,
+    component: WalletOperatorSettings,
+  },
+  {
+    path: OPERATOR_WALLET_TABLE_IMPORT_LIST,
+    component: WalletOperatorTableImportList,
+  },
+  {
+    path: OPERATOR_WALLET_TABLE_IMPORT_CREATE,
+    component: WalletOperatorTableImportCreate,
   },
 ]
 

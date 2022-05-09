@@ -8,7 +8,7 @@ import { Container } from './styles'
 import { useModal } from '@/hooks/useModal'
 import InsertRqeNumber from './messages/insertRqeNumber/index'
 
-//Será mostrado uma modal caso a especialidade requerer inscrição
+// Será mostrado uma modal caso a especialidade requerer inscrição
 
 interface SpecialtysProps {
   specialtys: MultiSelectOption[]

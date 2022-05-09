@@ -12,7 +12,6 @@ const Grid: React.FC<{ nameDoctor: string }> = ({ nameDoctor }) => {
   const { schedule } = useScheduleSpecialist()
 
   const history = useHistory()
-  console.log(schedule)
 
   const scheduleOnSpecificDay = (name: string) =>
     schedule.filter((data) => data.day === name)

@@ -4,6 +4,7 @@ import colors from '@/styles/colors'
 interface ContainerProps {
   small?: boolean
   medium?: boolean
+  block?: boolean
   disabledWithEvents?: boolean
   variation?: string
 }
@@ -27,6 +28,7 @@ export const Container = styled.button<ContainerProps>`
     color: #fff;
     border-color: ${({ theme }) => theme.darkness};
   }
+
   ${({ small }) =>
     small &&
     css`
@@ -39,7 +41,11 @@ export const Container = styled.button<ContainerProps>`
       padding: 10px 32px;
     `}
 
-
+  ${({ block }) =>
+    block &&
+    css`
+      width: 100%;
+    `}
 
   ${({ disabledWithEvents }) =>
     disabledWithEvents &&
@@ -79,6 +85,17 @@ export const Container = styled.button<ContainerProps>`
       :hover {
         background: #316153 !important;
         border: solid 2px #316153;
+      }
+    `}
+    ${(props) =>
+    props.variation === 'red' &&
+    css`
+      color: #fff;
+      background: #fd8163 !important;
+      border: #fd8163 2px solid;
+      :hover {
+        background: #c2533d !important;
+        border: #c2533d 2px solid;
       }
     `}
 `

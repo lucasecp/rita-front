@@ -16,7 +16,6 @@ import {
   SEE_ONE_USER,
   EDIT_USER,
   CREATE_USER,
-  DIRECTOR_WALLET_SETTINGS,
 } from '../../constants/namedRoutes/routes'
 
 import { EditPlan } from '@/pages/modules/Director/PlanManagment/EditPlan'
@@ -33,7 +32,6 @@ import { FilterUsers } from '@/pages/modules/Director/Users/FilterUsers'
 import { SeeOneUser } from '@/pages/modules/Director/Users/SeeOneUser'
 import { EditUser } from '@/pages/modules/Director/Users/EditUser'
 import { CreateUser } from '@/pages/modules/Director/Users/CreateUser'
-import WalletSettings from '@/pages/modules/operator/WalletSettings'
 
 const directorRoutes = [
   {
@@ -79,28 +77,27 @@ const directorRoutes = [
   },
   {
     path: FILTER_USERS,
+    // exact: true,
     component: FilterUsers,
   },
   {
     path: SEE_ONE_USER,
+    exact: true,
     component: SeeOneUser,
   },
   {
     path: EDIT_USER,
+    exact: true,
     component: EditUser,
   },
   {
     path: CREATE_USER,
     component: CreateUser,
   },
-  {
-    path: DIRECTOR_WALLET_SETTINGS,
-    component: WalletSettings,
-  },
 ]
 
 const directorRoutesComponents = directorRoutes.map((props, index) => (
-  <Route key={index} isPrivate {...props} />
+  <Route key={index} isPrivate {...props} exact />
 ))
 
 export default directorRoutesComponents

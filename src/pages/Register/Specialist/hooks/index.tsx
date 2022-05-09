@@ -66,6 +66,10 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
     const list = []
 
     for (const specialty in specialtysAndDocs) {
+      if (!specialtysAndDocs[specialty].document) {
+        continue
+      }
+
       const formFile = new FormData()
 
       formFile.append('file', specialtysAndDocs[specialty].document)
@@ -108,6 +112,9 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   }
 
   const registerPhoto = async () => {
+    if (!photo) {
+      return
+    }
     try {
       const formFile = new FormData()
 
@@ -118,7 +125,7 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
         formFile,
       )
     } catch (error) {
-      throw new Error('Foto não enviada')
+      throw new Error('Sua foto não foi salva!')
     }
   }
 

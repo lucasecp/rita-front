@@ -38,9 +38,11 @@ import {
   PATIENT_WALLET_STATEMENTS,
   PATIENT_WALLET_SETTINGS,
   OPERATOR_WALLET_DASHBOARD,
+  OPERATOR_WALLET_PURCHASES,
   OPERATOR_WALLET_PAYMENTS,
   OPERATOR_WALLET_STATEMENTS,
   OPERATOR_WALLET_SETTINGS,
+  OPERATOR_WALLET_TABLE_IMPORT_LIST,
   FILTER_SELLABLE_ITEMS,
   OPERATOR_SEE_ALL_CLINICS,
   OPERATOR_SEE_ALL_SPECIALTYS,
@@ -150,6 +152,10 @@ export const menuItens = [
     permissions: [permissions.VER_CARTEIRA_DIGITAL_OPERADOR],
     children: [
       {
+        path: OPERATOR_WALLET_PURCHASES,
+        name: 'Compras',
+      },
+      {
         path: OPERATOR_WALLET_PAYMENTS,
         name: 'Pagamentos',
       },
@@ -160,6 +166,10 @@ export const menuItens = [
       {
         path: OPERATOR_WALLET_SETTINGS,
         name: 'Configurações',
+      },
+      {
+        path: OPERATOR_WALLET_TABLE_IMPORT_LIST,
+        name: 'Importação de Tabelas',
       },
     ],
   },

@@ -47,7 +47,6 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
 
     getIssuingAgency()
   }, [])
- 
 
   useEffect(() => {
     if (!setIssuingAgencyToApi) {
@@ -55,8 +54,7 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
     }
 
     const issuingAgencyOpt = issuingAgencyOptions.find(
-      (data) =>
-        data.label === issuingAgency || data.value === Number(issuingAgency),
+      (data) => data.value === Number(issuingAgency),
     )
 
     if (!issuingAgencyOpt?.value || !issuingAgencyOpt?.label) {

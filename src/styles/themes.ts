@@ -60,14 +60,19 @@ const green: ThemeProps = {
   light: '#D8EADE',
   extraLight: '#F1F8F4',
 }
-
 const orange: ThemeProps = {
-  darkness: '#C2533D',
-  main: '#DF644B',
-  medium: '#FD8163',
-  mediumLight: '#FBA38F',
-  light: '#FEE1DD',
-  extraLight: '#FBF1F0',
+  // darkness: '#C2533D',
+  // main: '#FD8163',
+  // medium: '#DF644B',
+  // mediumLight: '#FBA38F',
+  // light: '#FEE1DD',
+  // extraLight: '#FBF1F0',
+  darkness: '#1C23BD',
+  main: '#000CEC',
+  medium: '#326BF6',
+  mediumLight: '#C5DBFE',
+  light: '#EAF0FA',
+  extraLight: '#F5F9FF',
 }
 
 export const themes = {

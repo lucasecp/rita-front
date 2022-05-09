@@ -16,6 +16,7 @@ import { RitaLoading } from './components/Loading/RitaLoading'
 
 import { ToastContainer } from 'react-toastify'
 import { RegisterPatientProvider } from './pages/Register/RegisterPatient/hooks'
+import { PhysicalPersonRegisterProvider } from './pages/Register/physicalPersonRegister/shared/hooks'
 
 export const App: React.FC = () => {
   return (
@@ -27,11 +28,13 @@ export const App: React.FC = () => {
               <ThemeProvider>
                 <GlobalStyle />
                 <RegisterPatientProvider>
-                  <Routes />
-                  <Modal />
+                  <PhysicalPersonRegisterProvider>
+                    <Routes />
+                    <Modal />
+                    <RitaLoading />
+                    <ToastContainer />
+                  </PhysicalPersonRegisterProvider>
                 </RegisterPatientProvider>
-                <RitaLoading />
-                <ToastContainer />
               </ThemeProvider>
             </MenuProvider>
           </AuthProvider>

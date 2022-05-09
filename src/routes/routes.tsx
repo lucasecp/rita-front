@@ -6,7 +6,7 @@ import { Route } from './custom.routes'
 import { Initial } from '@/pages/Initial'
 import Login from '@/pages/Login'
 import { Profile } from '@/pages/Profile'
-import NotFound from '@/pages/404'
+import { NotFound } from '@/pages/NotFound'
 import { FilterSellableItems } from '@/pages/SellableItems/FilterSellableItems'
 import { CreateSellableItem } from '@/pages/SellableItems/CreateSellableItem'
 import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
@@ -15,6 +15,7 @@ import { SeeAllProfiles } from '@/pages/ProfileAndPermissions/SeeAllProfiles'
 import { SeeOneProfile } from '@/pages/ProfileAndPermissions/SeeOneProfile'
 import { EditProfile } from '@/pages/ProfileAndPermissions/EditProfile'
 import { CreateProfile } from '@/pages/ProfileAndPermissions/CreateProfile'
+import ChooseProfile from '@/pages/ChooseProfile/'
 
 import {
   directorRoutes,
@@ -26,7 +27,7 @@ import {
 } from './modules'
 
 import registerRoutesComponent from './grouping/register.routes'
-import { newRegisterPatientRoutes } from './grouping/newRegisterPatient.routes'
+import { newRegisterPatientRoutes } from './grouping/physicalPersonRegister.routes'
 import passwordRoutesComponent from './grouping/password.routes'
 
 import {
@@ -43,9 +44,12 @@ import {
   DIRECTOR_CREATE_PROFILE,
   CREATE_SELLABLE_ITEMS,
   REASON_TO_LEAVE,
+  PLANS,
+  CHOOSE_PROFILE,
 } from './constants/namedRoutes/routes'
 import { TestAddressPage } from '@/pages/TestAddressPage'
 import { ReasonToLeave } from '@/pages/ReasonToLeave'
+import { Plans } from '@/pages/Register/Plans'
 
 export const Routes: React.FC = () => {
   return (
@@ -81,12 +85,18 @@ export const Routes: React.FC = () => {
       />
 
       <Route
-        path={DIRECTOR_SEE_ALL_PROFILES}
+        path={DIRECTOR_EDIT_PROFILE}
+        exact
         isPrivate
-        component={SeeAllProfiles}
+        component={EditProfile}
       />
 
-      <Route path={DIRECTOR_EDIT_PROFILE} isPrivate component={EditProfile} />
+      <Route
+        path={DIRECTOR_SEE_ALL_PROFILES}
+        isPrivate
+        exact
+        component={SeeAllProfiles}
+      />
 
       <Route
         path={CREATE_SELLABLE_ITEMS}
@@ -114,7 +124,11 @@ export const Routes: React.FC = () => {
 
       <Route path={LOGIN} exact component={Login} />
 
+      <Route path={CHOOSE_PROFILE} exact isPrivate component={ChooseProfile} />
+
       <Route path={REASON_TO_LEAVE} component={ReasonToLeave} />
+
+      <Route path={PLANS} component={Plans} />
 
       <Route path="/teste-de-endereco" component={TestAddressPage} />
 

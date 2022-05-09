@@ -11,9 +11,7 @@ export const Container = styled.button<{
   justify-content: center;
   gap: 4px;
 
-  min-width: 40px;
   height: 40px;
-  border-radius: 50%;
 
   overflow: hidden;
   margin-left: 16px;

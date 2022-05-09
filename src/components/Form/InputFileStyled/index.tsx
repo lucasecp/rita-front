@@ -4,7 +4,7 @@ import { InputFile } from '@/components/Form/InputFile'
 import MsgError from '@/components/MsgError'
 
 interface InputDocumentProps {
-  setValue: (value: string) => void
+  setValue: (file: File) => void
   label?: string
   color?: string
   msgError?: string

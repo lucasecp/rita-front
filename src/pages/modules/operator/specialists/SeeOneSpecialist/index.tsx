@@ -17,7 +17,6 @@ const SeeOneSpecialist = () => {
     if (!location.state) {
       return history.push(OPERATOR_SEE_ALL_SPECIALISTS)
     }
-    console.log(location.state.idDoctor)
 
     document.title = 'Rita Saúde | Informações Especialista'
 

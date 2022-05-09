@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+// teste
 
 export const Container = styled.div`
   padding: 8px 0;
@@ -49,7 +50,7 @@ export const Container = styled.div`
     }
     & + span + span {
       padding: 8px;
-      background${({ theme }) => theme.main};
+      background: ${({ theme }) => theme.main};
       color: #fff;
       font-size: 16px;
       font-weight: 700;

@@ -34,7 +34,7 @@ export const Step = styled.span<StepsProps>`
   ${({ active }) =>
     active &&
     css`
-      background${({ theme }) => theme.main};
+      background: ${({ theme }) => theme.main};
     `}
 
   +span {

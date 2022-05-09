@@ -29,10 +29,6 @@ export const arrayOfCheckedPermissions = (
     })
   })
 
-  console.log(
-    arrayToBeSetOnInitialCheckedPermissions.map(Number).sort((a, b) => a - b),
-  )
-
   return arrayToBeSetOnInitialCheckedPermissions
     .map(Number)
     .sort((a, b) => a - b)

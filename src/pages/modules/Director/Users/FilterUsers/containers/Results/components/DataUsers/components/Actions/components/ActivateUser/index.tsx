@@ -9,6 +9,7 @@ import { toast } from '@/styles/components/toastify'
 import apiUser from '@/services/apiUser'
 
 import { User } from '../../index'
+import { Container } from './styles'
 
 interface ActivateUserProps {
   userData: User
@@ -38,8 +39,10 @@ export const ActivateUser: React.FC<ActivateUserProps> = ({
   }
 
   return (
-    <CustomTooltip label="Ativar">
-      <ActivateIcon onClick={onActivateUser} />
-    </CustomTooltip>
+    <Container>
+      <CustomTooltip label="Ativar">
+        <ActivateIcon onClick={onActivateUser} />
+      </CustomTooltip>
+    </Container>
   )
 }

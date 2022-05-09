@@ -36,8 +36,7 @@ export const ContainerLabel = styled.div`
     font-size: 16px;
     line-height: 24px;
 
-    color: ${({ checked }) =>
-      checked ? colors.purple.main.dark : colors.gray.dark};
+    color: ${({ checked, theme }) => (checked ? theme.main : colors.gray.dark)};
     margin-left: ${({ label }) => (label ? 2 : 0)}px;
   }
   .MuiTypography-body1.Mui-disabled {
