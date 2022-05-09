@@ -6,7 +6,7 @@ import { Route } from './custom.routes'
 import { Initial } from '@/pages/Initial'
 import Login from '@/pages/Login'
 import { Profile } from '@/pages/Profile'
-import NotFound from '@/pages/404'
+import { NotFound } from '@/pages/NotFound'
 import { FilterSellableItems } from '@/pages/SellableItems/FilterSellableItems'
 import { CreateSellableItem } from '@/pages/SellableItems/CreateSellableItem'
 import { SeeSellableItems } from '@/pages/SellableItems/SeeSellableItems'
@@ -27,7 +27,7 @@ import {
 } from './modules'
 
 import registerRoutesComponent from './grouping/register.routes'
-import { newRegisterPatientRoutes } from './grouping/newRegisterPatient.routes'
+import { newRegisterPatientRoutes } from './grouping/physicalPersonRegister.routes'
 import passwordRoutesComponent from './grouping/password.routes'
 
 import {

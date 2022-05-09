@@ -3,9 +3,9 @@ import { SimpleModal, MODAL_TYPES } from '@/components/Modal/SimpleModal'
 import { ConfirmationModal } from '@/components/Modal/Confirmation'
 
 interface IShowSimple {
-  error: (message: string) => void
-  warning: (message: string) => void
-  success: (message: string) => void
+  error: (message: string, styles?: React.CSSProperties) => void
+  warning: (message: string, styles?: React.CSSProperties) => void
+  success: (message: string, styles?: React.CSSProperties) => void
 }
 
 interface ModalContextData {
@@ -50,24 +50,27 @@ const ModalProvider: React.FC = ({ children }) => {
     setTimeout(removeContentToAnimation, 300)
   }
 
-  const error = (message: string) => {
+  const error = (message: string, styles?: React.CSSProperties) => {
     showMessage(SimpleModal, {
       type: MODAL_TYPES.ERROR,
       message,
+      styles,
     })
   }
 
-  const warning = (message: string) => {
+  const warning = (message: string, styles?: React.CSSProperties) => {
     showMessage(SimpleModal, {
       type: MODAL_TYPES.WARNING,
       message,
+      styles,
     })
   }
 
-  const success = (message: string) => {
+  const success = (message: string, styles?: React.CSSProperties) => {
     showMessage(SimpleModal, {
       type: MODAL_TYPES.SUCCESS,
       message,
+      styles,
     })
   }
 

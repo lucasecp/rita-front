@@ -5,7 +5,7 @@ import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 import { ButtonArea, CardArea, Card, Content, TitleAndLogo } from './styles'
 
 import ButtonPrimary from '@/components/Button/Primary'
-import { RegionState } from '../newPatientRegister/ChooseRegion'
+import { RegionState } from '../physicalPersonRegister/ChooseRegion'
 import { useLocation } from 'react-router'
 import { RadioGroup } from '@material-ui/core'
 import RadioButton from '@/styles/components/RadioButton'

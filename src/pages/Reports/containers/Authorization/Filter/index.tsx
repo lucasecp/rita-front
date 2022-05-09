@@ -134,6 +134,14 @@ const FilterAuthorization: React.FC = () => {
     }
   }, [registerDates, validationDates, validators, name, cpf, status, columns])
 
+  const formatIncome = (value: string) => {
+    const formated = {
+      yes: 1,
+      no: 0,
+    }
+    return formated[value]
+  }
+
   const objQuery = [
     { name: 'nome', value: name },
     { name: 'cpf', value: clearFormat(cpf) },
@@ -144,7 +152,7 @@ const FilterAuthorization: React.FC = () => {
     { name: 'dataValidacaoFim', value: convertDate(validationDates[1]) },
     { name: 'idValidador', value: formatMultSelectArray(validators) },
     { name: 'campos', value: orderColumnsToApi(columns) },
-    { name: 'rendaBaixa', value: income === 'yes' ? 1 : 0 },
+    { name: 'rendaBaixa', value: formatIncome(income) },
   ]
 
   const hasFieldErrors = () => {
