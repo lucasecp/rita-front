@@ -21,7 +21,7 @@ interface CardProps {
     idPlan: number
     name: string
   }
-  setSelectedPlan: () => void
+  setSelectedPlan: (selectedPlan: { idPlan: number; name: string }) => void
 }
 
 export const CardOfPlans: React.FC<CardProps> = ({
