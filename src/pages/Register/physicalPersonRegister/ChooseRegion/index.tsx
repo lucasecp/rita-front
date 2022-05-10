@@ -68,10 +68,7 @@ export const ChooseRegion: React.FC = () => {
 
       history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN, {
         plans: mappedPlans,
-<<<<<<< HEAD
         // region,
-=======
->>>>>>> 3ba2848982ccfb37807d929cb446e3ffa67697da
       })
     } catch ({ response }) {
       toast.error('Erro ao Buscar Planos')

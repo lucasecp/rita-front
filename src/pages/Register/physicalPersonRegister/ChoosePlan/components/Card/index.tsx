@@ -30,11 +30,7 @@ interface CardProps {
   setSelectedPlan: (selectedPlan: SelectedPlan) => void
 }
 
-export const CardOfPlans: React.FC<CardProps> = ({
-  plan,
-  colorThemeIndex,
-  setSelectedPlan,
-}) => {
+export const CardOfPlans: React.FC<CardProps> = ({ plan, colorThemeIndex }) => {
   const history = useHistory()
   const { selectedPlan } = usePhysicalPersonRegister()
 
