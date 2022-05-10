@@ -34,7 +34,7 @@ export const Clinics: React.FC<SpecialistClinicsProps> = ({
   useEffect(() => {
     const getSpecialtys = async () => {
       try {
-        const { data } = await apiAdmin.get('/clinica')
+        const { data } = await apiAdmin.get('/clinica?status=A')
         const dataMapped = mapClinics(data?.clinicas)
 
         if (!dataMapped.length) {
