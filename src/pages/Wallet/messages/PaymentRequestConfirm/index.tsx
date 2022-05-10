@@ -52,9 +52,10 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
       let isAuthenticated = false
 
       try {
-        const { data } = await apiWallet.post('/authentication/rita', {
+        await apiWallet.post('/authentication/rita', {
           cpf: user.cpf,
           password,
+          keepAlive: true,
         })
 
         isAuthenticated = true
