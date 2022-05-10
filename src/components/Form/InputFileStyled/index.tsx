@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Button } from './styles'
+import { Container, Button, ButtonInput } from './styles'
 import { InputFile } from '@/components/Form/InputFile'
 import MsgError from '@/components/MsgError'
 
@@ -25,8 +25,8 @@ const InputFileStyled: React.FC<InputDocumentProps> = ({
     <Container name={name}>
       {label && <label>{label}</label>}
 
-      <InputFile setValue={setValue}>
-        <span />
+      <InputFile setValue={setValue} disabled={disabled}>
+        <ButtonInput disabled={disabled}/>
         <Button color={color} disabled={disabled}>
           Inserir arquivo
         </Button>

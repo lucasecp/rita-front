@@ -50,7 +50,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
 
     setEmailError('')
 
-    if (!email.trim()) {
+    if (!email?.trim()) {
       setEmailError('Email Obrigatório')
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       setEmailError('Email inválido.')
@@ -64,7 +64,7 @@ export const InputEmail: React.FC<InputEmailProps> = ({
   }, [emailError])
 
   const validateEmailError = (email: string) => {
-    if (!email.trim()) {
+    if (!email?.trim()) {
       setEmailError('Email Obrigatório.')
     } else if (!isEmail(email)) {
       setEmailError('Email inválido.')
