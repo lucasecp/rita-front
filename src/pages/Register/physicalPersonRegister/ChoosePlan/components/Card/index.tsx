@@ -12,8 +12,10 @@ import { MappedPlan } from '../../../ChooseRegion'
 import { usePhysicalPersonRegister } from '../../../shared/hooks'
 
 export interface SelectedPlan {
-  idPlan: number
-  name: string
+  idPlan: number | 0
+  name: string | ''
+  allowedMajorAge: boolean | null
+  maximumDependentsQuantity: number | null
 }
 
 export interface DataProps {
@@ -23,11 +25,6 @@ export interface DataProps {
 interface CardProps {
   colorThemeIndex: number
   plan: MappedPlan
-  selectedPlan: {
-    idPlan: number
-    name: string
-  }
-  setSelectedPlan: (selectedPlan: SelectedPlan) => void
 }
 
 export const CardOfPlans: React.FC<CardProps> = ({ plan, colorThemeIndex }) => {
@@ -52,6 +49,8 @@ export const CardOfPlans: React.FC<CardProps> = ({ plan, colorThemeIndex }) => {
             selectedPlan.set({
               idPlan: plan.idPlan,
               name: plan.name,
+              allowedMajorAge: plan.allowedMajorAge,
+              maximumDependentsQuantity: plan.maximumDependentsQuantity,
             })
           }
         >

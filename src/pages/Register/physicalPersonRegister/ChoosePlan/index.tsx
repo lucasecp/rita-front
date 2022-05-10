@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 
@@ -16,10 +16,7 @@ export interface DataProps {
 }
 
 export const ChoosePlans: React.FC = () => {
-  const { plans } = useLocation().state || []
-  const { region } = usePhysicalPersonRegister()
-
-  const [selectedPlan, setSelectedPlan] = useState({ idPlan: 0, name: '' })
+  const { plans, region, selectedPlan } = usePhysicalPersonRegister()
 
   console.log(plans)
 
@@ -34,16 +31,11 @@ export const ChoosePlans: React.FC = () => {
           </h2>
         </TitleAndLogo>
         <CardArea>
-          {plans.length > 0 &&
-            plans.map((plan, index) => {
+          {plans.get.length > 0 &&
+            plans.get.map((plan, index) => {
               return (
                 <div key={plan.idPlan}>
-                  <CardOfPlans
-                    selectedPlan={selectedPlan}
-                    setSelectedPlan={setSelectedPlan}
-                    plan={plan}
-                    colorThemeIndex={index % 4}
-                  />
+                  <CardOfPlans plan={plan} colorThemeIndex={index % 4} />
                 </div>
               )
             })}
@@ -51,10 +43,12 @@ export const ChoosePlans: React.FC = () => {
       </Content>
       <ButtonArea>
         <ButtonLink>Voltar</ButtonLink>
-        {selectedPlan.name.length > 0 && (
-          <span>Você escolheu o plano {selectedPlan.name}</span>
+        {selectedPlan.get.name.length > 0 && (
+          <span>Você escolheu o plano {selectedPlan.get.name}</span>
         )}
-        <ButtonPrimary>Próxima Etapa</ButtonPrimary>
+        <ButtonPrimary disabled={!selectedPlan.get.idPlan}>
+          Próxima Etapa
+        </ButtonPrimary>
       </ButtonArea>
     </RegisterLayout>
   )

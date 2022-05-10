@@ -43,7 +43,7 @@ export const ChooseRegion: React.FC = () => {
   const history = useHistory()
   const { Loading } = useLoading()
   const { showMessage } = useModal()
-  const { region } = usePhysicalPersonRegister()
+  const { region, plans } = usePhysicalPersonRegister()
 
   const onComeBack = () => {
     history.push(LOGIN)
@@ -57,8 +57,8 @@ export const ChooseRegion: React.FC = () => {
         params: { municipio: region.get.city, uf: region.get.uf },
       })
 
-      // REMOVE AFTER TEST
-      return history.push(PHYSICAL_PERSON_REGISTER_DOCUMENTS)
+      // // REMOVE AFTER TEST
+      // return history.push(PHYSICAL_PERSON_REGISTER_DOCUMENTS)
 
       if (!data.length) {
         return showMessage(AddUserOnWaitList, {}, true)
@@ -66,10 +66,9 @@ export const ChooseRegion: React.FC = () => {
 
       const mappedPlans = fromApiPlans(data)
 
-      history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN, {
-        plans: mappedPlans,
-        // region,
-      })
+      plans.set(mappedPlans)
+
+      history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
     } catch ({ response }) {
       toast.error('Erro ao Buscar Planos')
     } finally {

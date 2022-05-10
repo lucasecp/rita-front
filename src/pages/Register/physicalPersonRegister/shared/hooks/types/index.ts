@@ -10,6 +10,7 @@
 // }
 
 import { SelectedPlan } from '../../../ChoosePlan/components/Card'
+import { MappedPlan } from '../../../ChooseRegion'
 
 // export interface AddressState {
 //   cep?: string
@@ -54,6 +55,10 @@ export interface PhysicalPersonRegisterContextData {
   selectedPlan: {
     get: SelectedPlan
     set: React.Dispatch<React.SetStateAction<SelectedPlan>>
+  }
+  plans: {
+    get: MappedPlan[]
+    set: React.Dispatch<React.SetStateAction<MappedPlan[]>>
   }
   region: {
     get: RegionState
