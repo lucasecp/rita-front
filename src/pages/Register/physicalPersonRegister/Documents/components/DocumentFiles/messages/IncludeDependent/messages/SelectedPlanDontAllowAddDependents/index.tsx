@@ -9,26 +9,23 @@ import OutlineButton from '@/components/Button/Outline'
 import { useModal } from '@/hooks/useModal'
 
 import { Container } from './styles'
-import { PHYSICAL_PERSON_REGISTER_PAYMENT } from '@/routes/constants/namedRoutes/routes'
 import { usePhysicalPersonRegister } from '@/pages/Register/physicalPersonRegister/shared/hooks'
+import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN } from '@/routes/constants/namedRoutes/routes'
 
 export const SelectedPlanDontAllowAddDependents: React.FC = () => {
   const { closeModal } = useModal()
   const history = useHistory()
+
   const { finishRegister, patientWantsDependent } = usePhysicalPersonRegister()
 
   const onNotChooseOtherPlan = () => {
     finishRegister()
-
-    history.push(PHYSICAL_PERSON_REGISTER_PAYMENT)
-    closeModal()
   }
 
   const onChooseOtherPlan = () => {
     patientWantsDependent.set(true)
 
-    history.push('/paciente/cadastro/escolher-plano')
-    // history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
+    history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
 
     closeModal()
   }

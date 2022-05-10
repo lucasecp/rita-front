@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 
 import { HoldingDocument } from './containers/HoldingDocument'
 import { OwnFrontDocument } from './containers/OwnFrontDocument'
@@ -27,7 +26,6 @@ interface ErrorsState {
 export const DocumentFiles: React.FC<DocumentFilesProps> = ({
   saveDocuments,
 }) => {
-  const history = useHistory()
   const { showMessage } = useModal()
 
   const { setDocumentsFile } = usePhysicalPersonRegister()

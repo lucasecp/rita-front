@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
@@ -17,9 +18,12 @@ import {
   // AddressState,
   // DependentsState,
   // RegisterDataState,
+  RegionState,
   DocumentsState,
   PhysicalPersonRegisterContextData,
 } from './types'
+
+import { PHYSICAL_PERSON_REGISTER_PAYMENT } from '@/routes/constants/namedRoutes/routes'
 
 const PhysicalPersonRegisterContext =
   createContext<PhysicalPersonRegisterContextData>(
@@ -29,6 +33,7 @@ const PhysicalPersonRegisterContext =
 const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   const { showMessage, closeModal } = useModal()
   const { Loading } = useLoading()
+  const history = useHistory()
 
   // const [initialRegisterData, setInitialRegisterData] = useState(
   //   {} as RegisterDataState,
@@ -39,6 +44,8 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   // )
 
   // const [address, setAddress] = useState({} as AddressState | undefined)
+
+  const [region, setRegion] = useState({} as RegionState)
 
   const [documentsFile, setDocumentsFile] = useState({} as DocumentsState)
 
@@ -128,17 +135,24 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
     //   } finally {
     //     Loading.turnOff()
     //   }
+
+    history.push(PHYSICAL_PERSON_REGISTER_PAYMENT)
+    closeModal()
   }
 
   return (
     <PhysicalPersonRegisterContext.Provider
       value={{
+        region: {
+          get: region,
+          set: setRegion,
+        },
         setDocumentsFile,
-        finishRegister,
         patientWantsDependent: {
           get: patientWantsDependent,
           set: setPatientWantsDependent,
         },
+        finishRegister,
         // cpfHolder: registrationData?.cpf,
         // isPatientLinkedCompany,
         // limitOfDependents,

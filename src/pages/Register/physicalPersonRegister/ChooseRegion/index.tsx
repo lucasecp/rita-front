@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 
 import OutlineButton from '@/components/Button/Outline'
@@ -11,23 +11,39 @@ import { useModal } from '@/hooks/useModal'
 import { CityAutocomplete } from './components/CityAutocomplete'
 import InputCep from './components/InputCep'
 
-import { LOGIN, PLANS } from '@/routes/constants/namedRoutes/routes'
+import {
+  LOGIN,
+  PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN,
+  PHYSICAL_PERSON_REGISTER_DOCUMENTS,
+} from '@/routes/constants/namedRoutes/routes'
 import { AddUserOnWaitList } from './messages/AddUserOnWaitList'
 import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { toast } from 'react-toastify'
+import { fromApiPlans } from './adapters/fromApi'
+import { usePhysicalPersonRegister } from '../shared/hooks'
 
-export interface RegionState {
-  uf: string
-  city: string
+export interface Plans {
+  idPlano: number
+  maximoDependente: number
+  nome: string
+  permiteMaiores: boolean
+  preco: string
+}
+
+export interface MappedPlan {
+  idPlan: number
+  maximumDependentsQuantity: number
+  name: string
+  allowedMajorAge: boolean
+  price: string
 }
 
 export const ChooseRegion: React.FC = () => {
   const history = useHistory()
   const { Loading } = useLoading()
   const { showMessage } = useModal()
-
-  const [region, setRegion] = useState({} as RegionState)
+  const { region } = usePhysicalPersonRegister()
 
   const onComeBack = () => {
     history.push(LOGIN)
@@ -37,15 +53,22 @@ export const ChooseRegion: React.FC = () => {
     try {
       Loading.turnOn()
 
-      const { data } = await apiAdmin.get(`/plano/regiao`, {
-        params: { municipio: region.city, ufSigla: 'pr' },
+      const { data } = await apiAdmin.get('/plano/itens-vendaveis', {
+        params: { municipio: region.get.city, uf: region.get.uf },
       })
 
-      if (!data.dados.length) {
-        return showMessage(AddUserOnWaitList, { region }, true)
+      // REMOVE AFTER TEST
+      return history.push(PHYSICAL_PERSON_REGISTER_DOCUMENTS)
+
+      if (!data.length) {
+        return showMessage(AddUserOnWaitList, {}, true)
       }
 
-      history.push(PLANS, { data, region })
+      const mappedPlans = fromApiPlans(data)
+
+      history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN, {
+        plans: mappedPlans,
+      })
     } catch ({ response }) {
       toast.error('Erro ao Buscar Planos')
     } finally {
@@ -59,18 +82,18 @@ export const ChooseRegion: React.FC = () => {
         <div>
           <h2>Onde você está?</h2>
           <h3>Desta forma você terá acesso aos planos da sua regiãos</h3>
-          <InputCep onGetRegion={setRegion} />
+          <InputCep />
           <section>
             <hr />
             <h3>Ou</h3>
             <hr />
           </section>
-          <CityAutocomplete onGetRegion={setRegion} />
-          {!!region.city && (
+          <CityAutocomplete />
+          {!!region.get.city && (
             <h5>
               Cidade Selecionada:{' '}
               <span>
-                {region.city} - {region.uf}
+                {region.get.city} - {region.get.uf}
               </span>
             </h5>
           )}
@@ -82,7 +105,7 @@ export const ChooseRegion: React.FC = () => {
           <ButtonPrimary
             onClick={onNextStep}
             data-test="nextStep"
-            disabled={!region.city}
+            disabled={!region.get.city}
           >
             Próxima Etapa
           </ButtonPrimary>

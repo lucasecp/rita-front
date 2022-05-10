@@ -13,15 +13,11 @@ import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 import { ThankUser } from './messages/ThankUser'
 import apiPatient from '@/services/apiPatient'
-import { RegionState } from '../..'
 import { validatePhone } from '@/helpers/validateFields/validatePhone'
 import { InputEmail } from '@/components/smarts/InputEmail'
 import { useMessage } from '@/hooks/useMessage'
 import { validateFullName } from '@/helpers/validateFields/validateFullName'
-
-interface AddUserOnWaitListProps {
-  region: RegionState
-}
+import { usePhysicalPersonRegister } from '../../../shared/hooks'
 
 interface ErrorsState {
   name: string
@@ -29,11 +25,10 @@ interface ErrorsState {
   phone: string
 }
 
-export const AddUserOnWaitList: React.FC<AddUserOnWaitListProps> = ({
-  region,
-}) => {
+export const AddUserOnWaitList: React.FC = () => {
   const { Loading } = useLoading()
   const { closeModal, showMessage } = useModal()
+  const { region } = usePhysicalPersonRegister()
 
   const [name, setName] = useState('')
 
@@ -69,8 +64,8 @@ export const AddUserOnWaitList: React.FC<AddUserOnWaitListProps> = ({
         name,
         email,
         phone,
-        uf: region.uf,
-        cidade: region.city,
+        uf: region.get.uf,
+        cidade: region.get.city,
       })
 
       showMessage(ThankUser)
