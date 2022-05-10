@@ -3,40 +3,63 @@ import styled from 'styled-components'
 
 export const cardColors = {
   purple: {
-    borderAndTitles: colors.purple.main.darkness,
-    background: colors.purple.main.light,
+    primaryColor: colors.purple.main.darkness,
+    secondaryColor: colors.purple.main.light,
   },
   green: {
-    borderAndTitles: colors.green.dark,
-    background: colors.green.light,
+    primaryColor: colors.green.dark,
+    secondaryColor: colors.green.light,
   },
   blue: {
-    borderAndTitles: colors.blue.dark,
-    background: colors.blue.light,
+    primaryColor: colors.blue.dark,
+    secondaryColor: colors.blue.light,
   },
   orange: {
-    borderAndTitles: colors.orange.middleDark,
-    background: colors.orange.light,
+    primaryColor: colors.orange.middleDark,
+    secondaryColor: colors.orange.light,
   },
 }
 
-export const Card = styled.div<{ key: number; colorThemeIndex: number }>`
+export const Card = styled.div<{
+  key: number
+  colorThemeIndex: number
+  checked: boolean
+}>`
   height: 276.11px;
   width: 100%;
   padding: 24px;
-  background-color: ${({ colorThemeIndex }) =>
-    cardColors[Object.keys(cardColors)[colorThemeIndex]].background};
+  background-color: ${({ colorThemeIndex, checked }) =>
+    checked
+      ? cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor
+      : cardColors[Object.keys(cardColors)[colorThemeIndex]].secondaryColor};
   border-radius: 8px;
   border: 2px solid
     ${({ colorThemeIndex }) =>
-      cardColors[Object.keys(cardColors)[colorThemeIndex]].borderAndTitles};
+      cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
+
   background-repeat: no-repeat;
   position: relative;
+
   > svg {
     position: absolute;
     top: 50%;
     right: 0;
+    height: 150px;
     transform: translateY(-50%);
+    width: 77px;
+
+    path {
+      position: absolute;
+      /* top: 50%; */
+      height: 150px;
+      width: 77px;
+
+      right: 0;
+      fill: ${({ colorThemeIndex, checked }) =>
+        checked
+          ? 'white'
+          : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
+    }
   }
 
   div {
@@ -47,8 +70,10 @@ export const Card = styled.div<{ key: number; colorThemeIndex: number }>`
     h1 {
       font-weight: 700;
       font-size: 20px;
-      color: ${({ colorThemeIndex }) =>
-        cardColors[Object.keys(cardColors)[colorThemeIndex]].borderAndTitles};
+      color: ${({ colorThemeIndex, checked }) =>
+        checked
+          ? 'white'
+          : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
       margin-bottom: 16px;
     }
   }
@@ -56,16 +81,20 @@ export const Card = styled.div<{ key: number; colorThemeIndex: number }>`
   h2 {
     font-weight: 400;
     font-size: 20px;
-    color: ${({ colorThemeIndex }) =>
-      cardColors[Object.keys(cardColors)[colorThemeIndex]].borderAndTitles};
+    color: ${({ colorThemeIndex, checked }) =>
+      checked
+        ? 'white'
+        : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
     margin-top: 40px;
   }
 
   h3 {
     font-weight: 700;
     font-size: 10px;
-    color: ${({ colorThemeIndex }) =>
-      cardColors[Object.keys(cardColors)[colorThemeIndex]].borderAndTitles};
+    color: ${({ colorThemeIndex, checked }) =>
+      checked
+        ? 'white'
+        : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
   }
 
   ul {
@@ -73,7 +102,7 @@ export const Card = styled.div<{ key: number; colorThemeIndex: number }>`
     li {
       font-weight: 700;
       font-size: 10px;
-      color: ${colors.gray.dark};
+      color: ${({ checked }) => (checked ? 'white' : `${colors.gray.dark}`)};
     }
   }
 `
@@ -86,33 +115,40 @@ export const CheckField = styled.div<{
   width: 24px;
   border-radius: 50%;
   border: 2px solid
-    ${({ colorThemeIndex }) =>
-      cardColors[Object.keys(cardColors)[colorThemeIndex]].borderAndTitles};
+    ${({ colorThemeIndex, checked }) =>
+      checked
+        ? 'white'
+        : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
   cursor: pointer;
-  background-color: ${({ colorThemeIndex, checked }) =>
-    checked
-      ? cardColors[Object.keys(cardColors)[colorThemeIndex]].borderAndTitles
-      : 'transparent'};
+  background-color: ${({ checked }) => (checked ? 'white' : 'transparent')};
 `
 
 export const LinkArea = styled.div<{
   colorThemeIndex: number
+  checked: boolean
 }>`
   display: flex;
 
   button {
-    color: ${({ colorThemeIndex }) =>
-      cardColors[Object.keys(cardColors)[colorThemeIndex]].borderAndTitles};
+    color: ${({ colorThemeIndex, checked }) =>
+      checked
+        ? 'white'
+        : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
     padding: 14px 0;
     margin-left: auto;
 
     > span {
-      color: ${({ colorThemeIndex }) =>
-        cardColors[Object.keys(cardColors)[colorThemeIndex]].borderAndTitles};
+      color: ${({ colorThemeIndex, checked }) =>
+        checked
+          ? 'white'
+          : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
 
       > svg {
-        stroke: ${({ colorThemeIndex }) =>
-          cardColors[Object.keys(cardColors)[colorThemeIndex]].borderAndTitles};
+        stroke: ${({ colorThemeIndex, checked }) =>
+          checked
+            ? 'white'
+            : cardColors[Object.keys(cardColors)[colorThemeIndex]]
+                .primaryColor};
       }
     }
   }

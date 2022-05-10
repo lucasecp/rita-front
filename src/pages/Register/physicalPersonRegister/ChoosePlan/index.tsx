@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 
@@ -16,9 +16,12 @@ export interface DataProps {
 }
 
 export const ChoosePlans: React.FC = () => {
-  const { plans } = useLocation().state
+  const { plans } = useLocation().state || []
   const { region } = usePhysicalPersonRegister()
+
   const [selectedPlan, setSelectedPlan] = useState({ idPlan: 0, name: '' })
+
+  console.log(plans)
 
   return (
     <RegisterLayout>
@@ -31,18 +34,19 @@ export const ChoosePlans: React.FC = () => {
           </h2>
         </TitleAndLogo>
         <CardArea>
-          {plans.map((plan, index) => {
-            return (
-              <div key={plan.idPlan}>
-                <CardOfPlans
-                  selectedPlan={selectedPlan}
-                  setSelectedPlan={setSelectedPlan}
-                  plan={plan}
-                  colorThemeIndex={index % 4}
-                />
-              </div>
-            )
-          })}
+          {plans.length > 0 &&
+            plans.map((plan, index) => {
+              return (
+                <div key={plan.idPlan}>
+                  <CardOfPlans
+                    selectedPlan={selectedPlan}
+                    setSelectedPlan={setSelectedPlan}
+                    plan={plan}
+                    colorThemeIndex={index % 4}
+                  />
+                </div>
+              )
+            })}
         </CardArea>
       </Content>
       <ButtonArea>
