@@ -197,61 +197,9 @@ export const InputAndValues = styled.div`
 
 export const SelectPaymentOptions = styled.div`
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column nowrap;
   align-items: center;
-  justify-content: center;
   gap: 20px;
-
-  > div {
-    border: 1px solid ${({ theme }) => theme.main};
-    border-radius: 8px;
-
-    width: 232px;
-    height: 130px;
-    padding: 18px;
-
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    align-content: space-between;
-
-    cursor: pointer;
-    transition: background-color 300ms;
-
-    > h4 {
-      color: ${({ theme }) => theme.main};
-      font-size: 18px;
-    }
-
-    > svg {
-      align-self: flex-end;
-      color: ${({ theme }) => theme.main};
-      width: 30px;
-    }
-
-    &.active {
-      background-color: ${({ theme }) => theme.main};
-
-      > h4,
-      > svg {
-        color: #fff;
-      }
-    }
-
-    &.pix {
-      > svg {
-        fill: #fff;
-        width: 20px;
-      }
-
-      &.active {
-        > svg {
-          fill: ${({ theme }) => theme.main};
-        }
-      }
-    }
-  }
 
   > p {
     flex-grow: 1;
@@ -259,6 +207,69 @@ export const SelectPaymentOptions = styled.div`
     color: ${colors.orange.middleDark};
     font-size: 12px;
     text-align: center;
+  }
+`
+
+export const SelectPaymentOptionCreditCard = styled.div`
+  border: 1px solid ${({ theme }) => theme.main};
+  border-radius: 8px;
+
+  width: 232px;
+  height: 130px;
+  padding: 18px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  align-content: space-between;
+
+  cursor: pointer;
+  transition: background-color 300ms;
+
+  > h4 {
+    color: ${({ theme }) => theme.main};
+    font-size: 18px;
+  }
+
+  > svg {
+    align-self: flex-end;
+    color: ${({ theme }) => theme.main};
+    width: 30px;
+  }
+
+  &.active {
+    background-color: ${({ theme }) => theme.main};
+
+    > h4,
+    > svg {
+      color: #fff;
+    }
+  }
+`
+
+export const SelectPaymentOptionPix = styled.div`
+  border: 1px solid ${({ theme }) => theme.main};
+  border-radius: 8px;
+
+  width: 232px;
+  height: 130px;
+  padding: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: box-shadow 300ms;
+
+  > svg {
+    color: ${({ theme }) => theme.main};
+    height: 44px;
+  }
+
+  &.active {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 `
 

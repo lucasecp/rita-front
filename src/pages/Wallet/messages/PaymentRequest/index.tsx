@@ -9,8 +9,9 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import { PaymentRequestSummary } from '@/pages/Wallet/messages/PaymentRequestSummary'
 import { PaymentRequestRejection } from '@/pages/Wallet/messages/PaymentRequestRejection'
+import { DialogLayout } from '@/components/Dialog/Layout'
 
-import warning from '@/assets/icons/alert-circle.svg'
+import { ReactComponent as DollarSignCircleIcon } from '@/assets/icons/dollar-sign-circle.svg'
 import { ReactComponent as CrownIcon } from '@/assets/icons/crown.svg'
 import { Container, BodyAmountToPay } from './styles'
 
@@ -51,39 +52,43 @@ export const PaymentRequest: React.FC<PaymentRequestProps> = ({
       { data: paymentRequest, items: data },
       true,
     )
-  }
+  }2
 
   return (
-    <Container>
-      <header>
-        <img src={warning} />
-      </header>
+    <DialogLayout
+      header={
+        <>
+          <DollarSignCircleIcon />
+          <h3>Pedido de Pagamento</h3>
+        </>
+      }
+      body={
+        <Container>
+          <p>{paymentRequest.description}</p>
 
-      <section>
-        <h3>Pedido de Pagamento</h3>
-        <p>{paymentRequest.description}</p>
-
-        <BodyAmountToPay>
-          {/* <small>De <del><strong>{formatPrice(paymentRequest.debitAmount)}</strong></del> por</small> */}
-          <span>
-            <strong>{formatPrice(paymentRequest.debitAmount)}</strong>{' '}
-            <small>
-              (
-              <CrownIcon />
-              {convertWalletMoneyToCrown(paymentRequest.debitAmount)})
-            </small>
-            <br />
-            pagando com Rita Saúde
-          </span>
-        </BodyAmountToPay>
-      </section>
-
-      <footer>
-        <OutlineButton onClick={handleRejectClick}>
-          Não reconheço essa compra
-        </OutlineButton>
-        <ButtonPrimary onClick={handlePayClick}>Pagar</ButtonPrimary>
-      </footer>
-    </Container>
+          <BodyAmountToPay>
+            {/* <small>De <del><strong>{formatPrice(paymentRequest.debitAmount)}</strong></del> por</small> */}
+            <span>
+              <strong>{formatPrice(paymentRequest.debitAmount)}</strong>{' '}
+              <small>
+                (
+                <CrownIcon />
+                {convertWalletMoneyToCrown(paymentRequest.debitAmount)})
+              </small>
+              <br />
+              pagando com Rita Saúde
+            </span>
+          </BodyAmountToPay>
+        </Container>
+      }
+      footer={
+        <>
+          <OutlineButton onClick={handleRejectClick}>
+            Não reconheço essa compra
+          </OutlineButton>
+          <ButtonPrimary onClick={handlePayClick}>Pagar</ButtonPrimary>
+        </>
+      }
+    />
   )
 }

@@ -36,18 +36,24 @@ apiWallet.interceptors.request.use(
 apiWallet.interceptors.response.use(
   (response) => response,
   (error) => {
-    let output = new Error('Ocorreu um erro na requisição.')
+    let output = new Error('Ocorreu um erro na requisição')
 
     if (axios.isAxiosError(error) && error.response?.data) {
       const { data, status } = error.response
 
-      switch (status) {
-        case 404: {
-          if (data && data.message) {
+      if (data?.message) {
+        switch (status) {
+          case 404: {
             output = data.message
+            break
+          }
+
+          default: {
+            output.message += `: ${data.message}`
           }
         }
       }
+
     }
 
     return output instanceof Error ? Promise.reject(output) : output

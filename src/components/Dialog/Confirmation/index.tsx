@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { useModal } from '@/hooks/useModal'
+import { useDialog } from '@/hooks/useDialog'
 import ButtonOutline from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { Container } from './styles'
 
-export const ConfirmationModal: React.FC<
-  RitaComponents.ModalConfirmationProps
+export const DialogConfirmation: React.FC<
+  RitaComponents.DialogConfirmationProps
 > = ({
   message,
   cancelText = 'Cancelar',
@@ -15,15 +15,15 @@ export const ConfirmationModal: React.FC<
   onTruthy,
   onFalsy,
 }) => {
-  const { closeModal } = useModal()
+  const { dialogClose } = useDialog()
 
   function handleCancel() {
-    closeModal()
+    dialogClose()
     onTruthy && onTruthy()
   }
 
   function handleConfirm() {
-    closeModal()
+    dialogClose()
     onFalsy && onFalsy()
   }
 
