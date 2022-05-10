@@ -26,12 +26,13 @@ import { Container } from './styles'
 import Documents from '../components/Documents/index'
 import { useDocsSpecialtys } from '../hooks/useDocsSpecialty'
 import { useValidator } from '../hooks/useValidator'
+import { useMessage } from '@/hooks/useMessage'
 
 interface FormProps {
   data: DataSpecialistI
   profilePhoto: any
   specialtysDocs: SpecialtysAndDocsType
-  setMakeNewRequest: (v: boolean) => void
+  setMakeNewRequest: (v: number) => void
 }
 
 const Form: React.FC<FormProps> = ({
@@ -63,7 +64,7 @@ const Form: React.FC<FormProps> = ({
   const [rqeAndSpeciality, setRqeAndSpeciality] =
     useState<RqeAndSpecialtysType>({} as RqeAndSpecialtysType)
 
-  const [clickOnSave, setClickOnSave] = useState(0)
+  const [clickOnSave, setClickOnSave] = useMessage()
 
   const [formWasSubmited, setFormWasSubmited] = useState(false)
 
@@ -95,7 +96,8 @@ const Form: React.FC<FormProps> = ({
   ])
 
   const onSave = async () => {
-    setClickOnSave(randomValues)
+    // setClickOnSave(randomValues)
+    setClickOnSave()
 
     if (
       hasErrorOnFields(
@@ -133,7 +135,8 @@ const Form: React.FC<FormProps> = ({
 
       setFormWasSubmited(true)
 
-      setMakeNewRequest(!clickOnSave)
+      //setMakeNewRequest(!clickOnSave)
+      setMakeNewRequest(randomValues)
     } catch (error) {
       if (error instanceof Error) {
         toast.error('Erro ao editar')
@@ -155,7 +158,8 @@ const Form: React.FC<FormProps> = ({
 
     setFormWasSubmited(false)
 
-    setClickOnSave(randomValues)
+    // setClickOnSave(randomValues)
+    setClickOnSave()
   }
 
   useEffect(() => {

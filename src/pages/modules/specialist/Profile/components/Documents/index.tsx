@@ -134,14 +134,21 @@ const Documents: React.FC<DocumentsProps> = ({
   }, [rqe])
 
   useEffect(() => {
-    if (!formWasSubmited && !isEditing) {
+    if (!isEditing) {
       setPhoto(initialPhoto || '')
       setRqe(data.rqe || '')
     } else {
       setPhoto(photo || '')
       setRqe(rqe || '')
     }
-  }, [formWasSubmited, isEditing])
+  }, [isEditing])
+
+  useEffect(() => {
+    if (initialData) {
+      setPhoto(initialPhoto)
+      setRqe(rqe || '')
+    }
+  }, [initialData])
 
   return (
     <Container>

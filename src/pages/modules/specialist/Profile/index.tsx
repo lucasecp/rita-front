@@ -17,7 +17,7 @@ const SpecialistProfile: React.FC = () => {
     {} as SpecialtysAndDocsType,
   )
   const [photo, setPhoto] = useState<File>()
-  const [makeNewRequest, setMakeNewRequest] = useState(false)
+  const [makeNewRequest, setMakeNewRequest] = useState(0)
   const { Loading } = useLoading()
 
   useEffect(() => {
