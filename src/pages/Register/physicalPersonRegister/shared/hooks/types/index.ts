@@ -35,15 +35,14 @@ export interface DocumentsState {
   selectIncome: string
 }
 
-// export interface DependentsState {
-//   id?: number
-//   name?: string
-//   cpf?: string
-//   email?: string
-//   gender?: string
-//   birthdate?: string
-//   phone?: string
-// }
+export interface DependentsState {
+  name: string
+  cpf: string
+  email: string
+  gender: string
+  birthDate: string
+  phone: string
+}
 
 // export interface RegisterDataState {
 //   registrationData?: RegistrationDataState
@@ -64,6 +63,10 @@ export interface PhysicalPersonRegisterContextData {
   patientWantsDependent: {
     get: boolean
     set: React.Dispatch<React.SetStateAction<boolean>>
+  }
+  dependents: {
+    get: DependentsState[]
+    set: React.Dispatch<React.SetStateAction<DependentsState[]>>
   }
   finishRegister: () => void
   // cpfHolder?: string

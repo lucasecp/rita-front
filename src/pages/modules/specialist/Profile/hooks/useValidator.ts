@@ -44,6 +44,9 @@ export const useValidator = (): {
       //   continue
       // }
 
+      if (field === 'profissionalName') {
+        continue
+      }
       if (typeof fields[field] !== 'object' && !fields[field]) {
         setErrors((errors) => ({
           ...errors,
