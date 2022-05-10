@@ -16,10 +16,10 @@ import { DocumentsNotSended } from './messages/DocumentsNotSended'
 import {
   // RegistrationDataState,
   // AddressState,
-  // DependentsState,
   // RegisterDataState,
   RegionState,
   DocumentsState,
+  DependentsState,
   PhysicalPersonRegisterContextData,
 } from './types'
 
@@ -55,9 +55,9 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
     console.log(documentsFile)
   }, [documentsFile])
 
-  // const [dependents, setDependents] = useState(
-  //   [] as DependentsState[] | undefined,
-  // )
+  const [dependents, setDependents] = useState(
+    [] as DependentsState[] | undefined,
+  )
 
   // const resetData = () => {
   //   setRegistrationData({})
@@ -151,6 +151,10 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
         patientWantsDependent: {
           get: patientWantsDependent,
           set: setPatientWantsDependent,
+        },
+        dependents: {
+          get: dependents,
+          set: setDependents,
         },
         finishRegister,
         // cpfHolder: registrationData?.cpf,
