@@ -20,7 +20,9 @@ export const NoHasPlansAvailable: React.FC = () => {
       </h3>
 
       <footer>
-        <ButtonPrimary onClick={onCloseModal}>Fechar</ButtonPrimary>
+        <ButtonPrimary onClick={onCloseModal} data-test="closeModalButton">
+          Fechar
+        </ButtonPrimary>
       </footer>
     </Container>
   )

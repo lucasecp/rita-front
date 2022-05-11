@@ -5,19 +5,21 @@ import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 import { ButtonArea, Content, Price, Top } from './styles'
 
 import ButtonPrimary from '@/components/Button/Primary'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { usePhysicalPersonRegister } from '../shared/hooks'
+import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN } from '@/routes/constants/namedRoutes/routes'
 
 export const PlanDetails: React.FC = () => {
-  // const { region } = usePhysicalPersonRegister()
+  const history = useHistory()
+  const { region } = usePhysicalPersonRegister()
   const { plan } = useLocation().state
 
-  console.log(plan)
+  console.log(region, plan)
 
   return (
     <RegisterLayout>
       <Content>
-        {/* <Top>
+        <Top>
           <h1>{plan.name}</h1>
           <span>Experimente 7 dias grátis</span>
         </Top>
@@ -36,11 +38,15 @@ export const PlanDetails: React.FC = () => {
         </ul>
         <Price>
           <h2>R$ {plan.price}/Mês</h2>
-        </Price> */}
+        </Price>
       </Content>
       <footer>
         <ButtonArea>
-          <ButtonPrimary onClick={history.back}>Voltar</ButtonPrimary>
+          <ButtonPrimary
+            onClick={() => history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)}
+          >
+            Voltar
+          </ButtonPrimary>
         </ButtonArea>
       </footer>
     </RegisterLayout>

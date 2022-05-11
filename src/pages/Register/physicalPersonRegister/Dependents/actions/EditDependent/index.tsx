@@ -142,7 +142,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
 
   return (
     <Container>
-      <h2>Dependente</h2>
+      <h2 data-test="dependentEditTitle">Dependente</h2>
 
       <form>
         <InputText
@@ -155,6 +155,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
           msgError={errors.name}
           maxLength={100}
           onlyLetter
+          data-test="dependentNameField"
         />
         <InputMask
           label="CPF*:"
@@ -175,6 +176,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
             })
           }
           msgError={errors.cpf}
+          data-test="dependentCpfField"
         />
         <InputMask
           label="Data de Nascimento*:"
@@ -195,6 +197,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
             })
           }
           msgError={errors.birthDate}
+          data-test="dependentBirthdateField"
         />
         <Select
           label="Gênero*:"
@@ -215,6 +218,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
             setErrors({ ...errors, gender: validateGender(e.target.value) })
           }}
           msgError={errors.gender}
+          data-test="dependentGenderField"
         />
         <InputMask
           label="Celular*:"
@@ -225,6 +229,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
           onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           msgError={errors.phone}
+          data-test="dependentPhoneField"
         />
         <InputEmail
           initialEmail={email}
@@ -233,16 +238,25 @@ export const EditDependent: React.FC<EditDependentProps> = ({
           checkHasError={errorMessage}
           onKeyUp={sendErrorMessage}
           onBlur={sendErrorMessage}
+          data-test="dependentEmailField"
         />
       </form>
       <footer>
         <div>
-          <OutlineButton variation="red" onClick={onCancelEditDependent}>
+          <OutlineButton
+            variation="red"
+            onClick={onCancelEditDependent}
+            data-test="dependentCancelEditButton"
+          >
             Cancelar
           </OutlineButton>
         </div>
         <div>
-          <ButtonPrimary disabled={!isValidData()} onClick={onUpdateDependent}>
+          <ButtonPrimary
+            disabled={!isValidData()}
+            onClick={onUpdateDependent}
+            data-test="dependentUpdateButton"
+          >
             Atualizar
           </ButtonPrimary>
         </div>

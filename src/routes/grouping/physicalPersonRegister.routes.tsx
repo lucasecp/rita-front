@@ -44,5 +44,5 @@ const registerRoutes = [
 ]
 
 export const newRegisterPatientRoutes = registerRoutes.map((props, key) => (
-  <Route key={key} {...props} />
+  <Route key={key} {...props} exact />
 ))

@@ -7,6 +7,8 @@ import { useModal } from '@/hooks/useModal'
 
 import { NoHasPlansAvailable } from '../NoHasPlansAvailable'
 
+import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN } from '@/routes/constants/namedRoutes/routes'
+
 import { Container } from './styles'
 
 interface UpgradePlanProps {
@@ -23,7 +25,7 @@ export const UpgradePlan: React.FC<UpgradePlanProps> = ({
 
   const onAccepUpgradePlan = () => {
     if (hasCoverage) {
-      // history.push(CHOOSE_PLAN)
+      history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
     } else {
       showMessage(NoHasPlansAvailable)
     }
@@ -42,8 +44,18 @@ export const UpgradePlan: React.FC<UpgradePlanProps> = ({
       </h3>
 
       <footer>
-        <OutlineButton onClick={onRejectUpgradePlan}>Não</OutlineButton>
-        <ButtonPrimary onClick={onAccepUpgradePlan}>Sim</ButtonPrimary>
+        <OutlineButton
+          onClick={onRejectUpgradePlan}
+          data-test="rejectUpgradePlanButton"
+        >
+          Não
+        </OutlineButton>
+        <ButtonPrimary
+          onClick={onAccepUpgradePlan}
+          data-test="acceptUpgradePlanButton"
+        >
+          Sim
+        </ButtonPrimary>
       </footer>
     </Container>
   )

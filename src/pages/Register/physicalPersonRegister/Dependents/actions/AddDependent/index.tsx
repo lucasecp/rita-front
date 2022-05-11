@@ -115,7 +115,7 @@ export const AddDependent: React.FC<AddDependentProps> = ({
 
   return (
     <Container>
-      <h2>Dependente</h2>
+      <h2 data-test="dependentAddTitle">Dependente</h2>
 
       <form>
         <InputText
@@ -128,6 +128,7 @@ export const AddDependent: React.FC<AddDependentProps> = ({
           msgError={errors.name}
           maxLength={100}
           onlyLetter
+          data-test="dependentNameField"
         />
         <InputMask
           label="CPF*:"
@@ -148,6 +149,7 @@ export const AddDependent: React.FC<AddDependentProps> = ({
             })
           }
           msgError={errors.cpf}
+          data-test="dependentCpfField"
         />
         <InputMask
           label="Data de Nascimento*:"
@@ -168,6 +170,7 @@ export const AddDependent: React.FC<AddDependentProps> = ({
             })
           }
           msgError={errors.birthDate}
+          data-test="dependentBirthdateField"
         />
         <Select
           label="Gênero*:"
@@ -188,6 +191,7 @@ export const AddDependent: React.FC<AddDependentProps> = ({
             setErrors({ ...errors, gender: validateGender(e.target.value) })
           }}
           msgError={errors.gender}
+          data-test="dependentGenderField"
         />
         <InputMask
           label="Celular*:"
@@ -198,6 +202,7 @@ export const AddDependent: React.FC<AddDependentProps> = ({
           onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           msgError={errors.phone}
+          data-test="dependentPhoneField"
         />
         <InputEmail
           initialEmail={email}
@@ -206,16 +211,25 @@ export const AddDependent: React.FC<AddDependentProps> = ({
           checkHasError={errorMessage}
           onKeyUp={sendErrorMessage}
           onBlur={sendErrorMessage}
+          data-test="dependentEmailField"
         />
       </form>
       <footer>
         <div>
-          <OutlineButton variation="red" onClick={onCancelAddDependent}>
+          <OutlineButton
+            variation="red"
+            onClick={onCancelAddDependent}
+            data-test="dependentCancelAddButton"
+          >
             Cancelar
           </OutlineButton>
         </div>
         <div>
-          <ButtonPrimary disabled={!isValidData()} onClick={onSaveNewDependent}>
+          <ButtonPrimary
+            disabled={!isValidData()}
+            onClick={onSaveNewDependent}
+            data-test="dependentSaveButton"
+          >
             Salvar
           </ButtonPrimary>
         </div>

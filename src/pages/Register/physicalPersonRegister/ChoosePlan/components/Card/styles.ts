@@ -22,23 +22,22 @@ export const cardColors = {
 
 export const Card = styled.div<{
   key: number
-  colorThemeIndex: number
+  colorTheme: number
   checked: boolean
 }>`
   height: 276.11px;
   width: 100%;
   padding: 24px;
-  background-color: ${({ colorThemeIndex, checked }) =>
+  background-color: ${({ colorTheme, checked }) =>
     checked
-      ? cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor
-      : cardColors[Object.keys(cardColors)[colorThemeIndex]].secondaryColor};
+      ? cardColors[colorTheme].primaryColor
+      : cardColors[colorTheme].secondaryColor};
   border-radius: 8px;
-  border: 2px solid
-    ${({ colorThemeIndex }) =>
-      cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
+  border: 2px solid ${({ colorTheme }) => cardColors[colorTheme].primaryColor};
 
   background-repeat: no-repeat;
   position: relative;
+  cursor: pointer;
 
   > svg {
     position: absolute;
@@ -55,10 +54,8 @@ export const Card = styled.div<{
       width: 77px;
 
       right: 0;
-      fill: ${({ colorThemeIndex, checked }) =>
-        checked
-          ? 'white'
-          : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
+      fill: ${({ colorTheme, checked }) =>
+        checked ? 'white' : cardColors[colorTheme].primaryColor};
     }
   }
 
@@ -70,10 +67,8 @@ export const Card = styled.div<{
     h1 {
       font-weight: 700;
       font-size: 20px;
-      color: ${({ colorThemeIndex, checked }) =>
-        checked
-          ? 'white'
-          : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
+      color: ${({ colorTheme, checked }) =>
+        checked ? 'white' : cardColors[colorTheme].primaryColor};
       margin-bottom: 16px;
     }
   }
@@ -81,20 +76,16 @@ export const Card = styled.div<{
   h2 {
     font-weight: 400;
     font-size: 20px;
-    color: ${({ colorThemeIndex, checked }) =>
-      checked
-        ? 'white'
-        : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
+    color: ${({ colorTheme, checked }) =>
+      checked ? 'white' : cardColors[colorTheme].primaryColor};
     margin-top: 40px;
   }
 
   h3 {
     font-weight: 700;
     font-size: 10px;
-    color: ${({ colorThemeIndex, checked }) =>
-      checked
-        ? 'white'
-        : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
+    color: ${({ colorTheme, checked }) =>
+      checked ? 'white' : cardColors[colorTheme].primaryColor};
   }
 
   ul {
@@ -109,46 +100,43 @@ export const Card = styled.div<{
 
 export const CheckField = styled.div<{
   checked: boolean
-  colorThemeIndex: number
+  colorTheme: number
 }>`
   height: 24px;
   width: 24px;
   border-radius: 50%;
   border: 2px solid
-    ${({ colorThemeIndex, checked }) =>
-      checked
-        ? 'white'
-        : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
-  cursor: pointer;
-  background-color: ${({ checked }) => (checked ? 'white' : 'transparent')};
+    ${({ colorTheme, checked }) =>
+      checked ? 'white' : cardColors[colorTheme].primaryColor};
+  > div {
+    border: 2px solid transparent;
+    margin: auto;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    background-color: ${({ checked }) => (checked ? 'white' : 'transparent')};
+  }
 `
 
 export const LinkArea = styled.div<{
-  colorThemeIndex: number
+  colorTheme: number
   checked: boolean
 }>`
   display: flex;
 
   button {
-    color: ${({ colorThemeIndex, checked }) =>
-      checked
-        ? 'white'
-        : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
+    color: ${({ colorTheme, checked }) =>
+      checked ? 'white' : cardColors[colorTheme].primaryColor};
     padding: 14px 0;
     margin-left: auto;
 
     > span {
-      color: ${({ colorThemeIndex, checked }) =>
-        checked
-          ? 'white'
-          : cardColors[Object.keys(cardColors)[colorThemeIndex]].primaryColor};
+      color: ${({ colorTheme, checked }) =>
+        checked ? 'white' : cardColors[colorTheme].primaryColor};
 
       > svg {
-        stroke: ${({ colorThemeIndex, checked }) =>
-          checked
-            ? 'white'
-            : cardColors[Object.keys(cardColors)[colorThemeIndex]]
-                .primaryColor};
+        stroke: ${({ colorTheme, checked }) =>
+          checked ? 'white' : cardColors[colorTheme].primaryColor};
       }
     }
   }
