@@ -26,7 +26,7 @@ export const ChooseRegion: React.FC = () => {
   const history = useHistory()
   const { Loading } = useLoading()
   const { showMessage } = useModal()
-  const { region, patientWantsMinimumDependent } = usePhysicalPersonRegister()
+  const { region } = usePhysicalPersonRegister()
 
   const onComeBack = () => {
     history.push(LOGIN)
@@ -40,7 +40,6 @@ export const ChooseRegion: React.FC = () => {
         params: {
           municipio: region.get.city,
           uf: region.get.uf,
-          minimoDependente: patientWantsMinimumDependent.get,
         },
       })
 
