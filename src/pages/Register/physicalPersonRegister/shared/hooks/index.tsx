@@ -25,7 +25,7 @@ import {
 
 import { PHYSICAL_PERSON_REGISTER_PAYMENT } from '@/routes/constants/namedRoutes/routes'
 import { SelectedPlan } from '../../ChoosePlan/components/Card'
-import { MappedPlan } from '../../ChooseRegion'
+import { MappedPlan } from '../../ChoosePlan'
 
 const PhysicalPersonRegisterContext =
   createContext<PhysicalPersonRegisterContextData>(
@@ -55,7 +55,8 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
 
   const [documentsFile, setDocumentsFile] = useState({} as DocumentsState)
 
-  const [patientWantsDependent, setPatientWantsDependent] = useState(false)
+  const [patientWantsMinimumDependent, setPatientWantsMinimumDependent] =
+    useState(0)
 
   useEffect(() => {
     console.log(documentsFile)
@@ -162,9 +163,9 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
           set: setRegion,
         },
         setDocumentsFile,
-        patientWantsDependent: {
-          get: patientWantsDependent,
-          set: setPatientWantsDependent,
+        patientWantsMinimumDependent: {
+          get: patientWantsMinimumDependent,
+          set: setPatientWantsMinimumDependent,
         },
         dependents: {
           get: dependents,

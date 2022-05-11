@@ -1,4 +1,4 @@
-import { MappedPlan, Plans } from '../../ChoosePlan'
+import { MappedPlan, Plans } from '..'
 
 export const fromApiPlans = (data: Plans[]): MappedPlan[] =>
   data.map((plan) => {
