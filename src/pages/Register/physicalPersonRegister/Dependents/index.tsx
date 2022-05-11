@@ -25,7 +25,8 @@ import { DependentData } from './types'
 import { Container } from './styles'
 
 export const Dependents: React.FC = () => {
-  const { region, dependents, finishRegister } = usePhysicalPersonRegister()
+  const { region, dependents, selectedPlan, finishRegister } =
+    usePhysicalPersonRegister()
   const history = useHistory()
   const { showMessage } = useModal()
   const { Loading } = useLoading()
@@ -33,8 +34,8 @@ export const Dependents: React.FC = () => {
     dependents.get || [],
   )
 
-  const limitDependentsPlan = 2
-  const planAllowMajorAge = false
+  const limitDependentsPlan = selectedPlan.get.maximumDependentsQuantity
+  const planAllowMajorAge = selectedPlan.get.allowedMajorAge
 
   useEffect(() => {
     dependents.set(allDependents)

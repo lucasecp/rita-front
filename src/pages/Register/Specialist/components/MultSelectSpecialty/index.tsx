@@ -2,27 +2,35 @@ import CustomMultiSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
 import apiAdmin from '@/services/apiAdmin'
-import React, { useEffect, useState, SetStateAction } from 'react'
+import React, { useEffect, useState, SetStateAction, Dispatch } from 'react'
 
 import { Container } from './styles'
 import { useModal } from '@/hooks/useModal'
 import InsertRqeNumber from './messages/insertRqeNumber/index'
+import { useValidator } from '../../hooks/useValidator'
+import { ErrorsRegisterI } from '../../types'
 
 // Será mostrado uma modal caso a especialidade requerer inscrição
 
 interface SpecialtysProps {
   specialtys: MultiSelectOption[]
-  setSpecialtys: React.Dispatch<SetStateAction<MultiSelectOption[]>>
+  setSpecialtys: Dispatch<SetStateAction<MultiSelectOption[]>>
+  setErrors: Dispatch<SetStateAction<ErrorsRegisterI>>
+  setSpecialtysSelected: Dispatch<SetStateAction<MultiSelectOption[]>>
   errors: any
   color?: string
+  fieldsValues?: any
   [x: string]: any
 }
 
 export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
-  specialtys,
   setSpecialtys,
+  setErrors,
+  setSpecialtysSelected,
+  specialtys,
   errors,
   color,
+  fieldsValues,
   ...rest
 }) => {
   const [specialtysOptions, setSpecialtysOptions] = useState<
@@ -30,6 +38,7 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
   >([])
 
   const { showMessage } = useModal()
+  const { hasErrors } = useValidator()
 
   const mapSpecialtys = (
     array: {
@@ -49,10 +58,14 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
       .filter((specialty) => specialty.id && specialty.name)
   }
 
+  const idIssuingAgenceySelected = window.localStorage.getItem('@rita-issuingAgencySelected')
+
   useEffect(() => {
     const getSpecialtys = async () => {
       try {
-        const { data } = await apiAdmin.get('/especialidade')
+        setSpecialtys([] as MultiSelectOption[])
+        const { idIssuingAgencySelected } = JSON.parse(idIssuingAgenceySelected)
+        const { data } = await apiAdmin.get(`/especialidade?idOrgaoEmissor=${idIssuingAgencySelected}`)
         const dataMapped = mapSpecialtys(data?.especialidade)
 
         if (!dataMapped.length) {
@@ -60,11 +73,11 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
         }
 
         setSpecialtysOptions(dataMapped)
-      } catch ({ response }) {}
+      } catch ({ response }) { }
     }
 
     getSpecialtys()
-  }, [])
+  }, [idIssuingAgenceySelected])
 
   const onChange = (values: MultiSelectOption[], value?: MultiSelectOption) => {
     if (value?.rqeRequired) {
@@ -73,6 +86,8 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
         currentSpecialty: value,
       })
     }
+    setSpecialtysSelected([value])
+    hasErrors({...fieldsValues, specialtys: value })
     setSpecialtys(values)
   }
 
