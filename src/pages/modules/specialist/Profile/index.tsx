@@ -25,10 +25,13 @@ const SpecialistProfile: React.FC = () => {
       try {
         const response = await axios.all(
           dataMapped.specialtys.map((spec) =>
-            apiAdmin.get(
-              `/medico/documento/visualizar?cpf=${dataMapped.specialistInfo.cpf}&tipoDocumento=ComprovanteEspecialidade&idEspecialidade=${spec.id}`,
-              { responseType: 'arraybuffer' },
-            ),
+          {
+              console.log(`/medico/documento/visualizar?cpf=${dataMapped.specialistInfo.cpf}&tipoDocumento=ComprovanteEspecialidade&idEspecialidade=${spec.id}`)
+              return apiAdmin.get(
+                `/medico/documento/visualizar?cpf=${dataMapped.specialistInfo.cpf}&tipoDocumento=ComprovanteEspecialidade&idEspecialidade=${spec.id}`,
+                { responseType: 'arraybuffer' },
+              )
+            }
           ),
         )
         setSpecialtysDocs(specialysDocsFromApi(response, dataMapped.specialtys))
