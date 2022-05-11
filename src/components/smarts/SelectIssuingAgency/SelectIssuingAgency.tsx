@@ -36,7 +36,7 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
       try {
         setLabelLoading('Carregando...')
 
-        const { data } = await apiAdmin.get(`/orgao-emissor`)
+        const { data } = await apiAdmin.get(`/orgao-emissor?status=A`)
         const dataMapped = mapIssuingAgency(data)
         setIssuingAgencyOptions(dataMapped)
       } catch (error) {
@@ -62,7 +62,6 @@ const SelectIssuingAgency: React.FC<SelectIssuingAgencyProps> = ({
     }
 
     setIssuingAgency(issuingAgencyOpt.value)
-
     setIssuingAgencyToApi(issuingAgencyOpt.label)
   }, [issuingAgency, issuingAgencyOptions])
 

@@ -24,14 +24,15 @@ const ProfissionalInformation: React.FC = () => {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>([])
+  const [specialtysSelected, setSpecialtysSelected] = useState<MultiSelectOption[]>([])
   const [clinics, setClinics] = useState<MultiSelectOption[]>([])
+  const [clinicsSelected, setClinicsSeleted] = useState<MultiSelectOption[]>([])
   const [toggleClick, setToggleClick] = useState(0)
 
   const [errorMessage, sendErrorMessage] = useMessage()
   const { step, nextStep, setProfissionalInfo, errors, setErrors } =
     useRegisterSpecialist()
   const { hasErrors } = useValidator()
-  console.log(specialtys)
 
   const onNextStep = () => {
     sendErrorMessage()
@@ -79,6 +80,23 @@ const ProfissionalInformation: React.FC = () => {
       scrollOntoFieldError(errors)
     }
   }, [toggleClick])
+
+  const onSelectField = (field: string, value: MultiSelectOption) => {
+    setClinicsSeleted([value])
+    setClinics([value])
+    const data = {name,
+      profissionalName,
+      cpf,
+      receiveService,
+      email,
+      phone,
+      specialtys: specialtysSelected.length ? specialtysSelected : ''}
+    hasErrors({
+      ...data,
+      clinics: value,
+    })
+
+  }
 
   return (
     <Container hidden={step !== 2}>
@@ -169,6 +187,12 @@ const ProfissionalInformation: React.FC = () => {
           ]}
           hasError={!!errors.receiveService}
           msgError={errors.receiveService}
+          onBlur={() =>
+            setErrors({
+              ...errors,
+              receiveService: !hasErrors({ receiveService }) ? '' : 'Campo obrigatório'
+            })
+          }
         />
 
         <InputEmail
@@ -210,6 +234,16 @@ const ProfissionalInformation: React.FC = () => {
           errors={errors}
           setErrors={setErrors}
           color="green"
+          setSpecialtysSelected={setSpecialtysSelected}
+          fieldsValues={{
+            name,
+            profissionalName,
+            cpf,
+            receiveService,
+            email,
+            phone,
+            clinics: clinicsSelected.length ? clinicsSelected : '',
+          }}
         />
 
         <MultSelectClinics
@@ -218,6 +252,9 @@ const ProfissionalInformation: React.FC = () => {
           errors={errors}
           setErrors={setErrors}
           color="green"
+          onSelect={(values: MultiSelectOption[], value?: MultiSelectOption) =>
+            onSelectField('clinics', value)
+          }
         />
       </div>
       <FooterNextStep onClickNextStep={onNextStep} />

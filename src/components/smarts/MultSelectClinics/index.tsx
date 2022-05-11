@@ -39,7 +39,7 @@ export const MultSelectClinics: React.FC<ClinicsProps> = ({
   useEffect(() => {
     const getClinics = async () => {
       try {
-        const { data } = await apiAdmin.get('/clinica')
+        const { data } = await apiAdmin.get('/clinica?status=A&status=P')
         const dataMapped = mapClinics(data?.clinicas)
 
         if (!dataMapped.length) {
