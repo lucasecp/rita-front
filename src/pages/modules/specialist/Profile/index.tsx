@@ -26,7 +26,6 @@ const SpecialistProfile: React.FC = () => {
         const response = await axios.all(
           dataMapped.specialtys.map((spec) =>
           {
-              console.log(`/medico/documento/visualizar?cpf=${dataMapped.specialistInfo.cpf}&tipoDocumento=ComprovanteEspecialidade&idEspecialidade=${spec.id}`)
               return apiAdmin.get(
                 `/medico/documento/visualizar?cpf=${dataMapped.specialistInfo.cpf}&tipoDocumento=ComprovanteEspecialidade&idEspecialidade=${spec.id}`,
                 { responseType: 'arraybuffer' },
