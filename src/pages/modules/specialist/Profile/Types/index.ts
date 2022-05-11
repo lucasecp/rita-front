@@ -15,6 +15,7 @@ export interface SpecialistInfoI {
   cashback?: string
   takerate?: string
   issuingAgency?: string
+  issuingAgencyName?: string
 }
 
 export interface DataSpecialistI {
