@@ -114,24 +114,30 @@ export const Dependents: React.FC = () => {
     <RegisterLayout>
       <Container>
         <div>
-          <h2>Dependentes</h2>
+          <h2 data-test="depedentsTitle">Dependentes</h2>
           <ul>
             {allDependents.map((dependent, index) => (
               <li key={index}>
                 <ul>
-                  <li>
+                  <li data-test={`depedentName-${index}`}>
                     Nome: <span>{dependent.name}</span>
                   </li>
-                  <li>
+                  <li data-test={`depedentCPF-${index}`}>
                     CPF: <span>{dependent.cpf}</span>
                   </li>
                 </ul>
                 <div>
-                  <button onClick={() => onEditDependent(index, dependent)}>
+                  <button
+                    onClick={() => onEditDependent(index, dependent)}
+                    data-test={`dependentEditButton-${index}`}
+                  >
                     <img src={editIcon} />
                     Editar
                   </button>
-                  <button onClick={() => onRemoveDependent(index)}>
+                  <button
+                    onClick={() => onRemoveDependent(index)}
+                    data-test={`dependentDeleteButton-${index}`}
+                  >
                     <img src={trashIcon} />
                     Remover
                   </button>
@@ -143,13 +149,18 @@ export const Dependents: React.FC = () => {
             disabled={allDependents.length === 5}
             variation="blue"
             onClick={onAddDependent}
+            data-test="dependentAddButton"
           >
             Adicionar Dependentes
           </OutlineButton>
         </div>
         <footer>
-          <ButtonLink onClick={onPreviousStep}>Etapa Anterior</ButtonLink>
-          <ButtonPrimary onClick={onNextStep}>Próxima Etapa</ButtonPrimary>
+          <ButtonLink onClick={onPreviousStep} data-test="previousStepButton">
+            Etapa Anterior
+          </ButtonLink>
+          <ButtonPrimary onClick={onNextStep} data-test="nextStepButton">
+            Próxima Etapa
+          </ButtonPrimary>
         </footer>
       </Container>
     </RegisterLayout>
