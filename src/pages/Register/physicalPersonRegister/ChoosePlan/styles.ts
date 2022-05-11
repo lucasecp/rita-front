@@ -87,7 +87,7 @@ export const ButtonArea = styled.div`
   span {
     margin: auto;
     text-align: center;
-    font-size: 22px;
+    font-size: auto;
     color: ${colors.purple.main.dark};
     font-weight: 500;
   }
