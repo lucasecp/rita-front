@@ -5,22 +5,25 @@ import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 import { ButtonArea, Content, Price, Top } from './styles'
 
 import ButtonPrimary from '@/components/Button/Primary'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { usePhysicalPersonRegister } from '../shared/hooks'
 
 export const PlanDetails: React.FC = () => {
-  const { plan, region } = useLocation().state
-  const history = useHistory()
+  // const { region } = usePhysicalPersonRegister()
+  const { plan } = useLocation().state
+
+  console.log(plan)
 
   return (
     <RegisterLayout>
       <Content>
-        <Top>
+        {/* <Top>
           <h1>{plan.name}</h1>
           <span>Experimente 7 dias grátis</span>
         </Top>
         <span>
-          O {plan.name} tem abrangência em toda parte {region.city}do Brasil,
-          conta com redes credenciadas e atendimento especial para você.
+          O {plan.name} tem abrangência em toda parte do Brasil, conta com redes
+          credenciadas e atendimento especial para você.
         </span>
         <h3>inclusão de Dependentes</h3>
         <span>Sim</span>
@@ -33,7 +36,7 @@ export const PlanDetails: React.FC = () => {
         </ul>
         <Price>
           <h2>R$ {plan.price}/Mês</h2>
-        </Price>
+        </Price> */}
       </Content>
       <footer>
         <ButtonArea>

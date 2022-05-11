@@ -10,6 +10,7 @@ import { useModal } from '@/hooks/useModal'
 
 import { Container } from './styles'
 import { usePhysicalPersonRegister } from '@/pages/Register/physicalPersonRegister/shared/hooks'
+import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN } from '@/routes/constants/namedRoutes/routes'
 
 export const SelectedPlanDontAllowAddDependents: React.FC = () => {
   const { closeModal } = useModal()
@@ -24,8 +25,7 @@ export const SelectedPlanDontAllowAddDependents: React.FC = () => {
   const onChooseOtherPlan = () => {
     patientWantsDependent.set(true)
 
-    history.push('/paciente/cadastro/escolher-plano')
-    // history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
+    history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
 
     closeModal()
   }

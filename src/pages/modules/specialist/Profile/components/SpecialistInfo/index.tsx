@@ -124,21 +124,21 @@ const SpecialistInfo: React.FC<SpecialistInfoProps> = ({
         label="Nome Profissional:"
         value={profissionalName}
         setValue={setProfissionalName}
-        hasError={!!errors?.profissionalName}
-        msgError={errors?.profissionalName}
+        // hasError={!!errors?.profissionalName}
+        // msgError={errors?.profissionalName}
         maxLength={100}
-        onBlur={() =>
-          setErrors({
-            ...errors,
-            profissionalName: validateName(profissionalName),
-          })
-        }
-        onKeyUp={() =>
-          setErrors({
-            ...errors,
-            profissionalName: validateName(profissionalName),
-          })
-        }
+        // onBlur={() =>
+        //   setErrors({
+        //     ...errors,
+        //     profissionalName: validateName(profissionalName),
+        //   })
+        // }
+        // onKeyUp={() =>
+        //   setErrors({
+        //     ...errors,
+        //     profissionalName: validateName(profissionalName),
+        //   })
+        // }
         disabled={!isEditing}
         name="profissionalName"
       />

@@ -4,7 +4,7 @@ import { Select } from '@/components/Form/Select'
 import { UseLoadingInput } from '@/hooks/useLoadingInput'
 
 interface SpecialistsProps {
-  specialist: string
+  specialist: string | number
   setSpecialist: React.Dispatch<React.SetStateAction<string>>
 }
 
@@ -25,7 +25,7 @@ export const SelectSpecialists: React.FC<SpecialistsProps> = ({
   const mapSpecialistsOfClinic = (data: dataFromApi) => {
     return data?.medicos?.map((doctor) => ({
       id: doctor.idMedico,
-      name: doctor.nome,
+      label: doctor.nome,
     }))
   }
 
@@ -33,9 +33,7 @@ export const SelectSpecialists: React.FC<SpecialistsProps> = ({
     const getSpecialists = async () => {
       try {
         LoadingInput.turnOn()
-        const { data } = await apiAdmin.get(
-          '/clinica/59/medico?limit=10&skip=0',
-        )
+        const { data } = await apiAdmin.get('/clinica/59/medico')
 
         setSpecialtysOptions(mapSpecialistsOfClinic(data))
       } catch (error) {
@@ -49,7 +47,7 @@ export const SelectSpecialists: React.FC<SpecialistsProps> = ({
 
   return (
     <Select
-      label="Especialista"
+      label="Especialista:"
       labelDefaultOption={LoadingMessage}
       value={specialist}
       setValue={setSpecialist}

@@ -25,8 +25,10 @@ interface HeaderProps {
   setPhoto: Dispatch<SetStateAction<File>>
 }
 
-const Header: React.FC<HeaderProps> = ({ data, setPhoto: setPhotoSpecialist }) => {
-
+const Header: React.FC<HeaderProps> = ({
+  data,
+  setPhoto: setPhotoSpecialist,
+}) => {
   const [photo, setPhoto] = React.useState<File>({ size: 0 } as File)
   const [imgBlob, setImgBlob] = React.useState('')
   const { showSimple } = useModal()
@@ -38,10 +40,15 @@ const Header: React.FC<HeaderProps> = ({ data, setPhoto: setPhotoSpecialist }) =
       Loading.turnOn()
       const formData = new FormData()
       formData.append('file', photo)
-      await apiAdmin.post(`/medico/arquivo?cpf=${data.specialistInfo.cpf}&tipoDocumento=FotoPerfil`, formData)
+      await apiAdmin.post(
+        `/medico/arquivo?cpf=${data.specialistInfo.cpf}&tipoDocumento=FotoPerfil`,
+        formData,
+      )
       toast.success('Foto atualizada com sucesso!')
     } catch (error) {
-      toast.error('Ops! Houve um problema ao tentar adicionar uma foto no perfil, tente novamente.')
+      toast.error(
+        'Ops! Houve um problema ao tentar adicionar uma foto no perfil, tente novamente.',
+      )
     } finally {
       Loading.turnOff()
     }
@@ -49,10 +56,9 @@ const Header: React.FC<HeaderProps> = ({ data, setPhoto: setPhotoSpecialist }) =
 
   const onFileInput = async () => {
     if (photo && !isValidSizeFile(photo)) {
-      showSimple.error(
+      return showSimple.error(
         'Arquivo não suportado, O tamanho máximo do arquivo deve ser 10MB, nas extensões JPG, JPEG e PNG.',
       )
-      return
     } else if (photo) {
       const _imgBlob = URL.createObjectURL(photo)
       setImgBlob(_imgBlob)
@@ -88,7 +94,8 @@ const Header: React.FC<HeaderProps> = ({ data, setPhoto: setPhotoSpecialist }) =
           <InputFile
             setValue={setPhoto}
             clearOnClick
-            accept=".jpg, .jpeg, .png">
+            accept=".jpg, .jpeg, .png"
+          >
             <PenIcon />
           </InputFile>
         </span>
@@ -98,7 +105,11 @@ const Header: React.FC<HeaderProps> = ({ data, setPhoto: setPhotoSpecialist }) =
         <div>
           <h2>
             {formatTextWithLimit(
-              firstLetterCapitalize(data?.specialistInfo?.name || ''),
+              firstLetterCapitalize(
+                data?.specialistInfo?.profissionalName ||
+                  data?.specialistInfo?.name ||
+                  '',
+              ),
             ) || ''}
           </h2>
           <p>

@@ -12,18 +12,23 @@ import { Container } from './styles'
 
 import { NoPlansToAddDependents } from './messages/NoPlansToAddDependents'
 import { SelectedPlanDontAllowAddDependents } from './messages/SelectedPlanDontAllowAddDependents'
-import { usePhysicalPersonRegister } from '@/pages/Register/physicalPersonRegister/shared/hooks'
 
+import { toast } from '@/styles/components/toastify'
+
+import { usePhysicalPersonRegister } from '@/pages/Register/physicalPersonRegister/shared/hooks'
+import { useLoading } from '@/hooks/useLoading'
 import { PHYSICAL_PERSON_REGISTER_DEPENDENTS } from '@/routes/constants/namedRoutes/routes'
+import apiAdmin from '@/services/apiAdmin'
 
 export const IncludeDependent: React.FC = () => {
   const { closeModal, showMessage } = useModal()
   const history = useHistory()
-  const { finishRegister } = usePhysicalPersonRegister()
+  const { Loading } = useLoading()
+
+  const { finishRegister, region } = usePhysicalPersonRegister()
 
   // remove static values
-  const planSelectedAllowsDependent = true
-  const hasPlanTheAllowsDependentInRegion = true
+  const planSelectedAllowsDependent = false
 
   const onNotIncludeDependent = () => {
     finishRegister()
@@ -37,12 +42,25 @@ export const IncludeDependent: React.FC = () => {
       return
     }
 
-    // checkRangeRegion
-    // planos/itens-vendaveis
+    try {
+      Loading.turnOn()
+      const { data } = await apiAdmin.get('/plano/itens-vendaveis', {
+        params: {
+          municipio: region.get.city,
+          uf: region.get.uf,
+          minimoDependente: 1,
+        },
+      })
 
-    if (hasPlanTheAllowsDependentInRegion) {
-      showMessage(SelectedPlanDontAllowAddDependents)
-      return
+      if (data.length) {
+        showMessage(SelectedPlanDontAllowAddDependents)
+
+        return
+      }
+    } catch (error) {
+      toast.error('Erro ao buscar planos com dependentes')
+    } finally {
+      Loading.turnOff()
     }
 
     showMessage(NoPlansToAddDependents)

@@ -16,14 +16,16 @@ import { DocumentsNotSended } from './messages/DocumentsNotSended'
 import {
   // RegistrationDataState,
   // AddressState,
-  // DependentsState,
   // RegisterDataState,
   RegionState,
   DocumentsState,
+  DependentsState,
   PhysicalPersonRegisterContextData,
 } from './types'
 
 import { PHYSICAL_PERSON_REGISTER_PAYMENT } from '@/routes/constants/namedRoutes/routes'
+import { SelectedPlan } from '../../ChoosePlan/components/Card'
+import { MappedPlan } from '../../ChooseRegion'
 
 const PhysicalPersonRegisterContext =
   createContext<PhysicalPersonRegisterContextData>(
@@ -47,6 +49,10 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
 
   const [region, setRegion] = useState({} as RegionState)
 
+  const [selectedPlan, setSelectedPlan] = useState({} as SelectedPlan)
+
+  const [plans, setPlans] = useState([] as MappedPlan[])
+
   const [documentsFile, setDocumentsFile] = useState({} as DocumentsState)
 
   const [patientWantsDependent, setPatientWantsDependent] = useState(false)
@@ -55,9 +61,9 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
     console.log(documentsFile)
   }, [documentsFile])
 
-  // const [dependents, setDependents] = useState(
-  //   [] as DependentsState[] | undefined,
-  // )
+  const [dependents, setDependents] = useState(
+    [] as DependentsState[] | undefined,
+  )
 
   // const resetData = () => {
   //   setRegistrationData({})
@@ -143,12 +149,29 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   return (
     <PhysicalPersonRegisterContext.Provider
       value={{
+        selectedPlan: {
+          get: selectedPlan,
+          set: setSelectedPlan,
+        },
+        plans: {
+          get: plans,
+          set: setPlans,
+        },
+        region: {
+          get: region,
+          set: setRegion,
+        },
         setDocumentsFile,
-        finishRegister,
         patientWantsDependent: {
           get: patientWantsDependent,
           set: setPatientWantsDependent,
         },
+        dependents: {
+          get: dependents,
+          set: setDependents,
+        },
+        finishRegister,
+
         // cpfHolder: registrationData?.cpf,
         // isPatientLinkedCompany,
         // limitOfDependents,

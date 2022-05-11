@@ -8,13 +8,11 @@ import { Container } from './styles'
 
 import apiAdmin from '@/services/apiAdmin'
 import { addressFromApi } from './adapters/fromApi'
-import { RegionState } from '../..'
+import { usePhysicalPersonRegister } from '../../../shared/hooks'
 
-interface InputCepProps {
-  onGetRegion: (region: RegionState) => void
-}
+const InputCep: React.FC = () => {
+  const { region } = usePhysicalPersonRegister()
 
-const InputCep: React.FC<InputCepProps> = ({ onGetRegion }) => {
   const [cep, setCep] = useState('')
 
   useEffect(() => {
@@ -27,22 +25,18 @@ const InputCep: React.FC<InputCepProps> = ({ onGetRegion }) => {
         if (data.error === '1') {
           toast.error('Cep não encontrado!')
 
-          // onGetRegion({} as RegionState)
-
           return
         }
 
         const addressMapped = addressFromApi(data)
 
-        onGetRegion({
+        region.set({
           city: addressMapped.city,
           uf: addressMapped.uf,
         })
 
         setCep('')
       } catch (error) {
-        // onGetRegion({} as RegionState)
-
         toast.error('Error ao carregar endereço!')
       }
     }

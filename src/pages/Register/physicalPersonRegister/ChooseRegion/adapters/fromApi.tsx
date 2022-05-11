@@ -6,7 +6,7 @@ export const fromApiPlans = (data: Plans[]): MappedPlan[] =>
       idPlan: plan.idPlano,
       maximumDependentsQuantity: plan.maximoDependente,
       name: plan.nome,
-      AllowedMajorAge: plan.permiteMaiores,
+      allowedMajorAge: plan.permiteMaiores,
       price: plan.preco,
     }
   })

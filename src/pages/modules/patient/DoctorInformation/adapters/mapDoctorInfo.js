@@ -53,7 +53,9 @@ export const fromApi = (dataClinic) => {
   return {
     photo: dataClinic.avatar,
     title: firstLetterCapitalize(dataClinic.titulo),
-    name: firstLetterCapitalize(dataClinic.nome),
+    name:
+      firstLetterCapitalize(dataClinic.nomeProfissional) ||
+      firstLetterCapitalize(dataClinic.nome),
     address: dataClinic.endereco,
     district: dataClinic.bairro,
     city: dataClinic.cidade,
@@ -61,7 +63,7 @@ export const fromApi = (dataClinic) => {
     number: dataClinic.numero,
     verified: dataClinic.validadoClinica,
     crmuf: dataClinic.ufOrgaoEmissor,
-    crm: dataClinic.registroProfissional,
+    crm: dataClinic?.orgaoEmissor?.descricao,
     clinicdoctor,
     doctorSpecialty: { ...doctorSpecialty },
   }
