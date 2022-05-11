@@ -25,17 +25,14 @@ export const IncludeDependent: React.FC = () => {
   const history = useHistory()
   const { Loading } = useLoading()
 
-  const { finishRegister, region } = usePhysicalPersonRegister()
-
-  // remove static values
-  const planSelectedAllowsDependent = false
+  const { finishRegister, region, selectedPlan } = usePhysicalPersonRegister()
 
   const onNotIncludeDependent = () => {
     finishRegister()
   }
 
   const onIncludeDependent = async () => {
-    if (planSelectedAllowsDependent) {
+    if (selectedPlan.get.maximumDependentsQuantity > 0) {
       history.push(PHYSICAL_PERSON_REGISTER_DEPENDENTS)
 
       closeModal()
@@ -44,6 +41,7 @@ export const IncludeDependent: React.FC = () => {
 
     try {
       Loading.turnOn()
+
       const { data } = await apiAdmin.get('/plano/itens-vendaveis', {
         params: {
           municipio: region.get.city,

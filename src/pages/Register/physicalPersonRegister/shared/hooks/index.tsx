@@ -55,7 +55,8 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
 
   const [documentsFile, setDocumentsFile] = useState({} as DocumentsState)
 
-  const [patientWantsDependent, setPatientWantsDependent] = useState(false)
+  const [patientWantsMinimumDependent, setPatientWantsMinimumDependent] =
+    useState(0)
 
   useEffect(() => {
     console.log(documentsFile)
@@ -162,9 +163,9 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
           set: setRegion,
         },
         setDocumentsFile,
-        patientWantsDependent: {
-          get: patientWantsDependent,
-          set: setPatientWantsDependent,
+        patientWantsMinimumDependent: {
+          get: patientWantsMinimumDependent,
+          set: setPatientWantsMinimumDependent,
         },
         dependents: {
           get: dependents,

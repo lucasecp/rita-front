@@ -65,9 +65,9 @@ export interface PhysicalPersonRegisterContextData {
     set: React.Dispatch<React.SetStateAction<RegionState>>
   }
   setDocumentsFile: React.Dispatch<React.SetStateAction<DocumentsState>>
-  patientWantsDependent: {
-    get: boolean
-    set: React.Dispatch<React.SetStateAction<boolean>>
+  patientWantsMinimumDependent: {
+    get: number
+    set: React.Dispatch<React.SetStateAction<number>>
   }
   dependents: {
     get: DependentsState[]

@@ -43,7 +43,7 @@ export const ChooseRegion: React.FC = () => {
   const history = useHistory()
   const { Loading } = useLoading()
   const { showMessage } = useModal()
-  const { region, plans } = usePhysicalPersonRegister()
+  const { region } = usePhysicalPersonRegister()
 
   const onComeBack = () => {
     history.push(LOGIN)
@@ -57,16 +57,11 @@ export const ChooseRegion: React.FC = () => {
         params: { municipio: region.get.city, uf: region.get.uf },
       })
 
-      // // REMOVE AFTER TEST
-      // return history.push(PHYSICAL_PERSON_REGISTER_DOCUMENTS)
-
       if (!data.length) {
-        return showMessage(AddUserOnWaitList, {}, true)
+        showMessage(AddUserOnWaitList, {}, true)
+
+        return
       }
-
-      const mappedPlans = fromApiPlans(data)
-
-      plans.set(mappedPlans)
 
       history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
     } catch ({ response }) {

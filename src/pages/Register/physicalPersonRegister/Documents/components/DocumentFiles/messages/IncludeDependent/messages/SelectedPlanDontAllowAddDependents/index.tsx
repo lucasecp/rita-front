@@ -16,14 +16,15 @@ export const SelectedPlanDontAllowAddDependents: React.FC = () => {
   const { closeModal } = useModal()
   const history = useHistory()
 
-  const { finishRegister, patientWantsDependent } = usePhysicalPersonRegister()
+  const { finishRegister, patientWantsMinimumDependent } =
+    usePhysicalPersonRegister()
 
   const onNotChooseOtherPlan = () => {
     finishRegister()
   }
 
   const onChooseOtherPlan = () => {
-    patientWantsDependent.set(true)
+    patientWantsMinimumDependent.set(1)
 
     history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
 
