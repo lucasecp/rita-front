@@ -14,36 +14,19 @@ import InputCep from './components/InputCep'
 import {
   LOGIN,
   PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN,
-  PHYSICAL_PERSON_REGISTER_DOCUMENTS,
+  // PHYSICAL_PERSON_REGISTER_DOCUMENTS,
 } from '@/routes/constants/namedRoutes/routes'
 import { AddUserOnWaitList } from './messages/AddUserOnWaitList'
 import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { toast } from 'react-toastify'
-import { fromApiPlans } from './adapters/fromApi'
 import { usePhysicalPersonRegister } from '../shared/hooks'
-
-export interface Plans {
-  idPlano: number
-  maximoDependente: number
-  nome: string
-  permiteMaiores: boolean
-  preco: string
-}
-
-export interface MappedPlan {
-  idPlan: number
-  maximumDependentsQuantity: number
-  name: string
-  allowedMajorAge: boolean
-  price: string
-}
 
 export const ChooseRegion: React.FC = () => {
   const history = useHistory()
   const { Loading } = useLoading()
   const { showMessage } = useModal()
-  const { region } = usePhysicalPersonRegister()
+  const { region, patientWantsMinimumDependent } = usePhysicalPersonRegister()
 
   const onComeBack = () => {
     history.push(LOGIN)
@@ -54,7 +37,11 @@ export const ChooseRegion: React.FC = () => {
       Loading.turnOn()
 
       const { data } = await apiAdmin.get('/plano/itens-vendaveis', {
-        params: { municipio: region.get.city, uf: region.get.uf },
+        params: {
+          municipio: region.get.city,
+          uf: region.get.uf,
+          minimoDependente: patientWantsMinimumDependent.get,
+        },
       })
 
       if (!data.length) {

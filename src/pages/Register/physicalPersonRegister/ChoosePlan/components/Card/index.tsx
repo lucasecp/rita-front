@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom'
 import ButtonLink from '@/components/Button/Link'
 import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.svg'
 import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS } from '@/routes/constants/namedRoutes/routes'
-import { MappedPlan } from '../../../ChooseRegion'
+import { MappedPlan } from '../..'
 import { usePhysicalPersonRegister } from '../../../shared/hooks'
 
 export interface SelectedPlan {

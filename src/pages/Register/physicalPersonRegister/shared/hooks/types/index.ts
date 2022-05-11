@@ -10,7 +10,7 @@
 // }
 
 import { SelectedPlan } from '../../../ChoosePlan/components/Card'
-import { MappedPlan } from '../../../ChooseRegion'
+import { MappedPlan } from '../../../ChoosePlan'
 
 // export interface AddressState {
 //   cep?: string

@@ -25,7 +25,7 @@ import {
 
 import { PHYSICAL_PERSON_REGISTER_PAYMENT } from '@/routes/constants/namedRoutes/routes'
 import { SelectedPlan } from '../../ChoosePlan/components/Card'
-import { MappedPlan } from '../../ChooseRegion'
+import { MappedPlan } from '../../ChoosePlan'
 
 const PhysicalPersonRegisterContext =
   createContext<PhysicalPersonRegisterContextData>(

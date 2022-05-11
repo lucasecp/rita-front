@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 
@@ -8,9 +8,10 @@ import ButtonPrimary from '@/components/Button/Primary'
 import { useHistory } from 'react-router-dom'
 import ButtonLink from '@/components/Button/Link'
 import { CardOfPlans } from './components/Card'
-import { MappedPlan } from '../ChooseRegion'
 import { usePhysicalPersonRegister } from '../shared/hooks'
 import { PHYSICAL_PERSON_REGISTER_CHOOSE_REGION } from '@/routes/constants/namedRoutes/routes'
+import apiAdmin from '@/services/apiAdmin'
+import { fromApiPlans } from './adapters/fromApi'
 
 const cardColors = ['purple', 'green', 'blue', 'orange']
 
@@ -18,9 +19,44 @@ export interface DataProps {
   data: MappedPlan[]
 }
 
+export interface Plans {
+  idPlano: number
+  maximoDependente: number
+  nome: string
+  permiteMaiores: boolean
+  preco: string
+}
+
+export interface MappedPlan {
+  idPlan: number
+  maximumDependentsQuantity: number
+  name: string
+  allowedMajorAge: boolean
+  price: string
+}
+
 export const ChoosePlans: React.FC = () => {
   const history = useHistory()
-  const { plans, region, selectedPlan } = usePhysicalPersonRegister()
+  const { region, selectedPlan, patientWantsMinimumDependent } =
+    usePhysicalPersonRegister()
+  const [plans, setPlans] = useState([])
+  useEffect(() => {
+    const callApi = async () => {
+      const { data } = await apiAdmin.get('/plano/itens-vendaveis', {
+        params: {
+          municipio: region.get.city,
+          uf: region.get.uf,
+          minimoDependente: patientWantsMinimumDependent.get,
+        },
+      })
+
+      const mappedPlan = fromApiPlans(data)
+
+      setPlans(mappedPlan)
+    }
+
+    callApi()
+  }, [])
 
   return (
     <RegisterLayout>
@@ -33,8 +69,8 @@ export const ChoosePlans: React.FC = () => {
           </h2>
         </TitleAndLogo>
         <CardArea>
-          {plans.get.length > 0 &&
-            plans.get.map((plan, index) => {
+          {plans.length > 0 &&
+            plans.map((plan, index) => {
               return (
                 <div key={plan.idPlan}>
                   <CardOfPlans
