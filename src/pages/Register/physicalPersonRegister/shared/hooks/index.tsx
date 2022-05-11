@@ -18,13 +18,13 @@ import {
   // AddressState,
   // RegisterDataState,
   RegionState,
+  PlanState,
   DocumentsState,
   DependentsState,
   PhysicalPersonRegisterContextData,
 } from './types'
 
 import { PHYSICAL_PERSON_REGISTER_PAYMENT } from '@/routes/constants/namedRoutes/routes'
-import { SelectedPlan } from '../../ChoosePlan/components/Card'
 
 const PhysicalPersonRegisterContext =
   createContext<PhysicalPersonRegisterContextData>(
@@ -48,7 +48,7 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
 
   const [region, setRegion] = useState({} as RegionState)
 
-  const [selectedPlan, setSelectedPlan] = useState({} as SelectedPlan)
+  const [selectedPlan, setSelectedPlan] = useState({} as PlanState)
 
   const [documentsFile, setDocumentsFile] = useState({} as DocumentsState)
 
@@ -167,17 +167,8 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
         finishRegister,
 
         // cpfHolder: registrationData?.cpf,
-        // isPatientLinkedCompany,
-        // limitOfDependents,
-        // initialRegisterData,
-        // isActiveStep,
-        // currentStep: step,
-        // previousStep,
-        // nextStep,
-        // setInitialRegisterData,
         // setRegistrationData,
         // onGetAddress: setAddress,
-        // setDependents,
         // resetData,
       }}
     >

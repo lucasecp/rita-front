@@ -42,6 +42,7 @@ export const Select: React.FC<SelectProps> = ({
         }}
         value={value}
         id={label}
+        data-test={`select-${label}`}
         {...rest}
       >
         {labelDefaultOption && (

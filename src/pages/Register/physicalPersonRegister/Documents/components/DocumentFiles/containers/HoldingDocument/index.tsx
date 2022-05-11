@@ -32,7 +32,11 @@ export const HoldingDocument: React.FC<HoldingDocumentProps> = ({
       </AccordionSummary>
       <AccordionDetails>
         {holdingDocumentFile && (
-          <SendedFile file={holdingDocumentFile} onGetFile={onGetFile} />
+          <SendedFile
+            file={holdingDocumentFile}
+            onGetFile={onGetFile}
+            name="HoldingDocument"
+          />
         )}
         {!holdingDocumentFile && (
           <InstructionsHoldingDocument onGetFile={onGetFile} error={error} />

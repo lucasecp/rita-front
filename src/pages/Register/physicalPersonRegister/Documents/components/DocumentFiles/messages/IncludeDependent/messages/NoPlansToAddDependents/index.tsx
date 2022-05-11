@@ -2,7 +2,7 @@ import React from 'react'
 
 import warningIcon from '@/assets/icons/alerts/warning.svg'
 
-import OutlineButton from '@/components/Button/Outline'
+import ButtonPrimary from '@/components/Button/Primary'
 
 import { Container } from './styles'
 import { usePhysicalPersonRegister } from '@/pages/Register/physicalPersonRegister/shared/hooks'
@@ -19,7 +19,7 @@ export const NoPlansToAddDependents: React.FC = () => {
       <img src={warningIcon} />
       <p>No momento não temos planos para a inclusão de dependentes</p>
       <footer>
-        <OutlineButton onClick={onClose}>Fechar</OutlineButton>
+        <ButtonPrimary onClick={onClose}>Fechar</ButtonPrimary>
       </footer>
     </Container>
   )

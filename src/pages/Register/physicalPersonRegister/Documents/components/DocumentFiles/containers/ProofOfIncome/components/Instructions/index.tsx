@@ -39,6 +39,7 @@ export const InstructionsProofOfIncome: React.FC<
               href="https://cadunico.dataprev.gov.br/#/consultaSimples"
               target="_blank"
               rel="noreferrer"
+              data-test="linkCadUnico"
             >
               clique aqui
             </a>{' '}

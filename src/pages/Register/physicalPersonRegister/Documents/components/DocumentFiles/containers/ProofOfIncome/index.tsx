@@ -49,7 +49,11 @@ export const ProofOfIncome: React.FC<ProofOfIncomeProps> = ({
         </AccordionSummary>
         <AccordionDetails>
           {proofOfIncomeFile && (
-            <SendedFile file={proofOfIncomeFile} onGetFile={onGetFile} />
+            <SendedFile
+              file={proofOfIncomeFile}
+              onGetFile={onGetFile}
+              name="ProofOfIncome"
+            />
           )}
           {!proofOfIncomeFile && (
             <InstructionsProofOfIncome

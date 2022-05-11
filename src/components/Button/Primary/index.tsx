@@ -22,12 +22,13 @@ const ButtonPrimary: React.FC<IButtonPrimary> = ({
   return (
     <Container
       type="button"
-      {...rest}
       small={small}
       medium={medium}
       block={block}
       disabledWithEvents={disabledWithEvents}
       variation={variation}
+      data-test={`buttonPrimary-${children}`}
+      {...rest}
     >
       {children}
     </Container>
