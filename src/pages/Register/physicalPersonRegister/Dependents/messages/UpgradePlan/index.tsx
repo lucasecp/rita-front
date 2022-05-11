@@ -4,6 +4,7 @@ import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
 import { useModal } from '@/hooks/useModal'
+import { usePhysicalPersonRegister } from '../../../shared/hooks'
 
 import { NoHasPlansAvailable } from '../NoHasPlansAvailable'
 
@@ -21,10 +22,12 @@ export const UpgradePlan: React.FC<UpgradePlanProps> = ({
   limitDependentsPlan,
 }) => {
   const history = useHistory()
+  const { patientWantsMinimumDependent } = usePhysicalPersonRegister()
   const { showMessage, closeModal } = useModal()
 
   const onAccepUpgradePlan = () => {
     if (hasCoverage) {
+      patientWantsMinimumDependent.set(limitDependentsPlan + 1)
       history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
     } else {
       showMessage(NoHasPlansAvailable)
