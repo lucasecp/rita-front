@@ -56,10 +56,6 @@ export interface PhysicalPersonRegisterContextData {
     get: SelectedPlan
     set: React.Dispatch<React.SetStateAction<SelectedPlan>>
   }
-  plans: {
-    get: MappedPlan[]
-    set: React.Dispatch<React.SetStateAction<MappedPlan[]>>
-  }
   region: {
     get: RegionState
     set: React.Dispatch<React.SetStateAction<RegionState>>
