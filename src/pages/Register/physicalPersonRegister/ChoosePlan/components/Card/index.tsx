@@ -23,41 +23,44 @@ export interface DataProps {
 }
 
 interface CardProps {
-  colorThemeIndex: number
+  colorTheme: number
   plan: MappedPlan
 }
 
-export const CardOfPlans: React.FC<CardProps> = ({ plan, colorThemeIndex }) => {
+export const CardOfPlans: React.FC<CardProps> = ({ plan, colorTheme }) => {
   const history = useHistory()
   const { selectedPlan } = usePhysicalPersonRegister()
 
   const ToDetails = () => {
-    return history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS, plan)
+    history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS, { plan })
   }
 
   return (
     <Card
       key={plan.idPlan}
-      colorThemeIndex={colorThemeIndex}
+      data-test={`planCard-${plan.idPlan}`}
+      colorTheme={colorTheme}
       checked={selectedPlan.get.idPlan === plan.idPlan}
+      onClick={() =>
+        selectedPlan.set({
+          idPlan: plan.idPlan,
+          name: plan.name,
+          allowedMajorAge: plan.allowedMajorAge,
+          maximumDependentsQuantity: plan.maximumDependentsQuantity,
+        })
+      }
     >
       <RitaLogoHalf />
       <div>
         <h1>{plan.name}</h1>
-        <div
-          onClick={() =>
-            selectedPlan.set({
-              idPlan: plan.idPlan,
-              name: plan.name,
-              allowedMajorAge: plan.allowedMajorAge,
-              maximumDependentsQuantity: plan.maximumDependentsQuantity,
-            })
-          }
-        >
+        <div>
           <CheckField
             checked={selectedPlan.get.idPlan === plan.idPlan}
-            colorThemeIndex={colorThemeIndex}
-          />
+            colorTheme={colorTheme}
+            data-test={`planCardCheckBox-${plan.idPlan}`}
+          >
+            <div></div>
+          </CheckField>
         </div>
       </div>
       <h3>inclusão de Dependentes</h3>
@@ -74,8 +77,9 @@ export const CardOfPlans: React.FC<CardProps> = ({ plan, colorThemeIndex }) => {
       <h2>R$ {plan.price}/Mês</h2>
       <h3>Experimente 7 dias grátis</h3>
       <LinkArea
-        colorThemeIndex={colorThemeIndex}
+        colorTheme={colorTheme}
         checked={selectedPlan.get.idPlan === plan.idPlan}
+        data-test={`planCardDetails-${plan.idPlan}`}
       >
         <ButtonLink onClick={ToDetails}>
           <span>

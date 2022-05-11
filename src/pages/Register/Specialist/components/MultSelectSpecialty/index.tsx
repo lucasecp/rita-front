@@ -63,6 +63,7 @@ export const MultSelectSpecialty: React.FC<SpecialtysProps> = ({
   useEffect(() => {
     const getSpecialtys = async () => {
       try {
+        setSpecialtys([] as MultiSelectOption[])
         const { idIssuingAgencySelected } = JSON.parse(idIssuingAgenceySelected)
         const { data } = await apiAdmin.get(`/especialidade?idOrgaoEmissor=${idIssuingAgencySelected}`)
         const dataMapped = mapSpecialtys(data?.especialidade)
