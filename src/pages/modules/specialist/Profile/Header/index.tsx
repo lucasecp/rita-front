@@ -117,7 +117,7 @@ const Header: React.FC<HeaderProps> = ({
             <span>{formatCpf(data?.specialistInfo?.cpf) || ''}</span>
           </p>
           <p>
-            <h6>CRM:</h6>
+            <h6>Órgão Emissor:</h6>
             <span>{data?.specialistInfo?.classCouncil || ''}</span>
           </p>
         </div>
