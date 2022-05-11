@@ -20,6 +20,7 @@ export const fromApi = (doctorInfo: any): DataSpecialistI => {
       cashback: doctorInfo.cashBack ? doctorInfo.cashBack + '%' : '',
       takerate: doctorInfo.takeRate ? doctorInfo.takeRate + '%' : '',
       issuingAgency: doctorInfo.orgaoEmissor?.idOrgaoEmissor,
+      issuingAgencyName: doctorInfo.orgaoEmissor?.descricao,
     },
 
     specialtys: mapSpecialtys(doctorInfo.especialidades),

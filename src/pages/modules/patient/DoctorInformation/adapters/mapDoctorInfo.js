@@ -64,6 +64,7 @@ export const fromApi = (dataClinic) => {
     verified: dataClinic.validadoClinica,
     crmuf: dataClinic.ufOrgaoEmissor,
     crm: dataClinic?.orgaoEmissor?.descricao,
+    profissionalRegister: dataClinic?.registroProfissional,
     clinicdoctor,
     doctorSpecialty: { ...doctorSpecialty },
   }
