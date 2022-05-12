@@ -7,7 +7,7 @@ import ButtonLink from '@/components/Button/Link'
 
 import { AddDependent } from './actions/AddDependent'
 import { EditDependent } from './actions/EditDependent'
-import { UpgradePlan } from './messages/UpgradePlan'
+import { UpgradePlanQuantity } from './messages/UpgradePlanQuantity'
 
 import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
@@ -71,7 +71,7 @@ export const Dependents: React.FC = () => {
     if (limitDependentsPlan <= allDependents.length) {
       const hasCoverage = await verifyIfHasConverage()
 
-      showMessage(UpgradePlan, {
+      showMessage(UpgradePlanQuantity, {
         hasCoverage,
         limitDependentsPlan,
       })

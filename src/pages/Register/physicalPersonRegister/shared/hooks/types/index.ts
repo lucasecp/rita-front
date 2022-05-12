@@ -72,6 +72,10 @@ export interface PhysicalPersonRegisterContextData {
     get: number
     set: React.Dispatch<React.SetStateAction<number>>
   }
+  planAllowDependentMajorAge: {
+    get: boolean
+    set: React.Dispatch<React.SetStateAction<boolean>>
+  }
   dependents: {
     get: DependentsState[]
     set: React.Dispatch<React.SetStateAction<DependentsState[]>>
