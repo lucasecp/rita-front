@@ -18,6 +18,8 @@ import { validatePhone } from '@/helpers/validateFields/validatePhone'
 import { validateDepCpf } from '../helpers/validateDepCPF'
 import { validateDepBirthDate } from '../helpers/validateDepBirthDate'
 
+import { UpgradePlanAge } from '../../messages/UpgradePlanAge'
+
 import apiPatient from '@/services/apiPatient'
 import clearCpf from '@/helpers/clearSpecialCharacters'
 
@@ -38,7 +40,7 @@ export const AddDependent: React.FC<AddDependentProps> = ({
   holderCpf,
   planAllowMajorAge,
 }) => {
-  const { closeModal } = useModal()
+  const { closeModal, showMessage } = useModal()
   const [errorMessage, sendErrorMessage] = useMessage()
   const { Loading } = useLoading()
 
@@ -113,9 +115,23 @@ export const AddDependent: React.FC<AddDependentProps> = ({
     closeModal()
   }
 
+  const validateDependentBirthdate = () => {
+    const error = validateDepBirthDate(birthDate, !planAllowMajorAge)
+
+    if (error === 'Seu plano só aceita dependentes menores de idade') {
+      showMessage(UpgradePlanAge)
+      return
+    }
+
+    setErrors({
+      ...errors,
+      birthDate: validateDepBirthDate(birthDate, !planAllowMajorAge),
+    })
+  }
+
   return (
     <Container>
-      <h2>Dependente</h2>
+      <h2 data-test="dependentAddTitle">Dependente</h2>
 
       <form>
         <InputText
@@ -128,6 +144,7 @@ export const AddDependent: React.FC<AddDependentProps> = ({
           msgError={errors.name}
           maxLength={100}
           onlyLetter
+          data-test="dependentNameField"
         />
         <InputMask
           label="CPF*:"
@@ -148,6 +165,7 @@ export const AddDependent: React.FC<AddDependentProps> = ({
             })
           }
           msgError={errors.cpf}
+          data-test="dependentCpfField"
         />
         <InputMask
           label="Data de Nascimento*:"
@@ -155,19 +173,10 @@ export const AddDependent: React.FC<AddDependentProps> = ({
           value={birthDate}
           setValue={setBirthDate}
           hasError={!!errors.birthDate}
-          onBlur={() =>
-            setErrors({
-              ...errors,
-              birthDate: validateDepBirthDate(birthDate, !planAllowMajorAge),
-            })
-          }
-          onKeyUp={() =>
-            setErrors({
-              ...errors,
-              birthDate: validateDepBirthDate(birthDate, !planAllowMajorAge),
-            })
-          }
+          onBlur={validateDependentBirthdate}
+          onKeyUp={validateDependentBirthdate}
           msgError={errors.birthDate}
+          data-test="dependentBirthdateField"
         />
         <Select
           label="Gênero*:"
@@ -188,6 +197,7 @@ export const AddDependent: React.FC<AddDependentProps> = ({
             setErrors({ ...errors, gender: validateGender(e.target.value) })
           }}
           msgError={errors.gender}
+          data-test="dependentGenderField"
         />
         <InputMask
           label="Celular*:"
@@ -198,6 +208,7 @@ export const AddDependent: React.FC<AddDependentProps> = ({
           onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           msgError={errors.phone}
+          data-test="dependentPhoneField"
         />
         <InputEmail
           initialEmail={email}
@@ -206,16 +217,25 @@ export const AddDependent: React.FC<AddDependentProps> = ({
           checkHasError={errorMessage}
           onKeyUp={sendErrorMessage}
           onBlur={sendErrorMessage}
+          data-test="dependentEmailField"
         />
       </form>
       <footer>
         <div>
-          <OutlineButton variation="red" onClick={onCancelAddDependent}>
+          <OutlineButton
+            variation="red"
+            onClick={onCancelAddDependent}
+            data-test="dependentCancelAddButton"
+          >
             Cancelar
           </OutlineButton>
         </div>
         <div>
-          <ButtonPrimary disabled={!isValidData()} onClick={onSaveNewDependent}>
+          <ButtonPrimary
+            disabled={!isValidData()}
+            onClick={onSaveNewDependent}
+            data-test="dependentSaveButton"
+          >
             Salvar
           </ButtonPrimary>
         </div>

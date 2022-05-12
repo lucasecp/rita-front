@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import useLocalStorage from 'use-local-storage'
 
-import apiWallet from '@/services/apiWallet'
+import apiUser from '@/services/apiUser'
+import apiWallet, { getCallerId } from '@/services/apiWallet'
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
 import { useAuth } from '@/hooks/login'
@@ -52,9 +53,15 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
       let isAuthenticated = false
 
       try {
-        const { data } = await apiWallet.post('/authentication/rita', {
+        // await apiWallet.post('/authentication/rita', {
+        //   cpf: user.cpf,
+        //   password,
+        //   keepAlive: true,
+        // })
+        await apiUser.post('/login', {
           cpf: user.cpf,
-          password,
+          senha: password,
+          permanecerConectado: true,
         })
 
         isAuthenticated = true
@@ -88,9 +95,14 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
 
       if (isAuthenticated) {
         try {
-          const { data } = await apiWallet.get(
-            `/payment/pay/${paymentRequest.id}`,
-          )
+          const { data } = await apiWallet.post(`/payment/appointment`, {
+            id: paymentRequest.id,
+            callerId: getCallerId(),
+            user: {
+              ritaId: String(user.id),
+              token: user.token,
+            },
+          })
 
           // if (!data) {
           //   throw new Error('Resposta vazia')

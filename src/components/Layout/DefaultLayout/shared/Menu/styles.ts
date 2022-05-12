@@ -34,6 +34,9 @@ export const Container = styled.ul<{ expanded: boolean }>`
         color: ${({ theme }) => theme.main};
 
         fill: currentColor;
+        > * {
+          fill: currentColor;
+        }
       }
 
       > span {

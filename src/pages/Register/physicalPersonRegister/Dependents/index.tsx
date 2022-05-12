@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 import ButtonPrimary from '@/components/Button/Primary'
@@ -7,26 +7,39 @@ import ButtonLink from '@/components/Button/Link'
 
 import { AddDependent } from './actions/AddDependent'
 import { EditDependent } from './actions/EditDependent'
-import { UpgradePlan } from './messages/UpgradePlan'
+import { UpgradePlanQuantity } from './messages/UpgradePlanQuantity'
 
+import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
+import { usePhysicalPersonRegister } from '../shared/hooks'
+
 import apiAdmin from '@/services/apiAdmin'
 
 import trashIcon from '@/assets/icons/trash.svg'
 import editIcon from '@/assets/icons/edit.svg'
 
-import { DependentData } from './types'
+import { PHYSICAL_PERSON_REGISTER_DOCUMENTS } from '@/routes/constants/namedRoutes/routes'
 
+import { DependentData } from './types'
 import { Container } from './styles'
 
 export const Dependents: React.FC = () => {
+  const { region, dependents, selectedPlan, finishRegister } =
+    usePhysicalPersonRegister()
+  const history = useHistory()
   const { showMessage } = useModal()
   const { Loading } = useLoading()
-  const [dependents, setDependents] = useState<DependentData[]>([])
+  const [allDependents, setAllDependents] = useState<DependentData[]>(
+    dependents.get || [],
+  )
 
-  const limitDependentsPlan = 2
-  const planAllowMajorAge = false
+  const limitDependentsPlan = selectedPlan.get.maximumDependentsQuantity
+  const planAllowMajorAge = selectedPlan.get.allowedMajorAge
+
+  useEffect(() => {
+    dependents.set(allDependents)
+  }, [allDependents])
 
   const verifyIfHasConverage = async (): Promise<boolean> => {
     let hasCoverage: boolean
@@ -35,9 +48,9 @@ export const Dependents: React.FC = () => {
       Loading.turnOn()
       const response = await apiAdmin.get('/plano/itens-vendaveis', {
         params: {
-          municipio: 'Rio de Janeiro',
-          uf: 'RJ',
-          minimoDependente: 1,
+          municipio: region.get.city,
+          uf: region.get.uf,
+          minimoDependente: limitDependentsPlan + 1,
         },
       })
 
@@ -55,18 +68,19 @@ export const Dependents: React.FC = () => {
   }
 
   const onAddDependent = async () => {
-    if (limitDependentsPlan <= dependents.length) {
+    if (limitDependentsPlan <= allDependents.length) {
       const hasCoverage = await verifyIfHasConverage()
 
-      showMessage(UpgradePlan, {
+      showMessage(UpgradePlanQuantity, {
         hasCoverage,
         limitDependentsPlan,
       })
     } else {
       showMessage(AddDependent, {
-        dependents,
-        onGetDependents: setDependents,
-        holderCpf: '102.477.339-62',
+        dependents: allDependents,
+        onGetDependents: setAllDependents,
+        // remover string estática
+        holderCpf: '689.873.288-99',
         planAllowMajorAge,
       })
     }
@@ -76,41 +90,56 @@ export const Dependents: React.FC = () => {
     showMessage(EditDependent, {
       id,
       dependentData: dependent,
-      dependents,
-      onGetDependents: setDependents,
-      holderCpf: '102.477.339-62',
+      dependents: allDependents,
+      onGetDependents: setAllDependents,
+      // remover string estática
+      holderCpf: '689.873.288-99',
       planAllowMajorAge,
     })
   }
 
   const onRemoveDependent = (id: number) => {
-    const dependentsFiltered = dependents.filter((_, index) => id !== index)
+    const dependentsFiltered = allDependents.filter((_, index) => id !== index)
 
-    setDependents(dependentsFiltered)
+    setAllDependents(dependentsFiltered)
+  }
+
+  const onPreviousStep = () => {
+    history.push(PHYSICAL_PERSON_REGISTER_DOCUMENTS)
+  }
+
+  const onNextStep = () => {
+    finishRegister()
   }
 
   return (
     <RegisterLayout>
       <Container>
         <div>
-          <h2>Dependentes</h2>
+          <h2 data-test="depedentsTitle">Dependentes</h2>
           <ul>
-            {dependents.map((dependent, index) => (
+            {allDependents.map((dependent, index) => (
               <li key={index}>
                 <ul>
-                  <li>
+                  <li data-test={`depedentName-${index}`}>
                     Nome: <span>{dependent.name}</span>
                   </li>
-                  <li>
+                  <li data-test={`depedentCPF-${index}`}>
                     CPF: <span>{dependent.cpf}</span>
                   </li>
                 </ul>
                 <div>
-                  <button onClick={() => onEditDependent(index, dependent)}>
+                  <button
+                    onClick={() => onEditDependent(index, dependent)}
+                    data-test={`dependentEditButton-${index}`}
+                  >
                     <img src={editIcon} />
                     Editar
                   </button>
-                  <button onClick={() => onRemoveDependent(index)}>
+                  <button
+                    onClick={() => onRemoveDependent(index)}
+                    data-test={`dependentDeleteButton-${index}`}
+                  >
                     <img src={trashIcon} />
                     Remover
                   </button>
@@ -119,16 +148,21 @@ export const Dependents: React.FC = () => {
             ))}
           </ul>
           <OutlineButton
-            disabled={dependents.length === 5}
+            disabled={allDependents.length === 5}
             variation="blue"
             onClick={onAddDependent}
+            data-test="dependentAddButton"
           >
             Adicionar Dependentes
           </OutlineButton>
         </div>
         <footer>
-          <ButtonLink onClick={() => {}}>Etapa Anterior</ButtonLink>
-          <ButtonPrimary onClick={() => {}}>Próxima Etapa</ButtonPrimary>
+          <ButtonLink onClick={onPreviousStep} data-test="previousStepButton">
+            Etapa Anterior
+          </ButtonLink>
+          <ButtonPrimary onClick={onNextStep} data-test="nextStepButton">
+            Próxima Etapa
+          </ButtonPrimary>
         </footer>
       </Container>
     </RegisterLayout>

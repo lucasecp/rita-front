@@ -3,11 +3,13 @@ import shape from '@/assets/img/element3.png'
 
 export const Container = styled.div`
   /* display: grid; */
+  padding: 24px;
+
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: stretch;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
   background: linear-gradient(
     148.19deg,
     ${({ theme }) => theme.main} -15.68%,
@@ -28,11 +30,12 @@ export const Container = styled.div`
     display: block;
     position: fixed;
     top: 0;
+    left: 0;
     opacity: 0.6;
   }
-  > * {
+  /* > * {
     padding: 0 24px;
-  }
+  } */
   * {
     z-index: 1;
   }
@@ -48,32 +51,29 @@ export const Container = styled.div`
     justify-content: center;
   }
 
-  /* @media (max-width: 1180px) {
-    grid-template-columns: 3fr;
-  } */
-  /*
-  @media (max-width: 1065px) {
-    > main {
-      padding-left: 40px;
-      padding-right: 40px;
-    }
-  } */
+  > main {
+    /* height: 100%; */
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    justify-content: space-between;
+  }
 
   @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
     background-size: cover;
+
+    padding: 16px;
   }
-  /* > section {
-    > footer {
-      margin-top: 32px;
-    }
-  } */
+
   > main {
     justify-self: stretch;
   }
-  > main section > footer {
-    padding-top: 40px;
+  > main > footer {
+    /* padding-top: 40px; */
     h6,
     div {
       color: #ffff;

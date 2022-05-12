@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { ReactComponent as BackgroundCardImage } from '@/assets/img/background-card-image.svg'
+import { ReactComponent as RitaLogoHalf } from '@/assets/img/rita-logo-half.svg'
 
 import { Card, LinkArea, CheckField } from './styles'
 
@@ -8,68 +8,78 @@ import { useHistory } from 'react-router-dom'
 import ButtonLink from '@/components/Button/Link'
 import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.svg'
 import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS } from '@/routes/constants/namedRoutes/routes'
-import { MappedPlan } from '../../../ChooseRegion'
+import { MappedPlan } from '../..'
+import { usePhysicalPersonRegister } from '../../../shared/hooks'
 
-export interface DataProps {
-  data: MappedPlan
+export interface SelectedPlan {
+  idPlan: number | 0
+  name: string | ''
+  allowedMajorAge: boolean | null
+  maximumDependentsQuantity: number | null
 }
 
 interface CardProps {
-  colorThemeIndex: number
+  colorTheme: number
   plan: MappedPlan
-  selectedPlan: {
-    idPlan: number
-    name: string
-  }
-  setSelectedPlan: (selectedPlan: { idPlan: number; name: string }) => void
 }
 
-export const CardOfPlans: React.FC<CardProps> = ({
-  plan,
-  colorThemeIndex,
-  selectedPlan,
-  setSelectedPlan,
-}) => {
+export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
   const history = useHistory()
+  const { selectedPlan } = usePhysicalPersonRegister()
 
-  const ToDetails = (plan) => {
+  const onToKnowMore = () => {
     history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS, { plan })
   }
 
   return (
-    <Card key={plan.idPlan} colorThemeIndex={colorThemeIndex}>
-      <BackgroundCardImage />
+    <Card
+      key={plan.idPlan}
+      data-test={`planCard-${plan.idPlan}`}
+      colorTheme={colorTheme}
+      checked={selectedPlan.get.idPlan === plan.idPlan}
+      onClick={() =>
+        selectedPlan.set({
+          idPlan: plan.idPlan,
+          name: plan.name,
+          allowedMajorAge: plan.allowedMajorAge,
+          maximumDependentsQuantity: plan.maximumDependentsQuantity,
+        })
+      }
+    >
+      <RitaLogoHalf />
       <div>
         <h1>{plan.name}</h1>
-        <div
-          onClick={() =>
-            setSelectedPlan({
-              idPlan: plan.idPlan,
-              name: plan.name,
-            })
-          }
-        >
+        <div>
           <CheckField
-            checked={selectedPlan.idPlan === plan.idPlan}
-            colorThemeIndex={colorThemeIndex}
-          />
+            checked={selectedPlan.get.idPlan === plan.idPlan}
+            colorTheme={colorTheme}
+            data-test={`planCardCheckBox-${plan.idPlan}`}
+          >
+            <div></div>
+          </CheckField>
         </div>
       </div>
       <h3>inclusão de Dependentes</h3>
       <ul>
-        <li>sim</li>
+        <li data-test={`maximumDependentsQuantityCard-${plan.idPlan}`}>
+          {plan.maximumDependentsQuantity ? 'Sim' : 'Não'}
+        </li>
       </ul>
 
       <h3>Serviços Oferecidos</h3>
       <ul>
         <li>Urgência e Emergência</li>
-        <li>consultas médicas</li>
+        <li>Consultas Médicas</li>
         <li>Exames Simples</li>
       </ul>
       <h2>R$ {plan.price}/Mês</h2>
       <h3>Experimente 7 dias grátis</h3>
-      <LinkArea colorThemeIndex={colorThemeIndex}>
-        <ButtonLink onClick={() => ToDetails(plan)}>
+      <LinkArea
+        colorTheme={colorTheme}
+        checked={selectedPlan.get.idPlan === plan.idPlan}
+        data-test={`planCardDetails-${plan.idPlan}`}
+      >
+        <ButtonLink onClick={onToKnowMore}>
           <span>
             Saber Mais <ArrowRightIcon />
           </span>

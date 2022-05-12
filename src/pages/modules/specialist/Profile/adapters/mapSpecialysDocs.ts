@@ -7,23 +7,23 @@ const convertFileType = (name: string, type: string) => {
 
 export const specialysDocsFromApi = (
   docs: any[],
-
   specialtys: MultiSelectOption[],
-): SpecialtysAndDocsType => {
+): any => {
   return specialtys.reduce((ac: SpecialtysAndDocsType, value, index) => {
-    const fileType = docs[index].headers['content-type']
-
-    ac[value.name] = {
-      idSpecialty: specialtys[index].id,
-      document: new File(
-        [docs[index].data],
-        convertFileType(specialtys[index].name, fileType),
-        {
-          type: fileType,
-        },
-      ),
+    if(docs[index]?.headers){
+      const fileType = docs[index].headers['content-type']
+      ac[value.name] = {
+        idSpecialty: specialtys[index].id,
+        document: new File(
+          [docs[index].data],
+          convertFileType(specialtys[index].name, fileType),
+          {
+            type: fileType,
+          },
+        ),
+      }
+      return ac
     }
-
     return ac
   }, {})
 }

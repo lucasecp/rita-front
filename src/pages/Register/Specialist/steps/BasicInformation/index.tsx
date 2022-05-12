@@ -40,6 +40,7 @@ const BasicInformation: React.FC = () => {
     nextStep()
   }
   useEffect(() => {
+    window.localStorage.setItem('@rita-issuingAgencySelected', JSON.stringify({idIssuingAgencySelected: issuingAgency}))
     setbasicInformation({
       profissionalRegister,
       issuingAgency,
@@ -92,6 +93,13 @@ const BasicInformation: React.FC = () => {
           setIssuingAgency={setIssuingAgency}
           setIssuingAgencyToApi={setIssuingAgencyToApi}
           error={errors.issuingAgency}
+          setErrors={setErrors}
+          onBlur={() => {
+            setErrors({
+              ...errors,
+              issuingAgency: !hasErrors({ issuingAgency }) ? '' : 'Campo obrigatório'
+            })
+          }}
         />
 
         <Select
@@ -103,6 +111,12 @@ const BasicInformation: React.FC = () => {
           labelDefaultOption="Selecione"
           hasError={!!errors.ufIssuingAgency}
           msgError={errors.ufIssuingAgency}
+          onBlur={() => {
+            setErrors({
+              ...errors,
+              ufIssuingAgency: !hasErrors({ ufIssuingAgency }) ? '' : 'Campo obrigatório'
+            })
+          }}
         />
       </div>
       <FooterNextStep onClickNextStep={onNextStep} />

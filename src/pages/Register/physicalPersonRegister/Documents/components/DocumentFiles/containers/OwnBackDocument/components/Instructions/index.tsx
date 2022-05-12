@@ -34,7 +34,11 @@ export const InstructionsOwnBackDocument: React.FC<
               <li>Verifique se a imagem ficou nítida;</li>
             </ul>
           </div>
-          <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
+          <InputFile
+            data-test="OwnBackDocumentSelectFile"
+            accept=".png, .jpg, .jpeg, .pdf"
+            setValue={onGetFile}
+          >
             <OutlineButton small variation="blue">
               Selecionar Arquivo
             </OutlineButton>

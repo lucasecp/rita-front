@@ -17,8 +17,10 @@ import {
   CLINIC_CREATE_USERS,
   CLINIC_EDIT_USERS,
   CLINIC_APPOINTMENT_TABLE,
+  CLINIC_CREATE_SCHEDULING,
 } from '../../constants/namedRoutes/routes'
 import AppointmentTable from '@/pages/modules/clinic/AppointmentTable'
+import AppointmentScheduling from '@/pages/modules/clinic/AppointmentScheduling'
 
 const clinicRoutes = [
   {
@@ -52,6 +54,10 @@ const clinicRoutes = [
   {
     path: CLINIC_EDIT_USERS,
     component: EditUsersClinic,
+  },
+  {
+    path: CLINIC_CREATE_SCHEDULING,
+    component: AppointmentScheduling,
   },
 ]
 

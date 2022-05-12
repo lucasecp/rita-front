@@ -38,11 +38,12 @@ export const PaymentRequestRejection: React.FC<
       try {
         Loading.turnOn()
 
-        await apiWallet.post('/reject-event', {
+        await apiWallet.post('/event-reject', {
+          eventId: 'string',
           reason,
-          type_event: 'string',
-          event_id: 'string',
-          payment_request_id: data.id,
+          typeEvent: 'string',
+          paymentRequestId: data.id,
+          walletId: ''
         })
 
         toast.success('Mensagem enviada com sucesso')

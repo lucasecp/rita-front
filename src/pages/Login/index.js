@@ -4,7 +4,7 @@ import { InputPassword } from '@/components/Form/InputPassword'
 import LoginLayout from '@/components/Layout/LoginLayout'
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Content } from './style'
+import { Content } from './styles'
 import { Checkbox } from '@/components/Form/Checkbox'
 import validateCpf from '@/helpers/validateCpf'
 import { useAuth } from '@/hooks/login'
@@ -81,7 +81,7 @@ function Login() {
           <Link to={FORGOT_PASSWORD_INIT}>Esqueci minha senha</Link>{' '}
         </span>
         <div>
-          Não possui conta?
+          Não possui conta?{' '}
           <Link to="#" onClick={() => showMessage(HasCardSabin, {}, true)}>
             Cadastre-se aqui
           </Link>

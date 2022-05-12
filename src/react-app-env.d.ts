@@ -6,12 +6,18 @@ namespace RitaComponents {
     order?: 'ASC' | 'DESC'
   }
 
-  type ModalConfirmationProps = {
+  type DialogConfirmationProps = {
     message: string
     cancelText?: string
     confirmText?: string
     onTruthy?: () => void
     onFalsy?: () => void
+  }
+
+  type DialogLayoutProps = {
+    header: ReactNode
+    body: ReactNode
+    footer: ReactNode
   }
 }
 

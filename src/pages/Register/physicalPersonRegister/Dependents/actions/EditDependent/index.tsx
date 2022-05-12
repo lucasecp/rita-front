@@ -20,6 +20,8 @@ import { validateDepBirthDate } from '../helpers/validateDepBirthDate'
 
 import formatBirthdate from '@/helpers/formatDate'
 
+import { UpgradePlanAge } from '../../messages/UpgradePlanAge'
+
 import apiPatient from '@/services/apiPatient'
 import clearCpf from '@/helpers/clearSpecialCharacters'
 
@@ -44,7 +46,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
   holderCpf,
   planAllowMajorAge,
 }) => {
-  const { closeModal } = useModal()
+  const { closeModal, showMessage } = useModal()
   const [errorMessage, sendErrorMessage] = useMessage()
   const { Loading } = useLoading()
 
@@ -140,9 +142,23 @@ export const EditDependent: React.FC<EditDependentProps> = ({
     closeModal()
   }
 
+  const validateDependentBirthdate = () => {
+    const error = validateDepBirthDate(birthDate, !planAllowMajorAge)
+
+    if (error === 'Seu plano só aceita dependentes menores de idade') {
+      showMessage(UpgradePlanAge)
+      return
+    }
+
+    setErrors({
+      ...errors,
+      birthDate: validateDepBirthDate(birthDate, !planAllowMajorAge),
+    })
+  }
+
   return (
     <Container>
-      <h2>Dependente</h2>
+      <h2 data-test="dependentEditTitle">Dependente</h2>
 
       <form>
         <InputText
@@ -155,6 +171,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
           msgError={errors.name}
           maxLength={100}
           onlyLetter
+          data-test="dependentNameField"
         />
         <InputMask
           label="CPF*:"
@@ -175,6 +192,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
             })
           }
           msgError={errors.cpf}
+          data-test="dependentCpfField"
         />
         <InputMask
           label="Data de Nascimento*:"
@@ -182,19 +200,10 @@ export const EditDependent: React.FC<EditDependentProps> = ({
           value={birthDate}
           setValue={setBirthDate}
           hasError={!!errors.birthDate}
-          onBlur={() =>
-            setErrors({
-              ...errors,
-              birthDate: validateDepBirthDate(birthDate, !planAllowMajorAge),
-            })
-          }
-          onKeyUp={() =>
-            setErrors({
-              ...errors,
-              birthDate: validateDepBirthDate(birthDate, !planAllowMajorAge),
-            })
-          }
+          onBlur={validateDependentBirthdate}
+          onKeyUp={validateDependentBirthdate}
           msgError={errors.birthDate}
+          data-test="dependentBirthdateField"
         />
         <Select
           label="Gênero*:"
@@ -215,6 +224,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
             setErrors({ ...errors, gender: validateGender(e.target.value) })
           }}
           msgError={errors.gender}
+          data-test="dependentGenderField"
         />
         <InputMask
           label="Celular*:"
@@ -225,6 +235,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
           onBlur={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           onKeyUp={() => setErrors({ ...errors, phone: validatePhone(phone) })}
           msgError={errors.phone}
+          data-test="dependentPhoneField"
         />
         <InputEmail
           initialEmail={email}
@@ -233,16 +244,25 @@ export const EditDependent: React.FC<EditDependentProps> = ({
           checkHasError={errorMessage}
           onKeyUp={sendErrorMessage}
           onBlur={sendErrorMessage}
+          data-test="dependentEmailField"
         />
       </form>
       <footer>
         <div>
-          <OutlineButton variation="red" onClick={onCancelEditDependent}>
+          <OutlineButton
+            variation="red"
+            onClick={onCancelEditDependent}
+            data-test="dependentCancelEditButton"
+          >
             Cancelar
           </OutlineButton>
         </div>
         <div>
-          <ButtonPrimary disabled={!isValidData()} onClick={onUpdateDependent}>
+          <ButtonPrimary
+            disabled={!isValidData()}
+            onClick={onUpdateDependent}
+            data-test="dependentUpdateButton"
+          >
             Atualizar
           </ButtonPrimary>
         </div>

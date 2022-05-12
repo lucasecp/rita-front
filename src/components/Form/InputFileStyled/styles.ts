@@ -24,20 +24,23 @@ export const Container = styled.div<ContainerProps>`
     display: flex;
 
     width: 100%;
-
-    > span {
-      width: 100%;
-      border: solid 1px #eeeeee;
-      display: block;
-      padding: 14px 30px;
-      position: relative;
-      border-radius: 4px 0 0 4px;
-      cursor: pointer;
-    }
   }
-}
 `
 
+export const ButtonInput = styled.button`
+  width: 100%;
+  border: solid 1px #eeeeee;
+  display: block;
+  padding: 14px 30px;
+  position: relative;
+  border-radius: 4px 0 0 4px;
+  cursor: pointer;
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: default !important;
+    `}
+`
 export const Button = styled.button<ButtonProps>`
   background: ${({ theme }) => theme.extraLight};
   color: ${({ theme }) => theme.medium};

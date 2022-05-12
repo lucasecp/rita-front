@@ -16,10 +16,11 @@ import { DocumentsNotSended } from './messages/DocumentsNotSended'
 import {
   // RegistrationDataState,
   // AddressState,
-  // DependentsState,
   // RegisterDataState,
   RegionState,
+  PlanState,
   DocumentsState,
+  DependentsState,
   PhysicalPersonRegisterContextData,
 } from './types'
 
@@ -32,7 +33,7 @@ const PhysicalPersonRegisterContext =
 
 const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   const { showMessage, closeModal } = useModal()
-  const { Loading } = useLoading()
+  // const { Loading } = useLoading()
   const history = useHistory()
 
   // const [initialRegisterData, setInitialRegisterData] = useState(
@@ -47,17 +48,23 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
 
   const [region, setRegion] = useState({} as RegionState)
 
+  const [selectedPlan, setSelectedPlan] = useState({} as PlanState)
+
   const [documentsFile, setDocumentsFile] = useState({} as DocumentsState)
 
-  const [patientWantsDependent, setPatientWantsDependent] = useState(false)
+  const [patientWantsMinimumDependent, setPatientWantsMinimumDependent] =
+    useState(0)
+
+  const [planAllowDependentMajorAge, setPlanAllowDependentMajorAge] =
+    useState(false)
 
   useEffect(() => {
     console.log(documentsFile)
   }, [documentsFile])
 
-  // const [dependents, setDependents] = useState(
-  //   [] as DependentsState[] | undefined,
-  // )
+  const [dependents, setDependents] = useState(
+    [] as DependentsState[] | undefined,
+  )
 
   // const resetData = () => {
   //   setRegistrationData({})
@@ -143,28 +150,32 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   return (
     <PhysicalPersonRegisterContext.Provider
       value={{
+        selectedPlan: {
+          get: selectedPlan,
+          set: setSelectedPlan,
+        },
         region: {
           get: region,
           set: setRegion,
         },
         setDocumentsFile,
-        patientWantsDependent: {
-          get: patientWantsDependent,
-          set: setPatientWantsDependent,
+        patientWantsMinimumDependent: {
+          get: patientWantsMinimumDependent,
+          set: setPatientWantsMinimumDependent,
+        },
+        planAllowDependentMajorAge: {
+          get: planAllowDependentMajorAge,
+          set: setPlanAllowDependentMajorAge,
+        },
+        dependents: {
+          get: dependents,
+          set: setDependents,
         },
         finishRegister,
+
         // cpfHolder: registrationData?.cpf,
-        // isPatientLinkedCompany,
-        // limitOfDependents,
-        // initialRegisterData,
-        // isActiveStep,
-        // currentStep: step,
-        // previousStep,
-        // nextStep,
-        // setInitialRegisterData,
         // setRegistrationData,
         // onGetAddress: setAddress,
-        // setDependents,
         // resetData,
       }}
     >

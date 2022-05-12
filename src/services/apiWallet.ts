@@ -36,18 +36,24 @@ apiWallet.interceptors.request.use(
 apiWallet.interceptors.response.use(
   (response) => response,
   (error) => {
-    let output = new Error('Ocorreu um erro na requisição.')
+    let output = new Error('Ocorreu um erro na requisição')
 
     if (axios.isAxiosError(error) && error.response?.data) {
       const { data, status } = error.response
 
-      switch (status) {
-        case 404: {
-          if (data && data.message) {
+      if (data?.message) {
+        switch (status) {
+          case 404: {
             output = data.message
+            break
+          }
+
+          default: {
+            output.message += `: ${data.message}`
           }
         }
       }
+
     }
 
     return output instanceof Error ? Promise.reject(output) : output
@@ -61,4 +67,8 @@ export function getPaymentRequestSituation(id: string): string {
     id,
   ).toUpperCase() as RitaWallet.Enum.PaymentRequestSituation
   return PaymentRequestSituation[formattedID] || formattedID
+}
+
+export function getCallerId(): string {
+  return '31C48912-7EBA-EC11-AAE9-02944D6C834B'
 }

@@ -20,6 +20,7 @@ import { ReactComponent as UsersGroupIcon } from '@/assets/icons/users-group.svg
 import { ReactComponent as SpecialtysTypesIcon } from '@/assets/icons/specialtys-types.svg'
 import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
 import { ReactComponent as AppointmentTableIcon } from '@/assets/icons/appointment-table.svg'
+import { ReactComponent as AppointmentSchedulingIcon } from '@/assets/icons/calendar2-green.svg'
 
 import {
   INITIAL_PAGE,
@@ -58,6 +59,7 @@ import {
   CLINIC_PROFILE,
   CLINIC_SEE_ALL_USERS,
   CLINIC_APPOINTMENT_TABLE,
+  CLINIC_CREATE_SCHEDULING,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissions } from '@/constants/permissions'
@@ -269,4 +271,10 @@ export const menuItens = [
     name: 'Tabela de consulta',
     permissions: [permissions.GERENCIAR_TABELA_PRECOS_CLINICA],
   },
+  // {
+  //   path: CLINIC_CREATE_SCHEDULING,
+  //   icon: <AppointmentSchedulingIcon />,
+  //   name: 'Agendamento de consulta',
+  //   // permissions: [permissions.SERVICO_CONSULTA],
+  // },
 ]

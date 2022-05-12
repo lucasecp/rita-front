@@ -5,52 +5,101 @@ import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 import { ButtonArea, CardArea, Content, TitleAndLogo } from './styles'
 
 import ButtonPrimary from '@/components/Button/Primary'
-import { useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import ButtonLink from '@/components/Button/Link'
-import { CardOfPlans } from './components/Card'
-import { MappedPlan } from '../ChooseRegion'
+import { CardOfPlan } from './components/Card'
 import { usePhysicalPersonRegister } from '../shared/hooks'
+import {
+  PHYSICAL_PERSON_REGISTER_CHOOSE_REGION,
+  PHYSICAL_PERSON_REGISTER_DEPENDENTS,
+  PHYSICAL_PERSON_REGISTER_DOCUMENTS,
+} from '@/routes/constants/namedRoutes/routes'
+import apiAdmin from '@/services/apiAdmin'
+import { fromApiPlans } from './adapters/fromApi'
 
-export interface DataProps {
-  data: MappedPlan[]
+const cardColors = ['purple', 'green', 'blue', 'orange']
+
+export interface MappedPlan {
+  idPlan: number
+  maximumDependentsQuantity: number
+  name: string
+  allowedMajorAge: boolean
+  price: string
 }
 
 export const ChoosePlans: React.FC = () => {
-  const { plans } = useLocation().state
-  const { region } = usePhysicalPersonRegister()
-  const [selectedPlan, setSelectedPlan] = useState({ idPlan: 0, name: '' })
+  const history = useHistory()
+  const { region, selectedPlan, patientWantsMinimumDependent } =
+    usePhysicalPersonRegister()
+  const [plans, setPlans] = useState([])
+  useEffect(() => {
+    const callApi = async () => {
+      const { data } = await apiAdmin.get('/plano/itens-vendaveis', {
+        params: {
+          municipio: region.get.city,
+          uf: region.get.uf,
+          ...(patientWantsMinimumDependent.get > 0 && {
+            minimoDependente: patientWantsMinimumDependent.get,
+          }),
+        },
+      })
+
+      const mappedPlan = fromApiPlans(data)
+
+      setPlans(mappedPlan)
+    }
+
+    callApi()
+  }, [])
+
+  const toNext = () => {
+    if (patientWantsMinimumDependent.get > 0) {
+      return history.push(PHYSICAL_PERSON_REGISTER_DEPENDENTS)
+    }
+    history.push(PHYSICAL_PERSON_REGISTER_DOCUMENTS)
+  }
 
   return (
     <RegisterLayout>
       <Content>
         <TitleAndLogo>
-          <h6>Escolha seu Plano</h6>
+          <h6 data-test="choosePlanTitle">Escolha seu Plano</h6>
           <h2>
             Exibindo os planos para a sua região: {region.get.city}/
             {region.get.uf}
           </h2>
         </TitleAndLogo>
         <CardArea>
-          {plans.map((plan, index) => {
-            return (
-              <div key={plan.idPlan}>
-                <CardOfPlans
-                  selectedPlan={selectedPlan}
-                  setSelectedPlan={setSelectedPlan}
-                  plan={plan}
-                  colorThemeIndex={index % 4}
-                />
-              </div>
-            )
-          })}
+          {plans.length > 0 &&
+            plans.map((plan, index) => {
+              return (
+                <div key={plan.idPlan}>
+                  <CardOfPlan
+                    plan={plan}
+                    colorTheme={
+                      cardColors[
+                        Object.keys(cardColors)[index % cardColors.length]
+                      ]
+                    }
+                  />
+                </div>
+              )
+            })}
         </CardArea>
       </Content>
       <ButtonArea>
-        <ButtonLink>Voltar</ButtonLink>
-        {selectedPlan.name.length > 0 && (
-          <span>Você escolheu o plano {selectedPlan.name}</span>
+        <ButtonLink
+          onClick={() => history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_REGION)}
+        >
+          Voltar
+        </ButtonLink>
+        {selectedPlan.get.name && (
+          <span>Você escolheu o plano {selectedPlan.get.name}</span>
         )}
-        <ButtonPrimary>Próxima Etapa</ButtonPrimary>
+        {console.log(selectedPlan)}
+        <ButtonPrimary onClick={toNext} disabled={!selectedPlan.get.idPlan}>
+          Próxima Etapa
+        </ButtonPrimary>
       </ButtonArea>
     </RegisterLayout>
   )
