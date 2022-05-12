@@ -1,16 +1,14 @@
-// export interface RegistrationDataState {
-//   id?: number
-//   name?: string
-//   email?: string
-//   gender?: string
-//   birthdate?: string
-//   phone?: string
-//   cpf?: string
-//   company?: string
-// }
-
 import { SelectedPlan } from '../../../ChoosePlan/components/Card'
 import { MappedPlan } from '../../../ChoosePlan'
+
+export interface RegistrationDataState {
+  name: string
+  email: string
+  gender: string
+  birthdate: string
+  phone: string
+  cpf: string
+}
 
 // export interface AddressState {
 //   cep?: string
@@ -59,6 +57,10 @@ export interface DependentsState {
 // }
 
 export interface PhysicalPersonRegisterContextData {
+  registrationData: {
+    get: RegistrationDataState
+    set: React.Dispatch<React.SetStateAction<RegistrationDataState>>
+  }
   selectedPlan: {
     get: SelectedPlan
     set: React.Dispatch<React.SetStateAction<SelectedPlan>>
