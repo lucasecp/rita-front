@@ -22,7 +22,7 @@ const Content: React.FC<ContentProps> = ({ dependents }) => {
           />
         </ListItem>
       ))}
-      {/* {!dependents.total && <h2>Nenhum resultado encontrado</h2>} */}
+      {!dependents.length && <h2>Nenhum dependente cadastrado</h2>}
     </Container>
   )
 }
