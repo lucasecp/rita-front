@@ -2,7 +2,7 @@ import React from 'react'
 import ritaLogoImg from '@/assets/logo/expanded-logo.svg'
 import Footer from '../shared/Footer'
 
-import { Container } from './style'
+import { Container } from './styles'
 
 function LayoutExpanded({ children }) {
   return (
@@ -11,10 +11,8 @@ function LayoutExpanded({ children }) {
         <img src={ritaLogoImg} />
       </aside>
       <main>
-        <section>
-          <div>{children}</div>
-          <Footer />
-        </section>
+        <div>{children}</div>
+        <Footer />
       </main>
     </Container>
   )
