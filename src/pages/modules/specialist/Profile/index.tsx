@@ -23,7 +23,8 @@ const SpecialistProfile: React.FC = () => {
   useEffect(() => {
     const getSpecialtysDocs = async (dataMapped: DataSpecialistI) => {
       let specialistResult = []
-      dataMapped.specialtys.map(async (spec, index) => {
+      for(let index=0; index < dataMapped.specialtys.length;){
+        const spec = dataMapped.specialtys[index]
         try {
           Loading.turnOn()
 
@@ -31,10 +32,12 @@ const SpecialistProfile: React.FC = () => {
             `/medico/documento/visualizar?cpf=${dataMapped.specialistInfo.cpf}&tipoDocumento=ComprovanteEspecialidade&idEspecialidade=${spec.id}`,
             { responseType: 'arraybuffer' })
 
-          specialistResult.push(result)
-
-          if (dataMapped.specialtys.length === (index + 1)) {
-            setSpecialtysDocs(specialysDocsFromApi(specialistResult, dataMapped.specialtys))
+          if(result){
+            specialistResult.push(result)
+            if (dataMapped.specialtys.length === (index + 1)) {
+              setSpecialtysDocs(specialysDocsFromApi(specialistResult, dataMapped.specialtys))
+            }
+            index++
           }
 
         } catch (error) {
@@ -45,11 +48,12 @@ const SpecialistProfile: React.FC = () => {
             dataMapped.specialtys = dataMapped.specialtys.filter(item => item.id !== idEspecialidade)
             getSpecialtysDocs(dataMapped)
           }
-        } finally {
-          Loading.turnOff()
-        }
-      })
+        } finally {}
+      }
+      Loading.turnOff()
     }
+
+
     // const getSpecialtysDocs = async (dataMapped: DataSpecialistI) => {
     //   let specialistResult = []
     //    dataMapped.specialtys.map((spec, index) => {
