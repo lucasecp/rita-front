@@ -10,6 +10,7 @@ export const specialysDocsFromApi = (
 
   specialtys: MultiSelectOption[],
 ): SpecialtysAndDocsType => {
+  console.log(docs)
   return specialtys.reduce((ac: SpecialtysAndDocsType, value, index) => {
     const fileType = docs[index].headers['content-type']
 
