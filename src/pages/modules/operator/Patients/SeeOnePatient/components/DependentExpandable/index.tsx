@@ -85,7 +85,12 @@ export const DependentExpandable: React.FC<DependentExpandableProps> = ({
           onKeyUp={() => setErrors({ ...errors, ...validateName(name) })}
           msgError={errors.name}
         />
-        <InputMask
+
+        <div>
+          <label>CPF:</label>
+          <p>{cpf || ''}</p>
+        </div>
+        {/* <InputMask
           label="CPF:"
           mask="999.999.999-99"
           value={cpf}
@@ -97,7 +102,7 @@ export const DependentExpandable: React.FC<DependentExpandableProps> = ({
             setErrors({ ...errors, ...validateCpf(cpf, allDependents) })
           }
           msgError={errors.cpf}
-        />
+        /> */}
       </section>
       <section>
         <InputMask

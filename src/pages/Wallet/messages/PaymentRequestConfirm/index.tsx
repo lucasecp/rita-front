@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import useLocalStorage from 'use-local-storage'
 
+import apiUser from '@/services/apiUser'
 import apiWallet from '@/services/apiWallet'
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
@@ -52,10 +53,15 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
       let isAuthenticated = false
 
       try {
-        await apiWallet.post('/authentication/rita', {
+        // await apiWallet.post('/authentication/rita', {
+        //   cpf: user.cpf,
+        //   password,
+        //   keepAlive: true,
+        // })
+        await apiUser.post('/login', {
           cpf: user.cpf,
-          password,
-          keepAlive: true,
+          senha: password,
+          permanecerConectado: true,
         })
 
         isAuthenticated = true

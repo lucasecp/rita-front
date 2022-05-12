@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react'
+/** Styles */
 import { Container } from './styles'
+/** Helpers */
 import { isValidTypeFile } from '@/helpers/file/isValidTypeFile'
 import { isValidSizeFile } from '@/helpers/file/isValidSizeFile'
+/** Types */
 import {
   SpecialtysAndDocsType,
   ErrorsI,
   RqeAndSpecialtysType,
 } from '../../Types'
+/** Components */
 import { MultiSelectOption } from '@/components/Form/MultSelect'
 import InputFileStyled from '@/components/Form/InputFileStyled'
 import Actions from './Actions'
 import InputText from '@/components/Form/InputText'
+import { toast } from '@/styles/components/toastify'
+/** Services */
+import apiAdmin from '@/services/apiAdmin'
+/** Hooks */
+import { useLoading } from '@/hooks/useLoading'
+
 
 interface DocumentsProps {
   data: MultiSelectOption
@@ -42,16 +52,23 @@ const Documents: React.FC<DocumentsProps> = ({
     : ''
 
   const [photo, setPhoto] = useState(initialPhoto || '')
-
   const [rqe, setRqe] = useState(data.rqe || '')
+  const { Loading } = useLoading()
 
-  const removePhoto = () => {
-    setPhoto('')
-
-    setSpecialtysAndDocs((specialtysAndDocs: SpecialtysAndDocsType) => ({
-      ...specialtysAndDocs,
-      [data.name]: { idSpecialty: data.id, document: '' },
-    }))
+  const removePhoto = async () => {
+    try {
+      Loading.turnOn()
+      setPhoto('')
+      setSpecialtysAndDocs((specialtysAndDocs: SpecialtysAndDocsType) => ({
+        ...specialtysAndDocs,
+        [data.name]: { idSpecialty: data.id, document: '' },
+      }))
+      await apiAdmin.delete(`/medico/arquivo?tipoDocumento=ComprovanteEspecialidade&idEspecialidade=${data.id}`)
+    } catch (error) {
+      toast.error('Ops! Houve um erro ao tentar remover o documento, por favor atualize a página e tente novamente.')
+    } finally {
+      Loading.turnOff()
+    }
   }
 
   const removeSpecialtysAndRqe = () => {
@@ -134,14 +151,21 @@ const Documents: React.FC<DocumentsProps> = ({
   }, [rqe])
 
   useEffect(() => {
-    if (!formWasSubmited && !isEditing) {
+    if (!isEditing) {
       setPhoto(initialPhoto || '')
       setRqe(data.rqe || '')
     } else {
       setPhoto(photo || '')
       setRqe(rqe || '')
     }
-  }, [formWasSubmited, isEditing])
+  }, [isEditing])
+
+  useEffect(() => {
+    if (initialData) {
+      setPhoto(initialPhoto)
+      setRqe(rqe || '')
+    }
+  }, [initialData])
 
   return (
     <Container>

@@ -55,6 +55,9 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   const [patientWantsMinimumDependent, setPatientWantsMinimumDependent] =
     useState(0)
 
+  const [planAllowDependentMajorAge, setPlanAllowDependentMajorAge] =
+    useState(false)
+
   useEffect(() => {
     console.log(documentsFile)
   }, [documentsFile])
@@ -159,6 +162,10 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
         patientWantsMinimumDependent: {
           get: patientWantsMinimumDependent,
           set: setPatientWantsMinimumDependent,
+        },
+        planAllowDependentMajorAge: {
+          get: planAllowDependentMajorAge,
+          set: setPlanAllowDependentMajorAge,
         },
         dependents: {
           get: dependents,

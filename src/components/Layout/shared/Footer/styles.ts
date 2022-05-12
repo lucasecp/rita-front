@@ -4,6 +4,8 @@ export const Container = styled.footer`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 
+  margin-top: 16px;
+
   > svg {
     > path {
       fill: ${({ theme }) => theme.main};
