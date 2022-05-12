@@ -33,7 +33,11 @@ export const InstructionsOwnFrontDocument: React.FC<OwnFrontDocumentProps> = ({
               <li>Verifique se a imagem ficou nítida;</li>
             </ul>
           </div>
-          <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
+          <InputFile
+            data-test="OwnFrontDocumentSelectFile"
+            accept=".png, .jpg, .jpeg, .pdf"
+            setValue={onGetFile}
+          >
             <OutlineButton small variation="blue">
               Selecionar Arquivo
             </OutlineButton>

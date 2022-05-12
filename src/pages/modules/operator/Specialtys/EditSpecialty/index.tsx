@@ -69,10 +69,18 @@ const EditSpecialty: React.FC = () => {
       return
     }
 
+    const requireSubscription = (value: string) => {
+      const formated = {
+        yes: true,
+        no: false,
+      }
+      return formated[value]
+    }
+
     const data = toApi({
       id: specialtyInfo?.id,
       code: dataToApi.code,
-      requireSubscription: !!Number(dataToApi.requireSubscription),
+      requireSubscription: requireSubscription(dataToApi.requireSubscription),
       description: dataToApi.description,
       issuingAgency: dataToApi.issuingAgency,
     })
