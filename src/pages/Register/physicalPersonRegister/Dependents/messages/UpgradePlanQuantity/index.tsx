@@ -28,6 +28,7 @@ export const UpgradePlanQuantity: React.FC<UpgradePlanQuantityProps> = ({
   const onAcceptUpgradePlanQuantity = () => {
     if (hasCoverage) {
       patientWantsMinimumDependent.set(limitDependentsPlan + 1)
+      closeModal()
       history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
     } else {
       showMessage(NoHasPlansAvailableQuantity)

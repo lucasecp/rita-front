@@ -23,7 +23,7 @@ export const validateDepBirthDate = (
     const dateParsed = parse(value, 'dd/MM/yyyy', new Date())
     const age = differenceInYears(new Date(), dateParsed)
 
-    if (age < 18) return 'Seu plano só aceita dependentes menores de idade'
+    if (age > 18) return 'Seu plano só aceita dependentes menores de idade'
   }
 
   return ''
