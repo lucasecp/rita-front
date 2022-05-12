@@ -26,6 +26,7 @@ export const UpgradePlanAge: React.FC<UpgradePlanAgeProps> = ({
   const onAccepUpgradePlanAge = () => {
     if (hasCoverage) {
       planAllowDependentMajorAge.set(true)
+      closeModal()
       history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
     } else {
       showMessage(NoHasPlansAvailableAge)
