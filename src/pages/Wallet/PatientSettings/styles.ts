@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import colors from '@/styles/colors'
 
-import bg from '@/assets/img/wallet-card-bg.png'
-
 export const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -17,6 +15,14 @@ export const Container = styled.div`
     h3 {
       font-size: 24px;
       color: ${colors.gray.dark};
+    }
+
+    h5 {
+      font-size: 16px;
+      color: ${colors.gray.middleLight};
+
+      margin-top: 18px;
+      max-width: 320px;
     }
 
     > section {
