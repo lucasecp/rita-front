@@ -3,7 +3,7 @@ import axios from 'axios'
 import useLocalStorage from 'use-local-storage'
 
 import apiUser from '@/services/apiUser'
-import apiWallet from '@/services/apiWallet'
+import apiWallet, { getCallerId } from '@/services/apiWallet'
 import { useModal } from '@/hooks/useModal'
 import { useLoading } from '@/hooks/useLoading'
 import { useAuth } from '@/hooks/login'
@@ -95,9 +95,14 @@ export const PaymentRequestConfirm: React.FC<PaymentRequestConfirmProps> = ({
 
       if (isAuthenticated) {
         try {
-          const { data } = await apiWallet.get(
-            `/payment/pay/${paymentRequest.id}`,
-          )
+          const { data } = await apiWallet.post(`/payment/appointment`, {
+            id: paymentRequest.id,
+            callerId: getCallerId(),
+            user: {
+              ritaId: String(user.id),
+              token: user.token,
+            },
+          })
 
           // if (!data) {
           //   throw new Error('Resposta vazia')

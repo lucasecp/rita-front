@@ -6,10 +6,9 @@ import { useAuth } from '@/hooks/login'
 import { useDialog } from '@/hooks/useDialog'
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import { WalletCreditCard } from '@/pages/Wallet/components/CreditCard'
+import { CreditCardForm } from '@/pages/Wallet/components/CreditCardForm'
 
-import { ReactComponent as TimesCircleIcon } from '@/assets/icons/times-circle.svg'
 import { Container } from './styles'
-import { PaymentForm } from './components/PaymentForm'
 
 export const WalletPatientSettings: React.FC = () => {
   const { user } = useAuth()
@@ -109,7 +108,11 @@ export const WalletPatientSettings: React.FC = () => {
         )}
         <section>
           <h3>Adicionar cartão</h3>
-          <PaymentForm onSubmit={handleFormSubmit} />
+          <h5>
+            Cadastre seu cartão de crédito ou débito para realizar transações
+            financeiras
+          </h5>
+          <CreditCardForm onSubmit={handleFormSubmit} />
         </section>
       </Container>
     </DefaultLayout>
