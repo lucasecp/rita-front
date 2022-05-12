@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route } from '../../custom.routes'
 import SeeAllSpecialists from '@/pages/modules/clinic/SeeAllSpecialists'
+import SeeAllAppointmentSchedules from '@/pages/modules/clinic/SeeAllAppointmentSchedules'
 import SeeOneSpecialists from '@/pages/modules/clinic/SeeOneSpecialist'
 import ClinicProfile from '@/pages/modules/clinic/Profile'
 import SeeSchedule from '@/pages/modules/clinic/SeeSchedule'
@@ -18,6 +19,7 @@ import {
   CLINIC_EDIT_USERS,
   CLINIC_APPOINTMENT_TABLE,
   CLINIC_CREATE_SCHEDULING,
+  CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES,
 } from '../../constants/namedRoutes/routes'
 import AppointmentTable from '@/pages/modules/clinic/AppointmentTable'
 import AppointmentScheduling from '@/pages/modules/clinic/AppointmentScheduling'
@@ -58,6 +60,10 @@ const clinicRoutes = [
   {
     path: CLINIC_CREATE_SCHEDULING,
     component: AppointmentScheduling,
+  },
+  {
+    path: CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES,
+    component: SeeAllAppointmentSchedules,
   },
 ]
 
