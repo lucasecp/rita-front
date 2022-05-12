@@ -3,14 +3,10 @@ import colors from '@/styles/colors'
 import styled from 'styled-components'
 
 export const Content = styled.form`
-  /* background: ${hexToRgba(colors.white, 0.8)}; */
-  /* box-shadow: 0px 2px 8px rgba(223, 210, 255, 0.15); */
-  /* padding: 38px 32px 24px; */
-  /* width: 60%; */
   box-shadow: 0px 2px 8px 0px #00000026;
-  background: #fffffff2;
+  background: ${hexToRgba(colors.white, 0.95)};
   border-radius: 8px;
-  padding: 51px 30px 30px;
+  padding: 32px 24px;
   max-width: 458px;
   margin: auto;
 
@@ -47,12 +43,11 @@ export const Content = styled.form`
   > span {
     text-decoration: underline;
     font-weight: 500;
-    transition: 0.3s;
     cursor: pointer;
   }
   > span {
     margin-top: 25px;
-    margin-bottom: 70px;
+    margin-bottom: 40px;
     display: flex;
     justify-content: center;
     cursor: default;
@@ -87,6 +82,6 @@ export const Content = styled.form`
     margin-top: 6px;
   }
   div + div {
-    margin-top: 24px;
+    margin-top: 16px;
   }
 `
