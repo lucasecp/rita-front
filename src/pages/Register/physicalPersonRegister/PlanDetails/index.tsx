@@ -14,8 +14,6 @@ export const PlanDetails: React.FC = () => {
   const { region } = usePhysicalPersonRegister()
   const { plan } = useLocation().state
 
-  console.log(region, plan)
-
   return (
     <RegisterLayout>
       <Content>
@@ -24,8 +22,8 @@ export const PlanDetails: React.FC = () => {
           <span>Experimente 7 dias grátis</span>
         </Top>
         <span>
-          O {plan.name} tem abrangência em toda parte do Brasil, conta com redes
-          credenciadas e atendimento especial para você.
+          O Plano {plan.name} tem abrangência em toda parte do Brasil, conta com
+          redes credenciadas e atendimento especial para você.
         </span>
         <h3>inclusão de Dependentes</h3>
         <span>Sim</span>
