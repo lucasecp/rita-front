@@ -1,6 +1,5 @@
 import InputText from '@/components/Form/InputText'
 import { Select } from '@/components/Form/Select'
-import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectIssuingAgency'
 import React, { useEffect, useState } from 'react'
 import { ErrorsI, DataReceivedI } from '../types'
 import { Container } from './style'
@@ -32,13 +31,16 @@ const Form: React.FC<FormProps> = ({ errors, setDataToApi, dataFromApi }) => {
 
   return (
     <Container>
-      <SelectIssuingAgency
-        issuingAgency={issuingAgency}
-        setIssuingAgency={setIssuingAgency}
-        error={errors.issuingAgency}
+      <InputText
+        label="Órgão Emissor*:"
+        value={issuingAgency}
+        setValue={setIssuingAgency}
+        maxLength={100}
+        hasError={!!errors.issuingAgency}
+        msgError={errors.issuingAgency}
       />
       <InputText
-        label="Especialista:"
+        label="Especialista*:"
         value={specialistName}
         setValue={setSpecialistName}
         maxLength={100}

@@ -45,10 +45,10 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
       if (index === 0) {
         ac = val.horaInicio
       }
-      const current = formatedDate(ac)
+      const current = formatedDate(val.horaInicio)
       const previous = formatedDate(array[index - 1]?.horaInicio)
 
-      if (previous && current > previous) {
+      if (previous && current < previous) {
         ac = val.horaInicio
         return ac
       }
@@ -63,10 +63,10 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
         ac = val.horaFim
       }
 
-      const current = formatedDate(ac)
-      const next = formatedDate(array[index + 1]?.horaFim)
+      const current = formatedDate(val.horaFim)
+      const next = formatedDate(array[index - 1]?.horaFim)
 
-      if (next && current < next) {
+      if (next && current > next) {
         ac = val.horaFim
         return ac
       }
@@ -84,23 +84,24 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
     const start = getSmallerTimeOfSchedule(timesInDay)
     const endDate = getBiggestTimeOfSchedule(timesInDay)
 
+
     const initialDateNum = Number(start.slice(0, 5).replace(':', '.'))
     const endDateNum = Number(endDate.slice(0, 5).replace(':', '.'))
 
-    const amountTimes = Math.floor(endDateNum - initialDateNum) 
-
+    const amountTimes = Math.floor(endDateNum - initialDateNum)
 
     for (let i = 0; i < amountTimes; i++) {
       const calcStart = String(initialDateNum + i).replace('.', ':')
+      console.log(initialDateNum + i)
       const calEnd = String(Number(calcStart.replace(':', '.')) + 1).replace(
         '.',
         ':',
       )
 
-      let text = `${calcStart} - ${calEnd}`
+      let text = `${calcStart}0 - ${calEnd}0`
 
       if (amountTimes === i + 1) {
-        text = `${calcStart} - ${String(
+        text = `${calcStart}0 - ${String(
           Number(calcStart.replace(':', '.')) + 2,
         ).slice(0, 2)}:00`
       }

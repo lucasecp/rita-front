@@ -13,7 +13,7 @@ export const fromApi = (dataClinic) => {
 
     scheduleAppointment: scheduleFromApi(
       ...specialty?.clinica?.especialidade?.map((specialty) =>
-        specialty.agenda.map((schedule) => schedule.agenda),
+        specialty.agenda?.map((schedule) => schedule.agenda),
       ),
     ),
 

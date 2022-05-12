@@ -25,8 +25,11 @@ const DoctorInfo: React.FC<DoctorInfoProps> = ({ dataDoctor }) => {
       <ul>
         <li>
           <div>
-            <h6>Conselho Regional:</h6>
-            <p>{dataDoctor.crm}</p>
+            <h6>Registro Profissional:</h6>
+            <p>
+              {dataDoctor.crm} - {dataDoctor.profissionalRegister} -
+              {dataDoctor.ufIssuingAgency}
+            </p>
           </div>
           {dataDoctor.verified ? (
             <CustomTooltip label="Conselho de classe validado">
