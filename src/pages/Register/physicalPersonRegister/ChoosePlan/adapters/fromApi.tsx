@@ -1,4 +1,12 @@
-import { MappedPlan, Plans } from '..'
+import { MappedPlan } from '..'
+
+export interface Plans {
+  idPlano: number
+  maximoDependente: number
+  nome: string
+  permiteMaiores: boolean
+  preco: string
+}
 
 export const fromApiPlans = (data: Plans[]): MappedPlan[] =>
   data.map((plan) => {

@@ -54,7 +54,11 @@ export const ProofOfAddress: React.FC<ProofOfAddressProps> = ({
       </AccordionSummary>
       <AccordionDetails>
         {proofOfAddressFile ? (
-          <SendedFile file={proofOfAddressFile} onGetFile={onGetFile} />
+          <SendedFile
+            file={proofOfAddressFile}
+            onGetFile={onGetFile}
+            name="ProofOfAddress"
+          />
         ) : (
           <InstructionsProofOfAddress onGetFile={onGetFile} />
         )}

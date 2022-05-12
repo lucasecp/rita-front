@@ -39,7 +39,11 @@ export const OwnBackDocument: React.FC<OwnBackDocumentProps> = ({
         </AccordionSummary>
         <AccordionDetails>
           {ownBackDocumentFile && (
-            <SendedFile file={ownBackDocumentFile} onGetFile={onGetFile} />
+            <SendedFile
+              file={ownBackDocumentFile}
+              onGetFile={onGetFile}
+              name="OwnBackDocument"
+            />
           )}
           {!ownBackDocumentFile && (
             <InstructionsOwnBackDocument onGetFile={onGetFile} error={error} />

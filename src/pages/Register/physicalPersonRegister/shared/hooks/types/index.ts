@@ -27,6 +27,13 @@ export interface RegionState {
   city: string
 }
 
+export interface PlanState {
+  idPlan: number | 0
+  name: string | ''
+  allowedMajorAge: boolean | null
+  maximumDependentsQuantity: number | null
+}
+
 export interface DocumentsState {
   holdingDocumentFile: File | string
   ownFrontDocumentFile: File | string
@@ -55,10 +62,6 @@ export interface PhysicalPersonRegisterContextData {
   selectedPlan: {
     get: SelectedPlan
     set: React.Dispatch<React.SetStateAction<SelectedPlan>>
-  }
-  plans: {
-    get: MappedPlan[]
-    set: React.Dispatch<React.SetStateAction<MappedPlan[]>>
   }
   region: {
     get: RegionState

@@ -7,25 +7,17 @@ import { ButtonArea, CardArea, Content, TitleAndLogo } from './styles'
 import ButtonPrimary from '@/components/Button/Primary'
 import { useHistory } from 'react-router-dom'
 import ButtonLink from '@/components/Button/Link'
-import { CardOfPlans } from './components/Card'
+import { CardOfPlan } from './components/Card'
 import { usePhysicalPersonRegister } from '../shared/hooks'
-import { PHYSICAL_PERSON_REGISTER_CHOOSE_REGION } from '@/routes/constants/namedRoutes/routes'
+import {
+  PHYSICAL_PERSON_REGISTER_CHOOSE_REGION,
+  PHYSICAL_PERSON_REGISTER_DEPENDENTS,
+  PHYSICAL_PERSON_REGISTER_DOCUMENTS,
+} from '@/routes/constants/namedRoutes/routes'
 import apiAdmin from '@/services/apiAdmin'
 import { fromApiPlans } from './adapters/fromApi'
 
 const cardColors = ['purple', 'green', 'blue', 'orange']
-
-export interface DataProps {
-  data: MappedPlan[]
-}
-
-export interface Plans {
-  idPlano: number
-  maximoDependente: number
-  nome: string
-  permiteMaiores: boolean
-  preco: string
-}
 
 export interface MappedPlan {
   idPlan: number
@@ -46,7 +38,9 @@ export const ChoosePlans: React.FC = () => {
         params: {
           municipio: region.get.city,
           uf: region.get.uf,
-          minimoDependente: patientWantsMinimumDependent.get,
+          ...(patientWantsMinimumDependent.get > 0 && {
+            minimoDependente: patientWantsMinimumDependent.get,
+          }),
         },
       })
 
@@ -57,6 +51,13 @@ export const ChoosePlans: React.FC = () => {
 
     callApi()
   }, [])
+
+  const toNext = () => {
+    if (patientWantsMinimumDependent.get > 0) {
+      return history.push(PHYSICAL_PERSON_REGISTER_DEPENDENTS)
+    }
+    history.push(PHYSICAL_PERSON_REGISTER_DOCUMENTS)
+  }
 
   return (
     <RegisterLayout>
@@ -73,7 +74,7 @@ export const ChoosePlans: React.FC = () => {
             plans.map((plan, index) => {
               return (
                 <div key={plan.idPlan}>
-                  <CardOfPlans
+                  <CardOfPlan
                     plan={plan}
                     colorTheme={
                       cardColors[
@@ -96,7 +97,7 @@ export const ChoosePlans: React.FC = () => {
           <span>Você escolheu o plano {selectedPlan.get.name}</span>
         )}
         {console.log(selectedPlan)}
-        <ButtonPrimary disabled={!selectedPlan.get.idPlan}>
+        <ButtonPrimary onClick={toNext} disabled={!selectedPlan.get.idPlan}>
           Próxima Etapa
         </ButtonPrimary>
       </ButtonArea>

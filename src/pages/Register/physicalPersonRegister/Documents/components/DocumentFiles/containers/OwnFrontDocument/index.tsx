@@ -39,7 +39,11 @@ export const OwnFrontDocument: React.FC<OwnFrontDocumentProps> = ({
         </AccordionSummary>
         <AccordionDetails>
           {ownFrontDocumentFile && (
-            <SendedFile file={ownFrontDocumentFile} onGetFile={onGetFile} />
+            <SendedFile
+              file={ownFrontDocumentFile}
+              onGetFile={onGetFile}
+              name="OwnFrontDocument"
+            />
           )}
           {!ownFrontDocumentFile && (
             <InstructionsOwnFrontDocument onGetFile={onGetFile} error={error} />

@@ -18,20 +18,16 @@ export interface SelectedPlan {
   maximumDependentsQuantity: number | null
 }
 
-export interface DataProps {
-  data: MappedPlan
-}
-
 interface CardProps {
   colorTheme: number
   plan: MappedPlan
 }
 
-export const CardOfPlans: React.FC<CardProps> = ({ plan, colorTheme }) => {
+export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
   const history = useHistory()
   const { selectedPlan } = usePhysicalPersonRegister()
 
-  const ToDetails = () => {
+  const onToKnowMore = () => {
     history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS, { plan })
   }
 
@@ -65,7 +61,7 @@ export const CardOfPlans: React.FC<CardProps> = ({ plan, colorTheme }) => {
       </div>
       <h3>inclusão de Dependentes</h3>
       <ul>
-        <li>sim</li>
+        <li>{plan.maximumDependentsQuantity ? 'Sim' : 'Não'}</li>
       </ul>
 
       <h3>Serviços Oferecidos</h3>
@@ -81,7 +77,7 @@ export const CardOfPlans: React.FC<CardProps> = ({ plan, colorTheme }) => {
         checked={selectedPlan.get.idPlan === plan.idPlan}
         data-test={`planCardDetails-${plan.idPlan}`}
       >
-        <ButtonLink onClick={ToDetails}>
+        <ButtonLink onClick={onToKnowMore}>
           <span>
             Saber Mais <ArrowRightIcon />
           </span>

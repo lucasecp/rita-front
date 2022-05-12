@@ -17,7 +17,12 @@ const OutlineButton: React.FC<IButtonOutline> = ({
   // Change the variation to color
 
   return (
-    <Container {...rest} small={small} medium={medium}>
+    <Container
+      data-test={`outlineButton-${children}`}
+      small={small}
+      medium={medium}
+      {...rest}
+    >
       {children}
     </Container>
   )

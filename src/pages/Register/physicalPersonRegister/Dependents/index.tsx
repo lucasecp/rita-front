@@ -79,7 +79,8 @@ export const Dependents: React.FC = () => {
       showMessage(AddDependent, {
         dependents: allDependents,
         onGetDependents: setAllDependents,
-        holderCpf: '102.477.339-62',
+        // remover string estática
+        holderCpf: '689.873.288-99',
         planAllowMajorAge,
       })
     }
@@ -91,7 +92,8 @@ export const Dependents: React.FC = () => {
       dependentData: dependent,
       dependents: allDependents,
       onGetDependents: setAllDependents,
-      holderCpf: '102.477.339-62',
+      // remover string estática
+      holderCpf: '689.873.288-99',
       planAllowMajorAge,
     })
   }

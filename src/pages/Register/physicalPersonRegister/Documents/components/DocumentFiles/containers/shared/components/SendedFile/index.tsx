@@ -20,9 +20,14 @@ import previewFileInNewBlank from '@/helpers/previewFileInNewBlank'
 interface SendedFileProps {
   file: File | string
   onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+  name: string
 }
 
-export const SendedFile: React.FC<SendedFileProps> = ({ file, onGetFile }) => {
+export const SendedFile: React.FC<SendedFileProps> = ({
+  file,
+  onGetFile,
+  name,
+}) => {
   const { showMessage, showSimple } = useModal()
 
   const isMobile = useMediaPredicate('(max-width: 800px)')
@@ -70,7 +75,11 @@ export const SendedFile: React.FC<SendedFileProps> = ({ file, onGetFile }) => {
   return (
     <Container>
       <section>
-        <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
+        <InputFile
+          accept=".png, .jpg, .jpeg, .pdf"
+          setValue={onGetFile}
+          data-test={`${name}-selectFile`}
+        >
           <OutlineButton small variation="blue">
             Selecionar Arquivo
           </OutlineButton>
@@ -78,11 +87,11 @@ export const SendedFile: React.FC<SendedFileProps> = ({ file, onGetFile }) => {
         <h6>{typeof file === 'object' && file.name}</h6>
       </section>
       <aside>
-        <button onClick={showPreview}>
+        <button onClick={showPreview} data-test={`${name}-see`}>
           <img src={zoomIcon} />
           Ver
         </button>
-        <button onClick={removeFile}>
+        <button onClick={removeFile} data-test={`${name}-remove`}>
           <img src={trashIcon} />
           Remover
         </button>
