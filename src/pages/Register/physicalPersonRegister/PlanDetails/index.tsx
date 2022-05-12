@@ -22,16 +22,22 @@ export const PlanDetails: React.FC = () => {
           <span>Experimente 7 dias grátis</span>
         </Top>
         <span>
-          O Plano {plan.name} tem abrangência em toda parte do Brasil, conta com
+          O plano {plan.name} tem abrangência em toda parte do Brasil, conta com
           redes credenciadas e atendimento especial para você.
         </span>
-        <h3>inclusão de Dependentes</h3>
-        <span>Sim</span>
+        <h3>Inclusão de Dependentes</h3>
+        <span data-test={`maximumDependentsQuantityDetails-${plan.idPlan}`}>
+          {plan.maximumDependentsQuantity
+            ? `Sim. Até ${plan.maximumDependentsQuantity} dependente${
+                plan.maximumDependentsQuantity > 1 ? 's' : ''
+              }`
+            : 'Não'}
+        </span>
 
         <h3>Serviços Oferecidos</h3>
         <ul>
           <li>Urgência e Emergência</li>
-          <li>consultas médicas</li>
+          <li>Consultas médicas</li>
           <li>Exames Simples</li>
         </ul>
         <Price>
