@@ -26,38 +26,22 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
 
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
-
-  const [specialist, setName] = useState(local.specialist || '')
-  const [cpf, setCpf] = useState(local.cpf || '')
-  const [status, setStatus] = useState<MultiSelectOption[]>(local.status || [])
-  const [specialtys, setSpecialtys] = useState<MultiSelectOption[]>(
-    local.specialtys || [],
-  )
-  const [issuingAgency, setIssuingAgency] = useState(local.issuingAgency || '')
-  const [registerNumber, setRegisterNumber] = useState(
-    local.registerNumber || '',
-  )
+  const [specialist, setSpecialist] = useState(local.specialist || '')
+  const [patient, setPatient] = useState(local.patient || '')
+  const [date, setDate] = useState(local.date || '')
   const [errors, setErrors] = useState({
     specialist: '',
-    cpf: '',
     startTime: '',
-    endTime: ''
+    endTime: '',
+    patient: '',
   })
-  const cpfFormated = clearSpecialCaracter(cpf)
 
   const arrayQuery = [
-    { specialist: fieldsApi.NOME, value: specialist },
-    { specialist: fieldsApi.CPF, value: cpfFormated },
-    { specialist: fieldsApi.STATUS, value: formatMultSelectValue(status) },
-    {
-      specialist: fieldsApi.ESPECIALIDADES,
-      value: formatMultSelectValue(specialtys),
-    },
-    {
-      specialist: fieldsApi.ORGAO_EMISSOR,
-      value: issuingAgency,
-    },
-    { specialist: fieldsApi.NUMERO_REGISTRO, value: registerNumber },
+    { specialist: fieldsApi.ESPECIALISTA, value: specialist },
+    { specialist: fieldsApi.ESPECIALISTA, value: patient },
+    { specialist: fieldsApi.DATA, value: date },
+    { specialist: fieldsApi.HORARIO_INICIO, value: startTime },
+    { specialist: fieldsApi.HORARIO_FIM, value: endTime },
   ]
 
   useEffect(() => {
@@ -65,28 +49,15 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   }, [])
 
   const clearFields = () => {
-    setName('')
-    setCpf('')
-    setStatus([])
-    setSpecialtys([])
-    setIssuingAgency('')
-    setRegisterNumber('')
+    setSpecialist('')
     setFilters([])
-    setErrors({ specialist: '', cpf: '' })
+    setErrors({ specialist: '', startTime: '', endTime: '', patient: '' })
     window.localStorage.removeItem('@Rita/specialists-filter')
   }
 
   const hasErrors = () => {
     let newErrors = false
-    setErrors({ specialist: '', cpf: '' })
-
-    if ((cpfFormated.length < 11 || !validateCpf(cpfFormated)) && cpfFormated) {
-      setErrors((errors) => ({
-        ...errors,
-        cpf: 'CPF inválido.',
-      }))
-      newErrors = true
-    }
+    setErrors({ specialist: '', startTime: '', endTime: '', patient: '' })
 
     if (specialist.length < 3 && specialist) {
       setErrors((errors) => ({ ...errors, specialist: 'Informe 3 letras ou mais' }))
@@ -102,12 +73,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     window.localStorage.setItem(
       '@Rita/specialists-filter',
       JSON.stringify({
-        specialist,
-        specialtys,
-        issuingAgency,
-        registerNumber,
-        cpf,
-        status,
+        specialist
       }),
     )
     setFilters(verifyTypedFields(arrayQuery))
@@ -120,17 +86,19 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           variation="secondary"
           label="Especialista:"
           value={specialist}
-          setValue={setRegisterNumber}
-          maxLength={40}
+          setValue={setSpecialist}
+          maxLength={100}
+          asError={!!errors.specialist}
+          msgError={errors.specialist}
         />
         <InputText
           variation="secondary"
           label="Paciente:"
-          value={specialist}
-          setValue={setName}
-          maxLength={200}
-          hasError={!!errors.specialist}
-          msgError={errors.specialist}
+          value={patient}
+          setValue={setPatient}
+          maxLength={100}
+          hasError={!!errors.patient}
+          msgError={errors.patient}
         />
       </div>
       <div>

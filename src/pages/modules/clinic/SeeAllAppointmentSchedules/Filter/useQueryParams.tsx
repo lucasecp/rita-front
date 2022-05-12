@@ -1,10 +1,9 @@
 interface UseQueryParamsProps {
-  name: string | null
-  cpf: string | null
-  registerNumber: string | null
-  specialtys: any[]
-  status: any[]
-  issuingAgency: string | null
+  specialist: string | null
+  startTime: string | null
+  endTime: string | null
+  patient: string | null
+  date: string | null
 }
 
 export default (): UseQueryParamsProps => {
@@ -12,17 +11,15 @@ export default (): UseQueryParamsProps => {
     window.localStorage.getItem('@Rita/clinic-filter') || '{}',
   )
 
-  const name = localStorageValues?.name
+  const specialist = localStorageValues?.specialist
 
-  const cpf = localStorageValues?.cpf
+  const startTime = localStorageValues?.startTime
 
-  const registerNumber = localStorageValues?.registerNumber
+  const endTime = localStorageValues?.endTime
 
-  const specialtys = localStorageValues?.specialtys
+  const patient = localStorageValues?.patient
 
-  const issuingAgency = localStorageValues?.issuingAgency
+  const date = localStorageValues?.date
 
-  const status = localStorageValues?.status
-
-  return { registerNumber, status, name, cpf, specialtys, issuingAgency }
+  return { specialist, startTime, endTime, patient, date }
 }

@@ -1,8 +1,7 @@
 export const fieldsApi = {
-  NOME: 'nome',
-  CPF: 'cpf',
-  STATUS: 'status',
-  ESPECIALIDADES: 'especialidades',
-  ORGAO_EMISSOR: 'idOrgaoEmissor',
-  NUMERO_REGISTRO: 'registroProfissional',
+  ESPECIALISTA: 'especialista',
+  PACIENTE: 'patient',
+  DATA: 'data',
+  HORARIO_INICIO: 'horario_inicio',
+  HORARIO_FIM: 'horario_fim',
 }
