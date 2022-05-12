@@ -26,7 +26,7 @@ const Header = ({ doctorInfo }) => {
             <h6>
               Conselho Regional:
               <span>
-                &nbsp; {doctorInfo?.crm}- {doctorInfo?.profissionalRegister} -{' '}
+                &nbsp; {doctorInfo?.crm} - {doctorInfo?.profissionalRegister} - {' '}
                 {doctorInfo?.crmuf}
               </span>
             </h6>

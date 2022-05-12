@@ -12,7 +12,8 @@ export const fromApi = (doctorInfo: any): DataSpecialistI => {
       profissionalName: doctorInfo.nomeProfissional,
       cpf: doctorInfo.cpf,
       receiveService: doctorInfo.receberAgendamentos,
-      ufProfissionaRegister: doctorInfo.ufOrgaoEmissor,
+      ufProfissionaRegister:
+        doctorInfo.ufOrgaoEmissor && doctorInfo.ufOrgaoEmissor.toUpperCase(),
       classCouncil: doctorInfo.registroProfissional,
       email: doctorInfo.email,
       phone: doctorInfo.celular,

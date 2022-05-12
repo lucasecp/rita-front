@@ -8,7 +8,9 @@ export const fromApi = (dataResults: any[]): any => {
       photo: docInfo.avatar,
       name: firstLetterCapitalize(docInfo.nome),
       id: docInfo.id,
-      crm: docInfo.registroProfissional,
+      crm: docInfo?.orgaoEmissor?.descricao,
+      ufIssuingAgency: docInfo?.ufOrgaoEmissor,
+      profissionalRegister: docInfo?.registroProfissional,
       verified: docInfo.conselhoValidado,
       specialtys: docInfo.especialidades.map((spe: any) => ({
         verified: spe.rqeValidado,

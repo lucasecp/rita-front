@@ -34,6 +34,7 @@ const DoctorInformation = () => {
         )
         setDoctorInfo(fromApi(data))
       } catch (error) {
+        console.log(error)
       } finally {
         Loading.turnOff()
       }
