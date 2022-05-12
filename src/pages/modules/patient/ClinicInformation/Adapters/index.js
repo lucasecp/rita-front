@@ -7,23 +7,8 @@ export const fromApi = (dataClinic) => {
     name: firstLetterCapitalize(specialty.descricao),
     doctorSpecialty: specialty.medicoEspecialidade.map((spe) => ({
       rqe: spe.RQE,
-
-      defaultPrice: specialty.precos.reduce((ac, price) => {
-        if (price.idEspecialidade === spe.idEspecialidade) {
-          ac = formatPrice(price.precoNormal)
-          return ac
-        }
-        return ac
-      }, null),
-
-      ritaPrice: specialty.precos.reduce((ac, price) => {
-        if (price.idEspecialidade === spe.idEspecialidade) {
-          ac = formatPrice(price.precoRita)
-          return ac
-        }
-        return ac
-      }, null),
-
+      defaultPrice: formatPrice(specialty.precos[0].precoNormal),
+      ritaPrice: formatPrice(specialty.precos[0].precoRita),
       name: firstLetterCapitalize(spe.medico.nome),
       photo: spe.medico.avatar,
       status: spe.medico.status,
