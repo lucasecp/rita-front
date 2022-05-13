@@ -29,6 +29,7 @@ import { usePhysicalPersonRegister } from '../shared/hooks'
 import { GeneralFieldsErrors } from './messages/GeneralFieldsErrors'
 
 import { Container, ButtonLinkBlue } from './styles'
+import { PHYSICAL_PERSON_REGISTER_ADDRESS } from '@/routes/constants/namedRoutes/routes'
 
 export interface ErrorState {
   name?: string
@@ -125,7 +126,7 @@ export const RegistrationData: React.FC = () => {
         cpf: cpfState,
       })
 
-      // history.push(Address)
+      history.push(PHYSICAL_PERSON_REGISTER_ADDRESS)
     } else {
       showMessage(GeneralFieldsErrors)
     }
