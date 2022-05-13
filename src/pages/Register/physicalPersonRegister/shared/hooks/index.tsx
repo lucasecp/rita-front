@@ -176,8 +176,6 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
           set: setDependents,
         },
         finishRegister,
-
-        // cpfHolder: registrationData?.cpf,
         // setRegistrationData,
         // onGetAddress: setAddress,
         // resetData,
