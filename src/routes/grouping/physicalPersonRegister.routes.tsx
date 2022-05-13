@@ -8,6 +8,7 @@ import {
   PHYSICAL_PERSON_REGISTER_PAYMENT,
   PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN,
   PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS,
+  PHYSICAL_PERSON_REGISTER_CPF_HOLDER,
 } from '../constants/namedRoutes/routes'
 
 import { RegistrationData } from '@/pages/Register/physicalPersonRegister/RegistrationData'
@@ -17,8 +18,13 @@ import { Dependents } from '@/pages/Register/physicalPersonRegister/Dependents'
 import { Payment } from '@/pages/Register/physicalPersonRegister/Payment'
 import { ChoosePlans } from '@/pages/Register/physicalPersonRegister/ChoosePlan'
 import { PlanDetails } from '@/pages/Register/physicalPersonRegister/PlanDetails'
+import { CpfHolder } from '@/pages/Register/physicalPersonRegister/CpfHolder'
 
 const registerRoutes = [
+  {
+    path: PHYSICAL_PERSON_REGISTER_CPF_HOLDER,
+    component: CpfHolder,
+  },
   {
     path: PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA,
     component: RegistrationData,
