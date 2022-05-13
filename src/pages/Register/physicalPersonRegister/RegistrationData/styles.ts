@@ -1,23 +1,19 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import colors from '@/styles/colors'
 
-interface RegistrationDataStylesProps {
-  active: boolean
-}
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-export const Container = styled.div<RegistrationDataStylesProps>`
-  background: #fff;
-  width: 100%;
+  padding: 26px 0 0;
+  margin: 24px 0px;
+  position: relative;
 
-  display: none;
+  > main {
+    width: 100%;
+    background: #fff;
 
-  ${({ active }) =>
-    active &&
-    css`
-      display: block;
-    `}
-
-  > div {
     padding: 32px;
 
     > h1 {
