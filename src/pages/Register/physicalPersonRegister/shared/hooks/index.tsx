@@ -58,6 +58,8 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   const [planAllowDependentMajorAge, setPlanAllowDependentMajorAge] =
     useState(false)
 
+  const [cpf, setCpf] = useState('')
+
   useEffect(() => {
     console.log(documentsFile)
   }, [documentsFile])
@@ -176,6 +178,10 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
           set: setDependents,
         },
         finishRegister,
+        cpfHolder: {
+          get: cpf,
+          set: setCpf,
+        },
 
         // cpfHolder: registrationData?.cpf,
         // setRegistrationData,
