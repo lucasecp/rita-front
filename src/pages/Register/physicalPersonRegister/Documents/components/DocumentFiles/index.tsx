@@ -28,29 +28,29 @@ export const DocumentFiles: React.FC<DocumentFilesProps> = ({
 }) => {
   const { showMessage } = useModal()
 
-  const { setDocumentsFile } = usePhysicalPersonRegister()
+  const { documents } = usePhysicalPersonRegister()
 
-  const [holdingDocumentFile, setHoldingDocumentFile] = useState<File | string>(
-    '',
-  )
-
-  const [ownFrontDocumentFile, setOwnFrontDocumentFile] = useState<
-    File | string
-  >('')
-  const [ownBackDocumentFile, setOwnBackDocumentFile] = useState<File | string>(
-    '',
-  )
-  const [proofOfAddressFile, setProofOfAddressFile] = useState<File | string>(
-    '',
-  )
-  const [proofOfIncomeFile, setProofOfIncomeFile] = useState<File | string>('')
+  const [holdingDocument, setHoldingDocument] = useState<File | string>('')
+  const [ownFrontDocument, setOwnFrontDocument] = useState<File | string>('')
+  const [ownBackDocument, setOwnBackDocument] = useState<File | string>('')
+  const [proofOfAddress, setProofOfAddress] = useState<File | string>('')
+  const [proofOfIncome, setProofOfIncome] = useState<File | string>('')
   const [selectIncome, setSelectIncome] = useState('')
 
   const [errors, setErrors] = useState({} as ErrorsState)
 
   useEffect(() => {
+    setHoldingDocument(documents.get.holdingDocument)
+    setOwnFrontDocument(documents.get.ownFrontDocument)
+    setOwnBackDocument(documents.get.ownBackDocument)
+    setProofOfAddress(documents.get.proofOfAddress)
+    setProofOfIncome(documents.get.proofOfIncome)
+    setSelectIncome(documents.get.selectIncome)
+  }, [])
+
+  useEffect(() => {
     if (saveDocuments) {
-      if (holdingDocumentFile === '') {
+      if (holdingDocument === '') {
         setErrors({
           holdingDocument:
             'O envio da sua foto segurando o documento é obrigatório.',
@@ -60,7 +60,7 @@ export const DocumentFiles: React.FC<DocumentFilesProps> = ({
         return
       }
 
-      if (ownFrontDocumentFile === '') {
+      if (ownFrontDocument === '') {
         setErrors({
           ownFrontDocument:
             'O envio da foto do documento de identificação é obrigatório.',
@@ -70,7 +70,7 @@ export const DocumentFiles: React.FC<DocumentFilesProps> = ({
         return
       }
 
-      if (ownBackDocumentFile === '') {
+      if (ownBackDocument === '') {
         setErrors({
           ownBackDocument:
             'O envio da foto do documento de identificação é obrigatório.',
@@ -88,11 +88,11 @@ export const DocumentFiles: React.FC<DocumentFilesProps> = ({
         return
       }
 
-      setDocumentsFile({
-        holdingDocumentFile,
-        ownFrontDocumentFile,
-        ownBackDocumentFile,
-        proofOfIncomeFile,
+      documents.set({
+        holdingDocument,
+        ownFrontDocument,
+        ownBackDocument,
+        proofOfIncome,
         selectIncome,
       })
 
@@ -104,43 +104,39 @@ export const DocumentFiles: React.FC<DocumentFilesProps> = ({
     <Container>
       <h1>Documentos</h1>
       <HoldingDocument
-        onGetFile={setHoldingDocumentFile}
-        holdingDocumentFile={holdingDocumentFile}
+        onGetFile={setHoldingDocument}
+        holdingDocumentFile={holdingDocument}
         error={errors?.holdingDocument}
       />
 
       <OwnFrontDocument
-        hasPreviousDocument={!!holdingDocumentFile}
-        onGetFile={setOwnFrontDocumentFile}
-        ownFrontDocumentFile={ownFrontDocumentFile}
+        hasPreviousDocument={!!holdingDocument}
+        onGetFile={setOwnFrontDocument}
+        ownFrontDocumentFile={ownFrontDocument}
         error={errors?.ownFrontDocument}
       />
 
       <OwnBackDocument
-        hasPreviousDocument={!!holdingDocumentFile && !!ownFrontDocumentFile}
-        onGetFile={setOwnBackDocumentFile}
-        ownBackDocumentFile={ownBackDocumentFile}
+        hasPreviousDocument={!!holdingDocument && !!ownFrontDocument}
+        onGetFile={setOwnBackDocument}
+        ownBackDocumentFile={ownBackDocument}
         error={errors?.ownBackDocument}
       />
 
       <ProofOfAddress
         hasPreviousDocument={
-          !!holdingDocumentFile &&
-          !!ownFrontDocumentFile &&
-          !!ownBackDocumentFile
+          !!holdingDocument && !!ownFrontDocument && !!ownBackDocument
         }
-        onGetFile={setProofOfAddressFile}
-        proofOfAddressFile={proofOfAddressFile}
+        onGetFile={setProofOfAddress}
+        proofOfAddressFile={proofOfAddress}
       />
 
       <ProofOfIncome
         hasPreviousDocument={
-          !!holdingDocumentFile &&
-          !!ownFrontDocumentFile &&
-          !!ownBackDocumentFile
+          !!holdingDocument && !!ownFrontDocument && !!ownBackDocument
         }
-        onGetFile={setProofOfIncomeFile}
-        proofOfIncomeFile={proofOfIncomeFile}
+        onGetFile={setProofOfIncome}
+        proofOfIncomeFile={proofOfIncome}
         onSelectIncome={setSelectIncome}
         selectIncome={selectIncome}
         error={errors?.selectIncome}

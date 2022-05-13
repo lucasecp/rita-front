@@ -12,16 +12,6 @@
 import { SelectedPlan } from '../../../ChoosePlan/components/Card'
 import { MappedPlan } from '../../../ChoosePlan'
 
-// export interface AddressState {
-//   cep?: string
-//   uf?: string
-//   city?: string
-//   address?: string
-//   numberHome?: string
-//   district?: string
-//   complement?: string
-// }
-
 export interface RegionState {
   uf: string
   city: string
@@ -34,12 +24,22 @@ export interface PlanState {
   maximumDependentsQuantity: number | null
 }
 
+export interface AddressState {
+  cep?: string
+  uf?: string
+  city?: string
+  street?: string
+  number?: string
+  district?: string
+  complement?: string
+}
+
 export interface DocumentsState {
-  holdingDocumentFile: File | string
-  ownFrontDocumentFile: File | string
-  ownBackDocumentFile: File | string
-  proofOfAddressFile?: File | string
-  proofOfIncomeFile?: File | string
+  holdingDocument: File | string
+  ownFrontDocument: File | string
+  ownBackDocument: File | string
+  proofOfAddress?: File | string
+  proofOfIncome?: File | string
   selectIncome: string
 }
 
@@ -59,15 +59,22 @@ export interface DependentsState {
 // }
 
 export interface PhysicalPersonRegisterContextData {
-  selectedPlan: {
-    get: SelectedPlan
-    set: React.Dispatch<React.SetStateAction<SelectedPlan>>
-  }
   region: {
     get: RegionState
     set: React.Dispatch<React.SetStateAction<RegionState>>
   }
-  setDocumentsFile: React.Dispatch<React.SetStateAction<DocumentsState>>
+  selectedPlan: {
+    get: SelectedPlan
+    set: React.Dispatch<React.SetStateAction<SelectedPlan>>
+  }
+  address: {
+    get: AddressState
+    set: React.Dispatch<React.SetStateAction<AddressState>>
+  }
+  documents: {
+    get: DocumentsState
+    set: React.Dispatch<React.SetStateAction<DocumentsState>>
+  }
   patientWantsMinimumDependent: {
     get: number
     set: React.Dispatch<React.SetStateAction<number>>
@@ -81,10 +88,6 @@ export interface PhysicalPersonRegisterContextData {
   // isPatientLinkedCompany: boolean
   // limitOfDependents: number
   // initialRegisterData: RegisterDataState
-  // isActiveStep: (stepNumber: number) => boolean
-  // currentStep: number
-  // previousStep: () => void
-  // nextStep: () => void
   // setInitialRegisterData: React.Dispatch<
   //   React.SetStateAction<RegisterDataState>
   // >

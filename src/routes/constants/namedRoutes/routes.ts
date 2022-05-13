@@ -126,13 +126,18 @@ export const PHYSICAL_PERSON_REGISTER_CHOOSE_REGION =
 
 export const PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN =
   '/paciente/cadastro/escolher-plano'
+
 export const PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS =
   '/paciente/cadastro/escolher-plano/detalhes'
 
-export const PHYSICAL_PERSON_REGISTER_DEPENDENTS =
-  '/paciente/cadastro/dependentes'
+export const PHYSICAL_PERSON_REGISTER_ADDRESS = '/paciente/cadastro/endereco'
+
 export const PHYSICAL_PERSON_REGISTER_DOCUMENTS =
   '/paciente/cadastro/documentos'
+
+export const PHYSICAL_PERSON_REGISTER_DEPENDENTS =
+  '/paciente/cadastro/dependentes'
+
 export const PHYSICAL_PERSON_REGISTER_PAYMENT = '/paciente/cadastro/pagamento'
 
 export const TESTE = '/teste'

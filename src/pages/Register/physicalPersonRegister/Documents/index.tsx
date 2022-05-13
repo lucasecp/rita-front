@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import ButtonLink from '@/components/Button/Link'
@@ -9,12 +10,14 @@ import { DocumentFiles } from './components/DocumentFiles'
 
 import { Container } from './styles'
 import { useMessage } from '@/hooks/useMessage'
+import { PHYSICAL_PERSON_REGISTER_ADDRESS } from '@/routes/constants/namedRoutes/routes'
 
 export const Documents: React.FC = () => {
+  const history = useHistory()
   const [saveDocuments, sendSaveDocuments] = useMessage()
 
   const onPreviousStep = () => {
-    // previous page
+    history.push(PHYSICAL_PERSON_REGISTER_ADDRESS)
   }
 
   const onNextStep = () => {

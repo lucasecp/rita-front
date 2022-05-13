@@ -22,6 +22,7 @@ import {
   DocumentsState,
   DependentsState,
   PhysicalPersonRegisterContextData,
+  AddressState,
 } from './types'
 
 import { PHYSICAL_PERSON_REGISTER_PAYMENT } from '@/routes/constants/namedRoutes/routes'
@@ -44,20 +45,27 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   //   {} as RegistrationDataState | undefined,
   // )
 
-  // const [address, setAddress] = useState({} as AddressState | undefined)
-
   const [region, setRegion] = useState({} as RegionState)
 
   const [selectedPlan, setSelectedPlan] = useState({} as PlanState)
 
-  const [documentsFile, setDocumentsFile] = useState({} as DocumentsState)
+  const [address, setAddress] = useState({} as AddressState)
+
+  const [documents, setDocuments] = useState({} as DocumentsState)
 
   const [patientWantsMinimumDependent, setPatientWantsMinimumDependent] =
     useState(0)
 
   useEffect(() => {
-    console.log(documentsFile)
-  }, [documentsFile])
+    console.log('🚀 ~ region', region)
+    console.log('🚀 ~ selectedPlan', selectedPlan)
+    console.log('🚀 ~ address', address)
+    console.log('🚀 ~ documents', documents)
+    console.log(
+      '🚀 ~ patientWantsMinimumDependent',
+      patientWantsMinimumDependent,
+    )
+  }, [region, selectedPlan, address, documents, patientWantsMinimumDependent])
 
   const [dependents, setDependents] = useState(
     [] as DependentsState[] | undefined,
@@ -66,7 +74,7 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   // const resetData = () => {
   //   setRegistrationData({})
   //   setAddress({})
-  //   setDocumentsFile({} as DocumentsState)
+  //   setDocuments({} as DocumentsState)
   //   setDependents([])
   //   setStep(1)
   // }
@@ -155,7 +163,14 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
           get: region,
           set: setRegion,
         },
-        setDocumentsFile,
+        address: {
+          get: address,
+          set: setAddress,
+        },
+        documents: {
+          get: documents,
+          set: setDocuments,
+        },
         patientWantsMinimumDependent: {
           get: patientWantsMinimumDependent,
           set: setPatientWantsMinimumDependent,
