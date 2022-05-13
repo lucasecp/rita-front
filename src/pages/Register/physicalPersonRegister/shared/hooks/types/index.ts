@@ -83,7 +83,10 @@ export interface PhysicalPersonRegisterContextData {
     set: React.Dispatch<React.SetStateAction<DependentsState[]>>
   }
   finishRegister: () => void
-  // cpfHolder?: string
+  cpfHolder: {
+    get: string
+    set: React.Dispatch<React.SetStateAction<string>>
+  }
   // isPatientLinkedCompany: boolean
   // limitOfDependents: number
   // initialRegisterData: RegisterDataState
