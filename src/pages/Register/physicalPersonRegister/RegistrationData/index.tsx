@@ -42,7 +42,7 @@ export interface ErrorState {
 }
 
 export const RegistrationData: React.FC = () => {
-  const { registrationData } = usePhysicalPersonRegister()
+  const { registrationData, cpfHolder } = usePhysicalPersonRegister()
   const { showMessage } = useModal()
   const history = useHistory()
 
@@ -52,7 +52,7 @@ export const RegistrationData: React.FC = () => {
   const [gender, setGender] = useState('')
   const [birthdate, setBirthdate] = useState('')
   const [phone, setPhone] = useState('')
-  const [cpf, setCpf] = useState('')
+  const [cpf, setCpf] = useState(cpfHolder.get)
   const [terms, setTerms] = useState(false)
   const [errors, setErrors] = useState({} as ErrorState)
 
@@ -122,7 +122,7 @@ export const RegistrationData: React.FC = () => {
         birthdate,
         phone,
         email,
-        cpf: '367.527.674-08',
+        cpf,
       })
 
       // history.push(Address)
