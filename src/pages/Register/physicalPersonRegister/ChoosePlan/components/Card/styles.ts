@@ -26,7 +26,7 @@ export const Card = styled.div<{
   checked: boolean
 }>`
   height: 276.11px;
-  width: 100%;
+  max-width: 100%;
   padding: 24px;
   background-color: ${({ colorTheme, checked }) =>
     checked

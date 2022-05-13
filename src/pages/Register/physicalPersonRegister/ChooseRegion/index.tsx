@@ -62,7 +62,7 @@ export const ChooseRegion: React.FC = () => {
       <div>
         <div>
           <h2>Onde você está?</h2>
-          <h3>Desta forma você terá acesso aos planos da sua regiãos</h3>
+          <h3>Desta forma você terá acesso aos planos da sua região</h3>
           <InputCep />
           <section>
             <hr />
