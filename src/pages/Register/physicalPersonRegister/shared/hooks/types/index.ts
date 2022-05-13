@@ -1,16 +1,4 @@
-// export interface RegistrationDataState {
-//   id?: number
-//   name?: string
-//   email?: string
-//   gender?: string
-//   birthdate?: string
-//   phone?: string
-//   cpf?: string
-//   company?: string
-// }
-
 import { SelectedPlan } from '../../../ChoosePlan/components/Card'
-import { MappedPlan } from '../../../ChoosePlan'
 
 export interface RegionState {
   uf: string
@@ -22,6 +10,15 @@ export interface PlanState {
   name: string | ''
   allowedMajorAge: boolean | null
   maximumDependentsQuantity: number | null
+}
+
+export interface RegistrationDataState {
+  name: string
+  email: string
+  gender: string
+  birthdate: string
+  phone: string
+  cpf: string
 }
 
 export interface AddressState {
@@ -52,12 +49,6 @@ export interface DependentsState {
   phone: string
 }
 
-// export interface RegisterDataState {
-//   registrationData?: RegistrationDataState
-//   address?: AddressState
-//   dependents?: DependentsState[]
-// }
-
 export interface PhysicalPersonRegisterContextData {
   region: {
     get: RegionState
@@ -66,6 +57,10 @@ export interface PhysicalPersonRegisterContextData {
   selectedPlan: {
     get: SelectedPlan
     set: React.Dispatch<React.SetStateAction<SelectedPlan>>
+  }
+  registrationData: {
+    get: RegistrationDataState
+    set: React.Dispatch<React.SetStateAction<RegistrationDataState>>
   }
   address: {
     get: AddressState
@@ -79,24 +74,18 @@ export interface PhysicalPersonRegisterContextData {
     get: number
     set: React.Dispatch<React.SetStateAction<number>>
   }
+  planAllowDependentMajorAge: {
+    get: boolean
+    set: React.Dispatch<React.SetStateAction<boolean>>
+  }
   dependents: {
     get: DependentsState[]
     set: React.Dispatch<React.SetStateAction<DependentsState[]>>
   }
   finishRegister: () => void
-  // cpfHolder?: string
-  // isPatientLinkedCompany: boolean
-  // limitOfDependents: number
-  // initialRegisterData: RegisterDataState
-  // setInitialRegisterData: React.Dispatch<
-  //   React.SetStateAction<RegisterDataState>
-  // >
-  // setRegistrationData: React.Dispatch<
-  //   React.SetStateAction<RegistrationDataState | undefined>
-  // >
-  // onGetAddress: React.Dispatch<React.SetStateAction<AddressState | undefined>>
-  // setDependents: React.Dispatch<
-  //   React.SetStateAction<DependentsState[] | undefined>
-  // >
+  cpf: {
+    get: string
+    set: React.Dispatch<React.SetStateAction<string>>
+  }
   // resetData: () => void
 }

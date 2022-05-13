@@ -1,10 +1,11 @@
 import ButtonPrimary from '@/components/Button/Primary'
+import warningIcon from '@/assets/icons/alerts/warning.svg'
 
 import { useModal } from '@/hooks/useModal'
 
 import { Container } from './styles'
 
-export const NoHasPlansAvailable: React.FC = () => {
+export const NoHasPlansAvailableAge: React.FC = () => {
   const { closeModal } = useModal()
 
   const onCloseModal = () => {
@@ -13,11 +14,13 @@ export const NoHasPlansAvailable: React.FC = () => {
 
   return (
     <Container>
-      <h3>
-        Infelizmente não possuímos planos com quantidade
+      <img src={warningIcon} />
+
+      <p>
+        Infelizmente não possuímos planos para
         <br />
-        maiores de dependentes para a sua região
-      </h3>
+        Maiores de idade para a sua região
+      </p>
 
       <footer>
         <ButtonPrimary onClick={onCloseModal} data-test="closeModalButton">

@@ -2,60 +2,62 @@ import { useHistory } from 'react-router-dom'
 
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
+import warningIcon from '@/assets/icons/alerts/warning.svg'
 
 import { useModal } from '@/hooks/useModal'
 import { usePhysicalPersonRegister } from '../../../shared/hooks'
 
-import { NoHasPlansAvailable } from '../NoHasPlansAvailable'
+import { NoHasPlansAvailableAge } from '../NoHasPlansAvailableAge'
 
 import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN } from '@/routes/constants/namedRoutes/routes'
 
 import { Container } from './styles'
 
-interface UpgradePlanProps {
+interface UpgradePlanAgeProps {
   hasCoverage: boolean
-  limitDependentsPlan: number
 }
 
-export const UpgradePlan: React.FC<UpgradePlanProps> = ({
+export const UpgradePlanAge: React.FC<UpgradePlanAgeProps> = ({
   hasCoverage,
-  limitDependentsPlan,
 }) => {
   const history = useHistory()
-  const { patientWantsMinimumDependent } = usePhysicalPersonRegister()
+  const { planAllowDependentMajorAge } = usePhysicalPersonRegister()
   const { showMessage, closeModal } = useModal()
 
-  const onAccepUpgradePlan = () => {
+  const onAccepUpgradePlanAge = () => {
     if (hasCoverage) {
-      patientWantsMinimumDependent.set(limitDependentsPlan + 1)
+      planAllowDependentMajorAge.set(true)
+      closeModal()
       history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
     } else {
-      showMessage(NoHasPlansAvailable)
+      showMessage(NoHasPlansAvailableAge)
     }
   }
 
-  const onRejectUpgradePlan = () => {
+  const onRejectUpgradePlanAge = () => {
     closeModal()
   }
 
   return (
     <Container>
-      <h3>
-        Você só pode adicionar {limitDependentsPlan} dependentes
+      <img src={warningIcon} />
+
+      <p>
+        Seu plano permite somente dependentes menores de idade
         <br />
         Deseja fazer um upgrade de plano?
-      </h3>
+      </p>
 
       <footer>
         <OutlineButton
-          onClick={onRejectUpgradePlan}
-          data-test="rejectUpgradePlanButton"
+          onClick={onRejectUpgradePlanAge}
+          data-test="rejectUpgradePlanAgeButton"
         >
           Não
         </OutlineButton>
         <ButtonPrimary
-          onClick={onAccepUpgradePlan}
-          data-test="acceptUpgradePlanButton"
+          onClick={onAccepUpgradePlanAge}
+          data-test="acceptUpgradePlanAgeButton"
         >
           Sim
         </ButtonPrimary>

@@ -14,7 +14,7 @@ import { RegisterSuccess } from './messages/RegisterSuccess'
 import { DocumentsNotSended } from './messages/DocumentsNotSended'
 
 import {
-  // RegistrationDataState,
+  RegistrationDataState,
   // AddressState,
   // RegisterDataState,
   RegionState,
@@ -41,9 +41,9 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   //   {} as RegisterDataState,
   // )
 
-  // const [registrationData, setRegistrationData] = useState(
-  //   {} as RegistrationDataState | undefined,
-  // )
+  const [registrationData, setRegistrationData] = useState(
+    {} as RegistrationDataState,
+  )
 
   const [region, setRegion] = useState({} as RegionState)
 
@@ -55,6 +55,11 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
 
   const [patientWantsMinimumDependent, setPatientWantsMinimumDependent] =
     useState(0)
+
+  const [planAllowDependentMajorAge, setPlanAllowDependentMajorAge] =
+    useState(false)
+
+  const [cpf, setCpf] = useState('')
 
   useEffect(() => {
     console.log('🚀 ~ region', region)
@@ -155,6 +160,10 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   return (
     <PhysicalPersonRegisterContext.Provider
       value={{
+        registrationData: {
+          get: registrationData,
+          set: setRegistrationData,
+        },
         selectedPlan: {
           get: selectedPlan,
           set: setSelectedPlan,
@@ -175,11 +184,19 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
           get: patientWantsMinimumDependent,
           set: setPatientWantsMinimumDependent,
         },
+        planAllowDependentMajorAge: {
+          get: planAllowDependentMajorAge,
+          set: setPlanAllowDependentMajorAge,
+        },
         dependents: {
           get: dependents,
           set: setDependents,
         },
         finishRegister,
+        cpf: {
+          get: cpf,
+          set: setCpf,
+        },
 
         // cpfHolder: registrationData?.cpf,
         // setRegistrationData,

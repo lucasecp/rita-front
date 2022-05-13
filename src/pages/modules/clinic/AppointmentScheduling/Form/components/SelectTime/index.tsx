@@ -2,6 +2,7 @@ import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 import { Select } from '@/components/Form/Select'
 import { UseLoadingInput } from '@/hooks/useLoadingInput'
+import { parse } from 'date-fns'
 
 interface SelectTimeProps {
   idDoctor: string | number
@@ -24,10 +25,10 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
     horaFim: string
     diaSemana: number
   }
+  const [data, setData] = useState<dataFromApi[]>([])
 
   const getScheduleChosen = (data: dataFromApi[]) => {
-    const dateChosen = new Date(date).getDay()
-
+    const dateChosen = parse(date, 'dd/MM/yyyy', new Date()).getDay() + 1
     return data.filter((val) => val.diaSemana === dateChosen)
   }
 
@@ -45,10 +46,10 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
       if (index === 0) {
         ac = val.horaInicio
       }
-      const current = formatedDate(ac)
+      const current = formatedDate(val.horaInicio)
       const previous = formatedDate(array[index - 1]?.horaInicio)
 
-      if (previous && current > previous) {
+      if (previous && current < previous) {
         ac = val.horaInicio
         return ac
       }
@@ -63,10 +64,10 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
         ac = val.horaFim
       }
 
-      const current = formatedDate(ac)
-      const next = formatedDate(array[index + 1]?.horaFim)
+      const current = formatedDate(val.horaFim)
+      const next = formatedDate(array[index - 1]?.horaFim)
 
-      if (next && current < next) {
+      if (next && current > next) {
         ac = val.horaFim
         return ac
       }
@@ -76,34 +77,48 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
   }
 
   const mapSpecialistsOfClinic = (data: dataFromApi[]) => {
-    const timeList = []
     const timesInDay = getScheduleChosen(data)
 
-    // quantas horas cada opção vai ter
+    if (!timesInDay.length) {
+      return
+    }
+
+    const timeList = []
 
     const start = getSmallerTimeOfSchedule(timesInDay)
     const endDate = getBiggestTimeOfSchedule(timesInDay)
 
-    const initialDateNum = Number(start.slice(0, 5).replace(':', '.'))
-    const endDateNum = Number(endDate.slice(0, 5).replace(':', '.'))
+    const initialDateNum = start.slice(0, 5).replace(':', '.')
+    const endDateNum = endDate.slice(0, 5).replace(':', '.')
 
-    const amountTimes = Math.floor(endDateNum - initialDateNum) 
-
+    const amountTimes = Math.floor(Number(endDateNum) - Number(initialDateNum))
 
     for (let i = 0; i < amountTimes; i++) {
-      const calcStart = String(initialDateNum + i).replace('.', ':')
-      const calEnd = String(Number(calcStart.replace(':', '.')) + 1).replace(
-        '.',
-        ':',
-      )
+      const calcStart =
+        String(Number(initialDateNum.slice(0, 2)) + i) +
+        initialDateNum.slice(2, 5)
 
-      let text = `${calcStart} - ${calEnd}`
+      const calEnd =
+        String(Number(initialDateNum.slice(0, 2)) + i + 1) +
+        initialDateNum.slice(2, 5)
 
+      const startResult = calcStart.replace('.', ':')
+      const endResult = calEnd.replace('.', ':')
+
+      const setTwoDigits = (value: string) => '0' + value
+      const onlyOneDigit = (value: string) => value.split(':')[0].length === 1
+
+      let text = `${
+        onlyOneDigit(startResult) ? setTwoDigits(startResult) : startResult
+      } - ${onlyOneDigit(endResult) ? setTwoDigits(endResult) : endResult}`
+
+      // no último horário renderizar até o fim
       if (amountTimes === i + 1) {
-        text = `${calcStart} - ${String(
-          Number(calcStart.replace(':', '.')) + 2,
+        text = `${startResult} - ${String(
+          Number(calcStart.replace(':', '.')) + 1,
         ).slice(0, 2)}:00`
       }
+
       timeList.push({ id: text, label: text })
     }
     return timeList
@@ -116,9 +131,8 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
         const { data } = await apiAdmin.get(
           `/clinica/59/medico/${idDoctor}/agenda`,
         )
-        console.log(mapSpecialistsOfClinic(data))
 
-        setSpecialtysOptions(mapSpecialistsOfClinic(data))
+        setData(data)
       } catch (error) {
       } finally {
         LoadingInput.turnOff()
@@ -126,11 +140,15 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
     }
 
     getSpecialists()
+  }, [])
+
+  useEffect(() => {
+    setSpecialtysOptions(mapSpecialistsOfClinic(data))
   }, [date])
 
   return (
     <Select
-      label="Especialista:"
+      label="Horário de agendamento:"
       labelDefaultOption={LoadingMessage}
       value={time}
       setValue={setTime}
