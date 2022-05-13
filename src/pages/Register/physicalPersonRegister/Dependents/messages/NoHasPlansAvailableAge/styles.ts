@@ -1,16 +1,28 @@
 import styled from 'styled-components'
+import colors from '@/styles/colors'
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  align-items: center;
 
-  > h3 {
-    font-size: 18px;
+  > img {
+    width: 56px;
+  }
+
+  > p {
     font-weight: 500;
-    line-height: 40px;
-    color: #6a6a6a;
+    font-size: 20px;
+    line-height: 25px;
+
+    color: ${colors.gray.dark};
     text-align: center;
+
+    min-width: 450px;
+  }
+
+  > * + * {
+    margin-top: 24px;
   }
 
   > footer {
