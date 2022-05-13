@@ -25,7 +25,7 @@ import { DependentData } from './types'
 import { Container } from './styles'
 
 export const Dependents: React.FC = () => {
-  const { region, dependents, selectedPlan, cpfHolder, finishRegister } =
+  const { region, dependents, selectedPlan, cpf, finishRegister } =
     usePhysicalPersonRegister()
   const history = useHistory()
   const { showMessage } = useModal()
@@ -79,7 +79,7 @@ export const Dependents: React.FC = () => {
       showMessage(AddDependent, {
         dependents: allDependents,
         onGetDependents: setAllDependents,
-        holderCpf: cpfHolder.get,
+        holderCpf: cpf.get,
         planAllowMajorAge,
       })
     }
@@ -91,7 +91,7 @@ export const Dependents: React.FC = () => {
       dependentData: dependent,
       dependents: allDependents,
       onGetDependents: setAllDependents,
-      holderCpf: cpfHolder.get,
+      holderCpf: cpf.get,
       planAllowMajorAge,
     })
   }
