@@ -19,6 +19,19 @@ export const Container = styled.div`
     margin-top: 18px;
   }
 
+  > section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    align-items: start;
+    gap: 18px;
+    margin: 18px 0 32px;
+
+    > p {
+      color: ${colors.gray.middle};
+    }
+  }
+
   > form {
     margin-top: 24px;
   }

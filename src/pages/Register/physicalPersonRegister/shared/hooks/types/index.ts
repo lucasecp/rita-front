@@ -10,6 +10,7 @@ export interface PlanState {
   name: string | ''
   allowedMajorAge: boolean | null
   maximumDependentsQuantity: number | null
+  price: string | ''
 }
 
 export interface RegistrationDataState {

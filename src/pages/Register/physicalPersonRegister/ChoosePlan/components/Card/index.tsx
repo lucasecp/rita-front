@@ -16,6 +16,7 @@ export interface SelectedPlan {
   name: string | ''
   allowedMajorAge: boolean | null
   maximumDependentsQuantity: number | null
+  price: string | ''
 }
 
 interface CardProps {
@@ -43,6 +44,7 @@ export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
           name: plan.name,
           allowedMajorAge: plan.allowedMajorAge,
           maximumDependentsQuantity: plan.maximumDependentsQuantity,
+          price: plan.price,
         })
       }
     >
