@@ -12,6 +12,7 @@ import validateCreditCardExpirationDateAsBoolean from '@/helpers/validateCreditC
 import validateCreditCardSecurityCodeAsBoolean from '@/helpers/validateCreditCardSecurityCode'
 
 type CreditCardFormProps = {
+  resetOnCancel?: boolean
   onSubmit?: (model: any) => void
   onCancel?: () => void
 }
@@ -46,6 +47,7 @@ function validateName(value?: string | null) {
 }
 
 export const CreditCardForm: React.FC<CreditCardFormProps> = ({
+  resetOnCancel = true,
   onSubmit,
   onCancel = undefined,
 }) => {
@@ -88,11 +90,13 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
   }
 
   function handleReset() {
-    setErrors({})
-    setNumber('')
-    setExpireAt('')
-    setSecurityCode('')
-    setName('')
+    if (resetOnCancel) {
+      setErrors({})
+      setNumber('')
+      setExpireAt('')
+      setSecurityCode('')
+      setName('')
+    }
 
     onCancel && onCancel()
   }

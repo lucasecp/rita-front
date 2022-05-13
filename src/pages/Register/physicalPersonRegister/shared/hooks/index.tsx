@@ -14,7 +14,7 @@ import { RegisterSuccess } from './messages/RegisterSuccess'
 import { DocumentsNotSended } from './messages/DocumentsNotSended'
 
 import {
-  // RegistrationDataState,
+  RegistrationDataState,
   // AddressState,
   // RegisterDataState,
   RegionState,
@@ -40,9 +40,9 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   //   {} as RegisterDataState,
   // )
 
-  // const [registrationData, setRegistrationData] = useState(
-  //   {} as RegistrationDataState | undefined,
-  // )
+  const [registrationData, setRegistrationData] = useState(
+    {} as RegistrationDataState,
+  )
 
   // const [address, setAddress] = useState({} as AddressState | undefined)
 
@@ -150,6 +150,10 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   return (
     <PhysicalPersonRegisterContext.Provider
       value={{
+        registrationData: {
+          get: registrationData,
+          set: setRegistrationData,
+        },
         selectedPlan: {
           get: selectedPlan,
           set: setSelectedPlan,

@@ -1,6 +1,7 @@
 import { Route } from '../custom.routes'
 
 import {
+  PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA,
   PHYSICAL_PERSON_REGISTER_CHOOSE_REGION,
   PHYSICAL_PERSON_REGISTER_DOCUMENTS,
   PHYSICAL_PERSON_REGISTER_DEPENDENTS,
@@ -9,6 +10,7 @@ import {
   PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS,
 } from '../constants/namedRoutes/routes'
 
+import { RegistrationData } from '@/pages/Register/physicalPersonRegister/RegistrationData'
 import { ChooseRegion } from '@/pages/Register/physicalPersonRegister/ChooseRegion'
 import { Documents } from '@/pages/Register/physicalPersonRegister/Documents'
 import { Dependents } from '@/pages/Register/physicalPersonRegister/Dependents'
@@ -17,6 +19,10 @@ import { ChoosePlans } from '@/pages/Register/physicalPersonRegister/ChoosePlan'
 import { PlanDetails } from '@/pages/Register/physicalPersonRegister/PlanDetails'
 
 const registerRoutes = [
+  {
+    path: PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA,
+    component: RegistrationData,
+  },
   {
     path: PHYSICAL_PERSON_REGISTER_CHOOSE_REGION,
     component: ChooseRegion,

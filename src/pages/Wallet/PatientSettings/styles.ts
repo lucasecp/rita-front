@@ -12,6 +12,9 @@ export const Container = styled.div`
     box-shadow: rgb(223 210 255 / 15%) 0px 2px 8px 0px;
     border-radius: 8px;
 
+    display: flex;
+    flex-flow: column nowrap;
+
     h3 {
       font-size: 24px;
       color: ${colors.gray.dark};
@@ -30,6 +33,10 @@ export const Container = styled.div`
       flex-flow: row nowrap;
       gap: 24px;
 
+      margin-top: 24px;
+    }
+
+    > form {
       margin-top: 24px;
     }
 
