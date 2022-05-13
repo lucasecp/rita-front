@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
   return (
     <Container>
       <LogoIcon />
-      <CustomTooltip label="v1.2.10.1063">
+      <CustomTooltip label="v1.2.11.1064">
         <h6>Rita Saúde</h6>
       </CustomTooltip>
       <Time className="text-end">{dateNow}</Time>
