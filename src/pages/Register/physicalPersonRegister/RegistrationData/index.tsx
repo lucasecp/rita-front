@@ -42,7 +42,7 @@ export interface ErrorState {
 }
 
 export const RegistrationData: React.FC = () => {
-  const { registrationData } = usePhysicalPersonRegister()
+  const { registrationData, cpfHolder } = usePhysicalPersonRegister()
   const { showMessage } = useModal()
   const history = useHistory()
 
@@ -52,7 +52,7 @@ export const RegistrationData: React.FC = () => {
   const [gender, setGender] = useState('')
   const [birthdate, setBirthdate] = useState('')
   const [phone, setPhone] = useState('')
-  const [cpf, setCpf] = useState('')
+  const [cpf, setCpf] = useState(cpfHolder.get)
   const [terms, setTerms] = useState(false)
   const [errors, setErrors] = useState({} as ErrorState)
 
@@ -122,7 +122,7 @@ export const RegistrationData: React.FC = () => {
         birthdate,
         phone,
         email,
-        cpf: '367.527.674-08',
+        cpf,
       })
 
       // history.push(Address)
@@ -136,7 +136,7 @@ export const RegistrationData: React.FC = () => {
       <Container>
         <ExitAndSteps currentStep={1} />
         <main>
-          <h1>Dados Cadastrais</h1>
+          <h1 data-test="RegistrationDataTitle">Dados Cadastrais</h1>
           <InputText
             label="Nome Completo*:"
             value={name}
@@ -146,6 +146,7 @@ export const RegistrationData: React.FC = () => {
             msgError={errors.name}
             maxLength={100}
             onlyLetter
+            data-test="registrationDataNameField"
           />
           <section>
             <InputEmail
@@ -156,6 +157,7 @@ export const RegistrationData: React.FC = () => {
               checkHasError={errorMessage}
               onKeyUp={checkConfirmEmail}
               onBlur={sendErrorMessage}
+              data-test="registrationDataEmailField"
             />
             <InputText
               autoComplete="off"
@@ -167,6 +169,7 @@ export const RegistrationData: React.FC = () => {
               msgError={errors.confirmEmail}
               onPaste={(e) => e.preventDefault()}
               maxLength={100}
+              data-test="registrationDataConfirmEmailField"
             />
             <Select
               label="Gênero*:"
@@ -180,6 +183,7 @@ export const RegistrationData: React.FC = () => {
               hasError={errors.gender}
               value={gender}
               msgError={errors.gender}
+              data-test="registrationDataGenderField"
             />
             <InputMask
               label="Data de Nascimento*:"
@@ -190,6 +194,7 @@ export const RegistrationData: React.FC = () => {
               autoComplete="off"
               msgError={errors.birthdate}
               onKeyUp={checkMinorAge}
+              data-test="registrationDataBirthdateField"
             />
             <InputMask
               label="Celular*:"
@@ -198,6 +203,7 @@ export const RegistrationData: React.FC = () => {
               setValue={setPhone}
               hasError={!!errors.phone}
               msgError={errors.phone}
+              data-test="registrationDataPhoneField"
             />
             <InputMask
               label="CPF*:"
@@ -207,6 +213,7 @@ export const RegistrationData: React.FC = () => {
               hasError={!!errors.cpf}
               disabled
               msgError={errors.cpf}
+              data-test="registrationDataCpfField"
             />
           </section>
           <Checkbox
@@ -223,6 +230,7 @@ export const RegistrationData: React.FC = () => {
             checked={terms}
             setValue={setTerms}
             messageError={errors.terms}
+            data-test="registrationDataTermsField"
           />
         </main>
         <footer>
