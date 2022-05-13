@@ -59,7 +59,7 @@ export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
           </CheckField>
         </div>
       </div>
-      <h3>inclusão de Dependentes</h3>
+      <h3>Inclusão de Dependentes</h3>
       <ul>
         <li data-test={`maximumDependentsQuantityCard-${plan.idPlan}`}>
           {plan.maximumDependentsQuantity ? 'Sim' : 'Não'}

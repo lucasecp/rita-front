@@ -1,4 +1,5 @@
 import ButtonPrimary from '@/components/Button/Primary'
+import warningIcon from '@/assets/icons/alerts/warning.svg'
 
 import { useModal } from '@/hooks/useModal'
 
@@ -13,11 +14,13 @@ export const NoHasPlansAvailableQuantity: React.FC = () => {
 
   return (
     <Container>
-      <h3>
+      <img src={warningIcon} />
+
+      <p>
         Infelizmente não possuímos planos com quantidade
         <br />
-        maiores de dependentes para a sua região
-      </h3>
+        Maiores de dependentes para a sua região
+      </p>
 
       <footer>
         <ButtonPrimary onClick={onCloseModal} data-test="closeModalButton">

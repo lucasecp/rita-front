@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom'
 
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
+import warningIcon from '@/assets/icons/alerts/warning.svg'
 
 import { useModal } from '@/hooks/useModal'
 import { usePhysicalPersonRegister } from '../../../shared/hooks'
@@ -28,6 +29,7 @@ export const UpgradePlanQuantity: React.FC<UpgradePlanQuantityProps> = ({
   const onAcceptUpgradePlanQuantity = () => {
     if (hasCoverage) {
       patientWantsMinimumDependent.set(limitDependentsPlan + 1)
+      closeModal()
       history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
     } else {
       showMessage(NoHasPlansAvailableQuantity)
@@ -40,11 +42,13 @@ export const UpgradePlanQuantity: React.FC<UpgradePlanQuantityProps> = ({
 
   return (
     <Container>
-      <h3>
+      <img src={warningIcon} />
+
+      <p>
         Você só pode adicionar {limitDependentsPlan} dependentes
         <br />
         Deseja fazer um upgrade de plano?
-      </h3>
+      </p>
 
       <footer>
         <OutlineButton

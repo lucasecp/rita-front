@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom'
 
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
+import warningIcon from '@/assets/icons/alerts/warning.svg'
 
 import { useModal } from '@/hooks/useModal'
 import { usePhysicalPersonRegister } from '../../../shared/hooks'
@@ -26,6 +27,7 @@ export const UpgradePlanAge: React.FC<UpgradePlanAgeProps> = ({
   const onAccepUpgradePlanAge = () => {
     if (hasCoverage) {
       planAllowDependentMajorAge.set(true)
+      closeModal()
       history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN)
     } else {
       showMessage(NoHasPlansAvailableAge)
@@ -38,11 +40,13 @@ export const UpgradePlanAge: React.FC<UpgradePlanAgeProps> = ({
 
   return (
     <Container>
-      <h3>
+      <img src={warningIcon} />
+
+      <p>
         Seu plano permite somente dependentes menores de idade
         <br />
         Deseja fazer um upgrade de plano?
-      </h3>
+      </p>
 
       <footer>
         <OutlineButton
