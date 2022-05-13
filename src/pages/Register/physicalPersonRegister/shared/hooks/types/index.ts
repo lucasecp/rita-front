@@ -83,7 +83,7 @@ export interface PhysicalPersonRegisterContextData {
     set: React.Dispatch<React.SetStateAction<DependentsState[]>>
   }
   finishRegister: () => void
-  cpfHolder: {
+  cpf: {
     get: string
     set: React.Dispatch<React.SetStateAction<string>>
   }

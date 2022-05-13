@@ -18,12 +18,12 @@ import { Dependents } from '@/pages/Register/physicalPersonRegister/Dependents'
 import { Payment } from '@/pages/Register/physicalPersonRegister/Payment'
 import { ChoosePlans } from '@/pages/Register/physicalPersonRegister/ChoosePlan'
 import { PlanDetails } from '@/pages/Register/physicalPersonRegister/PlanDetails'
-import { CpfHolder } from '@/pages/Register/physicalPersonRegister/CpfHolder'
+import { Cpf } from '@/pages/Register/physicalPersonRegister/Cpf'
 
 const registerRoutes = [
   {
     path: PHYSICAL_PERSON_REGISTER_CPF_HOLDER,
-    component: CpfHolder,
+    component: Cpf,
   },
   {
     path: PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA,

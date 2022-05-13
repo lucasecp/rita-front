@@ -13,20 +13,25 @@ import { InvalidCpf } from './messages/InvalidCpf'
 import { useModal } from '@/hooks/useModal'
 
 import { usePhysicalPersonRegister } from '../shared/hooks'
+import { useHistory } from 'react-router'
+import { PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA } from '@/routes/constants/namedRoutes/routes'
 
-export const CpfHolder: React.FC = () => {
+export const Cpf: React.FC = () => {
+  const history = useHistory()
   const { showMessage } = useModal()
 
-  const { cpfHolder } = usePhysicalPersonRegister()
+  const { cpf } = usePhysicalPersonRegister()
 
   const handleConfirm = async () => {
-    if (cpfHolder.get.length === 0) {
+    if (cpf.get.length === 0) {
       return showMessage(CpfEmpty)
     }
 
-    if (!validateCpf(cpfHolder.get)) {
+    if (!validateCpf(cpf.get)) {
       return showMessage(InvalidCpf)
     }
+
+    history.push(PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA)
   }
 
   return (
@@ -38,8 +43,8 @@ export const CpfHolder: React.FC = () => {
             <InputMask
               mask="999.999.999-99"
               placeholder="___.___.___-__"
-              value={cpfHolder.get}
-              setValue={cpfHolder.set}
+              value={cpf.get}
+              setValue={cpf.set}
               name="cpf"
             />
             <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
