@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from './styles'
 
-const ServiceSchedule = ({ dataSchedule = [{}] }) => {
+const ServiceSchedule = ({ dataSchedule = [] }) => {
   const [daysEmpty, setDaysEmpty] = useState([])
   const hasDayInSchedule = (day) => {
     return dataSchedule.some(
@@ -19,7 +19,7 @@ const ServiceSchedule = ({ dataSchedule = [{}] }) => {
   }, [dataSchedule])
   console.log(daysEmpty, dataSchedule)
 
-  return daysEmpty.length  ? (
+  return daysEmpty.length <= 7 ? (
     <Container>
       <header>
         <h5>Agenda de atendimento</h5>
