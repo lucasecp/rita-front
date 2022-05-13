@@ -4,6 +4,7 @@ import { useDialog } from '@/hooks/useDialog'
 import ButtonOutline from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 
+import { ReactComponent as ExclamationCircleIcon } from '@/assets/icons/exclamation-circle.svg'
 import { Container } from './styles'
 
 export const DialogConfirmation: React.FC<
@@ -19,16 +20,20 @@ export const DialogConfirmation: React.FC<
 
   function handleCancel() {
     dialogClose()
-    onTruthy && onTruthy()
+    onFalsy && onFalsy()
   }
 
   function handleConfirm() {
     dialogClose()
-    onFalsy && onFalsy()
+    onTruthy && onTruthy()
   }
 
   return (
     <Container>
+      <header>
+        <ExclamationCircleIcon />
+      </header>
+
       <section>
         <p>{message}</p>
       </section>

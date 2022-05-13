@@ -24,7 +24,7 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   const { showMessage, showSimple } = useModal()
   const { Loading } = useLoading()
 
-  const [step, setStep] = useState(2)
+  const [step, setStep] = useState(1)
   const stepAmount = 3
 
   const [profissionalInfo, setProfissionalInfo] = useState<ProfissionalInfoI>(
