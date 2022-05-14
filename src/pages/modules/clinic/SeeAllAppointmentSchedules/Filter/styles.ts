@@ -13,12 +13,29 @@ export const Container = styled.div`
       grid-template-columns: 100%;
     }
   }
+
+  > div:nth-child(2) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    @media (max-width: 767px) {
+      grid-template-columns: 100%;
+    }
+    > section:first-child {
+      display: flex;
+      gap: 24px;
+      margin-top: 24px;
+      > div:nth-child(2), div:nth-child(3) {
+        > input {
+          width: 80px;
+        }
+      }
+    }
+  }
 `
 
 export const BtnGroup = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin: 24px 0 -16px 0;
+   margin-top: 31px;
+   width: 340px;
   > button:first-child {
     margin-right: 24px;
   }

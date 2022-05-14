@@ -5,7 +5,7 @@ import Content from './Content'
 import { TableProps } from '../types/index'
 
 const Table: React.FC<TableProps> = ({
-  specialists,
+  schedulers,
   order,
   setOrder,
   setMakeRequest,
@@ -13,7 +13,7 @@ const Table: React.FC<TableProps> = ({
   return (
     <Container>
       <Header order={order} setOrder={setOrder} />
-      <Content specialists={specialists} setMakeRequest={setMakeRequest} />
+      <Content schedulers={schedulers} setMakeRequest={setMakeRequest} />
     </Container>
   )
 }

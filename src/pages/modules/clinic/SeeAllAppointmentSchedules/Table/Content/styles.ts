@@ -64,7 +64,7 @@ export const Status = styled.li<StatusTypeProps>`
   }
 
   ${({ type }) =>
-    type === 'Ativo' &&
+    type === '' &&
     css`
       > span {
         background: ${colors.green.light};
@@ -72,7 +72,7 @@ export const Status = styled.li<StatusTypeProps>`
       }
     `}
   ${({ type }) =>
-    type === 'Negado' &&
+    type === '' &&
     css`
       > span {
         background: ${colors.orange.middleDark};
@@ -80,7 +80,7 @@ export const Status = styled.li<StatusTypeProps>`
       }
     `}
   ${({ type }) =>
-    type === 'Pendente' &&
+    type === 'Agendado' &&
     css`
       > span {
         background: ${colors.pink.middle};
@@ -88,7 +88,7 @@ export const Status = styled.li<StatusTypeProps>`
       }
     `}
   ${({ type }) =>
-    type === 'Inativo' &&
+    type === '' &&
     css`
       > span {
         background: ${colors.gray.middleLight};

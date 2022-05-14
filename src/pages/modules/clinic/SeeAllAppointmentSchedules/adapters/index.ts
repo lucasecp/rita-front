@@ -1,19 +1,25 @@
-import { formatCpf } from '@/helpers/formatCpf'
-import { DataSpecialist } from '../types'
+import { DataScheduler } from '../types'
 
-export const fromApi = (specialistInfo: any[]): DataSpecialist[] => {
-  return specialistInfo.map((spec) => ({
-    id: spec.idMedico,
-    name: spec.nome,
-    cpf: formatCpf(spec.cpf) || '-',
-    status: spec.status || '-',
-    registerNumber: spec.registroProfissional || '-',
-    // issuingAgency: spec.orgaoEmissor?.descricao
-    //   ? spec.orgaoEmissor?.descricao + ' ' + spec.ufOrgaoEmissor.toUpperCase()
-    //   : '-',
-    issuingAgency: {
-      name: spec.orgaoEmissor?.descricao || '',
-      profissionalRegister: spec.registroProfissional || '',
+export const fromApi = (dataSchedulers: any[]): DataScheduler[] => {
+  return dataSchedulers.map((item) => ({
+    id: item.id,
+    startDate: item.dataInicio,
+    endDate: item.dataFim,
+    startTime: item.horaInicio,
+    endTime: item.horaFim,
+    status: item.status,
+    price: item.preco,
+    specialtys: {
+      idSpecialtys: item.especialidade.idEspecialidade,
+      description: item.especialidade.descricao
     },
+    patient: {
+      idPatient: item.paciente.idPaciente,
+      name: item.paciente.nome
+    },
+    specialist: {
+      idSpecialist: item.medico.idMedico,
+      name: item.medico.nome
+    }
   }))
 }

@@ -10,14 +10,14 @@ import apiAdmin from '@/services/apiAdmin'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 import { fromApi } from './adapters'
-import { SpecialistI } from './types'
+import { IScheduler } from './types'
 
 const AppointmentSchedules: React.FC = () => {
   const [queryApi, setQueryApi] = useState('')
   const [filters, setFilters] = useState<any[]>([])
   const [order, setOrder] = useState({})
   const [makeRequest, setMakeRequest] = useState(0)
-  const [specialists, setSpecialists] = useState<SpecialistI>({
+  const [scheduler, setScheduler] = useState<IScheduler>({
     total: 0,
     data: [],
   })
@@ -33,11 +33,13 @@ const AppointmentSchedules: React.FC = () => {
       try {
         Loading.turnOn()
         const { data } = await apiAdmin(
-          `/clinica/${59}/medico${queryApi}${
+          `/clinica/${59}/agenda-pessoal${queryApi}${
             queryFilterString(filters) + queryOrderString(order)
           }`,
         )
-        setSpecialists({ total: data.total, data: fromApi(data.medicos) })
+        console.log(data)
+        console.log(`/clinica/${59}/agenda-pessoal${queryApi}${queryFilterString(filters) + queryOrderString(order)}`)
+        setScheduler({ total: data.total, data: fromApi(data) })
       } catch (error) {
       } finally {
         Loading.turnOff()
@@ -55,9 +57,9 @@ const AppointmentSchedules: React.FC = () => {
             setOrder={setOrder}
             order={order}
             setMakeRequest={setMakeRequest}
-            specialists={specialists}
+            schedulers={scheduler}
           />
-          <Pagination total={specialists?.total} setQuery={setQueryApi} />
+          <Pagination total={scheduler?.total} setQuery={setQueryApi} />
         </Content>
       </DefaultLayout>
     </Container>

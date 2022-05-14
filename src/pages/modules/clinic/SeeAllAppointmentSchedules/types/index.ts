@@ -3,36 +3,44 @@ interface OrderI {
   value?: string
 }
 
-export type StatusFromApi = 'I' | 'P' | 'A' | 'N'
-
-export interface DataSpecialist {
-  id: string
-  name: string
-  cpf: string
-  issuingAgency: {
+export interface DataScheduler {
+  id: number,
+  startDate: string,
+  endDate: string,
+  startTime: string,
+  endTime: string,
+  status: string,
+  price: number,
+  specialtys: {
+    idSpecialtys: number,
+    description: string
+  },
+  patient: {
+    idPatient: number,
     name: string
-    profissionalRegister: string
+  },
+  specialist: {
+    idSpecialist: number,
+    name: string
   }
-  registerNumber: string
-  status: StatusFromApi
 }
 
-export interface SpecialistI {
+export interface IScheduler {
   total: number
-  data?: DataSpecialist[]
+  data?: DataScheduler[]
 }
 
 type SetOrder = (order: OrderI) => void
 
 export interface TableProps {
-  specialists: SpecialistI
+  schedulers: IScheduler
   setOrder: SetOrder
   order: OrderI
   setMakeRequest: (x: number) => void
 }
 
 export interface ContentProps {
-  specialists: SpecialistI
+  schedulers: IScheduler
   setMakeRequest: (x: number) => void
 }
 

@@ -1,21 +1,18 @@
+import React, { useEffect, useState } from 'react'
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import InputText from '@/components/Form/InputText'
 import CustomMultSelect, {
   MultiSelectOption,
 } from '@/components/Form/MultSelect'
-import React, { useEffect, useState } from 'react'
 import MultSelectSpecialtys from '../Components/MultSelectSpecialtys'
-import { staticStatus } from '../static/fieldsMultSelect'
 import { BtnGroup, Container } from './styles'
-import formatMultSelectValue from '@/helpers/formatMultSelectValue'
 import { verifyTypedFields } from '../helpers/verifyTypedFields'
 import InputMask from '@/components/Form/InputMask'
 import { fieldsApi } from '../static/fieldsApi'
-import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
 import useQueryParams from './useQueryParams'
-import validateCpf from '@/helpers/validateCpf'
-import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectIssuingAgency'
+/** Helpers */
+import { parse, isValid, format } from 'date-fns'
 
 interface FilterProps {
   setFilters: React.Dispatch<React.SetStateAction<any[]>>
@@ -34,14 +31,13 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     startTime: '',
     endTime: '',
     patient: '',
+    date: ''
   })
 
-  const arrayQuery = [
-    { specialist: fieldsApi.ESPECIALISTA, value: specialist },
-    { specialist: fieldsApi.ESPECIALISTA, value: patient },
-    { specialist: fieldsApi.DATA, value: date },
-    { specialist: fieldsApi.HORARIO_INICIO, value: startTime },
-    { specialist: fieldsApi.HORARIO_FIM, value: endTime },
+  let arrayQuery = [
+    { name: fieldsApi.DATA, value: date },
+    { name: fieldsApi.HORARIO_INICIO, value: startTime },
+    { name: fieldsApi.HORARIO_FIM, value: endTime },
   ]
 
   useEffect(() => {
@@ -50,18 +46,50 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
 
   const clearFields = () => {
     setSpecialist('')
+    setPatient('')
+    setDate('')
+    setStartTime('')
+    setEndTime('')
     setFilters([])
-    setErrors({ specialist: '', startTime: '', endTime: '', patient: '' })
-    window.localStorage.removeItem('@Rita/specialists-filter')
+    _setErrors()
+  }
+
+  const _setErrors = () => {
+    setErrors({ specialist: '', startTime: '', endTime: '', patient: '', date: '' })
   }
 
   const hasErrors = () => {
     let newErrors = false
-    setErrors({ specialist: '', startTime: '', endTime: '', patient: '' })
 
-    if (specialist.length < 3 && specialist) {
+    if (specialist.length < 3) {
       setErrors((errors) => ({ ...errors, specialist: 'Informe 3 letras ou mais' }))
       newErrors = true
+    }else {
+      setErrors((errors) => ({ ...errors, specialist: '' }))
+    }
+    if (patient.length < 3) {
+      setErrors((errors) => ({ ...errors, patient: 'Informe 3 letras ou mais' }))
+      newErrors = true
+    }else {
+      setErrors((errors) => ({ ...errors, patient: '' }))
+    }
+    if (date === '') {
+      setErrors((errors) => ({ ...errors, date: 'Campo obrigatório.' }))
+      newErrors = true
+    }else {
+      setErrors((errors) => ({ ...errors, date: '' }))
+    }
+    if (startTime == '') {
+      setErrors((errors) => ({ ...errors, startTime: 'Campo obrigatório.' }))
+      newErrors = true
+    }else{
+      setErrors((errors) => ({ ...errors, startTime: '' }))
+    }
+    if (endTime === '') {
+      setErrors((errors) => ({ ...errors, endTime: 'Campo obrigatório.' }))
+      newErrors = true
+    }else{
+      setErrors((errors) => ({ ...errors, endTime: '' }))
     }
     return newErrors
   }
@@ -70,13 +98,29 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     if (hasErrors()) {
       return
     }
-    window.localStorage.setItem(
-      '@Rita/specialists-filter',
-      JSON.stringify({
-        specialist
-      }),
-    )
+    _setErrors()
+    let parseDate = parse(date, 'dd/MM/yyyy', new Date())
+    const dateFormated = format(parseDate, 'yyyy-MM-dd')
+    arrayQuery = arrayQuery.map(item => {
+      if(item.name === fieldsApi.DATA){
+        item.value = dateFormated
+        return item
+      }else {
+        return item
+      }
+    })
     setFilters(verifyTypedFields(arrayQuery))
+  }
+
+  const onBlurDateValidate = () => {
+    hasErrors()
+    const dateFormated = parse(date, 'dd/MM/yyyy', new Date())
+    const result = isValid(dateFormated)
+    if(!result){
+      setErrors({...errors, date: 'Data inválida!' })
+    }else {
+      setErrors({...errors, date: '' })
+    }
   }
 
   return (
@@ -90,6 +134,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           maxLength={100}
           asError={!!errors.specialist}
           msgError={errors.specialist}
+          onBlur={hasErrors}
         />
         <InputText
           variation="secondary"
@@ -99,42 +144,59 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           maxLength={100}
           hasError={!!errors.patient}
           msgError={errors.patient}
+          onBlur={hasErrors}
         />
       </div>
       <div>
-      <InputMask
-          mask="99:99"
-          label="Hora Início:"
-          value={startTime}
-          setValue={setStartTime}
-          specialist="startTime"
-          hasError={!!errors.startTime}
-          msgError={errors.startTime}
-          variation="secondary"
-          placeholder="00:00"
-        />
+        <section>
+          <InputMask
+            mask="99/99/9999"
+            label="Data:"
+            value={date}
+            setValue={setDate}
+            specialist="startTime"
+            hasError={!!errors.date}
+            msgError={errors.date}
+            variation="secondary"
+            placeholder="00/00/0000"
+            onBlur={onBlurDateValidate}
+          />
+          <InputMask
+            mask="99:99"
+            label="Hora Início:"
+            value={startTime}
+            setValue={setStartTime}
+            specialist="startTime"
+            hasError={!!errors.startTime}
+            msgError={errors.startTime}
+            variation="secondary"
+            placeholder="00:00"
+            onBlur={hasErrors}
+          />
 
-        <InputMask
-          mask="99:99"
-          label="Hora Fim:"
-          value={endTime}
-          setValue={setEndTime}
-          specialist="endTime"
-          hasError={!!errors.endTime}
-          msgError={errors.endTime}
-          variation="secondary"
-          placeholder="00:00"
-        />
+          <InputMask
+            mask="99:99"
+            label="Hora Fim:"
+            value={endTime}
+            setValue={setEndTime}
+            specialist="endTime"
+            hasError={!!errors.endTime}
+            msgError={errors.endTime}
+            variation="secondary"
+            placeholder="00:00"
+            onBlur={hasErrors}
+          />
+        </section>
+        <BtnGroup>
+          <OutlineButton small variation="red" onClick={() => clearFields()}>
+            Limpar Filtro
+          </OutlineButton>
+          <ButtonPrimary small onClick={onFilter}>
+            Filtrar Resultados
+          </ButtonPrimary>
+        </BtnGroup>
       </div>
 
-      <BtnGroup>
-        <OutlineButton small variation="red" onClick={() => clearFields()}>
-          Limpar Filtro
-        </OutlineButton>
-        <ButtonPrimary medium onClick={onFilter}>
-          Filtrar Resultados
-        </ButtonPrimary>
-      </BtnGroup>
     </Container>
   )
 }

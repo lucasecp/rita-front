@@ -1,32 +1,30 @@
 import React from 'react'
 import { Container } from './styles'
-import DesassociateIcon from './Desassociate'
 import View from './View'
 import CustomTooltip from '@/components/Tooltip'
-import Schedule from './Schedule'
-import { DataSpecialist } from '../../../types'
+import { DataScheduler } from '../../../types'
 
 interface ActionsProps {
-  data: DataSpecialist
+  data: DataScheduler
   setMakeRequest: (x: number) => void
 }
 
 const Actions: React.FC<ActionsProps> = ({ data, setMakeRequest }) => {
   return (
     <Container>
-      <CustomTooltip label="Desassociar">
+      <CustomTooltip label="">
         <div>
-          <DesassociateIcon id={data.id} setMakeRequest={setMakeRequest} />
+          {/** Button Here */}
         </div>
       </CustomTooltip>
-      <CustomTooltip label="Visualizar">
+      <CustomTooltip label="">
         <div>
-          <View id={data.id} status={data.status}/>
+          {/** Button Here */}
         </div>
       </CustomTooltip>
-      <CustomTooltip label="Agenda">
+      <CustomTooltip label="">
         <div>
-          <Schedule data={data} />
+          {/** Button Here */}
         </div>
       </CustomTooltip>
     </Container>
