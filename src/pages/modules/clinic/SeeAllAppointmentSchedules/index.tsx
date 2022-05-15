@@ -37,8 +37,6 @@ const AppointmentSchedules: React.FC = () => {
             queryFilterString(filters) + queryOrderString(order)
           }`,
         )
-        console.log(data)
-        console.log(`/clinica/${59}/agenda-pessoal${queryApi}${queryFilterString(filters) + queryOrderString(order)}`)
         setScheduler({ total: data.total, data: fromApi(data) })
       } catch (error) {
       } finally {

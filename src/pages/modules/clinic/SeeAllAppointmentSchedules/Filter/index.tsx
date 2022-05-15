@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
+/** Components */
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
 import InputText from '@/components/Form/InputText'
-import CustomMultSelect, {
-  MultiSelectOption,
-} from '@/components/Form/MultSelect'
-import MultSelectSpecialtys from '../Components/MultSelectSpecialtys'
-import { BtnGroup, Container } from './styles'
-import { verifyTypedFields } from '../helpers/verifyTypedFields'
 import InputMask from '@/components/Form/InputMask'
-import { fieldsApi } from '../static/fieldsApi'
-import useQueryParams from './useQueryParams'
+import InputAutoCompleteSpecialist from '../Components/InputAutoCompleteSpecialist'
+/** Styles */
+import { BtnGroup, Container } from './styles'
 /** Helpers */
+import { verifyTypedFields } from '../helpers/verifyTypedFields'
+import { fieldsApi } from '../static/fieldsApi'
 import { parse, isValid, format } from 'date-fns'
 
 interface FilterProps {
@@ -19,13 +17,13 @@ interface FilterProps {
 }
 
 const Filter: React.FC<FilterProps> = ({ setFilters }) => {
-  const local = useQueryParams()
+  //const local = useQueryParams()
 
+  const [researchDoctor, setResearchDoctor] = useState('')
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
-  const [specialist, setSpecialist] = useState(local.specialist || '')
-  const [patient, setPatient] = useState(local.patient || '')
-  const [date, setDate] = useState(local.date || '')
+  const [patient, setPatient] = useState('')
+  const [date, setDate] = useState('')
   const [errors, setErrors] = useState({
     specialist: '',
     startTime: '',
@@ -38,14 +36,16 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     { name: fieldsApi.DATA, value: date },
     { name: fieldsApi.HORARIO_INICIO, value: startTime },
     { name: fieldsApi.HORARIO_FIM, value: endTime },
+    { name: fieldsApi.ESPECIALISTA, value: '' },
   ]
 
   useEffect(() => {
+    window.localStorage.removeItem('@Rita/InputAutoCompleteSpecialist/IdSpecialist')
     setFilters(verifyTypedFields(arrayQuery))
   }, [])
 
   const clearFields = () => {
-    setSpecialist('')
+    setResearchDoctor('')
     setPatient('')
     setDate('')
     setStartTime('')
@@ -58,83 +58,83 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     setErrors({ specialist: '', startTime: '', endTime: '', patient: '', date: '' })
   }
 
-  const hasErrors = () => {
-    let newErrors = false
+  // const hasErrors = () => {
+  //   let newErrors = false
 
-    if (specialist.length < 3) {
-      setErrors((errors) => ({ ...errors, specialist: 'Informe 3 letras ou mais' }))
-      newErrors = true
-    }else {
-      setErrors((errors) => ({ ...errors, specialist: '' }))
-    }
-    if (patient.length < 3) {
-      setErrors((errors) => ({ ...errors, patient: 'Informe 3 letras ou mais' }))
-      newErrors = true
-    }else {
-      setErrors((errors) => ({ ...errors, patient: '' }))
-    }
-    if (date === '') {
-      setErrors((errors) => ({ ...errors, date: 'Campo obrigatório.' }))
-      newErrors = true
-    }else {
-      setErrors((errors) => ({ ...errors, date: '' }))
-    }
-    if (startTime == '') {
-      setErrors((errors) => ({ ...errors, startTime: 'Campo obrigatório.' }))
-      newErrors = true
-    }else{
-      setErrors((errors) => ({ ...errors, startTime: '' }))
-    }
-    if (endTime === '') {
-      setErrors((errors) => ({ ...errors, endTime: 'Campo obrigatório.' }))
-      newErrors = true
-    }else{
-      setErrors((errors) => ({ ...errors, endTime: '' }))
-    }
-    return newErrors
-  }
+  //   if (researchDoctor.length < 3) {
+  //     setErrors((errors) => ({ ...errors, specialist: 'Campo obrigatório.' }))
+  //     newErrors = true
+  //   } else {
+  //     setErrors((errors) => ({ ...errors, specialist: '' }))
+  //   }
+  //   if (patient.length < 3) {
+  //     setErrors((errors) => ({ ...errors, patient: 'Informe 3 letras ou mais' }))
+  //     newErrors = true
+  //   } else {
+  //     setErrors((errors) => ({ ...errors, patient: '' }))
+  //   }
+  //   if (date === '') {
+  //     setErrors((errors) => ({ ...errors, date: 'Campo obrigatório.' }))
+  //     newErrors = true
+  //   } else {
+  //     setErrors((errors) => ({ ...errors, date: '' }))
+  //   }
+  //   if (startTime == '') {
+  //     setErrors((errors) => ({ ...errors, startTime: 'Campo obrigatório.' }))
+  //     newErrors = true
+  //   } else {
+  //     setErrors((errors) => ({ ...errors, startTime: '' }))
+  //   }
+  //   if (endTime === '') {
+  //     setErrors((errors) => ({ ...errors, endTime: 'Campo obrigatório.' }))
+  //     newErrors = true
+  //   } else {
+  //     setErrors((errors) => ({ ...errors, endTime: '' }))
+  //   }
+  //   return newErrors
+  // }
 
   const onFilter = () => {
-    if (hasErrors()) {
-      return
+    // if (hasErrors()) {
+    //   return
+    // }
+    // _setErrors()
+    if (date !== '') { /** Para evitar catch Invalid Date */
+      let parseDate = parse(date, 'dd/MM/yyyy', new Date())
+      const dateFormated = format(parseDate, 'yyyy-MM-dd')
+      arrayQuery = arrayQuery.map(item => {
+        if (item.name === fieldsApi.DATA) {
+          item.value = dateFormated
+          return item
+        } else {
+          return item
+        }
+      })
     }
-    _setErrors()
-    let parseDate = parse(date, 'dd/MM/yyyy', new Date())
-    const dateFormated = format(parseDate, 'yyyy-MM-dd')
-    arrayQuery = arrayQuery.map(item => {
-      if(item.name === fieldsApi.DATA){
-        item.value = dateFormated
-        return item
-      }else {
-        return item
-      }
-    })
+
+    const idSpecialist = window.localStorage.getItem('@Rita/InputAutoCompleteSpecialist/IdSpecialist')
+
     setFilters(verifyTypedFields(arrayQuery))
   }
 
   const onBlurDateValidate = () => {
-    hasErrors()
+    // hasErrors()
     const dateFormated = parse(date, 'dd/MM/yyyy', new Date())
     const result = isValid(dateFormated)
-    if(!result){
-      setErrors({...errors, date: 'Data inválida!' })
-    }else {
-      setErrors({...errors, date: '' })
+    if (!result) {
+      setErrors({ ...errors, date: 'Data inválida!' })
+    } else {
+      setErrors({ ...errors, date: '' })
     }
   }
 
   return (
     <Container>
       <div>
-        <InputText
-          variation="secondary"
-          label="Especialista:"
-          value={specialist}
-          setValue={setSpecialist}
-          maxLength={100}
-          asError={!!errors.specialist}
-          msgError={errors.specialist}
-          onBlur={hasErrors}
+        <InputAutoCompleteSpecialist
+          setValue={setResearchDoctor}
+          value={researchDoctor}
+          errors={errors}
         />
         <InputText
           variation="secondary"
@@ -144,7 +144,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           maxLength={100}
           hasError={!!errors.patient}
           msgError={errors.patient}
-          onBlur={hasErrors}
         />
       </div>
       <div>
@@ -171,7 +170,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
             msgError={errors.startTime}
             variation="secondary"
             placeholder="00:00"
-            onBlur={hasErrors}
           />
 
           <InputMask
@@ -184,7 +182,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
             msgError={errors.endTime}
             variation="secondary"
             placeholder="00:00"
-            onBlur={hasErrors}
           />
         </section>
         <BtnGroup>
