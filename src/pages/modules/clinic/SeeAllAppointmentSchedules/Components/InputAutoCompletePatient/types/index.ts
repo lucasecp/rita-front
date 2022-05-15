@@ -1,6 +1,6 @@
 export interface CompleteProps {
   setValue: (value: string) => void
-  hasErrors: () => void
+  hasErrors?: () => void
   value: string,
   errors: ErrorI
 }

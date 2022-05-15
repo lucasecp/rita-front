@@ -3,4 +3,5 @@ export const fieldsApi = {
   HORARIO_INICIO: 'horaInicio',
   HORARIO_FIM: 'HoraFim',
   ESPECIALISTA: 'idMedico',
+  PACIENTE: 'idPaciente'
 }

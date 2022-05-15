@@ -5,7 +5,7 @@ import { Container } from './styles'
 import { CompleteProps } from './types/index'
 /** Components */
 import InputText from '@/components/Form/InputText'
-import apiAdmin from '@/services/apiAdmin'
+import apiPatient from '@/services/apiPatient'
 import ItemSpecialty from './itemPatient'
 
 const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
@@ -15,13 +15,13 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   setValue,
 }) => {
 
-  const ENDPOINT_SPECIALIST = `clinica/${59}/medico?limit=100000&skip=0&status=A&status=P`
+  const ENDPOINT_SPECIALIST = `/paciente`
 
   const [options, setOptions] = useState<any[]>([])
   const [specialist, setSpecialist] = useState([])
 
   const getAllSpecialist = async () => {
-    let result = await apiAdmin.get(ENDPOINT_SPECIALIST)
+    let result = await apiPatient.get(ENDPOINT_SPECIALIST)
     result.data = result?.data?.medicos.map((item: any) => {
       return {
         idSpecialist: item.idMedico,
@@ -56,10 +56,10 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   }
 
   const onSelect = async (value: any) => {
-    let result = await apiAdmin.get(ENDPOINT_SPECIALIST)
+    let result = await apiPatient.get(ENDPOINT_SPECIALIST)
      result?.data?.medicos.filter((item: any) => {
       if(item.nome === value){
-        window.localStorage.setItem("@Rita/InputAutoCompleteSpecialist/IdSpecialist", JSON.stringify(Number(item.idMedico)))
+        window.localStorage.setItem("@Rita/InputAutoCompletePatient/IdPatient", JSON.stringify(Number(item.idMedico)))
       }
     })
   }
@@ -78,7 +78,7 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
         value={value}>
         <InputText
           variation="secondary"
-          label="Especialista:"
+          label="Paciente:"
           onBlur={hasErrors}
           onFocus={() => setOptions([])}
           hasError={!!errors.specialist}
