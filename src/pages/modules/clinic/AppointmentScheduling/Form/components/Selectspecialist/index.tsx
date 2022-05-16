@@ -2,6 +2,7 @@ import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 import { Select } from '@/components/Form/Select'
 import { UseLoadingInput } from '@/hooks/useLoadingInput'
+import { useAuth } from '@/hooks/login';
 
 interface SpecialistsProps {
   specialist: string | number
@@ -14,6 +15,7 @@ export const SelectSpecialists: React.FC<SpecialistsProps> = ({
 }) => {
   const [specialtysOptions, setSpecialtysOptions] = useState([])
   const { LoadingInput, LoadingMessage } = UseLoadingInput()
+  const { user } = useAuth()
 
   interface dataFromApi {
     medicos: {
@@ -33,7 +35,7 @@ export const SelectSpecialists: React.FC<SpecialistsProps> = ({
     const getSpecialists = async () => {
       try {
         LoadingInput.turnOn()
-        const { data } = await apiAdmin.get('/clinica/59/medico')
+        const { data } = await apiAdmin.get(`/clinica/${user.idClinica}/medico`)
 
         setSpecialtysOptions(mapSpecialistsOfClinic(data))
       } catch (error) {

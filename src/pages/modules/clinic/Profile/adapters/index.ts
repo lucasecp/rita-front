@@ -12,6 +12,7 @@ import {
 } from '../Helpers/transformData'
 import { MultiSelectOption } from '@/components/Form/MultSelect'
 
+
 export const fromApi = async (
   data: any,
   specialtys: any[],
@@ -51,9 +52,10 @@ export const toApi = (
   responsibleAdministrative: ResponsibleAdministrativeI,
   address: AddressClinicI,
   specialty: MultiSelectOption[],
+  idClinic: number,
 ): any => {
   return {
-    idClinica: 59,
+    idClinica: idClinic,
     descricao: dataClinic.description,
     razaoSocial: dataClinic.razaoSocial,
     status: dataClinic.status,

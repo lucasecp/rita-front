@@ -12,6 +12,7 @@ import { useModal } from '@/hooks/useModal'
 import Denied from '../messages/Denied'
 import { SpecialistDataI } from '../Types'
 import ConfirmAuthorizationStatus from '../messages/ConfirmAuthorizationStatus'
+import { useAuth } from '@/hooks/login'
 
 interface EditSpecialistProps {
   specialistData: SpecialistDataI
@@ -19,6 +20,7 @@ interface EditSpecialistProps {
 
 const EditSpecialist: React.FC<EditSpecialistProps> = ({ specialistData }) => {
   const history = useHistory()
+  const { user } = useAuth()
   const { showMessage } = useModal()
 
   const onCancel = () => {
@@ -44,7 +46,10 @@ const EditSpecialist: React.FC<EditSpecialistProps> = ({ specialistData }) => {
         {specialistData?.status === 'P' && (
           <PrimaryButton
             onClick={() =>
-              showMessage(Denied, { idDoctor: specialistData.id, idClinic: 59 })
+              showMessage(Denied, {
+                idDoctor: specialistData.id,
+                idClinic: user.idClinica,
+              })
             }
             variation="red"
           >

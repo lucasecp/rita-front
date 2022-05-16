@@ -12,11 +12,13 @@ import { UsersI } from './types'
 import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 import ButtonHeader from './Components/ButtonHeader'
+import { useAuth } from '@/hooks/login';
 
 const SeeAllSpecialists: React.FC = () => {
   const [queryApi, setQueryApi] = useState('')
   const [filters, setFilters] = useState<any[]>([])
   const [order, setOrder] = useState({})
+  const { user } = useAuth()
   const filterName = JSON.parse(
     window.localStorage.getItem('@Rita/clinic-users-filter'),
   )
@@ -31,7 +33,7 @@ const SeeAllSpecialists: React.FC = () => {
       Loading.turnOn()
 
       const { data } = await apiAdmin(
-        `/clinica/${59}/usuario${queryApi}${
+        `/clinica/${user.idClinica}/usuario${queryApi}${
           queryFilterString(filters) + queryOrderString(order)
         }`,
       )

@@ -8,7 +8,7 @@ import {
   setUserLocalStorage,
 } from '@/storage/user'
 
-import React, { createContext, useState, useContext } from 'react'
+import React, { createContext, useState, useContext, useEffect } from 'react'
 import { useLoading } from '../useLoading'
 import { useModal } from '../useModal'
 import InvalidCredences from './messages/InvalidCredences'
@@ -30,12 +30,39 @@ export default function AuthProvider({ children }) {
   const history = useHistory()
 
   const [user, setUser] = useState(getUserStorage() || null)
+  const [afterLogin, setAfterLogin] = useState(false)
 
   const setDataLogin = (payload) => {
     setUser(payload)
     setUserLocalStorage(payload)
     setHeaderToken(payload.token)
   }
+
+  const getClinic = async () => {
+    try {
+      const {data} = await apiUser.get('clinica')
+      console.log(data)
+
+      setDataLogin({
+        ...user,
+        idClinica: data.clinica[0].idClinica,
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    if (afterLogin) {
+      const admClinic = user.area.some(
+        (perfil) => perfil.grupoPerfil === 'Clinica/Especialista',
+      )
+      console.log(admClinic)
+      if (admClinic) {
+        getClinic()
+      }
+    }
+  }, [afterLogin])
 
   const pushToUrl = (url) => {
     if (!url) return history.push(INITIAL_PAGE)
@@ -86,7 +113,6 @@ export default function AuthProvider({ children }) {
         Loading.turnOn()
 
         const { data } = await apiUser.post('/login', payload)
-
         const dataUser = jwt(data.jwtToken)
 
         setDataLogin({
@@ -94,6 +120,7 @@ export default function AuthProvider({ children }) {
           cpf: payload.cpf,
           token: data.jwtToken,
         })
+        setAfterLogin(true)
         if (dataUser?.area.length > 1) {
           history.push(CHOOSE_PROFILE)
         } else {

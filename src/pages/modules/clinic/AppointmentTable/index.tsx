@@ -11,8 +11,10 @@ import { toast } from '../../../../styles/components/toastify/index'
 import OutlineButton from '@/components/Button/Outline'
 import { useModal } from '@/hooks/useModal'
 import CancelEdting from './messages/CancelEdting/index'
+import { useAuth } from '@/hooks/login'
 
 const AppointmentTable: React.FC = () => {
+  const { user } = useAuth()
   const [specialtys, setSpecialtys] = useState<SpecialtysI[]>([])
   const [isEdting, setEdting] = useState(false)
   const [fieldWasChanged, setFieldWasChanged] = useState(false)
@@ -28,7 +30,9 @@ const AppointmentTable: React.FC = () => {
     try {
       Loading.turnOn()
 
-      const { data } = await apiAdmin.get(`clinica/59/tabela-precos`)
+      const { data } = await apiAdmin.get(
+        `clinica/${user.idClinica}/tabela-precos`,
+      )
 
       setSpecialtys(fromApi(data.especialidades))
     } catch (error) {
@@ -52,7 +56,10 @@ const AppointmentTable: React.FC = () => {
 
     try {
       Loading.turnOn()
-      await apiAdmin.post(`/clinica/59/tabela-precos`, toApi(specialtysToApi))
+      await apiAdmin.post(
+        `/clinica/${user.idClinica}/tabela-precos`,
+        toApi(specialtysToApi),
+      )
 
       getSpecialtys()
 
