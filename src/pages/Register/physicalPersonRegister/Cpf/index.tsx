@@ -13,7 +13,7 @@ import { InvalidCpf } from './messages/InvalidCpf'
 import { useModal } from '@/hooks/useModal'
 
 import { usePhysicalPersonRegister } from '../shared/hooks'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import {
   PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA,
   REGISTER_PATIENT,
