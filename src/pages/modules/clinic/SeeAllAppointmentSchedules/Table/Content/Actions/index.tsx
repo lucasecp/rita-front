@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from './styles'
-import View from './View'
+import Edit from './View'
 import CustomTooltip from '@/components/Tooltip'
 import { DataScheduler } from '../../../types'
 
@@ -14,7 +14,7 @@ const Actions: React.FC<ActionsProps> = ({ data, setMakeRequest }) => {
     <Container>
       <CustomTooltip label="">
         <div>
-          {/** Button Here */}
+          <Edit idDoctor={data.specialist.idSpecialist} idScheduler={data.id}/>
         </div>
       </CustomTooltip>
       <CustomTooltip label="">

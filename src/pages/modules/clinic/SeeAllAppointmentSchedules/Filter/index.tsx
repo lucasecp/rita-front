@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 /** Components */
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
-import InputText from '@/components/Form/InputText'
 import InputMask from '@/components/Form/InputMask'
 import InputAutoCompleteSpecialist from '../Components/InputAutoCompleteSpecialist'
 import InputAutoCompletePatient from '../Components/InputAutoCompletePatient'
@@ -40,12 +39,20 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     { name: fieldsApi.PACIENTE, value: '' },
   ]
 
-  useEffect(() => {
+  const removeLocalStorages = () => {
     window.localStorage.removeItem('@Rita/InputAutoCompleteSpecialist/IdSpecialist')
+    window.localStorage.removeItem('@Rita/InputAutoCompletePatient/IdPatient')
+    window.localStorage.removeItem('@Rita/InputAutoCompletePatient/patients')
+  }
+
+  useEffect(() => {
+    removeLocalStorages()
     setFilters(verifyTypedFields(arrayQuery))
   }, [])
 
+
   const clearFields = () => {
+    removeLocalStorages()
     setResearchDoctor('')
     setPatient('')
     setDate('')

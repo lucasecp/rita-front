@@ -37,13 +37,14 @@ const AppointmentSchedules: React.FC = () => {
             queryFilterString(filters) + queryOrderString(order)
           }`,
         )
-        setScheduler({ total: data.total, data: fromApi(data) })
+        setScheduler({ total: data.length, data: fromApi(data) })
       } catch (error) {
       } finally {
         Loading.turnOff()
       }
     }
     getClinics()
+    console.log('queryApi', queryApi)
   }, [queryApi, filters, order, makeRequest])
 
   return (

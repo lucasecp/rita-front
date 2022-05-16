@@ -29,12 +29,15 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
       }
     })
 
-    const filteredArray = result.data.filter(function (ele, pos) {
+    /** @description Remove objeto duplicado. 👇 */
+    const uniqueArray = new Set()
+    const filteredArray = result.data.filter((item => {
+        const duplicateSpecialistScheduler = uniqueArray.has(item.idSpecialist)
+        uniqueArray.add(item.idSpecialist)
+        return !duplicateSpecialistScheduler
+    }))
 
-      return result.data.indexOf(ele) == pos;
-    })
-    console.log("filteredArray", filteredArray)
-    setSpecialist(result.data)
+    setSpecialist(filteredArray)
   }
 
   React.useEffect(() => {
@@ -61,13 +64,46 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
     setOptions(value ? result : [])
   }
 
-  const onSelect = async (value: any) => {
-    let result = await apiAdmin.get(ENDPOINT_SPECIALIST)
-    result?.data?.filter((item: any) => {
-      if (item.medico.nome === value) {
-        window.localStorage.setItem("@Rita/InputAutoCompleteSpecialist/IdSpecialist", JSON.stringify(Number(item.medico.idMedico)))
+  /** @description Retorna todos os pacientes vinculados ao especialista */
+  const getPatientsBySpecialist = (data: any[], idSpecialist: number) => {
+    const patients = data.map(item => {
+      return {
+        idSpecialist: item.medico.idMedico,
+        patient: {
+          idPatient: item.paciente.idPaciente,
+          name: item.paciente.nome
+        }
       }
     })
+    const resultFilter = patients.filter(item => Number(item.idSpecialist) === idSpecialist)
+    return resultFilter.map(item => {
+      return {
+        idPatient: item.patient.idPatient,
+        name: item.patient.name,
+        isPatientsFilted: true
+      }
+    })
+  }
+
+  const onSelect = async (value: any) => {
+    let result = await apiAdmin.get(ENDPOINT_SPECIALIST)
+
+    result?.data?.filter((item: any) => {
+      if (item.medico.nome === value) {
+        window.localStorage.setItem("@Rita/InputAutoCompleteSpecialist/IdSpecialist", JSON.stringify(item.medico.idMedico))
+        window.localStorage.setItem('@Rita/InputAutoCompletePatient/patients', JSON.stringify(getPatientsBySpecialist(result.data, item.medico.idMedico)))
+
+      }
+    })
+  }
+
+  const removeLocalStorageSpecialist = () => {
+    window.localStorage.removeItem('@Rita/InputAutoCompleteSpecialist/IdSpecialist')
+    window.localStorage.removeItem('@Rita/InputAutoCompletePatient/patients')
+  }
+
+  const onClear = () => {
+    removeLocalStorageSpecialist()
   }
 
   return (
@@ -78,6 +114,7 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
         onSearch={(value => searchResult(value))}
         onChange={(value) => setValue(value)}
         onSelect={(value) => onSelect(value)}
+        onClear={onClear}
         notFoundContent="Nenhum resultado."
         allowClear
         maxLength={100}
@@ -86,9 +123,7 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
           variation="secondary"
           label="Especialista:"
           onBlur={hasErrors}
-          onFocus={() => setOptions([])}
-          hasError={!!errors.specialist}
-          msgError={errors.specialist} />
+          onFocus={() => setOptions([])}/>
       </AutoComplete>
     </Container>
   )
