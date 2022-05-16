@@ -28,9 +28,10 @@ export default function AuthProvider({ children }) {
   const { Loading } = useLoading()
   const { showMessage } = useModal()
   const history = useHistory()
+  // const {getClinic} = useTest()
 
   const [user, setUser] = useState(getUserStorage() || null)
-  const [afterLogin, setAfterLogin] = useState(false)
+  const [afterLogin, setAfterLogin] = useState(0)
 
   const setDataLogin = (payload) => {
     setUser(payload)
@@ -40,6 +41,7 @@ export default function AuthProvider({ children }) {
 
   const getClinic = async () => {
     try {
+     
       const { data } = await apiUser.get('clinica')
 
       setDataLogin({
@@ -50,7 +52,7 @@ export default function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    if (afterLogin) {
+    if (afterLogin !== 0) {
       const admClinic = user.area.some(
         (perfil) => perfil.grupoPerfil === 'Clinica/Especialista',
       )
@@ -116,12 +118,14 @@ export default function AuthProvider({ children }) {
           cpf: payload.cpf,
           token: data.jwtToken,
         })
-        setAfterLogin(true)
+
         if (dataUser?.area.length > 1) {
           history.push(CHOOSE_PROFILE)
         } else {
           pushToUrl(prevPath)
         }
+
+        setAfterLogin(Math.random() * (10 - 3) + 3)
       } catch (error) {
         console.log(error)
 
