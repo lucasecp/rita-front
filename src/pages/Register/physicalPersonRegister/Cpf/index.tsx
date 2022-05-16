@@ -16,7 +16,30 @@ import { usePhysicalPersonRegister } from '../shared/hooks'
 import { useHistory } from 'react-router'
 import { PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA } from '@/routes/constants/namedRoutes/routes'
 
+import { Analyzing } from './messages/Analyzing'
+import { Divergence } from './messages/Divergence'
+import { Denied } from './messages/Denied'
+import { Inactive } from './messages/Inactive'
+import { Found } from './messages/Found'
+import apiPatient from '@/services/apiPatient'
+import { AlreadyExists } from './messages/AlreadyExists'
+import { useLoading } from '@/hooks/useLoading'
+import { REGISTER_PATIENT } from '@/routes/constants/namedRoutes/routes'
+import { StatusD } from './messages/StatusD'
+
+export const status = {
+  NOT_COSTUMER_CARD_SABIN: 404,
+  HAVE_DATA_TO_IMPORT: 'CS',
+  APPROVED: 'A',
+  PENDING: 'P',
+  DENIED_FIRST_TIME: 'N',
+  DENIED_SECOND_TIME: 'NE',
+  INACTIVE: 'I',
+  DEPENDENT: 'D',
+}
+
 export const Cpf: React.FC = () => {
+  const { Loading } = useLoading()
   const history = useHistory()
   const { showMessage } = useModal()
 
@@ -29,6 +52,58 @@ export const Cpf: React.FC = () => {
 
     if (!validateCpf(cpf.get)) {
       return showMessage(InvalidCpf)
+    }
+
+    let company
+    try {
+      Loading.turnOn()
+      const { data: responseApi } = await apiPatient.get(
+        `/paciente/status?cpf=${cpf.get}`,
+      )
+
+      company = responseApi.empresa[0]
+
+      if (responseApi.status === status.INACTIVE) {
+        return showMessage(Inactive)
+      }
+      if (responseApi.status === status.DEPENDENT) {
+        return showMessage(StatusD)
+      }
+      if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
+        return showMessage(Found, {
+          company,
+          cpf,
+          email: responseApi.email,
+          phone: responseApi.telefone,
+        })
+      }
+      if (responseApi.status === status.APPROVED) {
+        return showMessage(AlreadyExists)
+      }
+      if (responseApi.status === status.PENDING) {
+        return showMessage(Analyzing)
+      }
+      if (responseApi.status === status.DENIED_FIRST_TIME) {
+        return showMessage(Divergence, {
+          company,
+          cpf,
+          email: responseApi.email,
+          phone: responseApi.telefone,
+          status: responseApi.status,
+        })
+      }
+      if (responseApi.status === status.DENIED_SECOND_TIME) {
+        return showMessage(Denied)
+      }
+    } catch ({ response }) {
+      const apiStatus = response.status
+      // company = response.data.empresa[0]
+
+      if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
+        return history.push(REGISTER_PATIENT, { userData: { cpf } })
+      }
+    } finally {
+      Loading.turnOff()
     }
 
     history.push(PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA)
