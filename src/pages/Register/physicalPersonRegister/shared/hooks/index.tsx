@@ -149,7 +149,7 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
       Loading.turnOff()
     }
 
-    resetStates()
+    // resetStates()
     history.push(PHYSICAL_PERSON_REGISTER_PAYMENT)
     closeModal()
   }
