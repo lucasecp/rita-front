@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Select } from '@/components/Form/Select'
 import { UseLoadingInput } from '@/hooks/useLoadingInput'
 import { parse } from 'date-fns'
+import { useAuth } from '@/hooks/login';
 
 interface SelectTimeProps {
   idDoctor: string | number
@@ -21,6 +22,7 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
 }) => {
   const [timeOptions, setTimeOptions] = useState([])
   const { LoadingInput, LoadingMessage } = UseLoadingInput()
+  const { user } = useAuth()
 
   interface dataFromApi {
     horaInicio: string
@@ -69,7 +71,7 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
       try {
         LoadingInput.turnOn()
         const { data } = await apiAdmin.get(
-          `/clinica/59/medico/${idDoctor}/agenda`,
+          `/clinica/${user.idClinica}/medico/${idDoctor}/agenda`,
         )
         const dataMapped = mapTime(data)
 

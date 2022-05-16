@@ -5,17 +5,25 @@ import apiAdmin from '@/services/apiAdmin'
 import { useLocation } from 'react-router'
 import { fromApi } from './adapters'
 import { DataI } from './types'
+import { useAuth } from '@/hooks/login'
 
 const EditAppointmentSchedule: React.FC = () => {
   const [schedulingData, setSchedulingData] = useState<DataI>({} as DataI)
 
   const [toggleNewRequest, setToggleNewRequest] = useState(0)
+
   const location = useLocation()
 
+  const { user } = useAuth()
+
   const getScheduling = async () => {
+    const idDoctor = location.state?.idDoctor || 217
+
+    const idSchedule = location.state?.idSchedule || 34
+
     try {
       const { data } = await apiAdmin.get(
-        `/clinica/59/medico/420/agenda-pessoal/30`,
+        `/clinica/${user.idClinica}/medico/${idDoctor}/agenda-pessoal/${idSchedule}`,
       )
 
       setSchedulingData(fromApi(data))

@@ -15,10 +15,11 @@ export const toApi = (data: DataI): DataToApiI => {
 }
 
 export const fromApi = (data: DataFromApiI): DataI => {
+  console.log(data.horaFim, data.horaInicio)
   return {
     idSchedule: data.idAgenda,
     title: data.titulo || `consulta-${data.paciente}`,
-    date: data.dataInicio,
+    date: String(data.dataInicio?.split('-')?.reverse()?.join('/')),
     time: data.horaInicio.slice(0, 5) + ' - ' + data.horaFim.slice(0, 5),
     origin: data.origem || 'Rita',
     specialty: data.especialidade?.idEspecialidade,

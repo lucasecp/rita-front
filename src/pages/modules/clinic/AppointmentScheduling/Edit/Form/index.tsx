@@ -93,7 +93,6 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
     }
     setErrors({} as ErrorsI)
 
-
     try {
       Loading.turnOn()
 
@@ -109,7 +108,7 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
       })
 
       await apiAdmin.put(
-        `/clinica/59/medico/${specialist}/agenda-pessoal/${data.idSchedule}/agenda-pessoal`,
+        `/clinica/${user.idClinica}/medico/${specialist}/agenda-pessoal/${data.idSchedule}/agenda-pessoal`,
         dataMaped,
       )
 
@@ -134,6 +133,7 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
     setTime(data.time || '')
     setSpecialist(data.specialist || '')
   }, [data])
+  console.log(data)
 
   const fieldsHadChange = (fields: any): boolean => {
     let result = false
