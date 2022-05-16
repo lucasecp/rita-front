@@ -14,10 +14,7 @@ import { useModal } from '@/hooks/useModal'
 
 import { usePhysicalPersonRegister } from '../shared/hooks'
 import { useHistory } from 'react-router-dom'
-import {
-  PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA,
-  REGISTER_PATIENT,
-} from '@/routes/constants/namedRoutes/routes'
+import { PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA } from '@/routes/constants/namedRoutes/routes'
 
 import { Analyzing } from './messages/Analyzing'
 import { Divergence } from './messages/Divergence'
