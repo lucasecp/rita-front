@@ -11,8 +11,10 @@ import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 import { fromApi } from './adapters'
 import { SpecialistI } from './types'
+import { useAuth } from '@/hooks/login'
 
 const SeeAllSpecialists: React.FC = () => {
+  const { user } = useAuth()
   const [queryApi, setQueryApi] = useState('')
   const [filters, setFilters] = useState<any[]>([])
   const [order, setOrder] = useState({})
@@ -33,7 +35,7 @@ const SeeAllSpecialists: React.FC = () => {
       try {
         Loading.turnOn()
         const { data } = await apiAdmin(
-          `/clinica/${59}/medico${queryApi}${
+          `/clinica/${user.idClinica}/medico${queryApi}${
             queryFilterString(filters) + queryOrderString(order)
           }`,
         )

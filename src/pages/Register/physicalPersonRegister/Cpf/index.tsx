@@ -13,7 +13,7 @@ import { InvalidCpf } from './messages/InvalidCpf'
 import { useModal } from '@/hooks/useModal'
 
 import { usePhysicalPersonRegister } from '../shared/hooks'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA } from '@/routes/constants/namedRoutes/routes'
 
 import { Analyzing } from './messages/Analyzing'
@@ -24,7 +24,6 @@ import { Found } from './messages/Found'
 import apiPatient from '@/services/apiPatient'
 import { AlreadyExists } from './messages/AlreadyExists'
 import { useLoading } from '@/hooks/useLoading'
-import { REGISTER_PATIENT } from '@/routes/constants/namedRoutes/routes'
 import { StatusD } from './messages/StatusD'
 
 export const status = {
@@ -39,11 +38,11 @@ export const status = {
 }
 
 export const Cpf: React.FC = () => {
-  const { Loading } = useLoading()
-  const history = useHistory()
-  const { showMessage } = useModal()
-
   const { cpf } = usePhysicalPersonRegister()
+
+  const history = useHistory()
+  const { Loading } = useLoading()
+  const { showMessage } = useModal()
 
   const handleConfirm = async () => {
     if (cpf.get.length === 0) {
@@ -72,7 +71,7 @@ export const Cpf: React.FC = () => {
       if (responseApi.status === status.HAVE_DATA_TO_IMPORT) {
         return showMessage(Found, {
           company,
-          cpf,
+          cpf: cpf.get,
           email: responseApi.email,
           phone: responseApi.telefone,
         })
@@ -86,7 +85,7 @@ export const Cpf: React.FC = () => {
       if (responseApi.status === status.DENIED_FIRST_TIME) {
         return showMessage(Divergence, {
           company,
-          cpf,
+          cpf: cpf.get,
           email: responseApi.email,
           phone: responseApi.telefone,
           status: responseApi.status,
@@ -97,16 +96,15 @@ export const Cpf: React.FC = () => {
       }
     } catch ({ response }) {
       const apiStatus = response.status
-      // company = response.data.empresa[0]
 
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return history.push(REGISTER_PATIENT, { userData: { cpf } })
+        history.push(PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA)
+
+        return
       }
     } finally {
       Loading.turnOff()
     }
-
-    history.push(PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA)
   }
 
   return (

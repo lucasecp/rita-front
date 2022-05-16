@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import moment from 'moment'
+import { useHistory } from 'react-router-dom'
 
+import { PHYSICAL_PERSON_REGISTER_CHOOSE_REGION } from '@/routes/constants/namedRoutes/routes'
+import formatPrice from '@/helpers/formatPrice'
 import apiWallet from '@/services/apiWallet'
 import { useDialog } from '@/hooks/useDialog'
 import { usePhysicalPersonRegister } from '@/pages/Register/physicalPersonRegister/shared/hooks'
@@ -11,6 +14,7 @@ import { Container } from './styles'
 export const Payment: React.FC = () => {
   const { dialogConfirmation } = useDialog()
   const { registrationData, selectedPlan } = usePhysicalPersonRegister()
+  const history = useHistory()
 
   async function handleFormSubmit(model: any) {
     const [month, year] = model.expireAt.split('/')
@@ -57,6 +61,12 @@ export const Payment: React.FC = () => {
     })
   }
 
+  useEffect(() => {
+    if (!registrationData.get.cpf) {
+      history.push(PHYSICAL_PERSON_REGISTER_CHOOSE_REGION)
+    }
+  }, [])
+
   return (
     <RegisterLayout>
       <Container>
@@ -64,8 +74,8 @@ export const Payment: React.FC = () => {
         <section>
           <p>CPF: <strong>{registrationData.get.cpf}</strong></p>
           <p>Nome do plano: <strong>{selectedPlan.get.name}</strong></p>
-          <p>Valor do plano: <strong>{selectedPlan.get.price}</strong></p>
-          <p>Periodicidade do plano: <strong>{selectedPlan.get.name}</strong></p>
+          <p>Valor do plano: <strong>{formatPrice(selectedPlan.get.price)}</strong></p>
+          <p>Periodicidade do plano: <strong>{selectedPlan.get.periodicity}</strong></p>
         </section>
 
         <h3>Adicionar cartão</h3>
@@ -75,6 +85,7 @@ export const Payment: React.FC = () => {
         </h5>
         <CreditCardForm
           resetOnCancel={false}
+          canUncheckAsDefault={false}
           onSubmit={handleFormSubmit}
           onCancel={handleFormCancel}
         />

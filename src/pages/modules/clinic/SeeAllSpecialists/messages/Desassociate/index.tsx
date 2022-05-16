@@ -8,6 +8,7 @@ import OutlineButton from '@/components/Button/Outline'
 import apiAdmin from '@/services/apiAdmin'
 import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
+import { useAuth } from '@/hooks/login'
 
 interface DesassociateProps {
   idDoctor: string
@@ -20,12 +21,13 @@ const Desassociate: React.FC<DesassociateProps> = ({
 }) => {
   const { closeModal } = useModal()
   const { Loading } = useLoading()
+  const { user } = useAuth()
 
   const onDesassociate = async () => {
     try {
       Loading.turnOn()
 
-      await apiAdmin.delete(`/clinica/59/medico/${idDoctor}`)
+      await apiAdmin.delete(`/clinica/${user.idClinica}/medico/${idDoctor}`)
       setMakeRequest(Math.random())
 
       toast.success('Especialista desassociado com sucesso!')

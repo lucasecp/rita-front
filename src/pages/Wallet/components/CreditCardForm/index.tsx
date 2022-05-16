@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { IMask } from 'react-imask'
 import { Container } from './styles'
 
 import InputText from '@/components/Form/InputText'
@@ -13,6 +14,7 @@ import validateCreditCardSecurityCodeAsBoolean from '@/helpers/validateCreditCar
 
 type CreditCardFormProps = {
   resetOnCancel?: boolean
+  canUncheckAsDefault?: boolean
   onSubmit?: (model: any) => void
   onCancel?: () => void
 }
@@ -48,6 +50,7 @@ function validateName(value?: string | null) {
 
 export const CreditCardForm: React.FC<CreditCardFormProps> = ({
   resetOnCancel = true,
+  canUncheckAsDefault = true,
   onSubmit,
   onCancel = undefined,
 }) => {
@@ -104,7 +107,10 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
   return (
     <Container onSubmit={handleSubmit} onReset={handleReset}>
       <section>
-        <InputText
+        <InputMask
+          useIMask={true}
+          mask="0000 0000 0000 0000"
+          lazy={true}
           label="Número do cartão:"
           value={number}
           setValue={setNumber}
@@ -121,8 +127,20 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
       </section>
 
       <InputMask
-        mask="19/99"
-        formatChars={{ 1: '[0-1]', 9: '[0-9]' }}
+        useIMask={true}
+        mask="MM/YY"
+        eager={true}
+        blocks={{
+          YY: {
+            mask: '00'
+          },
+          MM: {
+            mask: IMask.MaskedRange,
+            from: 1,
+            to: 12
+          }
+        }}
+        placeholder="MM/YY"
         label="Data de Validade:"
         value={expireAt}
         setValue={setExpireAt}
@@ -144,7 +162,9 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
       />
 
       <InputMask
-        mask="999"
+        useIMask={true}
+        mask="000[0]"
+        lazy={true}
         label="CVC:"
         value={securityCode}
         setValue={setSecurityCode}
@@ -184,13 +204,15 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
         />
       </section>
 
-      <section>
-        <Checkbox
-          setValue={setAsDefault}
-          checked={asDefault}
-          label="Definir como padrão"
-        />
-      </section>
+      {canUncheckAsDefault && (
+        <section>
+          <Checkbox
+            setValue={setAsDefault}
+            checked={asDefault}
+            label="Definir como padrão"
+          />
+        </section>
+      )}
 
       <footer>
         <OutlineButton type="reset">Cancelar</OutlineButton>

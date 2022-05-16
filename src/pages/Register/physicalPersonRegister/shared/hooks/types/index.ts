@@ -11,6 +11,7 @@ export interface PlanState {
   allowedMajorAge: boolean | null
   maximumDependentsQuantity: number | null
   price: string | ''
+  periodicity: string | ''
 }
 
 export interface RegistrationDataState {
@@ -41,7 +42,7 @@ export interface DocumentsState {
   selectIncome: string
 }
 
-export interface DependentsState {
+export interface DependentState {
   name: string
   cpf: string
   email: string
@@ -80,8 +81,8 @@ export interface PhysicalPersonRegisterContextData {
     set: React.Dispatch<React.SetStateAction<boolean>>
   }
   dependents: {
-    get: DependentsState[]
-    set: React.Dispatch<React.SetStateAction<DependentsState[]>>
+    get: DependentState[]
+    set: React.Dispatch<React.SetStateAction<DependentState[]>>
   }
   finishRegister: () => void
   cpf: {

@@ -9,9 +9,11 @@ import { fromApi } from '../adapters'
 import apiAdmin from '@/services/apiAdmin'
 import { useScheduleSpecialist } from '../hooks'
 import Grid from './Grid'
+import { useAuth } from '@/hooks/login'
 
 const Main: React.FC = () => {
   const history = useHistory()
+  const { user } = useAuth()
 
   const location = useLocation()
 
@@ -40,12 +42,12 @@ const Main: React.FC = () => {
       try {
         Loading.turnOn()
         const { data } = await apiAdmin.get(
-          `clinica/59/medico/${location.state?.dataDoctor?.id}/agenda`,
+          `clinica/${user.idClinica}/medico/${location.state?.dataDoctor?.id}/agenda`,
         )
 
-        setSchedule(fromApi(data, 59))
+        setSchedule(fromApi(data, user.idClinica))
         setCurrentDataClinicAndDoctor({
-          idClinic: 59,
+          idClinic: user.idClinica,
           idDoctor: location.state?.dataDoctor?.id,
         })
       } catch (error) {

@@ -44,7 +44,7 @@ export const AddUserOnWaitList: React.FC = () => {
 
     const errorsTemporary = {
       ...errors,
-      name: validateFullName(name),
+      nome: validateFullName(name),
       phone: validatePhone(phone),
     }
 
@@ -61,9 +61,9 @@ export const AddUserOnWaitList: React.FC = () => {
 
       await apiPatient.post('paciente/lista-espera', {
         id: '0',
-        name,
+        nome: name,
         email,
-        phone,
+        celular: phone,
         uf: region.get.uf,
         cidade: region.get.city,
       })
