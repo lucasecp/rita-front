@@ -75,7 +75,7 @@ export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
         <li>Consultas Médicas</li>
         <li>Exames Simples</li>
       </ul>
-      <h2>R$ {formatPrice(plan.price)}/ano</h2>
+      <h2>{formatPrice(plan.price)}/ano</h2>
       <h3>Experimente 7 dias grátis</h3>
       <LinkArea
         colorTheme={colorTheme}
