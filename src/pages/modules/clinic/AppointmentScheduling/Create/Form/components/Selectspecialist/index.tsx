@@ -6,13 +6,18 @@ import { UseLoadingInput } from '@/hooks/useLoadingInput'
 interface SpecialistsProps {
   specialist: string | number
   setSpecialist: React.Dispatch<React.SetStateAction<string>>
+  setSpecialistName: React.Dispatch<React.SetStateAction<string>>
+  [x: string]: any
 }
 
 export const SelectSpecialists: React.FC<SpecialistsProps> = ({
   setSpecialist,
   specialist,
+  setSpecialistName,
+  ...rest
 }) => {
   const [specialtysOptions, setSpecialtysOptions] = useState([])
+
   const { LoadingInput, LoadingMessage } = UseLoadingInput()
 
   interface dataFromApi {
@@ -45,6 +50,15 @@ export const SelectSpecialists: React.FC<SpecialistsProps> = ({
     getSpecialists()
   }, [])
 
+  useEffect(() => {
+    if (specialist) {
+      const name = specialtysOptions.find(
+        (spec) => spec.value === Number(specialist),
+      ).label
+      setSpecialistName(name)
+    }
+  }, [specialist])
+
   return (
     <Select
       label="Especialista:"
@@ -52,6 +66,7 @@ export const SelectSpecialists: React.FC<SpecialistsProps> = ({
       value={specialist}
       setValue={setSpecialist}
       options={specialtysOptions}
+      {...rest}
     />
   )
 }

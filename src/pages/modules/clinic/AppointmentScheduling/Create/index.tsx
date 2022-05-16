@@ -1,8 +1,12 @@
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Form from './Form'
 
-const AppointmentScheduling: React.FC = () => {
+const Create: React.FC = () => {
+  useEffect(() => {
+    document.title = 'Rita Saúde | Criar Agendamento'
+  }, [])
+
   return (
     <DefaultLayout title="Criar Agendamento">
       <Form />
@@ -10,4 +14,4 @@ const AppointmentScheduling: React.FC = () => {
   )
 }
 
-export default AppointmentScheduling
+export default Create

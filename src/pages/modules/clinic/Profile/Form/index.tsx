@@ -34,8 +34,10 @@ import { toast } from '@/styles/components/toastify'
 import apiAdmin from '@/services/apiAdmin'
 import { toApi, fromApi } from '../adapters'
 import { useLoading } from '@/hooks/useLoading'
+import { useAuth } from '@/hooks/login'
 
 const FormClinicProfile: React.FC = () => {
+  const { user } = useAuth()
   const [dataClinic, setDataClinic] = React.useState<DataClinicI>(
     {} as DataClinicI,
   )
@@ -75,7 +77,9 @@ const FormClinicProfile: React.FC = () => {
   /** @description Retorna os dados da clinica como o usuário clínica */
   const getClinicProfile = async () => {
     Loading.turnOn()
-    const result = await apiAdmin.get(`/clinica/minha-clinica/${59}`)
+    const result = await apiAdmin.get(
+      `/clinica/minha-clinica/${user.idClinica}`,
+    )
     const specialtys = await getAllSpecialtys()
     const data = await fromApi(result.data, specialtys)
     setData(data)
@@ -100,7 +104,7 @@ const FormClinicProfile: React.FC = () => {
       )
     })
     formData.append('file', photo)
-    await apiAdmin.put(`/clinica/minha-clinica/${59}`, formData)
+    await apiAdmin.put(`/clinica/minha-clinica/${user.idClinica}`, formData)
   }
 
   /** @description Envia os dados modificados para o backend */
@@ -263,6 +267,7 @@ const FormClinicProfile: React.FC = () => {
           responsibleAdministrative,
           address,
           specialty,
+          user.idClinica,
         )
         Loading.turnOn()
         await save(photo, data)

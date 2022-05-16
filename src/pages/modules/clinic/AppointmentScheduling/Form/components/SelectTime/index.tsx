@@ -2,6 +2,7 @@ import apiAdmin from '@/services/apiAdmin'
 import React, { useEffect, useState } from 'react'
 import { Select } from '@/components/Form/Select'
 import { UseLoadingInput } from '@/hooks/useLoadingInput'
+import { useAuth } from '@/hooks/login'
 import { parse } from 'date-fns'
 
 interface SelectTimeProps {
@@ -17,6 +18,7 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
   time,
   date,
 }) => {
+  const { user } = useAuth()
   const [specialtysOptions, setSpecialtysOptions] = useState([])
   const { LoadingInput, LoadingMessage } = UseLoadingInput()
 
@@ -129,7 +131,7 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
       try {
         LoadingInput.turnOn()
         const { data } = await apiAdmin.get(
-          `/clinica/59/medico/${idDoctor}/agenda`,
+          `/clinica/${user.idClinica}/medico/${idDoctor}/agenda`,
         )
 
         setData(data)
