@@ -42,15 +42,11 @@ export default function AuthProvider({ children }) {
     try {
       const { data } = await apiUser.get('clinica')
 
-      if (data.clinica.length > 0) {
-        setDataLogin({
-          ...user,
-          idClinica: data.clinica[0].idClinica,
-        })
-      }
-    } catch (e) {
-      console.log(e)
-    }
+      setDataLogin({
+        ...user,
+        idClinica: data.clinica[0]?.idClinica,
+      })
+    } catch (e) {}
   }
 
   useEffect(() => {
