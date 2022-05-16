@@ -15,19 +15,25 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   setValue,
 }) => {
 
-  const ENDPOINT_SPECIALIST = `clinica/${59}/medico?limit=100000&skip=0&status=A&status=P`
+  const ENDPOINT_SPECIALIST = `clinica/${59}/agenda-pessoal?limit=10000000&skip=0`
 
   const [options, setOptions] = useState<any[]>([])
   const [specialist, setSpecialist] = useState([])
 
   const getAllSpecialist = async () => {
     let result = await apiAdmin.get(ENDPOINT_SPECIALIST)
-    result.data = result?.data?.medicos.map((item: any) => {
+    result.data = result?.data?.map((item: any) => {
       return {
-        idSpecialist: item.idMedico,
-        name: item.nome
+        idSpecialist: item.medico.idMedico,
+        name: item.medico.nome
       }
     })
+
+    const filteredArray = result.data.filter(function (ele, pos) {
+
+      return result.data.indexOf(ele) == pos;
+    })
+    console.log("filteredArray", filteredArray)
     setSpecialist(result.data)
   }
 
@@ -57,9 +63,9 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
 
   const onSelect = async (value: any) => {
     let result = await apiAdmin.get(ENDPOINT_SPECIALIST)
-     result?.data?.medicos.filter((item: any) => {
-      if(item.nome === value){
-        window.localStorage.setItem("@Rita/InputAutoCompleteSpecialist/IdSpecialist", JSON.stringify(Number(item.idMedico)))
+    result?.data?.filter((item: any) => {
+      if (item.medico.nome === value) {
+        window.localStorage.setItem("@Rita/InputAutoCompleteSpecialist/IdSpecialist", JSON.stringify(Number(item.medico.idMedico)))
       }
     })
   }
