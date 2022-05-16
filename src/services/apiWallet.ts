@@ -68,3 +68,7 @@ export function getPaymentRequestSituation(id: string): string {
   ).toUpperCase() as RitaWallet.Enum.PaymentRequestSituation
   return PaymentRequestSituation[formattedID] || formattedID
 }
+
+export function getCallerId(): string {
+  return '31C48912-7EBA-EC11-AAE9-02944D6C834B'
+}

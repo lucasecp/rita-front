@@ -26,7 +26,7 @@ export const SelectSpecialists: React.FC<SpecialistsProps> = ({
 
   const mapSpecialistsOfClinic = (data: dataFromApi) => {
     return data?.medicos?.map((doctor) => ({
-      id: doctor.idMedico,
+      value: doctor.idMedico,
       label: doctor.nome,
     }))
   }

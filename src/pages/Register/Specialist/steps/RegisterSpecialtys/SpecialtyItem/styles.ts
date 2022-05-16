@@ -1,5 +1,17 @@
 import styled from 'styled-components'
 
+export const InputGroup = styled.div`
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  > * {
+    width: 100%;
+  }
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+`
+
 export const Container = styled.div<{ name: string }>`
   > h2 {
     font-size: 24px;

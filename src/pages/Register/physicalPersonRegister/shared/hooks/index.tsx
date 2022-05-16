@@ -14,7 +14,7 @@ import { RegisterSuccess } from './messages/RegisterSuccess'
 import { DocumentsNotSended } from './messages/DocumentsNotSended'
 
 import {
-  // RegistrationDataState,
+  RegistrationDataState,
   // AddressState,
   // RegisterDataState,
   RegionState,
@@ -22,6 +22,7 @@ import {
   DocumentsState,
   DependentsState,
   PhysicalPersonRegisterContextData,
+  AddressState,
 } from './types'
 
 import { PHYSICAL_PERSON_REGISTER_PAYMENT } from '@/routes/constants/namedRoutes/routes'
@@ -40,17 +41,17 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   //   {} as RegisterDataState,
   // )
 
-  // const [registrationData, setRegistrationData] = useState(
-  //   {} as RegistrationDataState | undefined,
-  // )
-
-  // const [address, setAddress] = useState({} as AddressState | undefined)
+  const [registrationData, setRegistrationData] = useState(
+    {} as RegistrationDataState,
+  )
 
   const [region, setRegion] = useState({} as RegionState)
 
   const [selectedPlan, setSelectedPlan] = useState({} as PlanState)
 
-  const [documentsFile, setDocumentsFile] = useState({} as DocumentsState)
+  const [address, setAddress] = useState({} as AddressState)
+
+  const [documents, setDocuments] = useState({} as DocumentsState)
 
   const [patientWantsMinimumDependent, setPatientWantsMinimumDependent] =
     useState(0)
@@ -58,9 +59,18 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   const [planAllowDependentMajorAge, setPlanAllowDependentMajorAge] =
     useState(false)
 
+  const [cpf, setCpf] = useState('')
+
   useEffect(() => {
-    console.log(documentsFile)
-  }, [documentsFile])
+    console.log('🚀 ~ region', region)
+    console.log('🚀 ~ selectedPlan', selectedPlan)
+    console.log('🚀 ~ address', address)
+    console.log('🚀 ~ documents', documents)
+    console.log(
+      '🚀 ~ patientWantsMinimumDependent',
+      patientWantsMinimumDependent,
+    )
+  }, [region, selectedPlan, address, documents, patientWantsMinimumDependent])
 
   const [dependents, setDependents] = useState(
     [] as DependentsState[] | undefined,
@@ -69,7 +79,7 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   // const resetData = () => {
   //   setRegistrationData({})
   //   setAddress({})
-  //   setDocumentsFile({} as DocumentsState)
+  //   setDocuments({} as DocumentsState)
   //   setDependents([])
   //   setStep(1)
   // }
@@ -150,6 +160,10 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
   return (
     <PhysicalPersonRegisterContext.Provider
       value={{
+        registrationData: {
+          get: registrationData,
+          set: setRegistrationData,
+        },
         selectedPlan: {
           get: selectedPlan,
           set: setSelectedPlan,
@@ -158,7 +172,14 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
           get: region,
           set: setRegion,
         },
-        setDocumentsFile,
+        address: {
+          get: address,
+          set: setAddress,
+        },
+        documents: {
+          get: documents,
+          set: setDocuments,
+        },
         patientWantsMinimumDependent: {
           get: patientWantsMinimumDependent,
           set: setPatientWantsMinimumDependent,
@@ -172,6 +193,10 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
           set: setDependents,
         },
         finishRegister,
+        cpf: {
+          get: cpf,
+          set: setCpf,
+        },
 
         // cpfHolder: registrationData?.cpf,
         // setRegistrationData,

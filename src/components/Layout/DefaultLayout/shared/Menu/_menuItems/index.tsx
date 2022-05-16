@@ -271,10 +271,10 @@ export const menuItens = [
     name: 'Tabela de consulta',
     permissions: [permissions.GERENCIAR_TABELA_PRECOS_CLINICA],
   },
-  // {
-  //   path: CLINIC_CREATE_SCHEDULING,
-  //   icon: <AppointmentSchedulingIcon />,
-  //   name: 'Agendamento de consulta',
-  //   // permissions: [permissions.SERVICO_CONSULTA],
-  // },
+  {
+    path: CLINIC_CREATE_SCHEDULING,
+    icon: <AppointmentSchedulingIcon />,
+    name: 'Agendamento de consulta',
+    // permissions: [permissions.SERVICO_CONSULTA],
+  },
 ]

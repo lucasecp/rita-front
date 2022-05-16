@@ -16,40 +16,39 @@ const Form: React.FC = () => {
 
   return (
     <Container>
-      <InputMask
-        mask="999.999.999-99"
-        label="CPF:"
-        value={cpf}
-        setValue={setCpf}
-      />
-      <InputText
-        label="Nome do Paciente:"
-        value={name}
-        setValue={setName}
-        disabled={!cpf}
-      />
-      <SelectSpecialists
-        specialist={specialist}
-        setSpecialist={setSpecialist}
-      />
-      <SelectSpecialty
-        idDoctor={specialist}
-        setSpecialty={setSpecialty}
-        specialty={specialty}
-      />
-      <InputMask
-        mask="99/99/9999"
-        label="Data:"
-        value={date}
-        setValue={setDate}
-      />
-      <SelectTime
-      idDoctor={ 435}
-      setTime={setTime}
-      time={time}
-      date={'12/09/2000'}
-
-      />
+      <h2>Dados da Consulta</h2>
+      <section>
+        <InputMask
+          mask="999.999.999-99"
+          label="CPF:"
+          value={cpf}
+          setValue={setCpf}
+        />
+        <InputText
+          label="Nome do Paciente:"
+          value={name}
+          setValue={setName}
+          disabled={!cpf}
+        />
+        <SelectSpecialists
+          specialist={specialist}
+          setSpecialist={setSpecialist}
+        />
+        <SelectSpecialty
+          idDoctor={specialist}
+          setSpecialty={setSpecialty}
+          specialty={specialty}
+        />
+      </section>
+      <div>
+        <InputMask
+          mask="99/99/9999"
+          label="Data:"
+          value={date}
+          setValue={setDate}
+        />
+        <SelectTime idDoctor={435} setTime={setTime} time={time} date={date} />
+      </div>
     </Container>
   )
 }

@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import colors from '@/styles/colors'
 
-import bg from '@/assets/img/wallet-card-bg.png'
-
 export const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -14,9 +12,20 @@ export const Container = styled.div`
     box-shadow: rgb(223 210 255 / 15%) 0px 2px 8px 0px;
     border-radius: 8px;
 
+    display: flex;
+    flex-flow: column nowrap;
+
     h3 {
       font-size: 24px;
       color: ${colors.gray.dark};
+    }
+
+    h5 {
+      font-size: 16px;
+      color: ${colors.gray.middleLight};
+
+      margin-top: 18px;
+      max-width: 320px;
     }
 
     > section {
@@ -24,6 +33,10 @@ export const Container = styled.div`
       flex-flow: row nowrap;
       gap: 24px;
 
+      margin-top: 24px;
+    }
+
+    > form {
       margin-top: 24px;
     }
 

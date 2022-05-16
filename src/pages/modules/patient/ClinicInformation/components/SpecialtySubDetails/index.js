@@ -22,7 +22,7 @@ const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
       <ul>
         <ContainerMainInfo>
           <MainInfo>
-            <h6>Conselho Regional:</h6>{' '}
+            <h6>Registro Profissional:</h6>{' '}
             <span>
               CRM - {dataSpecialtyDetails?.crm} - {dataSpecialtyDetails?.crmUf}{' '}
             </span>
