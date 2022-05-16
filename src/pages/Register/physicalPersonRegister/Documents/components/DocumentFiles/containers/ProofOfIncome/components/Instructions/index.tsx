@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { ReactComponent as WarningIcon } from '@/assets/icons/alerts/warning.svg'
 
@@ -13,11 +13,18 @@ interface InstructionsProofOfIncomeProps {
   selectIncome: string
   onGetSelectIncome: React.Dispatch<React.SetStateAction<string>>
   error: string
+  file: File | string
 }
 
 export const InstructionsProofOfIncome: React.FC<
   InstructionsProofOfIncomeProps
-> = ({ selectIncome, onGetSelectIncome, onGetFile, error }) => {
+> = ({ selectIncome, onGetSelectIncome, onGetFile, error, file }) => {
+  useEffect(() => {
+    if (file) {
+      onGetFile('')
+    }
+  }, [selectIncome])
+
   return (
     <Container>
       <header>
@@ -49,7 +56,7 @@ export const InstructionsProofOfIncome: React.FC<
         </p>
       )}
       {selectIncome !== '' && selectIncome !== incomeType.MORE_ONE_HALF && (
-        <BoxSendIncome onGetFile={onGetFile} />
+        <BoxSendIncome file={file} onGetFile={onGetFile} />
       )}
     </Container>
   )
