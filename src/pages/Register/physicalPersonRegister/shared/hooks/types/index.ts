@@ -11,6 +11,7 @@ export interface PlanState {
   allowedMajorAge: boolean | null
   maximumDependentsQuantity: number | null
   price: string | ''
+  periodicity: string | ''
 }
 
 export interface RegistrationDataState {
