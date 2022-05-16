@@ -56,7 +56,13 @@ const InputText: React.FC<InputTextProps> = ({
   return (
     <Container variation={variation} hasError={msgError || hasError} {...rest}>
       {label && <label htmlFor={label}>{label}</label>}
-      <input type={type} id={label} onChange={handleChange} {...rest} />
+      <input
+        type={type}
+        id={label}
+        onChange={handleChange}
+        data-test={`inputText-${label}`}
+        {...rest}
+      />
       {msgError && <MsgError>{msgError}</MsgError>}
     </Container>
   )
