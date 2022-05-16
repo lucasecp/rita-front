@@ -6,13 +6,16 @@ import { UseLoadingInput } from '@/hooks/useLoadingInput'
 interface SpecialistsProps {
   specialist: string | number
   setSpecialist: React.Dispatch<React.SetStateAction<string>>
+  [x: string]: any
 }
 
 export const SelectSpecialists: React.FC<SpecialistsProps> = ({
   setSpecialist,
   specialist,
+  ...rest
 }) => {
   const [specialtysOptions, setSpecialtysOptions] = useState([])
+
   const { LoadingInput, LoadingMessage } = UseLoadingInput()
 
   interface dataFromApi {
@@ -52,6 +55,7 @@ export const SelectSpecialists: React.FC<SpecialistsProps> = ({
       value={specialist}
       setValue={setSpecialist}
       options={specialtysOptions}
+      {...rest}
     />
   )
 }

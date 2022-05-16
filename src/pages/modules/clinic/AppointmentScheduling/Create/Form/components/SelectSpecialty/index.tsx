@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { Select } from '@/components/Form/Select'
 import apiAdmin from '@/services/apiAdmin'
-import { UseLoadingInput } from '../../../../../../../hooks/useLoadingInput'
+import { UseLoadingInput } from '@/hooks/useLoadingInput'
 
 interface SpecialtysProps {
   specialty: string | number
   setSpecialty: React.Dispatch<React.SetStateAction<string>>
   idDoctor: number | string
+  setSpecialtyName: React.Dispatch<React.SetStateAction<string>>
+  [x: string]: any
 }
 
 export const SelectSpecialty: React.FC<SpecialtysProps> = ({
   setSpecialty,
   specialty,
   idDoctor,
+  setSpecialtyName,
   ...rest
 }) => {
   const [specialtysOptions, setSpecialtysOptions] = useState([])
@@ -32,7 +35,7 @@ export const SelectSpecialty: React.FC<SpecialtysProps> = ({
 
   const mapSpecialtyOfClinic = (data: dataFromApi) => {
     return data?.clinica?.especialidades?.map((specialty) => ({
-      id: specialty.idEspecialidade,
+      value: specialty.idEspecialidade,
       label: specialty.descricao,
     }))
   }
@@ -41,6 +44,7 @@ export const SelectSpecialty: React.FC<SpecialtysProps> = ({
     if (!idDoctor) {
       return
     }
+    setSpecialty('')
 
     const getSpecialyts = async () => {
       try {
@@ -58,6 +62,15 @@ export const SelectSpecialty: React.FC<SpecialtysProps> = ({
 
     getSpecialyts()
   }, [idDoctor])
+
+  useEffect(() => {
+    if (specialty) {
+      const name = specialtysOptions.find(
+        (spec) => spec.value === Number(specialty),
+      ).label
+      setSpecialtyName(name)
+    }
+  }, [specialty])
 
   return (
     <Select
