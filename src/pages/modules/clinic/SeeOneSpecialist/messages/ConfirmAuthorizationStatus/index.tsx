@@ -9,6 +9,7 @@ import apiAdmin from '@/services/apiAdmin'
 import { useLoading } from '@/hooks/useLoading'
 import { toast } from '@/styles/components/toastify'
 import { SpecialistDataI } from '../../Types'
+import { useAuth } from '@/hooks/login'
 
 interface ConfirmAuthorizationStatusProps {
   specialistData: SpecialistDataI
@@ -19,13 +20,14 @@ const ConfirmAuthorizationStatus: React.FC<ConfirmAuthorizationStatusProps> = ({
 }) => {
   const { closeModal } = useModal()
   const { Loading } = useLoading()
+  const { user } = useAuth()
 
   /** @description Atualiza o status para 'A' */
   const onAuthorizeSpecialist = async () => {
     try {
       Loading.turnOn()
       await apiAdmin.patch(
-        `/clinica/${59}/medico/${specialistData.id}?statusMedicoClinica=A`,
+        `/clinica/${user.idClinica}/medico/${specialistData.id}?statusMedicoClinica=A`,
       )
       toast.success('Autorizado com sucesso!')
       closeModal()

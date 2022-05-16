@@ -11,8 +11,9 @@ import { CardOfPlan } from './components/Card'
 import { usePhysicalPersonRegister } from '../shared/hooks'
 import {
   PHYSICAL_PERSON_REGISTER_CHOOSE_REGION,
+  PHYSICAL_PERSON_REGISTER_CPF,
   PHYSICAL_PERSON_REGISTER_DEPENDENTS,
-  PHYSICAL_PERSON_REGISTER_DOCUMENTS,
+  // PHYSICAL_PERSON_REGISTER_DOCUMENTS,
 } from '@/routes/constants/namedRoutes/routes'
 import apiAdmin from '@/services/apiAdmin'
 import { fromApiPlans } from './adapters/fromApi'
@@ -25,6 +26,7 @@ export interface MappedPlan {
   name: string
   allowedMajorAge: boolean
   price: string
+  periodicity: string
 }
 
 export const ChoosePlans: React.FC = () => {
@@ -56,7 +58,7 @@ export const ChoosePlans: React.FC = () => {
     if (patientWantsMinimumDependent.get > 0) {
       return history.push(PHYSICAL_PERSON_REGISTER_DEPENDENTS)
     }
-    history.push(PHYSICAL_PERSON_REGISTER_DOCUMENTS)
+    history.push(PHYSICAL_PERSON_REGISTER_CPF)
   }
 
   return (
@@ -96,7 +98,6 @@ export const ChoosePlans: React.FC = () => {
         {selectedPlan.get.name && (
           <span>Você escolheu o plano {selectedPlan.get.name}</span>
         )}
-        {console.log(selectedPlan)}
         <ButtonPrimary onClick={toNext} disabled={!selectedPlan.get.idPlan}>
           Próxima Etapa
         </ButtonPrimary>

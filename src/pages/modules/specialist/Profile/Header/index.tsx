@@ -118,7 +118,10 @@ const Header: React.FC<HeaderProps> = ({
           </p>
           <p>
             <h6>{data?.specialistInfo?.issuingAgencyName}:</h6>
-            <span>{data?.specialistInfo?.classCouncil || ''}</span>
+            <span>
+              {data?.specialistInfo?.classCouncil || ''}-{' '}
+              {data?.specialistInfo?.ufProfissionaRegister}
+            </span>
           </p>
         </div>
       </div>

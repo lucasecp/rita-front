@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container } from './styles'
+import { Container, InputGroup } from './styles'
 import { MultiSelectOption } from '@/components/Form/MultSelect/index'
 import InputText from '@/components/Form/InputText/index'
 import { InputFile } from '@/components/Form/InputFile'
@@ -15,12 +15,21 @@ import { SpecialtysAndDocsType } from '../../../types'
 interface SpecialtyItemProps {
   data: MultiSelectOption
   current: number
+  setSpecialtys: React.Dispatch<React.SetStateAction<MultiSelectOption[]>>
+  specialtys: MultiSelectOption[]
 }
 
-const SpecialtyItem: React.FC<SpecialtyItemProps> = ({ data, current }) => {
+const SpecialtyItem: React.FC<SpecialtyItemProps> = ({
+  data,
+  current,
+  specialtys,
+  setSpecialtys,
+}) => {
   const [photo, setPhoto] = useState('')
+  const [rqe, setRqe] = useState(data.rqe || '')
 
-  const { errors, setSpecialtysAndDocs, setErrors } = useRegisterSpecialist()
+  const { errors, setSpecialtysAndDocs, setErrors, profissionalInfo } =
+    useRegisterSpecialist()
 
   const nameField = 'specialtysAndDocs' + current
 
@@ -29,7 +38,6 @@ const SpecialtyItem: React.FC<SpecialtyItemProps> = ({ data, current }) => {
   const hasKeyInSpecialtyErrors = (key: string) => {
     return key in errorSpecialtysAndDocs
   }
-
   const removePhoto = () => {
     setPhoto('')
     setSpecialtysAndDocs((specialtysAndDocs: SpecialtysAndDocsType) => ({
@@ -90,11 +98,20 @@ const SpecialtyItem: React.FC<SpecialtyItemProps> = ({ data, current }) => {
       removeSpecialtysAndDocs()
     }
   }, [])
+  useEffect(() => {
+    const restSpecialyst = specialtys.filter((spec) => spec.id !== data.id)
+    setSpecialtys(() => {
+      return [...restSpecialyst, { ...data, rqe }]
+    })
+  }, [rqe])
 
   return (
     <Container name={nameField}>
       <h2>Especialidade {current}</h2>
-      <InputText value={data.name} disabled />
+      <InputGroup>
+        <InputText value={data.name} disabled />
+        <InputText value={rqe} setValue={setRqe} label="RQE:" />
+      </InputGroup>
 
       {photo &&
       hasKeyInSpecialtyErrors(nameField) &&

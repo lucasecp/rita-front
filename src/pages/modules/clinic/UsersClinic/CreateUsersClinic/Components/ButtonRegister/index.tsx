@@ -14,6 +14,7 @@ import apiAdmin from '@/services/apiAdmin'
 import { useHistory } from 'react-router'
 import { CLINIC_SEE_ALL_USERS } from '@/routes/constants/namedRoutes/routes'
 import { useLoading } from '@/hooks/useLoading'
+import { useAuth } from '@/hooks/login'
 
 interface ButtonCadastrarProps {
   dataToApi: DataToApiI
@@ -30,6 +31,7 @@ const ButtonCadastrar: React.FC<ButtonCadastrarProps> = ({
 }) => {
   const history = useHistory()
   const { Loading } = useLoading()
+  const { user } = useAuth()
   const clearSpecialCharactesCPFAndPhone = (dataToApi: DataToApiI) => {
     return {
       ...dataToApi,
@@ -45,7 +47,10 @@ const ButtonCadastrar: React.FC<ButtonCadastrarProps> = ({
     if(!validateLengthField(dataToApi, setErrors) && !erros.email){
       try {
         Loading.turnOn()
-        await apiAdmin.post(`/clinica/${59}/usuario`, toApi(dataToApi))
+        await apiAdmin.post(
+          `/clinica/${user.idClinica}/usuario`,
+          toApi(dataToApi),
+        )
         toast.success(`Usuário cadastrado com sucesso!
                        Link para redefinir a senha enviada no e-mail ${dataToApi.email}`)
         history.push(CLINIC_SEE_ALL_USERS)

@@ -14,6 +14,7 @@ import {
   validateCity,
   validateUf,
 } from '../../helpers/validatorFields'
+import clearSpecialCharacters from '@/helpers/clearSpecialCharacters'
 
 interface ClinicAddressProps {
   address: AddressI
@@ -53,7 +54,7 @@ export const ClinicAddress: React.FC<ClinicAddressProps> = ({
 
   useEffect(() => {
     setAddress({
-      cep,
+      cep: clearSpecialCharacters(cep),
       uf: ufToApi,
       city,
       address: addressDep,

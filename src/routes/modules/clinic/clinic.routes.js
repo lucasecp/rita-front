@@ -20,9 +20,11 @@ import {
   CLINIC_APPOINTMENT_TABLE,
   CLINIC_CREATE_SCHEDULING,
   CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES,
+  CLINIC_EDIT_SCHEDULING
 } from '../../constants/namedRoutes/routes'
 import AppointmentTable from '@/pages/modules/clinic/AppointmentTable'
-import AppointmentScheduling from '@/pages/modules/clinic/AppointmentScheduling'
+import AppointmentScheduling from '@/pages/modules/clinic/AppointmentScheduling/Create'
+import EditAppointmentSchedule from '@/pages/modules/clinic/AppointmentScheduling/Edit'
 
 const clinicRoutes = [
   {
@@ -64,6 +66,10 @@ const clinicRoutes = [
   {
     path: CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES,
     component: SeeAllAppointmentSchedules,
+  },
+  {
+    path: CLINIC_EDIT_SCHEDULING,
+    component: EditAppointmentSchedule,
   },
 ]
 

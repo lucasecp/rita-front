@@ -1,0 +1,39 @@
+import styled from 'styled-components'
+import colors from '@/styles/colors'
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > img {
+    width: 56px;
+  }
+
+  > p {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25px;
+
+    color: ${colors.gray.dark};
+    text-align: center;
+
+    min-width: 450px;
+
+    @media (max-width: 768px) {
+      padding: 0 16px;
+      min-width: unset;
+    }
+  }
+
+  > * + * {
+    margin-top: 24px;
+  }
+
+  > footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+  }
+`

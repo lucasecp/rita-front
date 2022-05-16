@@ -4,6 +4,8 @@ export interface DoctorI {
   id: number
   crm: string
   verified: boolean
+  profissionalRegister: string
+  ufIssuingAgency: string
   specialtys: any[]
 }
 

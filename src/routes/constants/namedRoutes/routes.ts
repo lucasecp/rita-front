@@ -57,6 +57,7 @@ export const CLINIC_SEE_SPECIALIST_SCHEDULE =
 export const CLINIC_APPOINTMENT_TABLE = '/clinica/tabela-consulta'
 export const CLINIC_CREATE_SCHEDULING = '/clinica-agendamento/criar'
 export const CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES = '/agendamentos-consulta'
+export const CLINIC_EDIT_SCHEDULING = '/clinica-agendamento/editar'
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'
 export const VALIDATOR_SEE_ONE_PATIENT = '/autorizacoes/ver-paciente'
@@ -122,18 +123,25 @@ export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const REASON_TO_LEAVE = '/motivo-para-sair/:token'
 
+export const PHYSICAL_PERSON_REGISTER_CPF = '/paciente/cadastro/cpf'
+export const PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA =
+  '/paciente/cadastro/dados-cadastrais'
 export const PHYSICAL_PERSON_REGISTER_CHOOSE_REGION =
   '/paciente/cadastro/escolher-regiao'
-
 export const PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN =
   '/paciente/cadastro/escolher-plano'
+
 export const PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS =
   '/paciente/cadastro/escolher-plano/detalhes'
 
-export const PHYSICAL_PERSON_REGISTER_DEPENDENTS =
-  '/paciente/cadastro/dependentes'
+export const PHYSICAL_PERSON_REGISTER_ADDRESS = '/paciente/cadastro/endereco'
+
 export const PHYSICAL_PERSON_REGISTER_DOCUMENTS =
   '/paciente/cadastro/documentos'
+
+export const PHYSICAL_PERSON_REGISTER_DEPENDENTS =
+  '/paciente/cadastro/dependentes'
+
 export const PHYSICAL_PERSON_REGISTER_PAYMENT = '/paciente/cadastro/pagamento'
 
 export const TESTE = '/teste'

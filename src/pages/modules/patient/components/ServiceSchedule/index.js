@@ -17,8 +17,9 @@ const ServiceSchedule = ({ dataSchedule = [] }) => {
       }
     }
   }, [dataSchedule])
+  console.log(daysEmpty, dataSchedule)
 
-  return daysEmpty.length < 7 ? (
+  return daysEmpty.length <= 7 ? (
     <Container>
       <header>
         <h5>Agenda de atendimento</h5>

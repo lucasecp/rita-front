@@ -7,7 +7,7 @@ import ButtonLink from '@/components/Button/Link'
 
 import { AddDependent } from './actions/AddDependent'
 import { EditDependent } from './actions/EditDependent'
-import { UpgradePlan } from './messages/UpgradePlan'
+import { UpgradePlanQuantity } from './messages/UpgradePlanQuantity'
 
 import { useHistory } from 'react-router-dom'
 import { useModal } from '@/hooks/useModal'
@@ -21,16 +21,16 @@ import editIcon from '@/assets/icons/edit.svg'
 
 import { PHYSICAL_PERSON_REGISTER_DOCUMENTS } from '@/routes/constants/namedRoutes/routes'
 
-import { DependentData } from './types'
+import { DependentState } from '../shared/hooks/types'
 import { Container } from './styles'
 
 export const Dependents: React.FC = () => {
-  const { region, dependents, selectedPlan, finishRegister } =
+  const { region, dependents, selectedPlan, cpf, finishRegister } =
     usePhysicalPersonRegister()
   const history = useHistory()
   const { showMessage } = useModal()
   const { Loading } = useLoading()
-  const [allDependents, setAllDependents] = useState<DependentData[]>(
+  const [allDependents, setAllDependents] = useState<DependentState[]>(
     dependents.get || [],
   )
 
@@ -71,7 +71,7 @@ export const Dependents: React.FC = () => {
     if (limitDependentsPlan <= allDependents.length) {
       const hasCoverage = await verifyIfHasConverage()
 
-      showMessage(UpgradePlan, {
+      showMessage(UpgradePlanQuantity, {
         hasCoverage,
         limitDependentsPlan,
       })
@@ -79,21 +79,19 @@ export const Dependents: React.FC = () => {
       showMessage(AddDependent, {
         dependents: allDependents,
         onGetDependents: setAllDependents,
-        // remover string estática
-        holderCpf: '689.873.288-99',
+        holderCpf: cpf.get,
         planAllowMajorAge,
       })
     }
   }
 
-  const onEditDependent = (id: number, dependent: DependentData) => {
+  const onEditDependent = (id: number, dependent: DependentState) => {
     showMessage(EditDependent, {
       id,
       dependentData: dependent,
       dependents: allDependents,
       onGetDependents: setAllDependents,
-      // remover string estática
-      holderCpf: '689.873.288-99',
+      holderCpf: cpf.get,
       planAllowMajorAge,
     })
   }

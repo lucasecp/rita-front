@@ -20,18 +20,20 @@ import { validateDepBirthDate } from '../helpers/validateDepBirthDate'
 
 import formatBirthdate from '@/helpers/formatDate'
 
+import { UpgradePlanAge } from '../../messages/UpgradePlanAge'
+
 import apiPatient from '@/services/apiPatient'
 import clearCpf from '@/helpers/clearSpecialCharacters'
 
-import { DependentData } from '../../types'
+import { DependentState } from '../../../shared/hooks/types'
 
 import { Container } from './styles'
 
 interface EditDependentProps {
   id: number
-  dependentData: DependentData
-  dependents: DependentData[]
-  onGetDependents: React.Dispatch<React.SetStateAction<DependentData[]>>
+  dependentData: DependentState
+  dependents: DependentState[]
+  onGetDependents: React.Dispatch<React.SetStateAction<DependentState[]>>
   holderCpf: string
   planAllowMajorAge: boolean
 }
@@ -44,7 +46,7 @@ export const EditDependent: React.FC<EditDependentProps> = ({
   holderCpf,
   planAllowMajorAge,
 }) => {
-  const { closeModal } = useModal()
+  const { closeModal, showMessage } = useModal()
   const [errorMessage, sendErrorMessage] = useMessage()
   const { Loading } = useLoading()
 
@@ -140,6 +142,20 @@ export const EditDependent: React.FC<EditDependentProps> = ({
     closeModal()
   }
 
+  const validateDependentBirthdate = () => {
+    const error = validateDepBirthDate(birthDate, !planAllowMajorAge)
+
+    if (error === 'Seu plano só aceita dependentes menores de idade') {
+      showMessage(UpgradePlanAge)
+      return
+    }
+
+    setErrors({
+      ...errors,
+      birthDate: validateDepBirthDate(birthDate, !planAllowMajorAge),
+    })
+  }
+
   return (
     <Container>
       <h2 data-test="dependentEditTitle">Dependente</h2>
@@ -184,18 +200,8 @@ export const EditDependent: React.FC<EditDependentProps> = ({
           value={birthDate}
           setValue={setBirthDate}
           hasError={!!errors.birthDate}
-          onBlur={() =>
-            setErrors({
-              ...errors,
-              birthDate: validateDepBirthDate(birthDate, !planAllowMajorAge),
-            })
-          }
-          onKeyUp={() =>
-            setErrors({
-              ...errors,
-              birthDate: validateDepBirthDate(birthDate, !planAllowMajorAge),
-            })
-          }
+          onBlur={validateDependentBirthdate}
+          onKeyUp={validateDependentBirthdate}
           msgError={errors.birthDate}
           data-test="dependentBirthdateField"
         />

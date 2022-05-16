@@ -10,12 +10,15 @@ import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.sv
 import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS } from '@/routes/constants/namedRoutes/routes'
 import { MappedPlan } from '../..'
 import { usePhysicalPersonRegister } from '../../../shared/hooks'
+import { formatPrice } from '@/helpers/formatPrice'
 
 export interface SelectedPlan {
   idPlan: number | 0
   name: string | ''
   allowedMajorAge: boolean | null
   maximumDependentsQuantity: number | null
+  price: string | ''
+  periodicity: string | ''
 }
 
 interface CardProps {
@@ -43,6 +46,8 @@ export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
           name: plan.name,
           allowedMajorAge: plan.allowedMajorAge,
           maximumDependentsQuantity: plan.maximumDependentsQuantity,
+          price: plan.price,
+          periodicity: plan.periodicity,
         })
       }
     >
@@ -59,18 +64,20 @@ export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
           </CheckField>
         </div>
       </div>
-      <h3>inclusão de Dependentes</h3>
+      <h3>Inclusão de Dependentes</h3>
       <ul>
-        <li>{plan.maximumDependentsQuantity ? 'Sim' : 'Não'}</li>
+        <li data-test={`maximumDependentsQuantityCard-${plan.idPlan}`}>
+          {plan.maximumDependentsQuantity ? 'Sim' : 'Não'}
+        </li>
       </ul>
 
       <h3>Serviços Oferecidos</h3>
       <ul>
         <li>Urgência e Emergência</li>
-        <li>consultas médicas</li>
+        <li>Consultas Médicas</li>
         <li>Exames Simples</li>
       </ul>
-      <h2>R$ {plan.price}/Mês</h2>
+      <h2>{formatPrice(plan.price)}/ano</h2>
       <h3>Experimente 7 dias grátis</h3>
       <LinkArea
         colorTheme={colorTheme}
