@@ -1,11 +1,11 @@
 import clearCpf from '@/helpers/clearSpecialCharacters'
 import cpfValidate from '@/helpers/validateCpf'
 
-import { DependentData } from '../../types'
+import { DependentState } from '../../../shared/hooks/types'
 
 export const validateDepCpf = (
   value: string,
-  allDeps: DependentData[],
+  allDeps: DependentState[],
   holderCpf: string,
 ): string => {
   const alreadyExist = allDeps.some(
