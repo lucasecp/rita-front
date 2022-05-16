@@ -141,7 +141,7 @@ export const ClinicData: React.FC<ClinicDataProps> = ({
           ]}
           value={selectedStatus}
           setValue={setSelectedStatus}
-          disabled={!isEditing}
+          disabled
           onBlur={() =>
             setErrors({ ...errors, status: validateStatus(selectedStatus) })
           }
