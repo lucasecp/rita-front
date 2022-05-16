@@ -10,6 +10,7 @@ import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.sv
 import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS } from '@/routes/constants/namedRoutes/routes'
 import { MappedPlan } from '../..'
 import { usePhysicalPersonRegister } from '../../../shared/hooks'
+import { formatPrice } from '@/helpers/formatPrice'
 
 export interface SelectedPlan {
   idPlan: number | 0
@@ -74,7 +75,7 @@ export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
         <li>Consultas Médicas</li>
         <li>Exames Simples</li>
       </ul>
-      <h2>R$ {plan.price}/Mês</h2>
+      <h2>R$ {formatPrice(plan.price)}/ano</h2>
       <h3>Experimente 7 dias grátis</h3>
       <LinkArea
         colorTheme={colorTheme}

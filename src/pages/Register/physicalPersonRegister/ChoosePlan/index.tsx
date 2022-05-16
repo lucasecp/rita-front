@@ -97,7 +97,6 @@ export const ChoosePlans: React.FC = () => {
         {selectedPlan.get.name && (
           <span>Você escolheu o plano {selectedPlan.get.name}</span>
         )}
-        {console.log(selectedPlan)}
         <ButtonPrimary onClick={toNext} disabled={!selectedPlan.get.idPlan}>
           Próxima Etapa
         </ButtonPrimary>

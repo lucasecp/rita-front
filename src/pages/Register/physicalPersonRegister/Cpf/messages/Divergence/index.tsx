@@ -8,7 +8,9 @@ import { PRE_REGISTER } from '@/routes/constants/namedRoutes/routes'
 
 interface DivergenceProps {
   company: string
-  cpf: string
+  cpf: {
+    get: string
+  }
   email: string
   phone: string
   status: string
