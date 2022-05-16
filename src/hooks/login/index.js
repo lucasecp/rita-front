@@ -40,13 +40,14 @@ export default function AuthProvider({ children }) {
 
   const getClinic = async () => {
     try {
-      const {data} = await apiUser.get('clinica')
-      console.log(data)
+      const { data } = await apiUser.get('clinica')
 
-      setDataLogin({
-        ...user,
-        idClinica: data.clinica[0].idClinica,
-      })
+      if (data.clinica.length > 0) {
+        setDataLogin({
+          ...user,
+          idClinica: data.clinica[0].idClinica,
+        })
+      }
     } catch (e) {
       console.log(e)
     }
@@ -57,7 +58,6 @@ export default function AuthProvider({ children }) {
       const admClinic = user.area.some(
         (perfil) => perfil.grupoPerfil === 'Clinica/Especialista',
       )
-      console.log(admClinic)
       if (admClinic) {
         getClinic()
       }
