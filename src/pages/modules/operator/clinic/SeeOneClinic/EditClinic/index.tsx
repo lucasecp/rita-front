@@ -77,10 +77,6 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
     error = !!hasSpecificError[0]
 
     for (const field in fields) {
-      console.log('fields[field]', fields[field])
-      console.log('[field]', field)
-
-
       if ((!fields[field] || !fields[field].length) && field !== 'complement') {
         setErrors((errors) => ({ ...errors, [field]: 'Campo obrigatório' }))
         error = true
