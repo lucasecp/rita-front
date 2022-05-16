@@ -14,7 +14,7 @@ const Actions: React.FC<ActionsProps> = ({ data, setMakeRequest }) => {
     <Container>
       <CustomTooltip label="">
         <div>
-          <Edit idDoctor={data.specialist.idSpecialist} idScheduler={data.id}/>
+          <Edit idDoctor={data.specialist.idSpecialist} idSchedule={data.id}/>
         </div>
       </CustomTooltip>
       <CustomTooltip label="">
