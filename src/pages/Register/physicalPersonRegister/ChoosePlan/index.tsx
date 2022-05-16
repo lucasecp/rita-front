@@ -26,6 +26,7 @@ export interface MappedPlan {
   name: string
   allowedMajorAge: boolean
   price: string
+  periodicity: string
 }
 
 export const ChoosePlans: React.FC = () => {

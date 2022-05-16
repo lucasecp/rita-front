@@ -23,13 +23,13 @@ import { UpgradePlanAge } from '../../messages/UpgradePlanAge'
 import apiPatient from '@/services/apiPatient'
 import clearCpf from '@/helpers/clearSpecialCharacters'
 
-import { DependentData } from '../../types'
+import { DependentState } from '../../../shared/hooks/types'
 
 import { Container } from './styles'
 
 interface AddDependentProps {
-  dependents: DependentData[]
-  onGetDependents: React.Dispatch<React.SetStateAction<DependentData[]>>
+  dependents: DependentState[]
+  onGetDependents: React.Dispatch<React.SetStateAction<DependentState[]>>
   holderCpf: string
   planAllowMajorAge: boolean
 }
