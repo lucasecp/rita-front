@@ -8,19 +8,19 @@ import { SelectTime } from './components/SelectTime'
 import OutlineButton from '@/components/Button/Outline/index'
 import ButtonPrimary from '@/components/Button/Primary'
 import { InputCpf } from './components/InputCpf/index'
-import { ErrorsI } from '../types'
+import { ErrorsI, DataI } from '../types'
 import { isFuture, isToday, isValid, parse } from 'date-fns'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 import { useModal } from '@/hooks/useModal'
 import Cancel from './messages/Cancel'
-import { DataToApiI } from '../types/index'
 import apiAdmin from '@/services/apiAdmin'
 import { toApi } from '../adapters'
 import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
+import { useAuth } from '@/hooks/login'
 
 interface FormProps {
-  data: DataToApiI
+  data: DataI
   setToggleNewRequest: React.Dispatch<React.SetStateAction<number>>
 }
 
@@ -48,6 +48,8 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
   const { showMessage } = useModal()
 
   const { Loading } = useLoading()
+
+  const { user } = useAuth()
 
   const validateDate = () => {
     const dateformated = parse(date, 'dd/MM/yyyy', new Date())
@@ -91,16 +93,6 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
     }
     setErrors({} as ErrorsI)
 
-    const data = {
-      specialty: Number(specialty),
-      cpf,
-      date,
-      time,
-      title: '',
-      origin: '',
-      idPatient,
-      patientName,
-    }
 
     try {
       Loading.turnOn()
@@ -117,7 +109,7 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
       })
 
       await apiAdmin.put(
-        `/clinica/59/medico/${specialist}/agenda-pessoal`,
+        `/clinica/59/medico/${specialist}/agenda-pessoal/${data.idSchedule}/agenda-pessoal`,
         dataMaped,
       )
 

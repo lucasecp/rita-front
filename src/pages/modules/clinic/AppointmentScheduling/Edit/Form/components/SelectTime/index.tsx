@@ -90,7 +90,7 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
     }
 
     getTimes()
-  }, [date])
+  }, [date, idDoctor])
 
   return (
     <Select

@@ -7,7 +7,7 @@ import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 // import { useHistory } from 'react-router-dom'
 // import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
-import { DataToApiI } from '../../../types'
+import { DataI } from '../../../types'
 import { useLoading } from '@/hooks/useLoading'
 import apiAdmin from '@/services/apiAdmin'
 import { toast } from '@/styles/components/toastify'
@@ -15,7 +15,7 @@ import { toApi } from '../../../adapters'
 
 interface ConfirmProps {
   idSpecialist: number | string
-  data: DataToApiI & { specialtyName: string; specialistName: string }
+  data: DataI & { specialtyName: string; specialistName: string }
 }
 
 const Confirm: React.FC<ConfirmProps> = ({ idSpecialist, data }) => {
