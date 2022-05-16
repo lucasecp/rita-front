@@ -41,7 +41,6 @@ export default function AuthProvider({ children }) {
 
   const getClinic = async () => {
     try {
-     
       const { data } = await apiUser.get('clinica')
 
       setDataLogin({

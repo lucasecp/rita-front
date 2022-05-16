@@ -4,7 +4,6 @@ import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down2.svg'
 
 import { AccordionContainer } from './styles'
 import { InstructionsProofOfIncome } from './components/Instructions'
-import { SendedFile } from '../shared/components/SendedFile'
 
 import { incomeType } from './constants/income'
 
@@ -26,45 +25,35 @@ export const ProofOfIncome: React.FC<ProofOfIncomeProps> = ({
   error,
 }) => {
   return (
-    <>
-      <AccordionContainer
-        square={true}
-        defaultExpanded={false}
-        expanded={hasPreviousDocument || !!proofOfIncomeFile}
+    <AccordionContainer
+      square={true}
+      defaultExpanded={false}
+      expanded={hasPreviousDocument || !!proofOfIncomeFile}
+    >
+      <AccordionSummary
+        aria-controls="panel3a-content"
+        id="panel3a-header"
+        expandIcon={
+          !proofOfIncomeFile &&
+          selectIncome !== incomeType.MORE_ONE_HALF && <ArrowDownIcon />
+        }
+        disabled={
+          !!proofOfIncomeFile || selectIncome === incomeType.MORE_ONE_HALF
+        }
       >
-        <AccordionSummary
-          aria-controls="panel3a-content"
-          id="panel3a-header"
-          expandIcon={
-            !proofOfIncomeFile &&
-            selectIncome !== incomeType.MORE_ONE_HALF && <ArrowDownIcon />
-          }
-          disabled={
-            !!proofOfIncomeFile || selectIncome === incomeType.MORE_ONE_HALF
-          }
-        >
-          <h2>
-            Comprovante de renda <span>*</span>
-          </h2>
-        </AccordionSummary>
-        <AccordionDetails>
-          {proofOfIncomeFile && (
-            <SendedFile
-              file={proofOfIncomeFile}
-              onGetFile={onGetFile}
-              name="ProofOfIncome"
-            />
-          )}
-          {!proofOfIncomeFile && (
-            <InstructionsProofOfIncome
-              selectIncome={selectIncome}
-              onGetSelectIncome={onSelectIncome}
-              onGetFile={onGetFile}
-              error={error}
-            />
-          )}
-        </AccordionDetails>
-      </AccordionContainer>
-    </>
+        <h2>
+          Comprovante de renda <span>*</span>
+        </h2>
+      </AccordionSummary>
+      <AccordionDetails>
+        <InstructionsProofOfIncome
+          selectIncome={selectIncome}
+          onGetSelectIncome={onSelectIncome}
+          onGetFile={onGetFile}
+          error={error}
+          file={proofOfIncomeFile}
+        />
+      </AccordionDetails>
+    </AccordionContainer>
   )
 }

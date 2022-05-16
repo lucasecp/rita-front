@@ -20,6 +20,7 @@ function InstructionsIncome({
       onGetFile('')
     }
   }, [selectIncome])
+
   return (
     <Container>
       <header>

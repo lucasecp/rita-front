@@ -61,7 +61,7 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
   }
 
   useEffect(() => {
-    const getSpecialists = async () => {
+    const getTime = async () => {
       try {
         LoadingInput.turnOn()
         const { data } = await apiAdmin.get(
@@ -75,8 +75,8 @@ export const SelectTime: React.FC<SelectTimeProps> = ({
       }
     }
 
-    getSpecialists()
-  }, [])
+    getTime()
+  }, [idDoctor])
 
   useEffect(() => {
     setTime('')

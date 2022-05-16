@@ -4,36 +4,29 @@ import Form from './Form'
 import apiAdmin from '@/services/apiAdmin'
 import { useLocation } from 'react-router'
 import { fromApi } from './adapters'
-import { DataToApiI } from './types'
+import { DataI } from './types'
+import { useAuth } from '@/hooks/login'
 
 const EditAppointmentSchedule: React.FC = () => {
-  const [schedulingData, setSchedulingData] = useState<DataToApiI>(
-    {} as DataToApiI,
-  )
+  const [schedulingData, setSchedulingData] = useState<DataI>({} as DataI)
 
   const [toggleNewRequest, setToggleNewRequest] = useState(0)
+
   const location = useLocation()
 
-  const getScheduling = async () => {
-    try {
-      // const result = await apiAdmin.get(
-      //   `/clinica/59/medico/420/agenda-pessoal/30`,
-      // )
+  const { user } = useAuth()
 
-      setSchedulingData(
-        fromApi({
-          titulo: '',
-          dataInicio: '14/05/2022',
-          dataFim: '14/05/2022',
-          horaInicio: '11:00:09',
-          horaFim: '12:00:33',
-          origem: 'Rita',
-          idEspecialidade: 5,
-          idPaciente: 2,
-          cpf: '07440384563',
-          idMedico: 443
-        }),
+  const getScheduling = async () => {
+    const idDoctor = location.state?.idDoctor || 217
+
+    const idSchedule = location.state?.idSchedule || 34
+
+    try {
+      const { data } = await apiAdmin.get(
+        `/clinica/${user.idClinica}/medico/${idDoctor}/agenda-pessoal/${idSchedule}`,
       )
+
+      setSchedulingData(fromApi(data))
     } catch (error) {}
   }
 
@@ -44,7 +37,7 @@ const EditAppointmentSchedule: React.FC = () => {
   useEffect(() => {
     document.title = 'Rita Saúde | Visualizar/Editar Agendamento'
 
-  // idSchedule
+    // idSchedule
 
     if (!location.state) {
       // return history.push(CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES)

@@ -1,7 +1,7 @@
 import { parse } from 'date-fns'
-import { DataToApiI, DataFromApiI } from '../types'
+import { DataToApiI, DataI, DataFromApiI } from '../types'
 
-export const toApi = (data: DataToApiI): DataFromApiI => {
+export const toApi = (data: DataI): DataToApiI => {
   return {
     titulo: data.title || `consulta-${data.patientName}`,
     dataInicio: parse(data.date, 'dd/MM/yyyy', new Date()).toISOString(),
@@ -14,15 +14,17 @@ export const toApi = (data: DataToApiI): DataFromApiI => {
   }
 }
 
-export const fromApi = (data: DataFromApiI): DataToApiI => {
+export const fromApi = (data: DataFromApiI): DataI => {
+  console.log(data.horaFim, data.horaInicio)
   return {
+    idSchedule: data.idAgenda,
     title: data.titulo || `consulta-${data.paciente}`,
-    date: data.dataInicio,
+    date: String(data.dataInicio?.split('-')?.reverse()?.join('/')),
     time: data.horaInicio.slice(0, 5) + ' - ' + data.horaFim.slice(0, 5),
     origin: data.origem || 'Rita',
-    specialty: data.idEspecialidade,
-    idPatient: data.idPaciente,
-    cpf: data.cpf,
-    specialist: data.idMedico,
+    specialty: data.especialidade?.idEspecialidade,
+    idPatient: data.paciente?.idPaciente,
+    cpf: data.paciente?.cpf,
+    specialist: data.especialista.idMedico,
   }
 }
