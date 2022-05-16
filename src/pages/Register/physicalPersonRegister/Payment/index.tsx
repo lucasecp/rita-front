@@ -1,13 +1,16 @@
 import React from 'react'
 import moment from 'moment'
 
+import apiWallet from '@/services/apiWallet'
 import { useDialog } from '@/hooks/useDialog'
+import { usePhysicalPersonRegister } from '@/pages/Register/physicalPersonRegister/shared/hooks'
 import { RegisterLayout } from '@/components/Layout/RegisterLayout'
 import { CreditCardForm } from '@/pages/Wallet/components/CreditCardForm'
 import { Container } from './styles'
 
 export const Payment: React.FC = () => {
   const { dialogConfirmation } = useDialog()
+  const { registrationData, selectedPlan } = usePhysicalPersonRegister()
 
   async function handleFormSubmit(model: any) {
     const [month, year] = model.expireAt.split('/')
@@ -25,6 +28,23 @@ export const Payment: React.FC = () => {
       alias: model.name,
       asDefault: model.asDefault
     })
+    await apiWallet.post('/user/credit-card', {
+      number: model.number,
+      holder: model.name,
+      expirationDate: moment()
+        .set({
+          year: 2000 + Number(year),
+          month: Number(month) - 1,
+        })
+        .toISOString(),
+      cvv: model.securityCode,
+      alias: model.name,
+      asDefault: model.asDefault,
+      user: {
+        ritaId: registrationData.get.cpf,
+        token: registrationData.get.cpf,
+      },
+    })
   }
 
   function handleFormCancel() {
@@ -40,6 +60,14 @@ export const Payment: React.FC = () => {
   return (
     <RegisterLayout>
       <Container>
+        <h3>Dados do paciente e plano</h3>
+        <section>
+          <p>CPF: <strong>{registrationData.get.cpf}</strong></p>
+          <p>Nome do plano: <strong>{selectedPlan.get.name}</strong></p>
+          <p>Valor do plano: <strong>{selectedPlan.get.price}</strong></p>
+          <p>Periodicidade do plano: <strong>{selectedPlan.get.name}</strong></p>
+        </section>
+
         <h3>Adicionar cartão</h3>
         <h5>
           Cadastre seu cartão de crédito ou débito para realizar transações
