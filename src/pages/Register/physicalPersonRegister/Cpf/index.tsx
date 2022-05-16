@@ -41,11 +41,11 @@ export const status = {
 }
 
 export const Cpf: React.FC = () => {
-  const { Loading } = useLoading()
-  const history = useHistory()
-  const { showMessage } = useModal()
-
   const { cpf } = usePhysicalPersonRegister()
+
+  const history = useHistory()
+  const { Loading } = useLoading()
+  const { showMessage } = useModal()
 
   const handleConfirm = async () => {
     if (cpf.get.length === 0) {
@@ -99,16 +99,15 @@ export const Cpf: React.FC = () => {
       }
     } catch ({ response }) {
       const apiStatus = response.status
-      // company = response.data.empresa[0]
 
       if (apiStatus === status.NOT_COSTUMER_CARD_SABIN) {
-        return history.push(REGISTER_PATIENT, { userData: { cpf } })
+        history.push(PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA)
+
+        return
       }
     } finally {
       Loading.turnOff()
     }
-
-    history.push(PHYSICAL_PERSON_REGISTER_REGISTRATION_DATA)
   }
 
   return (
