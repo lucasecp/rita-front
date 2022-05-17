@@ -103,7 +103,11 @@ const FormClinicProfile: React.FC = () => {
         key === 'especialidade' ? JSON.stringify(data[key]) : data[key],
       )
     })
-    formData.append('file', photo)
+
+    if (photo.size !== 0) {
+      formData.append('file', photo)
+    }
+
     await apiAdmin.put(`/clinica/minha-clinica/${user.idClinica}`, formData)
   }
 

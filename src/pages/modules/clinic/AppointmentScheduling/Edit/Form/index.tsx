@@ -112,7 +112,7 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
       })
 
       await apiAdmin.put(
-        `/clinica/${user.idClinica}/medico/${specialist}/agenda-pessoal/${data.idSchedule}/agenda-pessoal`,
+        `/clinica/${user.idClinica}/medico/${specialist}/agenda-pessoal/${data.idSchedule}`,
         dataMaped,
       )
 
