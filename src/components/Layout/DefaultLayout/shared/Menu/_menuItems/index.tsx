@@ -18,7 +18,7 @@ import { ReactComponent as StethoscopeIcon } from '@/assets/icons/stethoscope.sv
 import { ReactComponent as UsersIcon } from '@/assets/icons/users.svg'
 import { ReactComponent as UsersGroupIcon } from '@/assets/icons/users-group.svg'
 import { ReactComponent as SpecialtysTypesIcon } from '@/assets/icons/specialtys-types.svg'
-import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
+import { ReactComponent as Calendar } from '@/assets/icons/calendar3-green.svg'
 import { ReactComponent as AppointmentTableIcon } from '@/assets/icons/appointment-table.svg'
 import { ReactComponent as AppointmentSchedulingIcon } from '@/assets/icons/calendar2-green.svg'
 

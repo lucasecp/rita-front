@@ -23,7 +23,7 @@ import {
   validateCPF,
   validatePhone,
   validateTwoPhone,
-  validateCep
+  validateCep,
 } from '../helpers/validatorFields'
 
 import { validateCNPJ } from '@/helpers/validateCNPJ'
@@ -83,42 +83,42 @@ const EditClinic: React.FC<any> = ({ clinicData }) => {
       } else {
         if (field === 'cpf') {
           const returnCpfValid = validateCPF(fields[field])
-          if(returnCpfValid !== ''){
+          if (returnCpfValid !== '') {
             setErrors((errors) => ({ ...errors, [field]: returnCpfValid }))
             error = true
           }
         }
         if (field === 'cnpj') {
           const returnCpfValid = validateCNPJ(fields[field])
-          if(!returnCpfValid){
+          if (!returnCpfValid) {
             setErrors((errors) => ({ ...errors, [field]: 'CNPJ Inválido.' }))
             error = true
           }
         }
         if (field === 'cep') {
           const returnCepValid = validateCep(fields[field])
-          if(returnCepValid !== ''){
+          if (returnCepValid !== '') {
             setErrors((errors) => ({ ...errors, [field]: returnCepValid }))
             error = true
           }
         }
         if (field === 'phone') {
           const returnTwoPhoneValid = validateTwoPhone(fields[field])
-          if(returnTwoPhoneValid !== ''){
+          if (returnTwoPhoneValid !== '') {
             setErrors((errors) => ({ ...errors, [field]: returnTwoPhoneValid }))
             error = true
           }
         }
         if (field === 'celPhone') {
           const returnPhoneValid = validatePhone(fields[field])
-          if(returnPhoneValid !== ''){
+          if (returnPhoneValid !== '') {
             setErrors((errors) => ({ ...errors, [field]: returnPhoneValid }))
             error = true
           }
         }
         if (field === 'email') {
           const returnisEmailValid = isEmail(fields[field])
-          if(!returnisEmailValid){
+          if (!returnisEmailValid) {
             setErrors((errors) => ({ ...errors, [field]: 'E-mail Inválido.' }))
             error = true
           }
