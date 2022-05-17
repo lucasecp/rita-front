@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Filter from './Filter'
 import Table from './Table'
 import { Container, Content } from './styles'
-
+import ButtonIncluir from './Components/BottomCreate'
 import Pagination from '@/components/Pagination'
 import { useLoading } from '@/hooks/useLoading'
 import apiAdmin from '@/services/apiAdmin'
@@ -11,15 +11,16 @@ import { queryFilterString } from '@/helpers/queryString/filter'
 import { queryOrderString } from '@/helpers/queryString/order'
 import { fromApi } from './adapters'
 import { IScheduler } from './types'
+import { useAuth } from '@/hooks/login'
 
 const AppointmentSchedules: React.FC = () => {
   const [queryApi, setQueryApi] = useState('')
   const [filters, setFilters] = useState<any[]>([])
   const [order, setOrder] = useState({})
   const [makeRequest, setMakeRequest] = useState(0)
+  const { user } = useAuth()
   const [scheduler, setScheduler] = useState<IScheduler>({
-    total: 0,
-    data: [],
+    total: 0, data: [],
   })
   const { Loading } = useLoading()
 
@@ -32,9 +33,9 @@ const AppointmentSchedules: React.FC = () => {
     const getClinics = async () => {
       try {
         Loading.turnOn()
+
         const { data } = await apiAdmin(
-          `/clinica/${59}/agenda-pessoal${queryApi}${
-            queryFilterString(filters) + queryOrderString(order)
+          `/clinica/${user.idClinica}/agenda-pessoal${queryApi}${queryFilterString(filters) + queryOrderString(order)
           }`,
         )
         setScheduler({ total: data.length, data: fromApi(data) })
@@ -49,7 +50,7 @@ const AppointmentSchedules: React.FC = () => {
 
   return (
     <Container>
-      <DefaultLayout title="Filtragem - Agendamentos de consulta">
+      <DefaultLayout title="Filtragem - Agendamentos de consulta" headerChildren={<ButtonIncluir/>}>
         <Content>
           <Filter setFilters={setFilters} />
           <Table

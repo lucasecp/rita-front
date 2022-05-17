@@ -7,6 +7,7 @@ import { CompleteProps } from './types/index'
 import InputText from '@/components/Form/InputText'
 import apiAdmin from '@/services/apiAdmin'
 import ItemSpecialty from './itemSpecialty'
+import { useAuth } from '@/hooks/login'
 
 const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   value,
@@ -14,8 +15,8 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   hasErrors,
   setValue,
 }) => {
-
-  const ENDPOINT_SPECIALIST = `clinica/${59}/agenda-pessoal?limit=10000000&skip=0`
+  const { user } = useAuth()
+  const ENDPOINT_SPECIALIST = `clinica/${user.idClinica}/agenda-pessoal?limit=10000000&skip=0`
 
   const [options, setOptions] = useState<any[]>([])
   const [specialist, setSpecialist] = useState([])
