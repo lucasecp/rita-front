@@ -30,12 +30,17 @@ const AppointmentSchedules: React.FC = () => {
   }, [])
 
   useEffect(() => {
+    if (!queryApi) {
+      return
+    }
+    
     const getClinics = async () => {
       try {
         Loading.turnOn()
 
         const { data } = await apiAdmin(
-          `/clinica/${user.idClinica}/agenda-pessoal${queryApi}${queryFilterString(filters) + queryOrderString(order)
+          `/clinica/${user.idClinica}/agenda-pessoal${queryApi}${
+            queryFilterString(filters) + queryOrderString(order)
           }`,
         )
         setScheduler({ total: data.length, data: fromApi(data) })
