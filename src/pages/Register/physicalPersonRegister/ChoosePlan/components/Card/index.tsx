@@ -8,7 +8,6 @@ import { useHistory } from 'react-router-dom'
 import ButtonLink from '@/components/Button/Link'
 import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.svg'
 import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS } from '@/routes/constants/namedRoutes/routes'
-import { MappedPlan } from '../..'
 import { usePhysicalPersonRegister } from '../../../shared/hooks'
 import { formatPrice } from '@/helpers/formatPrice'
 
@@ -21,9 +20,18 @@ export interface SelectedPlan {
   periodicity: string | ''
 }
 
+interface Plan {
+  idPlan: number
+  maximumDependentsQuantity: number
+  name: string
+  allowedMajorAge: boolean
+  price: string
+  periodicity: string
+}
+
 interface CardProps {
   colorTheme: number
-  plan: MappedPlan
+  plan: Plan
 }
 
 export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
