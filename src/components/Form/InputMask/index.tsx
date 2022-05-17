@@ -54,6 +54,7 @@ const InputMask: React.FC<InputMaskProps> = ({
           id={label}
           disabled={disabled}
           onChange={(event) => setValue && setValue(event.target.value)}
+          data-test={`inputMask-${label}`}
           {...rest}
         />
       )}
