@@ -6,15 +6,14 @@ import { DataScheduler } from '../../../types'
 
 interface ActionsProps {
   data: DataScheduler
-  setMakeRequest: (x: number) => void
 }
 
-const Actions: React.FC<ActionsProps> = ({ data, setMakeRequest }) => {
+const Actions: React.FC<ActionsProps> = ({ data }) => {
   return (
     <Container>
-      <CustomTooltip label="">
+      <CustomTooltip label="Editar/Visualizar">
         <div>
-          <Edit idDoctor={data.specialist.idSpecialist} idSchedule={data.id}/>
+          <Edit idDoctor={data.specialist.idSpecialist} idSchedule={data.id} />
         </div>
       </CustomTooltip>
       <CustomTooltip label="">

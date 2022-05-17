@@ -15,9 +15,15 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   setValue,
 }) => {
   const { user } = useAuth()
-  const ENDPOINT_PATIENT = `clinica/${user.idClinica}/agenda-pessoal?limit=10000000&skip=0`
-  const patients = JSON.parse(window.localStorage.getItem('@Rita/InputAutoCompletePatient/patients'))
-  const idSpecialist = JSON.parse(window.localStorage.getItem('@Rita/InputAutoCompleteSpecialist/IdSpecialist'))
+  const ENDPOINT_PATIENT = `clinica/${user.idClinica}/agenda-pessoal`
+  const patients = JSON.parse(
+    window.localStorage.getItem('@Rita/InputAutoCompletePatient/patients'),
+  )
+  const idSpecialist = JSON.parse(
+    window.localStorage.getItem(
+      '@Rita/InputAutoCompleteSpecialist/IdSpecialist',
+    ),
+  )
 
   const [options, setOptions] = useState<any[]>([])
   const [patient, setPatient] = useState([])
@@ -25,11 +31,11 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   /** @description Remove objeto duplicado. 👇 */
   const removeObjectDuplicate = (filteredArray: any, data: any[]) => {
     const uniqueArray = new Set()
-    filteredArray = data.filter((item => {
+    filteredArray = data.filter((item) => {
       const duplicatePatientScheduler = uniqueArray.has(item.idPatient)
       uniqueArray.add(item.idPatient)
       return !duplicatePatientScheduler
-    }))
+    })
     if (filteredArray.length === 1) {
       setValue(filteredArray[0].name)
     }
@@ -37,27 +43,31 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   }
 
   const getPatients = async () => {
-    let result = await apiAdmin.get(ENDPOINT_PATIENT)
-    let filteredArray: any[] = []
+    const result = await apiAdmin.get(ENDPOINT_PATIENT)
+    const filteredArray: any[] = []
     result.data = result?.data?.map((item: any) => {
       return {
         idPatient: item.paciente.idPaciente,
-        name: item.paciente.nome
+        name: item.paciente.nome,
       }
     })
 
     if (patients) {
       removeObjectDuplicate(filteredArray, patients)
-      window.localStorage.setItem('@Rita/InputAutoCompletePatient/patients', JSON.stringify(patients.map(item => {
-        return {
-          ...item,
-          isPatientsFilted: false
-        }
-      })))
+      window.localStorage.setItem(
+        '@Rita/InputAutoCompletePatient/patients',
+        JSON.stringify(
+          patients.map((item) => {
+            return {
+              ...item,
+              isPatientsFilted: false,
+            }
+          }),
+        ),
+      )
     } else {
       removeObjectDuplicate(filteredArray, result.data)
     }
-
   }
 
   React.useEffect(() => {
@@ -70,19 +80,21 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   }, [patients, idSpecialist])
 
   const searchResult = (query: any) => {
-    let result = patient
-      .filter(item => {
-        if (String(item.name).toLowerCase().trim().includes(String(query).toLowerCase().trim())) {
-          return item
-        }
-      })
+    let result = patient.filter((item) => {
+      if (
+        String(item.name)
+          .toLowerCase()
+          .trim()
+          .includes(String(query).toLowerCase().trim())
+      ) {
+        return item
+      }
+    })
 
     result = result.map((value: any) => {
       return {
         value: value.name,
-        label: (
-          <ItemPatient patient={value.name} />
-        ),
+        label: <ItemPatient patient={value.name} />,
       }
     })
 
@@ -90,10 +102,13 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   }
 
   const onSelect = async (value: any) => {
-    let result = await apiAdmin.get(ENDPOINT_PATIENT)
+    const result = await apiAdmin.get(ENDPOINT_PATIENT)
     result?.data?.filter((item: any) => {
       if (item.paciente.nome === value) {
-        window.localStorage.setItem("@Rita/InputAutoCompletePatient/IdPatient", JSON.stringify(Number(item.paciente.idPaciente)))
+        window.localStorage.setItem(
+          '@Rita/InputAutoCompletePatient/IdPatient',
+          JSON.stringify(Number(item.paciente.idPaciente)),
+        )
       }
     })
   }
@@ -111,19 +126,21 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
       <AutoComplete
         dropdownClassName="certain-category-search-dropdown"
         options={options}
-        onSearch={(value => searchResult(value))}
+        onSearch={(value) => searchResult(value)}
         onChange={(value) => setValue(value)}
         onSelect={(value) => onSelect(value)}
         onClear={onClear}
         notFoundContent="Nenhum resultado."
         allowClear
         maxLength={100}
-        value={value}>
+        value={value}
+      >
         <InputText
           variation="secondary"
           label="Paciente:"
           onBlur={hasErrors}
-          onFocus={() => setOptions([])} />
+          onFocus={() => setOptions([])}
+        />
       </AutoComplete>
     </Container>
   )

@@ -18,7 +18,6 @@ interface FilterProps {
 }
 
 const Filter: React.FC<FilterProps> = ({ setFilters }) => {
-
   const [researchDoctor, setResearchDoctor] = useState('')
   const [patient, setPatient] = useState('')
   const [startTime, setStartTime] = useState('')
@@ -44,7 +43,9 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   ]
 
   const removeLocalStorages = () => {
-    window.localStorage.removeItem('@Rita/InputAutoCompleteSpecialist/IdSpecialist')
+    window.localStorage.removeItem(
+      '@Rita/InputAutoCompleteSpecialist/IdSpecialist',
+    )
     window.localStorage.removeItem('@Rita/InputAutoCompletePatient/IdPatient')
     window.localStorage.removeItem('@Rita/InputAutoCompletePatient/patients')
   }
@@ -53,7 +54,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     removeLocalStorages()
     setFilters(verifyTypedFields(arrayQuery))
   }, [])
-
 
   const clearFields = () => {
     removeLocalStorages()
@@ -64,18 +64,25 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     setStartTime('')
     setEndTime('')
     setFilters([])
-    _setErrors()
   }
 
   const _setErrors = () => {
-    setErrors({ specialist: '', startTime: '', endTime: '', patient: '', startDate: '', endDate: '' })
+    setErrors({
+      specialist: '',
+      startTime: '',
+      endTime: '',
+      patient: '',
+      startDate: '',
+      endDate: '',
+    })
   }
 
   const onFilter = () => {
-    if (startDate !== '') { /** Para evitar catch Invalid Date */
-      let parseDate = parse(startDate, 'dd/MM/yyyy', new Date())
+    if (startDate !== '') {
+      /** Para evitar catch Invalid Date */
+      const parseDate = parse(startDate, 'dd/MM/yyyy', new Date())
       const dateFormated = format(parseDate, 'yyyy-MM-dd')
-      arrayQuery = arrayQuery.map(item => {
+      arrayQuery = arrayQuery.map((item) => {
         if (item.name === fieldsApi.DATA_INICIAL) {
           item.value = dateFormated
           return item
@@ -84,10 +91,11 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
         }
       })
     }
-    if (endDate !== '') { /** Para evitar catch Invalid Date */
-      let parseDate = parse(endDate, 'dd/MM/yyyy', new Date())
+    if (endDate !== '') {
+      /** Para evitar catch Invalid Date */
+      const parseDate = parse(endDate, 'dd/MM/yyyy', new Date())
       const dateFormated = format(parseDate, 'yyyy-MM-dd')
-      arrayQuery = arrayQuery.map(item => {
+      arrayQuery = arrayQuery.map((item) => {
         if (item.name === fieldsApi.DATA_FINAL) {
           item.value = dateFormated
           return item
@@ -102,9 +110,13 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   }
 
   const updateIDSpecialistAndPatient = (arrayQuery: any[]) => {
-    const idSpecialist = window.localStorage.getItem('@Rita/InputAutoCompleteSpecialist/IdSpecialist')
-    const idPatient = window.localStorage.getItem('@Rita/InputAutoCompletePatient/IdPatient')
-    return arrayQuery.map(item => {
+    const idSpecialist = window.localStorage.getItem(
+      '@Rita/InputAutoCompleteSpecialist/IdSpecialist',
+    )
+    const idPatient = window.localStorage.getItem(
+      '@Rita/InputAutoCompletePatient/IdPatient',
+    )
+    return arrayQuery.map((item) => {
       if (item.name === fieldsApi.ESPECIALISTA) {
         item.value = idSpecialist
         return item
@@ -119,8 +131,8 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
 
   const onBlurDateValidate = (field: string) => {
     const fieldDate = {
-      'startDate': startDate,
-      'endDate': endDate
+      startDate: startDate,
+      endDate: endDate,
     }
     const DateWithOutCharacters = clearSpecialCharacters(fieldDate[field])
     if (DateWithOutCharacters !== '') {
@@ -143,10 +155,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           setValue={setResearchDoctor}
           value={researchDoctor}
         />
-        <InputAutoCompletePatient
-          setValue={setPatient}
-          value={patient}
-        />
+        <InputAutoCompletePatient setValue={setPatient} value={patient} />
       </div>
       <div>
         <section>
@@ -201,7 +210,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           </ButtonPrimary>
         </BtnGroup>
       </div>
-
     </Container>
   )
 }

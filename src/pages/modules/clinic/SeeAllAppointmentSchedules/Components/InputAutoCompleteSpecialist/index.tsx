@@ -15,7 +15,7 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   setValue,
 }) => {
   const { user } = useAuth()
-  const ENDPOINT_SPECIALIST = `clinica/${user.idClinica}/agenda-pessoal?limit=10000000&skip=0`
+  const ENDPOINT_SPECIALIST = `clinica/${user.idClinica}/agenda-pessoal`
 
   const [options, setOptions] = useState<any[]>([])
   const [specialist, setSpecialist] = useState([])
@@ -32,9 +32,9 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
     /** @description Remove objeto duplicado. 👇 */
     const uniqueArray = new Set()
     const filteredArray = result.data.filter((item => {
-        const duplicateSpecialistScheduler = uniqueArray.has(item.idSpecialist)
-        uniqueArray.add(item.idSpecialist)
-        return !duplicateSpecialistScheduler
+      const duplicateSpecialistScheduler = uniqueArray.has(item.idSpecialist)
+      uniqueArray.add(item.idSpecialist)
+      return !duplicateSpecialistScheduler
     }))
 
     setSpecialist(filteredArray)
@@ -123,7 +123,7 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
           variation="secondary"
           label="Especialista:"
           onBlur={hasErrors}
-          onFocus={() => setOptions([])}/>
+          onFocus={() => setOptions([])} />
       </AutoComplete>
     </Container>
   )

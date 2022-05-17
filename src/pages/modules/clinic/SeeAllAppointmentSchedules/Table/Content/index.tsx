@@ -9,11 +9,9 @@ import Actions from './Actions'
 /** Helpers */
 import { parse, format } from 'date-fns'
 
-const Content: React.FC<ContentProps> = ({ schedulers, setMakeRequest }) => {
-
-
+const Content: React.FC<ContentProps> = ({ schedulers }) => {
   const formatDate = (date: string) => {
-    let parseDate = parse(date, 'yyyy-MM-dd', new Date())
+    const parseDate = parse(date, 'yyyy-MM-dd', new Date())
     return format(parseDate, 'dd/MM/yyyy')
   }
 
@@ -22,20 +20,28 @@ const Content: React.FC<ContentProps> = ({ schedulers, setMakeRequest }) => {
       {schedulers?.data?.map((item, index) => (
         <ul key={index}>
           <li>{formatDate(item?.endDate)}</li>
-          <li>{item?.startTime} às {item?.endTime}</li>
           <li>
-            <CustomTooltip label={firstLetterCapitalize(item?.specialist?.name)}>
+            {item?.startTime} às {item?.endTime}
+          </li>
+          <li>
+            <CustomTooltip
+              label={firstLetterCapitalize(item?.specialist?.name)}
+            >
               <div>
-                {formatTextWithLimit(firstLetterCapitalize(item?.specialist?.name), 25) ||
-                  '-'}
+                {formatTextWithLimit(
+                  firstLetterCapitalize(item?.specialist?.name),
+                  25,
+                ) || '-'}
               </div>
             </CustomTooltip>
           </li>
           <li>
             <CustomTooltip label={firstLetterCapitalize(item?.patient?.name)}>
               <div>
-                {formatTextWithLimit(firstLetterCapitalize(item?.patient?.name), 20) ||
-                  '-'}
+                {formatTextWithLimit(
+                  firstLetterCapitalize(item?.patient?.name),
+                  20,
+                ) || '-'}
               </div>
             </CustomTooltip>
           </li>
@@ -43,7 +49,7 @@ const Content: React.FC<ContentProps> = ({ schedulers, setMakeRequest }) => {
             <span>{item?.status}</span>
           </Status>
           <li>{formatPrice(item?.price)}</li>
-          <Actions data={item} setMakeRequest={setMakeRequest} />
+          <Actions data={item} />
         </ul>
       ))}
 

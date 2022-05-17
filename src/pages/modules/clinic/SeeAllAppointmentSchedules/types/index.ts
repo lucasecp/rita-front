@@ -4,23 +4,23 @@ interface OrderI {
 }
 
 export interface DataScheduler {
-  id: number,
-  startDate: string,
-  endDate: string,
-  startTime: string,
-  endTime: string,
-  status: string,
-  price: number,
+  id: number
+  startDate: string
+  endDate: string
+  startTime: string
+  endTime: string
+  status: string
+  price: number
   specialtys: {
-    idSpecialtys: number,
+    idSpecialtys: number
     description: string
-  },
+  }
   patient: {
-    idPatient: number,
+    idPatient: number
     name: string
-  },
+  }
   specialist: {
-    idSpecialist: number,
+    idSpecialist: number
     name: string
   }
 }
@@ -36,12 +36,10 @@ export interface TableProps {
   schedulers: IScheduler
   setOrder: SetOrder
   order: OrderI
-  setMakeRequest: (x: number) => void
 }
 
 export interface ContentProps {
   schedulers: IScheduler
-  setMakeRequest: (x: number) => void
 }
 
 export interface HeaderProps {

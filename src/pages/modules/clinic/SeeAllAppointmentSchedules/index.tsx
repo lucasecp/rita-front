@@ -12,22 +12,24 @@ import { queryOrderString } from '@/helpers/queryString/order'
 import { fromApi } from './adapters'
 import { IScheduler } from './types'
 import { useAuth } from '@/hooks/login'
-import { useHistory } from 'react-router'
 
 const AppointmentSchedules: React.FC = () => {
   const [queryApi, setQueryApi] = useState('')
-  const [filters, setFilters] = useState<any[]>([])
+  const [filters, setFilters] = useState([])
   const [order, setOrder] = useState({})
   const [makeRequest, setMakeRequest] = useState(0)
   const { user } = useAuth()
   const [scheduler, setScheduler] = useState<IScheduler>({
-    total: 0, data: [],
+    total: 0,
+    data: [],
   })
   const { Loading } = useLoading()
 
   useEffect(() => {
     document.title = 'Rita Saúde | Agendamento de consultas'
+  }, [])
 
+  useEffect(() => {
     const getClinics = async () => {
       try {
         Loading.turnOn()
@@ -43,19 +45,17 @@ const AppointmentSchedules: React.FC = () => {
       }
     }
     getClinics()
-  }, [queryApi, filters, order, makeRequest])
+  }, [queryApi, filters, order])
 
   return (
     <Container>
-      <DefaultLayout title="Filtragem - Agendamentos de consulta" headerChildren={<ButtonIncluir />}>
+      <DefaultLayout
+        title="Filtragem - Agendamentos de consulta"
+        headerChildren={<ButtonIncluir />}
+      >
         <Content>
           <Filter setFilters={setFilters} />
-          <Table
-            setOrder={setOrder}
-            order={order}
-            setMakeRequest={setMakeRequest}
-            schedulers={scheduler}
-          />
+          <Table setOrder={setOrder} order={order} schedulers={scheduler} />
           <Pagination total={scheduler?.total} setQuery={setQueryApi} />
         </Content>
       </DefaultLayout>
