@@ -2,7 +2,7 @@ export interface CompleteProps {
   setValue: (value: string) => void
   hasErrors?: () => void
   value: string,
-  errors: ErrorI
+  errors?: ErrorI
 }
 
 export type OptionsI = {

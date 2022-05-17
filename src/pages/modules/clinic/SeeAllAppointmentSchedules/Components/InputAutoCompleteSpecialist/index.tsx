@@ -11,7 +11,6 @@ import { useAuth } from '@/hooks/login'
 
 const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   value,
-  errors,
   hasErrors,
   setValue,
 }) => {

@@ -2,10 +2,11 @@ import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import React, { useState, useEffect } from 'react'
 import Form from './Form'
 import apiAdmin from '@/services/apiAdmin'
-import { useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router'
 import { fromApi } from './adapters'
 import { DataI } from './types'
 import { useAuth } from '@/hooks/login'
+import { CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES } from '@/routes/constants/namedRoutes/routes'
 
 const EditAppointmentSchedule: React.FC = () => {
   const [schedulingData, setSchedulingData] = useState<DataI>({} as DataI)
@@ -13,6 +14,8 @@ const EditAppointmentSchedule: React.FC = () => {
   const [toggleNewRequest, setToggleNewRequest] = useState(0)
 
   const location = useLocation()
+
+  const history = useHistory()
 
   const { user } = useAuth()
 
@@ -27,7 +30,7 @@ const EditAppointmentSchedule: React.FC = () => {
       )
 
       setSchedulingData(fromApi(data))
-    } catch (error) {}
+    } catch (error) { }
   }
 
   useEffect(() => {
@@ -37,10 +40,8 @@ const EditAppointmentSchedule: React.FC = () => {
   useEffect(() => {
     document.title = 'Rita Saúde | Visualizar/Editar Agendamento'
 
-    // idSchedule
-
     if (!location.state) {
-      // return history.push(CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES)
+      return history.push(CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES)
     }
   }, [])
 

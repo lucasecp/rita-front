@@ -9,6 +9,7 @@ import InputAutoCompletePatient from '../Components/InputAutoCompletePatient'
 import { BtnGroup, Container } from './styles'
 /** Helpers */
 import { verifyTypedFields } from '../helpers/verifyTypedFields'
+import clearSpecialCharacters from '@/helpers/clearSpecialCharacters'
 import { fieldsApi } from '../static/fieldsApi'
 import { parse, isValid, format } from 'date-fns'
 
@@ -22,17 +23,20 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   const [patient, setPatient] = useState('')
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
-  const [date, setDate] = useState('')
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
   const [errors, setErrors] = useState({
     specialist: '',
     startTime: '',
     endTime: '',
     patient: '',
-    date: ''
+    startDate: '',
+    endDate: '',
   })
 
   let arrayQuery = [
-    { name: fieldsApi.DATA, value: date },
+    { name: fieldsApi.DATA_INICIAL, value: startDate },
+    { name: fieldsApi.DATA_FINAL, value: endDate },
     { name: fieldsApi.HORARIO_INICIO, value: startTime },
     { name: fieldsApi.HORARIO_FIM, value: endTime },
     { name: fieldsApi.ESPECIALISTA, value: '' },
@@ -55,7 +59,8 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     removeLocalStorages()
     setResearchDoctor('')
     setPatient('')
-    setDate('')
+    setStartDate('')
+    setEndDate('')
     setStartTime('')
     setEndTime('')
     setFilters([])
@@ -63,15 +68,27 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   }
 
   const _setErrors = () => {
-    setErrors({ specialist: '', startTime: '', endTime: '', patient: '', date: '' })
+    setErrors({ specialist: '', startTime: '', endTime: '', patient: '', startDate: '', endDate: '' })
   }
 
   const onFilter = () => {
-    if (date !== '') { /** Para evitar catch Invalid Date */
-      let parseDate = parse(date, 'dd/MM/yyyy', new Date())
+    if (startDate !== '') { /** Para evitar catch Invalid Date */
+      let parseDate = parse(startDate, 'dd/MM/yyyy', new Date())
       const dateFormated = format(parseDate, 'yyyy-MM-dd')
       arrayQuery = arrayQuery.map(item => {
-        if (item.name === fieldsApi.DATA) {
+        if (item.name === fieldsApi.DATA_INICIAL) {
+          item.value = dateFormated
+          return item
+        } else {
+          return item
+        }
+      })
+    }
+    if (endDate !== '') { /** Para evitar catch Invalid Date */
+      let parseDate = parse(endDate, 'dd/MM/yyyy', new Date())
+      const dateFormated = format(parseDate, 'yyyy-MM-dd')
+      arrayQuery = arrayQuery.map(item => {
+        if (item.name === fieldsApi.DATA_FINAL) {
           item.value = dateFormated
           return item
         } else {
@@ -88,11 +105,11 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     const idSpecialist = window.localStorage.getItem('@Rita/InputAutoCompleteSpecialist/IdSpecialist')
     const idPatient = window.localStorage.getItem('@Rita/InputAutoCompletePatient/IdPatient')
     return arrayQuery.map(item => {
-      if(item.name === fieldsApi.ESPECIALISTA){
+      if (item.name === fieldsApi.ESPECIALISTA) {
         item.value = idSpecialist
         return item
       }
-      if(item.name === fieldsApi.PACIENTE){
+      if (item.name === fieldsApi.PACIENTE) {
         item.value = idPatient
         return item
       }
@@ -100,13 +117,22 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     })
   }
 
-  const onBlurDateValidate = () => {
-    const dateFormated = parse(date, 'dd/MM/yyyy', new Date())
-    const result = isValid(dateFormated)
-    if (!result) {
-      setErrors({ ...errors, date: 'Data inválida!' })
+  const onBlurDateValidate = (field: string) => {
+    const fieldDate = {
+      'startDate': startDate,
+      'endDate': endDate
+    }
+    const DateWithOutCharacters = clearSpecialCharacters(fieldDate[field])
+    if (DateWithOutCharacters !== '') {
+      const dateFormated = parse(fieldDate[field], 'dd/MM/yyyy', new Date())
+      const result = isValid(dateFormated)
+      if (!result) {
+        setErrors({ ...errors, [field]: 'Data inválida!' })
+      } else {
+        setErrors({ ...errors, [field]: '' })
+      }
     } else {
-      setErrors({ ...errors, date: '' })
+      setErrors({ ...errors, [field]: '' })
     }
   }
 
@@ -116,27 +142,35 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
         <InputAutoCompleteSpecialist
           setValue={setResearchDoctor}
           value={researchDoctor}
-          errors={errors}
         />
         <InputAutoCompletePatient
           setValue={setPatient}
           value={patient}
-          errors={errors}
         />
       </div>
       <div>
         <section>
           <InputMask
             mask="99/99/9999"
-            label="Data:"
-            value={date}
-            setValue={setDate}
-            specialist="startTime"
-            hasError={!!errors.date}
-            msgError={errors.date}
+            label="Data Inicial:"
+            value={startDate}
+            setValue={setStartDate}
+            hasError={!!errors.startDate}
+            msgError={errors.startDate}
             variation="secondary"
             placeholder="00/00/0000"
-            onBlur={onBlurDateValidate}
+            onBlur={() => onBlurDateValidate('startDate')}
+          />
+          <InputMask
+            mask="99/99/9999"
+            label="Data Final:"
+            value={endDate}
+            setValue={setEndDate}
+            hasError={!!errors.endDate}
+            msgError={errors.endDate}
+            variation="secondary"
+            placeholder="00/00/0000"
+            onBlur={() => onBlurDateValidate('endDate')}
           />
           <InputMask
             mask="99:99"

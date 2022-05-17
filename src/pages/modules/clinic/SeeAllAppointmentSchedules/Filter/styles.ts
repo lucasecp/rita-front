@@ -24,9 +24,9 @@ export const Container = styled.div`
       display: flex;
       gap: 24px;
       margin-top: 24px;
-      > div:nth-child(2), div:nth-child(3) {
+      > div:nth-child(1), div:nth-child(2), div:nth-child(3), div:nth-child(4) {
         > input {
-          width: 80px;
+          width: 100px;
         }
       }
     }

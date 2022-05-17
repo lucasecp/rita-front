@@ -12,6 +12,7 @@ import { queryOrderString } from '@/helpers/queryString/order'
 import { fromApi } from './adapters'
 import { IScheduler } from './types'
 import { useAuth } from '@/hooks/login'
+import { useHistory } from 'react-router'
 
 const AppointmentSchedules: React.FC = () => {
   const [queryApi, setQueryApi] = useState('')
@@ -26,9 +27,6 @@ const AppointmentSchedules: React.FC = () => {
 
   useEffect(() => {
     document.title = 'Rita Saúde | Agendamento de consultas'
-    if (!queryApi) {
-      return
-    }
 
     const getClinics = async () => {
       try {
@@ -45,12 +43,11 @@ const AppointmentSchedules: React.FC = () => {
       }
     }
     getClinics()
-    console.log('queryApi', queryApi)
   }, [queryApi, filters, order, makeRequest])
 
   return (
     <Container>
-      <DefaultLayout title="Filtragem - Agendamentos de consulta" headerChildren={<ButtonIncluir/>}>
+      <DefaultLayout title="Filtragem - Agendamentos de consulta" headerChildren={<ButtonIncluir />}>
         <Content>
           <Filter setFilters={setFilters} />
           <Table

@@ -11,7 +11,6 @@ import { useAuth } from '@/hooks/login'
 
 const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   value,
-  errors,
   hasErrors,
   setValue,
 }) => {
@@ -55,7 +54,7 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
           isPatientsFilted: false
         }
       })))
-    }else {
+    } else {
       removeObjectDuplicate(filteredArray, result.data)
     }
 
@@ -66,8 +65,8 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   }, [])
 
   React.useEffect(() => {
-    if(patients && patients[0].isPatientsFilted) getPatients()
-    if(!idSpecialist) getPatients()
+    if (patients && patients[0].isPatientsFilted) getPatients()
+    if (!idSpecialist) getPatients()
   }, [patients, idSpecialist])
 
   const searchResult = (query: any) => {
@@ -100,7 +99,7 @@ const InputAutoCompleteSpecialist: React.FC<CompleteProps> = ({
   }
 
   const removeLocalStoragePatient = () => {
-      window.localStorage.removeItem('@Rita/InputAutoCompletePatient/IdPatient')
+    window.localStorage.removeItem('@Rita/InputAutoCompletePatient/IdPatient')
   }
 
   const onClear = () => {

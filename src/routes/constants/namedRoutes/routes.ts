@@ -55,8 +55,8 @@ export const CLINIC_PROFILE = '/clinica/perfil'
 export const CLINIC_SEE_SPECIALIST_SCHEDULE =
   '/clinica-especialista/agenda-especialista'
 export const CLINIC_APPOINTMENT_TABLE = '/clinica/tabela-consulta'
+export const CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES = '/clinica-agendamento'
 export const CLINIC_CREATE_SCHEDULING = '/clinica-agendamento/criar'
-export const CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES = '/agendamentos-consulta'
 export const CLINIC_EDIT_SCHEDULING = '/clinica-agendamento/editar'
 
 export const VALIDATOR_ANALYZE_PATIENTS = '/autorizacoes/analisar-pacientes'

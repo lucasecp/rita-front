@@ -18,6 +18,8 @@ import { toApi } from '../adapters'
 import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
 import { useAuth } from '@/hooks/login'
+import { CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES } from '@/routes/constants/namedRoutes/routes'
+import { useHistory } from 'react-router'
 
 interface FormProps {
   data: DataI
@@ -48,6 +50,8 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
   const { showMessage } = useModal()
 
   const { Loading } = useLoading()
+
+  const history = useHistory()
 
   const { user } = useAuth()
 
@@ -158,6 +162,10 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
     setToggleNewRequest(Math.random() * (10 - 3) + 3)
   }
 
+  const onBack = () => {
+    history.push(CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES)
+  }
+
   return (
     <Container>
       <h2>Dados da Consulta</h2>
@@ -224,7 +232,7 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
           </>
         ) : (
           <>
-            <OutlineButton>Voltar</OutlineButton>
+            <OutlineButton onClick={onBack}>Voltar</OutlineButton>
             <ButtonPrimary onClick={() => setIsEditing(true)}>
               Editar
             </ButtonPrimary>
