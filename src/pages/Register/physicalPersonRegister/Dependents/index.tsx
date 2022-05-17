@@ -22,6 +22,8 @@ import editIcon from '@/assets/icons/edit.svg'
 import { PHYSICAL_PERSON_REGISTER_DOCUMENTS } from '@/routes/constants/namedRoutes/routes'
 
 import { DependentState } from '../shared/hooks/types'
+import { ExitAndSteps } from '../shared/components/ExitAndSteps'
+
 import { Container } from './styles'
 
 export const Dependents: React.FC = () => {
@@ -113,6 +115,7 @@ export const Dependents: React.FC = () => {
   return (
     <RegisterLayout>
       <Container>
+        <ExitAndSteps currentStep={4} />
         <div>
           <h2 data-test="depedentsTitle">Dependentes</h2>
           <ul>

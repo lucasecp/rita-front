@@ -5,15 +5,14 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   padding: 26px 0 0;
-  box-shadow: 0px 2px 8px 0px ${({ theme }) => theme.mediumLight}26;
-  background: ${colors.white};
-  margin: 20px 0px 100px 0;
-  border-radius: 8px;
+  margin: 24px 0px;
   position: relative;
 
   > div {
     width: 100%;
+    background: #fff;
     padding: 32px;
 
     > button {
