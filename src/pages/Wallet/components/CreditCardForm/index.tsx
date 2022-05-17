@@ -33,7 +33,10 @@ function validateCreditCardNumber(value: string) {
 }
 
 function validateCreditCardExpirationDate(value: string) {
-  return validateCreditCardExpirationDateAsBoolean(value)
+  const valueSplitted = value.split('')
+  const month = valueSplitted[0] + valueSplitted[1]
+  const year = valueSplitted[2] + valueSplitted[3]
+  return validateCreditCardExpirationDateAsBoolean(`${month}/${year}`)
     ? ''
     : 'Data de expiração do cartão de crédito inválida'
 }
@@ -129,7 +132,6 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
       <InputMask
         useIMask={true}
         mask="MM/YY"
-        eager={true}
         blocks={{
           YY: {
             mask: '00'
@@ -140,7 +142,7 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
             to: 12
           }
         }}
-        placeholder="MM/YY"
+        placeholder="MM/AA"
         label="Data de Validade:"
         value={expireAt}
         setValue={setExpireAt}
@@ -192,7 +194,14 @@ export const CreditCardForm: React.FC<CreditCardFormProps> = ({
       />
 
       <section>
-        <InputText
+        <InputMask
+          useIMask={true}
+          mask="str"
+          blocks={{
+            str: {
+              mask: /^[a-zA-Z\s]+$/
+            }
+          }}
           label="Nome impresso no cartão:"
           value={name}
           setValue={setName}

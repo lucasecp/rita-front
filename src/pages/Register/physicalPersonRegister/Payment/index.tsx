@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import moment from 'moment'
 import { useHistory } from 'react-router-dom'
 
-import { PHYSICAL_PERSON_REGISTER_CHOOSE_REGION } from '@/routes/constants/namedRoutes/routes'
+import { LOGIN, PHYSICAL_PERSON_REGISTER_CHOOSE_REGION } from '@/routes/constants/namedRoutes/routes'
 import formatPrice from '@/helpers/formatPrice'
 import apiWallet from '@/services/apiWallet'
 import { useDialog } from '@/hooks/useDialog'
@@ -54,9 +54,9 @@ export const Payment: React.FC = () => {
   function handleFormCancel() {
     dialogConfirmation({
       message: 'Tem certeza que deseja cancelar a adição de um cartão? Você pode adicioná-lo mais tarde dentro da página Configurações no menu Carteira Digital.',
-      onTruthy: async () => {
-        console.log('truthy')
-        // redirect
+      cancelText: 'Voltar',
+      onTruthy () {
+        history.push(LOGIN)
       },
     })
   }
@@ -75,7 +75,9 @@ export const Payment: React.FC = () => {
           <p>CPF: <strong>{registrationData.get.cpf}</strong></p>
           <p>Nome do plano: <strong>{selectedPlan.get.name}</strong></p>
           <p>Valor do plano: <strong>{formatPrice(selectedPlan.get.price)}</strong></p>
-          <p>Periodicidade do plano: <strong>{selectedPlan.get.periodicity}</strong></p>
+          {selectedPlan.get.periodicity && (
+            <p>Periodicidade do plano: <strong>{selectedPlan.get.periodicity}</strong></p>
+          )}
         </section>
 
         <h3>Adicionar cartão</h3>

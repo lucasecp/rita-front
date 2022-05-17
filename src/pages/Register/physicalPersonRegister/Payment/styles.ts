@@ -35,4 +35,10 @@ export const Container = styled.div`
   > form {
     margin-top: 24px;
   }
+
+  @media (max-width: 767px) {
+    > section {
+      grid-template-columns: 1fr;
+    }
+  }
 `
