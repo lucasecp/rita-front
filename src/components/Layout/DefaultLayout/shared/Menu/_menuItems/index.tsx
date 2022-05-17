@@ -60,6 +60,7 @@ import {
   CLINIC_SEE_ALL_USERS,
   CLINIC_APPOINTMENT_TABLE,
   CLINIC_CREATE_SCHEDULING,
+  CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissions } from '@/constants/permissions'
@@ -272,9 +273,9 @@ export const menuItens = [
     permissions: [permissions.GERENCIAR_TABELA_PRECOS_CLINICA],
   },
   {
-    path: CLINIC_CREATE_SCHEDULING,
+    path: CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES,
     icon: <AppointmentSchedulingIcon />,
     name: 'Agendamento de consulta',
-    // permissions: [permissions.SERVICO_CONSULTA],
+    permissions: [permissions.GERENCIAR_AGENDA_HORARIOS_ESPECIALISTA],
   },
 ]

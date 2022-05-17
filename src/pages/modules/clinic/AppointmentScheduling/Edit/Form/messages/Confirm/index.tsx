@@ -5,8 +5,8 @@ import warningIcon from '@/assets/icons/alerts/warning.svg'
 import { Container, ButtonGroup } from './styles'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
-// import { useHistory } from 'react-router-dom'
-// import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
+import { useHistory } from 'react-router-dom'
+import { CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES } from '@/routes/constants/namedRoutes/routes'
 import { DataI } from '../../../types'
 import { useLoading } from '@/hooks/useLoading'
 import apiAdmin from '@/services/apiAdmin'
@@ -21,7 +21,7 @@ interface ConfirmProps {
 const Confirm: React.FC<ConfirmProps> = ({ idSpecialist, data }) => {
   const { closeModal } = useModal()
 
-  // const history = useHistory()
+  const history = useHistory()
 
   const { Loading } = useLoading()
 
@@ -46,6 +46,7 @@ const Confirm: React.FC<ConfirmProps> = ({ idSpecialist, data }) => {
       )
 
       toast.success('Agendamento feito com sucesso')
+      history.push(CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES)
     } catch (error) {
       toast.error(error.response.message || 'Erro ao agendar consulta')
     } finally {

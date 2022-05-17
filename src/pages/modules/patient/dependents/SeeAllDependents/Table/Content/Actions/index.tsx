@@ -42,17 +42,29 @@ const Actions: React.FC<ActionsProps> = ({
         </>
       )
     }
+    if (status === 'Negado') {
+      label = (
+        <>
+          O dependente cadastrado está negado pois há divergências nos
+          documentos, clique aqui para atualizar os documentos.
+        </>
+      )
+    }
     return label
   }
 
   return (
     <Container>
-      <CustomTooltip label={warninglabel()}>
+      <CustomTooltip
+        label={warninglabel()}
+        data-test={`tooltipWarningContainer_${dependent.id}`}
+      >
         <WarningIconStyled
           hidden={!warning}
           onClick={() =>
             history.push(PATIENT_ADD_DOCUMENT_DEPENDENT, { dependent })
           }
+          data-test={`tooltipWarningContent_${dependent.id}`}
         />
       </CustomTooltip>
 

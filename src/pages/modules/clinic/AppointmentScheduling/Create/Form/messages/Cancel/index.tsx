@@ -6,12 +6,17 @@ import { Container, ButtonGroup } from './styles'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
 import { useHistory } from 'react-router-dom'
-import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
+import { CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES, CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 
 const Cancel: React.FC = () => {
   const { closeModal } = useModal()
 
   const history = useHistory()
+
+  const onBack = () => {
+    closeModal()
+    history.push(CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES)
+  }
 
   return (
     <Container>
@@ -23,10 +28,7 @@ const Cancel: React.FC = () => {
 
       <ButtonGroup>
         <OutlineButton
-          onClick={
-            () => closeModal()
-            // history.push(CLINIC_SEE_ALL_SPECIALIST)
-          }
+          onClick={onBack}
         >
           Sim
         </OutlineButton>
