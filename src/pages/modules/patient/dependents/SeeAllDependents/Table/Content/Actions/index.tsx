@@ -42,6 +42,14 @@ const Actions: React.FC<ActionsProps> = ({
         </>
       )
     }
+    if (status === 'Negado') {
+      label = (
+        <>
+          O dependente cadastrado está negado pois há divergências nos
+          documentos, clique aqui para atualizar os documentos.
+        </>
+      )
+    }
     return label
   }
 

@@ -15,7 +15,9 @@ const Content: React.FC<ContentProps> = ({ dependents }) => {
           <Actions
             idDependent={dep.id}
             status={dep.status}
-            warning={!dep.documentsOk || dep.isValidate}
+            warning={
+              !dep.documentsOk || dep.isValidate || dep.status === 'Negado'
+            }
             documentsOk={dep.documentsOk}
             isValidate={dep.isValidate}
             dependent={{ id: dep.id, birthdate: dep.birthdate, cpf: dep.cpf }}
