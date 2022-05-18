@@ -44,9 +44,7 @@ export const PlanDetails: React.FC = () => {
           <h2>
             {plan.price === 'Isento'
               ? 'Isento'
-              : `R$ ${plan.price}/${
-                  plan.periodicity === 'Yearly' ? 'ano' : 'mês'
-                }`}
+              : `${plan.price}/${plan.periodicity}`}
           </h2>
         </Price>
       </Content>
