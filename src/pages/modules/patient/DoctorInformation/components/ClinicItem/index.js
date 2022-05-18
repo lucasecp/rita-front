@@ -19,7 +19,7 @@ const ClinicItem = ({ clinic }) => {
             {state ? (
               <li>
                 <span>
-                  {clinic?.clinic.address} - {clinic?.clinic.district} -{' '}
+                  {clinic?.clinic.address} - {clinic?.clinic.district} - {' '}
                   {clinic?.clinic.city}
                 </span>
                 {clinic?.verified && (

@@ -3,69 +3,63 @@ import { formatPhone } from '@/helpers/formatPhone'
 import { scheduleFromApi } from './mapSchedule'
 import { formatPrice } from '@/helpers/formatPrice'
 
-export const fromApi = (dataClinic) => {
-  const doctorSpecialty = dataClinic?.medicoEspecialidade?.find(
-    (dSpecialty) => dSpecialty,
-  )
+export const fromApi = (dataDoctor) => {
+  // const doctorSpecialty = dataDoctor?.especialidades?.find(
+  //   (dSpecialty) => dSpecialty,
+  // )
 
-  const clinicdoctor = dataClinic?.clinicaMedico?.map((specialty) => ({
-    linkGoogleMap: specialty.clinica.comoChegar,
+  const clinicdoctor = dataDoctor?.clinicas?.map((clinic) => ({
+    linkGoogleMap: clinic.comoChegar,
 
     scheduleAppointment: scheduleFromApi(
-      ...specialty?.clinica?.especialidade?.map((specialty) =>
-        specialty.agenda?.map((schedule) => schedule.agenda),
+      ...clinic?.especialidades?.map((clinic) =>
+        clinic.agenda?.map((schedule) => schedule.agenda),
       ),
     ),
 
-    status: specialty.statusMedicoClinica,
-    clinic: {
-      photo: specialty.clinica.foto,
-      description: firstLetterCapitalize(specialty.clinica?.descricao),
-      phone: formatPhone(specialty.clinica.telefone),
-      status: specialty.clinica.status,
-      address: specialty.clinica.endereco,
-      district: specialty.clinica.bairro,
-      city: specialty.clinica.cidade,
-      uf: specialty.clinica.uf,
-      number: specialty.clinica.numero,
-    },
-    specialtys: specialty.clinica?.especialidade?.map((spe) => ({
+    specialtys: clinic?.especialidades?.map((spe) => ({
       description: firstLetterCapitalize(spe.descricao),
 
-      defaultPrice: spe?.precos?.reduce((ac, price) => {
-        if (price.idEspecialidade === spe.idEspecialidade) {
-          ac = formatPrice(price.precoNormal)
-          return ac
-        }
-        return ac
-      }, null),
+      defaultPrice: formatPrice(spe?.preco?.precoNormal),
 
-      ritaPrice: spe?.precos?.reduce((ac, price) => {
-        if (price.idEspecialidade === spe.idEspecialidade) {
-          ac = formatPrice(price.precoRita)
-          return ac
-        }
-        return ac
-      }, null),
+      ritaPrice: formatPrice(spe?.preco?.precoRita),
     })),
+    status: clinic.statusMedicoClinica,
+    clinic: {
+      photo: clinic.foto,
+      description: firstLetterCapitalize(clinic?.descricao),
+      phone: formatPhone(clinic.telefone),
+      status: clinic.status,
+      address: clinic.endereco,
+      district: clinic.bairro,
+      city: clinic.cidade,
+      uf: clinic.uf,
+      number: clinic.numero,
+    },
+  }))
+
+  const doctorSpecialty = dataDoctor?.especialidades?.map((spe) => ({
+    description: firstLetterCapitalize(spe.descricao),
+    RQE: spe.RQE
   }))
 
   return {
-    photo: dataClinic.avatar,
-    title: firstLetterCapitalize(dataClinic.titulo),
+    photo: dataDoctor.avatar,
+    title: firstLetterCapitalize(dataDoctor.titulo),
     name:
-      firstLetterCapitalize(dataClinic.nomeProfissional) ||
-      firstLetterCapitalize(dataClinic.nome),
-    address: dataClinic.endereco,
-    district: dataClinic.bairro,
-    city: dataClinic.cidade,
-    uf: dataClinic.uf,
-    number: dataClinic.numero,
-    verified: dataClinic.validadoClinica,
-    crmuf: dataClinic.ufOrgaoEmissor,
-    crm: dataClinic?.orgaoEmissor?.descricao,
-    profissionalRegister: dataClinic?.registroProfissional,
+      firstLetterCapitalize(dataDoctor.nomeProfissional) ||
+      firstLetterCapitalize(dataDoctor.nome),
+    address: dataDoctor.endereco,
+    district: dataDoctor.bairro,
+    city: dataDoctor.cidade,
+    uf: dataDoctor.uf,
+    number: dataDoctor.numero,
+    verified: dataDoctor.validadoClinica,
+    crmuf: dataDoctor.ufOrgaoEmissor,
+    crm: dataDoctor?.orgaoEmissor?.descricao,
+    profissionalRegister: dataDoctor?.registroProfissional,
     clinicdoctor,
-    doctorSpecialty: { ...doctorSpecialty },
+    doctorSpecialty,
+    // doctorSpecialty: { ...doctorSpecialty },
   }
 }
