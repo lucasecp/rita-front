@@ -1,18 +1,46 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import React from 'react'
 import { ErrorI } from '../types'
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const validatePatient = (
-  patient: string,
-  setErrors: (errors: ErrorI) => ErrorI,
+export const validateField = (
+  field: string,
+  value: string,
+  setErrors: React.Dispatch<React.SetStateAction<ErrorI>>,
+  newErrors?: boolean,
 ) => {
-  let newErrors = false
-
-  if (patient.length < 3) {
-    // setErrors((errors: ErrorI) => ({
-    //   ...errors,
-    //   patient: 'Informe 3 caracteres ou mais',
-    // }))
+  if (value.length < 3) {
+    setErrors((errors: ErrorI) => ({
+      ...errors,
+      [field]: 'Informe 3 caracteres ou mais',
+    }))
     newErrors = true
+  } else {
+    setErrors((errors: ErrorI) => ({
+      ...errors,
+      [field]: '',
+    }))
+  }
+  return newErrors
+}
+
+export const validateStatus = (
+  field: string,
+  value: string,
+  setErrors: React.Dispatch<React.SetStateAction<ErrorI>>,
+  newErrors?: boolean,
+) => {
+  if (field === 'status' && value === '') {
+    setErrors((errors: ErrorI) => ({
+      ...errors,
+      [field]: 'Campo obrigatório.',
+    }))
+    newErrors = true
+  } else {
+    setErrors((errors: ErrorI) => ({
+      ...errors,
+      [field]: '',
+    }))
   }
   return newErrors
 }

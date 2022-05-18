@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /** Components */
 import OutlineButton from '@/components/Button/Outline'
 import ButtonPrimary from '@/components/Button/Primary'
@@ -11,6 +12,8 @@ import { fieldsApi } from '../static/fieldsApi'
 import { staticStatus } from '../static/status'
 /** Types */
 import { ErrorI } from '../types'
+/** Validations */
+import { validateField, validateStatus } from '../validations'
 /** Styles */
 import { BtnGroup, Container } from './styles'
 
@@ -23,12 +26,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   const [atendent, setAtendent] = useState('')
   const [protocolNumber, setProtocolNumber] = useState('')
   const [status, setStatus] = useState('')
-  const [errors, setErrors] = useState<ErrorI>({
-    atendent: '',
-    patient: '',
-    protocolNumber: '',
-    status: '',
-  })
+  const [errors, setErrors] = useState<ErrorI>({} as ErrorI)
 
   const arrayQuery = [
     { name: fieldsApi.PATIENT_NAME, value: patient },
@@ -41,33 +39,26 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     setFilters(verifyTypedFields(arrayQuery))
   }, [])
 
+  /** @description Limpa as mensagens de erros nos componentes */
+  const _setErrors = () => {
+    setErrors({} as ErrorI)
+  }
+
   const clearFields = () => {
     setPatient('')
     setAtendent('')
     setProtocolNumber('')
     setStatus('')
     setFilters([])
-  }
-
-  const _setErrors = () => {
-    setErrors({
-      atendent: '',
-      patient: '',
-      protocolNumber: '',
-      status: '',
-    })
+    _setErrors()
   }
 
   const hasErrors = () => {
     let newErrors = false
-
-    if (patient.length < 3) {
-      setErrors((errors) => ({
-        ...errors,
-        patient: 'Informe 3 caracteres ou mais',
-      }))
-      newErrors = true
-    }
+    newErrors = validateField('patient', patient, setErrors, newErrors)
+    newErrors = validateField('atendent', atendent, setErrors, newErrors)
+    newErrors = validateField('protocolNumber', protocolNumber, setErrors, newErrors)
+    newErrors = validateStatus('status', status, setErrors, newErrors)
     return newErrors
   }
 
@@ -79,8 +70,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     _setErrors()
   }
 
-  const onBlurDateValidate = (field: string) => { }
-
   return (
     <Container>
       <div>
@@ -91,6 +80,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           msgError={errors.patient}
           setValue={setPatient}
           maxLength={100}
+          onBlur={() => validateField('patient', patient, setErrors)}
           label="Paciente:"
         />
         <InputText
@@ -100,6 +90,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           msgError={errors.atendent}
           variation="secondary"
           maxLength={100}
+          onBlur={() => validateField('atendent', atendent, setErrors)}
           label="Atendente:"
         />
       </div>
@@ -112,6 +103,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
             msgError={errors.protocolNumber}
             setValue={setProtocolNumber}
             onlyNumber
+            onBlur={() => validateField('protocolNumber', protocolNumber, setErrors)}
             maxLength={50}
             label="Número de Protocolo:"
           />
@@ -122,6 +114,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
             msgError={errors.status}
             value={status}
             setValue={setStatus}
+            onBlur={() => validateStatus('status', status, setErrors)}
             variation="secondary"
             label="Status:"
           />
