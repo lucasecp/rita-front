@@ -86,8 +86,10 @@ export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
         <li>Exames Simples</li>
       </ul>
       <h2>
-        {formatPrice(plan.price)}/
-        {plan.periodicity === 'Yearly' ? 'ano' : 'mês'}
+        {plan.price === 'Isento'
+          ? 'Isento'
+          : `${formatPrice(plan.price)}/
+        ${plan.periodicity === 'Yearly' ? 'ano' : 'mês'}`}
       </h2>
       <h3>Experimente 7 dias grátis</h3>
       <LinkArea
