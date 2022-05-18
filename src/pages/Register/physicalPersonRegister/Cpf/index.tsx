@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ButtonPrimary from '@/components/Button/Primary'
 import InputMask from '@/components/Form/InputMask'
@@ -39,12 +39,21 @@ export const status = {
 
 export const Cpf: React.FC = () => {
   const { cpf } = usePhysicalPersonRegister()
+  const [localCpf, setLocalCpf] = useState('')
 
   const history = useHistory()
   const { Loading } = useLoading()
   const { showMessage } = useModal()
 
-  const handleConfirm = async () => {
+  useEffect(() => {
+    console.log(validateCpf(localCpf))
+
+    if (validateCpf(localCpf)) {
+      return cpf.set(localCpf)
+    }
+  }, [localCpf])
+
+  const onHandleConfirm = async () => {
     if (cpf.get.length === 0) {
       return showMessage(CpfEmpty)
     }
@@ -108,22 +117,20 @@ export const Cpf: React.FC = () => {
   }
 
   return (
-    <>
-      <RegisterLayout>
-        <Content>
-          <h6>Para iniciarmos o processo, por favor informe o seu CPF:</h6>
-          <div>
-            <InputMask
-              mask="999.999.999-99"
-              placeholder="___.___.___-__"
-              value={cpf.get}
-              setValue={cpf.set}
-              name="cpf"
-            />
-            <ButtonPrimary onClick={handleConfirm}>Confirmar</ButtonPrimary>
-          </div>
-        </Content>
-      </RegisterLayout>
-    </>
+    <RegisterLayout>
+      <Content>
+        <h6>Para iniciarmos o processo, por favor informe o seu CPF:</h6>
+        <div>
+          <InputMask
+            mask="999.999.999-99"
+            placeholder="___.___.___-__"
+            value={localCpf}
+            setValue={setLocalCpf}
+            name="cpf"
+          />
+          <ButtonPrimary onClick={onHandleConfirm}>Confirmar</ButtonPrimary>
+        </div>
+      </Content>
+    </RegisterLayout>
   )
 }
