@@ -7,13 +7,13 @@ import Instructions from './Instructions'
 import { Container } from './styles'
 import OutlineButton from '@/components/Button/Outline/index'
 import SpecialistInfo from './SpecialistInfo'
-import { useRegisterSpecialist } from '../../hooks'
+import { useRegisterClinic } from '../../hooks'
 import { isValidTypeFile } from '@/helpers/file/isValidTypeFile'
 import { isValidSizeFile } from '@/helpers/file/isValidSizeFile'
 import { useModal } from '@/hooks/useModal'
 
 const Photo: React.FC = () => {
-  const { basicInformation, step, photo, setPhoto } = useRegisterSpecialist()
+  const { basicInformation, step, photo, setPhoto } = useRegisterClinic()
   const { showSimple } = useModal()
 
   const removePhoto = () => setPhoto('')

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useRegisterSpecialist } from '../../hooks'
+import { useRegisterClinic } from '../../hooks'
 
 import { Container } from './styles'
 import InputText from '@/components/Form/InputText/index'
@@ -10,10 +10,11 @@ import SelectIssuingAgency from '@/components/smarts/SelectIssuingAgency/SelectI
 import { genericValidate } from '../../helpers/validatorFields'
 import { useValidator } from '../../hooks/useValidator'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
+import Photo from '../../components/Photo'
 
 const BasicInformation: React.FC = () => {
   const { step, nextStep, errors, setErrors, setbasicInformation } =
-    useRegisterSpecialist()
+    useRegisterClinic()
 
   const { hasErrors } = useValidator()
 
@@ -40,7 +41,10 @@ const BasicInformation: React.FC = () => {
     nextStep()
   }
   useEffect(() => {
-    window.localStorage.setItem('@rita-issuingAgencySelected', JSON.stringify({idIssuingAgencySelected: issuingAgency}))
+    window.localStorage.setItem(
+      '@rita-issuingAgencySelected',
+      JSON.stringify({ idIssuingAgencySelected: issuingAgency }),
+    )
     setbasicInformation({
       profissionalRegister,
       issuingAgency,
@@ -57,6 +61,7 @@ const BasicInformation: React.FC = () => {
 
   return (
     <Container hidden={step !== 1}>
+      <Photo />
       <h2>Dados do Especialista</h2>
       <div>
         <InputText
@@ -97,7 +102,9 @@ const BasicInformation: React.FC = () => {
           onBlur={() => {
             setErrors({
               ...errors,
-              issuingAgency: !hasErrors({ issuingAgency }) ? '' : 'Campo obrigatório'
+              issuingAgency: !hasErrors({ issuingAgency })
+                ? ''
+                : 'Campo obrigatório',
             })
           }}
         />
@@ -114,7 +121,9 @@ const BasicInformation: React.FC = () => {
           onBlur={() => {
             setErrors({
               ...errors,
-              ufIssuingAgency: !hasErrors({ ufIssuingAgency }) ? '' : 'Campo obrigatório'
+              ufIssuingAgency: !hasErrors({ ufIssuingAgency })
+                ? ''
+                : 'Campo obrigatório',
             })
           }}
         />

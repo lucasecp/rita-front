@@ -101,7 +101,7 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
       Loading.turnOn()
 
       const dataMaped = toApi({
-        specialty: Number(data.specialty),
+        specialty: Number(specialty),
         cpf,
         date,
         time,
@@ -118,7 +118,7 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
 
       toast.success('Agendamento feito com sucesso')
     } catch (error) {
-      toast.error(error.response.message || 'Erro ao agendar consulta')
+      toast.error(error?.response?.data?.message || 'Erro ao agendar consulta')
     } finally {
       Loading.turnOff()
     }
@@ -137,7 +137,6 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
     setTime(data.time || '')
     setSpecialist(data.specialist || '')
   }, [data])
-  console.log(data)
 
   const fieldsHadChange = (fields: any): boolean => {
     let result = false
