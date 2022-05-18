@@ -3,23 +3,24 @@ import { scheduleFromApi } from './mapSchedule'
 import { formatPrice } from '@/helpers/formatPrice'
 
 export const fromApi = (dataClinic) => {
-  const specialtys = dataClinic?.especialidade?.map((specialty) => ({
+  const specialtys = dataClinic?.especialidades?.map((specialty) => ({
     name: firstLetterCapitalize(specialty.descricao),
-    doctorSpecialty: specialty.medicoEspecialidade?.map((spe) => ({
+    doctorSpecialty: specialty?.especialistas.map((spe) => ({
       rqe: spe.RQE,
-      defaultPrice: formatPrice(specialty.precos[0]?.precoNormal),
-      ritaPrice: formatPrice(specialty.precos[0]?.precoRita),
-      name: firstLetterCapitalize(spe.medico?.nome),
-      photo: spe.medico?.avatar,
-      status: spe.medico?.status,
-      crm: spe.medico?.registroProfissional,
-      crmUf: spe.medico?.ufOrgaoEmissor,
-      title: firstLetterCapitalize(spe.medico?.titulo),
-      formation: spe.medico?.formacao,
-      verified: spe.medico?.validadoClinica,
-      hasSchedule: spe.medico?.receberAgendamentos,
+      defaultPrice: formatPrice(specialty.preco?.precoNormal),
+      ritaPrice: formatPrice(specialty.preco?.precoRita),
+      name: firstLetterCapitalize(spe?.nome),
+      professionalName: spe?.nomeProfissional,
+      issuingAgency: spe?.orgaoEmissor?.descricao,
+      photo: spe?.avatar,
+      status: spe?.status,
+      crm: spe?.registroProfissional,
+      crmUf: spe?.ufOrgaoEmissor,
+      formation: spe?.formacao,
+      verified: spe?.validadoClinica,
+      hasSchedule: spe?.receberAgendamentos,
       phone: dataClinic.telefone,
-      schedule: scheduleFromApi(spe.medico?.agenda),
+      schedule: scheduleFromApi(spe?.agenda),
     })),
   }))
 
