@@ -5,31 +5,29 @@ import { useModal } from '@/hooks/useModal'
 
 import { RegisterSuccess } from './messages/RegisterSuccess/index'
 import {
-  RegisterSpecialistContextData,
-  ProfissionalInfoI,
+  RegisterClinicContextData,
+  AddressI,
   BasicInformationI,
   SpecialtysAndDocsType,
   ErrorsRegisterI,
 } from '../types/index'
-import axios from 'axios'
 import apiAdmin from '@/services/apiAdmin'
 import { toApi } from '../adapters'
 import { AxiosError } from 'axios'
 
-const RegisterSpecialistContext = createContext<RegisterSpecialistContextData>(
-  {} as RegisterSpecialistContextData,
+const RegisterClinicContext = createContext<RegisterClinicContextData>(
+  {} as RegisterClinicContextData,
 )
 
-const RegisterSpecialistProvider: React.FC = ({ children }) => {
+const RegisterClinicProvider: React.FC = ({ children }) => {
   const { showMessage, showSimple } = useModal()
   const { Loading } = useLoading()
 
   const [step, setStep] = useState(1)
-  const stepAmount = 3
 
-  const [profissionalInfo, setProfissionalInfo] = useState<ProfissionalInfoI>(
-    {} as ProfissionalInfoI,
-  )
+  const stepAmount = 4
+
+  const [address, setAddress] = useState<AddressI>({} as AddressI)
 
   const [basicInformation, setbasicInformation] = useState<BasicInformationI>(
     {} as BasicInformationI,
@@ -62,43 +60,9 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
     }
   }
 
-  const createListFormDataOfSpecialtys = () => {
-    const list = []
-
-    for (const specialty in specialtysAndDocs) {
-      if (!specialtysAndDocs[specialty].document) {
-        continue
-      }
-
-      const formFile = new FormData()
-
-      formFile.append('file', specialtysAndDocs[specialty].document)
-
-      list.push({ id: specialtysAndDocs[specialty].idSpecialty, formFile })
-    }
-    return list
-  }
-
-  const registerDocsSpecialtys = async () => {
-    const listDocs = createListFormDataOfSpecialtys()
-
-    try {
-      await axios.all(
-        listDocs.map((data) =>
-          apiAdmin.post(
-            `medico/arquivo?cpf=${profissionalInfo.cpf}&tipoDocumento=ComprovanteEspecialidade&idEspecialidade=${data.id}`,
-            data.formFile,
-          ),
-        ),
-      )
-    } catch (error) {
-      throw new Error('Erro ao salvar os documentos das especialidades')
-    }
-  }
-
   const registerData = async () => {
     try {
-      const data = toApi({ ...profissionalInfo, ...basicInformation })
+      const data = toApi({ ...address, ...basicInformation })
 
       await apiAdmin.post('/medico', data)
     } catch (error) {
@@ -121,7 +85,7 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
       formFile.append('file', photo)
 
       await apiAdmin.post(
-        `medico/arquivo?cpf=${profissionalInfo.cpf}&tipoDocumento=FotoPerfil`,
+        `medico/arquivo?cpf=${address}&tipoDocumento=FotoPerfil`,
         formFile,
       )
     } catch (error) {
@@ -132,8 +96,6 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   const registerSpecialist = async () => {
     try {
       Loading.turnOn()
-
-      await registerDocsSpecialtys()
 
       await registerData()
 
@@ -150,7 +112,7 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
   }
 
   return (
-    <RegisterSpecialistContext.Provider
+    <RegisterClinicContext.Provider
       value={{
         isActiveStep,
         previousStep,
@@ -158,27 +120,27 @@ const RegisterSpecialistProvider: React.FC = ({ children }) => {
         registerSpecialist,
         step,
         basicInformation,
-        profissionalInfo,
+        address,
         specialtysAndDocs,
         photo,
         errors,
         stepAmount,
         setPhoto,
         setErrors,
-        setProfissionalInfo,
+        setAddress,
         setbasicInformation,
         setSpecialtysAndDocs,
       }}
     >
       {children}
-    </RegisterSpecialistContext.Provider>
+    </RegisterClinicContext.Provider>
   )
 }
 
-const useRegisterSpecialist = (): RegisterSpecialistContextData => {
-  const context = useContext(RegisterSpecialistContext)
+const useRegisterClinic = (): RegisterClinicContextData => {
+  const context = useContext(RegisterClinicContext)
 
   return context
 }
 
-export { RegisterSpecialistProvider, useRegisterSpecialist }
+export { RegisterClinicProvider, useRegisterClinic }

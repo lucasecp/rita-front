@@ -2,10 +2,10 @@ import React from 'react'
 
 import { Container, Step } from './styles'
 
-import { useRegisterSpecialist } from '../../hooks'
+import { useRegisterClinic } from '../../hooks'
 
 export const StepProgressBar: React.FC = () => {
-  const { step } = useRegisterSpecialist()
+  const { step } = useRegisterClinic()
 
   return (
     <Container>

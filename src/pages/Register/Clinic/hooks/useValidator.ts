@@ -1,10 +1,10 @@
 import { ErrorsRegisterI } from '../types/index'
-import { useRegisterSpecialist } from './index'
+import { useRegisterClinic } from './index'
 
 export const useValidator = (): {
   hasErrors: (x: any) => boolean
 } => {
-  const { setErrors } = useRegisterSpecialist()
+  const { setErrors } = useRegisterClinic()
 
   const hasErrors = (fields: ErrorsRegisterI) => {
     let error = false

@@ -118,7 +118,7 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
 
       toast.success('Agendamento feito com sucesso')
     } catch (error) {
-      toast.error(error.response.message || 'Erro ao agendar consulta')
+      toast.error(error?.response?.data?.message || 'Erro ao agendar consulta')
     } finally {
       Loading.turnOff()
     }

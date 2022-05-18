@@ -1,14 +1,13 @@
 import { MultiSelectOption } from '@/components/Form/MultSelect/index'
 
-export interface ProfissionalInfoI {
-  name: string
-  profissionalName: string
-  cpf: string
-  receiveService: string
-  email: string
-  phone: string
-  specialtys: MultiSelectOption[]
-  clinics: MultiSelectOption[]
+export interface AddressI {
+  cep: string
+  number: string
+  fullAddress: string
+  complement: string
+  district: string
+  city: string
+  uf: string
 }
 
 export interface BasicInformationI {
@@ -44,21 +43,21 @@ export type SpecialtysAndDocsType = {
   }
 }
 
-export interface RegisterSpecialistContextData {
+export interface RegisterClinicContextData {
   isActiveStep: (stepNumber: number) => boolean
   step: number
   previousStep: () => void
   nextStep: () => void
   registerSpecialist: () => Promise<void>
   photo: File | string
-  profissionalInfo: ProfissionalInfoI
+  address: AddressI
   basicInformation: BasicInformationI
   specialtysAndDocs: SpecialtysAndDocsType
   stepAmount: number
   errors: ErrorsRegisterI
   setErrors: React.Dispatch<React.SetStateAction<ErrorsRegisterI>>
   setPhoto: React.Dispatch<React.SetStateAction<File | string>>
-  setProfissionalInfo: React.Dispatch<React.SetStateAction<ProfissionalInfoI>>
+  setAddress: React.Dispatch<React.SetStateAction<AddressI>>
   setbasicInformation: React.Dispatch<React.SetStateAction<BasicInformationI>>
   setSpecialtysAndDocs: React.Dispatch<React.SetStateAction<any>>
 }

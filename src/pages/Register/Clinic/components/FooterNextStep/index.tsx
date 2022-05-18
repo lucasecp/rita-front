@@ -1,7 +1,7 @@
 import OutlineButton from '@/components/Button/Outline'
 import React from 'react'
 import ButtonPrimary from '@/components/Button/Primary/index'
-import { useRegisterSpecialist } from '../../hooks'
+import { useRegisterClinic } from '../../hooks'
 import { Container } from './styles'
 
 interface FooterNexStepProps {
@@ -9,7 +9,7 @@ interface FooterNexStepProps {
 }
 
 const FooterNextStep: React.FC<FooterNexStepProps> = ({ onClickNextStep }) => {
-  const { step, previousStep, stepAmount } = useRegisterSpecialist()
+  const { step, previousStep, stepAmount } = useRegisterClinic()
 
   return (
     <Container>
