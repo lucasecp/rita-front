@@ -101,7 +101,7 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
       Loading.turnOn()
 
       const dataMaped = toApi({
-        specialty: Number(data.specialty),
+        specialty: Number(specialty),
         cpf,
         date,
         time,
@@ -137,7 +137,6 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
     setTime(data.time || '')
     setSpecialist(data.specialist || '')
   }, [data])
-  console.log(data)
 
   const fieldsHadChange = (fields: any): boolean => {
     let result = false
