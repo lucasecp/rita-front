@@ -7,9 +7,10 @@ export interface ErrorsI {
   [x: string]: any
 }
 
-export interface DataToApiI {
-  specialty: number
-  cpf: string
+export interface DataI {
+  idSchedule?: number
+  specialty?: number
+  cpf?: string
   date: string
   time: string
   origin: string
@@ -18,7 +19,8 @@ export interface DataToApiI {
   patientName?: string
   specialist?: number
 }
-export interface DataFromApiI {
+
+export interface DataToApiI {
   titulo: string
   dataInicio: string
   dataFim: string
@@ -27,7 +29,30 @@ export interface DataFromApiI {
   origem: string
   idEspecialidade: number
   idPaciente: number
-  cpf?: string
-  paciente?: string
+}
+
+export interface DataFromApiI {
   idMedico?: number
+  idAgenda: number
+  status: string
+  titulo: string
+  origem: string
+  paciente: {
+    idPaciente: number
+    nomePaciente: string
+    cpf: string
+  }
+  especialidade: {
+    idEspecialidade: number
+    nomeEspecialidade: string
+  }
+  especialista: {
+    idMedico: number
+    nomeMedico: string
+  }
+  horaInicio: string
+  horaFim: string
+  dataInicio: string
+  dataFim: string
+  preco: number
 }

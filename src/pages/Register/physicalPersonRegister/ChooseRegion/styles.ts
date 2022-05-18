@@ -78,7 +78,6 @@ export const Container = styled.div`
         color: ${colors.gray.middle};
 
         > span {
-          color: ${colors.green.light};
           font-weight: 900;
         }
       }

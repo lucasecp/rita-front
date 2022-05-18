@@ -5,8 +5,6 @@ import warningIcon from '@/assets/icons/alerts/warning.svg'
 import { Container, ButtonGroup } from './styles'
 import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
-import { useHistory } from 'react-router-dom'
-import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
 import { ErrorsI } from '../../../types'
 
 interface CancelProps {

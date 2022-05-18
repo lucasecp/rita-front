@@ -55,9 +55,7 @@ export const InputCpf: React.FC<InputCpfProps> = ({
         )
 
         if (data.status !== 'A') {
-          setErrorCpf(
-            'Este paciente precisa ter o status aprovado com o plano social associado',
-          )
+          setErrorCpf('CPF não habilitado para atendimento')
 
           throw new Error()
         }

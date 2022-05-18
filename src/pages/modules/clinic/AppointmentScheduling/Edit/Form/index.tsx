@@ -8,19 +8,21 @@ import { SelectTime } from './components/SelectTime'
 import OutlineButton from '@/components/Button/Outline/index'
 import ButtonPrimary from '@/components/Button/Primary'
 import { InputCpf } from './components/InputCpf/index'
-import { ErrorsI } from '../types'
+import { ErrorsI, DataI } from '../types'
 import { isFuture, isToday, isValid, parse } from 'date-fns'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 import { useModal } from '@/hooks/useModal'
 import Cancel from './messages/Cancel'
-import { DataToApiI } from '../types/index'
 import apiAdmin from '@/services/apiAdmin'
 import { toApi } from '../adapters'
 import { toast } from '@/styles/components/toastify'
 import { useLoading } from '@/hooks/useLoading'
+import { useAuth } from '@/hooks/login'
+import { CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES } from '@/routes/constants/namedRoutes/routes'
+import { useHistory } from 'react-router'
 
 interface FormProps {
-  data: DataToApiI
+  data: DataI
   setToggleNewRequest: React.Dispatch<React.SetStateAction<number>>
 }
 
@@ -48,6 +50,10 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
   const { showMessage } = useModal()
 
   const { Loading } = useLoading()
+
+  const history = useHistory()
+
+  const { user } = useAuth()
 
   const validateDate = () => {
     const dateformated = parse(date, 'dd/MM/yyyy', new Date())
@@ -91,17 +97,6 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
     }
     setErrors({} as ErrorsI)
 
-    const data = {
-      specialty: Number(specialty),
-      cpf,
-      date,
-      time,
-      title: '',
-      origin: '',
-      idPatient,
-      patientName,
-    }
-
     try {
       Loading.turnOn()
 
@@ -117,13 +112,13 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
       })
 
       await apiAdmin.put(
-        `/clinica/59/medico/${specialist}/agenda-pessoal`,
+        `/clinica/${user.idClinica}/medico/${specialist}/agenda-pessoal/${data.idSchedule}`,
         dataMaped,
       )
 
       toast.success('Agendamento feito com sucesso')
     } catch (error) {
-      toast.error(error.response.message || 'Erro ao agendar consulta')
+      toast.error(error?.response?.data?.message || 'Erro ao agendar consulta')
     } finally {
       Loading.turnOff()
     }
@@ -142,6 +137,7 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
     setTime(data.time || '')
     setSpecialist(data.specialist || '')
   }, [data])
+  console.log(data)
 
   const fieldsHadChange = (fields: any): boolean => {
     let result = false
@@ -164,6 +160,10 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
     }
     setIsEditing(false)
     setToggleNewRequest(Math.random() * (10 - 3) + 3)
+  }
+
+  const onBack = () => {
+    history.push(CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES)
   }
 
   return (
@@ -232,7 +232,7 @@ const Form: React.FC<FormProps> = ({ data, setToggleNewRequest }) => {
           </>
         ) : (
           <>
-            <OutlineButton>Voltar</OutlineButton>
+            <OutlineButton onClick={onBack}>Voltar</OutlineButton>
             <ButtonPrimary onClick={() => setIsEditing(true)}>
               Editar
             </ButtonPrimary>

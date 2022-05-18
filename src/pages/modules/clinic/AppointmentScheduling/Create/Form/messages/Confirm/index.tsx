@@ -1,17 +1,17 @@
-import React from 'react'
-
-import ButtonPrimary from '@/components/Button/Primary'
 import warningIcon from '@/assets/icons/alerts/warning.svg'
-import { Container, ButtonGroup } from './styles'
-import { useModal } from '@/hooks/useModal'
 import OutlineButton from '@/components/Button/Outline'
-// import { useHistory } from 'react-router-dom'
-// import { CLINIC_SEE_ALL_SPECIALIST } from '@/routes/constants/namedRoutes/routes'
-import { DataToApiI } from '../../types'
+import ButtonPrimary from '@/components/Button/Primary'
 import { useLoading } from '@/hooks/useLoading'
+import { useModal } from '@/hooks/useModal'
+import { CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES } from '@/routes/constants/namedRoutes/routes'
 import apiAdmin from '@/services/apiAdmin'
 import { toast } from '@/styles/components/toastify'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { toApi } from '../../adapters'
+import { DataToApiI } from '../../types'
+import { ButtonGroup, Container } from './styles'
+
 
 interface ConfirmProps {
   idSpecialist: number | string
@@ -21,7 +21,7 @@ interface ConfirmProps {
 const Confirm: React.FC<ConfirmProps> = ({ idSpecialist, data }) => {
   const { closeModal } = useModal()
 
-  // const history = useHistory()
+  const history = useHistory()
 
   const { Loading } = useLoading()
 
@@ -46,8 +46,9 @@ const Confirm: React.FC<ConfirmProps> = ({ idSpecialist, data }) => {
       )
 
       toast.success('Agendamento feito com sucesso')
+      history.push(CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES)
     } catch (error) {
-      toast.error(error.response.message || 'Erro ao agendar consulta')
+      toast.error(error?.response?.data?.message || 'Erro ao agendar consulta')
     } finally {
       Loading.turnOff()
 

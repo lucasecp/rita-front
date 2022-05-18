@@ -18,7 +18,7 @@ import { ReactComponent as StethoscopeIcon } from '@/assets/icons/stethoscope.sv
 import { ReactComponent as UsersIcon } from '@/assets/icons/users.svg'
 import { ReactComponent as UsersGroupIcon } from '@/assets/icons/users-group.svg'
 import { ReactComponent as SpecialtysTypesIcon } from '@/assets/icons/specialtys-types.svg'
-import { ReactComponent as Calendar } from '@/assets/icons/calendar.svg'
+import { ReactComponent as Calendar } from '@/assets/icons/calendar3-green.svg'
 import { ReactComponent as AppointmentTableIcon } from '@/assets/icons/appointment-table.svg'
 import { ReactComponent as AppointmentSchedulingIcon } from '@/assets/icons/calendar2-green.svg'
 
@@ -60,6 +60,7 @@ import {
   CLINIC_SEE_ALL_USERS,
   CLINIC_APPOINTMENT_TABLE,
   CLINIC_CREATE_SCHEDULING,
+  CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissions } from '@/constants/permissions'
@@ -272,9 +273,9 @@ export const menuItens = [
     permissions: [permissions.GERENCIAR_TABELA_PRECOS_CLINICA],
   },
   {
-    path: CLINIC_CREATE_SCHEDULING,
+    path: CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES,
     icon: <AppointmentSchedulingIcon />,
     name: 'Agendamento de consulta',
-    // permissions: [permissions.SERVICO_CONSULTA],
+    permissions: [permissions.GERENCIAR_AGENDA_HORARIOS_ESPECIALISTA],
   },
 ]

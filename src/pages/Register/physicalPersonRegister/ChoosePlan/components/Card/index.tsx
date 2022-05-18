@@ -8,8 +8,8 @@ import { useHistory } from 'react-router-dom'
 import ButtonLink from '@/components/Button/Link'
 import { ReactComponent as ArrowRightIcon } from '@/assets/icons/arrow-right2.svg'
 import { PHYSICAL_PERSON_REGISTER_CHOOSE_PLAN_DETAILS } from '@/routes/constants/namedRoutes/routes'
-import { MappedPlan } from '../..'
 import { usePhysicalPersonRegister } from '../../../shared/hooks'
+import { formatPrice } from '@/helpers/formatPrice'
 
 export interface SelectedPlan {
   idPlan: number | 0
@@ -17,11 +17,21 @@ export interface SelectedPlan {
   allowedMajorAge: boolean | null
   maximumDependentsQuantity: number | null
   price: string | ''
+  periodicity: string | ''
+}
+
+interface Plan {
+  idPlan: number
+  maximumDependentsQuantity: number
+  name: string
+  allowedMajorAge: boolean
+  price: string
+  periodicity: string
 }
 
 interface CardProps {
   colorTheme: number
-  plan: MappedPlan
+  plan: Plan
 }
 
 export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
@@ -45,6 +55,7 @@ export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
           allowedMajorAge: plan.allowedMajorAge,
           maximumDependentsQuantity: plan.maximumDependentsQuantity,
           price: plan.price,
+          periodicity: plan.periodicity,
         })
       }
     >
@@ -74,7 +85,10 @@ export const CardOfPlan: React.FC<CardProps> = ({ plan, colorTheme }) => {
         <li>Consultas Médicas</li>
         <li>Exames Simples</li>
       </ul>
-      <h2>R$ {plan.price}/Mês</h2>
+      <h2>
+        {formatPrice(plan.price)}/
+        {plan.periodicity === 'Yearly' ? 'ano' : 'mês'}
+      </h2>
       <h3>Experimente 7 dias grátis</h3>
       <LinkArea
         colorTheme={colorTheme}

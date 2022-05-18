@@ -27,7 +27,7 @@ const ButtonCadastrar: React.FC<ButtonCadastrarProps> = ({
   dataToApi,
   erros,
   setErrors,
-  sendErrorMessage
+  sendErrorMessage,
 }) => {
   const history = useHistory()
   const { Loading } = useLoading()
@@ -37,14 +37,14 @@ const ButtonCadastrar: React.FC<ButtonCadastrarProps> = ({
       ...dataToApi,
       cpf: clearSpecialCharacters(dataToApi.cpf),
       phone: clearSpecialCharacters(dataToApi.phone),
-      phoneWithCaracters: dataToApi.phone
+      phoneWithCaracters: dataToApi.phone,
     }
   }
 
   const onSave = async () => {
     dataToApi = clearSpecialCharactesCPFAndPhone(dataToApi)
     sendErrorMessage()
-    if(!validateLengthField(dataToApi, setErrors) && !erros.email){
+    if (!validateLengthField(dataToApi, setErrors) && !erros.email) {
       try {
         Loading.turnOn()
         await apiAdmin.post(
@@ -55,18 +55,16 @@ const ButtonCadastrar: React.FC<ButtonCadastrarProps> = ({
                        Link para redefinir a senha enviada no e-mail ${dataToApi.email}`)
         history.push(CLINIC_SEE_ALL_USERS)
       } catch (error) {
-        toast.error('Não foi possível salvar as informações do novo usuário, entre em contato com o suporte técnico do sistema.')
+        toast.error(
+          'Não foi possível salvar as informações do novo usuário, entre em contato com o suporte técnico do sistema.',
+        )
       } finally {
         Loading.turnOff()
       }
     }
   }
 
-  return (
-    <Primary onClick={onSave}>
-      Cadastrar
-    </Primary>
-  )
+  return <Primary onClick={onSave}>Cadastrar</Primary>
 }
 
 export default ButtonCadastrar

@@ -45,7 +45,7 @@ export const DocumentFiles: React.FC<DocumentFilesProps> = ({
     setOwnBackDocument(documents.get.ownBackDocument)
     setProofOfAddress(documents.get.proofOfAddress)
     setProofOfIncome(documents.get.proofOfIncome)
-    setSelectIncome(documents.get.selectIncome)
+    setSelectIncome(documents.get.selectIncome || '')
   }, [])
 
   useEffect(() => {
@@ -141,6 +141,7 @@ export const DocumentFiles: React.FC<DocumentFilesProps> = ({
         selectIncome={selectIncome}
         error={errors?.selectIncome}
       />
+      {console.log(selectIncome)}
     </Container>
   )
 }

@@ -26,6 +26,7 @@ export interface MappedPlan {
   name: string
   allowedMajorAge: boolean
   price: string
+  // periodicity: string
 }
 
 export const ChoosePlans: React.FC = () => {
@@ -97,7 +98,6 @@ export const ChoosePlans: React.FC = () => {
         {selectedPlan.get.name && (
           <span>Você escolheu o plano {selectedPlan.get.name}</span>
         )}
-        {console.log(selectedPlan)}
         <ButtonPrimary onClick={toNext} disabled={!selectedPlan.get.idPlan}>
           Próxima Etapa
         </ButtonPrimary>

@@ -9,5 +9,6 @@ export const fromApiPlans = (data: Plans[]): MappedPlan[] =>
       name: plan.nome,
       allowedMajorAge: plan.permiteMaiores,
       price: plan.preco,
+      // periodicity: 'Anual',
     }
   })

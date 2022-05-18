@@ -21,7 +21,9 @@ import editIcon from '@/assets/icons/edit.svg'
 
 import { PHYSICAL_PERSON_REGISTER_DOCUMENTS } from '@/routes/constants/namedRoutes/routes'
 
-import { DependentData } from './types'
+import { DependentState } from '../shared/hooks/types'
+import { ExitAndSteps } from '../shared/components/ExitAndSteps'
+
 import { Container } from './styles'
 
 export const Dependents: React.FC = () => {
@@ -30,7 +32,7 @@ export const Dependents: React.FC = () => {
   const history = useHistory()
   const { showMessage } = useModal()
   const { Loading } = useLoading()
-  const [allDependents, setAllDependents] = useState<DependentData[]>(
+  const [allDependents, setAllDependents] = useState<DependentState[]>(
     dependents.get || [],
   )
 
@@ -85,7 +87,7 @@ export const Dependents: React.FC = () => {
     }
   }
 
-  const onEditDependent = (id: number, dependent: DependentData) => {
+  const onEditDependent = (id: number, dependent: DependentState) => {
     showMessage(EditDependent, {
       id,
       dependentData: dependent,
@@ -113,6 +115,7 @@ export const Dependents: React.FC = () => {
   return (
     <RegisterLayout>
       <Container>
+        <ExitAndSteps currentStep={4} />
         <div>
           <h2 data-test="depedentsTitle">Dependentes</h2>
           <ul>

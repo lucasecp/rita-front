@@ -4,12 +4,17 @@ import OutlineButton from '@/components/Button/Outline'
 import { InputFile } from '@/components/Form/InputFile'
 
 import { Container } from './styles'
+import { SendedFile } from '../../../../../shared/components/SendedFile'
 
 interface BoxSendIncomeProps {
   onGetFile: React.Dispatch<React.SetStateAction<File | string>>
+  file: File | string
 }
 
-export const BoxSendIncome: React.FC<BoxSendIncomeProps> = ({ onGetFile }) => {
+export const BoxSendIncome: React.FC<BoxSendIncomeProps> = ({
+  onGetFile,
+  file,
+}) => {
   return (
     <Container>
       <div id="box-information">
@@ -42,15 +47,15 @@ export const BoxSendIncome: React.FC<BoxSendIncomeProps> = ({ onGetFile }) => {
         </ul>
       </div>
 
-      <InputFile
-        data-test="IncomeSelectFile"
-        accept=".png, .jpg, .jpeg, .pdf"
-        setValue={onGetFile}
-      >
-        <OutlineButton small variation="blue">
-          Selecionar Arquivo
-        </OutlineButton>
-      </InputFile>
+      {file ? (
+        <SendedFile file={file} onGetFile={onGetFile} name="proofOfIncome" />
+      ) : (
+        <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
+          <OutlineButton small variation="blue">
+            Selecionar Arquivo
+          </OutlineButton>
+        </InputFile>
+      )}
 
       <section>
         <span>Permitido apenas o envio de 1 arquivo</span>
