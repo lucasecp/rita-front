@@ -1,7 +1,7 @@
 export default [
-  { label: 'Data', name: 'dataFim' },
-  { label: 'Inicio/fim', name: 'horaInicio' },
-  { label: 'Especialista', name: 'especialista' },
+  { label: 'Data', name: 'data' },
+  { label: 'Inicio/fim', name: 'hora' },
+  { label: 'Especialista', name: 'especialidade' },
   { label: 'Paciente', name: 'paciente' },
   { label: 'Status', name: 'status' },
   { label: 'Valor', name: 'preco' },

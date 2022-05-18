@@ -28,11 +28,9 @@ export const AutocompletePlan: React.FC<AutocompletePlanProps> = ({
     const listOfPlans = async () => {
       Loading.turnOn()
       try {
-        const { data } = await apiAdmin.get(
-          `/plano?limit=999&skip=0&nome=${plan.label}&status=P&status=A&status=S`,
-        )
+        const { data } = await apiAdmin.get('/itens-vendaveis/plano')
 
-        const planMapped = plansFromApi(data.dados)
+        const planMapped = plansFromApi(data)
 
         setPlanOptions(planMapped)
       } catch (error) {
