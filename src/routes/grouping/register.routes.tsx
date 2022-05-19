@@ -13,7 +13,9 @@ import {
   REGISTER_PATIENT,
   REGISTER_SPECIALIST,
   REGISTER_PATIENT_WITH_TOKEN,
+  REGISTER_CLINIC
 } from '../constants/namedRoutes/routes'
+import RegisterClinic from '@/pages/Register/Clinic'
 
 const registerRoutes = [
   {
@@ -39,6 +41,10 @@ const registerRoutes = [
   {
     path: REGISTER_SPECIALIST,
     component: RegisterSpecialist,
+  },
+  {
+    path: REGISTER_CLINIC,
+    component: RegisterClinic,
   },
 ]
 

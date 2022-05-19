@@ -119,6 +119,7 @@ export const REGISTER_CARD_SABIN = '/cadastro-cartao-sabin'
 
 export const REGISTER_PATIENT = '/cadastro/paciente/'
 export const REGISTER_SPECIALIST = '/cadastro/especialista/'
+export const REGISTER_CLINIC = '/cadastro/clinica/'
 export const REGISTER_PATIENT_WITH_TOKEN = '/cadastro/paciente/:token'
 
 export const REASON_TO_LEAVE = '/motivo-para-sair/:token'

@@ -1,11 +1,11 @@
 import React from 'react'
-import { RegisterClinicProvider } from './hooks'
 import { RegisterLayout } from './components/RegisterLayout'
 import { StepProgressBar } from './components/StepProgressBar'
-import BasicInformation from './steps/BasicInformation'
+import { RegisterClinicProvider } from './hooks'
 import Address from './steps/Address'
-import Photo from './components/Photo/index'
-
+import AdministrativeManager from './steps/Admin/AdministrativeManager'
+import BasicInformation from './steps/BasicInformation'
+import TechnicalManager from './steps/Admin/TechnicalManager'
 import { Content } from './styles'
 
 const RegisterClinic: React.FC = () => {
@@ -14,9 +14,11 @@ const RegisterClinic: React.FC = () => {
       <RegisterClinicProvider>
         <Content>
           <StepProgressBar />
-          <h1>Clinica - Cadastre-se</h1>
+          <h1>Clínica - Cadastro</h1>
           <BasicInformation />
           <Address />
+          <TechnicalManager />
+          <AdministrativeManager />
         </Content>
       </RegisterClinicProvider>
     </RegisterLayout>

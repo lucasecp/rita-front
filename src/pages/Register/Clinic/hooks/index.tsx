@@ -1,19 +1,18 @@
-import React, { createContext, useContext, useState } from 'react'
-
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
-
-import { RegisterSuccess } from './messages/RegisterSuccess/index'
-import {
-  RegisterClinicContextData,
-  AddressI,
-  BasicInformationI,
-  SpecialtysAndDocsType,
-  ErrorsRegisterI,
-} from '../types/index'
 import apiAdmin from '@/services/apiAdmin'
-import { toApi } from '../adapters'
 import { AxiosError } from 'axios'
+import React, { createContext, useContext, useState } from 'react'
+import { toApi } from '../adapters'
+import {
+  AddressI,
+  AdministratorI,
+  BasicInformationI,
+  ErrorsRegisterI,
+  RegisterClinicContextData,
+  TechnicianI,
+} from '../types/index'
+import { RegisterSuccess } from './messages/RegisterSuccess/index'
 
 const RegisterClinicContext = createContext<RegisterClinicContextData>(
   {} as RegisterClinicContextData,
@@ -23,7 +22,7 @@ const RegisterClinicProvider: React.FC = ({ children }) => {
   const { showMessage, showSimple } = useModal()
   const { Loading } = useLoading()
 
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(3)
 
   const stepAmount = 4
 
@@ -33,18 +32,16 @@ const RegisterClinicProvider: React.FC = ({ children }) => {
     {} as BasicInformationI,
   )
 
-  const [specialtysAndDocs, setSpecialtysAndDocs] =
-    useState<SpecialtysAndDocsType>({} as SpecialtysAndDocsType)
+  const [technician, setTechnician] = useState<TechnicianI>({} as TechnicianI)
+  const [administrator, setAdministrator] = useState<AdministratorI>(
+    {} as AdministratorI,
+  )
 
   const [photo, setPhoto] = useState<File | string>('')
 
   const [errors, setErrors] = useState<ErrorsRegisterI>({} as ErrorsRegisterI)
 
   const errorRequest = 'Erro ao realizar o cadastro'
-
-  const isActiveStep = (stepNumber: number) => {
-    return step === stepNumber
-  }
 
   const previousStep = () => {
     if (step > 1) {
@@ -59,6 +56,7 @@ const RegisterClinicProvider: React.FC = ({ children }) => {
       scrollTo(0, 0)
     }
   }
+  console.log(basicInformation, address, technician, administrator)
 
   const registerData = async () => {
     try {
@@ -114,14 +112,14 @@ const RegisterClinicProvider: React.FC = ({ children }) => {
   return (
     <RegisterClinicContext.Provider
       value={{
-        isActiveStep,
         previousStep,
         nextStep,
         registerSpecialist,
         step,
         basicInformation,
         address,
-        specialtysAndDocs,
+        technician,
+        administrator,
         photo,
         errors,
         stepAmount,
@@ -129,7 +127,8 @@ const RegisterClinicProvider: React.FC = ({ children }) => {
         setErrors,
         setAddress,
         setbasicInformation,
-        setSpecialtysAndDocs,
+        setTechnician,
+        setAdministrator,
       }}
     >
       {children}

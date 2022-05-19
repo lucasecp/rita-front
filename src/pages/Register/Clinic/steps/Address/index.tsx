@@ -1,10 +1,9 @@
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText/index'
-import { Select } from '@/components/Form/Select/index'
-import { InputEmail } from '@/components/smarts/InputEmail'
+import { Select } from '@/components/Form/Select/index.stories'
+import { CITYS } from '@/constants/citys'
+import { UF } from '@/constants/ufs'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
-import { validateCPF } from '@/helpers/validateFields/validateCPF'
-import { validatePhone } from '@/helpers/validateFields/validatePhone'
 import { useMessage } from '@/hooks/useMessage'
 import React, { useEffect, useState } from 'react'
 import { MultiSelectOption } from '../../../../../components/Form/MultSelect/index'
@@ -32,7 +31,7 @@ const Address: React.FC = () => {
 
   const [toggleClick, setToggleClick] = useState(0)
 
-  const [errorMessage, sendErrorMessage] = useMessage()
+  const [, sendErrorMessage] = useMessage()
   const { step, nextStep, setAddress, errors, setErrors } = useRegisterClinic()
   const { hasErrors } = useValidator()
 
@@ -93,8 +92,9 @@ const Address: React.FC = () => {
       <Photo />
       <h2>Endereço</h2>
       <div>
-        <InputText
-          label="Nome Completo:"
+        <InputMask
+          mask="99999-999"
+          label="CEP*:"
           value={cep}
           setValue={setCep}
           hasError={!!errors.cep}
@@ -102,22 +102,20 @@ const Address: React.FC = () => {
           onBlur={() =>
             setErrors({
               ...errors,
-              cep: genericValidate(cep, 'nome'),
+              cep: genericValidate(cep, 'cep'),
             })
           }
           onKeyUp={() =>
             setErrors({
               ...errors,
-              cep: genericValidate(cep, 'nome'),
+              cep: genericValidate(cep, 'cep'),
             })
           }
           cep="cep"
-          maxLength={200}
-          onlyLetter
         />
 
         <InputText
-          label="Nome Profissional:"
+          label="Número*:"
           value={number}
           setValue={setNumber}
           cep="number"
@@ -126,91 +124,94 @@ const Address: React.FC = () => {
           onBlur={() =>
             setErrors({
               ...errors,
-              number: genericValidate(number, 'nome profissional'),
+              number: genericValidate(number, 'número'),
             })
           }
           onKeyUp={() =>
             setErrors({
               ...errors,
-              number: genericValidate(number, 'nome profissional'),
+              number: genericValidate(number, 'número'),
             })
           }
-          maxLength={200}
-          onlyLetter
+          maxLength={100}
+          onlyNumber
         />
 
-        <InputMask
-          mask="999.999.999-99"
-          label="CPF:"
+        <InputText
+          label="Endereço*:"
           value={fullAddress}
           setValue={setFullAddress}
-          cep="fullAddress,"
+          cep="fullAddress"
           hasError={!!errors.fullAddress}
           msgError={errors.fullAddress}
           onBlur={() =>
             setErrors({
               ...errors,
-              fullAddress: validateCPF(fullAddress),
+              fullAddress: genericValidate(fullAddress, 'endereço'),
             })
           }
           onKeyUp={() =>
             setErrors({
               ...errors,
-              fullAddress: validateCPF(fullAddress),
+              fullAddress: genericValidate(fullAddress, 'endereço'),
             })
           }
+          maxLength={100}
+          noSpecialCaracter
         />
-        <Select
-          label="Receber Agendamentos:"
-          labelDefaultOption="Selecione"
+
+        <InputText
+          label="Complemento*:"
           value={complement}
           setValue={setComplement}
-          name="complement"
-          options={[
-            { label: 'Sim', value: 'yes' },
-            { label: 'Não', value: 'no' },
-          ]}
+          cep="complement"
           hasError={!!errors.complement}
           msgError={errors.complement}
+          maxLength={100}
+          onlyLetter
+        />
+
+        <InputText
+          label="Bairro*:"
+          value={district}
+          setValue={setDistrict}
+          cep="district"
+          hasError={!!errors.district}
+          msgError={errors.district}
           onBlur={() =>
             setErrors({
               ...errors,
-              complement: !hasErrors({ complement }) ? '' : 'Campo obrigatório',
-            })
-          }
-        />
-
-        <InputEmail
-          initialEmail={district}
-          onGetEmail={setDistrict}
-          hasError={(hasError) =>
-            toggleClick !== 0 && setErrors({ ...errors, district: hasError })
-          }
-          checkHasError={errorMessage}
-          onKeyUp={sendErrorMessage}
-          onBlur={sendErrorMessage}
-        />
-
-        <InputMask
-          mask="(99) 99999-9999"
-          label="Celular:"
-          value={city}
-          setValue={setCity}
-          cep="city"
-          hasError={!!errors.city}
-          msgError={errors.city}
-          onBlur={() =>
-            setErrors({
-              ...errors,
-              city: validatePhone(city),
+              district: genericValidate(district, 'bairro'),
             })
           }
           onKeyUp={() =>
             setErrors({
               ...errors,
-              city: validatePhone(city),
+              district: genericValidate(district, 'bairro'),
             })
           }
+          maxLength={100}
+          onlyLetter
+        />
+
+        <Select
+          label="Cidade*:"
+          labelDefaultOption="Selecione"
+          options={CITYS}
+          value={city}
+          setValue={setCity}
+          hasError={!!errors.city}
+          msgError={errors.city}
+        />
+
+        <Select
+          label="UF*:"
+          labelDefaultOption="Selecione"
+          options={UF}
+          value={uf}
+          setValue={setUf}
+          hasError={!!errors.uf}
+          msgError={errors.uf}
         />
       </div>
       <FooterNextStep onClickNextStep={onNextStep} />

@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  > header {
+    margin-bottom: 40px;
+  }
   > h2 {
     font-size: 24px;
     font-weight: 700;
@@ -15,22 +18,13 @@ export const Container = styled.div`
     gap: 24px;
     grid-template-columns: repeat(2, 1fr);
 
-    > *:nth-child(1),
-    > *:nth-child(2),
-    > *:nth-child(5),
-    > *:nth-child(7),
-    > *:nth-child(8) {
+    > *:nth-child(3) {
       grid-column: span 2;
     }
 
     @media (max-width: 767px) {
       grid-template-columns: 100%;
-
-      > *:nth-child(1),
-      > *:nth-child(2),
-      > *:nth-child(5),
-      > *:nth-child(7),
-      > *:nth-child(8) {
+      > *:nth-child(3) {
         grid-column: span 1;
       }
     }

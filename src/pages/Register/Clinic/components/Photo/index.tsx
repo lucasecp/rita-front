@@ -1,26 +1,21 @@
 import React, { useEffect } from 'react'
 import { ReactComponent as PenIcon } from '@/assets/icons/pen-green.svg'
-import { ReactComponent as ProfileIcon } from '@/assets/icons/profile-green.svg'
+import { ReactComponent as ProfileIcon } from '@/assets/icons/clinic-profile.svg'
 
 import { InputFile } from '@/components/Form/InputFile'
 import Instructions from './Instructions'
 import { Container } from './styles'
 import OutlineButton from '@/components/Button/Outline/index'
-import SpecialistInfo from './SpecialistInfo'
 import { useRegisterClinic } from '../../hooks'
 import { isValidTypeFile } from '@/helpers/file/isValidTypeFile'
 import { isValidSizeFile } from '@/helpers/file/isValidSizeFile'
 import { useModal } from '@/hooks/useModal'
 
 const Photo: React.FC = () => {
-  const { basicInformation, step, photo, setPhoto } = useRegisterClinic()
+  const { photo, setPhoto } = useRegisterClinic()
   const { showSimple } = useModal()
 
   const removePhoto = () => setPhoto('')
-
-  const someFieldIsEmpty = Object.values(basicInformation).some(
-    (value) => !value,
-  )
 
   const imgSource =
     typeof photo === 'object' ? window.URL.createObjectURL(photo) : ''
@@ -57,14 +52,11 @@ const Photo: React.FC = () => {
       </div>
 
       <div>
-        {photo && !someFieldIsEmpty && step >= 2 && (
-          <SpecialistInfo data={basicInformation} />
-        )}
+        <Instructions />
         {!photo && (
           <>
-            <Instructions />
             <InputFile setValue={setPhoto}>
-              <OutlineButton small variation="green">
+              <OutlineButton small variation="blue">
                 Selecionar Arquivo
               </OutlineButton>
             </InputFile>
