@@ -1,3 +1,4 @@
+import clearSpecialCharacters from '@/helpers/clearSpecialCharacters'
 import { useLoading } from '@/hooks/useLoading'
 import { useModal } from '@/hooks/useModal'
 import apiAdmin from '@/services/apiAdmin'
@@ -22,7 +23,7 @@ const RegisterClinicProvider: React.FC = ({ children }) => {
   const { showMessage, showSimple } = useModal()
   const { Loading } = useLoading()
 
-  const [step, setStep] = useState(3)
+  const [step, setStep] = useState(1)
 
   const stepAmount = 4
 
@@ -56,42 +57,45 @@ const RegisterClinicProvider: React.FC = ({ children }) => {
       scrollTo(0, 0)
     }
   }
-  console.log(basicInformation, address, technician, administrator)
 
   const registerData = async () => {
     try {
-      const data = toApi({ ...address, ...basicInformation })
+      const data = toApi({
+        ...basicInformation,
+        ...address,
+        ...technician,
+        ...administrator,
+      })
 
-      await apiAdmin.post('/medico', data)
+      await apiAdmin.post('/clinica', data)
     } catch (error) {
       const { response } = (error as AxiosError) || {}
 
       if (response?.status === 409) {
-        throw new Error('Especialista já cadastrado')
+        throw new Error('Clínica já cadastrada')
       }
       throw new Error(errorRequest)
     }
   }
 
   const registerPhoto = async () => {
-    if (!photo) {
-      return
-    }
-    try {
-      const formFile = new FormData()
+    if (photo) {
+      try {
+        const formFile = new FormData()
 
-      formFile.append('file', photo)
+        formFile.append('file', photo)
 
-      await apiAdmin.post(
-        `medico/arquivo?cpf=${address}&tipoDocumento=FotoPerfil`,
-        formFile,
-      )
-    } catch (error) {
-      throw new Error('Sua foto não foi salva!')
+        await apiAdmin.put(
+          `clinica/foto/${clearSpecialCharacters(basicInformation.cnpj)}`,
+          formFile,
+        )
+      } catch (error) {
+        throw new Error('Sua foto não foi salva!')
+      }
     }
   }
 
-  const registerSpecialist = async () => {
+  const registerClinic = async () => {
     try {
       Loading.turnOn()
 
@@ -114,7 +118,7 @@ const RegisterClinicProvider: React.FC = ({ children }) => {
       value={{
         previousStep,
         nextStep,
-        registerSpecialist,
+        registerClinic,
         step,
         basicInformation,
         address,

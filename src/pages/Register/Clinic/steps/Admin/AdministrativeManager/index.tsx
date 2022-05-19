@@ -13,7 +13,7 @@ import { useValidator } from '../../../hooks/useValidator'
 import { Container } from '../styles'
 
 const AdministrativeManager: React.FC = () => {
-  const { step, nextStep, errors, setErrors, setAdministrator } =
+  const { step, registerClinic, errors, setErrors, setAdministrator } =
     useRegisterClinic()
 
   const { hasErrors } = useValidator()
@@ -42,8 +42,9 @@ const AdministrativeManager: React.FC = () => {
 
       return setToggleClick(Math.random() * (10 - 3) + 3)
     }
-    nextStep()
+    registerClinic()
   }
+
   useEffect(() => {
     setAdministrator({
       cpfAdministrator,

@@ -4,9 +4,13 @@ export default css`
   .ant-select-dropdown {
     padding: 0 !important;
   }
+  .certain-category-search-dropdown-agenamento-consulta {
+    .ant-select-item {
+      padding: 0 !important;
+    }
+  }
   .ant-select-item {
-    padding: 0 !important;
-
+    padding: 8px;
     & + .ant-select-item-group {
       height: 1px;
       background-color: #f3f3f3;

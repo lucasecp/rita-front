@@ -17,6 +17,7 @@ export const Container = styled.div`
     display: grid;
     gap: 24px;
     grid-template-columns: repeat(2, 1fr);
+    align-items: start;
 
     > *:nth-child(3) {
       grid-column: span 2;

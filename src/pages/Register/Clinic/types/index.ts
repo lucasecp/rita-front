@@ -1,4 +1,4 @@
-import { MultiSelectOption } from '@/components/Form/MultSelect/index'
+import { MultiSelectOption } from "@/components/Form/MultSelect"
 
 export interface AddressI {
   cep: string
@@ -16,6 +16,7 @@ export interface BasicInformationI {
   socialReason: string
   phoneClinic: string
   emailClinic: string
+  specialtys: MultiSelectOption[]
 }
 
 export interface TechnicianI {
@@ -33,17 +34,6 @@ export interface AdministratorI {
 }
 
 export interface ErrorsRegisterI {
-  profissionalRegister: string
-  issuingAgency: string
-  ufIssuingAgency: string
-  name: string
-  profissionalName: string
-  cpf: string
-  receiveService: string
-  email: boolean | string
-  phone: string
-  specialtys: MultiSelectOption[]
-  clinics: MultiSelectOption[]
   [x: string]: any
 }
 
@@ -51,7 +41,7 @@ export interface RegisterClinicContextData {
   step: number
   previousStep: () => void
   nextStep: () => void
-  registerSpecialist: () => Promise<void>
+  registerClinic: () => Promise<void>
   photo: File | string
   address: AddressI
   basicInformation: BasicInformationI

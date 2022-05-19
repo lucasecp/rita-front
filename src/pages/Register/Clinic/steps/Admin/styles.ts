@@ -14,6 +14,7 @@ export const Container = styled.div`
     display: grid;
     gap: 24px;
     grid-template-columns: repeat(2, 1fr);
+    align-items: start
 
     @media (max-width: 767px) {
       grid-template-columns: 100%;

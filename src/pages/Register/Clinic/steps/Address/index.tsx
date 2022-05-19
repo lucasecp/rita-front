@@ -1,17 +1,15 @@
 import InputMask from '@/components/Form/InputMask'
 import InputText from '@/components/Form/InputText/index'
-import { Select } from '@/components/Form/Select/index.stories'
-import { CITYS } from '@/constants/citys'
-import { UF } from '@/constants/ufs'
+import SelectUf from '@/components/smarts/SelectUf'
 import { scrollOntoFieldError } from '@/helpers/scrollOntoFieldError'
 import { useMessage } from '@/hooks/useMessage'
 import React, { useEffect, useState } from 'react'
-import { MultiSelectOption } from '../../../../../components/Form/MultSelect/index'
 import FooterNextStep from '../../components/FooterNextStep'
 import Photo from '../../components/Photo'
 import { genericValidate } from '../../helpers/validatorFields'
 import { useRegisterClinic } from '../../hooks'
 import { useValidator } from '../../hooks/useValidator'
+import InputAutoCompleteAntd from './InputAutoCompleteAntd'
 import { Container } from './styles'
 
 const Address: React.FC = () => {
@@ -28,6 +26,7 @@ const Address: React.FC = () => {
   const [city, setCity] = useState('')
 
   const [uf, setUf] = useState('')
+  const [ufToApi, setUfToApi] = useState('')
 
   const [toggleClick, setToggleClick] = useState(0)
 
@@ -42,7 +41,6 @@ const Address: React.FC = () => {
         cep,
         number,
         fullAddress,
-        complement,
         district,
         city,
         uf,
@@ -61,7 +59,7 @@ const Address: React.FC = () => {
       complement,
       district,
       city,
-      uf,
+      uf: ufToApi,
     })
   }, [cep, number, fullAddress, complement, district, city, uf])
 
@@ -70,22 +68,7 @@ const Address: React.FC = () => {
       scrollOntoFieldError(errors)
     }
   }, [toggleClick])
-
-  const onSelectField = (field: string, value: MultiSelectOption) => {
-    const data = {
-      cep,
-      number,
-      fullAddress,
-      complement,
-      district,
-      city,
-      uf,
-    }
-    hasErrors({
-      ...data,
-      clinics: value,
-    })
-  }
+  console.log(city)
 
   return (
     <Container hidden={step !== 2}>
@@ -161,15 +144,17 @@ const Address: React.FC = () => {
         />
 
         <InputText
-          label="Complemento*:"
+          label="Complemento:"
           value={complement}
           setValue={setComplement}
           cep="complement"
-          hasError={!!errors.complement}
-          msgError={errors.complement}
           maxLength={100}
           onlyLetter
         />
+
+        <SelectUf uf={uf} setUf={setUf} setUfToApi={setUfToApi} />
+
+        <InputAutoCompleteAntd setValue={setCity} value={city} uf={uf} />
 
         <InputText
           label="Bairro*:"
@@ -192,26 +177,6 @@ const Address: React.FC = () => {
           }
           maxLength={100}
           onlyLetter
-        />
-
-        <Select
-          label="Cidade*:"
-          labelDefaultOption="Selecione"
-          options={CITYS}
-          value={city}
-          setValue={setCity}
-          hasError={!!errors.city}
-          msgError={errors.city}
-        />
-
-        <Select
-          label="UF*:"
-          labelDefaultOption="Selecione"
-          options={UF}
-          value={uf}
-          setValue={setUf}
-          hasError={!!errors.uf}
-          msgError={errors.uf}
         />
       </div>
       <FooterNextStep onClickNextStep={onNextStep} />

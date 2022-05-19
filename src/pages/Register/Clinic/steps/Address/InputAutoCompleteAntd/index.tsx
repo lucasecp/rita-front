@@ -5,17 +5,17 @@ import useSearch from './useSearch'
 import { Container } from './styles'
 import { CompleteProps } from './types/index'
 
-const Complete: React.FC<CompleteProps> = ({ setValue, value }) => {
+const Complete: React.FC<CompleteProps> = ({ setValue, value, uf }) => {
   const [inputValue, setInputValue] = useState('')
   const [options, setOptions] = useState<any[]>([])
 
-  useSearch(inputValue, setOptions)
+  useSearch(inputValue, setOptions, uf)
 
   return (
     <Container>
-      <label> Nome do especialista, Especialidade ou Clínica:</label>
+      <label>Cidade:</label>
       <AutoComplete
-        dropdownClassName="certain-category-search-dropdown-agenamento-consulta"
+        dropdownClassName="certain-category-search-dropdown"
         options={options}
         onSearch={(value) => setInputValue(value)}
         notFoundContent="Nenhum resultado."
@@ -23,7 +23,7 @@ const Complete: React.FC<CompleteProps> = ({ setValue, value }) => {
         allowClear
         value={value}
       >
-        <Input.Search size="large" placeholder="O que você procura?" />
+        <Input.Search size="large" placeholder="" />
       </AutoComplete>
     </Container>
   )

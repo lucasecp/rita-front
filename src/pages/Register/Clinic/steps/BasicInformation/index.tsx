@@ -59,8 +59,9 @@ const BasicInformation: React.FC = () => {
       socialReason,
       phoneClinic,
       emailClinic,
+      specialtys
     })
-  }, [cnpj, nameClinic, phoneClinic, emailClinic])
+  }, [cnpj, nameClinic, phoneClinic, emailClinic, specialtys])
 
   useEffect(() => {
     if (toggleClick !== 0) {

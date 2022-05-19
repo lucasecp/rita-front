@@ -1,10 +1,8 @@
-import React from 'react'
 import success from '@/assets/icons/alerts/success.svg'
-
-import { useHistory } from 'react-router-dom'
-import { useModal } from '@/hooks/useModal'
-
 import ButtonPrimary from '@/components/Button/Primary'
+import { useModal } from '@/hooks/useModal'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { Container } from './styles'
 
 export const RegisterSuccess: React.FC = () => {
@@ -20,8 +18,7 @@ export const RegisterSuccess: React.FC = () => {
     <Container>
       <img src={success} />
       <p>
-        Cadastro efetuado com sucesso, aguarde a aprovação da clínica para ter
-        acesso a plataforma
+        Cadastro finalizado com sucesso, aguarde a aprovação pela curadoria.
       </p>
       <footer>
         <ButtonPrimary onClick={handleCloseModal} variation="green">

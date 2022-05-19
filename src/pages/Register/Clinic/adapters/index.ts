@@ -1,19 +1,37 @@
-import clearSpecialCaracter from '@/helpers/clearSpecialCharacters'
-import { BasicInformationI, AddressI } from '../types'
-import { clinicaToApi } from './mapClinics'
+import clearSpecialCharacters from '@/helpers/clearSpecialCharacters'
+import {
+  AddressI,
+  AdministratorI,
+  BasicInformationI,
+  TechnicianI,
+} from '../types'
 import { specialtysToApi } from './mapSpecialtys'
 
-export const toApi = (data: AddressI & BasicInformationI): any => {
+export const toApi = (
+  data: AddressI & BasicInformationI & TechnicianI & AdministratorI,
+): any => {
   return {
-    // nome: data.name,
-    // nomeProfissional: data.profissionalName,
-    // cpf: clearSpecialCaracter(data.cpf),
-    // idOrgaoEmissor: data.issuingAgency,
-    // ufOrgaoEmissor: data.ufIssuingAgency,
-    // registroProfissional: data.profissionalRegister,
-    // email: data.email,
-    // celular: clearSpecialCaracter(data.phone),
-    // especialidades: specialtysToApi(data.specialtys),
-    // clinica: clinicaToApi(data.clinics),
+    descricao: data.nameClinic,
+    razaoSocial: data.socialReason,
+    cnpj: clearSpecialCharacters(data.cnpj),
+    telefone: clearSpecialCharacters(data.phoneClinic),
+    email: data.emailClinic,
+    endereco: data.fullAddress,
+    bairro: data.district,
+    cidade: data.city,
+    uf: data.uf,
+    cep: clearSpecialCharacters(data.cep),
+    complemento: data.complement,
+    numero: data.number,
+    responsavel: data.nameAdministrator,
+    emailResponsavel: data.emailAdministrator,
+    telefoneResponsavel: clearSpecialCharacters(data.phoneAdministrator),
+    cpfResponsavel: clearSpecialCharacters(data.cpfAdministrator),
+    biografia: '',
+    especialidade: specialtysToApi(data.specialtys),
+    responsavelTecnico: data.nameTechnician,
+    emailResponsavelTecnico: data.emailTechnician,
+    telResponsavelTecnico: clearSpecialCharacters(data.phoneTechnician),
+    cpfResponsavelTecnico: clearSpecialCharacters(data.cpfTechnician),
   }
 }

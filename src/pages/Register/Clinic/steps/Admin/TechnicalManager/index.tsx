@@ -25,7 +25,6 @@ const TechnicalManager: React.FC = () => {
   const [phoneTechnician, setPhoneTechnician] = useState('')
 
   const [emailTechnician, setEmailTechnician] = useState('')
-  const [test, setTest] = useState([])
 
   const [toggleClick, setToggleClick] = useState(0)
 
@@ -59,16 +58,6 @@ const TechnicalManager: React.FC = () => {
       scrollOntoFieldError(errors)
     }
   }, [toggleClick])
-
-  useEffect(() => {
-    fetch('https://servicodados.ibge.gov.br/api/v1/localidades/municipios')
-      .then((res) => res.json())
-      .then((res) => {
-        const dataMapped = res.map((r) => ({ label: r.nome, value: r.nome }))
-        setTest(dataMapped)
-      })
-  }, [])
-  console.log(test)
 
   return (
     <Container hidden={step !== 3}>
@@ -151,11 +140,6 @@ const TechnicalManager: React.FC = () => {
             })
           }
         />
-        <div>
-          {test.map((t) => (
-           `{label: "${t.label}" , value: "${t.value}" },`
-          ))}
-        </div>
       </div>
 
       <FooterNextStep onClickNextStep={onNextStep} />
