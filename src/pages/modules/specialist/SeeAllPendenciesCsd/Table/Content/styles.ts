@@ -88,7 +88,7 @@ export const Status = styled.li<StatusTypeProps>`
       }
     `}
   ${({ type }) =>
-    type === '' &&
+    type === 'AT' &&
     css`
       > span {
         background: ${colors.gray.middleLight};

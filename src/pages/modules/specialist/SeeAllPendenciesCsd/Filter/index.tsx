@@ -13,8 +13,6 @@ import { fieldsApi } from '../static/fieldsApi'
 import { staticStatus } from '../static/status'
 /** Types */
 import { ErrorI } from '../types'
-/** Validations */
-import { validateField, validateProtocolNumber, validateStatus } from '../validations'
 /** Styles */
 import { BtnGroup, Container } from './styles'
 
@@ -54,26 +52,10 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     _setErrors()
   }
 
-  const hasErrors = () => {
-    let newErrors = false
-    newErrors = validateField('patient', patient, setErrors, newErrors)
-    newErrors = validateField('atendent', atendent, setErrors, newErrors)
-    newErrors = validateProtocolNumber('protocolNumber', protocolNumber, setErrors, newErrors)
-    newErrors = validateStatus('status', status, setErrors, newErrors)
-    return newErrors
-  }
 
   const onFilter = () => {
-    if (hasErrors()) {
-      return
-    }
     setFilters(verifyTypedFields(arrayQuery))
     _setErrors()
-  }
-
-  const onChangeSelect = (event: any) => {
-    setStatus(event.target.value)
-    validateStatus('status', event.target.value, setErrors)
   }
 
   return (
@@ -86,7 +68,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           msgError={errors.patient}
           setValue={setPatient}
           maxLength={100}
-          onBlur={() => validateField('patient', patient, setErrors)}
           label="Paciente:"
         />
         <InputText
@@ -96,7 +77,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           msgError={errors.atendent}
           variation="secondary"
           maxLength={100}
-          onBlur={() => validateField('atendent', atendent, setErrors)}
           label="Atendente:"
         />
       </div>
@@ -109,7 +89,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
             msgError={errors.protocolNumber}
             setValue={setProtocolNumber}
             onlyNumber
-            onBlur={() => validateProtocolNumber('protocolNumber', protocolNumber, setErrors)}
             maxLength={50}
             label="Número de Protocolo:"
           />
@@ -120,8 +99,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
             msgError={errors.status}
             value={status}
             setValue={setStatus}
-            onChange={onChangeSelect}
-            onBlur={() => validateStatus('status', status, setErrors)}
             variation="secondary"
             label="Status:"
           />
