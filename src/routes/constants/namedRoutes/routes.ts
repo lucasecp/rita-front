@@ -112,6 +112,9 @@ export const PATIENT_WALLET_SETTINGS =
 
 export const SPECIALIST_PROFILE = '/especialista/perfil'
 export const SPECIALIST_SEE_SCHEDULE = '/especialista/agenda'
+export const SPECIALIST_SEE_ALL_APPOINTMENT_SCHEDULES =
+  '/especialista-agendamento'
+export const SPECIALIST_SEE_ALL_PENDENCIES_CSD = '/pendencias-atendimento-csd'
 
 export const PRE_REGISTER = '/pre-cadastro'
 export const DEFAULT_REGISTER = '/cadastro-inicial'

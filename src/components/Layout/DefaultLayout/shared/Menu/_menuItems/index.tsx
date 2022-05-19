@@ -21,6 +21,7 @@ import { ReactComponent as SpecialtysTypesIcon } from '@/assets/icons/specialtys
 import { ReactComponent as Calendar } from '@/assets/icons/calendar3-green.svg'
 import { ReactComponent as AppointmentTableIcon } from '@/assets/icons/appointment-table.svg'
 import { ReactComponent as AppointmentSchedulingIcon } from '@/assets/icons/calendar2-green.svg'
+import { ReactComponent as Atendiment } from '@/assets/icons/atendiment.svg'
 
 import {
   INITIAL_PAGE,
@@ -53,6 +54,7 @@ import {
   DIRECTOR_IMPORT,
   SPECIALIST_PROFILE,
   SPECIALIST_SEE_SCHEDULE,
+  SPECIALIST_SEE_ALL_PENDENCIES_CSD,
   FILTER_USERS,
   OPERATOR_SEE_ALL_ISSUING_AGENCY,
   CLINIC_SEE_ALL_SPECIALIST,
@@ -61,6 +63,7 @@ import {
   CLINIC_APPOINTMENT_TABLE,
   CLINIC_CREATE_SCHEDULING,
   CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES,
+  SPECIALIST_SEE_ALL_APPOINTMENT_SCHEDULES,
 } from '@/routes/constants/namedRoutes/routes'
 
 import { permissions } from '@/constants/permissions'
@@ -277,5 +280,11 @@ export const menuItens = [
     icon: <AppointmentSchedulingIcon />,
     name: 'Agendamento de consulta',
     permissions: [permissions.GERENCIAR_AGENDA_HORARIOS_ESPECIALISTA],
+  },
+  {
+    path: SPECIALIST_SEE_ALL_PENDENCIES_CSD,
+    icon: <Atendiment />,
+    name: 'Atendimentos',
+    permissions: [permissions.GERENCIAR_ATENDIMENTO_CSD],
   },
 ]

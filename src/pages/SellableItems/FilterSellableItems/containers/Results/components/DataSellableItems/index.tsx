@@ -84,6 +84,17 @@ export const DataSellableItems: React.FC<DataSellableItemsProps> = ({
           <li>
             <div>{sellableItem.amount || '-'}</div>
           </li>
+          <Actions
+            plan={{
+              idPlan: sellableItem.plan.id,
+              id: sellableItem.id,
+              outlets: sellableItem.outlets,
+              name: sellableItem.plan.name,
+              amount: sellableItem.amount,
+              rangeOfUse: sellableItem.outlets,
+              type: sellableItem.type,
+            }}
+          />
         </ul>
       ))}
       {!sellableItems?.length && <h2>Nenhum resultado encontrado</h2>}
