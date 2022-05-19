@@ -11,8 +11,6 @@ import { verifyTypedFields } from '../helpers/verifyTypedFields'
 import { fieldsApi } from '../static/fieldsApi'
 /** Statics */
 import { staticStatus } from '../static/status'
-/** Types */
-import { ErrorI } from '../types'
 /** Styles */
 import { BtnGroup, Container } from './styles'
 
@@ -25,7 +23,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   const [atendent, setAtendent] = useState('')
   const [protocolNumber, setProtocolNumber] = useState('')
   const [status, setStatus] = useState('')
-  const [errors, setErrors] = useState<ErrorI>({} as ErrorI)
 
   const arrayQuery = [
     { name: fieldsApi.PATIENT_NAME, value: patient.trim() },
@@ -38,24 +35,17 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     setFilters(verifyTypedFields(arrayQuery))
   }, [])
 
-  /** @description Limpa as mensagens de erros nos componentes */
-  const _setErrors = () => {
-    setErrors({} as ErrorI)
-  }
-
   const clearFields = () => {
     setPatient('')
     setAtendent('')
     setProtocolNumber('')
     setStatus('')
     setFilters([])
-    _setErrors()
   }
 
 
   const onFilter = () => {
     setFilters(verifyTypedFields(arrayQuery))
-    _setErrors()
   }
 
   return (
@@ -64,8 +54,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
         <InputText
           variation="secondary"
           value={patient}
-          hasError={!!errors.patient}
-          msgError={errors.patient}
           setValue={setPatient}
           maxLength={100}
           label="Paciente:"
@@ -73,8 +61,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
         <InputText
           value={atendent}
           setValue={setAtendent}
-          hasError={!!errors.atendent}
-          msgError={errors.atendent}
           variation="secondary"
           maxLength={100}
           label="Atendente:"
@@ -85,8 +71,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           <InputText
             variation="secondary"
             value={protocolNumber}
-            hasError={!!errors.protocolNumber}
-            msgError={errors.protocolNumber}
             setValue={setProtocolNumber}
             onlyNumber
             maxLength={50}
@@ -95,8 +79,6 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
           <Select
             labelDefaultOption="Selecione:"
             options={staticStatus}
-            hasError={!!errors.status}
-            msgError={errors.status}
             value={status}
             setValue={setStatus}
             variation="secondary"
