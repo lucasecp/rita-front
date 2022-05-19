@@ -7,7 +7,7 @@ import ButtonPrimary from '@/components/Button/Primary'
 
 import { Container } from './styles'
 
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { useModal } from '@/hooks/useModal'
 import { mapRangesToSendApi } from '../../helpers/mapDataToSendApi'
 import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
@@ -25,7 +25,7 @@ export const AddArea = ({ onGetArea, rangesOfUse = [] }) => {
 
   useEffect(() => {
     const updateUfs = async () => {
-      const ufsApi = await apiPatient.post(
+      const ufsApi = await apiAdmin.post(
         '/plano/uf',
         mapRangesToSendApi(rangesOfUse),
         {
@@ -49,7 +49,7 @@ export const AddArea = ({ onGetArea, rangesOfUse = [] }) => {
 
     const loadCities = async () => {
       try {
-        const citiesApi = await apiPatient.post(
+        const citiesApi = await apiAdmin.post(
           '/plano/municipio',
           mapRangesToSendApi(rangesOfUse),
           { params: { uf: ufSelected } },
@@ -91,17 +91,17 @@ export const AddArea = ({ onGetArea, rangesOfUse = [] }) => {
 
   useEffect(() => {
     const updateAreas = async () => {
-      const regionalsApi = await apiPatient.post(
+      const regionalsApi = await apiAdmin.post(
         '/plano/regional',
         mapRangesToSendApi(rangesOfUse),
       )
 
-      const ufsApi = await apiPatient.post(
+      const ufsApi = await apiAdmin.post(
         '/plano/uf',
         mapRangesToSendApi(rangesOfUse),
       )
 
-      const citiesApi = await apiPatient.post(
+      const citiesApi = await apiAdmin.post(
         '/plano/municipio',
         mapRangesToSendApi(rangesOfUse),
       )
