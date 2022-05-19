@@ -139,6 +139,7 @@ const PhysicalPersonRegisterProvider: React.FC = ({ children }) => {
         address,
         dependents,
         selectedIncome: documents.selectIncome,
+        selectedPlan,
       })
       await apiPatient.post('/paciente', registerPatientMapped)
       showMessage(RegisterSuccess)
