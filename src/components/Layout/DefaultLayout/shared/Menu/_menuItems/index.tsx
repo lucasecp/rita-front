@@ -61,7 +61,6 @@ import {
   CLINIC_PROFILE,
   CLINIC_SEE_ALL_USERS,
   CLINIC_APPOINTMENT_TABLE,
-  CLINIC_CREATE_SCHEDULING,
   CLINIC_SEE_ALL_APPOINTMENT_SCHEDULES,
   SPECIALIST_SEE_ALL_APPOINTMENT_SCHEDULES,
 } from '@/routes/constants/namedRoutes/routes'
@@ -280,6 +279,12 @@ export const menuItens = [
     icon: <AppointmentSchedulingIcon />,
     name: 'Agendamento de consulta',
     permissions: [permissions.GERENCIAR_AGENDA_HORARIOS_ESPECIALISTA],
+  },
+  {
+    path: SPECIALIST_SEE_ALL_APPOINTMENT_SCHEDULES,
+    icon: <AppointmentSchedulingIcon />,
+    name: 'Agendamento de consulta',
+    permissions: [permissions.GERENCIAR_MINHA_AGENDA_ESPECIALISTA],
   },
   {
     path: SPECIALIST_SEE_ALL_PENDENCIES_CSD,
