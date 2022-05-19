@@ -1,10 +1,16 @@
-import { RegistrationDataState, AddressState, DependentState } from '../types'
+import {
+  RegistrationDataState,
+  AddressState,
+  DependentState,
+  PlanState,
+} from '../types'
 
 interface RegisterDataState {
   registrationData?: RegistrationDataState
   address?: AddressState
   dependents?: DependentState[]
   selectedIncome: string
+  selectedPlan: PlanState
 }
 
 interface ToApi {
@@ -32,6 +38,7 @@ interface ToApi {
     dataNascimento?: string
     telefone?: string
   }[]
+  idPlano: number
 }
 
 const incomeToApi = (income = '') => {
@@ -72,5 +79,6 @@ export const registerPatientToApi = (
       dataNascimento: dependent.birthDate,
       telefone: dependent.phone,
     })),
+    idPlano: registerPatient.selectedPlan.idPlan,
   }
 }

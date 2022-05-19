@@ -50,7 +50,11 @@ export const BoxSendIncome: React.FC<BoxSendIncomeProps> = ({
       {file ? (
         <SendedFile file={file} onGetFile={onGetFile} name="proofOfIncome" />
       ) : (
-        <InputFile accept=".png, .jpg, .jpeg, .pdf" setValue={onGetFile}>
+        <InputFile
+          accept=".png, .jpg, .jpeg, .pdf"
+          setValue={onGetFile}
+          data-test="inputAddIncomeFile"
+        >
           <OutlineButton small variation="blue">
             Selecionar Arquivo
           </OutlineButton>

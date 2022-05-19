@@ -13,13 +13,6 @@ export const Container = styled.div`
   > button {
     margin-top: 24px;
   }
-  > span {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-    color: #6a6a6a;
-    margin-bottom: 5px;
-  }
 
   > p {
     max-width: 410px;
@@ -44,18 +37,15 @@ export const Container = styled.div`
     max-width: 670px;
     margin-bottom: 16px;
   }
-  > h6 {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 30px;
-    color: #4b8864;
-  }
   > h5 {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 30px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    text-align: center;
 
-    color: #6a6a6a;
+    color: ${colors.orange.middle};
+
+    margin-bottom: 16px;
   }
   > h2 {
     font-weight: 900;
@@ -89,7 +79,6 @@ export const Container = styled.div`
   }
 
   > p {
-    margin-bottom: 12px;
     > a {
       display: inline-flex;
       text-decoration: underline;
