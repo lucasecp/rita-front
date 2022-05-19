@@ -1,12 +1,17 @@
-import styled, { css } from 'styled-components'
+/* eslint-disable prettier/prettier */
 import { ReactComponent as ArrowDownIcon } from '@/assets/icons/arrow-down-order.svg'
 import { ReactComponent as ArrowUpIcon } from '@/assets/icons/arrow-up-order.svg'
+import styled, { css } from 'styled-components'
 
 interface ArrowProps {
   order: number
 }
 
-export const Content = styled.div`
+interface Columnrops {
+  conditionWidth?: string
+}
+
+export const Content = styled.div<Columnrops>`
   display: flex;
   font-size: 16px;
   font-weight: 700;
@@ -19,9 +24,13 @@ export const Content = styled.div`
   :last-child {
     margin-right: 0px;
   }
+  /* :first-child {
+    min-width: ${({ conditionWidth }) => conditionWidth === 'numProtocolo' ? '150px' : '250px'};
+    max-width: ${({ conditionWidth }) => conditionWidth === 'numProtocolo' ? '150px' : '250px'};
+  } */
   :first-child {
     min-width: 250px;
-    max-width: 250px;
+    max-width: 250px
   }
   justify-content: space-between;
 
@@ -54,7 +63,7 @@ export const Container = styled.header`
   }
 `
 
-export const ArrowUp = styled(ArrowUpIcon)<ArrowProps>`
+export const ArrowUp = styled(ArrowUpIcon) <ArrowProps>`
   border: none;
   background-color: transparent;
   padding: 0;
@@ -71,7 +80,7 @@ export const ArrowUp = styled(ArrowUpIcon)<ArrowProps>`
     `}
 `
 
-export const ArrowDown = styled(ArrowDownIcon)<ArrowProps>`
+export const ArrowDown = styled(ArrowDownIcon) <ArrowProps>`
   border: none;
   background-color: transparent;
   padding: 0;

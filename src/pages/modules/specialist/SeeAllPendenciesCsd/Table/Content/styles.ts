@@ -64,7 +64,7 @@ export const Status = styled.li<StatusTypeProps>`
   }
 
   ${({ type }) =>
-    type === 'Concluido' &&
+    type === 'C' &&
     css`
       > span {
         background: ${colors.green.light};
@@ -72,7 +72,7 @@ export const Status = styled.li<StatusTypeProps>`
       }
     `}
   ${({ type }) =>
-    type === 'Cancelado' &&
+    type === 'CA' &&
     css`
       > span {
         background: ${colors.orange.middleDark};
@@ -80,7 +80,7 @@ export const Status = styled.li<StatusTypeProps>`
       }
     `}
   ${({ type }) =>
-    type === 'Agendado' &&
+    type === 'P' &&
     css`
       > span {
         background: ${colors.pink.middle};

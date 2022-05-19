@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import CustomTooltip from '@/components/Tooltip'
 import React from 'react'
+import { DataAllPendenciesCsd } from '../../../types'
 import { Container } from './styles'
 import Edit from './View'
-import CustomTooltip from '@/components/Tooltip'
-import { DataScheduler } from '../../../types'
 
 interface ActionsProps {
-  data: DataScheduler
+  data: DataAllPendenciesCsd
 }
 
 const Actions: React.FC<ActionsProps> = ({ data }) => {
@@ -13,18 +14,14 @@ const Actions: React.FC<ActionsProps> = ({ data }) => {
     <Container>
       <CustomTooltip label="Editar/Visualizar">
         <div>
-          <Edit idDoctor={data.specialist.idSpecialist} idSchedule={data.id} />
+          <Edit />
         </div>
       </CustomTooltip>
       <CustomTooltip label="">
-        <div>
-          {/** Button Here */}
-        </div>
+        <div>{/** Button Here */}</div>
       </CustomTooltip>
       <CustomTooltip label="">
-        <div>
-          {/** Button Here */}
-        </div>
+        <div>{/** Button Here */}</div>
       </CustomTooltip>
     </Container>
   )

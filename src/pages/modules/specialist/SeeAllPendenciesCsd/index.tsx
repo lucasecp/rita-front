@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { DefaultLayout } from '@/components/Layout/DefaultLayout'
 import Pagination from '@/components/Pagination'
 import { queryFilterString } from '@/helpers/queryString/filter'
@@ -9,13 +10,13 @@ import { fromApi } from './adapters'
 import Filter from './Filter'
 import { Container, Content } from './styles'
 import Table from './Table'
-import { IScheduler } from './types'
+import { PendenciesCsdI } from './types'
 
 const AppointmentSchedules: React.FC = () => {
   const [queryApi, setQueryApi] = useState('')
   const [filters, setFilters] = useState([])
   const [order, setOrder] = useState({})
-  const [scheduler, setScheduler] = useState<IScheduler>({
+  const [dataCSD, setDataCSD] = useState<PendenciesCsdI>({
     total: 0,
     data: [],
   })
@@ -34,11 +35,7 @@ const AppointmentSchedules: React.FC = () => {
           `/atendimento${queryApi}${queryFilterString(filters) + queryOrderString(order)
           }`,
         )
-        // const { data } = await apiAdmin(
-        //   `/atendimento${queryApi}${queryFilterString(filters) + queryOrderString(order)
-        //   }`,
-        // )
-        setScheduler({ total: data.length, data: fromApi(data) })
+        setDataCSD({ total: data?.total, data: fromApi(data?.atendimentos) })
       } catch (error) {
       } finally {
         Loading.turnOff()
@@ -52,8 +49,8 @@ const AppointmentSchedules: React.FC = () => {
       <DefaultLayout title="Filtragem - Atendimentos CSD">
         <Content>
           <Filter setFilters={setFilters} />
-          <Table setOrder={setOrder} order={order} schedulers={scheduler} />
-          <Pagination total={scheduler?.total} setQuery={setQueryApi} />
+          <Table setOrder={setOrder} order={order} data={dataCSD} />
+          <Pagination total={dataCSD?.total} setQuery={setQueryApi} />
         </Content>
       </DefaultLayout>
     </Container>

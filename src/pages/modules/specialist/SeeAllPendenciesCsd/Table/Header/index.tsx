@@ -1,7 +1,7 @@
 import React from 'react'
 import orderly from '../../static/orderly'
 import { HeaderProps } from '../../types'
-import { Container, ArrowUp, ArrowDown, Content } from './styles'
+import { ArrowDown, ArrowUp, Container, Content } from './styles'
 
 const Header: React.FC<HeaderProps> = ({ order, setOrder }) => {
   const hasDescOrder = (name: string) =>
@@ -32,10 +32,12 @@ const Header: React.FC<HeaderProps> = ({ order, setOrder }) => {
         {orderly.map((order) => (
           <Content key={order.name}>
             <h5> {order.label} </h5>
-            <div onClick={() => toggleOrder(order.name)}>
-              <ArrowUp order={hasAscOrder(order.name) ? 1 : 0} />
-              <ArrowDown order={hasDescOrder(order.name) ? 1 : 0} />
-            </div>
+            {order.label !== 'Atendimento' && (
+              <div onClick={() => toggleOrder(order.name)}>
+                <ArrowUp order={hasAscOrder(order.name) ? 1 : 0} />
+                <ArrowDown order={hasDescOrder(order.name) ? 1 : 0} />
+              </div>
+            )}
           </Content>
         ))}
         <Content>

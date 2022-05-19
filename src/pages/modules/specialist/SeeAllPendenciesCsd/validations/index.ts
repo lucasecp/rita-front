@@ -44,3 +44,24 @@ export const validateStatus = (
   }
   return newErrors
 }
+
+export const validateProtocolNumber = (
+  field: string,
+  value: string,
+  setErrors: React.Dispatch<React.SetStateAction<ErrorI>>,
+  newErrors?: boolean,
+) => {
+  if (field === 'protocolNumber' && value === '') {
+    setErrors((errors: ErrorI) => ({
+      ...errors,
+      [field]: 'Campo obrigatório.',
+    }))
+    newErrors = true
+  } else {
+    setErrors((errors: ErrorI) => ({
+      ...errors,
+      [field]: '',
+    }))
+  }
+  return newErrors
+}

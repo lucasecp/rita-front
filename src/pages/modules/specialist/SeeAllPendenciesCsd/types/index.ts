@@ -1,45 +1,33 @@
+
 interface OrderI {
   name?: string
   value?: string
 }
 
-export interface DataScheduler {
-  id: number
-  startDate: string
-  endDate: string
-  startTime: string
-  endTime: string
+export interface DataAllPendenciesCsd {
+  numProtocolo: number
+  typeAtendiment: string
+  atendent: string
+  patient: string
+  data: string,
   status: string
-  price: number
-  specialtys: {
-    idSpecialtys: number
-    description: string
-  }
-  patient: {
-    idPatient: number
-    name: string
-  }
-  specialist: {
-    idSpecialist: number
-    name: string
-  }
 }
 
-export interface IScheduler {
+export interface PendenciesCsdI {
   total: number
-  data?: DataScheduler[]
+  data?: DataAllPendenciesCsd[]
 }
 
 type SetOrder = (order: OrderI) => void
 
 export interface TableProps {
-  schedulers: IScheduler
+  data: PendenciesCsdI
   setOrder: SetOrder
   order: OrderI
 }
 
 export interface ContentProps {
-  schedulers: IScheduler
+  dataCSD: PendenciesCsdI
 }
 
 export interface HeaderProps {

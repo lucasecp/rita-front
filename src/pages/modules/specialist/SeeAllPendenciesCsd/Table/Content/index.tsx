@@ -1,59 +1,62 @@
-import React from 'react'
-import { Container, Status } from './styles'
+/** Components */
 import CustomTooltip from '@/components/Tooltip'
-import { ContentProps } from '../../types'
-import formatTextWithLimit from '@/helpers/formatTextWithLimit'
-import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
-import { formatPrice } from '@/helpers/formatPrice'
-import Actions from './Actions'
 /** Helpers */
-import { parse, format } from 'date-fns'
+import { firstLetterCapitalize } from '@/helpers/firstLetterCapitalize'
+import formatTextWithLimit from '@/helpers/formatTextWithLimit'
+import React from 'react'
+import { formatDataColumn } from '../../helpers/formatDataColumn'
+import { formatStatusColumn } from '../../helpers/formatStatusColumn'
+/** Types */
+import { ContentProps } from '../../types'
+import Actions from './Actions'
+/** Styles */
+import { Container, Status } from './styles'
 
-const Content: React.FC<ContentProps> = ({ schedulers }) => {
-  const formatDate = (date: string) => {
-    const parseDate = parse(date, 'yyyy-MM-dd', new Date())
-    return format(parseDate, 'dd/MM/yyyy')
-  }
-
+const Content: React.FC<ContentProps> = ({ dataCSD }) => {
   return (
     <Container>
-      {schedulers?.data?.map((item, index) => (
+      {dataCSD?.data?.map((item, index) => (
         <ul key={index}>
-          <li>{formatDate(item?.endDate)}</li>
+          <li>{item?.numProtocolo}</li>
           <li>
-            {item?.startTime} às {item?.endTime}
-          </li>
-          <li>
-            <CustomTooltip
-              label={firstLetterCapitalize(item?.specialist?.name)}
-            >
+            <CustomTooltip label={firstLetterCapitalize(item?.typeAtendiment)}>
               <div>
                 {formatTextWithLimit(
-                  firstLetterCapitalize(item?.specialist?.name),
+                  firstLetterCapitalize(item?.typeAtendiment),
                   25,
                 ) || '-'}
               </div>
             </CustomTooltip>
           </li>
           <li>
-            <CustomTooltip label={firstLetterCapitalize(item?.patient?.name)}>
+            <CustomTooltip label={firstLetterCapitalize(item?.atendent)}>
               <div>
                 {formatTextWithLimit(
-                  firstLetterCapitalize(item?.patient?.name),
+                  firstLetterCapitalize(item?.atendent),
+                  25,
+                ) || '-'}
+              </div>
+            </CustomTooltip>
+          </li>
+          <li>
+            <CustomTooltip label={firstLetterCapitalize(item?.patient)}>
+              <div>
+                {formatTextWithLimit(
+                  firstLetterCapitalize(item?.patient),
                   20,
                 ) || '-'}
               </div>
             </CustomTooltip>
           </li>
+          <li>{formatDataColumn(item?.data)}</li>
           <Status type={item?.status}>
-            <span>{item?.status}</span>
+            <span>{formatStatusColumn(item?.status)}</span>
           </Status>
-          <li>{formatPrice(item?.price)}</li>
           <Actions data={item} />
         </ul>
       ))}
 
-      {!schedulers?.data?.length && <h2>Nenhum resultado encontrado</h2>}
+      {!dataCSD?.data?.length && <h2>Nenhum resultado encontrado</h2>}
     </Container>
   )
 }

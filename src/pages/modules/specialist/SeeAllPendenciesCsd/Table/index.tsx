@@ -1,14 +1,14 @@
 import React from 'react'
-import { Container } from './styles'
-import Header from './Header'
-import Content from './Content'
 import { TableProps } from '../types/index'
+import Content from './Content'
+import Header from './Header'
+import { Container } from './styles'
 
-const Table: React.FC<TableProps> = ({ schedulers, order, setOrder }) => {
+const Table: React.FC<TableProps> = ({ data, order, setOrder }) => {
   return (
     <Container>
       <Header order={order} setOrder={setOrder} />
-      <Content schedulers={schedulers} />
+      <Content dataCSD={data} />
     </Container>
   )
 }

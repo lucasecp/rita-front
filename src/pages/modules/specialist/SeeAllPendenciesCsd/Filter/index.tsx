@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prettier/prettier */
 /** Components */
 import OutlineButton from '@/components/Button/Outline'
@@ -13,7 +14,7 @@ import { staticStatus } from '../static/status'
 /** Types */
 import { ErrorI } from '../types'
 /** Validations */
-import { validateField, validateStatus } from '../validations'
+import { validateField, validateProtocolNumber, validateStatus } from '../validations'
 /** Styles */
 import { BtnGroup, Container } from './styles'
 
@@ -29,9 +30,9 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
   const [errors, setErrors] = useState<ErrorI>({} as ErrorI)
 
   const arrayQuery = [
-    { name: fieldsApi.PATIENT_NAME, value: patient },
-    { name: fieldsApi.SPECIALIST_NAME, value: atendent },
-    { name: fieldsApi.PROTOCOL_NUMBER, value: protocolNumber },
+    { name: fieldsApi.PATIENT_NAME, value: patient.trim() },
+    { name: fieldsApi.SPECIALIST_NAME, value: atendent.trim() },
+    { name: fieldsApi.PROTOCOL_NUMBER, value: protocolNumber.trim() },
     { name: fieldsApi.STATUS, value: status },
   ]
 
@@ -57,7 +58,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     let newErrors = false
     newErrors = validateField('patient', patient, setErrors, newErrors)
     newErrors = validateField('atendent', atendent, setErrors, newErrors)
-    newErrors = validateField('protocolNumber', protocolNumber, setErrors, newErrors)
+    newErrors = validateProtocolNumber('protocolNumber', protocolNumber, setErrors, newErrors)
     newErrors = validateStatus('status', status, setErrors, newErrors)
     return newErrors
   }
@@ -68,6 +69,11 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
     }
     setFilters(verifyTypedFields(arrayQuery))
     _setErrors()
+  }
+
+  const onChangeSelect = (event: any) => {
+    setStatus(event.target.value)
+    validateStatus('status', event.target.value, setErrors)
   }
 
   return (
@@ -103,7 +109,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
             msgError={errors.protocolNumber}
             setValue={setProtocolNumber}
             onlyNumber
-            onBlur={() => validateField('protocolNumber', protocolNumber, setErrors)}
+            onBlur={() => validateProtocolNumber('protocolNumber', protocolNumber, setErrors)}
             maxLength={50}
             label="Número de Protocolo:"
           />
@@ -114,6 +120,7 @@ const Filter: React.FC<FilterProps> = ({ setFilters }) => {
             msgError={errors.status}
             value={status}
             setValue={setStatus}
+            onChange={onChangeSelect}
             onBlur={() => validateStatus('status', status, setErrors)}
             variation="secondary"
             label="Status:"
