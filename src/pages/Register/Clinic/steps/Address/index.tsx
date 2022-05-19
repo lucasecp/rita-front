@@ -68,7 +68,6 @@ const Address: React.FC = () => {
       scrollOntoFieldError(errors)
     }
   }, [toggleClick])
-  console.log(city)
 
   return (
     <Container hidden={step !== 2}>

@@ -44,6 +44,7 @@ const TechnicalManager: React.FC = () => {
     }
     nextStep()
   }
+  
   useEffect(() => {
     setTechnician({
       cpfTechnician,

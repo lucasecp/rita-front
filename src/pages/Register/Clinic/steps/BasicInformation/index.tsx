@@ -68,7 +68,6 @@ const BasicInformation: React.FC = () => {
       scrollOntoFieldError(errors)
     }
   }, [toggleClick])
-  console.log(errors)
 
   return (
     <Container hidden={step !== 1}>
