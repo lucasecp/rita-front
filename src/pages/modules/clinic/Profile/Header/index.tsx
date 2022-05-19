@@ -31,6 +31,7 @@ const Header: React.FC = () => {
         const _imgBlob = URL.createObjectURL(photo)
         setImgBlob(_imgBlob)
         setFotoClinica(photo)
+        console.log(_imgBlob)
       }
     }
   }
@@ -43,7 +44,7 @@ const Header: React.FC = () => {
     <Container>
       <div>
         <div>
-          {data?.avatar ? (
+          {data?.avatar || imgBlob ? (
             <div>
               <img
                 src={

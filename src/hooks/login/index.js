@@ -28,7 +28,6 @@ export default function AuthProvider({ children }) {
   const { Loading } = useLoading()
   const { showMessage } = useModal()
   const history = useHistory()
-  // const {getClinic} = useTest()
 
   const [user, setUser] = useState(getUserStorage() || null)
   const [afterLogin, setAfterLogin] = useState(0)

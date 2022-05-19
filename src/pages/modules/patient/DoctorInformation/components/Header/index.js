@@ -17,10 +17,14 @@ const Header = ({ doctorInfo }) => {
         <DefaultImage />
       )}
       <div>
-        <h2>
-          {doctorInfo?.title}&nbsp;{doctorInfo?.name}
-        </h2>
-        <h4>{doctorInfo?.doctorSpecialty?.especialidade?.descricao}</h4>
+        <h2>{doctorInfo?.name}</h2>
+        <h4>
+          {doctorInfo?.doctorSpecialty?.map((speciality, i) => {
+            return i > 0
+              ? ' - ' + speciality?.description
+              : speciality?.description
+          })}
+        </h4>
         <ul>
           <li>
             <h6>
@@ -36,8 +40,15 @@ const Header = ({ doctorInfo }) => {
               Especialidades:
               <span>
                 &nbsp;
-                {doctorInfo?.doctorSpecialty?.especialidade?.descricao} -
-                {doctorInfo?.doctorSpecialty.RQE}
+                {doctorInfo?.doctorSpecialty?.map((speciality, i) => {
+                  return speciality.RQE
+                    ? i > 0
+                      ? ' | ' + speciality?.description + ' - ' + speciality.RQE
+                      : speciality?.description + ' - ' + speciality.RQE + ' '
+                    : i > 0
+                    ? ' | ' + speciality?.description
+                    : speciality?.description + ' '
+                })}
               </span>
               {doctorInfo?.verified && (
                 <CustomTooltip label="Verificado">

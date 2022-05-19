@@ -55,12 +55,16 @@ const Actions: React.FC<ActionsProps> = ({
 
   return (
     <Container>
-      <CustomTooltip label={warninglabel()}>
+      <CustomTooltip
+        label={warninglabel()}
+        data-test={`tooltipWarningContainer_${dependent.id}`}
+      >
         <WarningIconStyled
           hidden={!warning}
           onClick={() =>
             history.push(PATIENT_ADD_DOCUMENT_DEPENDENT, { dependent })
           }
+          data-test={`tooltipWarningContent_${dependent.id}`}
         />
       </CustomTooltip>
 

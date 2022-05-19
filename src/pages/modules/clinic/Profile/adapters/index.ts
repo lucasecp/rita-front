@@ -55,7 +55,7 @@ export const toApi = (
   idClinic: number,
 ): any => {
   return {
-    idClinica: idClinic,
+    idClinica: Number(idClinic),
     descricao: dataClinic.description,
     razaoSocial: dataClinic.razaoSocial,
     status: dataClinic.status,

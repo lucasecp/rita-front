@@ -29,7 +29,9 @@ const SpecialtyDetails = ({ parentWasClosed, dataSpecialtyDetails }) => {
           )}
           <div>
             <h2>
-              {dataSpecialtyDetails.title} {dataSpecialtyDetails?.name}
+              {dataSpecialtyDetails?.professionalName
+                ? dataSpecialtyDetails?.professionalName
+                : dataSpecialtyDetails?.name}
             </h2>
             <h3>{dataSpecialtyDetails.specialtyName}</h3>
           </div>

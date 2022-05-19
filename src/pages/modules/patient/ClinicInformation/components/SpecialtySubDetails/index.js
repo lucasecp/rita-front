@@ -24,7 +24,8 @@ const SpecialtyDetails = ({ dataSpecialtyDetails }) => {
           <MainInfo>
             <h6>Registro Profissional:</h6>{' '}
             <span>
-              CRM - {dataSpecialtyDetails?.crm} - {dataSpecialtyDetails?.crmUf}{' '}
+              {dataSpecialtyDetails?.issuingAgency} -{' '}
+              {dataSpecialtyDetails?.crm} - {dataSpecialtyDetails?.crmUf}{' '}
             </span>
             {dataSpecialtyDetails?.verified && (
               <CustomTooltip label="Verificado">

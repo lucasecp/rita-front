@@ -10,7 +10,7 @@ import {
   mapDataToSendApi,
   mapRangesToSendApi,
 } from './helpers/mapDataToSendApi'
-import apiPatient from '@/services/apiPatient'
+import apiAdmin from '@/services/apiAdmin'
 import { mapDataComingFromApi } from './helpers/mapDataComingFromApi'
 
 export const RangeOfUse = ({
@@ -29,7 +29,7 @@ export const RangeOfUse = ({
     try {
       Loading.turnOn()
 
-      const { data } = await apiPatient.post('/plano/abrangencia', dataToSend)
+      const { data } = await apiAdmin.post('/plano/abrangencia', dataToSend)
 
       const rangesOfUseMapped = mapDataComingFromApi(data)
 
@@ -44,7 +44,7 @@ export const RangeOfUse = ({
 
   const removeRegional = async (id) => {
     try {
-      const { data } = await apiPatient.delete(`/plano/abrangencia/${id}`, {
+      const { data } = await apiAdmin.delete(`/plano/abrangencia/${id}`, {
         params: { tipo: 'regional' },
         data: mapRangesToSendApi(listRangeOfUse),
       })
@@ -60,7 +60,7 @@ export const RangeOfUse = ({
 
   const removeUf = async (id) => {
     try {
-      const { data } = await apiPatient.delete(`/plano/abrangencia/${id}`, {
+      const { data } = await apiAdmin.delete(`/plano/abrangencia/${id}`, {
         params: { tipo: 'uf' },
         data: mapRangesToSendApi(listRangeOfUse),
       })
@@ -76,7 +76,7 @@ export const RangeOfUse = ({
 
   const removeCity = async (id) => {
     try {
-      const { data } = await apiPatient.delete(`/plano/abrangencia/${id}`, {
+      const { data } = await apiAdmin.delete(`/plano/abrangencia/${id}`, {
         params: { tipo: 'municipio' },
         data: mapRangesToSendApi(listRangeOfUse),
       })

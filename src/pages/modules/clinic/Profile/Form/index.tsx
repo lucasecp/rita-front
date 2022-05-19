@@ -95,16 +95,7 @@ const FormClinicProfile: React.FC = () => {
   }, [isDisabled])
 
   const save = async (photo: File, data: any) => {
-    const formData = new FormData()
-    const keys = Object.keys(data)
-    keys.forEach((key) => {
-      formData.append(
-        key,
-        key === 'especialidade' ? JSON.stringify(data[key]) : data[key],
-      )
-    })
-    formData.append('file', photo)
-    await apiAdmin.put(`/clinica/minha-clinica/${user.idClinica}`, formData)
+    await apiAdmin.put(`/clinica/minha-clinica/${user.idClinica}`, data)
   }
 
   /** @description Envia os dados modificados para o backend */

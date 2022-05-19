@@ -13,10 +13,10 @@ interface TermsProps {
   setErrors: React.Dispatch<React.SetStateAction<ErrorState>>
 }
 
-const Terms: React.FC<TermsProps> = ({ setTerms, setErrors }) => {
+export const Terms: React.FC<TermsProps> = ({ setTerms, setErrors }) => {
   const { closeModal } = useModal()
 
-  const handleAcceptTerms = () => {
+  const onReadAndAcceptTerms = () => {
     setTerms(true)
     setErrors((errors) => {
       return { ...errors, terms: '' }
@@ -438,11 +438,9 @@ const Terms: React.FC<TermsProps> = ({ setTerms, setErrors }) => {
           sexta - 8h00 às 18h00 (funcionamos apenas em dias úteis).
         </p>
       </TextGroup>
-      <ButtonPrimary onClick={handleAcceptTerms}>
+      <ButtonPrimary onClick={onReadAndAcceptTerms}>
         Li e Aceito os termos de uso
       </ButtonPrimary>
     </Container>
   )
 }
-
-export default Terms
